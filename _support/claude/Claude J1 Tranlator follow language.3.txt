@@ -1,0 +1,69 @@
+Prompt
+  https://claude.ai/chat/caa59947-18de-49e6-b706-086085091f54
+--------------------------------------------------------------------------------
+
+The attached module translator.js translates a website using Google Translate.
+The module is working as expected, with no errors.
+
+Is it possible to let the HTML component (the modal) follow the language that
+Google Translate has currently translated, respectively, the site language
+defined by siteLanguage?
+
+The language displayed in the div with id="dropdownJSON", managed by msDropdown.js,
+should reflect the current translation language, e.g., "German - Germany".
+
+The visibility of the buttons <button id="translator-buttonDisableTranslation" ...>
+and <button id="translator-buttonTranslate" ...> should be tied to the translation.
+
+If a page is not translated, as indicated by var documentLanguage equals var siteLanguage,
+the button with id="translator-buttonDisableTranslation" should be hidden.
+Vice versa, the button id="translator-buttonTranslate" should be shown only if
+a page can be translated into a different language.
+
+The first attempt to follow the page language, marked by the comment
+"claude - translator follow language #2", does not work correctly.
+
+Create a fixed version for optimization and use the comment
+"claude - translator follow language #3" for all proposed fixes.
+
+
+Claude
+--------------------------------------------------------------------------------
+
+Now let me examine the full context around the #2 block to understand exact
+boundaries for the replacement: Now let me look at the cbGoogle disable logic
+more carefully: Now I have a complete understanding of the problem.
+
+Let me analyze the issues with attempt #2 and create the fix.
+
+**Problems with #2:**
+
+1. **Unreliable language source**: The `googtrans` cookie is the primary source, but Google rewrites these cookies unpredictably (multiple copies across host/domain, `SameSite` cleared). `Cookies.get('googtrans')` may return stale or wrong data.
+2. **localStorage fallback is wrong after disable**: In `cbGoogle`, when translation is disabled or when `srcLang === selectedTranslationLanguage`, `translationLanguage` is reset to `srcLang`. So the fallback returns the site language even when the page might still be translated (before reload completes).
+3. **Missing button visibility**: No toggling of the Disable/Translate buttons at all.
+4. **Ignoring the authoritative source**: `document.documentElement.lang` is the single source of truth — Google Translate updates this attribute on the `<html>` element whenever it translates a page. This was never consulted.
+
+Here's the fix:Here's the fixed file. The core problem with attempt #2 was
+using the `googtrans` cookie as the primary language source — Google rewrites
+these cookies unpredictably (duplicating them across host/domain, clearing
+`SameSite`), so `Cookies.get('googtrans')` often returns stale or missing data.
+
+The localStorage fallback had its own issue: `cbGoogle` resets `translationLanguage`
+back to `srcLang` on disable, so the fallback also couldn't be trusted.
+
+**What #3 changes (lines 326–402):**
+
+**1. Authoritative language detection via `document.documentElement.lang`** — Google Translate updates the `<html lang="...">` attribute to the target language whenever it translates a page. This is the single reliable source of truth. The fix reads it fresh each time the modal opens, replacing the cookie+localStorage chain entirely.
+
+**2. Translation state derived by comparison** — `isTranslated = (currentDocLang !== siteLanguage)`. If the live document lang differs from the site's configured language (`{{contentLanguage}}`), the page is translated. If they match, it's not.
+
+**3. Dropdown sync uses the live language** — When translated, the dropdown is set to `currentDocLang` (e.g., `"de"`). When not translated, it's set to `siteLanguage` (e.g., `"en"`), so the user always sees the actual state.
+
+**4. Button visibility toggling** — This was completely missing from #2:
+- **Page not translated**: `#translator-buttonTranslate` is shown, `#translator-buttonDisableTranslation` is hidden
+- **Page is translated**: `#translator-buttonDisableTranslation` is shown, `#translator-buttonTranslate` is hidden
+
+The polling mechanism and safety timeout are preserved since the modal content
+is still loaded dynamically via XHR.
+
+

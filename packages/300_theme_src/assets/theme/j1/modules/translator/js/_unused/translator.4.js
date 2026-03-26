@@ -1,6 +1,6 @@
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/modules/translator/js/translator.js (4)
+ # ~/assets/theme/j1/modules/translator/js/translator.js
  # Provides JS Core functions|API for J1 Module Translator
  #
  #  Product/Info:

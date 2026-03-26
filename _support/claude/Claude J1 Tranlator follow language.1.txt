@@ -1,0 +1,32 @@
+Prompt
+  https://claude.ai/chat/315b5ce6-5adb-48f0-a11f-848868717299
+--------------------------------------------------------------------------------
+
+The attached module translator.js translates a website using Google Translate.
+The module is working as expected with no errors.
+
+Is it possible to let the HTML component (the modal) follow the language
+that Google Translate has currently translated? The language displayed in the
+div with id="dropdownJSON", managed by msDropdown.js, should reflect the
+current translation language, e.g., "German - Germany".
+
+Create a fixed version for optimization and use the comment
+"claude - translator follow language #1" for all proposed fixes.
+
+
+Claude
+--------------------------------------------------------------------------------
+
+Good catch — bei genauerem Hinsehen gibt es noch einen wichtigen Aspekt, den ich ansprechen sollte.
+
+In der HTML-Vorlage existiert `id="dropdownJSON"` **doppelt** — einmal im englischen Modal (`google-data-en`, Zeile 91) und einmal im deutschen Modal (`google-data-de`, Zeile 214). Da der Translator-Core nur den zur `dialogLanguage` passenden Block per XHR in den Dialog-Container lädt, ist zur Laufzeit nur **ein** `dropdownJSON`-Element im DOM vorhanden. Mein Fix mit `document.getElementById('dropdownJSON')` funktioniert daher korrekt — es gibt hier keinen Konflikt.
+
+Darüber hinaus behandelt der Fix folgende Randfälle sauber:
+
+**Kein `googtrans`-Cookie vorhanden** (Erstbesuch, keine aktive Übersetzung): `Cookies.get('googtrans')` liefert `undefined`, die `if (googtrans)`-Prüfung springt raus, und das Dropdown bleibt auf dem Standardeintrag — kein Fehler.
+
+**Benutzer wählt die Content-Sprache** (z. B. Englisch auf einer englischen Seite): In `cbGoogle()` wird das Cookie gelöscht und die Seite neu geladen. Nach dem Reload existiert kein `googtrans`-Cookie mehr — das Dropdown zeigt wieder den Standard.
+
+**msDropdown noch nicht initialisiert** wenn das Modal sichtbar wird: Das Polling-Intervall (alle 100 ms) wartet bis zu 5 Sekunden auf `dropdownEl.msDropdown`, deckt also Timing-Lücken ab.
+
+Soll ich noch etwas anpassen oder erweitern — zum Beispiel auch den `user_translate`-Cookie mit der aktuellen Sprache abgleichen, oder gibt es weitere Anforderungen?

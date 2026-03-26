@@ -1,12 +1,12 @@
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/modules/translator/js/translator.js (4)
+ # ~/assets/theme/j1/modules/translator/js/translator.js (3)
  # Provides JS Core functions|API for J1 Module Translator
  #
  #  Product/Info:
  #  http://jekyll.one
  #
- #  Copyright (C) 2023-2026 Juergen Adams
+ #  Copyright (C) 2026 Juergen Adams
  #
  #  J1 Theme is licensed under MIT License.
  #  See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE
@@ -20,16 +20,18 @@
 /* eslint no-unused-vars: "off"                                               */
 /* eslint no-undef: "off"                                                     */
 /* eslint no-redeclare: "off"                                                 */
+// claude - optimization chances: removed duplicate ESLint directive for
+// "indent" that appeared twice in the original
 /* eslint JSUnfilteredForInLoop: "off"                                        */
 // -----------------------------------------------------------------------------
 'use strict';
 
-// rewrote the Translator constructor function as an ES6 class. 
-// All internal helper functions become private methods (prefixed with
-// underscore by convention), public API methods are declared directly on
-// the class body, and "self = this" aliasing is eliminated in favor of
-// arrow functions that preserve lexical "this".
-//
+// claude - optimization chances #2: rewrote the Translator constructor
+// function as an ES6 class. All internal helper functions become private
+// methods (prefixed with underscore by convention), public API methods
+// are declared directly on the class body, and "self = this" aliasing
+// is eliminated in favor of arrow functions that preserve lexical "this".
+
 class Translator {
 
   // ---------------------------------------------------------------------------
@@ -44,44 +46,87 @@ class Translator {
     this._cookieSecure          = this._pageURL.protocol.includes('https');
     this._navigatorLanguage     = navigator.language || navigator.userLanguage;
     this._detailedSettingsShown = false;
+    // claude - optimization chances: removed duplicate declaration of
+    // "defaultDialogLanguage" (was declared twice with same value 'en')
+//  this._defaultDialogLanguage = 'en';
     this._translator            = {};
+
+    // claude - optimization chances #2: replaced loose variables
+    // "navigator_language" and "translation_language" that were declared
+    // but only used locally; "translation_language" is now scoped to the
+    // method that needs it, and "navigator_language" was never used at all
 
     // -------------------------------------------------------------------------
     // Cookie helper (static-like utility on the instance)
     // -------------------------------------------------------------------------
-    // converted the Cookie object into a pair of private methods (_setCookieRaw,
-    // _getCookieRaw) so the class owns its cookie logic without an intermediate
-    // object literal
+    // claude - optimization chances #2: converted the Cookie object into
+    // a pair of private methods (_setCookieRaw / _getCookieRaw) so the
+    // class owns its cookie logic without an intermediate object literal
     // -------------------------------------------------------------------------
 
     // -------------------------------------------------------------------------
     // default property settings
     // -------------------------------------------------------------------------
     this._translator.props = {
+      // contentURL:                 '/assets/data/translator',                         // this URL must contain the dialog content (modals) in the needed languages
+      // translatorLanguagesFile:    '/assets/data/iso-639-language-codes-flags.json',  // this FILE contains all codes/flags that can be used by the "dialog modal"
+      // translatorLanguages:        'translator-languages',                            // contains the supported language codes/flags used by the "dialog modal"
+      // translatorLocalStorageKey:  'user_translate',                                  // the localStorage key for User State (primary data)
+      // cookieConsentName:          'j1.user.consent',                                 // the name of the Cookie Consent Cookie (secondary data)
+      // cookieStorageDays:          365,                                               // the duration the cookie is stored on the client
+      // cookieSameSite:             'Lax',                                             // restrict consent cookie to first-party, do NOT send cookie to other domains
+      // cookieSecure:               this._cookieSecure,                                // secure flag on cookies
+      // translationEnabled:         false,                                             // enable|disable translation on first page view
+      // disableLanguageSelector:    false,                                             // disable language dropdown for translation in dialog (modal)
+      // translatorName:             'google',                                          // name of the default translator
+      // translationLanguages:       ['en', 'de', 'es', 'fr', 'it'],                    // supported languages for translation
+      // defaultLanguage:            'en',                                              // default language of the website (documents)
+      // translateAllPages:          true,                                              // enable translation on all pages
+      // hideSuggestionBox:          true,                                              // disable suggestions on translated text
+      // hidePoweredBy:              true,                                              // disable label "Powered by Google"
+      // hideTopFrame:               true,                                              // disable the (google) translator frame
+      // dialogContainerID:          'translator-modal',                                // container, the dialog modal is (dynamically) loaded
+      // xhrDataElement:             '',                                                // container for the language-specific consent modal taken from /assets/data/cookieconsent.html
+      // postSelectionCallback:      '',                                                // callback function, called after the user has made his selection
     };
 
-    // merge properties from (local) default|module
+    // merge properties from default|module
+    // claude - optimization chances #2: use Object.assign() instead of a
+    // manual for-in loop; this is both shorter and avoids iterating over
+    // inherited prototype properties without a hasOwnProperty guard
     if (props) {
       Object.assign(this._translator.props, props);
     }
 
+    // extract the language portion (e.g. "en" for English)
+    // if (this._translator.props.dialogLanguage.indexOf('-') !== -1) {
+    //   this._translator.props.dialogLanguage = this._translator.props.dialogLanguage.split('-')[0];
+    // }
+
+    // fallback on default language (modal) if dialogLanguage not supported
+    // if (!this._translator.props.dialogLanguages.includes(this._translator.props.dialogLanguage)) {
+    //   this._translator.props.dialogLanguage = this._defaultDialogLanguage;
+    // }
+
     // set the xhrDataElement of the modal loaded based on dialogLanguage
+//  this._translator.props.xhrDataElement = this._translator.props.xhrDataElement + '-' + this._translator.props.dialogLanguage;
     this._translator.props.xhrDataElement = this._translator.props.xhrDataElement;
 
     this._logger.info('initializing core module: started');
     this._logger.debug('state: started');
 
     var translationDefaultSettings = {
-      "translatorName":           "google",
-      "translationEnabled":       false,
-      "translateAllPages":        true,
-      "useLanguageFromBrowser":   true,
-      "translationLanguage":      "de",
-      "analysis":                 true,
-      "personalization":          true
+      "translatorName":         "google",
+      "translationEnabled":     false,
+      "translateAllPages":      true,
+      "useLanguageFromBrowser": true,
+      "translationLanguage":    "de",
+      "analysis":               true,
+      "personalization":        true
     };
 
-    // read translator settings from localStorage
+    // claude - translator change cookie to local storage #2
+    // read translator settings from localStorage instead of cookie
     var translatorData = this._getTranslatorData();
     if (!translatorData) {
       this._logger.info('initializing translator local storage: ' + this._translator.props.translatorLocalStorageKey);
@@ -92,9 +137,9 @@ class Translator {
     this._logger.debug('state: finished');
   }
 
-  // ---------------------------------------------------------------------------
+  // ===========================================================================
   // private cookie helpers
-  // ---------------------------------------------------------------------------
+  // ===========================================================================
 
   // ---------------------------------------------------------------------------
   // _setCookieRaw()
@@ -109,9 +154,9 @@ class Translator {
       expires = '; expires=' + date.toUTCString();
     }
 
-    // simplified nested if/else branches for cookie string construction
-    // into a single expression using conditional parts, improving readability
-    // and reducing duplication
+    // claude - optimization chances: simplified nested if/else branches
+    // for cookie string construction into a single expression using
+    // conditional parts, improving readability and reducing duplication
     var cookieStr = name + '=' + (value_encoded || '') + expires + '; Path=/; SameSite=' + cookieSameSite + ';';
     if (cookieDomain) {
       cookieStr += ' Domain=' + cookieDomain + ';';
@@ -145,9 +190,9 @@ class Translator {
 
   // ---------------------------------------------------------------------------
   // _setCookie()
-  // extracted repeated Cookie.set call pattern into a helper to reduce
-  // code duplication across agreeAll, doNotAgree, saveSettings (the same
-  // 6 arguments were passed every time)
+  // claude - optimization chances: extracted repeated Cookie.set call pattern
+  // into a helper to reduce code duplication across agreeAll, doNotAgree,
+  // saveSettings (the same 6 arguments were passed every time)
   // ---------------------------------------------------------------------------
   _setCookie(cookieName, value) {
     this._setCookieRaw(
@@ -162,7 +207,8 @@ class Translator {
 
   // ---------------------------------------------------------------------------
   // _getTranslatorData()
-  // read translator settings from localStorage
+  // claude - translator change cookie to local storage #2
+  // read translator settings from localStorage using key 'user_translate'
   // ---------------------------------------------------------------------------
   _getTranslatorData() {
     try {
@@ -179,7 +225,8 @@ class Translator {
 
   // ---------------------------------------------------------------------------
   // _setTranslatorData()
-  // write translator settings to localStorage
+  // claude - translator change cookie to local storage #2
+  // write translator settings to localStorage using key 'user_translate'
   // ---------------------------------------------------------------------------
   _setTranslatorData(value) {
     try {
@@ -192,9 +239,9 @@ class Translator {
     }
   }
 
-  // ---------------------------------------------------------------------------
+  // ===========================================================================
   // private internal helpers
-  // ---------------------------------------------------------------------------
+  // ===========================================================================
 
   // ---------------------------------------------------------------------------
   // _onDocumentReady()
@@ -206,6 +253,46 @@ class Translator {
     } else {
       document.addEventListener('DOMContentLoaded', callback);
     }
+  }
+
+  // ---------------------------------------------------------------------------
+  // _extend()
+  // deep merge of two objects
+  // claude - optimization chances #2: since _extend() is only ever called
+  // for a shallow merge (no deep=true flag passed), consider replacing it
+  // with Object.assign() at the call-site. Keeping it for now for parity,
+  // but flagging for future simplification.
+  // ---------------------------------------------------------------------------
+  _extend() {
+    var extended = {};
+    var deep = false;
+    var i = 0;
+    var length = arguments.length;
+
+    if (Object.prototype.toString.call(arguments[0]) === '[object Boolean]') {
+      deep = arguments[0];
+      i++;
+    }
+
+    var merge = function (obj) {
+      for (var prop in obj) {
+        if (Object.prototype.hasOwnProperty.call(obj, prop)) {
+          if (deep && Object.prototype.toString.call(obj[prop]) === '[object Object]') {
+            extended[prop] = this._extend(true, extended[prop], obj[prop]);
+          } else {
+            extended[prop] = obj[prop];
+          }
+        }
+      }
+    }.bind(this);
+
+    for (; i < length; i++) {
+      var obj = arguments[i];
+      merge(obj);
+    }
+    // claude - optimization chances: fixed inconsistent indentation on
+    // the return statement (was indented too far)
+    return extended;
   }
 
   // ---------------------------------------------------------------------------
@@ -233,66 +320,69 @@ class Translator {
     var selectorID;
     var translatorProps = this._translator.props;
 
-    var msDropdownSettings = {
+    var settings = this._extend({
       size:             0,
       width:            250,
       multiple:         false,
       selectedIndex:    1,
       enableAutoFilter: false,
       visibleRows:      null,
-    };
+    }, options);
 
-    // merge properties
-    if (msDropdownSettings) {
-      Object.assign(msDropdownSettings, options);
-    }
+    selectorID = '#' + settings.selector;
 
-    selectorID = '#' + msDropdownSettings.selector;
-
+    // claude - optimization chances: return the jqXHR object from $.ajax()
+    // so callers using $.when() actually receive a proper thenable/deferred
     return $.ajax({
-      url: msDropdownSettings.url,
+      url: settings.url,
       dataType: 'json',
       success: (data) => {
         var dropdownLanguages = [];
 
         if (translatorProps.translationLanguages.includes('all')) {
-          dropdownLanguages = data[msDropdownSettings.elm];
+          dropdownLanguages = data[settings.elm];
         } else {
-          for (var i = 0; i < data[msDropdownSettings.elm].length; i++) {
-            if (translatorProps.translationLanguages.includes(data[msDropdownSettings.elm][i].value)) {
-              dropdownLanguages.push(data[msDropdownSettings.elm][i]);
+          // claude - optimization chances: removed redundant length check
+          // (dropdownLanguages.length == 0); the array was just created
+          // empty on the line above, so this condition is always true.
+          // Also removed unused variable "elementNotFoundText" that was
+          // assigned but never read
+          for (var i = 0; i < data[settings.elm].length; i++) {
+            if (translatorProps.translationLanguages.includes(data[settings.elm][i].value)) {
+              dropdownLanguages.push(data[settings.elm][i]);
             }
           }
         }
 
-        if (msDropdownSettings.visibleRows > dropdownLanguages.length) {
-          msDropdownSettings.visibleRows = dropdownLanguages.length;
+        if (settings.visibleRows > dropdownLanguages.length) {
+          settings.visibleRows = dropdownLanguages.length;
         }
 
         if ($('#dropdownJSON')[0].msDropdown === undefined) {
           MsDropdown.make(selectorID, {
             byJson: {
               data: dropdownLanguages,
-              name: msDropdownSettings.name,
-              size: msDropdownSettings.size,
-              width: msDropdownSettings.width,
-              multiple: msDropdownSettings.multiple,
+              name: settings.name,
+              size: settings.size,
+              width: settings.width,
+              multiple: settings.multiple,
             },
-            enableAutoFilter: msDropdownSettings.enableAutoFilter,
-            visibleRows: msDropdownSettings.visibleRows,
+            enableAutoFilter: settings.enableAutoFilter,
+            visibleRows: settings.visibleRows,
           });
         }
       },
       error: (jqXHR, textStatus, errorThrown) => {
-        this._logger.error('failed to retrieve JSON data from: ' + msDropdownSettings.url);
+        this._logger.error('failed to retrieve JSON data from: ' + settings.url);
       }
     });
   }
 
   // ---------------------------------------------------------------------------
   // _updateOptionsFromCookie()
-  // update all checkboxes in dialog (modal) from current localStorage
-  // settings (method name kept for backward compatibility)
+  // claude - translator change cookie to local storage #2
+  // update all checkboxes in dialog (modal) from current localStorage settings
+  // (method name kept for backward compatibility)
   // ---------------------------------------------------------------------------
   _updateOptionsFromCookie() {
     var settings = this.getSettings();
@@ -310,13 +400,15 @@ class Translator {
   // ---------------------------------------------------------------------------
   _updateButtons() {
     if (this._detailedSettingsShown) {
-      this.$buttonDisableTranslation.hide();
-      this.$buttonTranslate.hide();
+      this.$buttonDoNotAgree.hide();
+      this.$buttonAgree.hide();
       this.$buttonSave.show();
+      this.$buttonAgreeAll.show();
     } else {
-      this.$buttonDisableTranslation.show();
-      this.$buttonTranslate.show();
+      this.$buttonDoNotAgree.show();
+      this.$buttonAgree.show();
       this.$buttonSave.hide();
+      this.$buttonAgreeAll.hide();
     }
   }
 
@@ -343,12 +435,14 @@ class Translator {
   }
 
   // ---------------------------------------------------------------------------
-  // _enableTranslation()
+  // _agreeAll()
   // process current settings from checkboxes for button 'agreeAll'
   // On 'agreeAll', enable ALL settings required for translation
   // ---------------------------------------------------------------------------
-  _enableTranslation() {
+  _agreeAll() {
     var consentSettings     = JSON.parse(this._getCookieRaw(this._translator.props.cookieConsentName));
+    // claude - translator change cookie to local storage #2
+    // read translator settings from localStorage instead of cookie
     var translationSettings = this._getTranslatorData();
 
     translationSettings.analysis            = true;
@@ -358,7 +452,10 @@ class Translator {
     consentSettings.analysis        = translationSettings.analysis;
     consentSettings.personalization = translationSettings.personalization;
 
+    // claude - optimization chances: use setCookie helper to reduce
+    // repeated boilerplate arguments
     this._setCookie(this._translator.props.cookieConsentName, consentSettings);
+    // claude - translator change cookie to local storage #2
     // write translator settings to localStorage instead of cookie
     this._setTranslatorData(translationSettings);
 
@@ -373,43 +470,20 @@ class Translator {
   }
 
   // ---------------------------------------------------------------------------
-  // _disableTranslation()
-  // process current settings for button `doNotAgree`
-  //
-  // Fixes:
-  //  1. Read existing settings via _getTranslatorData() instead of
-  //     _gatherOptions(). The old call replaced the full settings object
-  //     with only the checkbox values, losing keys like translatorName,
-  //     translateAllPages, and useLanguageFromBrowser. This now mirrors
-  //     the pattern used by _enableTranslation().
-  //  2. Sync the consent cookie (analysis/personalization = false) so it
-  //     stays consistent — _enableTranslation() already did this, but
-  //     _disableTranslation() previously skipped it.
-  //  3. Expire the googtrans cookie via document.cookie on every
-  //     plausible domain/path combination. The js-cookie Cookies.remove()
-  //     can miss cookies set by Google Translate with path or domain
-  //     attributes that differ from what js-cookie assumes.
-  //  4. Force a page reload after persisting the new state. Once Google
-  //     Translate is active it rewrites DOM text nodes in memory; cookie
-  //     deletion alone does NOT reverse those changes. A reload is the
-  //     only reliable way to restore the original page content.
-  //
+  // _doNotAgree()
+  // process current settings from checkboxes for button `doNotAgree`
   // ---------------------------------------------------------------------------
-  _disableTranslation() {
-    var url       = new liteURL(window.location.href);
-    var hostname  = url.hostname;
-    var domain    = hostname.substring(hostname.lastIndexOf('.', hostname.lastIndexOf('.') - 1) + 1);
-    var subDomain = '.' + domain;
+  _doNotAgree() {
+    var translationSettings = this._gatherOptions();
 
-    // expire googtrans via document.cookie on every plausible
-    // domain + path combination that Google Translate may have used
-    var expiry = '=; expires=Thu, 01 Jan 1970 00:00:00 UTC';
-    ['', hostname, subDomain].forEach(function (d) {
-      var base = 'googtrans' + expiry + '; Path=/';
-      document.cookie = d ? (base + '; Domain=' + d) : base;
-    });
+    translationSettings.translationEnabled  = false;
+    translationSettings.translationLanguage = this._translator.props.translationLanguage;
 
-    window.location.reload();
+    // claude - translator change cookie to local storage #2
+    // write translator settings to localStorage instead of cookie
+    this._setTranslatorData(translationSettings);
+
+    this.$modal.modal('hide');
   }
 
   // ---------------------------------------------------------------------------
@@ -423,7 +497,10 @@ class Translator {
     consentSettings.analysis        = translationSettings.analysis;
     consentSettings.personalization = translationSettings.personalization;
 
+    // claude - optimization chances: use setCookie helper
     this._setCookie(this._translator.props.cookieConsentName, consentSettings);
+    // claude - translator change cookie to local storage #2
+    // write translator settings to localStorage instead of cookie
     this._setTranslatorData(translationSettings);
 
     this.$modal.modal('hide');
@@ -432,8 +509,14 @@ class Translator {
   // ---------------------------------------------------------------------------
   // _showDialog()
   // Show|Create the translation dialog (modal)
+  // claude - optimization chances #2: replaced all "self = this" aliasing
+  // with arrow functions that capture lexical "this" automatically; this
+  // is idiomatic for ES6 classes and avoids a common source of bugs when
+  // "self" accidentally shadows or is reassigned
   // ---------------------------------------------------------------------------
   _showDialog() {
+    // claude - optimization chances: added missing semicolon after
+    // variable declaration
     var cbAction = 'none';
 
     this._onDocumentReady(() => {
@@ -461,6 +544,9 @@ class Translator {
         // on 'show'
         // ---------------------------------------------------------------------
         this.$modal.on('show.bs.modal', () => {
+          // claude - optimization chances: removed two unused variable
+          // declarations (msDropdownJSON, index) that were never referenced
+          // inside this event handler
           this._logger.debug('show.bs.modal: entered');
 
           $.when(
@@ -483,9 +569,10 @@ class Translator {
         this.$modal.on('shown.bs.modal', () => {
           var msDropdownJSON;
           var dependencies_met_msDropdownJSON_loaded;
-          // max-iterations guard to prevent the setInterval from polling
-          // indefinitely if the msDropdown element never becomes available
-          var maxRetries = 50;
+          // claude - optimization chances: added a max-iterations guard to
+          // prevent the setInterval from polling indefinitely if the
+          // msDropdown element never becomes available (e.g. network failure)
+          var maxRetries = 500;
           var retryCount = 0;
 
           // found msDropdownJSON loaded slow on some PC
@@ -505,6 +592,9 @@ class Translator {
                 this.$modal.hide();
               } else {
                 // set translation language for auto detection
+                // claude - optimization chances: reuse the already-computed
+                // "navigatorLanguage" variable from the outer scope instead
+                // of re-reading navigator.language / navigator.userLanguage
                 var translation_language;
                 if (this._translator.props.translationLanguage === 'auto') {
                   translation_language = this._navigatorLanguage.split('-')[0];
@@ -512,6 +602,8 @@ class Translator {
                   translation_language = this._translator.props.translationLanguage;
                 }
 
+                // claude - optimization chances: removed double semicolon
+                // at end of line
                 // set translation language for the dropdown
                 msDropdownJSON.selectedIndex = $('#dropdownJSON option[value=' + translation_language + ']').index();
 
@@ -522,7 +614,8 @@ class Translator {
 
                 $('#dropdownJSON').show();
 
-                // stop scrolling on the body, if modal is OPEN
+                // jadams, 2021-10-18: added stop scrolling on the body,
+                // if modal is OPEN
                 $('body').addClass('stop-scrolling');
 
                 this._logger.info('msDropdown successfully loaded in translation dialog');
@@ -548,6 +641,7 @@ class Translator {
         var templateUrl = this._translator.props.contentURL + '/' + 'index.html';
         $.get(templateUrl)
         .done((data) => {
+          // "initialize" in log messages
           this._logger.info('loading consent modal: successfully');
           this.modal.innerHTML = data;
           this.modal.innerHTML = $('#' + this._translator.props.xhrDataElement).eq(0).html();
@@ -558,11 +652,13 @@ class Translator {
             keyboard: false
           });
 
-          this.$buttonDisableTranslation  = $('#translator-buttonDisableTranslation');
-          this.$buttonTranslate           = $('#translator-buttonTranslate');
-          this.$buttonExit                = $('#translator-buttonExit');
-          this.$buttonSave                = $('#translator-buttonSave');
+          this.$buttonDoNotAgree = $('#translator-buttonDisableTranslation');
+          this.$buttonAgree      = $('#translator-buttonTranslate');
+          this.$buttonExit       = $('#translator-buttonExit');
+          this.$buttonSave       = $('#translator-buttonSave');
+          this.$buttonAgreeAll   = $('#translator-buttonTranslateAll');
 
+          // claude - translator change cookie to local storage #2
           this._logger.info('load/initialize options from local storage');
           this._updateButtons();
           this._updateOptionsFromCookie();
@@ -570,7 +666,6 @@ class Translator {
           // -------------------------------------------------------------------
           // register button events for the dialog (modal)
           // -------------------------------------------------------------------
-          //
           $('#google-options').on('hide.bs.collapse', () => {
             this._detailedSettingsShown = false;
             this._updateButtons();
@@ -581,12 +676,12 @@ class Translator {
 
           this._logger.info('initialize button event handler');
 
-          this.$buttonDisableTranslation.click(() => {
-            this._disableTranslation();
+          this.$buttonDoNotAgree.click(() => {
+            this._doNotAgree();
             cbAction = 'process';
           });
-          this.$buttonTranslate.click(() => {
-            this._enableTranslation();
+          this.$buttonAgree.click(() => {
+            this._agreeAll();
             cbAction = 'process';
           });
           this.$buttonExit.click(() => {
@@ -599,7 +694,11 @@ class Translator {
             this._updateOptionsFromCookie();
             cbAction = 'process';
           });
-
+          this.$buttonAgreeAll.click(() => {
+            $('#google-options').collapse('hide');
+            this._agreeAll();
+            cbAction = 'process';
+          });
           this.$modal.modal('show');
         })
         .fail(() => {
@@ -612,9 +711,9 @@ class Translator {
     });
   }
 
-  // ---------------------------------------------------------------------------
+  // ===========================================================================
   // public API
-  // ---------------------------------------------------------------------------
+  // ===========================================================================
 
   // ---------------------------------------------------------------------------
   // showDialog()
@@ -626,6 +725,7 @@ class Translator {
 
   // ---------------------------------------------------------------------------
   // getSettings()
+  // claude - translator change cookie to local storage #2
   // collect settings from localStorage instead of cookie
   // ---------------------------------------------------------------------------
   getSettings(optionName) {

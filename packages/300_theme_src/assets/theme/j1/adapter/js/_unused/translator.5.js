@@ -6,7 +6,7 @@ regenerate:                             true
 
 {% comment %}
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/adapter/js/translator.js
+ # ~/assets/theme/j1/adapter/js/translator.js (5)
  # Liquid template to create the Template Adapter for J1 Translator
  #
  # Product/Info:
@@ -57,7 +57,7 @@ regenerate:                             true
 
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/adapter/js/translator.js
+ # ~/assets/theme/j1/adapter/js/translator.js (5)
  # JS Adapter for J1 Translate
  #
  #  Product/Info:

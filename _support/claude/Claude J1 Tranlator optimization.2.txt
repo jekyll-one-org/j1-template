@@ -1,0 +1,38 @@
+Prompt
+  https://claude.ai/chat/b3843d5a-7840-4053-a3a3-43c842c18596
+--------------------------------------------------------------------------------
+
+The attached module translator.js translates a website using Google Translate.
+The module is working as expected with no errors.
+
+Is it possible to rewrite the function Translator(props) as a class that can
+be initialized using the adapter translator.js?  
+
+Create a fixed version for optimization and use the comment "claude - optimization chances #2" 
+for all proposed fixes.
+
+
+Claude
+--------------------------------------------------------------------------------
+
+Now I have the full file. Let me rewrite this as an ES6 class with the
+`#2` optimization comments.Here's the class-based rewrite. The module is
+fully compatible as an adapter — you initialize it the same way
+(`new Translator(props)`) — but the internal structure is now an ES6 class.
+
+Here's a summary of the `#2` optimizations applied:
+
+**Structural changes:**
+- Rewrote `function Translator(props)` as `class Translator` with a `constructor(props)`. All initialization logic lives in the constructor, and the public API (`showDialog`, `getSettings`) are proper class methods.
+- Eliminated the `var self = this` aliasing pattern entirely. Every callback (jQuery events, `setInterval`, `$.get`, etc.) is now an arrow function (`() => { ... }`), which preserves lexical `this` automatically — a cleaner and less error-prone approach.
+- The `Cookie` object literal was split into two private methods (`_setCookieRaw`, `_getCookieRaw`) that live directly on the class.
+- All internal helpers (`extend`, `executeFunctionByName`, `gatherOptions`, `updateButtons`, etc.) became underscore-prefixed private methods on the class.
+
+**Additional #2 optimizations flagged:**
+- Replaced the manual `for...in` property-merge loop with `Object.assign()` — shorter and avoids prototype-chain leakage without needing a `hasOwnProperty` guard.
+- Removed the unused `navigator_language` variable; scoped `translation_language` to only the method that uses it instead of leaving it dangling at module level.
+- Noted that `_extend()` is only ever called for shallow merges, so it could be replaced with `Object.assign()` at call-sites in a future pass.
+
+All original `#1` optimization comments are preserved alongside the new
+`#2` ones.
+

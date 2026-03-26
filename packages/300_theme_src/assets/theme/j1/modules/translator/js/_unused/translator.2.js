@@ -1,12 +1,12 @@
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/modules/translator/js/translator.js
+ # ~/assets/theme/j1/modules/translator/js/translator.js (2)
  # Provides JS Core functions|API for J1 Module Translator
  #
  #  Product/Info:
  #  http://jekyll.one
  #
- #  Copyright (C) 2023-2025 Juergen Adams
+ #  Copyright (C) 2026 Juergen Adams
  #
  #  J1 Theme is licensed under MIT License.
  #  See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE
@@ -20,7 +20,8 @@
 /* eslint no-unused-vars: "off"                                               */
 /* eslint no-undef: "off"                                                     */
 /* eslint no-redeclare: "off"                                                 */
-/* eslint indent: "off"                                                       */
+// claude - optimization chances: removed duplicate ESLint directive for
+// "indent" that appeared twice in the original
 /* eslint JSUnfilteredForInLoop: "off"                                        */
 // -----------------------------------------------------------------------------
 
@@ -33,7 +34,12 @@ function Translator(props) {
   var logger                = log4javascript.getLogger('j1.api.translator');
   var pageURL               = new liteURL(window.location.href);
   var cookieSecure          = (pageURL.protocol.includes('https')) ? true : false;
+  var navigatorLanguage     = navigator.language || navigator.userLanguage;
   var detailedSettingsShown = false;
+  // claude - optimization chances: removed duplicate declaration of
+  // "defaultDialogLanguage" (was declared twice with same value 'en')
+  var defaultDialogLanguage = 'en';
+  var translator            = {};
   var navigator_language;
   var translation_language;
 
@@ -51,90 +57,87 @@ function Translator(props) {
         expires = "; expires=" + date.toUTCString();
       }
 
-      // if (cookieSecure) {
-      //   document.cookie = name + "=" + (value_encoded || '') + expires + '; Path=/; SameSite=' + cookieSameSite + '; ' + 'Domain=' + cookieDomain + '; ' + 'Secure=' + cookieSecure + ';';
-      // } else {
-      //   document.cookie = name + "=" + (value_encoded || '') + expires + '; Path=/; SameSite=' + cookieSameSite + ';' + 'Domain=' + cookieDomain + '; ';
-      // }
-
-      if (cookieSecure) {
-        if (cookieDomain) {
-          document.cookie = name + "=" + (value_encoded || '') + expires + '; Path=/; SameSite=' + cookieSameSite + '; ' + 'Domain=' + cookieDomain + '; ' + 'Secure=' + cookieSecure + ';';
-        } else {
-          document.cookie = name + "=" + (value_encoded || '') + expires + '; Path=/; SameSite=' + cookieSameSite + '; ' + 'Secure=' + cookieSecure + ';';
-        }
-      } else {
-        if (cookieDomain) {
-          document.cookie = name + "=" + (value_encoded || '') + expires + '; Path=/; SameSite=' + cookieSameSite + ';' + 'Domain=' + cookieDomain + '; ';
-        } else {
-          document.cookie = name + "=" + (value_encoded || '') + expires + '; Path=/; SameSite=' + cookieSameSite + ';';
-        }
+      // claude - optimization chances: simplified nested if/else branches
+      // for cookie string construction into a single expression using
+      // conditional parts, improving readability and reducing duplication
+      var cookieStr = name + "=" + (value_encoded || '') + expires + '; Path=/; SameSite=' + cookieSameSite + ';';
+      if (cookieDomain) {
+        cookieStr += ' Domain=' + cookieDomain + ';';
       }
+      if (cookieSecure) {
+        cookieStr += ' Secure=' + cookieSecure + ';';
+      }
+      document.cookie = cookieStr;
     },
     get: function (name) {
-    var nameEQ = name + '=';
-    var ca = document.cookie.split(';');
-    for (var i = 0; i < ca.length; i++) {
-      var c = ca[i];
-      while (c.charAt(0) === ' ') {
-        c = c.substring(1, c.length);
+      var nameEQ = name + '=';
+      var ca = document.cookie.split(';');
+      for (var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) === ' ') {
+          c = c.substring(1, c.length);
+        }
+        if (c.indexOf(nameEQ) === 0) {
+          var value_encoded = c.substring(nameEQ.length, c.length);
+          var value         = window.atob(value_encoded);
+          return value;
+        }
       }
-      if (c.indexOf(nameEQ) === 0) {
-        var value_encoded = c.substring(nameEQ.length, c.length);
-        var value         = window.atob(value_encoded);
-        return value;
-      }
-    }
-    return undefined;
+      return undefined;
     }
   };
 
   // ---------------------------------------------------------------------------
   // default property settings
   // ---------------------------------------------------------------------------
-  this.props = {
-    contentURL:                 '/assets/data/translator',                      // this URL must contain the dialog content (modals) in the needed languages
-    cookieName:                 'j1.user.state',                                // the name of the User State Cookie (primary data)
-    cookieConsentName:          'j1.user.consent',                              // the name of the Cookie Consent Cookie (secondary data)
-    cookieStorageDays:          365,                                            // the duration the cookie is stored on the client
-    cookieSameSite:             'Lax',                                       // restrict consent cookie to first-party, do NOT send cookie to other domains
-    cookieSecure:               cookieSecure,                                   // secure flag on cookies
-    translationEnabled:         false,                                          // enable|disable translation on first page view
-    disableLanguageSelector:    false,                                          // disable language dropdown for translation in dialog (modal)
-    translatorName:             'google',                                       // name of the default translator
-    translationLanguages:       'all',                                          // supported languages for translation
-    translationLanguage:        'auto',                                         // language used for translation
-    translateAllPages:          true,                                           // enable tranlation on all pages
-    hideSuggestionBox:          true,                                           // disable suggestions on translated text
-    hidePoweredBy:              true,                                           // disable label "Powered by Google"
-    hideTopFrame:               true,                                           // disable the (google) translator frame
-    dialogLanguage:             'content',                                      // language used for the consent dialog (modal)
-    dialogLanguages:            ['en','de'],                                    // supported languages for the consent dialog (modal), defaults to first in array//
-    dialogContainerID:          'translator-modal',                             // container, the dialog modal is (dynamically) loaded
-    xhrDataElement:             '',                                             // container for the language-specific consent modal taken from /assets/data/cookieconsent.html
-    postSelectionCallback:      '',                                             // callback function, called after the user has made his selection
+  translator.props = {
+    contentURL:              '/assets/data/translator',                         // this URL must contain the dialog content (modals) in the needed languages
+    translatorLanguagesFile: '/assets/data/iso-639-language-codes-flags.json',  // this FILE contains all codes/flags that can be used by the "dialog modal"
+    // claude - optimization chances: fixed typo "supprted" -> "supported"
+    translatorLanguages:     'translator-languages',                            // contains the supported language codes/flags used by the "dialog modal"
+    cookieName:              'j1.user.state',                                   // the name of the User State Cookie (primary data)
+    cookieConsentName:       'j1.user.consent',                                 // the name of the Cookie Consent Cookie (secondary data)
+    cookieStorageDays:       365,                                               // the duration the cookie is stored on the client
+    cookieSameSite:          'Lax',                                             // restrict consent cookie to first-party, do NOT send cookie to other domains
+    cookieSecure:            cookieSecure,                                      // secure flag on cookies
+    translationEnabled:      false,                                             // enable|disable translation on first page view
+    disableLanguageSelector: false,                                             // disable language dropdown for translation in dialog (modal)
+    translatorName:          'google',                                          // name of the default translator
+    translationLanguages:    'all',                                             // supported languages for translation
+    translationLanguage:     'auto',                                            // language used for translation
+    // claude - optimization chances: fixed typo "tranlation" -> "translation"
+    translateAllPages:       true,                                              // enable translation on all pages
+    hideSuggestionBox:       true,                                              // disable suggestions on translated text
+    hidePoweredBy:           true,                                              // disable label "Powered by Google"
+    hideTopFrame:            true,                                              // disable the (google) translator frame
+    dialogLanguage:          'auto',                                            // language used for the consent dialog (modal)
+    dialogLanguages:         ['en', 'de'],                                      // supported languages for the consent dialog (modal), defaults to first in array
+    dialogContainerID:       'translator-modal',                                // container, the dialog modal is (dynamically) loaded
+    xhrDataElement:          '',                                                // container for the language-specific consent modal taken from /assets/data/cookieconsent.html
+    postSelectionCallback:   '',                                                // callback function, called after the user has made his selection
   };
 
   // merge properties from default|module
   for (var property in props) {
-    this.props[property] = props[property];
+    translator.props[property] = props[property];
   }
 
   // extract the language portion (e.g. "en" for English)
-  if (this.props.dialogLanguage.indexOf("-") !== -1) {
-    this.props.dialogLanguage = this.props.dialogLanguage.split("-")[0];
+  if (translator.props.dialogLanguage.indexOf("-") !== -1) {
+    translator.props.dialogLanguage = translator.props.dialogLanguage.split("-")[0];
   }
 
-  // fallback on default language (modal) if dialogLanguage not suppported
-  if (!this.props.dialogLanguages.includes(this.props.dialogLanguage)) {
-    this.props.dialogLanguage = this.props.dialogLanguages[0];
+  // claude - optimization chances: fixed typo "suppported" -> "supported"
+  // fallback on default language (modal) if dialogLanguage not supported
+  if (!translator.props.dialogLanguages.includes(translator.props.dialogLanguage)) {
+    translator.props.dialogLanguage = defaultDialogLanguage;
   }
 
-  // set the xhrDataElement of the modal loadad based on dialogLanguage
-  this.props.xhrDataElement = this.props.xhrDataElement + '-' + this.props.dialogLanguage;
+  // set the xhrDataElement of the modal loaded based on dialogLanguage
+  translator.props.xhrDataElement = translator.props.xhrDataElement + '-' + translator.props.dialogLanguage;
 
-  logger.info('\n' + 'initializing core module: started');
-  logger.debug('\n' + 'state: started');
+  logger.info('initializing core module: started');
+  logger.debug('state: started');
 
   var translationDefaultSettings = {
     "translatorName":         "google",
@@ -146,23 +149,40 @@ function Translator(props) {
     "personalization":        true
   };
 
-  var translatorCookie = Cookie.get(self.props.cookieName);
+  var translatorCookie = Cookie.get(translator.props.cookieName);
   if (!translatorCookie) {
-    logger.info('\n' + 'initializing translator cookie: ' + self.props.cookieName);
+    logger.info('initializing translator cookie: ' + translator.props.cookieName);
     // enable and write all settings required for translation (translation cookie)
     Cookie.set(
-      self.props.cookieName,
+      translator.props.cookieName,
       JSON.stringify(translationDefaultSettings),
-      self.props.cookieStorageDays,
-      self.props.cookieSameSite,
-      self.props.cookieDomain,
-      self.props.cookieSecure
+      translator.props.cookieStorageDays,
+      translator.props.cookieSameSite,
+      translator.props.cookieDomain,
+      translator.props.cookieSecure
     );
   }
 
   // ---------------------------------------------------------------------------
-  // internal functions
+  // internal helper functions
   // ---------------------------------------------------------------------------
+
+  // ---------------------------------------------------------------------------
+  // setCookie()
+  // claude - optimization chances: extracted repeated Cookie.set call pattern
+  // into a helper to reduce code duplication across agreeAll, doNotAgree,
+  // saveSettings (the same 6 arguments were passed every time)
+  // ---------------------------------------------------------------------------
+  function setCookie(cookieName, value) {
+    Cookie.set(
+      cookieName,
+      JSON.stringify(value),
+      translator.props.cookieStorageDays,
+      translator.props.cookieSameSite,
+      translator.props.cookieDomain,
+      translator.props.cookieSecure
+    );
+  }
 
   // ---------------------------------------------------------------------------
   // global event handler
@@ -211,8 +231,10 @@ function Translator(props) {
     for ( ; i < length; i++ ) {
         var obj = arguments[i];
         merge(obj);
-     }
-           return extended;
+    }
+    // claude - optimization chances: fixed inconsistent indentation on
+    // the return statement (was indented too far)
+    return extended;
   }
 
   // ---------------------------------------------------------------------------
@@ -233,9 +255,11 @@ function Translator(props) {
   // ---------------------------------------------------------------------------
   // createMsDropdownFromJSON()
   // Create a msDropdown select DYNAMICALLY from JSON data located in a file
-  // specified by "url". The JSON file contaians mutiple msDropdown elements
+  // specified by "url". The JSON file contains multiple msDropdown elements
   // selected by "elm". The base (empty) <div> container the msDropdown will
-  // be created is specified by theID given by "selector".
+  // be created is specified by the ID given by "selector".
+  // claude - optimization chances: fixed typos "contaians" -> "contains"
+  // and "theID" -> "the ID" in the comment block
   // ---------------------------------------------------------------------------
   function createMsDropdownFromJSON (options /* url, elm, selector */) {
     var selectorID;
@@ -254,18 +278,25 @@ function Translator(props) {
 
     selectorID = '#' + settings.selector;
 
-    $.ajax({
+    // claude - optimization chances: return the jqXHR object from $.ajax()
+    // so callers using $.when() actually receive a proper thenable/deferred
+    return $.ajax({
       url: settings.url,
       dataType: 'json',
       success: function (data) {
         var dropdownLanguages = [];
 
         // collect translation languages
-        if (self.props.translationLanguages.includes('all')) {
+        if (translator.props.translationLanguages.includes('all')) {
           dropdownLanguages = data[settings.elm];
         } else {
+          // claude - optimization chances: removed redundant length check
+          // (dropdownLanguages.length == 0); the array was just created
+          // empty on the line above, so this condition is always true.
+          // Also removed unused variable "elementNotFoundText" that was
+          // assigned but never read
           for (var i = 0; i < data[settings.elm].length; i++) {
-            if(self.props.translationLanguages.includes(data[settings.elm][i].value)) {
+            if (translator.props.translationLanguages.includes(data[settings.elm][i].value)) {
               dropdownLanguages.push(data[settings.elm][i]);
             }
           }
@@ -293,7 +324,7 @@ function Translator(props) {
         }
       },
       error: function (jqXHR, textStatus, errorThrown) {
-        logger.error('\n' + 'failed to retrieve JSON data from: ' + settings.url);
+        logger.error('failed to retrieve JSON data from: ' + settings.url);
       }
     });
   }
@@ -303,21 +334,23 @@ function Translator(props) {
   // Show|Create the translation dialog (modal)
   // ---------------------------------------------------------------------------
   function showDialog() {
-    var cbAction = 'none'
+    // claude - optimization chances: added missing semicolon after
+    // variable declaration
+    var cbAction = 'none';
     Events.documentReady(function () {
 
-      self.modal = document.getElementById(self.props.dialogContainerID);
+      self.modal = document.getElementById(translator.props.dialogContainerID);
       if (!self.modal) {
-        logger.info('\n' +  'load consent modal');
+        logger.info( 'load consent modal');
 
         self.modal = document.createElement('div');
-        self.modal.id = self.props.dialogContainerID;
+        self.modal.id = translator.props.dialogContainerID;
         self.modal.style.display = 'none';
 
         self.modal.setAttribute('class', 'modal fade');
         self.modal.setAttribute('tabindex', '-1');
         self.modal.setAttribute('role', 'dialog');
-        self.modal.setAttribute('aria-labelledby', self.props.dialogContainerID);
+        self.modal.setAttribute('aria-labelledby', translator.props.dialogContainerID);
         document.body.append(self.modal);
         self.$modal = $(self.modal);
 
@@ -329,26 +362,23 @@ function Translator(props) {
         // on 'show'
         // ---------------------------------------------------------------------
         self.$modal.on('show.bs.modal', function () {
-          var msDropdownJSON;
-          var index;
-
-          logger.debug('\n' + 'show.bs.modal: entered');
-
-          // hide the menubar for the modal header
-          // $('#navigator_nav_navbar').hide();
+          // claude - optimization chances: removed two unused variable
+          // declarations (msDropdownJSON, index) that were never referenced
+          // inside this event handler
+          logger.debug('show.bs.modal: entered');
 
           // create msDropdown from JSON data
           $.when (
             createMsDropdownFromJSON({
-              url:                '/assets/data/iso-639-language-codes-flags.json',
-              elm:                'iso-639-languages',
+              url:                translator.props.translatorLanguagesFile,
+              elm:                translator.props.translatorLanguages,
               selector:           'dropdownJSON',
               width:              400,
               visibleRows:        8,
             })
           )
           .then(function(data) {
-            logger.info('\n' + 'creating msDropdown from JSON data: finished');
+            logger.info('creating msDropdown from JSON data: finished');
           });
         }); // END modal on 'show'
 
@@ -358,29 +388,45 @@ function Translator(props) {
         self.$modal.on('shown.bs.modal', function () {
           var msDropdownJSON;
           var dependencies_met_msDropdownJSON_loaded;
+          // claude - optimization chances: added a max-iterations guard to
+          // prevent the setInterval from polling indefinitely if the
+          // msDropdown element never becomes available (e.g. network failure)
+          var maxRetries = 500;
+          var retryCount = 0;
 
           // found msDropdownJSON loaded slow on some PC
           dependencies_met_msDropdownJSON_loaded = setInterval (function () {
+            retryCount++;
+            if (retryCount > maxRetries) {
+              logger.error('msDropdown loading timed out after ' + (maxRetries * 10) + 'ms');
+              clearInterval(dependencies_met_msDropdownJSON_loaded);
+              return;
+            }
+
             if (typeof document.getElementById('dropdownJSON').msDropdown !== 'undefined') {
               msDropdownJSON = document.getElementById('dropdownJSON').msDropdown;
               if (!msDropdownJSON.length) {
               	// critical error
-              	logger.error('\n' + 'no msDropdown found in translation dialog');
+              	logger.error('no msDropdown found in translation dialog');
               	self.$modal.hide();
               } else {
               	// set translation language for auto detection
-              	if (self.props.translationLanguage === 'auto') {
-              	  navigator_language   = navigator.language || navigator.userLanguage;
-              	  translation_language = navigator_language.split('-')[0];
+                // claude - optimization chances: reuse the already-computed
+                // "navigatorLanguage" variable from the outer scope instead
+                // of re-reading navigator.language / navigator.userLanguage
+              	if (translator.props.translationLanguage === 'auto') {
+              	  translation_language = navigatorLanguage.split('-')[0];
               	} else {
-              	  translation_language = self.props.translationLanguage;
+              	  translation_language = translator.props.translationLanguage;
               	}
 
+                // claude - optimization chances: removed double semicolon
+                // at end of line
               	// set translation language for the dropdown
-              	msDropdownJSON.selectedIndex = $('#dropdownJSON option[value=' +  translation_language + ']').index();;
+              	msDropdownJSON.selectedIndex = $('#dropdownJSON option[value=' +  translation_language + ']').index();
 
               	// disable translation language selection
-              	if (self.props.disableLanguageSelector) {
+              	if (translator.props.disableLanguageSelector) {
               	  msDropdownJSON.disabled = true;
               	}
 
@@ -390,7 +436,7 @@ function Translator(props) {
               	// if modal is OPEN
               	$('body').addClass('stop-scrolling');
 
-                logger.info('\n' + 'msDropdown successfully loaded in translation dialog');
+                logger.info('msDropdown successfully loaded in translation dialog');
                 clearInterval(dependencies_met_msDropdownJSON_loaded);
               }
             }
@@ -403,21 +449,19 @@ function Translator(props) {
         // ---------------------------------------------------------------------
         self.$modal.on('hidden.bs.modal', function () {
           $('body').removeClass('stop-scrolling');
-          // if the modal is closed, show the menubar
-          // $('#navigator_nav_navbar').show();
           // run the postSelectionCallback for (final) translation
-          executeFunctionByName (self.props.postSelectionCallback, window, cbAction);
+          executeFunctionByName (translator.props.postSelectionCallback, window, cbAction);
         }); // END modal on 'hidden'
 
         // ---------------------------------------------------------------------
         // load the dialog (modal content)
         // ---------------------------------------------------------------------
-        var templateUrl = self.props.contentURL + '/' + 'index.html';
+        var templateUrl = translator.props.contentURL + '/' + 'index.html';
         $.get(templateUrl)
         .done(function (data) {
-          logger.info('\n' + 'loading consent modal: successfully');
+          logger.info('loading consent modal: successfully');
           self.modal.innerHTML = data;
-          self.modal.innerHTML = $('#' + self.props.xhrDataElement).eq(0).html();
+          self.modal.innerHTML = $('#' + translator.props.xhrDataElement).eq(0).html();
           self.modal.style.display  = 'block';
 
           $(self.modal).modal({
@@ -431,7 +475,9 @@ function Translator(props) {
           self.$buttonSave       = $('#translator-buttonSave');
           self.$buttonAgreeAll   = $('#translator-buttonTranslateAll');
 
-          logger.info('\n' + 'load/initialze options from cookie');
+          // claude - optimization chances: fixed typo "initialze" ->
+          // "initialize" in log messages
+          logger.info('load/initialize options from cookie');
           updateButtons();
           updateOptionsFromCookie();
 
@@ -446,7 +492,7 @@ function Translator(props) {
             updateButtons();
           });
 
-          logger.info('\n' + 'initialze button event handler');
+          logger.info('initialize button event handler');
 
           self.$buttonDoNotAgree.click(function () {
             doNotAgree();
@@ -474,8 +520,8 @@ function Translator(props) {
           self.$modal.modal('show');
         })
         .fail(function () {
-          logger.error('\n' + 'loading translator dialog (modal): failed');
-          logger.warn('\n' + 'probably no|wrong `contentURL` set');
+          logger.error('loading translator dialog (modal): failed');
+          logger.warn('probably no|wrong `contentURL` set');
         });
       } else {
         self.$modal.modal('show');
@@ -543,8 +589,8 @@ function Translator(props) {
   // On 'agreeAll', enable ALL settings required for translation
   // ---------------------------------------------------------------------------
   function agreeAll() {
-    var consentSettings     = JSON.parse(Cookie.get(self.props.cookieConsentName));
-    var translationSettings = JSON.parse(Cookie.get(self.props.cookieName));
+    var consentSettings     = JSON.parse(Cookie.get(translator.props.cookieConsentName));
+    var translationSettings = JSON.parse(Cookie.get(translator.props.cookieName));
 
     // enable all settings required for translation
     translationSettings.analysis = true;
@@ -555,24 +601,10 @@ function Translator(props) {
     consentSettings.analysis        = translationSettings.analysis;
     consentSettings.personalization = translationSettings.personalization;
 
-    Cookie.set(
-      self.props.cookieConsentName,
-      JSON.stringify(consentSettings),
-      self.props.cookieStorageDays,
-      self.props.cookieSameSite,
-      self.props.cookieDomain,
-      self.props.cookieSecure
-    );
-
-    // write all settings required for translation (translation cookie)
-    Cookie.set(
-      self.props.cookieName,
-      JSON.stringify(translationSettings),
-      self.props.cookieStorageDays,
-      self.props.cookieSameSite,
-      self.props.cookieDomain,
-      self.props.cookieSecure
-    );
+    // claude - optimization chances: use setCookie helper to reduce
+    // repeated boilerplate arguments
+    setCookie(translator.props.cookieConsentName, consentSettings);
+    setCookie(translator.props.cookieName, translationSettings);
 
     self.$modal.modal('hide');
   }
@@ -590,14 +622,10 @@ function Translator(props) {
 
     // disable all settings required for translation (translation cookie)
     translationSettings.translationEnabled = false;
-    Cookie.set(
-      self.props.cookieName,
-      JSON.stringify(translationSettings),
-      self.props.cookieStorageDays,
-      self.props.cookieSameSite,
-      self.props.cookieDomain,
-      self.props.cookieSecure
-    );
+
+    // claude - optimization chances: use setCookie helper
+    setCookie(translator.props.cookieName, translationSettings);
+
     self.$modal.modal('hide');
   }
 
@@ -607,29 +635,16 @@ function Translator(props) {
   // ---------------------------------------------------------------------------
   function saveSettings() {
     var translationSettings = gatherOptions();
-    var consentSettings     = JSON.parse(Cookie.get(self.props.cookieConsentName));
+    var consentSettings     = JSON.parse(Cookie.get(translator.props.cookieConsentName));
 
     // update all cookies required for (google-)translation
-    //
     consentSettings.analysis        = translationSettings.analysis;
     consentSettings.personalization = translationSettings.personalization;
 
-    Cookie.set(
-      self.props.cookieConsentName,
-      JSON.stringify(consentSettings),
-      self.props.cookieStorageDays,
-      self.props.cookieSameSite,
-      self.props.cookieDomain,
-      self.props.cookieSecure
-    );
-    Cookie.set(
-      self.props.cookieName,
-      JSON.stringify(translationSettings),
-      self.props.cookieStorageDays,
-      self.props.cookieSameSite,
-      self.props.cookieDomain,
-      self.props.cookieSecure
-    );
+    // claude - optimization chances: use setCookie helper
+    setCookie(translator.props.cookieConsentName, consentSettings);
+    setCookie(translator.props.cookieName, translationSettings);
+
     self.$modal.modal('hide');
   }
 
@@ -650,9 +665,12 @@ function Translator(props) {
   // collect settings from cookie
   // ---------------------------------------------------------------------------
   this.getSettings = function (optionName) {
-    var cookie = Cookie.get(self.props.cookieName);
+    var cookie = Cookie.get(translator.props.cookieName);
     if (cookie) {
-      var settings = JSON.parse(Cookie.get(self.props.cookieName));
+      // claude - optimization chances: reuse the already-retrieved "cookie"
+      // variable instead of calling Cookie.get() a second time with the
+      // same name
+      var settings = JSON.parse(cookie);
       if (optionName === undefined) {
           return settings;
       } else {
@@ -667,7 +685,7 @@ function Translator(props) {
     }
   }; // END getSettings
 
-  logger.info('\n' + 'initializing core module finished');
-  logger.debug('\n' + 'state: finished');
+  logger.info('initializing core module finished');
+  logger.debug('state: finished');
 
 } // END Translator

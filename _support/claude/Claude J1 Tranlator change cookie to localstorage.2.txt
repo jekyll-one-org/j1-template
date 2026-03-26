@@ -1,0 +1,49 @@
+Prompt
+  https://claude.ai/chat/71020883-a6dd-4cee-bead-00c84dbda9a2
+--------------------------------------------------------------------------------
+
+The attached module translator.js translates a website using Google Translate.
+The module is working as expected with no errors.
+
+Currently, the actual language settings are stored in the cookie
+translatorCookie (j1.user.translate). Change the storage of all data from the
+translatorCookie cookie to local storage using the key user_translate.
+
+Create a fixed version and use the comment
+"claude - translator change cookie to local storage #2"
+for all proposed fixes.
+
+
+Claude
+--------------------------------------------------------------------------------
+
+Now I have the full file. Let me trace all the places where the translator
+cookie is read/written, and create the updated version that migrates those
+to `localStorage` with key `user_translate`, while leaving the consent cookie
+(`j1.user.consent`) untouched as a real cookie.
+
+Now I'll apply all the changes systematically. Each edit replaces cookie-based
+translator storage with `localStorage` using key `user_translate`. Now let me
+copy to outputs and verify the result: All clean.
+
+The consent cookie remains cookie-based, and only the translator data moved
+to localStorage.
+
+Here's a summary of all changes made (each marked with the
+comment `claude - translator change cookie to local storage #2`):
+
+**Property renamed:** `tranlatorCookie: 'j1.user.translate'` → `translatorLocalStorageKey: 'user_translate'` — the property now holds the localStorage key instead of a cookie name.
+
+**Two new private methods added:**
+- `_getTranslatorData()` — reads and JSON-parses from `localStorage.getItem('user_translate')`, with try/catch error handling.
+- `_setTranslatorData(value)` — JSON-stringifies and writes via `localStorage.setItem('user_translate', ...)`, with try/catch error handling.
+
+**Six call sites updated to use the new methods:**
+- **Constructor** — initialization now checks `_getTranslatorData()` and writes defaults via `_setTranslatorData()` instead of `_getCookieRaw` / `_setCookieRaw`.
+- **`_agreeAll()`** — reads translator settings from `_getTranslatorData()` and writes back via `_setTranslatorData()`.
+- **`_doNotAgree()`** — writes via `_setTranslatorData()`.
+- **`_saveSettings()`** — writes via `_setTranslatorData()`.
+- **`getSettings()`** — reads via `_getTranslatorData()` instead of `_getCookieRaw`.
+- **Log message** in dialog load — updated from "cookie" to "local storage".
+
+**Unchanged:** The consent cookie (`j1.user.consent`) continues to use `_getCookieRaw` / `_setCookie` as before — only the translator data was migrated.

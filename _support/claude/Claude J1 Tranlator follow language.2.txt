@@ -1,0 +1,42 @@
+Prompt
+  https://claude.ai/chat/667e29da-f479-4bdd-8536-d5bc40ae3cb7
+--------------------------------------------------------------------------------
+
+The attached module translator.js translates a website using Google Translate.
+The module is working as expected with no errors.
+
+Let the HTML component (the modal) follow the language that Google Translate
+has currently translated. The language displayed in the div with id="dropdownJSON",
+managed by msDropdown.js, should reflect the current translation language,
+e.g., "German - Germany".
+
+Tracking the language should be done in the callback cbGoogle() of the adapter
+translator.js. The previous changes proposed by claude marked by comment
+"claude - translator follow language #1" can be ignored and should be disabled
+or removed as this strategy does not work.
+
+Create a (new) fixed version and use the comment
+"claude - translator follow language #2" for all proposed fixes.
+
+
+Claude
+--------------------------------------------------------------------------------
+
+Now let me read the skill file for creating the output:Now I have a clear understanding of the code. Let me create the fixed version. The #1 approach failed because it used `document.getElementById()` returning a raw DOM element but then called jQuery methods (`.length`, `.data()`, `.on()`) on it. I'll remove that entirely and implement a new strategy:
+
+1. **In `cbGoogle()`**: save the selected language to the `user_translate` cookie before reload
+2. **In `init()`**: use jQuery event delegation (`$(document).on('shown.bs.modal', ...)`) to sync the msDropdown when the translator modal is shown, reading from the `googtrans` cookie (primary) with fallback to the `user_translate` cookieFirst, replace the entire `#1` IIFE block with the new `#2` approach:Now, add the language tracking to `cbGoogle()` — save the selected language to the `user_translate` cookie before each reload. First, in the "same language as content" branch:Add cookie save before the first reload (same-language reset branch):Now add cookie save before the main reload (translation branch):Remove the unused `dialogContainer` variable from `cbGoogle` (was only for #1):Let me verify the key sections of the final file:The file looks correct. Let me copy it to the output directory:Here's the fixed version. The changes marked with `claude - translator follow language #2` are:
+
+**Why #1 failed:** It used `document.getElementById()` which returns a raw DOM element, then called jQuery methods (`.length`, `.data()`, `.on()`) on it — those are undefined on plain DOM elements, so the sync code never executed.
+
+**New strategy (#2) — two parts:**
+
+**1. `cbGoogle()` — persist the selected language before reload** (two locations):
+- **Translation branch:** writes `selectedTranslationLanguage` into `user_translate.translationLanguage` cookie right before `location.reload()`
+- **Same-language reset branch:** writes `srcLang` (content language) back into the cookie before reload, so the dropdown resets properly
+
+**2. `init()` — sync dropdown when modal opens** (replaces the #1 IIFE):
+- Uses `$(document).on('shown.bs.modal', ...)` — jQuery event delegation that works reliably for dynamically loaded modals without needing MutationObserver or jQuery object references
+- Polls briefly (100ms intervals, 5s timeout) for `dropdownEl.msDropdown` to be ready after the modal transition completes
+- Reads the active language from the `googtrans` cookie (primary source, format `/srcLang/destLang`) with fallback to `user_translate.translationLanguage` from the cookie written in step 1
+- Sets `dropdownEl.msDropdown.value` to the active language code

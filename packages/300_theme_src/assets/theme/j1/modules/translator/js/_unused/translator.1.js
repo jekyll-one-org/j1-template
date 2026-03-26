@@ -428,11 +428,11 @@ function Translator(props) {
             keyboard: false
           });
 
-          self.$buttonDoNotAgree = $('#translator-buttonDoNotAgree');
-          self.$buttonAgree      = $('#translator-buttonAgree');
+          self.$buttonDoNotAgree = $('#translator-buttonDisableTranslation');
+          self.$buttonAgree      = $('#translator-buttonTranslate');
           self.$buttonExit       = $('#translator-buttonExit');
           self.$buttonSave       = $('#translator-buttonSave');
-          self.$buttonAgreeAll   = $('#translator-buttonAgreeAll');
+          self.$buttonAgreeAll   = $('#translator-buttonTranslateAll');
 
           logger.info('\n' + 'load/initialze options from cookie');
           updateButtons();

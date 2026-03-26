@@ -1,0 +1,38 @@
+Prompt
+  https://claude.ai/chat/0d78274d-4e04-4ae6-8b31-08600ec83fa5
+--------------------------------------------------------------------------------
+
+ The attached module translator.js translates a website using Google Translate.
+ The current strategy for disabling translation is to delete the googtrans
+ cookie in the core module and in the adapter of the same name.
+ 
+ This does not work for the core module in _disableTranslation() when the
+ button $buttonDisableTranslation is clicked in the modal.
+ 
+ Is a better way to turn off a translation possible?
+ 
+ Create a fixed version for optimization and use the comment
+ "claude - translator improve disabling  #1" for all proposed fixes.
+
+
+Claude
+--------------------------------------------------------------------------------
+
+Now I have the full picture. Let me analyze the core issue in `_disableTranslation()`.I've found the root causes. There are two bugs and one fundamental limitation in `_disableTranslation()`:
+
+**Bug 1 — Settings overwrite:** `_disableTranslation()` calls `_gatherOptions()` which only returns checkbox values from the modal. This *replaces* the full settings object (losing keys like `translatorName`, `translateAllPages`, `useLanguageFromBrowser`). By contrast, `_enableTranslation()` correctly calls `_getTranslatorData()` to read the existing complete object and then mutates individual fields.
+
+**Bug 2 — Consent cookie not synced:** `_enableTranslation()` updates the consent cookie with the new `analysis`/`personalization` values, but `_disableTranslation()` never touches the consent cookie, leaving it stale.
+
+**Fundamental problem — Cookie deletion alone cannot undo an active translation:** Once Google Translate is active, it has injected an iframe and rewritten DOM text nodes in memory. Deleting the `googtrans` cookie doesn't reverse those DOM changes. The only reliable way to fully undo a live translation is to reload the page.
+
+Let me build the fixed version.Here's the fixed file. The rewritten `_disableTranslation()` addresses four issues, all tagged with `claude - translator improve disabling #1`:
+
+**Fix 1 — Settings object was being silently destroyed.** The old code called `_gatherOptions()`, which only returns the checkbox values from the modal DOM. This replaced the entire localStorage settings object, losing non-checkbox keys like `translatorName`, `translateAllPages`, and `useLanguageFromBrowser`. The fix reads the full existing object via `_getTranslatorData()` and mutates individual fields — the same pattern `_enableTranslation()` already uses correctly.
+
+**Fix 2 — Consent cookie left stale.** `_enableTranslation()` syncs `analysis` and `personalization` back to the consent cookie, but `_disableTranslation()` never touched it. The fix now sets both to `false` in the consent cookie, wrapped in a try/catch so a missing or corrupt consent cookie doesn't break the disable flow.
+
+**Fix 3 — More thorough `googtrans` cookie removal.** Google Translate sets its cookie with unpredictable domain/path attributes. The `Cookies.remove()` calls (js-cookie) can miss variants that were set with a different domain. The fix adds direct `document.cookie` expiration across all plausible domain combinations (bare, hostname, subdomain) before the js-cookie fallback calls.
+
+**Fix 4 — Page reload to clear in-memory DOM.** This is the fundamental reason disabling didn't work. Once Google Translate is active, it has rewritten the page's text nodes in memory and injected an iframe. No amount of cookie deletion reverses that — the translated text stays on screen. The fix calls `window.location.reload()` after persisting the new settings, so the page loads fresh in its original language. The `postSelectionCallback` is intentionally bypassed since no further translation processing is needed when disabling.
+

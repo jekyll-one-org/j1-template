@@ -1,0 +1,54 @@
+Prompt
+  https://claude.ai/chat/28ac93ae-b5b4-48ca-bf27-5877fa2a6969
+--------------------------------------------------------------------------------
+
+The attached module translator.js translates a website using Google Translate.
+The module is working as expected with no errors.
+
+Currently, the actual language settings are stored in the cookie
+"user_translate".
+
+Change the storage of all data from user_translate cookie to localstorage
+using the key user_translate.
+
+Create a fixed version and use the comment
+"claude - translator change cookie to localstorage #1" for all proposed fixes.
+
+
+Claude
+--------------------------------------------------------------------------------
+
+Now I have the full picture. I need to replace every `user_translate`
+cookie read/write/exists/expire call with `localStorage` equivalents.
+
+Let me create the fixed file. Now I'll apply each change. There are 8 locations
+where `user_translate` cookie operations occur.
+
+**Change 1:** Init — load user_translate from localStorage instead of
+cookie (lines 242–254)**
+
+Change 2:** Consent-based disable/enable block (lines 283–306)**
+
+Change 3:** Modal sync fallback — read from localStorage instead of cookie (line ~367)**
+
+Change 4:** cbGoogle — reset translation language when source equals selected (lines 503–511)**
+
+Change 5:** cbGoogle — save selected translation language (lines 545–553)
+Now let me verify the final result:Line 297 is a config parameter passed
+to the external Translator CORE module (out of scope for this adapter).
+Line 322 is a stale comment — let me fix it:Here's the updated file.
+
+All five `user_translate` cookie operations in the adapter have been migrated
+to `localStorage` with the key `user_translate`, each marked with the
+comment `claude - translator change cookie to localstorage #1`:
+
+1. **Init loader** (was `existsCookie`/`readCookie`/`writeCookie`) → now uses `getItem`/`setItem` with JSON parse/stringify
+2. **Consent check block** (was `writeCookie` + `expireCookie`) → replaced both branches with `setItem`; the `expireCookie` call is no longer needed since localStorage doesn't expire
+3. **Modal sync fallback** (was `readCookie`) → now reads from `getItem` with safe JSON parse
+4. **cbGoogle reset** (was `readCookie`/`writeCookie` when source equals selected language) → now `getItem`/`setItem`
+5. **cbGoogle save** (was `readCookie`/`writeCookie` after language selection) → now `getItem`/`setItem`
+
+The Translator CORE constructor call at line 297 (`cookieName: cookie_names.user_translate`)
+was left unchanged since it configures the external Translator module, not 
+this adapter's own storage.
+

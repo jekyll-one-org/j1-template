@@ -6,7 +6,7 @@ regenerate:                             true
 
 {% comment %}
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/adapter/js/translator.js
+ # ~/assets/theme/j1/adapter/js/translator.js (4)
  # Liquid template to create the Template Adapter for J1 Translator
  #
  # Product/Info:
@@ -57,7 +57,7 @@ regenerate:                             true
 
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/adapter/js/translator.js
+ # ~/assets/theme/j1/adapter/js/translator.js (4)
  # JS Adapter for J1 Translate
  #
  #  Product/Info:
@@ -82,7 +82,7 @@ regenerate:                             true
 
 j1.adapter.translator = (function (j1, window) {
 
-  const isDev = (j1.env === "development" || j1.env === "dev");
+  const isDev = (j1.env === "development" || j1.env === "dev") ? true : false;
 
   var environment       = '{{environment}}';
   var state             = 'not_started';
@@ -96,15 +96,26 @@ j1.adapter.translator = (function (j1, window) {
   var $modal;
   var cookie_names;
   var user_consent;
+  var logger;
+  var url;
+  var baseUrl;
+  var hostname;
+  var domain;
+  var subDomain;
+  var isSubDomain;
+  var cookie_option_domain;
+  var secure;
+  var logText;
+  var cookie_written;
   var siteLanguage;
+  var documentLanguage;
+  var navigatorLanguage;
   var ddSourceLanguage;
   var head;
   var gtTranslateScript;
   var gtCallbackScript;
   var languageList;
-
-  var logger;
-  var logText;
+  var domainAttribute;
 
   // date|time
   var startTime;
@@ -141,8 +152,17 @@ j1.adapter.translator = (function (j1, window) {
       translatorDefaults    = $.extend({}, {{translator_defaults | replace: 'nil', 'null' | replace: '=>', ':' }});
       translatorSettings    = $.extend({}, {{translator_settings | replace: 'nil', 'null' | replace: '=>', ':' }});
       translatorOptions     = $.extend(true, {}, translatorDefaults, translatorSettings);
+
+      url                   = new liteURL(window.location.href);
+      baseUrl               = url.origin;
+      hostname              = url.hostname;
+      domain                = hostname.substring(hostname.lastIndexOf('.', hostname.lastIndexOf('.') - 1) + 1);
+      subDomain             = '.' + domain;
+      isSubDomain           = j1.subdomain(hostname);
+      secure                = (url.protocol.includes('https')) ? true : false;
       siteLanguage          = '{{contentLanguage}}';
-//    documentLanguage      = document.documentElement.lang; 
+      documentLanguage      = document.documentElement.lang; 
+      navigatorLanguage     = navigator.language || navigator.userLanguage;
       cookie_names          = j1.getCookieNames();
       head                  = document.getElementsByTagName('head')[0];
 
@@ -168,16 +188,14 @@ j1.adapter.translator = (function (j1, window) {
       gtCallbackScript       = document.createElement('script');
       gtCallbackScript.id    = 'gt-callback';
       
-      // template literal for readability
-      gtCallbackScript.text  = `
-        function googleTranslateElementInit() {
-          var gtAPI = new google.translate.TranslateElement({
-            pageLanguage: "{{translator_options.contentLanguage}}",
-            layout:       google.translate.TranslateElement.FloatPosition.TOP_LEFT
-          },
-          "google_translate_element");
-        }
-      `;
+      gtCallbackScript.text  = '\n';
+      gtCallbackScript.text += 'function googleTranslateElementInit() {' + '\n';
+      gtCallbackScript.text += '  var gtAPI = new google.translate.TranslateElement({' + '\n';
+      gtCallbackScript.text += '    pageLanguage: "{{translator_options.contentLanguage}}",' + '\n';
+      gtCallbackScript.text += '    layout:       google.translate.TranslateElement.FloatPosition.TOP_LEFT' + '\n';
+      gtCallbackScript.text += '  },' + '\n';
+      gtCallbackScript.text += '  "google_translate_element");' + '\n';
+      gtCallbackScript.text += '}' + '\n';
 
       document.head.appendChild(gtCallbackScript);
 
@@ -186,8 +204,8 @@ j1.adapter.translator = (function (j1, window) {
       // -----------------------------------------------------------------------
       var dependencies_met_page_ready = setInterval (() => {
         var pageState       = $('#content').css("display");
-        var pageVisible     = (pageState === 'block');
-        var j1CoreFinished  = (j1.getState() === 'finished');
+        var pageVisible     = (pageState == 'block') ? true: false;
+        var j1CoreFinished  = (j1.getState() == 'finished') ? true : false;
 
         if (j1CoreFinished && pageVisible) {
 
@@ -204,6 +222,13 @@ j1.adapter.translator = (function (j1, window) {
             return;
           }
 
+          // set domain used by cookies
+          if (option_domain == 'auto') {
+            domainAttribute = domain ;
+          } else  {
+            domainAttribute = '';
+          }
+
           _this.setState('started');
           logger.debug('state: ' + _this.getState ());
           logger.info('module is being initialized');
@@ -217,8 +242,8 @@ j1.adapter.translator = (function (j1, window) {
           }
 
           // hide the google translate element if exists
-          if ($('#google_translate_element').length) {
-            $('#google_translate_element').hide();
+          if ($('google_translate_element')) {
+            $('google_translate_element').hide();
           }
 
           // show|hide translate button if enabled
@@ -240,21 +265,25 @@ j1.adapter.translator = (function (j1, window) {
           }
 
           // load|set user data
+          user_consent = j1.readCookie(cookie_names.user_consent);
           if (!user_consent.analysis || !user_consent.personalization) {
             // disable translation service
             user_translate.translationEnabled = false;
+            localStorage.setItem(translatorOptions.translatorLocalStorageKey, JSON.stringify(user_translate));
           } else {
             // enable translation service
             user_translate.translationEnabled = true;
+            localStorage.setItem(translatorOptions.translatorLocalStorageKey, JSON.stringify(user_translate));            
           }
-          localStorage.setItem(translatorOptions.translatorLocalStorageKey, JSON.stringify(user_translate));
 
           // initialize translator core
           j1.translator = new Translator({
-            cookieStorageDays:          expires,                                          // lifetime of a cookie [0..365], 0: session cookie
-            cookieSameSite:             same_site,                                        // restrict consent cookie
             contentURL:                 translatorOptions.contentURL,                     // dialog content (modals) for all supported languages
             translatorLocalStorageKey:  translatorOptions.translatorLocalStorageKey,      // name of the key in localsorage for user translation data
+            cookieStorageDays:          expires,                                          // lifetime of a cookie [0..365], 0: session cookie
+            cookieSameSite:             same_site,                                        // restrict consent cookie
+            cookieDomain:               domainAttribute,                                  // set domain (hostname|domain)
+            cookieSecure:               secure,                                           // set secure
             cookieConsentName:          translatorOptions.cookieConsentName,              // the name of the Cookie Consent Cookie (secondary data)
             disableLanguageSelector:    translatorOptions.disableLanguageSelector,        // disable language dropdown for translation in dialog (modal)
             translatorLanguagesFile:    translatorOptions.translatorLanguagesFile,
@@ -265,7 +294,7 @@ j1.adapter.translator = (function (j1, window) {
             translationEnabled:         translatorOptions.translationEnabled,             // run translation enabled|disabled
             translatorName:             translatorOptions.translatorName,                 // translator used for translation
             xhrDataElement:             translatorOptions.xhrDataElement,                 // container for all language-specific dialogs (modals)
-            postSelectionCallback:      translatorOptions.postSelectionCallback           // callback to run the translation
+            postSelectionCallback:      translatorOptions.postSelectionCallback    // callback to run the translation
           });
 
           // Sync the msDropdown language selector and button visibility
@@ -339,12 +368,13 @@ j1.adapter.translator = (function (j1, window) {
               clearInterval(syncPoll);
             }, 1000);
           });
+          // END claude - translator follow language #3
 
           // hide the translation feedback
           translationFeedbackHighlight  = '<style id="translationFeedbackHighlight">';
           translationFeedbackHighlight += '  .VIpgJd-yAWNEb-VIpgJd-fmcmS-sn54Q {';
           translationFeedbackHighlight += '    background-color:  transparent !important;';
-          translationFeedbackHighlight += '    box-shadow: none !important;';
+          translationFeedbackHighlight += '    box-shadow: none !important;;';
           translationFeedbackHighlight += '  }';
           translationFeedbackHighlight += '</style>';
 
@@ -355,8 +385,8 @@ j1.adapter.translator = (function (j1, window) {
             if (translatorOptions.translatorName === 'google') {
               logger.info('append Google Translate Script: ' + gtTranslateScript.id);
               head.appendChild(gtTranslateScript);
-              if ($('#google_translate_element').length) {
-                $('#google_translate_element').hide();
+              if ($('google_translate_element')) {
+                $('google_translate_element').hide();
               }
             }
           } else if (translatorOptions.translatorName === 'google') {
@@ -385,6 +415,8 @@ j1.adapter.translator = (function (j1, window) {
       // code for post processing
       logger.info('postTranslateElementInit entered');
       logger.info(response.T.Dh);
+
+      return;
     }, // END postTranslateElementInit
 
     // -------------------------------------------------------------------------
@@ -415,61 +447,58 @@ j1.adapter.translator = (function (j1, window) {
       selectedTranslationLanguage = msDropdown.value;
       logger.info('selected translation language: ' + selectedTranslationLanguage);
 
-      // read localStorage once at the top
-      user_translate = JSON.parse(localStorage.getItem(translatorOptions.translatorLocalStorageKey));
-
       // disabled translation
+      user_translate = JSON.parse(localStorage.getItem(translatorOptions.translatorLocalStorageKey));
       if (!user_translate.translationEnabled) {
         logger.info(`translation disabled for language: ${user_translate.translationLanguage}`);
         location.reload();
-
-        // added missing 'return' after location.reload() - without it,
-        // JS execution continues synchronously past the reload into the
-        // code below        
-        return;
       }
 
-      // restructured control flow to fix unreachable code.
-      // -----------------------------------------------------------------------
-      // Previously all three if/else-if/else branches ended with return or
-      // location.reload(), making the cookie-setting and language-saving
-      // code below them dead code that could never execute. The googtrans
-      // cookie was therefore never written and the selected language was
-      // never persisted.
-      //
-      // The corrected logic:
-      //   1. selected language differs from source AND is not the default
-      //      → set the googtrans cookie, save the selection, reload
-      //   2. selected language IS the default → do nothing
-      //   3. selected language equals the source → reset to source, return
-      //
-      // -----------------------------------------------------------------------
       // translation language MUST be DIFFERENT from default language
       if (srcLang !== selectedTranslationLanguage && selectedTranslationLanguage !== translatorOptions.defaultLanguage) {
-        // set transCode settings for Google Translate cookie
-        transCode = '/' + srcLang + '/' + selectedTranslationLanguage;
-        Cookies.set('googtrans', transCode);
-
-        if (isSubDomain) {
-          Cookies.set('googtrans', transCode, { domain: domain });
-        }
-
-        // save selected translation language to localStorage for dropdown
-        // sync after page reload
-        user_translate.translationLanguage = selectedTranslationLanguage;
+        // reset translation language in localStorage to content language
+        user_translate = JSON.parse(localStorage.getItem(translatorOptions.translatorLocalStorageKey));
+        user_translate.translationLanguage = srcLang;
         localStorage.setItem(translatorOptions.translatorLocalStorageKey, JSON.stringify(user_translate));
-        logger.info('saved translation language to localStorage: ' + selectedTranslationLanguage);
+        logger.info('reset translation language in localStorage to: ' + srcLang);
 
-        // reload current page to apply translation
         location.reload();
       } else if (selectedTranslationLanguage === translatorOptions.defaultLanguage) {
         return;
       } else {
         // reset translation language in localStorage to content language
+        user_translate = JSON.parse(localStorage.getItem(translatorOptions.translatorLocalStorageKey));
         user_translate.translationLanguage = srcLang;
         localStorage.setItem(translatorOptions.translatorLocalStorageKey, JSON.stringify(user_translate));
         logger.info('reset translation language in localStorage to: ' + srcLang);
+
+        return;
       }
+
+      // set transCode settings
+      //
+      transCode = '/' + srcLang + '/' + selectedTranslationLanguage;
+      Cookies.set('googtrans', transCode);
+
+      // -----------------------------------------------------------------------
+      // NOTE: googtrans cookie will be rewritten (by Google!?) for
+      // attributes 'SameSite' and 'Domain'. This results for 'SameSite'
+      // in an empty field and two cookies (host+domain) if domain option
+      // is enabled!!!
+      // -----------------------------------------------------------------------
+      if (isSubDomain) {
+        Cookies.set('googtrans', transCode, { domain: domain });
+      }
+
+      // save selected translation language to localStorage for dropdown
+      // sync after page reload
+      user_translate = JSON.parse(localStorage.getItem(translatorOptions.translatorLocalStorageKey));
+      user_translate.translationLanguage = selectedTranslationLanguage;
+      localStorage.setItem(translatorOptions.translatorLocalStorageKey, JSON.stringify(user_translate));
+      logger.info('saved translation language to localStorage: ' + selectedTranslationLanguage);
+
+      // reload current page
+      location.reload();
 
     }, // END cbGoogle
 
