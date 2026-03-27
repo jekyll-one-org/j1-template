@@ -1,0 +1,44 @@
+Prompt
+  https://claude.ai/chat/e2b11ef6-5292-4bb2-9c67-808a0b7e1e9f
+--------------------------------------------------------------------------------
+
+The attached module, backstretch.js, manages images and videos integrated
+into a website. The attached module, swiperjs (swiper-bundle.js), manages
+images and videos as sliders.
+
+The images or videos placed in the master header (attic) using the backstretch
+module change size when the browser window is resized (recalculated accordingly).
+Still, they are not recalculated correctly to fit within the resized container
+in the manner of responsiveness.
+
+The module backstretch should use the same resizing strategy (function resize)
+for images and videos as the module swiperjs (see swiper-bundle.js, function
+Resize) does.
+
+Create fixed versions for optimization and use the comment
+"claude - backstretch responsiveness #4" for all proposed fixes.
+
+
+Claude
+--------------------------------------------------------------------------------
+
+**Change 4:** Update the resolution-check measurements at the top of `resize()` to also use `clientWidth`/`clientHeight` consistently:Now let me also invalidate the dimension cache when `show()` loads a new image so `resize()` doesn't skip the first recalculation after an image change:Now let me verify the complete file by checking key sections for consistency:Everything is consistent. Let me now copy the final output:Here's the fixed `backstretch.js` with all six changes tagged as **"claude - backstretch responsiveness #4"**. The core problem was that backstretch relied solely on `window.resize` events and jQuery's `.width()`/`.innerWidth()` for dimension measurement, while SwiperJS uses a fundamentally different — and more reliable — strategy. Here's what was adopted:
+
+**1. ResizeObserver instead of window.resize** (line 686, constructor)
+SwiperJS's `Resize` module observes the *container element itself* via `ResizeObserver`, not just the window. This detects container-level size changes caused by CSS transitions, flex/grid reflows, or parent resizing that `window.resize` never fires for. A fallback to `window.resize` is kept for older browsers.
+
+**2. requestAnimationFrame batching** (line 686, constructor)
+SwiperJS wraps resize callbacks in `requestAnimationFrame` to coalesce rapid-fire events into a single paint cycle. Backstretch previously called `resize()` synchronously on every event, causing layout thrashing during continuous window dragging.
+
+**3. clientWidth/clientHeight measurement** (lines 870 + 929, resize)
+SwiperJS's `updateSize()` uses `el.clientWidth`/`el.clientHeight` and explicitly subtracts padding via `getComputedStyle`. Backstretch used jQuery's `.width()` and `.innerWidth()`, which behave inconsistently across `box-sizing` modes. Both the resolution-check at the top of `resize()` and the box-dimension calculation now use the SwiperJS pattern.
+
+**4. Dimension-change skip guard** (line 967, resize)
+SwiperJS's ResizeObserver callback checks `newWidth !== width || newHeight !== height` before triggering recalculation. A matching guard was added so `resize()` returns early when neither the container box nor the natural image dimensions have changed, avoiding redundant DOM writes.
+
+**5. Cache invalidation on image change** (line 1245, show)
+The skip guard from change 4 would block the first `resize()` after a slide change. The natural-dimension cache is now cleared when `_currentImage` changes, ensuring the new image gets correctly positioned.
+
+**6. Cleanup in destroy()** (line 1361, destroy)
+Following SwiperJS's `removeObserver()` pattern, `destroy()` now disconnects the `ResizeObserver` and cancels any pending `requestAnimationFrame` to prevent callbacks from firing on a torn-down instance.
+

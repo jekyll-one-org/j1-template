@@ -89,10 +89,10 @@ defaults:
                                               Analysis of this website's usage helps optimize its pages to
                                               improve visitors' experience. For traffic analysis, the service
                                               Google Analytics (GA) is used. GA uses persistent cookies that
-                                              remain on your computer for its service.
-                                              This website does <b>not</b> transfer any personal data to GA.
-                                              Implicit personal information, like IP addresses, is anonymized
-                                              to protect your privacy. 
+                                              remain on your computer for its service. This website does
+                                              <b>not</b> transfer any personal data to GA. Implicit personal
+                                              information, like IP addresses, is anonymized to protect your
+                                              privacy.
                                             </p>
                                           </li>
                                           <li style="list-style-type: none;">
@@ -100,11 +100,11 @@ defaults:
                                             <p>
                                               Remembering your personal settings enables additional services,
                                               such as theme translation, comments, and running advertising
-                                              campaigns, to provide visitors with a website free of charge.
-                                              Partners use persistent cookies that remain on your computer
-                                              for their services. Our partners, such as Bootswatch, Hyvor,
-                                              and Google, provide excellent, personalized services and finance
-                                              the running of this site.
+                                              campaigns, so visitors can use the website free of charge. Partners
+                                              use persistent cookies that remain on your computer for their services.
+                                              Our partners, such as Bootswatch, Hyvor, Disqus, and Google, provide
+                                              excellent, personalized services and help fund the operation of
+                                              this site.
                                             </p>
                                           </li>
                                         </ul>

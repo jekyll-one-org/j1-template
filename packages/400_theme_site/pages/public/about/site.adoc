@@ -78,3 +78,4 @@ an About page so that no one will miss it.
 
 [role="mb-7"]
 Good luck presenting your site, your project to the world!
+

@@ -1,0 +1,76 @@
+Prompt
+  https://claude.ai/chat/34a6eded-20b1-4fb5-8b6e-76f9beba6062
+--------------------------------------------------------------------------------
+
+The attached module backstretch.js manages images and videos integrated into
+a website. The module is working as expected with no errors.
+
+The project uses Backstretch to place images or videos into the master header
+(attic) of all website pages. The images or videos placed in the master header
+change when the browser window is resized (recalculated at this size), but do
+not behave responsively (as expected).
+
+The images seem to overflow the container, which means the images are not
+recalculated to fit 100% within the resized container.
+
+What might be the reason? Can this be fixed to make images and videos fit
+in the resized container? 
+
+Create fixed versions for optimization and use the comment
+"claude - backstretch responsiveness"  for all proposed fixes.
+
+
+Claude
+--------------------------------------------------------------------------------
+
+All fixes verified. Let me copy the files to the output directory.
+Here are the fixed files. I found three root causes working together
+to produce the overflow behavior, addressed across six marked changes
+(all tagged `claude - backstretch responsiveness`).
+
+**Root cause 1
+CSS framework interference with image dimensions.
+** The default `cover` scale mode intentionally sizes the image *larger*
+than the container (to fill it without letterboxing), then uses negative
+`top`/`left` offsets plus `overflow: hidden` to crop.
+
+However, CSS frameworks like Bootstrap commonly set `img { max-width: 100%; max-height: 100%; }`
+or `object-fit` rules globally. These cap the computed image size at the
+container's dimensions, overriding backstretch's calculated width/height — so
+the image stays at the container size rather than the intended
+oversized-and-cropped size. After a resize, this mismatch leaves the image
+at a stale dimension.
+
+Fixes in `backstretch.js`:
+- Added `maxHeight: 'none'` and `objectFit: 'none'` to the initial `styles.item` (alongside the existing `maxWidth: 'none'`)
+- Added `bgCSS.maxWidth = 'none'` and `bgCSS.maxHeight = 'none'` in the `resize()` method to re-enforce on every recalculation cycle
+- Re-enforced `overflow: 'hidden'` on the wrap element during every resize, since external media queries or class changes can reset it
+
+**Root cause 2
+Resize event flooding without throttling.
+** The `window.resize` event fires on every pixel of movement — potentially
+hundreds of times per second. Each fire triggers a full dimension recalculation
+and DOM style write.
+
+The browser can't repaint between calls, so intermediate/stale sizes accumulate
+and the final painted state may not match the actual container dimensions.
+
+Fixes in `backstretch.js`:
+- Wrapped the resize handler in `requestAnimationFrame` with cancellation, throttling recalculations to one per paint frame (~60fps)
+- Added cleanup of the rAF handle in `destroy()` to prevent orphaned callbacks
+
+**Root cause 3
+Premature resize in attic.js after text insertion.
+** In the `backstretch.after` callback, the title/tagline HTML is inserted
+and then `backstretch('resize')` is called synchronously. At that point the
+browser hasn't yet recalculated layout for the newly inserted text, so the
+container's height still reflects the *pre-insertion* state.
+
+The image is sized for that outdated height and overflows once the text pushes
+the container taller.
+
+Fix in `attic.js`:
+- Wrapped the `$('#{{attic_id}}').backstretch('resize')` call in
+`requestAnimationFrame` so the browser completes layout before backstretch
+reads the new container dimensions
+

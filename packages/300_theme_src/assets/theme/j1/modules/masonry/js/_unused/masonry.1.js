@@ -1,5 +1,5 @@
 /*!
- * Masonry PACKAGED v4.2.2  (1)
+ * Masonry PACKAGED v4.2.2
  * Cascading grid layout library
  * https://masonry.desandro.com
  * MIT License

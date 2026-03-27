@@ -1,6 +1,6 @@
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/modules/backstretch/js/backstretch.js (2)
+ # ~/assets/theme/j1/modules/backstretch/js/backstretch.js (1)
  # Backstretch v.2.1.16 implementation for J1 Theme.
  #
  # Product/Info:
@@ -128,19 +128,31 @@
    * ========================= */
 
   $.fn.backstretch.defaults = {
-    debug:    false,
-    duration: 5000,                       // Amount of time in between slides (if slideshow)
-    transition: 'fade',                   // Type of transition between slides
-    transitionDuration: 0,                // Duration of transition between slides
-    animateFirst: true,                   // Animate the transition of first image of slideshow in?
-    alignX: 0.5,                          // The x-alignment for the image, can be 'left'|'center'|'right' or any number between 0.0 and 1.0
-    alignY: 0.5,                          // The y-alignment for the image, can be 'top'|'center'|'bottom' or any number between 0.0 and 1.0
-    paused: false,                        // Whether the images should slide after given duration
-    start: 0,                             // Index of the first image to show
-    preload: 2,                           // How many images preload at a time?
-    preloadSize: 1,                       // How many images can we preload in parallel?
-    resolutionRefreshRate: 2500,          // How long to wait before switching resolution?
-    resolutionChangeRatioThreshold: 0.1   // How much a change should it be before switching resolution?
+    debug:    false
+      ,
+    duration: 5000 // Amount of time in between slides (if slideshow)
+      ,
+    transition: 'fade' // Type of transition between slides
+      ,
+    transitionDuration: 0 // Duration of transition between slides
+      ,
+    animateFirst: true // Animate the transition of first image of slideshow in?
+      ,
+    alignX: 0.5 // The x-alignment for the image, can be 'left'|'center'|'right' or any number between 0.0 and 1.0
+      ,
+    alignY: 0.5 // The y-alignment for the image, can be 'top'|'center'|'bottom' or any number between 0.0 and 1.0
+      ,
+    paused: false // Whether the images should slide after given duration
+      ,
+    start: 0 // Index of the first image to show
+      ,
+    preload: 2 // How many images preload at a time?
+      ,
+    preloadSize: 1 // How many images can we preload in parallel?
+      ,
+    resolutionRefreshRate: 2500 // How long to wait before switching resolution?
+      ,
+    resolutionChangeRatioThreshold: 0.1 // How much a change should it be before switching resolution?
   };
 
   /* STYLES

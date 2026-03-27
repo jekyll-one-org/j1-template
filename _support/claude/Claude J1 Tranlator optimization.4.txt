@@ -1,0 +1,127 @@
+Prompt
+  https://claude.ai/chat/699f3738-6c8d-498c-b8b5-c9c67ebaac29
+--------------------------------------------------------------------------------
+
+The attached module backstretch.js manages images and videos integrated into
+a website. The module is working as expected with no errors.
+
+The project uses Backstretch to place images or videos into the master header
+(attic) of all website pages.
+
+Are there potential optimization chances for code clarity (implementation/comments),
+correctness, and performance?
+
+Create fixed versions for optimization and use the comment "claude - optimization chances" 
+for all proposed fixes.
+
+
+Claude
+--------------------------------------------------------------------------------
+
+Now let me create a detailed change report:Here are all three deliverables: the report and both fixed source files.
+
+Across both files I identified **32 optimizations** — 14 correctness bugs, 5 performance improvements, and 13 code clarity fixes. Every change is tagged with `claude - optimization chances` in the source.
+
+The six most critical bugs that were silently broken in production:
+
+1. **`resolutionChangeRatioThreshold`** was receiving a transition *string* instead of a numeric threshold — resolution-adaptive image switching was completely non-functional
+2. **`containerWidth *= devicePixelRatio`** mutated a shared loop variable, corrupting image selection for all HiDPI/auto pixel-ratio images after the first match
+3. **`$('#attic_id')`** was a literal string instead of `$('#{{attic_id}}')` — the pauseOnHover feature never attached to any element
+4. **`{% assign loop = true %}` in both branches** — videos always looped regardless of configuration
+5. **Two CSS rules missing closing `}`** — the `.attic` padding rule and `.backstretch-item` opacity rule were malformed
+6. **`windowOrientation` compared against `deviceOrientation`** — window-orientation–based image selection was matching the wrong value
+
+# Optimization Report — backstretch.js & attic.js
+
+All changes are marked with the comment `claude - optimization chances` in the source files.
+
+---
+
+## backstretch.js — 16 fixes
+
+### Correctness (7 fixes)
+
+| # | Line(s) | Issue | Fix |
+|---|---------|-------|-----|
+| 1 | ~257 | `image.windowOrientation` was compared against `deviceOrientation` instead of `windowOrientation`. Window-orientation–based image selection never worked. | Changed comparand to `windowOrientation`. |
+| 2 | ~279 | `containerWidth *= devicePixelRatio` mutated the outer loop variable when `pixelRatio === 'auto'`, corrupting the width for all subsequent iterations. | Assigned the scaled value to `testWidth` only. |
+| 3 | ~553 | In `processAlignOptions`, the Y-axis fallback branch checked `options.alignX !== undefined` instead of `options.alignY`. Custom Y-alignment values could be silently ignored. | Changed guard to `options.alignY`. |
+| 4 | ~403 | The `preload` function's `next` slice used `count - batchSize` (an absolute index) instead of `startAt + count`, dropping trailing images when `startAt > 0`. The `sources` slice also started from `0` instead of `startAt`. | Corrected both slice boundaries. |
+| 5 | ~506 | The typo-detection warning for `resolutionChangeRatioTreshold` called `window.console.log` without the null guard used by every other deprecation warning, risking a crash in console-less environments. | Added `window.console && window.console.log` guard. |
+| 6 | ~990 | Used deprecated jQuery `.bind()` which was removed in jQuery 3.x. | Replaced with `.on()`. |
+| 7 | ~1042 | The `bringInNextImage` callback fired `backstretch.before` inside the *after* phase. The `before` event is already dispatched at the top of `show()`, so this caused a duplicate, out-of-sequence event for listeners. | Removed `'before'` from the event array. |
+
+### Performance (2 fixes)
+
+| # | Line(s) | Issue | Fix |
+|---|---------|-------|-----|
+| 8 | ~356 | The image preload cache used a linear array scan (O(n) per lookup). On pages with many images this scales poorly. | Replaced with a `Map` for O(1) lookups. |
+| 9 | ~1107 | The visibility-polling `setInterval(…, 10)` had no upper bound, running forever if the container was never made visible (e.g. removed from DOM). | Added a maximum retry count (~5 s timeout). |
+
+### Code Clarity (7 fixes)
+
+| # | Line(s) | Issue | Fix |
+|---|---------|-------|-----|
+| 10 | ~38 | Module-scoped `var logText` was shared between unrelated functions (`resize`, `show`, `catch`), which is error-prone. | Removed; inlined log strings at call sites. |
+| 11 | ~868 | Commented-out debug block contained non-English text ("Kacke am Schuh"). | Removed. |
+| 12 | ~1080 | Comment typo: "calculatiin" → "calculation". | Fixed. |
+| 13 | ~1553 | `getCurrentTime(seconds)` had an unused `seconds` parameter (copy-paste from `setCurrentTime`). | Removed parameter. |
+| 14 | ~720 | The `default:` label placed before `case 'fade':` in the switch statement is intentional (fallthrough) but confusing. | Added explanatory comment. |
+| 15 | ~1645 | `clearTimeout()` was used on a `setInterval()` handle. While browsers share the ID pool, this is technically incorrect per the HTML spec. | Changed to `clearInterval()`. |
+| 16 | ~1659 | `supportsFixedPosition` checks for browsers that have been EOL for 10+ years (IE6, iOS < 5, Android < 2.2, etc.). Always returns `true` in practice. | Added maintenance note suggesting replacement with a constant. |
+
+---
+
+## attic.js — 16 fixes
+
+### Correctness (7 fixes)
+
+| # | Line(s) | Issue | Fix |
+|---|---------|-------|-----|
+| 1 | ~249 | `resolutionChangeRatioThreshold` was set to `atticOptions.transition` (a string like `'fadeInOut'`) instead of `atticOptions.resolutionChangeRatioThreshold`. The backstretch resolution-change detection was completely broken. | Passed the correct property. |
+| 2 | ~273 | `pauseOnHover` bound the hover event to the literal CSS selector `#attic_id` instead of the Liquid-templated `#{{attic_id}}`. The feature never worked. | Changed to `$('#{{attic_id}}')`. |
+| 3 | ~536 | The `{% if loop %}…{% else %}` block set `loop = true` in *both* branches, making video looping unconditional regardless of configuration. | Set `loop = false` in the else branch. |
+| 4 | ~675 | The `.attic` padding/margin CSS rule was missing its closing `}`. The browser's error recovery could drop subsequent styles. | Added closing `}`. |
+| 5 | ~685 | The `.backstretch-item` opacity CSS rule was also missing its closing `}`. | Added closing `}`. |
+| 6 | ~466 | Tagline properties (`tagline_size`, `tagline_color`, `tagline_animate`, `tagline_align`) were referenced in `atticOptionsHeader` but never assigned from the YAML item config. Per-attic tagline overrides from header config were silently ignored. | Added the missing `{% assign %}` statements. |
+| 7 | ~646 | The initial CSS class setup for `#head-tagline` was missing `tagline_animate_delay`, even though it was applied in the `backstretch.after` callback. The first render could have inconsistent animation timing. | Added the missing `addClass` call. |
+
+### Performance (3 fixes)
+
+| # | Line(s) | Issue | Fix |
+|---|---------|-------|-----|
+| 8 | ~652 | The gradient CSS block included 3 obsolete vendor prefixes: `-webkit-gradient()` (Chrome < 10), `-o-linear-gradient()` (Opera < 12.1), and `filter: progid:DXImageTransform` (IE 6–9). These add bytes for zero browser coverage. | Removed; kept standard `linear-gradient` and `-webkit-linear-gradient`. |
+| 9 | ~676 | Four separate `$('head').append()` calls for CSS styles each trigger a style recalculation. | Consolidated into a single `append()` call. |
+| 10 | ~414 | Repeated `$('#head-title').addClass()` calls (3×) and `$('#head-tagline').addClass()` (3×) each perform a redundant DOM lookup. Same pattern for `.textOverlay` and `.attic-caption` (`.show()` then `.css()`). | Chained all calls on the same jQuery object. |
+
+### Code Clarity (6 fixes)
+
+| # | Line(s) | Issue | Fix |
+|---|---------|-------|-----|
+| 11 | ~287 | Three variables (`evt`, `inst`, `idx`) in the `backstretch.before` callback were assigned but never referenced. | Removed. |
+| 12 | ~291, ~331 | Missing semicolons on `textOverlayTitle` assignments (ASI-safe but inconsistent with codebase style). | Added semicolons. |
+| 13 | ~461 | Duplicate `{% assign padding_bottom %}` line. | Removed duplicate. |
+| 14 | ~509 | Duplicate `{% assign animateFirst %}` (already assigned 9 lines above). | Removed duplicate. |
+| 15 | ~105 | Three module-scoped variables (`startTime`, `endTime`, `timeSeconds`) were declared but never used anywhere. `logText` was also unused. | Removed all four declarations. |
+| 16 | ~169 | The `hide_page_oninit` block checks the option but all inner logic is commented out — dead code that executes an empty `if`. | Added maintenance note to either re-enable or remove. |
+
+---
+
+## Summary
+
+| Category | backstretch.js | attic.js | Total |
+|----------|---------------|----------|-------|
+| **Correctness** | 7 | 7 | **14** |
+| **Performance** | 2 | 3 | **5** |
+| **Code Clarity** | 7 | 6 | **13** |
+| **Total** | **16** | **16** | **32** |
+
+The most impactful fixes are:
+
+1. **resolutionChangeRatioThreshold = transition** (attic.js) — completely broke resolution-adaptive image switching
+2. **containerWidth mutation** (backstretch.js) — corrupted image selection for HiDPI/auto pixel-ratio images
+3. **pauseOnHover selector** (attic.js) — feature was entirely non-functional
+4. **loop always true** (attic.js) — videos could never stop looping
+5. **Missing CSS closing braces** (attic.js) — two CSS rules were technically malformed
+6. **Duplicate 'before' event** (backstretch.js) — listeners received spurious out-of-order events
+

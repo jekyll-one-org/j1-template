@@ -1,6 +1,6 @@
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/modules/backstretch/js/backstretch.js (2)
+ # ~/assets/theme/j1/modules/backstretch/js/backstretch.js (3)
  # Backstretch v.2.1.16 implementation for J1 Theme.
  #
  # Product/Info:
@@ -128,7 +128,7 @@
    * ========================= */
 
   $.fn.backstretch.defaults = {
-    debug:    false,
+    debug: false,
     duration: 5000,                       // Amount of time in between slides (if slideshow)
     transition: 'fade',                   // Type of transition between slides
     transitionDuration: 0,                // Duration of transition between slides
@@ -170,6 +170,13 @@
       height: '100%',
       zIndex: -999999
     },
+    // claude - backstretch responsiveness
+    // Added maxHeight: 'none' and objectFit: 'none' to prevent CSS
+    // frameworks (e.g. Bootstrap) from constraining image/video
+    // dimensions via inherited max-height or object-fit rules. Without
+    // these overrides, images may not scale beyond the container's
+    // CSS-defined maximum, causing them to appear "stuck" at a previous
+    // size after a browser resize.
     item: {
       position: 'absolute',
       margin: 0,
@@ -177,7 +184,9 @@
       border: 'none',
       width: '100%',
       height: '100%',
-      maxWidth: 'none'
+      maxWidth: 'none',
+      maxHeight: 'none',
+      objectFit: 'none'
     }
   };
 
@@ -684,18 +693,79 @@
     this.show(this.index);
 
     // Listen for resize
-    $window.on('resize.backstretch', $.proxy(this.resize, this))
-      .on('orientationchange.backstretch', $.proxy(function () {
-        // Need to do this in order to get the right window height
-        if (this.isBody && window.pageYOffset === 0) {
-          window.scrollTo(0, 1);
-          this.resize();
+    // claude - backstretch responsiveness
+    // Wrapped resize handler in requestAnimationFrame to throttle
+    // recalculations to the browser's paint cycle (~60fps). Without
+    // this, the raw resize event fires hundreds of times per second
+    // and image dimensions are recalculated on every pixel of
+    // movement — often faster than the browser can repaint — leaving
+    // images at stale/intermediate sizes that overflow the container.
+    var resizeRAFHandle = null;
+    var that = this;
+    $window.on('resize.backstretch', function () {
+        if (resizeRAFHandle) {
+          cancelAnimationFrame(resizeRAFHandle);
         }
-      }, this));
+        resizeRAFHandle = requestAnimationFrame(function () {
+          resizeRAFHandle = null;
+          that.resize();
+        });
+        that._resizeRAFHandle = resizeRAFHandle;
+      })
+      // claude - backstretch responsiveness #2
+      // Throttled the orientationchange handler through
+      // requestAnimationFrame, matching the resize handler. Without
+      // this, orientationchange calls resize() synchronously before the
+      // browser has finished reflowing the viewport to the new
+      // orientation, causing dimensions to be read from the stale
+      // (pre-rotation) layout. On mobile devices this manifests as the
+      // image being sized for portrait while the screen is already in
+      // landscape (or vice versa) until the next resize event corrects
+      // it.
+      .on('orientationchange.backstretch', function () {
+        // Need to do this in order to get the right window height
+        if (that.isBody && window.pageYOffset === 0) {
+          window.scrollTo(0, 1);
+        }
+        if (resizeRAFHandle) {
+          cancelAnimationFrame(resizeRAFHandle);
+        }
+        resizeRAFHandle = requestAnimationFrame(function () {
+          resizeRAFHandle = null;
+          that.resize();
+        });
+        that._resizeRAFHandle = resizeRAFHandle;
+      });
+
+    // claude - backstretch responsiveness #2
+    // Added ResizeObserver on the container element to detect size
+    // changes that do NOT trigger a window resize event. This is
+    // critical for Bootstrap 5 responsive layouts where the container
+    // width changes at breakpoint boundaries (e.g. navbar collapse,
+    // sidebar toggle, grid reflow from col-lg to col-md) without the
+    // browser window itself being resized. Without this, the
+    // backstretch image retains dimensions calculated for the previous
+    // container size and either overflows or leaves gaps until the user
+    // happens to resize the window. The observer is throttled through
+    // the same RAF handle to avoid redundant calculations when both
+    // window resize and container resize fire simultaneously.
+    this._resizeObserver = null;
+    if (typeof ResizeObserver !== 'undefined') {
+      this._resizeObserver = new ResizeObserver(function () {
+        if (resizeRAFHandle) {
+          cancelAnimationFrame(resizeRAFHandle);
+        }
+        resizeRAFHandle = requestAnimationFrame(function () {
+          resizeRAFHandle = null;
+          that.resize();
+        });
+        that._resizeRAFHandle = resizeRAFHandle;
+      });
+      this._resizeObserver.observe(container);
+    }
   };
 
   var performTransition = function (options) {
-
     var transition = options.transition || 'fade';
 
     // Look for multiple options
@@ -716,24 +786,24 @@
       // The 'default' label is intentionally placed before 'fade' so that
       // unrecognized transition names fall through to the fade behavior.
       default:
-        case 'fade':
+      case 'fade':
         $new.fadeIn({
-        duration: options.duration,
-        complete: options.complete,
-        easing: options.easing || undefined
-      });
-      break;
+          duration: options.duration,
+          complete: options.complete,
+          easing: options.easing || undefined
+        });
+        break;
 
       case 'fadeinout':
-          case 'fade_in_out':
+      case 'fade_in_out':
 
-          var fadeInNew = function () {
-            $new.fadeIn({
-              duration: options.duration / 2,
-              complete: options.complete,
-              easing: options.easing || undefined
-            });
-          };
+        var fadeInNew = function () {
+          $new.fadeIn({
+            duration: options.duration / 2,
+            complete: options.complete,
+            easing: options.easing || undefined
+          });
+        };
 
         if ($old.length) {
           $old.fadeOut({
@@ -747,25 +817,23 @@
 
         break;
 
-          case 'pushleft':
-          case 'push_left':
-          case 'pushright':
-          case 'push_right':
-          case 'pushup':
-          case 'push_up':
-          case 'pushdown':
-          case 'push_down':
-          case 'coverleft':
-          case 'cover_left':
-          case 'coverright':
-          case 'cover_right':
-          case 'coverup':
-          case 'cover_up':
-          case 'coverdown':
-          case 'cover_down':
-
-          var transitionParts = transition.match(/^(cover|push)_?(.*)$/);
-
+      case 'pushleft':
+      case 'push_left':
+      case 'pushright':
+      case 'push_right':
+      case 'pushup':
+      case 'push_up':
+      case 'pushdown':
+      case 'push_down':
+      case 'coverleft':
+      case 'cover_left':
+      case 'coverright':
+      case 'cover_right':
+      case 'coverup':
+      case 'cover_up':
+      case 'coverdown':
+      case 'cover_down':
+        var transitionParts = transition.match(/^(cover|push)_?(.*)$/);
         var animProp = transitionParts[2] === 'left' ? 'right' : transitionParts[2] === 'right' ? 'left' : transitionParts[2] === 'down' ? 'top' : transitionParts[2] === 'up' ? 'bottom' : 'right';
 
         var newCssStart = {
@@ -776,15 +844,15 @@
         newCssAnim[animProp] = 0;
 
         $new
-        .css(newCssStart)
-        .animate(newCssAnim, {
-          duration: options.duration,
-          complete: function () {
-            $new.css(animProp, '');
-            options.complete.apply(this, arguments);
-          },
-          easing: options.easing || undefined
-        });
+          .css(newCssStart)
+          .animate(newCssAnim, {
+            duration: options.duration,
+            complete: function () {
+              $new.css(animProp, '');
+              options.complete.apply(this, arguments);
+            },
+            easing: options.easing || undefined
+          });
 
         if (transitionParts[1] === 'push' && $old.length) {
           var oldCssAnim = {};
@@ -809,147 +877,403 @@
    * ========================= */
   Backstretch.prototype = {
 
+    // https://claude.ai/chat/19c2ed38-9c6e-4ce4-b9b8-ae110436a04e
+    // -------------------------------------------------------------------------
+    //
     resize: function () {
-        try {
-          // var debug = false;
-          var logger = log4javascript.getLogger('j1.api.attic');
+      try {
+        var debug = false;
+        var logger = log4javascript.getLogger('j1.api.attic');
 
-          // Check for a better suited image after the resize
-          var $resTest = this.options.alwaysTestWindowResolution ? $(window) : this.$root;
-          var newContainerWidth = $resTest.width();
-          var newContainerHeight = $resTest.height();
-          var changeRatioW = newContainerWidth / (this._lastResizeContainerWidth || 0);
-          var changeRatioH = newContainerHeight / (this._lastResizeContainerHeight || 0);
-          var resolutionChangeRatioThreshold = this.options.resolutionChangeRatioThreshold || 0.0;
+        // Check for a better suited image after the resize
+        var $resTest = this.options.alwaysTestWindowResolution ? $(window) : this.$root;
+        var newContainerWidth = $resTest.width();
+        var newContainerHeight = $resTest.height();
+        var changeRatioW = newContainerWidth / (this._lastResizeContainerWidth || 0);
+        var changeRatioH = newContainerHeight / (this._lastResizeContainerHeight || 0);
+        var resolutionChangeRatioThreshold = this.options.resolutionChangeRatioThreshold || 0.0;
 
-          // check for big changes in container size
-          if ((newContainerWidth !== this._lastResizeContainerWidth ||
-              newContainerHeight !== this._lastResizeContainerHeight) &&
-            ((Math.abs(changeRatioW - 1) >= resolutionChangeRatioThreshold || isNaN(changeRatioW)) ||
-              (Math.abs(changeRatioH - 1) >= resolutionChangeRatioThreshold || isNaN(changeRatioH)))) {
+        // check for big changes in container size
+        if ((newContainerWidth !== this._lastResizeContainerWidth ||
+            newContainerHeight !== this._lastResizeContainerHeight) &&
+          ((Math.abs(changeRatioW - 1) >= resolutionChangeRatioThreshold || isNaN(changeRatioW)) ||
+            (Math.abs(changeRatioH - 1) >= resolutionChangeRatioThreshold || isNaN(changeRatioH)))) {
 
-            this._lastResizeContainerWidth = newContainerWidth;
-            this._lastResizeContainerHeight = newContainerHeight;
+          this._lastResizeContainerWidth = newContainerWidth;
+          this._lastResizeContainerHeight = newContainerHeight;
 
-            // Big change: rebuild the entire images array
-            this.images = optimalSizeImages($resTest, this.originalImages);
+          // Big change: rebuild the entire images array
+          this.images = optimalSizeImages($resTest, this.originalImages);
 
-            // Preload them (they will be automatically inserted on the next cycle)
-            if (this.options.preload) {
-              preload(this.images, (this.index + 1) % this.images.length, this.options.preload);
-            }
-
-            // In case there is no cycle and the new source is different than the current
-            if (this.images.length === 1 &&
-              this._currentImage.url !== this.images[0].url) {
-
-              // Wait a little an update the image being showed
-              var that = this;
-              clearTimeout(that._selectAnotherResolutionTimeout);
-              that._selectAnotherResolutionTimeout = setTimeout(function () {
-                that.show(0);
-              }, this.options.resolutionRefreshRate);
-            }
+          // Preload them (they will be automatically inserted on the next cycle)
+          if (this.options.preload) {
+            preload(this.images, (this.index + 1) % this.images.length, this.options.preload);
           }
 
-          var bgCSS = {
-              left: 0,
-              top: 0,
-              right: 'auto',
-              bottom: 'auto'
-            }
+          // In case there is no cycle and the new source is different than the current
+          if (this.images.length === 1 &&
+            this._currentImage.url !== this.images[0].url) {
 
-            ,
-            boxWidth = this.isBody ? this.$root.width() : this.$root.innerWidth(),
-            boxHeight = this.isBody ? (window.innerHeight ? window.innerHeight : this.$root.height()) : this.$root.innerHeight()
-
-            ,
-            naturalWidth = this.$itemWrapper.data('width'),
-            naturalHeight = this.$itemWrapper.data('height')
-
-            ,
-            ratio = (naturalWidth / naturalHeight) || 1
-
-            ,
-            alignX = this._currentImage.alignX === undefined ? this.options.alignX : this._currentImage.alignX,
-            alignY = this._currentImage.alignY === undefined ? this.options.alignY : this._currentImage.alignY,
-            scale = validScale(this._currentImage.scale || this.options.scale);
-
-          // jadams, 2017-12-07: Added log for testing
-          if(this.options.debug) {
-            logger.debug('\n' + 'resize: boxHeight x boxWidth: ' + boxHeight + ' x ' + boxWidth);
+            // Wait a little an update the image being showed
+            var that = this;
+            clearTimeout(that._selectAnotherResolutionTimeout);
+            that._selectAnotherResolutionTimeout = setTimeout(function () {
+              that.show(0);
+            }, this.options.resolutionRefreshRate);
           }
-
-          // claude - optimization chances: code clarity
-          // Removed commented-out debug block with non-English text
-
-          var width, height;
-          if (scale === 'fit' || scale === 'fit-smaller') {
-            width = naturalWidth;
-            height = naturalHeight;
-
-            if (width > boxWidth ||
-              height > boxHeight ||
-              scale === 'fit-smaller') {
-              var boxRatio = boxWidth / boxHeight;
-              if (boxRatio > ratio) {
-                width = Math.floor(boxHeight * ratio);
-                height = boxHeight;
-              } else if (boxRatio < ratio) {
-                width = boxWidth;
-                height = Math.floor(boxWidth / ratio);
-              } else {
-                width = boxWidth;
-                height = boxHeight;
-              }
-            }
-          } else if (scale === 'fill') {
-            width = boxWidth;
-            height = boxHeight;
-          } else { // 'cover'
-            width = Math.max(boxHeight * ratio, boxWidth);
-            height = Math.max(width / ratio, boxHeight);
-          }
-
-          // Make adjustments based on image ratio
-          bgCSS.top = -(height - boxHeight) * alignY;
-          bgCSS.left = -(width - boxWidth) * alignX;
-          bgCSS.width = width;
-          bgCSS.height = height;
-
-          if (!this.options.bypassCss) {
-
-            this.$wrap
-              .css({
-                width: boxWidth,
-                height: boxHeight
-              })
-              .find('>.backstretch-item').not('.deleteable')
-              .each(function () {
-                var $wrapper = $(this);
-                $wrapper.find('img,video,iframe')
-                  .css(bgCSS);
-              });
-          }
-
-          var evt = $.Event('backstretch.resize', {
-            relatedTarget: this.$container[0]
-          });
-          this.$container.trigger(evt, this);
-
-        } catch (err) {
-          // IE7 seems to trigger resize before the image is loaded.
-          // This try/catch block is a hack to let it fail gracefully.
-          logger.warn('resize: error caught (legacy IE7 guard): ' + err);
         }
 
-        return this;
+        var bgCSS = {
+            left: 0,
+            top: 0,
+            right: 'auto',
+            bottom: 'auto'
+          },
+
+          // claude - backstretch responsiveness #2
+          // Replaced jQuery .width()/.height()/.innerWidth()/.innerHeight()
+          // with getBoundingClientRect() for the container dimension read.
+          // jQuery's dimension methods can return stale values when called
+          // inside a requestAnimationFrame callback that fires before the
+          // browser has fully committed a layout pass (especially after
+          // Bootstrap breakpoint transitions or dynamic class changes).
+          // getBoundingClientRect() forces a synchronous layout reflow and
+          // always returns the element's current rendered dimensions. For
+          // the body/window case, window.innerWidth/innerHeight are used
+          // directly as they are always current.
+          boxWidth, boxHeight;
+
+        if (this.isBody) {
+          boxWidth = window.innerWidth || document.documentElement.clientWidth;
+          boxHeight = window.innerHeight || document.documentElement.clientHeight;
+        } else {
+          var containerRect = this.$container[0].getBoundingClientRect();
+          boxWidth = Math.round(containerRect.width);
+          boxHeight = Math.round(containerRect.height);
+        }
+
+        var naturalWidth = this.$itemWrapper.data('width'),
+          naturalHeight = this.$itemWrapper.data('height'),
+          ratio = (naturalWidth / naturalHeight) || 1,
+          alignX = this._currentImage.alignX === undefined ? this.options.alignX : this._currentImage.alignX,
+          alignY = this._currentImage.alignY === undefined ? this.options.alignY : this._currentImage.alignY,
+          scale = validScale(this._currentImage.scale || this.options.scale);
+
+        // jadams, 2017-12-07: Added log for testing
+        if (debug) {
+          logger.debug('\n' + 'resize: boxHeight x boxWidth: ' + boxHeight + ' x ' + boxWidth);
+        }
+
+        // claude - optimization chances: code clarity
+        // Removed commented-out debug block with non-English text
+
+        var width, height;
+        if (scale === 'fit' || scale === 'fit-smaller') {
+          width = naturalWidth;
+          height = naturalHeight;
+
+          if (width > boxWidth ||
+            height > boxHeight ||
+            scale === 'fit-smaller') {
+            var boxRatio = boxWidth / boxHeight;
+            if (boxRatio > ratio) {
+              width = Math.floor(boxHeight * ratio);
+              height = boxHeight;
+            } else if (boxRatio < ratio) {
+              width = boxWidth;
+              height = Math.floor(boxWidth / ratio);
+            } else {
+              width = boxWidth;
+              height = boxHeight;
+            }
+          }
+        } else if (scale === 'fill') {
+          width = boxWidth;
+          height = boxHeight;
+        } else { // 'cover'
+          width = Math.max(boxHeight * ratio, boxWidth);
+          height = Math.max(width / ratio, boxHeight);
+        }
+
+        // Make adjustments based on image ratio
+        bgCSS.top = -(height - boxHeight) * alignY;
+        bgCSS.left = -(width - boxWidth) * alignX;
+        bgCSS.width = width;
+        bgCSS.height = height;
+
+        // claude - backstretch responsiveness
+        // Explicitly override maxWidth and maxHeight on every resize
+        // cycle. CSS frameworks or site-level stylesheets may set
+        // 'max-width: 100%' or 'max-height: 100%' on img/video
+        // elements, which caps the computed size to the wrapper's
+        // dimensions and prevents the cover/fill scale modes from
+        // rendering the image at the correct (larger-than-container)
+        // size. This causes the image to appear "stuck" or clipped
+        // incorrectly after a browser resize.
+        bgCSS.maxWidth = 'none';
+        bgCSS.maxHeight = 'none';
+
+        // claude - backstretch responsiveness #2
+        // Re-enforce objectFit: 'none' on every resize cycle.
+        // Bootstrap 5 applies 'object-fit: cover' or 'contain' to
+        // img elements via its .img-fluid and responsive utility
+        // classes. If Bootstrap's stylesheet is loaded after
+        // backstretch initializes, or if responsive classes are
+        // toggled dynamically (e.g. via JS or media-query-driven
+        // class changes), the initial inline objectFit style set
+        // during show() can be overridden by higher-specificity CSS
+        // rules. Without re-applying it here, the browser's
+        // object-fit algorithm takes over and sizes the image
+        // content independently of backstretch's calculated
+        // dimensions, causing the image to appear zoomed, cropped,
+        // or misaligned after a resize.
+        bgCSS.objectFit = 'none';
+
+        if (!this.options.bypassCss) {
+
+          // claude - backstretch responsiveness
+          // Re-enforce overflow: hidden on every resize. External
+          // CSS rules (media queries, specificity overrides, or
+          // dynamic class changes) can reset overflow on the wrap,
+          // allowing the intentionally oversized cover-mode image to
+          // visually spill out of the container.
+          this.$wrap
+            .css({
+              width: boxWidth,
+              height: boxHeight,
+              overflow: 'hidden'
+            })
+            .find('>.backstretch-item').not('.deleteable')
+            .each(function () {
+              var $wrapper = $(this);
+              $wrapper.find('img,video,iframe')
+                .css(bgCSS)
+                // claude - backstretch responsiveness #2
+                // Set explicit width/height attributes on iframe
+                // elements (YouTube embeds) in addition to CSS
+                // properties. Unlike <img> and <video>, iframes do
+                // not reliably resize from CSS width/height alone in
+                // all browsers — the embedded content may retain its
+                // original intrinsic dimensions. Setting the element
+                // attributes forces the iframe's content viewport to
+                // match the intended size, ensuring YouTube videos
+                // scale correctly when the browser is resized.
+                .filter('iframe').attr({
+                  'width': Math.round(bgCSS.width),
+                  'height': Math.round(bgCSS.height)
+                });
+            });
+        }
+
+        var evt = $.Event('backstretch.resize', {
+          relatedTarget: this.$container[0]
+        });
+        this.$container.trigger(evt, this);
+
+      } catch (err) {
+        // IE7 seems to trigger resize before the image is loaded.
+        // This try/catch block is a hack to let it fail gracefully.
+        logger.warn('resize: error caught (legacy IE7 guard): ' + err);
       }
 
-      // Show the slide at a certain position
-      ,
-    show: function (newIndex, overrideOptions) {
+      return this;
+    },
 
+    // https://gemini.google.com/app/28f451de55826d02
+    // -----------------------------------------------------------------------
+    // Gemini hat gesagt
+    // To ensure your images and videos in the master header (attic) respond
+    // flawlessly and natively to resizing—similar to Bootstrap 5 CSS
+    // components—we must transition backstretch.js from strictly calculating
+    // rigid integer pixels via JS to using modern CSS mechanisms like object-fit,
+    // width: 100%, and fractional bounds where JS geometry is required.
+    //
+    // Here is the fixed resize() method for backstretch.js to implement.
+    // You can patch this directly into your existing backstretch.js file
+    // (search for resize: function () {).
+    // -----------------------------------------------------------------------
+    // resize: function () {
+    //   try {
+    //     var debug = false;
+    //     var logger = log4javascript.getLogger('j1.api.attic');
+
+    //     // Check for a better suited image after the resize
+    //     var $resTest = this.options.alwaysTestWindowResolution ? $(window) : this.$root;
+    //     var newContainerWidth = $resTest.width();
+    //     var newContainerHeight = $resTest.height();
+    //     var changeRatioW = newContainerWidth / (this._lastResizeContainerWidth || 0);
+    //     var changeRatioH = newContainerHeight / (this._lastResizeContainerHeight || 0);
+    //     var resolutionChangeRatioThreshold = this.options.resolutionChangeRatioThreshold || 0.0;
+
+    //     // check for big changes in container size
+    //     if ((newContainerWidth !== this._lastResizeContainerWidth || newContainerHeight !== this._lastResizeContainerHeight) &&
+    //       ((Math.abs(changeRatioW - 1) >= resolutionChangeRatioThreshold ||
+    //         Math.abs(changeRatioH - 1) >= resolutionChangeRatioThreshold) ||
+    //         this.firstShow)) {
+
+    //       this._lastResizeContainerWidth = newContainerWidth;
+    //       this._lastResizeContainerHeight = newContainerHeight;
+
+    //       // Note: Here is where we check if a different sized image should be loaded.
+    //       var testImages = optimalSizeImages(
+    //         this.options.alwaysTestWindowResolution ? $(window) : this.$root,
+    //         this.originalImages);
+
+    //       var testImage = testImages[this.index];
+    //       if (this._currentImage === undefined || testImage.url !== this._currentImage.url) {
+    //         // A different image is needed, load it.
+    //         this.show(this.index);
+    //         return; // We will have a resize running after the show.
+    //       }
+    //     }
+
+    //     var boxWidth, boxHeight;
+
+    //     if (this.isBody) {
+    //       boxWidth = window.innerWidth || document.documentElement.clientWidth;
+    //       boxHeight = window.innerHeight || document.documentElement.clientHeight;
+    //     } else {
+    //       var containerRect = this.$container[0].getBoundingClientRect();
+    //       // gemini - backstretch responsiveness #3
+    //       // Removed Math.round() constraints to support fractional subpixel dimensions.
+    //       // Bootstrap responsive layouts and fluid grids often yield fractional container sizes,
+    //       // rounding these causes visible pixel gaps, overflows, or jitter during resizing.
+    //       boxWidth = containerRect.width;
+    //       boxHeight = containerRect.height;
+    //     }
+
+    //     var naturalWidth = this.$itemWrapper.data('width'),
+    //       naturalHeight = this.$itemWrapper.data('height'),
+    //       ratio = (naturalWidth / naturalHeight) || 1,
+    //       alignX = this._currentImage.alignX === undefined ? this.options.alignX : this._currentImage.alignX,
+    //       alignY = this._currentImage.alignY === undefined ? this.options.alignY : this._currentImage.alignY,
+    //       scale = validScale(this._currentImage.scale || this.options.scale);
+
+    //     if(debug) {
+    //       logger.debug('\n' + 'resize: boxHeight x boxWidth: ' + boxHeight + ' x ' + boxWidth);
+    //     }
+
+    //     var width, height, left, top;
+
+    //     // gemini - backstretch responsiveness #3
+    //     // Setup modern CSS variables for object-fit to behave identically to Bootstrap V5 classes.
+    //     var objectFitValue = 'cover';
+    //     if (scale === 'fit' || scale === 'fit-smaller') {
+    //       objectFitValue = 'contain';
+    //     } else if (scale === 'fill') {
+    //       objectFitValue = 'fill';
+    //     }
+    //     var alignXPercent = Math.round(alignX * 100);
+    //     var alignYPercent = Math.round(alignY * 100);
+
+    //     if (scale === 'fit' || scale === 'fit-smaller') {
+    //       width = naturalWidth;
+    //       height = naturalHeight;
+    //       if (width > boxWidth || height > boxHeight || scale === 'fit-smaller') {
+    //         var boxRatio = boxWidth / boxHeight;
+    //         if (boxRatio > ratio) {
+    //           width = boxHeight * ratio;
+    //           height = boxHeight;
+    //         } else {
+    //           height = boxWidth / ratio;
+    //           width = boxWidth;
+    //         }
+    //       }
+    //       left = (boxWidth - width) * alignX;
+    //       top = (boxHeight - height) * alignY;
+
+    //     } else if (scale === 'fill') {
+    //       width = boxWidth;
+    //       height = boxHeight;
+    //       left = 0;
+    //       top = 0;
+
+    //     } else { // cover
+    //       var boxRatio = boxWidth / boxHeight;
+    //       if (boxRatio > ratio) {
+    //         width = boxWidth;
+    //         height = width / ratio;
+    //       } else {
+    //         height = boxHeight;
+    //         width = height * ratio;
+    //       }
+    //       left = (boxWidth - width) * alignX;
+    //       top = (boxHeight - height) * alignY;
+    //     }
+
+    //     if (!this.options.bypassCss) {
+    //       // gemini - backstretch responsiveness #3
+    //       // Set wrap width and height to purely CSS 100% instead of JS computed pixels.
+    //       // This allows the container to instantly flow smoothly without waiting for the JS 
+    //       // resize event loop to catch up (e.g. Bootstrap col-* recalculations).
+    //       this.$wrap
+    //         .css({
+    //           width: '100%',
+    //           height: '100%',
+    //           overflow: 'hidden'
+    //         })
+    //         .find('>.backstretch-item').not('.deleteable')
+    //         .each(function () {
+    //           var $wrapper = $(this);
+    //           var $media = $wrapper.find('img,video,iframe');
+    //           var isIframe = $media.is('iframe');
+
+    //           var bgCSS;
+
+    //           // gemini - backstretch responsiveness #3
+    //           // To achieve true Bootstrap 5-like responsiveness, hand image/HTML5-video scaling 
+    //           // off to the browser. Only retain JavaScript sizing calculations for iframes
+    //           // (such as YouTube API embeds) since iframes cannot natively scale inner 
+    //           // contents with `object-fit`.
+    //           if (!isIframe) {
+    //             bgCSS = {
+    //               left: 0,
+    //               top: 0,
+    //               right: 'auto',
+    //               bottom: 'auto',
+    //               width: '100%',
+    //               height: '100%',
+    //               objectFit: objectFitValue,
+    //               objectPosition: alignXPercent + '% ' + alignYPercent + '%',
+    //               maxWidth: 'none',
+    //               maxHeight: 'none'
+    //             };
+    //           } else {
+    //             bgCSS = {
+    //               left: left + 'px',
+    //               top: top + 'px',
+    //               right: 'auto',
+    //               bottom: 'auto',
+    //               width: width + 'px',
+    //               height: height + 'px',
+    //               objectFit: 'none',
+    //               maxWidth: 'none',
+    //               maxHeight: 'none'
+    //             };
+    //           }
+
+    //           $media.css(bgCSS);
+
+    //           if (isIframe) {
+    //             $media.attr('width', width).attr('height', height);
+    //           }
+    //         });
+    //     }
+
+    //     var ev = $.Event('backstretch.resize', {
+    //       relatedTarget: this.$container[0]
+    //     });
+    //     this.$container.trigger(ev, this);
+
+    //   } catch (err) {
+    //     // Nothing
+    //   }
+
+    //   return this;
+    // },
+
+    // Show the slide at a certain position
+    show: function (newIndex, overrideOptions) {
         var logger = log4javascript.getLogger('j1.api.attic');
 
         // Validate index
@@ -1070,7 +1394,6 @@
             $wrapper.show();
             bringInNextImage();
           } else {
-
             performTransition({
               'new': $wrapper,
               old: $oldItemWrapper,
@@ -1079,17 +1402,16 @@
               easing: transitionEasing,
               complete: bringInNextImage
             });
-
           }
 
           that.firstShow = false;
 
           // jadams, 2017-12-07: Added log for debug mode
-          var imageWidth  = this.naturalWidth  || this.videoWidth  || this.width;
+          var imageWidth  = this.naturalWidth || this.videoWidth || this.width;
           var imageHeight = this.naturalHeight || this.videoHeight || this.height;
           var logText     = 'show: imageHeight x imageWidth: ' + imageHeight + ' x ' + imageWidth;
 
-          if(that.options.debug) {
+          if (that.options.debug) {
             logger.debug(logText);
           }
 
@@ -1104,7 +1426,7 @@
           var myID = '#' + that.$container['0']['id'];
           var visibilityRetries = 0;
           var maxVisibilityRetries = 500; // ~5 seconds at 10ms intervals
-          var isVisible = setInterval(function() {
+          var isVisible = setInterval(function () {
             visibilityRetries++;
             if ($(myID).is(':visible')) {
               if (that.options.debug) {
@@ -1134,29 +1456,25 @@
         that._currentImage = selectedImage;
 
         return that;
-      }
+      },
 
-      ,
-    current: function () {
-        return this.index;
-      }
+      current: function () {
+          return this.index;
+      },
 
-      ,
-    next: function () {
+      next: function () {
         var args = Array.prototype.slice.call(arguments, 0);
         args.unshift(this.index < this.images.length - 1 ? this.index + 1 : 0);
         return this.show.apply(this, args);
-      }
+      },
 
-      ,
-    prev: function () {
+      prev: function () {
         var args = Array.prototype.slice.call(arguments, 0);
         args.unshift(this.index === 0 ? this.images.length - 1 : this.index - 1);
         return this.show.apply(this, args);
-      }
-
-      ,
-    pause: function () {
+      },
+    
+      pause: function () {
         // Pause the slideshow
         this.paused = true;
 
@@ -1165,10 +1483,9 @@
         }
 
         return this;
-      }
+      },
 
-      ,
-    resume: function () {
+      resume: function () {
         // Resume the slideshow
         this.paused = false;
 
@@ -1178,10 +1495,9 @@
 
         this.cycle();
         return this;
-      }
+      },
 
-      ,
-    cycle: function () {
+      cycle: function () {
         // Start/resume the slideshow
         if (this.images.length > 1) {
           // Clear the timeout, just in case
@@ -1245,12 +1561,31 @@
 
         }
         return this;
-      }
+      },
 
-      ,
-    destroy: function (preserveBackground) {
+      destroy: function (preserveBackground) {
       // Stop the resize events
       $(window).off('resize.backstretch orientationchange.backstretch');
+
+      // claude - backstretch responsiveness
+      // Cancel any pending requestAnimationFrame-based resize to
+      // prevent a stale callback from firing after the instance is
+      // destroyed and its DOM elements removed.
+      if (this._resizeRAFHandle) {
+        cancelAnimationFrame(this._resizeRAFHandle);
+        this._resizeRAFHandle = null;
+      }
+
+      // claude - backstretch responsiveness #2
+      // Disconnect the ResizeObserver that was set up on the container
+      // element during initialization. Without this, the observer
+      // continues to fire callbacks for a destroyed instance, causing
+      // errors when resize() attempts to read dimensions from removed
+      // DOM elements.
+      if (this._resizeObserver) {
+        this._resizeObserver.disconnect();
+        this._resizeObserver = null;
+      }
 
       // Stop any videos
       if (this.videoWrapper) {
@@ -1300,9 +1635,7 @@
    * loop, mute, poster
    */
   VideoWrapper.prototype.init = function (options) {
-
     var that = this;
-
     var $video;
 
     var setVideoElement = function () {
@@ -1311,7 +1644,6 @@
     };
 
     // Determine video type
-
     var videoType = 'video';
 
     if (!(options.url instanceof Array) &&
@@ -1322,7 +1654,6 @@
     that.type = videoType;
 
     if (videoType === 'youtube') {
-
       // Try to load the API in the meantime
       VideoWrapper.loadYoutubeAPI();
 
@@ -1375,9 +1706,7 @@
         .prop('controls', false)
         .prop('loop', !!options.loop)
         .prop('muted', !!options.mute || options.mute === undefined)
-
-        // Let the first frames be available before playback, as we do transitions
-        .prop('preload', 'auto')
+        .prop('preload', 'auto')    // Let the first frames be available before playback, as we do transitions
         .prop('poster', options.poster || '');
 
       var sources = (options.url instanceof Array) ? options.url : [options.url];
@@ -1444,6 +1773,7 @@
           that._updateYoutubeSize();
           that.$video.trigger('canplay');
         },
+
         'onStateChange': function (event) {
           switch (event.data) {
             case YT.PlayerState.PLAYING:
@@ -1463,10 +1793,12 @@
               break;
           }
         },
+
         'onPlaybackQualityChange': function () {
           that._updateYoutubeSize();
           that.$video.trigger('resize');
         },
+
         'onError': function (err) {
           that.hasError = true;
           that.$video.trigger({
@@ -1693,9 +2025,7 @@
 
   var supportsFixedPosition = (function () {
     var ua = navigator.userAgent,
-      platform = navigator.platform
-      // Rendering engine is Webkit, and capture major version
-      ,
+      platform = navigator.platform,  // Rendering engine is Webkit, and capture major version
       wkmatch = ua.match(/AppleWebKit\/([0-9]+)/),
       wkversion = !!wkmatch && wkmatch[1],
       ffmatch = ua.match(/Fennec\/([0-9]+)/),

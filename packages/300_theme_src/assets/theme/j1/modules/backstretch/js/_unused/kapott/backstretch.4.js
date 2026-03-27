@@ -1,6 +1,6 @@
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/modules/backstretch/js/backstretch.js (2)
+ # ~/assets/theme/j1/modules/backstretch/js/backstretch.js (4)
  # Backstretch v.2.1.16 implementation for J1 Theme.
  #
  # Product/Info:
@@ -128,7 +128,7 @@
    * ========================= */
 
   $.fn.backstretch.defaults = {
-    debug:    false,
+    debug: false,
     duration: 5000,                       // Amount of time in between slides (if slideshow)
     transition: 'fade',                   // Type of transition between slides
     transitionDuration: 0,                // Duration of transition between slides
@@ -683,13 +683,66 @@
     this.index = this.options.start;
     this.show(this.index);
 
-    // Listen for resize
-    $window.on('resize.backstretch', $.proxy(this.resize, this))
-      .on('orientationchange.backstretch', $.proxy(function () {
+    // claude - backstretch responsiveness #4
+    // Adopted SwiperJS resize strategy: use ResizeObserver on the actual
+    // container element (instead of only window.resize) to detect container-
+    // level size changes (CSS transitions, flex reflows, parent resizes).
+    // Wrap resize calls in requestAnimationFrame to batch layout reads/writes
+    // and prevent jank, matching SwiperJS's Resize module pattern.
+    // Falls back to window.resize for browsers without ResizeObserver.
+    var resizeProxy = $.proxy(this.resize, this);
+    this._resizeAnimationFrame = null;
+    this._resizeObserver = null;
+
+    var that = this;
+    var rAFResize = function () {
+      if (that._resizeAnimationFrame) {
+        window.cancelAnimationFrame(that._resizeAnimationFrame);
+      }
+      that._resizeAnimationFrame = window.requestAnimationFrame(function () {
+        that._resizeAnimationFrame = null;
+        resizeProxy();
+      });
+    };
+    this._rAFResize = rAFResize;
+
+    if (typeof window.ResizeObserver !== 'undefined') {
+      // Primary: observe the container element directly (SwiperJS pattern)
+      this._resizeObserver = new ResizeObserver(function (entries) {
+        // Guard against destroyed or not-yet-initialized instances
+        if (!that.$container || !that.$wrap) return;
+
+        var entry = entries[0];
+        var newWidth, newHeight;
+        if (entry.contentRect) {
+          newWidth  = entry.contentRect.width;
+          newHeight = entry.contentRect.height;
+        } else {
+          var box = entry.contentBoxSize[0] || entry.contentBoxSize;
+          newWidth  = box.inlineSize;
+          newHeight = box.blockSize;
+        }
+
+        // Only recalculate if dimensions actually changed (SwiperJS guard)
+        if (newWidth !== that._lastObservedWidth || newHeight !== that._lastObservedHeight) {
+          that._lastObservedWidth  = newWidth;
+          that._lastObservedHeight = newHeight;
+          rAFResize();
+        }
+      });
+      // Observe the container element, not the window
+      this._resizeObserver.observe(this.isBody ? document.documentElement : this.$container[0]);
+    } else {
+      // Fallback: use window.resize with rAF batching for older browsers
+      $window.on('resize.backstretch', rAFResize);
+    }
+
+    // Listen for orientationchange (both paths need this)
+    $window.on('orientationchange.backstretch', $.proxy(function () {
         // Need to do this in order to get the right window height
         if (this.isBody && window.pageYOffset === 0) {
           window.scrollTo(0, 1);
-          this.resize();
+          rAFResize();
         }
       }, this));
   };
@@ -716,24 +769,24 @@
       // The 'default' label is intentionally placed before 'fade' so that
       // unrecognized transition names fall through to the fade behavior.
       default:
-        case 'fade':
+      case 'fade':
         $new.fadeIn({
-        duration: options.duration,
-        complete: options.complete,
-        easing: options.easing || undefined
-      });
-      break;
+          duration: options.duration,
+          complete: options.complete,
+          easing: options.easing || undefined
+        });
+        break;
 
       case 'fadeinout':
-          case 'fade_in_out':
+      case 'fade_in_out':
 
-          var fadeInNew = function () {
-            $new.fadeIn({
-              duration: options.duration / 2,
-              complete: options.complete,
-              easing: options.easing || undefined
-            });
-          };
+        var fadeInNew = function () {
+          $new.fadeIn({
+            duration: options.duration / 2,
+            complete: options.complete,
+            easing: options.easing || undefined
+          });
+        };
 
         if ($old.length) {
           $old.fadeOut({
@@ -747,24 +800,24 @@
 
         break;
 
-          case 'pushleft':
-          case 'push_left':
-          case 'pushright':
-          case 'push_right':
-          case 'pushup':
-          case 'push_up':
-          case 'pushdown':
-          case 'push_down':
-          case 'coverleft':
-          case 'cover_left':
-          case 'coverright':
-          case 'cover_right':
-          case 'coverup':
-          case 'cover_up':
-          case 'coverdown':
-          case 'cover_down':
+      case 'pushleft':
+      case 'push_left':
+      case 'pushright':
+      case 'push_right':
+      case 'pushup':
+      case 'push_up':
+      case 'pushdown':
+      case 'push_down':
+      case 'coverleft':
+      case 'cover_left':
+      case 'coverright':
+      case 'cover_right':
+      case 'coverup':
+      case 'cover_up':
+      case 'coverdown':
+      case 'cover_down':
 
-          var transitionParts = transition.match(/^(cover|push)_?(.*)$/);
+        var transitionParts = transition.match(/^(cover|push)_?(.*)$/);
 
         var animProp = transitionParts[2] === 'left' ? 'right' : transitionParts[2] === 'right' ? 'left' : transitionParts[2] === 'down' ? 'top' : transitionParts[2] === 'up' ? 'bottom' : 'right';
 
@@ -776,15 +829,15 @@
         newCssAnim[animProp] = 0;
 
         $new
-        .css(newCssStart)
-        .animate(newCssAnim, {
-          duration: options.duration,
-          complete: function () {
-            $new.css(animProp, '');
-            options.complete.apply(this, arguments);
-          },
-          easing: options.easing || undefined
-        });
+          .css(newCssStart)
+          .animate(newCssAnim, {
+            duration: options.duration,
+            complete: function () {
+              $new.css(animProp, '');
+              options.complete.apply(this, arguments);
+            },
+            easing: options.easing || undefined
+          });
 
         if (transitionParts[1] === 'push' && $old.length) {
           var oldCssAnim = {};
@@ -814,10 +867,24 @@
           // var debug = false;
           var logger = log4javascript.getLogger('j1.api.attic');
 
-          // Check for a better suited image after the resize
+          // claude - backstretch responsiveness #4
+          // Use clientWidth/clientHeight consistently for resolution checks
+          // (matching the SwiperJS updateSize pattern applied below).
+          // jQuery .width()/.height() on $(window) can yield different values
+          // depending on scrollbar presence and box-sizing; clientWidth on
+          // documentElement provides the CSS viewport size without scrollbar.
+          var resTestEl = this.options.alwaysTestWindowResolution
+            ? document.documentElement
+            : (this.isBody ? document.documentElement : this.$container[0]);
+          var newContainerWidth = this.options.alwaysTestWindowResolution
+            ? (window.innerWidth || resTestEl.clientWidth)
+            : resTestEl.clientWidth;
+          var newContainerHeight = this.options.alwaysTestWindowResolution
+            ? (window.innerHeight || resTestEl.clientHeight)
+            : resTestEl.clientHeight;
+
+          // Keep $resTest jQuery object for optimalSizeImages() which expects it
           var $resTest = this.options.alwaysTestWindowResolution ? $(window) : this.$root;
-          var newContainerWidth = $resTest.width();
-          var newContainerHeight = $resTest.height();
           var changeRatioW = newContainerWidth / (this._lastResizeContainerWidth || 0);
           var changeRatioH = newContainerHeight / (this._lastResizeContainerHeight || 0);
           var resolutionChangeRatioThreshold = this.options.resolutionChangeRatioThreshold || 0.0;
@@ -859,9 +926,31 @@
               bottom: 'auto'
             }
 
+            // claude - backstretch responsiveness #4
+            // Adopted SwiperJS updateSize() pattern: use clientWidth/clientHeight
+            // for reliable container measurement (CSS content-box without borders),
+            // then subtract padding to get the actual usable area. jQuery's
+            // .width()/.innerWidth() can return inconsistent values when box-sizing
+            // varies; clientWidth/clientHeight provide a stable, standards-based
+            // measurement that matches SwiperJS behavior.
             ,
-            boxWidth = this.isBody ? this.$root.width() : this.$root.innerWidth(),
-            boxHeight = this.isBody ? (window.innerHeight ? window.innerHeight : this.$root.height()) : this.$root.innerHeight()
+            containerEl = this.isBody ? document.documentElement : this.$container[0],
+            rawBoxWidth = this.isBody
+              ? (window.innerWidth || document.documentElement.clientWidth)
+              : containerEl.clientWidth,
+            rawBoxHeight = this.isBody
+              ? (window.innerHeight || document.documentElement.clientHeight)
+              : containerEl.clientHeight
+
+            // Subtract padding (SwiperJS updateSize pattern)
+            ,
+            computedStyle = this.isBody ? null : window.getComputedStyle(containerEl),
+            boxWidth = this.isBody ? rawBoxWidth : rawBoxWidth
+              - (parseInt(computedStyle.paddingLeft, 10) || 0)
+              - (parseInt(computedStyle.paddingRight, 10) || 0),
+            boxHeight = this.isBody ? rawBoxHeight : rawBoxHeight
+              - (parseInt(computedStyle.paddingTop, 10) || 0)
+              - (parseInt(computedStyle.paddingBottom, 10) || 0)
 
             ,
             naturalWidth = this.$itemWrapper.data('width'),
@@ -875,8 +964,28 @@
             alignY = this._currentImage.alignY === undefined ? this.options.alignY : this._currentImage.alignY,
             scale = validScale(this._currentImage.scale || this.options.scale);
 
+          // claude - backstretch responsiveness #4
+          // Adopted SwiperJS dimension-change guard: skip costly DOM updates
+          // when the effective box dimensions haven't changed since the last
+          // resize. SwiperJS's ResizeObserver callback applies the same check
+          // (newWidth !== width || newHeight !== height) before triggering
+          // recalculation.
+          if (boxWidth === 0 || boxHeight === 0) {
+            // Container is hidden or collapsed, skip resize (SwiperJS pattern)
+            return this;
+          }
+          if (boxWidth === this._lastBoxWidth && boxHeight === this._lastBoxHeight &&
+              naturalWidth === this._lastNaturalWidth && naturalHeight === this._lastNaturalHeight) {
+            // Dimensions unchanged, skip expensive DOM updates
+            return this;
+          }
+          this._lastBoxWidth = boxWidth;
+          this._lastBoxHeight = boxHeight;
+          this._lastNaturalWidth = naturalWidth;
+          this._lastNaturalHeight = naturalHeight;
+
           // jadams, 2017-12-07: Added log for testing
-          if(this.options.debug) {
+          if (this.options.debug) {
             logger.debug('\n' + 'resize: boxHeight x boxWidth: ' + boxHeight + ' x ' + boxWidth);
           }
 
@@ -1085,11 +1194,11 @@
           that.firstShow = false;
 
           // jadams, 2017-12-07: Added log for debug mode
-          var imageWidth  = this.naturalWidth  || this.videoWidth  || this.width;
+          var imageWidth = this.naturalWidth || this.videoWidth || this.width;
           var imageHeight = this.naturalHeight || this.videoHeight || this.height;
-          var logText     = 'show: imageHeight x imageWidth: ' + imageHeight + ' x ' + imageWidth;
+          var logText = 'show: imageHeight x imageWidth: ' + imageHeight + ' x ' + imageWidth;
 
-          if(that.options.debug) {
+          if (that.options.debug) {
             logger.debug(logText);
           }
 
@@ -1104,7 +1213,7 @@
           var myID = '#' + that.$container['0']['id'];
           var visibilityRetries = 0;
           var maxVisibilityRetries = 500; // ~5 seconds at 10ms intervals
-          var isVisible = setInterval(function() {
+          var isVisible = setInterval(function () {
             visibilityRetries++;
             if ($(myID).is(':visible')) {
               if (that.options.debug) {
@@ -1133,30 +1242,33 @@
 
         that._currentImage = selectedImage;
 
+        // claude - backstretch responsiveness #4
+        // Invalidate the dimension-change cache so the next resize()
+        // call recalculates positioning for the new image/video
+        // instead of being short-circuited by the skip guard.
+        that._lastNaturalWidth = undefined;
+        that._lastNaturalHeight = undefined;
+
         return that;
-      }
+      },
 
-      ,
-    current: function () {
+      current: function () {
         return this.index;
-      }
+      },
 
-      ,
-    next: function () {
+      next: function () {
         var args = Array.prototype.slice.call(arguments, 0);
         args.unshift(this.index < this.images.length - 1 ? this.index + 1 : 0);
         return this.show.apply(this, args);
-      }
+      },
 
-      ,
-    prev: function () {
+      prev: function () {
         var args = Array.prototype.slice.call(arguments, 0);
         args.unshift(this.index === 0 ? this.images.length - 1 : this.index - 1);
         return this.show.apply(this, args);
-      }
+      },
 
-      ,
-    pause: function () {
+      pause: function () {
         // Pause the slideshow
         this.paused = true;
 
@@ -1165,10 +1277,9 @@
         }
 
         return this;
-      }
+      },
 
-      ,
-    resume: function () {
+      resume: function () {
         // Resume the slideshow
         this.paused = false;
 
@@ -1178,10 +1289,9 @@
 
         this.cycle();
         return this;
-      }
+      },
 
-      ,
-    cycle: function () {
+      cycle: function () {
         // Start/resume the slideshow
         if (this.images.length > 1) {
           // Clear the timeout, just in case
@@ -1245,11 +1355,25 @@
 
         }
         return this;
+      },
+
+      destroy: function (preserveBackground) {
+      // claude - backstretch responsiveness #4
+      // Adopted SwiperJS destroy pattern: disconnect the ResizeObserver
+      // (matching SwiperJS removeObserver()) and cancel any pending
+      // requestAnimationFrame to prevent resize callbacks firing after
+      // the instance is torn down. Falls back to unbinding window.resize
+      // for browsers without ResizeObserver.
+      if (this._resizeObserver) {
+        this._resizeObserver.disconnect();
+        this._resizeObserver = null;
+      }
+      if (this._resizeAnimationFrame) {
+        window.cancelAnimationFrame(this._resizeAnimationFrame);
+        this._resizeAnimationFrame = null;
       }
 
-      ,
-    destroy: function (preserveBackground) {
-      // Stop the resize events
+      // Stop the resize events (fallback path + orientationchange)
       $(window).off('resize.backstretch orientationchange.backstretch');
 
       // Stop any videos
@@ -1272,19 +1396,21 @@
    * Video Abstraction Layer
    *
    * Static methods:
-   * > VideoWrapper.loadYoutubeAPI() -> Call in order to load the Youtube API.
-   *                                   An 'youtube_api_load' event will be triggered on $(window) when the API is loaded.
+   *  VideoWrapper.loadYoutubeAPI() -> Call in order to load the Youtube API.
+   *  An 'youtube_api_load' event will be triggered on $(window) when the API
+   *  is loaded.
    *
    * Generic:
-   * > player.type -> type of the video
-   * > player.video / player.$video -> contains the element holding the video
-   * > player.play() -> plays the video
-   * > player.pause() -> pauses the video
-   * > player.setCurrentTime(position) -> seeks to a position by seconds
+   *  player.type -> type of the video
+   *  player.video / player.$video -> contains the element holding the video
+   *  player.play() -> plays the video
+   *  player.pause() -> pauses the video
+   *  player.setCurrentTime(position) -> seeks to a position by seconds
    *
    * Youtube:
-   * > player.ytId will contain the youtube ID if the source is a youtube url
-   * > player.ytReady is a flag telling whether the youtube source is ready for playback
+   *  player.ytId will contain the youtube ID if the source is a youtube url
+   *  player.ytReady is a flag telling whether the youtube source is ready for playback
+   * 
    * */
 
   var VideoWrapper = function () {
@@ -1300,9 +1426,7 @@
    * loop, mute, poster
    */
   VideoWrapper.prototype.init = function (options) {
-
     var that = this;
-
     var $video;
 
     var setVideoElement = function () {
@@ -1310,8 +1434,7 @@
       that.video = $video[0];
     };
 
-    // Determine video type
-
+    // determine video type
     var videoType = 'video';
 
     if (!(options.url instanceof Array) &&
@@ -1322,7 +1445,6 @@
     that.type = videoType;
 
     if (videoType === 'youtube') {
-
       // Try to load the API in the meantime
       VideoWrapper.loadYoutubeAPI();
 
@@ -1368,7 +1490,7 @@
       }
 
     } else {
-      // Traditional <video> tag with multiple sources
+      // traditional <video> tag with multiple sources
 
       $video = $('<video>')
         .prop('autoplay', false)
@@ -1648,7 +1770,6 @@
   };
 
   var getDeviceOrientation = function () {
-
     if ('matchMedia' in window) {
       if (window.matchMedia('(orientation: portrait)').matches) {
         return 'portrait';
@@ -1687,15 +1808,10 @@
    * true in practice. Consider replacing with a constant 'true' if
    * legacy browser support is no longer required.
    *
-   * Based on code from jQuery Mobile 1.1.0
-   * http://jquerymobile.com/
-   * ========================= */
-
+   **/
   var supportsFixedPosition = (function () {
     var ua = navigator.userAgent,
-      platform = navigator.platform
-      // Rendering engine is Webkit, and capture major version
-      ,
+      platform = navigator.platform,   // Rendering engine is Webkit, and capture major version
       wkmatch = ua.match(/AppleWebKit\/([0-9]+)/),
       wkversion = !!wkmatch && wkmatch[1],
       ffmatch = ua.match(/Fennec\/([0-9]+)/),

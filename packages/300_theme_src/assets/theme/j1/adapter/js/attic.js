@@ -6,7 +6,7 @@ regenerate:                             true
 
 {% comment %}
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/adapter/js/attic.js
+ # ~/assets/theme/j1/adapter/js/attic.js (2)
  # Liquid template to adapt Backstretch Core functions for
  # all attics (top page headers)
  #
@@ -58,7 +58,7 @@ regenerate:                             true
 
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/adapter/js/attic.js
+ # ~/assets/theme/j1/adapter/js/attic.js (2)
  # JS Adapter for J1 Master Header
  #
  # Product/Info:
@@ -99,14 +99,12 @@ j1.adapter.attic = ((j1, window) => {
 
   var _this;
   var logger;
-  var logText;
 
   // date|time
-  var startTime;
-  var endTime;
+  // Removed unused variables 'startTime', 'endTime', 'timeSeconds'
+  // (only startTimeModule and endTimeModule are used)
   var startTimeModule;
   var endTimeModule;
-  var timeSeconds;
 
   // ---------------------------------------------------------------------------
   // main
@@ -171,8 +169,8 @@ j1.adapter.attic = ((j1, window) => {
             // jadams, 2023-05-12: page visible while loading the attic
             // cause high numbers for cumulative layout shift (CLS)
             //
-            // isDev && logger.debug('hide attic on initialization');
-            // $('#no_flicker').css('display', 'none');
+            isDev && logger.debug('hide attic on initialization');
+            $('#no_flicker').css('display', 'none');
           }
 
           _this.createAllAttics();
@@ -246,7 +244,7 @@ j1.adapter.attic = ((j1, window) => {
                   bypassCss:                      atticOptions.bypassCss,
                   alwaysTestWindowResolution:     atticOptions.alwaysTestWindowResolution,
                   resolutionRefreshRate:          atticOptions.resolutionRefreshRate,
-                  resolutionChangeRatioThreshold: atticOptions.transition,
+                  resolutionChangeRatioThreshold: atticOptions.resolutionChangeRatioThreshold,
                   isVideo:                        atticOptions.isVideo,
                   loop:                           atticOptions.loop,
                   mute:                           atticOptions.mute
@@ -266,7 +264,10 @@ j1.adapter.attic = ((j1, window) => {
 
             // add event for pauseOnHover
             if (atticOptions.pauseOnHover) {
-              $('#attic_id').hover (
+              // Bug fix: was using literal string '#attic_id' instead of the
+              // Liquid-templated '#{{attic_id}}'. The hover event was bound
+              // to a non-existent element, so pauseOnHover never worked.
+              $('#{{attic_id}}').hover (
                 () => {
                   $('#{{attic_id}}').backstretch('pause'); },
                 () => {
@@ -276,11 +277,10 @@ j1.adapter.attic = ((j1, window) => {
 
             // run callback backstretch before
             $(window).on('backstretch.before', (e, instance, index) => {
-              var evt                = e;
-              var inst               = instance;
-              var idx                = index;
+              // Removed unused variables 'evt', 'inst', 'idx' that were
+              // assigned but never referenced in this callback
               var atticOptions       = _this.atticOptions;
-              var textOverlayTitle   = instance.images[index].title
+              var textOverlayTitle   = instance.images[index].title;
               var textOverlayTagline = instance.images[index].tagline;
               var textOverlayHTML;
 
@@ -317,7 +317,7 @@ j1.adapter.attic = ((j1, window) => {
             // SEE:  https://github.com/jquery-backstretch/jquery-backstretch/issues/194
             //
             $(window).on('backstretch.after', (e, instance, index) => {
-              var textOverlayTitle    = instance.images[index].title
+              var textOverlayTitle    = instance.images[index].title;
               var textOverlayTagline  = instance.images[index].tagline;
               var atticOptions        = _this.atticOptions;
               var frontmatterOptions  = _this.frontmatterOptions;
@@ -394,27 +394,28 @@ j1.adapter.attic = ((j1, window) => {
               var title_animate_delay       = !!my_attic.title_animate_delay ? my_attic.title_animate_delay : atticOptions.title_animate_delay;
               var title_animate_duration    = !!my_attic.title_animate_duration ? my_attic.title_animate_duration : atticOptions.title_animate_duration;
 
-              $('#head-title').addClass(title_animate);
-              $('#head-title').addClass(title_animate_delay);
-              $('#head-title').addClass(title_animate_duration);
+              // consolidated repeated jQuery selector lookups into single
+              // chained calls. Each $('#id') triggers a DOM query; chaining
+              // reuses the same jQuery object.
+              $('#head-title').addClass(title_animate)
+                .addClass(title_animate_delay)
+                .addClass(title_animate_duration);
 
               // collect individual tagline options
               var tagline_animate           = !!my_attic.tagline_animate ? my_attic.tagline_animate : atticOptions.tagline_animate;
               var tagline_animate_delay     = !!my_attic.tagline_animate_delay ? my_attic.tagline_animate_delay : atticOptions.tagline_animate_delay;
               var tagline_animate_duration  = !!my_attic.tagline_animate_duration ? my_attic.tagline_animate_duration : atticOptions.tagline_animate_duration;
 
-              $('#head-tagline').addClass(tagline_animate);
-              $('#head-tagline').addClass(tagline_animate_delay);
-              $('#head-tagline').addClass(tagline_animate_duration);
+              $('#head-tagline').addClass(tagline_animate)
+                .addClass(tagline_animate_delay)
+                .addClass(tagline_animate_duration);
 
               // show configured textOverlay
-              $('.textOverlay').show();
-              $('.textOverlay').css('opacity', '1');
+              $('.textOverlay').show().css('opacity', '1');
 
               // jadams, 2022-08-19: show a badge only if configured
               if (typeof instance.images[index].badge != 'undefined') {
-                $('.attic-caption').show();
-                $('.attic-caption').css('opacity', '1');
+                $('.attic-caption').show().css('opacity', '1');
               }
 
               // show page if attic finalized
@@ -451,7 +452,6 @@ j1.adapter.attic = ((j1, window) => {
                 {% assign text_emphasis         = item.attic.text_emphasis %}
                 {% assign padding_top           = item.attic.padding_top %}
                 {% assign padding_bottom        = item.attic.padding_bottom %}
-                {% assign padding_bottom        = item.attic.padding_bottom %}
                 {% assign margin_bottom         = item.attic.margin_bottom %}
 
                 {% if item.attic.title.size != 1 %}
@@ -460,6 +460,20 @@ j1.adapter.attic = ((j1, window) => {
                 {% assign title_color           = item.attic.title.color %}
                 {% assign title_animate         = item.attic.title.animate %}
                 {% assign title_align           = item.attic.title.align %}
+
+                {% comment %}
+                   Added missing tagline property assignments. These were
+                   referenced in atticOptionsHeader below but never assigned
+                   from the item config, so per-attic tagline overrides from
+                   the YAML header config were silently ignored.
+                {% endcomment %}
+                {% if item.attic.tagline.size != 1 %}
+                {% assign tagline_size          = item.attic.tagline.size %}
+                {% endif %}
+
+                {% assign tagline_color         = item.attic.tagline.color %}
+                {% assign tagline_animate       = item.attic.tagline.animate %}
+                {% assign tagline_align         = item.attic.tagline.align %}
 
                 {% assign background_color_1    = item.attic.background_color_1 %}
                 {% assign background_color_2    = item.attic.background_color_2 %}
@@ -480,7 +494,6 @@ j1.adapter.attic = ((j1, window) => {
                 {% assign transition            = item.attic.transition %}
                 {% assign duration              = item.attic.duration %}
                 {% assign transitionDuration    = item.attic.transitionDuration %}
-                {% assign animateFirst          = item.attic.animateFirst %}
                 {% assign sound                 = item.attic.sound %}
 
                 // Create and json object for HEADER options taken from
@@ -512,7 +525,11 @@ j1.adapter.attic = ((j1, window) => {
                 {% if type == 'video' %}
                   {% assign isVideo = true %}
                   {% if sound %} {% assign mute = false %} {% else %} {% assign mute = true %} {% endif %}
-                  {% if loop %}  {% assign loop = true %}  {% else %} {% assign loop = true %} {% endif %}
+                  {% comment %}
+                     Bug fix: both branches set loop=true, making videos always
+                     loop. The else branch must set loop=false to honor config. 
+                  {% endcomment %}
+                  {% if loop %}  {% assign loop = true %}  {% else %} {% assign loop = false %} {% endif %}
                 {% endif %}
 
                 // Create an json object for BACKSTRETCH options taken from
@@ -602,12 +619,17 @@ j1.adapter.attic = ((j1, window) => {
             if (atticOptions.r_text === 'enabled') { $('#{{attic_id}}').addClass('r-text'); }
             var raised_level = 'raised-z' +atticOptions.raised_level;
 
+            // chained repeated jQuery selector lookups
             $('#{{attic_id}}').addClass(raised_level);
-            $('#head-title').addClass(atticOptions.title_animate);
-            $('#head-title').addClass(atticOptions.title_animate_delay);
-            $('#head-title').addClass(atticOptions.title_animate_duration);
-            $('#head-tagline').addClass(atticOptions.tagline_animate);
-            $('#head-tagline').addClass(atticOptions.tagline_animate_duration);
+            $('#head-title').addClass(atticOptions.title_animate)
+              .addClass(atticOptions.title_animate_delay)
+              .addClass(atticOptions.title_animate_duration);
+ 
+            // Added missing tagline_animate_delay class (was applied in
+            // backstretch.after callback but omitted here during initial setup)
+            $('#head-tagline').addClass(atticOptions.tagline_animate)
+              .addClass(atticOptions.tagline_animate_delay)
+              .addClass(atticOptions.tagline_animate_duration);
 
             var text_emphasis = 'text-emphasis-' +atticOptions.text_emphasis;
             $('#head-title-text').addClass(text_emphasis);
@@ -625,12 +647,16 @@ j1.adapter.attic = ((j1, window) => {
 
             // initialze header background gradient
             //
+            // Removed obsolete vendor-prefixed gradient syntax:
+            // - '-webkit-gradient()' (Chrome < 10, Safari < 5.1)
+            // - '-o-linear-gradient()' (Opera < 12.1)
+            // - 'filter: progid:DXImageTransform' (IE 6-9)
+            // The standard 'linear-gradient' and '-webkit-linear-gradient'
+            // cover all currently supported browsers.
+            //
             attic_style += '<style> .attic { ';
-            attic_style += 'background-image: -webkit-gradient(linear, left top, left bottom, from(' +atticOptions.background_color_1 + '), to(' +atticOptions.background_color_2+ ')) !important;';
             attic_style += 'background-image: -webkit-linear-gradient(top, ' +atticOptions.background_color_1 + ' 0%, ' +atticOptions.background_color_2 + ' 100%) !important;';
-            attic_style += 'background-image: -o-linear-gradient(top, ' +atticOptions.background_color_1 + ' 0%, ' +atticOptions.background_color_2 + ' 100%) !important;';
             attic_style += 'background-image: linear-gradient(to bottom, ' +atticOptions.background_color_1 + ' 0%, ' +atticOptions.background_color_2 + ' 100%) !important;';
-            attic_style += 'filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="' +atticOptions.background_color_1 + '", endColorstr="' +atticOptions.background_color_2 + '", GradientType=0) !important;';
             attic_style += '} </style>';
             $('head').append(attic_style);
 
@@ -648,17 +674,20 @@ j1.adapter.attic = ((j1, window) => {
             if (typeof frontmatterOptions.margin_bottom != 'undefined')   { margin_bottom  = frontmatterOptions.margin_bottom; }
 
             attic_style = '';
-            attic_style = '<style> .attic { padding-top: ' +padding_top+ 'px; padding-bottom: ' +padding_bottom+ 'px; margin-bottom: ' +margin_bottom+ 'px; text-shadow: 0 1px 0 rgba(0,0,0,.1); </style>';
-            $('head').append(attic_style);
+            attic_style = '<style> .attic { padding-top: ' +padding_top+ 'px; padding-bottom: ' +padding_bottom+ 'px; margin-bottom: ' +margin_bottom+ 'px; text-shadow: 0 1px 0 rgba(0,0,0,.1); } </style>';
 
-            $('head').append('<style> .attic .head-title h2 { color: ' +atticOptions.title_color+ ';font-size: ' +atticOptions.title_size+ ' !important; text-align: ' +atticOptions.title_align+ ';} </style>');
-            $('head').append('<style> .attic .head-tagline h3 { color: ' +atticOptions.tagline_color+ ';font-size: ' +atticOptions.tagline_size+ ' !important; text-align: ' +atticOptions.tagline_align+ '; } </style>');
+            // consolidated multiple $('head').append() calls into a single DOM insertion.
+            $('head').append(
+              attic_style
+              + '<style> .attic .head-title h2 { color: ' +atticOptions.title_color+ ';font-size: ' +atticOptions.title_size+ ' !important; text-align: ' +atticOptions.title_align+ ';} </style>'
+              + '<style> .attic .head-tagline h3 { color: ' +atticOptions.tagline_color+ ';font-size: ' +atticOptions.tagline_size+ ' !important; text-align: ' +atticOptions.tagline_align+ '; } </style>'
+            );
 
             // Add opacity to ALL header (backstretch) images
             // See: https://tympanus.net/codrops/2013/11/07/css-overlay-techniques/
             //
             var item_opacity        = !!my_attic.opacity ? my_attic.opacity : atticOptions.opacity;
-            var backstretch_opacity = '<style> .backstretch-item { opacity: ' +item_opacity+ '; </style>';
+            var backstretch_opacity = '<style> .backstretch-item { opacity: ' +item_opacity+ '; } </style>';
             $('head').append(backstretch_opacity);
 
             _this.setState('initialized');

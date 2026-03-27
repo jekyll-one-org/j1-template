@@ -1,28 +1,30 @@
 /*
  # -----------------------------------------------------------------------------
- # ~/scss/theme_uno/extensions/_attic.scss
+ # ~/scss/theme_uno/modules/_attic.scss
  #
  # Product/Info:
- # https://jekyll.one
+ # http://jekyll.one
  #
- # Copyright (C) 2023-2025 Juergen Adams
+ # Copyright (C) 2023-2026 Juergen Adams
  #
- # J1 Template is licensed under the MIT License.
+ # J1 Theme is licensed under the MIT License
  # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE
  # -----------------------------------------------------------------------------
- # NOTE: Styles for the attics module (master header)
+ # NOTE: Provides styles for the J1 Google Adsense module
+ # NOTE: Settings are set dynamicall by the JS adapter
  # -----------------------------------------------------------------------------
 */
 
 // Content
 // -----------------------------------------------------------------------------
+
 // fake attic used if NO attic is enabled for a layout
-// see: _data/modules/attics.yml
 .no-attic {
     padding-top: 80px;
 }
 
 .attic {
+  top: 80px;
   position: relative;
   width: 100%;
   overflow: hidden;                                                             // jadams, 2017-12-11: needed for image headers

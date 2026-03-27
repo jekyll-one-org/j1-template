@@ -514,7 +514,7 @@ resources:
       pass_init_data:                   true
 
       data:
-        css:                            []
+        css:                            [ modules/backstretch/css/attic ]
         files:                          [ adapter/js/attic.js ]
         js:                             [ modules/backstretch/js/backstretch ]
         init_function:                  [ j1.adapter.attic.init ]

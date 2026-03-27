@@ -1,6 +1,6 @@
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/modules/backstretch/js/backstretch.js (2)
+ # ~/assets/theme/j1/modules/backstretch/js/backstretch.js (6)
  # Backstretch v.2.1.16 implementation for J1 Theme.
  #
  # Product/Info:
@@ -128,19 +128,31 @@
    * ========================= */
 
   $.fn.backstretch.defaults = {
-    debug:    false,
-    duration: 5000,                       // Amount of time in between slides (if slideshow)
-    transition: 'fade',                   // Type of transition between slides
-    transitionDuration: 0,                // Duration of transition between slides
-    animateFirst: true,                   // Animate the transition of first image of slideshow in?
-    alignX: 0.5,                          // The x-alignment for the image, can be 'left'|'center'|'right' or any number between 0.0 and 1.0
-    alignY: 0.5,                          // The y-alignment for the image, can be 'top'|'center'|'bottom' or any number between 0.0 and 1.0
-    paused: false,                        // Whether the images should slide after given duration
-    start: 0,                             // Index of the first image to show
-    preload: 2,                           // How many images preload at a time?
-    preloadSize: 1,                       // How many images can we preload in parallel?
-    resolutionRefreshRate: 2500,          // How long to wait before switching resolution?
-    resolutionChangeRatioThreshold: 0.1   // How much a change should it be before switching resolution?
+    debug:    false
+      ,
+    duration: 5000 // Amount of time in between slides (if slideshow)
+      ,
+    transition: 'fade' // Type of transition between slides
+      ,
+    transitionDuration: 0 // Duration of transition between slides
+      ,
+    animateFirst: true // Animate the transition of first image of slideshow in?
+      ,
+    alignX: 0.5 // The x-alignment for the image, can be 'left'|'center'|'right' or any number between 0.0 and 1.0
+      ,
+    alignY: 0.5 // The y-alignment for the image, can be 'top'|'center'|'bottom' or any number between 0.0 and 1.0
+      ,
+    paused: false // Whether the images should slide after given duration
+      ,
+    start: 0 // Index of the first image to show
+      ,
+    preload: 2 // How many images preload at a time?
+      ,
+    preloadSize: 1 // How many images can we preload in parallel?
+      ,
+    resolutionRefreshRate: 2500 // How long to wait before switching resolution?
+      ,
+    resolutionChangeRatioThreshold: 0.1 // How much a change should it be before switching resolution?
   };
 
   /* STYLES
@@ -177,7 +189,13 @@
       border: 'none',
       width: '100%',
       height: '100%',
-      maxWidth: 'none'
+      // claude - backstretch responsiveness #6
+      // Both maxWidth and maxHeight must be 'none' to allow the image/video
+      // to exceed the container in either dimension during cover mode.
+      // Without maxHeight: 'none', an inherited or page-level max-height
+      // rule could clip the image vertically.
+      maxWidth: 'none',
+      maxHeight: 'none'
     }
   };
 
@@ -683,14 +701,73 @@
     this.index = this.options.start;
     this.show(this.index);
 
-    // Listen for resize
-    $window.on('resize.backstretch', $.proxy(this.resize, this))
+    // claude - backstretch responsiveness #5
+    // Adopt SwiperJS resize strategy: prefer ResizeObserver with
+    // requestAnimationFrame batching for efficient, container-aware
+    // resize detection. Falls back to window 'resize' event like Swiper
+    // does for older browsers.
+    var that = this;
+    this._resizeRAF = null;
+
+    // Debounced resize via requestAnimationFrame (prevents layout thrashing)
+    this._rafResize = function () {
+      if (that._resizeRAF) {
+        window.cancelAnimationFrame(that._resizeRAF);
+      }
+      that._resizeRAF = window.requestAnimationFrame(function () {
+        that._resizeRAF = null;
+        that.resize();
+      });
+    };
+
+    // ResizeObserver: detect container-level size changes (like SwiperJS)
+    if (typeof window.ResizeObserver !== 'undefined') {
+      this._resizeObserver = new ResizeObserver(function (entries) {
+        // Guard: skip if destroyed or not initialized
+        if (!that.$wrap || !that.$wrap.length) return;
+
+        var entry = entries[0];
+        var newWidth, newHeight;
+
+        if (entry.contentRect) {
+          newWidth  = entry.contentRect.width;
+          newHeight = entry.contentRect.height;
+        } else {
+          var box = entry.contentBoxSize[0] || entry.contentBoxSize;
+          newWidth  = box.inlineSize;
+          newHeight = box.blockSize;
+        }
+
+        // Only trigger resize if dimensions actually changed
+        // (mirrors SwiperJS: `if (newWidth !== width || newHeight !== height)`)
+        if (newWidth !== that._lastObservedWidth || newHeight !== that._lastObservedHeight) {
+          that._lastObservedWidth  = newWidth;
+          that._lastObservedHeight = newHeight;
+          that._rafResize();
+        }
+      });
+
+      // Observe the container element (not window)
+      var observeTarget = this.isBody ? document.documentElement : this.$container[0];
+      this._resizeObserver.observe(observeTarget);
+    }
+
+    // Always bind window resize as well (catches viewport changes,
+    // zoom, and serves as fallback when ResizeObserver is unavailable)
+    $window.on('resize.backstretch', $.proxy(this._rafResize, this))
       .on('orientationchange.backstretch', $.proxy(function () {
         // Need to do this in order to get the right window height
         if (this.isBody && window.pageYOffset === 0) {
           window.scrollTo(0, 1);
-          this.resize();
         }
+        // claude - backstretch responsiveness #5
+        // Orientation changes on mobile need a short delay for the
+        // browser to settle the new viewport dimensions before
+        // recalculating (similar to SwiperJS autoplay.resizeTimeout)
+        var self = this;
+        setTimeout(function () {
+          self._rafResize();
+        }, 150);
       }, this));
   };
 
@@ -814,6 +891,18 @@
           // var debug = false;
           var logger = log4javascript.getLogger('j1.api.attic');
 
+          // claude - backstretch responsiveness #5
+          // SwiperJS guard: skip resize when the container element has zero
+          // dimensions (hidden, collapsed, or not yet in the DOM). This
+          // mirrors SwiperJS `onResize`: `if (el && el.offsetWidth === 0) return;`
+          var containerEl = this.$container[0];
+          if (containerEl && containerEl.offsetWidth === 0 && containerEl.offsetHeight === 0) {
+            if (this.options.debug) {
+              logger.debug('\n' + 'resize: skipped (container has zero dimensions)');
+            }
+            return this;
+          }
+
           // Check for a better suited image after the resize
           var $resTest = this.options.alwaysTestWindowResolution ? $(window) : this.$root;
           var newContainerWidth = $resTest.width();
@@ -852,63 +941,167 @@
             }
           }
 
+          // claude - backstretch responsiveness #6
+          // Box dimension calculation for the backstretch image area.
+          //
+          // IMPORTANT: Unlike SwiperJS (whose slides flow inside the content
+          // box), the backstretch wrap is absolutely positioned with
+          // width/height: 100%. Per CSS spec, an absolutely positioned child's
+          // percentage dimensions resolve against the containing block's
+          // PADDING BOX. Therefore the image must be sized to the full
+          // clientWidth/clientHeight (which includes padding but excludes
+          // borders and scrollbar).
+          //
+          // The #5 fix subtracted padding (copying SwiperJS updateSize()),
+          // which caused containers like .attic — whose visual height is
+          // defined entirely by padding-top — to compute boxHeight=0,
+          // preventing any image from rendering.
           var bgCSS = {
               left: 0,
               top: 0,
               right: 'auto',
               bottom: 'auto'
+            };
+
+          var boxWidth, boxHeight;
+
+          if (this.isBody) {
+            boxWidth  = this.$root.width();
+            // claude - backstretch responsiveness #6
+            // Use window.innerHeight with CSS viewport fallback for reliable
+            // mobile height (handles address bar show/hide on iOS/Android)
+            boxHeight = window.innerHeight || document.documentElement.clientHeight || this.$root.height();
+          } else {
+            // claude - backstretch responsiveness #6
+            // Read the container's padding-box dimensions directly.
+            // clientWidth/clientHeight = content + padding (no border, no
+            // scrollbar), which matches exactly what the absolutely-positioned
+            // backstretch wrap covers.
+            //
+            // Fallback chain: clientWidth → offsetWidth → jQuery .width()
+            // offsetWidth includes borders, so it's slightly larger but still
+            // a better fallback than 0 when clientWidth is unavailable.
+            var el = this.$root[0];
+            boxWidth  = el.clientWidth  || el.offsetWidth  || this.$root.width();
+            boxHeight = el.clientHeight || el.offsetHeight || this.$root.height();
+          }
+
+          // claude - backstretch responsiveness #6
+          // Zero-dimension guard: skip resize when the container is hidden,
+          // collapsed, or not yet in the DOM
+          if (boxWidth <= 0 || boxHeight <= 0) {
+            if (this.options.debug) {
+              logger.debug('\n' + 'resize: skipped (computed box dimensions are zero or negative)');
             }
+            return this;
+          }
 
-            ,
-            boxWidth = this.isBody ? this.$root.width() : this.$root.innerWidth(),
-            boxHeight = this.isBody ? (window.innerHeight ? window.innerHeight : this.$root.height()) : this.$root.innerHeight()
+          // claude - backstretch responsiveness #6
+          // Guard: $itemWrapper may not exist yet if ResizeObserver fires
+          // before the first show() call has completed
+          if (!this.$itemWrapper || !this.$itemWrapper.length) {
+            return this;
+          }
 
-            ,
-            naturalWidth = this.$itemWrapper.data('width'),
-            naturalHeight = this.$itemWrapper.data('height')
+          var naturalWidth = this.$itemWrapper.data('width'),
+            naturalHeight = this.$itemWrapper.data('height');
 
-            ,
-            ratio = (naturalWidth / naturalHeight) || 1
+          // claude - backstretch responsiveness #6
+          // For videos/iframes that haven't reported dimensions yet, try to
+          // read them from the live element (videoWidth/videoHeight update
+          // asynchronously after loadedmetadata fires).
+          if (!naturalWidth || !naturalHeight) {
+            var mediaEl = this.$item && this.$item[0];
+            if (mediaEl) {
+              var liveW = mediaEl.naturalWidth || mediaEl.videoWidth || mediaEl.width;
+              var liveH = mediaEl.naturalHeight || mediaEl.videoHeight || mediaEl.height;
+              if (liveW && liveH) {
+                naturalWidth  = liveW;
+                naturalHeight = liveH;
+                this.$itemWrapper.data('width', liveW).data('height', liveH);
+              }
+            }
+          }
 
-            ,
+          // Guard: cannot calculate without dimensions
+          if (!naturalWidth || !naturalHeight) {
+            return this;
+          }
+
+          var ratio = naturalWidth / naturalHeight,
             alignX = this._currentImage.alignX === undefined ? this.options.alignX : this._currentImage.alignX,
             alignY = this._currentImage.alignY === undefined ? this.options.alignY : this._currentImage.alignY,
             scale = validScale(this._currentImage.scale || this.options.scale);
 
           // jadams, 2017-12-07: Added log for testing
+          // claude - backstretch responsiveness #6
+          // Enhanced debug output: include natural dimensions, aspect ratios,
+          // and scale mode for easier troubleshooting of sizing issues
           if(this.options.debug) {
-            logger.debug('\n' + 'resize: boxHeight x boxWidth: ' + boxHeight + ' x ' + boxWidth);
+            logger.debug('\n' + 'resize: box (w×h): ' + boxWidth + ' × ' + boxHeight
+              + ', natural (w×h): ' + naturalWidth + ' × ' + naturalHeight
+              + ', ratio: ' + (naturalWidth / naturalHeight).toFixed(4)
+              + ', scale: ' + validScale(this._currentImage.scale || this.options.scale));
           }
 
-          // claude - optimization chances: code clarity
-          // Removed commented-out debug block with non-English text
-
+          // claude - backstretch responsiveness #5
+          // Rewritten scale calculations using the same aspect-ratio
+          // comparison logic as SwiperJS uses for slide sizing: compute
+          // the box aspect ratio vs the media aspect ratio to determine
+          // which dimension constrains the fit.
           var width, height;
-          if (scale === 'fit' || scale === 'fit-smaller') {
-            width = naturalWidth;
-            height = naturalHeight;
+          var boxRatio = boxWidth / boxHeight;
 
-            if (width > boxWidth ||
-              height > boxHeight ||
-              scale === 'fit-smaller') {
-              var boxRatio = boxWidth / boxHeight;
+          if (scale === 'fit' || scale === 'fit-smaller') {
+            // Fit: scale down to fit entirely within the box (letterbox)
+            if (scale === 'fit' && naturalWidth <= boxWidth && naturalHeight <= boxHeight) {
+              // Natural size fits; no scaling needed
+              width  = naturalWidth;
+              height = naturalHeight;
+            } else {
+              // claude - backstretch responsiveness #6
+              // Use Math.floor (not Math.round) for fit modes. Rounding up
+              // by even 1px can push the image outside the box boundary,
+              // triggering unwanted scrollbars or clipping. Floor guarantees
+              // the image stays within the container.
+              // Scale to fit: constrain by the tighter dimension
               if (boxRatio > ratio) {
-                width = Math.floor(boxHeight * ratio);
+                // Box is wider than media: height is the constraint
                 height = boxHeight;
-              } else if (boxRatio < ratio) {
-                width = boxWidth;
-                height = Math.floor(boxWidth / ratio);
+                width  = Math.floor(boxHeight * ratio);
               } else {
-                width = boxWidth;
-                height = boxHeight;
+                // Box is taller than media: width is the constraint
+                width  = boxWidth;
+                height = Math.floor(boxWidth / ratio);
               }
             }
           } else if (scale === 'fill') {
-            width = boxWidth;
+            // Fill: stretch to exactly match the box (may distort)
+            width  = boxWidth;
             height = boxHeight;
-          } else { // 'cover'
-            width = Math.max(boxHeight * ratio, boxWidth);
-            height = Math.max(width / ratio, boxHeight);
+          } else {
+            // Cover (default): scale up to fill the box completely,
+            // cropping the excess. This is the CSS `object-fit: cover`
+            // equivalent and is the most critical case for responsiveness.
+            //
+            // claude - backstretch responsiveness #6
+            // Use Math.ceil (not Math.round) for the computed dimension.
+            // Rounding down by even 1px can leave a visible gap at the
+            // edge of the container on certain viewport sizes. Ceiling
+            // guarantees the image always fully covers the box, at the
+            // cost of at most 1px additional crop — imperceptible but
+            // prevents background-color bleed-through.
+            if (boxRatio >= ratio) {
+              // Box is wider (or equal) relative to media:
+              // width fills, height overflows
+              width  = boxWidth;
+              height = Math.ceil(boxWidth / ratio);
+            } else {
+              // Box is taller relative to media:
+              // height fills, width overflows
+              height = boxHeight;
+              width  = Math.ceil(boxHeight * ratio);
+            }
           }
 
           // Make adjustments based on image ratio
@@ -1127,6 +1320,25 @@
         that.$item.attr('alt', selectedImage.alt || '');
         that.$itemWrapper.data('options', selectedImage);
 
+        // claude - backstretch responsiveness #5
+        // For HTML5 videos, listen for 'loadedmetadata' to capture
+        // accurate videoWidth/videoHeight as soon as the browser has
+        // parsed the video header. This event often fires before
+        // 'canplay' and guarantees dimensions are available. Without
+        // this, resize() may calculate against stale or zero dimensions
+        // on the first layout pass.
+        if (isVideo && that.$item[0] && that.$item[0].tagName === 'VIDEO') {
+          that.$item.on('loadedmetadata.backstretch', function () {
+            var vid = this;
+            if (vid.videoWidth && vid.videoHeight) {
+              that.$itemWrapper
+                .data('width', vid.videoWidth)
+                .data('height', vid.videoHeight);
+              that.resize();
+            }
+          });
+        }
+
         if (!isVideo) {
           that.$item.attr('src', selectedImage.url);
         }
@@ -1251,6 +1463,18 @@
     destroy: function (preserveBackground) {
       // Stop the resize events
       $(window).off('resize.backstretch orientationchange.backstretch');
+
+      // claude - backstretch responsiveness #5
+      // Clean up ResizeObserver and pending RAF on destroy
+      // (mirrors SwiperJS removeObserver pattern in its Resize module)
+      if (this._resizeObserver) {
+        this._resizeObserver.disconnect();
+        this._resizeObserver = null;
+      }
+      if (this._resizeRAF) {
+        window.cancelAnimationFrame(this._resizeRAF);
+        this._resizeRAF = null;
+      }
 
       // Stop any videos
       if (this.videoWrapper) {

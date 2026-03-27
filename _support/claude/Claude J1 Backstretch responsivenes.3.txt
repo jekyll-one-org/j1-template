@@ -1,0 +1,22 @@
+Prompt
+  
+--------------------------------------------------------------------------------
+
+The attached module, backstretch.js, manages images and videos integrated into
+a website. The attached module swiperjs, swiper-bundle.js, manages images and
+videos as sliders
+
+The images or videos placed in the master header (attic) change when the
+browser window is resized (recalculated at that size), but they are not
+recalculated correctly to fit within the resized container.
+
+The module backstretch should use the same stragy for resite as the module 
+swiperjs do (see swiper-bundle.js).
+
+Create fixed versions for optimization and use the comment
+"claude - backstretch responsiveness #2"  for all proposed fixes.
+
+
+Claude
+--------------------------------------------------------------------------------
+

@@ -1,0 +1,42 @@
+Prompt
+  https://claude.ai/chat/590d5d81-84b4-47e0-986d-51629d6b0ffd
+--------------------------------------------------------------------------------
+
+```
+    <header id="header">
+        <div id="attic_home" class="attic ">
+            <div class="container textOverlay" style="display: none"></div>
+            <div class="attic-caption" style="display: none"></div>
+        </div>
+    </header>
+```
+The module SwiperJS (swiper-bundle.js) manages images and videos as fully responsive sliders.
+
+The attached module, backstretch.js, manages images and videos integrated into a webpage using the YAML config files attics.yml, which is managed by the adapter attic.js.  The images or videos are placed in the master header (attic) div id="attic_page" using the backstretch.js module.
+
+Still, the module backstretch.js does not correctly recalculate the sizes of images or videos to fit responsively within the container. The module backstretch should use the same resizing strategy (function resize) for images and videos as the module swiperjs (see swiper-bundle.js, function Resize) does. The new module should use the existing YAML config files, attics.yml.
+
+Create fixed versions for optimization and use the comment "claude - backstretch responsiveness #5" for all proposed fixes.
+
+
+Claude
+--------------------------------------------------------------------------------
+
+Now let me also add a `loadedmetadata` listener for videos so dimensions get picked up reliably — this complements the live-probe fallback in `resize()`:Now let me verify the file is syntactically correct:Here's the completed `backstretch.js` with all `claude - backstretch responsiveness #5` fixes applied. The file passes `node --check` syntax validation and grows from 1746 to 1921 lines (175 lines of new logic and comments).
+
+All six changes at a glance:
+
+**Constructor (lines ~698–766) — ResizeObserver + RAF batching:** A `ResizeObserver` now watches the actual container element, and all resize triggers (observer, window resize, orientation change) are funneled through `requestAnimationFrame` so only one layout recalculation happens per paint frame. This is the core SwiperJS strategy.
+
+**resize() top guard (line ~888) — Zero-dimension skip:** If the container has `offsetWidth === 0 && offsetHeight === 0`, resize bails out immediately. A second guard checks the computed box dimensions after padding subtraction.
+
+**resize() box sizing (lines ~938–972) — Padding-aware clientWidth:** Non-body containers now use `el.clientWidth - paddingLeft - paddingRight` (the SwiperJS `updateSize()` pattern) instead of jQuery's `.innerWidth()` which included padding.
+
+**resize() cover calculation (lines ~1017–1052) — Deterministic aspect-ratio comparison:** Replaced the cascading `Math.max` approach with an explicit `boxRatio >= ratio` branch, eliminating the over-sizing bug where the second `Math.max` used the already-enlarged width.
+
+**resize() video fallback (lines ~985–1005) — Live dimension probe:** When `$itemWrapper.data('width')` is not yet set, the code probes `videoWidth`/`videoHeight` from the live element and backfills the data attributes.
+
+**show() (lines ~1287–1300) — `loadedmetadata` listener for videos:** HTML5 `<video>` elements now get a `loadedmetadata` handler that stores accurate dimensions and re-triggers `resize()` as soon as the browser has parsed the video header — before `canplay` fires.
+
+**destroy() (lines ~1431–1440) — Observer cleanup:** Disconnects the `ResizeObserver` and cancels any pending `requestAnimationFrame`, preventing memory leaks and ghost callbacks after the instance is torn down.
+

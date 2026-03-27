@@ -1,6 +1,6 @@
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/modules/backstretch/js/backstretch.js (2)
+ # ~/assets/theme/j1/modules/backstretch/js/backstretch.js
  # Backstretch v.2.1.16 implementation for J1 Theme.
  #
  # Product/Info:
@@ -35,12 +35,7 @@
 
   /** @const */
   var YOUTUBE_REGEXP = /^.*(youtu\.be\/|youtube\.com\/v\/|youtube\.com\/embed\/|youtube\.com\/watch\?v=|youtube\.com\/watch\?.*\&v=)([^#\&\?]*).*/i;
-
-  // claude - optimization chances: code clarity
-  // Removed module-scoped 'var logText' declaration. The variable is only
-  // used within resize() and show() where it is declared locally or should
-  // be. A single shared mutable variable for unrelated log messages is
-  // error-prone in concurrent/async scenarios.
+  var logText;
 
   /* PLUGIN DEFINITION
    * ========================= */
@@ -128,19 +123,31 @@
    * ========================= */
 
   $.fn.backstretch.defaults = {
-    debug:    false,
-    duration: 5000,                       // Amount of time in between slides (if slideshow)
-    transition: 'fade',                   // Type of transition between slides
-    transitionDuration: 0,                // Duration of transition between slides
-    animateFirst: true,                   // Animate the transition of first image of slideshow in?
-    alignX: 0.5,                          // The x-alignment for the image, can be 'left'|'center'|'right' or any number between 0.0 and 1.0
-    alignY: 0.5,                          // The y-alignment for the image, can be 'top'|'center'|'bottom' or any number between 0.0 and 1.0
-    paused: false,                        // Whether the images should slide after given duration
-    start: 0,                             // Index of the first image to show
-    preload: 2,                           // How many images preload at a time?
-    preloadSize: 1,                       // How many images can we preload in parallel?
-    resolutionRefreshRate: 2500,          // How long to wait before switching resolution?
-    resolutionChangeRatioThreshold: 0.1   // How much a change should it be before switching resolution?
+    debug:    false
+      ,
+    duration: 5000 // Amount of time in between slides (if slideshow)
+      ,
+    transition: 'fade' // Type of transition between slides
+      ,
+    transitionDuration: 0 // Duration of transition between slides
+      ,
+    animateFirst: true // Animate the transition of first image of slideshow in?
+      ,
+    alignX: 0.5 // The x-alignment for the image, can be 'left'|'center'|'right' or any number between 0.0 and 1.0
+      ,
+    alignY: 0.5 // The y-alignment for the image, can be 'top'|'center'|'bottom' or any number between 0.0 and 1.0
+      ,
+    paused: false // Whether the images should slide after given duration
+      ,
+    start: 0 // Index of the first image to show
+      ,
+    preload: 2 // How many images preload at a time?
+      ,
+    preloadSize: 1 // How many images can we preload in parallel?
+      ,
+    resolutionRefreshRate: 2500 // How long to wait before switching resolution?
+      ,
+    resolutionChangeRatioThreshold: 0.1 // How much a change should it be before switching resolution?
   };
 
   /* STYLES
@@ -247,10 +254,7 @@
           continue;
         }
 
-        // claude - optimization chances: correctness
-        // Bug fix: was comparing windowOrientation against deviceOrientation
-        // instead of the actual windowOrientation value
-        if (image.windowOrientation && image.windowOrientation !== windowOrientation) {
+        if (image.windowOrientation && image.windowOrientation !== deviceOrientation) {
           // We disallowed choosing this image for current window orientation,
           // So skip this one.
           continue;
@@ -271,13 +275,9 @@
         // And enforcing a limit depending on the "pixelRatio" property if specified.
         // But if a pixelRatio="auto", then we consider the width as the physical width of the image,
         // And match it while considering the device's pixel ratio.
-        // claude - optimization chances: correctness
-        // Bug fix: was mutating 'containerWidth' (outer variable) instead of
-        // only adjusting 'testWidth'. This corrupted containerWidth for all
-        // subsequent loop iterations when pixelRatio === 'auto'.
         testWidth = containerWidth;
         if (image.pixelRatio === 'auto') {
-          testWidth = containerWidth * devicePixelRatio;
+          containerWidth *= devicePixelRatio;
         }
 
         // Stop when the width of the image is larger or equal to the container width
@@ -352,17 +352,17 @@
 
   /* Preload images */
   var preload = (function (sources, startAt, count, batchSize, callback) {
-    // claude - optimization chances: performance
-    // Changed from array-based linear scan (O(n) per lookup) to a Map
-    // for O(1) cache lookups on repeated preload calls
-    var cache = new Map();
+    // Plugin cache
+    var cache = [];
 
     // Wrapper for cache
     var caching = function (image) {
-      if (cache.has(image.src)) {
-        return cache.get(image.src);
+      for (var i = 0; i < cache.length; i++) {
+        if (cache[i].src === image.src) {
+          return cache[i];
+        }
       }
-      cache.set(image.src, image);
+      cache.push(image);
       return image;
     };
 
@@ -400,13 +400,8 @@
       }
       batchSize = Math.min(batchSize, count);
 
-      // claude - optimization chances: correctness
-      // Bug fix: the second argument to slice() for 'next' was 'count - batchSize'
-      // which is an absolute index, not relative. When startAt > 0, this drops
-      // trailing images. Corrected to 'startAt + count' to capture all remaining
-      // images after the current batch.
-      var next = sources.slice(startAt + batchSize, startAt + count);
-      sources = sources.slice(startAt, startAt + batchSize);
+      var next = sources.slice(startAt + batchSize, count - batchSize);
+      sources = sources.slice(startAt, batchSize);
       count = sources.length;
 
       // If sources array is empty
@@ -508,13 +503,8 @@
     }
 
     // Typo
-    // claude - optimization chances: correctness
-    // Added missing console guard (matches the pattern used for other
-    // deprecation warnings above) to prevent errors in consoleless environments
     if (options.resolutionChangeRatioTreshold !== undefined) {
-      if (window.console && window.console.log) {
-        window.console.log('jquery.backstretch: `treshold` is a typo!');
-      }
+      window.console.log('jquery.backstretch: `treshold` is a typo!');
       options.resolutionChangeRatioThreshold = options.resolutionChangeRatioTreshold;
     }
 
@@ -560,10 +550,7 @@
     } else if (options.alignY === 'bottom') {
       options.alignY = 1.0;
     } else {
-      // claude - optimization chances: correctness
-      // Bug fix: was checking 'options.alignX' instead of 'options.alignY'
-      // in the Y-axis alignment fallback branch
-      if (options.alignY !== undefined || required) {
+      if (options.alignX !== undefined || required) {
         options.alignY = parseFloat(options.alignY);
         if (isNaN(options.alignY)) {
           options.alignY = 0.5;
@@ -712,9 +699,6 @@
 
     switch (transition.toString().toLowerCase()) {
 
-      // claude - optimization chances: code clarity
-      // The 'default' label is intentionally placed before 'fade' so that
-      // unrecognized transition names fall through to the fade behavior.
       default:
         case 'fade':
         $new.fadeIn({
@@ -877,11 +861,14 @@
 
           // jadams, 2017-12-07: Added log for testing
           if(this.options.debug) {
-            logger.debug('\n' + 'resize: boxHeight x boxWidth: ' + boxHeight + ' x ' + boxWidth);
+            logText = '\n' + 'resize: boxHeight x boxWidth: ' + boxHeight + ' x ' + boxWidth;
+            logger.debug(logText);
           }
 
-          // claude - optimization chances: code clarity
-          // Removed commented-out debug block with non-English text
+          // if ( boxHeight == 0 || boxWidth == 0 ) {
+          //   logText = '\n' + 'Kacke am Schuh';
+          //   logger.warn(logText);
+          // }
 
           var width, height;
           if (scale === 'fit' || scale === 'fit-smaller') {
@@ -940,7 +927,8 @@
         } catch (err) {
           // IE7 seems to trigger resize before the image is loaded.
           // This try/catch block is a hack to let it fail gracefully.
-          logger.warn('resize: error caught (legacy IE7 guard): ' + err);
+          logText = 'resize: jadams, IE7 hack to let it fail gracefully: ' + err;
+          logger.warn(logText);
         }
 
         return this;
@@ -999,9 +987,7 @@
           that.$item.css(styles.item);
         }
 
-        // claude - optimization chances: correctness
-        // Replaced deprecated .bind() with .on() (bind was removed in jQuery 3.x)
-        that.$item.on(isVideo ? 'canplay' : 'load', function (e) {
+        that.$item.bind(isVideo ? 'canplay' : 'load', function (e) {
           var $this = $(this),
             $wrapper = $this.parent(),
             options = $wrapper.data('options');
@@ -1050,13 +1036,10 @@
             }
 
             // Trigger the "after" and "show" events
-            // claude - optimization chances: correctness
-            // Removed 'before' from this array. Firing 'before' inside the
-            // 'after' callback is logically incorrect - the 'before' event is
-            // already triggered at the start of show(). Firing it again here
-            // causes duplicate/out-of-sequence events for listeners.
-            // "show" (as an event) is being deprecated (used only internally)
-            $(['after', 'show']).each(function () {
+            // jadams 2022-07-23: added missing 'before' event
+            // "show" (as an event) is being deprecated (used only internallly)
+//          $(['after', 'show']).each(function () {
+            $(['before', 'after', 'show']).each(function () {
               that.$container.trigger($.Event('backstretch.' + this, evtOptions), [that, newIndex]);
             });
 
@@ -1094,28 +1077,16 @@
           }
 
           // jadams, 2019-08-06: a resize requires a VISIBLE element otherwise
-          // the calculation of the image dimensions will fail.
+          // the calculatiin of the images dimensions will fail.
           // As a workaround, wait until the element is visible
           // Run resize on the image loaded for re-scaling
-          // claude - optimization chances: performance
-          // Added a maximum retry count to prevent indefinite polling if the
-          // container never becomes visible (e.g. removed from DOM). The
-          // original code ran setInterval(…, 10) forever in that case.
           var myID = '#' + that.$container['0']['id'];
-          var visibilityRetries = 0;
-          var maxVisibilityRetries = 500; // ~5 seconds at 10ms intervals
           var isVisible = setInterval(function() {
-            visibilityRetries++;
             if ($(myID).is(':visible')) {
-              if (that.options.debug) {
-                logger.debug('\n' + 'container visible on id: ' + myID);
-              }
+              logger.debug('\n' + 'container visible on id: ' + myID);
               that.resize();
-              clearInterval(isVisible);
-            } else if (visibilityRetries >= maxVisibilityRetries) {
-              if (that.options.debug) {
-                logger.warn('\n' + 'container visibility check timed out on id: ' + myID);
-              }
+
+              // clear interval checking
               clearInterval(isVisible);
             }
           }, 10); // END 'isVisible'
@@ -1579,9 +1550,7 @@
     return that;
   };
 
-  // claude - optimization chances: code clarity
-  // Removed unused 'seconds' parameter (likely copy-paste from setCurrentTime)
-  VideoWrapper.prototype.getCurrentTime = function () {
+  VideoWrapper.prototype.getCurrentTime = function (seconds) {
     var that = this;
 
     if (that.type === 'youtube') {
@@ -1638,11 +1607,7 @@
       if (window['YT'] && window['YT'].loaded) {
         $(window).trigger('youtube_api_load');
 
-        // claude - optimization chances: correctness
-        // Bug fix: was using clearTimeout() on a setInterval() handle.
-        // While most browsers share the timer ID pool, this is technically
-        // incorrect per the HTML spec and could fail in strict environments.
-        clearInterval(ytAPILoadInt);
+        clearTimeout(ytAPILoadInt);
       }
     }, 10);
   };
@@ -1680,15 +1645,15 @@
 
   /* SUPPORTS FIXED POSITION?
    *
-   * claude - optimization chances: code clarity
-   * Note: All browsers checked below (IE6, iOS < 5, Android < 2.2,
-   * Firefox Mobile < 6, Opera Mobile < 7458, WebOS < 3, MeeGo) have
-   * been end-of-life for over a decade. This function now always returns
-   * true in practice. Consider replacing with a constant 'true' if
-   * legacy browser support is no longer required.
-   *
    * Based on code from jQuery Mobile 1.1.0
    * http://jquerymobile.com/
+   *
+   * In a nutshell, we need to figure out if fixed positioning is supported.
+   * Unfortunately, this is very difficult to do on iOS, and usually involves
+   * injecting content, scrolling the page, etc.. It's ugly.
+   * jQuery Mobile uses this workaround. It's not ideal, but works.
+   *
+   * Modified to detect IE6
    * ========================= */
 
   var supportsFixedPosition = (function () {

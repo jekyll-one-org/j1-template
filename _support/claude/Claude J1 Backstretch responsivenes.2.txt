@@ -1,0 +1,45 @@
+Prompt
+  https://claude.ai/chat/19c2ed38-9c6e-4ce4-b9b8-ae110436a04e
+--------------------------------------------------------------------------------
+
+The attached module, backstretch.js, manages images and videos integrated into
+a website.
+
+The images or videos placed in the master header (attic) change when the
+browser window is resized (recalculated at that size), but they are not
+recalculated correctly to fit within the resized container.
+
+Can this be fixed to make images and videos fully responsive like Bootstrap
+CSS/JS does? The Bootstrap framework is available in version V5 for the
+website; the master headers (attic) are used for all pages.
+
+
+Create fixed versions for optimization and use the comment
+"claude - backstretch responsiveness #2"  for all proposed fixes.
+
+
+Claude
+--------------------------------------------------------------------------------
+
+Both files pass syntax checks. Now let me produce a summary diff and copy to the output:Everything looks correct. Let me copy the files to the output directory:Here are both fixed files. All changes are marked with `claude - backstretch responsiveness #2`. Here's what was addressed across the 8 fix locations:
+
+**backstretch.js — 6 fixes:**
+
+1. **ResizeObserver on the container** — The original code only listens for `window.resize`, but Bootstrap 5 breakpoints can change the attic container's width (navbar collapse, grid reflow) without the browser window itself resizing. A `ResizeObserver` now catches these container-level size changes and triggers `resize()`, throttled through the same RAF handle.
+
+2. **Throttled `orientationchange` via RAF** — The old handler called `resize()` synchronously, reading dimensions from the stale pre-rotation layout. It now goes through `requestAnimationFrame` like the resize handler, so the browser finishes the orientation reflow before dimensions are read.
+
+3. **`getBoundingClientRect()` replaces jQuery dimension methods** — jQuery's `.width()`/`.innerWidth()` can return cached or stale values inside RAF callbacks, especially after Bootstrap breakpoint transitions. `getBoundingClientRect()` forces a synchronous layout read and always returns current rendered dimensions.
+
+4. **`objectFit: 'none'` enforced on every resize cycle** — Bootstrap 5's `.img-fluid` and responsive utilities apply `object-fit: cover/contain` on `<img>` elements. If Bootstrap's CSS loads after backstretch or classes change dynamically, the initial inline style gets overridden. Re-applying it each cycle prevents the browser's object-fit algorithm from taking over.
+
+5. **Explicit `width`/`height` attributes on `<iframe>` during resize** — YouTube embed iframes don't reliably resize from CSS alone; their embedded content viewport retains the original intrinsic dimensions. Setting the element attributes forces the iframe to match the calculated size.
+
+6. **`ResizeObserver` cleanup in `destroy()`** — Disconnects the observer to prevent callbacks firing on a destroyed instance.
+
+**attic.js — 2 fixes:**
+
+7. **Double-RAF for post-text-insertion resize** — A single `requestAnimationFrame` can fire before the browser completes layout of the newly injected title/tagline HTML. The double-RAF pattern guarantees a full style→layout→paint cycle completes first, so the container height correctly accounts for multi-line text wrapping on narrow viewports.
+
+8. **`document.fonts.ready` resize** — Web font swaps change text metrics and line counts after initial layout. An additional resize fires once all fonts have loaded, preventing the image from being sized for the fallback font's container height.
+

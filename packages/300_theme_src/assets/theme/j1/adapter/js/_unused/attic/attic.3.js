@@ -6,7 +6,7 @@ regenerate:                             true
 
 {% comment %}
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/adapter/js/attic.js
+ # ~/assets/theme/j1/adapter/js/attic.js (3)
  # Liquid template to adapt Backstretch Core functions for
  # all attics (top page headers)
  #
@@ -58,7 +58,7 @@ regenerate:                             true
 
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/adapter/js/attic.js
+ # ~/assets/theme/j1/adapter/js/attic.js (3)
  # JS Adapter for J1 Master Header
  #
  # Product/Info:
@@ -85,6 +85,8 @@ regenerate:                             true
 "use strict";
 j1.adapter.attic = ((j1, window) => {
 
+  const isDev = (j1.env === "development" || j1.env === "dev") ? true : false;
+
   {% comment %} Set global variables
   ------------------------------------------------------------------------------ {% endcomment %}
   var environment   = '{{environment}}';
@@ -97,14 +99,12 @@ j1.adapter.attic = ((j1, window) => {
 
   var _this;
   var logger;
-  var logText;
 
   // date|time
-  var startTime;
-  var endTime;
+  // Removed unused variables 'startTime', 'endTime', 'timeSeconds'
+  // (only startTimeModule and endTimeModule are used)
   var startTimeModule;
   var endTimeModule;
-  var timeSeconds;
 
   // ---------------------------------------------------------------------------
   // main
@@ -154,30 +154,29 @@ j1.adapter.attic = ((j1, window) => {
         var pageState   = $('#no_flicker').css("display");
         var pageVisible = (pageState === 'block') ? true: false;
 
-//      if (pageVisible) {
-        if (true) {
+        if (pageVisible) {
           startTimeModule = Date.now();
 
           _this.setState('started');
-          logger.debug('\n' + 'state: ' + _this.getState());
-          logger.info('\n' + 'module is being initialized');
+          isDev && logger.debug('state: ' + _this.getState());
+          logger.info('module is being initialized');
 
           {% if attic_options.enabled %}
-          logger.info('\n' + 'module initializaton: started');
+          logger.info('module initializaton: started');
 
           if (atticOptions.hide_page_oninit) {
             // hide whole page while attic is being created
             // jadams, 2023-05-12: page visible while loading the attic
             // cause high numbers for cumulative layout shift (CLS)
             //
-            logger.debug('\n' + 'hide attic on initialization');
-            // $('#no_flicker').css('display', 'none');
+            isDev && logger.debug('hide attic on initialization');
+            $('#no_flicker').css('display', 'none');
           }
 
           _this.createAllAttics();
           clearInterval(dependencies_met_page_ready);
           {% else %}
-          logger.warn('\n' + 'found module attics disabled');
+          isDev && logger.warn('found module attics disabled');
           // add additional top space if attics are disabled
           $('#no_flicker').addClass('mt-5');
           clearInterval(dependencies_met_page_ready);
@@ -245,13 +244,13 @@ j1.adapter.attic = ((j1, window) => {
                   bypassCss:                      atticOptions.bypassCss,
                   alwaysTestWindowResolution:     atticOptions.alwaysTestWindowResolution,
                   resolutionRefreshRate:          atticOptions.resolutionRefreshRate,
-                  resolutionChangeRatioThreshold: atticOptions.transition,
+                  resolutionChangeRatioThreshold: atticOptions.resolutionChangeRatioThreshold,
                   isVideo:                        atticOptions.isVideo,
                   loop:                           atticOptions.loop,
                   mute:                           atticOptions.mute
               });
             } else {
-              logger.warn('\n' + 'no attic container found on id: {{attic_id}}');
+              isDev && logger.warn('no attic container found on id: {{attic_id}}');
             }
 
             {% comment %} Add a spinner if configured
@@ -265,7 +264,10 @@ j1.adapter.attic = ((j1, window) => {
 
             // add event for pauseOnHover
             if (atticOptions.pauseOnHover) {
-              $('#attic_id').hover (
+              // Bug fix: was using literal string '#attic_id' instead of the
+              // Liquid-templated '#{{attic_id}}'. The hover event was bound
+              // to a non-existent element, so pauseOnHover never worked.
+              $('#{{attic_id}}').hover (
                 () => {
                   $('#{{attic_id}}').backstretch('pause'); },
                 () => {
@@ -275,11 +277,10 @@ j1.adapter.attic = ((j1, window) => {
 
             // run callback backstretch before
             $(window).on('backstretch.before', (e, instance, index) => {
-              var evt                = e;
-              var inst               = instance;
-              var idx                = index;
+              // Removed unused variables 'evt', 'inst', 'idx' that were
+              // assigned but never referenced in this callback
               var atticOptions       = _this.atticOptions;
-              var textOverlayTitle   = instance.images[index].title
+              var textOverlayTitle   = instance.images[index].title;
               var textOverlayTagline = instance.images[index].tagline;
               var textOverlayHTML;
 
@@ -316,7 +317,7 @@ j1.adapter.attic = ((j1, window) => {
             // SEE:  https://github.com/jquery-backstretch/jquery-backstretch/issues/194
             //
             $(window).on('backstretch.after', (e, instance, index) => {
-              var textOverlayTitle    = instance.images[index].title
+              var textOverlayTitle    = instance.images[index].title;
               var textOverlayTagline  = instance.images[index].tagline;
               var atticOptions        = _this.atticOptions;
               var frontmatterOptions  = _this.frontmatterOptions;
@@ -393,31 +394,32 @@ j1.adapter.attic = ((j1, window) => {
               var title_animate_delay       = !!my_attic.title_animate_delay ? my_attic.title_animate_delay : atticOptions.title_animate_delay;
               var title_animate_duration    = !!my_attic.title_animate_duration ? my_attic.title_animate_duration : atticOptions.title_animate_duration;
 
-              $('#head-title').addClass(title_animate);
-              $('#head-title').addClass(title_animate_delay);
-              $('#head-title').addClass(title_animate_duration);
+              // consolidated repeated jQuery selector lookups into single
+              // chained calls. Each $('#id') triggers a DOM query; chaining
+              // reuses the same jQuery object.
+              $('#head-title').addClass(title_animate)
+                .addClass(title_animate_delay)
+                .addClass(title_animate_duration);
 
               // collect individual tagline options
               var tagline_animate           = !!my_attic.tagline_animate ? my_attic.tagline_animate : atticOptions.tagline_animate;
               var tagline_animate_delay     = !!my_attic.tagline_animate_delay ? my_attic.tagline_animate_delay : atticOptions.tagline_animate_delay;
               var tagline_animate_duration  = !!my_attic.tagline_animate_duration ? my_attic.tagline_animate_duration : atticOptions.tagline_animate_duration;
 
-              $('#head-tagline').addClass(tagline_animate);
-              $('#head-tagline').addClass(tagline_animate_delay);
-              $('#head-tagline').addClass(tagline_animate_duration);
+              $('#head-tagline').addClass(tagline_animate)
+                .addClass(tagline_animate_delay)
+                .addClass(tagline_animate_duration);
 
               // show configured textOverlay
-              $('.textOverlay').show();
-              $('.textOverlay').css('opacity', '1');
+              $('.textOverlay').show().css('opacity', '1');
 
               // jadams, 2022-08-19: show a badge only if configured
               if (typeof instance.images[index].badge != 'undefined') {
-                $('.attic-caption').show();
-                $('.attic-caption').css('opacity', '1');
+                $('.attic-caption').show().css('opacity', '1');
               }
 
               // show page if attic finalized
-              //$('#no_flicker').css('display', 'block');
+              $('#no_flicker').css('display', 'block');
 
               // jadams, 2022-08-09:
               // resize the (background-)image to make sure the 'attic'
@@ -425,15 +427,63 @@ j1.adapter.attic = ((j1, window) => {
               // expands 'multiline' on small viewports
               // e.g. on mobile devices
               //
-              // $('#{{attic_id}}').backstretch('resize');
+              // claude - backstretch responsiveness #2
+              // Replaced the single requestAnimationFrame with a
+              // double-nested RAF ("double-RAF" pattern). After the
+              // title/tagline HTML is injected via .html() and made
+              // visible via .show(), the browser schedules a style
+              // recalculation and layout pass — but this work may not
+              // complete before the FIRST animation frame fires. A
+              // single RAF can therefore still read pre-text container
+              // dimensions, causing backstretch to size the image for
+              // the old (shorter) container height. The double-RAF
+              // guarantees that at least one full rendering
+              // cycle (style → layout → paint → composite) has
+              // completed before resize() reads the container, so
+              // the height correctly accounts for multi-line
+              // title/tagline text, especially on narrow viewports
+              // and mobile devices where text wrapping is common.
+              // This also helps with Bootstrap 5 responsive typography
+              // utilities (e.g. fs-* classes) that may change font
+              // sizes at breakpoints, further altering line counts
+              // and container height.
+              requestAnimationFrame(function() {
+                requestAnimationFrame(function() {
+                  $('#{{attic_id}}').backstretch('resize');
+                });
+              });
+
+              // claude - backstretch responsiveness #2
+              // Trigger an additional resize after web fonts finish
+              // loading. Browsers initially render text with a fallback
+              // (system) font and swap to the web font once it has
+              // downloaded (FOUT — Flash of Unstyled Text). The web font
+              // typically has different metrics (ascenders, descenders,
+              // advance widths) than the fallback, which changes the
+              // number of lines the title/tagline text wraps to and
+              // therefore the container height. Without this handler,
+              // the backstretch image remains sized for the
+              // fallback-font container height, and after the font swap
+              // the container grows (or shrinks) while the image does
+              // not, causing visible overflow or a gap below the image.
+              // document.fonts.ready is supported in all modern browsers
+              // and resolves once all queued font loads have completed
+              // (or immediately if no fonts are loading).
+              if (document.fonts && document.fonts.ready) {
+                document.fonts.ready.then(function() {
+                  requestAnimationFrame(function() {
+                    $('#{{attic_id}}').backstretch('resize');
+                  });
+                });
+              }
 
              _this.setState('finished');
-             logger.debug('\n' + 'state: ' + _this.getState());
-             logger.info('\n' + 'initialize attic on id {{attic_id}}: finished');
-             logger.info('\n' + 'module initializaton: finished');
+             isDev && logger.debug('state: ' + _this.getState());
+             logger.info('initialize attic on id {{attic_id}}: finished');
+             logger.info('module initializaton: finished');
 
              endTimeModule = Date.now();
-             logger.info('\n' + 'module initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
+             logger.info('module initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
             }); // END callback backstretch.after
           } // END if attic_id exists
 
@@ -450,7 +500,6 @@ j1.adapter.attic = ((j1, window) => {
                 {% assign text_emphasis         = item.attic.text_emphasis %}
                 {% assign padding_top           = item.attic.padding_top %}
                 {% assign padding_bottom        = item.attic.padding_bottom %}
-                {% assign padding_bottom        = item.attic.padding_bottom %}
                 {% assign margin_bottom         = item.attic.margin_bottom %}
 
                 {% if item.attic.title.size != 1 %}
@@ -459,6 +508,20 @@ j1.adapter.attic = ((j1, window) => {
                 {% assign title_color           = item.attic.title.color %}
                 {% assign title_animate         = item.attic.title.animate %}
                 {% assign title_align           = item.attic.title.align %}
+
+                {% comment %}
+                   Added missing tagline property assignments. These were
+                   referenced in atticOptionsHeader below but never assigned
+                   from the item config, so per-attic tagline overrides from
+                   the YAML header config were silently ignored.
+                {% endcomment %}
+                {% if item.attic.tagline.size != 1 %}
+                {% assign tagline_size          = item.attic.tagline.size %}
+                {% endif %}
+
+                {% assign tagline_color         = item.attic.tagline.color %}
+                {% assign tagline_animate       = item.attic.tagline.animate %}
+                {% assign tagline_align         = item.attic.tagline.align %}
 
                 {% assign background_color_1    = item.attic.background_color_1 %}
                 {% assign background_color_2    = item.attic.background_color_2 %}
@@ -479,7 +542,6 @@ j1.adapter.attic = ((j1, window) => {
                 {% assign transition            = item.attic.transition %}
                 {% assign duration              = item.attic.duration %}
                 {% assign transitionDuration    = item.attic.transitionDuration %}
-                {% assign animateFirst          = item.attic.animateFirst %}
                 {% assign sound                 = item.attic.sound %}
 
                 // Create and json object for HEADER options taken from
@@ -511,7 +573,11 @@ j1.adapter.attic = ((j1, window) => {
                 {% if type == 'video' %}
                   {% assign isVideo = true %}
                   {% if sound %} {% assign mute = false %} {% else %} {% assign mute = true %} {% endif %}
-                  {% if loop %}  {% assign loop = true %}  {% else %} {% assign loop = true %} {% endif %}
+                  {% comment %}
+                     Bug fix: both branches set loop=true, making videos always
+                     loop. The else branch must set loop=false to honor config. 
+                  {% endcomment %}
+                  {% if loop %}  {% assign loop = true %}  {% else %} {% assign loop = false %} {% endif %}
                 {% endif %}
 
                 // Create an json object for BACKSTRETCH options taken from
@@ -601,12 +667,17 @@ j1.adapter.attic = ((j1, window) => {
             if (atticOptions.r_text === 'enabled') { $('#{{attic_id}}').addClass('r-text'); }
             var raised_level = 'raised-z' +atticOptions.raised_level;
 
+            // chained repeated jQuery selector lookups
             $('#{{attic_id}}').addClass(raised_level);
-            $('#head-title').addClass(atticOptions.title_animate);
-            $('#head-title').addClass(atticOptions.title_animate_delay);
-            $('#head-title').addClass(atticOptions.title_animate_duration);
-            $('#head-tagline').addClass(atticOptions.tagline_animate);
-            $('#head-tagline').addClass(atticOptions.tagline_animate_duration);
+            $('#head-title').addClass(atticOptions.title_animate)
+              .addClass(atticOptions.title_animate_delay)
+              .addClass(atticOptions.title_animate_duration);
+ 
+            // Added missing tagline_animate_delay class (was applied in
+            // backstretch.after callback but omitted here during initial setup)
+            $('#head-tagline').addClass(atticOptions.tagline_animate)
+              .addClass(atticOptions.tagline_animate_delay)
+              .addClass(atticOptions.tagline_animate_duration);
 
             var text_emphasis = 'text-emphasis-' +atticOptions.text_emphasis;
             $('#head-title-text').addClass(text_emphasis);
@@ -624,12 +695,16 @@ j1.adapter.attic = ((j1, window) => {
 
             // initialze header background gradient
             //
+            // Removed obsolete vendor-prefixed gradient syntax:
+            // - '-webkit-gradient()' (Chrome < 10, Safari < 5.1)
+            // - '-o-linear-gradient()' (Opera < 12.1)
+            // - 'filter: progid:DXImageTransform' (IE 6-9)
+            // The standard 'linear-gradient' and '-webkit-linear-gradient'
+            // cover all currently supported browsers.
+            //
             attic_style += '<style> .attic { ';
-            attic_style += 'background-image: -webkit-gradient(linear, left top, left bottom, from(' +atticOptions.background_color_1 + '), to(' +atticOptions.background_color_2+ ')) !important;';
             attic_style += 'background-image: -webkit-linear-gradient(top, ' +atticOptions.background_color_1 + ' 0%, ' +atticOptions.background_color_2 + ' 100%) !important;';
-            attic_style += 'background-image: -o-linear-gradient(top, ' +atticOptions.background_color_1 + ' 0%, ' +atticOptions.background_color_2 + ' 100%) !important;';
             attic_style += 'background-image: linear-gradient(to bottom, ' +atticOptions.background_color_1 + ' 0%, ' +atticOptions.background_color_2 + ' 100%) !important;';
-            attic_style += 'filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="' +atticOptions.background_color_1 + '", endColorstr="' +atticOptions.background_color_2 + '", GradientType=0) !important;';
             attic_style += '} </style>';
             $('head').append(attic_style);
 
@@ -647,60 +722,63 @@ j1.adapter.attic = ((j1, window) => {
             if (typeof frontmatterOptions.margin_bottom != 'undefined')   { margin_bottom  = frontmatterOptions.margin_bottom; }
 
             attic_style = '';
-            attic_style = '<style> .attic { padding-top: ' +padding_top+ 'px; padding-bottom: ' +padding_bottom+ 'px; margin-bottom: ' +margin_bottom+ 'px; text-shadow: 0 1px 0 rgba(0,0,0,.1); </style>';
-            $('head').append(attic_style);
+            attic_style = '<style> .attic { padding-top: ' +padding_top+ 'px; padding-bottom: ' +padding_bottom+ 'px; margin-bottom: ' +margin_bottom+ 'px; text-shadow: 0 1px 0 rgba(0,0,0,.1); } </style>';
 
-            $('head').append('<style> .attic .head-title h2 { color: ' +atticOptions.title_color+ ';font-size: ' +atticOptions.title_size+ ' !important; text-align: ' +atticOptions.title_align+ ';} </style>');
-            $('head').append('<style> .attic .head-tagline h3 { color: ' +atticOptions.tagline_color+ ';font-size: ' +atticOptions.tagline_size+ ' !important; text-align: ' +atticOptions.tagline_align+ '; } </style>');
+            // consolidated multiple $('head').append() calls into a single DOM insertion.
+            $('head').append(
+              attic_style
+              + '<style> .attic .head-title h2 { color: ' +atticOptions.title_color+ ';font-size: ' +atticOptions.title_size+ ' !important; text-align: ' +atticOptions.title_align+ ';} </style>'
+              + '<style> .attic .head-tagline h3 { color: ' +atticOptions.tagline_color+ ';font-size: ' +atticOptions.tagline_size+ ' !important; text-align: ' +atticOptions.tagline_align+ '; } </style>'
+            );
 
             // Add opacity to ALL header (backstretch) images
             // See: https://tympanus.net/codrops/2013/11/07/css-overlay-techniques/
             //
             var item_opacity        = !!my_attic.opacity ? my_attic.opacity : atticOptions.opacity;
-            var backstretch_opacity = '<style> .backstretch-item { opacity: ' +item_opacity+ '; </style>';
+            var backstretch_opacity = '<style> .backstretch-item { opacity: ' +item_opacity+ '; } </style>';
             $('head').append(backstretch_opacity);
 
             _this.setState('initialized');
-            logger.debug('\n' + 'state: ' + _this.getState());
+            isDev && logger.debug('state: ' + _this.getState());
 
             // start RUNNER on page 'ready'|module state 'initialized'
             //
             // $(() => {
             //   var dependencies_met_attic_ready = setInterval (() => {
             //     if (_this.getState() === 'initialized') {
-            //       logger.info('\n' + 'initialize attic on id {{attic_id}}: started');
+            //       logger.info('initialize attic on id {{attic_id}}: started');
             //       {{attic_id}}_runner (atticOptions);
             //       clearInterval(dependencies_met_attic_ready);
             //     }
             //   }, 10);
             // });
 
-            logger.info('\n' + 'initialize attic on id {{attic_id}}: started');
-            {attic_id}}_runner (atticOptions);
+            logger.info('initialize attic on id {{attic_id}}: started');
+            {{attic_id}}_runner (atticOptions);
 
           } // END apply CSS styles|start ATTIC RUNNER
 
         {% else %}
           {% assign attic_id = item.attic.id %}
           _this.setState('finished');
-          logger.debug('\n' + 'state: ' + _this.getState());
-          logger.info('\n' + 'initialize attic on id {{attic_id}}: finished');
-          logger.info('\n' + 'module initializaton: finished');
+          isDev && logger.debug('state: ' + _this.getState());
+          logger.info('initialize attic on id {{attic_id}}: finished');
+          logger.info('module initializaton: finished');
 
           // add additional top space if attic disabled
           //
           $('#no_flicker').addClass('mt-3');
 
-          logger.warn('\n' + 'attic on id {{attic_id}}: disabled');
-          // $('#no_flicker').css('display', 'block');
+          isDev && logger.warn('attic on id {{attic_id}}: disabled');
+          $('#no_flicker').css('display', 'block');
         {% endif %} // END if header enabled
       {% endfor %} // END for item in header_config.attics
 
       // NO header found in page
       // if ($('#no_header').length) {
       //   _this.setState('completed');
-      //   logger.debug('\n' + 'state: ' + _this.getState());
-      //   logger.warn('\n' + 'no header configured or found in page');
+      //   isDev && logger.debug('state: ' + _this.getState());
+      //   isDev && logger.warn('no header configured or found in page');
       // }
 
       return true;
@@ -714,8 +792,8 @@ j1.adapter.attic = ((j1, window) => {
     messageHandler: (sender, message) => {
       var json_message = JSON.stringify(message, undefined, 2);
 
-      logText = '\n' + 'received message from ' + sender + ': ' + json_message;
-      logger.debug(logText);
+      logText = 'received message from ' + sender + ': ' + json_message;
+      isDev && logger.debug(logText);
 
       // -----------------------------------------------------------------------
       //  process commands|actions
@@ -726,7 +804,7 @@ j1.adapter.attic = ((j1, window) => {
         // place handling of command|action here
         //
 
-        logger.info('\n' + message.text);
+        logger.info(message.text);
       }
 
       //

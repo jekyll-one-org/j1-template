@@ -1,5 +1,5 @@
 /*!
- * Masonry PACKAGED v4.2.2  (1)
+ * Masonry PACKAGED v4.2.2
  * Cascading grid layout library
  * https://masonry.desandro.com
  * MIT License
@@ -237,10 +237,8 @@ proto.emitEvent = function( eventName, args ) {
   // once stuff
   var onceListeners = this._onceEvents && this._onceEvents[ eventName ];
 
-  // claude - optimization chances #5
-  // Fix: added missing semicolon after variable declaration
   for ( var i=0; i < listeners.length; i++ ) {
-    var listener = listeners[i];
+    var listener = listeners[i]
     var isOnce = onceListeners && onceListeners[ listener ];
     if ( isOnce ) {
       // remove listener
@@ -366,9 +364,7 @@ var isBoxSizeOuter;
 
 /**
  * setup
- * claude - optimization chances #5
- * Fix: corrected typo "isBoxSizerOuter" → "isBoxSizeOuter"
- * check isBoxSizeOuter
+ * check isBoxSizerOuter
  * do on first getSize() rather than on page load for Firefox bug
  */
 function setup() {
@@ -406,9 +402,7 @@ function setup() {
 function getSize( elem ) {
   setup();
 
-  // claude - optimization chances #5
-  // Fix: corrected typo "querySeletor" → "querySelector"
-  // use querySelector if elem is string
+  // use querySeletor if elem is string
   if ( typeof elem == 'string' ) {
     elem = document.querySelector( elem );
   }
@@ -503,18 +497,25 @@ return getSize;
 }( window, function factory() {
   'use strict';
 
-  // claude - optimization chances #5
-  // Fix: Element.prototype.matches is universally supported in all
-  // modern browsers. Removed obsolete vendor-prefix fallback chain
-  // (webkitMatchesSelector, mozMatchesSelector, etc.) which was dead
-  // code that added unnecessary complexity and a startup cost
   var matchesMethod = ( function() {
     var ElemProto = window.Element.prototype;
+    // check for the standard method name first
     if ( ElemProto.matches ) {
       return 'matches';
     }
+    // check un-prefixed
     if ( ElemProto.matchesSelector ) {
       return 'matchesSelector';
+    }
+    // check vendor prefixes
+    var prefixes = [ 'webkit', 'moz', 'ms', 'o' ];
+
+    for ( var i=0; i < prefixes.length; i++ ) {
+      var prefix = prefixes[i];
+      var method = prefix + 'MatchesSelector';
+      if ( ElemProto[ method ] ) {
+        return method;
+      }
     }
   })();
 
@@ -801,13 +802,11 @@ return utils;
 
 // ----- helpers ----- //
 
-// claude - optimization chances #5
-// Fix: removed unnecessary `prop = null` — variable goes out of scope
-// when the function returns, so nullifying serves no purpose
 function isEmptyObj( obj ) {
   for ( var prop in obj ) {
     return false;
   }
+  prop = null;
   return true;
 }
 
@@ -1001,9 +1000,7 @@ proto._transitionTo = function( x, y ) {
 };
 
 proto.getTranslate = function( x, y ) {
-  // claude - optimization chances #5
-  // Fix: corrected typo "cooridinates" → "coordinates"
-  // flip coordinates if origin on right or bottom
+  // flip cooridinates if origin on right or bottom
   var isOriginLeft = this.layout._getOption('originLeft');
   var isOriginTop = this.layout._getOption('originTop');
   x = isOriginLeft ? x : -x;
@@ -1074,12 +1071,10 @@ proto.transition = function( args ) {
   // set from styles
   if ( args.from ) {
     this.css( args.from );
-    // claude - optimization chances #5
-    // Fix: use void to force layout reflow without creating an unused
-    // variable. Reading offsetHeight triggers a synchronous reflow;
-    // the old code assigned it to `h` then set `h = null` which was
-    // a workaround for JSHint's "unused var" warning
-    void this.element.offsetHeight;
+    // force redraw. http://blog.alexmaccaw.com/css-transitions
+    var h = this.element.offsetHeight;
+    // hack for JSHint to hush about unused var
+    h = null;
   }
   // enable transition
   this.enableTransition( args.to );
@@ -1382,9 +1377,7 @@ var noop = function() {};
 
 // globally unique identifiers
 var GUID = 0;
-// claude - optimization chances #5
-// Fix: corrected typo "intances" → "instances"
-// internal store of all Outlayer instances
+// internal store of all Outlayer intances
 var instances = {};
 
 
@@ -1825,9 +1818,7 @@ proto.dispatchEvent = function( type, event, args ) {
 
 /**
  * keep item in collection, but do not lay it out
- * claude - optimization chances #5
- * Fix: corrected misleading comment — ignored items ARE skipped
- * in layout by _getItemsForLayout which filters out isIgnored items
+ * ignored items do not get skipped in layout
  * @param {Element} elem
  */
 proto.ignore = function( elem ) {
@@ -2245,10 +2236,8 @@ var msUnits = {
   s: 1000
 };
 
-// claude - optimization chances #5
-// Fix: corrected conversion example — 0.4 * 1000 = 400, not 40
 // munge time-like parameter into millisecond number
-// '0.4s' -> 400
+// '0.4s' -> 40
 function getMilliseconds( time ) {
   if ( typeof time == 'number' ) {
     return time;
@@ -2324,11 +2313,11 @@ return Outlayer;
     this._getMeasurement( 'gutter', 'outerWidth' );
     this.measureColumns();
 
-    // claude - optimization chances #5
-    // Fix: replaced manual for-loop with Array(n).fill(0) for
-    // clearer intent and single-allocation initialization
     // reset column Y
-    this.colYs = new Array( this.cols ).fill( 0 );
+    this.colYs = [];
+    for ( var i=0; i < this.cols; i++ ) {
+      this.colYs.push( 0 );
+    }
 
     this.maxY = 0;
     this.horizontalColIndex = 0;
@@ -2489,16 +2478,11 @@ return Outlayer;
     return size;
   };
 
-  // claude - optimization chances #5
-  // Fix: off-by-one in the unused-columns loop. The original
-  // `while ( --i )` stops when i reaches 0 (falsy), so colYs[0]
-  // is never inspected. Changed to `while ( --i >= 0 )` so that
-  // column 0 is also checked for content
   proto._getContainerFitWidth = function() {
     var unusedCols = 0;
     // count unused columns
     var i = this.cols;
-    while ( --i >= 0 ) {
+    while ( --i ) {
       if ( this.colYs[i] !== 0 ) {
         break;
       }
