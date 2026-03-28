@@ -39,7 +39,7 @@ code, pre {
   color: #212121;
   font-weight: 500;
   padding: 0.125em 0.275em 0.125em 0.275em;
-  word-break: break-word !important;
+  word-break: break-word;
 }
 
 /* -----------------------------------------------------------------------------
@@ -56,13 +56,14 @@ code, pre {
   ------------------------------------------------------------------------------ */
 
 .input-section {
-  border: 2px dashed var(--md-gray-400) !important;
+  border: 2px dashed var(--md-gray-400);
   padding: 28px;
 }
 
 .input-wrapper {
   background: transparent;
   box-sizing: border-box;
+  border-radius: 0px;
   display: flex;
   flex-wrap: wrap;
   margin-bottom: 1.5rem;
@@ -82,7 +83,7 @@ code, pre {
 
 /* align content to the left */
 .input-container:has(#serverPlaylistSelect) {
-  justify-content: flex-start !important;
+  justify-content: flex-start;
 }
 
 input {
@@ -118,8 +119,8 @@ input {
 input:-webkit-autofill,
 select:-webkit-autofill {
   animation-name: onAutoFillStart;
-  -webkit-box-shadow: 0 0 0 1000px var(--input-background) inset !important;
-  -webkit-text-fill-color: var(--text-color) !important;
+  -webkit-box-shadow: 0 0 0 1000px var(--input-background) inset;
+  -webkit-text-fill-color: var(--text-color);
   transition: background-color 5000s ease-in-out 0s;
 }
 
@@ -131,8 +132,8 @@ select:not(:-webkit-autofill) {
 input:autofill,
 select:autofill {
   animation-name: onAutoFillStart;
-  background-color: var(--input-background) !important;
-  color: var(--text-color) !important;
+  background-color: var(--input-background);
+  color: var(--text-color);
 }
 
 /* input elements #3
@@ -140,14 +141,14 @@ select:autofill {
    Explicit background overrides for ALL input/select elements so the
    browser's user-agent autofill background (Chrome's
    :-internal-autofill-selected, Firefox's :-moz-autofill, etc.) is
-   suppressed.  #videoUrlInput already had "background: none !important";
+   suppressed.  #videoUrlInput already had "background: none";
    the same treatment is now applied to #serverPlaylistSelect and
    #playlistSearchInput.
   ------------------------------------------------------------------------------ */
 
 #serverPlaylistSelect,
 #playlistSearchInput {
-  background: none !important;
+  background: none;
 }
 
 /* input elements #4
@@ -170,13 +171,13 @@ input[type="tel"],
 input[type="number"],
 input:not([type]),
 select {
-  background-color: var(--card-background) !important;
+  background-color: var(--card-background);
 }
 
 input[data-value-filled="true"],
 select[data-value-filled="true"] {
-  background-color: var(--input-background) !important;
-  color: var(--text-color) !important;
+  background-color: var(--input-background);
+  color: var(--text-color);
 }
 
 /* -----------------------------------------------------------------------------
@@ -184,7 +185,7 @@ select[data-value-filled="true"] {
   ------------------------------------------------------------------------------ */
 
 #videoUrlInput {
-  background: none !important;
+  background: none;
   border: 1px solid var(--border-color);
   border-radius: 0px;
   padding: .8rem 1rem .8rem 6.5rem;
@@ -192,7 +193,7 @@ select[data-value-filled="true"] {
 }
 
 /* claude - optimize css 2: removed redundant "background: none"
-   (already set with !important in the combined
+   (already set with in the combined
     #serverPlaylistSelect, #playlistSearchInput rule above)            */
 #serverPlaylistSelect {
   border: 1px solid var(--border-color);
@@ -215,7 +216,7 @@ select[data-value-filled="true"] {
 }
 
 /* claude - optimize css 2: removed redundant "background: none"
-   (already set with !important in the combined
+   (already set with in the combined
     #serverPlaylistSelect, #playlistSearchInput rule above)            */
 #playlistSearchInput {
   border: 1px solid var(--border-color);
@@ -264,7 +265,7 @@ select[data-value-filled="true"] {
 .paste-btn-inside:hover {
   background-color: var(--bs-primary);
   box-shadow: 0 2px 8px var(--shadow-color);
-  color: var(--md-gray-900) !important;
+  color: var(--md-gray-900);
 }
 
 .select-btn-inside {
@@ -294,7 +295,7 @@ select[data-value-filled="true"] {
 .select-btn-inside:hover {
   background-color: var(--bs-primary);
   box-shadow: 0 2px 8px var(--shadow-color);
-  color: var(--md-gray-900) !important;
+  color: var(--md-gray-900);
 }
 
 .search-icon-inside {
@@ -491,7 +492,7 @@ select[data-value-filled="true"] {
 .empty-player-overlay {
   align-items: center;
   background: var(--bs-gray-100);
-  border: 2px dashed var(--bs-gray-400) !important;
+  border: 2px dashed var(--bs-gray-400);
   bottom: 0;
   box-shadow: 0 4px 6px var(--shadow-color);
   display: flex;
@@ -537,9 +538,9 @@ select[data-value-filled="true"] {
 }
 
 .playlist.list-mode {
-  display: flex !important;
+  display: flex;
   flex-direction: column;
-  grid-template-columns: none !important;
+  grid-template-columns: none;
 }
 
 .playlist.card-mode {
@@ -551,11 +552,11 @@ select[data-value-filled="true"] {
 /* Medium devices (tablets, less than 992px) */
 @media (max-width: 991.98px) {
   .playlist.card-mode {
-  grid-template-columns: repeat(1, 1fr) !important;
+  grid-template-columns: repeat(1, 1fr);
 }
 
   #playlistModeSwitch {
-  display: none !important;
+  display: none;
 }
 }
 
@@ -1143,6 +1144,6 @@ select[data-value-filled="true"] {
   color: white;
   font-size: 12px;
   font-weight: bold;
-  margin-bottom: 3rem !important;
+  margin-bottom: 3rem;
   padding: 4px 8px;
 }

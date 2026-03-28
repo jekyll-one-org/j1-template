@@ -1,16 +1,22 @@
-/*!
- * Masonry PACKAGED v4.2.2  (1)
- * Cascading grid layout library
- * https://masonry.desandro.com
- * MIT License
- * by David DeSandro
- */
-
-/**
- * Bridget makes jQuery widgets
- * v2.0.1
- * MIT license
- */
+/*
+ # -----------------------------------------------------------------------------
+ # ~/assets/theme/j1/modules/masonry/js/masonry.js (1)
+ # Masonry v4.2.2 (PACKAGED)
+ # Cascading grid layout library
+ #
+ # Product/Info:
+ # https://jekyll.one
+ # https://github.com/desandro/masonry
+ #
+ # Copyright (C) 2022-2026 David DeSandro
+ # Copyright (C) 2023-2026 Juergen Adams
+ #
+ # J1 Template is licensed under the MIT License.
+ # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE
+ # Masonry is licensed under the MIT License.
+ # See: https://desandro.mit-license.org/
+ # -----------------------------------------------------------------------------
+*/
 
 /* jshint browser: true, strict: true, undef: true, unused: true */
 
@@ -39,7 +45,7 @@
 }( window, function factory( window, jQuery ) {
 'use strict';
 
-// ----- utils ----- //
+// ----- utils ----------------------------------------------------------------- //
 
 var arraySlice = Array.prototype.slice;
 
@@ -51,7 +57,7 @@ var logError = typeof console == 'undefined' ? function() {} :
     console.error( message );
   };
 
-// ----- jQueryBridget ----- //
+// ----- jQueryBridget --------------------------------------------------------- //
 
 function jQueryBridget( namespace, PluginClass, $ ) {
   $ = $ || jQuery || window.jQuery;
@@ -132,7 +138,7 @@ function jQueryBridget( namespace, PluginClass, $ ) {
 
 }
 
-// ----- updateJQuery ----- //
+// ----- updateJQuery ---------------------------------------------------------- //
 
 // set $.bridget for v1 backwards compatibility
 function updateJQuery( $ ) {
@@ -143,8 +149,6 @@ function updateJQuery( $ ) {
 }
 
 updateJQuery( jQuery || window.jQuery );
-
-// -----  ----- //
 
 return jQueryBridget;
 
@@ -175,9 +179,7 @@ return jQueryBridget;
 }( typeof window != 'undefined' ? window : this, function() {
 
 
-
 function EvEmitter() {}
-
 var proto = EvEmitter.prototype;
 
 proto.on = function( eventName, listener ) {
@@ -237,8 +239,6 @@ proto.emitEvent = function( eventName, args ) {
   // once stuff
   var onceListeners = this._onceEvents && this._onceEvents[ eventName ];
 
-  // claude - optimization chances #5
-  // Fix: added missing semicolon after variable declaration
   for ( var i=0; i < listeners.length; i++ ) {
     var listener = listeners[i];
     var isOnce = onceListeners && onceListeners[ listener ];
@@ -290,7 +290,7 @@ return EvEmitter;
 })( window, function factory() {
 'use strict';
 
-// -------------------------- helpers -------------------------- //
+// -------------------------- helpers ------------------------------------------ //
 
 // get a number from a string, not a percentage
 function getStyleSize( value ) {
@@ -307,7 +307,7 @@ var logError = typeof console == 'undefined' ? noop :
     console.error( message );
   };
 
-// -------------------------- measurements -------------------------- //
+// -------------------------- measurements ------------------------------------- //
 
 var measurements = [
   'paddingLeft',
@@ -342,7 +342,7 @@ function getZeroSize() {
   return size;
 }
 
-// -------------------------- getStyle -------------------------- //
+// -------------------------- getStyle ----------------------------------------- //
 
 /**
  * getStyle, get style of element, check for Firefox bug
@@ -358,7 +358,7 @@ function getStyle( elem ) {
   return style;
 }
 
-// -------------------------- setup -------------------------- //
+// -------------------------- setup -------------------------------------------- //
 
 var isSetup = false;
 
@@ -366,8 +366,6 @@ var isBoxSizeOuter;
 
 /**
  * setup
- * claude - optimization chances #5
- * Fix: corrected typo "isBoxSizerOuter" → "isBoxSizeOuter"
  * check isBoxSizeOuter
  * do on first getSize() rather than on page load for Firefox bug
  */
@@ -378,7 +376,7 @@ function setup() {
   }
   isSetup = true;
 
-  // -------------------------- box sizing -------------------------- //
+  // -------------------------- box sizing ------------------------------------- //
 
   /**
    * Chrome & Safari measure the outer-width on style.width on border-box elems
@@ -401,13 +399,11 @@ function setup() {
   body.removeChild( div );
 }
 
-// -------------------------- getSize -------------------------- //
+// -------------------------- getSize ------------------------------------------ //
 
 function getSize( elem ) {
   setup();
 
-  // claude - optimization chances #5
-  // Fix: corrected typo "querySeletor" → "querySelector"
   // use querySelector if elem is string
   if ( typeof elem == 'string' ) {
     elem = document.querySelector( elem );
@@ -503,7 +499,6 @@ return getSize;
 }( window, function factory() {
   'use strict';
 
-  // claude - optimization chances #5
   // Fix: Element.prototype.matches is universally supported in all
   // modern browsers. Removed obsolete vendor-prefix fallback chain
   // (webkitMatchesSelector, mozMatchesSelector, etc.) which was dead
@@ -562,7 +557,7 @@ return getSize;
 
 var utils = {};
 
-// ----- extend ----- //
+// ----- extend ---------------------------------------------------------------- //
 
 // extends objects
 utils.extend = function( a, b ) {
@@ -572,13 +567,13 @@ utils.extend = function( a, b ) {
   return a;
 };
 
-// ----- modulo ----- //
+// ----- modulo ---------------------------------------------------------------- //
 
 utils.modulo = function( num, div ) {
   return ( ( num % div ) + div ) % div;
 };
 
-// ----- makeArray ----- //
+// ----- makeArray ------------------------------------------------------------- //
 
 var arraySlice = Array.prototype.slice;
 
@@ -603,7 +598,7 @@ utils.makeArray = function( obj ) {
   return [ obj ];
 };
 
-// ----- removeFrom ----- //
+// ----- removeFrom ------------------------------------------------------------ //
 
 utils.removeFrom = function( ary, obj ) {
   var index = ary.indexOf( obj );
@@ -612,7 +607,7 @@ utils.removeFrom = function( ary, obj ) {
   }
 };
 
-// ----- getParent ----- //
+// ----- getParent ------------------------------------------------------------- //
 
 utils.getParent = function( elem, selector ) {
   while ( elem.parentNode && elem != document.body ) {
@@ -623,7 +618,7 @@ utils.getParent = function( elem, selector ) {
   }
 };
 
-// ----- getQueryElement ----- //
+// ----- getQueryElement ------------------------------------------------------- //
 
 // use element as selector string
 utils.getQueryElement = function( elem ) {
@@ -633,7 +628,7 @@ utils.getQueryElement = function( elem ) {
   return elem;
 };
 
-// ----- handleEvent ----- //
+// ----- handleEvent ----------------------------------------------------------- //
 
 // enable .ontype to trigger from .addEventListener( elem, 'type' )
 utils.handleEvent = function( event ) {
@@ -643,7 +638,7 @@ utils.handleEvent = function( event ) {
   }
 };
 
-// ----- filterFindElements ----- //
+// ----- filterFindElements ---------------------------------------------------- //
 
 utils.filterFindElements = function( elems, selector ) {
   // make array of elems
@@ -676,7 +671,7 @@ utils.filterFindElements = function( elems, selector ) {
   return ffElems;
 };
 
-// ----- debounceMethod ----- //
+// ----- debounceMethod -------------------------------------------------------- //
 
 utils.debounceMethod = function( _class, methodName, threshold ) {
   threshold = threshold || 100;
@@ -697,7 +692,7 @@ utils.debounceMethod = function( _class, methodName, threshold ) {
   };
 };
 
-// ----- docReady ----- //
+// ----- docReady -------------------------------------------------------------- //
 
 utils.docReady = function( callback ) {
   var readyState = document.readyState;
@@ -709,7 +704,7 @@ utils.docReady = function( callback ) {
   }
 };
 
-// ----- htmlInit ----- //
+// ----- htmlInit -------------------------------------------------------------- //
 
 // http://jamesroberts.name/blog/2010/02/22/string-functions-for-javascript-trim-to-camel-case-to-dashed-and-to-underscore/
 utils.toDashed = function( str ) {
@@ -760,8 +755,6 @@ utils.htmlInit = function( WidgetClass, namespace ) {
   });
 };
 
-// -----  ----- //
-
 return utils;
 
 }));
@@ -799,9 +792,8 @@ return utils;
 }( window, function factory( EvEmitter, getSize ) {
 'use strict';
 
-// ----- helpers ----- //
+// ----- helpers --------------------------------------------------------------- //
 
-// claude - optimization chances #5
 // Fix: removed unnecessary `prop = null` — variable goes out of scope
 // when the function returns, so nullifying serves no purpose
 function isEmptyObj( obj ) {
@@ -811,7 +803,7 @@ function isEmptyObj( obj ) {
   return true;
 }
 
-// -------------------------- CSS3 support -------------------------- //
+// -------------------------- CSS3 support ------------------------------------- //
 
 
 var docElemStyle = document.documentElement.style;
@@ -835,7 +827,7 @@ var vendorProperties = {
   transitionDelay: transitionProperty + 'Delay'
 };
 
-// -------------------------- Item -------------------------- //
+// -------------------------- Item --------------------------------------------- //
 
 function Item( element, layout ) {
   if ( !element ) {
@@ -1001,8 +993,6 @@ proto._transitionTo = function( x, y ) {
 };
 
 proto.getTranslate = function( x, y ) {
-  // claude - optimization chances #5
-  // Fix: corrected typo "cooridinates" → "coordinates"
   // flip coordinates if origin on right or bottom
   var isOriginLeft = this.layout._getOption('originLeft');
   var isOriginTop = this.layout._getOption('originTop');
@@ -1024,7 +1014,7 @@ proto.setPosition = function( x, y ) {
   this.position.y = parseFloat( y );
 };
 
-// ----- transition ----- //
+// ----- transition ------------------------------------------------------------ //
 
 /**
  * @param {Object} style - CSS
@@ -1074,7 +1064,6 @@ proto.transition = function( args ) {
   // set from styles
   if ( args.from ) {
     this.css( args.from );
-    // claude - optimization chances #5
     // Fix: use void to force layout reflow without creating an unused
     // variable. Reading offsetHeight triggers a synchronous reflow;
     // the old code assigned it to `h` then set `h = null` which was
@@ -1129,7 +1118,7 @@ proto.enableTransition = function(/* style */) {
   this.element.addEventListener( transitionEndEvent, this, false );
 };
 
-// ----- events ----- //
+// ----- events ---------------------------------------------------------------- //
 
 proto.onwebkitTransitionEnd = function( event ) {
   this.ontransitionend( event );
@@ -1206,14 +1195,14 @@ proto.removeTransitionStyles = function() {
   this.css( cleanTransitionStyle );
 };
 
-// ----- stagger ----- //
+// ----- stagger --------------------------------------------------------------- //
 
 proto.stagger = function( delay ) {
   delay = isNaN( delay ) ? 0 : delay;
   this.staggerDelay = delay + 'ms';
 };
 
-// ----- show/hide/remove ----- //
+// ----- show/hide/remove ------------------------------------------------------ //
 
 // remove element from DOM
 proto.removeElem = function() {
@@ -1372,18 +1361,16 @@ return Item;
 }( window, function factory( window, EvEmitter, getSize, utils, Item ) {
 'use strict';
 
-// ----- vars ----- //
+// ----- vars ------------------------------------------------------------------ //
 
 var console = window.console;
 var jQuery = window.jQuery;
 var noop = function() {};
 
-// -------------------------- Outlayer -------------------------- //
+// -------------------------- Outlayer ----------------------------------------- //
 
 // globally unique identifiers
 var GUID = 0;
-// claude - optimization chances #5
-// Fix: corrected typo "intances" → "instances"
 // internal store of all Outlayer instances
 var instances = {};
 
@@ -1547,7 +1534,7 @@ proto.getItemElements = function() {
   });
 };
 
-// ----- init & layout ----- //
+// ----- init & layout --------------------------------------------------------- //
 
 /**
  * lays out all items
@@ -1820,14 +1807,10 @@ proto.dispatchEvent = function( type, event, args ) {
   }
 };
 
-// -------------------------- ignore & stamps -------------------------- //
-
+// -------------------------- ignore & stamps ---------------------------------- //
 
 /**
  * keep item in collection, but do not lay it out
- * claude - optimization chances #5
- * Fix: corrected misleading comment — ignored items ARE skipped
- * in layout by _getItemsForLayout which filters out isIgnored items
  * @param {Element} elem
  */
 proto.ignore = function( elem ) {
@@ -1943,7 +1926,7 @@ proto._getElementOffset = function( elem ) {
   return offset;
 };
 
-// -------------------------- resize -------------------------- //
+// -------------------------- resize ------------------------------------------- //
 
 // enable event handlers for listeners
 // i.e. resize -> onresize
@@ -1993,7 +1976,7 @@ proto.needsResizeLayout = function() {
   return hasSizes && size.innerWidth !== this.size.innerWidth;
 };
 
-// -------------------------- methods -------------------------- //
+// -------------------------- methods ------------------------------------------ //
 
 /**
  * add items to Outlayer instance
@@ -2151,7 +2134,7 @@ proto.remove = function( elems ) {
   }, this );
 };
 
-// ----- destroy ----- //
+// ----- destroy --------------------------------------------------------------- //
 
 // remove and disable Outlayer instance
 proto.destroy = function() {
@@ -2177,7 +2160,7 @@ proto.destroy = function() {
 
 };
 
-// -------------------------- data -------------------------- //
+// -------------------------- data --------------------------------------------- //
 
 /**
  * get Outlayer instance from element
@@ -2191,7 +2174,7 @@ Outlayer.data = function( elem ) {
 };
 
 
-// -------------------------- create Outlayer class -------------------------- //
+// -------------------------- create Outlayer class ---------------------------- //
 
 /**
  * create a layout class
@@ -2212,11 +2195,11 @@ Outlayer.create = function( namespace, options ) {
   // sub-class Item
   Layout.Item = subclass( Item );
 
-  // -------------------------- declarative -------------------------- //
+  // -------------------------- declarative ------------------------------------ //
 
   utils.htmlInit( Layout, namespace );
 
-  // -------------------------- jQuery bridge -------------------------- //
+  // -------------------------- jQuery bridge ---------------------------------- //
 
   // make into jQuery plugin
   if ( jQuery && jQuery.bridget ) {
@@ -2237,7 +2220,7 @@ function subclass( Parent ) {
   return SubClass;
 }
 
-// ----- helpers ----- //
+// ----- helpers --------------------------------------------------------------- //
 
 // how many milliseconds are in each unit
 var msUnits = {
@@ -2245,7 +2228,6 @@ var msUnits = {
   s: 1000
 };
 
-// claude - optimization chances #5
 // Fix: corrected conversion example — 0.4 * 1000 = 400, not 40
 // munge time-like parameter into millisecond number
 // '0.4s' -> 400
@@ -2264,7 +2246,7 @@ function getMilliseconds( time ) {
   return num * mult;
 }
 
-// ----- fin ----- //
+// ----- fin ------------------------------------------------------------------- //
 
 // back in global
 Outlayer.Item = Item;
@@ -2309,7 +2291,7 @@ return Outlayer;
 
 
 
-// -------------------------- masonryDefinition -------------------------- //
+// -------------------------- masonryDefinition -------------------------------- //
 
   // create an Outlayer layout class
   var Masonry = Outlayer.create('masonry');
@@ -2324,7 +2306,6 @@ return Outlayer;
     this._getMeasurement( 'gutter', 'outerWidth' );
     this.measureColumns();
 
-    // claude - optimization chances #5
     // Fix: replaced manual for-loop with Array(n).fill(0) for
     // clearer intent and single-allocation initialization
     // reset column Y
@@ -2489,7 +2470,6 @@ return Outlayer;
     return size;
   };
 
-  // claude - optimization chances #5
   // Fix: off-by-one in the unused-columns loop. The original
   // `while ( --i )` stops when i reaches 0 (falsy), so colYs[0]
   // is never inspected. Changed to `while ( --i >= 0 )` so that

@@ -1,4 +1,24 @@
 /*
+ # -----------------------------------------------------------------------------
+ # ~/assets/theme/j1/modules/masonry/js/util/images_loaded.js
+ # imagesLoaded v5.0.0 (PACKAGED)
+ # Util library - Detect when images have been loaded.
+ #
+ # Product/Info:
+ # https://jekyll.one
+ # https://github.com/desandro/imagesloaded
+ #
+ # Copyright (C) 2022-2026 David DeSandro
+ # Copyright (C) 2023-2026 Juergen Adams
+ #
+ # J1 Template is licensed under the MIT License.
+ # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE
+ # Masonry is licensed under the MIT License.
+ # See: https://desandro.mit-license.org/
+ # -----------------------------------------------------------------------------
+*/
+
+/*
  * EvEmitter v2.1.1
  * Lil' event emitter
  * MIT License
