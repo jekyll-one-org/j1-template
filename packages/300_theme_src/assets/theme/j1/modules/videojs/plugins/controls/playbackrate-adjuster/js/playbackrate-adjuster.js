@@ -8,7 +8,7 @@
  # http://jekyll.one
  #
  # Copyright (C) Gary Katsevman <me@gkatsev.com>
- # Copyright (C) 2023-2025 Juergen Adams
+ # Copyright (C) 2023-2026 Juergen Adams
  #
  # playbackrate-adjuster is licensed under the under MIT License.
  #

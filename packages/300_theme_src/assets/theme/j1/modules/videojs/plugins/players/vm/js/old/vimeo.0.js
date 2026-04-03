@@ -8,7 +8,7 @@
  # http://jekyll.one
  #
  # Copyright (c) 2020 Kevin Aguiar <kevin.aguiar@mobiliza.com.br>
- # Copyright (C) 2023-2025 Juergen Adams
+ # Copyright (C) 2023-2026 Juergen Adams
  #
  # VideoJS-Vimeo is licensed under MIT License.
  # See: https://github.com/mobiliza/videojs-vimeo/blob/0.6.0/LICENSE 

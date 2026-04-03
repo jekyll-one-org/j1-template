@@ -10,7 +10,7 @@
  # http://jekyll.one
  #
  # Copyright (C) 2014-2025 Vladimir Kharlampidi
- # Copyright (C) 2023-2025 Juergen Adams
+ # Copyright (C) 2023-2026 Juergen Adams
  #
  # SwiperJS is licensed under the MIT License.
  # See: https://github.com/nolimits4web/swiper/blob/master/LICENSE
