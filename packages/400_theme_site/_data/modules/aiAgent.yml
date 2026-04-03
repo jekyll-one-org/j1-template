@@ -1,0 +1,46 @@
+# ------------------------------------------------------------------------------
+# ~/_data/modules/aiAgent.yml
+# User configuration settings for J1 aiAgent module
+#
+# Product/Info:
+# https://jekyll.one
+#
+# Copyright (C) 2026 Juergen Adams
+#
+# J1 Template is licensed under the MIT License.
+# See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE
+# -----------------------------------------------------------------------------
+
+# ------------------------------------------------------------------------------
+# Description
+#
+description:
+  title:                                J1 aiAgent
+  scope:                                User settings
+  location:                             _data/modules/aiAgent.yml
+
+# ------------------------------------------------------------------------------
+# User configuration settings
+#
+settings:
+
+  # ----------------------------------------------------------------------------
+  # GENERAL options
+  # ----------------------------------------------------------------------------
+  #
+  enabled:                              false
+
+  # ----------------------------------------------------------------------------
+  # API options (KB Manager/ai-agent-kb.adoc)
+  # ----------------------------------------------------------------------------
+  #
+  apiKey:                               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
+  model:                                claude-sonnet-4-20250514                # Claude Sonnet 4
+  systemPrompt: >
+                                        Claude, you are a helpful AI assistant.
+                                        Answer questions accurately and politely
+                                        in my language.
+  maxTokens:                            4096
+
+# ------------------------------------------------------------------------------
+# END config
