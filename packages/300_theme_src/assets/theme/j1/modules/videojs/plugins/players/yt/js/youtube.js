@@ -361,8 +361,8 @@
 
       // extract video data from YT video
       // Extract ALL available video data from the YT player object
-      // and store it on the tech instance so the VJS player (and
-      // adapters like skipad.js) can access it via
+      // and store it on the tech instance so the VJS player can
+      // access it via
       //   player.tech().videoData()   – full data object
       //   player.tech().videoTitle()  – title string (kept for backward compatibility)
       try {
@@ -379,8 +379,8 @@
       }
       // END extract video data from YT video
 
-      // dispatch a custom DOM event so external modules (e.g. skipad.js)
-      // are notified when YT video data becomes available.
+      // dispatch a custom DOM event so external modules are notified
+      // when YT video data becomes available.
       try {
         var ytVideoDataEvent = new CustomEvent('ytVideoDataResolved', {
           detail: {
@@ -1071,7 +1071,7 @@
     // hide controlbar for YT video
     // When the marker class 'vjs-youtube-hide-controlbar' is present on
     // the player container, the entire VideoJS control bar is hidden.
-    // The class is toggled by the skipad adapter (or any consumer) via
+    // The class is toggled by any consumer via
     // player.addClass('vjs-youtube-hide-controlbar').
     // NOTE: vjs-big-play-button disabled (display: none)
     const css = `
