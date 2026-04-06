@@ -514,10 +514,10 @@ resources:
       pass_init_data:                   true
 
       data:
-        css:                            [ modules/backstretch/css/attic ]
-        files:                          [ adapter/js/attic.js ]
+        css:                            [ modules/backstretch/css/backstretch ]
+        files:                          [ adapter/js/backstretch.js ]
         js:                             [ modules/backstretch/js/backstretch ]
-        init_function:                  [ j1.adapter.attic.init ]
+        init_function:                  [ j1.adapter.backstretch.init ]
 
   # ----------------------------------------------------------------------------
   # Navigator, JS API to create the naviagtion for J1 Theme

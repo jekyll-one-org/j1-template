@@ -11,6 +11,8 @@
  # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE
  # -----------------------------------------------------------------------------
  # NOTE: This is the (SASS) entry point for build-in theme MODULES
+ # NOTE: Make sure that base style are available independenly from
+ #       the  styles loaded by the module itself
  # -----------------------------------------------------------------------------
 */
 
@@ -18,29 +20,21 @@
 // -----------------------------------------------------------------------------
 
 @import "modules/adsense";
-
-// @import "modules/attic";
-
+@import "modules/backstretch";
 @import "modules/carousel";
 @import "modules/cookiebar";
 @import "modules/enhanced-modals";
 @import "modules/footer";
 @import "modules/gallery";
 @import "modules/lightbox";
-
 @import "modules/lightgallery";
-
-// @import "modules/masonry";
-
+@import "modules/masonry";
 @import "modules/navigator";
 @import "modules/rouge";
 @import "modules/searcher";
-
 @import "modules/skipad";
-
 @import "modules/slider";
 @import "modules/speak2me";
 @import "modules/toccer";
 @import "modules/videojs";
-
 @import "modules/yt-metadata-fetcher";

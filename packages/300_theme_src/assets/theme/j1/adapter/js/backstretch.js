@@ -6,7 +6,7 @@ regenerate:                             true
 
 {% comment %}
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/adapter/js/attic.js (2)
+ # ~/assets/theme/j1/adapter/js/backstretch.js (2)
  # Liquid template to adapt Backstretch Core functions for
  # all attics (top page headers)
  #
@@ -58,7 +58,7 @@ regenerate:                             true
 
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/adapter/js/attic.js (2)
+ # ~/assets/theme/j1/adapter/js/backstretch.js (2)
  # JS Adapter for J1 Master Header
  #
  # Product/Info:
@@ -83,7 +83,7 @@ regenerate:                             true
 /* eslint indent: "off"                                                       */
 // -----------------------------------------------------------------------------
 "use strict";
-j1.adapter.attic = ((j1, window) => {
+j1.adapter.backstretch = ((j1, window) => {
 
   const isDev = (j1.env === "development" || j1.env === "dev") ? true : false;
 
@@ -120,7 +120,7 @@ j1.adapter.attic = ((j1, window) => {
       // default module settings
       // -----------------------------------------------------------------------
       var settings = $.extend({
-        module_name: 'j1.adapter.attic',
+        module_name: 'j1.adapter.backstretch',
         generated:   '{{site.time}}'
       }, options);
 
@@ -128,7 +128,7 @@ j1.adapter.attic = ((j1, window) => {
       // global variable settings
       // -----------------------------------------------------------------------
       _this   = j1.adapter.attic;
-      logger  = log4javascript.getLogger('j1.adapter.attic');
+      logger  = log4javascript.getLogger('j1.adapter.backstretch');
 
       // initialize state flag
       _this.state = 'pending';

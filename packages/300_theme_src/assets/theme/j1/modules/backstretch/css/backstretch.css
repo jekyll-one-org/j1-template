@@ -1,6 +1,7 @@
 /*
  # -----------------------------------------------------------------------------
- # ~/scss/theme_uno/modules/_attic.scss
+ # /assets/theme/j1/modules/backstretch/css/backstretch.css
+ # Backstretch v.2.1.16 implementation for J1 Theme
  #
  # Product/Info:
  # http://jekyll.one
@@ -10,24 +11,30 @@
  # J1 Theme is licensed under the MIT License
  # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE
  # -----------------------------------------------------------------------------
- # NOTE: Provides styles for the J1 Google Adsense module
- # NOTE: Settings are set dynamicall by the JS adapter
- # -----------------------------------------------------------------------------
 */
 
-// Content
-// -----------------------------------------------------------------------------
+/* Content
+   ---------------------------------------------------------------------------- */
 
-// fake attic used if NO attic is enabled for a layout
+/*  fake attic used if NO attic is enabled for a layout */
 .no-attic {
-    padding-top: 80px;
+  padding-top: 80px;
 }
 
 .attic {
-  top: 80px;
+/* top: 80px; */            /* jadams, 2026-03-27: place under the menu bar*/
   position: relative;
   width: 100%;
-  overflow: hidden;                                                             // jadams, 2017-12-11: needed for image headers
+  overflow: hidden;         /* jadams, 2017-12-11: needed for image headers */
+  /* claude - backstretch responsiveness #6
+   * min-height: 0 prevents flex/grid parents from collapsing the attic
+   * when its height is defined entirely by padding. Without this, some
+   * flex containers can override the computed height to 0.
+   * box-sizing: border-box ensures the padding-top (which defines the
+   * attic's visual height) is included inside any explicit width/height
+   * constraints rather than added on top of them. */
+  min-height: 0;
+  box-sizing: border-box;
 }
 
 .attic .j1-booticon {
@@ -38,7 +45,7 @@
   margin-top: -1.2rem;
   margin-bottom: 0;
   font-weight: 600;
-  line-height: 1.2;                                                             // jadams, 2020-12-25: added line-height
+  line-height: 1.2;         /* jadams, 2020-12-25: added line-height */
 }
 
 .attic .head-tagline h3 {
@@ -90,8 +97,9 @@
     text-decoration: none;
 }
 
-// Media breakpoints
-// -----------------------------------------------------------------------------
+/* Media breakpoints
+   ----------------------------------------------------------------------------- */
+
 @media screen and (min-width: 992px) {
   .attic .lead {
     width: 90%;
@@ -131,8 +139,10 @@
   }
 }
 
-// Helper styles
-// -----------------------------------------------------------------------------
+
+/* Helper styles
+   ----------------------------------------------------------------------------- */
+
 .text-emphasis-none {
   text-shadow: none !important;
 }
@@ -149,8 +159,9 @@
   text-shadow: 0 4px 0 rgba(0,0,0,.2) !important;
 }
 
-// Unsplash badge
-// -----------------------------------------------------------------------------
+/* Unsplash badge
+   ----------------------------------------------------------------------------- */
+
 .attic__badge {
   background-color: rgba(0, 0, 0, 0.5);
   padding: 4px 6px;
