@@ -16,7 +16,7 @@
  # -----------------------------------------------------------------------------
 */
 
-/* Version 3.1.9 for J1 Template */
+/* Version 3.1.7 for J1 Template */
 
 /* global define, YT */
 (function (root, factory) {
@@ -194,16 +194,7 @@
         loop:             playersParams.loop,
         modestbranding:   playersParams.modestbranding,
         rel:              playersParams.rel,
-        showinfo:         playersParams.showinfo,
-
-        // claude - fix pip on youtube
-        // Explicitly set the origin parameter so the YouTube IFrame API
-        // can validate the embedding page even when the browser opens
-        // the player in a Picture-in-Picture browsing context (which
-        // may lack the HTTP Referer header). Without this, YT may
-        // reject the embed with error 153 (embedder.identity.missing.referrer).
-        origin:           window.location.origin
-        // END claude - fix pip on youtube
+        showinfo:         playersParams.showinfo
       };
 
       // Let the user set any YouTube parameter
@@ -436,12 +427,6 @@
           break;
 
         case YT.PlayerState.PLAYING:
-          // claude - fix pip on youtube
-          // Reset the PiP retry counter on successful playback so
-          // future error-153 occurrences get a fresh set of retries.
-          this._pipRetryCount = 0;
-          // END claude - fix pip on youtube
-
           // YouTube's IFrame API only populates the `author` field in
           // getVideoData() AFTER playback begins. The initial fetch
           // in onPlayerReady() runs before that, so `author` is always
@@ -511,48 +496,6 @@
     } // END onPlayerVolumeChange
 
     onPlayerError(e) {
-      // claude - fix pip on youtube
-      // Error 153 ("embedder.identity.missing.referrer") is a transient
-      // error that occurs when the browser opens the YouTube iframe in a
-      // Picture-in-Picture window without forwarding the parent page's
-      // referrer. Treating it as fatal (setting errorNumber) would block
-      // ALL subsequent onPlayerStateChange calls and permanently kill the
-      // player. Instead, attempt a recovery by re-loading the current
-      // video after a short delay.
-      if (e.data === 153) {
-        isDev && consoleLog('WARN', 'youtube.js',
-          'YT error 153 (PiP referrer): attempting recovery');
-
-        // cap retry attempts to avoid infinite loops
-        this._pipRetryCount = (this._pipRetryCount || 0) + 1;
-
-        if (this._pipRetryCount <= 3 && this.activeVideoId) {
-          this.setTimeout(() => {
-            if (this.ytPlayer && typeof this.ytPlayer.loadVideoById === 'function') {
-              isDev && consoleLog('INFO', 'youtube.js',
-                'retrying video load after error 153 (attempt '
-                + this._pipRetryCount + '/3)');
-
-              // clear any stale error state so onPlayerStateChange
-              // can process events again
-              delete this.errorNumber;
-
-              this.loadVideoById_(this.activeVideoId);
-            }
-          }, 1500);
-        } else {
-          isDev && consoleLog('ERROR', 'youtube.js',
-            'YT error 153: max retry attempts reached');
-
-          this.errorNumber = e.data;
-          this.trigger('pause');
-          this.trigger('error');
-        }
-
-        return;
-      }
-      // END claude - fix pip on youtube
-
       this.errorNumber = e.data;
       this.trigger('pause');
       this.trigger('error');
@@ -574,14 +517,6 @@
             code: code,
             message: 'Playback on other Websites has been disabled by the video owner.'
           };
-
-        // claude - fix pip on youtube
-        case 153:
-          return {
-            code: code,
-            message: 'Playback failed because the embed referrer could not be verified (Picture-in-Picture). Retrying.'
-          };
-        // END claude - fix pip on youtube
       }
 
       return { code: code, message: 'YouTube unknown error (' + this.errorNumber + ')' };
@@ -1073,12 +1008,11 @@
     // the player container, the entire VideoJS control bar is hidden.
     // The class is toggled by the skipad adapter (or any consumer) via
     // player.addClass('vjs-youtube-hide-controlbar').
-    // NOTE: vjs-big-play-button disabled (display: none)
     const css = `
       .vjs-youtube .vjs-iframe-blocker { display: none; }
       .vjs-youtube.vjs-user-inactive .vjs-iframe-blocker { display: block; }
       .vjs-youtube .vjs-poster { background-size: cover; }
-      .vjs-youtube .vjs-big-play-button { display: none; }
+      .vjs-youtube-mobile .vjs-big-play-button { display: none; }
       .vjs-youtube.vjs-youtube-hide-controlbar .vjs-control-bar { display: none !important; }
     `;
 

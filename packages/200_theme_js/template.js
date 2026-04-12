@@ -81,10 +81,10 @@ window.j1.env                = 'prod';
 // const J1ThemeSwitcher     = require('./js/bs_theme_switcher/switcher.js');
 // const J1MmenuLight        = require('./js/mmenu-light/mmenu.js');
 // const BootstrapJS         = require('./node_modules/bootstrap/dist/js/bootstrap.js');
+// const J1SCarousel         = require('./js/modules/carousel/carousel.js');
 
 const J1Tocbot               = require('./js/modules/tocbot/tocbot.js');
 const J1AttrChangeListener   = require('./js/modules/jquery-extensions/attrchange.js');
-// const J1SCarousel         = require('./js/modules/carousel/carousel.js');
 const J1Speak2Me             = require('./js/modules/jquery-extensions/speak2me/speak2me.js');
 
 // Additional Vanilla JS helpers

@@ -1,12 +1,12 @@
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/modules/videojs/js/plugins/players/yt/youtube.js
+ # ~/assets/theme/j1/modules/videojs/js/plugins/players/yt/youtube.js (1)
  # Provides YouTube Playback Technology (Tech) for Video.js V8 and newer
  #
  # Product/Info:
  # http://jekyll.one
  #
- # Copyright (C) 2023-2026 Juergen Adams
+ # Copyright (C) 2023-2025 Juergen Adams
  # Copyright (C) 2014-2015 Gary Katsevman, Benoit Tremblay
  #
  # YouTube Playback Technology (Tech) is licensed under MIT License.
@@ -16,7 +16,7 @@
  # -----------------------------------------------------------------------------
 */
 
-/* Version 3.1.9 for J1 Template */
+/* Version 3.1.3, modified version for J1 Template */
 
 /* global define, YT */
 (function (root, factory) {
@@ -31,19 +31,11 @@
     root.Youtube = factory(root.videojs);
   }
 }(this, function(videojs) {
-  "use strict";
+  'use strict';
 
-  // ---------------------------------------------------------------------------
-  // Constants
-  // ---------------------------------------------------------------------------
-
-  const env          = 'dev';                                                   // dev | prod
-  const isDev        = (env === "dev") ? true : false;
-  const consoleLogId = generateId();
-
-  // ---------------------------------------------------------------------------
-  // Module variables
-  // ---------------------------------------------------------------------------
+  // claude - optimization chances: added missing semicolon.
+  // var isDev = (j1.env === "development" || j1.env === "dev") ? true : false;
+  var isDev = false;
 
   var logger      = log4javascript.getLogger('videoJS.plugin.youtube');
   var _isOnMobile = videojs.browser.IS_IOS || videojs.browser.IS_NATIVE_ANDROID;
@@ -51,51 +43,6 @@
 
   var startTimeModule;
   var endTimeModule;
-
-  // ---------------------------------------------------------------------------
-  // Helper Functions
-  // ---------------------------------------------------------------------------
-
-  /**
-   * generateId - generate a random alphanumeric ID string
-   * @param {number} [length=11] - Desired ID length
-   * @returns {string} - Generated ID
-   */
-  function generateId(length = 11) {
-    const chars = 'abcdefghijklmnopqrstuvwxyz0123456789';
-    let id = '';
-    for (let i = 0; i < length; i++) {
-      id += chars[Math.floor(Math.random() * chars.length)];
-    }
-    return id;
-  }
-
-  /**
-   * consoleLog - formatted console output with timestamp and unique ID
-   * @param {string} level   - Log level: 'INFO', 'WARN', or 'ERROR'
-   * @param {string} module  - Source module identifier
-   * @param {string} message - Log message text
-   */  
-  function consoleLog(level, module, message) {
-    const timestamp = new Date().toISOString().slice(11, 23);
-
-    switch (level) {
-
-      case 'INFO':
-        console.log(`[${timestamp}] [${consoleLogId}] [${level}] [${module}] \n${message}`);
-        break;
-      case 'WARN':
-        console.warn(`[${timestamp}] [${consoleLogId}] [${level}] [${module}] \n${message}`);
-        break;
-      case 'ERROR':
-        console.error(`[${timestamp}] [${consoleLogId}] [${level}] [${module}] \n${message}`);
-        break;
-      default:
-        console.log(`[${timestamp}] [${consoleLogId}] [${level}] [${module}] \n${message}`);
-        break;
-    }
-
-  }
 
   class Youtube extends Tech {
 
@@ -194,16 +141,7 @@
         loop:             playersParams.loop,
         modestbranding:   playersParams.modestbranding,
         rel:              playersParams.rel,
-        showinfo:         playersParams.showinfo,
-
-        // claude - fix pip on youtube
-        // Explicitly set the origin parameter so the YouTube IFrame API
-        // can validate the embedding page even when the browser opens
-        // the player in a Picture-in-Picture browsing context (which
-        // may lack the HTTP Referer header). Without this, YT may
-        // reject the embed with error 153 (embedder.identity.missing.referrer).
-        origin:           window.location.origin
-        // END claude - fix pip on youtube
+        showinfo:         playersParams.showinfo
       };
 
       // Let the user set any YouTube parameter
@@ -224,6 +162,7 @@
         playerVars.cc_load_policy = this.options_['cc_load_policy'];
       }
 
+      // claude - optimization chances: the original code checked
       // `this.options_['cc_load_policy']` a second time (copy-paste error)
       // but assigned to `iv_load_policy`. Fixed the condition to check
       // `iv_load_policy` as intended.
@@ -315,7 +254,7 @@
         playerVars.theme = this.options_.theme;
       }
 
-      // allow undocumented options to be passed along via customVars
+      // Allow undocumented options to be passed along via customVars
       //
       if (typeof this.options_.customVars !== 'undefined') {
         var customVars = this.options_.customVars;
@@ -359,12 +298,14 @@
         this.featuresPlaybackRate = true;
       }
 
-      // extract video data from YT video
+      // claude - extract video data from YT video
       // Extract ALL available video data from the YT player object
       // and store it on the tech instance so the VJS player (and
       // adapters like skipad.js) can access it via
       //   player.tech().videoData()   – full data object
-      //   player.tech().videoTitle()  – title string (kept for backward compatibility)
+      //   player.tech().videoTitle()  – title string (kept for
+      //                                  backward compatibility)
+      // or by listening for the 'ytvideodatachange' event.
       try {
         var rawVideoData   = this.ytPlayer.getVideoData();
         this.ytVideoData_  = rawVideoData || {};
@@ -377,26 +318,23 @@
         this.ytVideoTitle_ = '';
         isDev && logger.debug('\n' + 'failed to extract YT video data: ' + e);
       }
-      // END extract video data from YT video
-
-      // dispatch a custom DOM event so external modules (e.g. skipad.js)
-      // are notified when YT video data becomes available.
-      try {
-        var ytVideoDataEvent = new CustomEvent('ytVideoDataResolved', {
-          detail: {
-            videoData: this.ytVideoData_,
-            videoTitle: this.ytVideoTitle_,
-            source: 'onPlayerReady'
-          }
-        });
-        document.dispatchEvent(ytVideoDataEvent);
-        isDev && logger.debug('\n' + 'dispatched event: ytVideoDataResolved (source: onPlayerReady)');
-      } catch (evtErr) {
-        isDev && logger.debug('\n' + 'failed to dispatch ytVideoDataResolved: ' + evtErr);
-      }
+      // END claude - extract video data from YT video
 
       this.playerReady_ = true;
       this.triggerReady();
+
+      // claude - extract video data from YT video
+      // Fire custom events AFTER triggerReady so the VJS player
+      // is fully wired and listeners on the player level can
+      // receive the events.
+      if (this.ytVideoData_ && Object.keys(this.ytVideoData_).length) {
+        this.trigger('ytvideodatachange', { videoData: this.ytVideoData_ });
+      }
+      // Backward compatibility: also fire the title-only event
+      if (this.ytVideoTitle_) {
+        this.trigger('yttitlechange', { title: this.ytVideoTitle_ });
+      }
+      // END claude - extract video data from YT video
 
       if (this.playOnReady) {
         this.play();
@@ -436,50 +374,6 @@
           break;
 
         case YT.PlayerState.PLAYING:
-          // claude - fix pip on youtube
-          // Reset the PiP retry counter on successful playback so
-          // future error-153 occurrences get a fresh set of retries.
-          this._pipRetryCount = 0;
-          // END claude - fix pip on youtube
-
-          // YouTube's IFrame API only populates the `author` field in
-          // getVideoData() AFTER playback begins. The initial fetch
-          // in onPlayerReady() runs before that, so `author` is always
-          // an empty string.
-          try {
-            if (this.ytPlayer && typeof this.ytPlayer.getVideoData === 'function') {
-              var freshData = this.ytPlayer.getVideoData();
-              if (freshData &&
-                  (  (freshData.author && (!this.ytVideoData_ || this.ytVideoData_.author !== freshData.author))
-                  || (freshData.title  && (!this.ytVideoData_ || this.ytVideoData_.title  !== freshData.title))
-                  )) {
-                this.ytVideoData_  = freshData;
-                this.ytVideoTitle_ = freshData.title || this.ytVideoTitle_;
-
-                isDev && logger.debug('\n' + 'updated YT video data (author now available): '
-                  + JSON.stringify(this.ytVideoData_));
-
-                // Re-dispatch the event with updated data (author field is
-                // only populated by the YT IFrame API after playback begins).
-                try {
-                  var ytVideoDataEvent = new CustomEvent('ytVideoDataResolved', {
-                    detail: {
-                      videoData: this.ytVideoData_,
-                      videoTitle: this.ytVideoTitle_,
-                      source: 'onPlayerStateChange:PLAYING'
-                    }
-                  });
-                  document.dispatchEvent(ytVideoDataEvent);
-                  isDev && logger.debug('\n' + 'dispatched event: ytVideoDataResolved (source: onPlayerStateChange:PLAYING)');
-                } catch (evtErr) {
-                  isDev && logger.debug('\n' + 'failed to dispatch ytVideoDataResolved: ' + evtErr);
-                }
-              }
-            }
-          } catch (e) {
-            isDev && logger.debug('\n' + 'failed to re-read YT video data on PLAYING: ' + e);
-          }
-
           this.trigger('timeupdate');
           this.trigger('durationchange');
           this.trigger('playing');
@@ -511,48 +405,6 @@
     } // END onPlayerVolumeChange
 
     onPlayerError(e) {
-      // claude - fix pip on youtube
-      // Error 153 ("embedder.identity.missing.referrer") is a transient
-      // error that occurs when the browser opens the YouTube iframe in a
-      // Picture-in-Picture window without forwarding the parent page's
-      // referrer. Treating it as fatal (setting errorNumber) would block
-      // ALL subsequent onPlayerStateChange calls and permanently kill the
-      // player. Instead, attempt a recovery by re-loading the current
-      // video after a short delay.
-      if (e.data === 153) {
-        isDev && consoleLog('WARN', 'youtube.js',
-          'YT error 153 (PiP referrer): attempting recovery');
-
-        // cap retry attempts to avoid infinite loops
-        this._pipRetryCount = (this._pipRetryCount || 0) + 1;
-
-        if (this._pipRetryCount <= 3 && this.activeVideoId) {
-          this.setTimeout(() => {
-            if (this.ytPlayer && typeof this.ytPlayer.loadVideoById === 'function') {
-              isDev && consoleLog('INFO', 'youtube.js',
-                'retrying video load after error 153 (attempt '
-                + this._pipRetryCount + '/3)');
-
-              // clear any stale error state so onPlayerStateChange
-              // can process events again
-              delete this.errorNumber;
-
-              this.loadVideoById_(this.activeVideoId);
-            }
-          }, 1500);
-        } else {
-          isDev && consoleLog('ERROR', 'youtube.js',
-            'YT error 153: max retry attempts reached');
-
-          this.errorNumber = e.data;
-          this.trigger('pause');
-          this.trigger('error');
-        }
-
-        return;
-      }
-      // END claude - fix pip on youtube
-
       this.errorNumber = e.data;
       this.trigger('pause');
       this.trigger('error');
@@ -574,14 +426,6 @@
             code: code,
             message: 'Playback on other Websites has been disabled by the video owner.'
           };
-
-        // claude - fix pip on youtube
-        case 153:
-          return {
-            code: code,
-            message: 'Playback failed because the embed referrer could not be verified (Picture-in-Picture). Retrying.'
-          };
-        // END claude - fix pip on youtube
       }
 
       return { code: code, message: 'YouTube unknown error (' + this.errorNumber + ')' };
@@ -613,7 +457,7 @@
       this.ytPlayer.cueVideoById(options);
     } // END cueVideoById_
 
-    // extract video data from YT video
+    // claude - extract video data from YT video
     // Public getter so the VJS player and external adapters can
     // retrieve ALL YouTube video data via player.tech().videoData().
     // Returns the full object from YT's getVideoData() which
@@ -637,7 +481,7 @@
       return this.ytVideoData_ || {};
     } // END videoData
 
-    // extract video data from YT video
+    // claude - extract video data from YT video
     // Backward-compatible getter – returns only the title string.
     videoTitle() {
       // If the title was already cached, return it immediately
@@ -884,7 +728,7 @@
       return this.ytPlayer ? this.ytPlayer.isMuted() : false;
     } // END muted
 
-    // removed erroneous `this.muted(true)` call
+    // claude - optimization chances: removed erroneous `this.muted(true)` call
     // in the else-branch. `muted()` is a getter (returns boolean), so calling
     // it with an argument had no effect. The else-branch was also logically
     // unreachable (it ran when `!this.ytPlayer` was true, then immediately
@@ -905,7 +749,7 @@
       }, 50);
     } // END setMuted
 
-    // removed unused `bufferedEnd` variable.
+    // claude - optimization chances: removed unused `bufferedEnd` variable.
     // The value was computed but never used; the return always used full
     // duration instead.
     buffered() {
@@ -1036,7 +880,7 @@
     });
   } // END apiLoaded
 
-  // replaced `this.readyState` inside the arrow
+  // claude - optimization chances: replaced `this.readyState` inside the arrow
   // function's `onreadystatechange` handler with `tag.readyState`. In the
   // original code, the arrow function lexically captures the outer `this`
   // (the module/window scope), NOT the script element, so
@@ -1068,17 +912,16 @@
   } // END loadScript
 
   function injectCss() {
-    // hide controlbar for YT video
+    // claude - hide controlbar for YT video
     // When the marker class 'vjs-youtube-hide-controlbar' is present on
     // the player container, the entire VideoJS control bar is hidden.
     // The class is toggled by the skipad adapter (or any consumer) via
     // player.addClass('vjs-youtube-hide-controlbar').
-    // NOTE: vjs-big-play-button disabled (display: none)
     const css = `
       .vjs-youtube .vjs-iframe-blocker { display: none; }
       .vjs-youtube.vjs-user-inactive .vjs-iframe-blocker { display: block; }
       .vjs-youtube .vjs-poster { background-size: cover; }
-      .vjs-youtube .vjs-big-play-button { display: none; }
+      .vjs-youtube-mobile .vjs-big-play-button { display: none; }
       .vjs-youtube.vjs-youtube-hide-controlbar .vjs-control-bar { display: none !important; }
     `;
 
@@ -1104,12 +947,10 @@
   var dependencies_met_page_ready = setInterval (() => {
     var pageState      = $('#content').css("display");
     var pageVisible    = (pageState === 'block') ? true : false;
-    var j1CoreFinished = (j1.getState() === 'finished') ? true : false;
+//  var j1CoreFinished = (j1.getState() === 'finished') ? true : false;
 
-    if (j1CoreFinished && pageVisible) {
-//  if (pageVisible) {      
-      const isDev     = (j1.env === "development" || j1.env === "dev") ? true : false;
-
+//  if (j1CoreFinished && pageVisible) {
+    if (pageVisible) {      
       startTimeModule = Date.now();
 
       isDev && logger.debug('\n' + 'initializing plugin: started');

@@ -40,9 +40,8 @@ resource_options:
       collapseDepth:                    3
   - attic:
       slides:
-        # AI generated video
         - url:                          /assets/video/headers/present_videos/modern-dance.mp4
-          alt:                          Broadway Underground Video
+          alt:                          AI generated video
           title:                        Video Player
           tagline:                      Playback Video
           isVideo:                      true

@@ -16,7 +16,7 @@
  # -----------------------------------------------------------------------------
 */
 
-/* Version 3.1.9 for J1 Template */
+/* Version 3.1.5 for J1 Template */
 
 /* global define, YT */
 (function (root, factory) {
@@ -33,21 +33,10 @@
 }(this, function(videojs) {
   "use strict";
 
-  // ---------------------------------------------------------------------------
-  // Constants
-  // ---------------------------------------------------------------------------
+  const consoleLogId  = generateId();
 
-  const env          = 'dev';                                                   // dev | prod
-  const isDev        = (env === "dev") ? true : false;
-  const consoleLogId = generateId();
-
-  // ---------------------------------------------------------------------------
-  // Module variables
-  // ---------------------------------------------------------------------------
-
-  var logger      = log4javascript.getLogger('videoJS.plugin.youtube');
-  var _isOnMobile = videojs.browser.IS_IOS || videojs.browser.IS_NATIVE_ANDROID;
-  var Tech        = videojs.getTech('Tech');
+  var _isOnMobile     = videojs.browser.IS_IOS || videojs.browser.IS_NATIVE_ANDROID;
+  var Tech            = videojs.getTech('Tech');
 
   var startTimeModule;
   var endTimeModule;
@@ -194,16 +183,7 @@
         loop:             playersParams.loop,
         modestbranding:   playersParams.modestbranding,
         rel:              playersParams.rel,
-        showinfo:         playersParams.showinfo,
-
-        // claude - fix pip on youtube
-        // Explicitly set the origin parameter so the YouTube IFrame API
-        // can validate the embedding page even when the browser opens
-        // the player in a Picture-in-Picture browsing context (which
-        // may lack the HTTP Referer header). Without this, YT may
-        // reject the embed with error 153 (embedder.identity.missing.referrer).
-        origin:           window.location.origin
-        // END claude - fix pip on youtube
+        showinfo:         playersParams.showinfo
       };
 
       // Let the user set any YouTube parameter
@@ -346,7 +326,7 @@
 
       this.ytPlayer = new YT.Player(this.options_.techId, playerConfig);
 
-      isDev && logger.debug('\n' + 'created ' + this.name_ + ' player on ID: ' + this.el_.firstChild.id);
+      // isDev && logger.debug('\n' + 'created ' + this.name_ + ' player on ID: ' + this.el_.firstChild.id);
     } // END initYTPlayer
 
     onPlayerReady() {
@@ -370,30 +350,14 @@
         this.ytVideoData_  = rawVideoData || {};
         this.ytVideoTitle_ = (rawVideoData && rawVideoData.title) ? rawVideoData.title : '';
 
-        isDev && logger.debug('\n' + 'extracted YT video data: '
+        // isDev && logger.debug('\n' + 'extracted YT video data: '
           + JSON.stringify(this.ytVideoData_));
       } catch (e) {
         this.ytVideoData_  = {};
         this.ytVideoTitle_ = '';
-        isDev && logger.debug('\n' + 'failed to extract YT video data: ' + e);
+        // isDev && logger.debug('\n' + 'failed to extract YT video data: ' + e);
       }
       // END extract video data from YT video
-
-      // dispatch a custom DOM event so external modules (e.g. skipad.js)
-      // are notified when YT video data becomes available.
-      try {
-        var ytVideoDataEvent = new CustomEvent('ytVideoDataResolved', {
-          detail: {
-            videoData: this.ytVideoData_,
-            videoTitle: this.ytVideoTitle_,
-            source: 'onPlayerReady'
-          }
-        });
-        document.dispatchEvent(ytVideoDataEvent);
-        isDev && logger.debug('\n' + 'dispatched event: ytVideoDataResolved (source: onPlayerReady)');
-      } catch (evtErr) {
-        isDev && logger.debug('\n' + 'failed to dispatch ytVideoDataResolved: ' + evtErr);
-      }
 
       this.playerReady_ = true;
       this.triggerReady();
@@ -436,12 +400,6 @@
           break;
 
         case YT.PlayerState.PLAYING:
-          // claude - fix pip on youtube
-          // Reset the PiP retry counter on successful playback so
-          // future error-153 occurrences get a fresh set of retries.
-          this._pipRetryCount = 0;
-          // END claude - fix pip on youtube
-
           // YouTube's IFrame API only populates the `author` field in
           // getVideoData() AFTER playback begins. The initial fetch
           // in onPlayerReady() runs before that, so `author` is always
@@ -456,28 +414,13 @@
                 this.ytVideoData_  = freshData;
                 this.ytVideoTitle_ = freshData.title || this.ytVideoTitle_;
 
-                isDev && logger.debug('\n' + 'updated YT video data (author now available): '
+                // isDev && logger.debug('\n' + 'updated YT video data (author now available): '
                   + JSON.stringify(this.ytVideoData_));
 
-                // Re-dispatch the event with updated data (author field is
-                // only populated by the YT IFrame API after playback begins).
-                try {
-                  var ytVideoDataEvent = new CustomEvent('ytVideoDataResolved', {
-                    detail: {
-                      videoData: this.ytVideoData_,
-                      videoTitle: this.ytVideoTitle_,
-                      source: 'onPlayerStateChange:PLAYING'
-                    }
-                  });
-                  document.dispatchEvent(ytVideoDataEvent);
-                  isDev && logger.debug('\n' + 'dispatched event: ytVideoDataResolved (source: onPlayerStateChange:PLAYING)');
-                } catch (evtErr) {
-                  isDev && logger.debug('\n' + 'failed to dispatch ytVideoDataResolved: ' + evtErr);
-                }
               }
             }
           } catch (e) {
-            isDev && logger.debug('\n' + 'failed to re-read YT video data on PLAYING: ' + e);
+            // isDev && logger.debug('\n' + 'failed to re-read YT video data on PLAYING: ' + e);
           }
 
           this.trigger('timeupdate');
@@ -511,48 +454,6 @@
     } // END onPlayerVolumeChange
 
     onPlayerError(e) {
-      // claude - fix pip on youtube
-      // Error 153 ("embedder.identity.missing.referrer") is a transient
-      // error that occurs when the browser opens the YouTube iframe in a
-      // Picture-in-Picture window without forwarding the parent page's
-      // referrer. Treating it as fatal (setting errorNumber) would block
-      // ALL subsequent onPlayerStateChange calls and permanently kill the
-      // player. Instead, attempt a recovery by re-loading the current
-      // video after a short delay.
-      if (e.data === 153) {
-        isDev && consoleLog('WARN', 'youtube.js',
-          'YT error 153 (PiP referrer): attempting recovery');
-
-        // cap retry attempts to avoid infinite loops
-        this._pipRetryCount = (this._pipRetryCount || 0) + 1;
-
-        if (this._pipRetryCount <= 3 && this.activeVideoId) {
-          this.setTimeout(() => {
-            if (this.ytPlayer && typeof this.ytPlayer.loadVideoById === 'function') {
-              isDev && consoleLog('INFO', 'youtube.js',
-                'retrying video load after error 153 (attempt '
-                + this._pipRetryCount + '/3)');
-
-              // clear any stale error state so onPlayerStateChange
-              // can process events again
-              delete this.errorNumber;
-
-              this.loadVideoById_(this.activeVideoId);
-            }
-          }, 1500);
-        } else {
-          isDev && consoleLog('ERROR', 'youtube.js',
-            'YT error 153: max retry attempts reached');
-
-          this.errorNumber = e.data;
-          this.trigger('pause');
-          this.trigger('error');
-        }
-
-        return;
-      }
-      // END claude - fix pip on youtube
-
       this.errorNumber = e.data;
       this.trigger('pause');
       this.trigger('error');
@@ -574,14 +475,6 @@
             code: code,
             message: 'Playback on other Websites has been disabled by the video owner.'
           };
-
-        // claude - fix pip on youtube
-        case 153:
-          return {
-            code: code,
-            message: 'Playback failed because the embed referrer could not be verified (Picture-in-Picture). Retrying.'
-          };
-        // END claude - fix pip on youtube
       }
 
       return { code: code, message: 'YouTube unknown error (' + this.errorNumber + ')' };
@@ -1023,16 +916,16 @@
   function apiLoaded() {
     YT.ready(() => {
       Youtube.isApiReady = true;
-      isDev && logger.debug('\n' + 'API loaded successfully');
+      // isDev && logger.debug('\n' + 'API loaded successfully');
 
       for (var i = 0; i < Youtube.apiReadyQueue.length; ++i) {
         Youtube.apiReadyQueue[i].initYTPlayer();
       }
-      isDev && logger.debug('\n' + 'created all players from queue: #' + i);
+      // isDev && logger.debug('\n' + 'created all players from queue: #' + i);
 
       endTimeModule = Date.now();
-      isDev && logger.debug('\n' + 'initializing plugin: finished');
-      isDev && logger.debug('\n' + 'plugin initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
+      // isDev && logger.debug('\n' + 'initializing plugin: finished');
+      // isDev && logger.debug('\n' + 'plugin initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
     });
   } // END apiLoaded
 
@@ -1073,12 +966,11 @@
     // the player container, the entire VideoJS control bar is hidden.
     // The class is toggled by the skipad adapter (or any consumer) via
     // player.addClass('vjs-youtube-hide-controlbar').
-    // NOTE: vjs-big-play-button disabled (display: none)
     const css = `
       .vjs-youtube .vjs-iframe-blocker { display: none; }
       .vjs-youtube.vjs-user-inactive .vjs-iframe-blocker { display: block; }
       .vjs-youtube .vjs-poster { background-size: cover; }
-      .vjs-youtube .vjs-big-play-button { display: none; }
+      .vjs-youtube-mobile .vjs-big-play-button { display: none; }
       .vjs-youtube.vjs-youtube-hide-controlbar .vjs-control-bar { display: none !important; }
     `;
 
@@ -1094,7 +986,7 @@
     }
 
     head.appendChild(style);
-    isDev && logger.debug('\n' + 'added additional CSS styles');
+    // isDev && logger.debug('\n' + 'added additional CSS styles');
   } // END injectCss
 
   Youtube.apiReadyQueue = [];
@@ -1102,13 +994,17 @@
   // initialize plugin if page ready
   // -------------------------------------------------------------------------
   var dependencies_met_page_ready = setInterval (() => {
+    var logger         = log4javascript.getLogger('videoJS.plugin.youtube');
+
     var pageState      = $('#content').css("display");
     var pageVisible    = (pageState === 'block') ? true : false;
     var j1CoreFinished = (j1.getState() === 'finished') ? true : false;
 
     if (j1CoreFinished && pageVisible) {
-//  if (pageVisible) {      
-      const isDev     = (j1.env === "development" || j1.env === "dev") ? true : false;
+//  if (pageVisible) {    
+
+      const isDev         = (j1.env === "development" || j1.env === "dev") ? true : false;
+      //var isDev         = true;
 
       startTimeModule = Date.now();
 

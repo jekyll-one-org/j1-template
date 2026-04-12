@@ -16,7 +16,7 @@
  # -----------------------------------------------------------------------------
 */
 
-/* Version 3.1.9 for J1 Template */
+/* Version 3.1.8 for J1 Template */
 
 /* global define, YT */
 (function (root, factory) {
@@ -1073,12 +1073,11 @@
     // the player container, the entire VideoJS control bar is hidden.
     // The class is toggled by the skipad adapter (or any consumer) via
     // player.addClass('vjs-youtube-hide-controlbar').
-    // NOTE: vjs-big-play-button disabled (display: none)
     const css = `
       .vjs-youtube .vjs-iframe-blocker { display: none; }
       .vjs-youtube.vjs-user-inactive .vjs-iframe-blocker { display: block; }
       .vjs-youtube .vjs-poster { background-size: cover; }
-      .vjs-youtube .vjs-big-play-button { display: none; }
+      .vjs-youtube-mobile .vjs-big-play-button { display: none; }
       .vjs-youtube.vjs-youtube-hide-controlbar .vjs-control-bar { display: none !important; }
     `;
 
