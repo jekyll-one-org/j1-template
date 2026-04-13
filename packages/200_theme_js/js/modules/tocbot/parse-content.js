@@ -6,7 +6,7 @@
  */
 
 export default function parseContent(options) {
-  const reduce = [].reduce
+  const reduce = [].reduce;
 
   /**
    * Get the last item in an array and return a reference to it.
@@ -14,7 +14,7 @@ export default function parseContent(options) {
    * @return {Object}
    */
   function getLastItem(array) {
-    return array[array.length - 1]
+    return array[array.length - 1];
   }
 
   /**
@@ -23,7 +23,7 @@ export default function parseContent(options) {
    * @return {Number}
    */
   function getHeadingLevel(heading) {
-    return +heading.nodeName.toUpperCase().replace("H", "")
+    return +heading.nodeName.toUpperCase().replace('H', '');
   }
 
   /**
@@ -37,9 +37,9 @@ export default function parseContent(options) {
       return (
         maybeElement instanceof window.HTMLElement ||
         maybeElement instanceof window.parent.HTMLElement
-      )
+      );
     } catch (e) {
-      return maybeElement instanceof window.HTMLElement
+      return maybeElement instanceof window.HTMLElement;
     }
   }
 
@@ -52,37 +52,37 @@ export default function parseContent(options) {
     // each node is processed twice by this method because nestHeadingsArray() and addNode() calls it
     // first time heading is real DOM node element, second time it is obj
     // that is causing problem so I am processing only original DOM node
-    if (!isHTMLElement(heading)) return heading
+    if (!isHTMLElement(heading)) return heading;
 
     if (
       options.ignoreHiddenElements &&
       (!heading.offsetHeight || !heading.offsetParent)
     ) {
-      return null
+      return null;
     }
 
     const headingLabel =
-      heading.getAttribute("data-heading-label") ||
+      heading.getAttribute('data-heading-label') ||
       (options.headingLabelCallback
         ? String(options.headingLabelCallback(heading.innerText))
-        : (heading.innerText || heading.textContent).trim())
+        : (heading.innerText || heading.textContent).trim());
     const obj = {
       id: heading.id,
       children: [],
       nodeName: heading.nodeName,
       headingLevel: getHeadingLevel(heading),
       textContent: headingLabel,
-    }
+    };
 
     if (options.includeHtml) {
-      obj.childNodes = heading.childNodes
+      obj.childNodes = heading.childNodes;
     }
 
     if (options.headingObjectCallback) {
-      return options.headingObjectCallback(obj, heading)
+      return options.headingObjectCallback(obj, heading);
     }
 
-    return obj
+    return obj;
   }
 
   /**
@@ -92,30 +92,30 @@ export default function parseContent(options) {
    * @return {Array}
    */
   function addNode(node, nest) {
-    const obj = getHeadingObject(node)
-    const level = obj.headingLevel
-    let array = nest
-    let lastItem = getLastItem(array)
-    const lastItemLevel = lastItem ? lastItem.headingLevel : 0
-    let counter = level - lastItemLevel
+    const obj = getHeadingObject(node);
+    const level = obj.headingLevel;
+    let array = nest;
+    let lastItem = getLastItem(array);
+    const lastItemLevel = lastItem ? lastItem.headingLevel : 0;
+    let counter = level - lastItemLevel;
 
     while (counter > 0) {
-      lastItem = getLastItem(array)
+      lastItem = getLastItem(array);
       // Handle case where there are multiple h5+ in a row.
       if (lastItem && level === lastItem.headingLevel) {
-        break
+        break;
       } else if (lastItem && lastItem.children !== undefined) {
-        array = lastItem.children
+        array = lastItem.children;
       }
-      counter--
+      counter--;
     }
 
     if (level >= options.collapseDepth) {
-      obj.isCollapsed = true
+      obj.isCollapsed = true;
     }
 
-    array.push(obj)
-    return array
+    array.push(obj);
+    return array;
   }
 
   /**
@@ -125,19 +125,19 @@ export default function parseContent(options) {
    * @return {Array}
    */
   function selectHeadings(contentElement, headingSelector) {
-    let selectors = headingSelector
+    let selectors = headingSelector;
     if (options.ignoreSelector) {
       selectors = headingSelector
-        .split(",")
+        .split(',')
         .map(function mapSelectors(selector) {
-          return `${selector.trim()}:not(${options.ignoreSelector})`
-        })
+          return `${selector.trim()}:not(${options.ignoreSelector})`;
+        });
     }
     try {
-      return contentElement.querySelectorAll(selectors)
+      return contentElement.querySelectorAll(selectors);
     } catch (e) {
-      console.warn(`Headers not found with selector: ${selectors}`) // eslint-disable-line
-      return null
+      console.warn(`Headers not found with selector: ${selectors}`); // eslint-disable-line
+      return null;
     }
   }
 
@@ -150,20 +150,20 @@ export default function parseContent(options) {
     return reduce.call(
       headingsArray,
       function reducer(prev, curr) {
-        const currentHeading = getHeadingObject(curr)
+        const currentHeading = getHeadingObject(curr);
         if (currentHeading) {
-          addNode(currentHeading, prev.nest)
+          addNode(currentHeading, prev.nest);
         }
-        return prev
+        return prev;
       },
       {
         nest: [],
-      },
-    )
+      }
+    );
   }
 
   return {
     nestHeadingsArray,
     selectHeadings,
-  }
+  };
 }

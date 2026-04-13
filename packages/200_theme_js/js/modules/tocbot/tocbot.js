@@ -49,11 +49,11 @@
 import * as tocbot from "./index-esm.js"
 ;((root, factory) => {
   if (typeof define === "function" && define.amd) {
-    define([], factory(root))
+    define([], factory(root));
   } else if (typeof exports === "object" && !(exports instanceof HTMLElement)) {
-    module.exports = factory(root)
+    module.exports = factory(root);
   } else {
-    root.tocbot = factory(root)
+    root.tocbot = factory(root);
   }
 })(
   typeof global !== "undefined" && !(global instanceof HTMLElement)
@@ -65,14 +65,14 @@ import * as tocbot from "./index-esm.js"
       !!root &&
       !!root.document &&
       !!root.document.querySelector &&
-      !!root.addEventListener // Feature test
+      !!root.addEventListener; // Feature test
     if (typeof window === "undefined" && !supports) {
-      return
+      return;
     }
 
     // Make tocbot available globally.
-    root.tocbot = tocbot
+    root.tocbot = tocbot;
 
-    return tocbot
-  },
-)
+    return tocbot;
+  }
+);

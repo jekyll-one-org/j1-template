@@ -5,13 +5,13 @@
  */
 
 export default function (options) {
-  const forEach = [].forEach
-  const some = [].some
-  const body = typeof window !== "undefined" && document.body
-  const SPACE_CHAR = " "
-  let tocElement
-  let currentlyHighlighting = true
-  let eventCount = 0
+  const forEach = [].forEach;
+  const some = [].some;
+  const body = typeof window !== 'undefined' && document.body;
+  const SPACE_CHAR = ' ';
+  let tocElement;
+  let currentlyHighlighting = true;
+  let eventCount = 0;
 
   /**
    * Create link and list elements.
@@ -20,13 +20,13 @@ export default function (options) {
    * @return {HTMLElement}
    */
   function createEl(d, container) {
-    const link = container.appendChild(createLink(d))
+    const link = container.appendChild(createLink(d));
     if (d.children.length) {
-      const list = createList(d.isCollapsed)
+      const list = createList(d.isCollapsed);
       d.children.forEach((child) => {
-        createEl(child, list)
-      })
-      link.appendChild(list)
+        createEl(child, list);
+      });
+      link.appendChild(list);
     }
   }
 
@@ -37,31 +37,31 @@ export default function (options) {
    * @return {HTMLElement}
    */
   function render(parent, data) {
-    const collapsed = false
-    const container = createList(collapsed)
+    const collapsed = false;
+    const container = createList(collapsed);
 
     data.forEach((d) => {
-      createEl(d, container)
-    })
+      createEl(d, container);
+    });
 
     // Return if no TOC element is provided or known.
-    tocElement = parent || tocElement
+    tocElement = parent || tocElement;
     if (tocElement === null) {
-      return
+      return;
     }
 
     // Remove existing child if it exists.
     if (tocElement.firstChild) {
-      tocElement.removeChild(tocElement.firstChild)
+      tocElement.removeChild(tocElement.firstChild);
     }
 
     // Just return the parent and don't append the list if no links are found.
     if (data.length === 0) {
-      return tocElement
+      return tocElement;
     }
 
     // Append the Elements that have been created
-    return tocElement.appendChild(container)
+    return tocElement.appendChild(container);
   }
 
   /**
@@ -70,37 +70,37 @@ export default function (options) {
    * @return {HTMLElement}
    */
   function createLink(data) {
-    const item = document.createElement("li")
-    const a = document.createElement("a")
+    const item = document.createElement('li');
+    const a = document.createElement('a');
     if (options.listItemClass) {
-      item.setAttribute("class", options.listItemClass)
+      item.setAttribute('class', options.listItemClass);
     }
 
     if (options.onClick) {
-      a.onclick = options.onClick
+      a.onclick = options.onClick;
     }
 
     if (options.includeTitleTags) {
-      a.setAttribute("title", data.textContent)
+      a.setAttribute('title', data.textContent);
     }
 
     if (options.includeHtml && data.childNodes.length) {
       forEach.call(data.childNodes, (node) => {
-        a.appendChild(node.cloneNode(true))
-      })
+        a.appendChild(node.cloneNode(true));
+      });
     } else {
       // Default behavior. Set to textContent to keep tests happy.
-      a.textContent = data.textContent
+      a.textContent = data.textContent;
     }
-    a.setAttribute("href", `${options.basePath}#${data.id}`)
+    a.setAttribute('href', `${options.basePath}#${data.id}`);
     a.setAttribute(
-      "class",
+      'class',
       `${
         options.linkClass + SPACE_CHAR
-      }node-name--${data.nodeName}${SPACE_CHAR}${options.extraLinkClasses}`,
-    )
-    item.appendChild(a)
-    return item
+      }node-name--${data.nodeName}${SPACE_CHAR}${options.extraLinkClasses}`
+    );
+    item.appendChild(a);
+    return item;
   }
 
   /**
@@ -109,16 +109,16 @@ export default function (options) {
    * @return {HTMLElement}
    */
   function createList(isCollapsed) {
-    const listElement = options.orderedList ? "ol" : "ul"
-    const list = document.createElement(listElement)
-    let classes = options.listClass + SPACE_CHAR + options.extraListClasses
+    const listElement = options.orderedList ? 'ol' : 'ul';
+    const list = document.createElement(listElement);
+    let classes = options.listClass + SPACE_CHAR + options.extraListClasses;
     if (isCollapsed) {
       // No plus/equals here fixes compilation issue.
-      classes = classes + SPACE_CHAR + options.collapsibleClass
-      classes = classes + SPACE_CHAR + options.isCollapsedClass
+      classes = classes + SPACE_CHAR + options.collapsibleClass;
+      classes = classes + SPACE_CHAR + options.isCollapsedClass;
     }
-    list.setAttribute("class", classes)
-    return list
+    list.setAttribute('class', classes);
+    return list;
   }
 
   /**
@@ -126,22 +126,22 @@ export default function (options) {
    * @return {HTMLElement}
    */
   function updateFixedSidebarClass() {
-    const scrollTop = getScrollTop()
+    const scrollTop = getScrollTop();
 
-    const posFixedEl = document.querySelector(options.positionFixedSelector)
-    if (options.fixedSidebarOffset === "auto") {
-      options.fixedSidebarOffset = tocElement.offsetTop
+    const posFixedEl = document.querySelector(options.positionFixedSelector);
+    if (options.fixedSidebarOffset === 'auto') {
+      options.fixedSidebarOffset = tocElement.offsetTop;
     }
 
     if (scrollTop > options.fixedSidebarOffset) {
       if (posFixedEl.className.indexOf(options.positionFixedClass) === -1) {
-        posFixedEl.className += SPACE_CHAR + options.positionFixedClass
+        posFixedEl.className += SPACE_CHAR + options.positionFixedClass;
       }
     } else {
       posFixedEl.className = posFixedEl.className.replace(
         SPACE_CHAR + options.positionFixedClass,
-        "",
-      )
+        ''
+      );
     }
   }
 
@@ -151,14 +151,14 @@ export default function (options) {
    * @return {int} position
    */
   function getHeadingTopPos(obj) {
-    let position = 0
+    let position = 0;
     if (obj !== null) {
-      position = obj.offsetTop
+      position = obj.offsetTop;
       if (options.hasInnerContainers) {
-        position += getHeadingTopPos(obj.offsetParent)
+        position += getHeadingTopPos(obj.offsetParent);
       }
     }
-    return position
+    return position;
   }
 
   /**
@@ -169,9 +169,9 @@ export default function (options) {
    */
   function updateClassname(obj, className) {
     if (obj && obj.className !== className) {
-      obj.className = className
+      obj.className = className;
     }
-    return obj
+    return obj;
   }
 
   /**
@@ -180,41 +180,41 @@ export default function (options) {
   function updateToc(headingsArray, event) {
     // Add fixed class at offset
     if (options.positionFixedSelector) {
-      updateFixedSidebarClass()
+      updateFixedSidebarClass();
     }
     // Get the top most heading currently visible on the page so we know what to highlight.
-    const headings = headingsArray
+    const headings = headingsArray;
     // This is needed for scroll events since document doesn't have getAttribute
-    const clickedHref = event?.target?.getAttribute
-      ? event?.target?.getAttribute("href")
-      : null
+    const clickedHref = (event && event.target && event.target.getAttribute)
+      ? event.target.getAttribute('href')
+      : null;
     const isBottomMode =
-      clickedHref && clickedHref.charAt(0) === "#"
-        ? getIsHeaderBottomMode(clickedHref.replace("#", ""))
-        : false
-    const shouldUpdate = currentlyHighlighting || isBottomMode
+      clickedHref && clickedHref.charAt(0) === '#'
+        ? getIsHeaderBottomMode(clickedHref.replace('#', ''))
+        : false;
+    const shouldUpdate = currentlyHighlighting || isBottomMode;
     if (event && eventCount < 5) {
-      eventCount++
+      eventCount++;
     }
 
     if (shouldUpdate && !!tocElement && headings.length > 0) {
-      const topHeader = getTopHeader(headings)
+      const topHeader = getTopHeader(headings);
 
       const oldActiveTocLink = tocElement.querySelector(
-        `.${options.activeLinkClass}`,
-      )
+        `.${options.activeLinkClass}`
+      );
 
       const topHeaderId = topHeader.id.replace(
         /([ #;&,.+*~':"!^$[\]()=>|/\\@])/g,
-        "\\$1",
-      )
-      const hashId = window.location.hash.replace("#", "")
-      let activeId = topHeaderId
+        '\\$1'
+      );
+      const hashId = window.location.hash.replace('#', '');
+      let activeId = topHeaderId;
 
       // Handle case where they clicked a link that cannot be scrolled to.
-      const isPageBottomMode = getIsPageBottomMode()
+      const isPageBottomMode = getIsPageBottomMode();
       if (clickedHref && isBottomMode) {
-        activeId = clickedHref.replace("#", "")
+        activeId = clickedHref.replace('#', '');
       } else if (
         hashId &&
         hashId !== topHeaderId &&
@@ -226,73 +226,73 @@ export default function (options) {
         // are in bottom mode and cannot be scrolled to.
         // Make sure that they stay highlighted on refresh
         // too, not just when clicked.
-        activeId = hashId
+        activeId = hashId;
       }
 
       const activeTocLink = tocElement.querySelector(
-        `.${options.linkClass}[href="${options.basePath}#${activeId}"]`,
-      )
+        `.${options.linkClass}[href="${options.basePath}#${activeId}"]`
+      );
       // Performance improvement to only change the classes
       // for the toc if a new link should be highlighted.
       if (oldActiveTocLink === activeTocLink) {
-        return
+        return;
       }
 
       // Remove the active class from the other tocLinks.
-      const tocLinks = tocElement.querySelectorAll(`.${options.linkClass}`)
+      const tocLinks = tocElement.querySelectorAll(`.${options.linkClass}`);
       forEach.call(tocLinks, (tocLink) => {
         updateClassname(
           tocLink,
-          tocLink.className.replace(SPACE_CHAR + options.activeLinkClass, ""),
-        )
-      })
-      const tocLis = tocElement.querySelectorAll(`.${options.listItemClass}`)
+          tocLink.className.replace(SPACE_CHAR + options.activeLinkClass, '')
+        );
+      });
+      const tocLis = tocElement.querySelectorAll(`.${options.listItemClass}`);
       forEach.call(tocLis, (tocLi) => {
         updateClassname(
           tocLi,
-          tocLi.className.replace(SPACE_CHAR + options.activeListItemClass, ""),
-        )
-      })
+          tocLi.className.replace(SPACE_CHAR + options.activeListItemClass, '')
+        );
+      });
 
       // Add the active class to the active tocLink.
       if (
         activeTocLink &&
         activeTocLink.className.indexOf(options.activeLinkClass) === -1
       ) {
-        activeTocLink.className += SPACE_CHAR + options.activeLinkClass
+        activeTocLink.className += SPACE_CHAR + options.activeLinkClass;
       }
-      const li = activeTocLink?.parentNode
+      const li = activeTocLink && activeTocLink.parentNode;
       if (li && li.className.indexOf(options.activeListItemClass) === -1) {
-        li.className += SPACE_CHAR + options.activeListItemClass
+        li.className += SPACE_CHAR + options.activeListItemClass;
       }
 
       const tocLists = tocElement.querySelectorAll(
-        `.${options.listClass}.${options.collapsibleClass}`,
-      )
+        `.${options.listClass}.${options.collapsibleClass}`
+      );
 
       // Collapse the other collapsible lists.
       forEach.call(tocLists, (list) => {
         if (list.className.indexOf(options.isCollapsedClass) === -1) {
-          list.className += SPACE_CHAR + options.isCollapsedClass
+          list.className += SPACE_CHAR + options.isCollapsedClass;
         }
-      })
+      });
 
       // Expand the active link's collapsible list and its sibling if applicable.
       if (
-        activeTocLink?.nextSibling &&
+        activeTocLink && activeTocLink.nextSibling &&
         activeTocLink.nextSibling.className.indexOf(
-          options.isCollapsedClass,
+          options.isCollapsedClass
         ) !== -1
       ) {
         updateClassname(
           activeTocLink.nextSibling,
           activeTocLink.nextSibling.className.replace(
             SPACE_CHAR + options.isCollapsedClass,
-            "",
-          ),
-        )
+            ''
+          )
+        );
       }
-      removeCollapsedFromParents(activeTocLink?.parentNode.parentNode)
+      removeCollapsedFromParents(activeTocLink && activeTocLink.parentNode && activeTocLink.parentNode.parentNode);
     }
   }
 
@@ -309,11 +309,11 @@ export default function (options) {
     ) {
       updateClassname(
         element,
-        element.className.replace(SPACE_CHAR + options.isCollapsedClass, ""),
-      )
-      return removeCollapsedFromParents(element.parentNode.parentNode)
+        element.className.replace(SPACE_CHAR + options.isCollapsedClass, '')
+      );
+      return removeCollapsedFromParents(element.parentNode.parentNode);
     }
-    return element
+    return element;
   }
 
   /**
@@ -321,100 +321,100 @@ export default function (options) {
    * @param {Event} event
    */
   function disableTocAnimation(event) {
-    const target = event.target || event.srcElement
+    const target = event.target || event.srcElement;
     if (
-      typeof target.className !== "string" ||
+      typeof target.className !== 'string' ||
       target.className.indexOf(options.linkClass) === -1
     ) {
-      return
+      return;
     }
     // Bind to tocLink clicks to temporarily disable highlighting
     // while smoothScroll is animating.
-    currentlyHighlighting = false
+    currentlyHighlighting = false;
   }
 
   /**
    * Enable TOC Animation.
    */
   function enableTocAnimation() {
-    currentlyHighlighting = true
+    currentlyHighlighting = true;
   }
 
   /**
    * Return currently highlighting status.
    */
   function getCurrentlyHighlighting() {
-    return currentlyHighlighting
+    return currentlyHighlighting;
   }
 
   function getIsHeaderBottomMode(headerId) {
-    const scrollEl = getScrollEl()
-    const activeHeading = document?.getElementById(headerId)
+    const scrollEl = getScrollEl();
+    const activeHeading = document.getElementById(headerId);
     const isBottomMode =
       activeHeading.offsetTop >
       scrollEl.offsetHeight -
         scrollEl.clientHeight * 1.4 -
-        options.bottomModeThreshold
-    return isBottomMode
+        options.bottomModeThreshold;
+    return isBottomMode;
   }
 
   function getIsPageBottomMode() {
-    const scrollEl = getScrollEl()
-    const isScrollable = scrollEl.scrollHeight > scrollEl.clientHeight
+    const scrollEl = getScrollEl();
+    const isScrollable = scrollEl.scrollHeight > scrollEl.clientHeight;
     const isBottomMode =
       getScrollTop() + scrollEl.clientHeight >
-      scrollEl.offsetHeight - options.bottomModeThreshold
-    return isScrollable && isBottomMode
+      scrollEl.offsetHeight - options.bottomModeThreshold;
+    return isScrollable && isBottomMode;
   }
 
   function getScrollEl() {
-    let el
+    let el;
     if (
       options.scrollContainer &&
       document.querySelector(options.scrollContainer)
     ) {
-      el = document.querySelector(options.scrollContainer)
+      el = document.querySelector(options.scrollContainer);
     } else {
-      el = document.documentElement || body
+      el = document.documentElement || body;
     }
-    return el
+    return el;
   }
 
   function getScrollTop() {
-    const el = getScrollEl()
-    return el?.scrollTop || 0
+    const el = getScrollEl();
+    return (el && el.scrollTop) || 0;
   }
 
   function getTopHeader(headings, scrollTop = getScrollTop()) {
-    let topHeader
+    let topHeader;
     some.call(headings, (heading, i) => {
       if (getHeadingTopPos(heading) > scrollTop + options.headingsOffset + 10) {
         // Don't allow negative index value.
-        const index = i === 0 ? i : i - 1
-        topHeader = headings[index]
-        return true
+        const index = i === 0 ? i : i - 1;
+        topHeader = headings[index];
+        return true;
       }
       if (i === headings.length - 1) {
         // This allows scrolling for the last heading on the page.
-        topHeader = headings[headings.length - 1]
-        return true
+        topHeader = headings[headings.length - 1];
+        return true;
       }
-    })
-    return topHeader
+    });
+    return topHeader;
   }
 
   function updateUrlHashForHeader(headingsArray) {
-    const scrollTop = getScrollTop()
-    const topHeader = getTopHeader(headingsArray, scrollTop)
-    const isPageBottomMode = getIsPageBottomMode()
+    const scrollTop = getScrollTop();
+    const topHeader = getTopHeader(headingsArray, scrollTop);
+    const isPageBottomMode = getIsPageBottomMode();
     if ((!topHeader || scrollTop < 5) && !isPageBottomMode) {
-      if (!(window.location.hash === "#" || window.location.hash === "")) {
-        window.history.pushState(null, null, "#")
+      if (!(window.location.hash === '#' || window.location.hash === '')) {
+        window.history.pushState(null, null, '#');
       }
     } else if (topHeader && !isPageBottomMode) {
-      const newHash = `#${topHeader.id}`
+      const newHash = `#${topHeader.id}`;
       if (window.location.hash !== newHash) {
-        window.history.pushState(null, null, newHash)
+        window.history.pushState(null, null, newHash);
       }
     }
   }
@@ -428,5 +428,5 @@ export default function (options) {
     getTopHeader,
     getScrollTop,
     updateUrlHashForHeader,
-  }
+  };
 }

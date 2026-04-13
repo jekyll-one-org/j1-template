@@ -2022,6 +2022,52 @@ resources:
         init_function:                  []
 
   # ----------------------------------------------------------------------------
+  # Markdown (MD -> HTML renderer)
+  #
+  - name:                               J1 Markdown
+    resource:
+      enabled:                          true
+
+      id:                               renderMD
+      comment:                          Module Markdown
+      region:                           head
+      layout:                           [ home, page, post ]
+      required:                         ondemand
+      script_load:                      defer
+      pass_init_data:                   false
+
+      data:
+        css:                            []
+        files:                          []
+        js:                             [ modules/markdown/js/marked ]
+        init_function:                  []
+
+  # ----------------------------------------------------------------------------
+  # PDF tools
+  #
+  - name:                               J1 PDF
+    resource:
+      enabled:                          true
+
+      id:                               pdf
+      comment:                          Module PDF
+      region:                           head
+      layout:                           [ home, page, post ]
+      required:                         ondemand
+      script_load:                      defer
+      pass_init_data:                   false
+
+      data:
+        css:                            []
+#       files:                          [ modules/pdf/js/pdf.mjs ]              # JS Module
+        files:                          []
+        js:                             [
+                                          modules/pdf/js/pdf,                   # PDF text extraction
+                                          modules/pdf/js/jsPDF                  # convert text to PDF
+                                        ]
+        init_function:                  []
+
+  # ----------------------------------------------------------------------------
   # jqueryScrollbar
   #
   # - name:                               J1 jqueryScrollbar
