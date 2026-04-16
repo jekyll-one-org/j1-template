@@ -2382,7 +2382,9 @@
     buffered() {
       const progress = this._vimeoState.progress;
 
-      return videojs.createTimeRange(0, progress.percent * progress.duration);
+//      jadams: videojs.createTimeRange is deprecated
+//      return videojs.createTimeRange(0, progress.percent * progress.duration);
+        return videojs.time.createTimeRanges(0, progress.percent * progress.duration);
     }
 
     paused() {
