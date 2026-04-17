@@ -11,6 +11,7 @@
 # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE
 # ------------------------------------------------------------------------------
 
+
 # ==============================================================================
 # 1. BUILD configuration
 #
@@ -53,7 +54,7 @@ environment:                            development
 # ------------------------------------------------------------------------------
 # Sets the build version of the site
 #
-version:                                2026.0.0
+version:                                2026.0.4
 
 # copyright
 # ------------------------------------------------------------------------------
@@ -614,6 +615,10 @@ collections:
 defaults:
 
   # ----------------------------------------------------------------------------
+  # J1 Sitemap plugin settings (EXCLUDES)
+  # ============================================================================
+
+  # ----------------------------------------------------------------------------
   # HTML partials (loaded via XHR) excluded from sitemap
   #
   - scope:
@@ -623,13 +628,61 @@ defaults:
       sitemap:                          false
 
   # ----------------------------------------------------------------------------
-  # Module HTML docs and examples excluded from sitemap
+  # MODULE files
+  # HTML docs and examples excluded from sitemap
   #
   - scope:
       path:                             assets/themes/j1
 
     values:
       sitemap:                          false
+
+  # ----------------------------------------------------------------------------
+  # PAGES excluded from sitemap
+  #
+  - scope:
+      path:                             pages/public/asciidoc_skeletons
+
+    values:
+      sitemap:                          false
+
+  - scope:
+      path:                             pages/public/blog
+
+    values:
+      sitemap:                          false
+
+  - scope:
+      path:                             pages/public/legal
+
+    values:
+      sitemap:                          false
+
+  - scope:
+      path:                             pages/public/plans
+
+    values:
+      sitemap:                          false
+
+  - scope:
+      path:                             pages/public/tools
+
+    values:
+      sitemap:                          false
+
+  # ----------------------------------------------------------------------------
+  # FILES (other static files) excluded from sitemap
+  #
+  - scope:
+      path:                             assets/theme/j1
+
+    values:
+      sitemap:                          false
+
+
+  # ----------------------------------------------------------------------------
+  # DEFAULT document settings
+  # ============================================================================
 
   # ----------------------------------------------------------------------------
   # PAGES
@@ -741,6 +794,7 @@ defaults:
       layout:                           page
       tts:                              false
       canonical:                        false
+      sitemap:                          false
 
   # ----------------------------------------------------------------------------
   # Book Shelf
@@ -753,6 +807,7 @@ defaults:
       layout:                           page
       tts:                              true
       canonical:                        false
+      sitemap:                          false
 
   - scope:
       type:                             fantasy
@@ -762,7 +817,8 @@ defaults:
       layout:                           page
       tts:                              true
       canonical:                        false
-
+      sitemap:                          false
+  
   - scope:
       type:                             romance
       path:                             collections/_romance
@@ -771,7 +827,7 @@ defaults:
       layout:                           page
       tts:                              true
       canonical:                        false
-
+      sitemap:                          false
 
 # ==============================================================================
 # 7. LAYOUT configuration

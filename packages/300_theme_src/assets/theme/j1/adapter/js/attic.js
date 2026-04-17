@@ -59,7 +59,8 @@ regenerate:                             true
 /*
  # -----------------------------------------------------------------------------
  # ~/assets/theme/j1/adapter/js/attic.js (2)
- # JS Adapter for J1 Master Header
+ # Backstretch v.2.1.16 implementation for J1 Theme.
+ # JS Adapter for J1 Master Header (attic)
  #
  # Product/Info:
  # https://jekyll.one
@@ -85,11 +86,11 @@ regenerate:                             true
 "use strict";
 j1.adapter.attic = ((j1, window) => {
 
-  const isDev = (j1.env === "development" || j1.env === "dev") ? true : false;
+  const environment = '{{environment}}';
+  const isDev       = (environment === "development" || environment === "dev") ? true : false;
 
   {% comment %} Set global variables
   ------------------------------------------------------------------------------ {% endcomment %}
-  var environment   = '{{environment}}';
   var state         = 'not_started';
   var moduleOptions = {};
 

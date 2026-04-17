@@ -1,36 +1,38 @@
 ---
-title:                                  TTS Karaoke
-title_extention:                        Mimick Karaoke lyrics
-tagline:                                Mimick Karaoke lyrics for spoken text
-date:                                   2025-02-10
-#last_modified:                         2025-01-01
+title:                                  Speak2Me
+title_extention:                        TTS Highlighting
+tagline:                                Test TTS Highlighting
+
+date:                                   2024-02-08
+#last_modified:                         2023-01-01
 
 description: >
-                                        TTS Karaoke Highlighting refers to a feature in text-to-speech systems
-                                        where words or phrases in displayed text are visually highlighted in
-                                        real-time as the synthesized voice reads them aloud, mimick the style
-                                        of karaoke lyrics on screen.
+                                        The search option for the J1 Template is based on the
+                                        search engine Lunr and is fully integrated with the template.
+                                        Lunr is designed to be lightweight yet full-featured to provide
+                                        users with a great search experience. Using Lunr for a Jekyll
+                                        website, there is no need to integrate complex external,
+                                        server-sided search engines like Google or Bing.
+
 keywords: >
                                         open source, free, template, jekyll, jekyllone, web,
-                                        sites, static, jamstack, bootstrap, html, html5
+                                        sites, static, jamstack, bootstrap,
+                                        lunr, site search, quick search, find,
+                                        google, bing
 
-categories:                             [ Tester ]
-tags:                                   [ Audio, TTS, Karaoke ]
+categories:                             [ Roundtrip ]
+tags:                                   [ Module, Site search ]
 
 image:
-  path:                                 /assets/image/module/attic/1920x1280/markus-spiske.jpg
+  path:                                 /assets/image/module/attic/lunr-1280x800.jpg
   width:                                1920
   height:                               1280
 
-compress:                               false
 regenerate:                             false
-personalization:                        false
-permalink:                              /pages/public/tools/tester/tts_karaoke/
+permalink:                              /pages/public/speak2me_hl_test_doc/
 
-resources:                              []
+resources:                              [ gallery, lightgallery ]
 resource_options:
-  - toccer:
-      collapseDepth:                    3
   - attic:
       slides:
         - url:                          /assets/image/module/attic/1920x1280/markus-spiske.jpg
@@ -42,13 +44,15 @@ resource_options:
 // Enable the Liquid Preprocessor
 :page-liquid:
 
-// Attribute settings for section control
-//
-:swiper--features:                      false
-
 // Set (local) page attributes here
 // -----------------------------------------------------------------------------
 // :page--attr:                         <attr-value>
+:time-num--string:                      5-10
+:time-en--string:                       Minutes
+:time-en--description:                  to read
+:time-de--string:                       Minuten
+:time-de--description:                  Lesezeit
+:lunrjs--home:                          //lunrjs.com
 
 //  Load Liquid procedures
 // -----------------------------------------------------------------------------
@@ -58,673 +62,197 @@ resource_options:
 // -----------------------------------------------------------------------------
 {% include {{load_attributes}} scope="global" %}
 
-[role="dropcap"]
-TTS Karaoke Highlighting refers to a feature in text-to-speech (TTS) systems
-where words or phrases in displayed text are visually highlighted in real-time
-as the synthesized voice reads them aloud, mimicking the style of karaoke
-lyrics on screen.
-
-This synchronization enhances reading comprehension by combining auditory
-playback with visual cues, allowing users to follow along effortlessly.
-Modern neural TTS engines often provide precise word-level timestamps to
-enable smooth highlighting without unnatural pauses.
-
-
-// Include sub-documents (if any)
-// -----------------------------------------------------------------------------
 
 // Page content
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-// https://github.com/westonruter/html5-audio-read-along/tree/master
+Sentence no 1. Sentence no 2. Sentence no 3.
 
-[role="mt-5"]
-== TTS Karaoke Highlighting
+// [role="dropcap"]
+// The search option for J1 Template is based on Lunar, a great search engine.
 
-// Willkommen zum Text-to-Speech Karaoke Demo!
+// Eins. Zwei. Drei.
 
-// Diese Anwendung zeigt, wie man Wörter während des Sprechens hervorhebt.
-// Die Web Speech API verwendet Boundary Events, um die Position jedes Wortes
-// zu verfolgen.
+// [role="dropcap"]
+// The search option for J1 Template is based on Lunar, a great search engine.
+// Lunar, written by Oliver Nightingale in Javscript, is fully integrated with
+// the template system. The engine is designed to be small in code size yet
+// full-featured to provide users with a great search experience.
 
-Welcome to the Text-to-Speech (TTS) Karaoke Demo!
+// *Lunar*, written by link:{lunrjs--home}[Oliver Nightingale, {browser-window--new}]
+// in Javscript, is fully integrated with the template system. The engine is
+// designed to be small in code size yet full-featured to provide users with a
+// great search experience.
 
-This page shows how to highlight words while speaking. The Web Speech
-API uses boundary events to track the position of each word.
+// Necessary data is stored in cookies to enable the basic services of this site
+// to operate. This website does not keep records of their use. All information
+// data necessary to control this page are stored in so-called session cookies.
+// Session cookies are automatically removed from your browser when you have
+// closed all the tabs in your browser.
 
+// Necessary::
+// Necessary data is stored in cookies to enable the basic services of this site
+// to operate. This website *does not keep records* of their use. All information
+// data necessary to control this page are stored in so-called *session cookies*.
+// Session cookies are *automatically* removed from your browser when you have
+// *closed* all the tabs in your browser.
+
+// Analyses::
+// Analyzing the use of this website helps us to improve your user experience of
+// the website to optimize. Google Analytics GA is used for the analysis. This
+// site does not transmit any personal data. Implicit personal data such as
+// IP addresses are *anonymized* to protect your privacy.
+
+// For J1 Template, different lightbox modules are available:
+
+// * PhotoSwipeJS, the default
+// * lightGallery, optional lightbox
+
+// Two types of video sources are supported:
+
+// * Video from local folders from your webspace.
+// * Video from online sources like YouTube.
+
+// .Gallery + lightGallery
+// gallery::jg_old_times[role="mt-4 mb-4"]
+
+// [role="mt-4"]
+// "Don't do stupid things twice. The selection is too big for that."
+// -- Jean-Paul Sartre
+
+[subs=attributes]
 ++++
-<div class="container nospeak mt-5">
-
-    <!-- h1>🎤 TTS Karaoke Highlighting</h1>
-    <p class="subtitle">Text-to-Speech mit Wort-für-Wort Hervorhebung</p -->
-    
-    <div id="status" class="status ready">Bereit zum Starten</div>
-    <div id="textDisplay" class="text-display"></div>
-
-    <div class="controls nospeak">
-        <button id="speakBtn">▶ Sprechen</button>
-        <button id="pauseBtn" disabled>⏸ Pause</button>
-        <button id="stopBtn" disabled>⏹ Stop</button>
-    </div>
-
-    <div class="settings">
-        <div class="setting-group">
-            <label for="voiceSelect">Stimme</label>
-            <select id="voiceSelect"></select>
-        </div>
-        <div class="setting-group">
-            <label for="rateSlider">Geschwindigkeit: <span class="range-value" id="rateValue">1.0</span></label>
-            <input type="range" id="rateSlider" min="0.5" max="2" step="0.1" value="1">
-        </div>
-        <div class="setting-group">
-            <label for="pitchSlider">Tonhöhe: <span class="range-value" id="pitchValue">1.0</span></label>
-            <input type="range" id="pitchSlider" min="0.5" max="2" step="0.1" value="1">
-        </div>
-    </div>
-
-    <!-- textarea id="textInput" class="mt-4 mb-8" placeholder="Geben Sie hier Ihren Text ein ...">
-TTS Karaoke Highlighting bezeichnet eine Funktion in Text-to-Speech (TTS)-Systemen, bei der Wörter oder Phrasen im angezeigten Text in Echtzeit visuell hervorgehoben werden, während die synthetische Stimme sie vorliest, wodurch der Stil von Karaoke-Texten auf dem Bildschirm nachgeahmt wird.
-Diese Synchronisierung verbessert das Leseverständnis durch die Kombination von Audio- und visuellen Hinweisen und ermöglicht so ein müheloses Mitlesen. Moderne neuronale TTS-Systeme liefern oft präzise Zeitstempel auf Wortebene, um ein flüssiges Hervorheben ohne unnatürliche Pausen zu ermöglichen.
-    </textarea -->
-
-    <!-- textarea id="textInput" class="mt-4 mb-8" placeholder="Enter your text ...">
-La mise en évidence karaoké (TTS Karaoke Highlighting) est une fonctionnalité des systèmes de synthèse vocale qui met en évidence visuellement, en temps réel, les mots ou expressions d'un texte affiché, au fur et à mesure que la voix de synthèse les lit à haute voix, imitant ainsi le style des paroles de karaoké.
-Cette synchronisation améliore la compréhension de la lecture en combinant la lecture audio et les repères visuels, permettant ainsi aux utilisateurs de suivre sans effort. Les moteurs TTS neuronaux modernes fournissent souvent des horodatages précis au niveau du mot pour une mise en évidence fluide, sans pauses artificielles.
-  </textarea -->
-
-    <!-- textarea id="textInput" class="mt-4 mb-8" placeholder="Enter your text ...">
-The relevance, the score, is calculated based on an algorithm called BM25, along with other factors. You don't need to worry too much about the details of how this technique works. To summarize: the more a search term occurs in a document, the more that term will increase that documents' score, but th more a search term occurs in the overall collection of documents, the less that term will increase a document's score. In other words: seldom words count and increase the score.
-    </textarea -->
-
-    <textarea id="textInput" class="mt-4 mb-8" placeholder="Enter your text ...">
-TTS Karaoke Highlighting refers to a feature in text-to-speech systems where words or phrases in displayed text are visually highlighted in real-time as the synthesized voice reads them aloud, mimicking the style of karaoke lyrics on screen.
-This synchronization enhances reading comprehension by combining auditory playback with visual cues, allowing users to follow along effortlessly. Modern neural TTS engines often provide precise word-level timestamps to enable smooth highlighting without unnatural pauses.
-    </textarea>
-
-    <!-- textarea id="textInput" class="mt-4 mb-8" placeholder="Enter your text ...">
-The relevance, the score, is calculated based on an algorithm called BM25, along with other factors. You don't need to worry too much about the details of how this technique works. To summarize: the more a search term occurs in a document, the more that term will increase that documents' score, but th more a search term occurs in the overall collection of documents, the less that term will increase a document's score. In other words: seldom words count and increase the score.
-
-Scoring information generated by the BM25 algorithm is added to the search index and allows a very fast calculation of the relevance of documents for queries.
-
-Imagine you're website contains documents about Jekyll. The term Jekyll may occur very frequently throughout the entire website. Used quite often for the content. So finding a document that mentions the term Jekyll isn't very significant for a search.
-
-However, if you're searching for Jekyll Generator, only some documents of the website has the word Generator in them, and that will bring the score, the relevance, for documents having both words in them at a higher level, and bring them higher up in the search results.
-
-Matching and scoring are used by all search engines - the same as for J1 QuickSearch. You'll see for QuickSearch a similar behavior in sorting search results as you already know from commercial internet search engines like Google: the top results are the more relevant ones.
-    </textarea -->
-
+<div class="video-title">
+  <p>
+    <i class="mdib mdib-clock-outline mdib-24px mr-2"></i>
+    {time-num--string} {time-en--string} {time-en--description}.
+  </p>
 </div>
 ++++
 
-++++
-<script>
-
-const logger            = log4javascript.getLogger('j1.tts.karaoke');
-
-// Rough average speaking speed, en: ~150-160 words per minute
-const avgSpeedSpeakingWordsPerMin   = 170; // en
-// const avgSpeedSpeakingWordsPerMin   = 215; // fr
-
-const textDisplay       = document.getElementById('textDisplay');
-const textInput         = document.getElementById('textInput');
-const textInputValue    = textInput.value;
-const trimedText        = textInputValue.trim();
-const speakBtn          = document.getElementById('speakBtn');
-const pauseBtn          = document.getElementById('pauseBtn');
-const stopBtn           = document.getElementById('stopBtn');
-const voiceSelect       = document.getElementById('voiceSelect');
-const rateSlider        = document.getElementById('rateSlider');
-const pitchSlider       = document.getElementById('pitchSlider');
-const rateValue         = document.getElementById('rateValue');
-const pitchValue        = document.getElementById('pitchValue');
-const status            = document.getElementById('status');
-
-var voices              = [];
-var utterance           = null;
-var isPaused            = false;
-
-var voiceUserDefault    = 'Google UK English Female';
-var voiceChromeDefault  = 'Google US English';
-var defaultLanguage     = '';
-var navigatorLanguage   = navigator.language || navigator.userLanguage;
-var sourceLanguage      = document.getElementsByTagName("html")[0].getAttribute("lang");
-
-var onBoundaryEmulated  = false;
-var voiceName           = '';
-var words2speak;
-
-// load voices available
-function loadVoices() {
-    voices = speechSynthesis.getVoices();
-    voiceSelect.innerHTML = '';
-    
-    const germanVoices  = voices.filter(v => v.lang.startsWith('de'));
-    const englishVoices = voices.filter(v => v.lang.startsWith('en'));
-    const otherVoices   = voices.filter(v => !v.lang.startsWith('de') && !v.lang.startsWith('en'));
-
-    [...germanVoices, ...englishVoices, ...otherVoices].forEach((voice, index) => {
-        const option = document.createElement('option');
-        option.value = index;
-        option.textContent = `${voice.name} (${voice.lang})`;
-        if (voice.default) option.textContent += ' - Standard';
-        voiceSelect.appendChild(option);
-    });
-
-    // select voice
-    if (sourceLanguage == 'de' && germanVoices.length > 0) {
-        const voiceIndex  = voices.indexOf(germanVoices[2]);
-        voiceSelect.value = voiceIndex;
-        voiceName         = germanVoices[0];
-    }
-
-    if (sourceLanguage == 'en' && englishVoices.length > 0) {
-        const voiceIndex  = voices.indexOf(englishVoices[0]);
-        voiceSelect.value = voiceIndex;
-        voiceName         = englishVoices[0].name;
-    }
-
-    // if (sourceLanguage == 'en' && englishVoices.length > 0) {
-    //     const voiceIndex  = voices.indexOf(germanVoices[2]);
-    //     voiceSelect.value = voiceIndex;
-    //     voiceName         = germanVoices[0];
-    // }
-
-    if (voiceName.includes('Google')) {
-        onBoundaryEmulated  = true;
-    } else {
-        onBoundaryEmulated  = false;
-    }   
-}
-
-
-function emulateOnBoundaryHandlerSimple() {
-
-// Rough estimatation: ~5 chars per word
-const avgCharsPerWord               = getAverageCharsPerWord(trimedText);
-
-// time values
-const secPerMin                     = 60;
-const msPerSec                      = 1000;
-const msPerMin                      = secPerMin * msPerSec;
-
-// Adjust duration based on utterance.rate (default is 1)
-const avgMsPerChar                  = msPerMin / (avgSpeedSpeakingWordsPerMin * avgCharsPerWord); 
-const adjustedMsPerChar             = avgMsPerChar / utterance.rate;
-
-var currentOffset                   = 0;
-
-    words2speak.forEach((word) => {
-        const charIndex = trimedText.indexOf(word, currentOffset);
-
-        if (charIndex === -1) return;
-
-        // delay calculated based on absolute position from start
-        const wordDelay = charIndex * adjustedMsPerChar;
-
-        setTimeout(() => {
-            // emulated/extended boundary event object
-            const event                 = {};
-
-            event.name                  = event.name || 'word';
-            event.charIndex             = event.charIndex || charIndex;
-            event.charLength            = event.charLength || word.length;
-            event.elapsedTime           = event.elapsedTime || performance.now();
-            event.currentTarget         = event.currentTarget|| {};
-            event.currentTarget.text    = event.currentTarget.text || trimedText;
-            event.currentTarget.word    = event.currentTarget.word || word;     // extended propetty
-            event.utterance             = event.utterance || utterance;
-
-            logger.debug(`emulated utterance.onboundary:\n
-             spoken word: ${event.currentTarget.word} at startIndex: ${event.charIndex}`);
-
-            highlightWord(event.charIndex);
-        }, wordDelay);
-
-        currentOffset = event.charIndex + event.charLength;
-    });
-}
-
-function emulateOnBoundaryHandler() {
-
-// Rough estimatation: ~5 chars per word
-const avgCharsPerWord               = getAverageCharsPerWord(trimedText);
-
-// time values
-const secPerMin                     = 60;
-const msPerSec                      = 1000;
-const msPerMin                      = secPerMin * msPerSec;
-
-// Adjust duration based on utterance.rate (default is 1)
-const avgMsPerChar                  = msPerMin / (avgSpeedSpeakingWordsPerMin * avgCharsPerWord); 
-const adjustedMsPerChar             = avgMsPerChar / utterance.rate;
-
-var currentOffset                   = 0;
-var cumulativeDelay                 = 0;
-
-    // emulated boundary handler
-    words2speak.forEach((word) => {
-        // find actual position of this word in the text
-        const charIndex = trimedText.indexOf(word, currentOffset);
-
-        if (charIndex === -1) {
-            logger.warn(`Word: "${word}" not found in text after offset: ${currentOffset}`);
-            return;
-        }
-
-        // calculate delay based on characters from start to this word
-        const wordDelay = cumulativeDelay;
-
-        setTimeout(() => {
-            const currentWord           = trimedText.substring(charIndex, charIndex + word.length);
-
-            // emulated/extended boundary event object
-            const event                 = {};
-
-            event.name                  = event.name || 'word';
-            event.charIndex             = event.charIndex || charIndex;
-            event.charLength            = event.charLength || word.length;
-            event.elapsedTime           = event.elapsedTime || performance.now();
-            event.currentTarget         = event.currentTarget|| {};
-            event.currentTarget.text    = event.currentTarget.text || trimedText;
-            event.currentTarget.word    = event.currentTarget.word || word;     // extended property
-            event.utterance             = event.utterance || utterance;
-
-            logger.debug(`emulated utterance.onboundary:\n spoken word: ${event.currentTarget.word} at startIndex: ${event.charIndex}`);
-
-            highlightWord(event.charIndex);
-        }, wordDelay);
-
-        // update offset and cumulative delay for next iteration
-        currentOffset    = charIndex + word.length;
-        cumulativeDelay += (word.length * adjustedMsPerChar);
-
-        // account for spaces/whitespace between words
-        // find next non-whitespace character
-        while (currentOffset < trimedText.length && /\s/.test(trimedText[currentOffset])) {
-            cumulativeDelay += adjustedMsPerChar; // Add delay for whitespace
-            currentOffset++;
-        }
-    });
-}
-
-function getAverageCharsPerWord(text) {
-    // split by whitespace and filter out empty strings
-    const words = text.trim().split(/\s+/);
-    
-    if (words.length === 0 || words[0] === "") return 0;
-
-    // calculate total characters across all words
-    const totalChars = words.reduce((sum, word) => sum + word.length, 0);
-
-    // calculate the average
-    return totalChars / words.length;
-}
-
-// pause/resume speaking
-function togglePause() {
-    if (isPaused) {
-        speechSynthesis.resume();
-        updateStatus('speaking', '🔊 Spreche...');
-        pauseBtn.textContent = '⏸ Pause';
-        isPaused = false;
-    } else {
-        speechSynthesis.pause();
-        updateStatus('paused', '⏸ Pausiert');
-        pauseBtn.textContent = '▶ Fortsetzen';
-        isPaused = true;
-    }
-}
-
-// stop speaking
-function stop() {
-    speechSynthesis.cancel();
-    updateStatus('ready', 'Gestoppt. Bereit zum Starten');
-    speakBtn.disabled = false;
-    pauseBtn.disabled = true;
-    stopBtn.disabled = true;
-    pauseBtn.textContent = '⏸ Pause';
-    isPaused = false;
-    
-    // remove all current highlights
-    textDisplay.querySelectorAll('span').forEach(span => {
-        span.classList.remove('highlight');
-    });
-}
-
-// update voices on changes
-loadVoices();
-if (speechSynthesis.onvoiceschanged !== undefined) {
-    speechSynthesis.onvoiceschanged = loadVoices;
-}
-
-// update sliders
-rateSlider.addEventListener('input', (e) => {
-    rateValue.textContent = e.target.value;
-});
-
-pitchSlider.addEventListener('input', (e) => {
-    pitchValue.textContent = e.target.value;
-});
-
-// split spoken text in spans (for highlightning)
-function prepareText(text) {
-    const words = text.split(/\s+/);
-    textDisplay = document.getElementById('textDisplay');
-    textDisplay.innerHTML = '';
-    
-    words.forEach((word, index) => {
-        const span = document.createElement('span');
-        // add single space between words
-        span.textContent = word + ' '; 
-        span.dataset.index = index;
-        textDisplay.appendChild(span);
-    });
-}
-
-// highlighting logic
-function highlightWord(charIndex) {
-    const spans = textDisplay.querySelectorAll('span');
-    var currentPos = 0;
-
-    // remove all exising highlights 
-    spans.forEach(span => span.classList.remove('highlight'));
-
-    // searh for current word to highlight
-    for (var span of spans) {
-        const wordLength      = span.textContent.length;
-        const spanTextContent = span.textContent;
-
-        if (charIndex >= currentPos && charIndex < currentPos + wordLength) {
-            span.classList.add('highlight');
-            // scrool smooth to current word spoken
-            span.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            break;
-        }
-        currentPos += wordLength;
-    }
-}
-
-// state update
-function updateStatus(state, text) {
-    status.className = `status ${state}`;
-    status.textContent = text;
-}
-
-// central speak funktion
-function speak() {
-
-    logger.info(`speak: \n funktion is being initialized`);
-
-    if (!trimedText) return;
-
-    // stop previous utterance
-    speechSynthesis.cancel();
-
-    prepareText(trimedText);
-
-    utterance           = new SpeechSynthesisUtterance(textInputValue);
-    utterance.voice     = voices[voiceSelect.value];
-    utterance.rate      = parseFloat(rateSlider.value);
-    utterance.pitch     = parseFloat(pitchSlider.value);
-
-    if (onBoundaryEmulated) {
-        logger.info(`speak: \n
-         use speech synthesis utterance boundary events of type: emulated`);
-    } else {
-        logger.info(`speak: \n
-         use speech synthesis utterance boundary events of type: native`);
-
-        // speech synthesis utterance boundary events
-        // NOTE: avalable for OS based voices only
-        utterance.onboundary = (event) => {
-            const dummyWord = 'dummyWord';
-
-            if (event.name === 'word') {
-                const startIndex    = event.charIndex;
-                const length        = event.charLength;
-                const targetText    = event.target.text;
-
-                // extract word from original text
-                const currentWord = targetText.substring(startIndex, startIndex + length);
-                logger.debug(`utterance.onboundary: \n
-                 spoken word: ${currentWord} at startIndex: ${startIndex}`);
-
-                // trigger highlighting logic
-                highlightWord(startIndex);
-            }
-      };
-    }
-
-    utterance.onstart = () => {
-        speakBtn.disabled   = true;
-        pauseBtn.disabled   = false;
-        stopBtn.disabled    = false;
-        isPaused            = false;
-        words2speak         = trimedText.split(/\s+/);
-
-        updateStatus('speaking', '🔊 Speaking ...');
-
-        if (onBoundaryEmulated) {
-//        emulateOnBoundaryHandlerSimple();
-          emulateOnBoundaryHandler();
-        }
-    };
-
-    utterance.onend = () => {
-        updateStatus('ready', 'Ready to start');
-        speakBtn.disabled = false;
-        pauseBtn.disabled = true;
-        stopBtn.disabled = true;
-
-        // remove all current highlights
-        textDisplay.querySelectorAll('span').forEach(span => {
-            span.classList.remove('highlight');
-        });
-    };
-
-    utterance.onerror = (event) => {
-        console.error('Speech error:', event);
-        updateStatus('ready', 'error occured');
-        speakBtn.disabled = false;
-        pauseBtn.disabled = true;
-        stopBtn.disabled = true;
-    };
-
-    speechSynthesis.speak(utterance);
-}
-
-// event listeners
-speakBtn.addEventListener('click', speak);
-pauseBtn.addEventListener('click', togglePause);
-stopBtn.addEventListener('click', stop);
-
-</script>
-++++
-
-++++
-<style>
-
-.VIpgJd-ZVi9od-aZ2wEe-wOHMyf-ti6hGc {
-    -webkit-transition-delay: 0s;
-    transition-delay: 0s;
-    left: -14px;
-    top: -14px;
-    display: none;
-}
-
-/*
-h1 {
-    color: #333;
-    margin-bottom: 10px;
-    text-align: center;
-}
-
-.subtitle {
-    color: #666;
-    text-align: center;
-    margin-bottom: 30px;
-    font-size: 14px;
-}
-
-.text-display {
-    background: #eeeeee;
-    margin-top: 30px;
-    margin-bottom: 30px;
-    min-height: 150px;
-    font-size: 20px;
-    color: #333;
-}
-
-.text-display span {
-    transition: all 0.15s ease;
-    padding: 2px 0;
-}
-
-.text-display span.highlight {
-    background: linear-gradient(120deg, #f6d365 0%, #fda085 100%);
-    color: #fff;
-    font-weight: 600;
-    border-radius: 4px;
-    padding: 2px 4px;
-    box-shadow: 0 2px 8px rgba(253, 160, 133, 0.4);
-}
-*/
-
-.controls {
-    display: flex;
-    gap: 15px;
-    margin-bottom: 20px;
-    flex-wrap: wrap;
-}
-
-button {
-    flex: 1;
-    min-width: 120px;
-    padding: 15px 25px;
-    font-size: 16px;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    font-weight: 600;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-}
-
-button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(0,0,0,0.15);
-}
-
-button:active {
-    transform: translateY(0);
-}
-
-#speakBtn {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
-}
-
-#pauseBtn {
-    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-    color: white;
-}
-
-#stopBtn {
-    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-    color: white;
-}
-
-button:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-    transform: none !important;
-}
-
-textarea {
-    width: 100%;
-    padding: 15px;
-    border: 2px solid #e0e0e0;
-    border-radius: 10px;
-    font-size: 16px;
-    font-family: inherit;
-    resize: vertical;
-    min-height: 120px;
-    transition: border-color 0.3s ease;
-}
-
-textarea:focus {
-    outline: none;
-    border-color: #667eea;
-}
-
-.settings {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 20px;
-    margin-bottom: 20px;
-}
-
-.setting-group {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-}
-
-label {
-    font-weight: 600;
-    color: #555;
-    font-size: 14px;
-}
-
-select, input[type="range"] {
-    font-size: 14px;
-    background: white;    
-    border: 2px solid #e0e0e0;
-    border-radius: 8px;
-    /* padding: 10px; */
-}
-
-input[type="range"] {
-    cursor: pointer;
-}
-
-.range-value {
-    text-align: right;
-    color: #667eea;
-    font-weight: 600;
-}
-
-.info {
-    background: #e3f2fd;
-    border-left: 4px solid #2196f3;
-    padding: 15px;
-    border-radius: 8px;
-    margin-top: 20px;
-    font-size: 14px;
-    color: #1565c0;
-}
-
-.status {
-    text-align: center;
-    padding: 10px;
-    border-radius: 8px;
-    margin-bottom: 20px;
-    font-weight: 600;
-}
-
-.status.ready {
-    background: #e8f5e9;
-    color: #2e7d32;
-}
-
-.status.speaking {
-    background: #fff3e0;
-    color: #e65100;
-}
-
-.status.paused {
-    background: #f3e5f5;
-    color: #6a1b9a;
-}
-
-</style>
-++++
+// Include sub-documents (if any)
+// -----------------------------------------------------------------------------
+// [role="mt-5"]
+// == Github Gist
+
+// Code snippets may helpful to support your readers for existing code examples.
+// An excellent place for code snippets is  at Github. To embed an existing
+// gist into your documents, the Asciidoc Extention *Gist block* provides the
+// block macro `gist::` to do so.
+
+// The following *Gist* snippet is taken from this
+// link:{url-asciidoc-extensions--gist-example}[example, {browser-window--new}]:
+
+// [source, prometheus, role="noclip"]
+// ----
+// .Gist title
+// gist::git_address[]
+// ----
+
+// .Example of a gist block
+// [source, text, role="noclip"]
+// ----
+// .Guard setup to live preview AsciiDoc output
+// gist::mojavelinux/5546622[]
+// ----
+
+// [.result]
+// ====
+// .Guard setup to live preview AsciiDoc output
+// gist::mojavelinux/5546622[]
+// ====
+
+[role="mt-4"]
+== Introduction
+
+Using the J1 Search module for a website, it is *not* longer needed to
+integrate complex external search engines like _Bing_ or _Google_ into your
+web. Searching a website using QuickSearch is s little different from Internet
+search engines.
+
+[NOTE]
+====
+The document content is collected from the HTML body element `<body>`.
+To limit the size of the index data loaded by the browser, the bodys'
+content is removed from the document source, but the *content* is still
+fully searchable.
+====
+
+Search platforms are using complex algorithms to provide a simple interface
+but require a lot of artificial intelligence methods to make sense out of a
+handful of words given for a search and to inject advertising elements for
+their customers.
+
+Nevertheless, the J1 implementation of Lunar, is simple like searching at
+_Google_ or _Bing_ but offers additional features to do searches more
+specifically. QuickSearch provides an easy-to-use query language for better
+results with no advertising included.
+
+[role="mt-4"]
+== Core concepts
+
+Understanding some of the concepts and terminology that search engine of
+J1 Template, will allow users to provide powerful search expressions to get
+more relevant search results.
+
+[role="mt-4"]
+=== Indexing documents
+
+QuickSearch offers searches on *all* documents of the website generated by J1.
+Advantage: no internet access is needed for searches. Searches are based on a
+pre-build local *full-text* index loaded by the browser for all pages. The
+index for a site is generated by the Jekyll index plugin `lunr_index.rb`
+located in the plugins folder `_plugins`.
+
+[NOTE]
+====
+The full-text index for the search engine is always generated by Jekyll
+at *build-time.*
+====
+
+[role="mt-4"]
+=== Documents
+
+The searchable data in an index is organized as documents containing the
+text and the words you want to search on. A document is a JSON-based data set
+with fields that are processed to create the result list for a search.
+
+
+In this document, there are several fields, like *title*, *tagline*, or
+*description*, that could be used for full-text searches. But additional
+fields are available, like *tags* or *categories* that can be used for
+more specific searches.
+
+To do a simple full-text search as well as more specific searches, the
+search core engine *Lunar* offers a query language, a DSL (domain-specific
+language). Find more about *QuickSearch|Lunr DSL* queries with the section
+<<Searching>>.
+
+[role="mt-4"]
+=== Scoring
+
+The relevance, the *score*, is calculated based on an algorithm called *BM25*,
+along with other factors. You don't need to worry too much about the details
+of how this technique works. To summarize: the more a search term occurs in
+a document, the more that term will increase that documents' score, but th
+more a search term occurs in the *overall* collection of documents, the less
+that term will increase a document's score. In other words: seldom words count
+and increase the score.
+
+Scoring information generated by the BM25 algorithm is added to the search
+index and allows a very fast calculation of the relevance of documents
+for queries.
+
+Imagine you're website contains documents about Jekyll. The term *Jekyll*
+may occur very frequently throughout the entire website. Used quite often
+for the content. So finding a document that mentions the term Jekyll isn't
+very significant for a search.
+
+However, if you're searching for *Jekyll Generator*, only some documents of
+the website has the word *Generator* in them, and that will bring the score,
+the relevance, for documents having both words in them at a higher level,
+and bring them higher up in the search results.
+
+Matching and scoring are used by all search engines - the same as for J1
+QuickSearch. You'll see for QuickSearch a similar behavior in *sorting*
+search results as you already know from commercial internet search engines
+like Google: the top results are the more relevant ones.

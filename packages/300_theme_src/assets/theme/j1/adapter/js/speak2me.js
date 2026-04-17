@@ -306,8 +306,8 @@ j1.adapter.speak2me = ((j1, window) => {
           // on shown
           // -------------------------------------------------------------------
           $('#speak2me_container').on('shown.bs.modal', function () {
-            this.$buttonSpeak = $('#speak_button');
             this.$buttonStop  = $('#stop_button');
+            this.$buttonSpeak = $('#speak_button');
 
             // setup workaround for chromium based browsers
             // to enable infinite speech output

@@ -1,18 +1,18 @@
-// -----------------------------------------------------------------------------
-// ESLint shimming
-// -----------------------------------------------------------------------------
-/* eslint indent: "off"                                                       */
-/* eslint no-undef: "off"                                                     */
-/* eslint semi: "off"                                                         */
-// -----------------------------------------------------------------------------
-'use strict';
-
-module.exports = function updateTocScroll(options) {
-  var toc = document.querySelector(options.tocSelector);
+export default function updateTocScroll(options) {
+  const toc =
+    options.tocScrollingWrapper ||
+    options.tocElement ||
+    document.querySelector(options.tocSelector);
   if (toc && toc.scrollHeight > toc.clientHeight) {
-    var activeItem = toc.querySelector('.' + options.activeListItemClass);
+    const activeItem = toc.querySelector(`.${options.activeListItemClass}`);
     if (activeItem) {
-      toc.scrollTop = activeItem.offsetTop;
+      // Determine element top and bottom
+      const eTop = activeItem.offsetTop;
+
+      // Check if out of view
+      // Above scroll view
+      const scrollAmount = eTop - options.tocScrollOffset;
+      toc.scrollTop = scrollAmount > 0 ? scrollAmount : 0;
     }
   }
 }

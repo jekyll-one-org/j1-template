@@ -1,0 +1,281 @@
+/*
+ # -----------------------------------------------------------------------------
+ # ~/assets/theme/j1/modules/masonry/css/theme/uno.css  (fix #4 patch)
+ #
+ # Drop-in CSS patch for the .card.bottom hover-enlargement bug.
+ # Append to the end of the existing masonry uno.css, OR load this file AFTER
+ # uno.css so these rules win by source order.
+ #
+ # Scope:
+ #   - Fixes:   hover on <div class="card bottom"> enlarges the card's height.
+ #   - Target:  masonry cards using markup
+ #                <div class="card bottom">
+ #                  <a class="lg-item" ...><img ...></a>
+ #                  <div class="caption">...</div>
+ #                </div>
+ #   - Prior attempts: #1 (lightGallery uno.css icon), #2 (overlay pinning),
+ #                     #3 (box-model freeze + inline image fix).
+ #     All three failed because they did not address the REAL mechanism.
+ #
+ # Copyright (C) 2023-2026 Juergen Adams  -  MIT License
+ # -----------------------------------------------------------------------------
+*/
+
+/* claude - masonry card hover #4
+   ===========================================================================
+   ROOT CAUSE
+
+   .card (bootstrap.css, line ~4334) is declared:
+       .card {
+         display: flex;
+         flex-direction: column;
+         height: var(--bs-card-height);   /* empty by default => auto */
+         ...
+       }
+
+   Fix #3 then set:
+       .card.bottom { height: var(--card-h); }      /* --card-h: auto */
+
+   On a `display: flex; flex-direction: column` element with `height: auto`,
+   the card's height is literally the SUM of its flex children's block sizes:
+       card.height = image-anchor.height + caption.height
+
+   So anything that changes the caption's height changes the card's height.
+   The caption height changes because:
+
+     (a) The webfont (Lato, plus system fallbacks) swaps in AFTER first paint.
+         When it swaps, the caption's line box is re-measured. The new
+         font's ascent/descent metrics differ from the fallback by 1-3 px.
+
+     (b) bootstrap.css line ~370 declares:
+             a:hover { --bs-link-color-rgb: var(--bs-link-hover-color-rgb); }
+         This triggers a style recalculation on every ancestor hover. During
+         that recalc, if the font has just swapped, the caption's measured
+         height updates.
+
+     (c) Fix #3 set `line-height: 1` on .card.bottom. With line-height equal
+         to font-size, descenders render outside the content box and the
+         browser's half-leading rounding can flip by 1 px between paints.
+
+   The "hover enlarges the card" symptom is really:
+       first hover coincides with font swap + style recalc,
+       AND the card's height is a live sum of its children.
+
+   Fix #3 tried to solve this by locking the image anchor's line-height and
+   font-size, but left the caption as a flex sibling that still contributes
+   height to the card. So the card still grew.
+
+   SOLUTION
+
+     1. Make the card's height EXPLICIT (pixel value), not derived.
+     2. Use `contain: size` to make descendant layout legally unable to
+        affect the card's size.
+     3. Take the caption OUT of normal flow — absolutely positioned over
+        the image. The caption cannot contribute to flow height if it
+        isn't in the flow.
+     4. Use `object-fit: cover` on the image so the image fills the fixed
+        card exactly without creating its own line box.
+     5. Use `box-shadow` for any hover cue — it paints outside the border
+        box and has zero layout cost.
+
+   =========================================================================== */
+
+
+/* claude - masonry card hover #4
+   ---------------------------------------------------------------------------
+   Card container: explicit height, containment, opted out of flex column.
+   --------------------------------------------------------------------------- */
+.card.bottom {
+  /* Author-controlled sizing. Override per card with inline style
+     `style="--card-h: 240px; --card-w: 320px"` or a utility class. */
+  --card-h: 220px;
+  --card-w: 100%;
+
+  /* Opt out of bootstrap's `.card { display: flex; flex-direction: column }`.
+     The card no longer sums its children — it has an explicit size. */
+  display: block;
+
+  /* Positioning context for the absolute image-anchor and caption. */
+  position: relative;
+
+  /* Explicit box. No `auto`, no inheritance gymnastics. */
+  box-sizing: border-box;
+  height: var(--card-h);
+  width:  var(--card-w);
+
+  /* Spec-level guarantee that descendants cannot affect this element's
+     layout, paint area, or size. This is the hard barrier that fixes
+     #1 / #2 / #3 lacked. */
+  contain: layout paint size;
+
+  /* Clip any stray sub-pixel overflow so nothing can visually "leak" and
+     get interpreted as growth. */
+  overflow: hidden;
+
+  /* Neutralise box-model contributions. */
+  padding: 0;
+  margin:  0;
+  border:  0;
+
+  /* Only non-geometric transition — safe for hover cues. */
+  transition: box-shadow 0.2s ease;
+}
+
+/* claude - masonry card hover #4
+   Pin every interactive state to the exact same geometry. Redundant given
+   `contain: size`, but kept as defence-in-depth for browsers/engines that
+   apply containment lazily. */
+.card.bottom,
+.card.bottom:hover,
+.card.bottom:focus,
+.card.bottom:focus-within,
+.card.bottom:active {
+  height:     var(--card-h);
+  width:      var(--card-w);
+  min-height: var(--card-h);
+  max-height: var(--card-h);
+  min-width:  0;
+  max-width:  none;
+  transform:  none;
+}
+
+
+/* claude - masonry card hover #4
+   ---------------------------------------------------------------------------
+   Image anchor: absolute, fills the card, no line box.
+   --------------------------------------------------------------------------- */
+.card.bottom > a.lg-item {
+  position: absolute;
+  inset: 0;                 /* shorthand for top/right/bottom/left: 0 */
+  display: block;
+
+  /* Kill the line box entirely. No line box => no descender gap, no
+     font-metric-driven height. */
+  font-size: 0;
+  line-height: 0;
+
+  /* Bootstrap's global `a { text-decoration: underline }` (line ~368) is
+     the one thing that could still add a painted underline beneath the
+     image; remove it here. */
+  text-decoration: none;
+  border: 0;
+  cursor: default; /* preserves the existing lightGallery uno.css intent */
+}
+
+.card.bottom > a.lg-item:hover,
+.card.bottom > a.lg-item:focus,
+.card.bottom > a.lg-item:active {
+  font-size: 0;
+  line-height: 0;
+  text-decoration: none;
+  border: 0;
+}
+
+/* claude - masonry card hover #4
+   Image fills the card exactly. object-fit: cover is what makes a fixed
+   card height cosmetically acceptable regardless of the source image's
+   aspect ratio. If you need `contain` semantics instead, change it per
+   card via a utility class — do not remove the fixed height. */
+.card.bottom > a.lg-item > img,
+.card.bottom > a.lg-item > picture > img {
+  display: block;
+  width:  100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+  vertical-align: top;
+  border: 0;
+
+  /* Block any theme rule like `a:hover img { transform: scale(1.05) }`
+     that would reflow when combined with adjacent margins. */
+  transform: none;
+  transition: none;
+}
+
+.card.bottom > a.lg-item:hover > img,
+.card.bottom > a.lg-item:hover > picture > img {
+  transform: none;
+}
+
+
+/* claude - masonry card hover #4
+   ---------------------------------------------------------------------------
+   Caption: absolute overlay bar at the bottom of the card.
+   This is the single most important change — it takes the caption out of
+   the card's height equation entirely.
+   --------------------------------------------------------------------------- */
+.card.bottom > .caption {
+  position: absolute;
+  left:   0;
+  right:  0;
+  bottom: 0;
+
+  /* Explicit metrics — never `inherit`. Adjust to project taste but keep
+     them as concrete values on both idle and hover states. */
+  padding: 0.5rem 0.75rem;
+  margin:  0;
+  border:  0;
+
+  font-size:   0.875rem;
+  line-height: 1.3;          /* room for descenders; no half-leading games */
+  color:       #ffffff;
+  background:  rgba(0, 0, 0, 0.55);
+
+  /* Truncate rather than wrap. Wrapping would change caption height if a
+     longer string is later rendered — not a hover issue, but a future
+     footgun we close here. */
+  white-space:   nowrap;
+  overflow:      hidden;
+  text-overflow: ellipsis;
+
+  /* The overlay must never intercept clicks meant for the anchor. */
+  pointer-events: none;
+
+  /* Only colour transitions — no geometry transitions. */
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.card.bottom:hover > .caption,
+.card.bottom:focus-within > .caption {
+  /* Optional: darken the caption on hover. Purely cosmetic, zero layout. */
+  background: rgba(0, 0, 0, 0.70);
+}
+
+
+/* claude - masonry card hover #4
+   ---------------------------------------------------------------------------
+   Hover cue: box-shadow only. box-shadow paints outside the border box and
+   does not contribute to layout. Remove this block if you do not want a
+   visible hover cue.
+   --------------------------------------------------------------------------- */
+.card.bottom:hover {
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+}
+
+
+/* claude - masonry card hover #4
+   ---------------------------------------------------------------------------
+   Counter the specific fix #3 rules that are now harmful.
+   Fix #3 set `line-height: 1` and `flex: 0 0 auto` on .card.bottom. With
+   the card now `display: block`, `flex: 0 0 auto` has no effect, and
+   `line-height: 1` could still be inherited by a future child we don't
+   control, so we reset both to safe defaults.
+   --------------------------------------------------------------------------- */
+.card.bottom {
+  line-height: normal;       /* override fix #3's `line-height: 1` */
+  flex: initial;             /* override fix #3's `flex: 0 0 auto` */
+}
+
+
+/* claude - masonry card hover #4
+   ---------------------------------------------------------------------------
+   Per-card sizing utilities (optional). Use on the markup like:
+       <div class="card bottom card-bottom--h180">...</div>
+   --------------------------------------------------------------------------- */
+.card.bottom.card-bottom--h160 { --card-h: 160px; }
+.card.bottom.card-bottom--h180 { --card-h: 180px; }
+.card.bottom.card-bottom--h200 { --card-h: 200px; }
+.card.bottom.card-bottom--h240 { --card-h: 240px; }
+.card.bottom.card-bottom--h280 { --card-h: 280px; }
+.card.bottom.card-bottom--h320 { --card-h: 320px; }
+

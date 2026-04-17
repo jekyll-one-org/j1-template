@@ -5,7 +5,7 @@
 # Product/Info:
 # https://jekyll.one
 #
-# Copyright (C) 2023-2026 Juergen Adams
+# Copyright (C) 2026 Juergen Adams
 #
 # J1 Template is licensed under the MIT License.
 # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE
@@ -30,6 +30,30 @@ defaults:
   #
   enabled:                              false
 
+  smoothScroll:
+    enabled:                            true
+
+  toolbox:
+    enabled:                            false
+
+  playlist:
+    enabled:                            true
+
+    search:
+      enabled:                          true
+
+    sort:
+      enabled:                          true
+
+    loop:
+      enabled:                          true
+      pip:                              false
+
+    type:                               cards                                   # list | cards
+
+    cards:
+      perRow:                           4
+
   # ----------------------------------------------------------------------------
   # MODULE options
   # ----------------------------------------------------------------------------
@@ -39,23 +63,26 @@ defaults:
   # ----------------------------------------------------------------------------
   videoJS:
 
-    # ----------------------------------------------------------------------------
+    autoStart:                          true
+    preloadVideo:                       true
+
+    # --------------------------------------------------------------------------
     # videoJS settings
-    # ----------------------------------------------------------------------------
+    # --------------------------------------------------------------------------
     playbackRates:
-      enabled:                          false
+      enabled:                          true
       values:                           [ 0.25, 0.5, 1, 1.5, 2 ]
 
-    # ----------------------------------------------------------------------------
+    # --------------------------------------------------------------------------
     # videoJS Player (Tech) settings
-    # ----------------------------------------------------------------------------
+    # --------------------------------------------------------------------------
     players:
 
       youtube:
 
         # players parameters
         #
-        autoplay:                       0
+        autoplay:                       true
         cc_load_policy:                 0                                       # captions are initially hidden
         controls:                       0
         disablekb:                      1
@@ -74,9 +101,9 @@ defaults:
         end:                            true                                    # set end (of a video) allowed
         start:                          true                                    # set start (of a video) allowed
 
-    # ----------------------------------------------------------------------------
+    # --------------------------------------------------------------------------
     # videoJS Plugin settings
-    # ----------------------------------------------------------------------------
+    # --------------------------------------------------------------------------
     plugins:
 
       autoCaption:
@@ -102,8 +129,8 @@ defaults:
         skipInitialFocus:               false                                   # stops focusing the player on initial Play (default: false)
 
       skipButtons:
-        enabled:                        false
-        surroundPlayButton:             false
+        enabled:                        true
+        surroundPlayButton:             true
         
         backwardIndex:                  1
         forwardIndex:                   1

@@ -1,34 +1,18 @@
-// -----------------------------------------------------------------------------
-// ESLint shimming
-// -----------------------------------------------------------------------------
-/* eslint indent: "off"                                                       */
-/* eslint no-undef: "off"                                                     */
-/* eslint no-unused-vars: "off"                                               */
-// -----------------------------------------------------------------------------
-'use strict';
-
-// -----------------------------------------------------------------------------
-// ESLint shimming
-// -----------------------------------------------------------------------------
-/* eslint no-extra-semi: "off"                                                */
-/* eslint no-undef: "off"                                                     */
-/* eslint no-redeclare: "off"                                                 */
-/* eslint no-unused-vars: "off"                                               */
-/* eslint indent: "off"                                                       */
-/* eslint quotes: "off"                                                       */
-/* eslint no-prototype-builtins: "off"                                        */
-/* global window                                                              */
-
-module.exports = {
+export default {
   // Where to render the table of contents.
   tocSelector: '.js-toc',
+  // Or, you can pass in a DOM node instead
+  tocElement: null,
   // Where to grab the headings to build the table of contents.
   contentSelector: '.js-toc-content',
+  // Or, you can pass in a DOM node instead
+  contentElement: null,
   // Which headings to grab inside of the contentSelector element.
   headingSelector: 'h1, h2, h3',
   // Headings that match the ignoreSelector will be skipped.
-  ignoreSelector: '.notoc',
-  // For headings inside relative or absolute positioned containers within content
+  ignoreSelector: '.js-toc-ignore',
+  // For headings inside relative or absolute positioned
+  // containers within content.
   hasInnerContainers: false,
   // Main class to add to links.
   linkClass: 'toc-link',
@@ -63,9 +47,20 @@ module.exports = {
   // Smooth scroll offset.
   scrollSmoothOffset: 0,
   // Callback for scroll end.
-  scrollEndCallback: function (e) {},
-  // Headings offset between the headings and the top of the document (this is meant for minor adjustments).
+  scrollEndCallback: function () {},
+  // Headings offset between the headings and the top of
+  // the document (this is meant for minor adjustments).
   headingsOffset: 1,
+  // Enable the URL hash to update with the proper heading ID as
+  // a user scrolls the page.
+  enableUrlHashUpdateOnScroll: false,
+  // type of scroll handler to use. to make scroll event not too rapid.
+  // Options are: 'debounce' or 'throttle'
+  // when set auto , use debounce less than 333ms , other use throttle.
+  // for ios browser can't use history.pushState() more than 100 times per 30 seconds reason
+  scrollHandlerType: 'auto',
+  //  scrollHandler delay in ms.
+  scrollHandlerTimeout: 50,
   // Timeout between events firing to make sure it's
   // not too rapid (for performance reasons).
   throttleTimeout: 50,
@@ -79,28 +74,35 @@ module.exports = {
   // element's offsetTop from the top of the document on init.
   fixedSidebarOffset: 'auto',
   // includeHtml can be set to true to include the HTML markup from the
-  // heading node instead of just including the textContent.
+  // heading node instead of just including the innerText.
   includeHtml: false,
+  // includeTitleTags automatically sets the html title tag of the link
+  // to match the title. This can be useful for SEO purposes or
+  // when truncating titles.
+  includeTitleTags: false,
   // onclick function to apply to all links in toc. will be called with
   // the event as the first parameter, and this can be used to stop,
   // propagation, prevent default or perform action
-  onClick: function (e) {},
+  onClick: function () {},
   // orderedList can be set to false to generate unordered lists (ul)
   // instead of ordered lists (ol)
   orderedList: true,
-  // If there is a fixed article scroll container, set to calculate titles' offset
+  // If there is a fixed article scroll container, set to calculate offset.
   scrollContainer: null,
-  // prevent ToC DOM rendering if it's already rendered by an external system
+  // prevent ToC DOM rendering if it's already rendered by an external system.
   skipRendering: false,
   // Optional callback to change heading labels.
   // For example it can be used to cut down and put ellipses on multiline headings you deem too long.
-  // Called each time a heading is parsed. Expects a string in return, the modified label to display.
+  // Called each time a heading is parsed. Expects a string and returns the modified label to display.
+  // Additionally, the attribute `data-heading-label` may be used on a heading to specify
+  // a shorter string to be used in the TOC.
   // function (string) => string
   headingLabelCallback: false,
   // ignore headings that are hidden in DOM
   ignoreHiddenElements: false,
   // Optional callback to modify properties of parsed headings.
-  // The heading element is passed in node parameter and information parsed by default parser is provided in obj parameter.
+  // The heading element is passed in node parameter and information
+  // parsed by default parser is provided in obj parameter.
   // Function has to return the same or modified obj.
   // The heading will be excluded from TOC if nothing is returned.
   // function (object, HTMLElement) => object | void
@@ -110,4 +112,15 @@ module.exports = {
   // Only takes affect when `tocSelector` is scrolling,
   // keep the toc scroll position in sync with the content.
   disableTocScrollSync: false,
+  // If this is null then just use `tocElement` or `tocSelector` instead
+  // assuming `disableTocScrollSync` is set to false. This allows for
+  // scrolling an outer element (like a nav panel w/ search) containing the toc.
+  // Please pass an element, not a selector here.
+  tocScrollingWrapper: null,
+  // Offset for the toc scroll (top) position when scrolling the page.
+  // Only effective if `disableTocScrollSync` is false.
+  tocScrollOffset: 30,
+  // Threshold for when bottom mode should be enabled to handle
+  // highlighting links that cannot be scrolled to.
+  bottomModeThreshold: 30,
 };

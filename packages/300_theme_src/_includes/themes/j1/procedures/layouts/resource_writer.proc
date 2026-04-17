@@ -136,10 +136,16 @@ if placement == 'head' or placement == 'body'
                   {% endif %}
                   {% when 'js' %}
                     {% if url_detected > 1 %}
-                      <script {{script_load}}  src="{{file}}"></script>
+                      <script {{script_load}} src="{{file}}"></script>
                     {% else %}
-                      <script {{script_load}}  src="{{base_path}}/{{file}}"></script>
+                      <script {{script_load}} src="{{base_path}}/{{file}}"></script>
                     {% endif %}
+                  {% when 'mjs' %}
+                    {% if url_detected > 1 %}
+                      <script {{script_load}} src="{{file}}" type="module"></script>
+                    {% else %}
+                      <script {{script_load}} src="{{base_path}}/{{file}}" type="module"></script>
+                    {% endif %}                    
                 {% when 'css' %}
                   {% if url_detected > 1 %}
                     <link rel="stylesheet" href="{{file}}">
@@ -181,6 +187,29 @@ if placement == 'head' or placement == 'body'
 
         {% endfor %}
       {% endif %}
+
+      {% comment %} process data key of type 'mjs' (currently NOT used)
+      --------------------------------------------------------------------------
+      {% if data_key == 'mjs' and layout_valid %}
+        {% for locator in data_value %}
+
+          <!-- [INFO   ] [j1.layout.resource_writer.proc        ] [ layout: '{{page.layout}}' , comment: '{{resource_settings.comment}}' ] -->
+          <!-- [INFO   ] [j1.layout.resource_writer.proc        ] [ place resource|s of type '{{data_key}}' for resource_id: '{{resource_settings.id}}' ] -->
+
+          {% include {{select_location}} location=location locator=locator %}
+          {% assign my_location = {{location_source}} %}
+
+          {% if environment == 'development' %}
+            {% if location == 'remote' %} <script {{script_load}}  src="{{my_location}}.js" type="module"></script> {% endif %}
+            {% if location == 'local'  %} <script {{script_load}}  src="{{my_location}}.js" type="module"></script> {% endif %}
+          {% else %}
+            {% if location == 'remote' %} <script {{script_load}}  src="{{my_location}}.min.js" type="module"></script> {% endif %}
+            {% if location == 'local'  %} <script {{script_load}}  src="{{my_location}}.min.js" type="module"></script> {% endif %}
+          {% endif %}
+
+        {% endfor %}
+      {% endif %}
+      -------------------------------------------------------------------------- {% endcomment %}
 
       {% comment %} process data key of type 'js'
       -------------------------------------------------------------------------- {% endcomment %}

@@ -2175,10 +2175,10 @@
   //     correct.  A z-index of 1 is sufficient to guarantee it sits on top.
   //
   //  b) vjs-vimeo-hide-controlbar: a CSS hook symmetric with the YouTube
-  //     tech's `vjs-youtube-hide-controlbar` class.  Consumers (or the
-  //     skipad adapter) can add/remove this class at runtime to swap between
-  //     VideoJS controls and native Vimeo controls without reloading the
-  //     player, e.g. vjsPlayer.addClass('vjs-vimeo-hide-controlbar').
+  //     tech's `vjs-youtube-hide-controlbar` class.  Consumerscan add/remove
+  //     this class at runtime to swap between VideoJS controls and native
+  //     Vimeo controls without reloading the player, e.g.
+  //     vjsPlayer.addClass('vjs-vimeo-hide-controlbar').
   //
   function injectCss() {
     if (cssInjected) {
@@ -2382,7 +2382,9 @@
     buffered() {
       const progress = this._vimeoState.progress;
 
-      return videojs.createTimeRange(0, progress.percent * progress.duration);
+//      jadams: videojs.createTimeRange is deprecated
+//      return videojs.createTimeRange(0, progress.percent * progress.duration);
+        return videojs.time.createTimeRanges(0, progress.percent * progress.duration);
     }
 
     paused() {

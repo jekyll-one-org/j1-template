@@ -1,6 +1,12 @@
+<<<<<<< HEAD
  /*
  # -----------------------------------------------------------------------------
  # ~/assets/theme/j1/modules/masonry/css/theme/uno.js (1)
+=======
+/*
+ # -----------------------------------------------------------------------------
+ # ~/assets/theme/j1/modules/masonry/css/theme/uno.css (1)
+>>>>>>> main
  # Product/Info:
  # http://jekyll.one
  #
@@ -46,15 +52,45 @@ a.masonry-article-link:hover {
 .masonry-article-item .masonry-article-link .masonry-article-hover {
   display: flex;
   position: absolute;
+<<<<<<< HEAD
+=======
+  /* claude - masonry card hover #2
+     Pin the overlay to all four edges of the (positioned) anchor instead of
+     relying solely on width/height 100%. When the overlay is in a context
+     where its closest positioned ancestor is missing, width/height 100%
+     still produces layout (flex intrinsic sizing) and can push the card to
+     grow on hover. top/right/bottom/left: 0 anchors the box without
+     contributing height to the flow. */
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+>>>>>>> main
   width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.5);
   align-items: center;
   justify-content: center;
   opacity: 0;
+<<<<<<< HEAD
   transition: opacity ease-in-out 0.25s;
 }
 
+=======
+  /* claude - masonry card hover #2
+     Keep the overlay non-interactive while invisible so hovering its area
+     never triggers layout/metric recalculation on the card. */
+  pointer-events: none;
+  transition: opacity ease-in-out 0.25s;
+}
+
+/* claude - masonry card hover #2
+   Re-enable pointer interaction on the overlay only while it is visible. */
+.masonry-article-item .masonry-article-link:hover .masonry-article-hover {
+  pointer-events: auto;
+}
+
+>>>>>>> main
 .masonry-article-item .masonry-article-link .masonry-article-hover .masonry-article-hover-content {
   font-size: 1.25rem;
   color: white;
@@ -114,3 +150,91 @@ a.masonry-article-link:hover {
   margin-bottom: 0.5rem;
 }
 
+<<<<<<< HEAD
+=======
+/* claude - masonry card hover #2
+   ---------------------------------------------------------------------------
+   Stabilise the .card.bottom markup so its box stays identical in :hover.
+
+   User markup:
+     <div class="card bottom">
+       ...
+       <div class="caption">YouTube Video - Carpool Karaoke James and Adele</div>
+     </div>
+
+   Root cause of the enlargement:
+     - The anchor inside the card (a.lg-item) is NOT .masonry-article-link,
+       so the .masonry-article-hover overlay rules above do not apply and
+       cannot be blamed directly for the card's markup.
+     - The card itself is not established as a containing block, so any
+       absolutely-positioned child (or a child that switches position on
+       hover) falls back to an outer ancestor and its height contributes
+       to the card flow on hover.
+     - The inner <a class="lg-item"> may toggle border-bottom /
+       text-decoration metrics on :hover, which pushes the card height by
+       1-2 px - visible as "enlargement".
+
+   The fix below:
+     1) Makes .card.bottom a containing block (position: relative) so
+        any position: absolute child is sized against the card itself.
+     2) Freezes the card's box-model across :hover and :focus-within so
+        width and height remain identical between states.
+     3) Neutralises the inner anchor's hover-driven layout shifts.
+     4) Forces any legacy overlay dropped into the card to behave as an
+        absolute overlay rather than contributing to flow height.
+   --------------------------------------------------------------------------- */
+
+/* claude - masonry card hover #2 */
+.card.bottom {
+  position: relative;
+}
+
+/* claude - masonry card hover #2
+   Box-model must be identical in idle and hover states. */
+.card.bottom,
+.card.bottom:hover,
+.card.bottom:focus-within {
+  transform: none;
+  height: auto;
+  min-height: 0;
+  padding-top: inherit;
+  padding-bottom: inherit;
+  border-top-width: inherit;
+  border-bottom-width: inherit;
+  margin-top: inherit;
+  margin-bottom: inherit;
+}
+
+/* claude - masonry card hover #2
+   Prevent the classic 1-2 px height oscillation caused by an anchor
+   toggling border-bottom / text-decoration on hover. */
+.card.bottom > a.lg-item,
+.card.bottom > a.lg-item:hover {
+  border-bottom: none;
+  text-decoration: none;
+  line-height: inherit;
+}
+
+/* claude - masonry card hover #2
+   Any legacy overlay dropped into .card.bottom must be an absolute
+   overlay, never a flow-level flex box. */
+.card.bottom .masonry-article-hover,
+.card.bottom .card-hover,
+.card.bottom .hover-overlay {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+/* claude - masonry card hover #2 */
+.card.bottom:hover .masonry-article-hover,
+.card.bottom:hover .card-hover,
+.card.bottom:hover .hover-overlay {
+  pointer-events: auto;
+}
+>>>>>>> main
