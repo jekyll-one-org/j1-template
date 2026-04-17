@@ -220,7 +220,7 @@ Masonry for J1 Template is a great tool for creating dynamic video galleries.
 The module makes creating a gallery to display videos of different types easy.
 
 .YouTube Video
-masonry::youtube[role="mb-4"]
+masonry::mixed_video_example[role="mb-4"]
 
 [role="mb-5"]
 .More about Masonry
