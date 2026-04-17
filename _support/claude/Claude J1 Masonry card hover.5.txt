@@ -1,0 +1,28 @@
+Prompt 
+  
+--------------------------------------------------------------------------------
+
+```
+<div class="card bottom">
+  ...
+  <div class="caption">YouTube Video · Carpool Karaoke James and Adele</div>
+</div>
+```
+
+On mouse hover, the element "card bottom" gets enlarged in size for the 
+height. This is not wanted. The sizes for width and height should remain
+unchanged/set to be fixed.
+
+What is the reason for the change in height?
+
+
+
+
+
+Create a fixed version and use the comment "claude - masonry card hover #4" 
+for all proposed fixes.
+
+
+Claude
+--------------------------------------------------------------------------------
+

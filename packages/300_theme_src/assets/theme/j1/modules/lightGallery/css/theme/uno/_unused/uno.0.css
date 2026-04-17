@@ -1,6 +1,6 @@
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/modules/lightGallery/css/theme/uno.css (1)
+ # ~/assets/theme/j1/modules/lightGallery/css/theme/uno.css (0)
  # Provides LightGallery styles for Theme Uno
  #
  # Product/Info:
@@ -118,21 +118,10 @@
   cursor: default;
 }
 
-/* custom icons (vjs big-play-button)
+/* custom icons (vjs big-play-button
 -------------------------------------------------------------------------------- */
-
-/* claude - masonry card hover #1
-   Ensure the parent that hosts the absolutely-positioned .big-play-button
-   establishes a positioning context. Without `position: relative` on
-   .lg-uno-video-icon, the button resolves its top/left/bottom/right against
-   the nearest positioned ancestor (or the viewport), which can cause it to
-   shift when hover state triggers a repaint/reflow in a different ancestor.
-*/
-.lg-uno-video-icon {
-  position: relative; /* claude - masonry card hover #1 */
-}
-
-.lg-uno-video-icon .big-play-button {
+.lg-uno-video-icon
+.big-play-button {
   position: absolute;
   cursor: pointer;
   top: 0;
@@ -140,36 +129,12 @@
   bottom: 0;
   right: 0;
   z-index: 1;
-  /* claude - masonry card hover #1
-     Use background-longhand properties instead of the `background` shorthand
-     so the hover rule (which also uses the shorthand) cannot reset values
-     like background-size/background-origin/background-clip to their initial
-     state. Swapping only the image URL keeps positioning identical on hover.
-  */
-  background-image: url(icons/play-button.svg); /* claude - masonry card hover #1 */
-  background-repeat: no-repeat;                 /* claude - masonry card hover #1 */
-  background-position: center center;           /* claude - masonry card hover #1 */
-  background-size: auto;                        /* claude - masonry card hover #1 */
+  background: url(icons/play-button.svg) no-repeat center center;
 }
 
-/* claude - masonry card hover #1
-   On hover, change ONLY the background-image. Do NOT use the `background`
-   shorthand here — the shorthand resets every unspecified background-*
-   sub-property (background-size, background-origin, background-clip,
-   background-attachment, background-color) to its initial value, which is
-   what made the icon appear displaced from center on hover. Also restate
-   the positioning offsets defensively so any future cascade change cannot
-   detach the button from its centered position.
-*/
-.lg-uno-video-icon:hover .big-play-button {
-  top: 0;                                             /* claude - masonry card hover #1 */
-  left: 0;                                            /* claude - masonry card hover #1 */
-  bottom: 0;                                          /* claude - masonry card hover #1 */
-  right: 0;                                           /* claude - masonry card hover #1 */
-  background-image: url(icons/play-button-hover.svg); /* claude - masonry card hover #1 */
-  background-repeat: no-repeat;                       /* claude - masonry card hover #1 */
-  background-position: center center;                 /* claude - masonry card hover #1 */
-  background-size: auto;                              /* claude - masonry card hover #1 */
+.lg-uno-video-icon:hover
+.big-play-button {
+  background: url(icons/play-button-hover.svg) no-repeat center center;
 }
 
 /* custom thumbnails

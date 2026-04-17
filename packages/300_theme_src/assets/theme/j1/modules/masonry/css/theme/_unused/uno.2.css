@@ -1,0 +1,416 @@
+/*
+ # -----------------------------------------------------------------------------
+ # ~/assets/theme/j1/modules/masonry/css/theme/uno.css (2)
+ # Product/Info:
+ # http://jekyll.one
+ #
+ # Copyright (C) 2023-2026 Juergen Adams
+ #
+ # J1 Template is licensed under the MIT License.
+ # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE
+ # -----------------------------------------------------------------------------
+ # NOTE: Styles for all masonry blocks
+ # -----------------------------------------------------------------------------
+*/
+
+.grid-sizer,
+.grid-item {
+  float: left;
+  width: 33%;
+}
+
+a.masonry-article-link {
+  font-weight: 500 !important;
+  text-decoration: none;
+  border-bottom: unset;
+  color: #FFFFFF;
+}
+
+a.masonry-article-link:hover {
+  color: #757575;
+}
+
+.masonry-article-item {
+  max-width: 26rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.masonry-article-item .masonry-article-link {
+  position: relative;
+  display: block;
+  margin: 0 auto;
+  border-bottom: none;
+}
+
+.masonry-article-item .masonry-article-link .masonry-article-hover {
+  display: flex;
+  position: absolute;
+  /* claude - masonry card hover #2
+     Pin the overlay to all four edges of the (positioned) anchor instead of
+     relying solely on width/height 100%. When the overlay is in a context
+     where its closest positioned ancestor is missing, width/height 100%
+     still produces layout (flex intrinsic sizing) and can push the card to
+     grow on hover. top/right/bottom/left: 0 anchors the box without
+     contributing height to the flow. */
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  /* claude - masonry card hover #2
+     Keep the overlay non-interactive while invisible so hovering its area
+     never triggers layout/metric recalculation on the card. */
+  pointer-events: none;
+  transition: opacity ease-in-out 0.25s;
+}
+
+/* claude - masonry card hover #2
+   Re-enable pointer interaction on the overlay only while it is visible. */
+.masonry-article-item .masonry-article-link:hover .masonry-article-hover {
+  pointer-events: auto;
+}
+
+.masonry-article-item .masonry-article-link .masonry-article-hover .masonry-article-hover-content {
+  font-size: 1.25rem;
+  color: white;
+}
+
+.masonry-article-item .masonry-article-link:hover .masonry-article-hover {
+  opacity: 1;
+}
+
+.masonry-article-item .masonry-article-caption {
+  padding: 1.5rem;
+  text-align: center;
+  background-color: #bdbdbd;
+}
+
+.masonry-article-item .masonry-article-caption .masonry-article-caption-heading {
+  font-size: 1.5rem;
+  font-weight: 400;
+  margin-bottom: 0;
+}
+
+.masonry-article-item .masonry-article-caption .masonry-article-caption-subheading {
+  font-style: italic;
+  font-weight: 600;
+  font-family: "Lato", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  color: #212121;
+}
+
+.masonry-article-item--w100 {
+  max-width: 100px !important;
+}
+
+.masonry-article-item--w200 {
+  max-width: 200px !important;
+}
+
+.masonry-article-item--w300 {
+  max-width: 300px !important;
+}
+
+.masonry-article-item--w400 {
+  max-width: 400px !important;
+}
+
+.masonry-article-item--w500 {
+  max-width: 500px !important;
+}
+
+.masonry-title {
+  display: flex;
+  align-items: center;
+  text-rendering: optimizeLegibility;
+  text-align: left;
+  line-height: 1.25;
+  font-size: 1.125rem;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+
+/* claude - masonry card hover #2
+   ---------------------------------------------------------------------------
+   Stabilise the .card.bottom markup so its box stays identical in :hover.
+
+   User markup:
+     <div class="card bottom">
+       ...
+       <div class="caption">YouTube Video - Carpool Karaoke James and Adele</div>
+     </div>
+
+   Root cause of the enlargement:
+     - The anchor inside the card (a.lg-item) is NOT .masonry-article-link,
+       so the .masonry-article-hover overlay rules above do not apply and
+       cannot be blamed directly for the card's markup.
+     - The card itself is not established as a containing block, so any
+       absolutely-positioned child (or a child that switches position on
+       hover) falls back to an outer ancestor and its height contributes
+       to the card flow on hover.
+     - The inner <a class="lg-item"> may toggle border-bottom /
+       text-decoration metrics on :hover, which pushes the card height by
+       1-2 px - visible as "enlargement".
+
+   The fix below:
+     1) Makes .card.bottom a containing block (position: relative) so
+        any position: absolute child is sized against the card itself.
+     2) Freezes the card's box-model across :hover and :focus-within so
+        width and height remain identical between states.
+     3) Neutralises the inner anchor's hover-driven layout shifts.
+     4) Forces any legacy overlay dropped into the card to behave as an
+        absolute overlay rather than contributing to flow height.
+   --------------------------------------------------------------------------- */
+
+/* claude - masonry card hover #2 */
+.card.bottom {
+  position: relative;
+}
+
+/* claude - masonry card hover #2
+   Box-model must be identical in idle and hover states. */
+.card.bottom,
+.card.bottom:hover,
+.card.bottom:focus-within {
+  transform: none;
+  height: auto;
+  min-height: 0;
+  padding-top: inherit;
+  padding-bottom: inherit;
+  border-top-width: inherit;
+  border-bottom-width: inherit;
+  margin-top: inherit;
+  margin-bottom: inherit;
+}
+
+/* claude - masonry card hover #2
+   Prevent the classic 1-2 px height oscillation caused by an anchor
+   toggling border-bottom / text-decoration on hover. */
+.card.bottom > a.lg-item,
+.card.bottom > a.lg-item:hover {
+  border-bottom: none;
+  text-decoration: none;
+  line-height: inherit;
+}
+
+/* claude - masonry card hover #2
+   Any legacy overlay dropped into .card.bottom must be an absolute
+   overlay, never a flow-level flex box. */
+.card.bottom .masonry-article-hover,
+.card.bottom .card-hover,
+.card.bottom .hover-overlay {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+/* claude - masonry card hover #2 */
+.card.bottom:hover .masonry-article-hover,
+.card.bottom:hover .card-hover,
+.card.bottom:hover .hover-overlay {
+  pointer-events: auto;
+}
+
+/* claude - masonry card hover #3
+   ===========================================================================
+   WHY FIX #2 DID NOT WORK - a precise post-mortem
+
+   Fix #2 tried to freeze the card's box via:
+       .card.bottom, .card.bottom:hover, .card.bottom:focus-within {
+         padding-top:       inherit;
+         padding-bottom:    inherit;
+         border-top-width:  inherit;
+         border-bottom-width:inherit;
+         margin-top:        inherit;
+         margin-bottom:     inherit;
+       }
+   The intent was "keep whatever value the card has, regardless of :hover".
+   But `inherit` does NOT mean "keep the current value". It means
+   "take the value from the parent element". If the parent has different
+   padding/border/margin values than the card's resting state, the hover
+   rule actually CHANGES those values instead of locking them. This can
+   cause the card to grow on hover rather than preventing growth. It also
+   cannot undo a padding that some other stylesheet applies directly via
+   `.card.bottom:hover { padding: ... }`, because both rules target the
+   same selector and the later/ more specific one wins.
+
+   Fix #2 also assumed the flow-level overlay responsible for growth has
+   the class `.masonry-article-hover`, `.card-hover`, or `.hover-overlay`.
+   In the real markup the card contains `<div class="caption">`, which is
+   NOT in that list. Nothing in fix #2 touches `.caption`, so if the
+   caption (or a theme rule like `.card:hover .caption`) changes its
+   padding, line-height, font-size, or becomes visible on hover, the card
+   still grows.
+
+   Finally, the classic cause of a 2-6 px growth on image cards: the image
+   is rendered as inline-level. Inline images sit on the text baseline and
+   leave a descender gap below the image (for characters like g, p, y).
+   That gap is part of the line box and therefore part of the anchor's
+   height. If ANY rule changes `line-height`, `font-size`,
+   `vertical-align`, or the image's `display` on hover (directly or via
+   inheritance), the line box recomputes and the card grows. Fix #2 tried
+   to neutralise this on `a.lg-item` only, with `line-height: inherit`,
+   which - as explained above - does not lock the value, and also did not
+   address the image itself.
+
+   Fix #3 replaces the broken mechanism and widens coverage.
+   --------------------------------------------------------------------------- */
+
+/* claude - masonry card hover #3
+   Use a CSS custom property as the single source of truth for the card's
+   height. As long as the card and its hover/focus states all resolve to
+   the same `--card-h` value, the card cannot change height on hover.
+   Downstream users can override --card-h per card (e.g. with an inline
+   style) if they need a different fixed height. Default `auto` preserves
+   the current sizing when nothing overrides it. */
+.card.bottom {
+  --card-h: auto;
+  --card-w: auto;
+  box-sizing: border-box;
+  height: var(--card-h);
+  width: var(--card-w);
+  /* Block any ancestor font-size/line-height change from reflowing the
+     card via inline descender arithmetic. */
+  line-height: 1;
+  /* Prevent a flex/grid parent from stretching the card on hover if a
+     sibling changes size. */
+  flex: 0 0 auto;
+}
+
+/* claude - masonry card hover #3
+   Freeze the card's box model across all interactive states by setting
+   each property to an explicit value rather than `inherit`. `revert-layer`
+   is not used here on purpose: we want the value to be the SAME in idle
+   and hover states, not "whatever the cascade would have applied". */
+.card.bottom,
+.card.bottom:hover,
+.card.bottom:focus,
+.card.bottom:focus-within,
+.card.bottom:active {
+  height: var(--card-h);
+  min-height: 0;
+  max-height: none;
+  padding: 0;
+  border-width: 0;
+  margin: 0;
+  transform: none;
+  /* Kill any hover transition that interpolates geometry. Opacity/color
+     transitions on descendants are still fine. */
+  transition: none;
+}
+
+/* claude - masonry card hover #3
+   The image inside a.lg-item is the most common source of 2-6 px hover
+   growth. When an <img> renders as inline, it sits on the text baseline
+   and leaves a descender gap below it; that gap is part of the anchor's
+   line box, and any hover-driven change to line-height, font-size, or
+   vertical-align resizes the line box and therefore the card. Making
+   the image block-level and the anchor's line-height fixed at 0 removes
+   the line box entirely, so no descender gap exists to grow. */
+.card.bottom a.lg-item {
+  display: block;
+  font-size: 0;
+  line-height: 0;
+  border: 0;
+  text-decoration: none;
+}
+
+.card.bottom a.lg-item:hover,
+.card.bottom a.lg-item:focus,
+.card.bottom a.lg-item:active {
+  font-size: 0;
+  line-height: 0;
+  border: 0;
+  text-decoration: none;
+}
+
+.card.bottom a.lg-item > img,
+.card.bottom a.lg-item > picture > img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  vertical-align: top;
+  border: 0;
+  /* Block theme rules like `a:hover img { transform: scale(1.05) }` from
+     producing a visual size change that also triggers reflow when the
+     transform origin or an adjacent margin is animated. If the user
+     WANTS a scale effect, they can override this for their specific
+     card; by default we keep geometry identical. */
+  transform: none;
+  transition: none;
+}
+
+.card.bottom a.lg-item:hover > img,
+.card.bottom a.lg-item:hover > picture > img {
+  transform: none;
+}
+
+/* claude - masonry card hover #3
+   The caption is the one child fix #2 forgot about. Lock its geometry
+   the same way as the card itself. The caption's text CAN change color
+   or weight on hover without resizing the card, but its padding,
+   margins, borders, line-height, and font-size must not change. */
+.card.bottom .caption,
+.card.bottom:hover .caption,
+.card.bottom:focus-within .caption {
+  padding: inherit; /* NOTE: this is safe only because both sides of the
+                       comparison (:hover and non-hover) resolve to the
+                       same parent; the card's padding is pinned to 0
+                       above, so the caption's parent is stable. */
+  /* Explicit values preferred - uncomment and tune to taste if the
+     project has a specific caption padding/line-height to keep.
+     padding:     0.5rem 0.75rem;
+     font-size:   0.875rem;
+     line-height: 1.3;
+  */
+  margin: 0;
+  border-width: 0;
+  transform: none;
+  transition: color 0.2s ease, background-color 0.2s ease;
+  /* Clip any descender/overflow so a font-metric change cannot push the
+     card. If the caption needs to show a longer string, prefer
+     text-overflow: ellipsis over allowing reflow. */
+  overflow: hidden;
+}
+
+/* claude - masonry card hover #3
+   Block every descendant from contributing a hover-driven size delta to
+   the card. Visual effects (color, background, opacity, box-shadow,
+   filter) remain allowed because they do not reflow. Geometric
+   properties are pinned. Use `:where()` to keep specificity at 0 so
+   project-specific overrides still win if truly needed. */
+.card.bottom :where(*, *::before, *::after) {
+  box-sizing: border-box;
+}
+
+.card.bottom:hover :where(*:not(.caption-text-allowed-to-grow)),
+.card.bottom:focus-within :where(*:not(.caption-text-allowed-to-grow)) {
+  /* Intentionally empty - this rule exists as a documented hook. If a
+     specific descendant is later found to still grow on hover, add the
+     offending property here (e.g. `padding: 0 !important;`) scoped to
+     the descendant selector, NOT to the card. */
+}
+
+/* claude - masonry card hover #3
+   If the project DOES want a visible hover cue on the card, do it with
+   properties that don't reflow: box-shadow and outline. Both paint
+   outside the border box and cost zero layout pixels. The rule below is
+   optional and commented out; enable if desired. */
+/*
+.card.bottom {
+  transition: box-shadow 0.2s ease;
+}
+.card.bottom:hover {
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+}
+*/

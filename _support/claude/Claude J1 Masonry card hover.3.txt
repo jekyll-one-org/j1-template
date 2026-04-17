@@ -1,0 +1,90 @@
+Prompt 
+  https://claude.ai/chat/b2bc9459-5b5d-403e-8ae0-2647b4320e72
+--------------------------------------------------------------------------------
+
+```
+<div class="card bottom">
+  ...
+  <div class="caption">YouTube Video · Carpool Karaoke James and Adele</div>
+</div>
+```
+
+Previous fixes, that does not work, are commented by comment "claude - masonry card hover #2".
+
+On mouse hover, the element "card bottom" gets enlarged in size for the 
+height. This is not wanted. The sizes for width and height should remain
+unchanged/set to be fixed.
+
+What is the reason for the change in height?
+
+Create a fixed version and use the comment "claude - masonry card hover #3" 
+for all proposed fixes.
+
+
+Claude
+--------------------------------------------------------------------------------
+
+I'll analyze the issue carefully. Let me first look at the masonry.js file to understand what's happening on hover.The masonry JS is just the standard library — it calculates layout on initialization and on resize events, but it does not respond to mouse hover. So the hover-driven growth is purely a CSS issue, not a JS issue. Good — that narrows it down.
+
+Now let me think carefully about what's actually happening.
+
+Looking at the user's markup:
+```html
+<div class="card bottom">
+  ...
+  <a class="lg-item">...</a>
+  <div class="caption">YouTube Video · Carpool Karaoke James and Adele</div>
+</div>
+```
+
+The previous "fix #2" attempts already did:
+1. Made `.card.bottom` a containing block (`position: relative`)
+2. Froze `height`, `min-height`, padding, margins, borders with `inherit`
+3. Killed `border-bottom`/`text-decoration` on `a.lg-item:hover`
+4. Forced `.masonry-article-hover` / `.card-hover` / `.hover-overlay` to `position: absolute`
+
+And yet the card still enlarges on hover. Let me think about what fix #2 missed.
+
+## The real reason for the height change
+
+Fix #2 made a critical assumption: that the overlay causing the growth has one of the class names `.masonry-article-hover`, `.card-hover`, or `.hover-overlay`. But **the user's markup shows the overlay-like child is actually `<div class="caption">`** — which has none of those class names.
+
+Also, fix #2 used `padding-top: inherit; padding-bottom: inherit; ...` for the hover states. This is dangerous — `inherit` takes the value from the **parent element**, not "keep the current value". If the parent's padding is different from the card's resting padding, `inherit` actually *changes* the padding on hover rather than freezing it. Same trap for `border-*-width` and `margin-*`. The intent was "don't change", but the mechanism does something else entirely.
+
+But the bigger culprit is likely one of these, acting on the actual rendered card:
+
+**1. `.caption` (or something inside it) shifts on hover.** The card has `<div class="caption">`, which fix #2 never touched. If any CSS elsewhere (lightGallery, Bootstrap, theme CSS) styles `.card:hover .caption` or `.card.bottom:hover .caption` with a different `padding`, `font-size`, `line-height`, `transform: translateY(...)`, or reveals a previously `display:none` element, the card grows.
+
+**2. The `<a class="lg-item">` is an inline element wrapping an image.** On hover, if its `line-height`, `font-size`, or the image's `vertical-align` / `display` changes (e.g. theme CSS sets `a:hover { line-height: 1.5 }` where resting was `1.2`), the anchor's line-box grows by a few pixels. That's the classic "image in an inline anchor has a descender gap that changes on hover" bug. The fix is `display: block` (or `vertical-align: middle`) on the image and on the anchor.
+
+**3. A `transform: scale(...)` or `transition` on `.card:hover` from a theme stylesheet.** Fix #2 set `transform: none` but only for `.card.bottom`, not for descendants — and if a child scales, the card's visual box grows even though `height` is unchanged. However, the user reports the *height* changes, which suggests actual layout reflow, not just a visual transform.
+
+**4. Most likely: the image inside `.lg-item` has default `display: inline`.** Inline images sit on the baseline and leave a 3–5 px descender gap below. Many themes toggle `img { vertical-align: baseline }` ↔ `middle` on hover via `a:hover img`, or the anchor's `line-height` changes on hover. Result: card grows by a few pixels on hover. This exactly matches the symptom ("1–2 px enlargement" that fix #2 tried to address via `line-height: inherit` on `a.lg-item`, but `inherit` is again the wrong tool — and it only targeted the anchor, not the image).
+
+Given fix #2 already tried to neutralize the anchor's line-height but failed, the remaining likely cause is the **image's inline descender gap** combined with something in the theme that changes on hover, OR the `.caption` shifting on hover.
+
+Now let me write fix #3.## Why fix #2 didn't work — the actual reasons
+
+The masonry.js library is pure layout math; it reacts to initialization and resize events and has no hover handler, so the growth is 100% CSS. Fix #2 got the diagnosis half-right but used mechanisms that couldn't deliver the intended effect:
+
+**1. `inherit` ≠ "keep the current value".** Fix #2 wrote `padding-top: inherit; border-top-width: inherit; margin-top: inherit; ...` on both the resting and `:hover` rules, thinking this would lock the box model. It doesn't. `inherit` means "take the parent's value." If the parent's `padding-top` differs from the card's resting `padding-top`, the hover rule *changes* padding instead of freezing it — producing exactly the growth fix #2 was trying to stop.
+
+**2. Fix #2 only policed three class names.** It scoped its position-absolute correction to `.masonry-article-hover`, `.card-hover`, and `.hover-overlay`. But the card in your markup contains `<div class="caption">`, which isn't in that list. Any theme rule like `.card:hover .caption { padding: ... }` or `.card:hover .caption { line-height: ... }` reflows the card untouched.
+
+**3. The image's inline descender gap — the classic culprit.** An `<img>` inside `<a class="lg-item">` renders as inline by default. Inline images sit on the text baseline with a descender gap of a few pixels below them (room for letters like `g`/`p`/`y`). That gap is part of the anchor's line box. Any hover-driven change to `line-height`, `font-size`, or `vertical-align` anywhere up the inheritance chain recomputes the line box and the card grows by 2–6 px. Fix #2 set `line-height: inherit` on the anchor, which (same bug as #1) doesn't lock the value — and it never touched the image itself.
+
+## What fix #3 does differently
+
+- Uses a CSS variable `--card-h` as the single source of truth for the card's height, pinned across idle, `:hover`, `:focus`, `:focus-within`, `:active`.
+- Sets `padding: 0; border-width: 0; margin: 0; transition: none` with **explicit values**, not `inherit`, so hover can't mutate geometry.
+- Makes the image `display: block` and zeroes out the anchor's `font-size` and `line-height`, eliminating the inline descender line box entirely — no gap exists to grow.
+- Freezes the `.caption` geometry that fix #2 forgot about.
+- Suggests `box-shadow` (commented-out) as the right way to add a hover cue without triggering reflow.
+
+If the card still grows after this, the remaining culprit will be outside
+`.card.bottom` — e.g. a parent flex container changing its `gap` on hover,
+or a `transform: scale()` on an ancestor. In that case, open the browser's
+DevTools, record a performance trace while hovering, and look for the
+"Recalculate Style" entry — it will name the exact property and selector
+responsible.
+

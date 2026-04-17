@@ -1,0 +1,102 @@
+Prompt 
+  https://claude.ai/chat/293bd556-9ba1-4f14-89fa-17acbff2d3bd
+--------------------------------------------------------------------------------
+
+```
+<div class="card bottom">
+  ...
+  <div class="caption">YouTube Video · Carpool Karaoke James and Adele</div>
+</div>
+```
+
+The attached adapter, masonry.js, manages the settings for the masonry module.
+The adapter/module is working as expected with no errors.
+
+On mouse hover, the element "card bottom" gets enlarged in size for the 
+height. This is not wanted, the sires for width and height should remain
+unchanged on mouse hover.
+
+What is the reason?
+
+Create a fixed version and use the comment "claude - masonry card hover #2" 
+for all proposed fixes.
+
+
+Claude
+--------------------------------------------------------------------------------
+
+I'll analyze the files to understand the issue with the card hover behavior.The project knowledge search returned swiper-bundle content, which isn't directly related. Let me look at the actual uploaded files — the masonry.js and _caption.scss files.Now I have a full picture. The masonry.js is the Masonry library itself — no hover behavior lives there. The `_caption.scss` file only styles the `<caption>` element (table caption) — also unrelated.
+
+The hover behavior comes from the CSS. Looking at the two `uno.css` files you provided, the relevant piece is inside the **masonry** `uno.css`:
+
+```css
+.masonry-article-item .masonry-article-link .masonry-article-hover {
+  display: flex;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity ease-in-out 0.25s;
+}
+```
+
+## Why the card grows in height on hover
+
+This rule is intended to create a dark translucent overlay on top of the article link. It uses `position: absolute` with `width: 100%` and `height: 100%`, which requires the **parent** (`.masonry-article-link`) to be a containing block (i.e. have `position: relative` or similar).
+
+Look at the `.masonry-article-link` rule:
+
+```css
+.masonry-article-item .masonry-article-link {
+  position: relative;
+  display: block;
+  margin: 0 auto;
+  border-bottom: none;
+}
+```
+
+Good — it is `position: relative`. So the overlay *should* be absolutely positioned inside the link. **But** this rule only applies to `.masonry-article-link` that sits inside `.masonry-article-item`.
+
+Your markup is different:
+
+```html
+<div class="card bottom">
+  ...
+  <div class="caption">YouTube Video · Carpool Karaoke James and Adele</div>
+</div>
+```
+
+The card is a `.card.bottom` wrapping a `.lg-item` anchor (per the selector `.card.bottom > a.lg-item` in the lightGallery CSS), **not** a `.masonry-article-item > a.masonry-article-link`. So:
+
+1. The `.masonry-article-hover` rule (which would lay the overlay on top) never matches your card's anchor.
+2. If your card contains a `<div class="masonry-article-hover">` (or equivalent), it inherits only the top part of the rule — `display: flex; position: absolute; width: 100%; height: 100%` — but because the ancestor anchor is NOT `position: relative` in your layout, the overlay is treated as flow content / positions relative to a different ancestor, effectively pushing the card to grow.
+
+Even simpler explanation that matches what you're seeing: the overlay element `.masonry-article-hover` has `display: flex` and `height: 100%` applied even when `opacity: 0`. For that element to sit *on top of* the card (as an overlay) instead of *inside the flow* (which would add its height to the card), **its closest positioned ancestor must be the card itself**. In your `.card.bottom` markup that positioned ancestor is missing, so the overlay is being laid out in normal flow and its `height: 100%` plus flex sizing enlarges the card on hover — exactly the symptom you described.
+
+A second contributor: the rules `.masonry-article-item .masonry-article-link:hover .masonry-article-hover { opacity: 1 }` trigger a layout reflow on hover because the overlay (or a sibling) may switch from `display: none`-ish behavior to `display: flex` via some cascade in your local overrides. Since the overlay is in the flow (not absolute relative to the card), growing opacity coincides with its flex box taking its natural height on hover.
+
+## The fix
+
+Scope the overlay/hover rules so they only touch elements that are properly contained, and guarantee the card itself is a positioned ancestor for any overlay it contains. Mark every touched rule with the requested comment.## Summary
+
+**Why the card enlarges on hover**
+
+The height growth is a CSS issue, not a masonry.js issue. The masonry library and `_caption.scss` are not involved — they only compute grid positions and style `<caption>` elements respectively. The culprit is in the masonry `uno.css`:
+
+1. The existing `.masonry-article-hover` overlay relies on `width: 100%; height: 100%` but has no `top/right/bottom/left: 0`. When its closest positioned ancestor resolves unexpectedly — which is exactly what happens in your `.card.bottom` markup, because the anchor inside it is `a.lg-item`, not `a.masonry-article-link` — the overlay's flex-box intrinsic sizing contributes height to the card on hover.
+2. `.card.bottom` itself has no `position: relative`, so it isn't a containing block — any absolute child escapes upward.
+3. The inner `a.lg-item` has default browser hover behavior (text-decoration / border oscillation) that adds 1–2 px of height.
+
+**The fix (in `/mnt/user-data/outputs/uno.css`)**
+
+Every change carries the `claude - masonry card hover #2` comment. In brief:
+
+- Overlay rule now pins `top/right/bottom/left: 0` and adds `pointer-events: none` when hidden, so it can never push card flow height.
+- `.card.bottom` is turned into a containing block with `position: relative`.
+- Box-model on `.card.bottom` is frozen across `:hover` and `:focus-within` (`height`, `min-height`, `transform`, paddings, margins, border widths) so width and height stay identical.
+- `a.lg-item` inside the card is normalised so `:hover` doesn't toggle `text-decoration` or `border-bottom`.
+- Any legacy overlay class inside `.card.bottom` is forced into absolute positioning.
+
