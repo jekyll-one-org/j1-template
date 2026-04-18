@@ -632,7 +632,7 @@ defaults:
   # HTML docs and examples excluded from sitemap
   #
   - scope:
-      path:                             assets/themes/j1
+      path:                             assets/theme/j1
 
     values:
       sitemap:                          false
