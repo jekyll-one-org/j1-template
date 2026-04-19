@@ -30,35 +30,28 @@ personalization:                        true
 regenerate:                             false
 permalink:                              /pages/public/tour/video_data/
 
-resources:                              [
-                                          gallery, lightgallery,
-                                          masonry, videojs
-                                        ]
-
-resource_options:
-  - toccer:
-      collapseDepth:                    3
-  - attic:
-      slides:
-        - url:                          /assets/image/module/attic/1920x1280/modern-dance.jpg
-          alt:                          Photo Gemini AI
-#          badge:
-#            type:                       unsplash
-#            author:                     Quino Al Angel
-#            href:                       //unsplash.com/@quinoal
+resources:                              [ gallery, lightgallery, videojs ]
 
 #resource_options:
 #  - toccer:
 #      collapseDepth:                    3
 #  - attic:
 #      slides:
-#        - url:                          /assets/video/headers/present_videos/modern-dance.mp4
-#          alt:                          AI generated video
-#          title:                        Video Player
-#          tagline:                      Playback Video
-#          isVideo:                      true
-#          mute:                         false
-##         loop:                         false
+#        - url:                          /assets/image/module/attic/1920x1280/modern-dance.jpg
+#          alt:                          Photo Gemini AI
+
+resource_options:
+  - toccer:
+      collapseDepth:                    3
+  - attic:
+      slides:
+        - url:                          /assets/video/headers/present_videos/modern-dance.mp4
+          alt:                          AI generated video
+          title:                        Video Player
+          tagline:                      Playback Video
+          isVideo:                      true
+          mute:                         false
+#         loop:                         false
 ---
 
 // Page Initializer
@@ -77,7 +70,7 @@ resource_options:
 
 // Attribute settings for section control
 //
-:masonry:                               true
+:masonry:                               false
 :justifiedGallery:                      true
 
 
@@ -195,12 +188,15 @@ specific theme, topic, or purpose. The gallery module (lightGallery) for
 J1 Template is a fast, modular, and responsive plugin for creating
 beautiful-looking, featured image and video galleries.
 
-[role="mb-4"]
 The combination of a gallery and a lightbox is entirely usable for all
 the video content you want to present on your site. You can place galleries
 elsewhere with your content. You can use them for blogs by putting them into
-your article's content.
+your article's content. The galley maker *justifiedGallery* in combination
+with the *lightbox* lightGallery is a great toolset for creating dynamic
+video galleries. The module combinati0n makes creating a gallery to access
+videos easy.
 
+[role="mt-4"]
 [CAUTION]
 ====
 The module lightGallery can be used for free for private use, but a
@@ -212,38 +208,9 @@ how to use lightGallery for *commercial* websites and projects.
 Find below examples of video galleries of locally stored (MP4) video resources
 *and* video content provided online.
 
-ifeval::[{masonry} == true]
-[role="mt-5"]
-=== Masonry Gallery
-
-Masonry for J1 Template is a great tool for creating dynamic video galleries.
-The module makes creating a gallery to display videos of different types easy.
-
-.YouTube Video
-masonry::mixed_video_example[role="mb-4"]
-
-[role="mb-5"]
-.More about Masonry
-[TIP]
-====
-Find more on how the Masonry module can be used on the
-link:{url-j1-masonry-previewer}[Masonry Preview, {browser-window--new}] page.
-====
-endif::[]
-
-
-ifeval::[{justifiedGallery} == true]
-[role="mt-5"]
-=== Justified Gallery
-
-The galley maker *justifiedGallery* in combination with the *lightbox*
-lightGallery is a great toolset for creating dynamic video galleries.
-The module combinati0n makes creating a gallery to access videos easy.
-
-
 [role="mt-4"]
 [[justified-gllery-local-video]]
-==== Local Video
+=== Local Video
 
 Videos created by a digicam or a mobile can be played by J1 Template using
 the lightGallery integration. Present videos you have made at it's best.
@@ -263,7 +230,7 @@ gallery::jg_video_html5[role="mb-4"]
 
 [role="mt-5"]
 [[justified-gllery-youtube]]
-==== YouTube
+=== YouTube
 
 The community at link:{url-youtube--home}[YouTube, {browser-window--new}]
 is large, with over 1 billion users that watch hundreds of millions of
@@ -273,7 +240,6 @@ shows or songs on YouTube.
 
 .YouTube Video · justifiedGallery + LightGallery
 gallery::jg_video_youtube_james_and_adele[role="mb-4"]
-endif::[]
 
 
 [role="mt-5"]

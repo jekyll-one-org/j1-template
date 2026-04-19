@@ -37,8 +37,6 @@ settings:
 
     # --------------------------------------------------------------------------
     # POSTS
-    # claude - optimization chances #5
-    # Fix: removed stray period in section separator
     # --------------------------------------------------------------------------
 
     # --------------------------------------------------------------------------
@@ -94,8 +92,6 @@ settings:
 
     # --------------------------------------------------------------------------
     # COLLECTIONS
-    # claude - optimization chances #5
-    # Fix: removed stray period in section separator
     # --------------------------------------------------------------------------
 
     # --------------------------------------------------------------------------
@@ -280,8 +276,6 @@ settings:
 
     # --------------------------------------------------------------------------
     # IMAGES
-    # claude - optimization chances #5
-    # Fix: removed stray period in section separator
     # --------------------------------------------------------------------------
 
     # --------------------------------------------------------------------------
@@ -525,8 +519,6 @@ settings:
           file:                         thomas-tucker_b.jpg
           caption:                      Sunset over Taipei City - Taiwan
 
-        # claude - optimization chances #5
-        # Fix: corrected duplicate comment numbering (was "image 2")
         # image 3
         - image:
           file:                         emmad-mazhari_b.jpg
@@ -537,8 +529,6 @@ settings:
           file:                         johan-mouchet_b.jpg
           caption:                      The Queen Bee at the Eureka Tower - Melbourne Southbank Australia
 
-        # claude - optimization chances #5
-        # Fix: corrected indentation (was 7 spaces, should be 8)
         # image 5
         - image:
           file:                         federico-rizzarelli_b.jpg
@@ -549,10 +539,9 @@ settings:
           file:                         gints-gailis_b.jpg
           caption:                      Shangri-La Hotel Jakarta - Indonesia
 
+
     # --------------------------------------------------------------------------
     # VIDEOS
-    # claude - optimization chances #5
-    # Fix: removed stray period in section separator
     # --------------------------------------------------------------------------
 
     # --------------------------------------------------------------------------
@@ -642,7 +631,6 @@ settings:
 #             portrait:                 0
 #             color:                    var(--md-gray-100)
 
-
           # Wistia
           # --------------------------------------------------------------------
           wistiaPlayer:
@@ -720,152 +708,112 @@ settings:
 
 #       video 1
         - video:
-          name:                         Carpool Karaoke James and Adele
+          name:                         Planet Earth II
           type:                         youtube
-          api:                          videojs
+          api:                          videojs                                 # jadams !!!
           size:                         1280-720
-          source:                       //youtube.com/Nck6BZga7TQ
+          source:                       //youtube.com/IUN664s7N-c
           pinterest_prefix:             Pin video
           tweet_prefix:                 Try video
           description: >
-                                        <h2>Carpool Karaoke 2015</h2>
+                                        <h2>Beauty of Nature</h2>
                                         <h3>
-                                          James is on holidays in London and picks up
-                                          Adele for a ride through the city.
-                                          On the way, they sing some of their biggest hits.
+                                          The BBC America presents breathtaking landscapes of
+                                          amazing habitats from their Planet Earth II series
+                                          on YouTube
                                         </h3>
           poster:
             style:                      img-responsive
-            source:                     //img.youtube.com/vi/Nck6BZga7TQ/mqdefault.jpg
+            source:                     //img.youtube.com/vi/IUN664s7N-c/maxresdefault.jpg
+
           caption:
+            enabled:                    true
             position:                   bottom
-            text:                       YouTube Video &middot; Carpool Karaoke James and Adele
+            text:                       YouTube Video &middot; Beauty of Nature
 
 #       video 2
         - video:
-          name:                         Last Carpool Karaoke
-          type:                         youtube
-          api:                          videojs
+          name:                         Nature Video by Charlie Kaye
+          type:                         vimeo
           size:                         1280-720
-          source:                       //youtube.com/nV8UZJNBY6Y
+          source:                       //vimeo.com/112836958
           pinterest_prefix:             Pin video
           tweet_prefix:                 Try video
           description: >
-                                        <h2>Carpool Karaoke 2023</h2>
+                                        <h2>Amazing Nature</h2>
                                         <h3>
-                                          Adele wakeups James at home for the very
-                                          last Late Late Night Show and for the
-                                          final Carpool Caraoke Tour.
+                                          Video by <a target='_blank' href='//vimeo.com/charliekaye'>Charlie Kaye.</a>
+                                          on Vimeo
                                         </h3>
           poster:
             style:                      img-responsive
-            source:                     //img.youtube.com/vi/nV8UZJNBY6Y/maxresdefault.jpg
+            source:                     /assets/video/poster/vimeo/amazing_nature.jpg
+
           caption:
+            enabled:                    true
             position:                   bottom
-            text:                       YouTube Video &middot; Last Carpool Karaoke
+            text:                       Vimeo Video &middot; Amazing Nature
 
+#       video 3
+        - video:
+          name:                         Beginner Mat Pilates
+          type:                         dailymotion
+          size:                         1280-720
+          source:                       //dai.ly/x87ycik
+          pinterest_prefix:             Pin video
+          tweet_prefix:                 Try video
+          description: >
+                                        <h2>SELF Channel</h2>
+                                        <h3>Beginner Mat Pilates</h3>
+          poster:
+            style:                      img-responsive
+            source:                     /assets/video/poster/dailymotion/pilates.jpg
 
+          caption:
+            enabled:                    true
+            position:                   bottom
+            text:                       "Dailymotion Video &middot; SELF Channel: Beginner Mat Pilates"
 
-# #       video 1
-#         - video:
-#           name:                         Planet Earth II
-#           type:                         youtube
-#           api:                          videojs                                 # jadams !!!
-#           size:                         1280-720
-#           source:                       //youtube.com/IUN664s7N-c
-#           pinterest_prefix:             Pin video
-#           tweet_prefix:                 Try video
-#           description: >
-#                                         <h2>Beauty of Nature</h2>
-#                                         <h3>
-#                                           The BBC America presents breathtaking landscapes of
-#                                           amazing habitats from their Planet Earth II series
-#                                           on YouTube
-#                                         </h3>
-#           poster:
-#             style:                      img-responsive
-#             source:                     //img.youtube.com/vi/IUN664s7N-c/maxresdefault.jpg
-#           caption:
-#             position:                   bottom
-#             text:                       YouTube Video &middot; Beauty of Nature
+#       video 4
+        - video:
+          name:                         Peck Pocketed
+          type:                         html5
+          size:                         1280-720
+          source:                       peck_pocketed.mp4
+          pinterest_prefix:             Pin video
+          tweet_prefix:                 Try video
+          description: >
+                                        <h2>Peck Pocketed by Kevin Herron</h2>
+                                        <h3>Student Academy Award winning cartoon clip on VideoJS</h3>
 
-# #       video 2
-#         - video:
-#           name:                         Nature Video by Charlie Kaye
-#           type:                         vimeo
-#           size:                         1280-720
-#           source:                       //vimeo.com/112836958
-#           pinterest_prefix:             Pin video
-#           tweet_prefix:                 Try video
-#           description: >
-#                                         <h2>Amazing Nature</h2>
-#                                         <h3>
-#                                           Video by <a target='_blank' href='//vimeo.com/charliekaye'>Charlie Kaye.</a>
-#                                           on Vimeo
-#                                         </h3>
-#           poster:
-#             style:                      img-responsive
-#             source:                     /assets/video/poster/vimeo/amazing_nature.jpg
-#           caption:
-#             position:                   bottom
-#             text:                       Vimeo Video &middot; Amazing Nature
+          tracks:
+            - track:
+              default:                  true                                    # Indicates that the track is to be enabled if the user's preferences do not indicate that another track would be more appropriate
+              kind:                     captions
+              srclang:                  en                                      # Code for the language of the text track
+              label:                    English                                 # Descriptive text for the track that will used in the user interface (player)
+              src:                      /assets/video/tracks/html5/peck_pocketed/captions/video.vtt
 
-# #       video 3
-#         - video:
-#           name:                         Beginner Mat Pilates
-#           type:                         dailymotion
-#           size:                         1280-720
-#           source:                       //dai.ly/x87ycik
-#           pinterest_prefix:             Pin video
-#           tweet_prefix:                 Try video
-#           description: >
-#                                         <h2>SELF Channel</h2>
-#                                         <h3>Beginner Mat Pilates</h3>
-#           poster:
-#             style:                      img-responsive
-#             source:                     /assets/video/poster/dailymotion/pilates.jpg
+            - track:
+              default:                  true                                    # Indicates that the track is to be enabled if the user's preferences do not indicate that another track would be more appropriate
+              kind:                     chapters
+              srclang:                  en                                      # Code for the language of the text track
+              label:                    Chapters                                # Descriptive text for the track that will used in the user interface (player)
+              src:                      /assets/video/tracks/html5/peck_pocketed/chapters/video.vtt
 
-#           caption:
-#             position:                   bottom
-#             text:                       "Dailymotion Video &middot; SELF Channel: Beginner Mat Pilates"
+          poster:
+            style:                      img-responsive
+            source:                     peck_pocketed.jpg
 
-# #       video 4
-#         - video:
-#           name:                         Peck Pocketed
-#           type:                         html5
-#           size:                         1280-720
-#           source:                       peck_pocketed.mp4
-#           pinterest_prefix:             Pin video
-#           tweet_prefix:                 Try video
-#           description: >
-#                                         <h2>Peck Pocketed by Kevin Herron</h2>
-#                                         <h3>Student Academy Award winning cartoon clip on VideoJS</h3>
-
-#           tracks:
-#             - track:
-#               default:                  true                                    # Indicates that the track is to be enabled if the user's preferences do not indicate that another track would be more appropriate
-#               kind:                     captions
-#               srclang:                  en                                      # Code for the language of the text track
-#               label:                    English                                 # Descriptive text for the track that will used in the user interface (player)
-#               src:                      /assets/video/tracks/html5/peck_pocketed/captions/video.vtt
-
-#             - track:
-#               default:                  true                                    # Indicates that the track is to be enabled if the user's preferences do not indicate that another track would be more appropriate
-#               kind:                     chapters
-#               srclang:                  en                                      # Code for the language of the text track
-#               label:                    Chapters                                # Descriptive text for the track that will used in the user interface (player)
-#               src:                      /assets/video/tracks/html5/peck_pocketed/chapters/video.vtt
-
-#           poster:
-#             style:                      img-responsive
-#             source:                     peck_pocketed.jpg
-#           caption:
-#             position:                   bottom
-#             text:                       Local MP4 Video &middot; Peck Pocketed
+          caption:
+            
+            position:                   bottom
+            text:                       Local MP4 Video &middot; Peck Pocketed
 
 
     # --------------------------------------------------------------------------
     # YouTube Videos
+    #
     - grid:
       enabled:                          true
 
@@ -951,7 +899,6 @@ settings:
 #             portrait:                 0
 #             color:                    var(--md-gray-100)
 
-
           # Wistia
           # --------------------------------------------------------------------
           wistiaPlayer:
@@ -1014,8 +961,6 @@ settings:
         initLayout:                     true
         percentPosition:                true
 
-
-
       # ------------------------------------------------------------------------
       # videos
       #
@@ -1040,7 +985,9 @@ settings:
           poster:
             style:                      img-responsive
             source:                     //img.youtube.com/vi/Nck6BZga7TQ/mqdefault.jpg
+
           caption:
+            enabled:                    true
             position:                   bottom
             text:                       YouTube Video &middot; Carpool Karaoke James and Adele
 
@@ -1063,11 +1010,13 @@ settings:
           poster:
             style:                      img-responsive
             source:                     //img.youtube.com/vi/nV8UZJNBY6Y/maxresdefault.jpg
+
           caption:
+            enabled:                    true
             position:                   bottom
             text:                       YouTube Video &middot; Last Carpool Karaoke
 
-#       video 1
+#       video 3
         - video:
           name:                         Carpool Karaoke James and Adele
           type:                         youtube
@@ -1086,11 +1035,13 @@ settings:
           poster:
             style:                      img-responsive
             source:                     //img.youtube.com/vi/Nck6BZga7TQ/mqdefault.jpg
+
           caption:
+            enabled:                    true
             position:                   bottom
             text:                       YouTube Video &middot; Carpool Karaoke James and Adele
 
-#       video 2
+#       video 4
         - video:
           name:                         Last Carpool Karaoke
           type:                         youtube
@@ -1109,7 +1060,9 @@ settings:
           poster:
             style:                      img-responsive
             source:                     //img.youtube.com/vi/nV8UZJNBY6Y/maxresdefault.jpg
+
           caption:
+            enabled:                    true
             position:                   bottom
             text:                       YouTube Video &middot; Last Carpool Karaoke
 
