@@ -44,8 +44,6 @@ exclude_from_search:                    true
 {% assign consent_settings          = modules.cookieconsent.settings %}
 {% assign lunr_search_defaults      = modules.defaults.lunr.defaults %}
 {% assign lunr_search_settings      = modules.lunr.settings %}
-{% assign doc_search_defaults       = modules.defaults.docsearch.defaults %}
-{% assign doc_search_settings       = modules.docsearch.settings %}
 
 {% assign translator_defaults       = modules.defaults.translator.defaults %}
 {% assign translator_settings       = modules.translator.settings %}
@@ -63,7 +61,6 @@ exclude_from_search:                    true
 -------------------------------------------------------------------------------- {% endcomment %}
 {% assign authentication_options    = authentication_defaults | merge: authentication_settings %}
 {% assign lunr_search_options       = lunr_search_defaults | merge: lunr_search_settings %}
-{% assign doc_search_options        = doc_search_defaults | merge: doc_search_settings %}
 {% assign quicklinks_options        = nav_quicklinks_defaults | merge: nav_quicklinks_settings %}
 {% assign consent_options           = consent_defaults | merge: consent_settings %}
 {% assign toggler_options           = toggler_defaults | merge: toggler_settings %}
@@ -119,10 +116,6 @@ exclude_from_search:                    true
 {% assign quicksearch_action        = quicklinks_options.quicksearch_action %}
 {% assign quicksearch_label         = quicklinks_options.quicksearch_label %}
 
-{% assign docsearch_icon            = quicklinks_options.docsearch_icon %}
-{% assign docsearch_action          = quicklinks_options.docsearch_action %}
-{% assign docsearch_label           = quicklinks_options.docsearch_label %}
-
 {% assign translate_icon            = quicklinks_options.translate_icon %}
 {% assign translate_action          = quicklinks_options.translate_action %}
 {% assign translate_label           = quicklinks_options.translate_label %}
@@ -130,10 +123,6 @@ exclude_from_search:                    true
 {% assign speak2me_icon             = quicklinks_options.speak2me_icon %}
 {% assign speak2me_action           = quicklinks_options.speak2me_action %}
 {% assign speak2me_label            = quicklinks_options.speak2me_label %}
-
-{% assign theme_toggler_icon        = quicklinks_options.theme_toggler_icon %}
-{% assign theme_toggler_action      = quicklinks_options.theme_toggler_action %}
-{% assign theme_toggler_label       = quicklinks_options.theme_toggler_label %}
 
 {% comment %} Unused buttons
 --------------------------------------------------------------------------------
@@ -145,9 +134,17 @@ exclude_from_search:                    true
 {% assign translator_action         = quicklinks_options.translator_action %}
 {% assign translator_label          = quicklinks_options.translator_label %}
 
+{% assign theme_toggler_icon        = quicklinks_options.theme_toggler_icon %}
+{% assign theme_toggler_action      = quicklinks_options.theme_toggler_action %}
+{% assign theme_toggler_label       = quicklinks_options.theme_toggler_label %}
+
 {% assign notebooks_icon            = quicklinks_options.notebooks_icon %}
 {% assign notebooks_action          = quicklinks_options.notebooks_action %}
 {% assign notebooks_label           = quicklinks_options.notebooks_label %}
+
+{% assign docsearch_icon            = quicklinks_options.docsearch_icon %}
+{% assign docsearch_action          = quicklinks_options.docsearch_action %}
+{% assign docsearch_label           = quicklinks_options.docsearch_label %}
 --------------------------------------------------------------------------------
 {% endcomment %}
 

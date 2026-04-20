@@ -1,6 +1,6 @@
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/modules/lightGallery/js/plugins/lg-video.js (5)
+ # ~/assets/theme/j1/modules/lightGallery/js/plugins/lg-video.js (6)
  # Provides lightGallery v2.8.3 JS code for the plugin lgVideo
  #
  # Product/Info:
@@ -27,25 +27,7 @@
     typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
     typeof define === 'function' && define.amd ? define(factory) :
     (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.lgVideo = factory());
-}(this, (function () {
-'use strict';
-
-    /*! 
-    ****************************************************************************
-    Copyright (c) Microsoft Corporation.
-
-    Permission to use, copy, modify, and/or distribute this software for any
-    purpose with or without fee is hereby granted.
-
-    THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH
-    REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY
-    AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,
-    INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM
-    LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
-    OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
-    PERFORMANCE OF THIS SOFTWARE.
-    **************************************************************************** 
-    */
+}(this, (function () { "use strict";
 
     var __assign = function() {
         __assign = Object.assign || function __assign(t) {
@@ -60,18 +42,18 @@
 
     // jadams
     var videoSettings = {
-        autoplayFirstVideo: true,
-        htmlPlayerParams: false,
-        youTubePlayerParams: false,
-        vimeoPlayerParams: false,
-        dailymotionPlayerParams: false,
-        wistiaPlayerParams: false,
-        tiktokPlayerParams: false,
-        gotoNextSlideOnVideoEnd: true,
-        autoplayVideoOnSlide: false,
-        videojs: false,
-        videojsTheme: '',
-        videojsOptions: {},
+        autoplayFirstVideo:         true,
+        htmlPlayerParams:           false,
+        youTubePlayerParams:        false,
+//      vimeoPlayerParams:          false,
+//      dailymotionPlayerParams:    false,
+//      wistiaPlayerParams:         false,
+//      tiktokPlayerParams:         false,
+        gotoNextSlideOnVideoEnd:    true,
+        autoplayVideoOnSlide:       false,
+        videojs:                    false,
+        videojsTheme:               '',
+        videojsOptions:             {},
     };
 
     /**
@@ -80,34 +62,33 @@
      * Below interfaces are used to build the website documentations
      * */
     var lGEvents = {
-        afterAppendSlide: 'lgAfterAppendSlide',
-        init: 'lgInit',
-        hasVideo: 'lgHasVideo',
-        containerResize: 'lgContainerResize',
-        updateSlides: 'lgUpdateSlides',
-        afterAppendSubHtml: 'lgAfterAppendSubHtml',
-        beforeOpen: 'lgBeforeOpen',
-        afterOpen: 'lgAfterOpen',
-        slideItemLoad: 'lgSlideItemLoad',
-        beforeSlide: 'lgBeforeSlide',
-        afterSlide: 'lgAfterSlide',
-        posterClick: 'lgPosterClick',
-        dragStart: 'lgDragStart',
-        dragMove: 'lgDragMove',
-        dragEnd: 'lgDragEnd',
-        beforeNextSlide: 'lgBeforeNextSlide',
-        beforePrevSlide: 'lgBeforePrevSlide',
-        beforeClose: 'lgBeforeClose',
-        afterClose: 'lgAfterClose',
-        rotateLeft: 'lgRotateLeft',
-        rotateRight: 'lgRotateRight',
-        flipHorizontal: 'lgFlipHorizontal',
-        flipVertical: 'lgFlipVertical',
-        autoplay: 'lgAutoplay',
-        autoplayStart: 'lgAutoplayStart',
-        autoplayStop: 'lgAutoplayStop',
+        afterAppendSlide:       'lgAfterAppendSlide',
+        init:                   'lgInit',
+        hasVideo:               'lgHasVideo',
+        containerResize:        'lgContainerResize',
+        updateSlides:           'lgUpdateSlides',
+        afterAppendSubHtml:     'lgAfterAppendSubHtml',
+        beforeOpen:             'lgBeforeOpen',
+        afterOpen:              'lgAfterOpen',
+        slideItemLoad:          'lgSlideItemLoad',
+        beforeSlide:            'lgBeforeSlide',
+        afterSlide:             'lgAfterSlide',
+        posterClick:            'lgPosterClick',
+        dragStart:              'lgDragStart',
+        dragMove:               'lgDragMove',
+        dragEnd:                'lgDragEnd',
+        beforeNextSlide:        'lgBeforeNextSlide',
+        beforePrevSlide:        'lgBeforePrevSlide',
+        beforeClose:            'lgBeforeClose',
+        afterClose:             'lgAfterClose',
+        rotateLeft:             'lgRotateLeft',
+        rotateRight:            'lgRotateRight',
+        flipHorizontal:         'lgFlipHorizontal',
+        flipVertical:           'lgFlipVertical',
+        autoplay:               'lgAutoplay',
+        autoplayStart:          'lgAutoplayStart',
+        autoplayStop:           'lgAutoplayStop',
     };
-
 
     var isEmpty = function (obj) {
         return Object.keys(obj).length === 0;
@@ -120,6 +101,7 @@
         })
             .join('&');
     };
+
     var paramsToObject = function (url) {
         var paramas = url
             .slice(1)
@@ -132,6 +114,8 @@
         }, {});
         return paramas;
     };
+
+    // jadams
     var getYouTubeParams = function (videoInfo, youTubePlayerParamsSettings) {
         if (!videoInfo.youtube)
             return '';
@@ -145,65 +129,14 @@
             mute: 1,
             enablejsapi: 1,
         };
-        var playerParamsSettings = youTubePlayerParamsSettings || {};
-        var youTubePlayerParams = __assign(__assign(__assign({}, defaultYouTubePlayerParams), playerParamsSettings), slideUrlParams);
-        var youTubeParams = "?" + param(youTubePlayerParams);
+        var playerParamsSettings    = youTubePlayerParamsSettings || {};
+        var youTubePlayerParams     = __assign(__assign(__assign({}, defaultYouTubePlayerParams), playerParamsSettings), slideUrlParams);
+        var youTubeParams           = "?" + param(youTubePlayerParams);
         return youTubeParams;
     };
+
     var isYouTubeNoCookie = function (url) {
         return url.includes('youtube-nocookie.com');
-    };
-    var getVimeoURLParams = function (defaultParams, videoInfo) {
-        if (!videoInfo || !videoInfo.vimeo)
-            return '';
-        var urlParams = videoInfo.vimeo[2] || '';
-        var defaultVimeoPlayerParams = Object.assign({}, {
-            autoplay: 0,
-            muted: 1,
-        }, defaultParams);
-        var defaultPlayerParams = defaultVimeoPlayerParams &&
-            Object.keys(defaultVimeoPlayerParams).length !== 0
-            ? param(defaultVimeoPlayerParams)
-            : '';
-        // Support private video
-        var urlWithHash = videoInfo.vimeo[0].split('/').pop() || '';
-        var urlWithHashWithParams = urlWithHash.split('?')[0] || '';
-        var hash = urlWithHashWithParams.split('#')[0];
-        var isPrivate = videoInfo.vimeo[1] !== hash;
-        if (isPrivate) {
-            urlParams = urlParams.replace("/" + hash, '');
-        }
-        urlParams =
-            urlParams[0] == '?' ? '&' + urlParams.slice(1) : urlParams || '';
-        var privateUrlParams = isPrivate ? "h=" + hash : '';
-        defaultPlayerParams = privateUrlParams
-            ? "&" + defaultPlayerParams
-            : defaultPlayerParams;
-        var vimeoPlayerParams = "?" + privateUrlParams + defaultPlayerParams + urlParams;
-        return vimeoPlayerParams;
-    };
-
-    // jadams
-    var getTikTokURLParams = function (defaultParams, videoInfo) {
-        if (!videoInfo || !videoInfo.tiktok)
-            return '';
-        var urlParams = videoInfo.tiktok[2] || '';
-        var defaultPlayerParams = defaultParams && Object.keys(defaultParams).length !== 0
-            ? '&' + param(defaultParams)
-            : '';
-        // Support private video
-        var urlWithHash = videoInfo.tiktok[0].split('/').pop() || '';
-        var urlWithHashWithParams = urlWithHash.split('?')[0] || '';
-        var hash = urlWithHashWithParams.split('#')[0];
-        var isPrivate = videoInfo.tiktok[1] !== hash;
-        if (isPrivate) {
-            urlParams = urlParams.replace("/" + hash, '');
-        }
-        urlParams =
-            urlParams[0] == '?' ? '&' + urlParams.slice(1) : urlParams || '';
-        // For vimeo last params gets priority if duplicates found
-        var tiktokPlayerParams = "?autoplay=0&muted=1" + defaultPlayerParams + urlParams;
-        return tiktokPlayerParams;
     };
 
     // jadams
@@ -237,7 +170,6 @@
         var dependency_met_module_ready, videoInfo, playerState,
             videoStart, videojsPlayer, playbackRates,
             hotKeysPlugin, skipButtonsPlugin, zoomPlugin;
-
 
         // ---------------------------------------------------------------------
         // helper functions
@@ -366,33 +298,33 @@
                 playerState = getPlayerStatus(videojsPlayer);
 
                 var hotKeysPluginDefaults = {
-                    volumeStep:                 vjsOptions.plugins.hotKeys.volumeStep,
-                    seekStep:                   vjsOptions.plugins.hotKeys.seekStep,
-                    enableMute:                 vjsOptions.plugins.hotKeys.enableMute,
-                    enableVolumeScroll:         vjsOptions.plugins.hotKeys.enableVolumeScroll,
-                    enableHoverScroll:          vjsOptions.plugins.hotKeys.enableHoverScroll,
-                    enableFullscreen:           vjsOptions.plugins.hotKeys.enableFullscreen,
-                    enableNumbers:              vjsOptions.plugins.hotKeys.enableNumbers,
-                    enableJogStyle:             vjsOptions.plugins.hotKeys.enableJogStyle,
-                    alwaysCaptureHotkeys:       vjsOptions.plugins.hotKeys.alwaysCaptureHotkeys,
-                    captureDocumentHotkeys:     vjsOptions.plugins.hotKeys.captureDocumentHotkeys,
-                    enableModifiersForNumbers:  vjsOptions.plugins.hotKeys.enableModifiersForNumbers,
-                    enableInactiveFocus:        vjsOptions.plugins.hotKeys.enableInactiveFocus,
-                    skipInitialFocus:           vjsOptions.plugins.hotKeys.skipInitialFocus
+                    volumeStep:                     vjsOptions.plugins.hotKeys.volumeStep,
+                    seekStep:                       vjsOptions.plugins.hotKeys.seekStep,
+                    enableMute:                     vjsOptions.plugins.hotKeys.enableMute,
+                    enableVolumeScroll:             vjsOptions.plugins.hotKeys.enableVolumeScroll,
+                    enableHoverScroll:              vjsOptions.plugins.hotKeys.enableHoverScroll,
+                    enableFullscreen:               vjsOptions.plugins.hotKeys.enableFullscreen,
+                    enableNumbers:                  vjsOptions.plugins.hotKeys.enableNumbers,
+                    enableJogStyle:                 vjsOptions.plugins.hotKeys.enableJogStyle,
+                    alwaysCaptureHotkeys:           vjsOptions.plugins.hotKeys.alwaysCaptureHotkeys,
+                    captureDocumentHotkeys:         vjsOptions.plugins.hotKeys.captureDocumentHotkeys,
+                    enableModifiersForNumbers:      vjsOptions.plugins.hotKeys.enableModifiersForNumbers,
+                    enableInactiveFocus:            vjsOptions.plugins.hotKeys.enableInactiveFocus,
+                    skipInitialFocus:               vjsOptions.plugins.hotKeys.skipInitialFocus
                 };
 
                 var skipButtonsPluginDefaults = {
-                    backward:                     vjsOptions.plugins.skipButtons.backward,
-                    forward:                      vjsOptions.plugins.skipButtons.forward,
-                    backwardIndex:                0,
-                    forwardIndex:                 1
+                    backward:                       vjsOptions.plugins.skipButtons.backward,
+                    forward:                        vjsOptions.plugins.skipButtons.forward,
+                    backwardIndex:                  0,
+                    forwardIndex:                   1
                 };
 
                 var zoomPluginDefaults = {
-                    moveX:                      vjsOptions.plugins.zoomButtons.moveX,
-                    moveY:                      vjsOptions.plugins.zoomButtons.moveY,
-                    rotate:                     vjsOptions.plugins.zoomButtons.rotate,
-                    zoom:                       vjsOptions.plugins.zoomButtons.zoom
+                    moveX:                          vjsOptions.plugins.zoomButtons.moveX,
+                    moveY:                          vjsOptions.plugins.zoomButtons.moveY,
+                    rotate:                         vjsOptions.plugins.zoomButtons.rotate,
+                    zoom:                           vjsOptions.plugins.zoomButtons.zoom
                 };
 
                 //  add customControlContainer
@@ -655,28 +587,13 @@
 
     /**
      * Video module for lightGallery
-     * Supports HTML5, YouTube, Vimeo, Wistia, Dailymotion, TikToc
+     * Supports HTML5, YouTube, Native
      *
 
      * @ref Youtube
      * https://developers.google.com/youtube/player_parameters#enablejsapi
      * https://developers.google.com/youtube/iframe_api_reference
      * https://developer.chrome.com/blog/autoplay/#iframe-delegation
-     *
-     * @ref Vimeo
-     * https://stackoverflow.com/questions/10488943/easy-way-to-get-vimeo-id-from-a-vimeo-url
-     * https://vimeo.zendesk.com/hc/en-us/articles/360000121668-Starting-playback-at-a-specific-timecode
-     * https://vimeo.zendesk.com/hc/en-us/articles/360001494447-Using-Player-Parameters
-     *
-     * @ref Wistia
-     * https://wistia.com/support/integrations/wordpress(How to get url)
-     * https://wistia.com/support/developers/embed-options#using-embed-options
-     * https://wistia.com/support/developers/player-api
-     * https://wistia.com/support/developers/construct-an-embed-code
-     * http://jsfiddle.net/xvnm7xLm/
-     * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/video
-     * https://wistia.com/support/embed-and-share/sharing-videos
-     * https://private-sharing.wistia.com/medias/mwhrulrucj
      *
      */
     var Video = /** @class */ (function () {
@@ -752,7 +669,7 @@
         /**
          * @desc fired immediately before each slide transition.
          * Pause the previous video
-         * Hide the download button if the slide contains YouTube, Vimeo, or Wistia videos.
+         * Hide the download button if the slide contains YouTube videos.
          *
          * @param {Event} event - Javascript Event object.
          * @param {number} prevIndex - Previous index of the slide.
@@ -797,14 +714,14 @@
             }
         };
         /**
-         * Play HTML5, Youtube, Vimeo or Wistia videos in a particular slide.
+         * Play HTML5, Youtube, Native videos in a particular slide.
          * @param {number} index - Index of the slide
          */
         Video.prototype.playVideo = function (index) {
             this.controlVideo(index, 'play');
         };
         /**
-         * Pause HTML5, Youtube, Vimeo or Wistia videos in a particular slide.
+         * Pause HTML5, Youtube, Native in a particular slide.
          * @param {number} index - Index of the slide
          */
         Video.prototype.pauseVideo = function (index) {
@@ -864,33 +781,6 @@
             video_api = 'youtube';
             video     = (video_api === 'iframe') ? video_iframe : video_vjs;
             // END videoInfo youtube
-          } else if (videoInfo.vimeo) {
-            var videoId = 'lg-vimeo' + index;
-            var playerParams = getVimeoURLParams(this.settings.vimeoPlayerParams, videoInfo);
-
-            video = "<iframe allow=\"autoplay\" id=" + videoId + " class=\"lg-video-object lg-vimeo " + addClass + "\" " + videoTitle + " src=\"//player.vimeo.com/video/" + (videoInfo.vimeo[1] + playerParams) + "\" " + commonIframeProps + "></iframe>";
-          } else if (videoInfo.wistia) {
-            var wistiaId = 'lg-wistia' + index;
-            var playerParams = param(this.settings.wistiaPlayerParams);
-            playerParams = playerParams ? '?' + playerParams : '';
-
-            video = "<iframe allow=\"autoplay\" id=\"" + wistiaId + "\" src=\"//fast.wistia.net/embed/iframe/" + (videoInfo.wistia[4] + playerParams) + "\" " + videoTitle + " class=\"wistia_embed lg-video-object lg-wistia " + addClass + "\" name=\"wistia_embed\" " + commonIframeProps + "></iframe>";
-          } else if (videoInfo.dailymotion) {
-            var dailymotionId = 'lg-dailymotion' + index;
-            var playerParams = param(this.settings.dailymotionPlayerParams);
-            playerParams = playerParams ? '?' + playerParams : '';
-
-            video = `
-              <iframe
-                id="${dailymotionId}"
-                src="//dailymotion.com/embed/video/${videoInfo.dailymotion[1]}?api=1 ${playerParams}"
-                ${videoTitle}
-                class="dailymotion_embed lg-video-object lg-dailymotiion ${addClass}"
-                name="dailymotion_embed"
-                ${commonIframeProps}>
-              </iframe>
-            `;
-
           } else if (videoInfo.html5) {
             var html5VideoMarkup = '';
             for (var i = 0; i < html5Video.source.length; i++) {
@@ -898,6 +788,7 @@
                 var typeAttr = type ? "type=\"" + type + "\"" : '';
                 html5VideoMarkup += "<source src=\"" + html5Video.source[i].src + "\" " + typeAttr + ">";
             }
+
             if (html5Video.tracks) {
                 var _loop_1 = function (i) {
                     var trackAttributes = '';
@@ -911,6 +802,7 @@
                     _loop_1(i);
                 }
             }
+
             var html5VideoAttrs_1 = '';
             var videoAttributes_1 = html5Video.attributes || {};
             Object.keys(videoAttributes_1 || {}).forEach(function (key) {
@@ -1014,36 +906,6 @@
                         _this.core.goToNextSlide();
                     });
                 }
-                else if (videoInfo.vimeo) {
-                    try {
-                        // https://github.com/vimeo/player.js/#ended
-                        new Vimeo.Player($videoElement.get()).on('ended', function () {
-                            _this.core.goToNextSlide();
-                        });
-                    }
-                    catch (e) {
-                        // jadams
-                        console.error('lightGallery:- Make sure you have included //github.com/vimeo/player.js');
-                    }
-                }
-                else if (videoInfo.wistia) {
-                    try {
-                        window._wq = window._wq || [];
-                        // @todo Event is gettign triggered multiple times
-                        window._wq.push({
-                            id: $videoElement.attr('id'),
-                            onReady: function (video) {
-                                video.bind('end', function () {
-                                    _this.core.goToNextSlide();
-                                });
-                            },
-                        });
-                    }
-                    catch (e) {
-                        // jadams
-                        console.error('lightGallery:- Make sure you have included //fast.wistia.com/assets/external/E-v1.js');
-                    }
-                }
             }
         };
 
@@ -1123,27 +985,6 @@
                         console.error("lightGallery:- " + e);
                     }
                 } // END youtube
-            } else if (videoInfo.vimeo) {
-                try {
-                    new Vimeo.Player($videoElement.get())[action]();
-                }
-                catch (e) {
-                    console.warn('lightGallery: Make sure you have included //github.com/vimeo/player.js');
-                } // END vimeo
-            } else if (videoInfo.wistia) {
-                try {
-                    window._wq = window._wq || [];
-                    // @todo Find a way to destroy wistia player instance
-                    window._wq.push({
-                        id: $videoElement.attr('id'),
-                        onReady: function (video) {
-                            video[action]();
-                        },
-                    });
-                }
-                catch (e) {
-                    console.warn('lightGallery: Make sure you have included //fast.wistia.com/assets/external/E-v1.js');
-                } // END wistia
             } // END if videoInfo
 
         }; // END controlVideo
