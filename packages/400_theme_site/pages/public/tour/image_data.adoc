@@ -424,5 +424,4 @@ QuickTime or Silverlight is no longer needed, as the J1 Theme provides
 HTML5 video support for both local content and online sources on the
 Internet.
 
-[role="mb-7"]
 Incredible? See the next example page link:{url-tour--audio_data}[Audio Player].

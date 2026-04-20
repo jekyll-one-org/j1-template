@@ -205,7 +205,7 @@ or `nav_quicklinks` sections. Colors accept CSS custom properties
 **Adding Quicklink Buttons:**
 Each quicklink is defined as a triplet of `*_icon`, `*_url` (or `*_action`),
 and `*_label` entries. Link buttons navigate to URLs; action buttons trigger
-JavaScript functions (e.g., `quicksearch`, `translate`, `cookie-consent`).
+JavaScript functions (e.g., `site_search`, `translate`, `cookie-consent`).
 
 **Configuring Mobile Menus:**
 Mobile menus are defined as instances under `nav_mmenu.menus`. Each instance
@@ -680,7 +680,7 @@ completing.
 | `icon_color_hover`     | `var(--md-gray-500)`     | Hover icon color                          |
 | `icon_size`            | `mdib-2x`               | Icon size class                           |
 | `home_icon/url/label`  | `home-variant` / `/`     | Home button configuration                 |
-| `quicksearch_icon`     | `magnify`                | Search action button icon                 |
+| `site_search_icon`     | `magnify`                | Search action button icon                 |
 | `cookies_icon`         | `cookie`                 | Cookie consent action icon                |
 | `translate_icon`       | `google-translate`       | Google Translate action icon               |
 | `theme_toggler_icon`   | `lightbulb-outline`      | Theme toggler action icon                 |

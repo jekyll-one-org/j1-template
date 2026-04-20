@@ -64,7 +64,7 @@
       icon:                             code-parentheses
 
     - title:                            Search
-      href:                             /pages/public/tour/quicksearch/
+      href:                             /pages/public/tour/site_search/
       icon:                             magnify
 
 # ------------------------------------------------------------------------------
@@ -440,8 +440,8 @@
 #           - title:                    J1 Feeds
 #             href:                     '#'                                     # //jekyll.one/pages/public/manuals/j1/plugins/j1_feeds/
 #             icon:                     slide
-#           - title:                    J1 Quicksearch
-#             href:                     '#'                                     # //jekyll.one/pages/public/manuals/j1/plugins/quicksearch/
+#           - title:                    J1 site_search
+#             href:                     '#'                                     # //jekyll.one/pages/public/manuals/j1/plugins/site_search/
 #             icon:                     magnify
 
         - title:                        External Plugins

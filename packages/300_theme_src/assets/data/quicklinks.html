@@ -112,9 +112,9 @@ exclude_from_search:                    true
 {% assign cookies_action            = quicklinks_options.cookies_action %}
 {% assign cookies_label             = quicklinks_options.cookies_label %}
 
-{% assign quicksearch_icon          = quicklinks_options.quicksearch_icon %}
-{% assign quicksearch_action        = quicklinks_options.quicksearch_action %}
-{% assign quicksearch_label         = quicklinks_options.quicksearch_label %}
+{% assign site_search_icon          = quicklinks_options.site_search_icon %}
+{% assign site_search_action        = quicklinks_options.site_search_action %}
+{% assign site_search_label         = quicklinks_options.site_search_label %}
 
 {% assign translate_icon            = quicklinks_options.translate_icon %}
 {% assign translate_action          = quicklinks_options.translate_action %}
@@ -159,7 +159,7 @@ exclude_from_search:                    true
 
 {% comment %} Show|Hide QuickLink icons
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign show_quicksearch_icon     = lunr_search_options.enabled %}
+{% assign show_site_search_icon     = lunr_search_options.enabled %}
 {% assign show_docsearch_icon       = doc_search_options.enabled %}
 {% assign show_translator_icon      = translator_options.enabled %}
 {% assign show_speak2me_icon        = speak2me_options.enabled %}
@@ -263,7 +263,7 @@ exclude_from_search:                    true
 
       {% comment %} Action buttons
       ------------------------------------------------------------------------------ {% endcomment %}
-      {% if show_quicksearch_icon %}<li id="quickLinksSearchButton" class="nav-icon {{quicksearch_action}}"><a href="#" title="{{quicksearch_label}}" aria-label="{{quicksearch_label}}"><i class="nav-icon {{icon_family}} {{icon_family}}-{{quicksearch_icon}} {{icon_size}}"></i></a></li>{% endif %}
+      {% if show_site_search_icon %}<li id="quickLinksSearchButton" class="nav-icon {{site_search_action}}"><a href="#" title="{{site_search_label}}" aria-label="{{site_search_label}}"><i class="nav-icon {{icon_family}} {{icon_family}}-{{site_search_icon}} {{icon_size}}"></i></a></li>{% endif %}
       {% if show_docsearch_icon %}<li id="quickLinksDocSearchButton" class="nav-icon {{docsearch_action}}"><a href="#" aria-label="{{docsearch_label}}"><i class="nav-icon {{icon_family}} {{icon_family}}-{{docsearch_icon}} {{icon_size}}"></i></a></li>{% endif %}
       {% if show_auth_manager_icon %}<li id="quickLinksSignInOutButton" class="nav-icon sign-inout" style="display: none;"><a class="nav-icon" id="navLinkSignInOut" aria-label="SignOut" href="#" data-bs-toggle="modal" data-bs-target="#{{signin_modal_id}}"><i id="iconSignInOut" class="nav-icon {{icon_family}} {{icon_family}}-{{signin_icon}} {{icon_size}}"></i></a></li>{% endif %}
       {% if show_cookieconsent_icon %}<li id="quickLinksCookieButton" class="nav-icon {{cookies_action}}" style="display: block;"><a href="#" title="{{cookies_label}}" aria-label="{{cookies_label}}"><i class="nav-icon {{icon_family}} {{icon_family}}-{{cookies_icon}} {{icon_size}}"></i></a></li>{% endif %}

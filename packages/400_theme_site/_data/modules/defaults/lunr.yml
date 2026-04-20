@@ -75,7 +75,7 @@ defaults:
     search_history_wrapper_id:          search_history_select_wrapper
 
     container_id:                       search_modal
-    type:                               quicksearch                             # quicksearch | elasticsearch
+    type:                               site_search                             # site_search | elasticsearch
     icon_family:                        mdib
     icon_color:                         var(--bs-white)
     icon_size:                          mdib-2x

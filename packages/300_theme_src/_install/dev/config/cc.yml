@@ -1433,7 +1433,7 @@ collections:
                 fields:
                   - { label: enabled, name: enabled, widget: boolean, hint: Enables or Disables Top Search }
                   - { label: id, name: id, widget: string, hint: ID of the Topsearch container }
-                  - { label: type, name: type, widget: select, options: [ quicksearch, algolia, google ], hint: TBD }
+                  - { label: type, name: type, widget: select, options: [ site_search, algolia, google ], hint: TBD }
                   - { label: icon family, name: icon_family, widget: select, options: [ MDI, FA ], hint: TBD }
                   - { label: icon color, name: icon_color, widget: string, hint: TBD }
                   - { label: icon size, name: icon_size, widget: string, hint: TBD }

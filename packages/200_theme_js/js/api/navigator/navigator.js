@@ -367,18 +367,18 @@ module.exports = function navigator ( options ) {
         // -------------------------------------------------------------------
 
         // ---------------------------------------------------------------------
-        // QuickSearch
+        // site_search
         //
-        if ($('li.quicksearch')) {
+        if ($('li.site_search')) {
 
-          logger.debug('register OPEN event for QuickSearch');
+          logger.debug('register OPEN event for site_search');
 
-          $('li.quicksearch > a', this).on('click', function(e) {
+          $('li.site_search > a', this).on('click', function(e) {
             logger.debug('manage search action OPEN');
             $('#searchModal').modal('show');
           });
 
-        } // END QuickSearch
+        } // END site_search
 
         // ---------------------------------------------------------------------
         // DocSearch dialog

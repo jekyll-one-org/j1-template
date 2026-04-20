@@ -1,6 +1,6 @@
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/modules/lunr/js/quicksearch.js
+ # ~/assets/theme/j1/modules/lunr/js/site_search.js
  # jQuery plugin to use Lunr Search for J1 Theme
  #
  # Product/Info:

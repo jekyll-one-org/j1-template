@@ -1,7 +1,7 @@
 {% comment %}
  # -----------------------------------------------------------------------------
  # ~/_includes/templates/j1/modules/searcher/procedures/topsearch.proc
- # Liquid PROCEDURE template to create search input for J1 Quicksearch
+ # Liquid PROCEDURE template to create search input for J1 site_search
  #
  # Product/Info:
  # https://jekyll.one
@@ -25,7 +25,7 @@ topsearch_options.enabled: {{topsearch_options.enabled | debug}}
 {% comment %} Liquid procedures
 -------------------------------------------------------------------------------- {% endcomment %}
 
-{% comment %} Set quicksearch properties
+{% comment %} Set site_search properties
 -------------------------------------------------------------------------------- {% endcomment %}
 {% assign topsearch_id            = topsearch_options.container_id %}
 {% assign icon_family             = topsearch_options.icon_family | downcase %}
@@ -39,7 +39,7 @@ topsearch_options.enabled: {{topsearch_options.enabled | debug}}
 {% assign quick_search            = false %}
 {% assign elastic_search          = false %}
 
-{% if topsearch_options.type == 'quicksearch' %}
+{% if topsearch_options.type == 'site_search' %}
   {% assign quick_search = true %}
 {% endif %}
 
@@ -77,7 +77,7 @@ topsearch_options.enabled: {{topsearch_options.enabled | debug}}
 
           <!-- MODAL Header -->
           <div class="modal-header">
-            <h2 id="searchModalLabel"class="modal-title fs-5">QuickSearch</h2>
+            <h2 id="searchModalLabel"class="modal-title fs-5">site_search</h2>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
 

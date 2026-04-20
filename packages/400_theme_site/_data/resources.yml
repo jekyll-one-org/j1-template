@@ -681,7 +681,7 @@ resources:
 
   # ----------------------------------------------------------------------------
   # Lunr search engine
-  # JS API used for the QuickSearch feature
+  # JS API used for the site_search feature
   # of J1 Theme based on the Lunr JS API
   #
   # See: https://lunrjs.com/
