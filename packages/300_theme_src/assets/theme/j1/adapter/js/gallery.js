@@ -48,17 +48,15 @@ regenerate:                             true
 
 {% comment %} Set config options II
 --------------------------------------------------------------------------------
-{% assign gallery_defaults    = modules.defaults.gallery.defaults %}
-{% assign gallery_players     = modules.gallery_app.settings %}
-{% assign gallery_playlists   = modules.gallery_playlists.settings %}
+{% assign gallery_defaults  = modules.defaults.gallery.defaults %}
+{% assign gallery_players   = modules.gallery_app.settings %}
+{% assign gallery_playlists = modules.gallery_playlists.settings %}
+
+{% assign gallery_options   = gallery_defaults | merge: gallery_players %}
+{% assign gallery_options   = gallery_options  | merge: gallery_playlists %}
+{% assign galleries         = gallery_options.galleries %}
 -------------------------------------------------------------------------------- {% endcomment %}
 
-{% comment %} set config options II
---------------------------------------------------------------------------------
-{% assign gallery_options     = gallery_defaults | merge: gallery_players %}
-{% assign gallery_options     = gallery_options  | merge: gallery_playlists %}
-{% assign galleries           = gallery_options.galleries %}
--------------------------------------------------------------------------------- {% endcomment %}
 
 {% comment %} Detect prod mode
 -------------------------------------------------------------------------------- {% endcomment %}
@@ -66,11 +64,6 @@ regenerate:                             true
 {% if environment == 'prod' or environment == 'production' %}
   {% assign production = true %}
 {% endif %}
-
-
-{% comment %} Collect gallery options
-gallery_options: {{gallery_options | debug}}
--------------------------------------------------------------------------------- {% endcomment %}
 
 
 /*
