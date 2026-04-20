@@ -17,4 +17,4 @@
 * 1d31bd040 2023-10-23 | Added workaround for Chromium browsers when callback "jg.complete" (justifiedGallery) is NOT fired [Juergen Adams]
 * 831ba1c98 2023-10-23 | Cleanup files [Juergen Adams]
 * 1552726fe 2023-10-23 | Removed old|unneeded module|config for "lightGallery". Removed probleatic image (#14) for gallery id "jg_mega_cities". [Juergen Adams]
-* 330361787 2023-10-23 | Cleanup files (tag: v2024.3.22) [Juergen Adams]
+* 330361787 2023-10-23 | Cleanup files (tag: v2026.0.22) [Juergen Adams]
