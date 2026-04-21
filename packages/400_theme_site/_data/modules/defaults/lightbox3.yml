@@ -147,18 +147,16 @@ defaults:
   # ----------------------------------------------------------------------------
   #
   enabled:                              false
-  alwaysShowNavOnTouchDevices:          false
-  albumLabel:                           Image %1 of %2
-  disableScrolling:                     true
-  fadeDuration:                         400
-  fitImagesInViewport:                  true
-  imageFadeDuration:                    600
-  maxWidth:
-  maxHeight:
-  positionFromTop:                      50
-  resizeDuration:                       250
-  showImageNumberLabel:                 true
-  wrapAround:                           true
+  debug:                                false
+  
+  selector:                             "[data-lightbox]"
+  padding:                              40
+  springOpen:
+    stiffness:                          260
+    damping:                            26
+  springClose:
+    stiffness:                          500
+    damping:                            38
 
 # ------------------------------------------------------------------------------
 # END config

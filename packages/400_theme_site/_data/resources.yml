@@ -1096,32 +1096,32 @@ resources:
         init_function:                  [ j1.adapter.iframer.init ]
 
   # ----------------------------------------------------------------------------
-  # Lightbox V2
-  # The main lightbox for J1 Theme
+  # Lightbox V3
+  # The default lightbox for J1 Template
   #
-  # See: ttp://lokeshdhakar.com/projects/lightbox2/
+  # See: https://github.com/lokesh/lightbox3
   #
-  # - name:                               J1 Lightbox V2
-  #   resource:
-  #     enabled:                          true
+  - name:                               J1 Lightbox V3
+    resource:
+      enabled:                          true
 
-  #     id:                               lightbox
-  #     comment:                          Module Lightbox
-  #     layout:                           [ all ]
-  #     region:                           head
-  #     required:                         ondemand
-  #     script_load:                      defer
-  #     dependencies:                     false
-  #     pass_init_data:                   true
+      id:                               lightbox3
+      comment:                          Module Lightbox
+      layout:                           [ all ]
+      region:                           head
+      required:                         ondemand
+      script_load:                      defer
+      dependencies:                     false
+      pass_init_data:                   true
 
-  #     data:
-  #       css:                            [
-  #                                         modules/lightbox/css/lightbox,
-  #                                         modules/lightbox/css/theme/uno
-  #                                       ]
-  #       files:                          [ adapter/js/lightbox.js ]
-  #       js:                             [ modules/lightbox/js/lightbox ]
-  #       init_function:                  [ j1.adapter.lightbox.init ]
+      data:
+        css:                            [
+                                          modules/lightbox3/css/lightbox3,
+                                          modules/lightbox3/css/theme/uno
+                                        ]
+        files:                          [ adapter/js/lightbox3.js ]
+        js:                             [ modules/lightbox3/js/lightbox3 ]
+        init_function:                  [ j1.adapter.lightbox3.init ]
 
   # ----------------------------------------------------------------------------
   # Iconify Framework

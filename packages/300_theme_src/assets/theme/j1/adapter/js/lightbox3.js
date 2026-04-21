@@ -6,13 +6,13 @@ regenerate:                             true
 
 {% comment %}
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/adapter/js/lightbox.js
- # Liquid template to adapt Lightbox Core functions
+ # ~/assets/theme/j1/adapter/js/lightbox3.js
+ # Liquid template to adapt Lightbox V3 Core functions
  #
  # Product/Info:
  # https://jekyll.one
  #
- # Copyright (C) 2023-2026 Juergen Adams
+ # Copyright (C) 2026 Juergen Adams
  #
  # J1 Template is licensed under the MIT License.
  # For details, see: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE
@@ -40,8 +40,8 @@ regenerate:                             true
 
 {% comment %} Set config data
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign lightbox_defaults = modules.defaults.lightbox.defaults %}
-{% assign lightbox_settings = modules.lightbox.settings %}
+{% assign lightbox_defaults = modules.defaults.lightbox3.defaults %}
+{% assign lightbox_settings = modules.lightbox3.settings %}
 
 {% comment %} Set config options
 -------------------------------------------------------------------------------- {% endcomment %}
@@ -56,20 +56,20 @@ regenerate:                             true
 
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/adapter/js/lightbox.js
- # JS Adapter for J1 Lightbox
+ # ~/assets/theme/j1/adapter/js/lightbox3.js
+ # JS Adapter for Lightbox V3
  #
  # Product/Info:
  # https://jekyll.one
- # https://github.com/lokesh/lightbox2/
+ # https://github.com/lokesh/lightbox3
  #
- # Copyright (C) 2023-2026 Juergen Adams
- # Copyright (C) 2007, 2018 Lokesh Dhakar
+ # Copyright (C) 2026 Lokesh Dhakar
+ # Copyright (C) 2026 Juergen Adams
  #
  # J1 Template is licensed under the MIT License.
  # For details, see: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE
- # Lightbox V2 is licensed under the MIT License.
- # For details, see https://github.com/lokesh/lightbox2/
+ # Lightbox V3 is licensed under the MIT License.
+ # For details, see https://github.com/lokesh/lightbox3/blob/master/LICENSE
  #
  # -----------------------------------------------------------------------------
  # Adapter generated: {{site.time}}
@@ -82,7 +82,7 @@ regenerate:                             true
 /* eslint indent: "off"                                                       */
 // -----------------------------------------------------------------------------
 "use strict";
-j1.adapter.lightbox = ((j1, window) => {
+j1.adapter.lightbox3 = ((j1, window) => {
 
   const isDev = (j1.env === "development" || j1.env === "dev") ? true : false;
 
@@ -125,15 +125,15 @@ j1.adapter.lightbox = ((j1, window) => {
       // default module settings
       // -----------------------------------------------------------------------
       var settings = $.extend({
-        module_name: 'j1.adapter.lightbox',
+        module_name: 'j1.adapter.lightbox3',
         generated:   '{{site.time}}'
       }, options);
 
       // -----------------------------------------------------------------------
       // global variable settings
       // -----------------------------------------------------------------------
-      _this   = j1.adapter.lightbox;
-      logger  = log4javascript.getLogger('j1.adapter.lightbox');
+      _this   = j1.adapter.lightbox3;
+      logger  = log4javascript.getLogger('j1.adapter.lightbox3');
 
       // create settings object from frontmatter (page settings)
       frontmatterOptions    = options !== null ? $.extend({}, options) : {};
@@ -150,29 +150,22 @@ j1.adapter.lightbox = ((j1, window) => {
         var pageState      = $('#content').css("display");
         var pageVisible    = (pageState === 'block') ? true: false;
         var j1CoreFinished = (j1.getState() === 'finished') ? true : false;
-        var lbV2Finished   = ($('#lightbox').length) ? true : false;
 
-         if (j1CoreFinished && pageVisible && lbV2Finished) {
-           startTimeModule = Date.now();
+         if (j1CoreFinished && pageVisible) {
+          startTimeModule = Date.now();
 
           _this.setState('started');
           logger.debug('state: ' + _this.getState());
           logger.info('module is being initialized');
 
-          lightbox.option({
-            alwaysShowNavOnTouchDevices:  lightboxOptions.alwaysShowNavOnTouchDevices,
-            albumLabel:                   lightboxOptions.albumLabel,
-            disableScrolling:             lightboxOptions.disableScrolling,
-            fadeDuration:                 lightboxOptions.fadeDuration,
-            fitImagesInViewport:          lightboxOptions.fitImagesInViewport,
-            imageFadeDuration:            lightboxOptions.imageFadeDuration,
-            maxWidth:                     lightboxOptions.maxWidth,
-            maxHeight:                    lightboxOptions.maxHeight,
-            positionFromTop:              lightboxOptions.positionFromTop,
-            resizeDuration:               lightboxOptions.resizeDuration,
-            showImageNumberLabel:         lightboxOptions.showImageNumberLabel,
-            wrapAround:                   lightboxOptions.wrapAround
-          });
+          // NOTE: Lightbox V3 auto-initialize on all [data-lightbox] elements.
+
+          // for programmatic access, load the API reference
+          setTimeout(() => {
+            // load API reference
+            const lb = Lightbox3.Lightbox.init();
+            // lb.open('https://images.unsplash.com/photo-1542224566-6e85f2e6772f?w=2400&q=80[Cherry blossoms in bloom]');
+          }, 500);
 
           _this.setState('finished');
           logger.debug('state: ' + _this.getState());

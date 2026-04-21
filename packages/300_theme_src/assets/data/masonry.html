@@ -376,6 +376,26 @@ exclude_from_search:                    true
               <div class="caption">{{image.caption}}</div>
               {% endif %}
             </div>
+            {% elsif grid.lightbox.type == 'sw' %}
+            <div class="{{grid.caption.position}}">
+              <a
+                href="{{grid.image_base_path}}/{{image.file}}"
+                data-pswp-width="1920"
+		            data-pswp-height="1280"
+		            target="_blank">
+                 <img
+                  id="{{forloop.index}}"
+                  class="pswp-image {{grid.image_styles}}"
+                  src="{{grid.image_base_path}}/{{image.file}}"
+                  aria-label="{{image.caption}}"
+                  style="{{image_filters}};">
+                <div  class="swp-caption-content">{{image.caption}}"</div>
+                <span class="pswp-caption-content">{{image.caption}}"</span>
+              </a>
+              {% if grid.caption.enabled %}
+              <div class="caption">{{image.caption}}</div>
+              {% endif %}
+            </div>
             {% else %}
             <div class="{{grid.caption.position}}">
               <img

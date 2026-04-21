@@ -1,15 +1,24 @@
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/modules/lightbox/css/theme/uno.min.css
- # Provides Lightbox styles for J1 Theme Uno
+ # ~/assets/theme/j1/modules/lightbox3/css/theme/uno.css
+ # Provides Lightbox V3 styles for J1 Theme Uno (v1.1.0)
  #
  # Product/Info:
  # https://jekyll.one
  #
- # Copyright (C) 2023-2026 Juergen Adams
+ # Copyright (C) 2026 Juergen Adams
  #
  # J1 Template is licensed under the MIT License.
  # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE
  # -----------------------------------------------------------------------------
 */
-.lightbox .lb-image{border-radius:1px;border:1px solid lightgrey}.lb-outerContainer{zoom:unset}
+
+.lightbox3-overlay {
+  --lb-image-border-radius: 0px;
+}
+
+@media (max-width: 600px) {
+  .lightbox3-overlay {
+     --lb-image-border-radius: 0px;
+  }
+}
