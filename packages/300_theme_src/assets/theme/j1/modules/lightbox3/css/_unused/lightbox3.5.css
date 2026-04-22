@@ -1,6 +1,6 @@
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/modules/lightbox3/css/lightbox.css (6)
+ # ~/assets/theme/j1/modules/lightbox3/css/lightbox.css (5)
  # Lightbox v.1.1.0 implementation for J1 Theme.
  #
  # Product/Info:
@@ -62,13 +62,9 @@
   pointer-events: none;
 }
 
-/* claude - J1 Lightbox modifications #8: object-fit changed from cover to contain.
-   The JS (computeTargetRect / animateFitTransition) sets width/height to preserve
-   the natural aspect ratio, so cover is never needed and causes unintended cropping
-   during the thumbnail→full-res spring when intermediate sizes momentarily mismatch. */
 .lightbox3-image {
   position: absolute;
-  object-fit: contain;
+  object-fit: cover;
   user-select: none;
   -webkit-user-drag: none;
   will-change: transform;
@@ -120,13 +116,7 @@
   letter-spacing: 0.02em;
   line-height: 1;
   user-select: none;
-  /* claude - J1 Lightbox modifications #8: pointer-events: none removed from here.
-     In HTML (unlike SVG), a parent's none cascades to all children and cannot be
-     overridden by a child's pointer-events: auto — so this rule was silently
-     preventing caption links and the bar's stopPropagation guard from working,
-     even when JS set pointerEvents = '' (which only reverts to this CSS none).
-     Pointer-events are now managed exclusively by updateChromeVisuals() in the JS
-     via explicit 'auto' / 'none' assignment (see #8 fix in lightbox3.js). */
+  pointer-events: none;
   width: max-content;
   max-width: min(90vw, 600px);
   z-index: 1;
@@ -230,13 +220,7 @@
 .lightbox3-arrow {
   position: fixed;
   top: 50%;
-  /* claude - J1 Lightbox modifications #8: margin-top: -50px removed.
-     The CSS comment above (from #3) says margin-top centres the 100 px button, but
-     updateChromeVisuals() also applies translateY(calc(-50% + drift)) at all times.
-     At steady state translateY(-50%) already shifts the element up by 50 px (50% of
-     100 px height), so adding margin-top: -50px produced a 50 px upward double-offset
-     that pushed the arrows above the viewport midline. The JS translateY is the
-     single source of truth for vertical centering. */
+  margin-top: -50px;                  /* centres 100px button on the midline */
   display: flex;
   align-items: center;
   justify-content: center;

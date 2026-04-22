@@ -1,6 +1,6 @@
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/modules/lightbox3/js/lightbox.js (7)
+ # ~/assets/theme/j1/modules/lightbox3/js/lightbox.js (6)
  # Lightbox v.1.1.0 implementation for J1 Theme.
  #
  # Product/Info:
@@ -2756,12 +2756,7 @@
                 this.chromeBar.style.top = `${captionTop}px`;
                 this.chromeBar.style.opacity = String(opacity);
                 this.chromeBar.style.transform = `translateX(calc(-50% + ${d.bar.x * p}px)) translateY(${barY + d.bar.y * p}px)`;
-                // claude - J1 Lightbox modifications #8: use explicit 'auto' instead of ''
-                // when the bar should be interactive. Setting '' would revert to the CSS
-                // default — which previously was 'none' and silently blocked all pointer
-                // events (caption links, stopPropagation guard) even when fully visible.
-                // CSS no longer declares pointer-events on this element (see #8 in CSS).
-                this.chromeBar.style.pointerEvents = interactive ? 'auto' : 'none';
+                this.chromeBar.style.pointerEvents = interactive ? '' : 'none';
             }
             if (this.chromePrev) {
                 const prevScale = this.getPressScale(this.chromePrev);
