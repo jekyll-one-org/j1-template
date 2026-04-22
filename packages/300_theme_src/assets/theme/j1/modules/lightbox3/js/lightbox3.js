@@ -1,6 +1,6 @@
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/modules/lightbox3/js/lightbox.js (7)
+ # ~/assets/theme/j1/modules/lightbox3/js/lightbox.js (5)
  # Lightbox v.1.1.0 implementation for J1 Theme.
  #
  # Product/Info:
@@ -109,10 +109,6 @@
     const WHEEL_NAV_THRESHOLD = 60; // Accumulated horizontal px to commit navigate
     const WHEEL_DISMISS_THRESHOLD = 150; // Accumulated vertical px to commit dismiss
     const WHEEL_DISMISS_VELOCITY = 600; // Simulated velocity for wheel-driven dismiss close
-    // claude - J1 Lightbox modifications #7: gap between image bottom edge and caption bar (px)
-    const CAPTION_GAP = 14;
-    // claude - J1 Lightbox modifications #7: wheel zoom factor per pixel of deltaY
-    const WHEEL_ZOOM_FACTOR = 0.998;
 
     class Lightbox {
         constructor(opts = {}) {
@@ -181,9 +177,6 @@
             this.chromeBaseOpacity = 0;
             this.chromeDriftProgress = 0;
             this.chromeDriftVectors = { bar: { x: 0, y: 0 }, prev: { x: 0, y: 0 }, next: { x: 0, y: 0 } };
-            // claude - J1 Lightbox modifications #7: tracks current visual Y of the image
-            // bottom edge so the caption bar can be positioned just below the image.
-            this.imageVisualBottom = 0;
             this.chromeFadeSwapped = false;
             // Spring-driven button press (scale down on press, bounce back on release)
             this.pressSprings = new Map();
@@ -1233,14 +1226,6 @@
         applyAnimState(img, backdrop, state) {
             img.style.transform = `translate(${state.translateX}px, ${state.translateY}px) scale(${state.scale})`;
             backdrop.style.opacity = String(state.opacity);
-            // claude - J1 Lightbox modifications #7: keep imageVisualBottom in sync with
-            // the FLIP spring so the caption bar tracks the image bottom during open/close.
-            // transform-origin is centre-centre, so the visual bottom is:
-            //   centre_y + translateY + half_height × scale
-            const fr = this.zoom.fitRect;
-            if (fr && fr.height > 0) {
-                this.imageVisualBottom = fr.y + fr.height / 2 + state.translateY + (fr.height / 2) * state.scale;
-            }
             if (this.isTextLink) {
                 img.style.opacity = String(Math.min(1, state.opacity / TEXT_LINK_OPACITY_THRESHOLD));
             }
@@ -1429,10 +1414,7 @@
             return Math.max(nativeScale, 2);
         }
         zoomIn(clickX, clickY) {
-            // claude - J1 Lightbox modifications #7: removed !isZoomable() guard so even
-            // images that fit entirely in the viewport can be zoomed in (pswp behaviour).
-            // getTapZoomScale() already guarantees a minimum target of 2× fit scale.
-            if (!this.imgEl)
+            if (!this.imgEl || !this.isZoomable())
                 return;
             this.debugLog('zoomIn');
             this.emit('zoomIn');
@@ -1830,12 +1812,6 @@
             this.imgEl.style.transform = `translate(${offsetX}px, ${offsetY}px) scale(${scale})`;
             this.backdrop.style.opacity = String(this.dismiss.opacity);
             this.chromeBaseOpacity = this.dismiss.opacity;
-            // claude - J1 Lightbox modifications #7: caption follows the image bottom
-            // during swipe-to-dismiss so it doesn't stay fixed at the viewport bottom.
-            const fr = this.zoom.fitRect;
-            if (fr && fr.height > 0) {
-                this.imageVisualBottom = fr.y + fr.height / 2 + offsetY + (fr.height / 2) * scale;
-            }
             this.updateChromeVisuals();
         }
         handleDismissRelease() {
@@ -1987,23 +1963,19 @@
             const deltaY = e.deltaY * lineScale;
             const absX = Math.abs(deltaX);
             const absY = Math.abs(deltaY);
-            // claude - J1 Lightbox modifications #7: wheel always zooms centred on the
-            // cursor, matching pswp behaviour. Navigation (swipe) and close (backdrop /
-            // Esc) are handled by other gestures.
             if (this.zoom.zoomed || this.zoom.scale !== 1) {
-                // Zoomed: primary-axis scroll pans; secondary axis ignored to avoid drift.
-                if (absY >= absX) {
-                    this.wheelPan(0, deltaY);
-                }
-                else {
-                    this.wheelPan(deltaX, 0);
-                }
+                // Zoomed: scroll pans
+                this.wheelPan(deltaX, deltaY);
                 return;
             }
-            // At fit scale: both axes drive zoom (vertical preferred; horizontal ignored
-            // when there is stronger vertical intent, since trackpad pans fire both).
-            if (absY > 0) {
-                this.wheelZoom(deltaY, e.clientX, e.clientY);
+            // At fit scale: determine primary axis
+            if (absX > absY && this.gallery.length > 1) {
+                // Horizontal dominant — navigate gallery
+                this.wheelNavigate(deltaX);
+            }
+            else if (absY > 0) {
+                // Vertical dominant — dismiss
+                this.wheelDismiss(deltaY);
             }
         }
         wheelPan(deltaX, deltaY) {
@@ -2073,48 +2045,6 @@
                 this.wheelDismissY = 0;
                 this.dismissClose(0, WHEEL_DISMISS_VELOCITY);
             }
-        }
-        // claude - J1 Lightbox modifications #7: smooth focal-point zoom driven by the
-        // mouse wheel, matching pswp behaviour. The point under the cursor stays fixed
-        // in screen space as scale changes. Clamped to [1, maxScale]; at scale=1 the
-        // image snaps back to fit (panX/panY reset to 0) so the caption reappears.
-        wheelZoom(deltaY, clientX, clientY) {
-            const factor = Math.pow(WHEEL_ZOOM_FACTOR, deltaY);
-            const maxScale = this.getMaxZoomScale();
-            const { fitRect } = this.zoom;
-            // Visual centre of the image with current pan applied
-            const visCenterX = fitRect.x + fitRect.width / 2 + this.zoom.panX;
-            const visCenterY = fitRect.y + fitRect.height / 2 + this.zoom.panY;
-            let newScale = this.zoom.scale * factor;
-            newScale = Math.max(1, Math.min(maxScale, newScale));
-            // Focal-point correction: keep the pixel under the cursor fixed in screen space
-            const relX = clientX - visCenterX;
-            const relY = clientY - visCenterY;
-            const scaleChange = newScale / this.zoom.scale;
-            let newPanX = this.zoom.panX + relX * (1 - scaleChange);
-            let newPanY = this.zoom.panY + relY * (1 - scaleChange);
-            // Snap to exact fit when back at scale 1
-            if (newScale === 1) {
-                newPanX = 0;
-                newPanY = 0;
-            }
-            else {
-                const bounds = this.computePanBounds(newScale);
-                newPanX = clamp(newPanX, bounds.minX, bounds.maxX);
-                newPanY = clamp(newPanY, bounds.minY, bounds.maxY);
-            }
-            this.stopSpring();
-            this.zoom.scale = newScale;
-            this.zoom.panX = newPanX;
-            this.zoom.panY = newPanY;
-            this.zoom.zoomed = newScale > 1;
-            this.applyPanTransform();
-            this.updateCursorState();
-            // Slide chrome proportionally to zoom level (mirrors updatePinch behaviour)
-            const chromeProgress = Math.min(1, Math.max(0, (newScale - 1) / 0.5));
-            this.stopChromeSpring();
-            this.chromeSpring = { position: chromeProgress, velocity: 0 };
-            this.updateChromeVisuals();
         }
         // ─── Swipe-to-navigate ──────────────────────────────────────
         startSwipeNav(startX, currentX) {
@@ -2484,12 +2414,6 @@
             if (!this.imgEl)
                 return;
             this.imgEl.style.transform = `translate(${this.zoom.panX}px, ${this.zoom.panY}px) scale(${this.zoom.scale})`;
-            // claude - J1 Lightbox modifications #7: keep imageVisualBottom in sync with
-            // pan/scale so the caption bar repositions correctly after wheel-zoom or pan.
-            const fr = this.zoom.fitRect;
-            if (fr && fr.height > 0) {
-                this.imageVisualBottom = fr.y + fr.height / 2 + this.zoom.panY + (fr.height / 2) * this.zoom.scale;
-            }
         }
         computePanBounds(scale) {
             const { fitRect } = this.zoom;
@@ -2517,10 +2441,12 @@
                 this.zoomOut();
                 return;
             }
-            // claude - J1 Lightbox modifications #7: always zoom in on click (pswp behaviour).
-            // Previously, non-zoomable images closed the lightbox — now they zoom to 2× instead.
-            // Close is handled by the close button, Escape key, or the backdrop click.
-            this.zoomIn(e.clientX, e.clientY);
+            if (this.isZoomable()) {
+                this.zoomIn(e.clientX, e.clientY);
+            }
+            else {
+                this.close();
+            }
         }
         // ─── Cursor state ────────────────────────────────────────────
         updateCursorState() {
@@ -2533,10 +2459,11 @@
             else if (this.zoom.zoomed) {
                 img.style.cursor = 'grab';
             }
-            else {
-                // claude - J1 Lightbox modifications #7: always zoom-in cursor — clicking
-                // the image now zooms in at every scale (pswp behaviour), never closes.
+            else if (this.isZoomable()) {
                 img.style.cursor = 'zoom-in';
+            }
+            else {
+                img.style.cursor = 'pointer';
             }
         }
         // ─── Chrome UI ──────────────────────────────────────────────
@@ -2738,30 +2665,16 @@
             const zoom = this.chromeSpring.position;
             const opacity = this.chromeBaseOpacity;
             const interactive = opacity > 0.1 && zoom < 0.5;
-            // claude - J1 Lightbox modifications #7: caption bar positioned just below
-            // the image's current visual bottom edge (pswp behaviour). The bar slides DOWN
-            // by barY when zoomed in so it exits the viewport without fighting the image.
-            // barY = 0 when at fit scale, increasing to 120px when fully zoomed.
+            // Slide chrome off viewport edges when zoomed
             const barY = zoom * 120;
             const arrowX = zoom * 100;
             // Per-element directional drift toward/from thumbnail origin
             const p = this.chromeDriftProgress;
             const d = this.chromeDriftVectors;
             if (this.chromeBar) {
-                // claude - J1 Lightbox modifications #7: set `top` so the bar sits
-                // CAPTION_GAP px below the image's visual bottom.  translateY handles
-                // the zoom-slide-out and open/close drift; the base vertical position
-                // comes from imageVisualBottom set in applyAnimState/applyPanTransform.
-                const captionTop = this.imageVisualBottom + CAPTION_GAP;
-                this.chromeBar.style.top = `${captionTop}px`;
                 this.chromeBar.style.opacity = String(opacity);
                 this.chromeBar.style.transform = `translateX(calc(-50% + ${d.bar.x * p}px)) translateY(${barY + d.bar.y * p}px)`;
-                // claude - J1 Lightbox modifications #8: use explicit 'auto' instead of ''
-                // when the bar should be interactive. Setting '' would revert to the CSS
-                // default — which previously was 'none' and silently blocked all pointer
-                // events (caption links, stopPropagation guard) even when fully visible.
-                // CSS no longer declares pointer-events on this element (see #8 in CSS).
-                this.chromeBar.style.pointerEvents = interactive ? 'auto' : 'none';
+                this.chromeBar.style.pointerEvents = interactive ? '' : 'none';
             }
             if (this.chromePrev) {
                 const prevScale = this.getPressScale(this.chromePrev);
@@ -3016,9 +2929,6 @@
                 width: `${rect.width}px`,
                 height: `${rect.height}px`,
             });
-            // claude - J1 Lightbox modifications #7: track image bottom so the caption
-            // bar can be positioned just below the image rather than at viewport bottom.
-            this.imageVisualBottom = rect.y + rect.height;
         }
         // ─── Helpers ─────────────────────────────────────────────────
         /** Target border-radius for the lightbox image, read from --lb-image-border-radius CSS property. */
