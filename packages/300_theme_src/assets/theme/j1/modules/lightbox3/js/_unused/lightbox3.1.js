@@ -1,11 +1,11 @@
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/modules/lightbox3/js/lightbox.css
+ # ~/assets/theme/j1/modules/lightbox3/js/lightbox.js (1)
  # Lightbox v.1.1.0 implementation for J1 Theme.
  #
  # Product/Info:
  # https://jekyll.one
- # http://lokeshdhakar.com/projects/lightbox2/
+ # https://github.com/lokesh/lightbox3/
  #
  # Copyright (C) 2026 Juergen Adams
  # Copyright (C) 2026 Lokesh Dhakar
@@ -2483,18 +2483,19 @@
             bar.appendChild(captionEl);
             this.chromeCaption = captionEl;
             // Close button
+            // claude - J1 Lightbox modifications #1: SVG replaced with pswp-style filled path;
+            // button appended to overlay (top-right corner) instead of inside the chrome bar.
             const close = document.createElement('button');
             close.className = 'lightbox3-close';
             close.setAttribute('aria-label', 'Close');
             close.type = 'button';
             close.innerHTML =
-                '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="4" y1="4" x2="12" y2="12"/><line x1="12" y1="4" x2="4" y2="12"/></svg>';
+                '<svg viewBox="0 0 32 32" fill="currentColor" width="32" height="32"><path d="M24 10l-2-2-6 6-6-6-2 2 6 6-6 6 2 2 6-6 6 6 2-2-6-6z"/></svg>';
             close.addEventListener('click', (e) => {
                 e.stopPropagation();
                 this.close();
             });
             close.addEventListener('pointerdown', (e) => e.stopPropagation());
-            bar.appendChild(close);
             this.chromeClose = close;
             this.bindPressSpring(close);
             // Stop clicks on the chrome bar (e.g. caption links) from reaching the
@@ -2504,6 +2505,9 @@
             });
             this.overlay.appendChild(bar);
             this.chromeBar = bar;
+            // claude - J1 Lightbox modifications #1: close button lives directly on the overlay
+            // at the top-right corner, not inside the bottom chrome bar.
+            this.overlay.appendChild(close);
             this.overlay.focus({ preventScroll: true });
             // Navigation arrows (gallery only)
             if (isGallery) {
@@ -2659,6 +2663,10 @@
             }
             if (this.chromeClose) {
                 const closeScale = this.getPressScale(this.chromeClose);
+                // claude - J1 Lightbox modifications #1: close button is now a standalone fixed
+                // element at the top-right; apply the same base opacity as the chrome bar so it
+                // fades in on open and fades out on close together with the rest of the chrome UI.
+                this.chromeClose.style.opacity = String(opacity);
                 this.chromeClose.style.transform = `scale(${closeScale})`;
                 this.chromeClose.style.pointerEvents = interactive ? '' : 'none';
             }

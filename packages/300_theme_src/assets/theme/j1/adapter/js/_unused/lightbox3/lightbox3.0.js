@@ -6,7 +6,7 @@ regenerate:                             true
 
 {% comment %}
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/adapter/js/lightbox3.js (1)
+ # ~/assets/theme/j1/adapter/js/lightbox3.js (0)
  # Liquid template to adapt Lightbox V3 Core functions
  #
  # Product/Info:
@@ -107,84 +107,9 @@ j1.adapter.lightbox3 = ((j1, window) => {
   var endTimeModule;
   var timeSeconds;
 
-  // claude - J1 Lightbox modifications #5
-  // Declare lb at module scope so the instance is accessible from all
-  // methods (messageHandler, open, destroy) and by external callers
-  // via j1.adapter.lightbox3.getLightbox().
-  var lb;
-
-  // claude - J1 Lightbox modifications #5
-  // MutationObserver reference kept at module scope so it can be
-  // disconnected cleanly when destroy() is called.
-  var domObserver;
-
   // ---------------------------------------------------------------------------
   // helper functions
   // ---------------------------------------------------------------------------
-
-  // claude - J1 Lightbox modifications #5
-  // _initLightbox()
-  // Centralises the actual Lightbox3 initialisation so both the first
-  // run and any re-initialisation triggered by the MutationObserver share
-  // exactly the same code path and options.
-  // ---------------------------------------------------------------------------
-  function _initLightbox () {
-    // Destroy any existing instance before creating a new one to prevent
-    // duplicate event listeners accumulating across navigations / hot-reloads.
-    if (lb && typeof lb.destroy === 'function') {
-      lb.destroy();
-      logger.debug('existing Lightbox3 instance destroyed before re-init');
-    }
-
-    lb = Lightbox3.Lightbox.init(lightboxOptions);
-    logger.debug('Lightbox3 instance (re-)initialised with options: ' + JSON.stringify(lightboxOptions));
-  }
-
-  // claude - J1 Lightbox modifications #5
-  // _startDomObserver()
-  // Watches the DOM for newly inserted [data-lightbox] elements so that
-  // galleries and images injected after the initial page load (e.g. by
-  // J1 gallery, carousel or AJAX modules) are covered by the same
-  // Lightbox3 instance without requiring a full page reload.
-  //
-  // The observer calls _initLightbox() at most once per batch of mutations
-  // (debounced via requestAnimationFrame) to avoid redundant re-inits.
-  // ---------------------------------------------------------------------------
-  function _startDomObserver () {
-    if (domObserver) {
-      domObserver.disconnect();
-    }
-
-    var rafPending = false;
-    var selector   = lightboxOptions.selector || '[data-lightbox]';
-
-    domObserver = new MutationObserver(function (mutations) {
-      var hasNewTargets = mutations.some(function (mutation) {
-        return Array.from(mutation.addedNodes).some(function (node) {
-          if (node.nodeType !== Node.ELEMENT_NODE) { return false; }
-          // Match the node itself or any of its descendants.
-          return node.matches(selector) ||
-                 node.querySelector(selector) !== null;
-        });
-      });
-
-      if (hasNewTargets && !rafPending) {
-        rafPending = true;
-        requestAnimationFrame(function () {
-          logger.info('new [data-lightbox] elements detected – re-initialising Lightbox3');
-          _initLightbox();
-          rafPending = false;
-        });
-      }
-    });
-
-    domObserver.observe(document.body, {
-      childList: true,
-      subtree:   true
-    });
-
-    logger.debug('MutationObserver active for selector: ' + selector);
-  }
 
   // ---------------------------------------------------------------------------
   // main
@@ -216,11 +141,6 @@ j1.adapter.lightbox3 = ((j1, window) => {
       // Load module DEFAULTS|CONFIG
       lightboxDefaults      = $.extend({}, {{lightbox_defaults | replace: 'nil', 'null' | replace: '=>', ':' }});
       lightboxSettings      = $.extend({}, {{lightbox_settings | replace: 'nil', 'null' | replace: '=>', ':' }});
-
-      // claude - J1 Lightbox modifications #5
-      // Use a deep (true) extend so nested objects such as backdrop,
-      // springOpen and springClose are merged correctly rather than
-      // replaced wholesale by the higher-priority source.
       lightboxOptions       = $.extend(true, {}, lightboxDefaults, lightboxSettings, frontmatterOptions);
 
       // -----------------------------------------------------------------------
@@ -231,36 +151,22 @@ j1.adapter.lightbox3 = ((j1, window) => {
         var pageVisible    = (pageState === 'block') ? true: false;
         var j1CoreFinished = (j1.getState() === 'finished') ? true : false;
 
-        if (j1CoreFinished && pageVisible) {
+         if (j1CoreFinished && pageVisible) {
           startTimeModule = Date.now();
 
           _this.setState('started');
           logger.debug('state: ' + _this.getState());
           logger.info('module is being initialized');
 
-          // claude - J1 Lightbox modifications #5
-          // Guard: honour the enabled flag from merged config.
-          // When enabled is false the adapter registers itself as finished
-          // but skips Lightbox3 initialisation so no listeners are attached.
-          if (!lightboxOptions.enabled) {
-            logger.info('Lightbox3 is disabled via configuration – skipping initialisation');
-            _this.setState('finished');
-            logger.debug('state: ' + _this.getState());
-            clearInterval(dependencies_met_page_ready);
-            return;
-          }
+          // NOTE: Lightbox V3 auto-initialize on all [data-lightbox] elements.
+          const lb = Lightbox3.Lightbox.init(lightboxOptions);
 
-          // claude - J1 Lightbox modifications #5
-          // _initLightbox() replaces the inline Lightbox3.Lightbox.init() call.
-          // The instance is stored in the module-scoped `lb` variable so it is
-          // reachable from getLightbox(), open(), destroy() and messageHandler().
-          _initLightbox();
-
-          // claude - J1 Lightbox modifications #5
-          // Start the MutationObserver so that [data-lightbox] elements added
-          // dynamically by other J1 modules (galleries, carousels, AJAX) are
-          // automatically covered by the same Lightbox3 instance and options.
-          _startDomObserver();
+          // for programmatic access, load the API reference
+          // setTimeout(() => {
+          //   // load API reference
+          //   const lb = Lightbox3.Lightbox.init();
+          //   // lb.open('https://images.unsplash.com/photo-1542224566-6e85f2e6772f?w=2400&q=80[Cherry blossoms in bloom]');
+          // }, 500);
 
           _this.setState('finished');
           logger.debug('state: ' + _this.getState());
@@ -318,60 +224,7 @@ j1.adapter.lightbox3 = ((j1, window) => {
     // -------------------------------------------------------------------------
     getState: () => {
       return _this.state;
-    }, // END getState
-
-    // claude - J1 Lightbox modifications #5
-    // -------------------------------------------------------------------------
-    // getLightbox()
-    // Returns the active Lightbox3 instance for programmatic access.
-    // Callers can use this to invoke lb.open(url) or lb.destroy() directly.
-    //
-    // Example (from another J1 module):
-    //   const lb = j1.adapter.lightbox3.getLightbox();
-    //   if (lb) { lb.open('/assets/images/hero.jpg[Hero image]'); }
-    // -------------------------------------------------------------------------
-    getLightbox: () => {
-      return lb;
-    }, // END getLightbox
-
-    // claude - J1 Lightbox modifications #5
-    // -------------------------------------------------------------------------
-    // open()
-    // Convenience wrapper to programmatically open an image URL in the
-    // active Lightbox3 instance without requiring callers to hold a
-    // reference to the raw lb object.
-    //
-    // @param {string} url  Full URL optionally suffixed with [caption]:
-    //                      '/assets/image/foo.jpg[My caption]'
-    // -------------------------------------------------------------------------
-    open: (url) => {
-      if (lb && typeof lb.open === 'function') {
-        lb.open(url);
-      } else {
-        logger.warn('open() called before Lightbox3 is initialised or while disabled');
-      }
-    }, // END open
-
-    // claude - J1 Lightbox modifications #5
-    // -------------------------------------------------------------------------
-    // destroy()
-    // Tears down the Lightbox3 instance and the MutationObserver.
-    // Useful when navigating away or when a page section is removed so
-    // that no stale event listeners remain in memory.
-    // -------------------------------------------------------------------------
-    destroy: () => {
-      if (domObserver) {
-        domObserver.disconnect();
-        domObserver = null;
-        logger.debug('MutationObserver disconnected');
-      }
-      if (lb && typeof lb.destroy === 'function') {
-        lb.destroy();
-        lb = null;
-        logger.info('Lightbox3 instance destroyed');
-      }
-      _this.setState('destroyed');
-    } // END destroy
+    } // END getState
 
   }; // END main (return)
 })(j1, window);

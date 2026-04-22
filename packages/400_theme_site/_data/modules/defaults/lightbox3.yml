@@ -149,11 +149,16 @@ defaults:
   enabled:                              false
   debug:                                false
   
-  selector:                             "[data-lightbox]"
   padding:                              40
+  selector:                             "[data-lightbox]"
+  
+  backdrop:
+    click:                              close                                   # close | keep
+  
   springOpen:
     stiffness:                          260
     damping:                            26
+  
   springClose:
     stiffness:                          500
     damping:                            38

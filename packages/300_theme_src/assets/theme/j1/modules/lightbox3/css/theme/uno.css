@@ -14,6 +14,8 @@
 */
 
 .lightbox3-overlay {
+  --lb-backdrop-color: rgba(0, 0, 0, 1);
+  --lb-chrome-border-radius: 0px;
   --lb-image-border-radius: 0px;
 }
 
@@ -21,4 +23,12 @@
   .lightbox3-overlay {
      --lb-image-border-radius: 0px;
   }
+}
+
+/* ===== Chrome UI ===== */
+
+.lightbox3-chrome {
+  background: none;
+  border-radius: none;
+  box-shadow: none;
 }
