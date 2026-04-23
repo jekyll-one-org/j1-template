@@ -30,7 +30,7 @@ regenerate:                             false
 permalink:                              /pages/public/tour/asciidoc_extensions/
 
 resources:                              [
-                                          gallery, iconify, lightbox,
+                                          gallery, iconify, lightbox3,
                                           lightgallery, videojs
                                         ]
 resource_options:
