@@ -65,18 +65,28 @@ exclude_from_search:                    true
     <meta name="robots" content="noindex, nofollow">
     <meta name="translator (ui|modal)" content="module data file">
   </head>
+
   <body>
     {% comment %} Modal Translator (dialog)
     ---------------------------------------------------------------------------- {% endcomment %}
+    <!-- start modal -->
     <div id="google-data">
-      <div id="modal-google-translate" class="modal-dialog modal-frame modal-top modal-notify modal-primary" role="document">
+      <div id="modal-google-translate"
+        class="modal-dialog modal-frame modal-top modal-notify modal-primary"
+        data-bs-backdrop="static"
+        data-bs-keyboard="false"
+        tabindex="-1"
+        role="document">
+
+        <!-- start modal content -->
         <div class="modal-content">
 
           <div class="modal-header">
             <p class="lead">{{translate_options.google.modal_settings.title}}</p>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
 
-          <!-- start modal body  -->
+          <!-- start modal body -->
           <div class="container mt-4">
 
             <p>
@@ -144,7 +154,9 @@ exclude_from_search:                    true
 
             </div>
           </div>
+          <!-- end modal body -->
 
+          <!-- start modal footer -->
           <div class="modal-footer">
             <button
               id="translator-buttonDisableTranslation"
@@ -179,12 +191,13 @@ exclude_from_search:                    true
               Save my settings
             </button>
           </div>
-
+          <!-- end modal footer -->
         </div>
+         <!-- end modal content -->
       </div>
     </div>
-    {% comment %} END Modal Translator dialog
-    -------------------------------------------------------------------------------- {% endcomment %}
+     <!-- end modal -->
+
   </body>
 </html>
 {%- endcapture -%}

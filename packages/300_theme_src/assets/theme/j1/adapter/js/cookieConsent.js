@@ -117,8 +117,6 @@ j1.adapter.cookieConsent = ((j1, window) => {
   var cookie_domain;
   var secure;
   var cookie_written;
-  var contentLanguage;
-  var navigatorLanguage;
   var domainAttribute;
 
   var logger;
@@ -167,8 +165,6 @@ j1.adapter.cookieConsent = ((j1, window) => {
       hostname          = url.hostname;
       auto_domain       = hostname.substring(hostname.lastIndexOf('.', hostname.lastIndexOf('.') - 1) + 1);
       secure            = (url.protocol.includes('https')) ? true : false;
-      contentLanguage   = '{{site.language}}';
-      navigatorLanguage = navigator.language || navigator.userLanguage;
 
       // Load cookie DEFAULTS|CONFIG
       cookieDefaults    = $.extend({}, {{cookie_defaults | replace: 'nil', 'null' | replace: '=>', ':' }});
@@ -179,18 +175,6 @@ j1.adapter.cookieConsent = ((j1, window) => {
       cookieConsentDefaults = $.extend({}, {{consent_defaults | replace: 'nil', 'null' | replace: '=>', ':' }});
       cookieConsentSettings = $.extend({}, {{consent_settings | replace: 'nil', 'null' | replace: '=>', ':' }});
       cookieConsentOptions  = $.extend(true, {}, cookieConsentDefaults, cookieConsentSettings);
-
-      if (navigatorLanguage.indexOf("-") !== -1) {
-        navigatorLanguage = navigatorLanguage.split("-")[0];
-      }
-
-      if (cookieConsentOptions.dialogLanguage === 'auto') {
-        cookieConsentOptions.dialogLanguage = navigatorLanguage;
-      } else if (cookieConsentOptions.dialogLanguage === 'content') {
-        cookieConsentOptions.dialogLanguage = contentLanguage;
-      } else {
-        cookieConsentOptions.dialogLanguage = navigatorLanguage;
-      }
 
       check_cookie_option_domain  = (cookieOptions.domain === 'false') ? false : true;
       expireCookiesOnRequiredOnly = (cookieOptions.expireCookiesOnRequiredOnly === 'true') ? true: false;
@@ -265,7 +249,6 @@ j1.adapter.cookieConsent = ((j1, window) => {
               cookieSameSite:         same_site,                                // restrict consent cookie
               cookieSecure:           secure,                                   // only sent to the server with an encrypted request over HTTPS
               cookieDomain:           domainAttribute,                          // set domain (hostname|domain)
-              dialogLanguage:         cookieConsentOptions.dialogLanguage,      // language for the dialog (modal)
               whitelisted:            cookieConsentOptions.whitelisted,         // pages NO cookie dialog is shown
               reloadPageOnChange:     cookieConsentOptions.reloadPageOnChange,  // reload if setzings has changed
               dialogContainerID:      cookieConsentOptions.dialogContainerID,   // container, the dialog modal is (dynamically) loaded

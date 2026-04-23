@@ -43,9 +43,8 @@ function CookieConsent(props) {
   var detailedSettingsShown = false;
   var url                   = new liteURL(window.location.href);
   var cookieSecure          = (url.protocol.includes('https')) ? true : false;
-  var navigatorLanguage     = navigator.language || navigator.userLanguage;
-  var defaultDialogLanguage = 'en';
   var dataChanged           = null;
+
   var logText;
   var current_page;
   var whitelisted;
@@ -53,20 +52,14 @@ function CookieConsent(props) {
   logger.debug('initializing core module: started');
   logger.debug('state: started');
 
-  if (navigatorLanguage.indexOf("-") !== -1) {
-    navigatorLanguage = navigatorLanguage.split("-")[0];
-  }
-
   // default settings
   this.props = {
     autoShowDialog:         true,                                               // show dialog if NO consent cookie found
-    dialogLanguage:         defaultDialogLanguage,                              // language used for the consent dialog (modal)
-    dialogLanguages:        ['en','de'],                                        // supported languages for the consent dialog (modal), defaults to first in array
     contentURL:             '/assets/data/cookieconsent',                       // URL contain the consent dialogs (modals) for ALL supported languages
     postSelectionCallback:  '',                                                 // callback function, called after the user has made his selection
     whitelisted:            [],                                                 // pages NO consent modal dialog is issued
-    xhrDataElement:         'consent-data',                                     // src container for all language-specific consent dialogs (taken from contentURL)
-    dialogContainerID:      'consent-modal'                                     // dest container, the dialog modal is loaded (dynamically)
+    xhrDataElement:         'consent-data',                                     // container for the consent dialog
+    dialogContainerID:      'consent-modal'                                     // dialog modal
   };
 
   // merge property settings
@@ -74,21 +67,7 @@ function CookieConsent(props) {
     this.props[property] = props[property];
   }
 
-  if (this.props.dialogLanguage.indexOf("-") !== -1) {
-    this.props.dialogLanguage = this.props.dialogLanguage.split("-")[0];
-  }
-
-  // fallback on default language (modal) if dialogLanguage not suppported
-  if (!this.props.dialogLanguages.includes(this.props.dialogLanguage)) {
-    this.props.dialogLanguage = defaultDialogLanguage;
-  }
-
-  // set modal by dialogLanguage that is loadad
-  this.props.xhrDataElement = this.props.xhrDataElement + '-' + this.props.dialogLanguage;
-
-  // set modal by dialogLanguage that is loadad
   this.props.cookieSecure = cookieSecure;
-
   var Cookie = {
     set: (name, value, days, cookieSameSite, cookieDomain, cookieSecure) => {
       var value_encoded = window.btoa(value);

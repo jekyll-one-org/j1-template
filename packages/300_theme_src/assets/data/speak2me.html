@@ -65,9 +65,8 @@ exclude_from_search:                    true
     <meta name="robots" content="noindex, nofollow">
     <meta name="speak2me (ui|modal)" content="module data file">
   </head>
+
   <body>
-    {% comment %} Modal Speak2Me
-    ---------------------------------------------------------------------------- {% endcomment %}
     <!-- start modal container -->
     <div id="speak2me-modal-data">
       <!-- start modal -->
@@ -75,15 +74,18 @@ exclude_from_search:                    true
         class="modal-dialog modal-frame modal-top modal-notify modal-primary"
         data-bs-backdrop="static"
         data-bs-keyboard="false"
-        tabindex="-1" role="document">
-        <!-- start modal content  -->
+        tabindex="-1"
+        role="document">
+
+        <!-- start modal content -->
         <div class="modal-content">
 
           <div class="modal-header">
             <p class="lead">{{speak2me_options.modal.title}}</p>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
 
-          <!-- start modal body  -->
+          <!-- start modal body -->
           <div class="container mt-4">
 
             <!-- start settings -->
@@ -203,15 +205,14 @@ exclude_from_search:                    true
             </div>
             <!-- end settings -->
           </div>
-          <!-- end modal body  -->
+          <!-- end modal body -->
         </div>
-        <!-- end modal content  -->
+        <!-- end modal content -->
       </div>
       <!-- end modal -->
     </div>
     <!-- end modal container -->
-    {% comment %} END Modal Speak2Me
-    --------------------------------------------------------------------------- {% endcomment %}
+
   </body>
 </html>
 {%- endcapture -%}

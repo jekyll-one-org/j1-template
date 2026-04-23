@@ -1,6 +1,6 @@
 {% comment %}
  # -----------------------------------------------------------------------------
- # ~/_includes/templates/j1/modules/searcher/procedures/topsearch.proc
+ # ~/_includes/templates/j1/modules/searcher/procedures/topsearch.proc (1)
  # Liquid PROCEDURE template to create search input for J1 site_search
  #
  # Product/Info:
