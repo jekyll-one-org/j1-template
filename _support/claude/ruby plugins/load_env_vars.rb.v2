@@ -1,0 +1,46 @@
+# -----------------------------------------------------------------------------
+# _plugins/j1_env_vars.rb (2)
+# claude - J1 claudeAI modifications #2
+#
+# Expose selected process environment variables to Liquid via site.j1_env.
+# Multi-platform by construction: Ruby's ENV works identically on macOS,
+# Linux, *BSD and Windows. A `.env` file in the site root is loaded
+# automatically when the `dotenv` gem is available (local dev convenience).
+#
+# Add to Gemfile if you want .env support:
+#   gem 'dotenv', '~> 3.1', group: :jekyll_plugins
+#
+# SECURITY
+# --------
+# Only names in WHITELIST are exposed to Liquid / the build. CLAUDE_API_KEY
+# is intentionally NOT whitelisted: it must live server-side in the Netlify
+# Function runtime and must never be baked into the generated site.
+# -----------------------------------------------------------------------------
+
+begin
+  require 'dotenv'
+  Dotenv.load('.env') if File.exist?('.env')
+rescue LoadError
+  # dotenv is optional; plain ENV still works.
+end
+
+module J1
+  module EnvVars
+    # Keep SECRETS out of this list.
+    WHITELIST = %w[
+      J1_ENV
+      JEKYLL_ENV
+      SITE_URL
+      CLAUDE_API_ENDPOINT
+    ].freeze
+  end
+end
+
+Jekyll::Hooks.register :site, :after_init do |site|
+  env_hash = {}
+  J1::EnvVars::WHITELIST.each do |name|
+    value = ENV[name]
+    env_hash[name] = value unless value.nil? || value.empty?
+  end
+  site.config['j1_env'] = env_hash
+end

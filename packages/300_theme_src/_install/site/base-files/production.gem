@@ -173,6 +173,7 @@ group :jekyll_plugins do
   #
   # Additional Supporting GEMs (optional)
   #
+  gem 'dotenv', '~> 3.1'                                                        # Required for claudeAI
   # gem 'algolia', '~> 2.0', '>= 2.0.4'                                         # Required for Algolia support only
   # gem 'asciidoctor-pdf', '>= 1.5.4'                                           # Required for Asciidoctor PDF creation only
   # gem 'jekyll-sass-converter', '>= 2.1.0'                                     # Required for Jekyll|SASS (file) conversion support

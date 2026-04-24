@@ -1,0 +1,62 @@
+# ------------------------------------------------------------------------------
+# ~/_plugins/load_env_vars.rb (1)
+# Expose a whitelisted set of environment variables to Liquid templates
+# at build time as `<NAME>`.
+#
+# claude - J1 claudeAI modifications #1
+#
+# Rationale:
+# Jekyll does NOT expose arbitrary process environment variables to Liquid.
+# This generator injects a curated, explicit whitelist into `site.config`
+# before any page is rendered, so adapters / data files / layouts can read
+# secrets (API keys, tokens, ...) at build time without committing them to
+# the repository.
+#
+# SECURITY NOTE:
+# Any value read here is embedded into the generated static assets and is
+# therefore VISIBLE to any visitor of the site. Use this pattern to keep
+# secrets out of version control/YAML config fies only. For values that MUST
+# remain secret from end users, proxy the API call through a
+# backend/serverless function.
+#
+# Usage:
+#   1. set/export CLAUDE_API_KEY="sk-ant-api03-..." in the runtime env
+#   2. place the value of CLAUDE_API_KEY in an .env file.
+# ------------------------------------------------------------------------------
+
+module Jekyll
+  class J1EnvVarsGenerator < Generator
+    safe true
+    priority :highest
+
+    begin
+      require 'dotenv'
+      Dotenv.load('.env') if File.exist?('.env')
+    rescue LoadError
+      # dotenv is optional; plain ENV still works.
+      Jekyll.logger.warn 'dotenv:', "no env file found. Use plain ENV settings."
+    end
+
+    # Whitelist of environment variables that may be read at build time.
+    # Add new entries here explicitly; unknown variables are never exposed.
+    ALLOWED_ENV_VARS = %w[
+      CLAUDE_API_ENDPOINT
+      CLAUDE_API_KEY
+    ].freeze
+
+    def generate(site)
+      env_vars = {}
+      ALLOWED_ENV_VARS.each do |key|
+        value = ENV[key].to_s
+        env_vars[key] = value
+
+        if value.empty?
+          Jekyll.logger.warn 'J1 env:', "#{key} is not set (empty string will be used)"
+        else
+          Jekyll.logger.info 'J1 env:', "#{key} loaded from process environment"
+        end
+      end
+      site.config['j1_env'] = env_vars
+    end
+  end
+end

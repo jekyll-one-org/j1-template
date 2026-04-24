@@ -1295,10 +1295,10 @@
         // claude - files api #1: build request headers - add beta header
         // when using Files API so the server accepts file_id references.
         const requestHeaders = {
-          'Content-Type':                             'application/json',
-          'x-api-key':                                settings.apiKey,
-          'anthropic-version':                        '2023-06-01',
-          'anthropic-dangerous-direct-browser-access': 'true',
+          'Content-Type':                               'application/json',
+          'x-api-key':                                  settings.apiKey,
+          'anthropic-version':                          '2023-06-01',
+          'anthropic-dangerous-direct-browser-access':  'true',
         };
         if (useFilesApi) {
           requestHeaders['anthropic-beta'] = FilesAPI.BETA_HEADER;
@@ -1614,12 +1614,12 @@
 
       if (s.apiKey) {
         dot.className         = 'status-dot connected';
-        text.textContent      = 'Agent connected.';
-        textInfo.textContent  = `NOTE: Your question should not exceed ${s.maxInputTokens} chars.`;
+        text.textContent      = 'ChatBot connected.';
+        textInfo.textContent  = `NOTE - Your question should not exceed ${s.maxInputTokens} chars.`;
       } else {
         dot.className         = 'status-dot disconnected';
-        text.textContent      = 'Agent disconnected.';
-        textInfo.textContent  = 'NOTE: Please check your internet connection.';
+        text.textContent      = 'ChatBot disconnected.';
+        textInfo.textContent  = 'NOTE - Please check your internet connection.';
       }
 
       const modelLabels = {

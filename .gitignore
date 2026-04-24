@@ -28,10 +28,17 @@ tmp/
 **/notebooks/j1-bokeh-tutorial/*.svg
 
 
-# Never publish your sensitive personal and/or OAuth
-# data to any repo - not to public, not to any private.
+# Never publish your sensitive personal and/or third party data
+# (like APIkeys for example) to any repo, NOT to public and
+# NOT to any private.
 # ------------------------------------------------------------------------------
+.env
+.env.*
+**/.env
+**/.env.*
+!.env.example
 private.yml
+
 
 
 # Unneeded files for package 100_theme_css

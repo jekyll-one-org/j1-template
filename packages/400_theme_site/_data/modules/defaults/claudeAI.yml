@@ -50,10 +50,10 @@ defaults:
   maxInpuTokens:                        512
 
   chatMessages:
-    agentConnected:                     Agent connected.
-    agentConnectedInfo:                 "NOTE: Your question should not exceed ${s.maxInputTokens} chars."
-    agentDisConnected:                  Agent disconnected.
-    agentDisConnectedInfo:              NOTE, Please check your internet connection.
+    agentConnected:                     ChatBot connected.
+    agentConnectedInfo:                 NOTE - Your question should not exceed ${s.maxInputTokens} chars.
+    agentDisConnected:                  ChatBot disconnected.
+    agentDisConnectedInfo:              NOTE - Please check your internet connection.
 
   modelLabels:
     claude-sonnet-4-20250514:           Claude Sonnet 4

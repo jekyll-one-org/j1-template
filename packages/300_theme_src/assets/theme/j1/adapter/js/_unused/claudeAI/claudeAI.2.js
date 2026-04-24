@@ -161,6 +161,19 @@ j1.adapter.claudeAI = ((j1, window) => {
       claudeAiSettings = $.extend({}, {{claudeAI_settings | replace: 'nil', 'null' | replace: '=>', ':' }});
       claudeAiOptions  = $.extend(true, {}, claudeAiDefaults, claudeAiSettings);
 
+      // claude - J1 claudeAI modifications #1
+      // Inject apiKey from the build-time environment variable CLAUDE_API_KEY
+      // so the secret never has to live in a YAML config file. The value is
+      // resolved above by Liquid from site.j1_env.CLAUDE_API_KEY.
+      //
+      claudeAiOptions.apiKey = '{{ claudeApiKey }}';
+
+      if (!claudeAiOptions.apiKey) {
+        // No hard failure here; the handler decides how to react to a missing key.
+        // A warning is emitted so the misconfiguration is easy to spot in DevTools.
+        console.warn('[j1.adapter.claudeAI] CLAUDE_API_KEY was not set at build time; apiKey is empty');
+      }
+
       claudeAiOptions.isDev = isDev;
 
       _this           = j1.adapter.claudeAI;
@@ -176,23 +189,6 @@ j1.adapter.claudeAI = ((j1, window) => {
 
         if (j1CoreFinished && pageVisible) {
           startTimeModule = Date.now();
-
-          // claude - J1 claudeAI modifications #1
-          // Inject apiKey from the build-time environment variable
-          // CLAUDE_API_KEY so the secret never has to live in a YAML
-          // config file. The value is resolved by Liquid from site.env file.
-          // See: _plugins/load_env_vars.rb
-          //
-          claudeAiOptions.apiKey = '{{ claudeApiKey }}';
-
-          if (!claudeAiOptions.apiKey) {
-            // No hard failure here; the handler decides how to react to
-            // a missing key. A warning is emitted so the misconfiguration
-            // is easy to spot in DevTools.
-             logger.warn('\n' + 'env var "CLAUDE_API_KEY" was not set at build time; apiKey is empty');
-          } else {
-            logger.warn('\n' + 'env var "CLAUDE_API_KEY" was set at build time. NOTE: the apiKey is exposed to the public');
-          }
 
           _this.setState('started');
           logger.debug('\n' + `state: ${_this.getState()}`);
@@ -222,12 +218,12 @@ j1.adapter.claudeAI = ((j1, window) => {
           // }
 
           // initialize claudeAiHandler
-          logger.info('\n' + `claudeAiHandler enabled: ${claudeAiOptions.enabled}`);
+          logger.info('\n'+ `claudeAiHandler enabled: ${claudeAiOptions.enabled}`);
           if (claudeAiOptions.enabled) {
             try {
               claudeAiHandler = new claudeAi.claudeAiHandler(claudeAiOptions);
             } catch (error) {
-              logger.error('\n' + `initializing claudeAiHandler failed: ${error}`);
+              logger.error('\n'+ `initializing claudeAiHandler failed: ${error}`);
             }
           }
 

@@ -1,0 +1,58 @@
+# ------------------------------------------------------------------------------
+# ~/_data/modules/claudeAI.yml
+# User configuration settings for J1 claudeAI module
+#
+# Product/Info:
+# https://jekyll.one
+#
+# Copyright (C) 2026 Juergen Adams
+#
+# J1 Template is licensed under the MIT License.
+# See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE
+# ------------------------------------------------------------------------------
+
+description:
+  title:                                J1 claudeAI
+  scope:                                User settings
+  location:                             _data/modules/claudeAI.yml
+
+settings:
+
+  # --------------------------------------------------------------------------
+  # GENERAL options
+  # --------------------------------------------------------------------------
+  enabled:                              true
+
+  # --------------------------------------------------------------------------
+  # API options
+  # --------------------------------------------------------------------------
+  #
+  # claude - J1 claudeAI modifications #2
+  # The browser no longer talks to api.anthropic.com directly; it calls the
+  # same-origin serverless proxy defined in
+  # `netlify/functions/claude-proxy.mjs`. The proxy adds the secret
+  # CLAUDE_API_KEY server-side before forwarding the request to Anthropic.
+  #
+  # Consequences:
+  #   * No API key is present in any file under version control.
+  #   * No API key is baked into the generated static assets.
+  #   * Inspecting the browser DevTools reveals only a relative URL.
+  #
+  # The default "/api/claude" matches the `config.path` declared in the
+  # Netlify Function. It can be overridden at build time by exporting the
+  # environment variable CLAUDE_API_ENDPOINT (whitelisted in system plugin
+  # `_plugins/load_env_vars.rb`).
+  #
+  apiEndpoint:                          /api/claude
+
+  # claude - J1 claudeAI modifications #2
+  # Legacy setting kept for documentation only. The old build-time injection
+  # from site.j1_env.CLAUDE_API_KEY described in modifications #1 is
+  # DEPRECATED and has been removed from the adapter. Do NOT set apiKey
+  # here; the proxy holds the secret server-side.
+  #
+  # apiKey:                             removed
+
+
+# -----------------------------------------------------------------------------
+# END config

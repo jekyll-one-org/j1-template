@@ -140,7 +140,7 @@ the (red) button *Clear Conversation* to *remove* all entries.
 The ChatBot works best when your questions are clear and focused.
 More *Help and Tips* needed?
 Check the 
-link:/pages/public/tools/claudeAi-chat-help/[ChatBot Help, {browser-window--new}]
+link:/pages/public/tools/claudeAI/chatHelp/[ChatBot Help, {browser-window--new}]
 page on how to use the ChatBot efficiently.
 
 ++++
