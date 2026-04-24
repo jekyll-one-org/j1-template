@@ -641,6 +641,24 @@
 #               target:                   _blank
 
 # ------------------------------------------------------------------------------
+# Menu CHATBOT
+#
+- item:                                 ChatBot
+  sublevel:
+
+    - title:                            Help
+      icon:                             information-variant
+      href:                             /pages/public/tools/aiagent-chat-help/
+
+    - title:                            ChatBot
+      icon:                             robot
+      href:                             /pages/public/tools/aiagent-chat/
+
+    - title:                            Knowledge Base
+      icon:                             cog
+      href:                             /pages/public/tools/aiagent-kb/
+
+# ------------------------------------------------------------------------------
 # Menu ONLINE
 #
 - item:                                 Online

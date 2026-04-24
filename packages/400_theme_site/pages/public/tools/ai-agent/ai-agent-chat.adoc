@@ -1,0 +1,181 @@
+---
+title:                                  ChatBot
+title_extention:                        Ask Claude
+tagline:                                Ask for support
+
+date:                                   2026-04-11
+#last_modified:                         2026-01-01
+
+description: >
+                                        Chat interface for the Claude Agent.
+                                        Manages the conversation UI, message history,
+                                        and Anthropic API communication.
+keywords: >
+                                        open source, free, template, jekyll, jekyllone,
+                                        web, sites, static, jamstack, bootstrap, chatbot,
+                                        anthropic, ai agent, claude
+
+categories:                             [ Tools ]
+tags:                                   [ AI, Agent, Claude ]
+
+image:
+  path:                                 /assets/image/module/attic/1920x1280/j1-launch.jpg
+  width:                                1920
+  height:                               1280
+
+toc:                                    true
+fab_menu_id:                            open_toc                                # default
+comments:                               false
+#comress:                               true
+#exclude_from_search:                   true
+
+regenerate:                             false
+permalink:                              /pages/public/tools/aiagent-chat/
+
+resources:                              [ aiAgent, pdf, renderMD ]
+resource_options:
+  - attic:
+      opacity:                          .6
+      padding_top:                      600
+      slides:
+        - url:                          /assets/image/module/attic/1920x1280/j1-launch.jpg
+          alt:                          skipad-promo-image
+---
+
+// Page Initializer
+// =============================================================================
+// Enable the Liquid Preprocessor
+:page-liquid:
+
+// Set page (local) attributes here
+// -----------------------------------------------------------------------------
+// :page--attr:                         <attr-value>
+
+{% comment %} Liquid procedures
+-------------------------------------------------------------------------------- {% endcomment %}
+{% capture load_attributes %}themes/{{site.template.name}}/procedures/global/attributes_loader.proc{% endcapture %}
+
+// Load page attributes
+// -----------------------------------------------------------------------------
+{% include {{load_attributes}} scope="global" %}
+
+{% comment %} Debugging
+site.biography: {{ site.biography | debug }}
+-------------------------------------------------------------------------------- {% endcomment %}
+
+// Page content
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[role="dropcap"]
+The  is a built-in AI assistant that can answer your questions
+about SkipAd directly on the website. It is powered by Claude, an AI LLM
+developed by Anthropic. You do not need an account or any setup — just type
+a question and get a helpful answer.
+
+// Include sub-documents (if any)
+// -----------------------------------------------------------------------------
+[TIP]
+====
+The Agent knows all about the SkipAd features, including the video player,
+the playlists, how to import and export, series support, and more. It draws
+its knowledge from a dedicated knowledge base that is kept up to date
+with each release.
+====
+
+
+[role="mt-5"]
+== Conversation Thread
+
+All your questions are recorded in the chat history (conversation thread).
+The history is stored in the browser, so you don't lose the answers given by
+the Agent so far. If you are *not longer interested* in the hisstory, click on
+the (red) button *Clear Conversation* to *remove* all entries.
+
+++++
+<!-- ===========================================================================
+     Toast Container
+     =========================================================================== -->
+<div id="toastContainer" class="toast-container"></div>
+
+<!-- ===========================================================================
+     App Shell
+     =========================================================================== -->
+<div class="agent-shell">
+
+  <!-- =========================================================================
+       Main — Chat Interface
+       ========================================================================= -->
+  <div class="agent-main mt-3">
+
+    <!-- Chat Header -->
+    <div class="chat-header">
+      <span class="chat-header-title">Chat history</span>
+      <div class="chat-header-actions">
+        <button class="kb-btn kb-btn-error kb-btn-sm"
+          title="Clear conversation thread" 
+          onclick="aiAgent.AgentUI.clearChat()">
+          <span class="mdi mdi-broom"></span>
+          Clear Conversation
+        </button>
+      </div>
+    </div>
+
+    <!-- Messages -->
+    <div id="chatMessages" class="chat-messages hide-scrollbar mt-3">
+      <div id="welcomeScreen" class="chat-welcome">
+        <span class="mdi mdi-robot-outline"></span>
+        <h2 class="notoc">Welcome to the ChatBot</h2>
+        <p>
+          Ask your questions about SkipAd. The agent uses Claude
+          AI and the information available on this website as
+          its knowledge base for giving helpful answers.
+        </p>
+      </div>
+    </div>
+++++
+
+
+[role="mt-5"]
+== Your question
+
+The ChatBot works best when your questions are clear and focused.
+More *Help and Tips* needed?
+Check the 
+link:/pages/public/tools/aiagent-chat-help/[ChatBot Help, {browser-window--new}]
+page on how to use the ChatBot efficiently.
+
+++++
+    <!-- Input Bar -->
+    <div class="chat-input-bar mt-4">
+    <div class="chat-input-header">
+      <span class="text-md text-muted">
+        <span class="mdib mdib-head-question-outline"></span>
+      </span>
+    </div>
+      <div class="chat-input-wrap">
+        <textarea id="chatInput" rows="1"
+            placeholder="Enter your question ..."
+            onkeydown="aiAgent.AgentUI.handleInputKey(event)">
+        </textarea>
+      </div>
+
+      <!-- ChatBot sendBtn -->
+      <button id="sendBtn" class="chat-send-btn"
+        onclick="aiAgent.AgentChat.send()"
+        title="Send your question">
+        <span class="mdi mdi-send"></span>
+      </button>
+    </div>
+
+    <!-- Status Bar -->
+    <div class="chat-status-bar">
+      <span>
+        <span id="statusDot" class="status-dot disconnected"></span>
+        <span id="statusText">Agent disconnected</span>
+        <span id="statusTextInfo">NOTE: Please check your internet connection.</span>
+      </span>
+      <span id="modelInfo" class="flex-1" style="text-align:right;">—</span>
+    </div>
+  </div>
+
+</div>
+++++

@@ -2098,6 +2098,28 @@ resources:
         init_function:                  []
 
   # ----------------------------------------------------------------------------
+  # J1 aiAgent (Claude)
+  #
+  - name:                               J1 aiAgent
+    resource:
+      enabled:                          true
+
+      id:                               aiAgent
+      comment:                          Module aiAgent
+      region:                           head
+      layout:                           [ all ]
+      required:                         ondemand
+      script_load:                      defer
+      dependencies:                     false
+      pass_init_data:                   false
+
+      data: 
+        css:                            [ modules/aiAgent/css/aiAgent ]
+        js:                             [ modules/aiAgent/js/aiAgent ]
+        files:                          [ adapter/js/aiAgent.js ]
+        init_function:                  [ j1.adapter.aiAgent.init ]
+
+  # ----------------------------------------------------------------------------
   # J1 VideoPlayer
   #
   - name:                               J1 VideoPlayer

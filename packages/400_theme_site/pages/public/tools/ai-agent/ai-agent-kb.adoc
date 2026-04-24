@@ -1,0 +1,217 @@
+---
+title:                                  Knowlegebase
+title_extention:                        Training data
+tagline:                                Add training data
+
+date:                                   2026-04-11
+#last_modified:                         2026-01-01
+
+description: >
+                                        Knowledge Base manager for the J1 Claude Agent.
+                                        Manages document import, URL fetching, text input
+                                        and the sidebar entry list.
+keywords: >
+                                        open source, free, template, jekyll, jekyllone, web,
+                                        sites, static, jamstack, bootstrap, knowledge base,
+                                        ai agent, claude
+
+categories:                             [ Tools ]
+tags:                                   [ AI, Agent, Claude ]
+
+image:
+  path:                                 /assets/image/module/attic/1920x1280/j1-launch.jpg
+  width:                                1920
+  height:                               1280
+
+toc:                                    false
+fab_menu_id:                            default                                 # default | open_toc
+comments:                               false
+exclude_from_search:                    true
+
+regenerate:                             false
+permalink:                              /pages/public/tools/aiagent-kb/
+
+resources:                              [ aiAgent, pdf, renderMD ]
+resource_options:
+  - attic:
+      opacity:                          .6
+      padding_top:                      600
+      slides:
+        - url:                          /assets/image/module/attic/1920x1280/j1-launch.jpg
+          alt:                          skipad-promo-image
+---
+
+// Page Initializer
+// =============================================================================
+// Enable the Liquid Preprocessor
+:page-liquid:
+
+// Set page (local) attributes here
+// -----------------------------------------------------------------------------
+// :page--attr:                         <attr-value>
+
+{% comment %} Liquid procedures
+-------------------------------------------------------------------------------- {% endcomment %}
+{% capture load_attributes %}themes/{{site.template.name}}/procedures/global/attributes_loader.proc{% endcapture %}
+
+// Load page attributes
+// -----------------------------------------------------------------------------
+{% include {{load_attributes}} scope="none" %}
+
+{% comment %} Debugging
+site.biography: {{ site.biography | debug }}
+-------------------------------------------------------------------------------- {% endcomment %}
+
+// Page content
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[role="dropcap"]
+The document manager for the Claude Agent, manages the sources for the
+knowledge base Claude uses, such as URLs, documents, or text input for
+responding to questions.
+
+// Include sub-documents (if any)
+// -----------------------------------------------------------------------------
+++++
+
+  <!-- PDF.js for PDF text extraction -->
+  <!-- script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.4.168/pdf.min.mjs" type="module"></script -->
+
+<!-- ===========================================================================
+     App Shell
+     =========================================================================== -->
+<div class="agent-shell">
+
+  <!-- =========================================================================
+       Knowledge Base UI
+       ========================================================================= -->
+  <main class="agent-shell-main mt-4">
+    <div class="agent-shell-header mb-4">
+      <span class="mdib mdib-harddisk-plus" style="font-size:2.75rem; color:var(--agent-primary)"></span>
+      <h2>Document Manager</h2>
+    </div>
+
+    <!-- =======================================================================
+        Toast Container
+        ======================================================================== -->
+    <div id="toastContainer" class="toast-container"></div>    
+
+    <!-- =======================================================================
+        Agent Shell
+        ======================================================================== -->
+    <div class="agent-shell-body">
+
+      <!-- URL Importer -->
+      <div class="kb-section">
+        <div class="kb-section-title">
+          <span class="mdi mdi-web"></span>
+          Add website
+        </div>
+
+        <div class="flex-col gap-sm">
+          <input id="urlInput" type="url" class="kb-input"
+                 placeholder="https://example.com/page">
+          <button class="kb-btn kb-btn-success kb-btn-sm kb-btn-block"
+                  onclick="aiAgent.KnowledgeBase.addUrl()">
+            <span class="mdi mdi-download"></span>
+            Load website
+          </button>
+        </div>
+      </div>
+
+      <!-- File Uploader -->
+      <div class="kb-section">
+        <div class="kb-section-title">
+          <span class="mdi mdi-file-document-outline"></span> Dateien hochladen
+        </div>
+        
+        <div id="dropZone" class="kb-drop-zone"
+             ondragover="event.preventDefault();this.classList.add('drag-over')"
+             ondragleave="this.classList.remove('drag-over')"
+             ondrop="aiAgent.KnowledgeBase.handleDrop(event)">
+          <span class="mdi mdi-cloud-upload-outline"></span>
+          <p>Drag and drop files to here<br>or click for selection</p>
+          <p class="text-sm">Markdown · AsciiDoc · Text · PDF</p>
+        </div>
+        <input id="fileInput" type="file" class="hidden" multiple
+               accept=".md,.adoc,.asciidoc,.txt,.text,.pdf"
+               onchange="aiAgent.KnowledgeBase.handleFiles(this.files)">
+      </div>
+
+      <!-- Text|Paste -->
+      <div class="kb-section">
+        <div class="kb-section-title">
+          <span class="mdi mdi-text-box-outline"></span>
+            Insert text
+        </div>
+        <div class="flex-col gap-sm">
+          <input id="pasteTitle" class="kb-input" placeholder="Titel">
+          <textarea id="pasteContent" class="kb-textarea" rows="3"
+                    placeholder="Insert content/text here …"></textarea>
+          <button class="kb-btn kb-btn-success kb-btn-sm kb-btn-block"
+                  onclick="aiAgent.KnowledgeBase.addPaste()">
+            <span class="mdi mdi-plus-circle-outline"></span>
+              Add
+          </button>
+        </div>
+      </div>
+
+      <!-- Entry List -->
+      <div class="kb-section">
+        <div class="kb-section-title justify-between" style="display:flex;">
+          <span><span class="mdi mdi-database-outline"></span>Entries</span>
+          <span id="entryCount" class="text-sm">0</span>
+        </div>
+        <div id="kbEntries" class="kb-entries">
+          <p class="text-muted text-sm" style="text-align:center;padding:1rem 0;">
+            No entries yet
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <!-- claude - limit KB size #6 -->
+    <div class="sidebar-footer">
+      <div class="kb-stats">
+        <span class="stat-pill">
+          <span class="mdi mdi-file-document-multiple-outline"></span>
+          <span id="totalDocs">0</span> Documents
+        </span>
+        <span class="stat-pill">
+          <span class="mdi mdi-format-letter-case"></span>
+          <span id="totalChars">0</span> Characters
+        </span>
+      </div>
+      <!-- claude - limit KB size #6: storage usage indicator (chars) -->
+      <div class="kb-storage-usage mt-sm">
+        <div class="kb-storage-usage-header">
+          <span class="text-sm text-muted">
+            <span class="mdi mdi-database-outline"></span> Storage
+          </span>
+          <span id="kbStorageText" class="text-sm text-muted">0 / 0 chars (0%)</span>
+        </div>
+        <div class="kb-storage-bar">
+          <div id="kbStorageBarFill" class="kb-storage-bar-fill" style="width:0%"></div>
+        </div>
+      </div>
+      <div class="kb-btn-group mt-sm">
+        <button class="kb-btn kb-btn-success kb-btn-sm"
+                onclick="aiAgent.KnowledgeBase.exportAll()">
+          <span class="mdi mdi-export"></span> Export
+        </button>
+        <button class="kb-btn kb-btn-warning kb-btn-sm"
+                onclick="document.getElementById('importFileInput').click()">
+          <span class="mdi mdi-import"></span> Import
+        </button>
+        <input id="importFileInput" type="file" class="hidden" accept=".json"
+               onchange="aiAgent.KnowledgeBase.importAll(this.files)">
+        <button class="kb-btn kb-btn-error kb-btn-sm"
+                onclick="aiAgent.KnowledgeBase.clearAll()">
+          <span class="mdi mdi-delete-outline"></span> Delete
+        </button>
+      </div>
+    </div>
+  </main>
+
+</div>
+++++

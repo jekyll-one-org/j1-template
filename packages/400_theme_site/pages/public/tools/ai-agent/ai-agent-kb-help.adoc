@@ -1,0 +1,255 @@
+---
+title:                                  Knowlegebase
+title_extention:                        Help
+tagline:                                Help
+
+date:                                   2026-04-11
+# last_modified:                        2026-04-01
+
+description: >
+                                        Chat interface for the Claude Agent.
+                                        Manages the conversation UI, message
+                                        history, and Anthropic API communication.
+keywords: >
+                                        open source, free, template, jekyll,
+                                        jekyllone, web, sites, static, jamstack,
+                                        bootstrap, chatbot, anthropic, ai agent,
+                                        claude
+
+categories:                             [ Tools ]
+tags:                                   [ AI, ChatBot ]
+
+image:
+  path:                                 /assets/image/module/attic/1920x1280/j1-launch.jpg
+  width:                                1920
+  height:                               1280
+
+fab_menu_id:                            open_toc
+scrollbar:                              false
+comments:                               false
+
+regenerate:                             false
+permalink:                              /pages/public/tools/aiagent-kb-help/
+
+resources:                              []
+resource_options:
+  - attic:
+      opacity:                          .6
+      padding_top:                      600
+      slides:
+        - url:                          /assets/image/module/attic/1920x1280/j1-launch.jpg
+          alt:                          Block Ads on YouTube
+---
+
+// Page Initializer
+// =============================================================================
+// Enable the Liquid Preprocessor
+:page-liquid:
+
+// Set (local) page attributes here
+// -----------------------------------------------------------------------------
+// :page--attr:                         <attr-value>
+
+
+//  Load Liquid procedures
+// -----------------------------------------------------------------------------
+{% capture load_attributes %}themes/{{site.template.name}}/procedures/global/attributes_loader.proc{%endcapture%}
+
+// Load page attributes
+// -----------------------------------------------------------------------------
+{% include {{load_attributes}} scope="global" %}
+
+// Page content
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[role="dropcap"]
+The *Knowledge Base* page lets you manage the training data for the
+Claude AI Agent. Everything the agent knows when answering your questions
+comes from the documents, web pages, and text snippets you add here.
+Think of it as the agent's personal library: the more relevant content
+you provide, the better the agent can answer your questions.
+
+
+[role="mt-4"]
+== Add a Website
+
+Use this section to import the text content of any publicly accessible
+web page.
+
+. Find the input field labelled _https://example.com/page_ near the
+  top of the sidebar.
+. Type or paste the full URL of the web page you want to add.
+. Click the *Load website* button.
+. The page content will be fetched and added to the knowledge base
+  as a new entry.
+
+[role="mt-4 mb-5"]
+[TIP]
+====
+Make sure the URL starts with *https://* (or *http://*). Only publicly
+accessible pages can be fetched. Pages that require a login or are
+behind a paywall will not load.
+====
+
+
+[role="mt-4"]
+== Upload Files
+
+Use this section to upload one or more files from your computer.
+The following file formats are accepted:
+
+* *Markdown* (.md)
+* *AsciiDoc* (.adoc, .asciidoc)
+* *Plain text* (.txt, .text)
+* *PDF* (.pdf)
+
+There are two ways to upload:
+
+Drag and drop::
+  Open a file manager window on your computer, select the file or files
+  you want to add, and drag them onto the drop zone (the area that reads
+  _Drag and drop files to here or click for selection_). Release the
+  mouse button to start the upload.
+Click to select::
+  Click anywhere inside the drop zone. A file browser dialog will open.
+  Navigate to the file or files you want to add, select them, and confirm.
+
+Each uploaded file appears as a new entry in the knowledge base.
+
+[role="mt-4"]
+=== Insert Text
+
+If you want to add a short piece of information that does not exist as a
+file or web page, you can type or paste it directly.
+
+. Enter a descriptive title in the *Title* field (for example,
+  _Company contact details_ or _Product FAQ_).
+. Type or paste your content into the text area below the title field.
+. Click the *Add* button to store the text as a new knowledge base
+  entry.
+
+
+[role="mt-4"]
+== Entry List
+
+Below the three input sections, you will find the *Entries* list. This
+area shows every document currently stored in the knowledge base. A small
+counter next to the heading tells you how many entries you have.
+
+When the knowledge base is empty, the list displays the message
+_No entries yet_. As you add websites, files, or text snippets, each
+one will appear here as a separate entry that you can review or remove.
+
+
+[role="mt-4"]
+== Statistics and Management
+
+At the very bottom of the sidebar, a small status bar shows two numbers:
+
+Documents::
+  The total number of entries in your knowledge base.
+Characters::
+  The total number of characters across all entries. This gives you
+  a rough idea of how much content the agent has to work with.
+
+Below the statistics, you will find three management buttons:
+
+Export::
+  Saves the entire knowledge base as a single JSON file to your
+  computer. Use this to create a *backup* or to transfer your
+  knowledge base to a different browser or device.
+Import::
+  Loads a previously exported knowledge base file. Click the button
+  and choose a *.json* file from your computer. The entries from the
+  file will be added to your knowledge base.
+Delete::
+  Removes *all* entries from the knowledge base at once.
+
+[role="mt-4 mb-5"]
+[CAUTION]
+====
+Clicking *Delete* permanently removes every entry from the knowledge
+base. If you want to keep your data, make sure to *export* it first.
+====
+
+
+[role="mt-4"]
+== API Settings
+
+The Knowledge Base page includes an *API Settings* dialog. In the current
+version, all settings are supplied automatically by the site configuration
+and are displayed as read-only. The dialog shows the following information:
+
+Anthropic API Key::
+  The API key used to communicate with the Claude service. This value
+  is provided by the site configuration and cannot be changed here.
+Model::
+  The Claude model that the agent uses (for example, _Claude Sonnet 4_).
+  This value is also provided by the site configuration.
+System Prompt::
+  An optional instruction that guides the agent's behaviour and tone.
+  If configured, it is shown here for reference.
+Max Tokens::
+  The maximum number of tokens (roughly, words and word pieces) the
+  agent may use in a single response.
+
+[role="mt-4 mb-5"]
+[NOTE]
+====
+All API settings are managed centrally through the site configuration.
+You do not need to enter an API key or change any settings to use the
+Knowledge Base.
+====
+
+
+[role="mt-5"]
+== FAQ — Knowledge Base
+
+Find below a list of frequently asked questions about the Knowledge Base.
+
+[role="mt-4"]
+=== What file types can I upload?
+
+You can upload Markdown (.md), AsciiDoc (.adoc, .asciidoc), plain text
+(.txt, .text), and PDF (.pdf) files.
+
+[role="mt-4"]
+=== Is there a size limit for uploads?
+
+There is no hard file-size limit enforced by the interface, but very
+large documents will increase the number of characters sent to the
+Claude API. Keep in mind that the API has a context window limit, so
+it is best to provide focused, relevant content rather than extremely
+long documents.
+
+[role="mt-4"]
+=== Where is my knowledge base stored?
+
+Your knowledge base is stored entirely in your own browser (local
+storage). No data is sent to any server other than the Claude API
+when you ask the agent a question. If you clear your browser's local
+data, your knowledge base entries *will be lost*. Use the *Export*
+button regularly to create backup files.
+
+[role="mt-4"]
+=== Can I share my knowledge base with someone else?
+
+Yes. Click the *Export* button to save the knowledge base as a JSON
+file. Send that file to another person (for example by email). They
+can then use the *Import* button on their own Knowledge Base page to
+load your entries.
+
+[role="mt-4"]
+=== Can I use the knowledge base on a different device?
+
+Export the knowledge base on your current device, transfer the JSON
+file to the other device, and import it there. This works exactly the
+same way as sharing a knowledge base with another person.
+
+[role="mt-4"]
+=== Why can a website not be loaded?
+
+Some websites block automated fetching of their content. Pages behind
+a login, paywalled articles, or sites with strict security policies
+may refuse the request. In such cases, you can try copying the relevant
+text from the page manually and adding it through the *Insert text*
+section instead.
