@@ -1,6 +1,6 @@
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/modules/lunr/css/theme/uno.css (2)
+ # ~/assets/theme/j1/modules/lunr/css/theme/uno.css (1)
  # Provides styles for J1 Module lunr/topsdarch (result styles)
  #
  # Product/Info:
@@ -113,7 +113,7 @@ div#search_history_select_wrapper {
 }
 
 
-.top-search-input {
+.search-input {
   background-color: var(--md-gray-50);
   border: 1px solid var(--md-gray-300) !important;
   border-radius: 0px;
@@ -124,18 +124,18 @@ div#search_history_select_wrapper {
   width: 100%;
 }
 
-.top-search-input:hover, .top-search-input:focus {
+.search-input:hover, .search-input:focus {
   border-color: var(--md-blue-500);
   box-shadow: 0 0 0 2px rgba(33, 150, 243, .15);
   outline: none;
 }
 
-.top-search-input::placeholder {
+.search-input::placeholder {
   color: var(--md-gray-600);
   opacity: .7;
 }
 
-.top-search-input[data-value-filled="true"] {
+.search-input[data-value-filled="true"] {
   background-color: var(--md-gray-50);
 }
 
@@ -169,13 +169,11 @@ div#search_history_select_wrapper {
    Ensure the input reserves horizontal space on its right edge for
    the absolutely-positioned clear button (~2rem is enough for the
    24px mdib glyph plus its padding). Targeted by ID to be explicit
-   and to avoid depending on class-name drift between .top-search-input
+   and to avoid depending on class-name drift between .search-input
    and .top-search-input.
 */
 #search-query {
   padding-right: 2.25rem;
-  border: 1px solid var(--md-gray-400);
-  border-radius: 0px;
 }
 
 /* claude - J1 TopSearch modifications #1
@@ -194,10 +192,10 @@ button#clear-topsearch {
   display: flex;
   font-size: 1rem;
   justify-content: center;
-  /* padding: .25rem .5rem; */
+  padding: .25rem .5rem;
   position: absolute;
   right: .5rem;
-  top: 36%;
+  top: 50%;
   transform: translateY(-50%);
   transition: color .2s;
 }

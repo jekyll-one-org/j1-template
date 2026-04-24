@@ -1,6 +1,6 @@
 {% comment %}
  # -----------------------------------------------------------------------------
- # ~/_includes/templates/j1/modules/searcher/procedures/topsearch.proc (7)
+ # ~/_includes/templates/j1/modules/searcher/procedures/topsearch.proc (6)
  # Liquid PROCEDURE template to create search input for J1 site_search
  #
  # Product/Info:
@@ -103,50 +103,26 @@ topsearch_options.enabled: {{topsearch_options.enabled | debug}}
                 <div class="input-group">
 
                   <span class="input-group-addon">
-                    <i class="mdib mdib-magnify mdib-24px mr-3"></i>
+                    <i class="mdib mdib-magnify mdib-24px mr-2"></i>
                   </span>
 
-                  {%- comment -%} claude - J1 TopSearch modifications #1
-                    Wrap the <input> and its inline clear button in an
-                    .input-container so the clear button can be absolutely
-                    positioned over the right edge of the input (mirrors the
-                    #videoUrlInput / #playlistInputClear pattern in skipad.css).
-                    #send-to-history is intentionally kept OUTSIDE the container
-                    so it stays a flex sibling to the right of the input, as
-                    before.
-                  {%- endcomment -%}
-                  <div class="input-container">
-                    <input
-                      id="search-query"
-                      class="top-search-input"
-                      type="text"
-                      name="quick-search-query"
-                      placeholder="Your search expression ..."
-                      data-value-filled="false"
-                      autocomplete="off">
+                  <input
+                    id="search-query"
+                    class="top-search-input"
+                    type="text"
+                    name="quick-search-query"
+                    placeholder="Your search expression ..."
+                    data-value-filled="false"
+                    autocomplete="off">
 
-                    {%- comment -%} claude - J1 TopSearch modifications #1
-                      Converted <span> to <button> for correct semantics/keyboard
-                      handling. Icon changed from mdib-format-clear to mdib-close
-                      (standard "x" for input-clear). The d-none class is kept so
-                      the existing TopSearch JS can continue to show/hide the
-                      element the same way it always has (toggling d-none); the
-                      CSS default is display: flex, which d-none overrides via
-                      !important when present.
-                    {%- endcomment -%}
-                    <button
-                      id="clear-topsearch"
-                      type="button"
-                      class="form-clear form-clear-searcher d-none"
-                      title="Clear search"
-                      aria-label="Clear search">
-                      <i class="mdib mdib-close mdib-24px"></i>
-                    </button>
-                  </div>
+                    <span id="clear-topsearch"
+                      class="form-clear form-clear-searcher d-none">
+                      <i class="mdib mdib-format-clear mdib-24px"></i>
+                    </span>
 
-                  <span id="send-to-history">
-                    <i class="mdib mdib-send mdib-24px"></i>
-                  </span>
+                    <span id="send-to-history">
+                      <i class="mdib mdib-send mdib-24px" ></i>
+                    </span>
 
                 </div>
               </div>
@@ -157,6 +133,7 @@ topsearch_options.enabled: {{topsearch_options.enabled | debug}}
                 <div id="search-results"></div>
               </div>
               <!-- END SEARCH Results -->
+
             </div>
             <!-- END SEARCH Container -->
 

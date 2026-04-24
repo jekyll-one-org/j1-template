@@ -1,0 +1,147 @@
+/*
+ # -----------------------------------------------------------------------------
+ # ~/assets/theme/j1/modules/lunr/css/theme/uno.css (0)
+ # Provides styles for J1 Module lunr/topsdarch (result styles)
+ #
+ # Product/Info:
+ # https://jekyll.one
+ #
+ # Copyright (C) 2023-2026 Juergen Adams
+ #
+ # J1 Theme is licensed under MIT License.
+ # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE
+ # -----------------------------------------------------------------------------
+ # NOTE:
+ #  See: _includes\themes\j1\modules\searcher\procedures\topsearch.proc
+ # -----------------------------------------------------------------------------
+*/
+
+
+/* search results
+-------------------------------------------------------------------------------- */
+div#search-results {
+  display: none;
+}
+
+.search-results {
+  max-height: 450px;
+  width: 98%;
+  background-color: unset;
+  overflow-y: scroll!important;
+  margin-top: .25rem;
+  margin-bottom: .25rem;
+}
+
+.list-search-results {
+  list-style: none;
+  margin-left: .5rem;
+  margin-right: 4.25rem;
+}
+
+p.result-item-text {
+  font-size: .875rem;
+  margin-bottom: .5rem;
+  text-align: justify;
+  line-height: 1.25rem;
+}
+
+
+/* input form
+-------------------------------------------------------------------------------- */
+span.input-group-addon > i {
+  color: var(--bs-gray-500);
+}
+
+span#clear-topsearch {
+  display: none;
+  cursor: pointer;
+  margin-top: 1.15rem;
+  margin-left: 10px;
+}
+
+span#clear-topsearch > i {
+  color: var(--bs-gray-500);
+}
+
+span#clear-topsearch > i:hover {
+  color: var(--md-gray-700) !important;
+}
+
+span#send-to-history {
+  display: none;
+  cursor: pointer;
+  margin-top: 1.15rem;
+  margin-left: .75rem;
+}
+
+span#send-to-history > i {
+  color: var(--bs-gray-500);
+}
+
+span#send-to-history > i:hover {
+  color: var(--md-gray-700) !important;
+}
+
+div#search_history_select_wrapper {
+  display: none;
+  margin-left: 2.5rem;
+  margin-right: 1.5rem;
+}
+
+
+/* input element
+-------------------------------------------------------------------------------- */
+
+.top-search {
+  padding-top: 32px;
+  position: sticky;
+  /* top: 0; */
+}
+
+.top-search .input-group-addon {
+  border: none;
+  color: #212121;
+  padding-left: 0;
+  padding-right: 0;
+  background-color: transparent;
+}
+
+.top-search .input-group-addon.close-search {
+  cursor: pointer;
+}
+
+.top-search input.form-control {
+  border: none;
+  box-shadow: 0 0 0;
+  height: 40px;
+  padding: 0 15px;
+  background-color: transparent;
+  height: 61px;
+}
+
+
+.search-input {
+  background-color: var(--md-gray-50);
+  border: 1px solid var(--md-gray-300) !important;
+  border-radius: 0px;
+  color: var(--md-gray-900);
+  font-size: .92rem;
+  padding: .6rem .75rem;
+  transition: border-color .2s, box-shadow .2s;
+  width: 100%;
+}
+
+.search-input:hover, .search-input:focus {
+  border-color: var(--md-blue-500);
+  box-shadow: 0 0 0 2px rgba(33, 150, 243, .15);
+  outline: none;
+}
+
+.search-input::placeholder {
+  color: var(--md-gray-600);
+  opacity: .7;
+}
+
+.search-input[data-value-filled="true"] {
+  background-color: var(--md-gray-50);
+}
