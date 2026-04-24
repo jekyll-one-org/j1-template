@@ -641,22 +641,26 @@
 #               target:                   _blank
 
 # ------------------------------------------------------------------------------
-# Menu CHATBOT
+# Menu CLAUDE AI
 #
 - item:                                 ChatBot
   sublevel:
 
-    - title:                            Help
+    - title:                            Chat Help
       icon:                             information-variant
-      href:                             /pages/public/tools/aiagent-chat-help/
+      href:                             /pages/public/tools/claudeAI/chatHelp/
+
+    - title:                            Knowledge Base Help
+      icon:                             information-variant
+      href:                             /pages/public/tools/claudeAI/kbHelp/
 
     - title:                            ChatBot
       icon:                             robot
-      href:                             /pages/public/tools/aiagent-chat/
+      href:                             /pages/public/tools/claudeAI/chat/
 
     - title:                            Knowledge Base
       icon:                             cog
-      href:                             /pages/public/tools/aiagent-kb/
+      href:                             /pages/public/tools/claudeAI/kb/
 
 # ------------------------------------------------------------------------------
 # Menu ONLINE

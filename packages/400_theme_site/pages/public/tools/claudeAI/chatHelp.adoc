@@ -1,0 +1,248 @@
+---
+title:                                  ChatBot
+title_extention:                        Help
+tagline:                                Help
+
+date:                                   2026-04-11
+#last_modified:                         2026-04-01
+
+description: >
+                                        Chat interface for the Claude Agent.
+                                        Manages the conversation UI, message
+                                        history, and Anthropic API communication.
+keywords: >
+                                        open source, free, template, jekyll,
+                                        jekyllone, web, sites, static, jamstack,
+                                        bootstrap, chatbot, anthropic, ai agent,
+                                        claude
+
+categories:                             [ Tools ]
+tags:                                   [ AI, ChatBot ]
+
+image:
+  path:                                 /assets/image/module/attic/1920x1280/j1-launch.jpg
+  width:                                1920
+  height:                               1280
+
+fab_menu_id:                            open_toc
+scrollbar:                              false
+comments:                               false
+
+regenerate:                             false
+permalink:                              /pages/public/tools/claudeAI/chatHelp/
+
+resources:                              []
+resource_options:
+  - attic:
+      opacity:                          .6
+      padding_top:                      600
+      slides:
+        - url:                          /assets/image/module/attic/1920x1280/j1-launch.jpg
+          alt:                          Block Ads on YouTube
+---
+
+// Page Initializer
+// =============================================================================
+// Enable the Liquid Preprocessor
+:page-liquid:
+
+// Set (local) page attributes here
+// -----------------------------------------------------------------------------
+// :page--attr:                         <attr-value>
+
+//  Load Liquid procedures
+// -----------------------------------------------------------------------------
+{% capture load_attributes %}themes/{{site.template.name}}/procedures/global/attributes_loader.proc{%endcapture%}
+
+// Load page attributes
+// -----------------------------------------------------------------------------
+{% include {{load_attributes}} scope="global" %}
+
+
+// Page content
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[role="dropcap"]
+The *ChatBot* is a built-in AI assistant that can answer your
+questions about J1 Template directly on the website. It is powered by Claude,
+an AI model developed by Anthropic. You do not need an account or any
+setup — just type a question and get a helpful answer.
+
+The ChatBot knows about all J1 Template features, including the video
+player, playlists, import and export, series support, and more. It draws on
+a dedicated knowledge base that is updated with each release.
+
+
+[role="mt-5"]
+== What the ChatBot Can Do
+
+The ChatBot is designed to help you get the most out of J1 Template. You
+can ask it about any feature or topic related to the website. Typical
+questions include:
+
+* How do I import a playlist?
+* Which video collections are available?
+* How does the merge toggle work?
+* Can I use J1 Template on my phone?
+* What player controls are available?
+* How do I export and share my playlist?
+
+The agent answers in plain language and, where helpful, includes
+step-by-step instructions. It can respond in *any language* — simply
+write your question in German, French, Spanish, or whichever language
+you prefer, and the ChatBot will reply in the same language.
+
+
+[role="mt-5"]
+== How to Use the Chat
+
+Using the ChatBot takes just a few simple steps:
+
+. Navigate to the *ChatBot* page. You can find it in the main menu
+  under *ChatBot > ChatBot*.
+. You will see the chat window with a text input field at the bottom.
+. Type your question or message into the input field that reads
+  _Enter your message ..._.
+. Press kbd:[Enter] on your keyboard or click the *send button* (the
+  arrow icon to the right of the input field) to submit your message.
+. Wait a moment while the ChatBot processes your request. You will
+  see a brief loading indicator while it works.
+. The agent's reply will appear in the chat window above your message.
+
+You can continue asking follow-up questions in the same conversation.
+The ChatBot remembers the context of earlier messages within the
+current session, so you can refine or build on previous answers without
+repeating yourself.
+
+
+[role="mt-5"]
+== Chat Window Layout
+
+The chat interface is divided into several areas:
+
+Header::
+At the top of the chat window, you will see the title *J1 Template ChatBot*
+and a *Neuer Chat* (New Chat) button on the right side.
+
+Message Area::
+The large central area displays the conversation. Your messages appear
+on one side with a person icon, and the agent's replies appear on the
+other side with a robot icon.
+
+Input Bar::
+At the bottom, you will find the text field where you type your messages.
+Next to it is the send button.
+
+Status Bar::
+Below the input field, a small status bar shows the current connection
+state (a green dot means: the agent is connected with the AI server) and
+which AI model is in use (default: _Claude Haiku 4_).
+
+
+[role="mt-5"]
+== Starting a New Conversation
+
+If you want to start fresh and clear the current chat history, click
+the *Clear Chat* button in the top-right corner of the chat window.
+This removes all previous messages from the screen and begins a new
+conversation.
+
+[role="mt-4 mb-5"]
+[CAUTION]
+====
+Starting a new chat, what *clears* the current *chat history*, can be
+helpful when you want to ask about a *completely different topic* and
+do *not need the context* from your earlier questions. 
+====
+
+[role="mt-5"]
+== Getting Good Answers
+
+The ChatBot works best when your questions are clear and specific.
+Here are a few tips:
+
+Be specific::
+Instead of asking _"How does the playlist work?"_ try something like
+_"How do I sort my playlist by duration?"_ The more precise your
+question, the more useful the answer will be.
+
+Ask one thing at a time::
+If you have several questions, it helps to ask them one after another
+rather than combining everything into a single long message.
+
+Use your own language::
+The ChatBot can understand and respond in many languages. You do not
+need to write in English if that is not your preferred language.
+
+Refer to earlier answers::
+Because the agent remembers the current conversation, you can say things
+like _"Can you explain that last step in more detail?"_ and it will
+know what you mean.
+
+
+[role="mt-5"]
+== Limitations
+
+While the ChatBot is very helpful, there are a few things to keep in
+mind:
+
+* The agent only knows about *J1 Template*. It is _not_ a general-purpose
+  assistant for unrelated topics.
+* It does *not* search the internet. Answers come exclusively from the
+ _ J1 Template knowledge base_.
+* Very long or complex messages may occasionally produce less precise
+  answers. If that happens, try breaking your question into smaller
+  parts.
+
+
+[role="mt-5"]
+== FAQ
+
+Find below answers to common questions about the ChatBot.
+
+[role="mt-4"]
+=== Do I need an account to use the ChatBot?
+
+No. The ChatBot is available to everyone without any login or
+registration.
+
+[role="mt-4"]
+=== Is the ChatBot free?
+
+Yes. Just like the rest of J1 Template, the ChatBot is *100{nbsp}% free*
+to use.
+
+[role="mt-4"]
+=== Which AI model powers the ChatBot?
+
+The ChatBot uses *Claude*, developed by Anthropic. The specific model
+in use is shown in the status bar at the bottom of the chat window.
+
+[role="mt-4"]
+=== Can the ChatBot help me with things outside of J1 Template?
+
+The ChatBot is designed specifically for J1 Template. While it is powered
+by a capable AI model, its knowledge base is focused on J1 Template features
+and usage. For general questions, you may want to visit
+link://claude.ai[Claude, window="_blank"] directly.
+
+[role="mt-4"]
+=== Is my conversation private?
+
+Your messages are sent to the Anthropic API for processing, but they are
+not stored on the J1 Template server. The chat history exists only in your
+browser while the page is open. Once you close or reload the page, the
+conversation is gone.
+
+[role="mt-4"]
+=== Why does the agent sometimes take a moment to respond?
+
+The ChatBot sends your message to an external AI service and waits
+for a reply. Depending on the length and complexity of your question, and
+on current server load, this can take a few seconds. The status bar will
+indicate when the agent is working on your request.
+
+[role="mt-4"]
+=== Can I use the ChatBot on my phone?
+
+Yes. The chat interface adapts to smaller screens automatically. On a
+mobile device, the layout adjusts so you can type and read comfortably.
