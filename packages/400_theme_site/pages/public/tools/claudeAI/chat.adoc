@@ -146,24 +146,27 @@ page on how to use the ChatBot efficiently.
 ++++
     <!-- Input Bar -->
     <div class="chat-input-bar mt-4">
-    <div class="chat-input-header">
-      <span class="text-md text-muted">
-        <span class="mdib mdib-head-question-outline"></span>
-      </span>
-    </div>
+
+      <div class="chat-input-header">
+        <span class="text-md text-muted">
+          <span class="mdib mdib-head-question-outline mr-2"></span>
+        </span>
+      </div>
+
       <div class="chat-input-wrap">
-        <textarea id="chatInput" rows="1"
-            placeholder="Enter your question ..."
-            onkeydown="claudeAi.AgentUI.handleInputKey(event)">
-        </textarea>
+        <textarea id="chatInput" rows="1" placeholder="Enter your question ..." onkeydown="claudeAi.AgentUI.handleInputKey(event)">        </textarea>
+        <button id="clear-chatinput" type="button" class="form-clear form-clear-chatinput" title="Clear input" aria-label="Clear input" onclick="claudeAi.AgentUI.clearChatInput()">
+          <i class="mdib mdib-close mdib-24px"></i>
+        </button>
       </div>
 
       <!-- ChatBot sendBtn -->
       <button id="sendBtn" class="chat-send-btn"
-        onclick="claudeAi.AgentChat.send()"
-        title="Send your question">
-        <span class="mdi mdi-send"></span>
+          onclick="claudeAi.AgentChat.send()"
+          title="Send your question">
+          <span class="mdi mdi-send"></span>
       </button>
+
     </div>
 
     <!-- Status Bar -->
@@ -175,7 +178,9 @@ page on how to use the ChatBot efficiently.
       </span>
       <span id="modelInfo" class="flex-1" style="text-align:right;">—</span>
     </div>
-  </div>
 
+  </div>
+  <!-- END agent-main -->
 </div>
+<!-- END agent-shell -->
 ++++

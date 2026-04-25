@@ -204,7 +204,9 @@ button#clear-topsearch {
 
 button#clear-topsearch:hover > i,
 button#clear-topsearch:focus > i {
-  color: var(--md-gray-700) !important;
+  /* color: var(--md-gray-700) !important; */
+  color: var(--md-red-500);
+  opacity: 1;  
 }
 
 button#clear-topsearch:focus {

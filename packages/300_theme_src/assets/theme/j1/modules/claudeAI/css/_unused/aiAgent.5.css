@@ -1,6 +1,6 @@
 /*
  # -----------------------------------------------------------------------------
- # /assets/theme/j1/modules/claudeAi/css/claudeAI.css (6)
+ # /assets/theme/j1/modules/claudeAi/css/claudeAI.css (5)
  # Provides styles for J1 Module claudeAI
  #
  # Product/Info:
@@ -13,7 +13,7 @@
  # -----------------------------------------------------------------------------
 */
 
-/* Version 1.0.6 for J1 Template */
+/* Version 1.0.5 for J1 Template */
 
 /*  ----------------------------------------------------------------------------
     Root Properties
@@ -845,66 +845,6 @@ pre code {
 #chatInput::placeholder {
   color: var(--secondary-color);
   opacity: .7;
-}
-
-/* ---------------------------------------------------------------------------
-   claude - J1 claudeAI modifications #4
-   Clear-input button for the chat textarea (#chatInput).
-   Mirrors the look-and-feel of the global #clear-topsearch button used on
-   the website search input. The button is absolutely positioned at the
-   right edge inside .chat-input-wrap (which is position: relative) and is
-   shown only when the textarea contains user input (toggled by AgentUI
-   via the .is-visible class).
-   The right padding on #chatInput is extended so typed text never flows
-   underneath the icon.
-   --------------------------------------------------------------------------- */
-#chatInput {
-  /* reserve space on the right so text does not run under the clear icon */
-  padding-right: 2.4rem;
-}
-
-#clear-chatinput {
-  align-items: center;
-  background: transparent;
-  border: none;
-  border-radius: 4px;
-  color: var(--secondary-color);
-  cursor: pointer;
-  display: none;            /* shown only when textarea is non-empty */
-  height: 28px;
-  justify-content: center;
-  line-height: 1;
-  opacity: .65;
-  padding: 0;
-  position: absolute;
-  right: .4rem;
-  top: .01rem;
-  transition: opacity .15s ease, color .15s ease, background-color .15s ease;
-  width: 28px;
-  z-index: 2;
-}
-
-/* subtle red wash on hover|focus */
-#clear-chatinput:hover, #clear-chatinput:focus {
-  /* background-color: rgba(244, 67, 54, .08);  */
-  color: var(--md-red-500);
-  opacity: 1;
-}
-
-#clear-chatinput:focus-visible {
-  color: var(--md-red-500);
-  opacity: 1;
-  outline: 2px solid var(--agent-primary);
-  outline-offset: 1px;
-}
-
-#clear-chatinput.is-visible {
-  display: flex;
-}
-
-#clear-chatinput .mdib {
-  font-size: 20px;
-  line-height: 1;
 }
 
 /* Claude - adjust button/textarea #1 */

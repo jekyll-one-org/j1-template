@@ -13,7 +13,7 @@
  # -----------------------------------------------------------------------------
 */
 
-/* Version 1.0.15 for J1 Template */
+/* Version 1.0.14 for J1 Template */
 
 // -----------------------------------------------------------------------------
 // ESLint shimming
@@ -2037,8 +2037,6 @@
   return {
     claudeAiHandler:     claudeAiHandler,
     getAdapterOptions:  function () { return Object.assign({}, adapterOptions); },
-
-    // Sub-modules exposed for HTML onclick handlers and external access
     Storage:            Storage,
     FilesAPI:           FilesAPI,
     Toast:              Toast,

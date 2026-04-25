@@ -1,6 +1,6 @@
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/modules/claudeAi/js/claudeAI.js (15)
+ # ~/assets/theme/j1/modules/claudeAi/js/claudeAI.js (14)
  # Provides JS Core for J1 Module claudeAI
  #
  # Product/Info:
@@ -13,7 +13,7 @@
  # -----------------------------------------------------------------------------
 */
 
-/* Version 1.0.15 for J1 Template */
+/* Version 1.0.14 for J1 Template */
 
 // -----------------------------------------------------------------------------
 // ESLint shimming
@@ -1866,51 +1866,15 @@
         if (chatInput) {
           chatInput.value = '';
           autoResizeInput(chatInput);
-
-          // claude - J1 claudeAI modifications #4
-          // Hide the clear-input button after the textarea is reset,
-          // so it stays in sync with the (now empty) input value.
-          updateClearButtonVisibility(chatInput);
         }
       }
-    }
-
-    // claude - J1 claudeAI modifications #4
-    // clearChatInput - reset the chat textarea (#chatInput) on demand.
-    // Wired to the #clear-chatinput button (which mirrors the global
-    // #clear-topsearch search-input clear control). After clearing the
-    // value we re-run autoResizeInput() to collapse the textarea back
-    // to its single-line height, hide the clear button, and restore
-    // focus so the user can keep typing without an extra click.
-    function clearChatInput() {
-      const chatInput = document.getElementById('chatInput');
-      if (!chatInput) return;
-      chatInput.value = '';
-      autoResizeInput(chatInput);
-      updateClearButtonVisibility(chatInput);
-      chatInput.focus();
-    }
-
-    // claude - J1 claudeAI modifications #4
-    // updateClearButtonVisibility - toggle the .is-visible class on the
-    // #clear-chatinput button based on whether the textarea contains
-    // any non-whitespace input. Kept module-private; called from the
-    // 'input' listener (see DOMContentLoaded wiring) and from the
-    // post-send / clearChatInput paths above.
-    function updateClearButtonVisibility(chatInput) {
-      const clearBtn = document.getElementById('clear-chatinput');
-      if (!clearBtn) return;
-      const hasContent = !!(chatInput && chatInput.value && chatInput.value.trim().length > 0);
-      clearBtn.classList.toggle('is-visible', hasContent);
     }
 
     return {
       getSettings, loadSettings, updateStatusBar,
       openSettings, closeSettings,
       // claude - J1 claudeAI modifications #3
-      clearChat, deleteMessagePair, handleInputKey,
-      // claude - J1 claudeAI modifications #4
-      clearChatInput, updateClearButtonVisibility
+      clearChat, deleteMessagePair, handleInputKey
     };
   })();
 
@@ -1994,15 +1958,6 @@
     const chatInput = document.getElementById('chatInput');
     if (chatInput) {
       chatInput.addEventListener('input', () => autoResizeInput(chatInput));
-
-      // claude - J1 claudeAI modifications #4
-      // Show / hide the #clear-chatinput button as the user types or
-      // deletes content. Mirrors the behavior of the search input's
-      // #clear-topsearch button. We also run an initial sync so the
-      // visibility reflects any pre-filled value present at load time
-      // (e.g. browser autofill or restored draft).
-      chatInput.addEventListener('input', () => AgentUI.updateClearButtonVisibility(chatInput));
-      AgentUI.updateClearButtonVisibility(chatInput);
     }
 
     // Close settings modal on backdrop click
