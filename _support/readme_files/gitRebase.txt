@@ -53,6 +53,8 @@ remote:            path: packages/400_theme_site/_data/modules/aiAgent.yml:37
 remote:
 
 
+kapott
+--------------------------------------------------------------------------------
 
 D:\j1\development\j1-theme\j1-template>git hi
 * 6a2c0cb5f 2026-04-25 | Deleted insecure 400_theme_site/my_j1_env* files (API Key) (HEAD -> main, develop) [Juergen Adams]
@@ -71,3 +73,26 @@ D:\j1\development\j1-theme\j1-template>git hi
 * bd4ce275d 2026-04-23 | Updated quicklinks, module modals (headers) [Juergen Adams]
 * c6d7dcd28 2026-04-23 | Readded module lazyLoader (resources) [Juergen Adams]
 * 99bbc54a0 2026-04-23 | Reversed module lightbox3 (min version) [Juergen Adams]
+
+
+OK
+--------------------------------------------------------------------------------
+
+* 493e9f571 2026-04-25 | Site config - last files (HEAD -> main, origin/main, origin/HEAD) [Juergen Adams]
+* 3eeb4f699 2026-04-25 | Module claudeAI - stopped committing the ApiKey to YAML [Juergen Adams]
+* 608c7cbf0 2026-04-24 | Renamed module aiAgent to claudeAI [Juergen Adams]
+* ba3ab8a7e 2026-04-24 | Added first version of module aiAgent [Juergen Adams]
+* 4fffe0b15 2026-04-24 | New version 2026.0.7. Updated module TopSerach (lunr) [Juergen Adams]
+* bd4ce275d 2026-04-23 | Updated quicklinks, module modals (headers) [Juergen Adams]
+* c6d7dcd28 2026-04-23 | Readded module lazyLoader (resources) [Juergen Adams]
+* 99bbc54a0 2026-04-23 | Reversed module lightbox3 (min version) [Juergen Adams]
+* 9681f362c 2026-04-22 | Reversed module lightbox3 [Juergen Adams]
+* b9bd068ac 2026-04-22 | Updated module lightbox3 for design/features #2 [Juergen Adams]
+* e300bbf54 2026-04-22 | Updated module lightbox3 for the design and to make all instances configurable [Juergen Adams]
+* d81701cfd 2026-04-21 | Moved Lightbox V2 -> Lightbox V3 [Juergen Adams]
+* e420493f7 2026-04-20 | Disabled quicklink icons not used. Rename quicksearch to site_search [Juergen Adams]
+* 782f2556f 2026-04-20 | New version 2026.0.6. Removed all unused modules [Juergen Adams]
+* 4decaccf5 2026-04-20 | New version 2026.0.5 (tag: v2026.0.5) [Juergen Adams]
+* 67a4cb529 2026-04-20 | Fixed _install/ files [Juergen Adams]
+* 9700e6281 2026-04-19 | Restored assets/data/galleries.html to previous version (tag: v2026.0.4) [Juergen Adams]
+* ca433b8df 2026-04-18 | Fixed _config.yml files for dev/prod [Juergen Adams]
