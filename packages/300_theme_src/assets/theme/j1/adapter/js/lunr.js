@@ -406,8 +406,10 @@ j1.adapter.lunr = ((j1, window) => {
             {% endif %}
           });
 
-          logger.info('initializing UI event handlers (modal)');
-          _this.uiEventHandler();
+          if (searchOptions.enabled) {
+            logger.info('initializing UI event handlers (modal)');
+            _this.uiEventHandler(searchOptions);
+          }
 
           {% if search_history_enabled %}
           // initialize history array from cookie
@@ -469,7 +471,7 @@ j1.adapter.lunr = ((j1, window) => {
     // -------------------------------------------------------------------------
     // uiEventHandler (topSearchModal)
     // -------------------------------------------------------------------------
-    uiEventHandler: () => {
+    uiEventHandler: (optiond) => {
       const topSearchModalID = '#' + 'searchModal';
       const searchIput       = document.querySelector('input');
       var data               = [];
