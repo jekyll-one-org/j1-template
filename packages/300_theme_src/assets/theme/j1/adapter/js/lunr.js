@@ -362,15 +362,30 @@ j1.adapter.lunr = ((j1, window) => {
       // module initializer
       // -----------------------------------------------------------------------
       var dependencies_met_lunr_finished = setInterval (() => {
-        var j1CoreFinished     = (j1.getState() === 'finished') ? true : false;
-//      var slimSelectFinished = (Object.keys(j1.adapter.slimSelect.select).length) ? true : false;
+        var pageState           = $('#content').css("display");
+        var pageVisible         = (pageState === 'block') ? true : false;
+        var j1CoreFinished      = (j1.getState() === 'finished') ? true : false;
+//      var slimSelectFinished  = (Object.keys(j1.adapter.slimSelect.select).length) ? true : false;
 
-        if (j1CoreFinished) {
+        if (j1CoreFinished && pageVisible) {
           startTimeModule   = Date.now();
 
           // get|clear queryInput element (prompt)
           queryInput        = document.getElementById('search-query');
-          queryInput.value  = '';
+          // get|clear queryInput element (modal/prompt)
+          queryInput = document.getElementById('search-query');
+          if (queryInput) {
+            queryInput.value  = '';
+          } else {
+            // _this.setState('finished');
+            // logger.debug('state: ' + _this.getState());
+            // logger.info('initializing module: finished');
+
+            // endTimeModule = Date.now();
+            // logger.info('module initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
+
+            // return;
+          }
 
           // initialize state flag
           _this.setState('started');

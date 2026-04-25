@@ -32,11 +32,12 @@ module Jekyll
     begin
       require 'dotenv'
       Dotenv.load('.env') if File.exist?('.env')
+      Jekyll.logger.info 'J1 Env:', "dotenv - env file found"
     rescue LoadError
       # dotenv is optional; plain ENV still works.
-      Jekyll.logger.warn 'dotenv:', "no env file found. Use plain ENV settings."
+      Jekyll.logger.warn 'J1 Env:', "dotenv - env file not found, use plain ENV settings"
     end
-
+ 
     # Whitelist of environment variables that may be read at build time.
     # Add new entries here explicitly; unknown variables are never exposed.
     ALLOWED_ENV_VARS = %w[
@@ -51,9 +52,9 @@ module Jekyll
         env_vars[key] = value
 
         if value.empty?
-          Jekyll.logger.warn 'J1 env:', "#{key} is not set (empty string will be used)"
+          Jekyll.logger.warn 'J1 Env:', "#{key} is not set (empty string will be used)"
         else
-          Jekyll.logger.info 'J1 env:', "#{key} loaded from process environment"
+          Jekyll.logger.info 'J1 Env:', "#{key} loaded from process environment"
         end
       end
       site.config['j1_env'] = env_vars
