@@ -1,0 +1,73 @@
+
+
+remote:
+remote: - GITHUB PUSH PROTECTION
+remote:   —————————————————————————————————————————
+remote:     Resolve the following violations before pushing again
+remote:
+remote:     - Push cannot contain secrets
+remote:
+remote:
+remote:      (?) Learn how to resolve a blocked push
+remote:      https://docs.github.com/code-security/secret-scanning/working-with-secret-scanning-and-push-protection/working-with-push-protection-from-the-command-line#resolving-a-blocked-push
+remote:
+remote:      (?) This repository does not have Secret Scanning enabled, but is eligible. Enable Secret Scanning to view and manage detected secrets.
+remote:      Visit the repository settings page, https://github.com/jekyll-one-org/j1-template/settings/security_analysi
+remote:
+remote:
+remote:       —— Anthropic API Key —————————————————————————————————
+remote:        locations:
+remote:          - commit: e4dcf9e62bb86f0c4fdfc66045c207d362fe15b2
+remote:            path: packages/400_theme_site/_data/modules/aiAgent.yml:37         *****  deleted
+remote:          - commit: dbe7cb79251049363d24beec2aa49e6c55c6b3a4
+remote:            path: packages/400_theme_site/_data/modules/claudeAI.yml:37        *****  modified
+remote:          - commit: 14ae641ea0e83e76de007e9cc11f90bbb50c6b22
+remote:            path: packages/400_theme_site/my_j1_env:18                         *****  deleted
+remote:          - commit: 14ae641ea0e83e76de007e9cc11f90bbb50c6b22
+remote:            path: packages/400_theme_site/my_j1_env.yml:18                     *****  deleted
+remote:
+remote:        (?) To push, remove secret from commit(s) or follow this URL to allow the secret.
+remote:        https://github.com/jekyll-one-org/j1-template/security/secret-scanning/unblock-secret/3CpHv91nDjhuLRqaJyv3fhX0uCw
+remote:
+remote:
+remote:
+To https://github.com/jekyll-one-org/j1-template.git
+ ! [remote rejected]     main -> main (push declined due to repository rule violations)
+error: failed to push some refs to 'https://github.com/jekyll-one-org/j1-template.git'
+
+D:\j1\
+
+* 59cbcf6b8 2026-04-25 | Site config - last files (HEAD -> develop, main) [Juergen Adams]
+* 14ae641ea 2026-04-25 | Module claudeAI - stopped committing the ApiKey to YAML [Juergen Adams]
+* dbe7cb792 2026-04-24 | Renamed module aiAgent to claudeAI (claudeAI) [Juergen Adams]
+* e4dcf9e62 2026-04-24 | Added first version of module aiAgent [Juergen Adams]
+* 4fffe0b15 2026-04-24 | New version 2026.0.7. Updated module TopSerach (lunr) [Juergen Adams]
+
+
+remote:
+remote:
+remote:       —— Anthropic API Key —————————————————————————————————
+remote:        locations:
+remote:          - commit: e4dcf9e62bb86f0c4fdfc66045c207d362fe15b2
+remote:            path: packages/400_theme_site/_data/modules/aiAgent.yml:37
+remote:
+
+
+
+D:\j1\development\j1-theme\j1-template>git hi
+* 6a2c0cb5f 2026-04-25 | Deleted insecure 400_theme_site/my_j1_env* files (API Key) (HEAD -> main, develop) [Juergen Adams]
+*   b2433e4ad 2026-04-25 | Resolved conflict in _data/modules/claudeAI.yml [Juergen Adams]
+|\
+| * 493e9f571 2026-04-25 | Site config - last files (origin/main, origin/HEAD) [Juergen Adams]
+| * 3eeb4f699 2026-04-25 | Module claudeAI - stopped committing the ApiKey to YAML [Juergen Adams]
+| * 608c7cbf0 2026-04-24 | Renamed module aiAgent to claudeAI [Juergen Adams]
+| * ba3ab8a7e 2026-04-24 | Added first version of module aiAgent [Juergen Adams]
+* | 59cbcf6b8 2026-04-25 | Site config - last files [Juergen Adams]
+* | 14ae641ea 2026-04-25 | Module claudeAI - stopped committing the ApiKey to YAML [Juergen Adams]
+* | dbe7cb792 2026-04-24 | Renamed module aiAgent to claudeAI (claudeAI) [Juergen Adams]
+* | e4dcf9e62 2026-04-24 | Added first version of module aiAgent [Juergen Adams]
+|/
+* 4fffe0b15 2026-04-24 | New version 2026.0.7. Updated module TopSerach (lunr) [Juergen Adams]
+* bd4ce275d 2026-04-23 | Updated quicklinks, module modals (headers) [Juergen Adams]
+* c6d7dcd28 2026-04-23 | Readded module lazyLoader (resources) [Juergen Adams]
+* 99bbc54a0 2026-04-23 | Reversed module lightbox3 (min version) [Juergen Adams]

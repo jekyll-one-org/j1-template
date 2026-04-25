@@ -247,3 +247,145 @@ NOTE: This will only turn off the warning, not the function itself.
 
   git remote add fury https://jekyll-one@git.fury.io/jekyll-one-org/<package-name>.git
   git push fury master
+
+
+
+// Claude
+// https://claude.ai/chat/a148afb7-79b1-4360-ad06-7d66b8b6ebd4
+// -----------------------------------------------------------------------------
+
+== Howto remove files from a commit using git CLI
+
+Depends on which commit and whether it's been pushed. Here are the common cases:
+
+**Remove a file from the most recent commit (not pushed yet)**
+
+Keep the file on disk, just untrack it from the commit:
+```bash
+git rm --cached path/to/file
+git commit --amend --no-edit
+```
+
+Or if you want to delete it entirely:
+```bash
+git rm path/to/file
+git commit --amend --no-edit
+```
+
+**Undo the last commit entirely but keep changes staged**
+
+```bash
+git reset --soft HEAD~1
+# now unstage the files you don't want
+git restore --staged path/to/file
+git commit -m "your message"
+```
+
+**Remove a file from an older commit**
+
+Use interactive rebase. Say the commit is 3 back:
+```bash
+git rebase -i HEAD~3
+```
+Mark the target commit as `edit`, save, then:
+```bash
+git rm --cached path/to/file
+git commit --amend --no-edit
+git rebase --continue
+```
+
+**If you already pushed**
+
+You'll need to force push after any of the above:
+```bash
+git push --force-with-lease
+```
+Be careful — this rewrites history and will disrupt anyone else working on that branch. `--force-with-lease` is safer than plain `--force` because it refuses to overwrite if someone else has pushed in the meantime.
+
+**Common gotcha: secrets or large files**
+
+`git rm --cached` + amend only removes the file from that commit. If the file exists in earlier commits too (e.g. a leaked API key), it's still in history. For that, use `git filter-repo` (preferred) or BFG Repo-Cleaner — and rotate the secret regardless, since it's already been exposed.
+
+
+
+
+// Gemini
+// https://gemini.google.com/app/ec906b3f648b6ef9
+// -----------------------------------------------------------------------------
+
+Removing files from an older commit is a common task, but it does involve
+"rewriting history." The standard tool for this is **Interactive Rebase**.
+
+> [!CAUTION]
+> **Warning:** If you have already pushed these commits to a shared repository, rewriting history can cause issues for your teammates. Only do this on local
+branches or branches you manage alone.
+
+
+### Step 1: Start an Interactive Rebase
+
+First, you need to identify how far back the commit is. Find the hash of
+the commit **immediately before** the one you want to edit.
+
+```bash
+git rebase -i <commit-hash-before-target>
+```
+*Alternatively, if it's 3 commits back, use:* `git rebase -i HEAD~3`
+
+
+### Step 2: Mark the Commit for Editing
+
+Your text editor will open with a list of commits. Find the line representing
+the commit you want to fix and change the word **`pick`** to **`edit`**
+(or just **`e`**).
+
+Save and close the editor. Git will now pause at that specific commit.
+
+
+### Step 3: Remove the File
+
+Now that you are "inside" that old commit, remove the file from the index.
+
+* **To keep the file on your computer but remove it from the commit:**
+    ```bash
+    git rm --cached <file-path>
+    ```
+* **To delete the file entirely:**
+    ```bash
+    git rm <file-path>
+    ```
+
+### Step 4: Amend the Commit
+
+Update the commit with your changes without changing the commit message.
+
+```bash
+git commit --amend --no-edit
+```
+
+### Step 5: Complete the Rebase
+
+Now that the specific commit is fixed, tell Git to finish applying the
+remaining (later) commits.
+
+```bash
+git rebase --continue
+```
+
+
+
+
+### Alternative: If it's the MOST RECENT commit
+If you just realized you messed up the very last commit you made, you don't need a full rebase. Just run:
+
+1.  `git rm --cached <file-path>`
+2.  `git commit --amend --no-edit`
+
+
+### What to do if things go wrong?
+If you get confused during the rebase or merge conflicts become too
+overwhelming, you can always abort and return to the state you were in
+before you started:
+
+```bash
+git rebase --abort
+```
