@@ -392,23 +392,25 @@ j1.adapter.lunr = ((j1, window) => {
           logger.debug('set module state to: ' + _this.getState());
           logger.info('initializing module: started');
 
-          logger.info('initializing search engine');
-          $(searchOptions.search_input).lunrSearch({
-            index_file:     searchOptions.index_file,
-            results:        searchOptions.results,
-            template:       searchOptions.template,
-            titleMsg:       searchOptions.titleMsg,
-            emptyMsg:       searchOptions.emptyMsg,
-            {% if search_history_enabled %}
-            onResultShown:  function () {
-              $('#send-to-history').show();
-            }
-            {% endif %}
-          });
-
           if (searchOptions.enabled) {
+            logger.info('initializing search engine');
+            $(searchOptions.search_input).lunrSearch({
+              index_file:     searchOptions.index_file,
+              results:        searchOptions.results,
+              template:       searchOptions.template,
+              titleMsg:       searchOptions.titleMsg,
+              emptyMsg:       searchOptions.emptyMsg,
+              {% if search_history_enabled %}
+              onResultShown:  function () {
+                $('#send-to-history').show();
+              }
+              {% endif %}
+            });
+
             logger.info('initializing UI event handlers (modal)');
             _this.uiEventHandler(searchOptions);
+          } else {
+            logger.info('module disabled');
           }
 
           {% if search_history_enabled %}
