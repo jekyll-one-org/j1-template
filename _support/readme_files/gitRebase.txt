@@ -41,7 +41,7 @@ D:\j1\
 * 14ae641ea 2026-04-25 | Module claudeAI - stopped committing the ApiKey to YAML [Juergen Adams]
 * dbe7cb792 2026-04-24 | Renamed module aiAgent to claudeAI (claudeAI) [Juergen Adams]
 * e4dcf9e62 2026-04-24 | Added first version of module aiAgent [Juergen Adams]
-* 4fffe0b15 2026-04-24 | New version 2026.0.7. Updated module TopSerach (lunr) [Juergen Adams]
+* 4fffe0b15 2026-04-24 | New version 2026.0.8. Updated module TopSerach (lunr) [Juergen Adams]
 
 
 remote:
@@ -69,7 +69,7 @@ D:\j1\development\j1-theme\j1-template>git hi
 * | dbe7cb792 2026-04-24 | Renamed module aiAgent to claudeAI (claudeAI) [Juergen Adams]
 * | e4dcf9e62 2026-04-24 | Added first version of module aiAgent [Juergen Adams]
 |/
-* 4fffe0b15 2026-04-24 | New version 2026.0.7. Updated module TopSerach (lunr) [Juergen Adams]
+* 4fffe0b15 2026-04-24 | New version 2026.0.8. Updated module TopSerach (lunr) [Juergen Adams]
 * bd4ce275d 2026-04-23 | Updated quicklinks, module modals (headers) [Juergen Adams]
 * c6d7dcd28 2026-04-23 | Readded module lazyLoader (resources) [Juergen Adams]
 * 99bbc54a0 2026-04-23 | Reversed module lightbox3 (min version) [Juergen Adams]
@@ -82,7 +82,7 @@ OK
 * 3eeb4f699 2026-04-25 | Module claudeAI - stopped committing the ApiKey to YAML [Juergen Adams]
 * 608c7cbf0 2026-04-24 | Renamed module aiAgent to claudeAI [Juergen Adams]
 * ba3ab8a7e 2026-04-24 | Added first version of module aiAgent [Juergen Adams]
-* 4fffe0b15 2026-04-24 | New version 2026.0.7. Updated module TopSerach (lunr) [Juergen Adams]
+* 4fffe0b15 2026-04-24 | New version 2026.0.8. Updated module TopSerach (lunr) [Juergen Adams]
 * bd4ce275d 2026-04-23 | Updated quicklinks, module modals (headers) [Juergen Adams]
 * c6d7dcd28 2026-04-23 | Readded module lazyLoader (resources) [Juergen Adams]
 * 99bbc54a0 2026-04-23 | Reversed module lightbox3 (min version) [Juergen Adams]

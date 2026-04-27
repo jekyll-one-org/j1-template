@@ -3,7 +3,7 @@
 # Expose a whitelisted set of environment variables to Liquid templates
 # at build time as `site.j1_env.<NAME>`.
 #
-# J1 Jekyll plugin #1
+# J1 Jekyll plugin #2
 #
 # Rationale:
 # Jekyll does NOT expose arbitrary process environment variables to Liquid.
@@ -24,6 +24,11 @@
 #   1. set/export CLAUDE_API_KEY="sk-ant-api03-..." in the runtime env, or
 #   2. place CLAUDE_API_KEY=... in a project-root .env file (dotenv gem).
 #
+#   3. declare every variable you want exposed in
+#      _data/plugins/load-env.yml under settings.allowedEnvVars
+#      (or in the defaults file). Variables not listed there are
+#      never read or exposed.
+#
 # ------------------------------------------------------------------------------
 
 require 'yaml'
@@ -34,15 +39,14 @@ module Jekyll
     safe true
     priority :highest
 
-    # claude - J1 Jekyll plugin #1
-    # Whitelist of environment variables that may be read at build time.
-    # Add new entries here explicitly; unknown variables are never exposed.
-    # Lifted out of `generate` to class scope to avoid Ruby's
-    # "dynamic constant assignment" warning.
-    ALLOWED_ENV_VARS = %w[
-      CLAUDE_API_ENDPOINT
-      CLAUDE_API_KEY
-    ].freeze
+    # claude - J1 Jekyll plugin #2
+    # The hard-coded ALLOWED_ENV_VARS constant has been removed. The
+    # whitelist is now sourced from the YAML config files
+    #   _data/plugins/defaults/load-env.yml  -> defaults.allowedEnvVars
+    #   _data/plugins/load-env.yml           -> settings.allowedEnvVars
+    # so site authors can extend the whitelist without editing plugin
+    # source. The merge of defaults + user settings (see `generate`)
+    # already makes the user value win over the default.
 
     # Main plugin action, called by Jekyll-core
     def generate(site)
@@ -92,12 +96,37 @@ module Jekyll
       # nested inside `generate` after a `private` declaration.
       load_dotenv(@project_path)
 
+      # claude - J1 Jekyll plugin #2
+      # Resolve the whitelist of variables from the merged config. The
+      # YAML can legitimately produce nil, an empty array, or entries
+      # with stray whitespace, so coerce defensively:
+      #   * Array(...)        -> nil becomes [], scalar becomes [scalar]
+      #   * to_s.strip        -> tolerate symbols and surrounding spaces
+      #   * reject(&:empty?)  -> drop blank entries from typo'd YAML
+      #   * uniq              -> avoid logging the same key twice if a
+      #                          user accidentally lists it in both files
+      allowed_env_vars = Array(config['allowedEnvVars'])
+                          .map { |k| k.to_s.strip }
+                          .reject(&:empty?)
+                          .uniq
+
+      if allowed_env_vars.empty?
+        Jekyll.logger.warn 'J1 Env:',
+          'allowedEnvVars is empty - no variables will be exposed. ' \
+          'Add entries to settings.allowedEnvVars in _data/plugins/load-env.yml.'
+        site.config['j1_env'] = {}
+        return
+      end
+
       # claude - J1 Jekyll plugin #1
       # Read each whitelisted variable from ENV and expose them via
       # site.config['j1_env'] for use in Liquid as:
       #   {{ site.j1_env.CLAUDE_API_ENDPOINT }}
+      # claude - J1 Jekyll plugin #2
+      # Iterate over the config-derived list instead of the removed
+      # ALLOWED_ENV_VARS constant.
       env_vars = {}
-      ALLOWED_ENV_VARS.each do |key|
+      allowed_env_vars.each do |key|
         value = ENV[key].to_s
         env_vars[key] = value
 

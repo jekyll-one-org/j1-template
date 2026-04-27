@@ -24,7 +24,17 @@ description:
 # User configuration settings
 #
 settings:
-# enabled:                              true                                    # enable|disable load env vars
+
+  # ----------------------------------------------------------------------------
+  # Global settings
+  #
+  enabled:                              true                                    # enable|disable the plugin
+  # ----------------------------------------------------------------------------
+  # Plugin settings
+  #
+  allowedEnvVars:                       [
+                                          CLAUDE_API_KEY
+                                        ]
 
 # ------------------------------------------------------------------------------
 # END config

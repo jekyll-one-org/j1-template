@@ -23,22 +23,26 @@ description:
 # ------------------------------------------------------------------------------
 # Default configuration settings
 #
+# ------------------------------------------------------------------------------
+# Global settings
+#
+#   enabled
+#   ----------------------------------------------------------------------------
+#   Enables|Disables the plugin. If set to false, no env data is being
+#   processed.
+#
+#     values:                         boolean (true|false)
+#     default:                        false
+#
+#   ----------------------------------------------------------------------------
+#
 defaults:
+  enabled:                              false
 
   # ----------------------------------------------------------------------------
   # Plugin settings
   #
-  #   enabled
-  #   --------------------------------------------------------------------------
-  #   Enables|Disables the plugin. If set to false, no files are being
-  #   generated.
-  #
-  #     values:                         boolean (true|false)
-  #     default:                        false
-  #
-  #   --------------------------------------------------------------------------
-  #
-  enabled:                              false
+  allowedEnvVars:                       []
 
 # ------------------------------------------------------------------------------
 # END config
