@@ -646,14 +646,6 @@
 - item:                                 ChatBot
   sublevel:
 
-    - title:                            Chat Help
-      icon:                             information-variant
-      href:                             /pages/public/tools/claudeAI/chatHelp/
-
-    - title:                            Knowledge Base Help
-      icon:                             information-variant
-      href:                             /pages/public/tools/claudeAI/kbHelp/
-
     - title:                            ChatBot
       icon:                             robot
       href:                             /pages/public/tools/claudeAI/chat/
@@ -661,6 +653,14 @@
     - title:                            Knowledge Base
       icon:                             cog
       href:                             /pages/public/tools/claudeAI/kb/
+
+    - title:                            Chat Help
+      icon:                             information-variant
+      href:                             /pages/public/tools/claudeAI/chatHelp/
+
+    - title:                            Knowledge Base Help
+      icon:                             information-variant
+      href:                             /pages/public/tools/claudeAI/kbHelp/
 
 # ------------------------------------------------------------------------------
 # Menu ONLINE

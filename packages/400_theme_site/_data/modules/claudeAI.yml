@@ -27,7 +27,6 @@ settings:
   # API options
   # --------------------------------------------------------------------------
   #
-  # claude - J1 claudeAI modifications #2
   # The browser no longer talks to api.anthropic.com directly; it calls the
   # same-origin serverless proxy defined in
   # `netlify/functions/claude-proxy.mjs`. The proxy adds the secret
@@ -45,14 +44,12 @@ settings:
   #
   apiEndpoint:                          /api/claude
 
-  # claude - J1 claudeAI modifications #2
   # Legacy setting kept for documentation only. The old build-time injection
   # from site.j1_env.CLAUDE_API_KEY described in modifications #1 is
   # DEPRECATED and has been removed from the adapter. Do NOT set apiKey
   # here; the proxy holds the secret server-side.
   #
   # apiKey:                             removed
-
 
 # -----------------------------------------------------------------------------
 # END config

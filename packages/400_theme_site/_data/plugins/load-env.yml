@@ -29,6 +29,7 @@ settings:
   # Global settings
   #
   enabled:                              true                                    # enable|disable the plugin
+
   # ----------------------------------------------------------------------------
   # Plugin settings
   #

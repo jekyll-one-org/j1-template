@@ -175,7 +175,6 @@ function CookieConsent(props) {
   // executeFunctionByName()
   // execute a function by NAME (functionName) in a browser context
   // (e.g. window) the function is published
-  // claude - pass options to a callback function #2
   // ---------------------------------------------------------------------------
   function executeFunctionByName (functionName, context, args) {
     var namespaces = functionName.split('.');
@@ -227,7 +226,7 @@ function CookieConsent(props) {
         // ---------------------------------------------------------------------
         self.$modal.on('hidden.bs.modal', function () {
           // process settings after the user has made his selections
-          // claude - pass options to a callback function #2
+          // pass options to a callback function
           //  executeFunctionByName(callbackName, context, options)
           executeFunctionByName (self.props.postSelectionCallback, window, {
             dataChanged: dataChanged
@@ -241,8 +240,7 @@ function CookieConsent(props) {
         .done(function (data) {
           logger.info('loading consent modal: successfully');
 
-          // -------------------------------------------------------------
-          // claude - J1 Bootstrap JS modifications #2
+          // -------------------------------------------------------------------
           //
           // Guard the modal initialization so that the Bootstrap Modal
           // constructor never runs against a `self.modal` that lacks a
@@ -274,7 +272,8 @@ function CookieConsent(props) {
           // user simply does not see the consent modal on this page
           // load, which is preferable to a hard JS error breaking the
           // site.
-          // -------------------------------------------------------------
+          // -------------------------------------------------------------------
+          //
           var $parsed       = $('<div>').append($.parseHTML(data || '', document, false));
           var $xhrWrapper   = $parsed.find('#' + self.props.xhrDataElement).eq(0);
           var dialogMarkup  = $xhrWrapper.length ? $xhrWrapper.html() : '';
@@ -305,14 +304,14 @@ function CookieConsent(props) {
 
           self.modal.style.display = 'block';
 
-          // ----------------------------------------------------------
-          // claude - J1 Bootstrap JS modifications #2
+          // -------------------------------------------------------------------
           // Defer the Bootstrap init to the next animation frame.
           // This gives the browser one tick to finish parsing and
           // reflowing the freshly-injected markup before
           // `new Modal(...)` reads `_dialog`. Falls back to a
           // setTimeout on environments without rAF.
-          // ----------------------------------------------------------
+          // -------------------------------------------------------------------
+          //
           var initBootstrapModal = function () {
             // paranoid re-check: another script could have wiped or
             // replaced the modal in the time since innerHTML
