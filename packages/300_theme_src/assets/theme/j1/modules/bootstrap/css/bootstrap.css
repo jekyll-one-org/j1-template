@@ -5352,16 +5352,19 @@ textarea.form-control-lg {
   border-radius: 0.375rem;
   opacity: var(--bs-btn-close-opacity);
 }
+
 .btn-close:hover {
-  color: var(--bs-btn-close-color);
+  color: var(--md-red-500);
   text-decoration: none;
   opacity: var(--bs-btn-close-hover-opacity);
 }
+
 .btn-close:focus {
   outline: 0;
   box-shadow: var(--bs-btn-close-focus-shadow);
   opacity: var(--bs-btn-close-focus-opacity);
 }
+
 .btn-close:disabled, .btn-close.disabled {
   pointer-events: none;
   -webkit-user-select: none;

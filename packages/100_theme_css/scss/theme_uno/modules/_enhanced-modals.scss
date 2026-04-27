@@ -71,6 +71,12 @@ body {
 			margin-left: auto;
 			align-self: flex-end;
 		}
+
+	    .close:hover {
+			color: var(--md-red-500);
+			opacity: 1;
+		}
+
 	}
 
     .modal-footer {

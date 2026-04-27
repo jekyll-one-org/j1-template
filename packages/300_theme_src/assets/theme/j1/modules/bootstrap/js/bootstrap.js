@@ -2535,10 +2535,15 @@
       this._element.setAttribute('aria-modal', true);
       this._element.setAttribute('role', 'dialog');
       this._element.scrollTop = 0;
+
+      //jadams, 2026-04-26
+      // if environment is of type production, the property _dialog may empty (null)
+      // potetially a timing issue
       const modalBody = SelectorEngine.findOne(SELECTOR_MODAL_BODY, this._dialog);
       if (modalBody) {
         modalBody.scrollTop = 0;
       }
+
       reflow(this._element);
       this._element.classList.add(CLASS_NAME_SHOW$4);
       const transitionComplete = () => {
@@ -2586,7 +2591,16 @@
     }
     _hideModal() {
       this._element.style.display = 'none';
-      this._element.setAttribute('aria-hidden', true);
+      // jadams, 2026-04-26
+      // WARNING (chrome):
+      //   Blocked aria-hidden on an element because its descendant retained focus.
+      //   The focus must not be hidden from assistive technology users. Avoid using
+      //   aria-hidden on a focused element or its ancestor. Consider using the inert
+      //   attribute instead, which will also prevent focus. For more details, see
+      //   the aria-hidden section of the WAI-ARIA specification
+      //   at https://w3c.github.io/aria/#aria-hidden.
+      //
+      //this._element.setAttribute('aria-hidden', true);
       this._element.removeAttribute('aria-modal');
       this._element.removeAttribute('role');
       this._isTransitioning = false;

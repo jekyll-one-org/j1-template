@@ -72,13 +72,12 @@ topsearch_options.enabled: {{topsearch_options.enabled | debug}}
       data-bs-backdrop="static"
       data-bs-keyboard="false"
       tabindex="-1"
-      aria-labelledby="{{topsearch_id}}"
-      aria-hidden="true">
+      role="document"
+      aria-labelledby="Modal TopSearch">
 
       <!-- Modal Container -->
       <div
-        class="modal-dialog modal-frame modal-top modal-notify modal-primary"
-        role="document">
+        class="modal-dialog modal-frame modal-top modal-notify modal-primary">
 
         <!-- MODAL Content -->
         <div class="modal-content">

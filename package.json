@@ -112,6 +112,7 @@
   },
   "dependencies": {
     "bootstrap": "^5.3.8",
+    "cookie-consent-js": "^2.1.12",
     "cross-env": "^7.0.3",
     "cross-var": "^1.1.0",
     "fs": "^0.0.1-security",
