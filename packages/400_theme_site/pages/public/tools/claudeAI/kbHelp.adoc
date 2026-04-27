@@ -75,12 +75,11 @@ you provide, the better the agent can answer your questions.
 Use this section to import the text content of any publicly accessible
 web page.
 
-. Find the input field labelled _https://example.com/page_ near the
-  top of the sidebar.
-. Type or paste the full URL of the web page you want to add.
-. Click the *Load website* button.
+. Find the input field top of the sidebar
+. Type or paste the full URL of the web page you want to add
+. Click the *Load website* button
 . The page content will be fetched and added to the knowledge base
-  as a new entry.
+  as a new entry
 
 [role="mt-4 mb-5"]
 [TIP]
