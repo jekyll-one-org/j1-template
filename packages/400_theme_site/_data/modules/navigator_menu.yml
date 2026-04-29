@@ -210,8 +210,18 @@
 # ------------------------------------------------------------------------------
 # Menu MANUALS
 #
-# - item:                                 Manuals
-#   sublevel:
+- item:                                 Manual
+  sublevel:
+
+    - title:                            Lightbox V3
+      href:                             /pages/public/manual/module/lightbox3/lightbox/
+      icon:                             flashlight
+
+    - title:                            PhotoSwipe V5
+      href:                             /pages/public/manual/module/photoswipe5/photoswipe/
+      icon:                             flashlight
+
+
 
 #     - title:                            Where to go
 #       href:                             //jekyll.one/pages/public/manuals/where_to_go/

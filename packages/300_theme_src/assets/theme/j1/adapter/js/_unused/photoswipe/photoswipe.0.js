@@ -6,9 +6,9 @@ regenerate:                             true
 
 {% comment %}
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/adapter/js/lightbox3.js (1)
- # Liquid template to adapt Lightbox V3 Core functions
- # Based on Lightbox V3 v.1.1.0 - Modified version for J1 Theme.
+ # ~/assets/theme/j1/adapter/js/photoswipe.js (0)
+ # Liquid template to adapt Photoswipe Lightbox Core functions
+ # Based on Photoswipe Lightbox V5 (v.5.4.4) - Modified version for J1 Theme.
  #
  # Product/Info:
  # https://jekyll.one
@@ -41,8 +41,8 @@ regenerate:                             true
 
 {% comment %} Set config data
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign lightbox_defaults = modules.defaults.lightbox3.defaults %}
-{% assign lightbox_settings = modules.lightbox3.settings %}
+{% assign lightbox_defaults = modules.defaults.photoswipe.defaults %}
+{% assign lightbox_settings = modules.photoswipe.settings %}
 
 {% comment %} Set config options
 -------------------------------------------------------------------------------- {% endcomment %}
@@ -58,20 +58,21 @@ regenerate:                             true
 
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/adapter/js/lightbox3.js (1)
- # JS Adapter for J1 Lightbox V3 (based on v1.1.0)
+ # ~/assets/theme/j1/adapter/js/photoswipe.js (0)
+ # JS Adapter for J1 Photoswipe Lightbox (v5.4.4)
+ # Modified version for J1 Theme.
  #
  # Product/Info:
  # https://jekyll.one
- # https://github.com/lokesh/lightbox3
+ # https://photoswipe.com
  #
- # Copyright (C) 2026 Lokesh Dhakar
+ # Copyright (C) 2014 - 2024 Dmitry Semenov
  # Copyright (C) 2026 Juergen Adams
  #
  # J1 Template is licensed under the MIT License.
  # For details, see: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE
- # Lightbox V3 is licensed under the MIT License.
- # For details, see https://github.com/lokesh/lightbox3/blob/master/LICENSE
+ # PhotoSwipe is licensed under the MIT License.
+ # See: https://github.com/dimsemenov/PhotoSwipe/blob/master/LICENSE
  #
  # -----------------------------------------------------------------------------
  # Adapter generated: {{site.time}}
@@ -84,7 +85,7 @@ regenerate:                             true
 /* eslint indent: "off"                                                       */
 // -----------------------------------------------------------------------------
 "use strict";
-j1.adapter.lightbox3 = ((j1, window) => {
+j1.adapter.photoswipe = ((j1, window) => {
 
   const isDev = (j1.env === "development" || j1.env === "dev") ? true : false;
 
@@ -111,7 +112,7 @@ j1.adapter.lightbox3 = ((j1, window) => {
 
   // Declare lb at module scope so the instance is accessible from all
   // methods (messageHandler, open, destroy) and by external callers
-  // via j1.adapter.lightbox3.getLightbox().
+  // via j1.adapter.photoswipe.getLightbox().
   var lb;
 
   // MutationObserver reference kept at module scope so it can be
@@ -123,7 +124,7 @@ j1.adapter.lightbox3 = ((j1, window) => {
   // ---------------------------------------------------------------------------
 
   // _initLightbox()
-  // Centralises the actual Lightbox3 initialisation so both the first
+  // Centralises the actual PsLightbox initialisation so both the first
   // run and any re-initialisation triggered by the MutationObserver share
   // exactly the same code path and options.
   // ---------------------------------------------------------------------------
@@ -132,18 +133,18 @@ j1.adapter.lightbox3 = ((j1, window) => {
     // duplicate event listeners accumulating across navigations / hot-reloads.
     if (lb && typeof lb.destroy === 'function') {
       lb.destroy();
-      logger.debug('existing Lightbox3 instance destroyed before re-init');
+      logger.debug('existing PsLightbox instance destroyed before re-init');
     }
 
-    lb = Lightbox3.Lightbox.init(lightboxOptions);
-    logger.debug('Lightbox3 instance (re-)initialised with options: ' + JSON.stringify(lightboxOptions));
+    lb = PsLightbox.Lightbox.init(lightboxOptions);
+    logger.debug('PsLightbox instance (re-)initialised with options: ' + JSON.stringify(lightboxOptions));
   }
 
   // _startDomObserver()
   // Watches the DOM for newly inserted [data-lightbox] elements so that
   // galleries and images injected after the initial page load (e.g. by
   // J1 gallery, carousel or AJAX modules) are covered by the same
-  // Lightbox3 instance without requiring a full page reload.
+  // PsLightbox instance without requiring a full page reload.
   //
   // The observer calls _initLightbox() at most once per batch of mutations
   // (debounced via requestAnimationFrame) to avoid redundant re-inits.
@@ -169,7 +170,7 @@ j1.adapter.lightbox3 = ((j1, window) => {
       if (hasNewTargets && !rafPending) {
         rafPending = true;
         requestAnimationFrame(function () {
-          logger.info('new [data-lightbox] elements detected – re-initialising Lightbox3');
+          logger.info('new [data-lightbox] elements detected – re-initialising PsLightbox');
           _initLightbox();
           rafPending = false;
         });
@@ -198,15 +199,15 @@ j1.adapter.lightbox3 = ((j1, window) => {
       // default module settings
       // -----------------------------------------------------------------------
       var settings = $.extend({
-        module_name: 'j1.adapter.lightbox3',
+        module_name: 'j1.adapter.photoswipe',
         generated:   '{{site.time}}'
       }, options);
 
       // -----------------------------------------------------------------------
       // global variable settings
       // -----------------------------------------------------------------------
-      _this   = j1.adapter.lightbox3;
-      logger  = log4javascript.getLogger('j1.adapter.lightbox3');
+      _this   = j1.adapter.photoswipe;
+      logger  = log4javascript.getLogger('j1.adapter.photoswipe');
 
       // create settings object from frontmatter (page settings)
       frontmatterOptions    = options !== null ? $.extend({}, options) : {};
@@ -237,24 +238,26 @@ j1.adapter.lightbox3 = ((j1, window) => {
 
           // Guard: honour the enabled flag from merged config.
           // When enabled is false the adapter registers itself as finished
-          // but skips Lightbox3 initialisation so no listeners are attached.
+          // but skips PsLightbox initialisation so no listeners are attached.
           if (!lightboxOptions.enabled) {
-            logger.info('Lightbox3 is disabled via configuration – skipping initialisation');
+            logger.info('PsLightbox is disabled via configuration – skipping initialisation');
             _this.setState('finished');
             logger.debug('state: ' + _this.getState());
             clearInterval(dependencies_met_page_ready);
             return;
           }
 
-          // _initLightbox() replaces the inline Lightbox3.Lightbox.init() call.
+          // _initLightbox() replaces the inline PsLightbox.Lightbox.init() call.
           // The instance is stored in the module-scoped `lb` variable so it is
           // reachable from getLightbox(), open(), destroy() and messageHandler().
-          _initLightbox();
+          // jadams
+          // _initLightbox();
 
           // Start the MutationObserver so that [data-lightbox] elements added
           // dynamically by other J1 modules (galleries, carousels, AJAX) are
-          // automatically covered by the same Lightbox3 instance and options.
-          _startDomObserver();
+          // automatically covered by the same PsLightbox instance and options.
+          // jadams
+          // _startDomObserver();
 
           _this.setState('finished');
           logger.debug('state: ' + _this.getState());
@@ -316,11 +319,11 @@ j1.adapter.lightbox3 = ((j1, window) => {
 
     // -------------------------------------------------------------------------
     // getLightbox()
-    // Returns the active Lightbox3 instance for programmatic access.
+    // Returns the active PsLightbox instance for programmatic access.
     // Callers can use this to invoke lb.open(url) or lb.destroy() directly.
     //
     // Example (from another J1 module):
-    //   const lb = j1.adapter.lightbox3.getLightbox();
+    //   const lb = j1.adapter.photoswipe.getLightbox();
     //   if (lb) { lb.open('/assets/images/hero.jpg[Hero image]'); }
     // -------------------------------------------------------------------------
     getLightbox: () => {
@@ -330,7 +333,7 @@ j1.adapter.lightbox3 = ((j1, window) => {
     // -------------------------------------------------------------------------
     // open()
     // Convenience wrapper to programmatically open an image URL in the
-    // active Lightbox3 instance without requiring callers to hold a
+    // active PsLightbox instance without requiring callers to hold a
     // reference to the raw lb object.
     //
     // @param {string} url  Full URL optionally suffixed with [caption]:
@@ -340,13 +343,13 @@ j1.adapter.lightbox3 = ((j1, window) => {
       if (lb && typeof lb.open === 'function') {
         lb.open(url);
       } else {
-        logger.warn('open() called before Lightbox3 is initialised or while disabled');
+        logger.warn('open() called before PsLightbox is initialised or while disabled');
       }
     }, // END open
 
     // -------------------------------------------------------------------------
     // destroy()
-    // Tears down the Lightbox3 instance and the MutationObserver.
+    // Tears down the PsLightbox instance and the MutationObserver.
     // Useful when navigating away or when a page section is removed so
     // that no stale event listeners remain in memory.
     // -------------------------------------------------------------------------
@@ -359,7 +362,7 @@ j1.adapter.lightbox3 = ((j1, window) => {
       if (lb && typeof lb.destroy === 'function') {
         lb.destroy();
         lb = null;
-        logger.info('Lightbox3 instance destroyed');
+        logger.info('PsLightbox instance destroyed');
       }
       _this.setState('destroyed');
     } // END destroy

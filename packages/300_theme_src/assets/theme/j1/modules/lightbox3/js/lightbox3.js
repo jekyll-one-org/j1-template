@@ -1,7 +1,8 @@
 /*
  # -----------------------------------------------------------------------------
  # ~/assets/theme/j1/modules/lightbox3/js/lightbox.js (5)
- # Lightbox v.1.1.0 implementation for J1 Theme.
+ # Based on Lightbox V3 v.1.1.0 
+ # Modified version for J1 Theme
  #
  # Product/Info:
  # https://jekyll.one
@@ -66,7 +67,6 @@
     const SPRING_OPEN  = { stiffness: 260, damping: 26, mass: 1 };
     const SPRING_CLOSE = { stiffness: 500, damping: 38, mass: 1 };
 
-    // claude - J1 Lightbox modifications #6
     // Added backdrop to DEFAULTS. backdrop.click controls whether a tap/click
     // on the dimmed backdrop area closes the lightbox ('close', default) or
     // leaves it open ('keep'). Declaring it here makes the option self-documenting
@@ -641,7 +641,9 @@
                 this.openTextLinkWithImage(triggerEl, src, size.width, size.height);
             });
         }
-        /** Run the FLIP morph for a text-link trigger once image dimensions are known. */
+
+        // Run the FLIP morph for a text-link trigger once image
+        // dimensions are known.
         openTextLinkWithImage(triggerEl, src, natW, natH) {
             const thumbRect = triggerEl
                 ? this.getThumbRect(triggerEl)
@@ -678,10 +680,10 @@
                 this.emit('opened');
             }, undefined, undefined, undefined, openVisuallyDone);
         }
-        /**
-         * Build a rect centered on the text link with the image's aspect ratio.
-         * Sized so the shorter dimension matches the text link's height.
-         */
+
+        // Build a rect centered on the text link with the image's
+        // aspect ratio. Sized so the shorter dimension matches the text
+        // link's height.
         textLinkFlipRect(linkRect, natW, natH) {
             const aspect = natW / natH;
             const h = linkRect.height;
@@ -729,7 +731,8 @@
                 this.updateCursorState();
             });
         }
-        /** Spring-animate the image from one fit rect to another (aspect ratio change). */
+        // Spring-animate the image from one fit rect to another
+        // (aspect ratio change).
         animateFitTransition(from, to) {
             this.stopFitTransition();
             if (this.reducedMotion) {
@@ -908,11 +911,11 @@
                 this.wheelSnapBackTimer = null;
             }
         }
-        /**
-         * "Catch" bounce: the trigger element squishes down slightly then
-         * springs back to normal scale, as if catching the lightbox image.
-         * Runs on its own rAF loop so it doesn't interfere with the main spring.
-         */
+
+        // "Catch" bounce: the trigger element squishes down slightly then
+        // springs back to normal scale, as if catching the lightbox image.
+        //Runs on its own rAF loop so it doesn't interfere with the main spring.
+        //
         bounceTrigger(el) {
             if (this.reducedMotion)
                 return; // Skip decorative bounce
@@ -1019,11 +1022,11 @@
             this.wheelNavCommitted = false;
             this.wheelNavTotalDelta = 0;
         }
-        /**
-         * After strip animation completes, reposition slide elements so the new
-         * current image is at left:0. Remove the old far slide, create a new one
-         * at the opposite edge.
-         */
+
+        // After strip animation completes, reposition slide elements so
+        // the new current image is at left: 0. Remove the old far slide,
+        // create a new one at the opposite edge.
+        //
         recycleSlots(direction) {
             const slideWidth = window.innerWidth + SLIDE_GAP;
             if (direction === 1) {
@@ -1071,7 +1074,10 @@
                 }
             }
         }
-        /** Set up zoom state and image src for the newly-centered current image. */
+
+        // Set up zoom state and image src for the newly-centered
+        // current image.
+        //
         setupCurrentImage() {
             this.zoom = this.defaultZoomState();
             this.stopFitTransition();
@@ -1113,10 +1119,10 @@
             }
             this.updateCursorState();
         }
-        /**
-         * If a strip spring is running (from a flick or arrow key), resolve it so
-         * the user can start a new gesture from a clean state.
-         */
+
+        // If a strip spring is running (from a flick or arrow key),
+        // resolve it so the user can start a new gesture from a clean state.
+        //
         resolveStripAnimation() {
             if (this.stripRafId === null)
                 return;
@@ -1311,11 +1317,11 @@
             }
             this.updateChromeFade(offset);
         }
-        /**
-         * Cross-fade caption and counter as the strip slides between images.
-         * Opacity follows a V-curve: 1 → 0 at midpoint → 1.
-         * Text content swaps at the midpoint so the new caption fades in.
-         */
+
+        // Cross-fade caption and counter as the strip slides between images.
+        // Opacity follows a V-curve: 1 → 0 at midpoint → 1.
+        // Text content swaps at the midpoint so the new caption fades in.
+        //
         updateChromeFade(offset) {
             if (this.gallery.length <= 1)
                 return;
@@ -1365,12 +1371,13 @@
             if (this.chromeCounter)
                 this.chromeCounter.style.opacity = String(fadeOpacity);
         }
-        /**
-         * Rubber-band bounce at gallery edges. Kicks the strip with velocity in the
-         * attempted direction — the spring overshoots then settles back to 0,
-         * hinting that there are no more images that way.
-         * direction: 1 = shift right (at first image), -1 = shift left (at last).
-         */
+
+        // Rubber-band bounce at gallery edges. Kicks the strip with velocity
+        // in the attempted direction — the spring overshoots then settles
+        // back to 0, hinting that there are no more images that way.
+        // direction: 1 = shift right (at first image),
+        // -1 = shift left (at last).
+        //
         bounceStrip(direction) {
             this.debugLog(`bounceStrip(${direction > 0 ? 'right' : 'left'})`);
             const BOUNCE_VELOCITY = 1200;
@@ -1379,11 +1386,12 @@
                 this.stripOffset = 0;
             });
         }
-        /**
-         * If a strip animation is in progress, stop it and resolve immediately.
-         * Navigation animations are completed (index updated, slots recycled).
-         * Bounce animations are just cancelled (strip reset to 0).
-         */
+
+        // If a strip animation is in progress, stop it and resolve
+        // immediately. Navigation animations are completed (index updated,
+        // slots recycled). Bounce animations are just cancelled
+        // (strip reset to 0).
+        //
         forceCompleteStripAnimation() {
             if (this.stripRafId === null)
                 return;
@@ -1821,13 +1829,14 @@
                 // Image-initiated: let the click handler deal with it.
                 const fromOverlay = this.dismiss.fromOverlay;
                 this.dismiss = this.defaultDismissState();
-                // claude - J1 Lightbox modifications #6
+
                 // Honour the backdrop.click option for the pointer-based path.
                 // handleOverlayPointerDown captures the pointer on the overlay, which
                 // suppresses the subsequent synthetic 'click' event — so this is the
                 // only place that can close the lightbox for an overlay tap gesture.
                 // When backdrop.click is 'keep', a tap on the backdrop is intentional
                 // and the lightbox must stay open.
+                //
                 if (fromOverlay && (this.opts.backdrop?.click ?? 'close') !== 'keep')
                     this.close();
                 return;
@@ -2476,12 +2485,13 @@
             // Bottom pill bar
             const bar = document.createElement('div');
             bar.className = 'lightbox3-chrome';
-            if (!hasContent)
-                bar.classList.add('lightbox3-chrome--minimal');
-            // claude - J1 Lightbox modifications #2: counter is now a standalone fixed element
-            // at the top-left corner, vertically aligned with the close button. It is appended
-            // directly to the overlay (not inside the bottom chrome bar) so it can be positioned
-            // and animated independently.
+            if (!hasContent) bar.classList.add('lightbox3-chrome--minimal');
+
+            // counter is a standalone fixed element at the top-left corner,
+            // vertically aligned with the close button. It is appended
+            // directly to the overlay (not inside the bottom chrome bar)
+            // so it can be positioned and animated independently.
+            //
             const counter = document.createElement('span');
             counter.className = 'lightbox3-counter';
             if (isGallery) {
@@ -2500,9 +2510,11 @@
                 captionEl.style.display = 'none';
             bar.appendChild(captionEl);
             this.chromeCaption = captionEl;
+
             // Close button
-            // claude - J1 Lightbox modifications #1: SVG replaced with pswp-style filled path;
-            // button appended to overlay (top-right corner) instead of inside the chrome bar.
+            // SVG replaced with pswp-style filled path; button appended
+            // to overlay (top-right corner) instead of inside the chrome bar.
+            //
             const close = document.createElement('button');
             close.className = 'lightbox3-close';
             close.setAttribute('aria-label', 'Close');
@@ -2523,10 +2535,10 @@
             });
             this.overlay.appendChild(bar);
             this.chromeBar = bar;
-            // claude - J1 Lightbox modifications #1: close button lives directly on the overlay
+            // close button lives directly on the overlay
             // at the top-right corner, not inside the bottom chrome bar.
             this.overlay.appendChild(close);
-            // claude - J1 Lightbox modifications #2: counter lives directly on the overlay
+            // counter lives directly on the overlay
             // at the top-left corner, vertically aligned with the close button.
             this.overlay.appendChild(counter);
             this.overlay.focus({ preventScroll: true });
@@ -2536,9 +2548,10 @@
                 prev.className = 'lightbox3-arrow lightbox3-arrow-prev';
                 prev.setAttribute('aria-label', 'Previous image');
                 prev.type = 'button';
-                // claude - J1 Lightbox modifications #3: SVG replaced with pswp-style filled-path
-                // icon (60×60 viewBox, same path as pswp__icn-arrow). Shadow stroke uses
-                // paint-order so it renders behind the fill without a separate <use> element.
+                // SVG replaced with pswp-style filled-path icon
+                // (60×60 viewBox, same path as pswp__icn-arrow).
+                // Shadow stroke uses paint-order so it renders behind
+                // the fill without a separate <use> element.
                 prev.innerHTML =
                     '<svg viewBox="0 0 60 60" fill="currentColor" width="60" height="60" aria-hidden="true"><path d="M29 43l-3 3-16-16 16-16 3 3-13 13 13 13z" stroke="#4f4f4f" stroke-width="2" paint-order="stroke"/></svg>';
                 prev.addEventListener('click', (e) => {
@@ -2553,9 +2566,12 @@
                 next.className = 'lightbox3-arrow lightbox3-arrow-next';
                 next.setAttribute('aria-label', 'Next image');
                 next.type = 'button';
-                // claude - J1 Lightbox modifications #3: same filled-path icon as prev; the
-                // CSS rule .lightbox3-arrow-next svg { transform: scale(-1,1); } mirrors it
-                // horizontally — identical to how pswp flips its next arrow via transform.
+
+                // same filled-path icon as prev; the CSS rule 
+                // .lightbox3-arrow-next svg { transform: scale(-1,1); }
+                // mirrors it horizontally — identical to how pswp flips
+                // its next arrow via transform.
+                //
                 next.innerHTML =
                     '<svg viewBox="0 0 60 60" fill="currentColor" width="60" height="60" aria-hidden="true"><path d="M29 43l-3 3-16-16 16-16 3 3-13 13 13 13z" stroke="#4f4f4f" stroke-width="2" paint-order="stroke"/></svg>';
                 next.addEventListener('click', (e) => {
@@ -2603,12 +2619,13 @@
                     this.currentIndex < this.gallery.length - 1 ? '' : 'none';
             }
         }
-        /**
-         * Compute per-element drift vectors from a thumbnail origin point.
-         * Each vector points from the element's resting position back toward the origin,
-         * scaled by CHROME_DRIFT. During animation, these are multiplied by chromeDriftProgress
-         * so elements appear to launch from / return to the thumbnail location.
-         */
+
+        // Compute per-element drift vectors from a thumbnail origin point.
+        // Each vector points from the element's resting position back toward
+        // the origin, scaled by CHROME_DRIFT. During animation, these are
+        // multiplied by chromeDriftProgress so elements appear to launch
+        // from / return to the thumbnail location.
+        //
         computeChromeDrift(originX, originY) {
             const CHROME_DRIFT = 0.05;
             const vw = window.innerWidth;
@@ -2690,15 +2707,17 @@
             }
             if (this.chromeClose) {
                 const closeScale = this.getPressScale(this.chromeClose);
-                // claude - J1 Lightbox modifications #1: close button is now a standalone fixed
-                // element at the top-right; apply the same base opacity as the chrome bar so it
-                // fades in on open and fades out on close together with the rest of the chrome UI.
+                // close button is now a standalone fixed element at the
+                // top-right; apply the same base opacity as the chrome
+                // bar so it fades in on open and fades out on close together
+                // with the rest of the chrome UI.
+                //
                 this.chromeClose.style.opacity = String(opacity);
                 this.chromeClose.style.transform = `scale(${closeScale})`;
                 this.chromeClose.style.pointerEvents = interactive ? '' : 'none';
             }
-            // claude - J1 Lightbox modifications #2: counter is now a standalone fixed element
-            // at the top-left corner; animate its base opacity in sync with the close button.
+            // counter is a standalone fixed element at the top-left corner;
+            // animate its base opacity in sync with the close button.
             if (this.chromeCounter) {
                 this.chromeCounter.style.opacity = String(opacity);
                 this.chromeCounter.style.pointerEvents = interactive ? '' : 'none';
@@ -2760,7 +2779,9 @@
             };
             this.pressRafId = requestAnimationFrame(tick);
         }
-        // ─── DOM ─────────────────────────────────────────────────────
+
+        // --- DOM -------------------------------------------------------------
+        //
         createOverlay(src) {
             const overlay = document.createElement('div');
             overlay.className = 'lightbox3-overlay';
@@ -2770,13 +2791,16 @@
             const backdrop = document.createElement('div');
             backdrop.className = 'lightbox3-backdrop';
             backdrop.style.opacity = '0';
-            // claude - J1 Lightbox modifications #6
-            // Only attach the direct click-to-close listener when backdrop.click is
-            // 'close' (the default). When set to 'keep', clicking the dimmed backdrop
-            // area is intentionally a no-op, so we simply skip binding this listener.
+
+            // Only attach the direct click-to-close listener when
+            // backdrop.click is 'close' (the default). When set to 'keep',
+            // clicking the dimmed backdrop area is intentionally a no-op,
+            // so we simply skip binding this listener.
+            //
             if ((this.opts.backdrop?.click ?? 'close') !== 'keep') {
                 backdrop.addEventListener('click', this.close);
             }
+
             // Strip container — translates horizontally for gallery navigation
             const strip = document.createElement('div');
             strip.className = 'lightbox3-strip';
@@ -2816,7 +2840,9 @@
             slide.appendChild(img);
             return { slide, img };
         }
-        /** Create and position an adjacent (prev or next) slide in the strip. */
+
+        // Create and position an adjacent (prev or next) slide in the strip.
+        //
         createAdjacentSlide(galleryIndex, leftPosition) {
             if (!this.stripEl)
                 return;
@@ -2838,7 +2864,9 @@
                 this.nextSlideImg = img;
             }
         }
-        /** Set the src and position for an adjacent slide's image. */
+
+        // Set the src and position for an adjacent slide's image.
+        //
         setupSlideImage(img, item) {
             const br = this.getTargetBorderRadius();
             img.style.borderRadius = br > 0 ? `${br}px` : '';
@@ -2874,7 +2902,8 @@
                 }
             }
         }
-        /** Position an image element at the given rect. */
+
+        // Position an image element at the given rect.
         positionImageEl(img, rect) {
             Object.assign(img.style, {
                 left: `${rect.x}px`,
@@ -2883,7 +2912,9 @@
                 height: `${rect.height}px`,
             });
         }
-        /** Populate prev and next slides for gallery navigation. */
+
+        // Populate prev and next slides for gallery navigation.
+        //
         populateAdjacentSlides() {
             if (!this.stripEl || this.gallery.length <= 1)
                 return;
@@ -2930,8 +2961,12 @@
                 height: `${rect.height}px`,
             });
         }
-        // ─── Helpers ─────────────────────────────────────────────────
-        /** Target border-radius for the lightbox image, read from --lb-image-border-radius CSS property. */
+
+        // --- Helpers ---------------------------------------------------------
+
+        // Target border-radius for the lightbox image, read from
+        // --lb-image-border-radius CSS property.
+        //
         getTargetBorderRadius() {
             if (this.overlay) {
                 const value = getComputedStyle(this.overlay).getPropertyValue('--lb-image-border-radius');
@@ -2940,7 +2975,10 @@
             }
             return DEFAULT_IMAGE_BORDER_RADIUS;
         }
-        /** Viewport padding around the lightbox image, read from --lb-image-padding CSS property. */
+
+        // Viewport padding around the lightbox image, read from
+        // --lb-image-padding CSS property.
+        //
         getTargetImagePadding() {
             if (this.overlay) {
                 const value = getComputedStyle(this.overlay).getPropertyValue('--lb-image-padding');
@@ -2949,10 +2987,13 @@
             }
             return this.opts.padding;
         }
-        // claude - J1 Lightbox modifications #4: separate horizontal padding so the
-        // image stays clear of the prev/next arrow buttons (75 px wide, flush to edges).
+
+        // separate horizontal padding so the image stays clear of the
+        // prev/next arrow buttons (75 px wide, flush to edges).
         // Reads --lb-image-padding-x; falls back to 95 px (75 px arrow + 20 px margin).
-        /** Horizontal viewport padding around the lightbox image, read from --lb-image-padding-x CSS property. */
+        // Horizontal viewport padding around the lightbox image, read from
+        // --lb-image-padding-x CSS property.
+        //
         getTargetImagePaddingX() {
             if (this.overlay) {
                 const value = getComputedStyle(this.overlay).getPropertyValue('--lb-image-padding-x');
@@ -2961,7 +3002,9 @@
             }
             return 95;
         }
-        /** Read the visual border-radius from the thumbnail's trigger element. */
+
+        // Read the visual border-radius from the thumbnail's trigger element.
+        //
         getThumbBorderRadius(el) {
             // Check the trigger element first (wrapping anchor/div with overflow:hidden),
             // then fall back to the image inside it.
@@ -3024,11 +3067,11 @@
                 left: leftFrac * targetRect.width,
             };
         }
-        /**
-         * Compute FLIP scale and crop insets for morphing between the lightbox image
-         * and a thumbnail. Handles both CSS object-fit:cover cropping and server-side
-         * aspect ratio mismatches (e.g. Unsplash ?fit=crop).
-         */
+
+        // Compute FLIP scale and crop insets for morphing between the lightbox
+        // image and a thumbnail. Handles both CSS object-fit:cover cropping
+        // and server-side aspect ratio mismatches (e.g. Unsplash ?fit=crop).
+        //
         computeFlipCrop(morphRect, fitRect, triggerEl, isTextLink) {
             const scaleX = morphRect.width / fitRect.width;
             const scaleY = morphRect.height / fitRect.height;
@@ -3076,24 +3119,32 @@
             const vw = window.innerWidth;
             const vh = window.innerHeight;
             const p = this.getTargetImagePadding();
-            // claude - J1 Lightbox modifications #4: use a wider horizontal padding so
-            // the image stays clear of the prev/next arrow buttons (75 px wide, flush to
+
+            // use a wider horizontal padding so the image stays clear
+            // of the prev/next arrow buttons (75 px wide, flush to
             // the viewport edges). Vertical padding is unchanged.
             const px = this.getTargetImagePaddingX();
+
             const scale = Math.min((vw - px * 2) / naturalWidth, (vh - p * 2) / naturalHeight, 1);
             const w = naturalWidth * scale;
             const h = naturalHeight * scale;
             return new DOMRect((vw - w) / 2, (vh - h) / 2, w, h);
         }
-        /** Like computeTargetRect but without the scale ≤ 1 cap. Used when full-res
-         *  dimensions are unknown — fills the viewport based on aspect ratio alone. */
+
+        // Like computeTargetRect but without the scale ≤ 1 cap. Used when
+        // full-res dimensions are unknown — fills the viewport based on
+        // aspect ratio alone.
+        //
         computeTargetRectFromAspectRatio(width, height) {
             const vw = window.innerWidth;
             const vh = window.innerHeight;
             const p = this.getTargetImagePadding();
-            // claude - J1 Lightbox modifications #4: mirror the wider horizontal padding
-            // used in computeTargetRect so aspect-ratio-only fits also clear the arrows.
+
+            // mirror the wider horizontal padding used in computeTargetRect
+            // so aspect-ratio-only fits also clear the arrows.
+            //
             const px = this.getTargetImagePaddingX();
+
             const scale = Math.min((vw - px * 2) / width, (vh - p * 2) / height);
             const w = width * scale;
             const h = height * scale;

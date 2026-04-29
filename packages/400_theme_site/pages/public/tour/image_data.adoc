@@ -104,13 +104,15 @@ support such functionality.
 For J1 Template, different lightbox modules are available:
 
 * Lightbox V3  (default)
-* PhotoSwipeJS (optional)
+* PhotoSwipe Lightbox V5 (optional)
 * lightGallery (optional)
 
-The *default* tool employed by J1 Template is PhotoSwipeJS, a Javascript
-library free to use for private or business websites. For more complex use
-cases, like a thumbnail gallery preview or video support, *LightGallery* can
-be used alternatively.
+The *default* app employed by J1 Template is Lightbox V3, a Javascript
+library free to use for private or business websites. As an alternative,
+PhotoSwipe Lightbox can be used. This lightbox may a better choice on
+mobile devices for extended touch, pan and swipe support. For more complex
+use cases, like a thumbnail gallery preview or video support, *LightGallery*
+can be used.
 
 [CAUTION]
 ====

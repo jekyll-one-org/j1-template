@@ -1,0 +1,585 @@
+---
+title:                                  PhotoSwipe Lightbox
+title_extention:                        API
+tagline:                                Application Interface
+
+date:                                   2026-04-28
+#last_modified:                         2026-01-01
+
+description: >
+                                        PhotoSwipe Lightbox is a JavaScript library
+                                        to create lightboxes placed on images in webpages.
+                                        When you click such images, they open in a new,
+                                        overlaying layer, darkening the background and
+                                        focusing the image.
+
+keywords: >
+                                        open source, free, template, jekyll, jekyllone, web,
+                                        sites, static, jamstack, bootstrap,
+                                        html, html5, slider, photoswipe
+
+categories:                             [ Manual ]
+tags:                                   [ Module, Photoswipe, Core ]
+
+image:
+  path:                                 /assets/image/module/attic/1920x1280/bp-miller.jpg
+  width:                                1920
+  height:                               1280
+
+attic:                                  false
+regenerate:                             true
+personalization:                        true
+permalink:                              /pages/public/manual/module/photoswipe5/photoswipe/
+
+resources:                              [ photoswipejs ]
+resource_options:
+  - toccer:
+      collapseDepth:                    2
+  - attic:
+      opacity:                          0.3
+      preload:                          0
+      transitionDuration:               fast
+      resolutionRefreshRate:            500
+      slides:
+        - url:                          /assets/image/module/attic/1920x1280/bp-miller.jpg
+          alt:                          Photo by BP Miller on Unsplash
+          badge:
+            type:                       unsplash
+---
+
+// http://localhost:22000/opening-or-closing-transition
+// Page Initializer
+// =============================================================================
+// Enable the Liquid Preprocessor
+:page-liquid:
+
+// Attribute settings for page content control (e.g includes)
+//
+:documentdir:                           _includes/documents
+
+
+//  Load Liquid procedures
+// -----------------------------------------------------------------------------
+{% capture load_attributes %}themes/{{site.template.name}}/procedures/global/attributes_loader.proc{%endcapture%}
+
+// Load page attributes
+// -----------------------------------------------------------------------------
+{% include {{load_attributes}} scope="global" %}
+
+
+// Page content
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// See: https://photoswipe.com/getting-started
+
+[role="dropcap"]
+A lightbox is a helper which displays enlarged, almost screen-filling versions
+of images while dimming the remainder of the page. The technique, introduced
+by Lightbox Version 2, gained widespread popularity thanks to its simple style.
+The term *lightbox* has been employed since then for Javascript libraries to
+support such functionality.
+
+PhotoSwipe Lightbox is a JavaScript library to create lightboxes placed
+on images in webpages. When you click such extended images, they open in
+a new, overlaying layer, darkening the background and focusing the image.
+Well-suited for desktops, browsers, and apps on mobile devices with
+touchscreens. The library provides a smooth and engaging way to showcase
+images on the web, especially on mobile devices.
+
+Here's a breakdown of its key functionalities:
+
+Displays images in a lightbox::
+When you click on an image, it overlays the current page with a zoomed-in
+view of the image. Easily zoom in and out of images and pan around them.
+View images in full-screen for an immersive experience
+
+Supports galleries::
+You can link multiple images together, allowing users to easily browse
+through a collection.
+
+Touch-friendly::
+Designed with intuitive touch gestures for navigation (swiping, pinching, etc.).
+Supports touch gestures like swiping, pinching, and dragging.
+
+Responsive::
+Adapts to different screen sizes and orientations.
+
+Customizable::
+Offers various options for customization, such as themes, transitions, and
+social sharing features.
+
+Keyboard Navigation::
+Navigate through images using keyboard shortcuts.
+
+Social Sharing::
+Easily share images on social media platforms.
+
+[role="mt-4"]
+PhotoSwipe comes with a rich link://photoswipe.com/getting-started/[API, {browser-window--new}].
+The programming interface allows developers to create individual user
+interfaces (UI) for pagination, navigation and more. Find a large number of
+complex examples on the pages of the
+link://uiinitiative.com/[UI Initiative project, {browser-window--new}].
+
+The rich API makes PhotoSwipe an excellent choice for *web developers*, not least
+for template systems like J1 Template. In the current version of the J1 template
+(version 2025.x), PhotoSwipe is the *default slider* and *replaces* the *previously*
+used *carousels* _Owl Carousel_, _Slickslider_, and _Masterslider_ by their
+implementations based on _PhotoSwipe_.
+
+[NOTE]
+====
+The
+link://photoswipe.com/getting-started/[PhotoSwipe API documentation, {browser-window--new}]
+pages are based on PhotoSwipe version *v5.4.4* for the current J1
+template version 2025.x. The idea of providing this documentation is
+*not* to simply copy the original pages as duplicates. For better
+readability and usability, all pages are restructured and enhanced by
+code examples or improved description texts.
+
+The documentation pages for the J1 Template project will be used for the
+**AI**-based **chat client** (*planned* for 4th quarter of 2025). The agent
+will be trained by all available documentation pages of the Template system
+to give users an easy-to-use source for using the J1 Template to create
+websites for their needs.
+
+All previously used slider *resources* are available in version 2025.x for
+*backward compatibility* but are no longer used for the example
+pages of the *built-in web*.
+====
+
+[role="mt-5"]
+== Usage
+
+See
+link://photoswipe.com/getting-started/[PhotoSwipe Documentation, {browser-window--new}]
+and
+link://photoswipe.com/methods/#photoswipelightbox-methods/[PhotoSwipe Lightbox Methods, {browser-window--new}]
+for more examples.
+
+[cols="3,9a", subs=+macros, options="header", width="100%", role="rtable mt-5"]
+|===
+|Name |Description
+
+|`gallery`
+|The *gallery* element. May be a DOM element, a NodeList, or a CSS
+selector string. The gallery is the container that holds all the
+slides – for example a Swiper slider container.
+
+|`children`
+|The *clickable* elements *inside* a gallery. May be a DOM element,
+a NodeList, or a CSS selector string. Typically this is `'a'` so that
+each slide's link becomes the trigger that opens the lightbox. If the
+option is not defined or set to `false`, the gallery's *root* node is
+used as the only child.
+
+|===
+
+// [role="mt-5"]
+// === pswpModule
+
+// Function or Module. Should return import(), if you need to *dynamic* import.
+
+// Default: `undefined`
+
+// [role="mb-5"]
+// .Example
+// [source, js]
+// ----
+// pswpModule: PhotoSwipe
+// ----
+
+// Or the PhotoSwipe *Core* module itself.
+
+// [role="mb-5"]
+// .Example
+// [source, js]
+// ----
+// const lightbox = new PhotoSwipeLightbox({
+//   pswpModule: PhotoSwipe
+//   // ...
+// });
+// ----
+
+[role="mt-5"]
+=== Initialization
+
+A complete PhotoSwipe Lightbox setup needs the lightbox JavaScript
+file (`photoswipe-lightbox.min.js`) and the PhotoSwipe core file
+(`photoswipe.min.js`), plus the main stylesheet (`photoswipe.css`).
+If you also want captions, add the *Dynamic Caption* plugin
+(`photoswipe-caption-plugin.min.js`) and its stylesheet
+(`photoswipe-caption-plugin.css`).
+
+The lightbox – with the optional caption plugin attached – is then
+initialised like so:
+
+[source, html]
+----
+<!-- Lightbox initialisation (JavaScript) -->
+<script>
+  const myLightbox = new PhotoSwipeLightbox({
+    gallery:    '#my_gallery',
+    children:   'a',
+    pswpModule: PhotoSwipe,
+    // ... other options
+  });
+
+  // Attach the caption plugin BEFORE myLightbox.init() is called.
+  const captionPlugin = new PhotoSwipeDynamicCaption(myLightbox, {
+    type: 'auto'
+  });
+
+  // Initialise the lightbox AFTER all plugins are attached.
+  myLightbox.init();
+</script>
+----
+
+=== Base HTML pattern
+
+HTML pattern (mirrors PhotoSwipe's standard markup):
+
+[source, html]
+----
+<div
+  data-photoswipe-lightbox="my-gallery">
+  <a
+    href="big-1.jpg"
+    data-pswp-width="1600" data-pswp-height="1067">
+      <img
+        src="thumb-1.jpg"
+        alt="">
+  </a>
+  <a
+    href="big-2.jpg" data-pswp-width="1600"
+    data-pswp-height="1067">
+      <img
+        src="thumb-2.jpg"
+        alt="">
+  </a>
+</div>
+----
+
+[role="mt-4"]
+=== HTML pattern v1
+
+The simplest way to combine PhotoSwipe with the *Swiper* slider is to
+put a `<div>` for every slide inside the slider's wrapper element. Each
+slide contains the image and (optionally) a hidden caption element.
+
+[source, html]
+----
+<!-- Slider main container (required) -->
+<div id="gallery_id" class="swiper swiper-container">
+
+  <!-- Slider wrapper element (required) -->
+  <div class="swiper-wrapper">
+    <!-- Slides (required) -->
+    <div class="swiper-slide">
+      <img src="path/to/image-1.jpg">
+      <span class="pswp-caption-content">Caption: Image 1</span>
+    </div>
+    <!-- more slides -->
+    <div class="swiper-slide">
+      <img src="path/to/image-x.jpg">
+      <span class="pswp-caption-content">Caption: Image X</span>
+    </div>
+  </div> <!-- END wrapper element -->
+
+  <!-- Swiper Pagination (optional) -->
+  <div class="swiper-pagination"></div>
+
+  <!-- Swiper Navigation (optional) -->
+  <div class="swiper-button-prev"></div>
+  <div class="swiper-button-next"></div>
+
+  <!-- Swiper Scrollbar (optional)-->
+  <div class="swiper-scrollbar"></div>
+
+</div> <!-- END Main container -->
+----
+
+[role="mt-5"]
+=== HTML pattern v2
+
+This variant uses an unordered list (`<ul>`/`<li>`) instead of plain
+`<div>` elements for the slides. Functionally it is identical to v1; use
+whichever markup fits your site best.
+
+[source, html]
+----
+<!-- Slider main container (required) -->
+<div id="gallery_id" class="swiper swiper-container">
+
+  <!-- Slider wrapper element (required) -->
+    <ul class="swiper-wrapper">
+      <!-- Slides (required) -->
+      <li class="swiper-slide">
+        <img src="path/to/image-1.jpg">
+        <span class="pswp-caption-content">Caption: Image 1</span>
+      </li>
+      <!-- more slides -->
+      <li class="swiper-slide">
+        <img src="path/to/image-x.jpg">
+        <span class="pswp-caption-content">Caption: Image X</span>
+      </li>
+    </ul> <!-- END swiper-wrapper (slides) -->
+
+  <!-- Swiper Pagination (optional) -->
+  <div class="swiper-pagination"></div>
+
+  <!-- Swiper Navigation (optional) -->
+  <div class="swiper-button-prev"></div>
+  <div class="swiper-button-next"></div>
+
+  <!-- Swiper Scrollbar (optional)-->
+  <div class="swiper-scrollbar"></div>
+
+</div> <!-- END Main container -->
+----
+
+[role="mt-5"]
+=== Extended HTML pattern
+
+The extended layout wraps each thumbnail image in an `<a>` tag that
+links to the *full-size* image. The link also carries
+`data-pswp-width` and `data-pswp-height` attributes so PhotoSwipe knows
+the natural size of the full image *before* loading it. This avoids
+visible layout jumps and is required for the opening animation to work
+smoothly.
+
+[source, html]
+----
+<!-- Slider main container (required) -->
+<div id="gallery_id" class="swiper swiper-container">
+
+  <!-- Slider wrapper element (required) -->
+  <ul class="swiper-wrapper">
+    <!-- Slides (required) -->
+    <li class="swiper-slide">
+      <a href="path/to/image-1.jpg"
+        data-pswp-width="<max_width>"
+        data-pswp-height="<max_height>">
+        <img src="path/to/image-1.jpg" alt="Image 1">
+        <span class="pswp-caption-content">Caption: Image 1</span>
+      </a>
+    </li>
+    <!-- more slides -->
+    <li class="swiper-slide">
+      <a href="path/to/image-x.jpg"
+        data-pswp-width="<max_width>"
+        data-pswp-height="<max_height>">
+        <img src="path/to/image-x.jpg" alt="Image X">
+        <span class="pswp-caption-content">Caption: Image X</span>
+      </a>
+    </li>
+  </ul> <!-- END swiper-wrapper (slides) -->
+
+  <!-- Swiper Pagination (optional) -->
+  <div class="swiper-pagination"></div>
+
+  <!-- Swiper Navigation (optional) -->
+  <div class="swiper-button-prev"></div>
+  <div class="swiper-button-next"></div>
+
+  <!-- Swiper Scrollbar (optional)-->
+  <div class="swiper-scrollbar"></div>
+
+</div> <!-- END Main container -->
+----
+
+[role="mt-5"]
+=== Preload first slide
+
+Boolean option `preloadFirstSlide`, default `true`. When enabled,
+PhotoSwipe starts downloading the image of the first slide *in
+parallel* with the opening animation. This makes the opening feel
+faster because the image is often ready by the time the animation
+finishes. Set the option to `false` if you would rather start the
+download only after the dialog is fully open.
+
+[role="mb-5"]
+[source, js]
+----
+import PhotoSwipeLightbox from '/photoswipe/photoswipe-lightbox.esm.js';
+const lightbox = new PhotoSwipeLightbox({
+  gallery:           '#gallery_id',
+  pswpModule:        PhotoSwipe,
+  children:          'a',
+  preloadFirstSlide: false
+});
+lightbox.init();
+----
+
+[role="mt-5"]
+=== Translating
+
+PhotoSwipe shows a few short pieces of text in its user interface
+(button tooltips, error messages and the slide-counter separator).
+You can translate them into any language by overriding the options
+listed below.
+
+[role="mb-5"]
+[source, js]
+----
+{
+  closeTitle:        'Close',          // tooltip on the close button
+  zoomTitle:         'Zoom',           // tooltip on the zoom button
+  arrowPrevTitle:    'Previous',       // tooltip on the previous-arrow button
+  arrowNextTitle:    'Next',           // tooltip on the next-arrow button
+  errorMsg:          'The image cannot be loaded',
+  indexIndicatorSep: '/'               // separator in "1 / 10"
+}
+----
+
+[role="mb-5"]
+.Example
+[source, js]
+----
+const lightbox = new PhotoSwipeLightbox({
+  gallery:           '#gallery_id',
+  pswpModule:        PhotoSwipe,
+  closeTitle:        'Close the dialog',
+  zoomTitle:         'Zoom the photo',
+  arrowPrevTitle:    'Go to the previous photo',
+  arrowNextTitle:    'Go to the next photo',
+  errorMsg:          'The photo cannot be loaded',
+  indexIndicatorSep: ' of ',
+  preloadFirstSlide: false
+});
+
+lightbox.init();
+----
+
+[role="mt-5"]
+== Auto initialization
+
+Adds Lightbox V3-style auto-initialization to PhotoSwipeLightbox so
+that any element matching the configurable selector (default
+`[data-photoswipe-lightbox]`) is treated as a gallery container
+without requiring callers to instantiate `new PhotoSwipeLightbox(...)`
+and `.init()` themselves.
+
+++++
+<div data-photoswipe-lightbox="auto-gallery">
+  <div class="featured-grid mt-3 mb-5">
+    <a
+      href="https://images.unsplash.com/photo-1654394237275-081d5455774b?w=2400&q=80"
+      data-pswp-width="1600" data-pswp-height="1067">
+      <img
+        src="https://images.unsplash.com/photo-1654394237275-081d5455774b?w=600&h=450&fit=crop&q=80"
+        alt="A view of a town with mountains in the background">
+    </a>
+    <a
+      href="https://images.unsplash.com/photo-1567972042114-5a1eaba28886?w=2400&q=80"
+      data-pswp-width="1600" data-pswp-height="1067">
+      <img
+        src="https://images.unsplash.com/photo-1567972042114-5a1eaba28886?w=600&h=450&fit=crop&q=80"
+        alt="A view of a street with a lot of palm trees">
+    </a>
+    <a
+      href="https://images.unsplash.com/photo-1600663757626-0fc610ba60d4?w=2400&q=80"
+      data-pswp-width="1600" data-pswp-height="1067">
+      <img
+        src="https://images.unsplash.com/photo-1600663757626-0fc610ba60d4?w=600&h=450&fit=crop&q=80"
+        alt="Red and white bridge over the trees">
+    </a>
+    <a
+      href="https://images.unsplash.com/photo-1576764225594-96ad970efffa?w=2400&q=80"
+      data-pswp-width="1600" data-pswp-height="1067">
+      <img
+        src="https://images.unsplash.com/photo-1576764225594-96ad970efffa?w=600&h=450&fit=crop&q=80"
+        alt="A view of a city from a hill above the clouds">
+    </a>
+  </div>
+</div>
+++++
+
+=== HTML pattern
+
+HTML pattern (mirrors PhotoSwipe's base markup):
+
+[source, html]
+----
+<div
+  data-photoswipe-lightbox="my-gallery">
+  <a
+    href="big-1.jpg"
+    data-pswp-width="1600" data-pswp-height="1067">
+    <img
+      src="thumb-1.jpg"
+      alt="caption text 1">
+  </a>
+  <a
+    href="big-2.jpg"
+    data-pswp-width="1600" data-pswp-height="1067">
+    <img
+      src="thumb-2.jpg"
+      alt="caption text 2">
+  </a>
+</div>
+----
+
+The element carrying `data-photoswipe-lightbox` is the gallery; its
+descendant `<a>` tags are the slides. The attribute value is treated
+purely as a logical id (useful for getAutoInitInstance lookups) and
+is not required.
+
+
+// Include sub-documents
+// -----------------------------------------------------------------------------
+
+include::{documentdir}/100_photoswipe_core_parameters.asciidoc[]
+include::{documentdir}/110_photoswipe_lightbox_methods.asciidoc[]
+include::{documentdir}/120_photoswipe_lightbox_events.asciidoc[]
+include::{documentdir}/130_photoswipe_lightbox_captions.asciidoc[]
+
+
+++++
+<style>
+
+/* ——— Featured grid —--------------------------------------------------------—— */
+
+.featured {
+  position: relative;
+  max-width: 60rem;
+  margin: 0 auto;
+  padding: 0 16px 2rem;
+  opacity: 0;
+}
+
+.featured-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 3px;
+  position: relative;
+}
+
+.featured-grid a {
+  display: block;
+  overflow: hidden;
+  aspect-ratio: 4 / 3;
+  background: var(--color-bg-hover);
+  border-radius: 0px;
+}
+
+.featured-grid img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  border-radius: 0px;
+  transition: transform 0.15s ease;
+}
+
+.featured-grid a:active img {
+  transform: scale(0.95);
+}
+
+@media (max-width: 719px) {
+  .featured-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+</style>
+++++

@@ -1,0 +1,108 @@
+[role="mt-5"]
+[[pswp-lightbox-methods]]
+== Methods
+
+[role="mt-4"]
+=== init
+
+`init()`
+
+Initialise the lightbox. Must be called exactly once for each
+lightbox instance. This call does *not* open the dialog itself; it
+only attaches the click handlers that will open the dialog later (by
+default a normal mouse `click` on a thumbnail). It is also the place
+where PhotoSwipe will preload images that are needed before the
+dialog opens.
+
+[source, js]
+----
+const lightbox = new PhotoSwipeLightbox({
+  // options
+});
+
+// you may bind events here
+
+lightbox.init();
+----
+
+[role="mt-4"]
+=== destroy
+
+`destroy()`
+
+Removes every event listener that the lightbox has attached and closes
+the lightbox if it is currently open. After this call the instance can
+no longer be used. To reopen the lightbox you have to create a new
+`PhotoSwipeLightbox` and call `init()` again.
+
+[source, js]
+----
+let lightbox = new PhotoSwipeLightbox({
+  gallery:    '#gallery--test-destroy',
+  pswpModule: PhotoSwipe,
+  children:   'a',
+  returnFocus: false
+});
+
+lightbox.init();
+
+const button = document.createElement('button');
+button.type = 'button';
+button.innerText = 'destroy the photoswipe';
+document.querySelector('#gallery--test-destroy').after(button);
+button.onclick = () => {
+  if (lightbox) {
+    lightbox.destroy();
+    lightbox = null;
+  }
+};
+----
+
+[role="mt-4"]
+=== loadAndOpen
+
+`loadAndOpen(index, dataSource, point)`
+
+Programmatically open PhotoSwipe at a given slide. Use this when you
+need to open the lightbox from code (for example from a button click)
+instead of waiting for the user to click a thumbnail.
+
+Arguments:
+
+. `index` (`number`) – Zero-based index of the slide to open.
+. `dataSource` (optional, `DataSource`) – The gallery whose slides
+  should be shown. Use this only if you want to override the default
+  gallery.
+. `point` (optional, `{ x: number, y: number }`) – Pixel coordinates of
+  the click that opened the lightbox. By default this is
+  `{ x: e.clientX, y: e.clientY }` of the original click event.
+
+If you use the `gallery` and `children` options, *and* you omit the
+second argument, PhotoSwipe will use the *first* matching gallery
+element. To open a specific gallery element instead, pass it as the
+data source: `{ gallery: HTMLElement }`. For example:
+
+[source, js]
+----
+const lightbox = new PhotoSwipeLightbox({
+  gallery:    '#gallery--with-button',
+  pswpModule: PhotoSwipe,
+  children:   'a',
+});
+
+lightbox.init();
+
+const btn = document.createElement('button');
+btn.type = 'button';
+btn.innerText = 'open second image';
+document.querySelector('#gallery--with-button').after(btn);
+
+btn.onclick = () => {
+  lightbox.loadAndOpen(1, {
+    gallery: document.querySelector('#gallery--with-button')
+  });
+
+  // Alternatively you can simply trigger the native click:
+  // document.querySelector('#gallery--with-button a:nth-of-type(2)').click();
+};
+----

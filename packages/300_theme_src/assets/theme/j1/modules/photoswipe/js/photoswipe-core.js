@@ -29,7 +29,7 @@
      * @param {T} tagName
      * @param {Node} [appendToEl]
      * @returns {HTMLElementTagNameMap[T]}
-     */
+    */
     function createElement(className, tagName, appendToEl) {
       const el = document.createElement(tagName);
   
@@ -43,12 +43,12 @@
   
       return el;
     }
+
     /**
      * @param {Point} p1
      * @param {Point} p2
      * @returns {Point}
-     */
-  
+    */
     function equalizePoints(p1, p2) {
       p1.x = p2.x;
       p1.y = p2.y;
@@ -59,38 +59,39 @@
   
       return p1;
     }
+
     /**
      * @param {Point} p
-     */
-  
+    */
     function roundPoint(p) {
       p.x = Math.round(p.x);
       p.y = Math.round(p.y);
     }
+
     /**
      * Returns distance between two points.
      *
      * @param {Point} p1
      * @param {Point} p2
      * @returns {number}
-     */
-  
+    */
     function getDistanceBetween(p1, p2) {
       const x = Math.abs(p1.x - p2.x);
       const y = Math.abs(p1.y - p2.y);
       return Math.sqrt(x * x + y * y);
     }
+
     /**
      * Whether X and Y positions of points are equal
      *
      * @param {Point} p1
      * @param {Point} p2
      * @returns {boolean}
-     */
-  
+    */
     function pointsEqual(p1, p2) {
       return p1.x === p2.x && p1.y === p2.y;
     }
+
     /**
      * The float result between the min and max values.
      *
@@ -98,11 +99,11 @@
      * @param {number} min
      * @param {number} max
      * @returns {number}
-     */
-  
+    */
     function clamp(val, min, max) {
       return Math.min(Math.max(val, min), max);
     }
+
     /**
      * Get transform string
      *
@@ -110,8 +111,7 @@
      * @param {number} [y]
      * @param {number} [scale]
      * @returns {string}
-     */
-  
+    */
     function toTransformString(x, y, scale) {
       let propValue = `translate3d(${x}px,${y || 0}px,0)`;
   
@@ -121,6 +121,7 @@
   
       return propValue;
     }
+
     /**
      * Apply transform:translate(x, y) scale(scale) to element
      *
@@ -128,12 +129,13 @@
      * @param {number} x
      * @param {number} [y]
      * @param {number} [scale]
-     */
-  
+    */
     function setTransform(el, x, y, scale) {
       el.style.transform = toTransformString(x, y, scale);
     }
+
     const defaultCSSEasing = 'cubic-bezier(.4,0,.22,1)';
+
     /**
      * Apply CSS transition to element
      *
@@ -141,38 +143,37 @@
      * @param {string} [prop] CSS property to animate
      * @param {number} [duration] in ms
      * @param {string} [ease] CSS easing function
-     */
-  
+    */
     function setTransitionStyle(el, prop, duration, ease) {
       // inOut: 'cubic-bezier(.4, 0, .22, 1)', // for "toggle state" transitions
       // out: 'cubic-bezier(0, 0, .22, 1)', // for "show" transitions
       // in: 'cubic-bezier(.4, 0, 1, 1)'// for "hide" transitions
       el.style.transition = prop ? `${prop} ${duration}ms ${ease || defaultCSSEasing}` : 'none';
     }
+
     /**
      * Apply width and height CSS properties to element
      *
      * @param {HTMLElement} el
      * @param {string | number} w
      * @param {string | number} h
-     */
-  
+    */
     function setWidthHeight(el, w, h) {
       el.style.width = typeof w === 'number' ? `${w}px` : w;
       el.style.height = typeof h === 'number' ? `${h}px` : h;
     }
+
     /**
      * @param {HTMLElement} el
-     */
-  
+    */
     function removeTransitionStyle(el) {
       setTransitionStyle(el);
     }
+
     /**
      * @param {HTMLImageElement} img
      * @returns {Promise<HTMLImageElement | void>}
-     */
-  
+    */
     function decodeImage(img) {
       if ('decode' in img) {
         return img.decode().catch(() => {});
@@ -188,8 +189,8 @@
         img.onerror = reject;
       });
     }
+
     /** @typedef {LOAD_STATE[keyof LOAD_STATE]} LoadState */
-  
     /** @type {{ IDLE: 'idle'; LOADING: 'loading'; LOADED: 'loaded'; ERROR: 'error' }} */
   
     const LOAD_STATE = {
@@ -198,17 +199,18 @@
       LOADED: 'loaded',
       ERROR: 'error'
     };
+
     /**
      * Check if click or keydown event was dispatched
      * with a special key or via mouse wheel.
      *
      * @param {MouseEvent | KeyboardEvent} e
      * @returns {boolean}
-     */
-  
+    */
     function specialKeyUsed(e) {
       return 'button' in e && e.button === 1 || e.ctrlKey || e.metaKey || e.altKey || e.shiftKey;
     }
+
     /**
      * Parse `gallery` or `children` options.
      *
@@ -216,8 +218,7 @@
      * @param {string} [legacySelector]
      * @param {HTMLElement | Document} [parent]
      * @returns HTMLElement[]
-     */
-  
+    */
     function getElementsFromOption(option, legacySelector, parent = document) {
       /** @type {HTMLElement[]} */
       let elements = [];
@@ -236,12 +237,12 @@
   
       return elements;
     }
+
     /**
      * Check if browser is Safari
      *
      * @returns {boolean}
-     */
-  
+    */
     function isSafari() {
       return !!(navigator.vendor && navigator.vendor.match(/apple/i));
     }
@@ -266,17 +267,16 @@
      * @prop {string} type
      * @prop {EventListenerOrEventListenerObject} listener
      * @prop {boolean} [passive]
-     */
-  
-  
+    */
     class DOMEvents {
       constructor() {
         /**
          * @type {PoolItem[]}
          * @private
-         */
+        */
         this._pool = [];
       }
+
       /**
        * Adds event listeners
        *
@@ -284,12 +284,12 @@
        * @param {PoolItem['type']} type Can be multiple, separated by space.
        * @param {PoolItem['listener']} listener
        * @param {PoolItem['passive']} [passive]
-       */
-  
-  
+      */
+    
       add(target, type, listener, passive) {
         this._toggleListener(target, type, listener, passive);
       }
+
       /**
        * Removes event listeners
        *
@@ -297,17 +297,14 @@
        * @param {PoolItem['type']} type
        * @param {PoolItem['listener']} listener
        * @param {PoolItem['passive']} [passive]
-       */
-  
-  
+      */
       remove(target, type, listener, passive) {
         this._toggleListener(target, type, listener, passive, true);
       }
+
       /**
        * Removes all bound events
-       */
-  
-  
+      */
       removeAll() {
         this._pool.forEach(poolItem => {
           this._toggleListener(poolItem.target, poolItem.type, poolItem.listener, poolItem.passive, true, true);
@@ -315,6 +312,7 @@
   
         this._pool = [];
       }
+
       /**
        * Adds or removes event
        *
@@ -325,8 +323,7 @@
        * @param {PoolItem['passive']} [passive]
        * @param {boolean} [unbind] Whether the event should be added or removed
        * @param {boolean} [skipPool] Whether events pool should be skipped
-       */
-  
+      */
   
       _toggleListener(target, type, listener, passive, unbind, skipPool) {
         if (!target) {
@@ -354,10 +351,10 @@
                   passive
                 });
               }
-            } // most PhotoSwipe events call preventDefault,
+            }
+            
+            // most PhotoSwipe events call preventDefault,
             // and we do not need browser to scroll the page
-  
-  
             const eventOptions = supportsPassive ? {
               passive: passive || false
             } : false;
@@ -369,11 +366,8 @@
     }
   
     /** @typedef {import('../photoswipe.js').PhotoSwipeOptions} PhotoSwipeOptions */
-  
     /** @typedef {import('../core/base.js').default} PhotoSwipeBase */
-  
     /** @typedef {import('../photoswipe.js').Point} Point */
-  
     /** @typedef {import('../slide/slide.js').SlideData} SlideData */
   
     /**
@@ -399,6 +393,7 @@
         y: window.innerHeight
       };
     }
+
     /**
      * Parses padding option.
      * Supported formats:
@@ -433,8 +428,7 @@
      * @param {SlideData} itemData Data about the slide
      * @param {number} index Slide index
      * @returns {number}
-     */
-  
+    */
     function parsePaddingOption(prop, options, viewportSize, itemData, index) {
       let paddingValue = 0;
   
@@ -2866,15 +2860,15 @@
           });
         }
       }
+
       /**
        * Whether the main scroll can be horizontally swiped to the next or previous slide.
        * @returns {boolean}
-       */
-  
-  
+      */
       canBeSwiped() {
         return this.pswp.getNumItems() > 1;
       }
+
       /**
        * Move main scroll by X amount of slides.
        * For example:
@@ -2882,16 +2876,14 @@
        *    `0` will reset the scroll position of the current slide,
        *    `3` will move three slides forward
        *
-       * If loop option is enabled - index will be automatically looped too,
+       * If loop option is enabled - index will be auto^matically looped too,
        * (for example `-1` will move to the last slide of the gallery).
        *
        * @param {number} diff
        * @param {boolean} [animate]
        * @param {number} [velocityX]
        * @returns {boolean} whether index was changed or not
-       */
-  
-  
+      */
       moveIndexBy(diff, animate, velocityX) {
         const {
           pswp
@@ -7005,31 +6997,27 @@
        * relative to PhotoSwipe viewport.
        *
        * @private
-       */
-  
-  
+      */
       _updatePageScrollOffset() {
         this.setScrollOffset(0, window.pageYOffset);
       }
+
       /**
        * @param {number} x
        * @param {number} y
-       */
-  
-  
+      */
       setScrollOffset(x, y) {
         this.offset.x = x;
         this.offset.y = y;
         this.dispatch('updateScrollOffset');
       }
+
       /**
        * Create main HTML structure of PhotoSwipe,
        * and add it to DOM
        *
        * @private
-       */
-  
-  
+      */
       _createMainStructure() {
         // root DOM element of PhotoSwipe (.pswp)
         this.element = createElement('pswp', 'div');
@@ -7052,6 +7040,7 @@
   
         (this.options.appendToEl || document.body).appendChild(this.element);
       }
+
       /**
        * Get position and dimensions of small thumbnail
        *   {x:,y:,w:}
@@ -7059,35 +7048,31 @@
        * Height is optional (calculated based on the large image)
        *
        * @returns {Bounds | undefined}
-       */
-  
-  
+      */
       getThumbBounds() {
         return getThumbBounds(this.currIndex, this.currSlide ? this.currSlide.data : this._initialItemData, this);
       }
+
       /**
        * If the PhotoSwipe can have continuous loop
        * @returns Boolean
-       */
-  
-  
+      */
       canLoop() {
         return this.options.loop && this.getNumItems() > 2;
       }
+
       /**
        * @private
        * @param {PhotoSwipeOptions} options
        * @returns {PreparedPhotoSwipeOptions}
-       */
-  
-  
+      */
       _prepareOptions(options) {
         if (window.matchMedia('(prefers-reduced-motion), (update: slow)').matches) {
           options.showHideAnimationType = 'none';
           options.zoomAnimationDuration = 0;
         }
+        
         /** @type {PreparedPhotoSwipeOptions} */
-  
   
         return { ...defaultOptions,
           ...options
@@ -7097,6 +7082,6 @@
     }
   
     return PhotoSwipe;
-  
+
   }));
   

@@ -1,0 +1,645 @@
+[role="mt-5"]
+[[photoswipe-core-parameters]]
+== Parameters
+
+A list of all available options (parameters) in alphabetical order. You
+can also find the original option settings in the
+link://photoswipe.com/getting-started/[PhotoSwipe Documentation, {browser-window--new}].
+
+[role="mt-4"]
+=== allowPanToNext
+
+Boolean, `true`. Allow swipe navigation to the next slide when the
+current slide is zoomed. Does not apply to mouse events.
+
+[role="mb-5"]
+[source, js]
+----
+const lightbox = new PhotoSwipeLightbox({
+  gallery: '#gallery_id',
+  pswpModule: PhotoSwipe,
+  children: 'a',
+  allowPanToNext: false
+});
+lightbox.init();
+----
+
+[role="mt-4"]
+=== arrowKeys
+
+Boolean, `true`. Use the left and right arrow keys to move between slides.
+
+[role="mb-5"]
+[source, js]
+----
+const lightbox = new PhotoSwipeLightbox({
+  gallery: '#gallery_id',
+  pswpModule: PhotoSwipe,
+  children: 'a',
+  arrowKeys: false
+});
+
+lightbox.init();
+----
+
+[role="mt-4"]
+=== bgOpacity
+
+// Description rewritten in plain English. Background color is set via the
+// CSS variable `--pswp-bg`, while transparency is controlled by this
+// option, not by the alpha channel of an RGBA color.
+//
+Number, `0.8`. Sets how transparent the dark backdrop behind the image
+is. A value of `0` is fully transparent, `1` is fully opaque. The
+backdrop's *color* is set in CSS via `--pswp-bg`; only its *opacity*
+should be set here.
+
+[cols="3,2,2,5a", subs=+macros, options="header", width="100%", role="rtable mt-4 mb-5"]
+|===
+|Name |Type |Default |Description \| Example
+
+|`bgOpacity`
+|number
+|0.8
+|Controls how transparent the backdrop behind the image is.
+
+[role="mb-5"]
+[source, js]
+----
+const lightbox = new PhotoSwipeLightbox({
+  // ... other options
+  bgOpacity: 0.2,
+});
+
+lightbox.init();
+----
+|===
+
+[role="mt-4"]
+=== clickAction
+
+// Added a short explanation so the section is self-contained for readers
+// who do not click through to the linked page.
+//
+Configures what happens when the user clicks on the image
+(`imageClickAction`) or on the dark background around it
+(`bgClickAction`). Possible values include `'close'`, `'next'`,
+`'zoom'`, `'zoom-or-close'` and `false` (no action).
+
+Refer to the
+link:https://photoswipe.com/click-and-tap-actions/[click and tap actions, {browser-window--new}]
+page for the full list and examples.
+
+[role="mb-5"]
+[source, js]
+----
+const lightbox = new PhotoSwipeLightbox({
+  gallery: '#gallery_id',
+  pswpModule: PhotoSwipe,
+  children: 'a',
+  imageClickAction: 'zoom-or-close',
+  bgClickAction:    'close'
+});
+
+lightbox.init();
+----
+
+[role="mt-4"]
+=== clickToCloseNonZoomable
+
+Boolean, `true`. If an image cannot be zoomed (for example, because it
+is smaller than the viewport), clicking on it will close the lightbox.
+
+[role="mb-5"]
+[source, js]
+----
+const lightbox = new PhotoSwipeLightbox({
+  gallery: '#gallery_id',
+  pswpModule: PhotoSwipe,
+  children: 'a',
+  clickToCloseNonZoomable: false
+});
+
+lightbox.init();
+----
+
+[role="mt-4"]
+=== closeOnVerticalDrag
+
+Boolean, `true`. Close the lightbox by dragging the image up or down
+(touch devices).
+
+[role="mb-5"]
+[source, js]
+----
+const lightbox = new PhotoSwipeLightbox({
+  gallery: '#gallery_id',
+  pswpModule: PhotoSwipe,
+  children: 'a',
+  closeOnVerticalDrag: false
+});
+
+lightbox.init();
+----
+
+[role="mt-4"]
+=== easing
+
+String, `'cubic-bezier(.4,0,.22,1)'`. Sets the CSS easing function used
+for the open, close and zoom transitions. Any valid CSS
+`transition-timing-function` value is accepted.
+
+Find an
+link://photoswipe.com/opening-or-closing-transition#transition-duration-and-easing/[Example, {browser-window--new}]
+here.
+
+[role="mt-4"]
+=== escKey
+
+Boolean, `true`. Allow the user to close the lightbox by pressing the
+*Esc* key.
+
+// Added a short example so this option is documented in the same style
+// as its neighbours.
+//
+[role="mb-5"]
+[source, js]
+----
+const lightbox = new PhotoSwipeLightbox({
+  gallery: '#gallery_id',
+  pswpModule: PhotoSwipe,
+  children: 'a',
+  escKey: false
+});
+
+lightbox.init();
+----
+
+[role="mt-4"]
+=== errorMsg
+
+String, `'The image cannot be loaded'`.
+
+The text that is shown when an image fails to load. If you need to
+display formatted HTML instead of plain text, use the
+link://photoswipe.com/filters#contenterrorelement[contentErrorElement filter].
+
+[role="mb-5"]
+[source, js]
+----
+const lightbox = new PhotoSwipeLightbox({
+  gallery: '#gallery_id',
+  pswpModule: PhotoSwipe,
+  children: 'a',
+  errorMsg: 'The photo cannot be loaded'
+});
+lightbox.init();
+----
+
+[role="mt-4"]
+=== getViewportSizeFn
+
+// Clarified the function signature so beginners can copy it.
+//
+Function, `undefined`. A function that returns the size of the slide's
+viewport in pixels. The function receives the merged options object and
+the PhotoSwipe instance and must return an object of the form
+`{ x: <width>, y: <height> }`. Use this when the lightbox is rendered
+inside a container that is smaller than the browser window.
+
+[role="mb-5"]
+[source, js]
+----
+const lightbox = new PhotoSwipeLightbox({
+  gallery: '#gallery_id',
+  pswpModule: PhotoSwipe,
+  children: 'a',
+  getViewportSizeFn: function(options, pswp) {
+    return {
+      x: document.documentElement.clientWidth - 200,
+      y: window.innerHeight
+    };
+  }
+});
+
+lightbox.init();
+----
+
+[role="mt-4"]
+=== hideAnimationDuration
+
+Number, `333`. Closing transition duration in milliseconds. Set to `0`
+to disable the closing animation.
+
+Find an
+link://photoswipe.com/opening-or-closing-transition#transition-duration-and-easing/[Example, {browser-window--new}]
+here.
+
+You can use the options `showAnimationDuration` and
+`hideAnimationDuration` together (both are integers, default `333`).
+
+The `easing` option (string, default `cubic-bezier(.4,0,.22,1)`) accepts
+any CSS timing function and applies to every zoom transition (including
+double-tap).
+
+Both options can also be changed dynamically while PhotoSwipe is open.
+
+In the example below the transition duration is set to 1000 ms (1 s).
+The easing is changed dynamically: the opening transition uses
+`ease-out-back`, the zoom transitions use `ease-in-out-back` and the
+closing transition uses `ease-in-back`:
+
+[role="mb-5"]
+[source, js]
+----
+const backEasing = {
+  in:    'cubic-bezier(0.6, -0.28, 0.7, 1)',
+  out:   'cubic-bezier(0.3, 0, 0.32, 1.275)',
+  inOut: 'cubic-bezier(0.68, -0.55, 0.265, 1.55)'
+};
+
+const lightbox = new PhotoSwipeLightbox({
+  gallery: '#gallery_id',
+  pswpModule: PhotoSwipe,
+  children: 'a',
+  showHideAnimationType: 'zoom',
+  showAnimationDuration: 1000,
+  hideAnimationDuration: 1000
+});
+
+lightbox.on('firstUpdate', () => {
+  lightbox.pswp.options.easing = backEasing.out;
+});
+
+lightbox.on('initialZoomInEnd', () => {
+  lightbox.pswp.options.easing = backEasing.inOut;
+});
+
+lightbox.on('close', () => {
+  lightbox.pswp.options.easing = backEasing.in;
+});
+
+lightbox.init();
+----
+
+[role="mt-4"]
+=== indexIndicatorSep
+
+String, `' / '`. The separator used by the slide counter in the top
+toolbar. The default produces strings like `1 / 10`. Use `' of '` to
+get `1 of 10` instead.
+
+[role="mb-5"]
+[source, js]
+----
+const lightbox = new PhotoSwipeLightbox({
+  gallery: '#gallery_id',
+  pswpModule: PhotoSwipe,
+  children: 'a',
+  indexIndicatorSep: ' of '
+});
+
+lightbox.init();
+----
+
+[role="mt-4"]
+=== loop
+
+Boolean, `true`. When enabled, swiping past the last slide takes the
+user back to the first slide (and vice versa). The option is always
+treated as `false` when the gallery has fewer than three slides.
+
+[role="mb-5"]
+[source, js]
+----
+const lightbox = new PhotoSwipeLightbox({
+  gallery: '#gallery_id',
+  pswpModule: PhotoSwipe,
+  children: 'a',
+  loop: false
+});
+
+lightbox.init();
+----
+
+[role="mt-4"]
+=== mainClass
+
+String, `undefined`. One or more CSS class names (separated by a space)
+that are added to the root element of PhotoSwipe. Use this to apply
+custom styles to a single lightbox instance. An example can be found on
+the
+link://photoswipe.com/styling#modifying-icons[Styling, {browser-window--new}]
+page.
+
+// Promoted appendToEl from a level-4 sub-heading to a regular level-3
+// section, since it is an independent option and not part of `mainClass`.
+//
+[role="mt-4"]
+=== appendToEl
+
+DOM element, `document.body`. The element that PhotoSwipe will be
+appended to when it opens. Useful when the page uses a custom layout
+container (for example a documentation framework) that should host the
+lightbox instead of `<body>`.
+
+[source, js]
+----
+const lightbox = new PhotoSwipeLightbox({
+  gallery: '#gallery_id',
+  pswpModule: PhotoSwipe,
+  children: 'a',
+  appendToEl: document.querySelector('#__docusaurus')
+});
+
+lightbox.init();
+----
+
+[role="mt-4"]
+=== maxWidthToAnimate
+
+Integer, `4000`. Maximum width (in pixels) of an image that should be
+animated when opening or closing the lightbox. If the rendered image is
+wider than this value, the open/close animation is automatically
+disabled to keep the transition smooth.
+
+[role="mb-5"]
+[source, js]
+----
+const lightbox = new PhotoSwipeLightbox({
+  gallery: '#gallery_id',
+  pswpModule: PhotoSwipe,
+  children: 'a',
+  maxWidthToAnimate: 800,
+});
+
+lightbox.init();
+----
+
+[role="mt-4"]
+=== padding
+
+Object, `{ top: 0, bottom: 0, left: 0, right: 0 }`. Adds inner padding
+(in pixels) around the slide area on each side. Useful for keeping
+content (such as captions or toolbars) away from the edges of the
+viewport.
+
+[source, js]
+----
+const lightbox = new PhotoSwipeLightbox({
+  gallery: '#gallery_id',
+  pswpModule: PhotoSwipe,
+  children: 'a',
+  padding: { top: 20, bottom: 40, left: 100, right: 100 }
+});
+
+lightbox.init();
+----
+
+[role="mt-4"]
+=== paddingFn
+
+Function, `undefined`. A function that returns a padding object (same
+shape as `padding`). Overrides the `padding` option when set. The
+function is called frequently, so keep it simple and fast. The function
+receives the current viewport size, the data of the current slide and
+the slide index.
+
+[role="mb-5"]
+[source, js]
+----
+const lightbox = new PhotoSwipeLightbox({
+  gallery: '#gallery_id',
+  pswpModule: PhotoSwipe,
+  children: 'a',
+  paddingFn: (viewportSize, itemData, index) => {
+    return {
+      // value depends on the slide index
+      top: index === 0 ? 100 : 0,
+
+      // value depends on the viewport size
+      bottom: viewportSize.x < 600 ? 0 : 200,
+
+      // value depends on the image size
+      left: itemData.w < 2000 ? 50 : 0,
+
+      right: 0
+    };
+  }
+});
+
+lightbox.init();
+----
+
+[role="mt-4"]
+=== pinchToClose
+
+Boolean, `true`. Allow the user to close the lightbox with a pinch-out
+touch gesture.
+
+[role="mb-5"]
+[source, js]
+----
+const lightbox = new PhotoSwipeLightbox({
+  gallery: '#gallery_id',
+  pswpModule: PhotoSwipe,
+  children: 'a',
+  pinchToClose: false
+});
+
+lightbox.init();
+----
+
+[role="mt-4"]
+=== preload
+
+Array, `[1, 2]`. Preload nearby slides based on the user's direction of
+movement. The first number is how many images to preload before the
+current one, the second is how many to preload after it. The two
+neighbouring images are always loaded.
+
+[role="mb-5"]
+[source, js]
+----
+const lightbox = new PhotoSwipeLightbox({
+  gallery: '#gallery_id',
+  pswpModule: PhotoSwipe,
+  children: 'a',
+  preload: [1, 4]
+});
+
+lightbox.init();
+----
+
+[role="mt-4"]
+=== preloaderDelay
+
+Number (ms), `2000`. Delay (in milliseconds) before the spinning
+loading indicator appears. If the image finishes loading before this
+delay is up, the indicator never shows. Use `0` to display the
+indicator immediately.
+
+[role="mb-5"]
+[source, js]
+----
+const lightbox = new PhotoSwipeLightbox({
+  gallery: '#gallery_id',
+  pswpModule: PhotoSwipe,
+  children: 'a',
+  preloaderDelay: 0
+});
+
+lightbox.init();
+----
+
+[role="mt-4"]
+=== returnFocus
+
+Boolean, `true`. After the lightbox is closed, move the keyboard focus
+back to the element that had it before the lightbox opened. This is
+important for accessibility.
+
+[role="mb-5"]
+[source, js]
+----
+const lightbox = new PhotoSwipeLightbox({
+  gallery: '#gallery_id',
+  pswpModule: PhotoSwipe,
+  children: 'a',
+  returnFocus: false
+});
+
+lightbox.init();
+----
+
+[role="mt-4"]
+=== showAnimationDuration
+
+Number, `333`. Opening transition duration in milliseconds. Set to `0`
+to disable the opening animation.
+
+Find an
+link://photoswipe.com/opening-or-closing-transition#transition-duration-and-easing/[Example, {browser-window--new}]
+here.
+
+[role="mb-5"]
+[source, js]
+----
+const lightbox = new PhotoSwipeLightbox({
+  gallery: '#gallery_id',
+  pswpModule: PhotoSwipe,
+  children: 'a',
+  showAnimationDuration: 1000
+});
+
+lightbox.init();
+----
+
+[role="mt-4"]
+=== spacing
+
+Number, `0.1`. The gap between slides, expressed as a fraction of the
+viewport width. The default of `0.1` means a gap of 10 % of the
+viewport width.
+
+[role="mb-5"]
+[source, js]
+----
+const lightbox = new PhotoSwipeLightbox({
+  gallery: '#gallery_id',
+  pswpModule: PhotoSwipe,
+  children: 'a',
+  spacing: 0.5, // 50% of viewport width
+});
+
+lightbox.init();
+----
+
+[role="mt-4"]
+=== trapFocus
+
+Boolean, `true`. Keep the keyboard focus inside the lightbox while it
+is open. Together with `returnFocus`, this is the recommended setting
+for an accessible lightbox.
+
+[role="mt-4"]
+=== tapAction
+
+// Added a short, self-contained explanation. Beginners no longer need
+// to leave the page to find out which values are valid.
+//
+Configures what happens when the user single-taps (`tapAction`) or
+double-taps (`doubleTapAction`) on a slide. Possible values include
+`'close'`, `'next'`, `'zoom'`, `'zoom-or-close'` and `false`
+(no action).
+
+Refer to the
+link://photoswipe.com/click-and-tap-actions/[click and tap actions, {browser-window--new}]
+page for the full list and examples.
+
+[role="mb-5"]
+[source, js]
+----
+const lightbox = new PhotoSwipeLightbox({
+  gallery: '#gallery_id',
+  pswpModule: PhotoSwipe,
+  children: 'a',
+  tapAction:       'toggle-controls',
+  doubleTapAction: 'zoom'
+});
+
+lightbox.init();
+----
+
+[role="mt-4"]
+=== wheelToZoom
+
+Boolean, `undefined`. By default, PhotoSwipe zooms the image only when
+the user holds *Ctrl* and turns the mouse wheel. When this option is
+enabled, simply turning the wheel zooms the image (no Ctrl key
+required).
+
+[role="mb-5"]
+[source, js]
+----
+const lightbox = new PhotoSwipeLightbox({
+  gallery: '#gallery_id',
+  pswpModule: PhotoSwipe,
+  children: 'a',
+  wheelToZoom: true
+});
+
+lightbox.init();
+----
+
+[role="mt-4"]
+=== zoomAnimationDuration
+
+Number, `333`. Duration (in milliseconds) of the zoom-in / zoom-out
+transition. Set to `0` to disable the zoom animation.
+
+Find an
+link://photoswipe.com/opening-or-closing-transition#transition-duration-and-easing/[Example, {browser-window--new}]
+here.
+
+[role="mt-4"]
+=== zoomLevel
+
+// Replaced the bare list of option names with a short description of
+// each level. This avoids forcing readers off the page for the basics.
+//
+There are three related options that control how far the user can zoom
+into an image:
+
+* `initialZoomLevel` – the zoom level applied when a slide first opens.
+* `secondaryZoomLevel` – the zoom level applied after a single zoom
+  click or tap.
+* `maxZoomLevel` – the maximum zoom level the user can reach by
+  pinching, double-tapping, or rolling the mouse wheel.
+
+Each option accepts a number (e.g. `2` for 200 %), one of the strings
+`'fit'`, `'fill'`, `'auto'`, or a function that returns one of those
+values. See
+link://photoswipe.com/adjusting-zoom-level/[Adjusting zoom level, {browser-window--new}]
+for details. The default values are described
+link://photoswipe.com/adjusting-zoom-level#default-behaviour/[there too, {browser-window--new}].

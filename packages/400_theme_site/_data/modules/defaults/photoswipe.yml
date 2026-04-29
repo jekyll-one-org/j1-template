@@ -1,6 +1,6 @@
 # ------------------------------------------------------------------------------
 # ~/_data/modules/defaults/lightbox.yml
-# Default configuration for J1 Lightbox
+# Default configuration for J1 Photoswipe Lightbox V5
 #
 # Product/Info:
 # https://jekyll.one
@@ -15,9 +15,9 @@
 # Description
 #
 description:
-  title:                                Lightbox
-  scope:                                User settings
-  location:                             _data/modules/lightbox.yml
+  title:                                Photoswipe Lightbox
+  scope:                                Default settings
+  location:                             _data/modules/defaults/photoswipe.yml
 
 # ------------------------------------------------------------------------------
 # Default configuration settings
@@ -25,16 +25,15 @@ description:
 defaults:
 
   # ------------------------------------------------------------------------------
-  # Lightbox V2
+  # Photoswipe V5
   #
   # JavaScript library that displays images and videos by filling the
   # screen, and dimming out the rest of the web page. Enables gallery views
   # for individual images, images sets and images are part of a carousel
   # (e.g. Owl Carousel).
 
- 
   # ------------------------------------------------------------------------------
-  # J1 Lightbox default settings
+  # Lightbox default settings
   #
 
   #   alwaysShowNavOnTouchDevices
@@ -138,7 +137,7 @@ defaults:
   #   first image in the set.
   #
   #   values:                         boolean (false|true)
-  #   default:                        false                4
+  #   default:                        false
   #
   # ------------------------------------------------------------------------------
 
@@ -162,6 +161,22 @@ defaults:
   springClose:
     stiffness:                          500
     damping:                            38
+
+  autoInit:
+    children:                           a
+    bgOpacity:                          1
+    showHideOpacity:                    true
+    loop:                               true
+    wheelToZoom:                        true
+    showHideAnimationType:              zoom
+    imageClickAction:                   next
+    tapAction:                          next
+    padding:                            [
+                                          top: 0,
+                                          bottom: 0,
+                                          left: 80,
+                                          right: 80
+                                        ]
 
 # ------------------------------------------------------------------------------
 # END config

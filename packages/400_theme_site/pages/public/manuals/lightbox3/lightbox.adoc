@@ -1,14 +1,14 @@
 ---
 title:                                  Lightbox V3
-title_extention:                        The original lightbox script
-tagline:                                Default lightbox
+title_extention:                        The default lightbox
+tagline:                                The default lightbox
 
-date:                                   2020-11-05
-#last_modified:                         2023-01-01
+date:                                   2026-04-28
+#last_modified:                         2026-01-01
 
 description: >
-                                        The original lightbox script. Now with fluid
-                                        animations and touch‑first gestures.
+                                        The original lightbox script by Lokesh Dhakar.
+                                        Now with fluid animations and touch‑first gestures.
 keywords: >
                                         open source, free, template, jekyll, jekyllone, web,
                                         sites, static, lightbox
@@ -22,7 +22,7 @@ image:
   height:                               1280
 
 regenerate:                             false
-permalink:                              /pages/public/manuals/lightbox/
+permalink:                              /pages/public/manual/module/lightbox3/lightbox/
 
 resources:                              [ lightbox3 ]
 resource_options:
@@ -60,7 +60,7 @@ resource_options:
 
 // Load page attributes
 // -----------------------------------------------------------------------------
-{% include {{load_attributes}} scope="global" %}
+{% include {{load_attributes}} scope="none" %}
 
 
 // Page content
@@ -83,23 +83,50 @@ gestures.
 [role="mt-5"]
 == Getting started
 
+A lightbox is a helper which displays enlarged, almost screen-filling versions
+of images while dimming the remainder of the page. The technique, introduced
+by Lightbox Version 2, gained widespread popularity thanks to its simple style.
+The term *lightbox* has been employed since then for Javascript libraries to
+support such functionality.
+
+The new version of Lightbox V2 (by Lokesh Dhakar) with fluid animations
+and touch‑first gestures.
+
 ++++
-<div class="featured mt-5" style="opacity: 1;">
-    <div class="featured-grid">
-      <a href="https://images.unsplash.com/photo-1654394237275-081d5455774b?w=2400&amp;q=80" data-lightbox="featured" data-caption="Swipe through images or use ← → arrow keys" style="">
-        <img src="https://images.unsplash.com/photo-1654394237275-081d5455774b?w=600&amp;h=450&amp;fit=crop&amp;q=80" alt="A view of a town with mountains in the background">
-      </a>
-      <a href="https://images.unsplash.com/photo-1567972042114-5a1eaba28886?w=2400&amp;q=80" data-lightbox="featured" data-caption="Tap, click, or pinch to zoom" style="">
-        <img src="https://images.unsplash.com/photo-1567972042114-5a1eaba28886?w=600&amp;h=450&amp;fit=crop&amp;q=80" alt="A view of a street with a lot of palm trees">
-      </a>
-      <a href="https://images.unsplash.com/photo-1600663757626-0fc610ba60d4?w=2400&amp;q=80" data-lightbox="featured" data-caption="Drag to pan when zoomed in" style="">
-        <img src="https://images.unsplash.com/photo-1600663757626-0fc610ba60d4?w=600&amp;h=450&amp;fit=crop&amp;q=80" alt="Red and white bridge over the trees">
-      </a>      <a href="https://images.unsplash.com/photo-1576764225594-96ad970efffa?w=2400&amp;q=80" data-lightbox="featured" data-caption="Swipe down, flick the ×, or press Escape to close">
-        <img src="https://images.unsplash.com/photo-1576764225594-96ad970efffa?w=600&amp;h=450&amp;fit=crop&amp;q=80" alt="A view of a city from a hill above the clouds">
-      </a>
-    </div>
+<div class="featured mt-3" style="opacity: 1">
+  <div class="featured-grid">
+    <a
+      href="https://images.unsplash.com/photo-1654394237275-081d5455774b?w=2400&q=80"
+      data-lightbox="featured" data-caption="Swipe through images or use ← → arrow keys">
+      <img
+        src="https://images.unsplash.com/photo-1654394237275-081d5455774b?w=600&h=450&fit=crop&q=80"
+        alt="A view of a town with mountains in the background">
+    </a>
+    <a
+      href="https://images.unsplash.com/photo-1567972042114-5a1eaba28886?w=2400&q=80"
+      data-lightbox="featured" data-caption="Tap, click, or pinch to zoom">
+      <img
+        src="https://images.unsplash.com/photo-1567972042114-5a1eaba28886?w=600&h=450&fit=crop&q=80"
+        alt="A view of a street with a lot of palm trees">
+    </a>
+    <a
+      href="https://images.unsplash.com/photo-1600663757626-0fc610ba60d4?w=2400&q=80"
+      data-lightbox="featured" data-caption="Drag to pan when zoomed in">
+      <img
+        src="https://images.unsplash.com/photo-1600663757626-0fc610ba60d4?w=600&h=450&fit=crop&q=80" 
+        alt="Red and white bridge over the trees">
+    </a>
+    <a
+      href="https://images.unsplash.com/photo-1576764225594-96ad970efffa?w=2400&q=80"
+      data-lightbox="featured" data-caption="Click the X button, or press Escape to close">
+      <img
+        src="https://images.unsplash.com/photo-1576764225594-96ad970efffa?w=600&h=450&fit=crop&q=80"
+        alt="A view of a city from a hill above the clouds">
+    </a>
   </div>
+</div>
 ++++
+
 
 ++++
 <style>
@@ -117,7 +144,7 @@ gestures.
 .featured-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 8px;
+  gap: 3px;
   position: relative;
 }
 
@@ -126,7 +153,7 @@ gestures.
   overflow: hidden;
   aspect-ratio: 4 / 3;
   background: var(--color-bg-hover);
-  border-radius: 8px;
+  border-radius: 0px;
 }
 
 .featured-grid img {
@@ -134,7 +161,7 @@ gestures.
   height: 100%;
   object-fit: cover;
   display: block;
-  border-radius: 8px;
+  border-radius:0px;
   transition: transform 0.15s ease;
 }
 
@@ -275,6 +302,7 @@ opened image.
 values and state. Also enabled via `+?debug+` URL param.
 |===
 
+
 [[api-methods]]
 [role="mt-4"]
 === Methods
@@ -295,6 +323,7 @@ morph animation from that element; without it, the image fades in.
 |`+destroy()+` |Remove all event listeners, cancel animations, and tear
 down the instance.
 |===
+
 
 [[api-events]]
 [role="mt-4"]
@@ -322,6 +351,7 @@ removed.
 Subscribe with `+lb.on(event, callback)+` and unsubscribe with
 `+lb.off(event, callback)+`. Callbacks receive a
 `+{ src, triggerEl, index, total }+` detail object.
+
 
 [[api-css]]
 [role="mt-4"]
@@ -371,12 +401,58 @@ and will seamlessly transition to the full-size image.
 
 ++++
 <div class="mixed-gallery">
-  <a href="https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=2400&amp;q=80" data-lightbox="mixed" data-caption="Sunlit mountain valley" style="width: 210px;"><img src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=420&amp;h=280&amp;fit=crop&amp;q=80" alt="Sunlit mountain valley"></a>
-  <a href="https://images.unsplash.com/photo-1414609245224-afa02bfb3fda?w=2400&amp;q=80" data-lightbox="mixed" data-caption="Ocean cliffs at sunset" style="width: 94px;"><img src="https://images.unsplash.com/photo-1414609245224-afa02bfb3fda?w=188&amp;h=280&amp;fit=crop&amp;q=80" alt="Ocean cliffs at sunset"></a>
-  <a href="https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=2400&amp;q=80" data-lightbox="mixed" data-caption="Lake with autumn trees" style="width: 210px;"><img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=420&amp;h=280&amp;fit=crop&amp;q=80" alt="Lake with autumn trees"></a>
-  <a href="https://images.unsplash.com/photo-1519681393784-d120267933ba?w=2400&amp;q=80" data-lightbox="mixed" data-caption="Snow-capped peaks at night" style="width: 140px;"><img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?w=280&amp;h=280&amp;fit=crop&amp;q=80" alt="Snow-capped peaks at night"></a>
-  <a href="https://images.unsplash.com/photo-1505567745926-ba89000d255a?w=2400&amp;q=80" data-lightbox="mixed" data-caption="Volcanic landscape" style="width: 94px;"><img src="https://images.unsplash.com/photo-1505567745926-ba89000d255a?w=188&amp;h=280&amp;fit=crop&amp;q=80" alt="Volcanic landscape"></a>
-  <a href="https://images.unsplash.com/photo-1508739773434-c26b3d09e071?w=2400&amp;q=80" data-lightbox="mixed" data-caption="Sunset over the sea" style="width: 210px;"><img src="https://images.unsplash.com/photo-1508739773434-c26b3d09e071?w=420&amp;h=280&amp;fit=crop&amp;q=80" alt="Sunset over the sea"></a>
+  <a
+    href="https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=2400&q=80"
+    data-lightbox="mixed" data-caption="Sunlit mountain valley"
+    style="width: 210px">
+    <img
+      src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=420&h=280&fit=crop&q=80"
+      alt="Sunlit mountain valley">
+  </a>
+  <a
+    href="https://images.unsplash.com/photo-1414609245224-afa02bfb3fda?w=2400&q=80"
+    data-lightbox="mixed"
+    data-caption="Ocean cliffs at sunset"
+    style="width: 94px">
+    <img
+      src="https://images.unsplash.com/photo-1414609245224-afa02bfb3fda?w=188&h=280&fit=crop&q=80"
+      alt="Ocean cliffs at sunset">
+  </a>
+  <a
+    href="https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=2400&q=80"
+    data-lightbox="mixed"
+    data-caption="Lake with autumn trees" style="width: 210px">
+    <img
+      src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=420&h=280&fit=crop&q=80"
+      alt="Lake with autumn trees">
+  </a>
+  <a
+    href="https://images.unsplash.com/photo-1519681393784-d120267933ba?w=2400&q=80"
+    data-lightbox="mixed"
+    data-caption="Snow-capped peaks at night"
+    style="width: 140px">
+    <img
+      src="https://images.unsplash.com/photo-1519681393784-d120267933ba?w=280&h=280&fit=crop&q=80"
+      alt="Snow-capped peaks at night">
+   </a>
+  <a
+    href="https://images.unsplash.com/photo-1505567745926-ba89000d255a?w=2400&q=80"
+    data-lightbox="mixed"
+    data-caption="Volcanic landscape"
+    style="width: 94px">
+    <img
+      src="https://images.unsplash.com/photo-1505567745926-ba89000d255a?w=188&h=280&fit=crop&q=80"
+      alt="Volcanic landscape">
+  </a>
+  <!-- a
+    href="https://images.unsplash.com/photo-1508739773434-c26b3d09e071?w=2400&q=80"
+    data-lightbox="mixed"
+    data-caption="Sunset over the sea"
+    style="width: 210px">
+    <img
+      src="https://images.unsplash.com/photo-1508739773434-c26b3d09e071?w=420&h=280&fit=crop&q=80"
+      alt="Sunset over the sea">
+  </a -->
 </div>
 ++++
 
@@ -395,7 +471,7 @@ and will seamlessly transition to the full-size image.
   overflow: hidden;
   height: 140px;
   background: var(--color-bg-hover);
-  border-radius: 8px;
+  border-radius: 0px;
   outline: none;
 }
 
@@ -409,7 +485,7 @@ and will seamlessly transition to the full-size image.
   height: 100%;
   object-fit: cover;
   display: block;
-  border-radius: 8px;
+  border-radius: 0px;
   transition: transform 0.15s ease;
 }
 
@@ -419,7 +495,7 @@ and will seamlessly transition to the full-size image.
 
 @media (max-width: 719px) {
   .mixed-gallery {
-    gap: 6px;
+    gap: 3px;
   }
 
   .mixed-gallery a {
@@ -438,19 +514,25 @@ and will seamlessly transition to the full-size image.
 </style>
 ++++
 
-[role="mt-5"]
-=== Zoom & pan
 
-Click or tap to zoom in. Pinch to zoom on touch. Drag to pan when
-zoomed.
+// [role="mt-5"]
+// === Zoom & pan
 
-++++
-<div class="image-row">
-  <a href="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=3600&amp;q=90" data-lightbox="" data-caption="Glass tower">
-    <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=560&amp;h=400&amp;fit=crop&amp;q=80" alt="Modern skyscraper glass facade looking up">
-  </a>
-</div>
-++++      
+// Click or tap to zoom in. Pinch to zoom on touch. Drag to pan when
+// zoomed.
+
+// ++++
+// <div class="image-row">
+//   <a
+//     href="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=3600&q=90"
+//     data-lightbox=""
+//     data-caption="Glass tower">
+//     <img
+//       src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=560&h=400&fit=crop&q=80"
+//       alt="Modern skyscraper glass facade looking up">
+//   </a>
+// </div>
+// ++++      
 
 ++++
 <style>
@@ -467,7 +549,7 @@ zoomed.
   aspect-ratio: 1 / 1;
   background: var(--color-bg-hover);
   width: 200px;
-  border-radius: 8px;
+  border-radius: 0px;
 }
 
 .image-row img {
@@ -475,7 +557,7 @@ zoomed.
   height: 100%;
   object-fit: cover;
   display: block;
-  border-radius: 8px;
+  border-radius: 0px;
   transition: transform 0.15s ease;
 }
 
@@ -486,7 +568,7 @@ zoomed.
 .gallery {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 8px;
+  gap: 3px;
 }
 
 .gallery a {
@@ -494,7 +576,7 @@ zoomed.
   overflow: hidden;
   aspect-ratio: 1 / 1;
   background: var(--color-bg-hover);
-  border-radius: 8px;
+  border-radius: 0px;
   outline: none;
 }
 
@@ -508,7 +590,7 @@ zoomed.
   height: 100%;
   object-fit: cover;
   display: block;
-  border-radius: 8px;
+  border-radius: 0px;
   transition: transform 0.15s ease;
 }
 
@@ -532,7 +614,7 @@ zoomed.
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 3px;
   font-size: 1.05rem;
 }
 
@@ -547,48 +629,63 @@ Captions support links and line breaks.
 
 ++++
 <div class="image-row mb-4">
-  <a href="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=2400&amp;q=80" data-lightbox="" data-caption="Photo by &lt;a href='https://unsplash.com/@kalenemsley'&gt;Kalen Emsley&lt;/a&gt;">
-    <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=400&amp;h=400&amp;fit=crop&amp;q=80" alt="Snow-capped mountains with a valley and evergreen trees">
+  <a
+    href="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=2400&q=80"
+    data-lightbox=""
+    data-caption="Photo by <a href='https://unsplash.com/@kalenemsley'> Kalen Emsley </a>">
+    <img
+      src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=400&h=400&fit=crop&q=80"
+      alt="Snow-capped mountains with a valley and evergreen trees">
   </a>
 </div>
 ++++      
 
 [source, html]
 ----
-<a href="photo.jpg"
-   data-lightbox
-   data-caption="Photo by <a href='https://example.com'>Jane Doe</a>">
-  <img src="thumb.jpg">
+<a
+  href="photo.jpg"
+  data-lightbox
+  data-caption="Photo by <a href='https://example.com'>Jane Doe</a>">
+  <img
+    src="thumb.jpg"
+    alt="Caption text">
 </a>
 ----
 
-[role="mt-5"]
-=== Custom springs
 
-Select a preset, then click the image to feel the difference.
+// [role="mt-5"]
+// === Custom springs
 
-++++
-<div class="spring-presets">
-  <button class="spring-preset-btn active" data-preset="default">Default</button>
-  <button class="spring-preset-btn" data-preset="snappy">Snappy</button>
-  <button class="spring-preset-btn" data-preset="bouncy">Bouncy</button>
-</div>
+// Select a preset, then click the image to feel the difference.
 
-<div class="image-row mb-4" style="margin-top: 12px;">
-  <a href="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=2400&amp;q=80" data-lightbox="" data-caption="Try different spring presets to feel the difference">
-    <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&amp;h=400&amp;fit=crop&amp;q=80" alt="Mountains rising above a sea of clouds at sunset">
-  </a>
-</div>
-++++
+// ++++
+// <div class="spring-presets">
+//   <button class="spring-preset-btn active" data-preset="default">Default</button>
+//   <button class="spring-preset-btn" data-preset="snappy">Snappy</button>
+//   <button class="spring-preset-btn" data-preset="bouncy">Bouncy</button>
+// </div>
+
+// <div class="image-row mb-4" style="margin-top: 12px;">
+//   <a
+//     href="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=2400&q=80"
+//     data-lightbox=""
+//     data-caption="Try different spring presets to feel the difference">
+//     <img
+//       src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=400&fit=crop&q=80"
+//       alt="Mountains rising above a sea of clouds at sunset">
+//   </a>
+// </div>
+// ++++
 
 
-[source, js]
-----
-Lightbox.init({
-  springOpen:  { stiffness: 260, damping: 24 },
-  springClose: { stiffness: 300, damping: 28 },
-});
-----
+// [source, js]
+// ----
+// Lightbox.init({
+//   springOpen:  { stiffness: 260, damping: 24 },
+//   springClose: { stiffness: 300, damping: 28 },
+// });
+// ----
+
 
 [role="mt-4"]
 === Text links
@@ -599,13 +696,48 @@ element.
 ++++
 <div class="text-links">
   <ul>
-    <li><a href="https://images.unsplash.com/photo-1542224566-6e85f2e6772f?w=2400&amp;q=80" data-lightbox="" style="">Cherry blossoms in bloom</a></li>
-    <li><a href="https://images.unsplash.com/photo-1546026423-cc4642628d2b?w=2400&amp;q=80" data-lightbox="">Coral reef underwater</a></li>
-    <li><a href="https://images.unsplash.com/photo-1534067783941-51c9c23ecefd?w=2400&amp;q=80" data-lightbox="">Lightning over the plains</a></li>
+    <li>
+      <a
+        href="https://images.unsplash.com/photo-1542224566-6e85f2e6772f?w=2400&q=80"
+        data-lightbox="">
+        Cherry blossoms in bloom
+      </a>
+    </li>
+    <li>
+      <a
+        href="https://images.unsplash.com/photo-1546026423-cc4642628d2b?w=2400&q=80"
+        data-lightbox="">
+        Coral reef underwater
+      </a>
+    </li>
+    <li>
+      <a
+        href="https://images.unsplash.com/photo-1534067783941-51c9c23ecefd?w=2400&q=80"
+        data-lightbox="">
+        Lightning over the plains
+      </a>
+    </li>
   </ul>
 </div>
 ++++
 
+[role="mt-4"]
+HTML pattern:
+
+[source, html]
+----
+  <a
+    href="https://images.unsplash.com/photo-1542224566-6e85f2e6772f?w=2400&q=80"
+    data-lightbox="">
+    Cherry blossoms in bloom
+  </a>
+----
+
+[role="mt-4"]
+[NOTE]
+====
+Because of the missing <img> tag, no captions are available.
+====
 
 [role="mt-4"]
 === Programmatic open

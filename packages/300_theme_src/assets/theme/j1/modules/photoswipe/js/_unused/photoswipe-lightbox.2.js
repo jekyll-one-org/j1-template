@@ -1,6 +1,6 @@
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/modules/photoswipe/js/photoswipe-lightbox.js (3)
+ # ~/assets/theme/j1/modules/photoswipe/js/photoswipe-lightbox.js (2)
  # PhotoSwipe v5.4.4 Lightbox JS by Dmytro Semenov
  # Provides PhotoSwipe Lightbox (UMD version to be used with webbrowsers)
  # Modified version for J1 Theme
@@ -2003,17 +2003,9 @@
     // is not required.
     //
     // Per-gallery overrides via data attributes on the gallery element:
-    //   data-pswp-children          children selector (default: 'a')
-    //   data-pswp-options           JSON object merged on top of the global options
-    //                               (e.g. data-pswp-options='{"bgOpacity":0.9}')
-    //   data-pswp-caption           "false" disables the dynamic caption plugin
-    //                               for this gallery (claude - Update Photoswipe
-    //                               Lightbox auto-init #2)
-    //   data-pswp-caption-options   JSON object merged on top of the caption
-    //                               plugin defaults (e.g.
-    //                               data-pswp-caption-options='{"type":"below"}')
-    //                               (claude - Update Photoswipe Lightbox
-    //                               auto-init #2)
+    //   data-pswp-children   children selector (default: 'a')
+    //   data-pswp-options    JSON object merged on top of the global options
+    //                        (e.g. data-pswp-options='{"bgOpacity":0.9}')
     //
     // Public static API on PhotoSwipeLightbox:
     //   PhotoSwipeLightbox.autoInit([opts], [root])     scan & create instances
@@ -2024,9 +2016,6 @@
     //   PhotoSwipeLightbox.autoInitOptions              user overrides for autoInit()
     //   PhotoSwipeLightbox.autoInitDefaults             baked-in defaults (claude - Update Photoswipe Lightbox auto-init #1)
     //   PhotoSwipeLightbox.autoInitDisabled             skip DOMContentLoaded boot
-    //   PhotoSwipeLightbox.autoInitCaptionPlugin        caption plugin class ref (claude - Update Photoswipe Lightbox auto-init #2)
-    //   PhotoSwipeLightbox.autoInitCaptionEnabled       toggle caption auto-attach (claude - Update Photoswipe Lightbox auto-init #2)
-    //   PhotoSwipeLightbox.autoInitCaptionDefaults      baked-in caption options (claude - Update Photoswipe Lightbox auto-init #2)
     //
     // Default behaviour: a DOMContentLoaded listener inside this module
     // calls autoInit() once with `PhotoSwipeLightbox.autoInitOptions` and
@@ -2075,119 +2064,7 @@
       padding:                { top: 0, bottom: 0, left: 80, right: 80 }
     };
     // claude - Update Photoswipe Lightbox auto-init #1 (end)
-
-    // claude - Update Photoswipe Lightbox auto-init #2
-    // -----------------------------------------------------------------------
-    // Caption-plugin auto-attachment for auto-initialised galleries.
-    //
-    // PhotoSwipeDynamicCaption (https://github.com/dimsemenov/photoswipe-
-    // dynamic-caption-plugin) must be instantiated AFTER the lightbox is
-    // constructed but BEFORE lightbox.init() is called, because the plugin
-    // hooks the lightbox's 'init' event to wire itself into the PhotoSwipe
-    // core instance. autoInit() does exactly that below, so the manual
-    // pattern...
-    //
-    //     const lb  = new PhotoSwipeLightbox(opts);
-    //     const cap = new PhotoSwipeDynamicCaption(lb, { type: 'auto' });
-    //     lb.init();
-    //
-    // ...is reproduced for every auto-initialised gallery without the
-    // caller having to glue it together.
-    //
-    // Resolution order for the plugin class at autoInit() time:
-    //   1. PhotoSwipeLightbox.autoInitCaptionPlugin (if explicitly set)
-    //   2. window.PhotoSwipeDynamicCaption (UMD global from the plugin's
-    //      own bundle)
-    // If neither is present, a single console warning is emitted and the
-    // plugin is silently skipped for every gallery. Set
-    //     PhotoSwipeLightbox.autoInitCaptionEnabled = false;
-    // before bootstrap to suppress the warning when the plugin is
-    // intentionally not loaded.
-    //
-    // The created plugin instance is stashed on the lightbox as
-    // `lb._autoInitCaption` so it can be retrieved via
-    // `PhotoSwipeLightbox.getAutoInitInstance(el)._autoInitCaption`.
-    // No explicit teardown is needed: lightbox.destroy() fires
-    // `slideDestroy`, which the plugin already handles to clean up its
-    // caption DOM nodes; the plugin instance itself becomes
-    // garbage-collectable once the lightbox is dropped from
-    // _autoInitInstances / _autoInitInstanceSet in autoInitDestroy().
-    // -----------------------------------------------------------------------
-
-    PhotoSwipeLightbox.autoInitCaptionPlugin   = null;          // resolved lazily
-    PhotoSwipeLightbox.autoInitCaptionEnabled  = true;
-    PhotoSwipeLightbox.autoInitCaptionDefaults = { type: 'auto' };
-
-    /**
-     * Read and parse the optional `data-pswp-caption-options` JSON blob
-     * from a gallery element. Returns {} on any parse failure (mirrors
-     * _autoInitReadOptions's contract: never throws).
-     *
-     * @param {Element} el
-     * @returns {Object}
-    */
-    function _autoInitReadCaptionOptions(el) {
-      const raw = el.getAttribute('data-pswp-caption-options');
-      if (!raw) { return {}; }
-      try {
-        return JSON.parse(raw);
-      } catch (err) {
-        if (typeof console !== 'undefined' && console.warn) {
-          console.warn('[PhotoSwipeLightbox] invalid data-pswp-caption-options JSON on',
-                       el, ':', raw, err);
-        }
-        return {};
-      }
-    }
-
-    /**
-     * Attach a PhotoSwipeDynamicCaption plugin to a freshly constructed
-     * lightbox instance, if the plugin class is available and not
-     * disabled (globally or for this gallery).
-     *
-     * MUST be called BEFORE lb.init(), because the plugin hooks the
-     * lightbox's 'init' event during its own constructor.
-     *
-     * @param {PhotoSwipeLightbox} lb
-     * @param {Element}            el  gallery element (for data-attr lookup)
-    */
-    function _autoInitAttachCaption(lb, el) {
-      if (!PhotoSwipeLightbox.autoInitCaptionEnabled) { return; }
-
-      // Per-gallery opt-out: data-pswp-caption="false".
-      // Any other value (or absence) keeps the global default.
-      if (el.getAttribute('data-pswp-caption') === 'false') { return; }
-
-      const PluginClass = PhotoSwipeLightbox.autoInitCaptionPlugin
-        || (typeof window !== 'undefined' ? window.PhotoSwipeDynamicCaption : null);
-
-      if (!PluginClass) {
-        // Plugin script not loaded. Warn ONCE so a misconfiguration is
-        // visible without spamming the console for every gallery on
-        // the page.
-        if (!_autoInitAttachCaption._warned
-            && typeof console !== 'undefined' && console.warn) {
-          console.warn('[PhotoSwipeLightbox] autoInitCaptionEnabled is true but '
-                     + 'PhotoSwipeDynamicCaption is not available. '
-                     + 'Load photoswipe-caption-plugin.js before this script, '
-                     + 'or set PhotoSwipeLightbox.autoInitCaptionEnabled = false.');
-          _autoInitAttachCaption._warned = true;
-        }
-        return;
-      }
-
-      const captionOpts = Object.assign(
-        {},
-        PhotoSwipeLightbox.autoInitCaptionDefaults || {},
-        _autoInitReadCaptionOptions(el)
-      );
-
-      // Constructor side-effect: registers the 'init' listener on lb.
-      // Stash the reference for later retrieval / debugging.
-      lb._autoInitCaption = new PluginClass(lb, captionOpts);
-    }
-    // claude - Update Photoswipe Lightbox auto-init #2 (end)
-
+  
     // WeakMap: gallery element -> PhotoSwipeLightbox instance (idempotency).
     // Declared with `let` so autoInitDestroy() can swap in a fresh WeakMap
     // (WeakMap has no clear() method, and rebuilding is the only way to
@@ -2271,14 +2148,6 @@
         });
   
         const lb = new PhotoSwipeLightbox(opts);
-
-        // claude - Update Photoswipe Lightbox auto-init #2
-        // Attach the dynamic caption plugin (if enabled and available)
-        // BEFORE init() so the plugin's 'init'-event listener fires on
-        // the right instance.
-        _autoInitAttachCaption(lb, el);
-        // claude - Update Photoswipe Lightbox auto-init #2 (end)
-
         lb.init();
   
         _autoInitInstances.set(el, lb);

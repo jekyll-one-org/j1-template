@@ -1,0 +1,192 @@
+[role="mt-5"]
+[[photoswipe-captions-plugin]]
+== Captions
+
+PhotoSwipe does not show captions out of the box, but a small *plugin*
+called *PhotoSwipe Dynamic Caption* adds that feature. The plugin
+automatically places the caption text either *below* or *to the right
+of* the image, depending on how much space is available. It works best
+for short to medium-length captions and only for images that use the
+default `fit` scale mode.
+
+link:https://dimsemenov.github.io/photoswipe-dynamic-caption-plugin/[Plugin demo, {browser-window--new}]
+
+For *accessibility*, make sure that important caption text is also
+available *outside* of PhotoSwipe – for example by setting an `alt`
+attribute on the thumbnail image or by linking the caption to the
+thumbnail with `aria-labelledby`.
+
+[role="mt-5"]
+[[photoswipe-captions-plugin-parameters]]
+=== Parameters
+
+The Dynamic Caption plugin reads its caption text from a hidden element
+inside each slide. By default it looks for an element with the CSS
+class `.pswp-caption-content` and uses its inner HTML as the caption.
+If no such element is found, the plugin falls back to the `alt`
+attribute of the thumbnail image.
+
+The minimum HTML that the plugin expects on each slide looks like this:
+
+.HTML Structure
+[source, html]
+----
+<a href="path/to/large-image.jpg" data-pswp-width="1024" data-pswp-height="768">
+  <img src="path/to/thumbnail.jpg" alt="" />
+  <span class="pswp-caption-content">Caption content</span>
+</a>
+----
+
+// Made it explicit that `captionContent` may be either a CSS selector
+// string OR a function returning the caption HTML.
+//
+You can also build the caption text programmatically by passing a
+function as `captionContent`. The function receives the current slide
+object and must return a string of HTML (or plain text):
+
+.Example
+[source, js]
+----
+captionContent: (slide) => {
+  return slide.data.element.querySelector('img').getAttribute('alt');
+}
+----
+
+[cols="4,2,2,4a", subs=+macros, options="header", width="100%", role="rtable mt-5"]
+|===
+|Name |Type |Default |Description \| Example
+
+|`captionContent`
+|string \| function
+|`.pswp-caption-content`
+|Where to read the caption text from. If a string is supplied it is
+used as a CSS selector and the plugin reads the inner HTML of the
+matching element. If the element is not found, the plugin uses the
+`alt` attribute of the thumbnail image. A function may be used instead
+of a selector to build the caption from any data you like.
+
+|`type`
+|string
+|`auto`
+|Position of the caption. Allowed values are `auto`, `below` or
+`aside`:
+
+* `below` – the caption is always shown below the image.
+* `aside` – the caption is always shown to the right of the image.
+* `auto` – the plugin picks the better of the two depending on how
+  much space is available.
+
+|`mobileLayoutBreakpoint`
+|number \| function
+|600
+|Window width (in pixels) below which the *mobile* caption layout is
+used. May also be a function that returns `true` to force the mobile
+layout.
+
+.Example
+[source, js]
+----
+mobileLayoutBreakpoint: (pswp, captionPlugin) => {
+  return (window.innerWidth < 750);
+}
+----
+
+|`horizontalEdgeThreshold`
+|number
+|20
+|When the caption's `x` position is smaller than this value (in
+pixels), the plugin adds the class `pswp__dynamic-caption--on-hor-edge`
+to the caption element. Use this hook to apply a different style (for
+example extra horizontal padding) when the caption sits at the very
+edge of the screen.
+
+|`mobileCaptionOverlapRatio`
+|number
+|0.3
+|Controls when the mobile caption switches to an *overlap* layout.
+The value is a ratio between 0 and 1. With the default `0.3`, the
+caption begins overlapping the image once more than 30 % of the
+horizontal space is empty. Set the value to `0` to make the caption
+*always* overlap, or to `1` to make it *never* overlap (the image
+will always shift up to make room, unless it is taller than the
+viewport).
+
+|`verticallyCenterImage`
+|boolean
+|`false`
+|When set to `true`, the image is always vertically centred in the
+remaining space between the caption and the rest of the viewport.
+With the default value `false`, the image is only lifted up enough to
+make room for the caption when it does not fit underneath.
+
+|===
+
+[role="mt-5"]
+[[photoswipe-captions-plugin-styling]]
+=== Styling
+
+The caption element always has the CSS class `pswp__dynamic-caption`.
+Depending on its current position the plugin adds one of the following
+modifier classes:
+
+* `pswp__dynamic-caption--below` – caption is below the image.
+* `pswp__dynamic-caption--aside` – caption is to the right of the image.
+* `pswp__dynamic-caption--mobile` – caption is pinned to the bottom of
+  the viewport (the default mobile layout).
+
+If the caption sits near the left horizontal edge it additionally gets
+the class `pswp__dynamic-caption--on-hor-edge`.
+
+You can adjust the look of the captions in the *plugin CSS file*
+(media queries are welcome):
+
+[source, css]
+----
+.pswp__dynamic-caption--aside {
+  max-width: 300px;
+  padding: 20px 15px 20px 20px;
+  margin-top: 70px;
+}
+.pswp__dynamic-caption--below {
+  max-width: 700px;
+  padding: 15px 0 0;
+}
+.pswp__dynamic-caption--mobile {
+  background: rgba(0, 0, 0, 0.5);
+  padding: 10px 15px;
+}
+----
+
+// Added a short explanation of how the plugin chooses between the
+// `below` and `aside` layouts, so the bullet list is easier to follow.
+//
+Internally, the plugin decides where to place the caption like this:
+
+* It compares the amount of free horizontal space and free vertical
+  space around the image.
+* If there is more *vertical* space:
+** The caption width is set to the width of the image.
+** The class `pswp__dynamic-caption--below` is added so its size can be
+   adjusted via CSS.
+** The caption height is measured.
+** If the caption fits without moving the image, it is shown right
+   below the image.
+** If it does not fit, the pan area height is reduced by the height of
+   the caption to make room.
+* If there is more *horizontal* space:
+** The class `pswp__dynamic-caption--aside` is added so its size can be
+   adjusted via CSS.
+** The caption width is measured.
+** If the caption fits next to the image without moving it, it is shown
+   on the right side.
+** If it does not fit, the pan area width is reduced by the caption
+   width to make room.
+
+If the `mobileLayoutBreakpoint` is met:
+
+* The caption height is measured at 100 % of the available width.
+* The pan area height is reduced so the caption fits below the image.
+* The remaining horizontal space is checked.
+* If too much horizontal space is left over (see
+  `mobileCaptionOverlapRatio`), the caption simply overlaps the image
+  and the image is left at its default position.

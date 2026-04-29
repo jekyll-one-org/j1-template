@@ -1,0 +1,319 @@
+[role="mt-5"]
+== Events
+
+PhotoSwipe Lightbox lets you react to a number of events. All event
+handlers can be attached directly to the lightbox instance with
+`lightbox.on(eventName, callback)`. They are forwarded to the
+PhotoSwipe core automatically as soon as the dialog opens.
+
+[source, js]
+----
+const lightbox = new PhotoSwipeLightbox({
+  gallery:    '#gallery_id',
+  pswpModule: PhotoSwipe,
+  children:   'a'
+});
+
+lightbox.on('change', () => {
+  // runs every time the user moves to another slide
+  console.log('current index:', lightbox.pswp.currIndex);
+});
+
+lightbox.init();
+----
+
+[role="mt-4"]
+=== Initialization events
+
+// Added a short description for every initialisation event so the list
+// is meaningful on its own. The example is rewritten to use the UMD
+// `pswpModule: PhotoSwipe` style that the rest of the manual uses.
+//
+These events fire while the lightbox is opening, in the order shown
+below:
+
+`beforeOpen`::
+PhotoSwipe is about to open. Use it to prepare data before any UI is
+created.
+
+`firstUpdate`::
+The DOM structure has been built and the initial slide index is set.
+You can change the initial index here.
+
+`initialLayout`::
+PhotoSwipe is measuring sizes. If you need to read element dimensions
+with `getBoundingClientRect`, do it here.
+
+`change`::
+A slide has become active. Fires both at first open and whenever the
+user navigates to another slide.
+
+`afterInit`::
+PhotoSwipe is fully initialised; the opening transition is now
+running.
+
+`bindEvents`::
+PhotoSwipe has finished binding its DOM event listeners (pointer
+events, wheel, keyboard, etc.).
+
+[source, js]
+----
+const lightbox = new PhotoSwipeLightbox({
+  gallery:    '#gallery--test-init-events',
+  pswpModule: PhotoSwipe,
+  children:   'a'
+});
+
+lightbox.on('beforeOpen', () => {
+  console.log('beforeOpen');
+});
+
+lightbox.on('firstUpdate', () => {
+  console.log('firstUpdate');
+});
+
+lightbox.on('initialLayout', () => {
+  console.log('initialLayout');
+});
+
+lightbox.on('change', () => {
+  console.log('change');
+});
+
+lightbox.on('afterInit', () => {
+  console.log('afterInit');
+});
+
+lightbox.on('bindEvents', () => {
+  console.log('bindEvents');
+});
+
+lightbox.init();
+----
+
+[role="mt-4"]
+=== Opening and closing transitions
+
+These events fire even when the corresponding transition is disabled
+(for example when `showAnimationDuration` is `0`).
+
+// Added a short prose summary so the meaning of each event is clear
+// without reading the example.
+`openingAnimationStart`::
+The opening animation has just started.
+
+`openingAnimationEnd`::
+The opening animation has finished. The lightbox is now fully open and
+ready to receive user input.
+
+`closingAnimationStart`::
+The closing animation has just started.
+
+`closingAnimationEnd`::
+The closing animation has finished. The lightbox is no longer visible.
+
+[source, js]
+----
+const lightbox = new PhotoSwipeLightbox({
+  gallery:    '#gallery--test-opening-closing-events',
+  pswpModule: PhotoSwipe,
+  children:   'a'
+});
+
+lightbox.on('openingAnimationStart', () => {
+  console.log('openingAnimationStart');
+});
+lightbox.on('openingAnimationEnd', () => {
+  console.log('openingAnimationEnd');
+});
+lightbox.on('closingAnimationStart', () => {
+  console.log('closingAnimationStart');
+});
+lightbox.on('closingAnimationEnd', () => {
+  console.log('closingAnimationEnd');
+});
+
+lightbox.init();
+----
+
+[role="mt-4"]
+=== Closing
+
+// Added inline notes describing exactly when each event is useful.
+`close`::
+PhotoSwipe is starting to close. This is the right moment to unbind
+listeners that were added on open.
+
+`destroy`::
+PhotoSwipe is fully closed and its DOM nodes are about to be removed.
+Tear down anything that should not outlive the lightbox here.
+
+[source, js]
+----
+const lightbox = new PhotoSwipeLightbox({
+  gallery:    '#gallery--test-closing-events',
+  pswpModule: PhotoSwipe,
+  children:   'a'
+});
+
+lightbox.on('close', () => {
+  // PhotoSwipe starts to close - unbind most events here
+  console.log('close');
+});
+
+lightbox.on('destroy', () => {
+  // PhotoSwipe is fully closed - destroy everything
+  console.log('destroy');
+});
+
+lightbox.init();
+----
+
+[role="mt-4"]
+=== Pointer and gesture events
+
+// Replaced the ESM-import-based example with a UMD version to match the
+// rest of the manual, and added a short description per event.
+//
+These events report low-level pointer (mouse, pen, touch) input.
+
+`pointerDown` / `pointerMove` / `pointerUp`::
+Fire on the equivalent native pointer event. The original DOM event is
+available as `e.originalEvent`.
+
+`pinchClose`::
+Fires while the user is closing the lightbox with a pinch gesture.
+Calling `e.preventDefault()` cancels the gesture.
+
+`verticalDrag`::
+Fires while the user is closing the lightbox with a vertical drag.
+Calling `e.preventDefault()` cancels the gesture.
+
+[source, js]
+----
+const lightbox = new PhotoSwipeLightbox({
+  gallery:    '#gallery--test-pointer-events',
+  pswpModule: PhotoSwipe,
+  children:   'a'
+});
+
+lightbox.on('pointerDown', (e) => {
+  console.log('pointerDown', e.originalEvent);
+});
+lightbox.on('pointerMove', (e) => {
+  console.log('pointerMove', e.originalEvent);
+});
+lightbox.on('pointerUp', (e) => {
+  console.log('pointerUp', e.originalEvent);
+});
+lightbox.on('pinchClose', (e) => {
+  // triggered when using pinch to close gesture
+  // can be prevented with e.preventDefault()
+  console.log('pinchClose', e.bgOpacity);
+});
+lightbox.on('verticalDrag', (e) => {
+  // triggered when using vertical drag to close gesture
+  // can be prevented with e.preventDefault()
+  console.log('verticalDrag', e.panY);
+});
+
+lightbox.init();
+----
+
+[role="mt-4"]
+=== Slide content events
+
+// Added one-line descriptions for each content event so beginners know
+// when each one is useful. Switched the example to UMD to stay
+// consistent with the rest of the manual.
+//
+These events let you observe (and in many cases override) how slide
+content is loaded, resized and added to the page. Refer to the
+link://photoswipe.com/custom-content[Custom Content, {browser-window--new}]
+section of the official docs for full examples.
+
+`contentInit`::
+A new content object has just been created.
+
+`contentLoad`::
+Content is about to start loading. Can be cancelled with
+`e.preventDefault()`. Useful when you want to provide a custom element
+on `content.element`.
+
+`contentLoadImage`::
+Same as `contentLoad`, but only fires for image content.
+
+`loadComplete`::
+Content has finished loading.
+
+`contentResize`::
+Content is about to be resized. Can be cancelled.
+
+`imageSizeChange`::
+The displayed size of an image content has changed (the image element
+is on `content.element`).
+
+`contentLazyLoad`::
+Lazy loading of a piece of content is starting. Can be cancelled.
+
+`contentAppend`::
+Content is about to be appended to the DOM. Can be cancelled if you
+want to do this yourself.
+
+`contentActivate` / `contentDeactivate`::
+Fired when a piece of content becomes the current slide / stops being
+the current slide. Both can be cancelled.
+
+`contentRemove`::
+Content is about to be removed from the DOM. Can be cancelled.
+
+`contentDestroy`::
+Content is about to be destroyed. Can be cancelled.
+
+[source, js]
+----
+const lightbox = new PhotoSwipeLightbox({
+  gallery:    '#gallery--test-content-events',
+  pswpModule: PhotoSwipe,
+  children:   'a'
+});
+
+lightbox.on('contentInit', ({ content }) => {
+  console.log('contentInit', content);
+});
+lightbox.on('contentLoad', ({ content, isLazy }) => {
+  console.log('contentLoad', content, isLazy);
+});
+lightbox.on('contentLoadImage', ({ content, isLazy }) => {
+  console.log('contentLoadImage', content, isLazy);
+});
+lightbox.on('loadComplete', ({ content, slide }) => {
+  console.log('loadComplete', content);
+});
+lightbox.on('contentResize', ({ content, width, height }) => {
+  console.log('contentResize', content, width, height);
+});
+lightbox.on('imageSizeChange', ({ content, width, height, slide }) => {
+  console.log('imageSizeChange', content, width, height, slide, slide.index);
+});
+lightbox.on('contentLazyLoad', ({ content }) => {
+  console.log('contentLazyLoad', content);
+});
+lightbox.on('contentAppend', ({ content }) => {
+  console.log('contentAppend', content);
+});
+lightbox.on('contentActivate', ({ content }) => {
+  console.log('contentActivate', content);
+});
+lightbox.on('contentDeactivate', ({ content }) => {
+  console.log('contentDeactivate', content);
+});
+lightbox.on('contentRemove', ({ content }) => {
+  console.log('contentRemove', content);
+});
+lightbox.on('contentDestroy', ({ content }) => {
+  console.log('contentDestroy', content);
+});
+
+lightbox.init();
+----
