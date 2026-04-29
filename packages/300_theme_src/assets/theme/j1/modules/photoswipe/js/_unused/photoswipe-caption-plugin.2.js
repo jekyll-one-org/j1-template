@@ -3,7 +3,6 @@
  # ~/assets/theme/j1/modules/photoswipe/js/photoswipe-caption-plugin.js (2)
  # PhotoSwipe Dynamic Caption plugin 1.2.7 by Dmytro Semenov 
  # UMD version to be used with webbrowsers
- # Modified version for J1 Theme
  # -----------------------------------------------------------------------------
  #
  # Product/Info:
