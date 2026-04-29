@@ -536,6 +536,33 @@ lightbox.init();
 ----
 
 [role="mt-4"]
+=== showHideAnimationType
+
+String, "zoom". Adjust opening or closing transition.
+It supports three values:
+
+- `zoom` (default)
+- `fade` (default if there is no thumbnail)
+- `none`
+
+Animations are automatically disabled, when user sets *prefers-reduced-motion*
+to *reduce*.
+
+[role="mb-5"]
+[source, js]
+----
+const lightbox = new PhotoSwipeLightbox({
+  gallery: '#gallery_id',
+  pswpModule: PhotoSwipe,
+  children: 'a',
+  showHideAnimationType: 'fade'
+});
+
+lightbox.init();
+----
+
+
+[role="mt-4"]
 === spacing
 
 Number, `0.1`. The gap between slides, expressed as a fraction of the

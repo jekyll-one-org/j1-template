@@ -234,7 +234,7 @@ initialised like so:
 </script>
 ----
 
-=== Base HTML pattern
+==== Base HTML pattern
 
 HTML pattern (mirrors PhotoSwipe's standard markup):
 
@@ -260,7 +260,7 @@ HTML pattern (mirrors PhotoSwipe's standard markup):
 ----
 
 [role="mt-4"]
-=== HTML pattern v1
+==== HTML pattern v1
 
 The simplest way to combine PhotoSwipe with the *Swiper* slider is to
 put a `<div>` for every slide inside the slider's wrapper element. Each
@@ -299,7 +299,7 @@ slide contains the image and (optionally) a hidden caption element.
 ----
 
 [role="mt-5"]
-=== HTML pattern v2
+==== HTML pattern v2
 
 This variant uses an unordered list (`<ul>`/`<li>`) instead of plain
 `<div>` elements for the slides. Functionally it is identical to v1; use
@@ -338,7 +338,7 @@ whichever markup fits your site best.
 ----
 
 [role="mt-5"]
-=== Extended HTML pattern
+==== Extended HTML pattern
 
 The extended layout wraps each thumbnail image in an `<a>` tag that
 links to the *full-size* image. The link also carries
@@ -451,17 +451,18 @@ lightbox.init();
 ----
 
 [role="mt-5"]
-== Auto initialization
+=== Auto initialization
 
-Adds Lightbox V3-style auto-initialization to PhotoSwipeLightbox so
-that any element matching the configurable selector (default
-`[data-photoswipe-lightbox]`) is treated as a gallery container
-without requiring callers to instantiate `new PhotoSwipeLightbox(...)`
-and `.init()` themselves.
+Adds Lightbox V3-style auto-initialization to PhotoSwipeLightbox so that any
+element matching the configurable selector (default `[data-photoswipe-lightbox]`)
+is treated as a gallery container without requiring callers to instantiate
+`new PhotoSwipeLightbox(...)` and `.init()` themselves.
 
+[role="mb-3"]
+*Example*
 ++++
 <div data-photoswipe-lightbox="auto-gallery">
-  <div class="featured-grid mt-3 mb-5">
+  <div class="featured-grid mt-3 mb-4">
     <a
       href="https://images.unsplash.com/photo-1654394237275-081d5455774b?w=2400&q=80"
       data-pswp-width="1600" data-pswp-height="1067">
@@ -494,14 +495,12 @@ and `.init()` themselves.
 </div>
 ++++
 
-=== HTML pattern
-
-HTML pattern (mirrors PhotoSwipe's base markup):
-
+[role="mb-3"]
+*HTML pattern*
 [source, html]
 ----
 <div
-  data-photoswipe-lightbox="my-gallery">
+  data-photoswipe-lightbox="auto-gallery">
   <a
     href="big-1.jpg"
     data-pswp-width="1600" data-pswp-height="1067">
@@ -519,10 +518,10 @@ HTML pattern (mirrors PhotoSwipe's base markup):
 </div>
 ----
 
-The element carrying `data-photoswipe-lightbox` is the gallery; its
-descendant `<a>` tags are the slides. The attribute value is treated
-purely as a logical id (useful for getAutoInitInstance lookups) and
-is not required.
+The element carrying `data-photoswipe-lightbox` (auto-gallery) is the
+gallery. Its descendant `<a>` tags are the slides. The attribute value
+is treated purely as a logical id (useful for getAutoInitInstance lookups)
+and is not required.
 
 
 // Include sub-documents
