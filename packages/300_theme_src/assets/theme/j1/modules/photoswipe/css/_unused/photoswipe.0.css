@@ -1,6 +1,6 @@
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/modules/photoswipe/css/photoswipe.css (1)
+ # ~/assets/theme/j1/modules/photoswipe/css/photoswipe.css (0)
  # PhotoSwipe main CSS by Dmytro Semenov 
  # Provides PhotoSwipe styles
  # -----------------------------------------------------------------------------
@@ -174,20 +174,6 @@
     cursor: -webkit-zoom-out;
     cursor: -moz-zoom-out;
     cursor: zoom-out;
-}
-/* claude - Update Photoswipe Lightbox init zoom #1
- * When the lightbox is auto-initialised with `zoom: false`, the JS adds
- * `pswp--no-zoom-cursor` to PhotoSwipe's root via `mainClass`. Without
- * this rule the image would inherit the base `.pswp__img { cursor:
- * zoom-out }` declaration -- a zoom cursor on a non-zoomable image. The
- * rule below replaces that with a hand/finger pointer so the cursor
- * matches the configured click action (e.g. `imageClickAction: 'next'`).
- * The `:active` form keeps the pointer while the image is being clicked
- * so it does not flicker to `grab`/`grabbing` from the click-to-zoom
- * rules above. */
-.pswp--no-zoom-cursor .pswp__img,
-.pswp--no-zoom-cursor .pswp__img:active {
-    cursor: pointer;
 }
 .pswp__button {
     -webkit-user-select: none;
