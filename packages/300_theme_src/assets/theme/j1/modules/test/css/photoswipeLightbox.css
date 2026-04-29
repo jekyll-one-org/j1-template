@@ -1,0 +1,49 @@
+/*
+ # -----------------------------------------------------------------------------
+ # ~/assets/theme/j1/modules/tester/css/photoswipeLightbox.css
+ # Additional CSS for tester app
+ # -----------------------------------------------------------------------------
+*/
+
+/* ——— Featured grid —--------------------------------------------------------—— */
+
+.featured {
+  position: relative;
+  max-width: 60rem;
+  margin: 0 auto;
+  padding: 0 16px 2rem;
+}
+
+.featured-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 3px;
+  position: relative;
+}
+
+.featured-grid a {
+  display: block;
+  overflow: hidden;
+  aspect-ratio: 4 / 3;
+  background: var(--color-bg-hover);
+  border-radius: 0px;
+}
+
+.featured-grid img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  border-radius: 0px;
+  transition: transform 0.15s ease;
+}
+
+.featured-grid a:active img {
+  transform: scale(0.95);
+}
+
+@media (max-width: 719px) {
+  .featured-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

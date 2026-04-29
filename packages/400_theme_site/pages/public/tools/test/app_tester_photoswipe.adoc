@@ -83,32 +83,32 @@ and `.init()` themselves.
 [role="mt-4"]
 *Example*:
 ++++
-<div data-photoswipe-lightbox="auto-gallery">
-  <div class="featured-grid mt-3 mb-4">
+<div class="featured" data-photoswipe-lightbox="auto-gallery">
+  <div class="featured-grid mt-3">
     <a
       href="https://images.unsplash.com/photo-1654394237275-081d5455774b?w=2400&q=80"
-      data-pswp-width="1600" data-pswp-height="1067">
+      data-pswp-width="600" data-pswp-height="450">
       <img
         src="https://images.unsplash.com/photo-1654394237275-081d5455774b?w=600&h=450&fit=crop&q=80"
         alt="A view of a town with mountains in the background">
     </a>
     <a
       href="https://images.unsplash.com/photo-1567972042114-5a1eaba28886?w=2400&q=80"
-      data-pswp-width="1600" data-pswp-height="1067">
+      data-pswp-width="600" data-pswp-height="450">
       <img
         src="https://images.unsplash.com/photo-1567972042114-5a1eaba28886?w=600&h=450&fit=crop&q=80"
         alt="A view of a street with a lot of palm trees">
     </a>
     <a
       href="https://images.unsplash.com/photo-1600663757626-0fc610ba60d4?w=2400&q=80"
-      data-pswp-width="1600" data-pswp-height="1067">
+      data-pswp-width="626" data-pswp-height="1024">
       <img
         src="https://images.unsplash.com/photo-1600663757626-0fc610ba60d4?w=600&h=450&fit=crop&q=80"
         alt="Red and white bridge over the trees">
     </a>
     <a
       href="https://images.unsplash.com/photo-1576764225594-96ad970efffa?w=2400&q=80"
-      data-pswp-width="1600" data-pswp-height="1067">
+      data-pswp-width="1092" data-pswp-height="614">
       <img
         src="https://images.unsplash.com/photo-1576764225594-96ad970efffa?w=600&h=450&fit=crop&q=80"
         alt="A view of a city from a hill above the clouds">
@@ -230,188 +230,3 @@ a logical group id, useful only for `getAutoInitInstance` lookups.
 // a `setState`/`getState`/`messageHandler` shape, and a `frontmatterOptions`
 // merge — say the word and I'll produce one that calls `PhotoSwipeLightbox.autoInit(...)`
 // instead of doing its own DOM scanning.
-
-++++
-<style>
-
-/* ——— Featured grid —--------------------------------------------------------—— */
-
-.featured {
-  position: relative;
-  max-width: 60rem;
-  margin: 0 auto;
-  padding: 0 16px 2rem;
-  opacity: 0;
-}
-
-.featured-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 3px;
-  position: relative;
-}
-
-.featured-grid a {
-  display: block;
-  overflow: hidden;
-  aspect-ratio: 4 / 3;
-  background: var(--color-bg-hover);
-  border-radius: 0px;
-}
-
-.featured-grid img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-  border-radius: 0px;
-  transition: transform 0.15s ease;
-}
-
-.featured-grid a:active img {
-  transform: scale(0.95);
-}
-
-@media (max-width: 719px) {
-  .featured-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-/* ——— Mixed gallery --------------------------------------------------------——— */
-
-.mixed-gallery {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-
-.mixed-gallery a {
-  display: block;
-  overflow: hidden;
-  height: 140px;
-  background: var(--color-bg-hover);
-  border-radius: 8px;
-  outline: none;
-}
-
-.mixed-gallery a:focus-visible {
-  outline: 2px solid var(--color-link);
-  outline-offset: 2px;
-}
-
-.mixed-gallery img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-  border-radius: 8px;
-  transition: transform 0.15s ease;
-}
-
-.mixed-gallery a:active img {
-  transform: scale(0.95);
-}
-
-@media (max-width: 719px) {
-  .mixed-gallery {
-    gap: 6px;
-  }
-
-  .mixed-gallery a {
-    height: 90px;
-    width: auto !important;
-    border-radius: 6px;
-  }
-
-  .mixed-gallery img {
-    width: auto;
-    height: 100%;
-    border-radius: 6px;
-  }
-}
-
-/* ——— Image grid & rows ----------------------------------------------------——— */
-
-.image-row {
-  display: flex;
-  gap: 8px;
-}
-
-.image-row a {
-  display: block;
-  overflow: hidden;
-  aspect-ratio: 1 / 1;
-  background: var(--color-bg-hover);
-  width: 200px;
-  border-radius: 8px;
-}
-
-.image-row img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-  border-radius: 8px;
-  transition: transform 0.15s ease;
-}
-
-.image-row a:active img {
-  transform: scale(0.95);
-}
-
-.gallery {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 8px;
-}
-
-.gallery a {
-  display: block;
-  overflow: hidden;
-  aspect-ratio: 1 / 1;
-  background: var(--color-bg-hover);
-  border-radius: 8px;
-  outline: none;
-}
-
-.gallery a:focus-visible {
-  outline: 2px solid var(--color-link);
-  outline-offset: 2px;
-}
-
-.gallery img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-  border-radius: 8px;
-  transition: transform 0.15s ease;
-}
-
-.gallery a:active img {
-  transform: scale(0.95);
-}
-
-/* ——— Text links —-----------------------------------------------------------—— */
-
-.text-links a {
-  color: var(--color-link);
-  text-decoration: underline;
-  text-underline-offset: 3px;
-}
-
-.text-links a:hover {
-  color: var(--color-text);
-}
-
-.text-links ul {
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  font-size: 1.05rem;
-}
-
-</style>
-++++

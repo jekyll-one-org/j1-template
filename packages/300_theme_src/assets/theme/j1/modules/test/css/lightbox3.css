@@ -1,0 +1,184 @@
+/*
+ # -----------------------------------------------------------------------------
+ # ~/assets/theme/j1/modules/tester/css/lightbox3.css
+ # Additional CSS for tester app
+ # -----------------------------------------------------------------------------
+*/
+
+/* ——— Featured grid —--------------------------------------------------------—— */
+
+.featured {
+  position: relative;
+  max-width: 60rem;
+  margin: 0 auto;
+  padding: 0 16px 2rem;
+}
+
+.featured-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 3px;
+  position: relative;
+}
+
+.featured-grid a {
+  display: block;
+  overflow: hidden;
+  aspect-ratio: 4 / 3;
+  background: var(--color-bg-hover);
+  border-radius: 0px;
+}
+
+.featured-grid img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  border-radius: 0px;
+  transition: transform 0.15s ease;
+}
+
+.featured-grid a:active img {
+  transform: scale(0.95);
+}
+
+@media (max-width: 719px) {
+  .featured-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* ——— Mixed gallery --------------------------------------------------------——— */
+
+.mixed-gallery {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3px;
+}
+
+.mixed-gallery a {
+  display: block;
+  overflow: hidden;
+  height: 140px;
+  background: var(--color-bg-hover);
+  border-radius: 0px;
+  outline: none;
+}
+
+.mixed-gallery a:focus-visible {
+  outline: 2px solid var(--color-link);
+  outline-offset: 2px;
+}
+
+.mixed-gallery img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  border-radius: 0px;
+  transition: transform 0.15s ease;
+}
+
+.mixed-gallery a:active img {
+  transform: scale(0.95);
+}
+
+@media (max-width: 719px) {
+  .mixed-gallery {
+    gap: 3px;
+  }
+
+  .mixed-gallery a {
+    height: 90px;
+    width: auto !important;
+    border-radius: 0px;
+  }
+
+  .mixed-gallery img {
+    width: auto;
+    height: 100%;
+    border-radius: 0px;
+  }
+}
+
+/* ——— Image grid & rows ----------------------------------------------------——— */
+
+.image-row {
+  display: flex;
+  gap: 3px;
+}
+
+.image-row a {
+  display: block;
+  overflow: hidden;
+  aspect-ratio: 1 / 1;
+  background: var(--color-bg-hover);
+  width: 200px;
+  border-radius: 0px;
+}
+
+.image-row img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  border-radius: 0px;
+  transition: transform 0.15s ease;
+}
+
+.image-row a:active img {
+  transform: scale(0.95);
+}
+
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 3px;
+}
+
+.gallery a {
+  display: block;
+  overflow: hidden;
+  aspect-ratio: 1 / 1;
+  background: var(--color-bg-hover);
+  border-radius: 0px;
+  outline: none;
+}
+
+.gallery a:focus-visible {
+  outline: 2px solid var(--color-link);
+  outline-offset: 2px;
+}
+
+.gallery img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  border-radius: 0px;
+  transition: transform 0.15s ease;
+}
+
+.gallery a:active img {
+  transform: scale(0.95);
+}
+
+/* ——— Text links —-----------------------------------------------------------—— */
+
+.text-links a {
+  color: var(--color-link);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.text-links a:hover {
+  color: var(--color-text);
+}
+
+.text-links ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 1rem;
+}

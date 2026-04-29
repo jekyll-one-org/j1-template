@@ -127,58 +127,6 @@ and touch‑first gestures.
 </div>
 ++++
 
-
-++++
-<style>
-
-/* ——— Featured grid ——— */
-
-.featured {
-  position: relative;
-  max-width: 60rem;
-  margin: 0 auto;
-  padding: 0 16px 2rem;
-  opacity: 0;
-}
-
-.featured-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 3px;
-  position: relative;
-}
-
-.featured-grid a {
-  display: block;
-  overflow: hidden;
-  aspect-ratio: 4 / 3;
-  background: var(--color-bg-hover);
-  border-radius: 0px;
-}
-
-.featured-grid img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-  border-radius:0px;
-  transition: transform 0.15s ease;
-}
-
-.featured-grid a:active img {
-  transform: scale(0.95);
-}
-
-@media (max-width: 719px) {
-  .featured-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-</style>
-++++
-
-
 [[gs-markup]]
 [role="mt-4"]
 === Markup
@@ -444,76 +392,8 @@ and will seamlessly transition to the full-size image.
       src="https://images.unsplash.com/photo-1505567745926-ba89000d255a?w=188&h=280&fit=crop&q=80"
       alt="Volcanic landscape">
   </a>
-  <!-- a
-    href="https://images.unsplash.com/photo-1508739773434-c26b3d09e071?w=2400&q=80"
-    data-lightbox="mixed"
-    data-caption="Sunset over the sea"
-    style="width: 210px">
-    <img
-      src="https://images.unsplash.com/photo-1508739773434-c26b3d09e071?w=420&h=280&fit=crop&q=80"
-      alt="Sunset over the sea">
-  </a -->
 </div>
 ++++
-
-++++
-<style>
-/* ——— Mixed gallery ——— */
-
-.mixed-gallery {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-
-.mixed-gallery a {
-  display: block;
-  overflow: hidden;
-  height: 140px;
-  background: var(--color-bg-hover);
-  border-radius: 0px;
-  outline: none;
-}
-
-.mixed-gallery a:focus-visible {
-  outline: 2px solid var(--color-link);
-  outline-offset: 2px;
-}
-
-.mixed-gallery img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-  border-radius: 0px;
-  transition: transform 0.15s ease;
-}
-
-.mixed-gallery a:active img {
-  transform: scale(0.95);
-}
-
-@media (max-width: 719px) {
-  .mixed-gallery {
-    gap: 3px;
-  }
-
-  .mixed-gallery a {
-    height: 90px;
-    width: auto !important;
-    border-radius: 6px;
-  }
-
-  .mixed-gallery img {
-    width: auto;
-    height: 100%;
-    border-radius: 6px;
-  }
-}
-
-</style>
-++++
-
 
 // [role="mt-5"]
 // === Zoom & pan
@@ -533,94 +413,6 @@ and will seamlessly transition to the full-size image.
 //   </a>
 // </div>
 // ++++      
-
-++++
-<style>
-/* ——— Image grid & rows ——— */
-
-.image-row {
-  display: flex;
-  gap: 8px;
-}
-
-.image-row a {
-  display: block;
-  overflow: hidden;
-  aspect-ratio: 1 / 1;
-  background: var(--color-bg-hover);
-  width: 200px;
-  border-radius: 0px;
-}
-
-.image-row img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-  border-radius: 0px;
-  transition: transform 0.15s ease;
-}
-
-.image-row a:active img {
-  transform: scale(0.95);
-}
-
-.gallery {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 3px;
-}
-
-.gallery a {
-  display: block;
-  overflow: hidden;
-  aspect-ratio: 1 / 1;
-  background: var(--color-bg-hover);
-  border-radius: 0px;
-  outline: none;
-}
-
-.gallery a:focus-visible {
-  outline: 2px solid var(--color-link);
-  outline-offset: 2px;
-}
-
-.gallery img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-  border-radius: 0px;
-  transition: transform 0.15s ease;
-}
-
-.gallery a:active img {
-  transform: scale(0.95);
-}
-
-/* ——— Text links ——— */
-
-.text-links a {
-  color: var(--color-link);
-  text-decoration: underline;
-  text-underline-offset: 3px;
-}
-
-.text-links a:hover {
-  color: var(--color-text);
-}
-
-.text-links ul {
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 3px;
-  font-size: 1.05rem;
-}
-
-</style>
-++++
-
 
 [role="mt-5"]
 === HTML in captions
@@ -723,7 +515,6 @@ element.
 
 [role="mt-4"]
 HTML pattern:
-
 [source, html]
 ----
   <a
@@ -745,8 +536,7 @@ Because of the missing <img> tag, no captions are available.
 Open images from code. Without a trigger element, the image fades in
 from center.
 
-Open image via API
-
+Open image via API:
 [source, js]
 ----
 const lb = Lightbox3.Lightbox.init();

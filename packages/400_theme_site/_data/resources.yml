@@ -400,6 +400,32 @@ resources:
         init_function:                  []
 
   # ----------------------------------------------------------------------------
+  # J1 Test/Manual
+  # Additional CSS for test/manual
+  #
+  - name:                               J1 Tester 
+    resource:
+      enabled:                          true
+
+      id:                               test-css
+      comment:                          Additional CSS for test/manual
+      region:                           head
+      layout:                           [ all ]
+      required:                         always
+      script_load:
+      dependencies:                     false
+      pass_init_data:                   false
+
+      data:
+        css:                            []
+        files:                          [
+                                          modules/test/css/lightbox3.css,
+                                          modules/test/css/photoswipeLightbox.css
+                                        ]
+        js:                             []
+        init_function:                  []
+
+  # ----------------------------------------------------------------------------
   # Speak2Me
   # Speech Synthesis (TTS)
   #
