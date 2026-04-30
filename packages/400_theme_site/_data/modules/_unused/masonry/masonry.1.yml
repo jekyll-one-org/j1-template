@@ -308,7 +308,7 @@ settings:
       #
       lightbox:
         enabled:                        true
-        type:                           ps                                      # ps | lb | lg
+        type:                           lg                                      # ps | lb | lg
 
       # ------------------------------------------------------------------------
       # caption options
@@ -330,8 +330,7 @@ settings:
       # lightGallery options
       #
       lightGallery:
-#       plugins:                        lgFullscreen, lgRotate, lgThumbnail
-        plugins:                        lgThumbnail
+        plugins:                        lgFullscreen, lgRotate, lgThumbnail
 
         options:
           licenseKey:                   0000-0000-000-0000

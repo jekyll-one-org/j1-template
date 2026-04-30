@@ -103,16 +103,20 @@ support such functionality.
 
 For J1 Template, different lightbox modules are available:
 
-* Lightbox V3  (default)
-* PhotoSwipe Lightbox V5 (optional)
+* PhotoSwipe Lightbox V5 (default)
+* Lightbox V3  (optional)
 * lightGallery (optional)
 
-The *default* app employed by J1 Template is Lightbox V3, a Javascript
-library free to use for private or business websites. As an alternative,
-PhotoSwipe Lightbox can be used. This lightbox may a better choice on
-mobile devices for extended touch, pan and swipe support. For more complex
-use cases, like a thumbnail gallery preview or video support, *LightGallery*
-can be used.
+The *default* app employed by J1 Template is *PhotoSwipe Lightbox V5*, a
+powerful Javascript library free to use for private or business websites.
+This lightbox is an excellent choice for web developers (rich API) and
+for mobile devices, with extended touch, pan, and swipe support.
+
+As an alternative, *Lightbox V3* can be used. This lightweight lightbox
+is a good choice for websites running (mostly) on desktop computers but
+also supports mobile devices, including touch, pan, and swipe. For more
+complex use cases, like a thumbnail gallery preview or video support,
+*LightGallery* can be used.
 
 [CAUTION]
 ====
@@ -333,6 +337,9 @@ The difference between a **Grid**-styled gallery and a **Masonry**-styled
 gallery is how they handle image height and alignment. While a *grid* forces
 a *uniform structure*, *masonry* allows images to retain their natural
 proportions, creating a *brick wall* effect. 
+
+// .Old times
+// gallery::jg_old_times[role="mt-4 mb-4"]
 
 [role="mt-4"]
 === Grid-styled Gallery

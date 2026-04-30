@@ -130,13 +130,17 @@
   transform: scale(0.95);
 }
 
-.gallery {
+/* ——— Gallery ----------------------------------------------------——— */
+
+/* jadams, 2026-04-29: renamed .gallery to .image-gallery */
+/* jadams, 2026-04-29: because of clsss/naming conflicts  */
+.image-gallery {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 3px;
 }
 
-.gallery a {
+.image-gallery a {
   display: block;
   overflow: hidden;
   aspect-ratio: 1 / 1;
@@ -145,12 +149,12 @@
   outline: none;
 }
 
-.gallery a:focus-visible {
+.image-gallery a:focus-visible {
   outline: 2px solid var(--color-link);
   outline-offset: 2px;
 }
 
-.gallery img {
+.image-gallery img {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -159,7 +163,7 @@
   transition: transform 0.15s ease;
 }
 
-.gallery a:active img {
+.image-gallery a:active img {
   transform: scale(0.95);
 }
 

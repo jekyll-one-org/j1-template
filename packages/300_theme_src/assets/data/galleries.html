@@ -7,7 +7,7 @@ exclude_from_search:                    true
 
 {% comment %}
  # -----------------------------------------------------------------------------
- # ~/assets/data/galleries.html (0)
+ # ~/assets/data/galleries.html (1)
  # Liquid procedure to generate the HTML portion for all J1 Galleries
  # configured (Justified Gallery)
  #
@@ -96,14 +96,33 @@ exclude_from_search:                    true
         {% endfor %}
       {% endif %}
 
-    <!-- START Image Galleries -->
-    <div id="{{gallery.id}}">
+     <!-- START Image Galleries -->
+     {% if gallery.lightbox.type == 'ps' %}
+      <div id="{{gallery.id}}" data-photoswipe-lightbox="{{gallery.id}}">
+     {% else %}
+      <div id="{{gallery.id}}">
+     {% endif %}
       {% for image in gallery.images %}
         {% assign caption     = image.caption_text %}
         {% assign description = image.description %}
+        {% assign width       = image.width %}
+        {% assign height      = image.height %}
 
         {% if gallery.lightbox.enabled %}
-        {% if gallery.lightbox.type == 'lb' %}
+        {% if gallery.lightbox.type == 'ps' %}
+        <a
+          href="{{gallery.image_base_path}}/{{image.file}}"
+          data-pswp-width="{{width}}"
+          data-pswp-height="{{height}}">
+             <img
+              id="{{gallery.id}}_{{forloop.index}}"
+              class="{{gallery.image_styles}}"
+              src="{{gallery.image_base_path}}/{{image.file}}"
+              alt="{{caption|strip|strip_newlines}}"
+              aria-label="{{caption|strip|strip_newlines}}"
+              style="{{image_filters}};">
+        </a>
+        {% elsif gallery.lightbox.type == 'lb' %}
         <a
           href="{{gallery.image_base_path}}/{{image.file}}"
           data-lightbox="{{gallery.id}}-image-group"
@@ -115,7 +134,7 @@ exclude_from_search:                    true
               src="{{gallery.image_base_path}}/{{image.file}}"
               alt="{{caption|strip|strip_newlines}}"
               aria-label="{{caption|strip|strip_newlines}}"
-              style="{{image_filters}};">
+              style="width: {{width}}px;height: {{height}}px; {{image_filters}};">
         </a>
         {% elsif gallery.lightbox.type == 'lg' %}
         <a

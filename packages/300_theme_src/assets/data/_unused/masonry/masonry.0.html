@@ -376,6 +376,26 @@ exclude_from_search:                    true
               <div class="caption">{{image.caption}}</div>
               {% endif %}
             </div>
+            {% elsif grid.lightbox.type == 'sw' %}
+            <div class="{{grid.caption.position}}">
+              <a
+                href="{{grid.image_base_path}}/{{image.file}}"
+                data-pswp-width="1920"
+		            data-pswp-height="1280"
+		            target="_blank">
+                 <img
+                  id="{{forloop.index}}"
+                  class="pswp-image {{grid.image_styles}}"
+                  src="{{grid.image_base_path}}/{{image.file}}"
+                  aria-label="{{image.caption}}"
+                  style="{{image_filters}};">
+                <div  class="swp-caption-content">{{image.caption}}"</div>
+                <span class="pswp-caption-content">{{image.caption}}"</span>
+              </a>
+              {% if grid.caption.enabled %}
+              <div class="caption">{{image.caption}}</div>
+              {% endif %}
+            </div>
             {% else %}
             <div class="{{grid.caption.position}}">
               <img
@@ -468,17 +488,29 @@ exclude_from_search:                    true
                    {% for attribute in grid.lightGallery.attributes %}
                    {{attribute[0] | json}}:   {{attribute[1] | json}}{% if forloop.last %}{% else %},{% endif %}
                    {% endfor %}
-                }
+                },
+                "tracks": [
+                  {% for track in video.tracks %}
+                  {
+                    {% for attribute in track %}
+                      {% if attribute[0] == 'track' %} {% continue %} {% endif %}
+                      {{attribute[0] | json}}: {{attribute[1] | json}}{% if forloop.last %}{% else %},{% endif %}
+                    {% endfor %}
+                  }{% if forloop.last %}{% else %},{% endif %}
+                  {% endfor %}
+                ]
               }'>
-                <div class="lg-uno-video-icon">
-                  <img
-                    id="{{video.name | replace: ' ','_' | replace: '-','_' | downcase}}"
-                    class="{{video.poster.style}}"
-                    src="{{grid.html5.poster_base_path}}/{{video.poster.source}}"
-                    aria-label="{{video.name}}">
 
-                   <span class="big-play-button"></span>
-                 </div>
+              <div class="lg-uno-video-icon">
+                <img
+                  id="{{video.name | replace: ' ','_' | replace: '-','_' | downcase}}"
+                  class="{{video.poster.style}}"
+                  src="{{grid.html5.poster_base_path}}/{{video.poster.source}}"
+                  aria-label="{{video.name}}">
+
+                  <span class="big-play-button"></span>
+              </div>
+
             </a>
             <!-- END {{video.type}} video -->
             <div class="caption">{{video.caption.text}}</div>

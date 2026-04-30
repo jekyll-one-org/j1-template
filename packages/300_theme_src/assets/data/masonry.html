@@ -7,7 +7,7 @@ exclude_from_search:                    true
 
 {% comment %}
  # -----------------------------------------------------------------------------
- # ~/assets/data/masonry_app.html
+ # ~/assets/data/masonry.html (1)
  # Liquid procedure to generate the HTML portion for all Masonry Grids
  # configured
  #
@@ -335,8 +335,12 @@ exclude_from_search:                    true
         {% endfor %}
       {% endif %}
 
-      <!-- Card Image Grid -->
+      <!-- START Image Grid -->
+     {% if grid.lightbox.type == 'ps' %}
+      <div id="{{grid.id}}" class="row {{grid.id | replace: '_','-' }} g-0" data-photoswipe-lightbox="{{grid.id}}">
+     {% else %}
       <div id="{{grid.id}}" class="row {{grid.id | replace: '_','-' }} g-0">
+    {% endif %}
         {% for image in grid.images %}
         <div class="col-xl-{{grid.responsive.xl}} col-lg-{{grid.responsive.lg}} col-md-{{grid.responsive.md}} col-sm-{{grid.responsive.sm}} col-{{grid.responsive.xs}}" style=";padding-bottom: {{grid.gutters}}px; padding-left: {{grid.gutters}}px;">
           <div class="card">
@@ -345,15 +349,13 @@ exclude_from_search:                    true
             <div class="{{grid.caption.position}}">
               <a
                 href="{{grid.image_base_path}}/{{image.file}}"
-                data-lightbox="{{grid.id}}-image-group"
-                data-caption="{{image.caption}}"
-                data-title="{{image.caption}}">
+                data-lightbox="{{grid.id}}"
+                data-caption="{{image.caption}}">
                  <img
-                  id="{{forloop.index}}"
                   class="{{grid.image_styles}}"
                   src="{{grid.image_base_path}}/{{image.file}}"
                   aria-label="{{image.caption}}"
-                  style="{{image_filters}}; height: {{grid.image_height}}">
+                  style="height: {{grid.image_height}}px">
               </a>
               {% if grid.caption.enabled %}
               <div class="caption">{{image.caption}}</div>
@@ -370,27 +372,27 @@ exclude_from_search:                    true
                   id="{{forloop.index}}"
                   class="img-responsive"
                   src="{{grid.image_base_path}}/{{image.file}}"
-                  aria-label="{{image.caption}}">
+                  aria-label="{{image.caption}}"
+                  style="height: {{grid.image_height}}px">
               </a>
               {% if grid.caption.enabled %}
               <div class="caption">{{image.caption}}</div>
               {% endif %}
             </div>
-            {% elsif grid.lightbox.type == 'sw' %}
+            {% elsif grid.lightbox.type == 'ps' %}
+            {% assign width       = image.width %}
+            {% assign height      = image.height %}            
             <div class="{{grid.caption.position}}">
               <a
                 href="{{grid.image_base_path}}/{{image.file}}"
-                data-pswp-width="1920"
-		            data-pswp-height="1280"
-		            target="_blank">
+                data-pswp-width="{{width}}"
+                data-pswp-height="{{height}}">
                  <img
-                  id="{{forloop.index}}"
-                  class="pswp-image {{grid.image_styles}}"
-                  src="{{grid.image_base_path}}/{{image.file}}"
-                  aria-label="{{image.caption}}"
-                  style="{{image_filters}};">
-                <div  class="swp-caption-content">{{image.caption}}"</div>
-                <span class="pswp-caption-content">{{image.caption}}"</span>
+                    class="{{grid.image_styles}}"
+                    src="{{grid.image_base_path}}/{{image.file}}"
+                    alt="{{image.caption}}"
+                    aria-label="{{image.caption}}"
+                    style="height: {{grid.image_height}}px">
               </a>
               {% if grid.caption.enabled %}
               <div class="caption">{{image.caption}}</div>
@@ -413,7 +415,7 @@ exclude_from_search:                    true
         </div>
         {% endfor %}
       </div>
-      <!-- /Image Grid -->
+      <!-- END Image Grid -->
     {% endif %}
 
     {% comment %} VIDEO Grid
