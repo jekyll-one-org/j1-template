@@ -1,7 +1,7 @@
 ---
 title:                                  Lightbox V3
-title_extention:                        The default lightbox
-tagline:                                The default lightbox
+title_extention:                        API
+tagline:                                Application Interface
 
 date:                                   2026-04-28
 #last_modified:                         2026-01-01
@@ -10,14 +10,14 @@ description: >
                                         The original lightbox script by Lokesh Dhakar.
                                         Now with fluid animations and touch‑first gestures.
 keywords: >
-                                        open source, free, template, jekyll, jekyllone, web,
-                                        sites, static, lightbox
+                                        open source, free, template, jekyll,
+                                        jekyllone, website, static, lightbox
 
 categories:                             [ Manual ]
-tags:                                   [ Module, Lightbox ]
+tags:                                   [ Module, LightboxV3 ]
 
 image:
-  path:                                 /assets/image/module/attic/1920x1280/bp-miller.jpg
+  path:                                 /assets/image/module/attic/1920x1280/isaac-davis.jpg
   width:                                1920
   height:                               1280
 
@@ -26,18 +26,16 @@ permalink:                              /pages/public/manual/module/lightbox3/li
 
 resources:                              [ lightbox3 ]
 resource_options:
+  - toccer:
+      collapseDepth:                    3
   - attic:
-      opacity:                          0.3
-      preload:                          0
-      transitionDuration:               fast
-      resolutionRefreshRate:            500
       slides:
-        - url:                          /assets/image/module/attic/1920x1280/bp-miller.jpg
-          alt:                          Photo by BP Miller on Unsplash
+        - url:                          /assets/image/module/attic/1920x1280/isaac-davis.jpg
+          alt:                          Photo by Isaac Davis on Unsplash
           badge:
             type:                       unsplash
-            author:                     BP Miller
-            href:                       //unsplash.com/de/@bp_miller
+            author:                     Isaac Davis
+            href:                       //unsplash.com/@isaacdavis
 ---
 
 // Page Initializer

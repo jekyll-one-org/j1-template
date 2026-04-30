@@ -221,7 +221,9 @@
       href:                             /pages/public/manual/module/photoswipe5/photoswipe/
       icon:                             flashlight
 
-
+    - title:                            lightGallery V2
+      href:                             /pages/public/manual/module/lightgallery2/lightgallery/
+      icon:                             flashlight
 
 #     - title:                            Where to go
 #       href:                             //jekyll.one/pages/public/manuals/where_to_go/

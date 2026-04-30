@@ -1,5 +1,5 @@
 ---
-title:                                  lightGallery Lightbox
+title:                                  lightGallery V2
 title_extention:                        API
 tagline:                                Application Interface
 
@@ -18,7 +18,7 @@ categories:                             [ Manual ]
 tags:                                   [ Module, lightGallery, Core ]
 
 image:
-  path:                                 /assets/image/module/attic/1920x1280/bp-miller.jpg
+  path:                                 /assets/image/module/attic/1920x1280/isaac-davis.jpg
   width:                                1920
   height:                               1280
 

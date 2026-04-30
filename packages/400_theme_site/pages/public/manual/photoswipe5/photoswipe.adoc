@@ -1,5 +1,5 @@
 ---
-title:                                  PhotoSwipe Lightbox
+title:                                  PhotoSwipe V5
 title_extention:                        API
 tagline:                                Application Interface
 
@@ -22,8 +22,7 @@ categories:                             [ Manual ]
 tags:                                   [ Module, Photoswipe, Core ]
 
 image:
-  path:                                 /assets/image/module/attic/1920x1280/bp-miller.jpg
-  width:                                1920
+  path:                                 /assets/image/module/attic/1920x1280/isaac-davis.jpg
   height:                               1280
 
 attic:                                  false
@@ -36,15 +35,13 @@ resource_options:
   - toccer:
       collapseDepth:                    2
   - attic:
-      opacity:                          0.3
-      preload:                          0
-      transitionDuration:               fast
-      resolutionRefreshRate:            500
       slides:
-        - url:                          /assets/image/module/attic/1920x1280/bp-miller.jpg
-          alt:                          Photo by BP Miller on Unsplash
+        - url:                          /assets/image/module/attic/1920x1280/isaac-davis.jpg
+          alt:                          Photo by Isaac Davis on Unsplash
           badge:
             type:                       unsplash
+            author:                     Isaac Davis
+            href:                       //unsplash.com/@isaacdavis
 ---
 
 // http://localhost:22000/opening-or-closing-transition
