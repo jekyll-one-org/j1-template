@@ -138,8 +138,8 @@ exclude_from_search:                    true
         </a>
         {% elsif gallery.lightbox.type == 'lg' %}
         <a
-          href="{{gallery.image_base_path}}/{{image.file}}"
           class="lg-item"
+          href="{{gallery.image_base_path}}/{{image.file}}"
           data-sub-html="{{description|strip|strip_newlines}}">
           <img
             id="{{gallery.id}}_{{forloop.index}}"

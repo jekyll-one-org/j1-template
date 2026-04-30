@@ -1,6 +1,6 @@
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/modules/lightGallery/js/core/lightgallery.js (3)
+ # ~/assets/theme/j1/modules/lightGallery/js/core/lightgallery.js (2)
  # Provides the lightGallery v2.8.3 Main JS module
  #
  # Product/Info:
@@ -1135,24 +1135,6 @@
                         .first()
                         .attr('style', imgStyle);
                 }
-                // claude - Modify lightGallery img overlay #1
-                // Re-fit the inline width/height of every image slide whose
-                // <img> has finished loading. The fit ratio depends on the
-                // .lg-inner area so window resize / orientation change must
-                // recompute or the wrapper will keep its previous px size and
-                // either letterbox the new viewport or overflow it.
-                //
-                // Iterate via querySelectorAll on the raw .lg-outer DOM node:
-                // the lgQuery wrapper exposes .length only on its internal
-                // .selector NodeList, so a plain DOM walk is simpler and
-                // avoids reaching into private state.
-                var outerEl = this.outer && this.outer.get && this.outer.get();
-                if (outerEl) {
-                    var loadedSlides = outerEl.querySelectorAll('.lg-item.lg-complete');
-                    for (var s = 0; s < loadedSlides.length; s++) {
-                        this.applyLgImgOverlaySize($LG(loadedSlides[s]));
-                    }
-                }
                 this.LGel.trigger(lGEvents.containerResize);
             }
         };
@@ -1653,193 +1635,6 @@
                     '</span>');
             });
         };
-        // claude - Modify lightGallery img overlay #1
-        // ---------------------------------------------------------------
-        // Mirror PhotoSwipe's `setWidthHeight()` on `.pswp__img`.
-        //
-        // The base lightGallery stylesheet positions <picture class="lg-img-wrap">
-        // at left:0; right:0; top:0; bottom:0 with width/height: 100%, so the
-        // wrapper visually covers the full slide -- including the .lg-prev /
-        // .lg-next arrow buttons at the slide edges. The inner <img> uses
-        // max-width/max-height: 100%, so the *picture* still looks correctly
-        // sized, but the picture wrapper itself swallows pointer events on the
-        // arrows.
-        //
-        // After the image's naturalWidth/Height are known, this helper
-        // computes a "fit" size (image scaled into the .lg-inner area, minus
-        // the toolbar offsets that lightGallery already tracks via
-        // mediaContainerPosition) and writes inline `width` / `height` in px
-        // onto both the <picture class="lg-img-wrap"> and the
-        // <img class="lg-image">. Inline styles always win over the
-        // stylesheet's width/height: 100%, so the wrapper shrinks to the
-        // visible image. The companion uno.css rule adds `margin: auto` to
-        // .lg-img-wrap so the four 0 offsets auto-center the now-intrinsic
-        // wrapper inside the slide -- the same visual result as PhotoSwipe's
-        // .pswp__img with explicit inline w/h.
-        //
-        // Only image slides are affected: the selector `.lg-image` matches
-        // exclusively the <img> emitted by `getImgMarkup()`. Video posters
-        // (.lg-video-poster), iframes and HTML slides have no `.lg-image`
-        // child, so this is a no-op for them.
-        LightGallery.prototype.applyLgImgOverlaySize = function ($currentSlide) {
-            if (!$currentSlide || !$currentSlide.get) {
-                return;
-            }
-            var slideEl = $currentSlide.get();
-            if (!slideEl) {
-                return;
-            }
-            var imgEl = slideEl.querySelector('.lg-image');
-            if (!imgEl) {
-                return;
-            }
-            var natW = imgEl.naturalWidth;
-            var natH = imgEl.naturalHeight;
-            // If the image has no natural dimensions yet (still loading or
-            // failed) bail out -- triggerSlideItemLoad / refreshOnResize will
-            // call us again once they are known.
-            if (!natW || !natH) {
-                return;
-            }
-            var inner = this.$inner && this.$inner.get && this.$inner.get();
-            var outerEl = this.outer && this.outer.get && this.outer.get();
-            if (!inner) {
-                return;
-            }
-            var innerRect = inner.getBoundingClientRect();
-            var areaW = innerRect.width || inner.clientWidth || window.innerWidth;
-            var areaH = innerRect.height || inner.clientHeight || window.innerHeight;
-            // claude - Modify lightGallery img overlay #2
-            // Reserve horizontal space for the .lg-prev / .lg-next arrow
-            // buttons so the picture wrapper stops sitting underneath them.
-            //
-            // The arrows are siblings of .lg-inner inside .lg-content (see
-            // the template assembled in LightGallery's constructor). They
-            // are positioned with `position: absolute; left: 0` and
-            // `right: 0`, which makes them visually overlay the left and
-            // right edges of .lg-inner. Without subtracting their widths,
-            // the fit math below treats the full .lg-inner width as
-            // available, so the resulting wrapper / image extends
-            // underneath the chevrons and visually overlaps them.
-            //
-            // We measure offsetWidth at runtime instead of using a
-            // hard-coded constant so the fix continues to work when:
-            //   - the host page restyles .lg-prev / .lg-next to a
-            //     different size,
-            //   - either button is disabled via `controls: false` (the
-            //     querySelector returns null and the contribution is 0),
-            //   - a downstream stylesheet sets `display: none` on a
-            //     button (offsetWidth resolves to 0).
-            var prevBtn = outerEl && outerEl.querySelector('.lg-prev');
-            var nextBtn = outerEl && outerEl.querySelector('.lg-next');
-            var prevW = (prevBtn && prevBtn.offsetWidth) || 0;
-            var nextW = (nextBtn && nextBtn.offsetWidth) || 0;
-            // claude - Modify lightGallery img overlay #2
-            // Reserve vertical space for the toolbar (top), the captions
-            // container (.lg-components .lg-sub-html, bottom) and the
-            // thumbnail strip (.lg-thumb-outer, bottom).
-            //
-            // This replaces change #1's `mediaContainerPosition.top +
-            // bottom` subtraction, which was incorrect in both
-            // allowMediaOverlap modes:
-            //
-            //   * allowMediaOverlap === false (default): $content has
-            //     already been shrunk by setMediaContainerPosition() so
-            //     .lg-inner's clientHeight ALREADY excludes the toolbar
-            //     and the captions/thumbs. The old code then subtracted
-            //     them a second time, producing a wrapper roughly half
-            //     the size it should be. The image fit, but well inside
-            //     the available area.
-            //   * allowMediaOverlap === true: getMediaContainerPosition()
-            //     returns {0, 0} unconditionally, so the old code
-            //     subtracted nothing and the picture extended under the
-            //     toolbar / captions / thumbs -- the exact overlap the
-            //     user reported.
-            //
-            // Measuring how many pixels each bar visually covers .lg-inner
-            // (via getBoundingClientRect) yields the correct reservation
-            // in both modes: bars that sit OUTSIDE .lg-inner contribute
-            // 0 (no double subtraction), bars that sit OVER it contribute
-            // exactly the overlapping pixel count.
-            //
-            // The in-slide caption variant (.lg-item .lg-sub-html, used
-            // when settings.appendSubHtmlTo === '.lg-item') is positioned
-            // inside .lg-img-wrap itself and therefore needs no separate
-            // reservation -- the wrapper is what we are sizing here.
-            var topReserve = 0;
-            var bottomReserve = 0;
-            if (outerEl) {
-                var toolbar = outerEl.querySelector('.lg-toolbar');
-                if (toolbar) {
-                    var tbRect = toolbar.getBoundingClientRect();
-                    topReserve = Math.max(topReserve, tbRect.bottom - innerRect.top);
-                }
-                var subHtml = outerEl.querySelector('.lg-components .lg-sub-html');
-                if (subHtml && subHtml.clientHeight > 0) {
-                    var shRect = subHtml.getBoundingClientRect();
-                    bottomReserve = Math.max(bottomReserve, innerRect.bottom - shRect.top);
-                }
-                var thumbOuter = outerEl.querySelector('.lg-thumb-outer');
-                if (thumbOuter && thumbOuter.clientHeight > 0) {
-                    var thRect = thumbOuter.getBoundingClientRect();
-                    bottomReserve = Math.max(bottomReserve, innerRect.bottom - thRect.top);
-                }
-            }
-            topReserve = Math.max(0, topReserve);
-            bottomReserve = Math.max(0, bottomReserve);
-            // claude - Modify lightGallery img overlay #2
-            // Shrink the fit-area by the reservations computed above. From
-            // here on the math is unchanged from change #1: pick the
-            // smaller of the two scale ratios so the image is fully
-            // visible, never scale beyond 1x.
-            areaW = Math.max(0, areaW - prevW - nextW);
-            areaH = Math.max(0, areaH - topReserve - bottomReserve);
-            if (areaW <= 0 || areaH <= 0) {
-                return;
-            }
-            var hRatio = areaW / natW;
-            var vRatio = areaH / natH;
-            var fit = Math.min(1, Math.min(hRatio, vRatio));
-            var w = Math.round(natW * fit);
-            var h = Math.round(natH * fit);
-            var picture = slideEl.querySelector('.lg-img-wrap');
-            if (picture) {
-                // claude - Modify lightGallery img overlay #2
-                // Pin the wrapper's containing rectangle to the *available*
-                // area (i.e. the .lg-inner box minus the bars) instead of
-                // the full .lg-inner box.
-                //
-                // Why this matters: the wrapper has `position: absolute`
-                // with base-CSS offsets `top: 0; right: 0; bottom: 0;
-                // left: 0` and uno.css adds `margin: auto`. With change
-                // #1's plain `width` / `height` write, the wrapper was
-                // centered inside the FULL .lg-item box. That works when
-                // the top and bottom reservations are equal (margin auto
-                // distributes the slack symmetrically) but fails when
-                // they differ -- e.g. a 47px toolbar on top and a 100px
-                // caption strip at the bottom. In the asymmetric case,
-                // symmetric centering still leaves the wrapper overlapping
-                // the larger bar.
-                //
-                // Writing inline `top` / `right` / `bottom` / `left` here
-                // overrides the base CSS's zero offsets so the wrapper's
-                // containing block becomes the available rectangle.
-                // Together with the explicit width/height and margin:auto
-                // (carried over from change #1's uno.css rule) the
-                // browser distributes the slack symmetrically WITHIN that
-                // rectangle, producing correct centering regardless of
-                // how asymmetric the reservations are.
-                picture.style.top = topReserve + 'px';
-                picture.style.right = nextW + 'px';
-                picture.style.bottom = bottomReserve + 'px';
-                picture.style.left = prevW + 'px';
-                picture.style.width = w + 'px';
-                picture.style.height = h + 'px';
-            }
-            imgEl.style.width = w + 'px';
-            imgEl.style.height = h + 'px';
-        };
-
         LightGallery.prototype.triggerSlideItemLoad = function ($currentSlide, index, delay, speed, isFirstSlide) {
             var _this = this;
             var currentGalleryItem = this.galleryItems[index];
@@ -1850,12 +1645,6 @@
                 !currentGalleryItem.poster
                 ? speed
                 : 0;
-            // claude - Modify lightGallery img overlay #1
-            // The image has just loaded (onSlideObjectLoad fired its load.lg
-            // callback), so naturalWidth/Height are now valid. Apply the
-            // PhotoSwipe-style inline px sizing before the lg-complete class
-            // is added to avoid a one-frame flash of the full-slide wrapper.
-            this.applyLgImgOverlaySize($currentSlide);
             setTimeout(function () {
                 $currentSlide.addClass('lg-complete lg-complete_');
                 _this.LGel.trigger(lGEvents.slideItemLoad, {

@@ -1,6 +1,6 @@
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/modules/lightGallery/css/theme/uno.css (4)
+ # ~/assets/theme/j1/modules/lightGallery/css/theme/uno.css (3)
  # Provides LightGallery styles for Theme Uno
  #
  # Product/Info:
@@ -73,25 +73,10 @@
   overflow: hidden;
 }
 
-/*
- * Limit the image (overlay) size  to NOT overlap
- * the prev/next buttons (lg-prev/lg-next), the
- * toolbar at the top, and the captions container
- * at the bottom. */
-.lg-outer .lg-object {
-  display: inline-block;
-  vertical-align: middle;
-  max-width: 80%;
-  max-height: 90%;
-  width: auto;
-  height: auto;
-  position: relative;
-}
-
 /* custom image overlay (picture wrap)
    ----------------------------------------------------------------------------- */
 
-/* 
+/* claude - Modify lightGallery img overlay #1
  * Re-shape <picture class="lg-img-wrap"> so it stops covering the slide
  * edges (and therefore stops swallowing pointer events on .lg-prev /
  * .lg-next). The base lightGallery stylesheet positions .lg-img-wrap with:
@@ -133,7 +118,7 @@
 /* custom buttons (prev/next)
    ----------------------------------------------------------------------------- */
 
-/*
+   /* claude - Modify lightGallery buttons #1
  * Re-style the prev / next arrow buttons so they look and position exactly
  * like PhotoSwipe's pswp__button--arrow--prev / --next. Differences from
  * the original lightGallery rules:
@@ -176,7 +161,7 @@
   -webkit-touch-callout: none;
 }
 
-/*
+/* claude - Modify lightGallery buttons #1
  * The legacy lg.woff glyph pseudo-elements are intentionally disabled --
  * the SVG injected into the button replaces them. `content: none` keeps
  * the rules harmless even if a downstream stylesheet still expects the
@@ -186,7 +171,7 @@
   content: none;
 }
 
-/*
+/* claude - Modify lightGallery buttons #1
  * The injected arrow SVG. Geometry mirrors PhotoSwipe's .pswp__icn
  * (60x60, vertically centered in the button, offset 9px from the prev
  * edge / 14px from the next edge) and the next-arrow flip uses the same
@@ -265,12 +250,13 @@
 /* custom icons (vjs big-play-button)
 -------------------------------------------------------------------------------- */
 
-/*
+/* claude - masonry card hover #1
    Ensure the parent that hosts the absolutely-positioned .big-play-button
    establishes a positioning context. Without `position: relative` on
    .lg-uno-video-icon, the button resolves its top/left/bottom/right against
    the nearest positioned ancestor (or the viewport), which can cause it to
-   shift when hover state triggers a repaint/reflow in a different ancestor. */
+   shift when hover state triggers a repaint/reflow in a different ancestor.
+*/
 .lg-uno-video-icon {
   position: relative; /* claude - masonry card hover #1 */
 }
@@ -283,25 +269,27 @@
   bottom: 0;
   right: 0;
   z-index: 1;
-  /*
+  /* claude - masonry card hover #1
      Use background-longhand properties instead of the `background` shorthand
      so the hover rule (which also uses the shorthand) cannot reset values
      like background-size/background-origin/background-clip to their initial
-     state. Swapping only the image URL keeps positioning identical on hover.   */
+     state. Swapping only the image URL keeps positioning identical on hover.
+  */
   background-image: url(icons/play-button.svg); /* claude - masonry card hover #1 */
   background-repeat: no-repeat;                 /* claude - masonry card hover #1 */
   background-position: center center;           /* claude - masonry card hover #1 */
   background-size: auto;                        /* claude - masonry card hover #1 */
 }
 
-/*
+/* claude - masonry card hover #1
    On hover, change ONLY the background-image. Do NOT use the `background`
    shorthand here — the shorthand resets every unspecified background-*
    sub-property (background-size, background-origin, background-clip,
    background-attachment, background-color) to its initial value, which is
    what made the icon appear displaced from center on hover. Also restate
    the positioning offsets defensively so any future cascade change cannot
-   detach the button from its centered position. */
+   detach the button from its centered position.
+*/
 .lg-uno-video-icon:hover .big-play-button {
   top: 0;                                             /* claude - masonry card hover #1 */
   left: 0;                                            /* claude - masonry card hover #1 */

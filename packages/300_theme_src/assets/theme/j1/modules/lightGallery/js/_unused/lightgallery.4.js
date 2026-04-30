@@ -1,6 +1,6 @@
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/modules/lightGallery/js/core/lightgallery.js (3)
+ # ~/assets/theme/j1/modules/lightGallery/js/core/lightgallery.js (4)
  # Provides the lightGallery v2.8.3 Main JS module
  #
  # Product/Info:

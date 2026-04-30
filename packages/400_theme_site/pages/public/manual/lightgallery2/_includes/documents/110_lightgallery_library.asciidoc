@@ -1,175 +1,198 @@
+// claude - Update lightGallery Lightbox manual #1
+// This file has been heavily updated to match lightGallery v2.8.3
+// (the version that is shipped with the J1 template). The most
+// important changes are:
+//
+//   * The whole API is now described in *vanilla JavaScript*. The
+//     previous version of this file documented the *jQuery v1.x* API
+//     (`$lg.lightGallery()`, `onBeforeOpen.lg`, ...) which no longer
+//     works with the bundled scripts.
+//
+//   * Default values were corrected against the source code. For
+//     example `speed` is now `400` (not `600`), `preload` is `2`
+//     (not `1`) and `backdropDuration` is `300` (not `150`).
+//
+//   * Event names follow the v2 convention (`lgInit`, `lgBeforeSlide`,
+//     ... – CamelCase, no `.lg` namespace).
+//
+//   * Many v2 settings that were missing from the previous version
+//     (`allowMediaOverlap`, `licenseKey`, `mobileSettings`, `strings`,
+//     `trapFocus`, `zoomFromOrigin`, ...) have been added.
+//
+//   * Obsolete share targets (e.g. `googlePlus`) have been removed and
+//     the `pinterest` share target has been added.
+//
+//   * The empty *TODO: Description to be added* rows in the
+//     *Transition styles* table have been replaced with short, plain
+//     English explanations of every transition mode.
+//
 [role="mt-5"]
-== lightgallery API
+== lightGallery API
 
-lightgallery is a fast, modular and responsive jQuery Plugin to create
-simple but beautiful looking, featured image and video galleries supported by
-a powerful lightbox.
+lightGallery is a fast, modular and responsive JavaScript lightbox.
+The *core* library handles slide navigation, animations and the
+basic toolbar. Every extra feature (thumbnails, zoom, full-screen,
+autoplay, ...) is provided by a *plugin* that can be loaded
+independently.
 
-lightgallery consists in a core library for all basic functionality and
-additional plugin libraries to extend the lightbox component for your needs.
-lightgallery comes with a lot of options, events, and methods to
-customize the gallery without touching the core code. You can find both
-lightgallery core options, and the built in plugin options here.
+This chapter documents the API of lightGallery `v2.8.3` (the version
+shipped with the J1 template). For each option you will find its
+type, its default value and a short description. The longer settings
+also come with a small example.
 
 [role="mt-4"]
 === Initialization
 
-The initialization of lightgallery is done by a *4-step-sequence*: Loading the
-CSS (1) and JS code (2) portions, placing the HTML code of the gallery (3)
-followed by a final setup phase to make lightgallery instances ready to use (4).
+The initialisation of lightGallery happens in *four* steps: load the
+CSS (1), load the JavaScript (2), place the gallery markup in the
+HTML body (3) and finally call the global `lightGallery()` function
+to wire everything together (4).
 
 [role="mt-4"]
 ==== CSS load
 
-First of all add lightgallery.css in the <HEAD> section of the document.
+Add the lightGallery bundle stylesheet inside the `<head>` of the
+document. The bundle file already contains every plugin stylesheet,
+so only one `<link>` tag is needed:
 
 [source, html]
 ----
 <head>
-  <link type="text/css" rel="stylesheet" href="css/lightgallery.css" />
+  <link rel="stylesheet" type="text/css"
+        href="css/lightgallery-bundle.min.css" />
 </head>
 ----
 
 [role="mt-4"]
 ==== JS load
 
-Include jQuery and lightgallery.min.js into your document. If you want to
-include any lightgallery plugin you can include it after
-lightgallery.min.js.
+Include the lightGallery core script and the plugin scripts you want
+to use, just before the closing `</body>` tag. The order matters –
+plugins must be loaded *after* the core:
 
 [source, html]
 ----
-</BODY>
+<body>
   ...
-  <!-- lightgallery core -->
+  <!-- 1. lightGallery core -->
   <script src="js/lightgallery.min.js"></script>
-  <!-- lightgallery plugins -->
-  <script src="js/lg-thumbnail.min.js"></script>
+
+  <!-- 2. Plugins (load only the ones you need) -->
+  <script src="js/plugins/lg-thumbnail.min.js"></script>
+  <script src="js/plugins/lg-zoom.min.js"></script>
+  <script src="js/plugins/lg-fullscreen.min.js"></script>
+  <script src="js/plugins/lg-autoplay.min.js"></script>
+  <script src="js/plugins/lg-share.min.js"></script>
+  <script src="js/plugins/lg-rotate.min.js"></script>
+  <script src="js/plugins/lg-hash.min.js"></script>
+  <script src="js/plugins/lg-pager.min.js"></script>
+  <script src="js/plugins/lg-video.min.js"></script>
   ...
-  <script src="js/lg-fullscreen.min.js"></script>
-  ...
-</HTML>
+</body>
 ----
 
 [role="mt-4"]
-==== HTML Markup
+==== HTML markup
 
-lightgallery allows to use any kind of HTML Block element to create the HTML
-portion of a gallery.
+lightGallery accepts almost any HTML structure. The only requirement
+is a *gallery container* that wraps every clickable slide.
 
-.Simple `<A>` element
+.Single image (the container is the slide itself)
 [source, html]
 ----
-<a id="lightgallery_id" href="img/img1.jpg">
-    Click to open
+<a id="my_gallery" href="img/img1.jpg">
+  <img src="img/thumb1.jpg" alt="Image 1" />
 </a>
 
 <script>
-  $(document).ready(function() {
-    $('#lightgallery_id').lightGallery({
-        selector: 'this'
-    });
-  });
+  const el = document.getElementById('my_gallery');
+  lightGallery(el, { selector: 'this' });
 </script>
 ----
 
-.Simple `<DIV>` element
+.Container with `<a>` tags as slides
 [source, html]
 ----
-<div id="lightgallery_id">
-  <a href="img/img1.jpg">
-      <img src="img/thumb1.jpg" />
-  </a>
-  <a href="img/img2.jpg">
-      <img src="img/thumb2.jpg" />
-  </a>
-  ...
+<div id="my_gallery">
+  <a href="img/img1.jpg"><img src="img/thumb1.jpg" /></a>
+  <a href="img/img2.jpg"><img src="img/thumb2.jpg" /></a>
 </div>
 
 <script>
-  $(document).ready(function() {
-    $('#lightgallery_id').lightGallery();
-  });
+  const el = document.getElementById('my_gallery');
+  lightGallery(el, { selector: 'a' });
 </script>
 ----
 
-.Nested `<DIV>` element
+.Container with `<div>` tags as slides
 [source, html]
 ----
-<div id="lightgallery_id">
-  <h2>Gallery title</h3>
+<div id="my_gallery">
   <div class="item" data-src="img/img1.jpg">
-      <img src="img/thumb1.jpg" />
+    <img src="img/thumb1.jpg" />
   </div>
   <div class="item" data-src="img/img2.jpg">
-      <img src="img/thumb2.jpg" />
+    <img src="img/thumb2.jpg" />
   </div>
-  ...
 </div>
 
 <script>
-  $(document).ready(function() {
-    $('#lightgallery_id').lightGallery({
-        selector: '.item'
-    });
-  });
+  const el = document.getElementById('my_gallery');
+  lightGallery(el, { selector: '.item' });
 </script>
 ----
 
-.`<UL>` element
+.Container with `<ul>` / `<li>` (J1 default)
 [source, html]
 ----
-<ul id="lightgallery_id">
+<ul id="my_gallery">
   <li data-src="img/img1.jpg">
-      <img src="img/thumb1.jpg" />
+    <img src="img/thumb1.jpg" />
   </li>
   <li data-src="img/img2.jpg">
-      <img src="img/thumb2.jpg" />
+    <img src="img/thumb2.jpg" />
   </li>
-  ...
 </ul>
 
 <script>
-  $(document).ready(function() {
-    $('#lightgallery_id').lightGallery();
-  });
+  const el = document.getElementById('my_gallery');
+  lightGallery(el, { selector: 'li' });
 </script>
 ----
 
-For J1Template, a Bootstrap-based notation is used based on
-(unstyled) unordered lists (<ul> .. </ul>).
-
-Each image is defined as an list item part of the Markup <li> .. </li>. To make
-the (thumbnail) images responsive, a class definition of the Bootstrap
-grid-classes like *col-xs-6 col-sm-4 col-md-3* are used to display (2-3-4) images
-fully responsive; dependig on the size of the view port.
+For J1 Template, a Bootstrap-based notation built on top of (unstyled)
+unordered lists is used. Each image is one `<li>` element with grid
+classes such as `col-xs-6 col-sm-4 col-md-3` so the thumbnails are
+responsive (2 / 3 / 4 columns depending on the viewport size):
 
 [source, html]
 ----
-<!-- container for lg gallery data (id = "j1-lightgallery")  -->
+<!-- gallery container (id = "j1-lightgallery") -->
 <div id="j1-lightgallery" class="j1-lg-galleryblock">
-  <div class="title">The gallery title</div> <!-- gallery title -->
-  <!-- ul list element for the show (id = "j1-lightgallery-ul") -->
+  <div class="title">My gallery title</div>
+
+  <!-- slide list (id = "j1-lightgallery-ul") -->
   <ul id="j1-lightgallery-ul" class="row list-unstyled">
-    <!-- image items, 2-3-4 per row -->
+
+    <!-- one slide per <li> – 2/3/4 per row depending on viewport -->
     <li class="col-xs-6 col-sm-4 col-md-3"
-        data-src="/assets/image/img_1" <!-- for thumbnail view -->
-        data-sub-html="<p>The image caption text for img_1</p>"> <!-- image caption -->
-      <!-- for fullsize view inside the lightbox -->
+        data-src="/assets/image/img_1.jpg"
+        data-sub-html="<p>Caption text for img_1</p>">
       <a href="#">
-        <img class="lg-thumbnail" src="/assets/image/img_1">
+        <img class="lg-thumbnail" src="/assets/image/thumb_1.jpg" />
       </a>
     </li>
-    ...
-    <!-- as many items needed -->
-    ...
+
+    <!-- as many slides as needed ... -->
+
     <li class="col-xs-6 col-sm-4 col-md-3"
-        data-src="/assets/image/img_n"
-        data-sub-html="<p>The image caption text for img_n</p>">
+        data-src="/assets/image/img_n.jpg"
+        data-sub-html="<p>Caption text for img_n</p>">
       <a href="#">
-        <img class="lg-thumbnail" src="/assets/image/img_n">
+        <img class="lg-thumbnail" src="/assets/image/thumb_n.jpg" />
       </a>
     </li>
+
   </ul>
 </div>
 ----
@@ -177,21 +200,42 @@ fully responsive; dependig on the size of the view port.
 [role="mt-4"]
 ==== JS initialization
 
-Finally you need to initiate the gallery by adding the following code.
+// claude - Update lightGallery Lightbox manual #1
+// The previous example used the deprecated jQuery API
+// `$('#id').lightGallery({ ... })`. The v2 API is the global
+// `lightGallery(element, options)` function.
+//
+Once the markup is in place, call the global `lightGallery()`
+function with the gallery container element and an options object:
 
 [source, js]
 ----
-$('#j1-lightgallery-ul').lightGallery({
-  mode: 'lg-fade',
-  ...
-  <!-- more options -->
-  ...
-  cssEasing : 'cubic-bezier(0.25, 0, 0.25, 1)'
+const galleryEl = document.getElementById('j1-lightgallery-ul');
+
+const lg = lightGallery(galleryEl, {
+  selector: 'li',
+  mode:     'lg-fade',
+  speed:    500,
+  plugins:  [lgThumbnail, lgZoom],
+  // ... more options
 });
 ----
 
 [role="mt-4"]
-=== Options
+=== Core options
+
+// claude - Update lightGallery Lightbox manual #1
+// Every option in this table has been verified against the
+// `lightGalleryCoreSettings` object in `lightgallery.js` v2.8.3.
+// Defaults that were wrong in the previous version of the manual
+// (`speed: 600`, `backdropDuration: 150`, `preload: 1`, ...) have
+// been corrected. New v2 options that were missing
+// (`allowMediaOverlap`, `licenseKey`, `loop`, `trapFocus`,
+// `zoomFromOrigin`, ...) have been added.
+//
+The table below lists the options of the lightGallery *core*. Each
+plugin adds further options of its own; those are documented in the
+*Plugins* section further down.
 
 [cols="^4a,^1a,^2a,^5a", options="header", width="100%", role="rtable mt-3"]
 |===
@@ -200,566 +244,915 @@ $('#j1-lightgallery-ul').lightGallery({
 |`mode`
 |string
 |`lg-slide`
-|Type of transition between images. lightgallery comes with lots of
-transition effects. See chapter <<Transition styles>> for more details.
-
-|`cssEasing`
-|string
-|`ease`
-|Type of easing to be used for css animations.
+|Type of transition between slides. lightGallery comes with many
+transitions; see chapter <<Transition styles>> for the full list.
 
 |`easing`
 |string
-|`linear`
-|Type of easing to be used for jquery animations.
+|`ease`
+|CSS *easing* function used for the slide transition. Any valid
+`transition-timing-function` value is accepted (`ease`,
+`ease-in`, `ease-out`, `cubic-bezier(...)` ...).
 
 |`speed`
-|number
-|600
-|Transition duration (in ms).
+|number (ms)
+|`400`
+|Slide transition duration in milliseconds.
+
+|`licenseKey`
+|string
+|`0000-0000-000-0000`
+|lightGallery commercial license key. Leave the default value for
+*non-commercial* use; otherwise enter the key you received from the
+lightGallery author.
 
 |`height`
 |string
 |`100%`
-|Height of the gallery. Examples: `100%`, `300px`
+|Height of the gallery wrapper. Examples: `100%`, `300px`.
 
 |`width`
 |string
 |`100%`
-|Width of the gallery. Examples: `100%`, `300px`
+|Width of the gallery wrapper. Examples: `100%`, `300px`.
 
 |`addClass`
 |string
-|``
-|Add custom class for a gallery, can be used to set different style
-for different galleries.
+|`''`
+|Custom CSS class added to the gallery wrapper. Useful when you want
+to apply different styles to different galleries on the same page.
 
 |`startClass`
 |string
 |`lg-start-zoom`
-|Starting animation class for the gallery.
+|Animation class used while the gallery is opening.
 
 |`backdropDuration`
-|number
-|150
-|lightgallery backdrop transtion duration. +
+|number (ms)
+|`300`
+|Length of the backdrop fade-in / fade-out animation.
 
 [NOTE]
 ====
-Do not change the value of backdrop via css.
+Do not change the value of the backdrop opacity through CSS – use
+the `$backdrop-opacity` Sass variable or the `backdropDuration`
+option instead.
 ====
 
-|`hideBarsDelay`
-|number
-|6000
-|Delay for hiding gallery controls in ms
+|`container`
+|string \| function \| element
+|`''`
+|Element that the gallery is appended to. By default the gallery is
+attached to the body of the document. Pass a CSS selector, a DOM
+element or a function returning either of the two if you want to
+attach the gallery somewhere else.
 
-|`useLeft`
+|`startAnimationDuration`
+|number (ms)
+|`400`
+|Length of the start animation that lifts the clicked thumbnail to
+the position of the full-size slide.
+
+|`zoomFromOrigin`
 |boolean
-|false
-|Force lightgallery to use css left property instead of transform.
+|`true`
+|If `true`, the gallery opens with a zoom animation that starts from
+the clicked thumbnail. Set to `false` for a simple fade.
+
+|`hideBarsDelay`
+|number (ms)
+|`0`
+|Delay (in milliseconds) after which the gallery toolbars are hidden
+when the cursor is idle. A value of `0` keeps the bars visible at all
+times.
+
+|`showBarsAfter`
+|number (ms)
+|`10000`
+|How long the toolbars are kept visible right after the gallery has
+opened, regardless of `hideBarsDelay`.
+
+|`slideDelay`
+|number (ms)
+|`0`
+|Delay before a slide change starts. Useful for syncing the slide
+transition with another animation.
+
+|`supportLegacyBrowser`
+|boolean
+|`true`
+|Add fall-backs for older browsers (IE10/11, old mobile browsers).
+Disable for a slightly smaller runtime when you only target modern
+browsers.
+
+|`allowMediaOverlap`
+|boolean
+|`false`
+|If `true`, the thumbnail strip and the captions are allowed to
+overlap the main image. If `false` (the default), the main image is
+shrunk so that nothing overlaps it.
+
+|`videoMaxSize`
+|string
+|`1280-720`
+|Maximum dimensions used when displaying videos, in the form
+`WIDTH-HEIGHT`.
+
+|`loadYouTubePoster`
+|boolean
+|`true`
+|Automatically load the YouTube poster image as the placeholder for
+YouTube video slides.
+
+|`defaultCaptionHeight`
+|number (px)
+|`0`
+|Default caption height (in pixels) used while the gallery is
+calculating its layout. Set to a non-zero value when captions take a
+visible amount of vertical space, to avoid a small layout jump on
+opening.
+
+|`ariaLabelledby`
+|string
+|`''`
+|`id` of an element on the page that *labels* the gallery. Used to
+build the `aria-labelledby` attribute on the gallery wrapper for
+better accessibility.
+
+|`ariaDescribedby`
+|string
+|`''`
+|`id` of an element on the page that *describes* the gallery. Used
+for the `aria-describedby` attribute.
+
+|`resetScrollPosition`
+|boolean
+|`true`
+|If `true`, the page is scrolled back to its previous position when
+the gallery is closed.
+
+|`hideScrollbar`
+|boolean
+|`false`
+|If `true`, the page scrollbar is hidden while the gallery is open.
 
 |`closable`
 |boolean
-|true
-|Allows clicks on dimmer to close gallery.
+|`true`
+|If `true`, clicks on the dark backdrop close the gallery.
+
+|`swipeToClose`
+|boolean
+|`true`
+|If `true`, a vertical swipe gesture closes the gallery.
+
+|`closeOnTap`
+|boolean
+|`true`
+|If `true`, a tap on the slide closes the gallery (touch devices).
+
+|`showCloseIcon`
+|boolean
+|`true`
+|If `true`, the close icon is shown in the top-right corner of the
+toolbar.
+
+|`showMaximizeIcon`
+|boolean
+|`false`
+|If `true`, an extra *maximize* icon is shown next to the close icon.
 
 |`loop`
 |boolean
-|true
-|If `false`, will disable the ability to loop back to the beginning
-of the gallery when on the last element.
+|`true`
+|If `false`, the gallery does *not* loop back to the first slide
+after the last one (and vice versa).
 
 |`escKey`
 |boolean
-|true
-|Whether the lightgallery could be closed by pressing the *Esc* key.
+|`true`
+|If `true`, pressing *Esc* closes the gallery.
 
 |`keyPress`
 |boolean
-|true
-|Enable keyboard navigation.
+|`true`
+|If `true`, the left and right arrow keys move between slides.
+
+|`trapFocus`
+|boolean
+|`true`
+|If `true`, keyboard focus is trapped inside the gallery while it is
+open. Required for an accessible gallery.
 
 |`controls`
 |boolean
-|true
-|If `false`, prev/next buttons will not be displayed.
+|`true`
+|If `false`, the previous / next arrow buttons are hidden.
 
 |`slideEndAnimation`
-|bolean
-|true
-|Enable slideEnd animation.
+|boolean
+|`true`
+|If `true`, a small bounce animation plays when the user tries to go
+past the first or the last slide.
 
 |`hideControlOnEnd`
 |boolean
-|false
-|If `true`, prev/next button will be hidden on first/last image.
+|`false`
+|If `true`, the previous / next arrows are hidden on the first /
+last slide.
 
 |`mousewheel`
 |boolean
-|true
-|Change slide on mousewheel
+|`false`
+|If `true`, the mouse wheel can be used to switch between slides.
 
 |`getCaptionFromTitleOrAlt`
 |boolean
-|true
-|Option to get captions from alt or title tags.
+|`true`
+|If `true` and a slide has no `data-sub-html` attribute, the caption
+is read from the `alt` (or `title`) attribute of the thumbnail
+image.
 
 |`appendSubHtmlTo`
 |string
 |`.lg-sub-html`
-|Specify where the sub-html should be appended. `.lg-sub-html` or `.lg-item`
+|CSS selector that points to the element where the caption (sub-html)
+is appended. Use `.lg-sub-html` for a caption *outside* the slide,
+or `.lg-item` for a caption *inside* the slide.
 
 |`subHtmlSelectorRelative`
 |boolean
-|false
-|Set to `true` if the selector in *data-sub-html* should
-use the current item as its origin.
+|`false`
+|If `true`, a `data-sub-html` value that starts with `#` or `.` is
+looked up *inside* the current slide instead of in the whole document.
 
 |`preload`
 |number
-|1
-|Number of preload slides. will exicute only after the current
-slide is fully loaded.
-Examples: you clicked on 4th image and if *preload = 1* then 3rd slide
-and 5th slide will be loaded in the background after the 4th slide is
-fully loaded. if *preload is 2* then 2nd 3rd 5th 6th slides is
-preloaded.
+|`2`
+|Number of slides to *preload* in the background. With the default
+of `2`, the slides immediately before and after the current one are
+loaded ahead of time, so the user does not see a loading spinner
+when navigating.
 
-|`showAfterLoad`
-|boolean
-|true
-|Show Content once it is fully loaded.
+|`numberOfSlideItemsInDom`
+|number
+|`10`
+|Maximum number of slide elements that are kept in the DOM at the
+same time. Increasing this value uses more memory; decreasing it
+forces the gallery to re-create slide elements more often.
 
 |`selector`
 |string
-|``
-|Custom selector property instead of just child. Pass `this`
-to select same element Examples: `.class` `#id`
+|`''`
+|CSS selector for the clickable slides. Pass `'this'` if the gallery
+container is itself the only slide; pass `'a'`, `'.item'` or any
+other selector to match a list of children.
 
 |`selectWithin`
-|string
-|``
-|By default selectror element is taken from only inside the gallery
-element. Instead of that you can tell lightgallery to select element
-within a specific element. +
-
-Examples: `.class`, `#id` or
-`galleryItems =  $(this.s.selectWithin).find(this.s.selector);`
+|string \| element
+|`''`
+|By default, lightGallery looks for slides *inside* the gallery
+container. Use this option to point to another element to look for
+slides in.
 
 |`nextHtml`
 |string
-|``
-|Custom html for next control.
+|`''`
+|Custom HTML used as the *next* control button. Leave empty for the
+default arrow icon.
 
 |`prevHtml`
 |string
-|``
-|Custom html for prev control.
+|`''`
+|Custom HTML used as the *previous* control button.
 
-|index
+|`index`
 |number
-|0
-|Allows to set which image or video should load initially.
+|`0`
+|Index of the slide that is shown first when the gallery opens.
+
+|`iframeWidth`
+|string
+|`100%`
+|Width of the iframe used for `data-iframe="true"` slides.
+
+|`iframeHeight`
+|string
+|`100%`
+|Height of the iframe used for `data-iframe="true"` slides.
 
 |`iframeMaxWidth`
 |string
 |`100%`
-|Set maximum width for iframe.
+|Maximum width of the iframe.
+
+|`iframeMaxHeight`
+|string
+|`100%`
+|Maximum height of the iframe.
 
 |`download`
 |boolean
-|true
-|Enable download button. By default download url will be taken from
-*data-src*\|*href* attribute but it supports only for modern browsers.
-If you want you can provide another url for download via `data-download-url`.
-Pass `false` in `data-download-url` if you want to hide download button
-for the particular slide.
+|`true`
+|If `true`, a download button is shown in the toolbar. The download
+URL is read from the `data-download-url` attribute (or, as a
+fall-back, from `data-src` / `href`). Pass `false` (or
+`data-download-url="false"` per slide) to hide the button.
 
 |`counter`
 |boolean
-|true
-|Whether to show total number of images and index number of currently
-displayed image.
+|`true`
+|If `true`, a slide counter ("3 / 10") is shown in the toolbar.
 
 |`appendCounterTo`
 |string
 |`.lg-toolbar`
-|Where the counter should be appended.
+|CSS selector of the element that the counter is appended to.
 
 |`swipeThreshold`
-|number
-|50
-|By setting the swipeThreshold (in px) you can set how far the user
-must swipe for the next\|prev image.
+|number (px)
+|`50`
+|Minimum distance (in pixels) the user has to swipe before the next
+or previous slide is shown.
+
+|`enableSwipe`
+|boolean
+|`true`
+|Enable touch-swipe support on touch devices.
 
 |`enableDrag`
 |boolean
-|true
-|Enables desktop mouse drag support.
-
-|`enableTouch`
-|boolean
-|true
-|Enables touch support.
+|`true`
+|Enable mouse-drag support on desktop browsers.
 
 |`dynamic`
 |boolean
-|false
-|lightgallery can be instantiated and launched programmatically by setting
-this option to `true` and populating `dynamicEl` option (see below) with
-the definitions of images.
+|`false`
+|If `true`, the gallery is built from the JavaScript array passed in
+`dynamicEl` instead of from the DOM. See the *Dynamic mode* section
+of the main page for an example.
 
 |`dynamicEl`
 |array
 |`[]`
-|An array of objects (`src`, `iframe`, `subHtml`, `thumb`, `poster`,
-`responsive`, `srcset` `sizes`) representing gallery elements.
+|Array of slide objects used in dynamic mode. Each object accepts
+the keys listed in the *Dynamic variables* table below
+(`src`, `thumb`, `subHtml`, ...).
+
+|`extraProps`
+|array
+|`[]`
+|Names of extra `data-*` attributes whose values should be copied
+onto each slide object. Use this when you have your own custom data
+attributes that you want to read back inside event handlers.
+
+|`isMobile`
+|function
+|`undefined`
+|A user-supplied function that returns `true` when the gallery
+should switch to *mobile* mode. By default lightGallery uses a
+built-in detection routine.
+
+|`mobileSettings`
+|object
+|see below
+|Options that *override* the matching core settings on touch
+devices. The defaults are
+`{ controls: false, showCloseIcon: false, download: false }`.
+
+|`plugins`
+|array
+|`[]`
+|Array of plugin classes to load. Order does not matter.
+Example: `plugins: [lgThumbnail, lgZoom, lgFullscreen]`.
+
+|`strings`
+|object
+|see below
+|Translation strings used by the core toolbar buttons and error
+messages. The default object is
+`{ closeGallery: 'Close gallery', toggleMaximize: 'Toggle maximize',
+previousSlide: 'Previous slide', nextSlide: 'Next slide',
+download: 'Download', playVideo: 'Play video',
+mediaLoadingFailed: 'Oops... Failed to load content...' }`.
+
 |===
 
 [role="mt-4"]
 === Transition styles
 
-lightgallery comes with lots of transition effects used for the transition
-between images. Use option `mode` to set the type of a transition for your
-gallery.
+// claude - Update lightGallery Lightbox manual #1
+// All `TODO: Description to be added` rows have been replaced with
+// short, plain English explanations of every transition mode. The
+// transition list itself is taken from the Sass source file shipped
+// with the template (`scss/modules/_lg-transitions.scss`).
+//
+lightGallery comes with a long list of CSS transitions for moving
+from one slide to the next. Use the `mode` option to pick the one
+you like:
 
 [cols="7a,6a", options="header", width="100%", role="rtable mt-3"]
 |===
 |Style | Description
 
 |`lg-slide`
-|TODO: Description to be added
+|Default. Slides move horizontally, the new slide enters from the
+right (or from the left when going backwards).
 
 |`lg-fade`
-|TODO: Description to be added
+|The current slide fades out and the next slide fades in. No
+horizontal motion.
 
 |`lg-zoom-in`, `lg-zoom-in-big`
-|TODO: Description to be added
+|The new slide zooms *in* from a smaller scale. The `*-big` variant
+starts from an even smaller scale, so the zoom is more dramatic.
 
 |`lg-zoom-out`, `lg-zoom-out-big`
-|TODO: Description to be added
+|The current slide zooms *out* and disappears, then the next slide
+appears at full size. The `*-big` variant uses a stronger zoom-out.
 
 |`lg-zoom-out-in`, `lg-zoom-in-out`
-|TODO: Description to be added
+|Combines a zoom-out on the leaving slide with a zoom-in on the
+entering slide. `zoom-out-in` zooms out first then in;
+`zoom-in-out` does the reverse.
 
 |`lg-soft-zoom`
-|TODO: Description to be added
+|Subtle zoom transition – similar to `lg-zoom-in` but with a smaller
+scale change for a calmer effect.
 
 |`lg-scale-up`
-|TODO: Description to be added
+|The new slide scales up from `0` (invisible) to its full size.
 
 |`lg-slide-circular`, `lg-slide-circular-vertical`
-|TODO: Description to be added
+|Slide transition with a circular reveal. The vertical variant
+reveals the new slide from top to bottom instead of left to right.
 
 |`lg-slide-vertical`, `lg-slide-vertical-growth`
-|TODO: Description to be added
+|Slides move vertically (top to bottom). The `*-growth` variant
+combines the vertical move with a small grow-in effect.
 
 |`lg-slide-skew-only`, `lg-slide-skew-only-rev`
-|TODO: Description to be added
+|Plain skew transition – the slide tilts as it moves. The `*-rev`
+variant tilts in the opposite direction.
 
 |`lg-slide-skew-only-y`, `lg-slide-skew-only-y-rev`
-|TODO: Description to be added
+|Same as `lg-slide-skew-only` but the skew is applied on the
+*vertical* (Y) axis instead of the horizontal (X) axis.
 
 |`lg-slide-skew`, `lg-slide-skew-rev`
-|TODO: Description to be added
+|Combined slide + skew transition. The slide moves horizontally and
+tilts at the same time.
 
 |`lg-slide-skew-cross`, `lg-slide-skew-cross-rev`
-|TODO: Description to be added
+|Slide + skew transition where the leaving and entering slides skew
+in *opposite* directions, producing a cross-over effect.
 
 |`lg-slide-skew-ver`, `lg-slide-skew-ver-rev`
-|TODO: Description to be added
+|Vertical version of `lg-slide-skew`. Slides move vertically and
+tilt at the same time.
 
 |`lg-slide-skew-ver-cross`, `lg-slide-skew-ver-cross-rev`
-|TODO: Description to be added
+|Vertical version of `lg-slide-skew-cross`.
 
 |`lg-lollipop`, `lg-lollipop-rev`
-|TODO: Description to be added
+|Skew + scale + slide combination that gives a "swing" effect (like
+a swinging lollipop). The `*-rev` variant swings in the opposite
+direction.
 
 |`lg-rotate`, `lg-rotate-rev`
-|TODO: Description to be added
+|Slide transition combined with a rotation. The `*-rev` variant
+rotates in the opposite direction.
 
 |`lg-tube`
-|TODO: Description to be added
+|Slides appear to come out of a tube – horizontal slide combined
+with a small perspective tilt.
 
 |===
 
 [role="mt-4"]
 === Data attributes
 
+// claude - Update lightGallery Lightbox manual #1
+// Added the `data-facebook-share-url`, `data-twitter-share-url` and
+// `data-pinterest-share-url` rows that the share plugin reads, and
+// the `data-tweet-text` / `data-pinterest-text` rows. The
+// `data-html` description has been clarified.
+//
+Each slide can be configured through `data-*` attributes on its
+container element. lightGallery reads these attributes when the
+gallery is built.
+
 [cols="3a,9a", options="header", width="100%", role="rtable mt-3"]
 |===
 |Name |Description
 
 |`data-src`
-|The large version of the image or video.
+|URL of the *large* image or video. Required, unless `href` already
+points to the large image (anchor-tag pattern) or `data-html` is
+used to embed an HTML5 video.
 
 |`data-sub-html`
-|The id or class name of an object(div) which contain your
-sub html.
+|Caption HTML. May be either the literal HTML of the caption (e.g.
+`"<h4>Image 1</h4>"`) or the `id` / class of an element on the page
+that contains the caption HTML.
 
 |`data-sub-html-url`
-|The URL of the file which contains your *sub html*.
+|URL of an external file whose contents are loaded as the caption.
+Useful for very long captions.
 
 |`data-html`
-|the id or class name of an object(div) which contain your html.
-Used for inserting html5 videos.
+|`id` (or class) of a hidden element on the page whose contents are
+used as the slide content. Mainly used to embed HTML5 video tags.
 
 |`data-poster`
-|Poster (thumb) image of the video.
+|URL of the poster image used as the *placeholder* for a video
+slide.
 
 |`data-responsive`
-|List of images and viewport's max width separated by comma. +
-Examples: `img/1-375.jpg 375, img/1-480.jpg 480, img/1-757.jpg 757`.
+|Comma-separated list of image URLs and breakpoints. Example:
+`img/1-375.jpg 375, img/1-480.jpg 480, img/1-757.jpg 757`. The
+browser picks the first image whose breakpoint is `<= viewport
+width`.
 
 |`data-srcset`
-|srcset values
+|Standard `srcset` value (same syntax as the HTML `srcset`
+attribute).
 
 |`data-sizes`
-|srcset sizes
+|Standard `sizes` value (same syntax as the HTML `sizes` attribute).
 
 |`data-iframe`
-|Set true is you want to open your URL in an HTML iframe.
+|Set to `"true"` to open the URL in an `<iframe>` instead of an
+image / video viewer.
 
 |`data-download-url`
-|Download URL for your image or video. Pass `false` if you want
-to hide the download button.
+|Custom download URL. Pass `"false"` to hide the download button for
+a single slide.
 
 |`data-width`
-|Actual size of the image in px. Used in zoom plugin to see
-the actual size of the image when you doubleclick on the image.
+|Natural width of the image in pixels. Used by the zoom plugin to
+display the *actual size* on a double-click.
+
+|`data-facebook-share-url`
+|URL used by the share plugin's *Facebook* button. Defaults to the
+current page URL.
+
+|`data-twitter-share-url`
+|URL used by the share plugin's *Twitter* button. Defaults to the
+current page URL.
+
+|`data-tweet-text`
+|Pre-filled tweet text used by the share plugin's *Twitter* button.
+
+|`data-pinterest-share-url`
+|URL used by the share plugin's *Pinterest* button. Defaults to the
+current page URL.
+
+|`data-pinterest-text`
+|Pre-filled description used by the share plugin's *Pinterest*
+button.
 
 |===
 
 [role="mt-4"]
 === Methods
 
+// claude - Update lightGallery Lightbox manual #1
+// The Methods section is rewritten for the v2.x API. The previous
+// version showed the jQuery `$lg.data('lightGallery').slide(2)`
+// pattern, which no longer exists. In v2 the methods are called
+// directly on the instance returned by `lightGallery()`.
+//
+The `lightGallery()` function returns the *instance* of the gallery.
+All methods are called directly on that instance.
+
 [source, js]
 ----
-var $lg = $('#lightgallery');
+const galleryEl = document.getElementById('my_gallery');
+const lg = lightGallery(galleryEl, { selector: 'a' });
 
-$lg.lightGallery();
-
-// Go to third slide
-// Index starts from 0
-$lg.data('lightGallery').slide(2);
+// Open the gallery on the third slide (index = 2)
+lg.openGallery(2);
 ----
 
-[cols="2a,4a,6a",options="header", width="100%", role="rtable mt-3"]
+[cols="2a,4a,6a", options="header", width="100%", role="rtable mt-3"]
 |===
-
 |Name |Parameters |Description
 
-|slide()
-|index
-|Goto a specific slide. The index of the slide starts from 0.
+|`openGallery(index, element)`
+|`index` (number, optional) +
+`element` (DOM element, optional)
+|Open the gallery. `index` is the zero-based index of the slide to
+show first; `element` is the DOM element used as the origin of the
+zoom-from-thumbnail animation. Both arguments are optional.
 
-|goToNextSlide()
-|
-|Go to next slide.
+|`slide(index, fromTouch, fromThumb, direction)`
+|`index`, `fromTouch`, `fromThumb`, `direction`
+|Go to a specific slide. `index` is zero-based. The other three
+arguments are optional and only need to be set when you mimic a
+real user action; in normal code you can pass `false`, `false`,
+`false`.
 
-|goToPrevSlide()
-|
-|Go to previous slide.
+|`goToNextSlide(fromTouch)`
+|`fromTouch` (boolean, optional)
+|Move to the next slide.
 
-|destroy()
-|`true`
-|close or destroy the gallery. If you pass true as a parameter destroy
-method will destroy the gallery completely. If parameter is `undefined`
-or `false` destroy will only close the gallery and plugins instance
-remains with the element.
+|`goToPrevSlide(fromTouch)`
+|`fromTouch` (boolean, optional)
+|Move to the previous slide.
+
+|`closeGallery(force)`
+|`force` (boolean, optional)
+|Close the gallery. Pass `true` to close even if a slide is
+currently busy with an animation.
+
+|`refresh(galleryItems)`
+|`galleryItems` (array, optional)
+|Refresh the gallery. Call this method after the underlying DOM has
+changed (slides added, removed or reordered). In *dynamic* mode you
+can also pass an array of new slide objects.
+
+|`updateSlides(items, index)`
+|`items` (array), `index` (number)
+|Replace the current slide list with a new one and jump to the
+slide at `index`. Used to programmatically swap the contents of the
+gallery.
+
+|`destroy()`
+|–
+|Close the gallery (if open) and tear down all event listeners.
+After this call the instance can no longer be used.
 
 |===
 
 [role="mt-4"]
 === Dynamic variables
 
-[cols="3a,9a",options="header", width="100%", role="rtable mt-3"]
+// claude - Update lightGallery Lightbox manual #1
+// Updated the table to match the keys actually accepted by the
+// `dynamicEl` array in v2.8.3. The `href` row was removed because
+// the v2 API uses `src` instead. Added `video`, `alt` and
+// `slideName` (used by the hash plugin).
+//
+The objects passed to `dynamicEl` accept the following keys (all are
+optional unless noted):
+
+[cols="3a,9a", options="header", width="100%", role="rtable mt-3"]
 |===
 |Name |Description
 
 |`src`
-|The large version of your image or video.
+|URL of the large image or video. *Required*.
 
-|`href`
-|The large version of your image or video.
+|`thumb`
+|URL of the thumbnail image used by the thumbnail plugin and the
+zoom-from-thumbnail animation.
 
 |`subHtml`
-|The id or class name of an object(div) which contain your sub
-html.
+|Caption HTML, the `id` / class of an element on the page or a
+plain string. See `data-sub-html` for details.
 
 |`subHtmlUrl`
-|The URL of the file which contain your sub html.
+|URL of an external caption file (loaded with `fetch`).
+
+|`alt`
+|`alt` text used as a fall-back caption when
+`getCaptionFromTitleOrAlt` is `true`.
 
 |`html`
-|The id or class name of an object(div) which contain your html. Used
-for inserting html5 videos.
+|`id` / class of a hidden element whose contents are used as the
+slide content. Mainly used for HTML5 video.
+
+|`video`
+|JSON object describing a video source. Used to render video
+slides without a separate `<video>` tag.
 
 |`poster`
-|Poster (thumb) image of the video.
+|URL of the poster image for video slides.
 
 |`responsive`
-|List of images and viewport's max width separated by comma. +
-
-Examples: `img/1-375.jpg 375, img/1-480.jpg 480, img/1-757.jpg 757`
+|Comma-separated list of image URLs and breakpoints (same syntax
+as `data-responsive`).
 
 |`srcset`
-|srcset values
+|Standard `srcset` value.
 
 |`sizes`
-|srcset sizes
+|Standard `sizes` value.
 
 |`iframe`
-|Set `true` is you want to open your like in an iframe.
+|Set to `true` to open `src` in an iframe.
 
 |`downloadUrl`
-|Download URL for the image or video. Pass `false` if you
-want to hide the download button.
+|Custom download URL. Pass `false` to hide the download button.
 
 |`width`
-|Actual size of the image in px. Used in zoom plugin to see the
-actual size of the image when you doublec-lick on the image.
+|Natural width of the image (used by the zoom plugin).
+
+|`slideName`
+|Custom slide name used by the hash plugin (when
+`customSlideName` is enabled).
 
 |===
 
 [role="mt-4"]
 === Events
 
+// claude - Update lightGallery Lightbox manual #1
+// The whole Events section is rewritten for the v2 event API.
+//
+//   * Event names are now CamelCase and prefixed with `lg`
+//     (`lgInit`, `lgBeforeSlide`, ...). The old jQuery-namespaced
+//     names (`onBeforeOpen.lg`) no longer work.
+//   * Events are dispatched as `CustomEvent` objects on the gallery
+//     container element. Use `addEventListener()` to listen and
+//     read `event.detail` for the parameters.
+//   * Several events that did not exist in v1 (`lgInit`,
+//     `lgRotateLeft`, `lgFlipHorizontal`, `lgAutoplayStart`,
+//     `lgAutoplayStop`, ...) have been added to the table.
+//
+lightGallery dispatches a number of *custom events* on the gallery
+container element. Listen to them with the standard
+`addEventListener()` API:
+
 [source, js]
 ----
-var $lg = $('#lightgallery');
+const galleryEl = document.getElementById('my_gallery');
+const lg = lightGallery(galleryEl, { selector: 'a' });
 
-$lg.lightGallery();
-
-// Perform any action just before opening the gallery
-$lg.on('onBeforeOpen.lg',function(event){
-    alert('onBeforeOpen');
+// Run before the gallery opens
+galleryEl.addEventListener('lgBeforeOpen', (event) => {
+  console.log('lgBeforeOpen');
 });
 
-// custom event with extra parameters
-// index - index of the slide
-// fromTouch - true if slide function called via touch event or mouse drag
-// fromThumb - true if slide function called via thumbnail click
-$lg.on('onBeforeSlide.lg',function(event, index, fromTouch, fromThumb){
-  console.log(index, fromTouch, fromThumb);
+// Run before each slide change.
+// event.detail = { prevIndex, index, fromTouch, fromThumb }
+galleryEl.addEventListener('lgBeforeSlide', (event) => {
+  const { prevIndex, index, fromTouch, fromThumb } = event.detail;
+  console.log('lgBeforeSlide', prevIndex, index, fromTouch, fromThumb);
 });
 ----
 
-[cols="3a,3a,6a",options="header", width="100%", role="rtable mt-3"]
+[cols="3a,3a,6a", options="header", width="100%", role="rtable mt-3"]
 |===
-|Event Type |Parameter |Description
+|Event Type |`event.detail` |Description
 
-|`onBeforeOpen.lg`
-|event
-|Fired immediately before the start opening. +
-`event` -- jQuery event object
+|`lgInit`
+|`instance`
+|Fired when the gallery instance is created (immediately after
+`lightGallery()` returns).
 
-|`onAfterOpen.lg`
-|event
-|Fired immediately after opening the gallery. +
-`event` -- jQuery event object
+|`lgBeforeOpen`
+|–
+|Fired right before the opening animation starts.
 
-|`onAferAppendSlide.lg`
-|event, index
-|This event is fired when the slide content has been inserted into its
-slide container. +
-`event` -- jQuery event object +
-`index` -- Index of the slide
+|`lgAfterOpen`
+|–
+|Fired right after the opening animation has finished.
 
-|`onAfterAppendSubHtml.lg`
-|event, index
-|This event is fired when the sub-html content. +
-`event` -- jQuery event object +
-`index` -- Index of the slide +
+|`lgAfterAppendSlide`
+|`index`
+|Fired when the slide content has been inserted into its slide
+container.
 
-Examples: title\|description has been appended into the slide.
+|`lgAfterAppendSubHtml`
+|`index`
+|Fired when the caption (sub-html) has been appended to the slide.
 
-|`onSlideItemLoad.lg`
-|event, index
-|This event is fired once the image inside the slide has been
-completely loaded. +
-`event` -- jQuery event object +
-`index` -- Index of the slide
+|`lgSlideItemLoad`
+|`index`, `delay`, `isFirstSlide`
+|Fired once the image (or video poster) inside the slide has finished
+loading.
 
-|`onBeforeSlide.lg`
-|event, prevIndex, index, fromTouch, fromThumb
-|Fired immediately before each slide transition. +
+|`lgBeforeSlide`
+|`prevIndex`, `index`, `fromTouch`, `fromThumb`
+|Fired right before each slide transition. `fromTouch` is `true`
+when the change was triggered by touch / drag; `fromThumb` is
+`true` when the change was triggered by clicking a thumbnail.
 
-`event` -- jQuery event object +
-`prevIndex` -- Index of the previous slide +
-`index` -- Index of the slide +
-`fromTouch` -- `true` if slide function called via touch event or mouse drag +
-`fromThumb` -- `true` if slide function called via thumbnail click
+|`lgAfterSlide`
+|`prevIndex`, `index`, `fromTouch`, `fromThumb`
+|Fired right after each slide transition.
 
-|`onAfterSlide.lg`
-|event, prevIndex, index, fromTouch, fromThumb
-|Fired immediately after each slide transition. +
-`event` -- jQuery event object +
-`prevIndex` -- Index of the previous slide +
-`index` -- Index of the slide +
-`fromTouch` -- `true` if slide function called via touch event or mouse drag +
-`fromThumb` -- `true` if slide function called via thumbnail click
+|`lgBeforePrevSlide`
+|`index`, `fromTouch`
+|Fired right before a *previous* slide transition.
 
-|`onBeforePrevSlide.lg`
-|event, index, fromTouch
-|Fired immediately before each "prev" slide transition. +
-`event` -- jQuery event object +
-`index` -- Index of the slide +
-`fromTouch` -- `true` if slide function called via touch event or mouse drag
+|`lgBeforeNextSlide`
+|`index`, `fromTouch`
+|Fired right before a *next* slide transition.
 
-|`onBeforeNextSlide.lg`
-|event, index, fromTouch
-|Fired ired immediately before each "next" slide transition. +
-`event` -- jQuery event object +
-`index` -- Index of the slide +
-`fromTouch` -- `true` if slide function called via touch event or mouse drag
+|`lgPosterClick`
+|–
+|Fired when the user clicks on the poster image of a video slide.
 
-|`onDragstart.lg`
-|event
-|Fired when the user starts to drag the slide. +
-`event` -- jQuery event object
+|`lgDragStart`
+|–
+|Fired when the user starts dragging a slide.
 
-|`onDragmove.lg`
-|event
-|Fired periodically during the drag operation. +
-`event` -- jQuery event object
+|`lgDragMove`
+|–
+|Fired periodically while a drag operation is in progress.
 
-|`onDragend.lg`
-|event
-|Fired when the user has finished the drag operation. +
-`event` -- jQuery event object
+|`lgDragEnd`
+|–
+|Fired when the user lets go after a drag.
 
-|`onSlideClick.lg`
-|event
-|Fired when the user clicks on the slide and does not crossed
-the swipeThreshold value. +
-`event` -- jQuery event object
+|`lgHasVideo`
+|`index`, `src`, `html5Video`, `videoStatus`
+|Fired when a slide that contains a video is being prepared.
 
-|`onBeforeClose.lg`
-|event
-|Fired immediately before the start of the close process. +
-`event` -- jQuery event object
+|`lgContainerResize`
+|–
+|Fired when the gallery container is resized (window resize, mobile
+orientation change, ...).
 
-|`onCloseAfter.lg`
-|event
-|Fired immediately once lightgallery is closed. +
-`event` -- jQuery event object
+|`lgUpdateSlides`
+|–
+|Fired when `updateSlides()` has finished updating the slide list.
+
+|`lgRotateLeft`
+|`rotate`
+|Fired by the *rotate* plugin after a left rotation.
+
+|`lgRotateRight`
+|`rotate`
+|Fired by the *rotate* plugin after a right rotation.
+
+|`lgFlipHorizontal`
+|`flipHorizontal`
+|Fired by the *rotate* plugin after a horizontal flip.
+
+|`lgFlipVertical`
+|`flipVertical`
+|Fired by the *rotate* plugin after a vertical flip.
+
+|`lgAutoplay`
+|`index`
+|Fired by the *autoplay* plugin every time the autoplay timer moves
+to the next slide.
+
+|`lgAutoplayStart`
+|`index`
+|Fired by the *autoplay* plugin when autoplay starts.
+
+|`lgAutoplayStop`
+|`index`
+|Fired by the *autoplay* plugin when autoplay stops.
+
+|`lgBeforeClose`
+|–
+|Fired right before the closing animation starts.
+
+|`lgAfterClose`
+|–
+|Fired once the gallery has been fully closed.
 
 |===
 
 [role="mt-4"]
 === Plugins
 
-lightgallery plugins enable additional functionality to the lightbox view to
-display thumbnails of the gallery images as a footer line for example. Several
-plugins are available to make a gallery view more comfortable for the users and
-support your image content for ...
+// claude - Update lightGallery Lightbox manual #1
+// Each plugin section now starts with a one-line description that
+// tells the reader what the plugin does. The settings tables have
+// been verified against the source files
+// (`lg-thumbnail.js`, `lg-video.js`, `lg-fullscreen.js`,
+// `lg-pager.js`, `lg-zoom.js`, `lg-hash.js`, `lg-share.js`,
+// `lg-autoplay.js`, `lg-rotate.js`, `lg-comment.js`).
+//
+lightGallery plugins add extra features to the lightbox view, such
+as a thumbnail strip, a full-screen button, autoplay, social-share
+buttons or rotate controls. Plugins are loaded with the `plugins`
+option of the core – just import the plugin script in the HTML head
+and add the plugin class to the array:
+
+[source, html]
+----
+<script src="js/plugins/lg-thumbnail.min.js"></script>
+<script src="js/plugins/lg-zoom.min.js"></script>
+<script>
+  lightGallery(document.getElementById('my_gallery'), {
+    selector: 'a',
+    plugins:  [lgThumbnail, lgZoom]
+  });
+</script>
+----
 
 [role="mt-4"]
 ==== Thumbnails Plugin
 
-You need to include thumbnials plugin (lg-thumbnail.js) in your document
-to use the following options.
+// claude - Update lightGallery Lightbox manual #1
+// Added the `alignThumbnails`, `thumbHeight`, `appendThumbnailsTo`,
+// `thumbnailSwipeThreshold` and `thumbnailPluginStrings` options
+// (all v2 additions). Removed `thumbContHeight` (renamed to
+// `thumbHeight`) and `pullCaptionUp` / `exThumbImage` /
+// `showThumbByDefault` which are no longer in v2.8.3.
+//
+You need to include the *thumbnail* plugin (`lg-thumbnail.min.js`)
+to use the options below. The plugin shows a strip of thumbnails at
+the bottom of the gallery and lets the user jump to any slide by
+clicking its thumbnail.
 
 [cols="^3a,^2a,^2a,^5a", options="header", width="100%", role="rtable mt-3"]
 |===
@@ -768,180 +1161,153 @@ to use the following options.
 |`thumbnail`
 |boolean
 |`true`
-|Enable thumbnails for the gallery.
+|Enable the thumbnail strip.
 
 |`animateThumb`
 |boolean
 |`true`
-|Enable thumbnail animation.
+|Animate the thumbnail strip when the active slide changes.
 
 |`currentPagerPosition`
 |string
 |`middle`
-|Position of selected thumbnail. Posible settings: `left`, `middle`
-or `right`.
+|Where to position the *active* thumbnail inside the strip. Allowed
+values: `left`, `middle`, `right`.
+
+|`alignThumbnails`
+|string
+|`middle`
+|Vertical alignment of the thumbnail strip. Allowed values:
+`left`, `middle`, `right`.
 
 |`thumbWidth`
-|number
-|100
-|Width of each thumbnails.
+|number (px)
+|`100`
+|Width of each thumbnail in pixels.
 
-|`thumbContHeight`
-|number
-|100
-|Height of the thumbnail container including padding and border.
+|`thumbHeight`
+|string
+|`80px`
+|Height of each thumbnail (CSS length).
 
 |`thumbMargin`
-|number
-|5
-|Spacing between each thumbnails.
+|number (px)
+|`5`
+|Spacing between two thumbnails in pixels.
 
-|`exThumbImage`
-|string or false
+|`appendThumbnailsTo`
+|string
+|`.lg-components`
+|CSS selector of the element the thumbnail strip is appended to.
+
+|`toggleThumb`
+|boolean
 |`false`
-|If you want to use external image for thumbnail, add the path of
-that image inside *data-* attribute and set value of this option to
-the name of your custom attribute.
-
-|`showThumbByDefault`
-|boolean
-|true
-|Show or hide thumbnails by default.
-
-|`toogleThumb`
-|boolean
-|true
-|Whether to display thumbnail toggle button.
-
-|`pullCaptionUp`
-|boolean
-|true
-|Pull captions above thumbnails.
+|If `true`, an extra *toggle thumbnails* button is shown so the
+user can hide / show the strip on demand.
 
 |`enableThumbDrag`
 |boolean
-|true
-|Enables desktop mouse drag support for thumbnails.
+|`true`
+|Enable mouse-drag support for the thumbnail strip (desktop).
 
 |`enableThumbSwipe`
 |boolean
-|true
-|Enables thumbnail touch/swipe support for touch devices.
+|`true`
+|Enable touch-swipe support for the thumbnail strip (mobile).
 
-|`swipeThreshold`
-|number
-|50
-|By setting the swipeThreshold (in px) you can set how far the
-user must swipe for the next/prev slide.
+|`thumbnailSwipeThreshold`
+|number (px)
+|`10`
+|Minimum swipe distance (in pixels) before the thumbnail strip
+starts to scroll.
 
-|`loadYoutubeThumbnail`
+|`loadYouTubeThumbnail`
 |boolean
-|true
-|You can automatically load thumbnails for youtube videos from
-youtube by setting loadYoutubeThumbnail to `true`.
+|`true`
+|Automatically load the YouTube poster image as the thumbnail of
+YouTube video slides.
 
-|`youtubeThumbSize`
-|number
-|1
-|You can specify the thumbnail size by setting respective number.
+|`youTubeThumbSize`
+|string \| number
+|`maxresdefault`
+|Size of the auto-generated YouTube thumbnail. See the *YouTube
+ThumbSizes* table below for the allowed values.
 
-|`loadVimeoThumbnail`
-|boolean
-|true
-|You can automatically load thumbnails for vimeo videos from vimeo
-by setting loadYoutubeThumbnail to `true`.
-
-|`vimeoThumbSize`
-|string
-|`thumbnail_small`
-| Thumbnail size for vimeo videos: +
-`thumbnail_large, `thumbnail_medium`, or `thumbnail_small`.
-
-|`loadDailymotionThumbnail`
-|boolean
-|true
-|You can automatically load thumbnails for dailymotion videos
-from dailymotion by setting loadDailymotionThumbnail to `true`.
+|`thumbnailPluginStrings`
+|object
+|`{ toggleThumbnails: 'Toggle thumbnails' }`
+|Translation strings used by the thumbnail plugin.
 
 |===
 
 [role="mt-4"]
-===== Youtube ThumbSizes
+===== YouTube ThumbSizes
 
 [cols="3a,3a,6a", options="header", width="100%", role="r-table mt-3"]
 |===
-|Values |Size |Description
+|Value |Size |Description
 
 |`0`
 |480x360 pixels
-|Player Background Thumbnail.
+|Player background thumbnail.
 
 |`1`
 |120x90 pixels
-|Default Thumbnail size.
+|Default thumbnail size.
 
 |`2`
 |120x90 pixels
-|Middle Thumbnail size.
+|Middle thumbnail.
 
 |`3`
 |120x90 pixels
-|End Thumbnail
+|End thumbnail.
 
 |`hqdefault`
 |480x360 pixels
-|High Quality Thumbnail.
+|High quality thumbnail.
 
 |`mqdefault`
 |320x180 pixels
-|Medium Quality Thumbnail.
+|Medium quality thumbnail.
 
 |`default`
 |120x90 pixels
-|Regular Quality Thumbnail.
+|Regular quality thumbnail.
 
 |`sddefault`
 |640x480 pixels
-|Standard Definition Thumbnail.
+|Standard definition thumbnail.
 
 |`maxresdefault`
 |1920x1080 pixels
-|Maximum Resolution Thumbnail.
+|Maximum resolution thumbnail. *(default in J1 Template)*
 
 |===
 
 [NOTE]
 ====
-`sddefault` and `maxresdefault` are optional which may or may not exist.
+`sddefault` and `maxresdefault` are *optional* on YouTube – they may
+or may not exist for a given video. If they do not exist, YouTube
+returns a placeholder image.
 ====
-
-
-[role="mt-4"]
-===== Vimeo ThumbSizes
-
-[cols="3a,3a,6a", options="header", width="100%", role="r-table mt-3"]
-|===
-|Values |Size |Description
-
-|`thumbnail_small`
-|100x75 pixels
-|Small size Thumbnail.
-
-|`thumbnail_medium`
-|200x150 pixels
-|Medium size Thumbnail.
-
-|`thumbnail_large`
-|640x360 pixels
-|Large size Thumbnail.
-
-|===
 
 [role="mt-4"]
 ==== Autoplay Plugin
 
-You need to include autoplay plugin (lg-autoplay.js) in your document to
-use the following options.
+// claude - Update lightGallery Lightbox manual #1
+// The autoplay plugin's option names changed in v2:
+//   * `pause`             -> `slideShowInterval`
+//   * `fourceAutoplay`    -> `forceSlideShowAutoplay` (typo fix)
+//   * The new `slideShowAutoplay` option controls whether autoplay
+//     starts on its own when the gallery opens.
+// The previous version of this manual still used the v1 names; the
+// table below uses the correct v2 names from `lg-autoplay.js`.
+//
+You need to include the *autoplay* plugin (`lg-autoplay.min.js`) to
+use the options below. The plugin starts a slideshow timer when the
+gallery opens (or only when the user clicks the *play* button).
 
 [cols="3a,2a,2a,5a", options="header", width="100%", role="rtable mt-3"]
 |===
@@ -949,275 +1315,453 @@ use the following options.
 
 |`autoplay`
 |boolean
-|true
-|Enable gallery autoplay.
+|`true`
+|Enable the autoplay plugin. Set to `false` to disable autoplay
+completely.
 
-|`pause`
-|number
-|5000
-|The time (in ms) between each auto transition.
+|`slideShowAutoplay`
+|boolean
+|`false`
+|If `true`, the slideshow starts on its own once the gallery is
+open. If `false`, the user has to click the *play* button to start
+the slideshow.
+
+|`slideShowInterval`
+|number (ms)
+|`5000`
+|Time between two automatic slide changes, in milliseconds.
 
 |`progressBar`
 |boolean
-|true
-|Enable a autoplay progress bar.
+|`true`
+|Show a progress bar at the top of the gallery while autoplay is
+running.
 
-|`fourceAutoplay`
+|`forceSlideShowAutoplay`
 |boolean
-|false
-|If `false` autoplay will be stopped after first user action.
+|`false`
+|If `false` (the default), autoplay stops as soon as the user
+performs an action (click, swipe, ...). Set to `true` to keep
+autoplay running regardless.
 
 |`autoplayControls`
 |boolean
-|true`
-|Show or hide autoplay controls.
+|`true`
+|Show the *play* / *pause* button in the toolbar.
 
 |`appendAutoplayControlsTo`
 |string
 |`.lg-toolbar`
-|Where the autoply controls should be appended.
+|CSS selector of the element the autoplay button is appended to.
+
+|`autoplayPluginStrings`
+|object
+|`{ toggleAutoplay: 'Toggle Autoplay' }`
+|Translation strings used by the autoplay plugin.
 
 |===
 
 [role="mt-4"]
 ==== Video Plugin
 
-You need to include video plugin (lg-video.js) in your document to use
-the following options.
+// claude - Update lightGallery Lightbox manual #1
+// The video plugin's option names were renamed in v2 to use a
+// consistent `*PlayerParams` form (e.g. `youtubePlayerParams` ->
+// `youTubePlayerParams`). Some option names from the previous
+// version (`videoMaxWidth`, `vimeoPlayerParams`, `vkPlayerParams`,
+// `dailymotionPlayerParams`) no longer exist as separate settings
+// in v2.8.3 — the upstream library now uses the global
+// `videoMaxSize` core option and `htmlPlayerParams` instead.
+//
+You need to include the *video* plugin (`lg-video.min.js`) to use
+the options below. The plugin handles YouTube, Vimeo, Dailymotion,
+VK, and HTML5 video sources transparently.
 
 [cols="^3a,^2a,^2a,^5a", options="header", width="100%", role="rtable mt-3"]
 |===
 |Name |Type |Default |Description
 
-|videoMaxWidth
-|string
-|`855px`
-|Set limit for video maximal width.
+|`autoplayFirstVideo`
+|boolean
+|`true`
+|If `true`, a video that is the first slide starts playing
+automatically.
 
-|youtubePlayerParams
-|object
-|`{}`
-|Read more about https://developers.google.com/youtube/player_parameters[YouTube Player-Parameters] +
+|`autoplayVideoOnSlide`
+|boolean
+|`false`
+|If `true`, every video starts playing automatically when its
+slide becomes active.
 
-Example: +
+|`gotoNextSlideOnVideoEnd`
+|boolean
+|`true`
+|If `true`, the gallery moves to the next slide when the current
+video has finished playing.
+
+|`youTubePlayerParams`
+|object \| boolean
+|`false`
+|Pass an object of YouTube player parameters here to customise the
+embedded YouTube player. See the
+link://developers.google.com/youtube/player_parameters[YouTube Player Parameters, {browser-window--new}]
+documentation for the full list.
+
+[role="mb-2"]
+.Example
 [source, js, role="noclip"]
 ----
 youTubePlayerParams: {
-  showinfo: 0,
-  controls: 0
+  showinfo:    0,
+  controls:    0,
+  modestbranding: 1
 }
 ----
 
-To set youtubePlayerParams in lightGallery, you can pass an object with the
-desired parameters as a value for the youtubePlayerParams option in the
-lightGallery settings. +
+|`htmlPlayerParams`
+|object \| boolean
+|`false`
+|Pass an object of HTML5 `<video>` attributes (`muted`, `loop`,
+`playsinline`, ...) to customise the native HTML5 player.
 
-Example: +
-[source, js, , role="noclip"]
-----
-var lg = document.getElementById('lightGallery');
-lightGallery(lg, {
-    youTubePlayerParams: {
-        showinfo: 0,
-        controls: 0
-    }
-});
-----
-
-|vimeoPlayerParams
-|object
-|`{}`
-|Change vimeo player parameters. +
-Read more about https://developer.vimeo.com/player/embedding#universal-parameters[Vimeo Player-Parameters] +
-Example: +
-[source, js, role="noclip"]
-----
-vimeoPlayerParams: {
-  byline : 0,
-  portrait : 0
-  color : 'CCCCCC'
-}
-----
-
-To set vimeoPlayerParams in lightGallery, you can pass an object with the
-desired parameters as a value for the vimeoPlayerParams option in the
-lightGallery settings. +
-
-Example: +
-[source, js, , role="noclip"]
-----
-var lg = document.getElementById('lightGallery');
-lightGallery(lg, {
-    vimeoPlayerParams: {
-      byline : 0,
-      portrait : 0
-      color : 'CCCCCC'
-    }
-});
-----
-
-|dailymotionPlayerParams
-|object
-|`{}`
-|Read more about https://developer.dailymotion.com/player#player-parameters[DailyMotion Player-Parameters ] +
-Example: +
-
-|vkPlayerParams
-|object
-|`{}`
-|Change vk player parameters. +
-Example: +
-
-|videojs
+|`videojs`
 |boolean
 |`false`
-|Enbale videojs custom video player +
-Example: +
+|Use the *video.js* player to render HTML5 video slides. Requires
+loading the video.js library separately.
 
-|videojsOptions
+|`videojsTheme`
+|string
+|`''`
+|Custom CSS class added to video.js players. Useful for applying a
+video.js theme.
+
+|`videojsOptions`
 |object
 |`{}`
-|Videojs player options +
-Example: +
+|Options passed to the *video.js* player when `videojs` is `true`.
 
 |===
 
 [role="mt-4"]
 ==== Fullscreen Plugin
 
-You need to include fullscreen plugin (lg-fullscreen.js) in your
-document to use the following options.
+You need to include the *fullscreen* plugin (`lg-fullscreen.min.js`)
+to use the options below. The plugin adds a *fullscreen* toggle
+button to the toolbar; clicking it switches the browser into
+real-fullscreen mode (using the standard
+`requestFullscreen()` API).
 
 [cols="^3a,^2a,^2a,^5a", options="header", width="100%", role="rtable mt-3"]
 |===
 |Name |Type |Default |Description
 
-|fullScreen
+|`fullScreen`
 |boolean
 |`true`
-|Enable/Disable fullscreen mode
+|Enable the fullscreen plugin.
+
+|`fullscreenPluginStrings`
+|object
+|`{ toggleFullscreen: 'Toggle Fullscreen' }`
+|Translation strings used by the fullscreen plugin.
 
 |===
 
 [role="mt-4"]
 ==== Pager Plugin
 
-You need to include pager plugin (lg-pager.js) in your document to use
-the following options.
+You need to include the *pager* plugin (`lg-pager.min.js`) to use
+the options below. The plugin shows a small dot for every slide at
+the bottom of the gallery; the user can click any dot to jump
+directly to that slide.
 
 [cols="^3a,^2a,^2a,^5a", options="header", width="100%", role="rtable mt-3"]
 |===
 |Name |Type |Default |Description
 
-|pager
+|`pager`
 |boolean
 |`true`
-|Enable/Disable pager
+|Enable the pager plugin.
 
 |===
 
 [role="mt-4"]
-==== Zoomer Plugin
+==== Zoom Plugin
 
-You need to include zoom plugin (lg-zoom.js) in your document to use the
-following options.
+// claude - Update lightGallery Lightbox manual #1
+// Added the v2 options `infiniteZoom`, `showZoomInOutIcons`,
+// `actualSizeIcons` and `zoomPluginStrings`. Removed the wrong
+// description on `enableZoomAfter` (it is `300` ms by default, not
+// `50`).
+//
+You need to include the *zoom* plugin (`lg-zoom.min.js`) to use the
+options below. The plugin lets the user zoom into images using the
+mouse wheel, double-click, double-tap or pinch gestures.
 
 [cols="^3a,^2a,^2a,^5a", options="header", width="100%", role="rtable mt-3"]
 |===
 |Name |Type |Default |Description
 
-|zoom
+|`zoom`
 |boolean
 |`true`
-|Enable/Disable zoom option
+|Enable the zoom plugin.
 
-|scale
+|`scale`
 |number
 |`1`
-|Value of zoom should be incremented/decremented
+|How much each zoom step zooms in or out. A value of `1` means the
+zoom level changes by `1x` per step; a value of `2` doubles the
+zoom step.
 
-|enableZoomAfter |number in ms |`50` |Some css styles will be added to
-the images if zoom is enabled. So it might conflict if you add some
-custom styles to the images such as the initial transition while opening
-the gallery. So you can delay adding zoom related styles to the images
-by changing the value of `enableZoomAfter`.
+|`infiniteZoom`
+|boolean
+|`true`
+|If `true`, the user can keep zooming in past the actual image size.
+If `false`, zoom-in stops at the natural pixel size of the image.
 
-|actualSize |boolean |`true` |Enable actual pixel icon.
+|`actualSize`
+|boolean
+|`true`
+|Enable the *actual size* icon (a button that resets the zoom to the
+natural pixel size of the image).
+
+|`showZoomInOutIcons`
+|boolean
+|`false`
+|If `true`, separate *zoom-in* and *zoom-out* icons are shown in the
+toolbar.
+
+|`actualSizeIcons`
+|object
+|`{ zoomIn: 'lg-zoom-in', zoomOut: 'lg-zoom-out' }`
+|CSS class names used for the zoom-in and zoom-out icons.
+
+|`enableZoomAfter`
+|number (ms)
+|`300`
+|Number of milliseconds to wait *after* a slide change before
+enabling the zoom. Increase this value if your custom CSS animations
+on the image conflict with the zoom transitions.
+
+|`zoomPluginStrings`
+|object
+|`{ zoomIn: 'Zoom in', zoomOut: 'Zoom out', viewActualSize: 'View actual size' }`
+|Translation strings used by the zoom plugin.
 
 |===
 
 [role="mt-4"]
 ==== Hash Plugin
 
-You need to include hash plugin (lg-hash.js) in your document to use the
-following options.
+You need to include the *hash* plugin (`lg-hash.min.js`) to use the
+options below. The plugin updates the URL hash (`#lg=1&slide=3`)
+every time the user moves to another slide, so the gallery state
+becomes *bookmarkable*. Visiting a URL that already contains a
+matching hash opens the gallery on that slide.
 
 [cols="^3a,^2a,^2a,^5a", options="header", width="100%", role="rtable mt-3"]
 |===
 |Name |Type |Default |Description
 
-|hash
+|`hash`
 |boolean
 |`true`
-|Enable/Disable hash plugin
-|galleryId |number |`1` |Unique id for each gallery. It is mandatory
-when you use hash plugin for multiple galleries on the same page.
+|Enable the hash plugin.
+
+|`galleryId`
+|string \| number
+|`'1'`
+|Unique id used in the URL hash. *Required* when several galleries
+on the same page use the hash plugin (each gallery needs a different
+id).
+
+|`customSlideName`
+|boolean
+|`false`
+|If `true`, the slide name in the URL hash is taken from the
+`slideName` property of each slide instead of the slide's index. The
+result is a friendlier URL such as `#lg=1&slide=image-of-mountains`.
 
 |===
 
 [role="mt-4"]
-==== Share Providers Plugin
+==== Share Plugin
 
-You need to include share plugin (lg-share) in your document to use the
-following options.
+// claude - Update lightGallery Lightbox manual #1
+// `googlePlus` (and `googlePlusDropdownText`) have been removed –
+// Google+ has been shut down for years and v2.8.3 no longer
+// supports it. The `pinterest` and `pinterestDropdownText` options
+// remain. The new `additionalShareOptions` option (an array of
+// custom share targets) has been added.
+//
+You need to include the *share* plugin (`lg-share.min.js`) to use
+the options below. The plugin adds a *share* dropdown button to the
+toolbar with one entry per supported social network. You can also
+add your own targets through the `additionalShareOptions` array.
 
 [cols="^3a,^2a,^2a,^5a", options="header", width="100%", role="rtable mt-3"]
 |===
 |Name |Type |Default |Description
 
-|share
+|`share`
 |boolean
 |`true`
-|Enable/Disable share plugin
+|Enable the share plugin.
 
-|facebook
+|`facebook`
 |boolean
 |`true`
-|Enable Facebook share.
+|Show the *Facebook* share entry.
 
-|facebookDropdownText
+|`facebookDropdownText`
 |string
 |`Facebook`
-|Facebok dropdown text.
+|Label of the *Facebook* dropdown entry.
 
-|twitter
+|`twitter`
 |boolean
 |`true`
-|Enable twitter share.
+|Show the *Twitter* share entry.
 
-|twitterDropdownText
+|`twitterDropdownText`
 |string
 |`Twitter`
-|Twitter dropdown text
+|Label of the *Twitter* dropdown entry.
 
-|googlePlus
+|`pinterest`
 |boolean
 |`true`
-|Enable googlePlus share.
+|Show the *Pinterest* share entry.
 
-|googlePlusDropdownText
-|string
-|`GooglePlus`
-|GooglePlus dropdown text
-
-|pinterest
-|boolean
-|`true`
-|Enable pinterest share.
-
-|pinterestDropdownText
+|`pinterestDropdownText`
 |string
 |`Pinterest`
-|Pinterest dropdown text
+|Label of the *Pinterest* dropdown entry.
+
+|`additionalShareOptions`
+|array
+|`[]`
+|Array of custom share targets. Each entry is an object with the
+keys `type`, `generateLink`, `dropdownHTML` and `selector` – see
+the source of `lg-share.js` for an example.
+
+|`sharePluginStrings`
+|object
+|`{ share: 'Share' }`
+|Translation strings used by the share plugin.
+
+|===
+
+[role="mt-4"]
+==== Rotate Plugin
+
+// claude - Update lightGallery Lightbox manual #1
+// New section. The rotate plugin was not documented in the previous
+// version of this manual, even though `lg-rotate.js` ships with the
+// J1 Template. The defaults are taken straight from
+// `lg-rotate.js`.
+//
+You need to include the *rotate* plugin (`lg-rotate.min.js`) to use
+the options below. The plugin adds rotate-left, rotate-right,
+flip-horizontal and flip-vertical buttons to the toolbar.
+
+[cols="^3a,^2a,^2a,^5a", options="header", width="100%", role="rtable mt-3"]
+|===
+|Name |Type |Default |Description
+
+|`rotate`
+|boolean
+|`true`
+|Enable the rotate plugin.
+
+|`rotateSpeed`
+|number (ms)
+|`400`
+|Length of the rotate / flip animation, in milliseconds.
+
+|`rotateLeft`
+|boolean
+|`true`
+|Show the *rotate-left* button.
+
+|`rotateRight`
+|boolean
+|`true`
+|Show the *rotate-right* button.
+
+|`flipHorizontal`
+|boolean
+|`true`
+|Show the *flip-horizontal* button.
+
+|`flipVertical`
+|boolean
+|`true`
+|Show the *flip-vertical* button.
+
+|`rotatePluginStrings`
+|object
+|`{ flipVertical: 'Flip vertical', flipHorizontal: 'Flip horizontal', rotateLeft: 'Rotate left', rotateRight: 'Rotate right' }`
+|Translation strings used by the rotate plugin.
+
+|===
+
+[role="mt-4"]
+==== Comment Plugin
+
+// claude - Update lightGallery Lightbox manual #1
+// New section. The comment plugin (`lg-comment.js`) supports
+// Facebook and Disqus comments and is shipped with the J1 Template
+// but was not documented in the previous version of the manual.
+//
+You need to include the *comment* plugin (`lg-comment.min.js`) to
+use the options below. The plugin adds a *comments* sidebar that
+embeds either Facebook comments or Disqus comments next to each
+slide.
+
+[cols="^3a,^2a,^2a,^5a", options="header", width="100%", role="rtable mt-3"]
+|===
+|Name |Type |Default |Description
+
+|`commentBox`
+|boolean
+|`false`
+|Enable the comment plugin. Set to `true` *and* enable one of the
+two providers below.
+
+|`fbComments`
+|boolean
+|`false`
+|Enable Facebook comments. Each slide may carry an `fbHtml` property
+(in dynamic mode) or a `data-fb-html` attribute that contains the
+Facebook comments embed code.
+
+|`disqusComments`
+|boolean
+|`false`
+|Enable Disqus comments. Each slide may carry the
+`disqusIdentifier` and `disqusURL` properties (in dynamic mode) or
+the matching `data-*` attributes.
+
+|`disqusConfig`
+|object
+|`{ title: undefined, language: 'en' }`
+|Disqus configuration. Set `language` to your preferred Disqus
+language code; `title` is the page title used in the Disqus thread.
+
+|`commentsMarkup`
+|string
+|see source
+|HTML markup used for the comment sidebar. The default markup
+contains the empty `<div class="lg-comment-body"></div>` element
+into which the provider's embed code is injected.
+
+|`commentPluginStrings`
+|object
+|`{ toggleComments: 'Toggle Comments' }`
+|Translation strings used by the comment plugin.
 
 |===

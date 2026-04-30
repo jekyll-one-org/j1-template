@@ -146,10 +146,10 @@ settings:
       #
       lightbox:
         enabled:                        true
-        type:                           ps                                      # ps | lb | lg
+        type:                           lg                                      # ps | lb | lg
 
       lightGallery:
-        plugins:                        lgFullscreen, lgRotate, lgThumbnail
+        plugins:                        lgFullscreen, lgRotate, lgThumbnail, lgZoom
 
         options:
           licenseKey:                   0000-0000-000-0000
@@ -186,8 +186,8 @@ settings:
         # image 2
         - image:
           file:                         denys-nevozhai-1_b.jpg
-          width:                        5401
-          height:                       3601          
+          width:                        1920
+          height:                       1280          
           caption_text:                 China &middot; Man posing at the rooftop of Jin Mao Tower Shanghai
           description: >
                                         <h2>China</h2>
@@ -195,8 +195,8 @@ settings:
         # image 3
         - image:
           file:                         gints-gailis_b.jpg
-          width:                        1440
-          height:                       1861          
+          width:                        1468
+          height:                       1920          
           caption_text:                 Indonesia &middot; Shangri-La Hotel Jakarta
           description: >
                                         <h2>Indonesia</h2>
@@ -206,7 +206,7 @@ settings:
           file:                         steven-diaz_b.jpg
           width:                        1920
           height:                       1123          
-          caption_text:                 Indonesia &middot; Shangri-La Hotel Jakarta
+          caption_text:                 Japan &middot; Tokyo seen from World Trade Center Observation Deck
           description: >
                                         <h2>Japan</h2>
                                         <h3>Tokyo seen from World Trade Center Observation Deck</h3>
@@ -222,8 +222,8 @@ settings:
         # image 6
         - image:
           file:                         johan-mouchet_b.jpg
-          width:                        1920
-          height:                       2880          
+          width:                        872
+          height:                       1280          
           caption_text:                 Australia &middot; The Queen Bee at the Eureka Tower of Melbourne
           description: >
                                         <h2>Australia</h2>

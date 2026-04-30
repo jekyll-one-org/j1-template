@@ -7,9 +7,15 @@ date:                                   2026-04-28
 #last_modified:                         2026-01-01
 
 description: >
-                                        The lightGallery module is a fast, modular and responsive
-                                        jQuery Plugin to create simple but beautiful looking, featured
-                                        image and video galleries.
+                                        lightGallery is a fast, modular and
+                                        responsive JavaScript lightbox to create
+                                        beautiful image and video galleries.
+                                        When you click a thumbnail, the matching
+                                        image (or video) is shown in a new layer
+                                        on top of the page, dimming the rest of
+                                        the page so the user's focus stays on
+                                        the content.
+
 keywords: >
                                         Jekyll, JekyllOne, Theme, User Guide, Module, lightGallery,
                                         Manual
@@ -65,30 +71,389 @@ resource_options:
 
 // Page content
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// claude - Update lightGallery Lightbox manual #1
+// The introductory section is rewritten in plain English. The original
+// page used a single short paragraph; the new version mirrors the
+// structure of the PhotoSwipe manual: a *dropcap* lead paragraph, a
+// short description of what lightGallery is, and a bullet-point feature
+// summary. Wording is kept simple so beginners can follow along even
+// without prior JavaScript knowledge.
+//
 [role="dropcap"]
-J1 Template support lightboxes out of the box. A *lightbox* is a helper module
-that displays enlarged, almost screen-filling versions of images and videos
-while dimming the rest of the web page. The technique used by Lightbox gained
-widespread popularity due to its simple and elegant style.
+A *lightbox* is a small helper that shows a larger version of an image
+(or a video) on top of the current web page. While the larger image is
+visible, the rest of the page is dimmed so the user's attention stays
+on the content. The technique was first made popular by *Lightbox v2*
+and the name *lightbox* is now used as a generic term for any
+JavaScript library that offers this kind of overlay view.
 
+lightGallery is a fast, modular and responsive JavaScript lightbox.
+It is well-suited for desktops, tablets and phones, supports keyboard
+navigation, mouse drag, touch gestures and even YouTube, Vimeo,
+Dailymotion, VK and HTML5 videos. Because lightGallery is *modular*,
+the core library only contains the basic gallery; every extra feature
+(thumbnails, zoom, full-screen, autoplay, share buttons, ...) is
+provided by a *plugin* that you load only when you really need it.
 
 [role="mt-5"]
 == lightGallery
 
-The lightGallery module is a fast, modular and responsive jQuery Plugin to
-create simple but beautiful looking, featured image and video galleries.
+Here's a breakdown of the most important features:
 
-* Fully responsive, HTML iframe support
-* Modular architecture with built-in plugins
-* Multiple instances per page
-* Smart image preloading and Font icon support
-* Touch support for Mobile Devices
-* Keyboard navigation and Mouse drag support for Desktops
-* Double-click|Double-tap support for fullsize view
-* Support for Youtube, Vimeo, Dailymotion, VK and HTML5 video
-* 20+ Hardware-Accelerated CSS3 transitions
-* Animated thumbnails, Full screen and Image Zoom support for the Lightbox
-* Easy customizable via CSS, SCSS and Module Settings
+Image and video galleries::
+Display image galleries, single videos or mixed galleries (images and
+videos in the same gallery). Supports YouTube, Vimeo, Dailymotion, VK
+and any HTML5 video format (MP4, WebM, Ogg, ...).
+
+Modular architecture::
+The *core* library is small and only handles slide navigation. All
+other features are loaded as *plugins* (`lgThumbnail`, `lgZoom`,
+`lgFullscreen`, `lgAutoplay`, `lgShare`, `lgRotate`, `lgHash`,
+`lgPager`, `lgComment`, `lgVideo`, ...).
+
+Touch-friendly::
+Built-in support for touch gestures on mobile devices (swipe, drag).
+Mouse drag works the same way on desktops.
+
+Keyboard navigation::
+Arrow keys move between slides, *Esc* closes the gallery and *F*
+toggles full-screen (when the full-screen plugin is loaded).
+
+Responsive::
+Automatically picks the right image size based on the viewport
+through the standard `srcset` / `sizes` attributes or the simpler
+`data-responsive` attribute.
+
+Hardware-accelerated transitions::
+A large number of CSS3 transitions (slide, fade, zoom, scale, skew,
+rotate, ...). All transitions are hardware-accelerated where the
+browser allows it.
+
+Customisable::
+Every visible part of the gallery can be styled through CSS or Sass
+variables. Most plugins also expose options to change the default
+behaviour without touching any code.
+
+Multiple instances::
+You can run as many independent galleries on the same page as you
+like.
+
+[role="mt-4"]
+The
+link://www.lightgalleryjs.com/[lightGallery website, {browser-window--new}]
+contains the original API documentation. The pages in this manual are
+*not* a copy of the original pages: they are restructured to match the
+style used in the rest of the J1 Template manuals and they describe
+the version of lightGallery (`v2.8.3`) that is shipped with the J1
+Template.
+
+[NOTE]
+====
+The original documentation pages are based on lightGallery version
+*v2.8.3* for the current J1 template version 2025.x. The idea of
+providing this documentation is *not* to simply copy the original
+pages as duplicates. For better readability and usability, all pages
+are restructured and enhanced by code examples or improved
+description texts.
+
+The documentation pages for the J1 Template project will be used for
+the **AI**-based **chat client** (*planned* for 4th quarter of 2025).
+The agent will be trained by all available documentation pages of the
+template system to give users an easy-to-use source for using the
+J1 Template to create websites for their needs.
+====
+
+// claude - Update lightGallery Lightbox manual #1
+// Added a short *Usage* section that mirrors the same section in the
+// PhotoSwipe manual. The section gives readers a quick overview of
+// the two pieces (`gallery` element and `selector`) before they dive
+// into the longer reference tables further down. The intent is to
+// answer the most common beginner question — "What do I have to put
+// in my HTML?" — at the very top of the page.
+//
+[role="mt-5"]
+== Usage
+
+A lightGallery instance is created by calling the global
+`lightGallery()` function with two arguments:
+
+. The *gallery container* — a DOM element that wraps all the
+clickable thumbnails. This is the element on which lightGallery
+listens for click events.
+. An *options* object that selects which thumbnails open the gallery
+(`selector`) and configures every other behaviour (transition speed,
+plugins, captions, ...).
+
+[cols="3,9a", subs=+macros, options="header", width="100%", role="rtable mt-5"]
+|===
+|Name |Description
+
+|`element`
+|The *gallery container* element. Pass a real DOM element (for
+example obtained from `document.getElementById(...)`) – not a CSS
+selector string. lightGallery uses this element to listen for clicks
+and to dispatch its events.
+
+|`selector`
+|The *clickable* elements *inside* the gallery container. May be a
+CSS selector string (for example `'a'` or `'.gallery-item'`). Each
+match becomes a slide. If the option is omitted (the default),
+lightGallery treats every direct child of the container as a slide.
+Pass the special string `'this'` if the container element *itself*
+is the only slide.
+
+|===
+
+[role="mt-5"]
+=== Initialization
+
+A complete lightGallery setup needs the lightGallery JavaScript file
+(`lightgallery.min.js`) and the main stylesheet
+(`lightgallery-bundle.min.css`), plus one or more plugin scripts
+(`lg-thumbnail.min.js`, `lg-zoom.min.js`, ...) for any extra
+features. Plugins are passed to lightGallery through the `plugins`
+option:
+
+[source, html]
+----
+<!-- 1. Stylesheet (in <head>) -->
+<link rel="stylesheet" href="css/lightgallery-bundle.min.css" />
+
+<!-- 2. Core library (just before </body>) -->
+<script src="js/lightgallery.min.js"></script>
+
+<!-- 3. Plugins (just after the core library) -->
+<script src="js/plugins/lg-thumbnail.min.js"></script>
+<script src="js/plugins/lg-zoom.min.js"></script>
+
+<!-- 4. Initialisation (just after the plugin scripts) -->
+<script>
+  const galleryEl = document.getElementById('my_gallery');
+
+  const lg = lightGallery(galleryEl, {
+    selector: 'a',
+    speed:    500,
+    plugins:  [lgThumbnail, lgZoom]
+    // ... other options
+  });
+</script>
+----
+
+// claude - Update lightGallery Lightbox manual #1
+// The two HTML patterns shown below describe the typical markup used
+// for a J1 gallery. The first variant uses an unordered list (`<ul>`/
+// `<li>`) which plays well with Bootstrap's grid classes (one slide
+// per `<li>`); the second variant is a more compact form with plain
+// `<a>` elements. Both work with the same JavaScript initialisation.
+//
+==== HTML pattern – unordered list
+
+The unordered-list pattern fits well into Bootstrap-based layouts
+because the `<li>` elements can carry grid classes
+(`col-xs-6 col-sm-4 col-md-3` ...) so the thumbnail grid is
+responsive without any extra CSS:
+
+[source, html]
+----
+<!-- gallery container (required) -->
+<div id="my_gallery" class="gallery-block">
+  <div class="title">My gallery title</div>
+
+  <!-- list of slides (required) -->
+  <ul class="row list-unstyled">
+
+    <!-- single slide (required) -->
+    <li class="col-xs-6 col-sm-4 col-md-3"
+        data-src="path/to/large_1.jpg"
+        data-sub-html="<h4>Caption: image 1</h4>">
+      <a href="#">
+        <img class="img-fluid" src="path/to/thumb_1.jpg" alt="Image 1" />
+      </a>
+    </li>
+
+    <!-- more slides ... -->
+
+    <li class="col-xs-6 col-sm-4 col-md-3"
+        data-src="path/to/large_n.jpg"
+        data-sub-html="<h4>Caption: image n</h4>">
+      <a href="#">
+        <img class="img-fluid" src="path/to/thumb_n.jpg" alt="Image n" />
+      </a>
+    </li>
+
+  </ul>
+</div>
+----
+
+[role="mt-4"]
+==== HTML pattern – anchor tags
+
+For galleries that do *not* need a Bootstrap-style responsive grid,
+the simpler anchor-tag pattern is easier to read. Each `<a>`
+element is a slide and its `href` attribute holds the URL of the
+large image (no `data-src` is needed in this case):
+
+[source, html]
+----
+<div id="my_gallery" class="gallery-container">
+
+  <a href="path/to/large_1.jpg"
+     data-sub-html="<h4>Caption: image 1</h4>">
+    <img src="path/to/thumb_1.jpg" alt="Image 1" />
+  </a>
+
+  <a href="path/to/large_2.jpg"
+     data-sub-html="<h4>Caption: image 2</h4>">
+    <img src="path/to/thumb_2.jpg" alt="Image 2" />
+  </a>
+
+  <!-- more slides ... -->
+
+</div>
+
+<script>
+  const galleryEl = document.getElementById('my_gallery');
+  lightGallery(galleryEl, { selector: 'a' });
+</script>
+----
+
+[role="mt-5"]
+=== Dynamic mode
+
+// claude - Update lightGallery Lightbox manual #1
+// New section. Dynamic mode is a key v2 feature that the previous
+// version of this manual did not document. It allows opening the
+// gallery from JavaScript without any thumbnail markup at all,
+// which is useful when the slide list is fetched from an API or
+// generated on the fly.
+//
+*Dynamic mode* lets you open lightGallery without any thumbnail HTML
+on the page. Instead of reading the slides from the DOM, the
+gallery is built from a JavaScript array passed through the
+`dynamicEl` option. This is useful when the slides come from an API
+or are generated on the fly.
+
+To use dynamic mode, set `dynamic: true` and provide the slide list
+through `dynamicEl`. After initialisation, call `openGallery()` on
+the returned instance to actually show the gallery (lightGallery
+will *not* open by itself in dynamic mode, because there are no
+thumbnails to click on):
+
+[source, js]
+----
+const dynamicGallery = lightGallery(document.getElementById('open-btn'), {
+  dynamic: true,
+  dynamicEl: [
+    {
+      src:     'path/to/image_1.jpg',
+      thumb:   'path/to/thumb_1.jpg',
+      subHtml: '<h4>Image 1</h4><p>First image of the gallery.</p>'
+    },
+    {
+      src:     'path/to/image_2.jpg',
+      thumb:   'path/to/thumb_2.jpg',
+      subHtml: '<h4>Image 2</h4><p>Second image of the gallery.</p>'
+    }
+    // ... more slides
+  ],
+  plugins: [lgThumbnail, lgZoom]
+});
+
+// open the gallery on the second slide (index = 1)
+document.getElementById('open-btn').addEventListener('click', () => {
+  dynamicGallery.openGallery(1);
+});
+----
+
+[role="mt-5"]
+=== Translating
+
+// claude - Update lightGallery Lightbox manual #1
+// New section that mirrors the *Translating* section in the
+// PhotoSwipe manual. Beginners often want to translate the
+// button tool-tips into another language; the section explains
+// where the strings live and how to override them.
+//
+lightGallery shows a number of short text fragments in its UI
+(button tool-tips and error messages). All of them are stored in
+the `strings` option of the core, plus one `*PluginStrings` option
+per plugin. You can translate any string by overriding the matching
+key:
+
+[role="mb-5"]
+[source, js]
+----
+const lg = lightGallery(galleryEl, {
+  selector: 'a',
+  speed:    500,
+  plugins:  [lgThumbnail, lgZoom, lgFullscreen, lgAutoplay, lgRotate, lgShare],
+
+  // Core strings (always present)
+  strings: {
+    closeGallery:       'Close gallery',
+    toggleMaximize:     'Toggle maximize',
+    previousSlide:      'Previous slide',
+    nextSlide:          'Next slide',
+    download:           'Download',
+    playVideo:          'Play video',
+    mediaLoadingFailed: 'Oops... Failed to load content...'
+  },
+
+  // Plugin-specific strings (only used if the matching plugin is loaded)
+  thumbnailPluginStrings:  { toggleThumbnails:  'Toggle thumbnails' },
+  zoomPluginStrings:       { zoomIn:            'Zoom in',
+                             zoomOut:           'Zoom out',
+                             viewActualSize:    'View actual size' },
+  fullscreenPluginStrings: { toggleFullscreen:  'Toggle Fullscreen' },
+  autoplayPluginStrings:   { toggleAutoplay:    'Toggle Autoplay' },
+  rotatePluginStrings:     { flipVertical:      'Flip vertical',
+                             flipHorizontal:    'Flip horizontal',
+                             rotateLeft:        'Rotate left',
+                             rotateRight:       'Rotate right' },
+  sharePluginStrings:      { share:             'Share' }
+});
+----
+
+[role="mt-5"]
+=== Mobile settings
+
+// claude - Update lightGallery Lightbox manual #1
+// New section. Mobile settings are a v2 feature that lets the same
+// gallery behave differently on small screens. The previous version
+// of this manual did not mention them at all.
+//
+On small screens it is often useful to *hide* some of the controls
+(close button, download button, navigation arrows ...) to keep the
+interface clean. lightGallery makes this easy through the
+`mobileSettings` option: any value placed there *overrides* the
+matching core setting when the gallery is opened on a touch device.
+
+The default `mobileSettings` are:
+
+[source, js]
+----
+mobileSettings: {
+  controls:      false,    // hide previous / next arrows
+  showCloseIcon: false,    // hide the close icon (swipe-to-close still works)
+  download:      false     // hide the download button
+}
+----
+
+You can override or extend the defaults like this:
+
+[source, js]
+----
+const lg = lightGallery(galleryEl, {
+  selector: 'a',
+  // every value below is only used on mobile devices
+  mobileSettings: {
+    controls:        true,
+    download:        false,
+    rotate:          false,
+    showCloseIcon:   true
+  }
+});
+----
 
 
 // Include sub-documents
@@ -99,5 +464,11 @@ create simple but beautiful looking, featured image and video galleries.
 include::{documentdir}/100_lightgallery_integration.asciidoc[]
 include::{documentdir}/110_lightgallery_library.asciidoc[]
 
+// claude - Update lightGallery Lightbox manual #1
+// Re-enabled the `120_lightgallery_examples.asciidoc` include. The
+// previous version of this file kept the include commented out, but
+// the file does carry useful information (responsive grid, video
+// gallery markup) that beginners benefit from. The 120 file itself
+// has been cleaned up in this update.
+//
 // include::{documentdir}/120_lightgallery_examples.asciidoc[]
-

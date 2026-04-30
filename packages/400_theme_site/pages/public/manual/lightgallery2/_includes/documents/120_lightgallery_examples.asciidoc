@@ -1,15 +1,34 @@
-=== LightGallery examples
+// claude - Update lightGallery Lightbox manual #1
+// This file has been heavily cleaned up:
+//
+//   * The placeholder "At vero eos et accusam et justo ..." Lorem
+//     Ipsum paragraphs have been replaced with short, real
+//     descriptions.
+//   * The JavaScript snippets have been rewritten for the v2 API
+//     (`lightGallery(el, ...)` instead of `$('#id').lightGallery(...)`).
+//   * The Bootstrap grid classes have been kept (they are still the
+//     recommended way to lay out a responsive thumbnail grid in J1
+//     Template).
+//   * The video.js example now points to a current video.js CDN
+//     instead of the long-removed `vjs.zencdn.net/4.12.15/...`
+//     version.
+//
+[role="mt-5"]
+== lightGallery examples
 
-Find with the following demos, how J1 Theme implements Lightgallery for
-fully responsive usage. The template is based on Bootstrap and use the grid
-system to create tiling thumbnails automatically. No need for additional
-thumbnail images to create!
+The following demos show how the J1 Template uses lightGallery for
+fully responsive image and video galleries. The template is built
+on Bootstrap and reuses the standard grid classes
+(`col-xs-*`, `col-sm-*`, `col-md-*`) on the slide list to produce
+a tiling thumbnail layout *without* any extra CSS.
 
-==== LightGallery on Images
+[role="mt-4"]
+=== lightGallery on images
 
-The galley *Old times* is using 2 images per row by using the grid class
-`col-xs-6`. The view port is set to *extra small*, the number of columns to 6
-per image (12 columns per row) with 2px *gutter* (spacing set to a value of 2).
+The example gallery *Old Times* uses two images per row by adding
+the `col-xs-6` class to every `<li>`. The grid is *extra small*
+(viewport-wide) and reserves 6 columns per image (12 columns per
+row, two images per row), with a 2 px gutter between thumbnails:
 
 gallery::jg_old_times[ role="mb-4 wm-800" ]
 
@@ -19,196 +38,206 @@ gallery::jg_old_times[ role="mb-4 wm-800" ]
 gallery::jg_old_times[ role="mb-4 wm-800" ]
 ----
 
+[role="mt-4"]
+=== lightGallery on videos
 
-==== LightGallery on Videos
+lightGallery supports YouTube, Vimeo, VK, Dailymotion and every
+HTML5 video format the browser knows (MP4, WebM, Ogg, ...).
 
-Lightgallery supports YouTube, Vimeo, VK and all other types of HTML5 video
-formats. Such as MP4, WebM, Ogg, etc.
+To display a YouTube, Vimeo or VK video, paste the public video URL
+(or the *share* URL provided by the platform) into the `data-src`
+attribute of the slide – exactly like for an image. lightGallery
+inspects the URL, recognises the platform and creates the matching
+video slide automatically.
 
-To display YouTube, Vimeo or VK video, you can paste the video URL, or share
-URL, which is provided by YouTube / vimeo in the data-src attribute. The same
-way you display images in the gallery. Lightgallery will check the data-src
-attribute and if it is YouTube or vimeo video URL, it will create the video
-slide.
+You can also provide a *poster image* per video. The poster is
+displayed instead of the video while the user navigates between
+slides. Posters keep the gallery responsive (so the user can swipe
+or drag to other slides without waiting for the video to load) and
+they reduce the total bandwidth needed for the gallery. The video
+itself is loaded on demand, when the user clicks the poster. Set
+the poster URL through the `data-poster` attribute.
 
-You can even provide poster image for each videos. Poster images will be
-loaded instead of videos. So user will be able to navigate to other slides
-by using mouse drag or swipe. Poster images improve performance, and maintain
-the flexibility of your gallery without effecting user experience. Videos will
-be loaded when a user clicks on the poster images. You can place poster image
-url in the data-poster attribute.
+When the *thumbnail* plugin is loaded, lightGallery can also fetch
+the YouTube, Vimeo and Dailymotion thumbnails automatically. The
+thumbnail size is configured through `youTubeThumbSize` (see the
+*Thumbnails Plugin* section in the API reference for the allowed
+values). Videos are paused automatically when the user navigates to
+another slide – no extra code is needed on your side.
 
-Lightgallery allows you to load thumbnail images automatically from YouTube,
-Vimeo or VK. You can specify the size of the thumbnails in the settings.
-Videos will be automatically paused when a user starts to navigate to another
-slide. So user never have to worry about it. Lightgallery takes care of
-everything!
+[role="mt-4"]
+=== HTML5 video
 
-==== Html5 Video
+To display a local HTML5 video, place the `<video>` tag inside a
+hidden `<div>` on the page and reference the wrapper through the
+`data-html` attribute on the slide. *Do not* set `data-src` for
+HTML5 video slides – `data-html` already tells lightGallery what to
+render. As an alternative, the HTML markup itself can be passed
+directly as the value of `data-html`.
 
-To display html5 video create your video content using html5 video tag inside
-a hidden div. Then just add id or class name of the object(hidden div) which
-contains your html, inside the data-html attribute. data-src should not be
-provided when you use html5 videos . You can even provide video html directly
-inside data-html attribute.
+The example below uses the `lg-video-object lg-html5` classes on
+the `<video>` element so the *video* plugin can recognise it as an
+HTML5 video.
 
-Lightgallery will automatically check your content, and if it is id or class
-name of your hidden div content will be fetched from the div, and will be
-displayed as video. Otherwise direct content will be used for displaying
-the videos.
-
+[role="mt-4"]
 ==== Plugin dependency
 
-Lightgallery require the video plugin to be included in your document. Include
-Videojs CSS and Javascript files:
+HTML5 video slides require the *video* plugin. If you want to use
+the *video.js* skin instead of the native browser controls, also
+load the video.js library and stylesheet:
 
 [source, html]
 ----
-<link href="http://vjs.zencdn.net/4.12.15/video-js.css" rel="stylesheet">
-<script src="http://vjs.zencdn.net/4.12.15/video.js"></script>
+<!-- video.js (optional, only when `videojs: true`) -->
+<link rel="stylesheet" href="https://vjs.zencdn.net/8.10.0/video-js.css" />
+<script src="https://vjs.zencdn.net/8.10.0/video.min.js"></script>
+
+<!-- lightGallery video plugin (always required for video slides) -->
+<script src="js/plugins/lg-video.min.js"></script>
 ----
 
+[role="mt-4"]
 ==== HTML markup
 
 [source, html]
 ----
+<!-- Hidden <video> elements (one per slide) -->
 <div style="display:none;" id="video_1">
-  <video class="lg-video-object lg-html5" controls="none" preload="none">
-    <source src="/path/to/video_1" type="video/mp4">
+  <video class="lg-video-object lg-html5" controls preload="none">
+    <source src="/path/to/video_1.mp4" type="video/mp4">
     Your browser does not support HTML5 video.
   </video>
 </div>
-...
+<!-- ... -->
 <div style="display:none;" id="video_n">
-  <video class="lg-video-object lg-html5" controls="none" preload="none">
-    <source src="/path/to/video_n" type="video/mp4">
+  <video class="lg-video-object lg-html5" controls preload="none">
+    <source src="/path/to/video_n.mp4" type="video/mp4">
     Your browser does not support HTML5 video.
   </video>
 </div>
 
+<!-- Gallery markup -->
 <div class="j1-lg-galleryblock">
   <div class="title">Video gallery title</div>
+
   <ul id="j1-lg-video-html5-ul" class="row j1-lg-gutter list-unstyled">
+
     <li class="col-xs-6 col-sm-4 col-md-3 video"
         data-html="#video_1"
-        data-poster="/path/to/video_1-poster"
-        data-sub-html="Caption text for video_1" data-html="#video1">
+        data-poster="/path/to/video_1-poster.jpg"
+        data-sub-html="Caption text for video_1">
       <a class="thumbnail" href="#">
-        <img class="img-responsive" src="/path/tp/video-thumbnail_1.jpg">
+        <img class="img-fluid" src="/path/to/video_1-thumbnail.jpg">
       </a>
     </li>
-    ...
+
+    <!-- ... -->
+
     <li class="col-xs-6 col-sm-4 col-md-3 video"
         data-html="#video_n"
-        data-poster="/path/to/video_n-poster"
+        data-poster="/path/to/video_n-poster.jpg"
         data-sub-html="Caption text for video_n">
       <a class="thumbnail" href="#">
-        <img class="img-responsive" src="/path/tp/video-thumbnail_n.jpg">
+        <img class="img-fluid" src="/path/to/video_n-thumbnail.jpg">
       </a>
     </li>
 
   </ul>
 </div>
 
-<script type="text/javascript">
-  $(document).ready(function(){
-    $('#j1-lg-video-html5-ul').lightGallery({ videojs: true });
+<!-- Initialisation (v2 API) -->
+<script>
+  const galleryEl = document.getElementById('j1-lg-video-html5-ul');
+  lightGallery(galleryEl, {
+    selector: 'li',
+    plugins:  [lgVideo, lgThumbnail],
+    videojs:  true
   });
 </script>
 ----
 
-=== Examples
+[role="mt-4"]
+==== Example
 
-At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd
-gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem
-ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod
-tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
+The gallery below uses the markup pattern from the section above.
+Each slide is an MP4 video that is rendered through the video.js
+skin (`videojs: true`).
 
-.MP4 Videos - VideoJS Player
+.MP4 Videos – video.js player
 gallery::jg_video_html5[role="mb-5"]
 
-At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd
-gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem
-ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod
-tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
+[role="mt-4"]
+=== Online video
 
-==== Online Video
+Online video slides are even simpler than HTML5 video slides:
+because YouTube, Vimeo, VK and Dailymotion provide their own player,
+no hidden `<video>` element is needed. Set `data-src` to the public
+video URL (or the *share* URL) – lightGallery does the rest.
 
-Lightgallery supports YouTube, Vimeo, VK and all other types of HTML5 video
-formats. Such as MP4, WebM, Ogg, etc. To display YouTube, Vimeo or VK video,
-you can paste the video URL, or share URL, which is provided by YouTube|vimeo
-in the data-src attribute. The same way you display images in the gallery.
+A poster image (set through `data-poster`) is highly recommended.
+While the user navigates the gallery, the poster is shown instead
+of the video, so the gallery stays responsive. The video itself is
+loaded only when the user clicks the poster. The thumbnail plugin
+can also generate the thumbnails of YouTube, Vimeo and Dailymotion
+videos automatically – set `loadYouTubeThumbnail: true` (or the
+matching option for the other platforms) and pick a size with
+`youTubeThumbSize`.
 
-Lightgallery will check the data-src attribute and if it is YouTube or vimeo
-video URL, it will create the video slide. You can even provide poster image
-for each videos. Poster images will be loaded instead of videos. So user will
-be able to navigate to other slides by using mouse drag or swipe. Poster
-images improve performance, and maintain the flexibility of your gallery
-without effecting user experience.
+Videos are paused automatically when the user navigates to another
+slide.
 
-Videos will be loaded when a user clicks on the poster images. You can place
-poster image url in the data-poster attribute. Lightgallery allows you to
-load thumbnail images automatically from YouTube, Vimeo or VK. You can specify
-the size of the thumbnails in the settings.
+[role="mt-4"]
+==== Plugin dependency
 
-Videos will be automatically paused when a user starts to navigate to another
-slide, so the users never have to worry about it.
+Online video slides require the *video* plugin
+(`lg-video.min.js`). The plugin handles all four supported
+platforms (YouTube, Vimeo, VK, Dailymotion) without any extra
+configuration.
 
-=== Plugin dependency
-
-Lightgallery require the video plugin to be included in your document.
-
-=== API dependency
-
-Lightgallery require vimeo player api to be included in your document
-for pausing the vimeo video.
-
-[source, html]
-----
-<script src="https://f.vimeocdn.com/js/froogaloop2.min.js"></script>
-----
-
+[role="mt-4"]
 ==== HTML markup
 
 [source, html]
 ----
 <div class="j1-lg-galleryblock">
   <div class="title">Video gallery title</div>
+
   <ul id="j1-lg-video-online-ul" class="row j1-lg-gutter list-unstyled">
+
     <li class="col-xs-6 col-sm-4 col-md-3 video"
-        data-src="/url/of/video_1"
-        data-poster="/path/to/video_1-poster"
-        data-sub-html="Caption text for video_1" data-html="#video1">
+        data-src="https://www.youtube.com/watch?v=VIDEO_ID_1"
+        data-poster="/path/to/video_1-poster.jpg"
+        data-sub-html="Caption text for video_1">
       <a class="thumbnail" href="#">
-        <img class="img-responsive" src="/path/tp/video-thumbnail_1.jpg">
+        <img class="img-fluid" src="/path/to/video_1-thumbnail.jpg">
       </a>
     </li>
-    ...
+
+    <!-- ... -->
+
     <li class="col-xs-6 col-sm-4 col-md-3 video"
-        data-src="/url/of/video_n"
-        data-poster="/path/to/video_n-poster"
+        data-src="https://www.youtube.com/watch?v=VIDEO_ID_N"
+        data-poster="/path/to/video_n-poster.jpg"
         data-sub-html="Caption text for video_n">
       <a class="thumbnail" href="#">
-        <img class="img-responsive" src="/path/tp/video-thumbnail_n.jpg">
+        <img class="img-fluid" src="/path/to/video_n-thumbnail.jpg">
       </a>
     </li>
 
   </ul>
 </div>
 
-<script type="text/javascript">
-  $(document).ready(function(){
-    $('#j1-lg-video-online-ul').lightGallery();
+<script>
+  const galleryEl = document.getElementById('j1-lg-video-online-ul');
+  lightGallery(galleryEl, {
+    selector: 'li',
+    plugins:  [lgVideo, lgThumbnail]
   });
 </script>
 ----
 
+[role="mt-4"]
 ==== Example
-
-At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd
-gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem
-ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod
-tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
 
 .The Voice Kids, Germany 2021
 gallery::jg_video_online_youtube_2[role="mb-5"]

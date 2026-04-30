@@ -1,13 +1,13 @@
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/modules/lightGallery/css/lightgallery-bundle.css (0)
+ # ~/assets/theme/j1/modules/lightGallery/css/lightgallery-bundle.css (1)
  # Provides the lightGallery v2.8.3 Main JS module
  #
  # Product/Info:
  # https://jekyll.one
  #
  # Copyright (C) 2025 Sachin Neravath
- # Copyright (C) 2026 Juergen Adams
+ # Copyright (C) 2023-2026 Juergen Adams
  #
  # J1 Template is licensed under the MIT License.
  # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE
@@ -41,48 +41,119 @@
   font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
 
+/* claude - Modify lightGallery buttons #1
+ * Re-style the prev / next arrow buttons so they look and position exactly
+ * like PhotoSwipe's pswp__button--arrow--prev / --next. Differences from
+ * the original lightGallery rules:
+ *   - 75x100 hit area anchored flush to left:0 / right:0 (was a small
+ *     padded box inset 20px from each edge with a translucent background).
+ *   - No background / border / radius -- the chevron stands alone on top
+ *     of the slide, matching PhotoSwipe.
+ *   - Hover / focus / active states use opacity (0.85 -> 1) instead of
+ *     re-colouring the icon, again to mirror PhotoSwipe.
+ *   - The icon glyph is now an inline SVG (injected by lightgallery.js)
+ *     instead of the lg.woff @font-face glyph rendered by the original
+ *     :before / :after pseudo-elements, so those pseudo-elements are
+ *     neutralised below.
+ *   - --lg-icn-* tokens mirror PhotoSwipe's --pswp-icon-* tokens so a host
+ *     page can theme the chevron and its stroke shadow without depending
+ *     on PhotoSwipe's stylesheet being loaded. */
 .lg-next,
 .lg-prev {
-  background-color: rgba(0, 0, 0, 0.45);
-  border-radius: 2px;
-  color: #999;
-  cursor: pointer;
-  display: block;
-  font-size: 22px;
-  margin-top: -10px;
-  padding: 8px 10px 9px;
   position: absolute;
   top: 50%;
+  width: 75px;
+  height: 100px;
+  margin-top: -50px;
+  margin-left: 0;
+  margin-right: 0;
+  padding: 0;
+  background: none;
+  background-color: transparent;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  color: var(--lg-icn-color, #fff);
+  cursor: pointer;
+  display: block;
+  opacity: 0.85;
+  outline: 0;
   z-index: 1084;
-  outline: none;
-  border: none;
+  -webkit-appearance: none;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-touch-callout: none;
+}
+.lg-next:hover:not(.disabled),
+.lg-prev:hover:not(.disabled),
+.lg-next:focus:not(.disabled),
+.lg-prev:focus:not(.disabled),
+.lg-next:active:not(.disabled),
+.lg-prev:active:not(.disabled) {
+  background: none;
+  background-color: transparent;
+  border: 0;
+  box-shadow: none;
+  opacity: 1;
 }
 .lg-next.disabled,
 .lg-prev.disabled {
   opacity: 0 !important;
   cursor: default;
 }
-.lg-next:hover:not(.disabled),
-.lg-prev:hover:not(.disabled) {
-  color: #fff;
-}
 .lg-single-item .lg-next,
 .lg-single-item .lg-prev {
   display: none;
 }
 
-.lg-next {
-  right: 20px;
+.lg-prev {
+  left: 0;
+  right: auto;
 }
-.lg-next:before {
-  content: "\e095";
+.lg-next {
+  right: 0;
+  left: auto;
 }
 
-.lg-prev {
-  left: 20px;
+/* claude - Modify lightGallery buttons #1
+ * The legacy lg.woff glyph pseudo-elements are intentionally disabled --
+ * the SVG injected into the button replaces them. `content: none` keeps
+ * the rules harmless even if a downstream stylesheet still expects the
+ * selectors to exist. */
+.lg-prev:after,
+.lg-next:before {
+  content: none;
 }
-.lg-prev:after {
-  content: "\e094";
+
+/* claude - Modify lightGallery buttons #1
+ * The injected arrow SVG. Geometry mirrors PhotoSwipe's .pswp__icn
+ * (60x60, vertically centered in the button, offset 9px from the prev
+ * edge / 14px from the next edge) and the next-arrow flip uses the same
+ * scale(-1, 1) trick instead of shipping a second mirrored SVG. */
+.lg-prev .lg-arrow-icn,
+.lg-next .lg-arrow-icn {
+  position: absolute;
+  top: 50%;
+  margin-top: -30px;
+  width: 60px;
+  height: 60px;
+  overflow: hidden;
+  pointer-events: none;
+  fill: var(--lg-icn-color, #fff);
+  color: var(--lg-icn-color-secondary, #4f4f4f);
+}
+.lg-prev .lg-arrow-icn {
+  left: 9px;
+  right: auto;
+}
+.lg-next .lg-arrow-icn {
+  left: auto;
+  right: 14px;
+  transform: scale(-1, 1);
+}
+.lg-arrow-icn-shadow {
+  stroke: var(--lg-icn-stroke-color, #4f4f4f);
+  stroke-width: var(--lg-icn-stroke-width, 2px);
+  fill: none;
 }
 
 @-webkit-keyframes lg-right-end {

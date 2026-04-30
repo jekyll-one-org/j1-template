@@ -1,0 +1,214 @@
+=== LightGallery examples
+
+Find with the following demos, how J1 Theme implements Lightgallery for
+fully responsive usage. The template is based on Bootstrap and use the grid
+system to create tiling thumbnails automatically. No need for additional
+thumbnail images to create!
+
+==== LightGallery on Images
+
+The galley *Old times* is using 2 images per row by using the grid class
+`col-xs-6`. The view port is set to *extra small*, the number of columns to 6
+per image (12 columns per row) with 2px *gutter* (spacing set to a value of 2).
+
+gallery::jg_old_times[ role="mb-4 wm-800" ]
+
+
+[source, html]
+----
+gallery::jg_old_times[ role="mb-4 wm-800" ]
+----
+
+
+==== LightGallery on Videos
+
+Lightgallery supports YouTube, Vimeo, VK and all other types of HTML5 video
+formats. Such as MP4, WebM, Ogg, etc.
+
+To display YouTube, Vimeo or VK video, you can paste the video URL, or share
+URL, which is provided by YouTube / vimeo in the data-src attribute. The same
+way you display images in the gallery. Lightgallery will check the data-src
+attribute and if it is YouTube or vimeo video URL, it will create the video
+slide.
+
+You can even provide poster image for each videos. Poster images will be
+loaded instead of videos. So user will be able to navigate to other slides
+by using mouse drag or swipe. Poster images improve performance, and maintain
+the flexibility of your gallery without effecting user experience. Videos will
+be loaded when a user clicks on the poster images. You can place poster image
+url in the data-poster attribute.
+
+Lightgallery allows you to load thumbnail images automatically from YouTube,
+Vimeo or VK. You can specify the size of the thumbnails in the settings.
+Videos will be automatically paused when a user starts to navigate to another
+slide. So user never have to worry about it. Lightgallery takes care of
+everything!
+
+==== Html5 Video
+
+To display html5 video create your video content using html5 video tag inside
+a hidden div. Then just add id or class name of the object(hidden div) which
+contains your html, inside the data-html attribute. data-src should not be
+provided when you use html5 videos . You can even provide video html directly
+inside data-html attribute.
+
+Lightgallery will automatically check your content, and if it is id or class
+name of your hidden div content will be fetched from the div, and will be
+displayed as video. Otherwise direct content will be used for displaying
+the videos.
+
+==== Plugin dependency
+
+Lightgallery require the video plugin to be included in your document. Include
+Videojs CSS and Javascript files:
+
+[source, html]
+----
+<link href="http://vjs.zencdn.net/4.12.15/video-js.css" rel="stylesheet">
+<script src="http://vjs.zencdn.net/4.12.15/video.js"></script>
+----
+
+==== HTML markup
+
+[source, html]
+----
+<div style="display:none;" id="video_1">
+  <video class="lg-video-object lg-html5" controls="none" preload="none">
+    <source src="/path/to/video_1" type="video/mp4">
+    Your browser does not support HTML5 video.
+  </video>
+</div>
+...
+<div style="display:none;" id="video_n">
+  <video class="lg-video-object lg-html5" controls="none" preload="none">
+    <source src="/path/to/video_n" type="video/mp4">
+    Your browser does not support HTML5 video.
+  </video>
+</div>
+
+<div class="j1-lg-galleryblock">
+  <div class="title">Video gallery title</div>
+  <ul id="j1-lg-video-html5-ul" class="row j1-lg-gutter list-unstyled">
+    <li class="col-xs-6 col-sm-4 col-md-3 video"
+        data-html="#video_1"
+        data-poster="/path/to/video_1-poster"
+        data-sub-html="Caption text for video_1" data-html="#video1">
+      <a class="thumbnail" href="#">
+        <img class="img-responsive" src="/path/tp/video-thumbnail_1.jpg">
+      </a>
+    </li>
+    ...
+    <li class="col-xs-6 col-sm-4 col-md-3 video"
+        data-html="#video_n"
+        data-poster="/path/to/video_n-poster"
+        data-sub-html="Caption text for video_n">
+      <a class="thumbnail" href="#">
+        <img class="img-responsive" src="/path/tp/video-thumbnail_n.jpg">
+      </a>
+    </li>
+
+  </ul>
+</div>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('#j1-lg-video-html5-ul').lightGallery({ videojs: true });
+  });
+</script>
+----
+
+=== Examples
+
+At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd
+gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem
+ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod
+tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
+
+.MP4 Videos - VideoJS Player
+gallery::jg_video_html5[role="mb-5"]
+
+At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd
+gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem
+ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod
+tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
+
+==== Online Video
+
+Lightgallery supports YouTube, Vimeo, VK and all other types of HTML5 video
+formats. Such as MP4, WebM, Ogg, etc. To display YouTube, Vimeo or VK video,
+you can paste the video URL, or share URL, which is provided by YouTube|vimeo
+in the data-src attribute. The same way you display images in the gallery.
+
+Lightgallery will check the data-src attribute and if it is YouTube or vimeo
+video URL, it will create the video slide. You can even provide poster image
+for each videos. Poster images will be loaded instead of videos. So user will
+be able to navigate to other slides by using mouse drag or swipe. Poster
+images improve performance, and maintain the flexibility of your gallery
+without effecting user experience.
+
+Videos will be loaded when a user clicks on the poster images. You can place
+poster image url in the data-poster attribute. Lightgallery allows you to
+load thumbnail images automatically from YouTube, Vimeo or VK. You can specify
+the size of the thumbnails in the settings.
+
+Videos will be automatically paused when a user starts to navigate to another
+slide, so the users never have to worry about it.
+
+=== Plugin dependency
+
+Lightgallery require the video plugin to be included in your document.
+
+=== API dependency
+
+Lightgallery require vimeo player api to be included in your document
+for pausing the vimeo video.
+
+[source, html]
+----
+<script src="https://f.vimeocdn.com/js/froogaloop2.min.js"></script>
+----
+
+==== HTML markup
+
+[source, html]
+----
+<div class="j1-lg-galleryblock">
+  <div class="title">Video gallery title</div>
+  <ul id="j1-lg-video-online-ul" class="row j1-lg-gutter list-unstyled">
+    <li class="col-xs-6 col-sm-4 col-md-3 video"
+        data-src="/url/of/video_1"
+        data-poster="/path/to/video_1-poster"
+        data-sub-html="Caption text for video_1" data-html="#video1">
+      <a class="thumbnail" href="#">
+        <img class="img-responsive" src="/path/tp/video-thumbnail_1.jpg">
+      </a>
+    </li>
+    ...
+    <li class="col-xs-6 col-sm-4 col-md-3 video"
+        data-src="/url/of/video_n"
+        data-poster="/path/to/video_n-poster"
+        data-sub-html="Caption text for video_n">
+      <a class="thumbnail" href="#">
+        <img class="img-responsive" src="/path/tp/video-thumbnail_n.jpg">
+      </a>
+    </li>
+
+  </ul>
+</div>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('#j1-lg-video-online-ul').lightGallery();
+  });
+</script>
+----
+
+==== Example
+
+At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd
+gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem
+ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod
+tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
+
+.The Voice Kids, Germany 2021
+gallery::jg_video_online_youtube_2[role="mb-5"]
