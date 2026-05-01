@@ -6,7 +6,7 @@ regenerate:                             true
 
 {% comment %}
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/adapter/js/masonry.js
+ # ~/assets/theme/j1/adapter/js/masonry.js (1)
  # Liquid template to adapt the Masonry module
  #
  # Product/Info:
@@ -58,9 +58,10 @@ regenerate:                             true
   {% assign production = true %}
 {% endif %}
 
+
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/adapter/js/masonry.js
+ # ~/assets/theme/j1/adapter/js/masonry.js (1)
  # J1 Adapter for the comments module
  #
  # Product/Info:

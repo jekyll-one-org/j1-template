@@ -6,7 +6,7 @@ regenerate:                             true
 
 {% comment %}
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/adapter/js/iconPickers.js
+ # ~/assets/theme/j1/adapter/js/iconPickers.js (0)
  # Liquid template to adapt the iconPickers module
  #
  # Product/Info:
@@ -51,9 +51,10 @@ regenerate:                             true
 {% assign icon_picker_options  = icon_picker_defaults | merge: icon_picker_settings %}
 {% assign slim_select_options  = slim_select_defaults | merge: slim_select_settings %}
 
+
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/adapter/js/iconPickers.js
+ # ~/assets/theme/j1/adapter/js/iconPickers.js (0)
  # J1 Adapter for the iconPickers module
  #
  # Product/Info:

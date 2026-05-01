@@ -6,7 +6,7 @@ regenerate:                             true
 
 {% comment %}
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/core/js/j1.js
+ # ~/assets/theme/j1/core/js/j1.js (5)
  # Liquid template to initialize J1 Theme Core functions
  #
  # Product/Info:
@@ -110,9 +110,10 @@ regenerate:                             true
   {% assign language = "en" %}
 {% endif %}
 
+
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/adapter/js/j1_template.js
+ # ~/assets/theme/j1/adapter/js/j1.js (5)
  # JS Adapter for J1 Theme
  #
  # Product/Info:

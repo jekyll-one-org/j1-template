@@ -2,11 +2,11 @@
 regenerate:                             true
 ---
 
-{% capture cache %}
+{%- capture cache -%}
 
 {% comment %}
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/adapter/js/themeToggler.js
+ # ~/assets/theme/j1/adapter/js/themeToggler.js (1)
  # Liquid template to adapt the Theme Toggler module
  #
  # Product/Info:
@@ -59,9 +59,10 @@ regenerate:                             true
   {% assign production = true %}
 {% endif %}
 
+
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/adapter/js/themeToggler.js
+ # ~/assets/theme/j1/adapter/js/themeToggler.js (1)
  # J1 Adapter for the Theme Toggler module
  #
  # Product/Info:
@@ -83,8 +84,10 @@ regenerate:                             true
 // -----------------------------------------------------------------------------
 /* eslint indent: "off"                                                       */
 // -----------------------------------------------------------------------------
-'use strict';
+"use strict";
 j1.adapter.themeToggler = ((j1, window) => {
+
+  const isDev = (j1.env === "development" || j1.env === "dev") ? true : false;
 
   {% comment %} Set global variables
   ------------------------------------------------------------------------------ {% endcomment %}
@@ -96,7 +99,8 @@ j1.adapter.themeToggler = ((j1, window) => {
   var secure                = (url.protocol.includes('https')) ? true : false;
   var cookie_names          = j1.getCookieNames();
   var state                 = 'not_started';
-  var user_state           = {};
+  var user_state            = {};
+
   var light_theme_css;
   var dark_theme_css;
   var light_theme_name;
@@ -159,64 +163,78 @@ j1.adapter.themeToggler = ((j1, window) => {
       // module initializer
       // -----------------------------------------------------------------------
       var dependencies_met_page_ready = setInterval (() => {
-        var pageState      = $('#content').css("display");
-        var pageVisible    = (pageState === 'block') ? true : false;
-        var j1CoreFinished = (j1.getState() === 'finished') ? true : false;
+        var pageState           = $('#content').css("display");
+        var pageVisible         = (pageState === 'block') ? true : false;
+        var j1CoreFinished      = (j1.getState() === 'finished') ? true : false;
+        var toggleButtonExists  = (document.getElementById('quickLinksThemeTogglerButton') === null ? false : true)
 
-        if (j1CoreFinished && pageVisible) {
+        if (j1CoreFinished && pageVisible && toggleButtonExists) {
           startTimeModule = Date.now();
 
           user_state = j1.readCookie(cookie_names.user_state);
 
           _this.setState('started');
-          logger.debug('\n' + 'set module state to: ' + _this.getState());
-          logger.info('\n' + 'initializing module: started');
+          logger.debug('set module state to: ' + _this.getState());
+          logger.info('initializing module: started');
 
-          // toggle themeToggler icon to 'dark' if required
-          if ($('#quickLinksThemeTogglerButton').length) {
-            if (user_state.theme_name == dark_theme_name) {
-              $('#quickLinksThemeTogglerButton a i').toggleClass('mdib-lightbulb mdib-lightbulb-outline');
-            }
-          }
-
-          $('#quickLinksThemeTogglerButton').click(function () {
-            if (user_state.theme_name == light_theme_name) {
-              user_state.theme_name = dark_theme_name;
-              user_state.theme_css  = dark_theme_css;
-              user_state.theme_icon = 'mdib-lightbulb';
-            } else {
-              user_state.theme_name = light_theme_name;
-              user_state.theme_css  = light_theme_css;
-              user_state.theme_icon = 'mdib-lightbulb-outline';
-            }
-            logger.info('\n' + 'switch theme to: ' + user_state.theme_name);
-
-            user_state.writer = 'themeToggler';
-            var cookie_written = j1.writeCookie({
-              name:     cookie_names.user_state,
-              data:     user_state,
-              secure:   secure,
-              expires:  365
-            });
-
-            if (!cookie_written) {
-              logger.error('\n' + 'failed write to cookie: ' + cookie_names.user_consent);
-            } else {
-              location.reload(true);
-            }
-          }); // END button click
+          // -------------------------------------------------------------------
+          // Event Mgmt SHOULD moved ta navigator core
+          //
+          _this.initThemeTogglerEvent();
 
           _this.setState('finished');
-          logger.debug('\n' + 'state: ' + _this.getState());
-          logger.info('\n' + 'initializing module: finished');
+          logger.debug('state: ' + _this.getState());
+          logger.info('initializing module: finished');
 
           endTimeModule = Date.now();
-          logger.info('\n' + 'module initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
+          logger.info('module initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
 
           clearInterval(dependencies_met_page_ready);
         } // END pageVisible
       }, 10); // END dependencies_met_page_ready
     }, // END init
+
+    // -------------------------------------------------------------------------
+    // initThemeTogglerEvent
+    // -------------------------------------------------------------------------
+    initThemeTogglerEvent: () => {
+
+      // toggle themeToggler icon to 'dark' if required
+      if ($('#quickLinksThemeTogglerButton').length) {
+        if (user_state.theme_name === dark_theme_name) {
+          $('#quickLinksThemeTogglerButton a i').toggleClass('mdib-lightbulb mdib-lightbulb-outline');
+        }
+      }
+
+      // START EventListener 'click' (theme toggle icon)
+      document.getElementById('quickLinksThemeTogglerButton').addEventListener('click', function(event) {
+        if (user_state.theme_name === light_theme_name) {
+          user_state.theme_name = dark_theme_name;
+          user_state.theme_css  = dark_theme_css;
+          user_state.theme_icon = 'mdib-lightbulb';
+        } else {
+          user_state.theme_name = light_theme_name;
+          user_state.theme_css  = light_theme_css;
+          user_state.theme_icon = 'mdib-lightbulb-outline';
+        }
+        logger.info('switch theme to: ' + user_state.theme_name);
+
+        user_state.writer = 'themeToggler';
+        var cookie_written = j1.writeCookie({
+          name:     cookie_names.user_state,
+          data:     user_state,
+          secure:   secure,
+          expires:  365
+        });
+
+        if (!cookie_written) {
+          logger.error('failed write to cookie: ' + cookie_names.user_consent);
+        } else {
+          location.reload(true);
+        }
+      });
+      // END EventListener 'mouseover' (songlist)
+    },
 
     // -------------------------------------------------------------------------
     // messageHandler()
@@ -225,7 +243,7 @@ j1.adapter.themeToggler = ((j1, window) => {
     messageHandler: (sender, message) => {
       var json_message = JSON.stringify(message, undefined, 2);
 
-      logText = '\n' + 'received message from ' + sender + ': ' + json_message;
+      logText = 'received message from ' + sender + ': ' + json_message;
       logger.debug(logText);
 
       // -----------------------------------------------------------------------
@@ -237,7 +255,7 @@ j1.adapter.themeToggler = ((j1, window) => {
         // place handling of command|action here
         //
 
-        logger.info('\n' + message.text);
+        logger.info(message.text);
       }
 
       //
@@ -266,10 +284,12 @@ j1.adapter.themeToggler = ((j1, window) => {
   }; // END main (return)
 })(j1, window);
 
-{% endcapture %}
-{% if production %}
-  {{ cache | minifyJS }}
-{% else %}
-  {{ cache | strip_empty_lines }}
-{% endif %}
-{% assign cache = nil %}
+{%- endcapture -%}
+
+{%- if production -%}
+  {{ cache|minifyJS }}
+{%- else -%}
+  {{ cache|strip_empty_lines }}
+{%- endif -%}
+
+{%- assign cache = false -%}

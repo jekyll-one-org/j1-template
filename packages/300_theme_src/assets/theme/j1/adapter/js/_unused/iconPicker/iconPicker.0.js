@@ -2,11 +2,11 @@
 regenerate:                             true
 ---
 
-{% capture cache %}
+{%- capture cache -%}
 
 {% comment %}
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/adapter/js/iconPicker.js
+ # ~/assets/theme/j1/adapter/js/iconPicker.js (0)
  # Liquid template to adapt the iconPicker module
  #
  # Product/Info:
@@ -59,9 +59,10 @@ regenerate:                             true
   {% assign production = true %}
 {% endif %}
 
+
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/adapter/js/iconPicker.js
+ # ~/assets/theme/j1/adapter/js/iconPicker.js (0)
  # J1 Adapter for the iconPicker module
  #
  # Product/Info:
@@ -83,22 +84,33 @@ regenerate:                             true
 // -----------------------------------------------------------------------------
 /* eslint indent: "off"                                                       */
 // -----------------------------------------------------------------------------
-'use strict';
-j1.adapter.iconPicker = (function (j1, window) {
+"use strict";
+j1.adapter.iconPicker = ((j1, window) => {
 
-{% comment %} Set global variables
--------------------------------------------------------------------------------- {% endcomment %}
-var environment           = '{{environment}}';
-var state                 = 'not_started';
-var iconPickerDefaults;
-var iconPickerSettings;
-var iconPickerOptions;
-var frontmatterOptions;
-var icon_picker;
-var icon_picker_button_id;
-var _this;
-var logger;
-var logText;
+  const isDev = (j1.env === "development" || j1.env === "dev") ? true : false;
+
+  {% comment %} Set global variables
+  -------------------------------------------------------------------------------- {% endcomment %}
+  var environment           = '{{environment}}';
+  var state                 = 'not_started';
+
+  var iconPickerDefaults;
+  var iconPickerSettings;
+  var iconPickerOptions;
+  var frontmatterOptions;
+  var icon_picker;
+  var icon_picker_button_id;
+
+  var _this;
+  var logger;
+  var logText;
+
+  // date|time
+  var startTime;
+  var endTime;
+  var startTimeModule;
+  var endTimeModule;
+  var timeSeconds;
 
   // ---------------------------------------------------------------------------
   // Main object
@@ -106,13 +118,12 @@ var logText;
   return {
 
     // -------------------------------------------------------------------------
-    // init()
     // adapter initializer
     // -------------------------------------------------------------------------
-    init: function (options) {
+    init: (options) => {
 
       // -----------------------------------------------------------------------
-      // Default module settings
+      // default module settings
       // -----------------------------------------------------------------------
       var settings = $.extend({
         module_name: 'j1.adapter.iconPicker',
@@ -120,7 +131,7 @@ var logText;
       }, options);
 
       // -----------------------------------------------------------------------
-      // Global variable settings
+      // global variable settings
       // -----------------------------------------------------------------------
 
       // create settings object from module options
@@ -132,77 +143,90 @@ var logText;
       logger = log4javascript.getLogger('j1.adapter.iconPicker');
 
       // -----------------------------------------------------------------------
-      // initializer
+      // module initializer
       // -----------------------------------------------------------------------
-      var dependencies_met_page_ready = setInterval (function (options) {
+      var dependencies_met_page_ready = setInterval((options) => {
         var pageState       = $('#content').css("display");
-        var pageVisible     = (pageState == 'block') ? true : false;
-        var j1CoreFinished  = (j1.getState() == 'finished') ? true : false;
+        var pageVisible     = (pageState === 'block') ? true : false;
+        var j1CoreFinished  = (j1.getState() === 'finished') ? true : false;
 
         if (j1CoreFinished && pageVisible) {
+          startTimeModule = Date.now();
+
           icon_picker_button_id = '#' + iconPickerOptions.picker_button_id;
 
           _this.setState('started');
-          logger.debug('\n' + 'state: ' + _this.getState());
-          logger.info('\n' + 'module is being initialized on id: ' + icon_picker_button_id);
+          logger.debug('state: ' + _this.getState());
+          logger.info('module is being initialized on id: ' + icon_picker_button_id);
 
-          icon_picker = new UniversalIconPicker(icon_picker_button_id, {
-            allowEmpty:       iconPickerOptions.api_options.allowEmpty,
-            iconLibraries:    iconPickerOptions.api_options.iconLibraries,
-            iconLibrariesCss: iconPickerOptions.api_options.iconLibrariesCss,
-            onSelect: function(jsonIconData) {
-              // copy selected icon to clipboard (iconClass)
-              var copyFrom = document.createElement('textarea');
-              copyFrom.value = jsonIconData.iconClass;
-              document.body.appendChild(copyFrom);
-              copyFrom.select();
-              document.execCommand('copy');
-              // Remove data element from body
-              setTimeout(function () {
-                document.body.removeChild(copyFrom);
-              }, 500);
-            }
-          });
+          var dependencies_met_picker_button_ready = setInterval (() => {
+            var buttonState = $(icon_picker_button_id).length;
+            var buttonReady = (buttonState > 0) ? true : false;
 
-          // save config settings into the toccer object for later access
-          //
-          _this['icon_picker']    = icon_picker;
-          _this['moduleOptions']  = iconPickerOptions;
+            if (buttonReady) {
+              // setup initial slimSelect values|iconPicker options
+              icon_picker = new UniversalIconPicker(icon_picker_button_id, {
+                allowEmpty:       iconPickerOptions.api_options.allowEmpty,
+                iconLibraries:    iconPickerOptions.api_options.iconLibraries,
+                iconLibrariesCss: iconPickerOptions.api_options.iconLibrariesCss,
+                onSelect:         (jsonIconData) => {
+                  // copy selected icon to clipboard (iconClass)
+                  var copyFrom = document.createElement('textarea');
+                  copyFrom.value = jsonIconData.iconClass;
+                  document.body.appendChild(copyFrom);
+                  copyFrom.select();
+                  document.execCommand('copy');
+                  // Remove data element from body
+                  setTimeout(() => {
+                    document.body.removeChild(copyFrom);
+                  }, 500);
+                }
+              });
 
-          _this.setState('finished');
-          logger.debug('\n' + 'state: ' + _this.getState());
+              // save config settings into the toccer object for later access
+              _this['icon_picker']    = icon_picker;
+              _this['moduleOptions']  = iconPickerOptions;
 
-          logger.info('\n' + 'initializing module finished');
+              _this.setState('finished');
+              logger.debug('state: ' + _this.getState());
+              logger.info('initializing module finished');
+
+              endTimeModule = Date.now();
+              logger.info('module initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
+
+              clearInterval(dependencies_met_picker_button_ready);
+            } // END if buttonReady
+          }, 10); // END dependencies_met_picker_button_ready
+
           clearInterval(dependencies_met_page_ready);
-        }
-      }, 10);
-
+        } // END pageVisible
+      }, 10); // END dependencies_met_page_ready
     }, // END init
 
     // -------------------------------------------------------------------------
     // messageHandler()
     // manage messages send from other J1 modules
     // -------------------------------------------------------------------------
-    messageHandler: function (sender, message) {
+    messageHandler: (sender, message) => {
       var json_message = JSON.stringify(message, undefined, 2);
 
-      logText = '\n' + 'received message from ' + sender + ': ' + json_message;
+      logText = 'received message from ' + sender + ': ' + json_message;
       logger.debug(logText);
 
       // -----------------------------------------------------------------------
-      //  Process commands|actions
+      //  process commands|actions
       // -----------------------------------------------------------------------
       if (message.type === 'command' && message.action === 'module_initialized') {
 
         //
-        // Place handling of command|action here
+        // place handling of command|action here
         //
 
-        logger.info('\n' + message.text);
+        logger.info(message.text);
       }
 
       //
-      // Place handling of other command|action here
+      // place handling of other command|action here
       //
 
       return true;
@@ -210,9 +234,9 @@ var logText;
 
     // -------------------------------------------------------------------------
     // setState()
-    // Sets the current (processing) state of the module
+    // sets the current (processing) state of the module
     // -------------------------------------------------------------------------
-    setState: function (stat) {
+    setState: (stat) => {
       _this.state = stat;
     }, // END setState
 
@@ -220,17 +244,19 @@ var logText;
     // getState()
     // Returns the current (processing) state of the module
     // -------------------------------------------------------------------------
-    getState: function () {
+    getState: () => {
       return _this.state;
     } // END getState
 
-  }; // END return
+  }; // END main (return)
 })(j1, window);
 
-{% endcapture %}
-{% if production %}
-  {{ cache | minifyJS }}
-{% else %}
-  {{ cache | strip_empty_lines }}
-{% endif %}
-{% assign cache = nil %}
+{%- endcapture -%}
+
+{%- if production -%}
+  {{ cache|minifyJS }}
+{%- else -%}
+  {{ cache|strip_empty_lines }}
+{%- endif -%}
+
+{%- assign cache = false -%}

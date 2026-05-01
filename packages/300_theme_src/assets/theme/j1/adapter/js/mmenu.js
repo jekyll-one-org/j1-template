@@ -6,7 +6,7 @@ regenerate:                             true
 
 {% comment %}
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/adapter/js/mmenu.js
+ # ~/assets/theme/j1/adapter/js/mmenu.js (1)
  # Liquid template to adapt Mmenu-Light Core functions
  #
  # Product/Info:
@@ -74,9 +74,10 @@ regenerate:                             true
   {% assign production = true %}
 {% endif %}
 
+
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/adapter/js/mmenu.js
+ # ~/assets/theme/j1/adapter/js/mmenu.js (1)
  # JS Adapter for J1 MobileMenu (MMenu Light)
  #
  # Product/Info:

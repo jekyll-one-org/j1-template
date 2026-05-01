@@ -6,7 +6,7 @@ regenerate:                             true
 
 {% comment %}
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/adapter/js/lazyLoader.js
+ # ~/assets/theme/j1/adapter/js/lazyLoader.js (1)
  # Liquid template to adapt the J1 lazyLoader module
  #
  # Product/Info:
@@ -55,9 +55,10 @@ regenerate:                             true
   {% assign production = true %}
 {% endif %}
 
+
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/adapter/js/lazyLoader.js
+ # ~/assets/theme/j1/adapter/js/lazyLoader.js (1)
  # J1 Adapter for the J1 lazyLoader module
  #
  # Product/Info:
@@ -83,7 +84,7 @@ j1.adapter.lazyLoader = ((j1, window) => {
   const isDev = (j1.env === "development" || j1.env === "dev") ? true : false;
 
   {% comment %} Set global variables
-  -------------------------------------------------------------------------------- {% endcomment %}
+  ------------------------------------------------------------------------------ {% endcomment %}
   var environment     = '{{environment}}';
   var cookie_names    = j1.getCookieNames();
   var user_state      = j1.readCookie(cookie_names.user_state);
@@ -104,6 +105,11 @@ j1.adapter.lazyLoader = ((j1, window) => {
   var startTimeModule;
   var endTimeModule;
   var timeSeconds;
+
+  // claude - J1 Adapter optimizations #1
+  // safety-timeout handle for the bounded j1-core-ready poller below.
+  //
+  var dependenciesTimeout;
 
   // ---------------------------------------------------------------------------
   // main
@@ -136,9 +142,9 @@ j1.adapter.lazyLoader = ((j1, window) => {
       _this  = j1.adapter.lazyLoader;
       logger = log4javascript.getLogger('j1.adapter.lazyLoader');
 
-      // -------------------------------------------------------------------------
+      // -----------------------------------------------------------------------
       // module initializer
-      // ---------------------------------------------------------------------
+      // -----------------------------------------------------------------------
       var dependency_met_j1_core_ready = setInterval(() => {
         var j1CoreFinished = (j1.getState() === 'finished') ? true: false;
 
@@ -159,8 +165,30 @@ j1.adapter.lazyLoader = ((j1, window) => {
           logger.info('module initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
 
           clearInterval(dependency_met_j1_core_ready);
+          // claude - J1 Adapter optimizations #1
+          // clear safety timeout on the happy path
+          //
+          if (dependenciesTimeout) {
+            clearTimeout(dependenciesTimeout);
+            dependenciesTimeout = null;
+          }
         } // END if pageVisible
       }, 10); // END dependency_met_j1_core_ready
+
+      // claude - J1 Adapter optimizations #1
+      // bound the j1-core-ready poller. Previously, if j1.getState() never
+      // reached 'finished' (e.g. a bug elsewhere in the boot sequence,
+      // an aborted navigation), this 10ms interval ran for the lifetime
+      // of the tab — particularly costly for lazyLoader since it never
+      // gets to register IntersectionObservers and the user pays the CPU
+      // bill with no functional payoff. Cap at 30s and log a warning.
+      //
+      dependenciesTimeout = setTimeout(function () {
+        if (dependency_met_j1_core_ready) {
+          clearInterval(dependency_met_j1_core_ready);
+          logger.warn('lazyLoader init aborted: j1 core did not reach finished within 5s');
+        }
+      }, 5000);
     }, // END init
 
     // -------------------------------------------------------------------------

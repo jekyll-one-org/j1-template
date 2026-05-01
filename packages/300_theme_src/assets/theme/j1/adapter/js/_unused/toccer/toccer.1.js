@@ -2,11 +2,11 @@
 regenerate:                             true
 ---
 
-{% capture cache %}
+{%- capture cache -%}
 
 {% comment %}
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/adapter/js/toccer.js
+ # ~/assets/theme/j1/adapter/js/toccer.js (1)
  # Liquid template to adapt Tocbot Core functions
  #
  # Product/Info:
@@ -70,9 +70,11 @@ regenerate:                             true
 {% if environment == 'prod' or environment == 'production' %}
   {% assign production = true %}
 {% endif %}
+
+
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/adapter/js/toccer.js
+ # ~/assets/theme/j1/adapter/js/toccer.js (1)
  # JS Adapter for J1 Toccer
  #
  # Product/Info:
@@ -95,13 +97,16 @@ regenerate:                             true
 // -----------------------------------------------------------------------------
 /* eslint indent: "off"                                                       */
 // -----------------------------------------------------------------------------
-'use strict';
+"use strict";
 j1.adapter.toccer = (() => {
+
+  const isDev = (j1.env === "development" || j1.env === "dev") ? true : false;
 
   {% comment %} Set global variables
   ------------------------------------------------------------------------------ {% endcomment %}
   var environment         = '{{environment}}';
   var state               = 'not_started';
+
   var scrollerSettings    = {};
   var scrollerOptions     = {};
   var scrollerDefaults    = {};
@@ -164,8 +169,8 @@ j1.adapter.toccer = (() => {
 
       // initialize state flag
       // _this.setState('started');
-      // logger.debug('\n' + 'state: ' + _this.getState());
-      // logger.info('\n' + 'module is being initialized');
+      // logger.debug('state: ' + _this.getState());
+      // logger.info('module is being initialized');
 
       // -----------------------------------------------------------------------
       // module initializer
@@ -180,8 +185,8 @@ j1.adapter.toccer = (() => {
           startTimeModule = Date.now();
 
           _this.setState('started');
-          logger.debug('\n' + 'state: ' + _this.getState());
-          logger.info('\n' + 'module is being initialized');
+          logger.debug('state: ' + _this.getState());
+          logger.info('module is being initialized');
 
           _this.initToccerCore(toccerOptions);
 
@@ -189,11 +194,11 @@ j1.adapter.toccer = (() => {
           _this['moduleOptions'] = toccerOptions;
 
           _this.setState('finished');
-          logger.debug('\n' + 'state: ' + _this.getState());
-          logger.info('\n' + 'initializing module finished');
+          logger.debug('state: ' + _this.getState());
+          logger.info('initializing module finished');
 
           endTimeModule = Date.now();
-          logger.info('\n' + 'module initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
+          logger.info('module initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
 
           clearInterval(dependencies_met_toccer);
         } // END
@@ -205,10 +210,10 @@ j1.adapter.toccer = (() => {
     // -------------------------------------------------------------------------
     initToccerCore: (options) => {
       var scrollOffsetCorrection  = scrollerOptions.smoothscroll.offsetCorrection;
-      var scrollOffset            = j1.getScrollOffset(scrollOffsetCorrection);
+      var scrollOffset            = j1.getScrollOffset(scrollOffsetCorrection) + scrollOffsetCorrection;
 
       _this.setState('running');
-      logger.debug('\n' + 'state: ' + _this.getState());
+      logger.debug('state: ' + _this.getState());
 
       // tocbot get fired if HTML portion is loaded (AJAX load finished)
       var dependencies_met_ajax_load_finished = setInterval (() => {
@@ -239,23 +244,27 @@ j1.adapter.toccer = (() => {
             positionFixedClass:     'is-position-fixed',
             fixedSidebarOffset:     'auto',
             scrollContainer:        null,
-            scrollSmooth:           options.scrollSmooth,
-            scrollSmoothDuration:   options.scrollSmoothDuration,
-            scrollSmoothOffset:     scrollOffset,
-//          scrollEndCallback:      function (event) {
-//                                    // jadams
-//                                    var bla =  '';
-//                                  },
+            scrollSmooth:           false,                                      // options.scrollSmooth,
+            scrollSmoothDuration:   0,                                          // options.scrollSmoothDuration,
+            scrollSmoothOffset:     0,                                          // scrollOffset,
+            onClick:                (event) => {
+                                      // jadams 2024-03-16: workaroud|browser's history
+                                      var currentURL = event.currentTarget.href;
+                                      // add current URL (anchor) to browser's history
+                                      history.pushState(null, null, currentURL);
+
+                                      // jadams 2024-03-16: use smooth scrolling from J1
+                                      // NOTE: all scrolling functions from tocbot DISABLED
+                                      setTimeout(() => {
+                                        j1.scrollToAnchor(currentURL);
+                                      }, 1500);
+                                    },
             headingsOffset:         1,
-//          headingObjectCallback:  function (event) {
-//                                    // jadams
-//                                    var bla =  '';
-//                                  },
             throttleTimeout:        options.throttleTimeout
           });
           /* eslint-enable */
 
-          logger.debug('\n' + 'met dependencies for: loadHTML');
+          logger.debug('met dependencies for: loadHTML');
           clearInterval(dependencies_met_ajax_load_finished);
         } // END AJAX load finished
       }, 10); // END dependencies_met_ajax_load_finished
@@ -269,7 +278,7 @@ j1.adapter.toccer = (() => {
     messageHandler: (sender, message) => {
       var json_message = JSON.stringify(message, undefined, 2);
 
-      logText = '\n' + 'received message from ' + sender + ': ' + json_message;
+      logText = 'received message from ' + sender + ': ' + json_message;
       logger.debug(logText);
 
       // -----------------------------------------------------------------------
@@ -281,7 +290,7 @@ j1.adapter.toccer = (() => {
         // place handling of command|action here
         //
 
-        logger.info('\n' + message.text);
+        logger.info(message.text);
       }
 
       //
@@ -310,10 +319,12 @@ j1.adapter.toccer = (() => {
   }; // END main (return)
 })(j1, window);
 
-{% endcapture %}
-{% if production %}
-  {{ cache | minifyJS }}
-{% else %}
-  {{ cache | strip_empty_lines }}
-{% endif %}
-{% assign cache = nil %}
+{%- endcapture -%}
+
+{%- if production -%}
+  {{ cache|minifyJS }}
+{%- else -%}
+  {{ cache|strip_empty_lines }}
+{%- endif -%}
+
+{%- assign cache = false -%}
