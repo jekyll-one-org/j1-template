@@ -1,6 +1,6 @@
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/modules/masonry/js/masonry.js (1)
+ # ~/assets/theme/j1/modules/masonry/js/masonry.js (2)
  # Masonry v4.2.2 (PACKAGED)
  # Cascading grid layout library
  # Modified version for J1 Theme 
@@ -257,9 +257,16 @@ proto.emitEvent = function( eventName, args ) {
   return this;
 };
 
+// J1 Masonry optimizations #2
+// Return `this` for chainability, matching the rest of the EvEmitter
+// API: `on`, `once`, `off`, and `emitEvent` all return `this`. Without
+// this, calls like `instance.allOff().on('layout', fn)` throw a
+// TypeError. Behavior is otherwise unchanged.
+//
 proto.allOff = function() {
   delete this._events;
   delete this._onceEvents;
+  return this;
 };
 
 return EvEmitter;
@@ -560,10 +567,26 @@ var utils = {};
 
 // ----- extend ---------------------------------------------------------------- //
 
+// J1 Masonry optimizations #2
+// Cache `Object.prototype.hasOwnProperty` once at module scope. Used
+// below in `utils.extend` to skip inherited enumerable properties.
+//
+var hasOwn = Object.prototype.hasOwnProperty;
+
+// J1 Masonry optimizations #2
+// Iterate own enumerable properties only. The bare `for ... in` would
+// also walk inherited enumerable properties on `b`, which means any
+// extension on `Object.prototype` (libraries, polyfills) leaks into
+// the merged result. `hasOwn.call(b, prop)` is preferred over
+// `b.hasOwnProperty(prop)` so the check still works when `b` itself
+// shadows `hasOwnProperty`.
+//
 // extends objects
 utils.extend = function( a, b ) {
   for ( var prop in b ) {
-    a[ prop ] = b[ prop ];
+    if ( hasOwn.call( b, prop ) ) {
+      a[ prop ] = b[ prop ];
+    }
   }
   return a;
 };
@@ -879,10 +902,19 @@ proto.getSize = function() {
  * apply CSS styles to element
  * @param {Object} style
  */
+// J1 Masonry optimizations #2
+// Iterate own enumerable properties only, to avoid reading inherited
+// properties from `Object.prototype` and writing them to the element's
+// inline style. `Object.prototype.hasOwnProperty.call(...)` is the
+// safe form even if `style` shadows `hasOwnProperty`.
+//
 proto.css = function( style ) {
   var elemStyle = this.element.style;
 
   for ( var prop in style ) {
+    if ( !Object.prototype.hasOwnProperty.call( style, prop ) ) {
+      continue;
+    }
     // use vendor property if available
     var supportedProp = vendorProperties[ prop ] || prop;
     elemStyle[ supportedProp ] = style[ prop ];
@@ -1184,10 +1216,19 @@ proto.disableTransition = function() {
  * removes style property from element
  * @param {Object} style
 **/
+// J1 Masonry optimizations #2
+// Iterate own enumerable properties only when building the cleanup
+// style object, mirroring the guard now applied in `proto.css`. Without
+// this, an extension on `Object.prototype` would generate spurious
+// '' assignments through `proto.css`.
+//
 proto._removeStyles = function( style ) {
   // clean up transition styles
   var cleanStyle = {};
   for ( var prop in style ) {
+    if ( !Object.prototype.hasOwnProperty.call( style, prop ) ) {
+      continue;
+    }
     cleanStyle[ prop ] = '';
   }
   this.css( cleanStyle );
@@ -2121,15 +2162,36 @@ proto.getItem = function( elem ) {
  * @param {Array} elems
  * @returns {Array} items - Outlayer.Items
  */
+// J1 Masonry optimizations #2
+// Replace the quadratic O(items.length × elems.length) lookup with an
+// O(items.length + elems.length) scan: build an element-to-item Map
+// once, then resolve each elem in input order. Original ordering
+// semantics are preserved (the returned items follow the order of the
+// input `elems`), so the index-based stagger in `reveal()` / `hide()`
+// is unaffected. On small grids this is no faster, but on grids with
+// thousands of items batch operations like `remove([...])`,
+// `revealItemElements([...])`, and `hideItemElements([...])` go from
+// quadratic to linear.
+//
 proto.getItems = function( elems ) {
   elems = utils.makeArray( elems );
+  if ( !elems.length ) {
+    return [];
+  }
+  // build element -> item map once
+  var elemToItem = new Map();
+  for ( var i = 0, len = this.items.length; i < len; i++ ) {
+    var srcItem = this.items[i];
+    elemToItem.set( srcItem.element, srcItem );
+  }
+  // resolve each requested elem in input order
   var items = [];
-  elems.forEach( function( elem ) {
-    var item = this.getItem( elem );
+  for ( var j = 0, jlen = elems.length; j < jlen; j++ ) {
+    var item = elemToItem.get( elems[j] );
     if ( item ) {
       items.push( item );
     }
-  }, this );
+  }
 
   return items;
 };
@@ -2523,8 +2585,27 @@ return Outlayer;
     }
   };
 
+  // J1 Masonry optimizations #2
+  // Inline max-scan over `colYs`, matching the pattern already used in
+  // `_getColGroupY` and `_getTopColPosition` (J1 Masonry optimizations
+  // #1). This eliminates the `Math.max.apply(Math, this.colYs)` call,
+  // which:
+  //   1. Spreads the entire colYs array into the function arguments,
+  //      risking a "Maximum call stack size exceeded" RangeError on
+  //      very wide grids in some engines.
+  //   2. Costs an extra function call on every layout pass.
+  // `_resetLayout` always sets `this.cols >= 1` and fills `colYs` with
+  // zeros, so `colYs[0]` is always a safe seed value.
+  //
   proto._getContainerSize = function() {
-    this.maxY = Math.max.apply( Math, this.colYs );
+    var colYs = this.colYs;
+    var maxY = colYs[0];
+    for ( var i = 1, len = colYs.length; i < len; i++ ) {
+      if ( colYs[i] > maxY ) {
+        maxY = colYs[i];
+      }
+    }
+    this.maxY = maxY;
     var size = {
       height: this.maxY
     };

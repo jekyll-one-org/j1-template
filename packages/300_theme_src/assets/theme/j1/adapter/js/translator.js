@@ -6,7 +6,7 @@ regenerate:                             true
 
 {% comment %}
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/adapter/js/translator.js
+ # ~/assets/theme/j1/adapter/js/translator.js (5)
  # Liquid template to create the Template Adapter for J1 Translator
  #
  # Product/Info:
@@ -85,7 +85,6 @@ j1.adapter.translator = (function (j1, window) {
   const isDev = (j1.env === "development" || j1.env === "dev");
 
   var environment       = '{{environment}}';
-  var state             = 'not_started';
   var user_translate    = {};
 
   var translatorDefaults;
@@ -93,25 +92,25 @@ j1.adapter.translator = (function (j1, window) {
   var translatorOptions;
   var translationFeedbackHighlight;
   var _this;
-  var $modal;
   var cookie_names;
   var user_consent;
   var siteLanguage;
-  var ddSourceLanguage;
   var head;
   var gtTranslateScript;
   var gtCallbackScript;
-  var languageList;
 
   var logger;
   var logText;
 
+  // J1 Translator optimizations #2
+  // removed dead declarations: `state`, `$modal`, `ddSourceLanguage`,
+  // `languageList`, `startTime`, `endTime`, `timeSeconds`. None were assigned
+  // or read anywhere in the module — `state` in particular was shadowed by
+  // `_this.state` from init() onward.
+
   // date|time
-  var startTime;
-  var endTime;
   var startTimeModule;
   var endTimeModule;
-  var timeSeconds;
 
   // ---------------------------------------------------------------------------
   // Main object
@@ -162,28 +161,54 @@ j1.adapter.translator = (function (j1, window) {
       // add GT callback script dynamically in the head section
       // jadams, 2022-04-21: postTranslateElementInit cause error, disabled
       // -----------------------------------------------------------------------
-      gtTranslateScript      = document.createElement('script');
-      gtTranslateScript.id   = 'gt-translate';
-      gtTranslateScript.src  = '//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
-      gtCallbackScript       = document.createElement('script');
-      gtCallbackScript.id    = 'gt-callback';
-      
-      // template literal for readability
-      gtCallbackScript.text  = `
-        function googleTranslateElementInit() {
-          var gtAPI = new google.translate.TranslateElement({
-            pageLanguage: "{{translator_options.contentLanguage}}",
-            layout:       google.translate.TranslateElement.FloatPosition.TOP_LEFT
-          },
-          "google_translate_element");
-        }
-      `;
+      // J1 Translator optimizations #2
+      // guard script creation/injection so a second init() (e.g. on hot
+      // reload, SPA-style navigation, or any re-entry) doesn't add a second
+      // <script id="gt-translate"> / <script id="gt-callback"> to <head>
+      // and re-define googleTranslateElementInit on window.
+      //
+      var existingGtTranslate = document.getElementById('gt-translate');
+      if (existingGtTranslate) {
+        gtTranslateScript = existingGtTranslate;
+      } else {
+        gtTranslateScript      = document.createElement('script');
+        gtTranslateScript.id   = 'gt-translate';
+        gtTranslateScript.src  = '//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
+      }
 
-      document.head.appendChild(gtCallbackScript);
+      var existingGtCallback = document.getElementById('gt-callback');
+      if (existingGtCallback) {
+        gtCallbackScript = existingGtCallback;
+      } else {
+        gtCallbackScript       = document.createElement('script');
+        gtCallbackScript.id    = 'gt-callback';
+
+        // template literal for readability
+        gtCallbackScript.text  = `
+          function googleTranslateElementInit() {
+            var gtAPI = new google.translate.TranslateElement({
+              pageLanguage: "{{translator_options.contentLanguage}}",
+              layout:       google.translate.TranslateElement.FloatPosition.TOP_LEFT
+            },
+            "google_translate_element");
+          }
+        `;
+
+        document.head.appendChild(gtCallbackScript);
+      }
 
       // -----------------------------------------------------------------------
       // initializer
       // -----------------------------------------------------------------------
+      // J1 Translator optimizations #2
+      // bound the page-ready poller. Previously, if `#content` never reached
+      // `display: block` or j1.getState() never reached 'finished' (e.g. a
+      // bug elsewhere in the boot sequence, an aborted navigation, an extension
+      // hiding #content), this 10ms interval ran for the lifetime of the tab.
+      // Cap it at 30s and log a warning so the failure mode is visible in the
+      // console instead of silently burning CPU.
+      //
+      var dependenciesTimeout;
       var dependencies_met_page_ready = setInterval (() => {
         var pageState       = $('#content').css("display");
         var pageVisible     = (pageState === 'block');
@@ -209,32 +234,53 @@ j1.adapter.translator = (function (j1, window) {
           logger.info('module is being initialized');
 
           // load|initialize user translate data
-          if (localStorage.getItem(translatorOptions.translatorLocalStorageKey) !== null) {
-            user_translate = JSON.parse(localStorage.getItem(translatorOptions.translatorLocalStorageKey));
+          // J1 Translator optimizations #2
+          // defensive parsing: a corrupted JSON value in localStorage (from a
+          // previous failed write or browser-extension tampering) previously
+          // threw a SyntaxError that aborted module init silently. Fall back
+          // to the in-memory defaults and overwrite the bad value so the next
+          // session starts from a clean state. Also avoids the duplicate
+          // `localStorage.getItem(...)` call the original made.
+          //
+          var storedUserTranslate = localStorage.getItem(translatorOptions.translatorLocalStorageKey);
+          if (storedUserTranslate !== null) {
+            try {
+              user_translate = JSON.parse(storedUserTranslate);
+            } catch (e) {
+              logger.warn('corrupted user_translate in localStorage, resetting to defaults: ' + e.message);
+              localStorage.setItem(translatorOptions.translatorLocalStorageKey, JSON.stringify(user_translate));
+            }
           } else {
-            logger.debug ('write to localStorage: user_translate');
+            logger.debug('write to localStorage: user_translate');
             localStorage.setItem(translatorOptions.translatorLocalStorageKey, JSON.stringify(user_translate));
           }
 
+          // J1 Translator optimizations #2
+          // cache jQuery selections that are queried multiple times in this
+          // block — previously each `$('#…')` call re-ran the selector engine.
+          //
+          var $googleTranslateElement   = $('#google_translate_element');
+          var $quickLinksTranslateButton = $('#quickLinksTranslateButton');
+
           // hide the google translate element if exists
-          if ($('#google_translate_element').length) {
-            $('#google_translate_element').hide();
+          if ($googleTranslateElement.length) {
+            $googleTranslateElement.hide();
           }
 
           // show|hide translate button if enabled
           if (translatorOptions.hideTranslatorIcon) {
             if (!user_consent.analysis || !user_consent.personalization) {
               // disable google translate button if visible
-              if ($('#quickLinksTranslateButton').css('display') === 'block')  {
+              if ($quickLinksTranslateButton.css('display') === 'block')  {
                 logger.info('disable quickLinksTranslateButton');
-                $('#quickLinksTranslateButton').css('display', 'none');
+                $quickLinksTranslateButton.css('display', 'none');
               }
             }
             if (user_consent.analysis && user_consent.personalization) {
               // enable google translate button if NOT visible
-              if ($('#quickLinksTranslateButton').css('display') === 'none')  {
+              if ($quickLinksTranslateButton.css('display') === 'none')  {
                 logger.info('enable quickLinksTranslateButton');
-                $('#quickLinksTranslateButton').css('display', 'block');
+                $quickLinksTranslateButton.css('display', 'block');
               }
             }
           }
@@ -282,15 +328,43 @@ j1.adapter.translator = (function (j1, window) {
           //   - page IS translated (docLang !== siteLanguage):
           //       show "Disable translation", hide "Translate"
           // -------------------------------------------------------------------
+          // J1 Translator optimizations #2
+          // scope the dropdown-sync poller across modal-show events. The
+          // previous implementation created a fresh setInterval + setTimeout
+          // pair on every `shown.bs.modal`, with each pair only cleared by
+          // its own (independent) timer. Two modals shown within 1s could
+          // briefly run two pollers in parallel, racing to write
+          // dropdownEl.msDropdown.value. By tracking the active pair on the
+          // closure and cancelling them at the top of the handler, we
+          // guarantee at most one in-flight poller at a time.
+          //
+          var activeSyncPoll    = null;
+          var activeSyncTimeout = null;
+
           $(document).on('shown.bs.modal', function () {
+
+            // cancel any prior poll before starting a new one
+            if (activeSyncPoll) {
+              clearInterval(activeSyncPoll);
+              activeSyncPoll = null;
+            }
+            if (activeSyncTimeout) {
+              clearTimeout(activeSyncTimeout);
+              activeSyncTimeout = null;
+            }
 
             // poll briefly for the msDropdown to be ready (the modal
             // content may still be rendering after the show-transition)
             // -----------------------------------------------------------------
-            var syncPoll = setInterval(function () {
+            activeSyncPoll = setInterval(function () {
               var dropdownEl = document.getElementById('dropdownJSON');
               if (dropdownEl && dropdownEl.msDropdown) {
-                clearInterval(syncPoll);
+                clearInterval(activeSyncPoll);
+                activeSyncPoll = null;
+                if (activeSyncTimeout) {
+                  clearTimeout(activeSyncTimeout);
+                  activeSyncTimeout = null;
+                }
 
                 // read the CURRENT document language; Google Translate
                 // updates <html lang="..."> to the target language
@@ -335,26 +409,39 @@ j1.adapter.translator = (function (j1, window) {
             }, 100);
 
             // safety timeout: stop polling after 1 second
-            setTimeout(function () {
-              clearInterval(syncPoll);
+            activeSyncTimeout = setTimeout(function () {
+              if (activeSyncPoll) {
+                clearInterval(activeSyncPoll);
+                activeSyncPoll = null;
+              }
+              activeSyncTimeout = null;
             }, 1000);
           });
 
           // hide the translation feedback
-          translationFeedbackHighlight  = '<style id="translationFeedbackHighlight">';
-          translationFeedbackHighlight += '  .VIpgJd-yAWNEb-VIpgJd-fmcmS-sn54Q {';
-          translationFeedbackHighlight += '    background-color:  transparent !important;';
-          translationFeedbackHighlight += '    box-shadow: none !important;';
-          translationFeedbackHighlight += '  }';
-          translationFeedbackHighlight += '</style>';
+          // J1 Translator optimizations #2
+          // skip injection if a prior init() already added the style node
+          //
+          if (!document.getElementById('translationFeedbackHighlight')) {
+            translationFeedbackHighlight  = '<style id="translationFeedbackHighlight">';
+            translationFeedbackHighlight += '  .VIpgJd-yAWNEb-VIpgJd-fmcmS-sn54Q {';
+            translationFeedbackHighlight += '    background-color:  transparent !important;';
+            translationFeedbackHighlight += '    box-shadow: none !important;';
+            translationFeedbackHighlight += '  }';
+            translationFeedbackHighlight += '</style>';
 
-          $('head').append(translationFeedbackHighlight);
+            $('head').append(translationFeedbackHighlight);
+          }
 
           // enable|disable translation (after callback)
           if (user_translate.analysis && user_translate.personalization && user_translate.translationEnabled) {
             if (translatorOptions.translatorName === 'google') {
-              logger.info('append Google Translate Script: ' + gtTranslateScript.id);
-              head.appendChild(gtTranslateScript);
+              // J1 Translator optimizations #2
+              // only append the GT loader if it isn't already in <head>
+              if (!gtTranslateScript.parentNode) {
+                logger.info('append Google Translate Script: ' + gtTranslateScript.id);
+                head.appendChild(gtTranslateScript);
+              }
               if ($('#google_translate_element').length) {
                 $('#google_translate_element').hide();
               }
@@ -372,8 +459,25 @@ j1.adapter.translator = (function (j1, window) {
           logger.info('module initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
 
           clearInterval(dependencies_met_page_ready);
+          // J1 Translator optimizations #2
+          // clear the safety timeout on the happy path
+          //
+          if (dependenciesTimeout) {
+            clearTimeout(dependenciesTimeout);
+            dependenciesTimeout = null;
+          }
         }
       }, 10);
+
+      // J1 Translator optimizations #2
+      // safety bound paired with the 10ms poller above
+      //
+      dependenciesTimeout = setTimeout(function () {
+        if (dependencies_met_page_ready) {
+          clearInterval(dependencies_met_page_ready);
+          logger.warn('translator init aborted: page-ready conditions not met within 30s');
+        }
+      }, 30000);
 
     }, // END init
 
@@ -396,14 +500,15 @@ j1.adapter.translator = (function (j1, window) {
       var logger            = log4javascript.getLogger('j1.adapter.translator.cbGoogle');
       var msDropdown        = document.getElementById('dropdownJSON').msDropdown;
       var url               = new liteURL(window.location.href);
-      var baseUrl           = url.origin;
       var hostname          = url.hostname;
       var domain            = hostname.substring(hostname.lastIndexOf('.', hostname.lastIndexOf('.') - 1) + 1);
-      var subDomain         = '.' + domain;
       var isSubDomain       = j1.subdomain(hostname);
-      var domainAttribute   = '';
       var srcLang           = '{{contentLanguage}}';
 
+      // J1 Translator optimizations #2
+      // removed unused locals: `baseUrl`, `subDomain`, `domainAttribute`.
+      // None were read after assignment.
+      //
       var transCode;
       var selectedTranslationLanguage;
 
@@ -416,7 +521,23 @@ j1.adapter.translator = (function (j1, window) {
       logger.info('selected translation language: ' + selectedTranslationLanguage);
 
       // read localStorage once at the top
-      user_translate = JSON.parse(localStorage.getItem(translatorOptions.translatorLocalStorageKey));
+      // J1 Translator optimizations #2
+      // guard against missing/corrupted localStorage. JSON.parse(null)
+      // returns null, and JSON.parse(<invalid>) throws — both crashed the
+      // `user_translate.translationEnabled` access below with a TypeError
+      // before the user's selection could be acted on. Fall back to whatever
+      // user_translate currently holds at module scope (defaults from init)
+      // so the language switch still works on a fresh browser profile or
+      // after storage corruption.
+      //
+      var stored = localStorage.getItem(translatorOptions.translatorLocalStorageKey);
+      if (stored !== null) {
+        try {
+          user_translate = JSON.parse(stored);
+        } catch (e) {
+          logger.warn('corrupted user_translate in localStorage, using defaults: ' + e.message);
+        }
+      }
 
       // disabled translation
       if (!user_translate.translationEnabled) {
@@ -447,12 +568,17 @@ j1.adapter.translator = (function (j1, window) {
       // translation language MUST be DIFFERENT from default language
       if (srcLang !== selectedTranslationLanguage && selectedTranslationLanguage !== translatorOptions.defaultLanguage) {
         // set transCode settings for Google Translate cookie
+        // J1 Translator optimizations #2
+        // previously the cookie was set TWICE on a subdomain — once unscoped
+        // (host-only) and again with `domain: <parent>` — leaving two
+        // googtrans cookies in the jar that the browser then sent together,
+        // with last-write-wins resolution depending on path/order. Set it
+        // once with the right scope: domain-scoped on a subdomain so the
+        // value is shared with the parent and any sibling subdomains, and
+        // host-only otherwise.
+        //
         transCode = '/' + srcLang + '/' + selectedTranslationLanguage;
-        Cookies.set('googtrans', transCode);
-
-        if (isSubDomain) {
-          Cookies.set('googtrans', transCode, { domain: domain });
-        }
+        Cookies.set('googtrans', transCode, isSubDomain ? { domain: domain } : {});
 
         // save selected translation language to localStorage for dropdown
         // sync after page reload

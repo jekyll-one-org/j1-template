@@ -1,0 +1,89 @@
+/*
+ # -----------------------------------------------------------------------------
+ # ~/scss/theme_uno/extensions/_caption.scss
+ #
+ # Product/Info:
+ # https://jekyll.one
+ #
+ # Copyright (C) 2023-2026 Juergen Adams
+ #
+ # J1 Template is licensed under the MIT License.
+ # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE
+ #
+ # ROOT CAUSE
+ # -----------------------------------------------------------------------------
+ # In bootstrap.css the original cascade is:
+ #
+ #   .caption                    { position: relative; display: none; ... }
+ #   .bottom .caption            { display: none;
+ #                                 transform: translate(0, -100%);
+ #                                 transition: all 0.25s; }
+ #   .bottom:hover .caption      { display: block; }
+ #
+ # On hover the caption becomes display:block while still position:relative,
+ # so it joins the document flow BELOW the <img>, growing the .card by the
+ # caption's height. The translate(0,-100%) only lifts the painted pixels;
+ # transforms do not remove an element from layout. (Side effect: Masonry
+ # also has to reflow the row on every hover.)
+ #
+ # FIX
+ # -----------------------------------------------------------------------------
+ # Take the caption out of flow with `position: absolute` and anchor it to
+ # the .bottom / .top / .center wrapper (made `position: relative`). The card
+ # stays the same size on hover. We also switch the visibility toggle from
+ # display (not animatable) to opacity so the existing 0.25s transition
+ # actually animates.
+ # -----------------------------------------------------------------------------
+*/
+
+/* Establish the positioning context for the absolute caption. */
+.card .bottom,
+.card .top,
+.card .center {
+  position: relative;
+}
+
+/* Caption is rendered, but invisible and out of flow until the wrapper
+   is hovered. `pointer-events: none` keeps the invisible caption from
+   intercepting clicks meant for the image link. `transform: none`
+   neutralises the translate(0,-100%) from the original .bottom .caption
+   rule. Specificity here (0,0,3,0) beats the original (0,0,2,0).
+*/
+.card .bottom .caption,
+.card .top    .caption,
+.card .center .caption {
+  display: block;
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: 0;
+  opacity: 0;
+  pointer-events: none;
+  transform: none;
+  transition: opacity 0.25s ease;
+}
+
+/* Per-position anchoring. */
+.card .bottom .caption { bottom: 0; }
+.card .top    .caption { top: 0; }
+.card .center .caption {
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+/* Reveal on hover - opacity, not display, so it animates. */
+.card .bottom:hover .caption,
+.card .top:hover    .caption,
+.card .center:hover .caption {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Honour the user's reduced-motion preference - no fade. */
+@media (prefers-reduced-motion: reduce) {
+  .card .bottom .caption,
+  .card .top    .caption,
+  .card .center .caption {
+    transition: none;
+  }
+}

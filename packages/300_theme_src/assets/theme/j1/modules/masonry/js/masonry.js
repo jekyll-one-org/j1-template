@@ -3,13 +3,14 @@
  # ~/assets/theme/j1/modules/masonry/js/masonry.js (1)
  # Masonry v4.2.2 (PACKAGED)
  # Cascading grid layout library
+ # Modified version for J1 Theme 
  #
  # Product/Info:
  # https://jekyll.one
  # https://github.com/desandro/masonry
  #
  # Copyright (C) 2022-2026 David DeSandro
- # Copyright (C) 2023-2026 Juergen Adams
+ # Copyright (C) 2026 Juergen Adams
  #
  # J1 Template is licensed under the MIT License.
  # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE
@@ -949,16 +950,24 @@ proto.layoutPosition = function() {
   this.emitEvent( 'layout', [ this ] );
 };
 
+// J1 Masonry optimizations #1
+// Guard against zero-width / zero-height layouts (e.g. an item placed
+// inside a `display:none` tab or before the container has been measured)
+// to avoid emitting `NaN%` or `Infinity%` style values. We fall back to
+// pixel positioning in that edge case rather than corrupting the style.
+//
 proto.getXValue = function( x ) {
   var isHorizontal = this.layout._getOption('horizontal');
-  return this.layout.options.percentPosition && !isHorizontal ?
-    ( ( x / this.layout.size.width ) * 100 ) + '%' : x + 'px';
+  var width = this.layout.size && this.layout.size.width;
+  return this.layout.options.percentPosition && !isHorizontal && width ?
+    ( ( x / width ) * 100 ) + '%' : x + 'px';
 };
 
 proto.getYValue = function( y ) {
   var isHorizontal = this.layout._getOption('horizontal');
-  return this.layout.options.percentPosition && isHorizontal ?
-    ( ( y / this.layout.size.height ) * 100 ) + '%' : y + 'px';
+  var height = this.layout.size && this.layout.size.height;
+  return this.layout.options.percentPosition && isHorizontal && height ?
+    ( ( y / height ) * 100 ) + '%' : y + 'px';
 };
 
 proto._transitionTo = function( x, y ) {
@@ -1675,9 +1684,16 @@ proto._processLayoutQueue = function( queue ) {
 // set stagger from option in milliseconds number
 proto.updateStagger = function() {
   var stagger = this.options.stagger;
+  // J1 Masonry optimizations #1
+  // Always return the stagger value (in ms). The original returned
+  // `undefined` when stagger was null/undefined, so callers that compute
+  // `i * updateStagger()` (e.g. reveal/hide) silently produced `NaN`.
+  // `item.stagger()` happens to coerce NaN to 0, so the bug was masked,
+  // but the API is now consistent.
+  //
   if ( stagger === null || stagger === undefined ) {
     this.stagger = 0;
-    return;
+    return this.stagger;
   }
   this.stagger = getMilliseconds( stagger );
   return this.stagger;
@@ -1761,11 +1777,16 @@ proto._emitCompleteOnItems = function( eventName, items ) {
     _this.dispatchEvent( eventName + 'Complete', null, [ items ] );
   }
 
-  var count = items.length;
-  if ( !items || !count ) {
+  // J1 Masonry optimizations #1
+  // Reordered the existence check. The original code read `items.length`
+  // BEFORE the `!items` guard, so a missing/undefined items array would
+  // throw a TypeError instead of cleanly emitting completion.
+  //
+  if ( !items || !items.length ) {
     onComplete();
     return;
   }
+  var count = items.length;
 
   var doneCount = 0;
   function tick() {
@@ -2235,9 +2256,22 @@ function getMilliseconds( time ) {
   if ( typeof time == 'number' ) {
     return time;
   }
+  // J1 Masonry optimizations #1
+  // Defensively guard against non-string, null/undefined, or
+  // unparseable inputs. The original called `time.match(...)` directly,
+  // which throws TypeError when `time` is null/undefined, and then
+  // dereferenced `num.length` even though `num` could itself be null
+  // (via `matches && matches[1]`).
+  //
+  if ( typeof time != 'string' ) {
+    return 0;
+  }
   var matches = time.match( /(^\d*\.?\d*)(\w*)/ );
-  var num = matches && matches[1];
-  var unit = matches && matches[2];
+  if ( !matches ) {
+    return 0;
+  }
+  var num = matches[1];
+  var unit = matches[2];
   if ( !num.length ) {
     return 0;
   }
@@ -2327,7 +2361,16 @@ return Outlayer;
         this.containerWidth;
     }
 
-    var columnWidth = this.columnWidth += this.gutter;
+    // J1 Masonry optimizations #1
+    // Split the compound assignment `var columnWidth = this.columnWidth += this.gutter;`
+    // for readability. Behavior is identical: `this.columnWidth` is mutated
+    // to include the gutter, and `columnWidth` is the local alias used below.
+    // The mutation is safe across re-layouts because `_resetLayout()` calls
+    // `_getMeasurement('columnWidth', 'outerWidth')` first, restoring the
+    // gutter-free value on each pass.
+    //
+    this.columnWidth += this.gutter;
+    var columnWidth = this.columnWidth;
 
     // calculate columns
     var containerWidth = this.containerWidth + this.gutter;
@@ -2379,11 +2422,24 @@ return Outlayer;
 
   proto._getTopColPosition = function( colSpan ) {
     var colGroup = this._getTopColGroup( colSpan );
-    // get the minimum Y value from the columns
-    var minimumY = Math.min.apply( Math, colGroup );
+    // J1 Masonry optimizations #1
+    // Single-pass scan for the minimum Y AND its first index, avoiding the
+    // double traversal of the original `Math.min.apply(Math, colGroup)`
+    // followed by `colGroup.indexOf(minimumY)`. Preserves the original
+    // "first column wins on ties" placement behavior. This runs once per
+    // brick so the savings compound on grids with many items.
+    //
+    var minimumY = colGroup[0];
+    var minIndex = 0;
+    for ( var i = 1, len = colGroup.length; i < len; i++ ) {
+      if ( colGroup[i] < minimumY ) {
+        minimumY = colGroup[i];
+        minIndex = i;
+      }
+    }
 
     return {
-      col: colGroup.indexOf( minimumY ),
+      col: minIndex,
       y: minimumY,
     };
   };
@@ -2412,10 +2468,20 @@ return Outlayer;
     if ( colSpan < 2 ) {
       return this.colYs[ col ];
     }
-    // make an array of colY values for that one group
-    var groupColYs = this.colYs.slice( col, col + colSpan );
-    // and get the max value of the array
-    return Math.max.apply( Math, groupColYs );
+    // J1 Masonry optimizations #1
+    // Direct max-scan over `this.colYs` avoids both the `slice()` allocation
+    // and the `Math.max.apply` call. For each multi-column brick layout this
+    // saves one short-lived array; over many items and re-layouts it
+    // measurably reduces garbage-collection pressure.
+    //
+    var max = this.colYs[ col ];
+    var end = col + colSpan;
+    for ( var i = col + 1; i < end; i++ ) {
+      if ( this.colYs[i] > max ) {
+        max = this.colYs[i];
+      }
+    }
+    return max;
   };
 
   // get column position based on horizontal index. #873
