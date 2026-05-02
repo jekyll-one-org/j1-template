@@ -148,7 +148,11 @@ lorem:sentences[5]
 .News Scroll Group
 ++++
 <div id="home_news" class="preview_content">
-  <ul id="home_news-scroll-group" class="scroll-group scroll-group-horizontal align-items-stretch flex-wrap">
+  <ul
+    id="home_news-scroll-group"
+    class="scroll-group scroll-group-horizontal align-items-stretch flex-wrap"
+    data-scroller
+    data-news-scroll-group>
     <!-- [INFO   ] [~/assets/data/panel.html              ] [ write post items (card_block == 'card-list')] -->
     <li id="home_news-scroll-item" class="scroll-group-item items-2 p-0">
       <article class="card card-same-height raised-z0 mb-5">

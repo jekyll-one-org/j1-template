@@ -62,8 +62,8 @@
 {% comment %} Main
 -------------------------------------------------------------------------------- {% endcomment %}
 
-{% if include.header_title %}  {% assign header_title   = include.header_title %}  {% endif %}
-{% if include.header_tagline %}{% assign header_tagline = include.header_tagline %}{% endif %}
+{% if include.header_title %}   {% assign header_title   = include.header_title %}   {% endif %}
+{% if include.header_tagline %} {% assign header_tagline = include.header_tagline %} {% endif %}
 
 {% if site.data.j1_config.posts_collate.provider == 'custom' %}
 <!-- Use custom collator -->
@@ -85,8 +85,9 @@
 </div>
 {% endif %}
 
-<ul id="timeline" class="timeline">
-{% for post in posts_collate %}
+<ul id="timeline" class="timeline" data-scroller data-previewer-timeline>
+
+  {% for post in posts_collate %}
 
   {% assign place_image = false %}
   {% assign place_icon  = false %}

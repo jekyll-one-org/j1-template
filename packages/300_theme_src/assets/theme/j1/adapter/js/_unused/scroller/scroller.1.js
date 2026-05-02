@@ -162,9 +162,9 @@ j1.adapter.scroller = ((j1, window) => {
         var pageState       = $('#content').css("display");
         var pageVisible     = (pageState === 'block') ? true: false;
         var j1CoreFinished  = (j1.getState() === 'finished') ? true : false;
-        // var atticFinished   = (j1.adapter.attic.getState() == 'finished') ? true : false;
+        var j1AtticFinished = (j1.adapter.attic.getState() === 'finished') ? true : false;
 
-        if (j1CoreFinished && pageVisible) {
+        if (j1CoreFinished && pageVisible && j1AtticFinished) {
           startTimeModule = Date.now();
 
           _this.setState('started');
@@ -232,6 +232,9 @@ j1.adapter.scroller = ((j1, window) => {
 
         // process the wrapper if extsts
         if (scrollerExists) {
+
+          // scroller type infiniteScroll
+          // -------------------------------------------------------------------
           {% if item.scroller.type == 'infiniteScroll' %}
 
           {% assign scroller_id     = item.scroller.id %}
@@ -245,8 +248,10 @@ j1.adapter.scroller = ((j1, window) => {
           {% assign lastPageInfo_en = item.scroller.lastPageInfo_en %}
           {% assign lastPageInfo_de = item.scroller.lastPageInfo_de %}
 
-          var container = '#' + '{{container}}';
-          var pagePath  = '{{pagePath}}';
+          // Find all elements with a data-columns attribute
+          var dataElements = document.querySelectorAll("[data-scroller]");
+          var container   = '#' + '{{container}}';
+          var pagePath    = '{{pagePath}}';
 
           var dependencies_met_container_exists = setInterval(() => {
             var containerExists = ($(container).length) ? true : false;
@@ -305,12 +310,14 @@ j1.adapter.scroller = ((j1, window) => {
           container_timeouts['{{scroller_id}}'] = setTimeout(() => {
             if (dependencies_met_container_exists) {
               clearInterval(dependencies_met_container_exists);
-              logger.warn('scroller container poll aborted for {{scroller_id}}: ' + container + ' not present within 30s');
+              logger.warn('scroller container poll aborted for {{scroller_id}}: ' + container + ' not present within 5s');
             }
-          }, 30000);
+          }, 5000);
 
           {% endif %}
 
+          // scroller type showOnScroll
+          // -------------------------------------------------------------------
           {% if item.scroller.type == 'showOnScroll' %}
 
           {% assign scroller_id     = item.scroller.id %}
