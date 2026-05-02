@@ -102,11 +102,11 @@ j1.adapter.attic = ((j1, window) => {
   var _this;
   var logger;
 
-  // claude - J1 Adapter optimizations #1
+  // J1 Adapter optimizations #1
   // bound the page-ready poller. Previously, if `#no_flicker` never
   // reached `display: block` (e.g. a bug elsewhere in the boot sequence,
   // an aborted navigation, an extension hiding the element), this 10ms
-  // interval ran for the lifetime of the tab. Cap it at 30s and log a
+  // interval ran for the lifetime of the tab. Cap it and log a
   // warning so the failure mode is visible in the console instead of
   // silently burning CPU.
   //
@@ -187,7 +187,7 @@ j1.adapter.attic = ((j1, window) => {
 
           _this.createAllAttics();
           clearInterval(dependencies_met_page_ready);
-          // claude - J1 Adapter optimizations #1
+          // J1 Adapter optimizations #1
           // clear the safety timeout on the happy path
           //
           if (dependenciesTimeout) {
@@ -199,7 +199,7 @@ j1.adapter.attic = ((j1, window) => {
           // add additional top space if attics are disabled
           $('#no_flicker').addClass('mt-5');
           clearInterval(dependencies_met_page_ready);
-          // claude - J1 Adapter optimizations #1
+          // J1 Adapter optimizations #1
           // clear the safety timeout on the happy path
           //
           if (dependenciesTimeout) {
@@ -210,7 +210,7 @@ j1.adapter.attic = ((j1, window) => {
         }
       }, 10);
 
-      // claude - J1 Adapter optimizations #1
+      // J1 Adapter optimizations #1
       // safety bound paired with the 10ms poller above
       //
       dependenciesTimeout = setTimeout(function () {

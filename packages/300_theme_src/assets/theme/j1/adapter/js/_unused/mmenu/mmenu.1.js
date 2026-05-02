@@ -21,7 +21,7 @@
             _this.setState('finished');
             logger.debug('state: ' + _this.getState());
             clearInterval(dependencies_met_page_ready);
-            // claude - J1 Adapter optimizations #1
+            // J1 Adapter optimizations #1
             // clear safety timeout on the disabled-but-finished path too
             //
             if (dependenciesTimeout) {
@@ -49,7 +49,7 @@
           logger.info('module initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
 
           clearInterval(dependencies_met_page_ready);
-          // claude - J1 Adapter optimizations #1
+          // J1 Adapter optimizations #1
           // clear safety timeout on the happy path
           //
           if (dependenciesTimeout) {
@@ -59,12 +59,12 @@
         } // END if pageVisible
       }, 10); // END dependencies_met_page_ready
 
-      // claude - J1 Adapter optimizations #1
+      // J1 Adapter optimizations #1
       // bound the page-ready poller. Previously, if `#content` never reached
       // `display: block` or j1.getState() never reached 'finished' (e.g. a
       // bug elsewhere in the boot sequence, an aborted navigation, an
       // extension hiding #content), this 10ms interval ran for the lifetime
-      // of the tab. Cap it at 30s and log a warning so the failure mode is
+      // of the tab. Cap it and log a warning so the failure mode is
       // visible in the console instead of silently burning CPU.
       //
       dependenciesTimeout = setTimeout(function () {

@@ -149,12 +149,12 @@ j1.adapter.scroller = ((j1, window) => {
       // -----------------------------------------------------------------------
       // module initializer
       // -----------------------------------------------------------------------
-      // claude - J1 Adapter optimizations #1
+      // J1 Adapter optimizations #1
       // bound the page-ready poller. Previously, if `#content` never reached
       // `display: block` or j1.getState() never reached 'finished' (e.g. a
       // bug elsewhere in the boot sequence, an aborted navigation, an extension
       // hiding #content), this 10ms interval ran for the lifetime of the tab.
-      // Cap it at 30s and log a warning so the failure mode is visible in the
+      // Cap it and log a warning so the failure mode is visible in the
       // console instead of silently burning CPU.
       //
       var dependenciesTimeout;
@@ -162,7 +162,6 @@ j1.adapter.scroller = ((j1, window) => {
         var pageState       = $('#content').css("display");
         var pageVisible     = (pageState === 'block') ? true: false;
         var j1CoreFinished  = (j1.getState() === 'finished') ? true : false;
-        // var atticFinished   = (j1.adapter.attic.getState() == 'finished') ? true : false;
 
         if (j1CoreFinished && pageVisible) {
           startTimeModule = Date.now();
@@ -175,7 +174,7 @@ j1.adapter.scroller = ((j1, window) => {
           _this.generate_scrollers();
 
           clearInterval(dependencies_met_page_ready);
-          // claude - J1 Adapter optimizations #1
+          // J1 Adapter optimizations #1
           // clear the safety timeout on the happy path
           //
           if (dependenciesTimeout) {
@@ -185,7 +184,7 @@ j1.adapter.scroller = ((j1, window) => {
         } // END if pageVisible
       }, 10); // END dependency_met_page_ready
 
-      // claude - J1 Adapter optimizations #1
+      // J1 Adapter optimizations #1
       // safety bound paired with the 10ms poller above
       //
       dependenciesTimeout = setTimeout(() => {
@@ -205,12 +204,12 @@ j1.adapter.scroller = ((j1, window) => {
       var wrapper_dependencies = {};
       var dependency;
 
-      // claude - J1 Adapter optimizations #1
+      // J1 Adapter optimizations #1
       // parallel timeout map for the wrapper- and container-level pollers
       // generated below. Without bounds, a missing scroller container or a
       // missing infiniteScroll target would leave the 10ms intervals
       // running for the lifetime of the tab. Each poller below is paired
-      // with a 30s safety timeout that clears the interval and logs a
+      // with a safety timeout that clears the interval and logs a
       // warning if the dependency is never met.
       //
       var wrapper_timeouts   = {};
@@ -289,7 +288,7 @@ j1.adapter.scroller = ((j1, window) => {
                 logger.info('module initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
 
                 clearInterval(dependencies_met_container_exists);
-                // claude - J1 Adapter optimizations #1
+                // J1 Adapter optimizations #1
                 // clear the container-level safety timeout on the happy path
                 //
                 if (container_timeouts['{{scroller_id}}']) {
@@ -299,15 +298,15 @@ j1.adapter.scroller = ((j1, window) => {
             } // END containerExists
           }, 10); // END dependencies_met_container_exists
 
-          // claude - J1 Adapter optimizations #1
+          // J1 Adapter optimizations #1
           // safety bound paired with dependencies_met_container_exists above
           //
           container_timeouts['{{scroller_id}}'] = setTimeout(() => {
             if (dependencies_met_container_exists) {
               clearInterval(dependencies_met_container_exists);
-              logger.warn('scroller container poll aborted for {{scroller_id}}: ' + container + ' not present within 30s');
+              logger.warn('scroller container poll aborted for {{scroller_id}}: ' + container + ' not present within 5s');
             }
-          }, 30000);
+          }, 5000);
 
           {% endif %}
 
@@ -340,7 +339,7 @@ j1.adapter.scroller = ((j1, window) => {
           // END scroller_id: {{ scroller_id }}
 
           clearInterval(wrapper_dependencies['dependency_met_wrapper_ready_{{item.scroller.container}}']);
-          // claude - J1 Adapter optimizations #1
+          // J1 Adapter optimizations #1
           // clear the wrapper-level safety timeout on the happy path
           //
           if (wrapper_timeouts['{{item.scroller.container}}']) {
@@ -350,7 +349,7 @@ j1.adapter.scroller = ((j1, window) => {
         } // END if scrollerExists
       }, 10); // END dependencies_met_scroller_exists
 
-      // claude - J1 Adapter optimizations #1
+      // J1 Adapter optimizations #1
       // safety bound paired with the wrapper-level 10ms poller above.
       // Note: getElementById on a missing id returns null, so the original
       // `scrollerExists` condition (`!== undefined || !== null`) is always

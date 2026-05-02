@@ -145,11 +145,11 @@ j1.adapter.comments = ((j1, window) => {
   var logger;
   var logText;
 
-  // claude - J1 Adapter optimizations #1
+  // J1 Adapter optimizations #1
   // bound the j1-finished poller. Previously, if j1.getState() never
   // reached 'finished' (e.g. a bug elsewhere in the boot sequence or an
   // aborted navigation), this 10ms interval ran for the lifetime of the
-  // tab. Cap it at 30s and log a warning so the failure mode is visible
+  // tab. Cap it and log a warning so the failure mode is visible
   // in the console instead of silently burning CPU. The same bound is
   // applied to the per-provider and disabled-path pollers below.
   //
@@ -229,7 +229,7 @@ j1.adapter.comments = ((j1, window) => {
               logger.info('skip initialization for provider: ' + comments_provider);
 
               clearInterval(dependencies_met_page_ready);
-              // claude - J1 Adapter optimizations #1
+              // J1 Adapter optimizations #1
               // clear the safety timeout on the early-exit path
               //
               if (dependenciesTimeout) {
@@ -294,7 +294,7 @@ j1.adapter.comments = ((j1, window) => {
             }
 
             clearInterval(dependencies_met_page_ready);
-            // claude - J1 Adapter optimizations #1
+            // J1 Adapter optimizations #1
             // clear the safety timeout on the happy path
             //
             if (dependenciesTimeout) {
@@ -320,7 +320,7 @@ j1.adapter.comments = ((j1, window) => {
               logger.debug('invalid short name detected for Disqus: ' + providerID);
               logger.info('skip initialization for provider: ' + comments_provider);
               clearInterval(dependencies_met_page_ready);
-              // claude - J1 Adapter optimizations #1
+              // J1 Adapter optimizations #1
               // clear the safety timeout on the early-exit path
               //
               if (dependenciesTimeout) {
@@ -397,7 +397,7 @@ j1.adapter.comments = ((j1, window) => {
             // }, 10);
 
             clearInterval(dependencies_met_page_ready);
-            // claude - J1 Adapter optimizations #1
+            // J1 Adapter optimizations #1
             // clear the safety timeout on the happy path
             //
             if (dependenciesTimeout) {
@@ -421,7 +421,7 @@ j1.adapter.comments = ((j1, window) => {
             logger.info('module initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
 
             clearInterval(dependencies_met_page_ready);
-            // claude - J1 Adapter optimizations #1
+            // J1 Adapter optimizations #1
             // clear the safety timeout on the happy path
             //
             if (dependenciesTimeout) {
@@ -433,7 +433,7 @@ j1.adapter.comments = ((j1, window) => {
 
       } // END if  commentsOptions.comments
 
-      // claude - J1 Adapter optimizations #1
+      // J1 Adapter optimizations #1
       // safety bound paired with whichever 10ms poller is active above.
       // Both branches of the outer if/else hoist `dependencies_met_page_ready`
       // to function scope (var), so a single clearInterval here will stop

@@ -14,7 +14,7 @@ translator.js flagged by:
   // `display: block` or j1.getState() never reached 'finished' (e.g. a
   // bug elsewhere in the boot sequence, an aborted navigation, an extension
   // hiding #content), this 10ms interval ran for the lifetime of the tab.
-  // Cap it at 30s and log a warning so the failure mode is visible in the
+  // Cap it and log a warning so the failure mode is visible in the
   // console instead of silently burning CPU.
   //
   var dependenciesTimeout;
@@ -24,7 +24,7 @@ translator.js flagged by:
 ```
 
 Create fixed versions and use the comment
-"claude - J1 Adapter optimizations #1" for all proposed fixes.
+"J1 Adapter optimizations #1" for all proposed fixes.
 
 
 Claude
@@ -32,7 +32,7 @@ Claude
 
 Looking at the translator.js optimization pattern and applying it to the four other adapters. The key fix in each case is bounding the long-running `setInterval` pollers that wait for page/wrapper readiness — previously they could run forever if dependencies never met (a hidden `#content`, a never-injected wrapper, an aborted navigation).
 
-Let me create the fixed versions of each adapter.All four adapters now have bounded pollers patterned after the translator.js fix. Each fix is tagged `// claude - J1 Adapter optimizations #1`.
+Let me create the fixed versions of each adapter.All four adapters now have bounded pollers patterned after the translator.js fix. Each fix is tagged `// J1 Adapter optimizations #1`.
 
 **Summary of bounds added per file:**
 

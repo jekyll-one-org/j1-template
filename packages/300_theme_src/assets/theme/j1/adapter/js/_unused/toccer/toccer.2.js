@@ -175,7 +175,7 @@ j1.adapter.toccer = (() => {
       // -----------------------------------------------------------------------
       // module initializer
       // -----------------------------------------------------------------------
-      // claude - J1 Adapter optimizations #1
+      // J1 Adapter optimizations #1
       // bound the page-ready poller. Previously, if `#content` never reached
       // `display: block`, j1.getState() never reached 'finished', or the toc
       // module was effectively disabled by config (`toccerEnabled === false`),
@@ -212,7 +212,7 @@ j1.adapter.toccer = (() => {
           logger.info('module initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
 
           clearInterval(dependencies_met_toccer);
-          // claude - J1 Adapter optimizations #1
+          // J1 Adapter optimizations #1
           // clear the safety timeout on the happy path
           //
           if (dependenciesTimeout) {
@@ -222,7 +222,7 @@ j1.adapter.toccer = (() => {
         } // END
       }, 10); // END
 
-      // claude - J1 Adapter optimizations #1
+      // J1 Adapter optimizations #1
       // safety bound paired with the 10ms poller above
       //
       dependenciesTimeout = setTimeout(function () {
@@ -244,12 +244,12 @@ j1.adapter.toccer = (() => {
       logger.debug('state: ' + _this.getState());
 
       // tocbot get fired if HTML portion is loaded (AJAX load finished)
-      // claude - J1 Adapter optimizations #1
+      // J1 Adapter optimizations #1
       // bound the ajax-load poller. Previously, on any page where
       // `#toc_mmenu` is never injected (e.g. the AJAX include for the toc
       // panel fails, the layout omits the toc container, or the user
       // navigates away before the include completes), this 10ms interval
-      // ran for the lifetime of the tab. Cap it at 30s and log a warning
+      // ran for the lifetime of the tab. Cap it and log a warning
       // so the failure mode is visible in the console instead of silently
       // burning CPU.
       //
@@ -304,7 +304,7 @@ j1.adapter.toccer = (() => {
 
           logger.debug('met dependencies for: loadHTML');
           clearInterval(dependencies_met_ajax_load_finished);
-          // claude - J1 Adapter optimizations #1
+          // J1 Adapter optimizations #1
           // clear the safety timeout on the happy path
           //
           if (ajaxLoadTimeout) {
@@ -314,7 +314,7 @@ j1.adapter.toccer = (() => {
         } // END AJAX load finished
       }, 10); // END dependencies_met_ajax_load_finished
 
-      // claude - J1 Adapter optimizations #1
+      // J1 Adapter optimizations #1
       // safety bound paired with the 10ms poller above
       //
       ajaxLoadTimeout = setTimeout(function () {

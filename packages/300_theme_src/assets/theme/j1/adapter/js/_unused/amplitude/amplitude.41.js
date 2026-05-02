@@ -107,12 +107,12 @@ j1.adapter.amplitude = ((j1, window) => {
   var toJSON;
   var toText;
 
-  // claude - J1 Adapter optimizations #1
+  // J1 Adapter optimizations #1
   // bound the page-ready poller. Previously, if `#content` never reached
   // `display: block`, j1.getState() never reached 'finished', or the attic
   // adapter never finished (e.g. a bug elsewhere in the boot sequence, an
   // aborted navigation, an extension hiding #content), this 10ms interval
-  // ran for the lifetime of the tab. Cap it at 30s and log a warning so
+  // ran for the lifetime of the tab. Cap it and log a warning so
   // the failure mode is visible in the console instead of silently
   // burning CPU.
   //
@@ -401,7 +401,7 @@ j1.adapter.amplitude = ((j1, window) => {
          });
 
           clearInterval(dependencies_met_page_ready);
-          // claude - J1 Adapter optimizations #1
+          // J1 Adapter optimizations #1
           // clear the safety timeout on the happy path
           //
           if (dependenciesTimeout) {
@@ -411,7 +411,7 @@ j1.adapter.amplitude = ((j1, window) => {
         } // END pageVisible
       }, 10); // END dependencies_met_page_ready
 
-      // claude - J1 Adapter optimizations #1
+      // J1 Adapter optimizations #1
       // safety bound paired with the 10ms poller above
       //
       dependenciesTimeout = setTimeout(function () {

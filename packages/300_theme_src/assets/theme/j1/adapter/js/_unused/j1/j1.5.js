@@ -565,7 +565,7 @@ var j1 = ((options) => {
             // NOTE: asynchronous calls should be rewitten to xhrData
             // NOTE: Find $('#no_flicker').hide() conterpart in themes adapter
             // -----------------------------------------------------------------
-            // claude - J1 Adapter optimizations #1
+            // J1 Adapter optimizations #1
             // safety-timeout handles for the bounded pollers below.
             //
             var pageReadyTimeout1;
@@ -643,7 +643,7 @@ var j1 = ((options) => {
                       $('.{{footer}}').show();
 
                       clearInterval(dependencies_met_blocks_ready);
-                      // claude - J1 Adapter optimizations #1
+                      // J1 Adapter optimizations #1
                       // clear safety timeout on the happy path
                       //
                       if (blocksReadyTimeout1) {
@@ -653,7 +653,7 @@ var j1 = ((options) => {
                     }
                   }, 10); // ENS dependencies_met_blocks_ready
 
-                  // claude - J1 Adapter optimizations #1
+                  // J1 Adapter optimizations #1
                   // bound the blocks-ready poller. The condition this poller
                   // waits on (banner/panel/footer XHR states all === 'success')
                   // depends on AJAX fetches in initBanner / initPanel /
@@ -697,7 +697,7 @@ var j1 = ((options) => {
                       $('.{{footer}}').show();
 
                       clearInterval(dependencies_met_footer_block_ready);
-                      // claude - J1 Adapter optimizations #1
+                      // J1 Adapter optimizations #1
                       // clear safety timeout on the happy path
                       //
                       if (footerBlockTimeout1) {
@@ -707,7 +707,7 @@ var j1 = ((options) => {
                     } // END if footer
                   }, 10);
 
-                  // claude - J1 Adapter optimizations #1
+                  // J1 Adapter optimizations #1
                   // bound the footer-block-ready poller. Same reasoning as
                   // the blocks-ready poller above: if the footer XHR never
                   // resolves to 'success', the content stays hidden behind
@@ -725,7 +725,7 @@ var j1 = ((options) => {
                 } // END pages w/o banners or panels
 
                 clearInterval(dependencies_met_page_ready);
-                // claude - J1 Adapter optimizations #1
+                // J1 Adapter optimizations #1
                 // clear outer safety timeout on the happy path
                 //
                 if (pageReadyTimeout1) {
@@ -735,7 +735,7 @@ var j1 = ((options) => {
               } // END if pageVisible
             }, 10); // END dependencies_met_page_ready
 
-            // claude - J1 Adapter optimizations #1
+            // J1 Adapter optimizations #1
             // bound the page-ready poller. Previously, if `#no_flicker` never
             // reached `display: block` or j1.getState() never reached
             // 'finished' (e.g. a bug elsewhere in the boot sequence, an
@@ -815,7 +815,7 @@ var j1 = ((options) => {
       // NOTE: asynchronous calls should be rewitten to xhrData
       // NOTE: Find $('#no_flicker').hide() conterpart in themes adapter
       // -----------------------------------------------------------------------
-      // claude - J1 Adapter optimizations #1
+      // J1 Adapter optimizations #1
       // safety-timeout handles for the bounded pollers below.
       //
       var pageReadyTimeout2;
@@ -900,7 +900,7 @@ var j1 = ((options) => {
                 $('.{{footer}}').show();
 
                 clearInterval(dependencies_met_blocks_ready);
-                // claude - J1 Adapter optimizations #1
+                // J1 Adapter optimizations #1
                 // clear safety timeout on the happy path
                 //
                 if (blocksReadyTimeout2) {
@@ -910,7 +910,7 @@ var j1 = ((options) => {
               }
             }, 10);
 
-            // claude - J1 Adapter optimizations #1
+            // J1 Adapter optimizations #1
             // bound the blocks-ready poller. See first init poller for full
             // rationale: an XHR failure on any block leaves this 10ms
             // interval running and the page hidden behind #no_flicker.
@@ -928,7 +928,7 @@ var j1 = ((options) => {
             }, 30000);
 
             clearInterval(dependencies_met_page_ready);
-            // claude - J1 Adapter optimizations #1
+            // J1 Adapter optimizations #1
             // clear outer safety timeout on the happy path (early-exit
             // branch — when we have banners/panels, the original code
             // also clears here)
@@ -961,7 +961,7 @@ var j1 = ((options) => {
                 $('.{{footer}}').show();
 
                 clearInterval(dependencies_met_footer_block_ready);
-                // claude - J1 Adapter optimizations #1
+                // J1 Adapter optimizations #1
                 // clear safety timeout on the happy path
                 //
                 if (footerBlockTimeout2) {
@@ -971,7 +971,7 @@ var j1 = ((options) => {
               } // END  if footer
             }, 10); // END dependencies_met_footer_block_ready
 
-            // claude - J1 Adapter optimizations #1
+            // J1 Adapter optimizations #1
             // bound the footer-block-ready poller. Cap at 30s and reveal
             // content anyway so the page is usable.
             //
@@ -991,7 +991,7 @@ var j1 = ((options) => {
           logger.info('page initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
 
           clearInterval(dependencies_met_page_ready);
-          // claude - J1 Adapter optimizations #1
+          // J1 Adapter optimizations #1
           // clear outer safety timeout on the happy path
           //
           if (pageReadyTimeout2) {
@@ -1001,7 +1001,7 @@ var j1 = ((options) => {
         } // END pageVisible
       }, 10); // END dependencies_met_page_ready
 
-      // claude - J1 Adapter optimizations #1
+      // J1 Adapter optimizations #1
       // bound the page-ready poller. Previously, if `#no_flicker` never
       // reached `display: block` (e.g. a bug elsewhere in the boot
       // sequence, an aborted navigation), this 10ms interval ran for the
@@ -1519,7 +1519,7 @@ var j1 = ((options) => {
           j1.api.navigator.updateSidebar(current_user_data);
 
           // initiate smooth scroller if page is ready and visible
-          // claude - J1 Adapter optimizations #1
+          // J1 Adapter optimizations #1
           // safety-timeout handle for the bounded poller below.
           //
           var finalizeScrollTimeout1;
@@ -1536,7 +1536,7 @@ var j1 = ((options) => {
               }, {{template_config.page_on_load_timeout}});
 
               clearInterval(dependencies_met_page_ready);
-              // claude - J1 Adapter optimizations #1
+              // J1 Adapter optimizations #1
               // clear safety timeout on the happy path
               //
               if (finalizeScrollTimeout1) {
@@ -1546,7 +1546,7 @@ var j1 = ((options) => {
             }
           }, 10);
 
-          // claude - J1 Adapter optimizations #1
+          // J1 Adapter optimizations #1
           // bound the finalizePage scroll-anchor poller (APP-mode branch).
           // The condition this poller waits on (`#no_flicker` visible AND
           // j1.getState() === 'finished') is normally satisfied within ms
@@ -1743,7 +1743,7 @@ var j1 = ((options) => {
         j1.api.navigator.updateSidebar(current_user_data);
 
         // initiate smooth scroller if page is ready and visible
-        // claude - J1 Adapter optimizations #1
+        // J1 Adapter optimizations #1
         // safety-timeout handle for the bounded poller below.
         //
         var finalizeScrollTimeout2;
@@ -1760,7 +1760,7 @@ var j1 = ((options) => {
             }, {{template_config.page_on_load_timeout}});
 
             clearInterval(dependencies_met_page_ready);
-            // claude - J1 Adapter optimizations #1
+            // J1 Adapter optimizations #1
             // clear safety timeout on the happy path
             //
             if (finalizeScrollTimeout2) {
@@ -1770,7 +1770,7 @@ var j1 = ((options) => {
           } // END if pageVisible
         }, 10); // END dependencies_met_page_ready
 
-        // claude - J1 Adapter optimizations #1
+        // J1 Adapter optimizations #1
         // bound the finalizePage scroll-anchor poller (WEB-mode branch).
         // Same reasoning as the app-mode branch above.
         //
@@ -2510,7 +2510,7 @@ var j1 = ((options) => {
     resolveMacros: (user_data) => {
       var logger = log4javascript.getLogger('j1.resolveMacros');
 
-      // claude - J1 Adapter optimizations #1
+      // J1 Adapter optimizations #1
       // safety-timeout handle for the bounded poller below.
       //
       var sidebarLoadedTimeout;
@@ -2570,7 +2570,7 @@ var j1 = ((options) => {
             });
             logger.debug('met dependencies for: sidebarLoaded');
             clearInterval(sidebarLoaded);
-            // claude - J1 Adapter optimizations #1
+            // J1 Adapter optimizations #1
             // clear safety timeout on the happy path
             //
             if (sidebarLoadedTimeout) {
@@ -2581,7 +2581,7 @@ var j1 = ((options) => {
           } else {
             logger.error('no user data provided');
             clearInterval(sidebarLoaded);
-            // claude - J1 Adapter optimizations #1
+            // J1 Adapter optimizations #1
             // clear safety timeout on the error-but-handled path too
             //
             if (sidebarLoadedTimeout) {
@@ -2593,7 +2593,7 @@ var j1 = ((options) => {
         }
       }, 10);
 
-      // claude - J1 Adapter optimizations #1
+      // J1 Adapter optimizations #1
       // bound the sidebar-loaded poller. The condition this poller waits
       // on (`#sidebar_mmenu` present in the DOM) depends on the mobile
       // menu module having injected its markup. On pages that don't ship
@@ -2616,7 +2616,7 @@ var j1 = ((options) => {
     updateMacros: (user_data) => {
       var logger = log4javascript.getLogger('j1.updateMacros');
 
-      // claude - J1 Adapter optimizations #1
+      // J1 Adapter optimizations #1
       // safety-timeout handle for the bounded poller below.
       //
       var sidebarLoadedTimeout;
@@ -2662,7 +2662,7 @@ var j1 = ((options) => {
             });
             logger.debug('met dependencies for: sidebarLoaded');
             clearInterval(sidebarLoaded);
-            // claude - J1 Adapter optimizations #1
+            // J1 Adapter optimizations #1
             // clear safety timeout on the happy path
             //
             if (sidebarLoadedTimeout) {
@@ -2673,7 +2673,7 @@ var j1 = ((options) => {
           } else {
             logger.error('no user data provided');
             clearInterval(sidebarLoaded);
-            // claude - J1 Adapter optimizations #1
+            // J1 Adapter optimizations #1
             // clear safety timeout on the error-but-handled path too
             //
             if (sidebarLoadedTimeout) {
@@ -2685,7 +2685,7 @@ var j1 = ((options) => {
         }
       }, 10);
 
-      // claude - J1 Adapter optimizations #1
+      // J1 Adapter optimizations #1
       // bound the sidebar-loaded poller. Same reasoning as resolveMacros:
       // on pages without `#sidebar_mmenu`, this 10ms interval would run
       // for the lifetime of the tab. Cap at 30s and log a warning.
@@ -2950,7 +2950,7 @@ var j1 = ((options) => {
       var logger = log4javascript.getLogger('j1.scrollToAnchor');
       var scrollOffset;
 
-      // claude - J1 Adapter optimizations #1
+      // J1 Adapter optimizations #1
       // safety-timeout handle for the bounded poller below.
       //
       var scrollAnchorTimeout;
@@ -2992,7 +2992,7 @@ var j1 = ((options) => {
             }, {{template_config.timeoutScrollStaticPages}});
 
             clearInterval(dependencies_met_page_displayed);
-            // claude - J1 Adapter optimizations #1
+            // J1 Adapter optimizations #1
             // clear safety timeout on the happy path
             //
             if (scrollAnchorTimeout) {
@@ -3076,7 +3076,7 @@ var j1 = ((options) => {
             }, {{template_config.timeoutScrollDynamicPages}});
 
             clearInterval(dependencies_met_page_displayed);
-            // claude - J1 Adapter optimizations #1
+            // J1 Adapter optimizations #1
             // clear safety timeout on the happy path (dynamic branch)
             //
             if (scrollAnchorTimeout) {
@@ -3093,7 +3093,7 @@ var j1 = ((options) => {
             }, {{template_config.page_on_load_timeout}} );
 
             clearInterval(dependencies_met_page_displayed);
-            // claude - J1 Adapter optimizations #1
+            // J1 Adapter optimizations #1
             // clear safety timeout on the happy path (unknown branch)
             //
             if (scrollAnchorTimeout) {
@@ -3106,7 +3106,7 @@ var j1 = ((options) => {
         } // END if j1['pageMonitor'].pageType
       }, 10);
 
-      // claude - J1 Adapter optimizations #1
+      // J1 Adapter optimizations #1
       // bound the scroll-anchor display poller. The condition this poller
       // waits on includes `j1.pageMonitor.pageType !== 'unknown'`, which
       // is set elsewhere by the page monitor; if registerMonitors() failed

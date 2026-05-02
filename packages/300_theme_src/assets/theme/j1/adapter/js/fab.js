@@ -114,7 +114,7 @@ j1.adapter.fab = ((j1, window) => {
   var endTimeModule;
   var timeSeconds;
 
-  // claude - J1 Adapter optimizations #1
+  // J1 Adapter optimizations #1
   // safety-timeout handles for the bounded pollers in this adapter.
   //
   var pageReadyTimeout;
@@ -182,7 +182,7 @@ j1.adapter.fab = ((j1, window) => {
           _this.fabLoader(fabOptions);
 
           clearInterval(dependency_met_page_ready);
-          // claude - J1 Adapter optimizations #1
+          // J1 Adapter optimizations #1
           // clear safety timeout on the happy path
           //
           if (pageReadyTimeout) {
@@ -192,12 +192,12 @@ j1.adapter.fab = ((j1, window) => {
         } // END pageVisible
       }, 10); // END dependency_met_page_ready
 
-      // claude - J1 Adapter optimizations #1
+      // J1 Adapter optimizations #1
       // bound the page-ready poller. Previously, if `#content` never reached
       // `display: block` or j1.getState() never reached 'finished' (e.g. a
       // bug elsewhere in the boot sequence, an aborted navigation, an
       // extension hiding #content), this 10ms interval ran for the lifetime
-      // of the tab. Cap it at 30s and log a warning so the failure mode is
+      // of the tab. Cap it and log a warning so the failure mode is
       // visible in the console instead of silently burning CPU.
       //
       pageReadyTimeout = setTimeout(function () {
@@ -248,7 +248,7 @@ j1.adapter.fab = ((j1, window) => {
           logger.info('module initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
 
           clearInterval(dependencies_met_fab_initialized);
-          // claude - J1 Adapter optimizations #1
+          // J1 Adapter optimizations #1
           // clear safety timeout on the happy path
           //
           if (fabInitTimeout) {
@@ -258,7 +258,7 @@ j1.adapter.fab = ((j1, window) => {
         } // END if fabLoaded
       }, 10); // END dependencies_met_fab_initialized
 
-      // claude - J1 Adapter optimizations #1
+      // J1 Adapter optimizations #1
       // bound the FAB-initialized poller. The condition this poller waits
       // on (j1.xhrDOMState[#<container>] === 'success') depends on an XHR
       // load completing successfully — a 404, a network error, or a
@@ -350,7 +350,7 @@ j1.adapter.fab = ((j1, window) => {
 
                         $('#open_mmenu_toc').show();
                         clearInterval(dependencies_met_toccer_finished);
-                        // claude - J1 Adapter optimizations #1
+                        // J1 Adapter optimizations #1
                         // clear safety timeout on the happy path
                         //
                         if (toccerTimeoutMulti) {
@@ -360,7 +360,7 @@ j1.adapter.fab = ((j1, window) => {
                       }
                     }, 10); // END dependencies_met_toccer_finished
 
-                    // claude - J1 Adapter optimizations #1
+                    // J1 Adapter optimizations #1
                     // bound the toccer-finished poller. If the toccer adapter
                     // never reaches 'finished' (it errored, was disabled at
                     // runtime, or never received its config), this 10ms
@@ -433,7 +433,7 @@ j1.adapter.fab = ((j1, window) => {
                       //
                       $actionButton.prop('id', 'open_mmenu_toc');
                       clearInterval(dependencies_met_toccer_finished);
-                      // claude - J1 Adapter optimizations #1
+                      // J1 Adapter optimizations #1
                       // clear safety timeout on the happy path
                       //
                       if (toccerTimeoutSingle) {
@@ -443,7 +443,7 @@ j1.adapter.fab = ((j1, window) => {
                     }
                   }, 10); // END dependencies_met_toccer_finished
 
-                  // claude - J1 Adapter optimizations #1
+                  // J1 Adapter optimizations #1
                   // bound the toccer-finished poller. If the toccer adapter
                   // never reaches 'finished', this 10ms interval would run
                   // for the lifetime of the tab. Cap at 30s and log a

@@ -106,7 +106,7 @@ j1.adapter.lazyLoader = ((j1, window) => {
   var endTimeModule;
   var timeSeconds;
 
-  // claude - J1 Adapter optimizations #1
+  // J1 Adapter optimizations #1
   // safety-timeout handle for the bounded j1-core-ready poller below.
   //
   var dependenciesTimeout;
@@ -165,7 +165,7 @@ j1.adapter.lazyLoader = ((j1, window) => {
           logger.info('module initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
 
           clearInterval(dependency_met_j1_core_ready);
-          // claude - J1 Adapter optimizations #1
+          // J1 Adapter optimizations #1
           // clear safety timeout on the happy path
           //
           if (dependenciesTimeout) {
@@ -175,7 +175,7 @@ j1.adapter.lazyLoader = ((j1, window) => {
         } // END if pageVisible
       }, 10); // END dependency_met_j1_core_ready
 
-      // claude - J1 Adapter optimizations #1
+      // J1 Adapter optimizations #1
       // bound the j1-core-ready poller. Previously, if j1.getState() never
       // reached 'finished' (e.g. a bug elsewhere in the boot sequence,
       // an aborted navigation), this 10ms interval ran for the lifetime

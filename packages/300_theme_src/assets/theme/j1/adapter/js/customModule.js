@@ -105,7 +105,7 @@ j1.adapter.customModule = ((j1, window) => {
   var endTimeModule;
   var timeSeconds;
 
-  // claude - J1 Adapter optimizations #1
+  // J1 Adapter optimizations #1
   // safety-timeout handle for the bounded j1-core-ready poller below.
   //
   var dependenciesTimeout;
@@ -135,7 +135,7 @@ j1.adapter.customModule = ((j1, window) => {
       // -----------------------------------------------------------------------
       // global variable settings
       // -----------------------------------------------------------------------
-      // claude - J1 Adapter optimizations #1
+      // J1 Adapter optimizations #1
       // fixed copy/paste bug: `_this` was assigned to `j1.adapter.dropdowns`
       // (the template this file was cloned from). Every later call to
       // `_this.setState()` / `_this.getState()` therefore mutated and read
@@ -148,7 +148,7 @@ j1.adapter.customModule = ((j1, window) => {
       // create settings object from frontmatterOptions
       frontmatterOptions  = options != null ? $.extend({}, options) : {};
 
-      // claude - J1 Adapter optimizations #1
+      // J1 Adapter optimizations #1
       // removed leftover `{{dropdowns_options}}` Liquid reference (another
       // clone-from-dropdowns artefact). For a custom module with no YAML
       // backing, `dropdowns_options` either rendered the unrelated dropdowns
@@ -182,7 +182,7 @@ j1.adapter.customModule = ((j1, window) => {
           endTimeModule = Date.now();
           logger.info('initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
 
-          // claude - J1 Adapter optimizations #1
+          // J1 Adapter optimizations #1
           // the original code never cleared the interval — it would keep
           // firing every 10ms after j1CoreFinished was true, repeatedly
           // re-running the init block, thrashing setState/getState and
@@ -197,11 +197,11 @@ j1.adapter.customModule = ((j1, window) => {
         } // END j1CoreFinished
       }, 10); // END dependencies_met_j1_finished
 
-      // claude - J1 Adapter optimizations #1
+      // J1 Adapter optimizations #1
       // bound the j1-core-ready poller. Previously, if j1.getState() never
       // reached 'finished' (e.g. a bug elsewhere in the boot sequence,
       // an aborted navigation), this 10ms interval ran for the lifetime
-      // of the tab. Cap it at 30s and log a warning so the failure mode
+      // of the tab. Cap it and log a warning so the failure mode
       // is visible in the console instead of silently burning CPU.
       //
       dependenciesTimeout = setTimeout(function () {

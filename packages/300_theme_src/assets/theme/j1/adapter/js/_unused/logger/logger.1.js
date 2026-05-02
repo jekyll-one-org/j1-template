@@ -124,7 +124,7 @@ j1.adapter.logger = ((j1, window) => {
   var endTimeModule;
   var timeSeconds;
 
-  // claude - J1 Adapter optimizations #1
+  // J1 Adapter optimizations #1
   // safety-timeout handle for the bounded session-mode poller below.
   //
   var dependenciesTimeout;
@@ -317,7 +317,7 @@ j1.adapter.logger = ((j1, window) => {
           logger.info('module initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
 
           clearInterval(dependencies_met_mode_detected);
-          // claude - J1 Adapter optimizations #1
+          // J1 Adapter optimizations #1
           // clear safety timeout on the happy path
           //
           if (dependenciesTimeout) {
@@ -328,7 +328,7 @@ j1.adapter.logger = ((j1, window) => {
         } // END sessionReady
       }, 10); // END dependencies_met_mode_detected
 
-      // claude - J1 Adapter optimizations #1
+      // J1 Adapter optimizations #1
       // bound the session-mode poller. The condition this poller waits on
       // (`userSession.mode !== 'na'`) is set by the cookies/session adapter;
       // if that adapter fails to write the user_session cookie or the mode

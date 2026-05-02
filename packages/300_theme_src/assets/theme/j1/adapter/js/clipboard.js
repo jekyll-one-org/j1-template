@@ -87,11 +87,11 @@ j1.adapter.clipboard = ((j1, window) => {
   var logger;
   var logText;
 
-  // claude - J1 Adapter optimizations #1
+  // J1 Adapter optimizations #1
   // bound the j1-finished poller. Previously, if j1.getState() never
   // reached 'finished' (e.g. a bug elsewhere in the boot sequence or
   // an aborted navigation), this 10ms interval ran for the lifetime of
-  // the tab. Cap it at 30s and log a warning so the failure mode is
+  // the tab. Cap it and log a warning so the failure mode is
   // visible in the console instead of silently burning CPU.
   //
   var dependenciesTimeout;
@@ -184,7 +184,7 @@ j1.adapter.clipboard = ((j1, window) => {
           logger.info('module initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
 
           clearInterval(dependencies_met_j1_finished);
-          // claude - J1 Adapter optimizations #1
+          // J1 Adapter optimizations #1
           // clear the safety timeout on the happy path
           //
           if (dependenciesTimeout) {
@@ -194,7 +194,7 @@ j1.adapter.clipboard = ((j1, window) => {
         } // END j1CoreFinished
       }, 10); // END dependencies_met_j1_finished
 
-      // claude - J1 Adapter optimizations #1
+      // J1 Adapter optimizations #1
       // safety bound paired with the 10ms poller above
       //
       dependenciesTimeout = setTimeout(function () {

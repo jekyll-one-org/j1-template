@@ -128,7 +128,7 @@ j1.adapter.advertising = ((j1, window) => {
   var logger;
   var logText;
 
-  // claude - J1 Adapter optimizations #1
+  // J1 Adapter optimizations #1
   // bound the page-ready pollers (init() and ad_initializer()).
   // Previously, if `#content` never reached `display: block` or
   // j1.getState() never reached 'finished' (e.g. a bug elsewhere in the
@@ -215,7 +215,7 @@ j1.adapter.advertising = ((j1, window) => {
             logger.info('module disabled' );
 
             clearInterval(dependencies_met_page_ready);
-            // claude - J1 Adapter optimizations #1
+            // J1 Adapter optimizations #1
             // clear the safety timeout on the early-exit path
             //
             if (dependenciesTimeout) {
@@ -357,7 +357,7 @@ j1.adapter.advertising = ((j1, window) => {
           {% endif %} // END if 'advertising'
 
           clearInterval(dependencies_met_page_ready);
-          // claude - J1 Adapter optimizations #1
+          // J1 Adapter optimizations #1
           // clear the safety timeout on the happy path
           //
           if (dependenciesTimeout) {
@@ -367,7 +367,7 @@ j1.adapter.advertising = ((j1, window) => {
         }
       }, 10);
 
-      // claude - J1 Adapter optimizations #1
+      // J1 Adapter optimizations #1
       // safety bound paired with the 10ms poller above
       //
       dependenciesTimeout = setTimeout(function () {
@@ -474,7 +474,7 @@ j1.adapter.advertising = ((j1, window) => {
           } // END if ads_initialized
 
           clearInterval(dependencies_met_page_visible);
-          // claude - J1 Adapter optimizations #1
+          // J1 Adapter optimizations #1
           // clear the safety timeout on the happy path
           //
           if (adInitializerTimeout) {
@@ -484,7 +484,7 @@ j1.adapter.advertising = ((j1, window) => {
         } // END contentVisible|ads_found
       }, 10); // END dependencies_met_page_visible
 
-      // claude - J1 Adapter optimizations #1
+      // J1 Adapter optimizations #1
       // safety bound paired with the 10ms poller above. Without this, if
       // no `.adsbygoogle` elements ever appear in the page (e.g. ads
       // failed to inject, or the page has none), the interval would run

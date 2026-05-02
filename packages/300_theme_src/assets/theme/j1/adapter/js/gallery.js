@@ -125,7 +125,7 @@ j1.adapter.gallery = ((j1, window) => {
   var endTimeModule;
   var timeSeconds;
 
-  // claude - J1 Adapter optimizations #1
+  // J1 Adapter optimizations #1
   // safety-timeout handle for the bounded page-ready poller below.
   //
   var dependenciesTimeout;
@@ -206,7 +206,7 @@ j1.adapter.gallery = ((j1, window) => {
           }, 500);
 
           clearInterval(dependency_met_page_ready);
-          // claude - J1 Adapter optimizations #1
+          // J1 Adapter optimizations #1
           // clear safety timeout on the happy path
           //
           if (dependenciesTimeout) {
@@ -216,12 +216,12 @@ j1.adapter.gallery = ((j1, window) => {
         } // END 'finished' && 'pageVisible'
       }, 10); // END dependency_met_page_ready
 
-      // claude - J1 Adapter optimizations #1
+      // J1 Adapter optimizations #1
       // bound the page-ready poller. Previously, if `#content` never reached
       // `display: block` or j1.getState() never reached 'finished' (e.g. a
       // bug elsewhere in the boot sequence, an aborted navigation, an
       // extension hiding #content), this 10ms interval ran for the lifetime
-      // of the tab. Cap it at 30s and log a warning so the failure mode is
+      // of the tab. Cap it and log a warning so the failure mode is
       // visible in the console instead of silently burning CPU.
       //
       dependenciesTimeout = setTimeout(function () {
@@ -462,7 +462,7 @@ j1.adapter.gallery = ((j1, window) => {
                 }, 1000); // END timeout
 
                 clearInterval(load_dependencies['dependencies_met_html_loaded_{{gallery_id}}']);
-                // claude - J1 Adapter optimizations #1
+                // J1 Adapter optimizations #1
                 // clear the per-gallery safety timeout on the happy path
                 //
                 if (load_dependencies['html_loaded_timeout_{{gallery_id}}']) {
@@ -472,7 +472,7 @@ j1.adapter.gallery = ((j1, window) => {
               } // END  if xhrLoadState === 'success'
             }, 10); // END dependencies_met_html_loaded
 
-            // claude - J1 Adapter optimizations #1
+            // J1 Adapter optimizations #1
             // bound the per-gallery HTML-loaded poller. The condition
             // `j1.xhrDOMState[#{{gallery_id}}_parent] === 'success'` depends
             // on the AJAX fetch in loadGalleryHTML() completing. A 404, a

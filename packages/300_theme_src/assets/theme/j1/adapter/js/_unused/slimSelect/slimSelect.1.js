@@ -144,12 +144,12 @@ j1.adapter.slimSelect = ((j1, window) => {
       // -----------------------------------------------------------------------
       // module initializer
       // -----------------------------------------------------------------------
-      // claude - J1 Adapter optimizations #1
+      // J1 Adapter optimizations #1
       // bound the page-ready poller. Previously, if `#content` never reached
       // `display: block` or j1.getState() never reached 'finished' (e.g. a
       // bug elsewhere in the boot sequence, an aborted navigation, an extension
       // hiding #content), this 10ms interval ran for the lifetime of the tab.
-      // Cap it at 30s and log a warning so the failure mode is visible in the
+      // Cap it and log a warning so the failure mode is visible in the
       // console instead of silently burning CPU.
       //
       var dependenciesTimeout;
@@ -168,11 +168,11 @@ j1.adapter.slimSelect = ((j1, window) => {
           var wrapper_dependencies = {};
           var dependency;
 
-          // claude - J1 Adapter optimizations #1
+          // J1 Adapter optimizations #1
           // parallel timeout map for the per-wrapper pollers generated below.
           // Without bounds, a missing wrapper element (`#{{select.wrapper_id}}`)
           // would leave the inner 10ms interval running for the lifetime of
-          // the tab. Each wrapper poll is paired with a 30s safety timeout
+          // the tab. Each wrapper poll is paired with a safety timeout
           // that clears the interval and logs a warning.
           //
           var wrapper_timeouts = {};
@@ -235,7 +235,7 @@ j1.adapter.slimSelect = ((j1, window) => {
               logger.debug('initializing finished select: {{select.id}}');
 
               clearInterval(wrapper_dependencies['dependency_met_wrapper_ready_{{select.id}}']);
-              // claude - J1 Adapter optimizations #1
+              // J1 Adapter optimizations #1
               // clear the per-wrapper safety timeout on the happy path
               //
               if (wrapper_timeouts['{{select.id}}']) {
@@ -245,7 +245,7 @@ j1.adapter.slimSelect = ((j1, window) => {
             } // END if wrapperReady
           }, 10); // END dependency_met_wrapper_ready
 
-          // claude - J1 Adapter optimizations #1
+          // J1 Adapter optimizations #1
           // safety bound paired with the per-wrapper 10ms poller above
           //
           wrapper_timeouts['{{select.id}}'] = setTimeout(() => {
@@ -266,7 +266,7 @@ j1.adapter.slimSelect = ((j1, window) => {
           logger.info('module initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
 
           clearInterval(dependency_met_page_ready);
-          // claude - J1 Adapter optimizations #1
+          // J1 Adapter optimizations #1
           // clear the safety timeout on the happy path
           //
           if (dependenciesTimeout) {
@@ -276,7 +276,7 @@ j1.adapter.slimSelect = ((j1, window) => {
         } // END pageVisible
       }, 10); // END dependencies_met_page_ready
 
-      // claude - J1 Adapter optimizations #1
+      // J1 Adapter optimizations #1
       // safety bound paired with the 10ms poller above
       //
       dependenciesTimeout = setTimeout(() => {

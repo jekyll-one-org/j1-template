@@ -13,7 +13,7 @@ translator.js flagged by:
   // `display: block` or j1.getState() never reached 'finished' (e.g. a
   // bug elsewhere in the boot sequence, an aborted navigation, an extension
   // hiding #content), this 10ms interval ran for the lifetime of the tab.
-  // Cap it at 30s and log a warning so the failure mode is visible in the
+  // Cap it and log a warning so the failure mode is visible in the
   // console instead of silently burning CPU.
   //
   var dependenciesTimeout;
@@ -23,7 +23,7 @@ translator.js flagged by:
 ```
 
 Create fixed versions and use the comment
-"claude - J1 Adapter optimizations #1" for all proposed fixes.
+"J1 Adapter optimizations #1" for all proposed fixes.
 
 
 Claude
@@ -37,7 +37,7 @@ I copied all the uploaded adapters to a working directory and applied the same `
 2. **`clearTimeout(dependenciesTimeout)`** on every happy-path / early-exit branch that already calls `clearInterval(...)`.
 3. **`dependenciesTimeout = setTimeout(..., 30000)`** placed right after the `setInterval` is scheduled, which clears the interval and emits `logger.warn('<module> init aborted: ... within 30s')` if the conditions never resolve.
 
-All edits are tagged `claude - J1 Adapter optimizations #1`.
+All edits are tagged `J1 Adapter optimizations #1`.
 
 ### Adapters fixed in this session
 
@@ -89,5 +89,5 @@ Ich mache weiter mit dem `ad_initializer`-Poller in advertising.js und stelle da
 2. `clearTimeout(dependenciesTimeout)` auf jedem Happy-Path / Early-Exit, der bereits `clearInterval(...)` aufruft
 3. `dependenciesTimeout = setTimeout(..., 30000)` direkt nach dem `setInterval`, mit `logger.warn('<modul> init aborted: ... within 30s')`
 
-Alle Edits sind mit `claude - J1 Adapter optimizations #1` getaggt. `translator.js` und `cookieConsent.js` waren bereits optimiert und blieben unverändert.
+Alle Edits sind mit `J1 Adapter optimizations #1` getaggt. `translator.js` und `cookieConsent.js` waren bereits optimiert und blieben unverändert.
 

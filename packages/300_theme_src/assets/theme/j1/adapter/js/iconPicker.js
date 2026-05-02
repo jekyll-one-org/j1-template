@@ -112,7 +112,7 @@ j1.adapter.iconPicker = ((j1, window) => {
   var endTimeModule;
   var timeSeconds;
 
-  // claude - J1 Adapter optimizations #1
+  // J1 Adapter optimizations #1
   // safety-timeout handles for the bounded pollers below.
   //
   var pageReadyTimeout;
@@ -189,7 +189,7 @@ j1.adapter.iconPicker = ((j1, window) => {
                 }
               });
 
-              // claude - J1 Adapter optimizations #1
+              // J1 Adapter optimizations #1
               // fixed misleading comment ("toccer object") — this is the
               // iconPicker adapter, not toccer. Save config settings into
               // this adapter for later access.
@@ -205,7 +205,7 @@ j1.adapter.iconPicker = ((j1, window) => {
               logger.info('module initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
 
               clearInterval(dependencies_met_picker_button_ready);
-              // claude - J1 Adapter optimizations #1
+              // J1 Adapter optimizations #1
               // clear the inner safety timeout on the happy path
               //
               if (pickerButtonTimeout) {
@@ -215,13 +215,13 @@ j1.adapter.iconPicker = ((j1, window) => {
             } // END if buttonReady
           }, 10); // END dependencies_met_picker_button_ready
 
-          // claude - J1 Adapter optimizations #1
+          // J1 Adapter optimizations #1
           // bound the picker-button-ready poller. If the configured
           // `picker_button_id` element is never inserted into the DOM
           // (e.g. the button was removed from the page, the id was
           // mistyped in the YAML config, or the shortcode that emits it
           // wasn't included), this 10ms interval would run for the
-          // lifetime of the tab. Cap it at 30s and log a warning that
+          // lifetime of the tab. Cap it and log a warning that
           // names the missing id so the misconfiguration is debuggable.
           //
           pickerButtonTimeout = setTimeout(function () {
@@ -232,7 +232,7 @@ j1.adapter.iconPicker = ((j1, window) => {
           }, 5000);
 
           clearInterval(dependencies_met_page_ready);
-          // claude - J1 Adapter optimizations #1
+          // J1 Adapter optimizations #1
           // clear the outer safety timeout on the happy path
           //
           if (pageReadyTimeout) {
@@ -242,12 +242,12 @@ j1.adapter.iconPicker = ((j1, window) => {
         } // END pageVisible
       }, 10); // END dependencies_met_page_ready
 
-      // claude - J1 Adapter optimizations #1
+      // J1 Adapter optimizations #1
       // bound the page-ready poller. Previously, if `#content` never reached
       // `display: block` or j1.getState() never reached 'finished' (e.g. a
       // bug elsewhere in the boot sequence, an aborted navigation, an
       // extension hiding #content), this 10ms interval ran for the lifetime
-      // of the tab. Cap it at 30s and log a warning so the failure mode is
+      // of the tab. Cap it and log a warning so the failure mode is
       // visible in the console instead of silently burning CPU.
       //
       pageReadyTimeout = setTimeout(function () {

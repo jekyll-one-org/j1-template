@@ -108,7 +108,7 @@ j1.adapter.iframer = ((j1, window) => {
   var endTimeModule;
   var timeSeconds;
 
-  // claude - J1 Adapter optimizations #1
+  // J1 Adapter optimizations #1
   // safety-timeout handle for the bounded page-ready poller below.
   //
   var dependenciesTimeout;
@@ -167,7 +167,7 @@ j1.adapter.iframer = ((j1, window) => {
 
         if (j1CoreFinished && pageVisible) {
 
-          // claude - J1 Adapter optimizations #1
+          // J1 Adapter optimizations #1
           // record startTimeModule here. Previously the variable was
           // declared but never assigned in this adapter, so the
           // `endTimeModule - startTimeModule` line below produced NaN
@@ -190,7 +190,7 @@ j1.adapter.iframer = ((j1, window) => {
           logger.info('module initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
 
           clearInterval(dependencies_met_page_ready);
-          // claude - J1 Adapter optimizations #1
+          // J1 Adapter optimizations #1
           // clear safety timeout on the happy path
           //
           if (dependenciesTimeout) {
@@ -200,12 +200,12 @@ j1.adapter.iframer = ((j1, window) => {
         } // END j1CoreFinished && pageVisible
       }, 10); // END dependencies_met_page_ready
 
-      // claude - J1 Adapter optimizations #1
+      // J1 Adapter optimizations #1
       // bound the page-ready poller. Previously, if `#content` never reached
       // `display: block` or j1.getState() never reached 'finished' (e.g. a
       // bug elsewhere in the boot sequence, an aborted navigation, an
       // extension hiding #content), this 10ms interval ran for the lifetime
-      // of the tab. Cap it at 30s and log a warning so the failure mode is
+      // of the tab. Cap it and log a warning so the failure mode is
       // visible in the console instead of silently burning CPU.
       //
       dependenciesTimeout = setTimeout(function () {
@@ -289,7 +289,7 @@ j1.adapter.iframer = ((j1, window) => {
             }, {{iframer_options.delay_iframer}});
 
             clearInterval(load_dependencies['dependencies_met_html_loaded_{{iframe_id}}']);
-            // claude - J1 Adapter optimizations #1
+            // J1 Adapter optimizations #1
             // clear the per-iframe safety timeout on the happy path
             //
             if (load_dependencies['html_loaded_timeout_{{iframe_id}}']) {
@@ -300,7 +300,7 @@ j1.adapter.iframer = ((j1, window) => {
 
           }, 10); // END dependencies_met_html_loaded
 
-          // claude - J1 Adapter optimizations #1
+          // J1 Adapter optimizations #1
           // bound the per-iframe HTML-loaded poller. The condition
           // `j1.xhrDOMState[#{{iframe_id}}_parent] === 'success'` depends
           // on the AJAX fetch in loadIframeHTML() completing. A 404, a

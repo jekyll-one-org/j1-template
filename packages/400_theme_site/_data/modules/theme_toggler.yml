@@ -1,6 +1,6 @@
 # ------------------------------------------------------------------------------
-# ~/_data/modules/cookieconsent.yml
-# User configuration settings for J1 Cookie Consent module
+# ~/_data/modules/theme_toggler.yml
+# User configuration settings for J1 Theme Toggler module
 #
 # Product/Info:
 # https://jekyll.one
@@ -15,28 +15,20 @@
 # Description
 #
 description:
-  title:                                CookieConsent
+  title:                                J1 Theme Toggler
   scope:                                User settings
-  location:                             _data/modules/cookieconsent.yml
+  location:                             _data/modules/theme_toggler.yml
 
 # ------------------------------------------------------------------------------
 # User configuration settings
 #
 settings:
 
-  postSelectionCallback:                j1.adapter.cookieConsent.cbCookie       # called after the user has made his selection
-
-  # claude - pass options to postSelectionCallback callback function
-  # ----------------------------------------------------------------------------
-  reloadPageOnChange:                   true                                    # reload current page if user settings has been changed
-  expireCookiesOnRequiredOnly:          true
-
   # ----------------------------------------------------------------------------
   # GENERAL options
   # ----------------------------------------------------------------------------
   #
   enabled:                              true
-  showCookieIcon:                       true
 
 # ------------------------------------------------------------------------------
 # END config

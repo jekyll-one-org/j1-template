@@ -14,7 +14,7 @@ translator.js flagged by:
   // `display: block` or j1.getState() never reached 'finished' (e.g. a
   // bug elsewhere in the boot sequence, an aborted navigation, an extension
   // hiding #content), this 10ms interval ran for the lifetime of the tab.
-  // Cap it at 30s and log a warning so the failure mode is visible in the
+  // Cap it and log a warning so the failure mode is visible in the
   // console instead of silently burning CPU.
   //
   var dependenciesTimeout;
@@ -24,15 +24,15 @@ translator.js flagged by:
 ```
 
 Create fixed versions and use the comment
-"claude - J1 Adapter optimizations #1" for all proposed fixes.
+"J1 Adapter optimizations #1" for all proposed fixes.
 
 
 Claude
 --------------------------------------------------------------------------------
 
-Continuing with the remaining `sidebarLoaded` pollers in j1.js, then I'll finalize everything.Now let me do a sanity check on the fixed files — verify that all `setInterval` calls now have a bounded `setTimeout` partner:The 1:1 correspondence between `setInterval` calls and 30s safety timeouts is consistent across every file. Let me do one final structural check on the key files:Let me check whether the paren/brace mismatches are pre-existing in the original files or introduced by my edits:All brace/paren deltas are identical between original and fixed — the small offsets are pre-existing artifacts from Liquid `{% for/if %}` blocks that the crude stripping doesn't track perfectly. **No new mismatches were introduced** by the edits.
+Continuing with the remaining `sidebarLoaded` pollers in j1.js, then I'll finalize everything.Now let me do a sanity check on the fixed files — verify that all `setInterval` calls now have a bounded `setTimeout` partner:The 1:1 correspondence between `setInterval` calls and safety timeouts is consistent across every file. Let me do one final structural check on the key files:Let me check whether the paren/brace mismatches are pre-existing in the original files or introduced by my edits:All brace/paren deltas are identical between original and fixed — the small offsets are pre-existing artifacts from Liquid `{% for/if %}` blocks that the crude stripping doesn't track perfectly. **No new mismatches were introduced** by the edits.
 
-Let me copy all fixed files to the outputs directory:All 11 adapter files are fixed and ready. Every change is tagged with `// claude - J1 Adapter optimizations #1` so you can grep for them or strip them in review.
+Let me copy all fixed files to the outputs directory:All 11 adapter files are fixed and ready. Every change is tagged with `// J1 Adapter optimizations #1` so you can grep for them or strip them in review.
 
 **Summary of fixes (28 bounded pollers across 11 files):**
 

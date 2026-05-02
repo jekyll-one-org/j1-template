@@ -97,7 +97,7 @@ j1.adapter.iconPickerPage = ((j1, window) => {
   var logger;
   var logText;
 
-  // claude - J1 Adapter optimizations #1
+  // J1 Adapter optimizations #1
   // safety-timeout handles for the bounded pollers below.
   //
   var pageReadyTimeout;
@@ -124,7 +124,7 @@ j1.adapter.iconPickerPage = ((j1, window) => {
       // -----------------------------------------------------------------------
       // global variable settings
       // -----------------------------------------------------------------------
-      // claude - J1 Adapter optimizations #1
+      // J1 Adapter optimizations #1
       // fixed Liquid variable name `iconPicker_settings` →
       // `icon_picker_settings`. The misnamed variable is undefined in the
       // top-of-file assignments and rendered to nothing, so the adapter
@@ -221,7 +221,7 @@ j1.adapter.iconPickerPage = ((j1, window) => {
               init_select();
 
               clearInterval(dependencies_met_modules_ready);
-              // claude - J1 Adapter optimizations #1
+              // J1 Adapter optimizations #1
               // clear inner safety timeout on the happy path
               //
               if (modulesReadyTimeout) {
@@ -231,7 +231,7 @@ j1.adapter.iconPickerPage = ((j1, window) => {
             } // END if modules loaded
           }, 10); // END if modules loaded
 
-          // claude - J1 Adapter optimizations #1
+          // J1 Adapter optimizations #1
           // bound the modules-ready poller. This poller waits on TWO
           // sibling adapters (slimSelect, iconPicker) reaching 'finished'
           // AND on a wrapper element being injected. Any one of those
@@ -262,7 +262,7 @@ j1.adapter.iconPickerPage = ((j1, window) => {
           wrapperContainer.classList.add('mb-7');
 
           clearInterval(dependencies_met_page_ready);
-          // claude - J1 Adapter optimizations #1
+          // J1 Adapter optimizations #1
           // clear outer safety timeout on the happy path
           //
           if (pageReadyTimeout) {
@@ -272,12 +272,12 @@ j1.adapter.iconPickerPage = ((j1, window) => {
         } // END if page loaded
       }, 10); // END dependencies_met_page_ready
 
-      // claude - J1 Adapter optimizations #1
+      // J1 Adapter optimizations #1
       // bound the page-ready poller. Previously, if `#content` never reached
       // `display: block` or j1.getState() never reached 'finished' (e.g. a
       // bug elsewhere in the boot sequence, an aborted navigation, an
       // extension hiding #content), this 10ms interval ran for the lifetime
-      // of the tab. Cap it at 30s and log a warning so the failure mode is
+      // of the tab. Cap it and log a warning so the failure mode is
       // visible in the console instead of silently burning CPU.
       //
       pageReadyTimeout = setTimeout(function () {
