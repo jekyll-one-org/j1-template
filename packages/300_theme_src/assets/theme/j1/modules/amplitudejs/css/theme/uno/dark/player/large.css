@@ -21,7 +21,6 @@
 
 /* 2. Components
 # --------------------------------------------------------- */
-
 .large-player-container {
   display: flex;
   max-width: fit-content;
@@ -228,7 +227,7 @@
 .large-player-left-middle {
   margin-top: 10px;
   margin-bottom: 20px;
-  margin-left: 40px;
+  margin-left: 18px;
 }
 
 .large-player-left-bottom {
@@ -321,7 +320,6 @@
 .audio-rating {
   float: right;
   margin-top: 20px;
-  /* margin-right: -43px;   */
   margin-right: -66px;  
 }
 
@@ -421,10 +419,10 @@ input[type=range].amplitude-volume-slider {
     float: left;
     height: 1px;
     margin-top: -4px;
-    margin-left: 12px;
+    margin-left: 10px;
     width: calc(100% - 86px);
     background: transparent;
-}
+}  
 
 
 /* 3. Layout
@@ -437,11 +435,10 @@ Bootstrap (BS) grid breakpoints
   LG:     992px           Desktop
   XL:     1200px          Large Desktop
   XXL:    1400px          X Large Desktop
+
+  max-width: -webkit-fill-available;  Chrome, Safari, Edge
+  max-width: -moz-available;          Firefox 
  */
-
- /* max-width: -webkit-fill-available;  Chrome, Safari, Edge */
- /* max-width: -moz-available;          Firefox              */
-
 
 /* BS LG (Desktop)
 # --------------------------------------------------------- */
@@ -450,10 +447,12 @@ Bootstrap (BS) grid breakpoints
   .large-player-left {
     width: 35vw;
   }
+
   .large-player-left-top img {
     width: 45vw;
     object-fit: cover;
   }
+
   .playlist-screen-controls {
     display: none;
   }
@@ -463,12 +462,12 @@ Bootstrap (BS) grid breakpoints
     width: 25px;
     height: 25px;
   }
+
   input[type="range"].amplitude-volume-slider::-moz-slider-thumb {
     background-color: var(--ajs-theme-uno--blue-500);
     width: 25px;
     height: 25px;
   }
-
 }
 
 /* BS MD (Desktop)
@@ -477,9 +476,11 @@ Bootstrap (BS) grid breakpoints
   .large-player-left {
     width: 35vw;
   }
+
   .playlist-screen-controls {
     display: none;
   }
+
   .large-player-left-top img {
     width: 45vw;
     object-fit: cover;
@@ -501,10 +502,12 @@ Bootstrap (BS) grid breakpoints
   .large-player-left {
     width: 35vw;
   }
+
   .large-player-left-top img {
     width: 95vw;
     object-fit: cover;
   }
+
   .playlist-screen-controls {
     display: none;
   }  
@@ -534,7 +537,6 @@ Bootstrap (BS) grid breakpoints
   .playlist-screen-controls.large-player {
     display: none;
   }
-
   .large-player-title-list {
     border-bottom: 1px solid;
     border-color: var(--ajs-theme-uno--medium-silver);
@@ -591,6 +593,7 @@ Bootstrap (BS) grid breakpoints
     background-color: var(--ajs-theme-uno--blue-500);
   }
 }
+
 
 /* 4. Pages
 # ------------------------------------------------------------------------------ */

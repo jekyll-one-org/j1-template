@@ -15,7 +15,6 @@
 
 /* 1. Base
 # ------------------------------------------------------------------------------ */
-
 .compact-player {
   width: 500px;
   height: auto;
@@ -86,14 +85,6 @@
   opacity: 0.5;
 }
 
-/* .compact-player-shuffle.amplitude-shuffle-off {
-  background: url("/assets/theme/j1/modules/amplitudejs/icons/player/dark/shuffle-off.svg") no-repeat;
-}
-
-.compact-player-shuffle.amplitude-shuffle-on {
-  background: url("/assets/theme/j1/modules/amplitudejs/icons/player/dark/shuffle-on.svg") no-repeat;
-} */
-
 .compact-player-previous {
   display: inline-block;
   user-select: none;
@@ -103,7 +94,6 @@
   height: 24px;
   margin-right: 20px;
   margin-left: 20px;
-  /* background: url("/assets/theme/j1/modules/amplitudejs/icons/player/dark/previous.svg") no-repeat; */
 }
 
 .compact-player-previous:hover {
@@ -118,7 +108,6 @@
   width: 24px;
   margin-right: 20px;
   vertical-align: middle;
-  /* background: url("/assets/theme/j1/modules/amplitudejs/icons/player/dark/skip-backward.svg") no-repeat; */
 }
 
 .compact-player-skip-backward:hover {
@@ -150,7 +139,6 @@
   background: url("/assets/theme/j1/modules/amplitudejs/icons/player/dark/pause.svg") no-repeat;
 }
 
-
 .compact-player-skip-forward {
   display: inline-block;
   user-select: none;
@@ -159,7 +147,6 @@
   width: 24px;
   margin-left: 20px;
   vertical-align: middle;
-  /* background: url("/assets/theme/j1/modules/amplitudejs/icons/player/dark/skip-forward.svg") no-repeat; */
 }
 
 .compact-player-skip-forward:hover {
@@ -175,7 +162,6 @@
   margin-right: 25px;
   margin-left: 20px;
   vertical-align: middle;
-  /* background: url("/assets/theme/j1/modules/amplitudejs/icons/player/dark/next.svg") no-repeat; */
 }
 
 .compact-player-next:hover {
@@ -195,14 +181,6 @@
 .compact-player-repeat:hover {
   opacity: .5;
 }
-
-/* .compact-player-repeat.amplitude-repeat-off {
-  background: url("/assets/theme/j1/modules/amplitudejs/icons/player/dark/repeat-off.svg") no-repeat;
-}
-
-.compact-player-repeat.amplitude-repeat-on {
-  background: url("/assets/theme/j1/modules/amplitudejs/icons/player/dark/repeat-on.svg") no-repeat;
-} */
 
 .compact-player-control-container {
   margin-top: 20px;
@@ -240,9 +218,8 @@
 }
 
 .compact-player-amplitude-mute {
-  margin-left: 28px;
+  margin-left: 22px;
 }
-
 
 /* Player BOTTOM
 # --------------------------------------------------------- */
@@ -261,17 +238,15 @@ Bootstrap (BS) grid breakpoints
   LG:     992px           Desktop
   XL:     1200px          Large Desktop
   XXL:    1400px          X Large Desktop
+
+  max-width: -webkit-fill-available;  Chrome, Safari, Edge
+  max-width: -moz-available;          Firefox 
  */
-
- /* max-width: -webkit-fill-available;  Chrome, Safari, Edge */
- /* max-width: -moz-available;          Firefox              */
-
 
 /* BS SM (Mobile)
 # --------------------------------------------------------- */
 
 @media screen and (max-width: 576px) {
-
   .compact-player {
     max-width: -webkit-fill-available; /* Chrome, Safari, Edge */
     max-width: -moz-available; /* Firefox */
@@ -306,7 +281,6 @@ Bootstrap (BS) grid breakpoints
     border-radius: 30px;
     margin-top: -15px;
   }
-
 }
 
 
@@ -332,12 +306,12 @@ Bootstrap (BS) grid breakpoints
 
 .compact-player-volume-container
 input[type=range].amplitude-volume-slider {
-  float: left;
-  height: 1px;
-  margin-top: -4px;
-  margin-left: 12px;
-  width: calc(100% - 118px);
-  background: transparent;
+    float: left;
+    height: 1px;
+    margin-top: -4px;
+    margin-left: 10px;
+    width: calc(100% - 118px);
+    background: transparent;
 }
 
 .compact-player-list-controls {
@@ -477,8 +451,6 @@ img.now-playing {
   right: 0;
   left: 0;
   bottom: 0;
-  /* jadams 2024-11-07, workaround  (reason unclear) */
-  /* NOTE: make playlist 1 pixel wider to fit in width */
   width: calc(100% + 1px);
   background-color: var(--ajs-theme-uno--black);
 }
@@ -596,7 +568,6 @@ img.now-playing {
 
 /* 8. Animations
 # ------------------------------------------------------------------------------ */
-
 .slide-in-top {
   -webkit-animation: slide-in-top 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
   animation: slide-in-top 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
