@@ -328,8 +328,8 @@ defaults:
     delay_after_video_loaded:           500                                     # 0..1000 (ms), delay after yt video loaded
     shuffle_button:                     false                                   # true|false, shuffle button (currently NOT supported)
     repeat_button:                      false                                   # true|false, repeat  button (currently NOT supported)
-    song_progress_bar:                  false                                   # true|false, show progressbar in player
-    skip_forward_backward_button:       false
+    song_progress_bar:                  true                                    # true|false, show progressbar in player
+    skip_forward_backward_button:       true
     do_previous_button_on_first:        none                                    # none|last, item to select on click
     do_next_button_on_last:             first                                   # none|first, item to select on click
 
@@ -343,7 +343,6 @@ defaults:
       preset_value:                     50                                      # default volume level (percent)
       min_value:                        0                                       # percent
       max_value:                        100                                     # percent
-      preset_value:                     50                                      # percent
       slider_step:                      1                                       # integer 1..10
 
     # --------------------------------------------------------------------------

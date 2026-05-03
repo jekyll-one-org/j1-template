@@ -39,9 +39,9 @@ settings:
       # ------------------------------------------------------------------------
       # CONTROL settings
       #
-      song_progress_bar:                true
-      volume_slider:
-        enabled:                        true
+#     song_progress_bar:                true
+#      volume_slider:
+#        enabled:                        true
 
       # ------------------------------------------------------------------------
       # PLAYER settings
@@ -51,7 +51,7 @@ settings:
 
       # ------------------------------------------------------------------------
       # TIME settings
-      display_hours:                    false
+      # display_hours:                    false
 
       playlist:
         name:                           free_disco
@@ -78,16 +78,16 @@ settings:
 
       # ------------------------------------------------------------------------
       # TIME settings
-      display_hours:                    false
+      # display_hours:                    false
 
       # ------------------------------------------------------------------------
       # CONTROL settings
       #
-      song_progress_bar:                true
-      skip_forward_backward_button:     true
+#     song_progress_bar:                true
+#     skip_forward_backward_button:     true
       volume_slider:
         enabled:                        true
-        preset_value:                   50
+        preset_value:                   90
 
       playlist:
         name:                           free_disco
@@ -111,12 +111,12 @@ settings:
 
       # ------------------------------------------------------------------------
       # TIME settings
-      display_hours:                    false
+      # display_hours:                    false
 
       # ------------------------------------------------------------------------
       # CONTROL settings
       #
-      song_progress_bar:                true
+#     song_progress_bar:                true
       skip_forward_backward_button:     true
 
       playlist:
@@ -134,12 +134,12 @@ settings:
 
       # ------------------------------------------------------------------------
       # TIME settings
-      display_hours:                    false
+      # display_hours:                    false
 
       # ------------------------------------------------------------------------
       # CONTROL settings
       #
-      song_progress_bar:                true
+#     song_progress_bar:                true
       volume_slider:
         enabled:                        true
 
@@ -164,7 +164,7 @@ settings:
       # ------------------------------------------------------------------------
       # CONTROL settings
       #
-      song_progress_bar:                true
+#     song_progress_bar:                true
       skip_forward_backward_button:     true
       volume_slider:
         enabled:                        true
@@ -196,12 +196,12 @@ settings:
 
       # ------------------------------------------------------------------------
       # TIME settings
-      display_hours:                    false
+      # display_hours:                    false
 
       # ------------------------------------------------------------------------
       # CONTROL settings
       #
-      song_progress_bar:                true
+#     song_progress_bar:                true
       skip_forward_backward_button:     true
       volume_slider:
         enabled:                        true
@@ -240,7 +240,7 @@ settings:
       # ------------------------------------------------------------------------
       # CONTROL settings
       #
-      song_progress_bar:                true
+#     song_progress_bar:                true
       skip_forward_backward_button:     true
       forward_backward_skip_seconds:    60
       delay_after_video_loaded:         750
@@ -285,7 +285,7 @@ settings:
       # ------------------------------------------------------------------------
       # CONTROL settings
       #
-      song_progress_bar:                true
+#     song_progress_bar:                true
       skip_forward_backward_button:     true
       forward_backward_skip_seconds:    30
       delay_after_video_loaded:         750
@@ -324,14 +324,14 @@ settings:
       id:                               manon_melodie_yt_large
       type:                             large
       source:                           video
-      display_hours:                    false
+#     display_hours:                    false
       audio_fade_in:                    true
       audio_fade_out:                   true
 
       # ------------------------------------------------------------------------
       # CONTROL settings
       #
-      song_progress_bar:                true
+#     song_progress_bar:                true
       skip_forward_backward_button:     true
       forward_backward_skip_seconds:    10
       volume_slider:
@@ -370,14 +370,14 @@ settings:
       id:                               bea_yt_large
       type:                             large
       source:                           video
-      display_hours:                    false
+#     display_hours:                    false
       audio_fade_in:                    true
       audio_fade_out:                   true
 
       # ------------------------------------------------------------------------
       # CONTROL settings
       #
-      song_progress_bar:                true
+#     song_progress_bar:                true
       skip_forward_backward_button:     true
       forward_backward_skip_seconds:    10
       volume_slider:
@@ -416,12 +416,12 @@ settings:
       id:                               diana_krall_yt_large
       type:                             large
       source:                           video
-      display_hours:                    false
+#     display_hours:                    false
 
       # ------------------------------------------------------------------------
       # CONTROL settings
       #
-      song_progress_bar:                true
+#     song_progress_bar:                true
       skip_forward_backward_button:     true
       forward_backward_skip_seconds:    10
       volume_slider:
@@ -458,12 +458,12 @@ settings:
       id:                               mimi_rutherfurt_yt_large
       type:                             large
       source:                           video
-      display_hours:                    false
+#     display_hours:                    false
 
       # ------------------------------------------------------------------------
       # CONTROL settings
       #
-      song_progress_bar:                true
+#     song_progress_bar:                true
       skip_forward_backward_button:     true
       forward_backward_skip_seconds:    30
       volume_slider:
@@ -508,7 +508,7 @@ settings:
       # ------------------------------------------------------------------------
       # CONTROL settings
       #
-      song_progress_bar:                true
+#     song_progress_bar:                true
       skip_forward_backward_button:     true
       forward_backward_skip_seconds:    30
       volume_slider:

@@ -43,9 +43,13 @@ exclude_from_search:                    true
 {% assign amplitude_playlists   = modules.amplitude_playlists.settings %}
 
 {% comment %} set config options
--------------------------------------------------------------------------------- {% endcomment %}
 {% assign amplitude_options     = amplitude_defaults | merge: amplitude_players %}
 {% assign amplitude_options     = amplitude_options  | merge: amplitude_playlists %}
+-------------------------------------------------------------------------------- {% endcomment %}
+
+{% comment %} Set config options
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign amplitude_options   = amplitude_defaults | deep_merge: amplitude_players, amplitude_playlists %}
 
 {% comment %} set permalink setting
 -------------------------------------------------------------------------------- {% endcomment %}
@@ -63,6 +67,7 @@ exclude_from_search:                    true
 
 {% assign image_rating_path = '/assets/image/pattern/rating/scalable' %}
 
+
 {% comment %} main
 ================================================================================ {% endcomment %}
 <!DOCTYPE {{site.doctype}}>
@@ -77,10 +82,11 @@ exclude_from_search:                    true
 
   <body>
   {% comment %} create player instances
+  ------------------------------------------------------------------------------
   player.volume_slider:             {{player.volume_slider | debug}}
   amplitude_defaults.volume_slider: {{amplitude_defaults.player.volume_slider | debug}}
   volume_slider:                    {{volume_slider}}
-  ============================================================================== {% endcomment %}
+  ------------------------------------------------------------------------------ {% endcomment %}
 
   {% for player in amplitude_options.players %} {% if player.enabled %}
 
@@ -100,6 +106,17 @@ exclude_from_search:                    true
     {% assign playlist_controls             = amplitude_defaults.player.playlist.controls %}
     {% assign playlist_audio_info           = amplitude_defaults.player.playlist.audio_info %}    
     {% assign playlist_audio_rating         = amplitude_defaults.player.playlist.audio_rating %}    
+
+    {% comment %} playlist default settings
+    ---------------------------------------------------------------------------- {% endcomment %}
+    {% assign audio_info                    = amplitude_defaults.playlist.audio_info %}
+    {% assign audio_rating                  = amplitude_defaults.playlist.audio_rating %}
+    {% assign audio_single                  = amplitude_defaults.playlist.audio_single %}
+    {% assign audio_fade                    = amplitude_defaults.playlist.audio_fade %}
+    {% assign controls                      = amplitude_defaults.playlist.controls %}
+    {% assign start                         = amplitude_defaults.playlist.start %}
+    {% assign end                           = amplitude_defaults.playlist.end %}
+    {% assign shuffle                       = amplitude_defaults.playlist.shuffle %}
 
     {% comment %} player settings
     ---------------------------------------------------------------------------- {% endcomment %}
@@ -121,28 +138,30 @@ exclude_from_search:                    true
       {% assign song_progress_bar = player.song_progress_bar %}
     {% endif %}
 
-    {% comment %} NOTE: slider VALUE is set by Adapter|Amplitude API (volume)
+    {% comment %}
+      NOTE: check if volume_slider is set by default or the player
+      NOTE: the volume_slider VALUE is set by Adapter|Amplitude API (volume)
     ---------------------------------------------------------------------------- {% endcomment %}
-    {% if player.volume_slider %}
+    {% if volume_slider or player.volume_slider %}
       {% assign volume_slider      = player.volume_slider.enabled %}
       {% assign volume_slider_min  = amplitude_defaults.player.volume_slider.min_value %}
       {% assign volume_slider_max  = amplitude_defaults.player.volume_slider.max_value %}
       {% assign volume_slider_step = amplitude_defaults.player.volume_slider.slider_step %}
     {% endif %}
 
-    {% if player.shuffle_button %}
+    {% if shuffle_button or player.shuffle_button %}
       {% assign shuffle_button = player.shuffle_button %}
     {% endif %}
 
-    {% if player.repeat_button %}
+    {% if repeat_button or player.repeat_button %}
       {% assign repeat_button = player.repeat_button %}
     {% endif %}
 
-    {% if player.skip_forward_backward_button %}
+    {% if skip_forward_backward_button or player.skip_forward_backward_button %}
       {% assign skip_forward_backward_button = player.skip_forward_backward_button %}
     {% endif %}
 
-    {% if player.display_hours %}
+    {% if display_hours or player.display_hours %}
       {% assign display_hours = player.display_hours %}
     {% endif %}
 
@@ -158,7 +177,6 @@ exclude_from_search:                    true
       {% assign player_audio_rating_enabled = playlist_audio_rating %}
     {% endif %}
 
-
     {% comment %} unused
     ----------------------------------------------------------------------------
     {% unless player.playlist.scrollbar %}
@@ -172,10 +190,9 @@ exclude_from_search:                    true
     {% endunless %}
     ---------------------------------------------------------------------------- {% endcomment %}
 
-
     {% comment %} collect playlist items
     ---------------------------------------------------------------------------- {% endcomment %}
-      <!-- START collect playlist items for player on ID: {{player_id}} -->
+    <!-- START collect playlist items for player on ID: {{player_id}} -->
     {% for playlist in amplitude_options.playlists %} {% if playlist.enabled %}
       {% assign playlist_name = playlist.name | strip %}
 
@@ -187,8 +204,7 @@ exclude_from_search:                    true
         {% continue %}
       {% endif %}
     {% endif %} {% endfor %}
-      <!-- END collect playlist items -->
-
+    <!-- END collect playlist items -->
 
     {% comment %} collect player instances
     ============================================================================ {% endcomment %}
@@ -295,7 +311,8 @@ exclude_from_search:                    true
                 data-amplitude-song-info="album">
               </span>
             </div>
-          </div> <!-- END meta container -->
+          </div>
+          <!-- END meta container -->
 
           <!-- START volume container -->
           <div class="mini-player volume-container">
@@ -321,7 +338,7 @@ exclude_from_search:                    true
       </div>
       <!-- END create player instance on ID: {{player_id}} -->
       {% endif %}
-
+      
       {% comment %} END MINI player
       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {% endcomment %}
 
@@ -419,7 +436,8 @@ exclude_from_search:                    true
                 </div>
               </div>
               {% endif %}
-            </div> <!-- END playlist controls -->
+            </div>
+            <!-- END playlist controls -->
 
             <!-- START playlist items (COMPACT player )-->
             <ul
@@ -472,9 +490,11 @@ exclude_from_search:                    true
               <!-- END list item -->
               </li>
               {% endif %}{% endfor %}
-            </ul> <!-- END  playlist items -->
+            </ul>
+            <!-- END  playlist items -->
 
-          </div> <!-- END list screen -->
+          </div>
+          <!-- END list screen -->
 
           <!-- START compact player -->
           <div class="compact-player">
@@ -498,7 +518,8 @@ exclude_from_search:                    true
                 class="compact-player-header-arrows"
                 src="/assets/theme/j1/modules/amplitudejs/icons/player/dark/playlist-show.svg"
                 alt="Show Playlist">
-            </div> <!-- END compact player header (toggle playlist) -->
+            </div>
+            <!-- END compact player header (toggle playlist) -->
 
             <div class="player-top">
               <!-- NOTE: album cover image (replaced by AJS API based on playlist) -->
@@ -684,7 +705,8 @@ exclude_from_search:                    true
           </div>
           <!-- END compact player -->
 
-        </div> <!-- END compact player container -->
+        </div>
+        <!-- END compact player container -->
       </div>
       <!-- END create player instance on id: {{player_id}} -->
       {% endif %}
@@ -695,10 +717,9 @@ exclude_from_search:                    true
 
       {% comment %} LARGE player
       player.source:  {{source_media}}
+      player.shuffle_button:  {{player.shuffle_button}}
       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {% endcomment %}
       {% when 'large' %} {% if player_enabled %}
-
-      <!-- player.shuffle_button:  {{player.shuffle_button}} -->
 
       {% if player.source %}
         {% assign source_media = player.source %}
@@ -847,7 +868,6 @@ exclude_from_search:                    true
         <!-- END LARGE player left MIDDLE -->
 
         <!-- START LARGE player left BOTTOM -->
-        <!-- div class="player-left-bottom" -->
         <div class="large-player-left-bottom">
           <!-- time container -->
           <div class="time-container">
@@ -917,15 +937,15 @@ exclude_from_search:                    true
                 data-amplitude-song-info="album">
               </span>
             </div>
-          </div> <!-- END meta container -->
+          </div>
+          <!-- END meta container -->
         </div>
         <!-- END LARGE player left BOTTOM -->
       {% endcapture %}
 
       <!-- START create player instance on ID: {{player_id}} of type: {{player_type}} -->
       <div id="{{player_id}}" class="large-player">
-        <!-- START large player container -->
-        <!-- div class="large-player-container" -->
+          <!-- START large player container -->
           <div class="large-player-container">
 
             <!-- Large Player|Left Side -->
@@ -954,7 +974,6 @@ exclude_from_search:                    true
                   </span>
 
                   <!-- START player_audio_info (LARGE player) -->
-                  
                   {% for item in playlist_items %}{% if item.enabled %}
                   {% if playlist_audio_info and forloop.first %}
 
@@ -1011,6 +1030,7 @@ exclude_from_search:                    true
                 </div>
 
                 <!-- place extra control buttons (playlist_controls: {{playlist_controls}}) -->
+                <!-- Large Player|Left Side -->
                 {% if playlist_controls %}
                 <div class="list-controls">
                   <div
@@ -1029,10 +1049,11 @@ exclude_from_search:                    true
                     data-amplitude-source="{{source_media_attribute}}"
                     data-amplitude-playlist="{{player_playlist}}">
                   </div>
-                </div><!-- Large Player|Left Side -->
+                </div>
                 {% endif %}
 
-              </div> <!-- END playlist controls -->
+              </div>
+              <!-- END playlist controls -->
 
               <!-- START playlist items (Large Player) -->
               <ul
@@ -1105,11 +1126,10 @@ exclude_from_search:                    true
               </ul>
               <!-- END playlist items (Large Player) -->
 
-            </div> <!-- END Large Player|Right Side -->
-
-          </div>  <!-- END Player -->
-        <!-- /div -->
-        <!-- END large player container -->
+            </div>
+            <!-- END Large Player|Right Side -->
+          </div>
+          <!-- END large player container -->
       </div>
       <!-- END create player instance on ID: {{player_id}} -->
       {% endif %}

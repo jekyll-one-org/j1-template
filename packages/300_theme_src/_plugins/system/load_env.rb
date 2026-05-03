@@ -170,12 +170,12 @@ module Jekyll
       require 'dotenv'
       if File.exist?(env_file)
         Dotenv.load(env_file)
-        Jekyll.logger.info 'J1 Env:', "dotenv - loaded #{env_file}"
+        Jekyll.logger.info 'J1 Env:', 'dotenv file loaded'
       else
-        Jekyll.logger.info 'J1 Env:', 'dotenv - no .env file found'
+        Jekyll.logger.info 'J1 Env:', 'no dotenv fiule found'
       end
     rescue LoadError
-      Jekyll.logger.warn 'J1 Env:', 'dotenv gem not available, using plain ENV only'
+      Jekyll.logger.warn 'J1 Env:', 'dotenv gem not available, using process ENV'
     end
 
   end
