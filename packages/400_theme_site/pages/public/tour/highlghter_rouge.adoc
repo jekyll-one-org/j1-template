@@ -1,42 +1,40 @@
 ---
-title:                                  Rouge
-title_extention:                        Themeable Code Highlighter for J1 Template
-tagline:                                Themeable code highlighter
+title:                                  Themes
+title_extention:                        Bootstrap V5 Themes
+tagline:                                Individual Style
 
-date:                                   2023-07-08
-#last_modified:                         2023-01-01
+date:                                   2026-05-07
+#last_modified:                         2026-01-01
 
 description: >
-                                        Rouge is a native Ruby themeable syntax highlighter fully
-                                        integrated with J1 Template. The highlighter supports 100+
-                                        different languages and generates HTML output using standard
-                                        ANSI 256-colors displayed by all current browsers.
+                                        J1 Template offers various unique functionalities compared to other Jekyll themes and templates. Bootstrap themes for the J1 Template are based on free and Open Source CSS front-end framework Bootstrap of version V5. The
+                                        Bootstrap themes for the J1 enable the presentation of different versions (skins) of the same site using already prepared Bootstrap CSS templates.
 keywords: >
                                         open source, free, template, jekyll, jekyllone, web,
                                         sites, static, jamstack, bootstrap,
-                                        highlighter, rouge
+                                        css, style, theme, skin
 
 categories:                             [ Roundtrip ]
-tags:                                   [ Module, Rouge ]
+tags:                                   [ Bootstrap, Module, Theme ]
 
 image:
-  path:                                 /assets/image/module/attic/1920x1280/mohammad-rahmani.jpg
+  path:                                 /assets/image/module/attic/1920x1280/stories-ink-tattoo-care.jpg
   width:                                1920
   height:                               1280
 
-regenerate:                             true
-permalink:                              /pages/public/tour/rouge/
+regenerate:                             false
+permalink:                              /pages/public/tour/themes/
 
-resources:                              []
+resources:                              [ lightbox ]
 resource_options:
   - attic:
       slides:
-        - url:                          /assets/image/module/attic/1920x1280/mohammad-rahmani.jpg
-          alt:                          Photo by Mohammad Rahmani on Unsplash
+        - url:                          /assets/image/module/attic/1920x1280/stories-ink-tattoo-care.jpg
+          alt:                          Photo by Stories & Ink Tattoo Care on Unsplash
           badge:
             type:                       unsplash
-            author:                     Mohammad Rahmani
-            href:                       //unsplash.com/de/@afgprogrammer
+            author:                     Stories & Ink Tattoo Care
+            href:                       https://unsplash.com/de/@storiesandink
 ---
 
 // Page Initializer
@@ -65,166 +63,96 @@ resource_options:
 // Page content
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 [role="dropcap"]
-Rouge is a native Ruby themeable syntax highlighter fully integrated width J1
-Template. The highlighter supports 100+ different languages and generates HTML
-output using standard ANSI 256-colors displayed by all current browsers.
+Themes for the J1 Template are based on the Open Source CSS framework
+*Bootstrap* (version 5). A theme is like a *skin* for your website -- it
+changes the *look* of your pages without changing the content. With themes,
+you can show the same site in many different styles.
 
-Find available themes for selected languages to see how highlighting works
-using Rouge.
+A theme makes sure your website looks the same on every modern web browser.
+It sets the colors, fonts, sizes, and the look of buttons, tables, and
+forms. You can also use Bootstrap's built-in CSS classes to fine-tune
+parts of your design on your own.
 
 [subs=attributes]
 ++++
 <div class="video-title">
-  <i class="mdib mdib-clock-outline mdib-24px mr-2"></i>
+  <i class="mdi mdi-gray mdi-clock-time-five-outline mdi-24px mr-2"></i>
   {time-num--string} {time-en--string} {time-en--description}.
 </div>
 ++++
 
+
 // Include sub-documents (if any)
 // -----------------------------------------------------------------------------
 [role="mt-5"]
-== Select a Theme
+== The Themes
 
-For the default themes `Uno` of J1 Template, the following _Rouge_ themes
-are used:
+A theme changes how your website *looks*, but not how it *works*. It uses
+CSS rules from Bootstrap to set things like the color scheme, fonts, sizes,
+and the appearance of more complex parts such as forms and tables. Some
+themes also add extra components on top of the standard Bootstrap set.
 
-* theme_light: based on IgorPro theme `igorpro`
-* theme_dark:  based on Monokai theme Sublime `monokai.sublime`
+Changing the CSS styles of link:{url-bs--home}[Bootstrap, {browser-window--new}]
+is not too hard, but you do need some basic knowledge of
+link:{url-w3org--css-spec}[CSS, {browser-window--new}] to do it well.
+If you are new to CSS, the
+link:{url-w3schools--css-tutorial}[CSS tutorial at W3Schools, {browser-window--new}]
+is a good place to start. CSS is the design language used by every
+modern website.
 
-The *default* themes used for the J1 Template can be configured with
-the global *template config* file `~/_data/j1_config.yml`.
+.Bootswatch Themes (Examples)
+lightbox::bootswatch-themes[1280, {data-images--bootswatch-themes}]
 
-[source, yaml, role="noclip"]
-----
-# ------------------------------------------------------------------------------
-# HIGHLIGHTERs
-#
-rouge:
+Thanks to the team at link:{url-bootswatch--home}[Bootswatch, {browser-window--new}],
+many ready-made Bootstrap stylesheets are available for free. You can use
+them as they are, or use them as a starting point for your own design --
+you do not have to build everything from scratch.
 
-  theme_light:                          uno.light
-  theme_dark:                           uno.dark
-----
-
-To preview *all* themes supported by *J1 Template*, make your selection
-from the button *AVAILABLE THEMES* below.
-
-++++
-<div class="btn-group speak2me-ignore">
-  <!-- See: https://stackoverflow.com/questions/47242702/force-bootstrap-dropdown-menu-to-always-display-at-the-bottom-and-allow-it-go-of -->
-  <!-- NOTE: control the behaviour of popper.js for positioning -->
-  <!-- NOTE: set attribute data-flip="false" to open the SELECT list at the BOTTOM of the BUTTON -->
-  <button
-    class="btn btn-flex btn-lg btn-info dropdown-toggle mt-2 mb-4"
-    data-flip="false" type="button"
-    data-bs-toggle="dropdown"
-    data-bs-target="#navbarDropdown"
-    aria-haspopup="true"
-    aria-expanded="false">
-    Available Themes <span class="ml-2 caret"></span>
-  </button>
-
-  <ul class="dropdown-menu scrollable-menu" role="menu">
-    <li><a class="dropdown-item" onclick="j1.adapter.rouge.reaplyStyles('base16')">                 <i class="mdib mdib-view-quilt mdib-18px mr-2" style="color: #9E9E9E"></i>base16</a></li>
-    <li><a class="dropdown-item" onclick="j1.adapter.rouge.reaplyStyles('base16.dark')">            <i class="mdib mdib-view-quilt mdib-18px mr-2" style="color: #9E9E9E"></i>base16.dark</a></li>
-    <li><a class="dropdown-item" onclick="j1.adapter.rouge.reaplyStyles('base16.light')">           <i class="mdib mdib-view-quilt mdib-18px mr-2" style="color: #9E9E9E"></i>base16.light</a></li>
-    <li><a class="dropdown-item" onclick="j1.adapter.rouge.reaplyStyles('base16.monokai')">         <i class="mdib mdib-view-quilt mdib-18px mr-2" style="color: #9E9E9E"></i>base16.monokai</a></li>
-    <li><a class="dropdown-item" onclick="j1.adapter.rouge.reaplyStyles('base16.monokai.dark')">    <i class="mdib mdib-view-quilt mdib-18px mr-2" style="color: #9E9E9E"></i>base16.monokai.dark</a></li>
-    <li><a class="dropdown-item" onclick="j1.adapter.rouge.reaplyStyles('base16.monokai.light')">   <i class="mdib mdib-view-quilt mdib-18px mr-2" style="color: #9E9E9E"></i>base16.monokai.light</a></li>
-    <li><a class="dropdown-item" onclick="j1.adapter.rouge.reaplyStyles('base16.solarized')">       <i class="mdib mdib-view-quilt mdib-18px mr-2" style="color: #9E9E9E"></i>base16.solarized</a></li>
-    <li><a class="dropdown-item" onclick="j1.adapter.rouge.reaplyStyles('base16.solarized.dark')">  <i class="mdib mdib-view-quilt mdib-18px mr-2" style="color: #9E9E9E"></i>base16.solarized.dark</a></li>
-    <li><a class="dropdown-item" onclick="j1.adapter.rouge.reaplyStyles('base16.solarized.light')"> <i class="mdib mdib-view-quilt mdib-18px mr-2" style="color: #9E9E9E"></i>base16.solarized.light</a></li>
-    <li><a class="dropdown-item" onclick="j1.adapter.rouge.reaplyStyles('colorful')">               <i class="mdib mdib-view-quilt mdib-18px mr-2" style="color: #9E9E9E"></i>colorful</a></li>
-    <li><a class="dropdown-item" onclick="j1.adapter.rouge.reaplyStyles('github')">                 <i class="mdib mdib-view-quilt mdib-18px mr-2" style="color: #9E9E9E"></i>github</a></li>
-    <li><a class="dropdown-item" onclick="j1.adapter.rouge.reaplyStyles('gruvbox')">                <i class="mdib mdib-view-quilt mdib-18px mr-2" style="color: #9E9E9E"></i>gruvbox</a></li>
-    <li><a class="dropdown-item" onclick="j1.adapter.rouge.reaplyStyles('gruvbox.light')">          <i class="mdib mdib-view-quilt mdib-18px mr-2" style="color: #9E9E9E"></i>gruvbox.light</a></li>
-    <li><a class="dropdown-item" onclick="j1.adapter.rouge.reaplyStyles('igorpro')">                <i class="mdib mdib-view-quilt mdib-18px mr-2" style="color: #9E9E9E"></i>igorpro</a></li>
-    <li><a class="dropdown-item" onclick="j1.adapter.rouge.reaplyStyles('molokai')">                <i class="mdib mdib-view-quilt mdib-18px mr-2" style="color: #9E9E9E"></i>molokai</a></li>
-    <li><a class="dropdown-item" onclick="j1.adapter.rouge.reaplyStyles('monokai')">                <i class="mdib mdib-view-quilt mdib-18px mr-2" style="color: #9E9E9E"></i>monokai</a></li>
-    <li><a class="dropdown-item" onclick="j1.adapter.rouge.reaplyStyles('monokai.sublime')">        <i class="mdib mdib-view-quilt mdib-18px mr-2" style="color: #9E9E9E"></i>monokai.sublime</a></li>
-    <li><a class="dropdown-item" onclick="j1.adapter.rouge.reaplyStyles('pastie')">                 <i class="mdib mdib-view-quilt mdib-18px mr-2" style="color: #9E9E9E"></i>pastie</a></li>
-    <li><a class="dropdown-item" onclick="j1.adapter.rouge.reaplyStyles('thankful_eyes')">          <i class="mdib mdib-view-quilt mdib-18px mr-2" style="color: #9E9E9E"></i>thankful_eyes</a></li>
-    <li><a class="dropdown-item" onclick="j1.adapter.rouge.reaplyStyles('tulip')">                  <i class="mdib mdib-view-quilt mdib-18px mr-2" style="color: #9E9E9E"></i>tulip</a></li>
-  </ul>
-</div>
-<div id="selected" class="mt-1 mb-3"></div>
-++++
+Bootswatch also offers an
+link:{url-bootswatch--api}[Integration API, {browser-window--new}] that
+makes it easy to add their themes to an existing site. The J1 Template
+uses this API so you can pick a Bootswatch theme right from the menu of
+your website.
 
 [role="mt-4"]
-=== Liquid code
+=== Apply a Style
 
-[source, liquid, role="noclip"]
-----
-Hello {{ 'now' | date: "%Y %h" }}
+The default theme of the J1 Template is called *Uno*. It comes with both
+a *light* and a *dark* version and works well for many kinds of websites.
+*Uno* is a good starting point. If you want a different look, you can
+combine *Uno* with another theme to get your site ready quickly.
 
-{% comment %} if item.quantity is 4... {% endcomment %}
-{% for i in (1..item.quantity) %}
-  {{ i }}
-{% endfor %}
-----
+You can find every available theme in the *Themes* menu in the top bar of
+your website. Try a few of them and see how the page changes when a
+different theme is used.
 
-[role="mt-4"]
-=== Javascript code
+[WARNING]
+====
+When you switch from one theme to another *while the site is running*, the
+J1 Template tries to apply the new styles to all parts of the page (such
+as fonts, headings, lists, and paragraphs). This works for *most* common
+elements, but *not yet* for every single one.
+====
 
-[source, javascript, role="noclip"]
-----
-// helper functions
-//
-function styleSheetLoaded(styleSheet) {
-  var sheets     = document.styleSheets,
-      stylesheet = sheets[(sheets.length - 1)];
-
-  // find CSS file 'styleSheetName' in document
-  for(var i in document.styleSheets) {
-    if(sheets[i].href && sheets[i].href.indexOf(styleSheet) > -1) {
-      return true;;
-    }
-  }
-}
-----
-
-[role="mt-4"]
-=== Ruby code
-
-[source, ruby, role="noclip"]
-----
-require 'asciidoctor/extensions' unless RUBY_ENGINE == 'opal'
-include Asciidoctor <1>
-
-Asciidoctor::Extensions.register do
-  class J1BlockMacro < Extensions::BlockMacroProcessor
-    use_dsl
-    named :banner
-    name_positional_attributes 'role'
-
-    def process parent, target, attrs
-      html = %(<div id="#{target}" class="#{attrs['role']}"></div>)
-      create_pass_block parent, html, attrs, subs: nil
-    end
-  end
-  block_macro J1BlockMacro
-end
-----
-<1> don't miss to load the Asciidoctor ruby
+Pick a theme from the *Themes* menu, and the new Bootstrap stylesheet is
+applied automatically to every page of your website.
 
 
 [role="mt-5"]
 == What next
 
-The search module *site_search* for J1 Template is based on _Lunr_, a
-great search engine inspired by _Apache Solr_, written in Javscript by
-http://lunrjs.com[Oliver Nightingale, {browser-window--new}]. The engine
-is fully integrated with the template and is designed to provide users
-with a great search experience.
+The J1 Template is a great starting point for many kinds of websites.
+One handy feature it offers is *code highlighting*. Code highlighting
+adds colors to source code so it is easier to read and understand.
 
-Using the search module *site_search* for J1 based websites, it is *not*
-longer needed to integrate complex external, server-sided search engines
-like _Google_ or _Bing_. Visitors are able to search your site to find pages
-and posts they are interested in.
+Each programming language has its own keywords and rules. Code highlighting
+uses different colors for different parts of the code. For example, in
+JavaScript, keywords like *if*, *for*, or *function* get one color, while
+text strings and variables get another.
 
-Usability is one of the top criteria for all visitors browsing your site.
-A good user experience and excellent content are key factors for the success
-of a website. Nothing in business is guaranteed, but excellent user experience
-efforts are good reasons your readers will return.
+The J1 Template uses a code highlighter called *Rouge*. Rouge is written in
+Ruby and supports more than 100 programming languages. It produces colored
+HTML output that works in every modern web browser.
 
-Learn what is searching a J1 based websites all about at
-link:{url-tour--site_search}[Search Engine].
+To see what Rouge can do, go to the
+link:{url-tour--rouge-hightlighter}[Rouge Code Highlighter] page.
