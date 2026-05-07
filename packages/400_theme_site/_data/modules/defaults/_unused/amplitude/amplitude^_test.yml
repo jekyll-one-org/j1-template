@@ -1,0 +1,40 @@
+# ------------------------------------------------------------------------------
+# ~/_data/modules/defaults/test>_amplitude.yml
+# Default settings for J1 AmplitudeJS Module (test)
+#
+# Product/Info:
+# https://jekyll.one
+#
+# Copyright (C) 2026 Juergen Adams
+#
+# J1 Template is licensed under the MIT License.
+# See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE
+# ------------------------------------------------------------------------------
+
+# ------------------------------------------------------------------------------
+# Description
+#
+description:
+  title:                                AmplitudeJS
+  scope:                                Test Default settings
+  location:                             _data/modules/defaults/test_amplitude.yml
+
+# ------------------------------------------------------------------------------
+# Default settings
+#
+defaults:
+
+  # ----------------------------------------------------------------------------
+  # PLAYER defaults
+  # ----------------------------------------------------------------------------
+  player:
+
+    volume_slider:                                                              # defaults only
+      enabled:                          true                                    # true|false, enable volume slider in player
+      preset_value:                     50                                      # default volume level (percent)
+      min_value:                        0                                       # percent
+      max_value:                        100                                     # percent
+      slider_step:                      1                                       # integer 1..10
+
+# ------------------------------------------------------------------------------
+# END config

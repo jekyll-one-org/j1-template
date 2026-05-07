@@ -1,0 +1,57 @@
+# ------------------------------------------------------------------------------
+# ~/_data/modules/defaults/test>_amplitude.yml
+# Default settings for J1 AmplitudeJS Module (test)
+#
+# Product/Info:
+# https://jekyll.one
+#
+# Copyright (C) 2026 Juergen Adams
+#
+# J1 Template is licensed under the MIT License.
+# See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE
+# ------------------------------------------------------------------------------
+
+# ------------------------------------------------------------------------------
+# Description
+#
+description:
+  title:                                AmplitudeJS
+  scope:                                Test User settings (player)
+  location:                             _data/modules/amplitude._player_test.yml
+
+# ------------------------------------------------------------------------------
+# Default settings
+#
+settings:
+
+  # ----------------------------------------------------------------------------
+  # PLAYER settings
+  # ----------------------------------------------------------------------------
+  #
+  players:
+
+    # --------------------------------------------------------------------------
+    # MINI player, Emancipator
+    # --------------------------------------------------------------------------
+    #
+    - player:
+      # ------------------------------------------------------------------------
+      # GENERAL settings
+      #
+      enabled:                          true
+
+      id:                               emancipator_mini
+      type:                             mini      
+
+      # ------------------------------------------------------------------------
+      # CONTROL settings
+      #
+      volume_slider:                                                              # defaults only
+        enabled:                          true                                    # true|false, enable volume slider in player
+        preset_value:                     90                                      # default volume level (percent)
+        min_value:                        0                                       # percent
+        max_value:                        100                                     # percent
+        slider_step:                      1                                       # integer 1..10
+
+# ------------------------------------------------------------------------------
+# END config

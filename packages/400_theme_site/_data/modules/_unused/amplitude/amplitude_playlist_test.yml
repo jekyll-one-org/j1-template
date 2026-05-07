@@ -1,0 +1,62 @@
+# ------------------------------------------------------------------------------
+# ~/_data/modules/amplitude_playlist.yml
+# User Configuration of the AmplitudeJS Module (playlist)
+#
+# Product/Info:
+# https://jekyll.one
+#
+# Copyright (C) 2023-2026 Juergen Adams
+#
+# J1 Template is licensed under the MIT License.
+# See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE
+# ------------------------------------------------------------------------------
+
+# ------------------------------------------------------------------------------
+# Description
+#
+description:
+  title:                                AmplitudeJS
+  scope:                                User settings (playlist)
+  location:                             _data/modules/amplitude_playlist_test.yml
+
+# ------------------------------------------------------------------------------
+# User settings
+#
+settings:
+
+  # ----------------------------------------------------------------------------
+  # PLAYLIST settings
+  # ----------------------------------------------------------------------------
+  #
+  playlists:
+
+    # --------------------------------------------------------------------------
+    # Emancipator - Royalty Free Music
+    # --------------------------------------------------------------------------
+    #
+    - playlist:
+      # ------------------------------------------------------------------------
+      # GENERAL settings
+      #
+      enabled:                          true
+
+      name:                             emancipator
+      title:                            Emancipator
+
+      # ------------------------------------------------------------------------
+      # ALBUM settings
+      # ------------------------------------------------------------------------
+      album:                            &album_emancipator_music
+        name:                           Emancipator Music
+        playlist:                       emancipator
+        artist:                         Emancipator
+        audio_base:                     /assets/audio/album/emancipator
+        cover_image:                    /assets/audio/cover/default/placeholder-blue.jpg
+        audio_info:                     //emancipatormusic.com/
+        audio_fade_in:                  true
+        audio_fade_out:                 true
+        repeat:                         false
+        shuffle:                        false        
+
+# ------------------------------------------------------------------------------
+# END config

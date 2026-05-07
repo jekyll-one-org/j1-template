@@ -283,6 +283,7 @@
 
 .audio-artist {
   font-size: 16px;
+  font-weight: 400;
   line-height: 18px;
   white-space: nowrap;
   overflow: hidden;
@@ -295,6 +296,7 @@
   width: calc(100% - 25px);
   font-family: "Lato", sans-serif;
   font-size: 18px;
+  font-weight: 600;
   line-height: 24px;
   white-space: nowrap;
   overflow: hidden;
@@ -419,7 +421,7 @@ input[type=range].amplitude-volume-slider {
     float: left;
     height: 1px;
     margin-top: -4px;
-    margin-left: 10px;
+    margin-left: 6px;
     width: calc(100% - 86px);
     background: transparent;
 }  
@@ -517,6 +519,17 @@ Bootstrap (BS) grid breakpoints
 # --------------------------------------------------------- */
 
 @media screen and (max-width: 576px) {
+
+  div.mini-player.volume-container
+  input[type="range"].amplitude-volume-slider::-webkit-slider-thumb {
+    margin-top: -5px;
+  }
+
+  div.mini-player.volume-container
+  input[type="range"].amplitude-volume-slider::-webkit-slider-thumb {
+    margin-top: -5px;
+  }
+
   .large-player {
     max-width: -webkit-fill-available;
     max-width: -moz-available;
@@ -580,7 +593,8 @@ Bootstrap (BS) grid breakpoints
     width: 30px;
     height: 30px;
     border-radius: 30px;
-    margin-top: -15px;    
+    margin-top: -15px;
+    margin-left: 6px;
     background-color: var(--ajs-theme-uno--blue-500);
   }
 
@@ -589,7 +603,8 @@ Bootstrap (BS) grid breakpoints
     width: 30px;
     height: 30px;
     border-radius: 30px;
-    margin-top: -15px;    
+    margin-top: -15px;
+    margin-left: 6px;
     background-color: var(--ajs-theme-uno--blue-500);
   }
 }

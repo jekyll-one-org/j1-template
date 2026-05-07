@@ -1,10 +1,10 @@
 ---
 title:                                  Audio
-title_extention:                        J1 Audio Apps
-tagline:                                J1 Audio Apps
+title_extention:                        Player elements
+tagline:                                Player elements
 
-date:                                   2024-04-16
-last_modified:                          2025-05-17
+date:                                   2026-05-07
+# last_modified:                        2026-01-01
 
 description: >
                                         J1 Template provides playing audio on web pages
@@ -13,10 +13,10 @@ description: >
 keywords: >
                                         open source, free, template, jekyll, jekyllone, web,
                                         sites, static, jamstack, bootstrap, html, html5,
-                                        asciidoctor, audio
+                                        audio, amplitude
 
 categories:                             [ Tour ]
-tags:                                   [ Audio, Module ]
+tags:                                   [ Audio, HTML, Amplitude ]
 
 image:
   path:                                 /assets/image/module/attic/1920x1280/alexey-ruban.jpg
@@ -33,7 +33,7 @@ permalink:                              /pages/public/tour/audio_data/
 resources:                              [ amplitudejs ]
 resource_options:
   - toccer:
-      collapseDepth:                    3
+      collapseDepth:                    2
   - attic:
       opacity:                          1
       padding_top:                      600  
@@ -92,9 +92,8 @@ the visual and functional aspects of a player's audio control elements.
 
 // Include sub-documents (if any)
 // -----------------------------------------------------------------------------
-
 [role="mt-5"]
-== HTML 5 Audio
+== HTML 5 player
 
 Audio players can easily be embedded in web pages using the *audio* tag
 `<audio>.` Browsers have a built-in framework for decoding and playing audio
@@ -105,7 +104,7 @@ audio::/assets/audio/sound-effects/ambient-piano.mp3[role="mt-4 mb-5"]
 
 
 [role="mt-5"]
-== J1 AmplitudeJS
+== Amplitude player
 
 The J1 Template suports *native audio* files (e.g. mp3) using *custom players*
 based on *AmplitudeJS* using the the (default) theme Uno. The color scheme
@@ -114,7 +113,7 @@ used matches the look and feel of the template to preserve the page design.
 Three types of AmplitudeJS players are build-in for the J1 template system:
 
 * *Mini* Player
-* *Compact* Player (default player)
+* *Compact* Player (default)
 * *Large* Player
 
 [role="mt-4"]
@@ -125,9 +124,12 @@ clicking on the appropriate elements, touch events are applied to all
 mobile devices.
 ====
 
-
+=== Native player
 [role="mt-5"]
-=== Mini Player
+
+lorem:sentences[5]
+
+==== Mini player
 
 In the context of complex components on a web page, like an audio player,
 a mini player refers to a minimized version of full players. It typically
@@ -137,9 +139,6 @@ volume adjustment, while taking up less screen space.
 .Emancipator · From Dusk To Dawn
 amplitude::emancipator_mini[role="mb-4"]
 
-// .Royalty Free Music · Disco 80th
-// amplitude::disco_mini[role="mb-4"]
-
 Mini players are beneficial when you want to listen to audio in the
 background without dedicating the entire screen to the player. They
 are commonly found on music streaming services, podcast platforms, and
@@ -147,7 +146,7 @@ websites with embedded audio content.
 
 
 [role="mt-5"]
-=== Compact Player
+==== Compact player
 
 The design of a *Compact player* is an efficient approach that involves
 condensing the player controls and display elements into a smaller area.
@@ -157,16 +156,13 @@ overwhelming or dominating the content around it.
 .Emancipator · From Dusk To Dawn
 amplitude::emancipator_compact[role="mb-4"]
 
-// .Royalty Free Music · Disco 80th
-// amplitude::disco_compact[role="mb-4"]
-
 The player aims to balance functionality and space efficiency, ensuring users
 can easily access and control the audio playback without sacrificing too much
 screen space or placing  multiple players side-by-side.
 
 
 [role="mt-5"]
-=== Large Player
+==== Large player
 
 A complex component, like an audio player on a web page, typically refers
 to a design or layout that minimizes the component's space while maintaining
@@ -175,9 +171,6 @@ its functionality and usability.
 .Emancipator · From Dusk To Dawn
 amplitude::emancipator_large[role="mb-4"]
 
-// .Royalty Free Music · Disco 80th
-// amplitude::disco_large[role="mb-4"]
-
 The large design provides the full functionality of an audio player to ensure
 users can easily control audio playback. The player behaves similarly to a
 compact player, but all controls are displayed in a single window; there is
@@ -185,34 +178,45 @@ no need to open other widgets.
 
 
 [role="mt-5"]
-== J1 AmplitudeJS on YouTube
+=== Player over YouTube
 
-The example demonstrates playing *Audio* track from *YouTube Video* using an
-AmplitudJS player. The J1 template uses the video *plugin ytp* to extend the
-native functionality of the AmplitudeJS API to playback YouTube files only for
-the audio part.
-
-[role="mt-4 mb-5"]
-[CAUTION]
-====
-Playing audio tracks is currently supported only for videos from YouTube (YT).
-The YT plugin *ytp* embeds a YouTube (iframe) player and mimics the AmplitudeJS
-player buttons and controls to manage a *playlist* of videos the same as known
-for native audio files.
-====
-
-.Bea and her Business · YouTube 2025
-amplitude::bea_yt_large[role="mb-5"]
-
-.Diana Krall · YouTube
-amplitude::diana_krall_yt_large[role="mb-4"]
+The examples demonstrates playing *Audio* track from *YouTube Video* using an
+Amplitude player. The J1 Template uses the video *plugin ytp* to extend the
+native functionality of the Amplitude API to playback YouTube files *only* for
+the *audio part*.
 
 [role="mt-4 mb-5"]
 [NOTE]
 ====
-AmplitudeJS YT Player can only be used with the J1 Template. Currently, only
-AJS players of type *large* are supported.
+Amplitude YT Player can only be used with the J1 Template using the Amplitude
+plugin *ytp*. Currently, only players of type *large* are supported.
+
+The YT plugin embeds a YouTube (iframe) player and mimics all Amplitude
+player buttons and controls to manage a *playlist* of *videos* the same as
+known for native audio files.
 ====
+
+[role="mt-4"]
+==== Bea and her Business
+
+Bea (Wheeler) is a young British pop singer. She writes songs about real life,
+feelings, and growing up. Many people like her because her music is honest, 
+unny, and authentic.
+
+.Bea and her Business · YouTube 2025
+amplitude::bea_yt_large[role="mb-5"]
+
+[role="mt-4"]
+==== Diana Krall
+
+Diana Krall is a famous Canadian jazz singer and pianist. She was born on
+November 16, 1964, in Nanaimo, British Columbia. She became a star with
+albums such as Stepping Out (1993) and When I Look in Your Eyes (1999),
+which earned her a Grammy for Best Jazz Vocal. Her style mixes classic jazz
+standards with her deep voice and strong piano skills.
+
+.Diana Krall · YouTube
+amplitude::diana_krall_yt_large[role="mb-4"]
 
 
 [role="mt-5"]

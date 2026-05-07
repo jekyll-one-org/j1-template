@@ -357,7 +357,7 @@ var j1 = ((options) => {
       }, options);
 
       // save environment prod|dev in window for later access (e.g modules)
-      j1.env = environment;
+      j1.env = '{{environment}}';
 
       // create settings object from frontmatter options
       frontmatterOptions  = options != null ? $.extend({}, options) : {};

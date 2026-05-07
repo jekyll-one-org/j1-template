@@ -10,11 +10,16 @@
  * @author Tim Scanlin
  */
 
-import BuildHtml from './build-html.js';
-import defaultOptions from './default-options.js';
-import ParseContent from './parse-content.js';
+// -----------------------------------------------------------------------------
+// ESLint shimming
+// -----------------------------------------------------------------------------
+/* eslint indent: "off"                                                       */
+
+import defaultOptions from './import/default-options.js';
+import buildHtml from './import/build-html.js';
+import parseContent from './import/parse-content.js';
+import updateTocScroll from './import/update-toc-scroll.js';
 import initSmoothScrolling from './scroll-smooth/index.js';
-import updateTocScroll from './update-toc-scroll.js';
 
 // For testing purposes.
 export let _options = {}; // Object to store current options.
@@ -44,8 +49,8 @@ export function init(customOptions) {
   }
 
   // Pass options to these modules.
-  _buildHtml = BuildHtml(_options);
-  _parseContent = ParseContent(_options);
+  _buildHtml = buildHtml(_options);
+  _parseContent = parseContent(_options);
 
   // Destroy it if it exists first.
   destroy();

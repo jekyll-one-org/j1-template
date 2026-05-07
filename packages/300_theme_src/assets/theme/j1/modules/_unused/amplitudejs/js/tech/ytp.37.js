@@ -7,7 +7,7 @@ regenerate: true
 {% comment %}
  # -----------------------------------------------------------------------------
  # ~/assets/theme/j1/modules/amplitudejs/js/plugins/tech/ytp.js (37)
- # AmplitudeJS V5 Tech for J1 Template
+ # AmplitudeJS V5 Tech for J1 Template (AI optimized)
  #
  # Product/Info:
  # https://jekyll.one
@@ -40,16 +40,15 @@ regenerate: true
 {% assign blocks              = site.data.blocks %}
 {% assign modules             = site.data.modules %}
 
-{% comment %} Set config data (settings only)
+{% comment %} Set config data
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign amplitude_defaults  = modules.defaults.amplitude.defaults %}
-{% assign amplitude_players   = modules.amplitude_app.settings %}
-{% assign amplitude_playlists = modules.amplitude_playlists.settings %}
+{% assign amplitude_default   = modules.defaults.amplitude.defaults %}
+{% assign amplitude_player    = modules.amplitude_player.settings %}
+{% assign amplitude_playlist  = modules.amplitude_playlist.settings %}
 
-{% comment %} Set config options (settings only)
+{% comment %} Set config options
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign amplitude_options   = amplitude_defaults | merge: amplitude_players %}
-{% assign amplitude_options   = amplitude_options  | merge: amplitude_playlists %}
+{% assign amplitude_options   = amplitude_default | deep_merge: amplitude_player, amplitude_playlist %}
 
 {% comment %} Detect prod mode
 -------------------------------------------------------------------------------- {% endcomment %}
@@ -62,7 +61,7 @@ regenerate: true
 /*
  # -----------------------------------------------------------------------------
  # ~/assets/theme/j1/modules/amplitudejs/js/plugins/tech/ytp.js (37)
- # AmplitudeJS V5 Plugin|Tech for J1 Template
+ # AmplitudeJS V5 Plugin|Tech for J1 Template (AI optimized)
  #
  # Product/Info:
  # https://jekyll.one
@@ -97,21 +96,21 @@ regenerate: true
   // Per the YT IFrame API, codes 101 and 150 both signal "video not allowed
   // in embedded players" -- but they are still distinct values that must
   // be addressable individually. Renamed the second key so both are kept.
-  var YT_PLAYER_ERROR = {
+  const YT_PLAYER_ERROR = {
     INVALID_PARAMETER:           2,
     INVALID_PLAYER:              5,
     VIDEO_NOT_ALLOWED:           101,
     VIDEO_NOT_ALLOWED_EMBEDDED:  150
   };
 
-  var YT_PLAYER_ERROR_NAMES = {
+  const YT_PLAYER_ERROR_NAMES = {
     2:          "invalid parameter",
     5:          "invalid player",
     101:        "video not allowed",
     150:        "video not allowed"
   };
 
-  var YT_PLAYER_STATE = {
+  const YT_PLAYER_STATE = {
     UNSTARTED:  -1,
     ENDED:       0,
     PLAYING:     1,
@@ -128,7 +127,7 @@ regenerate: true
   // proper string key "-1" so `YT_PLAYER_STATE_NAMES[playerState]` works
   // directly for UNSTARTED. The "6" entry is retained for backwards
   // compatibility with existing call sites that still pass 6.
-  var YT_PLAYER_STATE_NAMES = {
+  const YT_PLAYER_STATE_NAMES = {
     "-1":       "unstarted",
     0:          "ended",
     1:          "playing",
@@ -167,9 +166,9 @@ regenerate: true
   var playersUILoaded                 = { state: false };
   var apiInitialized                  = { state: false };
 
-  var amplitudeDefaults               = $.extend({}, {{amplitude_defaults  | replace: 'nil', 'null' | replace: '=>', ':' }});
-  var amplitudePlayers                = $.extend({}, {{amplitude_players   | replace: 'nil', 'null' | replace: '=>', ':' }});
-  var amplitudePlaylists              = $.extend({}, {{amplitude_playlists | replace: 'nil', 'null' | replace: '=>', ':' }});
+  var amplitudeDefaults               = $.extend({}, {{amplitude_default  | replace: 'nil', 'null' | replace: '=>', ':' }});
+  var amplitudePlayers                = $.extend({}, {{amplitude_player   | replace: 'nil', 'null' | replace: '=>', ':' }});
+  var amplitudePlaylists              = $.extend({}, {{amplitude_playlist | replace: 'nil', 'null' | replace: '=>', ':' }});
   var amplitudeOptions                = $.extend(true, {}, amplitudeDefaults, amplitudePlayers, amplitudePlaylists);
 
   var playerExistsInPage              = false;
@@ -180,19 +179,16 @@ regenerate: true
   var ytPlayerCurrentTime             = 0;
   var singleAudio                     = false;
 
-  var playerScrollerSongElementMin    = {{amplitude_defaults.player.player_scroller_song_element_min}};
-  var playerScrollControl             = {{amplitude_defaults.player.player_scroll_control}};
-  var playerAutoScrollSongElement     = {{amplitude_defaults.player.player_auto_scroll_song_element}};
-  var playerFadeAudio                 = {{amplitude_defaults.player.player_fade_audio}};
-  var playerPlaybackRate              = '{{amplitude_defaults.player.player_playback_rate}}';
+  var playerScrollerSongElementMin    = {{amplitude_default.player.player_scroller_song_element_min}};
+  var playerScrollControl             = {{amplitude_default.player.player_scroll_control}};
+  var playerAutoScrollSongElement     = {{amplitude_default.player.player_auto_scroll_song_element}};
+  var playerFadeAudio                 = {{amplitude_default.player.player_fade_audio}};
+  var playerPlaybackRate              = '{{amplitude_default.player.player_playback_rate}}';
 
-  var muteAfterVideoSwitchInterval    = {{amplitude_defaults.player.mute_after_video_switch_interval}};
-  var checkActiveVideoInterval        = {{amplitude_defaults.player.check_active_video_interval}};
+  var muteAfterVideoSwitchInterval    = {{amplitude_default.player.mute_after_video_switch_interval}};
+  var checkActiveVideoInterval        = {{amplitude_default.player.check_active_video_interval}};
 
   var playList;
-  // J1 Amplitude optimizations #1
-  // CLEANUP: Removed duplicate `var playerProperties;` here. It was already
-  // declared 15 lines above. Same legality / confusion comment as before.
   var playerID;
   var playerType;
   var playListTitle;
@@ -202,8 +198,9 @@ regenerate: true
   var songs;
   var songMetaData;
   var songURL;
-                                                              
+
   var progress;
+
 
   // ---------------------------------------------------------------------------
   // Base YT functions
@@ -244,7 +241,7 @@ regenerate: true
     // fade-in audio (if enabled)
     if (playerFadeAudio) {
       currentVolume = player.getVolume();
-      logger.debug(`FADE-IN audio on StateChange at trackID|VideoID: ${trackID}|${videoID}`);
+      logger.debug('\n' + `FADE-IN audio on StateChange at trackID|VideoID: ${trackID}|${videoID}`);
       ytpFadeInAudio({
         playerID:     playerID,
         targetVolume: currentVolume,
@@ -264,8 +261,7 @@ regenerate: true
         playlist, playerID, songIndex, songs, playlistRepeat,
         trackID, activeVideoID, previousVideoID, isVideoChanged;
 
-    activeSong = getActiveSong();
-
+    activeSong          = getActiveSong();
     playlist            = activeVideoElement.playlist;
     playerID            = playlist + '_large';
     currentVideoTime    = player.getCurrentTime();
@@ -274,9 +270,6 @@ regenerate: true
     songIndex           = activeVideoElement.index;
     trackID             = songIndex + 1;
     songs               = activeVideoElement.songs;
-    // J1 Amplitude optimizations #1
-    // CLARITY: Removed redundant `? true : false` ternaries.
-    // The compared expression already returns a boolean.
     playlistRepeat      = songs[songIndex].repeat === 'true';
 
     // check if video is changed (to detect multiple videoIDs in playlist)
@@ -288,7 +281,7 @@ regenerate: true
 
     // fade-out audio (if enabled)
     if (isVideoChanged && playerFadeAudio) {
-      logger.debug(`FADE-OUT audio on processOnVideoEnd at trackID|VideoID: ${trackID}|${activeVideoID}`);
+      logger.debug('\n' + `FADE-OUT audio on processOnVideoEnd at trackID|VideoID: ${trackID}|${activeVideoID}`);
       ytpFadeOutAudio({
       playerID:     playerID,
       speed:        'default'
@@ -300,7 +293,7 @@ regenerate: true
         // LAST index reached, continue on FIRST index
         songIndex = 0;
 
-        logger.debug(`LOAD first VIDEO on processOnVideoEnd at trackID|playlist: ${trackID}|${playlist}`);
+        logger.debug('\n' + `LOAD first VIDEO on processOnVideoEnd at trackID|playlist: ${trackID}|${playlist}`);
         loadVideo(playlist, songIndex);
 
         // check if REPEAT is enabled on PLAYLIST
@@ -310,12 +303,12 @@ regenerate: true
         } 
       } else {
         // load next video
-        logger.debug(`LOAD next VIDEO on processOnVideoEnd at trackID|playlist: ${trackID}|${playlist}`);
+        logger.debug('\n' + `LOAD next VIDEO on processOnVideoEnd at trackID|playlist: ${trackID}|${playlist}`);
         loadVideo(playlist, songIndex + 1);
       }
     } else {
       // skip loading next video if a SINGLE video is used for playlist
-      logger.debug(`LOAD next TRACK in video on processOnVideoEnd at trackID|playlist: ${trackID}|${playlist}`);
+      logger.debug('\n' + `LOAD next TRACK in video on processOnVideoEnd at trackID|playlist: ${trackID}|${playlist}`);
     }
 
   } // END processOnVideoEnd  
@@ -333,8 +326,9 @@ regenerate: true
     // which is misleading. Now that YT_PLAYER_STATE_NAMES has a proper "-1"
     // key (see Fix #1), a single direct lookup with a fallback is enough
     // and produces the correct label for every documented YT state.
+    //
     var stateName = YT_PLAYER_STATE_NAMES[state] || ('unknown(' + state + ')');
-    isDev && logger.debug(`DO NOTHING on StateChange for state: ${stateName}`);
+    isDev && logger.debug('\n' + `DO NOTHING on StateChange for state: ${stateName}`);
   } // END doNothingOnStateChange
 
   // ---------------------------------------------------------------------------
@@ -351,6 +345,7 @@ regenerate: true
     // parameter and the local share the same identifier. The local
     // declarations are removed; the parameter stays authoritative until
     // it is reassigned from `activeSong.index` further down.
+    //
     var activeSong, activePlaylist,
         playerID, videoID, firstVideo,
         previousSongIndex,
@@ -373,13 +368,12 @@ regenerate: true
     previousPlayer  = j1.adapter.amplitude.data.ytPlayers[playerID].player
     trackID         = songIndex + 1;
 
-    logger.debug(`PLAY audio on YT Player at playlist|trackID: ${activePlaylist}|${trackID}`);
+    logger.debug('\n' + `PLAY audio on YT Player at playlist|trackID: ${activePlaylist}|${trackID}`);
 
     // save YT player GLOBAL data for later use (e.g. events)
     j1.adapter.amplitude.data.activePlayer              = 'ytp';
     j1.adapter.amplitude.data.ytpGlobals['activeIndex'] = songIndex;
     j1.adapter.amplitude.data.ytpGlobals['videoID']     = videoID;
-
 
     // save YT player data for later use (e.g. events)
     // -------------------------------------------------------------------------
@@ -392,7 +386,6 @@ regenerate: true
     j1.modules.amplitudejs.data.ytp.players[playerID].activeIndex = songIndex;
     j1.modules.amplitudejs.data.ytp.players[playerID].player = ytPlayer;
     j1.modules.amplitudejs.data.ytp.players[playerID].videoID = videoID;
-
 
     // update time container for the ACTIVE video
     // -----------------------------------------------------------------
@@ -408,6 +401,7 @@ regenerate: true
     // them before installing fresh ones. The handles are stored on
     // j1.adapter.amplitude.data so they survive across calls without
     // leaking to the global scope.
+    //
     var intervals = j1.adapter.amplitude.data.ytpIntervals
                   || (j1.adapter.amplitude.data.ytpIntervals = {});
 
@@ -433,7 +427,7 @@ regenerate: true
       var songCurrentTime = ytPlayer.getCurrentTime();
 
       if (songCurrentTime < songStartSec) {
-        logger.debug(`START video on StateChange at trackID|timestamp: ${trackID}|${tsStartSec}`);
+        logger.debug('\n' + `START video on StateChange at trackID|timestamp: ${trackID}|${tsStartSec}`);
         processOnVideoStart(ytPlayer, songStartSec);
       }
     } // END if songStartEnabled
@@ -448,7 +442,7 @@ regenerate: true
         var songCurrentTime = ytPlayer.getCurrentTime();
 
         if (songCurrentTime >= songEndSec) {
-          logger.debug(`STOP video on StateChange at trackID|timestamp: ${trackID}|${tsEndSec}`);
+          logger.debug('\n' + `STOP video on StateChange at trackID|timestamp: ${trackID}|${tsEndSec}`);
           processOnVideoEnd(ytPlayer);
 
           clearInterval(checkOnVideoEnd);
@@ -516,8 +510,6 @@ regenerate: true
     var playerID        = playlist + '_large';
     var songs           = j1.adapter.amplitude.data.ytPlayers[playerID].songs;
     var songMetaData    = songs[songIndex];
-    // J1 Amplitude optimizations #1
-    // CLARITY: removed redundant `? true : false`.
     var playlistRepeat  = songMetaData.repeat === 'true';
  
     if (songIndex === songs.length - 1) {
@@ -531,7 +523,7 @@ regenerate: true
       // ---------------------------------------------------------------------
       j1.modules.amplitudejs.data.ytp.previousIndex = songIndex;  
 
-      logger.debug(`LOAD first VIDEO on processOnStateChangeEnded at trackID|playlist: ${trackID}|${playlist}`);
+      logger.debug('\n' + `LOAD first VIDEO on processOnStateChangeEnded at trackID|playlist: ${trackID}|${playlist}`);
       loadVideo(playlist, songIndex);
 
       // check if REPEAT is enabled on PLAYLIST
@@ -548,7 +540,7 @@ regenerate: true
       j1.modules.amplitudejs.data.ytp.previousIndex = songIndex;        
 
       // load next video
-      logger.debug(`LOAD next VIDEO on processOnStateChangeEnded at trackID|playlist: ${trackID}|${playlist}`);
+      logger.debug('\n' + `LOAD next VIDEO on processOnStateChangeEnded at trackID|playlist: ${trackID}|${playlist}`);
       loadVideo(playlist, songIndex + 1);
     }
 
@@ -648,6 +640,7 @@ regenerate: true
     // processOnVideoStart). The result is that fade-in always faded to 50%
     // and ignored the caller's target. Same bug below for `speed`.
     // Replaced with the nullish-coalescing-as-default idiom.
+    //
     settings = {
       playerID:     params.playerID,
       targetVolume: (params.targetVolume != null) ? params.targetVolume : 50,
@@ -657,6 +650,7 @@ regenerate: true
     // number of iteration steps to INCREASE the players volume on fade-in
     // NOTE: number of steps controls how long and smooth the fade-in 
     // transition will be
+    //
     const iterationSteps = {
       'default':  150,
       'slow':     250,
@@ -670,7 +664,7 @@ regenerate: true
     currentStep   = 1;
 
     if (volumeSlider === undefined || volumeSlider === null) {
-      isDev && logger.warn('no volume slider found at playerID: ' + settings.playerID);
+      isDev && logger.warn('\n' + 'no volume slider found at playerID: ' + settings.playerID);
       return;
     }
 
@@ -701,6 +695,7 @@ regenerate: true
     // BUG FIX: Same defaulting bug as in ytpFadeInAudio --
     // `params.speed = 'default'` was overwriting the caller's choice
     // every call. Use a real default expression instead.
+    //
     settings =  {
       playerID:   params.playerID,
       speed:      params.speed || 'default'
@@ -721,7 +716,7 @@ regenerate: true
     currentStep   = 0;
 
     if (volumeSlider === undefined || volumeSlider === null) {
-      isDev && logger.warn('no volume slider found at playerID: ' + settings.playerID);
+      isDev && logger.warn('\n' + 'no volume slider found at playerID: ' + settings.playerID);
       return;
     }
 
@@ -745,7 +740,7 @@ regenerate: true
   function initYtAPI() {
     startTimeModule = Date.now();
 
-    logger.info('Initialize plugin|tech (ytp) : started');
+    logger.info('\n' + 'Initialize plugin|tech (ytp) : started');
 
     // Load YT IFrame Player API asynchronously
     // -------------------------------------------------------------------------
@@ -771,10 +766,6 @@ regenerate: true
     playlist        = currentPlaylist;
     playerID        = playlist + '_large';
     songs           = activeSong.songs;
-    // J1 Amplitude optimizations #1
-    // CLARITY: removed redundant `? true : false`. Note: `playlistRepeat`
-    // is computed but never used inside loadVideo; left as-is to match the
-    // existing surface (could be deleted, see review document).
     playlistRepeat  = songs[currentIndex].repeat === 'true';
     ytPlayer        = activeSong.player;
     songIndex       = currentIndex;
@@ -790,7 +781,6 @@ regenerate: true
       j1.adapter.amplitude.data.ytPlayers[playerID].activeIndex = songIndex;
       j1.adapter.amplitude.data.ytPlayers[playerID].videoID     = ytpVideoID;
 
-
       // save YT player data for later use (e.g. events)
       // -----------------------------------------------------------------------
       j1.modules.amplitudejs.data.ytp.previousSongIndex = songIndex;
@@ -798,8 +788,7 @@ regenerate: true
       j1.modules.amplitudejs.data.ytp.players[playerID].previousIndex = songIndex - 1;
       j1.modules.amplitudejs.data.ytp.players[playerID].videoID = ytpVideoID;
 
-
-      logger.debug(`SWITCH video on loadNextVideo at trackID|VideoID: ${trackID}|${ytpVideoID}`);
+      logger.debug('\n' + `SWITCH video on loadNextVideo at trackID|VideoID: ${trackID}|${ytpVideoID}`);
       ytPlayer.loadVideoById(ytpVideoID);
      
       // delay after switch video
@@ -849,10 +838,10 @@ regenerate: true
 
       if (ytApiReady && ytPlayerReady) {
 
-        {% for player in amplitude_players.players %}{% if player.enabled %}
+        {% for player in amplitude_player.players %}{% if player.enabled %}
 
           {% if player.source == empty %}
-            {% assign player_source = amplitude_defaults.player.source %}
+            {% assign player_source = amplitude_default.player.source %}
           {% else %}
             {% assign player_source = player.source %}
           {% endif %}
@@ -865,7 +854,7 @@ regenerate: true
         {% endif %}{% endfor %}
 
         clearInterval(dependencies_ytp_ready);
-        logger.info('Initialize APIPlayers : ready');
+        logger.info('\n' + 'Initialize APIPlayers : ready');
       } // END if ready
 
     }, 10); // END dependencies_ytp_ready
@@ -874,7 +863,6 @@ regenerate: true
 
   // ---------------------------------------------------------------------------
   // onYouTubeIframeAPIReady
-  //
   // Create a player after Iframe player API is ready to use
   // ---------------------------------------------------------------------------
   function onYouTubeIframeAPIReady() {
@@ -884,7 +872,7 @@ regenerate: true
       {% capture xhr_container_id %}{{player.id}}_app{% endcapture %}
 
       {% if player.source == empty %}
-        {% assign player_source = amplitude_defaults.player.source %}
+        {% assign player_source = amplitude_default.player.source %}
       {% else %}
         {% assign player_source = player.source %}
       {% endif %}
@@ -892,10 +880,13 @@ regenerate: true
       {% if player_source != 'video' %}
         {% continue %}
       {% else %}
+
+        // J1 Amplitude optimizations #2
+        // jadams, set|overload player settings
+        var player = $.extend({}, {{player | replace: 'nil', 'null' | replace: '=>', ':' }}, {{amplitude_defaults | replace: 'nil', 'null' | replace: '=>', ':' }});
+
         // load players of type 'video' configured in current page
         // ---------------------------------------------------------------------
-        // J1 Amplitude optimizations #1
-        // CLARITY: removed redundant `? true : false`.
         playerExistsInPage = $('#' + '{{xhr_container_id}}')[0] !== undefined;
         if (playerExistsInPage) { 
           var playerSettings     = $.extend({}, {{player | replace: 'nil', 'null' | replace: '=>', ':' }});
@@ -908,13 +899,13 @@ regenerate: true
 
           // load individual player settings (to manage multiple players in page)
           //
-          var ytpAutoPlay = ('{{player.yt_player.autoplay}}'.length > 0) ? '{{player.yt_player.autoplay}}'  : '{{amplitude_defaults.player.yt_player.autoplay}}';
-          var ytpLoop     = ('{{player.yt_player.loop}}'.length > 0)     ? '{{player.yt_player.loop}}'      : '{{amplitude_defaults.player.yt_player.loop}}';
-          var ytpHeight   = ('{{player.yt_player.height}}'.length > 0)   ? '{{player.yt_player.height}}'    : '{{amplitude_defaults.player.yt_player.height}}';
-          var ytpWidth    = ('{{player.yt_player.width}}'.length > 0)    ? '{{player.yt_player.width}}'     : '{{amplitude_defaults.player.yt_player.width}}';
+          var ytpAutoPlay = ('{{player.yt_player.autoplay}}'.length > 0) ? '{{player.yt_player.autoplay}}'  : '{{amplitude_default.player.yt_player.autoplay}}';
+          var ytpLoop     = ('{{player.yt_player.loop}}'.length > 0)     ? '{{player.yt_player.loop}}'      : '{{amplitude_default.player.yt_player.loop}}';
+          var ytpHeight   = ('{{player.yt_player.height}}'.length > 0)   ? '{{player.yt_player.height}}'    : '{{amplitude_default.player.yt_player.height}}';
+          var ytpWidth    = ('{{player.yt_player.width}}'.length > 0)    ? '{{player.yt_player.width}}'     : '{{amplitude_default.player.yt_player.width}}';
 
-          logger.info('AJS YouTube iFrame API: ready');
-          logger.info('configure player on ID: #{{player.id}}');
+          logger.info('\n' + 'AJS YouTube iFrame API: ready');
+          logger.info('\n' + 'configure player on ID: #{{player.id}}');
 
           // create a (hidden) ytp iframe container
           //
@@ -960,11 +951,9 @@ regenerate: true
           // save YT player GLOBAL data for later use (e.g. events)
           j1.adapter.amplitude.data.ytpGlobals['ytApiReady'] = ytApiReady;
 
-
           // save amplitudejs data for later use (e.g. events)
           // -------------------------------------------------------------------
           j1.modules.amplitudejs.data.ytp.apiReady = ytApiReady;
-
 
           // reset current player
           playerExistsInPage = false;
@@ -980,22 +969,25 @@ regenerate: true
           ytPlayer  = event.target;
           videoID   = ytPlayer.options.videoId;
 
-          logger.error(`YT API Error '${YT_PLAYER_ERROR_NAMES[eventData]}' for VideoID: '${videoID}'`);
+          logger.error('\n' + `YT API Error '${YT_PLAYER_ERROR_NAMES[eventData]}' for VideoID: '${videoID}'`);
 
           // save YT player GLOBAL data for later use (e.g. events)
           j1.adapter.amplitude.data.ytpGlobals['ytApiError'] = eventData;
 
-
           // save amplitudejs data for later use (e.g. events)
-          // ------------------------------------------------------------------
+          // -------------------------------------------------------------------
           j1.modules.amplitudejs.data.ytp.apiError = eventData;
-
 
         }
 
         // AJS YouTube Player initialization fired by the YT API
         // ---------------------------------------------------------------------
         function {{player.id}}OnPlayerReady(event) {
+
+          // J1 Amplitude optimizations #2
+          // jadams, set|overload player settings
+          var player = $.extend({}, {{player | replace: 'nil', 'null' | replace: '=>', ':' }}, {{amplitude_defaults | replace: 'nil', 'null' | replace: '=>', ':' }});
+
           var hours, minutes, seconds,
               ytPlayer, ytPlayerReady, playerVolumePreset,
               playListName, songsInPlaylist, titleListLargePlayer;
@@ -1004,7 +996,7 @@ regenerate: true
           ytPlayerReady       = true;
           playerVolumePreset  = parseInt({{player.volume_slider.preset_value}});
 
-          logger.debug(`FOUND video ready at ID: {{player.id}}`);
+          logger.debug('\n' + `FOUND video ready at ID: {{player.id}}`);
 
           // set video playback quality to a minimum
           ytPlayer.setPlaybackQuality('small');
@@ -1029,22 +1021,24 @@ regenerate: true
             }
           }
 
-          logger.info('yt player on ID {{player.id}}: ready');
+          logger.info('\n' + 'yt player on ID {{player.id}}: ready');
 
           // save YT player GLOBAL data for later use (e.g. events)
           j1.adapter.amplitude.data.ytpGlobals['ytPlayerReady'] = ytPlayerReady;
           j1.adapter.amplitude.data.ytpGlobals['ytApiError']    = 0;          
 
-
           // save amplitudejs data for later use (e.g. events)
           // -------------------------------------------------------------------
-          j1.modules.amplitudejs.data.ytp.apiError = 0;
-          j1.modules.amplitudejs.data.ytp.players.{{player.id}} = {};
+          j1.modules.amplitudejs.data.ytp.apiError                          = 0;
+          j1.modules.amplitudejs.data.ytp.players.{{player.id}}             = {};
           j1.modules.amplitudejs.data.ytp.players.{{player.id}}.playerReady = ytPlayerReady;
 
+          // J1 Amplitude optimizations #2
+          // jadams, set|overload player settings
+          var player = $.extend({}, {{player | replace: 'nil', 'null' | replace: '=>', ':' }}, {{amplitude_defaults | replace: 'nil', 'null' | replace: '=>', ':' }});
 
-          // get duration hours (if configured)
-          if ({{player.display_hours}} ) {
+          // J1 Amplitude optimizations #2
+          if (player.display_hours) {
             hours = ytpGetDurationHours(ytPlayer);
           }
 
@@ -1055,8 +1049,8 @@ regenerate: true
           // set duration time values for current video
           // -------------------------------------------------------------------
 
-          // set duration|hours
-          if ({{player.display_hours}} ) {
+          // J1 Amplitude optimizations #1
+          if (player.display_hours) {
             var durationHours = document.getElementsByClassName("amplitude-duration-hours");
             durationHours[0].innerHTML = hours;
           }
@@ -1073,12 +1067,12 @@ regenerate: true
           // -------------------------------------------------------------------
           endTimeModule = Date.now();
 
-          logger.info('Initialize plugin|tech (ytp) : finished');
+          logger.info('\n' + 'Initialize plugin|tech (ytp) : finished');
 
           if (playerCounter > 0) {
-            logger.info('Found players of type video (YTP) in page: ' + playerCounter);
+            logger.info('\n' + 'Found players of type video (YTP) in page: ' + playerCounter);
           } else {
-            isDev && logger.warn('Found NO players of type video (YTP) in page');
+            isDev && logger.warn('\n' + 'Found NO players of type video (YTP) in page');
           }
 
           // update activeVideoElement data structure for the ACTIVE video
@@ -1088,7 +1082,7 @@ regenerate: true
           }, checkActiveVideoInterval);
           // END checkActiveVideoElementYTP
 
-          logger.info('plugin|tech initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
+          logger.info('\n' + 'plugin|tech initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
 
         } // END onPlayerReady()
 
@@ -1106,6 +1100,11 @@ regenerate: true
         // AJS YouTube Player state changes fired by the YT API
         // ---------------------------------------------------------------------
         function {{player.id}}OnPlayerStateChange(event) {
+
+          // J1 Amplitude optimizations #2
+          // jadams, set|overload player settings
+          var player = $.extend({}, {{player | replace: 'nil', 'null' | replace: '=>', ':' }}, {{amplitude_defaults | replace: 'nil', 'null' | replace: '=>', ':' }});
+
           var currentTime, playlist, ytPlayer, ytVideoID,
               songs, songIndex, trackID, playerID, songMetaData;
 
@@ -1128,7 +1127,6 @@ regenerate: true
           j1.adapter.amplitude.data.ytPlayers.{{player.id}}.player      = ytPlayer;
           j1.adapter.amplitude.data.ytPlayers.{{player.id}}.activeIndex = songIndex;
 
-
           // save amplitudejs data for later use (e.g. events)
           // -------------------------------------------------------------------
           j1.modules.amplitudejs.data.activePlayer = 'ytp';
@@ -1139,7 +1137,6 @@ regenerate: true
           j1.modules.amplitudejs.data.ytp.activePlaylist = playlist;
           j1.modules.amplitudejs.data.ytp.players.{{player.id}}.player = ytPlayer;
           j1.modules.amplitudejs.data.ytp.players.{{player.id}}.activeIndex = songIndex;
-
 
           // reset time container|progressbar for the ACTIVE song (video)
           // -------------------------------------------------------------------          
@@ -1169,7 +1166,7 @@ regenerate: true
               processOnStateChangeEnded(event, playlist, songIndex);
               break;
             default:
-              logger.error(`UNKNOWN event on StateChange fired: ${event.data}`);
+              logger.error('\n' + `UNKNOWN event on StateChange fired: ${event.data}`);
           } // END switch event.data
 
         } // END {{player.id}}OnPlayerStateChange
@@ -1221,7 +1218,7 @@ regenerate: true
     rating    = metaData.rating;
     trackID   = metaData.index + 1;
 
-    logger.debug(`UPDATE metadata on ytpUpdatMetaContainers for trackID|playlist at: ${trackID}|${playlist}`);
+    logger.debug('\n' + `UPDATE metadata on ytpUpdatMetaContainers for trackID|playlist at: ${trackID}|${playlist}`);
 
     // update song name in meta-containers
     var songName = document.getElementsByClassName("song-name");
@@ -1293,7 +1290,6 @@ regenerate: true
 
   // ---------------------------------------------------------------------------
   // loadCoverImage(metaData)
-  //
   // load the configured cover image for a specic song (metaData)
   // ---------------------------------------------------------------------------  
   function loadCoverImage(metaData) {
@@ -1308,7 +1304,6 @@ regenerate: true
 
   // ---------------------------------------------------------------------------
   // ytpStopParallelActivePlayers(exceptPlayer)
-  //
   // if multiple players used on a page, stop ALL active AT|YT players
   // running in parallel skipping the exceptPlayer
   // ---------------------------------------------------------------------------  
@@ -1336,6 +1331,7 @@ regenerate: true
         // `(state > 0) ? state : 6` is no longer needed. Direct lookup
         // with a fallback expresses intent more clearly. Equivalent
         // simplifications appear at every site that used `[6]`.
+        //
         var rawState      = player.getPlayerState();
         var ytPlayerState = YT_PLAYER_STATE_NAMES[rawState] || 'unstarted';
 
@@ -1343,7 +1339,7 @@ regenerate: true
         // ---------------------------------------------------------------------
         var isValidPlayerState = /playing|paused/.test(ytPlayerState);
         if (isValidPlayerState) {
-          logger.debug(`STOP player at ytpStopParallelActivePlayers for id: ${ytPlayerID}`);
+          logger.debug('\n' + `STOP player at ytpStopParallelActivePlayers for id: ${ytPlayerID}`);
           player.stopVideo();
           var ytpButtonPlayerPlayPause = document.getElementsByClassName("large-player-play-pause-" + ytPlayerID);
           for (var j=0; j<ytpButtonPlayerPlayPause.length; j++) {
@@ -1396,7 +1392,6 @@ regenerate: true
 
   // ---------------------------------------------------------------------------
   // setSongActive(currentPlayList, currentIndex)
-  //
   // set song (video) active at index in playlist
   // ---------------------------------------------------------------------------
   function setSongActive(currentPlayList, currentIndex) {
@@ -1427,7 +1422,6 @@ regenerate: true
 
   // ---------------------------------------------------------------------------
   // getProgressBarSelectedPositionPercentage
-  //
   // Returns the position as a percentage the user clicked in player progressbar
   // NOTE: The percentage is out of [0.00 .. 1.00]  
   // ---------------------------------------------------------------------------
@@ -1441,7 +1435,6 @@ regenerate: true
 
   // ---------------------------------------------------------------------------
   // getTimeFromPercentage
-  //
   // Returns the time in seconds calculated from a percentage value
   // NOTE: The percentage is out of [0.00 .. 1.00]
   // ---------------------------------------------------------------------------
@@ -1455,7 +1448,6 @@ regenerate: true
   // ---------------------------------------------------------------------------
   // checkActiveVideoElementYTP
   //
-  // 
   // ---------------------------------------------------------------------------
   function checkActiveVideoElementYTP() {
     var activeVideoElements = document.getElementsByClassName("amplitude-active-song-container");
@@ -1491,7 +1483,6 @@ regenerate: true
 
         var videoArray                    = activeSong.url.split('=');
         activeVideoElement.videoID        = videoArray[1];
-
       }
     }
   }
@@ -1512,7 +1503,6 @@ regenerate: true
 
   // ---------------------------------------------------------------------------
   // getActiveSong()
-  //
   // Returns the time in seconds calculated from a percentage value
   // NOTE: The percentage is out of [0.00 .. 1.00]
   // ---------------------------------------------------------------------------
@@ -1528,7 +1518,6 @@ regenerate: true
 
   // ---------------------------------------------------------------------------
   // updateProgressBarsYTP
-  //
   // Update YTP specific progress data
   // ---------------------------------------------------------------------------
   function updateProgressBarsYTP() {
@@ -1548,7 +1537,7 @@ regenerate: true
         activeClass   = 'large-player-progress-' + playlist;
 
         if (activePlayer === undefined) {
-          logger.error('YT player not defined');
+          logger.error('\n' + 'YT player not defined');
           return;
         }
 
@@ -1569,7 +1558,6 @@ regenerate: true
 
   // ---------------------------------------------------------------------------
   // updateDurationTimeContainerYTP(player, playlist)
-  //
   // update time container values for current video
   // ---------------------------------------------------------------------------
   function updateDurationTimeContainerYTP(player, playlist) {
@@ -1624,7 +1612,6 @@ regenerate: true
 
   // ---------------------------------------------------------------------------
   // updateCurrentTimeContainerYTP(player, metaData)
-  //
   // update time container values for current video
   // ---------------------------------------------------------------------------
   function updateCurrentTimeContainerYTP(player, playlist) {
@@ -1679,7 +1666,6 @@ regenerate: true
 
   // ---------------------------------------------------------------------------
   // resetProgressBarYTP()
-  //
   // Reset ALL progress bars
   // ---------------------------------------------------------------------------
   function resetProgressBarYTP() {
@@ -1691,7 +1677,6 @@ regenerate: true
 
   // ---------------------------------------------------------------------------
   // resetCurrentTimeContainerYTP
-  //
   // Reset YTP specific CURRENT time data
   // ---------------------------------------------------------------------------  
   function resetCurrentTimeContainerYTP(player, playlist) {
@@ -1716,6 +1701,7 @@ regenerate: true
       // had a different number of hours/minutes spans (e.g. when
       // `display_hours` is false the hours collection is empty), the loop
       // either skipped real elements or skipped iteration entirely.
+      //
       for (var i=0; i<currentMinutes.length; i++) {
         var currentPlaylist = currentMinutes[i].dataset.amplitudePlaylist;
         if (currentPlaylist === playlist) {
@@ -1752,6 +1738,7 @@ regenerate: true
   function ytpLoadVideoById(player, id, _bufferQuoteIgnored) {
     // J1 Amplitude optimizations #1
     // BUG FIX: The original implementation was unrecoverable:
+    //
     //   1. `return true;` came BEFORE `clearInterval(videoLoaded);` --
     //      so the clearInterval line was unreachable; the timer ran forever.
     //   2. The `return` statements inside the setInterval callback returned
@@ -1767,6 +1754,7 @@ regenerate: true
     // no callers), the safest fix is to keep its name and signature stable
     // but rewrite it as a Promise that actually resolves when the video is
     // buffered, with a hard timeout to prevent the runaway-timer scenario.
+    //
     const cycle           = 250;   // poll every 250 ms
     const bufferThreshold = 3;     // % loaded before considering ready
     const maxTries        = 60;    // give up after 60 polls (~15 s)
@@ -1808,7 +1796,6 @@ regenerate: true
 
   // ---------------------------------------------------------------------------
   // ytpGetBuffered
-  //
   // Returns the buffered percentage of the video currently playing
   // ---------------------------------------------------------------------------
   function ytpGetBuffered(player) {
@@ -1818,7 +1805,6 @@ regenerate: true
 
   // ---------------------------------------------------------------------------
   // ytpGetActiveIndex
-  //
   // Returns the active song index (in the songs array, starts by 0)
   // ---------------------------------------------------------------------------
   function ytpGetActiveIndex(playerID) {
@@ -1833,7 +1819,6 @@ regenerate: true
 
   // ---------------------------------------------------------------------------
   // ytpSetActiveIndex
-  //
   // Set the index of the active song (index starts by 0)
   // ---------------------------------------------------------------------------   
   function ytpSetActiveIndex(playerID, idx) {
@@ -1850,7 +1835,6 @@ regenerate: true
 
   // ---------------------------------------------------------------------------
   // ytpGetPlayedPercentage
-  //
   // Returns the percentage of the video played
   // ---------------------------------------------------------------------------
   function ytpGetPlayedPercentage(player) {
@@ -1859,7 +1843,6 @@ regenerate: true
 
   // ---------------------------------------------------------------------------
   // ytpGetAudio
-  //
   // Returns the actual video element
   // ---------------------------------------------------------------------------
   function ytpGetAudio(player) {
@@ -1868,7 +1851,6 @@ regenerate: true
 
   // ---------------------------------------------------------------------------
   // ytpGetPlaybackSpeeds
-  //
   // Returns available playback speeds for the player
   // ---------------------------------------------------------------------------
   function ytpGetPlaybackSpeeds(player) {
@@ -1877,7 +1859,6 @@ regenerate: true
 
   // ---------------------------------------------------------------------------
   // ytpGetPlayerState
-  //
   // Returns the current state of the player
   // ---------------------------------------------------------------------------
   function ytpGetPlayerState(player) {
@@ -1886,7 +1867,6 @@ regenerate: true
 
   // ---------------------------------------------------------------------------
   // ytpGetDuration
-  //
   // Returns the duration of the video
   // ---------------------------------------------------------------------------
   function ytpGetDuration(player) {
@@ -1907,7 +1887,6 @@ regenerate: true
 
   // ---------------------------------------------------------------------------
   // ytpGetCurrentTime
-  //
   // Returns the current time of the video played
   // ---------------------------------------------------------------------------
   function ytpGetCurrentTime(player) {
@@ -1929,7 +1908,6 @@ regenerate: true
 
   // ---------------------------------------------------------------------------
   // ytpGetDurationHours
-  //
   // Returns the duration hours of the video
   // ---------------------------------------------------------------------------
   function ytpGetDurationHours(player) {
@@ -1954,7 +1932,6 @@ regenerate: true
 
   // ---------------------------------------------------------------------------
   // ytpGetDurationMinutes
-  //
   // Returns the duration minutes of the video
   // ---------------------------------------------------------------------------
   function ytpGetDurationMinutes(player) {
@@ -1979,7 +1956,6 @@ regenerate: true
 
   // ---------------------------------------------------------------------------
   // ytpGetDurationSeconds
-  //
   // Returns the duration seconds of the video
   // ---------------------------------------------------------------------------
   function ytpGetDurationSeconds(player) {
@@ -2004,7 +1980,6 @@ regenerate: true
 
   // ---------------------------------------------------------------------------
   // ytpGetCurrentHours
-  //
   // Returns the current hours the user is into the video
   // ---------------------------------------------------------------------------
   function ytpGetCurrentHours(player) {
@@ -2029,7 +2004,6 @@ regenerate: true
 
   // ---------------------------------------------------------------------------
   // ytpGetCurrentMinutes
-  //
   // Returns the current minutes the user is into the video
   // ---------------------------------------------------------------------------
   function ytpGetCurrentMinutes (player) {
@@ -2054,7 +2028,6 @@ regenerate: true
 
   // ---------------------------------------------------------------------------
   // ytpGetCurrentSeconds
-  //
   // Returns the current seconds the user is into the video
   // ---------------------------------------------------------------------------
   function ytpGetCurrentSeconds(player) {
@@ -2079,7 +2052,6 @@ regenerate: true
 
   // ---------------------------------------------------------------------------
   // togglePlayPauseButton
-  //
   // toggle button play|pause
   // ---------------------------------------------------------------------------
   function togglePlayPauseButton(elementClass) {
@@ -2140,7 +2112,6 @@ regenerate: true
 
   // ---------------------------------------------------------------------------
   // mimikYTPlayerUiEventsForAJS
-  //
   // Mimik AJS button events for YT video
   // ---------------------------------------------------------------------------  
   function mimikYTPlayerUiEventsForAJS(ytPlayerID) {
@@ -2177,6 +2148,7 @@ regenerate: true
           // 3. The handler was added unconditionally even when
           //    `playerScrollList` is null (no playlist DOM on the page),
           //    which would throw at .addEventListener. Added a null guard.
+          //
           var songElementHeight     = j1.adapter.amplitude.data.playerSongElementHeigth || 0;
           var listItemHeight        = songElementHeight / 2;
           var itemsPerBlock         = 1;
@@ -2245,7 +2217,7 @@ regenerate: true
               if (j1.adapter.amplitude.data.ytpGlobals.ytApiError > 0) {
                 // do nothing on API errors
                 var trackID = songIndex + 1;
-                logger.error(`DISABLED player for playlist|trackID: ${playlist}|${trackID} on API error '${YT_PLAYER_ERROR_NAMES[j1.adapter.amplitude.data.ytpGlobals.ytApiError]}'`);
+                logger.error('\n' + `DISABLED player for playlist|trackID: ${playlist}|${trackID} on API error '${YT_PLAYER_ERROR_NAMES[j1.adapter.amplitude.data.ytpGlobals.ytApiError]}'`);
 
                 return;
               }
@@ -2281,7 +2253,7 @@ regenerate: true
                 setTimeout(() => {
                   if (j1.adapter.amplitude.data.ytpGlobals.ytApiError > 0) {
                     var trackID = songIndex + 1;
-                    logger.error(`DISABLED player for playlist|trackID: ${playlist}|${trackID} on API error '${YT_PLAYER_ERROR_NAMES[j1.adapter.amplitude.data.ytpGlobals.ytApiError]}'`);
+                    logger.error('\n' + `DISABLED player for playlist|trackID: ${playlist}|${trackID} on API error '${YT_PLAYER_ERROR_NAMES[j1.adapter.amplitude.data.ytpGlobals.ytApiError]}'`);
 
                     // do nothing on API errors
                     return;
@@ -2336,7 +2308,7 @@ regenerate: true
                 ytpSeekTo(ytPlayer, ytPlayerCurrentTime, true);
 
                 var trackID =  songIndex + 1;
-                logger.debug(`PLAY video for PlayPauseButton on playlist|trackID: ${playlist}|${trackID} at: ${ytPlayerCurrentTime}`);
+                logger.debug('\n' + `PLAY video for PlayPauseButton on playlist|trackID: ${playlist}|${trackID} at: ${ytPlayerCurrentTime}`);
 
                 var playPauseButtonClass = `large-player-play-pause-${ytPlayerID}`;
                 togglePlayPauseButton(playPauseButtonClass);
@@ -2373,7 +2345,7 @@ regenerate: true
               currentVideoTime  = ytPlayer.getCurrentTime();
 
               if (playerState === YT_PLAYER_STATE.PLAYING || playerState === YT_PLAYER_STATE.PAUSED) {
-                logger.debug(`SKIP forward on Button skipForward for ${skipOffset} seconds`);
+                logger.debug('\n' + `SKIP forward on Button skipForward for ${skipOffset} seconds`);
                 ytpSeekTo(ytPlayer, currentVideoTime + skipOffset, true);
               }
 
@@ -2403,7 +2375,7 @@ regenerate: true
               currentVideoTime  = ytPlayer.getCurrentTime();
 
               if (playerState === YT_PLAYER_STATE.PLAYING || playerState === YT_PLAYER_STATE.PAUSED) {
-                logger.debug(`SKIP backward on Button skipBackward for ${skipOffset} seconds`);
+                logger.debug('\n' + `SKIP backward on Button skipBackward for ${skipOffset} seconds`);
                 ytpSeekTo(ytPlayer, currentVideoTime - skipOffset, true);
               }
 
@@ -2435,13 +2407,13 @@ regenerate: true
               if (j1.adapter.amplitude.data.ytpGlobals.ytApiError > 0) {
                 // do nothing on API errors
                 var trackID = songIndex + 1;
-                logger.error(`DISABLED player for playlist|trackID: ${playlist}|${trackID} on API error '${YT_PLAYER_ERROR_NAMES[j1.adapter.amplitude.data.ytpGlobals.ytApiError]}'`);
+                logger.error('\n' + `DISABLED player for playlist|trackID: ${playlist}|${trackID} on API error '${YT_PLAYER_ERROR_NAMES[j1.adapter.amplitude.data.ytpGlobals.ytApiError]}'`);
 
                 return;
               }
 
               if (ytPlayer === undefined) {
-                logger.error('YT player not defined');
+                logger.error('\n' + 'YT player not defined');
               }
 
               // select video
@@ -2479,9 +2451,8 @@ regenerate: true
               j1.modules.amplitudejs.data.ytp.players[playerID].player = ytPlayer;
               j1.modules.amplitudejs.data.ytp.players[playerID].activeIndex = songIndex;
 
-
               trackID = songIndex + 1;
-              logger.debug(`SWITCH video for PlayerNextButton at trackID|VideoID: ${trackID}|${ytpVideoID}`);
+              logger.debug('\n' + `SWITCH video for PlayerNextButton at trackID|VideoID: ${trackID}|${ytpVideoID}`);
               ytPlayer.loadVideoById(ytpVideoID);
 
               // delay after switch video
@@ -2561,13 +2532,13 @@ regenerate: true
             if (j1.adapter.amplitude.data.ytpGlobals.ytApiError > 0) {
               // do nothing on API errors
               var trackID = songIndex + 1;
-              logger.error(`DISABLED player for playlist|trackID: ${playlist}|${trackID} on API error '${YT_PLAYER_ERROR_NAMES[j1.adapter.amplitude.data.ytpGlobals.ytApiError]}'`);
+              logger.error('\n' + `DISABLED player for playlist|trackID: ${playlist}|${trackID} on API error '${YT_PLAYER_ERROR_NAMES[j1.adapter.amplitude.data.ytpGlobals.ytApiError]}'`);
 
               return;
             }
 
             if (ytPlayer === undefined) {
-              logger.error('YT player not defined');
+              logger.error('\n' + 'YT player not defined');
             }
 
             // select video
@@ -2591,7 +2562,6 @@ regenerate: true
             j1.adapter.amplitude.data.ytpGlobals['activeIndex']    = songIndex;
             j1.adapter.amplitude.data.ytpGlobals['activePlaylist'] = playlist;
 
-
             // save amplitudejs data for later use (e.g. events)
             // -----------------------------------------------------------------
             // J1 Amplitude optimizations #1
@@ -2600,6 +2570,7 @@ regenerate: true
             // other write site, the correct values are the strings 'ytp'
             // and the playlist name -- consumers downstream rely on these
             // being string identifiers, not the numeric song index.
+            //
             j1.modules.amplitudejs.data.activePlayer = 'ytp';
             j1.modules.amplitudejs.data.activeIndex = songIndex;
             j1.modules.amplitudejs.data.activePlaylist = playlist;
@@ -2607,8 +2578,6 @@ regenerate: true
             j1.modules.amplitudejs.data.ytp.activePlaylist = playlist;
             j1.modules.amplitudejs.data.ytp.players[playerID].player = ytPlayer;
             j1.modules.amplitudejs.data.ytp.players[playerID].activeIndex = songIndex;   
-
-
 
             // load previous video
             // -----------------------------------------------------------------
@@ -2619,7 +2588,7 @@ regenerate: true
             j1.adapter.amplitude.data.ytPlayers[playerID].videoID     = ytpVideoID; 
 
             trackID = songIndex + 1;
-            logger.debug(`SWITCH video for PlayePreviousButton at trackID|VideoID: ${trackID}|${ytpVideoID}`);
+            logger.debug('\n' + `SWITCH video for PlayePreviousButton at trackID|VideoID: ${trackID}|${ytpVideoID}`);
             ytPlayer.loadVideoById(ytpVideoID);
 
             // delay after switch video
@@ -2698,8 +2667,6 @@ regenerate: true
           songIndex           = parseInt(this.getAttribute("data-amplitude-song-index"));
           trackID             = songIndex + 1;
           activeSongIndex     = j1.adapter.amplitude.data.ytPlayers[playerID].activeIndex;
-          // J1 Amplitude optimizations #1
-          // CLARITY: removed redundant `? true : false`.
           isSongIndexChanged  = activeSongIndex !== songIndex;
 
           // set (current) song meta data
@@ -2710,9 +2677,6 @@ regenerate: true
           ytpVideoID          = (ytPlayerErrorTest) ? 'invalidVideoID' : songURL.split('=')[1];
           ytPlayer            = j1.adapter.amplitude.data.ytPlayers[playerID].player;
           playerState         = ytPlayer.getPlayerState();
-          // J1 Amplitude optimizations #1
-          // CLARITY: replaced magic-6 fallback with the proper -1 entry
-          // (see Fix #1) plus a defensive default.
           ytPlayerState       = YT_PLAYER_STATE_NAMES[playerState] || 'unstarted';
 
           // NOTE:
@@ -2727,7 +2691,7 @@ regenerate: true
             setTimeout(() => {
               if (j1.adapter.amplitude.data.ytpGlobals.ytApiError > 0) {
                 var trackID = songIndex + 1;
-                logger.error(`DISABLED player for playlist|trackID: ${playlist}|${trackID} on API error '${YT_PLAYER_ERROR_NAMES[j1.adapter.amplitude.data.ytpGlobals.ytApiError]}'`);
+                logger.error('\n' + `DISABLED player for playlist|trackID: ${playlist}|${trackID} on API error '${YT_PLAYER_ERROR_NAMES[j1.adapter.amplitude.data.ytpGlobals.ytApiError]}'`);
 
                 // do nothing on API errors
                 return;
@@ -2768,13 +2732,14 @@ regenerate: true
               // in the outer else). All three branches assign the same
               // `songs` and `ytPlayer` from the same source, so the
               // conditional is dead code. Reduced to a single assignment.
+              //
               songs     = j1.adapter.amplitude.data.ytPlayers[playerID].songs;
               ytPlayer  = j1.adapter.amplitude.data.ytPlayers[playerID].player;
 
               ytPlayerCurrentTime = ytPlayer.getCurrentTime();
 
               var trackID = songIndex + 1;
-              logger.debug(`PAUSE video for PlayerSongContainer on playlist|trackID: ${playlist}|${trackID} at: ${ytPlayerCurrentTime}`);
+              logger.debug('\n' + `PAUSE video for PlayerSongContainer on playlist|trackID: ${playlist}|${trackID} at: ${ytPlayerCurrentTime}`);
 
               var playPauseButtonClass = `large-player-play-pause-${ytPlayerID}`;
               togglePlayPauseButton(playPauseButtonClass);
@@ -2797,7 +2762,6 @@ regenerate: true
               j1.adapter.amplitude.data.ytPlayers[playerID].activeIndex = songIndex;
               j1.adapter.amplitude.data.ytPlayers[playerID].videoID     = ytpVideoID;
 
-
               // save amplitudejs data for later use (e.g. events)
               // -----------------------------------------------------------------
               // J1 Amplitude optimizations #1
@@ -2806,6 +2770,7 @@ regenerate: true
               // string 'ytp'. Downstream consumers compare against
               // strings, not objects, so this assignment broke the
               // active-player check exactly while a YT video was paused.
+              //
               j1.modules.amplitudejs.data.activePlayer = 'ytp';
               j1.modules.amplitudejs.data.activeIndex = songIndex;
               j1.modules.amplitudejs.data.activePlaylist = playlist;
@@ -2814,7 +2779,6 @@ regenerate: true
               j1.modules.amplitudejs.data.ytp.players[playerID].player = ytPlayer;
               j1.modules.amplitudejs.data.ytp.players[playerID].activeIndex = songIndex;
               j1.modules.amplitudejs.data.ytp.players[playerID].ytpVideoID = ytpVideoID;
-
 
               // reset|update current time settings
               resetCurrentTimeContainerYTP(ytPlayer, playlist);
@@ -2847,16 +2811,12 @@ regenerate: true
               ytPlayer.playVideo();
               ytpSeekTo(ytPlayer, ytPlayerCurrentTime, true);
 
-              activeSong = getActiveSong();
-              // J1 Amplitude optimizations #1
-              // CLEANUP: Same dead conditional as in the pause branch
-              // above -- all three arms assigned the same values.
-              // Reduced to a single assignment.
-              songs     = j1.adapter.amplitude.data.ytPlayers[playerID].songs;
-              ytPlayer  = j1.adapter.amplitude.data.ytPlayers[playerID].player;
+              activeSong  = getActiveSong();
+              songs       = j1.adapter.amplitude.data.ytPlayers[playerID].songs;
+              ytPlayer    = j1.adapter.amplitude.data.ytPlayers[playerID].player;
 
               var trackID = songIndex + 1;
-              logger.debug(`PLAY video for PlayerSongContainer on playlist|trackID: ${playlist}|${trackID} at: ${ytPlayerCurrentTime}`);
+              logger.debug('\n' + `PLAY video for PlayerSongContainer on playlist|trackID: ${playlist}|${trackID} at: ${ytPlayerCurrentTime}`);
 
               var playPauseButtonClass = `large-player-play-pause-${ytPlayerID}`;
               togglePlayPauseButton(playPauseButtonClass);
@@ -2878,14 +2838,14 @@ regenerate: true
               // load (next) video
               // -------------------------------------------------------------------
               trackID = songIndex + 1;
-              logger.debug(`SWITCH video for PlayerSongContainer at trackID|VideoID: ${trackID}|${ytpVideoID}`);
+              logger.debug('\n' + `SWITCH video for PlayerSongContainer at trackID|VideoID: ${trackID}|${ytpVideoID}`);
               loadVideo(playlist, songIndex) 
 
               // wait for API error state
               setTimeout(() => {
                 if (j1.adapter.amplitude.data.ytpGlobals.ytApiError > 0) {
                   var trackID = songIndex + 1;
-                  logger.error(`DISABLED player for playlist|trackID: ${playlist}|${trackID} on API error '${YT_PLAYER_ERROR_NAMES[j1.adapter.amplitude.data.ytpGlobals.ytApiError]}'`);
+                  logger.error('\n' + `DISABLED player for playlist|trackID: ${playlist}|${trackID} on API error '${YT_PLAYER_ERROR_NAMES[j1.adapter.amplitude.data.ytpGlobals.ytApiError]}'`);
 
                   // do nothing on API errors
                   return;
@@ -2905,7 +2865,6 @@ regenerate: true
                 j1.adapter.amplitude.data.ytPlayers[playerID].activeIndex = songIndex;
                 j1.adapter.amplitude.data.ytPlayers[playerID].videoID     = ytpVideoID;
 
-
                 // save amplitudejs data for later use (e.g. events)
                 // -------------------------------------------------------------
                 j1.modules.amplitudejs.data.activePlayer = 'ytp';
@@ -2917,7 +2876,6 @@ regenerate: true
                 j1.modules.amplitudejs.data.ytp.players[playerID].player = ytPlayer;
                 j1.modules.amplitudejs.data.ytp.players[playerID].activeIndex = songIndex;
                 j1.modules.amplitudejs.data.ytp.players[playerID].ytpVideoID = ytpVideoID;
-
 
                 // reset|update current time settings
                 resetCurrentTimeContainerYTP(ytPlayer, playlist);
@@ -3041,30 +2999,35 @@ regenerate: true
           }
 
           volumeSliders[i].addEventListener('click', function(event) {
-            var activeSong = getActiveSong();
+            var activePlayerType  = j1.adapter.amplitude.data.activePlayer;
 
-            if (!activeSong) {
-               // do nothing if activeSong data is missing (failsafe)
-              return;
-            } 
-
-            var ytPlayer    = activeSong.player; 
-            var playerState = ytPlayer.getPlayerState();
-
-            if ((playerState === YT_PLAYER_STATE.PLAYING || playerState === YT_PLAYER_STATE.PAUSED) && ytPlayer !== undefined) {
-              var volumeSlider, volumeValue;
-              var currenVolume = ytPlayer.getVolume();
-
-              volumeSlider = this;
-              volumeValue  = 50;  // default
-
-              if (volumeSlider !== null) {
-                volumeValue = parseInt(volumeSlider.value);
+            if (j1.adapter.amplitude.data.activePlayer === 'atp') {
+              // do nothing (managed by amplitude)
+            } else {
+              var activeSong = getActiveSong();
+              if (!activeSong) {
+                // do nothing if activeSong data is missing (failsafe)
+                return;
               }
 
-              ytPlayer.setVolume(volumeValue);
-            } // END if ytPlayer
+              // var ytPlayer = activeSong.player; 
+              var ytPlayer    = j1.adapter.amplitude.data.ytPlayers[activeSong.playerID].player;
+              var playerState = ytPlayer.getPlayerState();
 
+              if ((playerState === YT_PLAYER_STATE.PLAYING || playerState === YT_PLAYER_STATE.PAUSED) && ytPlayer !== undefined) {
+                var volumeSlider, volumeValue;
+                var currenVolume = ytPlayer.getVolume();
+
+                volumeSlider = this;
+                volumeValue  = 50;  // default
+
+                if (volumeSlider !== null) {
+                  volumeValue = parseInt(volumeSlider.value);
+                }
+
+                ytPlayer.setVolume(volumeValue);
+              } // END if ytPlayer
+            }
           }); // END EventListener 'click'
         } // END if volumeSliders
       } // END if volumeSliders
@@ -3076,7 +3039,9 @@ regenerate: true
     for (var i=0; i<volumeMutes.length; i++) {
       if (volumeMutes[i].dataset.amplitudeSource === 'audio') {
         // do nothing (managed by adapter)
-      } else {    
+      } else {
+        var activePlayer = j1.adapter.amplitude.data.activePlayer;
+
         if (volumeMutes[i]) {
           var volumMute = volumeMutes[i];
           var sliderID  = volumeMutes[i].id;
@@ -3091,12 +3056,6 @@ regenerate: true
             } 
   
             var ytPlayer            = activeSong.player;
-            // J1 Amplitude optimizations #1
-            // CLEANUP: The original declared `var playerState` on the line
-            // immediately above and then re-declared it three lines later
-            // with a different value. The first assignment was unused;
-            // removed it. Also folded the magic-6 dance into the proper
-            // -1 lookup (Fix #1).
             var volumeSlider        = j1.adapter.amplitude.data.ytPlayers[playerID].volumeSlider;
             var currenVolume        = ytPlayer.getVolume();
             var playerVolumePreset  = parseInt(j1.adapter.amplitude.data.ytPlayers[playerID].playerSettings.volume_slider.preset_value);

@@ -130,24 +130,26 @@ Bootstrap (BS) grid breakpoints
 # --------------------------------------------------------- */
 
 @media screen and (max-width: 576px) {
-  .mini-player-container {
+  div.mini-player-container {
     max-width: -webkit-fill-available;
     max-width: -moz-available;
   }
 
-  .mini-player.volume-container {
+  div.mini-player.volume-container {
     appearance: none;
     padding-top: 20px;
   }
  
+  div.mini-player-volume-container
   input[type="range"].mini-player.amplitude-volume-slider::-webkit-slider-thumb {
     width: 30px;
     height: 30px;
     border-radius: 30px;
-    margin-top: -15px;    
+    margin-top: -2px;    
     background-color: var(--ajs-theme-uno--blue-500);
   }
 
+  div.mini-player-volume-container
   input[type="range"].mini-player.amplitude-volume-slider::-moz-slider-thumb {
     width: 30px;
     height: 30px;
