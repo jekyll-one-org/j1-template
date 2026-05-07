@@ -23,7 +23,7 @@ image:
   height:                               1280
 
 regenerate:                             false
-permalink:                              /pages/public/tour/themes/
+permalink:                              /pages/public/tour/rouge/
 
 resources:                              [ lightbox ]
 resource_options:
