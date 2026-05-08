@@ -16,7 +16,7 @@ keywords: >
                                         audio, amplitude
 
 categories:                             [ Tour ]
-tags:                                   [ Audio, HTML, Amplitude ]
+tags:                                   [ Audio, Amplitude ]
 
 image:
   path:                                 /assets/image/module/attic/1920x1280/alexey-ruban.jpg
@@ -30,7 +30,7 @@ regenerate:                             false
 personalization:                        true
 permalink:                              /pages/public/tour/audio_data/
 
-resources:                              [ Amplitude ]
+resources:                              [ amplitudejs ]
 resource_options:
   - toccer:
       collapseDepth:                    2
@@ -127,11 +127,12 @@ On phones and tablets, *touch* gestures replace mouse clicks, so the
 players feel natural to use.
 ====
 
-=== Native player
 [role="mt-5"]
+=== Native player
 
 lorem:sentences[5]
 
+[role="mt-4"]
 ==== Mini player
 
 A *mini player* is a small player that shows only the basic controls --
@@ -147,7 +148,7 @@ and any website that wants to play audio without taking over the whole
 screen.
 
 
-[role="mt-5"]
+[role="mt-4"]
 ==== Compact player
 
 The *compact player* is the default. It shows more controls than the
@@ -162,7 +163,7 @@ You can even place several compact players side by side on the same
 page, for example to offer a few sample tracks.
 
 
-[role="mt-5"]
+[role="mt-4"]
 ==== Large player
 
 The *large player* shows the full set of audio player controls in one
