@@ -267,6 +267,22 @@ tag::urls[]
 :url-jekyll-sass-converter--gh-repo:              //github.com/jekyll/jekyll-sass-converter/
 :url-jekyll-sitemap--gh-repo:                     //github.com/jekyll/jekyll-sitemap/
 
+:url-tour--data-slider-picker:                    /pages/public/tour/data_slider_picker
+:url-tour--image_headers:                         /pages/public/tour/image_header
+:url-tour--readme-first:                          /pages/public/learn/read_me_first/
+:url-tour--image_data:                            /pages/public/tour/image_data/
+:url-tour--audio_data:                            /pages/public/tour/audio_data/
+:url-tour--video_data:                            /pages/public/tour/video_data/
+:url-tour--cards:                                 /pages/public/tour/cards/
+:url-tour--typography:                            /pages/public/tour/typography/
+:url-tour--asciidoc-extensions:                   /pages/public/tour/asciidoc_extensions/
+:url-tour--rouge-hightlighter:                    /pages/public/tour/rouge/
+:url-tour--extended-modals:                       /pages/public/tour/modals/
+:url-tour--icon-fonts:                            /pages/public/tour/mdi_icon_font/
+:url-tour--responsive-tables:                     /pages/public/tour/responsive_tables/
+:url-tour--themes:                                /pages/public/tour/themes/
+:url-tour--site_search:                           /pages/public/tour/site_search/
+
 :url-jquery--home:                                //jquery.com/
 
 :url-js-yaml--gh-repo:                            //github.com/nodeca/js-yaml/

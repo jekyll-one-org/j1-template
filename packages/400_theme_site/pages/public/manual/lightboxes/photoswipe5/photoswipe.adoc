@@ -52,6 +52,7 @@ resource_options:
 
 // Attribute settings for page content control (e.g includes)
 //
+:includedir:                            _includes
 :documentdir:                           _includes/documents
 
 

@@ -481,14 +481,14 @@ prefix every word with a plus sign:
 [role="mt-5"]
 == What next
 
-You have reached the end of the J1 tour. We hope you enjoyed it and
-got a good first impression of what the J1 Template can do for your
-website.
+You have reached the end of the tour through J1 Template. We hope you
+enjoyed it and got a good first impression of what the J1 Template can
+do for your website.
 
-If you want to learn more, the next step is *J1 in a Day* -- a
-*tutorial* that teaches you how to build a modern website with the J1
-Template. The tutorial covers the basics of both *Jekyll* and *J1*
-that every site owner should know.
+If you want to learn more, the next step is *J1 in a Day* -- a *tutorial*
+that teaches you how to build a modern website with the J1 Template. The
+tutorial covers the basics of both *Jekyll* and *J1* that every site owner
+should know.
 
 Jekyll (and J1) work differently from a classic Content Management
 System (CMS) like WordPress or Drupal. If you have used a CMS before,
