@@ -15,7 +15,6 @@
 
 /* 1. Base
 # ------------------------------------------------------------------------------ */
-
 .mini-player {
   -webkit-font-smoothing: antialiased;
 }
@@ -30,7 +29,6 @@
 
 /* 2. Components
 # ------------------------------------------------------------------------------ */
-
 .mini-player.control-container.meta-container {
   text-align: center;
   margin-left: 90px;
@@ -121,11 +119,6 @@ input[type="range"].amplitude-volume-slider::-webkit-slider-thumb {
   background-color: var(--ajs-theme-uno--blue-500);
 }
 
-/* claude - Amplitude/large player styles (mobile) #1
-   `::-moz-slider-thumb` is not a valid pseudo-element. Firefox's range
-   thumb is `::-moz-range-thumb`. The original selector was invalid, so
-   Firefox dropped the rule and the thumb was never styled in Firefox
-   (desktop or mobile). */
 div.mini-player-volume-container
 input[type="range"].amplitude-volume-slider::-moz-range-thumb {
   width: 30px;
@@ -157,14 +150,14 @@ Bootstrap (BS) grid breakpoints
     max-width: -webkit-fill-available;
     max-width: -moz-available;
   }
- 
-input[type=range].mini-player.amplitude-volume-slider {
-    appearance: none;
-    float: left;
-    margin-top: -22px;
-    margin-left: 16px;
-    width: 90%;
-}
+
+  input[type=range].mini-player.amplitude-volume-slider {
+      appearance: none;
+      float: left;
+      margin-top: -5px;
+      margin-left: -6px;
+      width: 90%;
+  }
 
   input[type=range].mini-player.amplitude-volume-slider::-webkit-slider-thumb {
     appearance: none;
@@ -177,10 +170,6 @@ input[type=range].mini-player.amplitude-volume-slider {
     background-color: var(--ajs-theme-uno--blue-500);
   }
 
-  /* claude - Amplitude/large player styles (mobile) #1
-     Same `::-moz-slider-thumb` typo as in the base block — replaced with
-     the real Firefox pseudo-element `::-moz-range-thumb` so the rule is
-     no longer dropped as invalid. */
   input[type=range].mini-player.amplitude-volume-slider::-moz-range-thumb {
     appearance: none;
     -moz-appearance: none;
