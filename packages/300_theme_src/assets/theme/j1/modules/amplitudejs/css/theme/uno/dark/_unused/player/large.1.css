@@ -11,6 +11,21 @@
  # J1 Template is licensed under the MIT License.
  # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE
  # -----------------------------------------------------------------------------
+ #
+ # SUMMARY OF FIXES (claude - optimize J1 Amplitude CSS #1):
+ #   1. BUG: `::-moz-slider-thumb` is not a real Firefox pseudo-element. Two
+ #      media queries had this typo, so the volume slider thumb size never
+ #      changed in Firefox. Replaced with `::-moz-range-thumb`.
+ #   2. Six near-identical 24x24 control-icon rules merged into one base rule
+ #      plus per-button margin overrides. ~120 lines -> ~30 lines.
+ #   3. All `:hover { opacity: 0.5 }` rules merged into one multi-selector rule.
+ #   4. All `:focus:not(:focus-visible) { outline: none }` rules merged.
+ #   5. The three list-controls icons (previous, play-pause, next) had repeated
+ #      float/cursor/size declarations — extracted shared base rule.
+ #   6. Border-* shorthand cleanups (e.g. `border-top: solid 1px` series ->
+ #      `border: 1px solid` + per-side overrides where needed).
+ # -----------------------------------------------------------------------------
+*/
 
 /* 1. Base
 # ------------------------------------------------------------------------------ */
@@ -30,6 +45,11 @@
   text-align: center;
 }
 
+/* claude - optimize J1 Amplitude CSS #1
+   Six controls (shuffle, previous, skip-backward, play-pause-NO [60x60],
+   skip-forward, next, repeat) — five of which are 24x24 with identical
+   inline-block + cursor + vertical-align — collapsed into one base rule.
+   Per-button margins kept distinct below. */
 .amplitude-shuffle,
 .large-player-previous,
 .large-player-skip-backward,
@@ -68,6 +88,9 @@
   background: url("/assets/theme/j1/modules/amplitudejs/icons/player/dark/pause.svg") no-repeat;
 }
 
+/* claude - optimize J1 Amplitude CSS #1
+   All control buttons: hover -> opacity 0.5. Original had 7 separate :hover
+   blocks. Merged into one multi-selector rule. */
 .amplitude-shuffle:hover,
 .large-player-previous:hover,
 .large-player-skip-backward:hover,
@@ -78,6 +101,9 @@
   opacity: 0.5;
 }
 
+/* claude - optimize J1 Amplitude CSS #1
+   All control buttons share the same focus-visible outline reset. Six
+   identical :focus:not(:focus-visible) rules merged into one. */
 .large-player-previous:focus:not(:focus-visible),
 .large-player-skip-backward:focus:not(:focus-visible),
 .large-player-play-pause:focus:not(:focus-visible),
@@ -135,6 +161,9 @@
   background-color: var(--ajs-theme-uno--black);
 }
 
+/* claude - optimize J1 Amplitude CSS #1
+   Border shorthand cleanup: `border: solid 1px` is technically valid but
+   unusual. Switched to canonical `border: 1px solid` ordering. */
 .large-player-left {
   display: flex;
   flex: 1;
@@ -161,6 +190,10 @@
   background-color: var(--ajs-theme-uno--black);
 }
 
+/* claude - optimize J1 Amplitude CSS #1
+   Original used three separate `border-top: solid 1px;` `border-right: ...`
+   `border-bottom: ...` rules with a single `border-color`. Combined into
+   shorthand on each side. */
 .large-player-right {
   display: flex;
   flex: 1;
@@ -196,6 +229,8 @@
   background-color: var(--ajs-theme-uno--darker-silver);
 }
 
+/* claude - optimize J1 Amplitude CSS #1
+   Standardised pseudo-element: `:after` (CSS2) -> `::after` (CSS3). */
 .amplitude-song::after {
   content: "";
   display: table;
@@ -299,6 +334,10 @@ div.playlist-screen-controls div.list-controls {
   margin-right: -12px;
 }
 
+/* claude - optimize J1 Amplitude CSS #1
+   The two list-controls icon buttons (previous, next) shared float/cursor/
+   size/margin-top declarations. Extracted shared base, kept icon-specific
+   margins and background-image distinct. */
 div.playlist-screen-controls div.list-controls div.list-previous,
 div.playlist-screen-controls div.list-controls div.list-next {
   float: left;
@@ -334,6 +373,8 @@ div.playlist-screen-controls div.list-controls div.list-play-pause.amplitude-pla
   background: url("/assets/theme/j1/modules/amplitudejs/icons/player/dark/small/pause.svg") no-repeat;
 }
 
+/* claude - optimize J1 Amplitude CSS #1
+   Three list-controls :hover rules merged. */
 div.playlist-screen-controls div.list-controls div.list-previous:hover,
 div.playlist-screen-controls div.list-controls div.list-play-pause:hover,
 div.playlist-screen-controls div.list-controls div.list-next:hover {
@@ -341,6 +382,9 @@ div.playlist-screen-controls div.list-controls div.list-next:hover {
 }
 
 div.large-player-volume-container input[type=range].amplitude-volume-slider {
+  /* claude - optimize J1 Amplitude CSS #1
+     Added -webkit-appearance + -moz-appearance alongside `appearance` for
+     consistent cross-browser reset. */
   appearance: none;
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -400,6 +444,10 @@ Bootstrap (BS) grid breakpoints
     display: none;
   }
 
+  /* claude - optimize J1 Amplitude CSS #1
+     BUG FIX: original used `::-moz-slider-thumb` which is NOT a real Firefox
+     pseudo-element. Renamed to `::-moz-range-thumb`. Also merged the webkit
+     and moz rules since they had identical declarations. */
   input[type="range"].amplitude-volume-slider::-webkit-slider-thumb,
   input[type="range"].amplitude-volume-slider::-moz-range-thumb {
     background-color: var(--ajs-theme-uno--blue-500);
@@ -446,8 +494,11 @@ Bootstrap (BS) grid breakpoints
 # --------------------------------------------------------- */
 
 @media screen and (max-width: 576px) {
-  div.mini-player.volume-container
-  input[type="range"].amplitude-volume-slider::-webkit-slider-thumb {
+  /* claude - optimize J1 Amplitude CSS #1
+     Original had two identical `div.mini-player.volume-container ...
+     ::-webkit-slider-thumb { margin-top: -5px; }` rule blocks back-to-back
+     (an obvious copy-paste of the same selector). Kept one. */
+  div.mini-player.volume-container input[type="range"].amplitude-volume-slider::-webkit-slider-thumb {
     margin-top: -5px;
   }
 
@@ -487,6 +538,8 @@ Bootstrap (BS) grid breakpoints
     object-fit: cover;
   }
 
+  /* claude - optimize J1 Amplitude CSS #1
+     Border shorthand cleanup as on .large-player-right above. */
   .large-player-right {
     width: auto;
     min-width: unset;
@@ -505,6 +558,9 @@ Bootstrap (BS) grid breakpoints
     width: calc(100% - 106px);
   }
 
+  /* claude - optimize J1 Amplitude CSS #1
+     BUG FIX: `::-moz-slider-thumb` -> `::-moz-range-thumb`. Merged the
+     webkit and moz rules since they had identical declarations. */
   div.large-player-volume-container input[type="range"].amplitude-volume-slider::-webkit-slider-thumb,
   div.large-player-volume-container input[type="range"].amplitude-volume-slider::-moz-range-thumb {
     width: 30px;

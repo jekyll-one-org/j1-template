@@ -33,7 +33,7 @@ permalink:                              /pages/public/tour/audio_data/
 resources:                              [ amplitudejs ]
 resource_options:
   - toccer:
-      collapseDepth:                    2
+      collapseDepth:                    4
   - attic:
       opacity:                          1
       padding_top:                      600  
@@ -130,9 +130,17 @@ players feel natural to use.
 [role="mt-5"]
 === Native player
 
-lorem:sentences[5]
+Native players are the built-in Amplitude players for the J1 Template.
+They do not require plugins to play audio files, such as MP3, and serve
+as a replacement for the HTML5 audio element.
 
-[role="mt-4"]
+[NOTE]
+====
+See <<YouTube player>> for players using the *YouTube plugin* to play
+the *audio part* of videos provided by the YouTube platform.
+====
+
+[role="mt-5"]
 ==== Mini player
 
 A *mini player* is a small player that shows only the basic controls --
@@ -179,7 +187,7 @@ best choice when audio is the main focus of the page.
 
 
 [role="mt-5"]
-=== Player over YouTube
+=== YouTube player
 
 You can also use the Amplitude player to play the *audio track* of a
 *YouTube video*. The J1 Template adds a small plugin called *ytp* to

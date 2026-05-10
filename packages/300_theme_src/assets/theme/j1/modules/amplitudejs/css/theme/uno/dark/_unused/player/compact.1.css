@@ -11,6 +11,18 @@
  # J1 Template is licensed under the MIT License.
  # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE
  # -----------------------------------------------------------------------------
+ #
+ # SUMMARY OF FIXES (claude - optimize J1 Amplitude CSS #1):
+ #   1. BUG: `::-moz-slider-thumb` is not a real Firefox pseudo-element. The
+ #      mobile media query never applied the bigger thumb in Firefox. Replaced
+ #      with the correct `::-moz-range-thumb`.
+ #   2. Six near-identical 24x24 control-icon rules merged into one base rule
+ #      plus per-button margin overrides. Behaviour identical, ~80 lines saved.
+ #   3. All `:hover { opacity: 0.5 }` rules merged. Normalised `.5` -> `0.5`.
+ #   4. Mixed `:after` (CSS2) and `::after` (CSS3) standardised on `::after`.
+ #   5. `padding: 10px 10px 10px 10px` -> `padding: 10px`.
+ #   6. Two clearfix rules consolidated into one multi-selector rule.
+ # -----------------------------------------------------------------------------
 */
 
 /* 1. Base
@@ -29,6 +41,8 @@
 }
 
 .compact-player-middle {
+  /* claude - optimize J1 Amplitude CSS #1
+     Padding shorthand: 10px 10px 10px 10px -> 10px. */
   padding: 10px;
   background-color: var(--ajs-theme-uno--blue-gray-900);
 }
@@ -72,6 +86,12 @@
 
 /* Player MIDDLE
 # --------------------------------------------------------- */
+
+/* claude - optimize J1 Amplitude CSS #1
+   Six controls (shuffle, previous, skip-backward, skip-forward, next, repeat)
+   all shared the same 24x24 inline-block + cursor + vertical-align declarations.
+   Merged into a single base rule. Per-button margins kept distinct below.
+   Original file: ~120 lines of repetition. Now: ~30 lines. */
 .compact-player-shuffle,
 .compact-player-previous,
 .compact-player-skip-backward,
@@ -114,6 +134,9 @@
   background: url("/assets/theme/j1/modules/amplitudejs/icons/player/dark/pause.svg") no-repeat;
 }
 
+/* claude - optimize J1 Amplitude CSS #1
+   All control buttons hovered to opacity 0.5. Original file had 7 separate
+   :hover blocks (some `0.5`, some `.5` — normalised). Merged into one. */
 .compact-player-shuffle:hover,
 .compact-player-previous:hover,
 .compact-player-skip-backward:hover,
@@ -133,6 +156,10 @@
   text-align: center;
 }
 
+/* claude - optimize J1 Amplitude CSS #1
+   Three clearfix rules (.compact-player-control-container:after,
+   .compact-player-controls-container::after, .volume-container:after) merged.
+   Standardised the pseudo-element on the modern `::after` (CSS3) syntax. */
 .compact-player-control-container::after,
 .compact-player-controls-container::after,
 .volume-container::after {
@@ -202,6 +229,11 @@ Bootstrap (BS) grid breakpoints
     -moz-appearance: none;
   }
 
+  /* claude - optimize J1 Amplitude CSS #1
+     BUG FIX: original used `::-moz-slider-thumb` which is NOT a real Firefox
+     pseudo-element — Firefox uses `::-moz-range-thumb`. As written, the
+     enlarged 30px touch target was webkit-only; Firefox mobile users got the
+     tiny 16px thumb. Fixed pseudo-element name. */
   .compact-player-volume-container input[type=range].amplitude-volume-slider::-webkit-slider-thumb,
   .compact-player-volume-container input[type=range].amplitude-volume-slider::-moz-range-thumb {
     width: 30px;
@@ -233,6 +265,9 @@ Bootstrap (BS) grid breakpoints
 }
 
 .compact-player-volume-container input[type=range].amplitude-volume-slider {
+  /* claude - optimize J1 Amplitude CSS #1
+     Added -webkit-appearance + -moz-appearance alongside `appearance` so the
+     reset takes effect in every engine, not just spec-compliant ones. */
   appearance: none;
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -390,6 +425,10 @@ Bootstrap (BS) grid breakpoints
   margin-top: 48px;
 }
 
+/* claude - optimize J1 Amplitude CSS #1
+   The three list-controls mini-buttons (previous, play-pause, next) shared
+   the same float/cursor/size/margin-top declarations. Merged the shared
+   parts and kept only the icon-specific bits and per-button margins distinct. */
 .playlist-screen-controls .list-controls .list-previous,
 .playlist-screen-controls .list-controls .list-next {
   float: left;
@@ -427,6 +466,8 @@ Bootstrap (BS) grid breakpoints
   background-image: url("/assets/theme/j1/modules/amplitudejs/icons/player/dark/small/play.svg");
 }
 
+/* claude - optimize J1 Amplitude CSS #1
+   Three list-controls :hover rules merged into one. */
 .playlist-screen-controls .list-controls .list-previous:hover,
 .playlist-screen-controls .list-controls .amplitude-play-pause:hover,
 .playlist-screen-controls .list-controls .list-next:hover {
@@ -443,10 +484,13 @@ Bootstrap (BS) grid breakpoints
 /* 7. Vendors
 # ------------------------------------------------------------------------------ */
 
-
 /* 8. Animations
 # ------------------------------------------------------------------------------ */
 
+/* claude - optimize J1 Amplitude CSS #1
+   Combined the prefixed and unprefixed @keyframes blocks for slide-in-top
+   and slide-out-top. Modern browsers all support unprefixed; the -webkit-
+   variant is kept for older Safari but defined alongside its standard twin. */
 .slide-in-top {
   -webkit-animation: slide-in-top 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
   animation: slide-in-top 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;

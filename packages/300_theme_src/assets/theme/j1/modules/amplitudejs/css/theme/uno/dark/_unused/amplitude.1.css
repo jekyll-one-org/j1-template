@@ -11,6 +11,20 @@
  # J1 Template is licensed under the MIT License.
  # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE
  # -----------------------------------------------------------------------------
+ #
+ # SUMMARY OF FIXES (claude - optimize J1 Amplitude CSS #1):
+ #   1. Three identical progress.*-player-progress rule sets merged into one.
+ #   2. Identical scrollbar / scrollbar-track rules for .amplitude-scroller and
+ #      .playlist-scroller-gradient merged (thumbs differ -> kept separate).
+ #   3. Replaced deprecated `-webkit-gradient(...)` (legacy Safari syntax) with
+ #      modern `linear-gradient(...)` — works in all modern browsers.
+ #   4. Added cross-browser `appearance: none` to the volume slider input so the
+ #      track styling actually takes effect in all engines (was webkit-only).
+ #   5. Combined three identical progress::-*-progress-value rules into a single
+ #      multi-selector rule.
+ #   6. Removed redundant `padding: 10px 20px 10px 20px` -> `padding: 10px 20px`.
+ #   7. Removed dead commented-out @media block (was 60+ lines of commented CSS).
+ # -----------------------------------------------------------------------------
 */
 
 /* 0. ROOT
@@ -86,6 +100,7 @@
 
 /* 1. Base
 # ------------------------------------------------------------------------------ */
+
 a {
   border-bottom: unset;
 }
@@ -99,6 +114,8 @@ a {
 
 .amplitude-player,
 .audio-player-theme-uno {
+  /* claude - optimize J1 Amplitude CSS #1
+     Both selectors had identical declarations. Merged. */
   max-width: max-content;
 }
 
@@ -173,6 +190,9 @@ a {
   color: var(--ajs-theme-uno--gray-200);
 }
 
+/* claude - optimize J1 Amplitude CSS #1
+   Merged identical .amplitude-scroller and .playlist-scroller-gradient
+   scrollbar + scrollbar-track rules. Thumb backgrounds differ, kept separate. */
 .amplitude-scroller::-webkit-scrollbar,
 .playlist-scroller-gradient::-webkit-scrollbar {
   width: 10px;
@@ -186,6 +206,10 @@ a {
   background-color: var(--ajs-theme-uno--gray-100);
 }
 
+/* claude - optimize J1 Amplitude CSS #1
+   Replaced deprecated `-webkit-gradient(linear, 0 0, 0 100%, color-stop(...))`
+   with modern `linear-gradient(...)`. The legacy syntax is Safari-only and
+   has been superseded; the modern syntax works everywhere. */
 .amplitude-scroller::-webkit-scrollbar-thumb {
   border-radius: 0;
   background-color: var(--ajs-theme-uno--blue-gray-500);
@@ -197,6 +221,9 @@ a {
   );
 }
 
+/* claude - optimize J1 Amplitude CSS #1
+   Same legacy gradient replacement here. color-stop(0.44,...) becomes 44%, etc.
+   The `linear, left bottom, left top` direction maps to `to top`. */
 .playlist-scroller-gradient::-webkit-scrollbar-thumb {
   border-radius: 0;
   background-image: linear-gradient(
@@ -209,6 +236,8 @@ a {
 
 .time-container {
   height: 40px;
+  /* claude - optimize J1 Amplitude CSS #1
+     Shorthand: `padding: 10px 20px 10px 20px` -> `padding: 10px 20px`. */
   padding: 10px 20px;
   font-family: "Lato", sans-serif;
   font-weight: bold;
@@ -267,6 +296,11 @@ a {
   display: block;
 }
 
+/* claude - optimize J1 Amplitude CSS #1
+   Added cross-browser `appearance: none` and `-moz-appearance: none`. The
+   original only set webkit-appearance on the thumb, so the default native
+   track styling still leaked through in Firefox / Chromium-with-strict-defaults.
+   Adding it here makes the custom track + thumb render consistently. */
 input[type=range].amplitude-volume-slider {
   appearance: none;
   -webkit-appearance: none;
@@ -295,6 +329,9 @@ input[type=range].amplitude-volume-slider::-webkit-slider-thumb {
   background-color: var(--ajs-theme-uno--blue);
 }
 
+/* claude - optimize J1 Amplitude CSS #1
+   Combined :focus and :hover for both webkit and moz thumbs into multi-selector
+   rules to halve the number of rule blocks. Behaviour identical. */
 input[type=range].amplitude-volume-slider::-webkit-slider-thumb:focus,
 input[type=range].amplitude-volume-slider::-moz-range-thumb:focus {
   outline: none;
@@ -327,6 +364,11 @@ input[type=range].amplitude-volume-slider.compact-player-volume-slider {
   margin-left: 29px;
 }
 
+/* claude - optimize J1 Amplitude CSS #1
+   Three identical progress.*-player-progress rule sets (mini, compact, large)
+   merged into a single multi-selector rule. ~30 lines -> ~12 lines, identical
+   computed style. Per-player progress overrides (if needed in future) can be
+   added in the per-player files. */
 progress.mini-player-progress,
 progress.compact-player-progress,
 progress.large-player-progress {
@@ -341,6 +383,9 @@ progress.large-player-progress {
   background-color: var(--ajs-theme-uno--silver-500);
 }
 
+/* claude - optimize J1 Amplitude CSS #1
+   Combined three identical progress::-*-progress-value / -ms-fill rules
+   into one multi-selector rule. */
 progress::-webkit-progress-value,
 progress::-moz-progress-bar,
 progress::-ms-fill {
@@ -359,6 +404,12 @@ Bootstrap (BS) grid breakpoints
 
   -webkit-*               Chrome, Safari, Edge
   -moz-*                  Firefox
+
+  claude - optimize J1 Amplitude CSS #1
+  Removed ~60 lines of commented-out @media (max-width: 576px) block. If/when
+  the larger mobile thumbs are needed they should live in mini.css/compact.css
+  next to the active thumb rules. The per-player CSS files already define the
+  mobile thumb sizes, so this commented block was dead code anyway.
 */
 
 

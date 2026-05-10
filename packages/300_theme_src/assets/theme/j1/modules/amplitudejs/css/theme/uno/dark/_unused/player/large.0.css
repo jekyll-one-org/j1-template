@@ -1,6 +1,6 @@
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/modules/amplitudejs/css/theme/uno/dark/player/large.css (1)
+ # ~/assets/theme/j1/modules/amplitudejs/css/theme/uno/dark/player/large.css (0)
  # AmplitudeJS v5.3.2 Large Player for J1 Template
  #
  # Product/Info:
@@ -11,6 +11,7 @@
  # J1 Template is licensed under the MIT License.
  # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE
  # -----------------------------------------------------------------------------
+*/
 
 /* 1. Base
 # ------------------------------------------------------------------------------ */
@@ -30,26 +31,55 @@
   text-align: center;
 }
 
-.amplitude-shuffle,
-.large-player-previous,
-.large-player-skip-backward,
-.large-player-skip-forward,
-.large-player-next,
-.amplitude-repeat {
+.amplitude-shuffle {
+  display: inline-block;
+  user-select: none;
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  vertical-align: middle;
+  margin-right: 25px;
+}
+
+.amplitude-shuffle:hover {
+  opacity: 0.5;
+}
+
+.large-player-previous {
+  display: inline-block;
+  user-select: none;
+  height: 24px;
+  width: 24px;
+  cursor: pointer;
+  vertical-align: middle;
+  margin-right: 20px;
+}
+
+.large-player-previous:hover {
+  opacity: 0.5;
+}
+
+.large-player-previous:focus:not(:focus-visible) {
+  outline: none;
+}
+
+.large-player-skip-backward {
   display: inline-block;
   user-select: none;
   cursor: pointer;
-  width: 24px;
   height: 24px;
+  width: 24px;
+  margin-right: 20px;
   vertical-align: middle;
 }
 
-/* Per-button margins (the only thing that actually differs) */
-.amplitude-shuffle             { margin-right: 25px; }
-.large-player-previous         { margin-right: 20px; }
-.large-player-skip-backward    { margin-right: 20px; }
-.large-player-skip-forward     { margin-left: 20px; }
-.large-player-next             { margin-right: 25px; margin-left: 20px; }
+.large-player-skip-backward:focus:not(:focus-visible) {
+  outline: none;
+}
+
+.large-player-skip-backward:hover {
+  opacity: 0.5;
+}
 
 .large-player-play-pause {
   display: inline-block;
@@ -60,6 +90,14 @@
   vertical-align: middle;
 }
 
+.large-player-play-pause:hover {
+  opacity: 0.5;
+}
+
+.large-player-play-pause:focus:not(:focus-visible) {
+  outline: none;
+}
+
 .large-player-play-pause.amplitude-paused {
   background: url("/assets/theme/j1/modules/amplitudejs/icons/player/dark/play.svg") no-repeat;
 }
@@ -68,23 +106,58 @@
   background: url("/assets/theme/j1/modules/amplitudejs/icons/player/dark/pause.svg") no-repeat;
 }
 
-.amplitude-shuffle:hover,
-.large-player-previous:hover,
-.large-player-skip-backward:hover,
-.large-player-play-pause:hover,
-.large-player-skip-forward:hover,
-.large-player-next:hover,
-.amplitude-repeat:hover {
+.large-player-skip-forward {
+  display: inline-block;
+  user-select: none;
+  cursor: pointer;
+  height: 24px;
+  width: 24px;
+  margin-left: 20px;
+  vertical-align: middle;
+}
+
+.large-player-skip-forward:focus:not(:focus-visible) {
+  outline: none;
+}
+
+.large-player-skip-forward:hover {
   opacity: 0.5;
 }
 
-.large-player-previous:focus:not(:focus-visible),
-.large-player-skip-backward:focus:not(:focus-visible),
-.large-player-play-pause:focus:not(:focus-visible),
-.large-player-skip-forward:focus:not(:focus-visible),
-.large-player-next:focus:not(:focus-visible),
+.large-player-next {
+  display: inline-block;
+  user-select: none;
+  height: 24px;
+  width: 24px;
+  cursor: pointer;
+  vertical-align: middle;
+  margin-right: 25px;
+  margin-left: 20px;
+}
+
+.large-player-next:focus:not(:focus-visible) {
+  outline: none;
+}
+
+.large-player-next:hover {
+  opacity: 0.5;
+}
+
+.amplitude-repeat {
+  display: inline-block;
+  user-select: none;
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  vertical-align: middle;
+}
+
 .amplitude-repeat:focus:not(:focus-visible) {
   outline: none;
+}
+
+.amplitude-repeat:hover {
+  opacity: 0.5;
 }
 
 .large-player-playlist-header {
@@ -141,7 +214,8 @@
   flex-direction: column;
   width: 50vw;
   max-width: fit-content;
-  border: 1px solid var(--ajs-theme-uno--medium-silver);
+  border: solid 1px;
+  border-color: var(--ajs-theme-uno--medium-silver);
   background-color: var(--ajs-theme-uno--darker-silver) !important;
 }
 
@@ -167,9 +241,10 @@
   flex-direction: column;
   flex-grow: 1;
   width: 50vw;
-  border-top: 1px solid var(--ajs-theme-uno--medium-silver);
-  border-right: 1px solid var(--ajs-theme-uno--medium-silver);
-  border-bottom: 1px solid var(--ajs-theme-uno--medium-silver);
+  border-top: solid 1px;
+  border-right: solid 1px;
+  border-bottom: solid 1px;
+  border-color: var(--ajs-theme-uno--medium-silver);
   background-color: var(--ajs-theme-uno--darker-silver) !important;
 }
 
@@ -196,7 +271,7 @@
   background-color: var(--ajs-theme-uno--darker-silver);
 }
 
-.amplitude-song::after {
+.amplitude-song:after {
   content: "";
   display: table;
   clear: both;
@@ -208,22 +283,22 @@
 }
 
 .audio-artist {
-  opacity: .5;
-  font-size: 16px;
-  font-weight: 600;
-  line-height: 18px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  color: var(--ajs-theme-uno--gray-300);
+    opacity: .5;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 18px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: var(--ajs-theme-uno--gray-300);
 }
 
 .audio-artist.large-player-item-header {
-  font-size: 18px;
-  font-family: "Lato", sans-serif;
-  font-weight: 600;
-  color: var(--ajs-theme-uno--white);
-  opacity: 1;
+    font-size: 18px;
+    font-family: "Lato", sans-serif;
+    font-weight: 600;
+    color: var(--ajs-theme-uno--white);
+    opacity: 1;
 }
 
 .audio-title {
@@ -257,7 +332,7 @@
 .audio-rating {
   float: right;
   margin-top: 24px;
-  margin-right: -66px;
+  margin-right: -66px;  
 }
 
 .song-name {
@@ -271,7 +346,9 @@
   color: var(--ajs-theme-uno--white);
 }
 
-.screen-controls-large-player .playlist-screen-meta-container .song-artist-album {
+.screen-controls-large-player
+.playlist-screen-meta-container
+.song-artist-album {
   opacity: 0.5;
   font-family: "Lato", sans-serif;
   font-size: 16px;
@@ -279,14 +356,18 @@
   color: var(--ajs-theme-uno--white);
 }
 
-.screen-controls-large-player .playlist-screen-meta-container .audio-rating {
+.screen-controls-large-player
+.playlist-screen-meta-container
+.audio-rating {
   display: flex;
   float: right;
-  margin-top: 0;
+  margin-top: 0px;
   margin-right: -94px;
 }
 
-.screen-controls-large-player .playlist-screen-meta-container .amplitude-audio-info {
+.screen-controls-large-player
+.playlist-screen-meta-container
+.amplitude-audio-info {  
   float: right;
   margin-top: -10px;
   margin-right: -126px;
@@ -299,24 +380,22 @@ div.playlist-screen-controls div.list-controls {
   margin-right: -12px;
 }
 
-div.playlist-screen-controls div.list-controls div.list-previous,
-div.playlist-screen-controls div.list-controls div.list-next {
+div.playlist-screen-controls div.list-controls div.list-previous {
   float: left;
   cursor: pointer;
   width: 15px;
   height: 17px;
-  margin-top: 4px;
-  background-repeat: no-repeat;
-}
-
-div.playlist-screen-controls div.list-controls div.list-previous {
   margin-right: 15px;
-  background-image: url("/assets/theme/j1/modules/amplitudejs/icons/player/dark/small/previous.svg");
+  margin-top: 4px;
+  background: url("/assets/theme/j1/modules/amplitudejs/icons/player/dark/small/previous.svg") no-repeat;
 }
 
-div.playlist-screen-controls div.list-controls div.list-next {
-  margin-left: 15px;
-  background-image: url("/assets/theme/j1/modules/amplitudejs/icons/player/dark/small/next.svg");
+div.playlist-screen-controls div.list-controls div.list-previous:hover {
+  opacity: 0.5;
+}
+
+div.playlist-screen-controls div.list-controls div.list-play-pause.amplitude-paused {
+  background: url("/assets/theme/j1/modules/amplitudejs/icons/player/dark/small/play.svg") no-repeat;
 }
 
 div.playlist-screen-controls div.list-controls div.list-play-pause {
@@ -326,24 +405,31 @@ div.playlist-screen-controls div.list-controls div.list-play-pause {
   height: 24px;
 }
 
-div.playlist-screen-controls div.list-controls div.list-play-pause.amplitude-paused {
-  background: url("/assets/theme/j1/modules/amplitudejs/icons/player/dark/small/play.svg") no-repeat;
+div.playlist-screen-controls div.list-controls div.list-play-pause:hover {
+  opacity: 0.5;
 }
 
 div.playlist-screen-controls div.list-controls div.list-play-pause.amplitude-playing {
   background: url("/assets/theme/j1/modules/amplitudejs/icons/player/dark/small/pause.svg") no-repeat;
 }
 
-div.playlist-screen-controls div.list-controls div.list-previous:hover,
-div.playlist-screen-controls div.list-controls div.list-play-pause:hover,
+div.playlist-screen-controls div.list-controls div.list-next {
+  float: left;
+  cursor: pointer;
+  width: 15px;
+  height: 17px;
+  margin-left: 15px;
+  margin-top: 4px;
+  background: url("/assets/theme/j1/modules/amplitudejs/icons/player/dark/small/next.svg") no-repeat;
+}
+
 div.playlist-screen-controls div.list-controls div.list-next:hover {
   opacity: 0.5;
 }
 
-div.large-player-volume-container input[type=range].amplitude-volume-slider {
+div.large-player-volume-container
+input[type=range].amplitude-volume-slider {
   appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
   float: left;
   height: 1px;
   margin-top: -4px;
@@ -363,28 +449,28 @@ Bootstrap (BS) grid breakpoints
   XXL:    1400px          X Large Desktop
 
   -webkit-*               Chrome, Safari, Edge
-  -moz-*                  Firefox
+  -moz-*                  Firefox 
 */
 
 /* BS LG (Desktop|Tablet)
 # --------------------------------------------------------- */
 @media (orientation: portrait) and (max-width: 992px) {
   .audio-title {
-    font-size: 16px;
-    line-height: 18px;
+      font-size: 16px;
+      line-height: 18px;
   }
 
   .song-name {
-    line-height: 18px;
-    font-size: 16px;
+      line-height: 18px;
+      font-size: 16px;
   }
 
   .audio-artist.large-player-item-header {
-    font-size: 14px;
-  }
+      font-size: 14px;
+  }  
 
   .meta-container .audio-artist-album {
-    font-size: 14px;
+      font-size: 14px;
   }
 
   .large-player-left {
@@ -400,8 +486,13 @@ Bootstrap (BS) grid breakpoints
     display: none;
   }
 
-  input[type="range"].amplitude-volume-slider::-webkit-slider-thumb,
-  input[type="range"].amplitude-volume-slider::-moz-range-thumb {
+  input[type="range"].amplitude-volume-slider::-webkit-slider-thumb {
+    background-color: var(--ajs-theme-uno--blue-500);
+    width: 25px;
+    height: 25px;
+  }
+
+  input[type="range"].amplitude-volume-slider::-moz-slider-thumb {
     background-color: var(--ajs-theme-uno--blue-500);
     width: 25px;
     height: 25px;
@@ -425,7 +516,7 @@ Bootstrap (BS) grid breakpoints
   }
 }
 
-/* BS MD (Tablet, landscape)
+/* BS MD (Tablet)
 # --------------------------------------------------------- */
 @media (orientation: landscape) and (max-width: 768px) {
   .large-player-left {
@@ -451,11 +542,16 @@ Bootstrap (BS) grid breakpoints
     margin-top: -5px;
   }
 
+  div.mini-player.volume-container
+  input[type="range"].amplitude-volume-slider::-webkit-slider-thumb {
+    margin-top: -5px;
+  }
+
   .large-player {
     max-width: -webkit-fill-available;
     max-width: -moz-available;
   }
-
+ 
   .large-player-container {
     position: relative;
     flex-direction: column;
@@ -471,15 +567,16 @@ Bootstrap (BS) grid breakpoints
   .playlist-screen-controls.large-player {
     display: none;
   }
-
   .large-player-title-list {
-    border-bottom: 1px solid var(--ajs-theme-uno--medium-silver);
+    border-bottom: 1px solid;
+    border-color: var(--ajs-theme-uno--medium-silver);
   }
 
   .large-player-left {
     width: auto;
     max-width: unset;
-    border: 1px solid var(--ajs-theme-uno--medium-silver);
+    border: solid 1px;
+    border-color: var(--ajs-theme-uno--medium-silver);
   }
 
   .large-player-left-top img {
@@ -490,23 +587,36 @@ Bootstrap (BS) grid breakpoints
   .large-player-right {
     width: auto;
     min-width: unset;
-    border: 1px solid var(--ajs-theme-uno--medium-silver);
-    border-top: 0;
+    border-top: 0px;
+    border-right: 1px solid;
+    border-bottom: 1px solid;
+    border-left: 1px solid;
+    border-color: var(--ajs-theme-uno--medium-silver);
   }
 
-  div.large-player-volume-container .large-player-amplitude-mute {
+  div.large-player-volume-container
+  .large-player-amplitude-mute {
     margin-left: 4px;
   }
 
-  div.large-player-volume-container input[type=range].amplitude-volume-slider {
+  div.large-player-volume-container
+  input[type=range].amplitude-volume-slider {
     appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
     width: calc(100% - 106px);
   }
 
-  div.large-player-volume-container input[type="range"].amplitude-volume-slider::-webkit-slider-thumb,
-  div.large-player-volume-container input[type="range"].amplitude-volume-slider::-moz-range-thumb {
+  div.large-player-volume-container
+  input[type="range"].amplitude-volume-slider::-webkit-slider-thumb {
+    width: 30px;
+    height: 30px;
+    border-radius: 30px;
+    margin-top: -15px;
+    margin-left: 6px;
+    background-color: var(--ajs-theme-uno--blue-500);
+  }
+
+  div.large-player-volume-container
+  input[type="range"].amplitude-volume-slider::-moz-slider-thumb {
     width: 30px;
     height: 30px;
     border-radius: 30px;

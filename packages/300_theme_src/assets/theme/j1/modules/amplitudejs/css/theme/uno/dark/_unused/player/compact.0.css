@@ -1,6 +1,6 @@
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/modules/amplitudejs/css/theme/uno/dark/player/compact.css (1)
+ # ~/assets/theme/j1/modules/amplitudejs/css/theme/uno/dark/player/compact.css (0)
  # AmplitudeJS v5.3.2 Compact Player for J1 Template
  #
  # Product/Info:
@@ -29,7 +29,7 @@
 }
 
 .compact-player-middle {
-  padding: 10px;
+  padding: 10px 10px 10px 10px;
   background-color: var(--ajs-theme-uno--blue-gray-900);
 }
 
@@ -72,12 +72,8 @@
 
 /* Player MIDDLE
 # --------------------------------------------------------- */
-.compact-player-shuffle,
-.compact-player-previous,
-.compact-player-skip-backward,
-.compact-player-skip-forward,
-.compact-player-next,
-.compact-player-repeat {
+
+.compact-player-shuffle {
   display: inline-block;
   user-select: none;
   cursor: pointer;
@@ -86,12 +82,38 @@
   vertical-align: middle;
 }
 
-/* Per-button margins (the only thing that actually differs between them) */
-.compact-player-previous       { margin-right: 20px; margin-left: 20px; }
-.compact-player-skip-backward  { margin-right: 20px; }
-.compact-player-skip-forward   { margin-left: 20px; }
-.compact-player-next           { margin-right: 25px; margin-left: 20px; }
-.compact-player-repeat         { margin-right: 25px; }
+.compact-player-shuffle:hover {
+  opacity: 0.5;
+}
+
+.compact-player-previous {
+  display: inline-block;
+  user-select: none;
+  cursor: pointer;
+  vertical-align: middle;
+  width: 24px;
+  height: 24px;
+  margin-right: 20px;
+  margin-left: 20px;
+}
+
+.compact-player-previous:hover {
+  opacity: 0.5;
+}
+
+.compact-player-skip-backward {
+  display: inline-block;
+  user-select: none;
+  cursor: pointer;
+  height: 24px;
+  width: 24px;
+  margin-right: 20px;
+  vertical-align: middle;
+}
+
+.compact-player-skip-backward:hover {
+  opacity: 0.5;
+}
 
 .compact-player-play-pause {
   display: inline-block;
@@ -100,6 +122,10 @@
   height: 60px;
   cursor: pointer;
   vertical-align: middle;
+}
+
+.compact-player-play-pause:hover {
+  opacity: 0.5;
 }
 
 .compact-player-play-pause:focus:not(:focus-visible) {
@@ -114,14 +140,47 @@
   background: url("/assets/theme/j1/modules/amplitudejs/icons/player/dark/pause.svg") no-repeat;
 }
 
-.compact-player-shuffle:hover,
-.compact-player-previous:hover,
-.compact-player-skip-backward:hover,
-.compact-player-play-pause:hover,
-.compact-player-skip-forward:hover,
-.compact-player-next:hover,
+.compact-player-skip-forward {
+  display: inline-block;
+  user-select: none;
+  cursor: pointer;
+  height: 24px;
+  width: 24px;
+  margin-left: 20px;
+  vertical-align: middle;
+}
+
+.compact-player-skip-forward:hover {
+  opacity: .5;
+}
+
+.compact-player-next {
+  display: inline-block;
+  user-select: none;
+  cursor: pointer;
+  height: 24px;
+  width: 24px;
+  margin-right: 25px;
+  margin-left: 20px;
+  vertical-align: middle;
+}
+
+.compact-player-next:hover {
+  opacity: .5;
+}
+
+.compact-player-repeat {
+  display: inline-block;
+  user-select: none;
+  cursor: pointer;
+  width: 24px;
+  height: 24px;
+  vertical-align: middle;
+  margin-right: 25px;
+}
+
 .compact-player-repeat:hover {
-  opacity: 0.5;
+  opacity: .5;
 }
 
 .compact-player-control-container {
@@ -129,13 +188,19 @@
   margin-bottom: 10px;
 }
 
+/* clearfix */
+.compact-player-control-container:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
 .compact-player-controls-container {
   text-align: center;
 }
 
-.compact-player-control-container::after,
-.compact-player-controls-container::after,
-.volume-container::after {
+/* clearfix */
+.compact-player-controls-container::after {
   content: "";
   display: table;
   clear: both;
@@ -144,6 +209,13 @@
 .volume-container img {
   display: block;
   float: left;
+}
+
+/* clearfix */
+.volume-container:after {
+  content: "";
+  display: table;
+  clear: both;
 }
 
 .compact-player-amplitude-mute {
@@ -167,19 +239,23 @@ Bootstrap (BS) grid breakpoints
   XXL:    1400px          X Large Desktop
 
   -webkit-*               Chrome, Safari, Edge
-  -moz-*                  Firefox
+  -moz-*                  Firefox 
 */
 
 /* BS SM (Mobile)
 # --------------------------------------------------------- */
 @media screen and (max-width: 576px) {
 
-  .compact-player-title-list .song-meta-container .song-name {
-    font-size: 16px !important;
+  .compact-player-title-list
+  .song-meta-container
+  .song-name {
+      font-size: 16px !important;
   }
 
-  .compact-player-title-list .song-meta-container .song-artist-album {
-    font-size: 14px !important;
+  .compact-player-title-list
+  .song-meta-container
+  .song-artist-album {
+      font-size: 14px !important;
   }
 
   .compact-player {
@@ -193,17 +269,24 @@ Bootstrap (BS) grid breakpoints
   }
 
   .compact-player-playlist {
-    width: calc(100% - 1px);
+    width: calc(100% - 1px); 
   }
 
-  .compact-player-volume-container input[type=range].amplitude-volume-slider {
+  .compact-player-volume-container
+  input[type=range].amplitude-volume-slider {
     appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
   }
 
-  .compact-player-volume-container input[type=range].amplitude-volume-slider::-webkit-slider-thumb,
-  .compact-player-volume-container input[type=range].amplitude-volume-slider::-moz-range-thumb {
+  .compact-player-volume-container
+  input[type=range].amplitude-volume-slider::-webkit-slider-thumb {
+    width: 30px;
+    height: 30px;
+    border-radius: 30px;
+    margin-top: -15px;
+  }
+
+  .compact-player-volume-container
+  input[type=range].amplitude-volume-slider::-moz-slider-thumb {
     width: 30px;
     height: 30px;
     border-radius: 30px;
@@ -220,7 +303,7 @@ Bootstrap (BS) grid breakpoints
 
 .meta-container.compact-player {
   height: 120px;
-  border: 0;
+  border: 0px;
 }
 
 .playlist-screen-meta-container {
@@ -232,16 +315,15 @@ Bootstrap (BS) grid breakpoints
   margin-top: 20px;
 }
 
-.compact-player-volume-container input[type=range].amplitude-volume-slider {
-  appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  float: left;
-  height: 1px;
-  margin-top: -4px;
-  margin-left: 10px;
-  width: calc(100% - 118px);
-  background: transparent;
+.compact-player-volume-container
+input[type=range].amplitude-volume-slider {
+    appearance: none;
+    float: left;
+    height: 1px;
+    margin-top: -4px;
+    margin-left: 10px;
+    width: calc(100% - 118px);
+    background: transparent;
 }
 
 .compact-player-list-controls {
@@ -250,14 +332,16 @@ Bootstrap (BS) grid breakpoints
   margin-right: -32px !important;
 }
 
-.compact-player-title-list .song {
+.compact-player-title-list
+.song {
   padding: 15px;
   cursor: pointer;
   line-height: 20px;
   background-color: var(--ajs-theme-uno--darker-silver);
 }
 
-.compact-player-title-list .song-number-now-playing {
+.compact-player-title-list
+.song-number-now-playing {
   float: left;
   width: 5px;
   height: 20px;
@@ -265,18 +349,24 @@ Bootstrap (BS) grid breakpoints
   margin-right: 20px;
 }
 
-.compact-player-title-list .song-number-now-playing .number {
+.compact-player-title-list
+.song-number-now-playing
+.number {
   opacity: 0.5;
   font-family: "Lato", sans-serif;
   font-size: 14px;
   color: var(--ajs-theme-uno--white);
 }
 
-.compact-player-title-list .song-number-now-playing img.now-playing {
+.compact-player-title-list
+.song-number-now-playing
+img.now-playing {
   display: none;
 }
 
-.compact-player-title-list .song-meta-container .song-name {
+.compact-player-title-list
+.song-meta-container
+.song-name {
   display: block;
   width: calc(100% - 40px);
   margin-left: 38px;
@@ -289,14 +379,18 @@ Bootstrap (BS) grid breakpoints
   color: var(--ajs-theme-uno--blue);
 }
 
-.compact-player-title-list .song-meta-container .audio-rating {
+.compact-player-title-list
+.song-meta-container
+.audio-rating {
   display: flex;
   float: right;
   margin-top: -38px;
   margin-right: -3px;
 }
 
-.compact-player-title-list .song-meta-container .song-artist-album {
+.compact-player-title-list
+.song-meta-container
+.song-artist-album {
   display: block;
   margin-left: 38px;
   font-family: "Lato", sans-serif;
@@ -304,7 +398,9 @@ Bootstrap (BS) grid breakpoints
   color: var(--ajs-theme-uno--gray-300);
 }
 
-.compact-player-title-list .song-meta-container .audio-duration {
+.compact-player-title-list
+.song-meta-container
+.audio-duration {
   float: right;
   margin-top: -18px;
   font-family: "Lato", sans-serif;
@@ -313,31 +409,40 @@ Bootstrap (BS) grid breakpoints
 }
 
 /* .playlist-screen-meta-container */
-.amplitude-audio-info-compact-player .audio-rating {
+.amplitude-audio-info-compact-player
+.audio-rating {
   display: flex;
   float: right;
   margin-top: 10px;
   margin-right: -100px;
 }
 
-.screen-controls-compact-player .playlist-screen-meta-container .amplitude-audio-info {
-  float: right;
-  margin-top: -10px;
-  margin-right: -130px;
+.screen-controls-compact-player
+.playlist-screen-meta-container
+.amplitude-audio-info {
+    float: right;
+    margin-top: -10px;
+    margin-right: -130px;
 }
 
-.screen-controls-compact-player .playlist-screen-meta-container .audio-rating {
+.screen-controls-compact-player
+.playlist-screen-meta-container
+.audio-rating {
   display: flex;
   float: right;
-  margin-top: 0;
+  margin-top: 0px;
   margin-right: -94px;
 }
 
-.compact-player-title-list .song.amplitude-active-song-container {
+.compact-player-title-list
+.song.amplitude-active-song-container {
   background-color: var(--ajs-theme-uno--medium-silver) !important;
 }
 
-.compact-player-title-list .song.amplitude-active-song-container .song-number-now-playing img.now-playing {
+.compact-player-title-list
+.song.amplitude-active-song-container
+.song-number-now-playing
+img.now-playing {
   display: inline-block;
   height: 16px;
   width: 16px;
@@ -345,7 +450,10 @@ Bootstrap (BS) grid breakpoints
   margin-left: 4px;
 }
 
-.compact-player-title-list .song.amplitude-active-song-container .song-number-now-playing .number {
+.compact-player-title-list
+.song.amplitude-active-song-container
+.song-number-now-playing
+.number {
   display: none;
 }
 
@@ -360,12 +468,15 @@ Bootstrap (BS) grid breakpoints
   background-color: var(--ajs-theme-uno--black);
 }
 
-.playlist-screen-controls .playlist-screen-meta-container {
+.playlist-screen-controls
+.playlist-screen-meta-container {
   float: left;
   width: calc(100% - 123px);
 }
 
-.playlist-screen-controls .playlist-screen-meta-container .song-name {
+.playlist-screen-controls
+.playlist-screen-meta-container
+.song-name {
   display: block;
   font-family: "Lato", sans-serif;
   font-size: 18px;
@@ -376,7 +487,9 @@ Bootstrap (BS) grid breakpoints
   color: var(--ajs-theme-uno--white);
 }
 
-.playlist-screen-controls .playlist-screen-meta-container .song-artist-album {
+.playlist-screen-controls
+.playlist-screen-meta-container
+.song-artist-album {
   opacity: 0.5;
   font-family: "Lato", sans-serif;
   font-size: 16px;
@@ -385,51 +498,76 @@ Bootstrap (BS) grid breakpoints
   color: var(--ajs-theme-uno--white);
 }
 
-.playlist-screen-controls .list-controls {
+.playlist-screen-controls
+.list-controls {
   float: right;
   margin-top: 48px;
 }
 
-.playlist-screen-controls .list-controls .list-previous,
-.playlist-screen-controls .list-controls .list-next {
+.playlist-screen-controls
+.list-controls
+.list-previous {
   float: left;
   cursor: pointer;
   width: 15px;
   height: 17px;
+  margin-right: 15px;
   margin-top: 4px;
   background-repeat: no-repeat;
-}
-
-.playlist-screen-controls .list-controls .list-previous {
-  margin-right: 15px;
   background-image: url("/assets/theme/j1/modules/amplitudejs/icons/player/dark/small/previous.svg");
 }
 
-.playlist-screen-controls .list-controls .list-next {
-  margin-left: 15px;
-  background-image: url("/assets/theme/j1/modules/amplitudejs/icons/player/dark/small/next.svg");
+.playlist-screen-controls
+.list-controls
+.list-previous:hover {
+  opacity: 0.5;
 }
 
-.playlist-screen-controls .list-controls .amplitude-play-pause {
+.playlist-screen-controls
+.list-controls
+.amplitude-play-pause {
   float: left;
   cursor: pointer;
   width: 17px;
   height: 24px;
 }
 
-.playlist-screen-controls .list-controls .amplitude-play-pause.amplitude-playing {
+.playlist-screen-controls
+.list-controls
+.amplitude-play-pause:hover {
+  opacity: 0.5;
+}
+
+.playlist-screen-controls
+.list-controls
+.amplitude-play-pause.amplitude-playing {
   background-repeat: no-repeat;
   background-image: url("/assets/theme/j1/modules/amplitudejs/icons/player/dark/small/pause.svg");
 }
 
-.playlist-screen-controls .list-controls .amplitude-play-pause.amplitude-paused {
+.playlist-screen-controls
+.list-controls
+.amplitude-play-pause.amplitude-paused {
   background-repeat: no-repeat;
   background-image: url("/assets/theme/j1/modules/amplitudejs/icons/player/dark/small/play.svg");
 }
 
-.playlist-screen-controls .list-controls .list-previous:hover,
-.playlist-screen-controls .list-controls .amplitude-play-pause:hover,
-.playlist-screen-controls .list-controls .list-next:hover {
+.playlist-screen-controls
+.list-controls
+.list-next {
+  float: left;
+  cursor: pointer;
+  width: 15px;
+  height: 17px;
+  margin-left: 15px;
+  margin-top: 4px;
+  background-repeat: no-repeat;
+  background-image: url("/assets/theme/j1/modules/amplitudejs/icons/player/dark/small/next.svg");
+}
+
+.playlist-screen-controls
+.list-controls
+.list-next:hover {
   opacity: 0.5;
 }
 
@@ -443,23 +581,39 @@ Bootstrap (BS) grid breakpoints
 /* 7. Vendors
 # ------------------------------------------------------------------------------ */
 
-
 /* 8. Animations
 # ------------------------------------------------------------------------------ */
-
 .slide-in-top {
   -webkit-animation: slide-in-top 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
   animation: slide-in-top 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
 }
 
 @-webkit-keyframes slide-in-top {
-  0%   { -webkit-transform: translateY(-10px); transform: translateY(-10px); opacity: 0; }
-  100% { -webkit-transform: translateY(0);     transform: translateY(0);     opacity: 1; }
+ 0% {
+  -webkit-transform: translateY(-10px);
+  transform: translateY(-10px);
+  opacity: 0;
+ }
+
+ 100% {
+   -webkit-transform: translateY(0);
+   transform: translateY(0);
+   opacity: 1;
+ }
 }
 
 @keyframes slide-in-top {
-  0%   { -webkit-transform: translateY(-10px); transform: translateY(-10px); opacity: 0; }
-  100% { -webkit-transform: translateY(0);     transform: translateY(0);     opacity: 1; }
+  0% {
+   -webkit-transform: translateY(-10px);
+   transform: translateY(-10px);
+   opacity: 0;
+  }
+
+  100% {
+   -webkit-transform: translateY(0);
+   transform: translateY(0);
+   opacity: 1;
+  }
 }
 
 .slide-out-top {
@@ -468,11 +622,29 @@ Bootstrap (BS) grid breakpoints
 }
 
 @-webkit-keyframes slide-out-top {
-  0%   { -webkit-transform: translateY(0);     transform: translateY(0);     opacity: 1; }
-  100% { -webkit-transform: translateY(-10px); transform: translateY(-10px); opacity: 0; }
+ 0% {
+   -webkit-transform: translateY(0);
+   transform: translateY(0);
+   opacity: 1;
+ }
+
+ 100% {
+   -webkit-transform: translateY(-10px);
+   transform: translateY(-10px);
+   opacity: 0;
+ }
 }
 
 @keyframes slide-out-top {
-  0%   { -webkit-transform: translateY(0);     transform: translateY(0);     opacity: 1; }
-  100% { -webkit-transform: translateY(-10px); transform: translateY(-10px); opacity: 0; }
+ 0% {
+   -webkit-transform: translateY(0);
+   transform: translateY(0);
+   opacity: 1;
+ }
+
+ 100% {
+   -webkit-transform: translateY(-10px);
+   transform: translateY(-10px);
+   opacity: 0;
+ }
 }

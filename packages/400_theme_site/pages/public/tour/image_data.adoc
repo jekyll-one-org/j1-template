@@ -38,11 +38,7 @@ resource_options:
   - attic:
       slides:
         - url:                          /assets/image/module/attic/1920x1280/modern-dance.jpg
-          alt:                          Photo Gemini AI
-#          badge:
-#            type:                       unsplash
-#            author:                     Quino Al Angel
-#            href:                       //unsplash.com/@quinoal
+          alt:                          Photo AI generated
 ---
 
 // Page Initializer
@@ -139,11 +135,6 @@ All three lightboxes are fully integrated. You can use them on their
 own *or* let them work in the background for other modules such as
 galleries and carousels.
 
-[TIP]
-====
-For more details on the default lightbox, see the
-link:{url-j1-docs--lightbox-module}[Lightbox module documentation, {browser-window--new}].
-====
 
 [role="mt-5"]
 === Lightbox V3

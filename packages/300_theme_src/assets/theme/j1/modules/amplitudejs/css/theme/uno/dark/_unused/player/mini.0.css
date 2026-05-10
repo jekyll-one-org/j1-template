@@ -1,6 +1,6 @@
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/modules/amplitudejs/css/theme/uno/dark/player/mini.css (1)
+ # ~/assets/theme/j1/modules/amplitudejs/css/theme/uno/dark/player/mini.css (0)
  # AmplitudeJS v5.3.2 Mini Player for J1 template
  #
  # Product/Info:
@@ -103,6 +103,14 @@
   width: calc(100% - 43px);
 }
 
+/* input[type=range].mini-player.amplitude-volume-slider {
+  appearance: none;
+  float: left;
+  margin-top: -22px;
+  margin-left: 28px;
+  width: 90%;
+} */
+
 input[type=range].mini-player.amplitude-volume-slider {
   appearance: none;
   float: left;
@@ -132,6 +140,7 @@ input[type="range"].amplitude-volume-slider::-moz-slider-thumb {
 }
 
 
+
 /* 3. Layout
 # ------------------------------------------------------------------------------
 Bootstrap (BS) grid breakpoints
@@ -152,6 +161,11 @@ Bootstrap (BS) grid breakpoints
     max-width: -webkit-fill-available;
     max-width: -moz-available;
   }
+
+  /* div.mini-player.volume-container {
+    appearance: none;
+    padding-top: 20px;
+  } */
  
   input[type=range].mini-player.amplitude-volume-slider::-webkit-slider-thumb {
     appearance: none;
