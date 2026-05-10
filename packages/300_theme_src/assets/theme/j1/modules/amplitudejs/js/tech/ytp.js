@@ -2944,8 +2944,8 @@ regenerate: true
                   playerState, progressBar, percentage, time;               
 
               activeSong = getActiveSong();
-              if (!activeSong) {
-                 // do nothing if activeSong data is missing (failsafe)
+              if (!activeSong.player) {
+                 // do nothing if activeSong player is missing (failsafe)
                 return;
               }
 
@@ -3005,8 +3005,8 @@ regenerate: true
               // do nothing (managed by amplitude)
             } else {
               var activeSong = getActiveSong();
-              if (!activeSong) {
-                // do nothing if activeSong data is missing (failsafe)
+              if (!activeSong.player) {
+                 // do nothing if activeSong player is missing (failsafe)
                 return;
               }
 

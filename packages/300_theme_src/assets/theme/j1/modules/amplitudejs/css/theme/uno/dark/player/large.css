@@ -400,7 +400,15 @@ Bootstrap (BS) grid breakpoints
     display: none;
   }
 
-  input[type="range"].amplitude-volume-slider::-webkit-slider-thumb,
+  /* claude - Amplitude/large player styles (mobile) #1
+     Same comma-grouping defect as the 576px block: split per engine. */
+  input[type="range"].amplitude-volume-slider::-webkit-slider-thumb {
+    background-color: var(--ajs-theme-uno--blue-500);
+    width: 25px;
+    height: 25px;
+  }
+
+  /* claude - Amplitude/large player styles (mobile) #1 */
   input[type="range"].amplitude-volume-slider::-moz-range-thumb {
     background-color: var(--ajs-theme-uno--blue-500);
     width: 25px;
@@ -446,10 +454,11 @@ Bootstrap (BS) grid breakpoints
 # --------------------------------------------------------- */
 
 @media screen and (max-width: 576px) {
-  div.mini-player.volume-container
-  input[type="range"].amplitude-volume-slider::-webkit-slider-thumb {
-    margin-top: -5px;
-  }
+  /* claude - Amplitude/large player styles (mobile) #1
+     Removed: `div.mini-player.volume-container input[...]::-webkit-slider-thumb`.
+     Missing comma made it a descendant selector targeting `.mini-player`,
+     which doesn't exist in the large-player markup, so the rule was dead.
+     The thumb on mobile is sized below in the split per-engine rules. */
 
   .large-player {
     max-width: -webkit-fill-available;
@@ -502,16 +511,30 @@ Bootstrap (BS) grid breakpoints
     appearance: none;
     -webkit-appearance: none;
     -moz-appearance: none;
-    width: calc(100% - 106px);
+    /* margin-left: 2px; */
   }
 
-  div.large-player-volume-container input[type="range"].amplitude-volume-slider::-webkit-slider-thumb,
+  /* claude - Amplitude/large player styles (mobile) #1
+     Combined `::-webkit-slider-thumb, ::-moz-range-thumb` made the whole
+     rule invalid in every engine (each engine rejects the pseudo it does
+     not own and, with comma-grouping, drops the entire rule). Split into
+     one rule per engine so each browser keeps the one it understands. */
+  div.large-player-volume-container input[type="range"].amplitude-volume-slider::-webkit-slider-thumb {
+    width: 30px;
+    height: 30px;
+    border-radius: 30px;
+    margin-top: -15px;
+    margin-left: -2px;
+    background-color: var(--ajs-theme-uno--blue-500);
+  }
+
+  /* claude - Amplitude/large player styles (mobile) #1 */
   div.large-player-volume-container input[type="range"].amplitude-volume-slider::-moz-range-thumb {
     width: 30px;
     height: 30px;
     border-radius: 30px;
     margin-top: -15px;
-    margin-left: 6px;
+    margin-left: -2px;
     background-color: var(--ajs-theme-uno--blue-500);
   }
 }

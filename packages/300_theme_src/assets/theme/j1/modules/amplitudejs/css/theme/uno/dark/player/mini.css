@@ -104,11 +104,11 @@
 }
 
 input[type=range].mini-player.amplitude-volume-slider {
-  appearance: none;
-  float: left;
-  margin-top: -32px;
-  margin-left: 28px;
-  width: 90%;
+    appearance: none;
+    float: left;
+    margin-top: -4px;
+    margin-left: 3px;
+    width: 90%;
 }
 
 div.mini-player-volume-container
@@ -121,8 +121,13 @@ input[type="range"].amplitude-volume-slider::-webkit-slider-thumb {
   background-color: var(--ajs-theme-uno--blue-500);
 }
 
+/* claude - Amplitude/large player styles (mobile) #1
+   `::-moz-slider-thumb` is not a valid pseudo-element. Firefox's range
+   thumb is `::-moz-range-thumb`. The original selector was invalid, so
+   Firefox dropped the rule and the thumb was never styled in Firefox
+   (desktop or mobile). */
 div.mini-player-volume-container
-input[type="range"].amplitude-volume-slider::-moz-slider-thumb {
+input[type="range"].amplitude-volume-slider::-moz-range-thumb {
   width: 30px;
   height: 30px;
   border-radius: 30px;
@@ -153,6 +158,14 @@ Bootstrap (BS) grid breakpoints
     max-width: -moz-available;
   }
  
+input[type=range].mini-player.amplitude-volume-slider {
+    appearance: none;
+    float: left;
+    margin-top: -22px;
+    margin-left: 16px;
+    width: 90%;
+}
+
   input[type=range].mini-player.amplitude-volume-slider::-webkit-slider-thumb {
     appearance: none;
     -webkit-appearance: none;
@@ -161,19 +174,21 @@ Bootstrap (BS) grid breakpoints
     width: 30px;
     height: 30px;
     border-radius: 30px;
-    margin-top: -2px;    
     background-color: var(--ajs-theme-uno--blue-500);
   }
 
-  input[type=range].mini-player.amplitude-volume-slider::-moz-slider-thumb {
+  /* claude - Amplitude/large player styles (mobile) #1
+     Same `::-moz-slider-thumb` typo as in the base block — replaced with
+     the real Firefox pseudo-element `::-moz-range-thumb` so the rule is
+     no longer dropped as invalid. */
+  input[type=range].mini-player.amplitude-volume-slider::-moz-range-thumb {
     appearance: none;
     -moz-appearance: none;
     margin-top: -15px;
-    margin-left: 6px;    
+    margin-left: 6px;
     width: 30px;
     height: 30px;
     border-radius: 30px;
-    margin-top: -15px;    
     background-color: var(--ajs-theme-uno--blue-500);
   }
 }

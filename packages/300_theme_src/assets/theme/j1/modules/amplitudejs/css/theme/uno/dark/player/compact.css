@@ -90,7 +90,7 @@
 .compact-player-previous       { margin-right: 20px; margin-left: 20px; }
 .compact-player-skip-backward  { margin-right: 20px; }
 .compact-player-skip-forward   { margin-left: 20px; }
-.compact-player-next           { margin-right: 25px; margin-left: 20px; }
+.compact-player-next           {/* margin-right: 25px; */margin-left: 20px;}
 .compact-player-repeat         { margin-right: 25px; }
 
 .compact-player-play-pause {
@@ -174,6 +174,10 @@ Bootstrap (BS) grid breakpoints
 # --------------------------------------------------------- */
 @media screen and (max-width: 576px) {
 
+  .compact-player-controls-container {
+      /* text-align: unset; */
+  }
+
   .compact-player-title-list .song-meta-container .song-name {
     font-size: 16px !important;
   }
@@ -196,18 +200,47 @@ Bootstrap (BS) grid breakpoints
     width: calc(100% - 1px);
   }
 
-  .compact-player-volume-container input[type=range].amplitude-volume-slider {
+  /* .compact-player-volume-container input[type=range].amplitude-volume-slider {
     appearance: none;
     -webkit-appearance: none;
     -moz-appearance: none;
+  } */
+
+  .compact-player-volume-container input[type=range].amplitude-volume-slider {
+      /*
+      appearance: none;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      */
+      margin-top: -4px !important;
+      margin-left: 12px !important;
   }
 
-  .compact-player-volume-container input[type=range].amplitude-volume-slider::-webkit-slider-thumb,
+  .compact-player-previous {
+      margin-right: 20px;
+      margin-left: 3px;
+  }
+
+  /* claude - Amplitude/large player styles (mobile) #1
+     Combined `::-webkit-slider-thumb, ::-moz-range-thumb` made the whole
+     rule invalid in every engine (each engine rejects the pseudo it does
+     not own and, with comma-grouping, drops the entire rule). Split into
+     one rule per engine so each browser keeps the one it understands. */
+  .compact-player-volume-container input[type=range].amplitude-volume-slider::-webkit-slider-thumb {
+    width: 30px;
+    height: 30px;
+    border-radius: 30px;
+    margin-top: -15px;
+    margin-right: -5px;
+  }
+
+  /* claude - Amplitude/large player styles (mobile) #1 */
   .compact-player-volume-container input[type=range].amplitude-volume-slider::-moz-range-thumb {
     width: 30px;
     height: 30px;
     border-radius: 30px;
     margin-top: -15px;
+    margin-right: -5px;
   }
 }
 
@@ -239,7 +272,7 @@ Bootstrap (BS) grid breakpoints
   float: left;
   height: 1px;
   margin-top: -4px;
-  margin-left: 10px;
+  margin-left: 22px;
   width: calc(100% - 118px);
   background: transparent;
 }
