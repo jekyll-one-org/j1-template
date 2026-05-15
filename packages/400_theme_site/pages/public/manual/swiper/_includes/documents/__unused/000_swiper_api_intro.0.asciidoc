@@ -1,0 +1,280 @@
+[role="mt-5"]
+== Swiper API
+
+Swiper provides a complete carousel engine that can be operated via
+touch (mobile devices) and mouse/keyboard (desktop). 
+
+[role="mt-4"]
+[[api-modules-overview]]
+=== Modules
+
+The following modules
+are registered in the project bundle:
+
+[cols="3a,9a", options="header", width="100%", role="table-responsive mt-4"]
+|===
+|Name |Description
+
+|`Accessibility (a11y)`
+|Once the a11y (Accessibility) module is activated, Swiper automatically
+adds ARIA attributes and semantic roles to the DOM. Specifically, important
+ARIA attributes such as aria-live, aria-label, and role are automatically
+added to the slider and its controls so that screen reader users can understand
+the purpose of the slider and navigate between the slides.
+
+|`Virtual`
+|lorem:sentences[3]
+
+|`Keyboard`
+|lorem:sentences[3]
+
+|`Mousewheel`
+|lorem:sentences[3]
+
+|`Navigation`
+|lorem:sentences[3]
+
+|`Pagination`
+|lorem:sentences[3]
+
+|`Scrollbar`
+|lorem:sentences[3]
+
+|`Parallax`
+|lorem:sentences[3]
+
+|`Zoom`
+|lorem:sentences[3]
+
+|`Controller`
+|lorem:sentences[3]
+
+|`History`
+|lorem:sentences[3]
+
+|`HashNavigation`
+|lorem:sentences[3]
+
+|`Autoplay`
+|lorem:sentences[3]
+
+|`Thumb`
+|lorem:sentences[3]
+
+|`freeMode`
+|lorem:sentences[3]
+
+|`Grid`
+|lorem:sentences[3]
+
+|`Manipulation`
+|lorem:sentences[3]
+
+|`Transition Effects`
+|lorem:sentences[3]
+
+|===
+
+
+[role="mt-4"]
+[[api-features]]
+=== Features
+
+The available module results in the following key features:
+
+[cols="4a,8a", options="header", width="100%", role="table-responsive mt-4"]
+|===
+|Name |Description
+
+|`Slide navigation`
+|Swiping, arrow keys, mouse wheel, buttons (swiper-button-prev/next),
+pagination, scrollbar
+
+|`Hardware-accelerated transitions`
+|Contriolled via CSS transforms (translate3d), including special effects
+such as fade, cube, flip, coverflow, creative, cards
+
+|`Modess`
+|Loop and free mode, autoplay, rewind
+
+|`Responsiveness`
+|Responsive behavior with breakpoints and grid layout (multiple rows)
+
+|`Accessibility (A11y)`
+|History or Hash navigation for deep linking Slides
+
+|`Mobile-friendly`
+|It is intended to be used in mobile websites, mobile web apps, and mobile
+native/hybrid apps.
+
+|`Library Agnostic`
+|Swiper doesn't require any JavaScript libraries like jQuery, which makes
+Swiper much smaller and faster. It can be safely used with libraries such
+as jQuery, Zepto, jQuery Mobile, etc.
+
+|`1:1 Touch movement`
+|By default, Swiper provides 1:1 touch movement interaction, but this ratio
+can be configured through Swiper settings.
+
+|`Mutation Observer`
+|Swiper has an option to enable Mutation Observer, with this feature Swiper
+will be automatically reinitialized and recalculate all required parameters
+if you make dynamic changes to the DOM, or in Swiper styles itself.
+
+|`RTL`
+|Swiper is the only slider that provides 100% RTL support with correct layout.
+
+|`Multi Row Slides Layout`
+|Swiper allows a multiple row slides layout, with a few slides per column.
+
+|`Transition Effects`
+|Fade, Flip, 3D Cube, 3D Coverflow.
+
+|`Two-way Control`
+|Swiper may be used as controller for any number of other Swipers, and
+even be controlled at the same time.
+
+|`Full Navigation Control`
+|Swiper comes with all required built-in navigation elements, such as
+Pagination, Navigation arrows and Scrollbar.
+
+|`Flexbox Layout`
+|Swiper uses modern flexbox layout for slides layout, which solves a lot
+of problems and time with size caclulations. Such layout also allows
+configuring the Slides grid using pure CSS.
+
+|`Most Flexible Slides Layout Grid`
+|Swiper has a lot of parameters on initialization to make it as flexible
+as possible. You can control slides per view, per column, per group,
+space between slides, and many more.
+
+|`Lazy Loading Images`
+|Swiper Lazy Loading delays loading of images in inactive/invisible
+slides until the user swipes to them. Such feature could make the
+page load faster and improve Swiper performance.
+
+|`Virtual Slides`
+|Swiper comes with Virtual Slides feature that is great when you have
+a lot of slides or content-heavy/image-heavy slides so it will keep
+just the required amount of slides in DOM.
+
+|===
+
+
+[role="mt-4"]
+[[api-swiper-html-layout]]
+=== HTML Layout
+
+lorem:sentences[3]
+
+[source, html]
+----
+<!-- Slider main container -->
+<div class="swiper">
+  <!-- Additional required wrapper -->
+  <div class="swiper-wrapper">
+    <!-- Slides -->
+    <div class="swiper-slide">Slide 1</div>
+    <div class="swiper-slide">Slide 2</div>
+    <div class="swiper-slide">Slide 3</div>
+    ...
+  </div>
+  <!-- If we need pagination -->
+  <div class="swiper-pagination"></div>
+
+  <!-- If we need navigation buttons -->
+  <div class="swiper-button-prev"></div>
+  <div class="swiper-button-next"></div>
+
+  <!-- If we need scrollbar -->
+  <div class="swiper-scrollbar"></div>
+</div>
+----
+
+
+[role="mt-5"]
+[[api-swiper-init]]
+=== Initialization
+
+When the Swiper's HTML portion is in place, we need to initialize it
+like so:
+
+[source, js, role="noclip"]
+----
+new Swiper(swiperContainer, parameters) // initialize swiper with options
+----
+
+* swiperContainer -- HTMLElement or string (with CSS Selector) of swiper
+  container HTML element. Required.
+* parameters -- object -- object with Swiper parameters. Optional.
+* *Method returns initialized Swiper instance*
+
+.Example
+[source, js]
+----
+const mySwiper = new Swiper('.my-swiper-container', {
+  speed: 400,
+  spaceBetween: 100,
+});
+----
+
+*After* you initialize Swiper it is possible to access to Swiper's
+instance on its HTMLElement. It is `swiper` property of Swiper's HTML
+container element:
+
+[source, js]
+----
+const swiperInstance = document.querySelector('.my-swiper-container').swiper;
+
+// Now you can use all slider methods like
+swiperInstance.slideNext();
+----
+
+[role="mt-4"]
+[[api-swiper-css-styles]]
+=== CSS styles
+
+Swiper CSS package contains different sets of CSS styles:
+
+CSS styles for bundle version:
+
+* `swiper-bundle.css` -- all Swiper styles including all modules styles
+  (like Navigation, Pagination, etc.)
+* `swiper-bundle.min.css` -- same as previous but minified
+
+CSS styles for bundle version (package imports):
+
+* `swiper/css` -- all Swiper styles including all modules styles (like
+  Navigation, Pagination, etc.)
+* `swiper/css/bundle` -- same as previous but minified
+
+CSS styles for core version and modules (package imports):
+
+* `swiper/css` -- only core Swiper styles
+
+* `swiper/css/a11y` -- styles required for A11y module
+* `swiper/css/autoplay` -- styles required for Autoplay module
+* `swiper/css/controller` -- styles required for Controller module
+
+* `swiper/css/effect-cards` -- styles required for Cards Effect module
+* `swiper/css/effect-coverflow` -- styles required for Coverflow Effect module
+* `swiper/css/effect-creative` -- styles required for Creative Effect module
+* `swiper/css/effect-cube` -- styles required for Cube Effect module
+* `swiper/css/effect-fade` -- styles required for Fade Effect module
+* `swiper/css/effect-flip` -- styles required for Flip Effect module
+
+* `swiper/css/free-mode` -- styles required for Free Mode module
+* `swiper/css/grid` -- styles required for Grid module
+* `swiper/css/hash-navigation` -- styles required for Hash Navigation module
+* `swiper/css/history` -- styles required for History module
+* `swiper/css/keyboard` -- styles required for Keyboard module
+* `swiper/css/manipulation` -- styles required for Manipulation module
+* `swiper/css/mousewheel` -- styles required for Mousewheel module
+* `swiper/css/navigation` -- styles required for Navigation module
+* `swiper/css/pagination` -- styles required for Pagination module
+* `swiper/css/parallax` -- styles required for Parallax module
+* `swiper/css/scrollbar` -- styles required for Scrollbar module
+* `swiper/css/thumbs` -- styles required for Thumbs module
+* `swiper/css/virtual` -- styles required for Virtual module
+* `swiper/css/zoom` -- styles required for Zoom module
+

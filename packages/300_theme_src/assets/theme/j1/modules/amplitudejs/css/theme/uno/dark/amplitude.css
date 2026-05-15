@@ -341,8 +341,22 @@ progress.large-player-progress {
   background-color: var(--ajs-theme-uno--silver-500);
 }
 
-progress::-webkit-progress-value,
-progress::-moz-progress-bar,
+/* WebKit/Blink (Chrome, Safari, Edge) — the track */
+progress::-webkit-progress-bar {
+  background-color: var(--ajs-theme-uno--silver-500);
+}
+
+/* WebKit/Blink — the filled value */
+progress::-webkit-progress-value {
+  background-color: var(--ajs-theme-uno--blue);
+}
+
+/* Firefox — the filled value */
+progress::-moz-progress-bar {
+  background-color: var(--ajs-theme-uno--blue);
+}
+
+/* Legacy IE/old Edge */
 progress::-ms-fill {
   background-color: var(--ajs-theme-uno--blue);
 }

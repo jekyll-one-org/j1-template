@@ -1,0 +1,374 @@
+[role="mt-5"]
+== Overview
+
+Swiper provides a complete carousel engine that can be operated via
+touch (mobile devices) and mouse/keyboard (desktop).
+
+The Swiper *API* is the set of *options*, *methods*, *properties* and
+*events* you use from JavaScript to configure and control a slider. In
+J1 Template you usually do *not* call this API directly. Instead, you
+write a few YAML settings and the J1 *swiper adapter*
+(`~/assets/theme/j1/adapter/js/swiper.js`) builds the JavaScript
+configuration for you. Reading this manual is still useful, because all
+YAML keys map one-to-one to the API names described below.
+
+[role="mt-4"]
+[[api-overview-modules]]
+=== Modules
+
+Swiper is built from a *core* and a set of optional *modules*. Each
+module adds a feature (navigation arrows, pagination dots, autoplay,
+zoom, etc.) and can be turned on or off independently. The J1 bundle
+(`swiper-bundle.js`) ships with all of the modules below pre-registered,
+so you only need to enable them in the parameters.
+
+[cols="3a,9a", subs=+macros, options="header", width="100%", role="table-striped rtable mt-4"]
+|===
+|Name |Description
+
+|`Accessibility (a11y)`
+|Once the a11y (Accessibility) module is activated, Swiper automatically
+adds ARIA attributes and semantic roles to the DOM. Specifically, important
+ARIA attributes such as `aria-live`, `aria-label`, and `role` are
+automatically added to the slider and its controls so that screen reader
+users can understand the purpose of the slider and navigate between the
+slides.
+
+|`Virtual`
+|Keeps only the slides that are currently visible (plus a small buffer)
+in the DOM and removes all others. Use this when your slider has *many*
+slides or very heavy content. The page stays fast because the browser
+does not have to render slides the visitor cannot see.
+
+|`Keyboard`
+|Lets visitors move between slides with the *left* and *right* (or
+*up*/*down*) arrow keys. Useful on desktop, for accessibility, and for
+keyboard-only users. You can limit the keys to the slider area only
+(`onlyInViewport`).
+
+|`Mousewheel`
+|Turns the *mouse wheel* (or two-finger touchpad scroll) into a slide
+control. Scrolling down or right moves to the next slide; scrolling up
+or left moves to the previous one. Helpful for full-screen slideshows
+on desktop.
+
+|`Navigation`
+|Adds two *navigation buttons* ("previous" and "next") next to the
+slider. Visitors click them to jump one slide back or forward. You can
+style the buttons with CSS or replace them with your own elements.
+
+|`Pagination`
+|Shows *pagination indicators* below (or beside) the slider so visitors
+can see how many slides exist and which one is active. The default is a
+row of *bullets*; you can also choose `fraction` ("3 / 10"),
+`progressbar`, or a fully `custom` renderer.
+
+|`Scrollbar`
+|Adds a small *scrollbar* under (or beside) the slider that reflects
+the current position. The scrollbar can be set to be draggable so the
+visitor can use it like a thumb to scrub through the slides.
+
+|`Parallax`
+|Lets you move *parts of a slide* at a different speed than the slide
+itself. The result is a sense of depth: a background image moves slowly
+while the headline in front moves faster. Parallax is configured per
+element with `data-swiper-parallax` attributes.
+
+|`Zoom`
+|Allows the visitor to *zoom* into the active slide by double-tapping
+(touch) or double-clicking (mouse), and to *pan* the zoomed image with
+a finger or the mouse. Useful for product galleries and photo viewers.
+
+|`Controller`
+|Connects two or more Swipers so that one *drives the other(s)*. When
+the master slider moves, the slaves follow. This is the basis for
+*thumbnail strips* and *side-by-side comparison* sliders.
+
+|`History`
+|Updates the browser's *URL* and *history* whenever the active slide
+changes. Each slide can have its own URL, so visitors can bookmark or
+share a direct link to a specific slide and the back/forward buttons
+work as expected.
+
+|`HashNavigation`
+|Like `History`, but uses the URL *hash fragment* (the part after `#`)
+instead of a full URL path. Lighter to set up because it does not need
+server-side rewriting. The hash is updated when the active slide
+changes.
+
+|`Autoplay`
+|Moves the slider forward *automatically* on a timer (default 3 seconds
+per slide). Autoplay can be paused on hover, stopped on the last slide,
+or disabled after the first user interaction.
+
+|`Thumb`
+|A pre-wired combination of `Controller` and a second small Swiper that
+shows *thumbnail* previews. Click a thumbnail and the main slider jumps
+to the matching slide; swipe the main slider and the active thumbnail
+follows.
+
+|`Free Mode`
+|Disables the *snap-to-slide* behaviour so the slider can stop *between*
+slides. Useful for continuous content like long image strips or product
+rows where snapping to a fixed slide would feel wrong.
+
+|`Grid`
+|Lets a slider show *multiple rows* of slides at the same time. You set
+the number of rows with `grid.rows`; Swiper then fills them column by
+column from left to right (or top to bottom in vertical sliders).
+
+|`Manipulation`
+|Adds methods for *adding*, *removing*, *prepending* or *appending*
+slides at runtime from JavaScript. Without this module, the slide list
+is fixed once the slider is created.
+
+|`Transition Effects`
+|A family of modules that change *how* the active slide is replaced by
+the next one. The default is a horizontal `slide`; alternatives are
+`fade`, `cube`, `flip`, `coverflow`, `creative` and `cards`. Each
+effect has its own options object (e.g. `fadeEffect`, `cubeEffect`).
+
+|===
+
+
+[role="mt-4"]
+[[api-overview-features]]
+=== Features
+
+The available modules result in the following key features:
+
+[cols="4a,8a", subs=+macros, options="header", width="100%", role="table-striped rtable mt-4"]
+|===
+|Name |Description
+
+|`Slide navigation`
+|Swiping, arrow keys, mouse wheel, buttons (`swiper-button-prev` /
+`swiper-button-next`), pagination, scrollbar.
+
+|`Hardware-accelerated transitions`
+|Controlled via CSS transforms (`translate3d`), including special effects
+such as fade, cube, flip, coverflow, creative and cards.
+
+|`Modes`
+|Loop and free mode, autoplay, rewind.
+
+|`Responsiveness`
+|Responsive behaviour with breakpoints and grid layout (multiple rows).
+
+|`Accessibility (A11y)`
+|Adds ARIA attributes and semantic roles to the slider and its controls
+so that screen-reader users can understand the purpose of the slider and
+navigate between the slides.
+
+|`Deep linking`
+|History or Hash navigation lets every slide have its own URL, so a
+visitor can bookmark or share a direct link to a specific slide.
+
+|`Mobile-friendly`
+|Intended to be used in mobile websites, mobile web apps, and mobile
+native/hybrid apps.
+
+|`Library Agnostic`
+|Swiper doesn't require any JavaScript libraries like jQuery, which makes
+Swiper much smaller and faster. It can be safely used with libraries such
+as jQuery, Zepto, jQuery Mobile, etc.
+
+|`1:1 Touch movement`
+|By default, Swiper provides 1:1 touch movement interaction, but this ratio
+can be configured through Swiper settings.
+
+|`Mutation Observer`
+|Swiper has an option to enable Mutation Observer. With this feature, Swiper
+will be automatically reinitialised and recalculate all required parameters
+if you make dynamic changes to the DOM, or to Swiper styles themselves.
+
+|`RTL`
+|Swiper is the only slider that provides 100% RTL support with correct layout.
+
+|`Multi Row Slides Layout`
+|Swiper allows a multiple-row slides layout, with a few slides per column.
+
+|`Transition Effects`
+|Fade, Flip, 3D Cube, 3D Coverflow.
+
+|`Two-way Control`
+|Swiper may be used as controller for any number of other Swipers, and
+even be controlled at the same time.
+
+|`Full Navigation Control`
+|Swiper comes with all required built-in navigation elements, such as
+Pagination, Navigation arrows and Scrollbar.
+
+|`Flexbox Layout`
+|Swiper uses modern flexbox layout for slides layout, which solves a lot
+of problems and time with size calculations. Such layout also allows
+configuring the Slides grid using pure CSS.
+
+|`Most Flexible Slides Layout Grid`
+|Swiper has a lot of parameters on initialisation to make it as flexible
+as possible. You can control slides per view, per column, per group,
+space between slides, and many more.
+
+|`Lazy Loading Images`
+|Swiper Lazy Loading delays loading of images in inactive/invisible
+slides until the user swipes to them. Such a feature can make the
+page load faster and improve Swiper performance.
+
+|`Virtual Slides`
+|Swiper comes with the Virtual Slides feature that is great when you have
+a lot of slides or content-heavy/image-heavy slides, so it will keep
+just the required amount of slides in the DOM.
+
+|===
+
+
+[role="mt-4"]
+[[api-swiper-css-styles]]
+=== CSS styles
+
+Swiper CSS comes in two flavours: a *bundle* (one file, everything
+included) and *single-module* files (one per feature). In the J1
+Template the *bundle* is used by default (`swiper-bundle.css`), so you
+do not have to import individual module CSS files.
+
+CSS styles for the bundle version:
+
+* `swiper-bundle.css` -- all Swiper styles including all module styles
+  (Navigation, Pagination, etc.)
+* `swiper-bundle.min.css` -- same as previous but minified
+
+CSS styles for the bundle version (package imports):
+
+* `swiper/css` -- all Swiper styles including all module styles
+  (Navigation, Pagination, etc.)
+* `swiper/css/bundle` -- same as previous but minified
+
+CSS styles for the core version and individual modules (package imports):
+
+* `swiper/css` -- only core Swiper styles
+
+* `swiper/css/a11y` -- styles required for the A11y module
+* `swiper/css/autoplay` -- styles required for the Autoplay module
+* `swiper/css/controller` -- styles required for the Controller module
+
+* `swiper/css/effect-cards` -- styles required for the Cards Effect module
+* `swiper/css/effect-coverflow` -- styles required for the Coverflow Effect module
+* `swiper/css/effect-creative` -- styles required for the Creative Effect module
+* `swiper/css/effect-cube` -- styles required for the Cube Effect module
+* `swiper/css/effect-fade` -- styles required for the Fade Effect module
+* `swiper/css/effect-flip` -- styles required for the Flip Effect module
+
+* `swiper/css/free-mode` -- styles required for the Free Mode module
+* `swiper/css/grid` -- styles required for the Grid module
+* `swiper/css/hash-navigation` -- styles required for the Hash Navigation module
+* `swiper/css/history` -- styles required for the History module
+* `swiper/css/keyboard` -- styles required for the Keyboard module
+* `swiper/css/manipulation` -- styles required for the Manipulation module
+* `swiper/css/mousewheel` -- styles required for the Mousewheel module
+* `swiper/css/navigation` -- styles required for the Navigation module
+* `swiper/css/pagination` -- styles required for the Pagination module
+* `swiper/css/parallax` -- styles required for the Parallax module
+* `swiper/css/scrollbar` -- styles required for the Scrollbar module
+* `swiper/css/thumbs` -- styles required for the Thumbs module
+* `swiper/css/virtual` -- styles required for the Virtual module
+* `swiper/css/zoom` -- styles required for the Zoom module
+
+
+[role="mt-4"]
+[[api-swiper-html-layout]]
+== HTML Layout
+
+A Swiper slider is built from a few *required* HTML elements and several
+*optional* helpers. The required ones are the *main container*
+(`.swiper`), the *wrapper* (`.swiper-wrapper`) and one or more *slides*
+(`.swiper-slide`). The optional helpers are *pagination*, *navigation*
+*buttons* and the *scrollbar*; they only appear if you turn the matching
+module on in the parameters.
+
+[source, html]
+----
+<!-- Slider main container -->
+<div class="swiper">
+  <!-- Additional required wrapper -->
+  <div class="swiper-wrapper">
+    <!-- Slides -->
+    <div class="swiper-slide">Slide 1</div>
+    <div class="swiper-slide">Slide 2</div>
+    <div class="swiper-slide">Slide 3</div>
+    ...
+  </div>
+  <!-- If we need pagination -->
+  <div class="swiper-pagination"></div>
+
+  <!-- If we need navigation buttons -->
+  <div class="swiper-button-prev"></div>
+  <div class="swiper-button-next"></div>
+
+  <!-- If we need scrollbar -->
+  <div class="swiper-scrollbar"></div>
+</div>
+----
+
+[NOTE]
+====
+In J1 Template you normally do *not* write this markup yourself. The
+swiper adapter loads the slider HTML from an Asciidoc fragment configured
+under `xhr_data_path` and inserts it into a placeholder on the page (see
+the AsciiDoc extension `swiper::`). The pattern above is what the
+adapter expects to find in that fragment.
+====
+
+
+[role="mt-5"]
+[[api-swiper-init]]
+== Initialization
+
+When the Swiper's HTML portion is in place, we need to initialise it
+like so:
+
+[source, js, role="noclip"]
+----
+new Swiper(swiperContainer, parameters) // initialize swiper with options
+----
+
+* `swiperContainer` -- HTMLElement or string (with CSS selector) of the
+  swiper container HTML element. *Required*.
+* `parameters` -- object with Swiper parameters. *Optional*.
+* The constructor *returns the initialised Swiper instance*.
+
+.Example
+[source, js]
+----
+const mySwiper = new Swiper('.my-swiper-container', {
+  speed:        400,
+  spaceBetween: 100,
+});
+----
+
+*After* you initialise Swiper, it is possible to access Swiper's
+instance on its HTMLElement. It is the `swiper` property of Swiper's HTML
+container element:
+
+[source, js]
+----
+const swiperInstance = document.querySelector('.my-swiper-container').swiper;
+
+// Now you can use all slider methods like
+swiperInstance.slideNext();
+----
+
+=== Initialisation in J1 Template
+
+In a J1 site the call above is generated by the swiper adapter from
+your YAML configuration. The adapter:
+
+. waits until the page is fully loaded and the slider's HTML fragment
+  has been injected,
+. reads the parameters from the YAML configuration of each slider,
+. calls `new Swiper(...)` for every enabled slider,
+. optionally creates a PhotoSwipe Lightbox on top of the slider when
+  `lightbox.enabled` is set.
+
+You can still grab the resulting instance from JavaScript via
+`document.querySelector('#<your_swiper_id>').swiper` and call any of the
+methods listed further down on this page.

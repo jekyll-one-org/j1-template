@@ -155,4 +155,4 @@ Ruby and supports more than 100 programming languages. It produces colored
 HTML output that works in every modern web browser.
 
 To see what Rouge can do, go to the
-link:{url-tour--rouge-hightlighter}[Rouge Code Highlighter] page.
+link:{url-tour--rouge-hightlighter}[Code Highlighter] page.

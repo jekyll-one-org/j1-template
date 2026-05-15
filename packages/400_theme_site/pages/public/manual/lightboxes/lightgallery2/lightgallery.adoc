@@ -1,7 +1,7 @@
 ---
 title:                                  lightGallery V2
 title_extention:                        API
-tagline:                                Application Interface
+tagline:                                Programming Interface
 
 date:                                   2026-04-28
 #last_modified:                         2026-01-01
@@ -31,7 +31,7 @@ image:
 attic:                                  false
 regenerate:                             false
 personalization:                        true
-permalink:                              /pages/public/manual/module/lightgallery2/lightgallery/
+permalink:                              /pages/public/manual/module/lightboxes/lightgallery/
 
 resources:                              [
                                           lightbox3, lightgallery,
@@ -473,3 +473,4 @@ include::{documentdir}/110_lightgallery_library.asciidoc[]
 // has been cleaned up in this update.
 //
 // include::{documentdir}/120_lightgallery_examples.asciidoc[]
+

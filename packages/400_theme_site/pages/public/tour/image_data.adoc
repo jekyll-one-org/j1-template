@@ -38,7 +38,11 @@ resource_options:
   - attic:
       slides:
         - url:                          /assets/image/module/attic/1920x1280/modern-dance.jpg
-          alt:                          Photo AI generated
+          alt:                          Photo Gemini AI
+#          badge:
+#            type:                       unsplash
+#            author:                     Quino Al Angel
+#            href:                       //unsplash.com/@quinoal
 ---
 
 // Page Initializer
@@ -65,7 +69,7 @@ resource_options:
 
 
 // Page content
-// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// -----------------------------------------------------------------------------
 [role="dropcap"]
 Welcome to the J1 Template tour page about *images*. This page shows the
 features the template offers for displaying image content on a web page:
@@ -91,6 +95,7 @@ libraries:
   {time-num--string} {time-en--string} {time-en--description}.
 </div>
 ++++
+
 
 // Include sub-documents (if any)
 // -----------------------------------------------------------------------------
@@ -134,7 +139,6 @@ for the current pricing and terms.
 All three lightboxes are fully integrated. You can use them on their
 own *or* let them work in the background for other modules such as
 galleries and carousels.
-
 
 [role="mt-5"]
 === Lightbox V3

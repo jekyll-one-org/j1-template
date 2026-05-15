@@ -1,0 +1,166 @@
+[role="mt-4"]
+[[swiper-api-modules-navigation]]
+=== Navigation
+
+Adds two *navigation buttons* ("previous" and "next") next to the
+slider. Visitors click them to jump one slide back or forward. You can
+style the buttons with CSS or replace them with your own elements.
+
+[cols="2a,2a,8a", options="header", width="100%", role="table-striped table-responsive mt-4"]
+|===
+|Name |Type |Description
+
+|navigation
+|boolean \| NavigationOptions
+|Object with navigation parameters or boolean `true` to enable with
+default settings.
+
+[source, js]
+----
+const swiper = new Swiper('.swiper', {
+  navigation: {
+    nextEl: '.swiper-button-next',
+    prevEl: '.swiper-button-prev',
+  },
+});
+----
+
+|===
+
+
+[role="mt-4"]
+[[swiper-api-modules-navigation--parameters]]
+==== Parameters
+
+lorem:sentences[3]
+
+[cols="3a,3a,3a,3a", options="header", width="100%", role="table-striped table-responsive mt-4"]
+|===
+|Name |Type |Default |Description
+
+|addIcons
+|boolean
+|true
+|Boolean property to add SVG icons to navigation buttons
+
+|disabledClass |string
+|'swiper-button-disabled' |CSS class name added to navigation button
+when it becomes disabled
+
+|enabled |boolean | |Boolean property to
+use with breakpoints to enable/disable navigation on certain breakpoints
+
+|hiddenClass |string
+|'swiper-button-hidden' |CSS class name added to navigation button when
+it becomes hidden
+
+|hideOnClick |boolean |false |Toggle
+navigation buttons visibility after click on Slider's container
+
+|lockClass |string
+|'swiper-button-lock' |CSS class name added to navigation button when it
+is disabled
+
+|navigationDisabledClass
+|string |'swiper-navigation-disabled' |CSS class name added on swiper
+container when navigation is disabled by breakpoint
+
+|nextEl |HTMLElement \| CSSSelector \|
+null |null |String with CSS selector or HTML element of the element that
+will work like "next" button after click on it
+
+|prevEl |HTMLElement \| CSSSelector \|
+null |null |String with CSS selector or HTML element of the element that
+will work like "prev" button after click on it
+
+|===
+
+
+[role="mt-4"]
+[[swiper-api-modules-navigation--properties]]
+==== Properties
+
+lorem:sentences[3]
+
+[cols="2a,2a,8a", options="header", width="100%", role="table-striped table-responsive mt-4"]
+|===
+|Name |Type |Description
+
+
+|swiper.navigation.nextEl
+|HTMLElement
+|HTMLElement of "next" navigation button
+
+|swiper.navigation.prevEl
+|HTMLElement
+|HTMLElement of "previous" navigation button
+
+|===
+
+
+[role="mt-4"]
+[[swiper-api-modules-navigation--methods]]
+==== Methods
+
+lorem:sentences[3]
+
+[cols="4a,8a", options="header", width="100%", role="table-striped table-responsive mt-4"]
+|===
+|Name |Description
+
+|swiper.navigation.destroy()
+| Destroy navigation
+
+|lswiper.navigation.init()
+| |Initialize navigation
+
+|swiper.navigation.update()
+||Update navigation buttons state (enabled/disabled)
+
+|===
+
+
+[role="mt-4"]
+[[swiper-api-modules-navigation--events]]
+==== Events
+
+lorem:sentences[3]
+
+[cols="2a,2a,8a", options="header", width="100%", role="table-striped table-responsive mt-4"]
+|===
+|Name |Type |Description
+
+|navigationHide
+|(swiper)
+|Event will be fired on navigation hide
+
+|navigationNext
+|(swiper)
+|Event will be fired on navigation next button click
+
+|navigationPrev
+|(swiper)
+|Event will be fired on navigation prev button click
+
+|navigationShow
+|(swiper)
+|Event will be fired on navigation show
+
+|===
+
+
+[role="mt-4"]
+[[swiper-api-modules-navigation--css]]
+==== CSS
+
+lorem:sentences[3]
+
+[source, css, role="noclip"]
+----
+{
+  --swiper-navigation-size: 44px;
+  --swiper-navigation-top-offset: 50%;
+  --swiper-navigation-sides-offset: 10px;
+  --swiper-navigation-color: var(--swiper-theme-color);
+}
+----

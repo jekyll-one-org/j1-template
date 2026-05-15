@@ -30,7 +30,7 @@ image:
 regenerate:                             false
 permalink:                              /pages/public/tour/site_search/
 
-resources:                              [ lightbox ]
+resources:                              [ lightbox3 ]
 resource_options:
   - attic:
       slides:

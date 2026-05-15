@@ -1,7 +1,7 @@
 ---
 title:                                  Lightbox V3
 title_extention:                        API
-tagline:                                Application Interface
+tagline:                                Programming Interface
 
 date:                                   2026-04-28
 #last_modified:                         2026-01-01
@@ -22,7 +22,7 @@ image:
   height:                               1280
 
 regenerate:                             false
-permalink:                              /pages/public/manual/module/lightbox3/lightbox/
+permalink:                              /pages/public/manual/module/lightboxes/lightbox/
 
 resources:                              [ lightbox3 ]
 resource_options:
@@ -659,3 +659,4 @@ lb.on('zoomOut', (e) => console.log('zoomOut', e.detail));
 
 // </script>
 // ++++
+

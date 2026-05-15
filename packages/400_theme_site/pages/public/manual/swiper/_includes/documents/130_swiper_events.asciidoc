@@ -1,0 +1,307 @@
+[role="mt-5"]
+[[swiper-api--events]]
+== Events
+
+// claude - Update swiper manual #1
+// Rewrote the lead sentence so it is a complete English sentence
+// ("listen" needed an object). Added the missing period after the
+// "this keyword" note.
+Swiper comes with a bunch of useful events you can *listen to*. Events
+can be assigned in two ways:
+
+. Using the `on` parameter on swiper initialisation:
++
+[source, js]
+----
+const swiper = new Swiper('.swiper', {
+  // ...
+  on: {
+    init: function () {
+      console.log('swiper initialized');
+    },
+  },
+});
+----
+. Using the `on` method *after* swiper initialisation:
++
+[source, js]
+----
+const swiper = new Swiper('.swiper', {
+  // ...
+});
+swiper.on('slideChange', function () {
+  console.log('slide changed');
+});
+----
+
+[NOTE]
+====
+The *this* keyword inside an event handler always points to the Swiper instance.
+====
+
+[cols="3a,2a,7a", subs=+macros, options="header", width="100%", role="table-striped table-responsive"]
+|===
+|Name |Arguments |Description
+
+|activeIndexChange
+|(swiper)
+|Event will be fired on active index change
+
+|afterInit
+|(swiper)
+|Event will be fired right after initialization
+
+|beforeDestroy
+|(swiper)
+|Event will be fired right before Swiper destroyed
+
+|beforeInit
+|(swiper)
+|Event will be fired right before initialization
+
+|beforeLoopFix
+|(swiper)
+|Event will be fired right before "loop fix"
+
+|beforeResize
+|(swiper)
+|Event will be fired before resize handler
+
+|beforeSlideChangeStart
+|(swiper)
+|Event will be fired before slide change transition start
+
+|beforeTransitionStart
+|(swiper, speed, internal)
+|Event will be fired before transition start
+
+|breakpoint
+|(swiper, breakpointParams)
+|Event will be fired on breakpoint change
+
+|changeDirection
+|(swiper)
+|Event will fired on direction change
+
+|click
+|(swiper, event)
+|Event will be fired when the user clicks or taps Swiper.
+Receives `pointerup` event as an argument.
+
+|destroy
+|(swiper)
+|Event will be fired on swiper destroy
+
+|doubleClick
+|(swiper, event)
+|Event will be fired when the user double-clicks or double-taps Swiper
+
+|doubleTap
+|(swiper, event)
+|Event will be fired when the user double-taps Swiper's container.
+Receives `pointerup` event as an argument
+
+|romEdge
+|(swiper)
+|Event will be fired when Swiper goes from beginning or end position
+
+|init
+|(swiper)
+|Fired right after Swiper initialization. Note that with `swiper.on('init')`
+syntax it will work only in case you set `init: false` parameter.
+
+[source, js]
+----
+const swiper = new Swiper('.swiper', {
+  init: false,
+  // other parameters
+});
+swiper.on('init', function() {
+ // do something
+});
+// init Swiper
+swiper.init();
+----
+
+[source, js]
+----
+// Otherwise use it as the parameter:
+const swiper = new Swiper('.swiper', {
+  // other parameters
+  on: {
+    init: function () {
+      // do something
+    },
+  }
+});
+----
+
+|lock
+|(swiper)
+|Event will be fired when swiper is locked (when `watchOverflow` enabled)
+
+|loopFix
+|(swiper)
+|Event will be fired after "loop fix"
+
+|momentumBounce
+|(swiper) |Event will be fired on momentum bounce
+
+|observerUpdate
+|(swiper)
+|Event will be fired if observer is enabled and it detects DOM mutations
+
+|orientationchange
+|(swiper)
+|Event will be fired on orientation change (e.g. landscape -> portrait)
+
+|progress
+|(swiper, progress)
+|Event will be fired when Swiper progress is changed, as an argument
+it receives progress that is always from 0 to 1
+
+|reachBeginning
+|(swiper)
+|Event will be fired when Swiper reaches its beginning (initial position)
+
+|reachEnd
+|(swiper)
+|Event will be fired when Swiper reaches the last slide
+
+|realIndexChange
+|(swiper)
+|Event will fired on real index change
+
+|resize
+|(swiper)
+|Event will be fired on window resize right before swiper's
+onresize manipulation
+
+|setTransition
+|(swiper, transition)
+|Event will be fired every time swiper starts animation.
+Receives current transition duration (in ms) as an argument
+
+|setTranslate
+|(swiper, translate)
+|Event will be fired when swiper's wrapper changes its position.
+Receives current translate value as an argument
+
+|slideChange
+|(swiper)
+|Event will be fired when currently active slide is changed
+
+|slideChangeTransitionEnd
+|(swiper)
+|Event will be fired after animation to other slide (next or
+previous).
+
+|slideChangeTransitionStart
+|(swiper)
+|Event will be fired in the beginning of animation to other
+slide (next or previous).
+
+|slideNextTransitionEnd
+|(swiper)
+|Same as "slideChangeTransitionEnd" but for "forward" direction only
+
+|slideNextTransitionStart
+|(swiper)
+|Same as "slideChangeTransitionStart" but for "forward"
+direction only
+
+slidePrevTransitionEnd
+|(swiper)
+|Same as "slideChangeTransitionEnd" but for "backward" direction only
+
+|slidePrevTransitionStart
+|(swiper)
+|Same as "slideChangeTransitionStart" but for "backward"
+direction only
+
+|slideResetTransitionEnd
+|(swiper)
+|Event will be fired in the end of animation of resetting slide to
+current one
+
+|slideResetTransitionStart
+|(swiper)
+|Event will be fired in the beginning of animation of
+resetting slide to current one
+
+|sliderFirstMove
+|(swiper, event)
+|Event will be fired with first touch/drag move
+
+|sliderMove
+|(swiper, event)
+|Event will be fired when the user touches and moves a finger over
+Swiper and moves it. Receives `pointermove` event as an argument.
+
+|slidesGridLengthChange
+|(swiper)
+|Event will be fired when slides grid has changed
+
+|slidesLengthChange
+|(swiper)
+|Event will be fired when number of slides has changed
+
+|slidesUpdated
+|(swiper)
+|Event will be fired after slides and their sizes are calculated and updated
+
+|snapGridLengthChange
+|(swiper)
+|Event will be fired when snap grid has changed
+
+|snapIndexChange
+|(swiper)
+|Event will fired on snap index change
+
+|tap
+|(swiper, event)
+|Event will be fired when user click/tap on Swiper. Receives `pointerup`
+event as an argument.
+
+|toEdge
+|(swiper)
+|Event will be fired when Swiper goes to beginning or end position
+
+|touchEnd
+|(swiper, event)
+|Event will be fired when the user releases Swiper. Receives `pointerup`
+event as an argument.
+
+|touchMove
+|(swiper, event)
+|Event will be fired when the user touches and moves a finger over
+Swiper. Receives `pointermove` event as an argument.
+
+|touchMoveOpposite
+|(swiper, event)
+|Event will be fired when the user touches and moves a finger over Swiper in
+direction opposite to direction parameter. Receives `pointermove`
+event as an argument.
+
+|touchStart
+|(swiper, event)
+|Event will be fired when the user touches Swiper. Receives `pointerdown`
+event as an argument.
+
+|transitionEnd
+|(swiper)
+|Event will be fired after a transition.
+
+|transitionStart
+|(swiper)
+|Event will be fired at the beginning of a transition.
+
+|unlock
+|(swiper)
+|Event will be fired when swiper is unlocked (when `watchOverflow` is enabled)
+
+|update
+|(swiper)
+|Event will be fired after a `swiper.update()` call
+
+|===

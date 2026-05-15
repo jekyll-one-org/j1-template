@@ -1,0 +1,120 @@
+
+[role="mt-5"]
+[[swiper-api--properties]]
+== Properties
+
+The follwing table lists all *properties* available in alphabetical order.
+
+[cols="3a,2a,7a", subs=+macros, options="header", width="100%", role="table-striped table-responsive"]
+|===
+|Name |Type |Description
+
+|link:#prop-swiper-activeIndex[swiper.activeIndex] |number a|
+Index number of currently active slide
+
+____
+Note, that in loop mode active index value will be always shifted on a
+number of looped slides
+____
+
+|link:#prop-swiper-allowSlideNext[swiper.allowSlideNext] |boolean
+|Disable / enable ability to slide to the next slides by assigning
+`false` / `true` to this property
+
+|link:#prop-swiper-allowSlidePrev[swiper.allowSlidePrev] |boolean
+|Disable / enable ability to slide to the previous slides by assigning
+`false` / `true` to this property
+
+|link:#prop-swiper-allowTouchMove[swiper.allowTouchMove] |boolean
+|Disable / enable ability move slider by grabbing it with mouse or by
+touching it with finger (on touch screens) by assigning `false` /
+`true` to this property
+
+|link:#prop-swiper-animating[swiper.animating] |boolean |`true` if
+swiper is in transition
+
+|link:#prop-swiper-clickedIndex[swiper.clickedIndex] |number |Index
+number of last clicked slide
+
+|link:#prop-swiper-clickedSlide[swiper.clickedSlide] |HTMLElement |Link
+to last clicked slide (HTMLElement)
+
+|link:#prop-swiper-defaults[swiper.defaults] |SwiperOptions |Swiper
+default options
+
+|link:#prop-swiper-el[swiper.el] |HTMLElement |Slider container HTML
+element
+
+|link:#prop-swiper-enabled[swiper.enabled] |boolean |`true` if Swiper
+is enabled, `false` otherwise
+
+|link:#prop-swiper-extendedDefaults[swiper.extendedDefaults]
+|SwiperOptions |Object with global Swiper extended options
+
+|link:#prop-swiper-height[swiper.height] |number |Height of container
+
+|link:#prop-swiper-isBeginning[swiper.isBeginning] |boolean |`true` if
+slider on most "left"/"top" position
+
+|link:#prop-swiper-isEnd[swiper.isEnd] |boolean |`true` if slider on
+most "right"/"bottom" position
+
+|link:#prop-swiper-isLocked[swiper.isLocked] |boolean |`true` if slide
+is "locked" (by `watchOverflow`) and slides can not be, e.g. when
+amount of slides is less that slides per view
+
+|link:#prop-swiper-originalParams[swiper.originalParams] |SwiperOptions
+|Object with original initialization parameters
+
+|link:#prop-swiper-params[swiper.params] |SwiperOptions |Object with
+passed initialization parameters
+
+|link:#prop-swiper-previousIndex[swiper.previousIndex] |number |Index
+number of previously active slide
+
+|link:#prop-swiper-progress[swiper.progress] |number |Current progress
+of wrapper translate (from 0 to 1)
+
+|link:#prop-swiper-realIndex[swiper.realIndex] |number |Index number of
+currently active slide considering rearranged slides in loop mode
+
+|link:#prop-swiper-slides[swiper.slides] |[.text-green]#HTMLElement[]#
+|Array of slides HTML elements. To get specific slide HTMLElement use
+`swiper.slides[1]`
+
+|link:#prop-swiper-slidesEl[swiper.slidesEl] |HTMLElement |Wrapper HTML
+element
+
+|link:#prop-swiper-slidesGrid[swiper.slidesGrid]
+|[.text-green]#number[]# |Slides grid
+
+|link:#prop-swiper-slidesSizesGrid[swiper.slidesSizesGrid]
+|[.text-green]#number[]# |Array of widths for slides
+
+|link:#prop-swiper-snapGrid[swiper.snapGrid] |[.text-green]#number[]#
+|Slides snap grid
+
+|link:#prop-swiper-snapIndex[swiper.snapIndex] |number |Index number of
+current snap in `snapGrid`
+
+|link:#prop-swiper-swipeDirection[swiper.swipeDirection] |'next' \|
+'prev' |Direction of sliding
+
+|link:#prop-swiper-touches[swiper.touches] |object a|
+Object with the following touch event properties:
+
+* `swiper.touches.startX`
+* `swiper.touches.startY`
+* `swiper.touches.currentX`
+* `swiper.touches.currentY`
+* `swiper.touches.diff`
+
+|link:#prop-swiper-translate[swiper.translate] |number |Current value of
+wrapper translate
+
+|link:#prop-swiper-width[swiper.width] |number |Width of container
+
+|link:#prop-swiper-wrapperEl[swiper.wrapperEl] |HTMLElement |Wrapper
+HTML element
+
+|===

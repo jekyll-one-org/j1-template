@@ -1,7 +1,7 @@
 ---
 title:                                  PhotoSwipe V5
 title_extention:                        API
-tagline:                                Application Interface
+tagline:                                Programming Interface
 
 date:                                   2026-04-28
 #last_modified:                         2026-01-01
@@ -28,7 +28,7 @@ image:
 attic:                                  false
 regenerate:                             true
 personalization:                        true
-permalink:                              /pages/public/manual/module/photoswipe5/photoswipe/
+permalink:                              /pages/public/manual/module/lightboxes/photoswipe/
 
 resources:                              [ photoswipejs ]
 resource_options:
@@ -53,8 +53,8 @@ resource_options:
 // Attribute settings for page content control (e.g includes)
 //
 :includedir:                            _includes
+:tabledir:                              _includes/tables
 :documentdir:                           _includes/documents
-
 
 //  Load Liquid procedures
 // -----------------------------------------------------------------------------

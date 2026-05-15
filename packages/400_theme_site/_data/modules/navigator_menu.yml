@@ -23,6 +23,10 @@
 - item:                                 Tour
   sublevel:
 
+  # - title:                            Colors
+  #   href:                             /pages/public/tools/previewer/color_palette/
+  #   icon:                             format-color-fill
+
     - title:                            Image
       href:                             /pages/public/tour/image_data/
       icon:                             image
@@ -228,6 +232,10 @@
           href:                         /pages/public/manuals/amplitude/amplitude_api/
           icon:                         speaker
 
+        - title:                        Swiper
+          href:                         /pages/public/manual/module/carousel/swiper/
+          icon:                         view-carousel 
+
     #  - title:                         Galleries
     #    href:                          /pages/public/manuals/modules/gallery/
     #    icon:                          view-dashboard-variant
@@ -237,10 +245,10 @@
           dropdown:
 
             - title:                    Lightbox v3
-              href:                     /pages/public/manual/module/lightboxes/lightbox3/
+              href:                     /pages/public/manual/module/lightboxes/lightbox/
               icon:                     flashlight
             - title:                    PhotoSwipe V5
-              href:                     /pages/public/manual/module/lightboxes/photoswipe5/
+              href:                     /pages/public/manual/module/lightboxes/photoswipe/
               icon:                     flashlight
             - title:                    lightGallery V2
               href:                     /pages/public/manual/module/lightboxes/lightgallery2/
@@ -672,7 +680,7 @@
 # ------------------------------------------------------------------------------
 # Menu CLAUDE AI
 #
-- item:                                 ChatBot
+- item:                                 Chat
   sublevel:
 
     - title:                            ChatBot
