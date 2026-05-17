@@ -1,0 +1,2827 @@
+// claude - Update swiper manual #2
+// claude - Update swiper manual #4
+[role="mt-5"]
+[[swiper-api--modules]]
+== Modules
+
+Swiper is built from a *core* and a set of optional *modules*. Each
+module adds a single feature (navigation arrows, pagination dots,
+autoplay, zoom and so on) and can be turned on or off independently.
+The J1 bundle (`swiper-bundle.js`) ships with *all* of the modules
+listed below pre-registered, so you only need to enable them in the
+Swiper parameters -- no extra import is required.
+
+Most modules follow the same pattern. A module is enabled by adding
+its name to the Swiper options, either as boolean `true` (use the
+default settings) or as an object (override one or more options):
+
+[source, js]
+----
+const swiper = new Swiper('.swiper', {
+  // shortest form -- use module defaults
+  navigation: true,
+
+  // expanded form -- pass custom options
+  pagination: {
+    el: '.swiper-pagination',
+    clickable: true,
+  },
+});
+----
+
+Once Swiper is created, modules expose three optional building blocks:
+
+* *Properties* -- read-only values you can inspect on the instance
+  (for example `swiper.navigation.nextEl`).
+* *Methods* -- helper functions you can call from your own code
+  (for example `swiper.autoplay.stop()`).
+* *Events* -- callbacks Swiper fires when something changes
+  (registered with `swiper.on('eventName', handler)`).
+
+[role="mt-5"]
+[[swiper-api-modules-navigation]]
+=== Navigation
+
+Adds two *navigation buttons* ("previous" and "next") next to the
+slider. Visitors click them to jump one slide back or forward. You can
+style the buttons with CSS or replace them with your own elements.
+
+[cols="2a,2a,8a", options="header", width="100%", role="table-striped rtable"]
+|===
+|Name |Type |Description
+
+|navigation
+|boolean \| NavigationOptions
+|Object with navigation parameters or boolean `true` to enable with
+default settings.
+
+[source, js]
+----
+const swiper = new Swiper('.swiper', {
+  navigation: {
+    nextEl: '.swiper-button-next',
+    prevEl: '.swiper-button-prev',
+  },
+});
+----
+
+|===
+
+[role="mt-5"]
+[[swiper-api-modules-navigation--parameters]]
+==== Parameters
+
+The table below lists the *options* that go inside the `navigation`
+object. You can also pass `navigation: true` instead of an object to
+turn navigation buttons on with the default settings (Swiper will then
+look for elements with the classes `.swiper-button-prev` and
+`.swiper-button-next` inside the slider container).
+
+[cols="3a,1a,1a,7a", options="header", width="100%", role="table-striped rtable"]
+|===
+|Name |Type |Default |Description
+
+|`disabledClass`
+|string
+|'swiper-button-disabled'
+|CSS class name added to the navigation button when it becomes
+disabled (e.g. on the first or last slide if `loop` is off).
+
+|`enabled`
+|boolean
+|true
+|Whether the module is active. Mainly used together with `breakpoints`
+to enable or disable navigation at specific screen sizes.
+
+|`hiddenClass`
+|string
+|'swiper-button-hidden'
+|CSS class name added to the navigation button when it is hidden.
+
+|`hideOnClick`
+|boolean
+|false
+|If `true`, the navigation buttons are toggled (hidden / shown) when
+the visitor clicks on the slider container.
+
+|`lockClass`
+|string
+|'swiper-button-lock'
+|CSS class name added to the navigation button when it is locked
+(e.g. when `watchOverflow` is enabled and there are not enough slides
+to scroll).
+
+|`navigationDisabledClass`
+|string
+|'swiper-navigation-disabled'
+|CSS class name added to the swiper container when navigation is
+disabled by a breakpoint.
+
+|`nextEl`
+|HTMLElement \| CSSSelector \| null
+|null
+|CSS selector string or HTML element of the element that should act
+as the "next" button.
+
+|`prevEl`
+|HTMLElement \| CSSSelector \| null
+|null
+|CSS selector string or HTML element of the element that should act
+as the "previous" button.
+
+|===
+
+[role="mt-5"]
+[[swiper-api-modules-navigation--properties]]
+==== Properties
+
+After the slider is created, the resolved navigation buttons are
+available on `swiper.navigation`:
+
+[cols="3a,2a,7a", options="header", width="100%", role="table-striped rtable"]
+|===
+|Name |Type |Description
+
+|`swiper.navigation.nextEl`
+|HTMLElement
+|HTMLElement of "next" navigation button
+
+|`swiper.navigation.prevEl`
+|HTMLElement
+|HTMLElement of "previous" navigation button
+
+|===
+
+[role="mt-5"]
+[[swiper-api-modules-navigation--methods]]
+==== Methods
+
+The navigation module adds a few helper methods to the slider instance.
+You usually do *not* need to call them by hand -- Swiper takes care of
+initialising and updating the buttons -- but they are useful if you
+build a custom navigation UI.
+
+[cols="4a,8a", options="header", width="100%", role="table-striped rtable"]
+|===
+|Name |Description
+
+|`swiper.navigation.destroy()`
+|Destroy navigation
+
+|`swiper.navigation.init()`
+|Initialize navigation
+
+|`swiper.navigation.update()`
+|Update navigation buttons state (enabled/disabled)
+
+|===
+
+[role="mt-5"]
+[[swiper-api-modules-navigation--events]]
+==== Events
+
+When the navigation module is active, Swiper fires the following extra
+events. They are registered with `swiper.on('eventName', handler)` like
+any other Swiper event (see the *Events* section above).
+
+[cols="2a,2a,8a", options="header", width="100%", role="table-striped rtable"]
+|===
+|Name |Arguments |Description
+
+|`navigationHide`
+|(swiper)
+|Event is fired on navigation hide
+
+|`navigationNext`
+|(swiper)
+|Event is fired on navigation next button click
+
+|`navigationPrev`
+|(swiper)
+|Event is fired on navigation prev button click
+
+|`navigationShow`
+|(swiper)
+|Event is fired on navigation show
+
+|===
+
+[role="mt-5"]
+[[swiper-api-modules-navigation--css]]
+==== CSS
+
+The look of the navigation buttons can be tuned through a small set of
+*CSS custom properties* (CSS variables). Set them on the slider
+container or on `:root` to change the size, position and colour of the
+arrows -- no JavaScript needed.
+
+[source, css, role="noclip"]
+----
+{
+  --swiper-navigation-size: 44px;
+  --swiper-navigation-top-offset: 50%;
+  --swiper-navigation-sides-offset: 10px;
+  --swiper-navigation-color: var(--swiper-theme-color);
+}
+----
+
+
+[role="mt-5"]
+[[swiper-api-modules-pagination]]
+=== Pagination
+
+Shows *pagination indicators* below (or beside) the slider so visitors
+can see how many slides exist and which one is active. Four built-in
+styles are available:
+
+* `bullets`     -- a row of small dots (default)
+* `fraction`    -- a "3 / 10" text counter
+* `progressbar` -- a thin horizontal progress bar
+* `custom`      -- render anything you want via the `renderCustom`
+  function
+
+[role="mt-5"]
+[[swiper-api-modules-pagination--parameters]]
+==== Parameters
+
+The table below lists the *options* that go inside the `pagination`
+object. You can also pass `pagination: true` instead of an object to
+turn pagination on with the default settings (Swiper will then look for
+an element with the class `.swiper-pagination` inside the slider
+container).
+
+Object with pagination parameters or boolean `true` to enable with
+default settings.
+
+[source, js]
+----
+const swiper = new Swiper('.swiper', {
+  pagination: {
+    el: '.swiper-pagination',
+    type: 'bullets',
+  },
+});
+----
+
+[cols="4a,1a,2a,5a", options="header", width="100%", role="table-striped rtable"]
+|===
+|Name |Type |Default |Description
+
+|`bulletActiveClass`
+|string
+|'swiper-pagination-bullet-active'
+|CSS class name of currently active pagination bullet
+
+|`bulletClass`
+|string
+|'swiper-pagination-bullet'
+|CSS class name of single pagination bullet
+
+|`bulletElement`
+|string
+|'span'
+|Defines which HTML tag will be used to represent a single pagination
+bullet. Only for `bullets` pagination type.
+
+|`clickable`
+|boolean
+|false
+|If `true` then clicking on a pagination bullet will cause transition
+to the matching slide. Only for `bullets` pagination type.
+
+|`clickableClass`
+|string
+|'swiper-pagination-clickable'
+|CSS class name set to pagination when it is clickable
+
+|`currentClass`
+|string
+|'swiper-pagination-current'
+|CSS class name of the element with currently active index
+in "fraction" pagination
+
+|`dynamicBullets`
+|boolean
+|false
+|Good to enable if you use bullets pagination with a lot of slides. So
+it will keep only few bullets visible at the same time.
+
+|`dynamicMainBullets`
+|number
+|1
+|The number of main bullets visible when `dynamicBullets` enabled.
+
+|`el`
+|HTMLElement \| CSSSelector \| null
+|null
+|String with CSS selector or HTML element of the container with
+pagination
+
+|`enabled`
+|boolean
+|true
+|Whether the module is active. Mainly used together with `breakpoints`
+to enable or disable pagination at specific screen sizes.
+
+|`formatFractionCurrent`
+|function(number)
+|none
+|format fraction pagination current number. Function
+receives current number, and you need to return formatted value
+
+|`formatFractionTotal`
+|function(number)
+|none
+|format fraction pagination total number. Function
+receives total number, and you need to return formatted value
+
+|`hiddenClass`
+|string
+|'swiper-pagination-hidden'
+|CSS class name of pagination when it becomes inactive
+
+|`hideOnClick`
+|boolean
+|false
+|Toggle (hide/show) pagination container visibility after click
+on Slider's container
+
+|`horizontalClass`
+|string
+|'swiper-pagination-horizontal'
+|CSS class name set to pagination in horizontal Swiper
+
+|`lockClass`
+|string
+|'swiper-pagination-lock'
+|CSS class name set to pagination when it is disabled
+
+|`modifierClass`
+|string
+|'swiper-pagination-'
+|The beginning of the modifier CSS class name that
+will be added to pagination depending on parameters
+
+|`paginationDisabledClass`
+|string
+|'swiper-pagination-disabled'
+|CSS class name added on swiper container and pagination element
+when pagination is disabled by breakpoint
+
+|`progressbarFillClass`
+|string
+|'swiper-pagination-progressbar-fill'
+|CSS class name of pagination progressbar fill element
+
+|`progressbarOpposite`
+|boolean
+|false
+|Makes pagination progressbar opposite to Swiper's
+`direction` parameter, means vertical progressbar for horizontal
+swiper direction and horizontal progressbar for vertical swiper
+direction
+
+|`progressbarOppositeClass`
+|string
+|'swiper-pagination-progressbar-opposite'
+|CSS class name of pagination progressbar opposite
+
+|`renderBullet`
+|function(number, string)
+|null
+|This parameter allows totally customize pagination bullets, you need to
+pass here a function that accepts `index` number of pagination bullet
+and required element class name (`className`). Only for `bullets`
+pagination type
+
+[source, js]
+----
+const swiper = new Swiper('.swiper', {
+  //...
+  pagination: {
+    //...
+    renderBullet: function (index, className) {
+      return '<span class="' + className + '">' + (index + 1) + '</span>';
+    },
+  },
+});
+----
+
+|`renderCustom`
+|function(Swiper, number, number)
+|null
+|This parameter is required for `custom` pagination type where you
+have to specify how it should be rendered.
+
+[source, js]
+----
+const swiper = new Swiper('.swiper', {
+  //...
+  pagination: {
+    //...
+    renderCustom: function (swiper, current, total) {
+      return current + ' of ' + total;
+    },
+  },
+});
+----
+
+|`renderFraction`
+|function(string, string)
+|null
+|This parameter allows to customize "fraction" pagination html. Only for
+`fraction` pagination type
+
+[source, js]
+----
+const swiper = new Swiper('.swiper', {
+  //...
+  pagination: {
+    //...
+    renderFraction: function (currentClass, totalClass) {
+      return '<span class="' + currentClass + '"></span>' +
+              ' of ' +
+              '<span class="' + totalClass + '"></span>';
+    },
+  },
+});
+----
+
+|`renderProgressbar`
+|function(string)
+|null
+|This parameter allows to customize "progress" pagination. Only for
+`progress` pagination type
+
+[source, js]
+----
+const swiper = new Swiper('.swiper', {
+  //...
+  pagination: {
+    //...
+    renderProgressbar: function (progressbarFillClass) {
+      return '<span class="' + progressbarFillClass + '"></span>';
+    },
+  },
+});
+----
+
+|`totalClass`
+|string
+|'swiper-pagination-total'
+|CSS class name of the element with total number of "snaps"
+in "fraction" pagination
+
+|`type`
+|'bullets' \| 'fraction' \| 'progressbar' \| 'custom'
+|'bullets'
+|String with type of pagination. Can be `bullets`, `fraction`,
+`progressbar` or `custom`
+
+|`verticalClass`
+|string
+|'swiper-pagination-vertical'
+|CSS class name set to pagination in vertical Swiper
+
+|===
+
+[role="mt-5"]
+[[swiper-api-modules-pagination--properties]]
+==== Properties
+
+After the slider is created, the resolved pagination element and its
+bullets are available on `swiper.pagination`:
+
+[cols="4a,2a,6a", options="header", width="100%", role="table-striped rtable"]
+|===
+|Name |Type |Description
+
+|`swiper.pagination.bullets`
+|HTMLElement[]
+|Array of pagination *bullet* HTML elements. Only populated when
+`type: 'bullets'` is used. To get a specific bullet element use, for
+example, `swiper.pagination.bullets[1]` for the second bullet.
+
+|`swiper.pagination.el`
+|HTMLElement
+|The HTML element of the pagination *container* (the element matched
+by the `el` option).
+
+|===
+
+[role="mt-5"]
+[[swiper-api-modules-pagination--methods]]
+==== Methods
+
+The pagination module adds a few helper methods to the slider instance.
+You usually do *not* need to call them by hand -- Swiper renders and
+updates the pagination automatically -- but they are useful if you
+re-render slides outside of Swiper.
+
+[cols="4a,8a", options="header", width="100%", role="table-striped rtable"]
+|===
+|Name |Description
+
+|`swiper.pagination.destroy()`
+|Destroy pagination
+
+|`swiper.pagination.init()`
+|Initialize pagination
+
+|`swiper.pagination.render()`
+|Render pagination layout
+
+|`swiper.pagination.update()`
+|Update pagination state (enabled/disabled/active)
+
+|===
+
+[role="mt-5"]
+[[swiper-api-modules-pagination--events]]
+==== Events
+
+When the pagination module is active, Swiper fires the following extra
+events. They are registered with `swiper.on('eventName', handler)` like
+any other Swiper event (see the *Events* section above).
+
+[cols="4a,2a,6a", options="header", width="100%", role="table-striped rtable"]
+|===
+|Name |Arguments |Description
+
+|`paginationHide`
+|(swiper)
+|Event is fired on pagination hide
+
+|`paginationRender`
+|(swiper, paginationEl)
+|Event is fired after pagination rendered
+
+|`paginationShow`
+|(swiper)
+|Event is fired on pagination show
+
+|`paginationUpdate`
+|(swiper, paginationEl)
+|Event is fired when pagination updated
+|===
+
+[role="mt-5"]
+[[swiper-api-modules-pagination--css]]
+==== CSS
+
+The look of the pagination (bullet size and colour, position relative
+to the slider, progress-bar height, etc.) can be tuned through a set of
+*CSS custom properties* (CSS variables). Set them on the slider
+container or on `:root` to adjust the appearance -- no JavaScript
+needed.
+
+[source, css, role="noclip"]
+----
+{
+  --swiper-pagination-color: var(--swiper-theme-color);
+  --swiper-pagination-left: auto;
+  --swiper-pagination-right: 8px;
+  --swiper-pagination-bottom: 8px;
+  --swiper-pagination-top: auto;
+  --swiper-pagination-fraction-color: inherit;
+  --swiper-pagination-progressbar-bg-color: rgba(0, 0, 0, 0.25);
+  --swiper-pagination-progressbar-size: 4px;
+  --swiper-pagination-bullet-size: 8px;
+  --swiper-pagination-bullet-width: 8px;
+  --swiper-pagination-bullet-height: 8px;
+  --swiper-pagination-bullet-inactive-color: #000;
+  --swiper-pagination-bullet-inactive-opacity: 0.2;
+  --swiper-pagination-bullet-opacity: 1;
+  --swiper-pagination-bullet-horizontal-gap: 4px;
+  --swiper-pagination-bullet-vertical-gap: 6px;
+}
+----
+
+
+[role="mt-5"]
+[[swiper-api-modules-scrollbar]]
+=== Scrollbar
+
+Adds a *scrollbar* to the slider that mirrors the current position
+inside the full set of slides. With `draggable: true` the visitor can
+also grab the scrollbar handle and drag the slider directly -- useful
+for sliders with many slides or with `freeMode` enabled.
+
+[role="mt-5"]
+[[swiper-api-modules-scrollbar--parameters]]
+==== Parameters
+
+The table below lists the *options* that go inside the `scrollbar`
+object. Pass `scrollbar: true` to enable the module with the default
+settings (Swiper will then look for an element with the class
+`.swiper-scrollbar` inside the slider container).
+
+Object with scrollbar parameters or boolean `true` to enable with
+default settings.
+
+[source, js]
+----
+const swiper = new Swiper('.swiper', {
+  scrollbar: {
+    el: '.swiper-scrollbar',
+    draggable: true,
+  },
+});
+----
+
+[cols="3a,2a,2a,5a", options="header", width="100%", role="table-striped rtable"]
+|===
+|Name |Type |Default |Description
+
+|dragClass
+|string
+|'swiper-scrollbar-drag'
+|Scrollbar draggable element CSS class
+
+|dragSize
+|number \| 'auto'
+|'auto'
+|Size of scrollbar draggable element in px
+
+|draggable
+|boolean
+|false
+|Set to `true` to make the scrollbar draggable so the visitor can
+control the slider position by dragging it.
+
+|el
+|HTMLElement \| CSSSelector \| null
+|null
+|String with CSS selector or HTML element of the container with
+scrollbar.
+
+|enabled
+|boolean
+|true
+|Whether the module is active. Mainly used together with `breakpoints`
+to enable or disable the scrollbar at specific screen sizes.
+
+|hide
+|boolean
+|false
+|Hide scrollbar automatically after user interaction
+
+|horizontalClass
+|string
+|'swiper-scrollbar-horizontal'
+|CSS class name set to scrollbar in horizontal Swiper
+
+|lockClass
+|string
+|'swiper-scrollbar-lock'
+|Scrollbar element additional CSS class when it is disabled
+
+|scrollbarDisabledClass
+|string
+|'swiper-scrollbar-disabled'
+|CSS class name added on swiper container and scrollbar element
+when scrollbar is disabled by breakpoint
+
+|snapOnRelease
+|boolean
+|true
+|Set to `true` to snap slider position to slides when you release scrollbar
+
+|verticalClass
+|string
+|'swiper-scrollbar-vertical'
+|CSS class name set to scrollbar in vertical Swiper
+
+|===
+
+[role="mt-5"]
+[[swiper-api-modules-scrollbar--properties]]
+==== Properties
+
+After the slider is created, the resolved scrollbar elements are
+available on `swiper.scrollbar`:
+
+[cols="2a,2a,8a", options="header", width="100%", role="table-striped rtable"]
+|===
+|Name |Type |Description
+
+|swiper.scrollbar.dragEl
+|HTMLElement
+|HTMLElement of Scrollbar draggable handler element
+
+|swiper.scrollbar.el
+|HTMLElement
+|HTMLElement of Scrollbar container element
+
+|===
+
+[role="mt-5"]
+[[swiper-api-modules-scrollbar--methods]]
+==== Methods
+
+The scrollbar module adds a few helper methods. Swiper calls them
+automatically while the slider runs; you only need them when you build
+a custom scrollbar UI on top of Swiper.
+
+[cols="4a,8a", options="header", width="100%", role="table-striped rtable"]
+|===
+|Name |Description
+
+|swiper.scrollbar.destroy()
+|Destroy scrollbar
+
+|swiper.scrollbar.init()
+|Initialize scrollbar
+
+|swiper.scrollbar.setTranslate()
+|Updates scrollbar translate
+
+|swiper.scrollbar.updateSize()
+|Updates scrollbar track and handler sizes
+
+|===
+
+[role="mt-5"]
+[[swiper-api-modules-scrollbar--events]]
+==== Events
+
+When the scrollbar is draggable, Swiper fires the following extra
+events while the visitor drags it. Register them with
+`swiper.on('eventName', handler)` like any other Swiper event.
+
+[cols="2a,2a,8a", options="header", width="100%", role="table-striped rtable"]
+|===
+|Name |Arguments |Description
+
+|scrollbarDragEnd
+|(swiper, event)
+|Event is fired on draggable scrollbar drag end
+
+|scrollbarDragMove
+|(swiper, event)
+|Event is fired on draggable scrollbar drag move
+
+|scrollbarDragStart
+|(swiper, event)
+|Event is fired on draggable scrollbar drag start
+
+|===
+
+[role="mt-5"]
+[[swiper-api-modules-scrollbar--css]]
+==== CSS
+
+The look of the scrollbar (track colour, handler colour, size, border
+radius, position relative to the slider) can be tuned through a set of
+*CSS custom properties* (CSS variables). Set them on the slider
+container or on `:root` to adjust the appearance -- no JavaScript
+needed.
+
+[source, css]
+----
+{
+  --swiper-scrollbar-border-radius: 10px;
+  --swiper-scrollbar-top: auto;
+  --swiper-scrollbar-bottom: 4px;
+  --swiper-scrollbar-left: auto;
+  --swiper-scrollbar-right: 4px;
+  --swiper-scrollbar-sides-offset: 1%;
+  --swiper-scrollbar-bg-color: rgba(0, 0, 0, 0.1);
+  --swiper-scrollbar-drag-bg-color: rgba(0, 0, 0, 0.5);
+  --swiper-scrollbar-size: 4px;
+}
+----
+
+
+[role="mt-5"]
+[[swiper-api-modules-autoplay]]
+=== Autoplay
+
+Makes the slider advance to the next slide automatically after a
+configurable delay. By default autoplay stops once the visitor swipes
+or clicks a navigation button; set `disableOnInteraction: false` to
+keep it running.
+
+[role="mt-5"]
+[[swiper-api-modules-autoplay--parameters]]
+==== Parameters
+
+The table below lists the *options* that go inside the `autoplay`
+object. Pass `autoplay: true` to enable the module with the default
+settings (3 seconds delay, autoplay stops after the first user
+interaction).
+
+Object with autoplay parameters or boolean `true` to enable with
+default settings
+
+[source, js]
+----
+const swiper = new Swiper('.swiper', {
+ autoplay: {
+   delay: 5000,
+ },
+});
+----
+
+[cols="3a,3a,3a,3a", options="header", width="100%", role="table-striped rtable"]
+|===
+|Name |Type |Default |Description
+
+|delay
+|number
+|3000
+|Delay between transitions (in ms). If this parameter is not specified,
+auto play will be disabled.
+
+If you need to specify different delay for specific slides you can do it
+by using `data-swiper-autoplay` (in ms) attribute on slide.
+
+[source, html]
+----
+<!-- hold this slide for 2 seconds -->
+<div class="swiper-slide" data-swiper-autoplay="2000">
+----
+
+|disableOnInteraction
+|boolean
+|false
+|If set to `true` autoplay will be permanently stopped after the
+first user interaction (swipe, navigation click, ...). With the
+default of `false` autoplay simply pauses during the interaction and
+restarts afterwards.
+
+|enabled
+|boolean
+|false
+|Whether autoplay is enabled. Set automatically to `true` when you
+pass `autoplay: true` or an `autoplay` object.
+
+|pauseOnMouseEnter
+|boolean
+|false
+|When enabled autoplay will be paused on pointer (mouse) enter
+over Swiper container.
+
+|reverseDirection
+|boolean
+|false
+|Enables autoplay in reverse direction
+
+|stopOnLastSlide
+|boolean
+|false
+|Enable this parameter and autoplay will be stopped when it reaches last
+slide (has no effect in loop mode)
+
+|waitForTransition
+|boolean
+|true
+|When enabled autoplay will wait for wrapper transition to
+continue. Can be disabled in case of using Virtual Translate when your
+slider may not have transition
+
+|===
+
+[role="mt-5"]
+[[swiper-api-modules-autoplay--properties]]
+==== Properties
+
+After the slider is created, the current autoplay state is available
+on `swiper.autoplay`:
+
+[cols="2a,2a,8a", options="header", width="100%", role="table-striped rtable"]
+|===
+|Name |Type |Description
+
+|swiper.autoplay.paused
+|boolean
+|Whether autoplay is paused
+
+|swiper.autoplay.running
+|boolean
+|Whether autoplay enabled and running
+
+|swiper.autoplay.timeLeft
+|number
+|If autoplay is paused, it contains time left (in ms) before transition
+to next slide
+
+|===
+
+[role="mt-5"]
+[[swiper-api-modules-autoplay--methods]]
+==== Methods
+
+The autoplay module exposes simple helper methods on the slider
+instance. Use them to start, stop, pause or resume autoplay from your
+own code (for example from a custom play/pause button).
+
+[cols="4a,8a", options="header", width="100%", role="table-striped rtable"]
+|===
+|Name |Description
+
+|swiper.autoplay.pause()
+|Pause autoplay
+
+|swiper.autoplay.resume()
+|Resume autoplay
+
+|swiper.autoplay.start()
+|Start autoplay
+
+|swiper.autoplay.stop()
+|Stop autoplay
+
+|===
+
+[role="mt-5"]
+[[swiper-api-modules-autoplay--events]]
+==== Events
+
+When the autoplay module is active, Swiper fires the following extra
+events. Register them with `swiper.on('eventName', handler)` like any
+other Swiper event.
+
+[cols="3a,3a,6a", options="header", width="100%", role="table-striped rtable"]
+|===
+|Name |Arguments |Description
+
+|autoplay
+|(swiper)
+|Event is fired when slide changed with autoplay
+
+|autoplayPause
+|(swiper)
+|Event is fired on autoplay pause
+
+|autoplayResume
+|(swiper)
+|Event is fired on autoplay resume
+
+|autoplayStart
+|(swiper)
+|Event is fired in when autoplay started
+
+|autoplayStop
+|(swiper)
+|Event is fired when autoplay stopped
+
+|autoplayTimeLeft
+|(swiper, timeLeft, percentage)
+|Event triggers continuously while autoplay is enabled. It
+contains time left (in ms) before transition to next slide and
+percentage of that time related to autoplay delay
+
+|===
+
+
+[role="mt-5"]
+[[swiper-api-modules-free-mode]]
+=== Free Mode
+
+Free mode turns the slider into a free-scrolling area: instead of
+snapping to a single slide on release, the visitor can flick through
+the slides and the wrapper keeps moving with momentum. Useful for
+slides that act more like a horizontally scrollable list.
+
+[role="mt-5"]
+[[swiper-api-modules-free-mode--parameters]]
+==== Parameters
+
+The table below lists the *options* that go inside the `freeMode`
+object. Pass `freeMode: true` to enable the module with the default
+settings, or pass an object to fine-tune momentum, snapping and
+sensitivity.
+
+Enables free mode functionality. Object with free mode parameters or
+boolean `true` to enable with default settings.
+
+[source, js]
+----
+const swiper = new Swiper('.swiper', {
+  freeMode: true,
+});
+
+const swiper = new Swiper('.swiper', {
+  freeMode: {
+    enabled: true,
+    sticky: true,
+  },
+});
+----
+
+[cols="3a,2a,2a,5a", options="header", width="100%", role="table-striped rtable"]
+|===
+|Name |Type |Default |Description
+
+|enabled
+|boolean
+|false
+|Whether the free mode is enabled
+
+|minimumVelocity
+|number
+|0.02
+|Minimum touchmove-velocity required to trigger free mode momentum
+
+|momentum
+|boolean
+|true
+|If enabled, then slide will keep moving for a while after you release it
+
+|momentumBounce
+|boolean
+|true
+|Set to `false` if you want to disable momentum bounce in free mode
+
+|momentumBounceRatio
+|number
+|1
+|Higher value produces larger momentum bounce effect
+
+|momentumRatio
+|number
+|1
+|Higher value produces larger momentum distance after you release slider
+
+|momentumVelocityRatio
+|number
+|1
+|Higher value produces larger momentum velocity after you release slider
+
+|sticky
+|boolean
+|false
+|Set to enabled to enable snap to slides positions in free mode
+
+|===
+
+
+[role="mt-5"]
+[[swiper-api-modules-grid]]
+=== Grid
+
+The Grid module turns the single-row slider into a *multi-row* grid:
+each "page" of the slider can show several rows of slides at once.
+Useful for image grids, product tiles or any layout where you want to
+show more than one slide vertically.
+
+[role="mt-5"]
+[[swiper-api-modules-grid--parameters]]
+==== Parameters
+
+The table below lists the *options* that go inside the `grid` object.
+Unlike most other modules the Grid module does not accept boolean
+`true` -- you must pass an object with at least the `rows` parameter
+set to a value greater than `1`.
+
+Object with grid parameters to enable "multirow" slider.
+
+[source, js]
+----
+const swiper = new Swiper('.swiper', {
+  grid: {
+    rows: 2,
+  },
+});
+----
+
+[cols="3a,3a,3a,3a", options="header", width="100%", role="table-striped rtable"]
+|===
+|Name |Type |Default |Description
+
+|fill
+|'row' \| 'column'
+|'column'
+|Can be `column` or `row`. Defines how slides should fill rows,
+by column or by row
+
+[CAUTION]
+====
+if used with loop mode make sure number of slides is even specified in
+loop mode requirements, or enable `loopAddBlankSlides` parameter
+====
+
+|rows
+|number
+|1
+|Number of slides rows, for multirow layout
+
+|===
+
+
+[role="mt-5"]
+[[swiper-api-modules-manipulation]]
+=== Manipulation
+
+The Manipulation module adds helper methods that let you add, remove
+and replace slides from your own JavaScript after the slider has been
+created. It is intended to be used only with the *Swiper Core*
+version; if you build your slides with React or Vue you should add or
+remove items from the framework state instead.
+
+[role="mt-5"]
+[[swiper-api-modules-manipulation--methods]]
+==== Methods
+
+The methods below are added directly to the `swiper` instance (not to
+a sub-namespace). They accept either an HTML string, an HTMLElement or
+an array of either, so you can build new slides in code and insert
+them dynamically.
+
+[cols="4a,8a", options="header", width="100%", role="table-striped rtable"]
+|===
+|Name |Description
+
+|swiper.addSlide(index, slides)
+|Add new slides to the required index. slides could be HTMLElement or
+HTML string with new slide or array with such slides, for example:
+
+[source, js]
+----
+swiper.addSlide(1, '<div class="swiper-slide">Slide 10"</div>')
+
+swiper.addSlide(1, [
+ '<div class="swiper-slide">Slide 10"</div>',
+ '<div class="swiper-slide">Slide 11"</div>'
+]);
+----
+
+|swiper.appendSlide(slides)
+|Add new slides to the end. slides could be HTMLElement or HTML string
+with new slide or array with such slides, for example:
+
+[source, js]
+----
+swiper.appendSlide('<div class="swiper-slide">Slide 10"</div>')
+
+swiper.appendSlide([
+ '<div class="swiper-slide">Slide 10"</div>',
+ '<div class="swiper-slide">Slide 11"</div>'
+]);
+----
+
+|swiper.prependSlide(slides)
+|Add new slides to the beginning. slides could be HTMLElement or HTML
+string with new slide or array with such slides, for example:
+
+[source, js]
+----
+swiper.prependSlide('<div class="swiper-slide">Slide 0"</div>')
+
+swiper.prependSlide([
+ '<div class="swiper-slide">Slide 1"</div>',
+ '<div class="swiper-slide">Slide 2"</div>'
+]);
+----
+
+|swiper.removeAllSlides()
+|Remove all slides
+
+|swiper.removeSlide(slideIndex)
+|Remove selected slides. slideIndex could be a number with slide index to
+remove or array with indexes.
+
+[source, js]
+----
+swiper.removeSlide(0);       // remove first slide
+swiper.removeSlide([0, 1]);  // remove first and second slides
+swiper.removeAllSlides();    // Remove all slides
+----
+
+|===
+
+
+[role="mt-5"]
+[[swiper-api-modules-parallax]]
+=== Parallax
+
+Swiper supports parallax transition effects for swiper/slides nested
+elements. There are two types of parallax elements supported:
+
+* Direct child elements of `swiper`. Parallax effect for such elements
+  will depend on total slider progress. Useful for parallax backgrounds
+* Slides child elements. Parallax effect for such elements will depend
+  on slide progress
+
+To enable parallax effects you need to init Swiper with passed
+`parallax:true` parameter and add one of the following (or mix)
+attributes to required elements:
+
+* `data-swiper-parallax` - enable transform-translate parallax
+  transition. This attribute may accept:
+ `number` -     value in px (as for title, subtitle in example above) to
+                move element depending on progress. In this case such element
+                will be moved on ± this value in px depending on slide position
+                (next or previous)
+ `percentage` - (as for "parallax-bg") to move element depending on
+                progress and on its size. In this case such element
+                will be moved on ±this percentage of its size (width in
+                horizontal direction, and height in vertical direction)
+                depending on slide position (next or previous).
+                So if element has 400px width and you specified
+                data-swiper-parallax="50%" then it will be moved on ± 200px
+* `data-swiper-parallax-x` - same but for x-axis direction
+* `data-swiper-parallax-y` - same but for y-axis direction
+* `data-swiper-parallax-scale` - scale ratio of the parallax element when
+  it is in "inactive" (not on active slide) state
+* `data-swiper-parallax-opacity` - opacity of the parallax element when
+  it is in "inactive" (not on active slide) state
+* `data-swiper-parallax-duration` - custom transition duration for
+  parallax elements
+
+[source, html, role="mt-5"]
+----
+<div class="swiper">
+  <!-- Parallax background element -->
+  <div
+    class="parallax-bg"
+    style="background-image:url(path/to/image.jpg)"
+    data-swiper-parallax="-23%"
+  ></div>
+  <div class="swiper-wrapper">
+    <div class="swiper-slide">
+      <!-- Each slide has parallax title -->
+      <div class="title" data-swiper-parallax="-100">Slide 1</div>
+      <!-- Parallax subtitle -->
+      <div class="subtitle" data-swiper-parallax="-200">Subtitle</div>
+      <!-- And parallax text with custom transition duration -->
+      <div
+        class="text"
+        data-swiper-parallax="-300"
+        data-swiper-parallax-duration="600"
+      >
+        <p>Lorem ipsum dolor sit amet, ...</p>
+      </div>
+      <!-- Opacity parallax -->
+      <div data-swiper-parallax-opacity="0.5">I will change opacity</div>
+      <!-- Scale parallax -->
+      <div data-swiper-parallax-scale="0.15">I will change scale</div>
+    </div>
+    ...
+  </div>
+</div>
+----
+
+[role="mt-5"]
+[[swiper-api-modules-parallax--parameters]]
+==== Parameters
+
+The parallax module has a single on/off switch. The actual parallax
+behaviour is driven entirely by the `data-swiper-parallax-*`
+attributes you put on the slide elements (see the example above).
+
+Object with parallax parameters or boolean `true` to enable with
+default settings.
+
+[source, js]
+----
+const swiper = new Swiper('.swiper', {
+  parallax: true,
+});
+----
+
+[cols="3a,2a,2a,5a", options="header", width="100%", role="table-striped rtable"]
+|===
+|Name |Type |Default |Description
+
+|enabled
+|boolean
+|false
+|Enable, if you want to use "parallaxed" elements inside of slider
+
+|===
+
+
+[role="mt-5"]
+[[swiper-api-modules-lazy-loading]]
+=== Lazy Loading
+
+Since version 9 Swiper doesn't have a specific lazy loading API, as it
+relies on native browser lazy loading feature. To use lazy loading, we
+just need to set `loading="lazy"` on images and add preloader element:
+
+[source, html]
+----
+<div class="swiper">
+  <div class="swiper-wrapper">
+    <!-- Lazy image -->
+    <div class="swiper-slide">
+      <img src="path/to/picture-1.jpg" loading="lazy" />
+      <div class="swiper-lazy-preloader"></div>
+    </div>
+
+    <!-- Lazy image with srcset -->
+    <div class="swiper-slide">
+      <img
+        src="path/to/logo-small.png"
+        srcset="path/to/logo-large.png 2x"
+        loading="lazy"
+      />
+      <div class="swiper-lazy-preloader"></div>
+    </div>
+  </div>
+</div>
+----
+
+As you see:
+
+* Lazy image must have `loading="lazy"` attribute
+* Add animated preloader spinner to slide which will be removed
+  automatically after image loaded:
+
+[source, html]
+----
+<div class="swiper-lazy-preloader"></div>
+----
+
+Or white one for dark layout:
+
+[source, html]
+----
+<div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
+----
+
+
+[role="mt-5"]
+[[swiper-api-modules-fade-effect]]
+=== Fade Effect
+
+Replaces the default horizontal "slide" transition with a *fade*
+between slides. To activate the effect set the global Swiper option
+`effect: 'fade'` and (optionally) fine-tune it with the `fadeEffect`
+object described below.
+
+[NOTE]
+====
+`crossFade` should be set to `true` in order to avoid seeing content
+behind or underneath.
+====
+
+[role="mt-5"]
+[[swiper-api-modules-fade-effect--parameters]]
+==== Parameters
+
+The `fadeEffect` object has a single option, `crossFade`, which
+controls whether the outgoing slide fades out at the same time the
+incoming slide fades in. Leave it disabled if your slides have a
+solid background, enable it whenever slides may be transparent.
+
+Object with Fade-effect parameters
+
+[source, js]
+----
+const swiper = new Swiper('.swiper', {
+  effect: 'fade',
+  fadeEffect: {
+    crossFade: true
+  },
+});
+----
+
+[cols="3a,3a,3a,3a", options="header", width="100%", role="table-striped rtable"]
+|===
+|Name |Type |Default |Description
+
+|crossFade
+|boolean
+|false
+|Enables slides cross fade
+
+|===
+
+
+[role="mt-5"]
+[[swiper-api-modules-coverflow-effect]]
+=== Coverflow Effect
+
+Coverflow makes the slides look like covers in a 3-D shelf: the active
+slide is in front and the others rotate and recede into the
+background. To activate the effect set the global Swiper option
+`effect: 'coverflow'` and fine-tune the look with the `coverflowEffect`
+object below.
+
+[role="mt-5"]
+[[swiper-api-modules-coverflow-effect--parameters]]
+==== Parameters
+
+The table below lists the options that go inside the
+`coverflowEffect` object. They control the rotation angle, the depth
+offset and other 3-D parameters of the coverflow look.
+
+Object with Coverflow-effect parameters.
+
+[source, js]
+----
+const swiper = new Swiper('.swiper', {
+  effect: 'coverflow',
+  coverflowEffect: {
+    rotate: 30,
+    slideShadows: false,
+  },
+});
+----
+
+[cols="3a,2a,1a,6a", options="header", width="100%", role="table-striped rtable"]
+|===
+|Name |Type |Default |Description
+
+|depth
+|number
+|100
+|Depth offset in px (slides translate in Z axis)
+
+|modifier
+|number
+|1
+|Effect multiplier
+
+|rotate
+|number
+|50
+|Slide rotate in degrees
+
+|scale
+|number
+|1
+|Slide scale effect
+
+|slideShadows
+|boolean
+|true
+|Enables slides shadows
+
+|stretch
+|number \| string
+|0
+|Stretch space between slides
+
+* a number is interpreted as pixels (e.g., `20` for 20px).
+* a string with a percentage (e.g., `"50%"`).
+
+|===
+
+
+[role="mt-5"]
+[[swiper-api-modules-flip-effect]]
+=== Flip Effect
+
+Replaces the default "slide" transition with a *flip*: the active
+slide rotates out of view while the next one rotates in, like turning
+a card. To activate the effect set the global Swiper option
+`effect: 'flip'` and (optionally) tune it with the `flipEffect`
+object below.
+
+[role="mt-5"]
+[[swiper-api-modules-flip-effect--parameters]]
+==== Parameters
+
+The `flipEffect` object has two switches: one to keep the rotation
+limited to slides next to the active one, and one to add a slight
+shadow during the flip.
+
+Object with Flip-effect parameters
+
+[source, js]
+----
+const swiper = new Swiper('.swiper', {
+  effect: 'flip',
+  flipEffect: {
+    slideShadows: false,
+  },
+});
+----
+
+[cols="3a,2a,2a,5a", options="header", width="100%", role="table-striped rtable"]
+|===
+|Name |Type |Default |Description
+
+|limitRotation
+|boolean
+|true
+|Limit edge slides rotation
+
+|slideShadows
+|boolean
+|true
+|Enables slides shadows
+
+|===
+
+
+[role="mt-5"]
+[[swiper-api-modules-cube-effect]]
+=== Cube Effect
+
+Arranges the slides on the four sides of a rotating cube. As the
+visitor swipes, the cube rotates so the next side comes into view.
+To activate the effect set the global Swiper option `effect: 'cube'`
+and tune the look with the `cubeEffect` object below.
+
+[role="mt-5"]
+[[swiper-api-modules-cube-effect--parameters]]
+==== Parameters
+
+The table below lists the options that go inside the `cubeEffect`
+object. They control the drop shadow under the cube and the small
+shadows on the slide faces.
+
+Object with Cube-effect parameters
+
+[source, js]
+----
+const swiper = new Swiper('.swiper', {
+  effect: 'cube',
+  cubeEffect: {
+    slideShadows: false,
+  },
+});
+----
+
+[cols="3a,2a,2a,5a", options="header", width="100%", role="table-striped rtable"]
+|===
+|Name |Type |Default |Description
+
+|shadow
+|boolean
+|true
+|Enables main slider shadow
+
+|shadowOffset
+|number
+|20
+|Main shadow offset in px
+
+|shadowScale
+|number
+|0.94
+|Main shadow scale ratio
+
+|slideShadows
+|boolean
+|true
+|Enables slides shadows
+
+|===
+
+
+[role="mt-5"]
+[[swiper-api-modules-cards-effect]]
+=== Cards Effect
+
+Stacks the slides like a deck of playing cards: the active slide sits
+on top and the others appear slightly offset and rotated behind it.
+To activate the effect set the global Swiper option `effect: 'cards'`
+and tune the offsets and rotation with the `cardsEffect` object below.
+
+[role="mt-5"]
+[[swiper-api-modules-cards-effect--parameters]]
+==== Parameters
+
+The table below lists the options that go inside the `cardsEffect`
+object. They control how much each card behind the active one is
+offset and rotated, and whether to draw shadows between them.
+
+Object with Cards-effect parameters
+
+[source, js]
+----
+const swiper = new Swiper('.swiper', {
+  effect: 'cards',
+  cardsEffect: {
+    // ...
+  },
+});
+----
+
+[cols="3a,2a,2a,5a", options="header", width="100%", role="table-striped rtable"]
+|===
+|Name |Type |Default |Description
+
+|perSlideOffset
+|number
+|8
+|Offset distance per slide (in px)
+
+|perSlideRotate
+|number
+|2
+|Rotate angle per slide (in degrees)
+
+|rotate
+|boolean
+|true
+|Enables cards rotation
+
+|slideShadows
+|boolean
+|true
+|Enables slides shadows
+
+|===
+
+
+[role="mt-5"]
+[[swiper-api-modules-creative-effect]]
+=== Creative Effect
+
+The most flexible of the built-in effects: lets you describe arbitrary
+*next* and *prev* transforms (translate, rotate, scale, opacity) for
+the slides around the active one. To activate the effect set the
+global Swiper option `effect: 'creative'` and configure the transforms
+in the `creativeEffect` object below.
+
+[role="mt-5"]
+[[swiper-api-modules-creative-effect--parameters]]
+==== Parameters
+
+The table below lists the options that go inside the `creativeEffect`
+object. The most important options are `prev` and `next`, which each
+accept a transform object (see the second source block below for the
+full shape).
+
+Object with Creative-effect parameters
+
+[source, js]
+----
+const swiper = new Swiper('.swiper', {
+  effect: 'creative',
+  creativeEffect: {
+    prev: {
+      // will set `translateZ(-400px)` on previous slides
+      translate: [0, 0, -400],
+    },
+    next: {
+      // will set `translateX(100%)` on next slides
+      translate: ['100%', 0, 0],
+    },
+  },
+});
+----
+
+[source, js]
+----
+{
+  // Array with translate X, Y and Z values
+  translate: (string | number)[];
+  // Array with rotate X, Y and Z values (in deg)
+  rotate?: number[];
+  // Slide opacity
+  opacity?: number;
+  // Slide scale
+  scale?: number;
+  // Enables slide shadow
+  shadow?: boolean;
+  // Transform origin, e.g. `left bottom`
+  origin?: string;
+}
+----
+
+[cols="3a,2a,2a,5a", options="header", width="100%", role="table-striped rtable"]
+|===
+|Name |Type |Default |Description
+
+|limitProgress
+|number
+|1
+|Limit progress/offset to amount of side slides. If `1`, then slides
+all slides after prev/next will have same state. If `2`, then all
+slides after 2nd before/after active will have same state, etc.
+
+|next
+|CreativeEffectTransform
+|none
+|Next slide transformations.
+
+|perspective
+|boolean
+|true
+|Enable this parameter if your custom transforms require 3D
+transformations (`translateZ`, `rotateX`, `rotateY` )
+
+|prev
+|CreativeEffectTransform
+|none
+|Previous slide transformations. Accepts object of the following type:
+
+|progressMultiplier
+|number
+|1
+|Allows to multiply slides transformations and opacity.
+
+|shadowPerProgress
+|boolean
+|false
+|Splits shadow "opacity" per slide based on
+`limitProgress` (only if transformation shadows enabled). E.g. setting
+`limitProgress: 2` and enabling `shadowPerProgress`, will set shadow
+opacity to `0.5` and `1` on two slides next to active. With this
+parameter disabled, all slides beside active will have shadow with `1`
+opacity
+
+|===
+
+
+[role="mt-5"]
+[[swiper-api-modules-thumbs]]
+=== Thumbs
+
+In addition to the <<Controller>> module, Swiper provides a *Thumbs*
+module that is designed to keep a *thumbnail strip* in sync with a
+main slider. Thumbs handles edge cases (loop mode, multi-active
+thumbs, auto-scrolling the strip) in a way that is more correct for
+this specific use-case than the generic Controller module.
+
+[role="mt-5"]
+[[swiper-api-modules-thumbs--parameters]]
+==== Parameters
+
+The table below lists the options that go inside the `thumbs` object.
+The only required option is `swiper`, which must be set to the
+*Swiper instance* (or a CSS selector) of the thumbnail slider.
+
+Object with thumbs component parameters
+
+[source, js]
+----
+const swiper = new Swiper('.swiper', {
+  ...
+  thumbs: {
+    swiper: thumbsSwiper
+  }
+});
+----
+
+[cols="3a,2a,2a,5a", options="header", width="100%", role="table-striped rtable"]
+|===
+|Name |Type |Default |Description
+
+|autoScrollOffset
+|number
+|0
+|Allows to set on which thumbs active slide from edge it should
+automatically move scroll thumbs. For example, if set to 1 and last
+visible thumb will be activated (1 from edge) it will auto scroll thumbs
+
+|multipleActiveThumbs
+|boolean
+|true
+|When enabled multiple thumbnail slides may get activated
+
+|slideThumbActiveClass
+|string
+|'swiper-slide-thumb-active'
+|Additional class that will be added to activated thumbs swiper slide
+
+|swiper
+|string \| Swiper \| null
+|null
+|Swiper instance of swiper used as thumbs or object with Swiper
+parameters to initialize thumbs swiper
+
+|thumbsContainerClass
+|string
+|'swiper-thumbs'
+|Additional class that will be added to thumbs swiper
+
+|===
+
+[role="mt-5"]
+[[swiper-api-modules-thumbs--properties]]
+==== Properties
+
+After the slider is created, the linked thumbs Swiper instance is
+available on `swiper.thumbs`:
+
+[cols="2a,2a,8a", options="header", width="100%", role="table-striped rtable"]
+|===
+|Name |Type |Description
+
+|swiper.thumbs.swiper
+|Swiper
+|Swiper instance of thumbs swiper
+
+|===
+
+[role="mt-5"]
+[[swiper-api-modules-thumbs--methods]]
+==== Methods
+
+The thumbs module adds two helper methods. Swiper calls them
+automatically so in normal use you do not need to touch them; they are
+documented here for completeness.
+
+[cols="4a,8a", options="header", width="100%", role="table-striped rtable"]
+|===
+|Name |Description
+
+|swiper.thumbs.init()
+|Initialize thumbs
+
+|swiper.thumbs.update(initial, p)
+|Update thumbs
+
+|===
+
+
+[role="mt-5"]
+[[swiper-api-modules-zoom]]
+=== Zoom
+
+Swiper supports zoom images functionality (similar to what you see on
+iOS when browsing single photo) where you can zoom-in image by pinch
+gesture and or by zoom-in/out by double tap on it. In this case,
+additional layout is required:
+
+[source, html]
+----
+<div class="swiper">
+  <div class="swiper-wrapper">
+    <div class="swiper-slide">
+      <div class="swiper-zoom-container">
+        <img src="path/to/image1.jpg" />
+      </div>
+    </div>
+    <div class="swiper-slide">
+      <div class="swiper-zoom-container">
+        <img src="path/to/image2.jpg" />
+      </div>
+    </div>
+    <div class="swiper-slide">Plain slide with text</div>
+    <div class="swiper-slide">
+      <!-- Override maxRatio parameter -->
+      <div class="swiper-zoom-container" data-swiper-zoom="5">
+        <img src="path/to/image1.jpg" />
+      </div>
+    </div>
+  </div>
+</div>
+----
+
+* All "zoomable" images should be wrapped with the div with
+  `swiper-zoom-container` class.
+* By default it expects to zoom one of the `img`, `picture` or
+  `canvas` element. If you want to make zoom on some other custom
+  element, then just add `swiper-zoom-target` class to this element.
+
+For example:
+
+[source, html]
+----
+<div class="swiper">
+  <div class="swiper-wrapper">
+    <div class="swiper-slide">
+      <div class="swiper-zoom-container">
+        <!-- custom zoomable element -->
+        <div
+          class="swiper-zoom-target"
+          style="background-image: url(...)"
+        ></div>
+      </div>
+    </div>
+  </div>
+</div>
+----
+
+[NOTE]
+====
+You can override `maxRatio` parameter for specific slides by using
+`data-swiper-zoom` attribute on zoom container.
+====
+
+[role="mt-5"]
+[[swiper-api-modules-zoom--parameters]]
+==== Parameters
+
+The table below lists the options that go inside the `zoom` object.
+Pass `zoom: true` to enable the module with the default settings (max
+zoom of 3 times the original size, double-tap to zoom).
+
+Enables zooming functionality. Object with zoom parameters or boolean
+`true` to enable with default settings.
+
+[source, js]
+----
+const swiper = new Swiper('.swiper', {
+  zoom: {
+    maxRatio: 5,
+  },
+});
+----
+
+[cols="3a,2a,2a,5a", options="header", width="100%", role="table-striped rtable"]
+|===
+|Name |Type |Default |Description
+
+|containerClass
+|string
+|'swiper-zoom-container'
+|CSS class name of zoom container
+
+|limitToOriginalSize
+|boolean
+|false
+|When set to true, the image will not be scaled past 100% of its
+original size
+
+|maxRatio
+|number
+|3
+|Maximum image zoom multiplier
+
+|minRatio
+|number
+|1
+|Minimal image zoom multiplier
+
+|panOnMouseMove
+|boolean
+|false
+|When set to true, a zoomed in image will automatically pan while moving the
+mouse over the image
+
+|toggle
+|boolean
+|true
+|Enable/disable zoom-in by slide's double tap
+
+|zoomedSlideClass
+|string
+|'swiper-slide-zoomed'
+|CSS class name of zoomed in container
+
+|===
+
+[role="mt-5"]
+[[swiper-api-modules-zoom--properties]]
+==== Properties
+
+After the slider is created, the current zoom state is available on
+`swiper.zoom`:
+
+[cols="2a,2a,8a", options="header", width="100%", role="table-striped rtable"]
+|===
+|Name |Type |Description
+
+|swiper.zoom.enabled
+|boolean
+|Whether the zoom module is enabled
+
+|swiper.zoom.scale
+|number
+|Current image scale ratio
+
+|===
+
+[role="mt-5"]
+[[swiper-api-modules-zoom--methods]]
+==== Methods
+
+The zoom module exposes helper methods for controlling the zoom level
+from your own code -- for example from a custom "zoom in" / "zoom out"
+button or from a keyboard shortcut.
+
+[cols="4a,8a", options="header", width="100%", role="table-striped rtable"]
+|===
+|Name |Description
+
+|swiper.zoom.disable()
+|Disable zoom module
+
+|swiper.zoom.enable()
+|Enable zoom module
+
+|swiper.zoom.in(ratio)
+|Zoom in image of the currently active slide. Optionally accepts custom
+zoom ratio
+
+|swiper.zoom.out()
+|Zoom out image of the currently active slide
+
+|swiper.zoom.toggle(event)
+|Toggle image zoom of the currently active slide
+
+|===
+
+[role="mt-5"]
+[[swiper-api-modules-zoom--events]]
+==== Events
+
+When the zoom module is active, Swiper fires the following extra
+event whenever the zoom level changes. Register it with
+`swiper.on('eventName', handler)` like any other Swiper event.
+
+[cols="2a,2a,8a", options="header", width="100%", role="table-striped rtable"]
+|===
+|Name |Arguments |Description
+
+|zoomChange
+|(swiper, scale, imageEl, slideEl)
+|Event is fired on zoom change
+
+|===
+
+
+[role="mt-5"]
+[[swiper-api-modules-keyboard-control]]
+=== Keyboard Control
+
+Lets visitors *navigate the slider with the keyboard* arrow keys (and
+optionally with Page Up / Page Down). Useful for accessibility and for
+desktop users who prefer the keyboard over the mouse.
+
+[role="mt-5"]
+[[swiper-api-modules-keyboard-control--parameters]]
+==== Parameters
+
+The table below lists the options that go inside the `keyboard`
+object. Pass `keyboard: true` to enable the module with the default
+settings (left/right arrows move the slider, only when it is in the
+viewport).
+
+Enables navigation through slides using keyboard. Object with keyboard
+parameters or boolean `true` to enable with default settings
+
+[source, js]
+----
+const swiper = new Swiper('.swiper', {
+  keyboard: {
+    enabled: true,
+    onlyInViewport: false,
+  },
+});
+----
+
+[cols="3a,2a,2a,5a", options="header", width="100%", role="table-striped rtable"]
+|===
+|Name |Type |Default |Description
+
+|enabled
+|boolean
+|false
+|Set to `true` to enable keyboard control
+
+|onlyInViewport
+|boolean
+|true
+|When enabled it will control sliders that are currently in viewport
+
+|pageUpDown
+|boolean
+|true
+|When enabled it will enable keyboard navigation by Page Up and
+Page Down keys
+
+|===
+
+[role="mt-5"]
+[[swiper-api-modules-keyboard-control--properties]]
+==== Properties
+
+After the slider is created, the current keyboard state is available
+on `swiper.keyboard`:
+
+[cols="2a,2a,8a", options="header", width="100%", role="table-striped rtable"]
+|===
+|Name |Type |Description
+
+|swiper.keyboard.enabled
+|boolean
+|Whether the keyboard control is enabled
+
+|===
+
+[role="mt-5"]
+[[swiper-api-modules-keyboard-control--methods]]
+==== Methods
+
+The keyboard module exposes two helper methods to turn keyboard
+control on or off from your own code at runtime.
+
+[cols="4a,8a", options="header", width="100%", role="table-striped rtable"]
+|===
+|Name |Description
+
+|swiper.keyboard.disable()
+|Disable keyboard control
+
+|swiper.keyboard.enable()
+|Enable keyboard control
+
+|===
+
+[role="mt-5"]
+[[swiper-api-modules-keyboard-control--events]]
+==== Events
+
+When the keyboard module is active, Swiper fires the following extra
+event whenever the visitor presses a key that the module handles.
+
+[cols="2a,2a,8a", options="header", width="100%", role="table-striped rtable"]
+|===
+|Name |Arguments |Description
+
+|keyPress
+|(swiper, keyCode)
+|Event is fired on key press
+|===
+
+
+[role="mt-5"]
+[[swiper-api-modules-mousewheel-control]]
+=== Mousewheel Control
+
+Lets visitors *navigate the slider with the mouse wheel* (or with the
+two-finger swipe gesture on a trackpad). Useful for full-page
+sliders, image galleries and any layout where wheel scrolling should
+move between slides instead of scrolling the page.
+
+[role="mt-5"]
+[[swiper-api-modules-mousewheel-control--parameters]]
+==== Parameters
+
+The table below lists the options that go inside the `mousewheel`
+object. Pass `mousewheel: true` to enable the module with the default
+settings.
+
+Enables navigation through slides using mouse wheel. Object with
+mousewheel parameters or boolean `true` to enable with default
+settings
+
+[source, js]
+----
+const swiper = new Swiper('.swiper', {
+  mousewheel: {
+    invert: true,
+  },
+});
+----
+
+[cols="3a,2a,2a,5a", options="header", width="100%", role="table-striped rtable"]
+|===
+|Name |Type |Default |Description
+
+|enabled
+|boolean
+|false
+|Set to `true` to enable mousewheel control
+
+|eventsTarget
+|HTMLElement \| 'container' \| 'wrapper' \| CSSSelector
+|'container'
+|String with CSS selector or HTML element of the container
+accepting mousewheel events. By default it is swiper
+
+|forceToAxis
+|boolean
+|false
+|Set to `true` to force mousewheel swipes to axis. So in horizontal mode
+mousewheel will work only with horizontal mousewheel scrolling, and only
+with vertical scrolling in vertical mode.
+
+|invert
+|boolean
+|false
+|Set to `true` to invert sliding direction
+
+|noMousewheelClass
+|string
+|'swiper-no-mousewheel'
+|Scrolling on elements with this class will be ignored
+
+|releaseOnEdges
+|boolean
+|false
+|Set to `true` and swiper will release mousewheel event and allow page
+scrolling when swiper is on edge positions (in the beginning or in the
+end)
+
+|sensitivity
+|number
+|1
+|Multiplier of mousewheel data, allows to tweak mouse wheel sensitivity
+
+|thresholdDelta
+|number \| null
+|null
+|Minimum mousewheel scroll delta to trigger swiper slide change
+
+|thresholdTime
+|number \| null
+|null
+|Minimum mousewheel scroll time delta (in ms) to trigger swiper
+slide change
+
+|===
+
+[role="mt-5"]
+[[swiper-api-modules-mousewheel-control--properties]]
+==== Properties
+
+After the slider is created, the current mousewheel state is
+available on `swiper.mousewheel`:
+
+[cols="2a,2a,8a", options="header", width="100%", role="table-striped rtable"]
+|===
+|Name |Type |Description
+
+|swiper.mousewheel.enabled
+|boolean
+|Whether the mousewheel control is enabled
+
+|===
+
+[role="mt-5"]
+[[swiper-api-modules-mousewheel-control--methods]]
+==== Methods
+
+The mousewheel module exposes two helper methods to turn mousewheel
+control on or off from your own code at runtime.
+
+[cols="4a,8a", options="header", width="100%", role="table-striped rtable"]
+|===
+|Name |Description
+
+|swiper.mousewheel.disable()
+|Disable mousewheel control
+
+|swiper.mousewheel.enable()
+|Enable mousewheel control
+
+|===
+
+[role="mt-5"]
+[[swiper-api-modules-mousewheel-control--events]]
+==== Events
+
+When the mousewheel module is active, Swiper fires the following
+extra event whenever a wheel event is handled by the slider.
+
+[cols="2a,2a,8a", options="header", width="100%", role="table-striped rtable"]
+|===
+|Name |Arguments |Description
+
+|scroll
+|(swiper, event)
+|Event is fired on mousewheel scroll
+
+|===
+
+
+[role="mt-5"]
+[[swiper-api-modules-virtual-slides]]
+=== Virtual Slides
+
+Virtual Slides module allows to keep just required amount of slides in
+DOM. It is very useful in terms in performance and memory issues if you
+have a lot of slides, especially slides with heavyweight DOM tree or
+images.
+
+[CAUTION]
+====
+Note that according to Virtual Slides realization it *doesn't work* with
+Grid module and `slidesPerView: 'auto'`
+====
+
+[role="mt-5"]
+[[swiper-api-modules-virtual-slides--parameters]]
+==== Parameters
+
+The table below lists the options that go inside the `virtual` object.
+The typical usage is to pass an array of slide contents as the
+`slides` parameter and Swiper will render only the slides that are
+currently visible.
+
+Enables virtual slides functionality. Object with virtual slides
+parameters or boolean `true` to enable with default settings.
+
+[source, js]
+----
+const swiper = new Swiper('.swiper', {
+  virtual: {
+    slides: ['Slide 1', 'Slide 2', 'Slide 3', 'Slide 4', 'Slide 5'],
+  },
+});
+----
+
+[cols="3a,2a,2a,5a", options="header", width="100%", role="table-striped rtable"]
+|===
+|Name |Type |Default |Description
+
+|addSlidesAfter
+|number
+|0
+|Increases amount of pre-rendered slides after active slide
+
+|addSlidesBefore
+|number
+|0
+|Increases amount of pre-rendered slides before active slide
+
+|cache
+|boolean
+|true
+|Enables DOM cache of rendering slides html elements. Once they
+are rendered they will be saved to cache and reused from it.
+
+|enabled
+|boolean
+|false
+|Whether the virtual slides are enabled
+
+|renderExternal
+|function(VirtualData)
+|null
+|Function for external rendering (e.g. using some other library to handle
+DOM manipulations and state like React.js or Vue.js). As an argument it
+accepts `data` object with the following properties:
+
+* `offset` - slides left/top offset in px
+* `from` - index of first slide required to be rendered
+* `to` - index of last slide required to be rendered
+* `slides` - array with slide items to be rendered
+
+|renderExternalUpdate
+|boolean
+|true
+|When enabled (by default) it will update Swiper layout right
+after renderExternal called. Useful to disable and update swiper
+manually when used with render libraries that renders asynchronously
+
+|renderSlide
+|function(T, any)
+|null
+|Function to render slide. As an argument it accepts current slide item
+for `slides` array and index number of the current slide. Function
+must return an outer HTML of the swiper slide or slide HTML element.
+
+|slides
+|T[]
+|[]
+|Array with slides
+
+|===
+
+[role="mt-5"]
+[[swiper-api-modules-virtual-slides--properties]]
+==== Properties
+
+After the slider is created, the current virtual-slides state is
+available on `swiper.virtual`:
+
+[cols="2a,2a,8a", options="header", width="100%", role="table-striped rtable"]
+|===
+|Name |Type |Description
+
+|swiper.virtual.cache
+|object
+|Object with cached slides HTML elements
+
+|swiper.virtual.from
+|number
+|Index of first rendered slide
+
+|swiper.virtual.slides
+|[]
+|Array with slide items passed by `virtual.slides` parameter
+
+|swiper.virtual.to
+|number
+|Index of last rendered slide
+
+|===
+
+[role="mt-5"]
+[[swiper-api-modules-virtual-slides--methods]]
+==== Methods
+
+The virtual module exposes its own set of methods to add and remove
+slides from the virtual array at runtime. Use these instead of the
+generic Manipulation module methods when `virtual` is enabled.
+
+[cols="4a,8a", options="header", width="100%", role="table-striped rtable"]
+|===
+|Name |Description
+
+|swiper.virtual.appendSlide(slide)
+|Append slide. `slides` can be a single slide item or array with such
+slides.
+
+|swiper.virtual.prependSlide(slide)
+|Prepend slide. `slides` can be a single slide item or array with such
+slides.
+
+|swiper.virtual.removeAllSlides()
+|Remove all slides
+
+|swiper.virtual.removeSlide(slideIndexes)
+|Remove specific slide or slides. `slideIndexes` can be a number with
+slide index to remove or array with indexes.
+
+|swiper.virtual.update(force)
+|Update virtual slides state
+
+|===
+
+[role="mt-5"]
+[[swiper-api-modules-virtual-slides--dom]]
+==== DOM
+
+Since version 9, Swiper virtual slides can work with slides originally
+rendered in DOM. On initialize it will remove them from DOM, cache and
+then re-use the ones which are required:
+
+[source, html]
+----
+<div class="swiper">
+  <div class="swiper-wrapper">
+    <div class="swiper-slide">Slide 1</div>
+    <div class="swiper-slide">Slide 2</div>
+    ...
+    <div class="swiper-slide">Slide 100</div>
+  </div>
+</div>
+<script>
+  const swiper = new Swiper('.swiper', {
+    virtual: {
+      enabled: true,
+    },
+  });
+</script>
+----
+
+
+[role="mt-5"]
+[[swiper-api-modules-hash-navigation]]
+=== Hash Navigation
+
+Hash navigation is intended to have a link to specific slide that allows
+to load page with specific slide opened.
+
+To make it work, you need to enable it by passing
+`hashNavigation:true` parameter and adding slides hashes in
+`data-hash` attribute:
+
+[source, html]
+----
+<div class="swiper">
+  <div class="swiper-wrapper">
+    <div class="swiper-slide" data-hash="slide1">Slide 1</div>
+    <div class="swiper-slide" data-hash="slide2">Slide 2</div>
+    <div class="swiper-slide" data-hash="slide3">Slide 3</div>
+    <div class="swiper-slide" data-hash="slide4">Slide 4</div>
+    <div class="swiper-slide" data-hash="slide5">Slide 5</div>
+    ...
+  </div>
+</div>
+----
+
+[source, js]
+----
+const swiper = new Swiper('.swiper', {
+  //enable hash navigation
+  hashNavigation: true,
+});
+----
+
+[role="mt-5"]
+[[swiper-api-modules-hash-navigation--parameters]]
+==== Parameters
+
+The table below lists the options that go inside the `hashNavigation`
+object. Pass `hashNavigation: true` to enable the module with the
+default settings (the URL hash is *added* to the browser history each
+time the active slide changes).
+
+Enables hash url navigation to for slides. Object with hash navigation
+parameters or boolean `true` to enable with default settings
+
+[source, js]
+----
+const swiper = new Swiper('.swiper', {
+  hashNavigation: {
+    replaceState: true,
+  },
+});
+----
+
+[cols="3a,2a,2a,5a", options="header", width="100%", role="table-striped rtable"]
+|===
+|Name |Type |Default |Description
+
+|enabled
+|boolean
+|false
+|Whether hash navigation is enabled.
+
+|getSlideIndex
+|function(Swiper, string)
+|none
+|Designed to be used with Virtual slides when it is impossible to find
+slide in DOM by hash (e.g. not yet rendered)
+
+|replaceState
+|boolean
+|false
+|Works in addition to hashnav to replace current url state with the new
+one instead of adding it to history
+
+|watchState
+|boolean
+|false
+|Set to `true` to enable also navigation through slides (when hashnav is
+enabled) by browser history or by setting directly hash on document
+location
+
+|===
+
+[role="mt-5"]
+[[swiper-api-modules-hash-navigation--events]]
+==== Events
+
+When the hash navigation module is active, Swiper fires the following
+extra events whenever the URL hash changes (either by the browser or
+by Swiper itself).
+
+[cols="2a,2a,8a", options="header", width="100%", role="table-striped rtable"]
+|===
+|Name |Arguments |Description
+
+|hashChange
+|(swiper)
+|Event is fired on window hash change
+
+|hashSet
+|(swiper)
+|Event is fired when swiper updates the hash
+|===
+
+
+[role="mt-5"]
+[[swiper-api-modules-history-navigation]]
+=== History Navigation
+
+History Navigation makes every slide a real *URL* using the
+browser's `history.pushState` API. The visitor can bookmark a slide,
+share its URL or use the browser's Back / Forward buttons to walk
+through the slides. Unlike Hash Navigation it changes the *path*, not
+just the `#hash`.
+
+[role="mt-5"]
+[[swiper-api-modules-history-navigation--parameters]]
+==== Parameters
+
+The table below lists the options that go inside the `history` object.
+The typical setup is to pick a URL `key` (e.g. `"slides"`) and to give
+each slide a `data-history` attribute with the URL part to use for
+that slide.
+
+Enables history push state where every slide will have its own url. In
+this parameter you have to specify main slides url like `"slides"` and
+specify every slide url using `data-history` attribute.
+
+Object with history navigation parameters or boolean `true` to enable
+with default settings
+
+[source, js]
+----
+const swiper = new Swiper('.swiper', {
+  history: {
+    replaceState: true,
+  },
+});
+----
+
+[source, html]
+----
+<!-- will produce "slides/slide1" url in browser history -->
+<div class="swiper-slide" data-history="slide1"></div>
+----
+
+[cols="3a,2a,2a,5a", options="header", width="100%", role="table-striped rtable"]
+|===
+|Name |Type |Default |Description
+
+|enabled
+|boolean
+|false
+|Enables History Plugin.
+
+|keepQuery
+|boolean
+|false
+|Keep query parameters when changing browser url.
+
+|key
+|string
+|'slides'
+|Url key for slides
+
+|replaceState
+|boolean
+|false
+|Works in addition to hashnav or history to replace current url state
+with the new one instead of adding it to history.
+
+|root
+|string
+|''
+|Swiper page root, useful to specify when you use Swiper history mode
+not on root website page. For example can be `https://my-website.com/` or
+`https://my-website.com/subpage/` or `/subpage/`
+
+|===
+
+
+[role="mt-5"]
+[[swiper-api-modules-controller]]
+=== Controller
+
+The Controller module *links* two (or more) Swiper instances together
+so they slide in sync. It is the most generic way to make sliders
+follow each other; if you only need a thumbnail strip have a look at
+the more specialised <<Thumbs>> module instead.
+
+[role="mt-5"]
+[[swiper-api-modules-controller--parameters]]
+==== Parameters
+
+The table below lists the options that go inside the `controller`
+object. The required option is `control`, which must reference another
+Swiper instance (or an array of them).
+
+Object with controller parameters or boolean `true` to enable with
+default settings
+
+[source, js]
+----
+const swiper = new Swiper('.swiper', {
+  controller: {
+    inverse: true,
+  },
+});
+----
+
+[cols="3a,2a,2a,5a", options="header", width="100%", role="table-striped rtable"]
+|===
+|Name |Type |Default |Description
+
+|by
+|'slide' \| 'container'
+|'slide'
+|Defines a way how to control another slider: slide by slide (with respect
+to other slider's grid) or depending on all slides/container (depending on
+total slider percentage).
+
+|control
+|string \| Swiper \| Swiper[] \| HTMLElement \| null
+|none
+|Pass here another Swiper instance or array
+with Swiper instances that should be controlled by this Swiper. Also
+accepts string with CSS selector of Swiper element, or HTMLElement of
+Swiper element
+
+|inverse
+|boolean
+|false
+|Set to `true` and controlling will be in inverse direction
+
+|===
+
+[role="mt-5"]
+[[swiper-api-modules-controller--properties]]
+==== Properties
+
+After the slider is created, the linked controlled Swiper instance(s)
+are available on `swiper.controller`:
+
+[cols="2a,2a,8a", options="header", width="100%", role="table-striped rtable"]
+|===
+|Name |Type |Description
+
+|swiper.controller.control
+|Swiper \| Swiper[]
+|Pass here another Swiper instance or array with Swiper
+instances that should be controlled by this Swiper
+
+|===
+
+
+[role="mt-5"]
+[[swiper-api-modules-a11y]]
+=== a11y (Accessibility)
+
+Accessibility makes the slider usable by assistive technologies such
+as screen readers and by visitors who navigate only with the keyboard.
+The term *a11y* is the common abbreviation for *accessibility* (11
+letters between the *a* and the *y*).
+
+[role="mt-5"]
+[[swiper-api-modules-a11y--parameters]]
+==== Parameters
+
+Once the Accessibility module is activated, Swiper automatically adds
+ARIA attributes and semantic roles to the DOM. Specifically, important
+ARIA attributes such as `aria-live`, `aria-label`, and `role` are
+automatically added to the slider and its controls so that screen
+reader users can understand the purpose of the slider and navigate
+between the slides.
+
+Additionally, the module adds `role="region"` and an `aria-label` to
+the carousel container, eliminating the need to set these ARIA
+attributes manually.
+
+Object with a11y parameters or boolean `true` to enable with default
+settings.
+
+[source, js]
+----
+const swiper = new Swiper('.swiper', {
+  a11y: {
+    prevSlideMessage: 'Previous slide',
+    nextSlideMessage: 'Next slide',
+  },
+});
+----
+
+[cols="3a,2a,2a,5a", options="header", width="100%", role="table-striped rtable"]
+|===
+|Name |Type |Default |Description
+
+|containerMessage
+|string \| null
+|null
+|Message for screen readers for outer swiper container
+
+|containerRole
+|string \| null
+|null
+|Value of the "role" attribute to be set on the swiper container
+
+|containerRoleDescriptionMessage
+|string \| null
+|null
+|Message for screen readers describing the role of outer swiper container.
+
+|enabled
+|boolean
+|true
+|Enables A11y
+
+|firstSlideMessage
+|string
+|'This is the first slide'
+|Message for screen readers for previous button when swiper is on first slide.
+
+|id
+|string \| number \| null
+|null
+|Value of `id` attribute to be set on swiper-wrapper. If `null` will be
+generated automatically.
+
+|itemRoleDescriptionMessage
+|string \| null
+|null
+|Message for screen readers describing the role of slide element.
+
+|lastSlideMessage
+|string
+|'This is the last slide'
+|Message for screen readers for next button when swiper is on last slide.
+
+|nextSlideMessage
+|string
+|'Next slide'
+|Message for screen readers for next button.
+
+|notificationClass
+|string
+|'swiper-notification'
+|CSS class name of a11y notification.
+
+|paginationBulletMessage
+|string
+|'Go to slide \{\{index}}'
+|Message for screen readers for single pagination bullet.
+
+|prevSlideMessage
+|string
+|'Previous slide'
+|Message for screen readers for previous button.
+
+|scrollOnFocus
+|boolean
+|true
+|Enables scrolling to the slide that has been focused.
+
+|slideLabelMessage
+|string
+|'\{\{index}} / \{\{slidesLength}}'
+|Message for screen readers describing the label of slide element.
+
+|slideRole
+|string
+|'group'
+|Value of swiper slide `role` attribute.
+
+|===

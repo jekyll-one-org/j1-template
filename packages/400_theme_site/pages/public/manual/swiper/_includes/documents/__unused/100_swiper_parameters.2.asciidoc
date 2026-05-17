@@ -1,4 +1,5 @@
 // claude - Update swiper manual #3
+// claude - Update swiper manual #6
 [role="mt-5"]
 [[swiper-api--parameters]]
 == Parameters
@@ -1306,7 +1307,15 @@ fields.
 [role="mt-4"]
 === normalizeSlideIndex
 
-Normalise the slide index.
+// claude - Update swiper manual #6
+// The original description ("Normalise the slide index.") was
+// not helpful to beginners. Replaced with a plain explanation of
+// what "normalise" means in this context.
+When enabled (default), Swiper keeps the active slide index inside
+the valid range of slides. If a user action would land on an
+out-of-range index, Swiper rounds it back to the closest real slide
+index. Leave this on unless you have a very specific reason to
+disable it.
 
 [cols="3a,2a,1a", options="header", width="100%", role="rtable"]
 |===
@@ -1487,10 +1496,15 @@ const swiper = new Swiper('.swiper', {
 [role="mt-4"]
 === passiveListeners
 
-Passive event listeners are used by default where possible to improve
-scrolling performance on mobile devices. If you need to use
-`e.preventDefault` and have a conflict with it, you should disable this
-parameter.
+// claude - Update swiper manual #6
+// Plain-English rewrite. The original referred to "passive event
+// listeners" and `e.preventDefault` without explaining what they
+// are; beginners reading the J1 manual could not act on that text.
+Browsers can attach touch/scroll event listeners in a *passive* mode,
+which lets the page keep scrolling smoothly while Swiper handles
+gestures. Swiper turns this on by default. Set this parameter to
+`false` only if you call `event.preventDefault()` inside your own
+Swiper event handlers and notice that it has no effect.
 
 [cols="3a,2a,1a", options="header", width="100%", role="rtable"]
 |===
@@ -1572,7 +1586,13 @@ Set to `false` if you want to disable resistant bounds.
 [role="mt-4"]
 === resistanceRatio
 
-Controls the resistance ratio.
+// claude - Update swiper manual #6
+// Replaced the circular description ("Controls the resistance ratio")
+// with a concrete explanation that tells the reader what numbers do.
+How "elastic" the slider feels when you try to drag past the first or
+last slide. A value of `0` means the slider stops dead at the edges
+(no bounce); a value of `1` means it follows the finger 1:1 even
+past the edge. The default of `0.85` gives a gentle resistance.
 
 [cols="3a,2a,1a", options="header", width="100%", role="rtable"]
 |===
@@ -2021,25 +2041,11 @@ mode (when `grid.rows > 1`).
 |===
 
 
-[role="mt-4"]
-=== snapToSlideEdge
-
-When enabled, the swiper will always snap to slide edges rather than
-arbitrary positions. This prevents partial slides from appearing
-misaligned at the end of the swiper. Only applies when `slidesPerView`
-is fractional or `auto`, and is ignored in `loop` and `centeredSlides`
-modes.
-
-[cols="3a,2a,1a", options="header", width="100%", role="rtable"]
-|===
-|Name |Type |Default
-
-|`snapToSlideEdge`
-|boolean
-|false
-
-|===
-
+// claude - Update swiper manual #6
+// The `snapToSlideEdge` parameter was removed from this manual:
+// it is *not* part of the Swiper 11.2.5 bundle shipped with the
+// J1 Template (verified against `swiper-bundle.js`). It first
+// appears in Swiper 12.x and would therefore confuse beginners.
 
 [role="mt-4"]
 === spaceBetween

@@ -171,11 +171,12 @@ table {
 }
 
 //  jadams, 2017-12-13: added font-size for the table body
+//  jadams, 2026-05-07: let the table stretch full width
 table {
-  font-size: $table__body--font-size;
-  // background: white;
-  background: $table--bg-color;
-  margin-bottom: 1.25em;
+    font-size: 85%;
+    background: transparent !important;
+    margin-bottom: 1.25em;
+    width: stretch;
 }
 
 table thead,

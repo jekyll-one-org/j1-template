@@ -1,180 +1,275 @@
-
+// claude - Update swiper manual #2
 [role="mt-5"]
 [[swiper-api--methods]]
 == Methods
 
-lorem:sentences[3]
+A *method* is a function you can call on the Swiper instance to make it
+*do* something at runtime -- for example, jump to a specific slide,
+update its layout after you added new slides, or attach an event
+handler. You usually have to grab the instance first:
+
+[source, js]
+----
+// 1. Initialise a slider:
+const mySwiper = new Swiper('.my-swiper-container');
+
+// 2. Call any method on it:
+mySwiper.slideNext();         // go to the next slide
+mySwiper.slideTo(3, 600);     // animate to slide index 3 in 600 ms
+----
+
+In J1 Template the instance is also stored on the slider's container
+element as the `swiper` property, so you can write:
+
+[source, js]
+----
+document.querySelector('#my-swiper').swiper.slideNext();
+----
+
+The table below lists *all* methods exposed by the core Swiper instance
+in alphabetical order. Module-specific methods (for example
+`swiper.autoplay.start()` or `swiper.zoom.in()`) are listed in the
+*Modules* section further down this page.
 
 [cols="4a,8a", subs=+macros, options="header", width="100%", role="table-striped table-responsive"]
 |===
 |Name |Description
 
-|swiper.attachEvents()
-|Attach all events listeners again
+|`swiper.attachEvents()`
+|Re-attach all built-in event listeners on the slider container. Useful
+*only* after a previous `detachEvents()` call.
 
-|swiper.changeDirection()
-|Changes slider direction from horizontal to vertical and back.
-* 'horizontal' \| 'vertical' If not specified, then
-  will automatically changed to opposite direction
-* boolean# - Will call swiper.update(). Default:true
+|`swiper.changeDirection(newDirection, needUpdate)`
+|Switch the slider between *horizontal* and *vertical* layout.
 
-|swiper.changeLanguageDirection(direction)
-|Changes slider language direction 'rtl' \| 'ltr'.
-Should be `rtl` or `ltr`
+* `newDirection` -- *String*, `'horizontal'` or `'vertical'`. If
+  omitted, the slider flips to the *opposite* of its current direction.
+* `needUpdate`   -- *Boolean*, default `true`. When `true`, `update()`
+  is called automatically after the direction change.
 
-|link:#method-swiper-destroy()
-|Destroy slider instance and detach all events listeners.
-Set it to false (by default it is true) to not to delete Swiper instance
-Set it to true and all custom styles will be removed from slides, wrapper and
-container. Useful if you need to destroy Swiper and to init again with
-new options or in different direction.
+|`swiper.changeLanguageDirection(direction)`
+|Switch the slider between left-to-right and right-to-left reading
+direction.
 
-|swiper.detachEvents()
-|Detach all events listeners
+* `direction` -- *String*, `'ltr'` (left-to-right) or `'rtl'`
+  (right-to-left).
 
-|swiper.disable()
-|Disable Swiper (if it was enabled). When Swiper is disabled, it will
-hide all navigation elements and won't respond to any events
-and interactions
+|`swiper.destroy(deleteInstance, cleanStyles)`
+|Destroy the slider instance and remove all internal event listeners.
+Use this when you no longer need the slider, or before re-creating it
+with new options.
 
-|swiper.enable()
-|Enable Swiper (if it was disabled)
+* `deleteInstance` -- *Boolean*, default `true`. Set to `false` to
+  *keep* the Swiper object in memory (only the listeners are removed).
+* `cleanStyles`    -- *Boolean*, default `true`. Set to `true` to
+  remove all inline styles from the container, the wrapper and the
+  slides. Helpful if you want to re-initialise the same DOM with
+  different options or in a different direction.
 
-|swiper.extendDefaults(options)
-|Extend global Swiper defaults
+|`swiper.detachEvents()`
+|Detach all built-in event listeners *without* destroying the slider.
+Counterpart to `attachEvents()`.
 
-|swiper.getTranslate()
-|Get current value of swiper wrapper css3 transform translate
+|`swiper.disable()`
+|Disable the slider. While disabled, Swiper hides its navigation
+elements and ignores any touch, mouse or keyboard input.
 
-|swiper.init(el)
-|Initialize slider
+|`swiper.enable()`
+|Re-enable a previously disabled slider.
 
-|swiper.maxTranslate()
-|Get current maximal translate value
+|`Swiper.extendDefaults(options)`
+|Extend the *global* Swiper defaults so that every slider created
+*after* this call inherits the given options.
 
-|swiper.minTranslate()
-|Get current minimal translate value
+[NOTE]
+====
+This is a *static* method on the `Swiper` class, not on a slider
+instance. Call it once *before* any `new Swiper(...)` so the new
+defaults take effect.
+====
 
-|swiper.off(eventhandler)
-|Remove event handler
+|`swiper.getTranslate()`
+|Return the current CSS *translate* value (in pixels) of the slide
+wrapper.
 
-|swiper.offAny(handler)
-|Remove event listener that will be fired on all events
+|`swiper.init(el)`
+|Initialise the slider. Only needed when you created the instance with
+`init: false`.
 
-|swiper.on(event handler)
-|Add event handler
+* `el` -- *HTMLElement*, optional container element to mount the
+  slider on. If omitted, the original container is used.
 
-|swiper.onAny(handler)
-|Add event listener that will be fired on all events
+|`swiper.maxTranslate()`
+|Return the *maximum* (most negative) translate value the wrapper can
+reach -- the position of the last slide.
 
-|swiper.once(event handler)
-|Add event handler that will be removed after it was fired
+|`swiper.minTranslate()`
+|Return the *minimum* translate value the wrapper can reach -- the
+position of the first slide.
 
-|swiper.setGrabCursor()
-|Set grab cursor
+|`swiper.off(event, handler)`
+|Remove a previously registered event handler.
 
-|swiper.setProgress(progress, speed)
-|Set Swiper translate progress (from 0 to 1). Where 0 - its initial
-position (offset) on first slide, and 1 - its maximum position (offset)
-on last slide
+* `event`   -- *String*. Name of the event (e.g. `'slideChange'`) or a
+  space-separated list of names.
+* `handler` -- *Function*. The exact same function reference you
+  passed to `on()`. Without `handler`, *all* handlers for `event`
+  are removed.
 
-* progress - Number. Swiper translate progress (from 0 to 1).
-* speed - Number. Transition duration (in ms).
+|`swiper.offAny(handler)`
+|Remove a handler that was registered with `onAny()`.
 
-|swiper.setTranslate(translate)
-|Set custom css3 transform's translate value for swiper wrapper.
+|`swiper.on(event, handler)`
+|Register an event handler.
 
-|swiper.slideNext(speed, runCallbacks)
-|Run transition to next slide.
+* `event`   -- *String*. Name of the event (e.g. `'slideChange'`) or
+  a space-separated list of names.
+* `handler` -- *Function*. Called every time the event fires.
 
-* speed - Number. Transition duration (in ms).
-* runCallbacks - Boolean. Set it to false (by default it is true)
-  and transition will not produce transition events.
+[source, js]
+----
+mySwiper.on('slideChange', function () {
+  console.log('Active slide is now:', this.activeIndex);
+});
+----
 
-|swiper.slidePrev(speed, runCallbacks)
-|Run transition to previous slide.
+|`swiper.onAny(handler)`
+|Register a handler that is called for *every* event fired by Swiper.
+Useful for debugging.
 
-* speed - Number. Transition duration (in ms).
-* runCallbacks - Boolean. Set it to false (by default it is true)
-  and transition will not produce transition events.
+[source, js]
+----
+mySwiper.onAny(function (eventName, ...args) {
+  console.log('Swiper event:', eventName, args);
+});
+----
 
-|swiper.slideReset(speed, runCallbacks)
-|Reset swiper position to currently active slide for the duration equal
-to 'speed' parameter.
+|`swiper.once(event, handler)`
+|Register an event handler that fires *only once* and is then
+automatically removed.
 
-* speed - Number. Transition duration (in ms).
-* runCallbacks - Boolean. Set it to false (by default it is true)
-  and transition will not produce transition events.
+|`swiper.setGrabCursor()`
+|Set the CSS `grab` cursor on the slider container. Normally you do
+not need to call this manually -- enable the `grabCursor` parameter
+instead.
 
-|swiper.slideTo(index, speed, runCallbacks))|
-Run transition to the slide with index number equal to 'index' parameter
-for the duration equal to 'speed' parameter.
+|`swiper.setProgress(progress, speed)`
+|Move the slider to a specific *progress* position between `0` (first
+slide) and `1` (last slide).
 
-* index - Number. Index number of slide.
-* speed - Nummber. Transition duration (in ms).
-* runCallbacks - Boolean. Set it to false (by default it is true)
-  and transition will not produce transition events.
+* `progress` -- *Number*, `0` to `1`.
+* `speed`    -- *Number*, transition duration in milliseconds.
+  Defaults to the slider's `speed` parameter.
 
-|swiper.slideToClosest(speed, runCallbacks)
-| Reset swiper position to closest slide/snap point for the duration equal
-to 'speed' parameter.
+|`swiper.setTranslate(translate)`
+|Set the CSS *translate* of the slide wrapper to an exact pixel value.
+Low-level method -- prefer `slideTo()` or `setProgress()` when
+possible.
 
-* speed - Nummber. Transition duration (in ms).
-* runCallbacks - Boolean. Set it to false (by default it is true)
-  and transition will not produce transition events.
+* `translate` -- *Number*, the new translate value in pixels.
 
-|swiper.slideToLoop(index, speed#, runCallbacks)
-|Does the same as .slideTo but for the case when used with enabled loop.
-So this method will slide to slides with realIndex matching to passed
-index
+|`swiper.slideNext(speed, runCallbacks)`
+|Animate to the *next* slide.
 
-* index - Number. Index number of slide.
-* speed - Nummber. Transition duration (in ms).
-* runCallbacks - Boolean. Set it to false (by default it is true)
-  and transition will not produce transition events.
+* `speed`        -- *Number*, transition duration in milliseconds.
+* `runCallbacks` -- *Boolean*, default `true`. Set `false` to skip the
+  transition events for this call.
 
-|swiper.slidesPerViewDynamic()
-|Get dynamically calculated amount of slides per view, useful only
-when slidesPerView set to `auto`
+|`swiper.slidePrev(speed, runCallbacks)`
+|Animate to the *previous* slide.
 
-|swiper.translateTo(translate, speed, runCallbacks, translateBounds)
-| Animate custom css3 transform's translate value for swiper wrapper
+* `speed`        -- *Number*, transition duration in milliseconds.
+* `runCallbacks` -- *Boolean*, default `true`. Set `false` to skip the
+  transition events for this call.
 
-* translate - Number. Translate value (in px)
-* speed - Nummber. Transition duration (in ms)
-* runCallbacks - Boolean. Set it to false (by default it is true)
-  and transition will not produce transition events.
-* translateBounds - Bolean. Set it to false (by default it is true)
-  and transition value can extend beyond min and max translate
+|`swiper.slideReset(speed, runCallbacks)`
+|Animate back to the *currently active* slide. Useful for cancelling a
+partial swipe.
 
-|swiper.unsetGrabCursor()
-|Unset grab cursor
+* `speed`        -- *Number*, transition duration in milliseconds.
+* `runCallbacks` -- *Boolean*, default `true`.
 
-|swiper.update()
-|You should call it after you add/remove slides manually, or after you
-hide/show it, or do any custom DOM modifications with Swiper This method
-also includes subcall of the following methods which you can use separately.
+|`swiper.slideTo(index, speed, runCallbacks)`
+|Animate to the slide with the given index.
 
-|swiper.updateAutoHeight(speed)
-|Force swiper to update its height (when autoHeight enabled) for the
-duration equal to 'speed' parameter
+* `index`        -- *Number*. Zero-based slide index (`0` is the first
+  slide).
+* `speed`        -- *Number*, transition duration in milliseconds.
+* `runCallbacks` -- *Boolean*, default `true`.
 
-* speed - Nummber. Transition duration (in ms)
+|`swiper.slideToClosest(speed, runCallbacks)`
+|Snap the slider to the *closest* slide / snap position. Mostly useful
+in `freeMode` after a free drag.
 
-|swiper.updateProgress()
-|Recalculate swiper progress
+* `speed`        -- *Number*, transition duration in milliseconds.
+* `runCallbacks` -- *Boolean*, default `true`.
 
-|swiper.updateSize()
-|Recalculate size of the swiper container
+|`swiper.slideToLoop(index, speed, runCallbacks)`
+|Same as `slideTo()` but for *loop* mode: takes the *real* slide index
+(without the cloned slides) and figures out the matching internal
+index for you.
 
-|swiper.updateSlides()
-|Recalculate the number of slides and their offsets. Useful after
-you add/remove slides with JavaScript
+* `index`        -- *Number*. Zero-based *real* slide index.
+* `speed`        -- *Number*, transition duration in milliseconds.
+* `runCallbacks` -- *Boolean*, default `true`.
 
-|swiper.updateSlidesClasses()
-|Update active/prev/next classes on slides and bullets
+|`swiper.slidesPerViewDynamic()`
+|Return the number of slides visible *right now*. Useful only when
+`slidesPerView: 'auto'` is set, because in that case the visible count
+depends on slide widths and the container size.
 
-|swiper.use(modules#)
-|Installs modules on Swiper at runtime.
+|`swiper.translateTo(translate, speed, runCallbacks, translateBounds)`
+|Animate the wrapper's CSS translate to an exact pixel value.
+
+* `translate`       -- *Number*, target translate value (in pixels).
+* `speed`           -- *Number*, transition duration in milliseconds.
+* `runCallbacks`    -- *Boolean*, default `true`. Set `false` to skip
+  transition events.
+* `translateBounds` -- *Boolean*, default `true`. Set `false` to allow
+  the value to go *beyond* the normal minimum / maximum.
+
+|`swiper.unsetGrabCursor()`
+|Remove the CSS `grab` cursor from the slider container (counterpart
+of `setGrabCursor()`).
+
+|`swiper.update()`
+|Recalculate everything: sizes, slide grid, progress and slide
+classes. Call this *after* you have added or removed slides manually,
+shown or hidden the slider, or made any other DOM changes that affect
+the layout. Internally this calls the four `updateXxx()` methods below
+in the right order.
+
+|`swiper.updateAutoHeight(speed)`
+|Force Swiper to recalculate its height to match the active slide. Use
+this together with `autoHeight: true`.
+
+* `speed` -- *Number*, transition duration in milliseconds.
+
+|`swiper.updateProgress()`
+|Recalculate the slider's progress value.
+
+|`swiper.updateSize()`
+|Recalculate the size of the slider container.
+
+|`swiper.updateSlides()`
+|Recalculate the number of slides and their offsets. Call after adding
+or removing slides from JavaScript.
+
+|`swiper.updateSlidesClasses()`
+|Refresh the `active`, `prev`, `next` and `visible` CSS classes on
+slides and pagination bullets.
+
+|`swiper.use(modules)`
+|Install one or more Swiper modules at runtime.
+
+* `modules` -- *Array* of Swiper module references.
+
+[source, js]
+----
+import Swiper from 'swiper';
+import { Navigation, Pagination } from 'swiper/modules';
+
+Swiper.use([Navigation, Pagination]);
+----
 
 |===

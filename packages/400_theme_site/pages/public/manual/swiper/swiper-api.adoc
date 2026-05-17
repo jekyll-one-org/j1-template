@@ -3,7 +3,7 @@ title:                                  Swiper V11
 title_extention:                        API
 tagline:                                Programming Interface
 
-date:                                   2026-05-16
+date:                                   2026-05-17
 #last_modified:                         2026-01-01
 
 description: >
@@ -21,7 +21,7 @@ categories:                             [ Manual ]
 tags:                                   [ Module, Slider, Swiper ]
 
 image:
-  path:                                 /assets/image/module/attic/1920x1280/teemu-paananen.jpg
+  path:                                 /assets/image/module/attic/1920x1280/sally-k.jpg
   width:                                1920
   height:                               1280
 
@@ -38,12 +38,12 @@ resource_options:
       collapseDepth:                    2
   - attic:
       slides:
-        - url:                          /assets/image/module/attic/1920x1280/teemu-paananen.jpg
-          alt:                          Photo by Teemu Paananen on Unsplash
+        - url:                          /assets/image/module/attic/1920x1280/sally-k.jpg
+          alt:                          Photo by Sally K on Unsplash
           badge:
             type:                       unsplash
-            author:                     Teemu Paananen
-            href:                       //unsplash.com/@xteemu
+            author:                     Photo by Sally K on Unsplash
+            href:                       //unsplash.com/@salivan_91
 ---
 
 // Page Initializer
@@ -109,13 +109,8 @@ restructured and enhanced by code examples or improved description texts.
 // -----------------------------------------------------------------------------
 
 include::{documentdir}/000_swiper_api_intro.asciidoc[]
-// include::{documentdir}/100_swiper_parameters.asciidoc[]
-// include::{documentdir}/110_swiper_properties.asciidoc[]
-
-// include::{documentdir}/120_swiper_methods.asciidoc[]
-// include::{documentdir}/130_swiper_events.asciidoc[]
+include::{documentdir}/100_swiper_parameters.asciidoc[]
+include::{documentdir}/110_swiper_properties.asciidoc[]
+include::{documentdir}/120_swiper_methods.asciidoc[]
+include::{documentdir}/130_swiper_events.asciidoc[]
 include::{documentdir}/140_swiper_modules.asciidoc[]
-
-
-
-

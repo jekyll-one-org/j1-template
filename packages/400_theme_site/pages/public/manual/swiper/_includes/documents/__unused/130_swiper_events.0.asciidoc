@@ -8,7 +8,7 @@ Swiper comes with a bunch of useful events you can *listen to*. Events
 can be assigned in two ways:
 
 . Using the `on` parameter on swiper initialisation:
-
++
 [source, js]
 ----
 const swiper = new Swiper('.swiper', {
@@ -21,7 +21,7 @@ const swiper = new Swiper('.swiper', {
 });
 ----
 . Using the `on` method *after* swiper initialisation:
-
++
 [source, js]
 ----
 const swiper = new Swiper('.swiper', {
@@ -37,6 +37,13 @@ swiper.on('slideChange', function () {
 The *this* keyword inside an event handler always points to the Swiper instance.
 ====
 
+// claude - Update swiper manual #6
+// Added a note pointing readers to the Modules section for events
+// that only exist when a specific module (autoplay, navigation,
+// pagination, scrollbar, keyboard, mousewheel, zoom, etc.) is
+// enabled. Without this hint beginners often look for `autoplayStart`
+// or `navigationNext` on this page and assume Swiper is broken
+// when they cannot find them.
 [NOTE]
 ====
 The table below lists the *core* Swiper events that work for *any*
@@ -104,6 +111,11 @@ underlying `pointerup` event as an argument.
 |(swiper)
 |Fired when the slider has been destroyed.
 
+// claude - Update swiper manual #6
+// Added the `disable` event. Swiper *does* emit this event via
+// `swiper.emit(swiper.isLocked ? 'lock' : 'unlock')` when the slider
+// is enabled/disabled at runtime through `swiper.disable()`.
+// Verified in `swiper-bundle.js` at the `enable`/`disable` core methods.
 |disable
 |(swiper)
 |Fired when the slider is *disabled* through `swiper.disable()` (or
@@ -120,6 +132,10 @@ input.
 |Fired when the user double-taps the slider container. Receives the
 underlying `pointerup` event as an argument.
 
+// claude - Update swiper manual #6
+// Added the `enable` event. Swiper emits this when the slider is
+// (re-)enabled through `swiper.enable()`. The counterpart of the
+// `disable` event above.
 |enable
 |(swiper)
 |Fired when a previously disabled slider is *re-enabled* through

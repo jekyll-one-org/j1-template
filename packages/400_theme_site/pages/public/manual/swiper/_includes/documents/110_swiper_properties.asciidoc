@@ -1,120 +1,195 @@
 
+// claude - Update swiper manual #2
 [role="mt-5"]
 [[swiper-api--properties]]
 == Properties
 
-The follwing table lists all *properties* available in alphabetical order.
+A *property* is a value that Swiper *exposes on the slider instance*. You
+read it the same way you read a field on any JavaScript object:
 
-[cols="3a,2a,7a", subs=+macros, options="header", width="100%", role="table-striped table-responsive"]
+[source, js]
+----
+const mySwiper = new Swiper('.swiper');
+
+console.log(mySwiper.activeIndex);   // 0, 1, 2, ...
+console.log(mySwiper.isEnd);         // true / false
+----
+
+In the J1 Template the instance is also available on the slider's HTML
+element as the `swiper` property of that element:
+
+[source, js]
+----
+const slider = document.querySelector('#my-swiper').swiper;
+console.log(slider.activeIndex);
+----
+
+The table below lists all properties available on the Swiper instance in
+alphabetical order.
+
+[cols="3a,2a,7a", options="header", width="100%", role="table-striped rtable"]
 |===
 |Name |Type |Description
 
-|link:#prop-swiper-activeIndex[swiper.activeIndex] |number a|
-Index number of currently active slide
+|swiper.activeIndex
+|number
+|Index number of the currently active slide.
 
-____
-Note, that in loop mode active index value will be always shifted on a
-number of looped slides
-____
+[NOTE]
+====
+Note: in loop mode the active index is *always shifted* by the number of
+looped (cloned) slides. Use `swiper.realIndex` to get the index of the
+*original* slide.
+====
 
-|link:#prop-swiper-allowSlideNext[swiper.allowSlideNext] |boolean
-|Disable / enable ability to slide to the next slides by assigning
-`false` / `true` to this property
+|swiper.allowSlideNext
+|boolean
+|Enable or disable swiping to the *next* slide. Set this property to
+`false` to lock the next direction, `true` to unlock it.
 
-|link:#prop-swiper-allowSlidePrev[swiper.allowSlidePrev] |boolean
-|Disable / enable ability to slide to the previous slides by assigning
-`false` / `true` to this property
+|swiper.allowSlidePrev
+|boolean
+|Enable or disable swiping to the *previous* slide. Set this property to
+`false` to lock the previous direction, `true` to unlock it.
 
-|link:#prop-swiper-allowTouchMove[swiper.allowTouchMove] |boolean
-|Disable / enable ability move slider by grabbing it with mouse or by
-touching it with finger (on touch screens) by assigning `false` /
-`true` to this property
+|swiper.allowTouchMove
+|boolean
+|Enable or disable moving the slider by *grabbing it with the mouse* or
+by *touching it with a finger* (on touch screens). Set `false` to
+disable, `true` to enable.
 
-|link:#prop-swiper-animating[swiper.animating] |boolean |`true` if
-swiper is in transition
+|swiper.animating
+|boolean
+|`true` while the slider is in transition between two slides, `false`
+otherwise.
 
-|link:#prop-swiper-clickedIndex[swiper.clickedIndex] |number |Index
-number of last clicked slide
+|swiper.clickedIndex
+|number
+|Index number of the slide that was clicked or tapped *last*.
 
-|link:#prop-swiper-clickedSlide[swiper.clickedSlide] |HTMLElement |Link
-to last clicked slide (HTMLElement)
+|swiper.clickedSlide
+|HTMLElement
+|Reference to the HTML element of the slide that was clicked or tapped
+*last*.
 
-|link:#prop-swiper-defaults[swiper.defaults] |SwiperOptions |Swiper
-default options
+|swiper.defaults
+|SwiperOptions
+|Object with Swiper's *built-in default* options (before any of your
+parameters are merged in).
 
-|link:#prop-swiper-el[swiper.el] |HTMLElement |Slider container HTML
-element
+|swiper.el
+|HTMLElement
+|HTML element of the slider container (the element with the
+`swiper` CSS class).
 
-|link:#prop-swiper-enabled[swiper.enabled] |boolean |`true` if Swiper
-is enabled, `false` otherwise
+|swiper.enabled
+|boolean
+|`true` if Swiper is currently *enabled*, `false` otherwise (see
+`enable()` / `disable()` methods).
 
-|link:#prop-swiper-extendedDefaults[swiper.extendedDefaults]
-|SwiperOptions |Object with global Swiper extended options
+|swiper.extendedDefaults
+|SwiperOptions
+|Object with *globally* extended Swiper defaults (as set
+via `Swiper.extendDefaults(...)`).
 
-|link:#prop-swiper-height[swiper.height] |number |Height of container
+|swiper.height
+|number
+|Current height of the slider container (in pixels).
 
-|link:#prop-swiper-isBeginning[swiper.isBeginning] |boolean |`true` if
-slider on most "left"/"top" position
+|swiper.isBeginning
+|boolean
+|`true` when the slider is on its first slide (left/top edge).
 
-|link:#prop-swiper-isEnd[swiper.isEnd] |boolean |`true` if slider on
-most "right"/"bottom" position
+|swiper.isEnd
+|boolean
+|`true` when the slider is on its last slide (right/bottom edge).
 
-|link:#prop-swiper-isLocked[swiper.isLocked] |boolean |`true` if slide
-is "locked" (by `watchOverflow`) and slides can not be, e.g. when
-amount of slides is less that slides per view
+|swiper.isLocked
+|boolean
+|`true` when the slider is *locked* by `watchOverflow` and can no
+longer slide (for example when there are fewer slides than
+`slidesPerView`).
 
-|link:#prop-swiper-originalParams[swiper.originalParams] |SwiperOptions
-|Object with original initialization parameters
+|swiper.originalParams
+|SwiperOptions
+|Object with the *original* initialization parameters (exactly the
+object you passed into `new Swiper(...)`).
 
-|link:#prop-swiper-params[swiper.params] |SwiperOptions |Object with
-passed initialization parameters
+|swiper.params
+|SwiperOptions
+|Object with the *current effective* initialization parameters. May
+differ from `originalParams` after responsive breakpoints kick in or
+after a parameter is changed at runtime.
 
-|link:#prop-swiper-previousIndex[swiper.previousIndex] |number |Index
-number of previously active slide
+|swiper.previousIndex
+|number
+|Index number of the slide that was active *before* the current one.
 
-|link:#prop-swiper-progress[swiper.progress] |number |Current progress
-of wrapper translate (from 0 to 1)
+|swiper.progress
+|number
+|Current progress of the wrapper translate, as a value between `0` (at
+the first slide) and `1` (at the last slide).
 
-|link:#prop-swiper-realIndex[swiper.realIndex] |number |Index number of
-currently active slide considering rearranged slides in loop mode
+|swiper.realIndex
+|number
+|Index of the currently active slide *in the original slide list*. In
+loop mode this skips the cloned duplicate slides, while `activeIndex`
+counts them.
 
-|link:#prop-swiper-slides[swiper.slides] |[.text-green]#HTMLElement[]#
-|Array of slides HTML elements. To get specific slide HTMLElement use
-`swiper.slides[1]`
+|swiper.slides
+|HTMLElement[]
+|Array of slide HTML elements. To get a specific slide use
+`swiper.slides[1]` (the second slide), `swiper.slides[0]` (the first),
+etc.
 
-|link:#prop-swiper-slidesEl[swiper.slidesEl] |HTMLElement |Wrapper HTML
-element
+|swiper.slidesEl
+|HTMLElement
+|HTML element of the slide *wrapper* (the element with the
+`swiper-wrapper` CSS class). Same as `swiper.wrapperEl`.
 
-|link:#prop-swiper-slidesGrid[swiper.slidesGrid]
-|[.text-green]#number[]# |Slides grid
+|swiper.slidesGrid
+|number[]
+|Array of *slide start positions* (in pixels) along the slider track.
 
-|link:#prop-swiper-slidesSizesGrid[swiper.slidesSizesGrid]
-|[.text-green]#number[]# |Array of widths for slides
+|swiper.slidesSizesGrid
+|number[]
+|Array of *slide widths* (or heights, for vertical sliders) in pixels.
 
-|link:#prop-swiper-snapGrid[swiper.snapGrid] |[.text-green]#number[]#
-|Slides snap grid
+|swiper.snapGrid
+|number[]
+|Array of *snap positions* (in pixels). A snap position is where the
+slider comes to rest after a swipe.
 
-|link:#prop-swiper-snapIndex[swiper.snapIndex] |number |Index number of
-current snap in `snapGrid`
+|swiper.snapIndex
+|number
+|Index of the current snap in `snapGrid`.
 
-|link:#prop-swiper-swipeDirection[swiper.swipeDirection] |'next' \|
-'prev' |Direction of sliding
+|swiper.swipeDirection
+|'next' \| 'prev'
+|Direction of the current/last swipe: `'next'` or `'prev'`.
 
-|link:#prop-swiper-touches[swiper.touches] |object a|
-Object with the following touch event properties:
+|swiper.touches
+|object
+|Object with current touch / pointer coordinates:
 
-* `swiper.touches.startX`
-* `swiper.touches.startY`
-* `swiper.touches.currentX`
-* `swiper.touches.currentY`
-* `swiper.touches.diff`
+* `swiper.touches.startX`   -- X position where the touch started
+* `swiper.touches.startY`   -- Y position where the touch started
+* `swiper.touches.currentX` -- X position right now (during the move)
+* `swiper.touches.currentY` -- Y position right now (during the move)
+* `swiper.touches.diff`     -- distance dragged since `startX` /
+  `startY` (positive or negative)
 
-|link:#prop-swiper-translate[swiper.translate] |number |Current value of
-wrapper translate
+|swiper.translate
+|number
+|Current value of the wrapper's CSS *translate* (in pixels). Negative
+values move the wrapper to the left (or up).
 
-|link:#prop-swiper-width[swiper.width] |number |Width of container
+|swiper.width
+|number
+|Current width of the slider container (in pixels).
 
-|link:#prop-swiper-wrapperEl[swiper.wrapperEl] |HTMLElement |Wrapper
-HTML element
+|swiper.wrapperEl
+|HTMLElement
+|HTML element of the slide *wrapper* (same as `swiper.slidesEl`).
 
 |===
