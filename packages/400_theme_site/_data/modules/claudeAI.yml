@@ -44,6 +44,14 @@ settings:
   #
   apiEndpoint:                          /api/claude
 
+  # ----------------------------------------------------------------------------
+  # KB options
+  #
+  # ----------------------------------------------------------------------------
+  #
+  storage:
+    maxTokenSize:                       200000                                  # tbc 
+
   # Legacy setting kept for documentation only. The old build-time injection
   # from site.j1_env.CLAUDE_API_KEY described in modifications #1 is
   # DEPRECATED and has been removed from the adapter. Do NOT set apiKey
