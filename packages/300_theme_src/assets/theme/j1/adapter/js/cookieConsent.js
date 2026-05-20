@@ -78,6 +78,10 @@ regenerate:                             true
  # -----------------------------------------------------------------------------
  # J1 CookieConsent optimizations #1
  # Improve cookieConsent code using lit #2
+ # - dropped legacy XHR-related YAML defaults
+ #   (`contentURL`, `xhrDataElement`, `dialogContainerID`)
+ # - "Do Nothing" button repurposed to a "Settings" toggle for the
+ #   Privacy Notice section (label change handled in the YAML)
  # -----------------------------------------------------------------------------
 */
 
@@ -93,10 +97,12 @@ j1.adapter.cookieConsent = ((j1, window) => {
 
   // Drop the redundant `? true : false` ternary - the comparison
   // already returns a boolean. Same simplification applied below.
+  //
   const isDev               = (j1.env === "development" || j1.env === "dev");
 
   // Liquid-injected literals are immutable for the lifetime of the page,
   // so they belong in `const`, not `var`.
+  //
   const environment         = '{{environment}}';
   const tracking_enabled    = ('{{tracking_enabled}}' === 'true');
   const tracking_id         = '{{tracking_id}}';
@@ -105,6 +111,7 @@ j1.adapter.cookieConsent = ((j1, window) => {
   //   (tracking_id.includes('tracking-id')) ? false : true
   // is equivalent but obscures the intent ("the placeholder string
   // 'tracking-id' means the ID has not been configured").
+  //
   const tracking_id_valid   = !tracking_id.includes('tracking-id');
 
   // Module-scope mutable state shared between init() and cbCookie().
@@ -115,6 +122,7 @@ j1.adapter.cookieConsent = ((j1, window) => {
   // and are no longer hoisted to module scope. The previous setup
   // declared a long block of unused names which made the surface
   // area of the module hard to reason about.
+  //
   let _this;
   let logger;
   let logText;
@@ -143,6 +151,7 @@ j1.adapter.cookieConsent = ((j1, window) => {
   // three j1.expireCookie() calls inline; centralising them removes the
   // duplication and keeps the two branches in sync if more cookies need
   // to be added later.
+  //
   function expirePersistentJ1Cookies(names) {
     j1.expireCookie({ name: names.user_state });
     j1.expireCookie({ name: names.user_consent });
@@ -153,6 +162,7 @@ j1.adapter.cookieConsent = ((j1, window) => {
   // personalization consent, propagate that decision to the translate
   // cookie and disable the translation service. Extracted because the
   // exact same six-line block existed in both branches of cbCookie().
+  //
   function syncTranslateCookieFromConsent(names, user_consent, user_translate, isSecure) {
     user_translate.analysis           = user_consent.analysis;
     user_translate.personalization    = user_consent.personalization;
@@ -175,6 +185,7 @@ j1.adapter.cookieConsent = ((j1, window) => {
   // missing branch so a partially-configured site cannot crash the
   // adapter; the component itself ships a complete English fallback
   // for any keys still missing at render time.
+  //
   function buildModalContent(options) {
     const ms     = (options && options.modal_settings) || {};
     const labels = ms.labels || {};
@@ -379,21 +390,30 @@ j1.adapter.cookieConsent = ((j1, window) => {
           // component reads it directly from the property and skips the
           // XHR fetch entirely.
           //
-          // Dropped from the constructor call:
+          // claude - improve cookieConsent code using lit #2
+          // The following constructor properties of the legacy
+          // (pre-Lit) implementation no longer exist:
           //
-          //   - `contentURL`       — the XHR endpoint is no longer
-          //                          consulted by the component
-          //   - `xhrDataElement`   — referred to a placeholder element
-          //                          that the component no longer uses
-          //   - `dialogContainerID`— the component owns its own host
-          //                          element (<j1-cookie-consent>)
+          //   - `contentURL`        — the XHR endpoint is gone; the
+          //                           component receives `content`
+          //                           directly via this constructor.
+          //   - `xhrDataElement`    — referred to a wrapper element
+          //                           inside the fetched HTML payload;
+          //                           no fetch, no wrapper.
+          //   - `dialogContainerID` — the component owns its own host
+          //                           element (<j1-cookie-consent>),
+          //                           so an external placeholder is
+          //                           unnecessary.
           //   - `reloadPageOnChange`— never read inside .mjs;
-          //                          cbCookie() already reads it from
-          //                          `cookieConsentOptions` directly
+          //                           cbCookie() reads it from
+          //                           `cookieConsentOptions` directly.
           //
-          // All four are still present in cookieConsentOptions for
-          // back-compat with anything else that may inspect them; they
-          // simply no longer cross the constructor boundary.
+          // The first three have also been removed from the YAML
+          // defaults file (`_data/modules/defaults/cookieconsent.yml`)
+          // because nothing — neither the adapter nor the component —
+          // reads them anymore. The Liquid template that emitted the
+          // legacy JSON payload at /assets/data/cookieconsent should
+          // be deleted from the site source tree.
           //
           const consentContent = buildModalContent(cookieConsentOptions);
 
@@ -429,7 +449,6 @@ j1.adapter.cookieConsent = ((j1, window) => {
     // made his selection
     // -------------------------------------------------------------------------
     cbCookie: (options) => {
-
       // The original implementation re-derived `url`, `hostname` and
       // `cookie_names` here even though they are already available from
       // the module closure (set in init()). It also declared
@@ -459,6 +478,7 @@ j1.adapter.cookieConsent = ((j1, window) => {
 
       // manage Google Analytics OptIn/Out
       // See: https://github.com/luciomartinez/gtag-opt-in/wiki
+      //
       if (tracking_enabled && tracking_id_valid) {
         // Managing cookie life-time
         // ---------------------------------------------------------------------
