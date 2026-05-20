@@ -701,8 +701,11 @@ resources:
 
       data:
         css:                            []
-        files:                          [ adapter/js/cookieConsent.js ]
-        js:                             [ modules/cookieConsent/js/cookieConsent ]
+        files:                          [
+                                          modules/cookieConsent/js/cookieConsent.mjs,
+                                          adapter/js/cookieConsent.js
+                                        ]
+        js:                             []
         init_function:                  [ j1.adapter.cookieConsent.init ]
 
   # ----------------------------------------------------------------------------
@@ -2144,6 +2147,28 @@ resources:
         js:                             [ modules/claudeAI/js/claudeAI ]
         files:                          [ adapter/js/claudeAI.js ]
         init_function:                  [ j1.adapter.claudeAI.init ]
+
+  # ----------------------------------------------------------------------------
+  # litElement
+  #
+  - name:                               litElement
+    resource:
+      enabled:                          true
+
+      id:                               lit3
+      comment:                          Module litElement
+      region:                           head
+      layout:                           [ all ]
+      required:                         ondemand
+      script_load:                      defer
+      dependencies:                     false
+      pass_init_data:                   false
+
+      data: 
+        css:                            []
+        js:                             []
+        files:                          [ modules/lit3/js/lit-all.mjs]
+        init_function:                  []
 
   # ----------------------------------------------------------------------------
   # J1 VideoPlayer

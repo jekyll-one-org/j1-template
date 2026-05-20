@@ -6,7 +6,7 @@ regenerate:                             true
 
 {% comment %}
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/adapter/js/cookieConsent.js (2)
+ # ~/assets/theme/j1/adapter/js/cookieConsent.js (3)
  # Liquid template to create the Template Adapter for J1 CookieConsent
  #
  # Product/Info:
@@ -63,7 +63,7 @@ regenerate:                             true
 
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/adapter/js/cookieConsent.js (2)
+ # ~/assets/theme/j1/adapter/js/cookieConsent.js (3)
  # JS Adapter for J1 CookieConsent
  #
  #  Product/Info:
@@ -75,6 +75,9 @@ regenerate:                             true
  #  See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE
  # -----------------------------------------------------------------------------
  #  Adapter generated: {{site.time}}
+ # -----------------------------------------------------------------------------
+ # J1 CookieConsent optimizations #1
+ # Improve cookieConsent code using lit #2
  # -----------------------------------------------------------------------------
 */
 
@@ -88,25 +91,22 @@ regenerate:                             true
 
 j1.adapter.cookieConsent = ((j1, window) => {
 
-  // J1 CookieConsent optimizations #1
   // Drop the redundant `? true : false` ternary - the comparison
   // already returns a boolean. Same simplification applied below.
   const isDev               = (j1.env === "development" || j1.env === "dev");
 
-  // J1 CookieConsent optimizations #1
   // Liquid-injected literals are immutable for the lifetime of the page,
   // so they belong in `const`, not `var`.
   const environment         = '{{environment}}';
   const tracking_enabled    = ('{{tracking_enabled}}' === 'true');
   const tracking_id         = '{{tracking_id}}';
-  // J1 CookieConsent optimizations #1
+  
   // Rewritten as a direct negation. The original
   //   (tracking_id.includes('tracking-id')) ? false : true
   // is equivalent but obscures the intent ("the placeholder string
   // 'tracking-id' means the ID has not been configured").
   const tracking_id_valid   = !tracking_id.includes('tracking-id');
 
-  // J1 CookieConsent optimizations #1
   // Module-scope mutable state shared between init() and cbCookie().
   // Variables that were only read inside one function (e.g. $modal,
   // user_cookie, url, baseUrl, hostname, auto_domain, startTime,
@@ -124,7 +124,6 @@ j1.adapter.cookieConsent = ((j1, window) => {
   let cookieOptions;
   let cookieConsentOptions;
 
-  // J1 CookieConsent optimizations #1
   // The original code polled j1.getState() every 10ms with no upper
   // bound. That is needlessly aggressive and, more importantly, will
   // keep the interval running for the lifetime of the tab if the j1
@@ -139,7 +138,6 @@ j1.adapter.cookieConsent = ((j1, window) => {
   // NOTE: RegEx for tracking_id: ^(G|UA|YT|MO)-[a-zA-Z0-9-]+$
   // See: https://stackoverflow.com/questions/20411767/how-to-validate-google-analytics-tracking-id-using-a-javascript-function/20412153
 
-  // J1 CookieConsent optimizations #1
   // Internal helper: expire all "persistent" J1 cookies down to session
   // cookies. Both branches of cbCookie() previously contained the same
   // three j1.expireCookie() calls inline; centralising them removes the
@@ -151,7 +149,6 @@ j1.adapter.cookieConsent = ((j1, window) => {
     j1.expireCookie({ name: names.user_translate });
   }
 
-  // J1 CookieConsent optimizations #1
   // Internal helper: when the user has not granted analysis OR
   // personalization consent, propagate that decision to the translate
   // cookie and disable the translation service. Extracted because the
@@ -168,6 +165,27 @@ j1.adapter.cookieConsent = ((j1, window) => {
     });
   }
 
+  // Internal helper: extract the localized text content for the consent
+  // modal from `cookieConsentOptions`. The result is the JSON shape the
+  // <j1-cookie-consent> Lit component used to fetch from
+  // /assets/data/cookieconsent via XHR; it is now handed to the
+  // constructor as the `content` property, so no XHR is needed.
+  //
+  // A defensive empty object is supplied as the fallback for each
+  // missing branch so a partially-configured site cannot crash the
+  // adapter; the component itself ships a complete English fallback
+  // for any keys still missing at render time.
+  function buildModalContent(options) {
+    const ms     = (options && options.modal_settings) || {};
+    const labels = ms.labels || {};
+    return {
+      title:         ms.title,
+      bodyText:      ms.body_text,
+      privacyNotice: ms.privacy_notice,
+      labels:        labels
+    };
+  }
+
   // ---------------------------------------------------------------------------
   // main
   // ---------------------------------------------------------------------------
@@ -181,7 +199,7 @@ j1.adapter.cookieConsent = ((j1, window) => {
       // -----------------------------------------------------------------------
       // default module settings
       // -----------------------------------------------------------------------
-      // J1 CookieConsent optimizations #1
+      
       // `settings` is built but never read after this point; keeping the
       // object literal is harmless, but use `const` instead of `var`.
       //
@@ -197,7 +215,6 @@ j1.adapter.cookieConsent = ((j1, window) => {
       logger            = log4javascript.getLogger('j1.adapter.cookieConsent');
       cookie_names      = j1.getCookieNames();
 
-      // J1 CookieConsent optimizations #1
       // These were module-scope `var`s but are only consumed inside
       // init(). Moving them into the function shrinks the surface area
       // of the IIFE and avoids accidental reuse from cbCookie().
@@ -207,7 +224,6 @@ j1.adapter.cookieConsent = ((j1, window) => {
       const hostname    = url.hostname;
       const auto_domain = hostname.substring(hostname.lastIndexOf('.', hostname.lastIndexOf('.') - 1) + 1);
 
-      // J1 CookieConsent optimizations #1
       // url.protocol always includes the trailing ':' (e.g. 'https:').
       // The previous `protocol.includes('https')` check would also
       // accept exotic values like 'httpsdummy:'. Use an exact match
@@ -221,18 +237,23 @@ j1.adapter.cookieConsent = ((j1, window) => {
       cookieOptions        = $.extend(true, {}, cookieDefaults, cookieSettings);
 
       // Load module DEFAULTS|CONFIG
+      
+      // `cookieConsentOptions` now carries the full localized content
+      // block (modal_settings.title, .body_text, .privacy_notice and
+      // .labels). This is the single source of truth for every text
+      // string displayed by the modal — no XHR fetch is performed by
+      // the Lit component.
       const cookieConsentDefaults = $.extend({}, {{consent_defaults | replace: 'nil', 'null' | replace: '=>', ':' }});
       const cookieConsentSettings = $.extend({}, {{consent_settings | replace: 'nil', 'null' | replace: '=>', ':' }});
       cookieConsentOptions        = $.extend(true, {}, cookieConsentDefaults, cookieConsentSettings);
 
-      // J1 CookieConsent optimizations #1
+      
       // `cookieOptions.domain` is a string ('auto', a literal hostname,
       // or 'false'). The original `=== 'false' ? false : true` is a
       // no-op ternary - replace with a direct comparison.
       //
       const check_cookie_option_domain = (cookieOptions.domain !== 'false');
 
-      // J1 CookieConsent optimizations #1
       // BUG FIX. The original code was:
       //   expireCookiesOnRequiredOnly =
       //     (cookieOptions.expireCookiesOnRequiredOnly === 'true') ? true : false;
@@ -261,7 +282,7 @@ j1.adapter.cookieConsent = ((j1, window) => {
       // -----------------------------------------------------------------------
       // module initializer
       // -----------------------------------------------------------------------
-      // J1 CookieConsent optimizations #1
+      
       // Locals previously stored at module scope. They are only read
       // inside this initializer.
       //
@@ -269,7 +290,6 @@ j1.adapter.cookieConsent = ((j1, window) => {
       let   stringifiedAttributes = '';
       let   domainAttribute;
 
-      // J1 CookieConsent optimizations #1
       // Polling failsafe. We capture the start time and bail out of the
       // interval if j1 core does not reach state 'finished' within
       // READY_POLL_TIMEOUT_MS. Also: the previous callback declared an
@@ -279,7 +299,7 @@ j1.adapter.cookieConsent = ((j1, window) => {
       //
       const pollStart = Date.now();
       const dependencies_met_page_ready = setInterval(() => {
-        // J1 CookieConsent optimizations #1
+        
         // The original code also computed `pageVisible` by inspecting
         // $('#content').css('display'), but never read the result.
         // Removed to save a jQuery query on every tick.
@@ -287,7 +307,7 @@ j1.adapter.cookieConsent = ((j1, window) => {
         const j1CoreFinished = (j1.getState() === 'finished');
 
         if (!j1CoreFinished) {
-          // J1 CookieConsent optimizations #1
+          
           // Hard timeout so a stalled core can no longer keep this
           // interval running for the lifetime of the tab.
           //
@@ -312,7 +332,7 @@ j1.adapter.cookieConsent = ((j1, window) => {
         if (cookieConsentOptions.enabled) {
           expires = cookieOptions.expires;
         } else {
-          // J1 CookieConsent optimizations #1
+          
           // Use the shared helper instead of inlining the same three
           // j1.expireCookie() calls.
           //
@@ -328,7 +348,6 @@ j1.adapter.cookieConsent = ((j1, window) => {
           logger.warn('\n' + 'disable module: Translator');
         }
 
-        // J1 CookieConsent optimizations #1
         // Both branches of the original `if (cookieOptions.domain === 'auto')`
         // appended the same `; Domain=<x>` segment to stringifiedAttributes.
         // Hoist the append out so it happens once, and pick the
@@ -348,25 +367,46 @@ j1.adapter.cookieConsent = ((j1, window) => {
           same_site = 'Lax';
         }
 
-        // -------------------------------------------------------------------
+        // ---------------------------------------------------------------------
         // NOTE: Click events moved to Navigator (core)
-        // -------------------------------------------------------------------
+        // ---------------------------------------------------------------------
 
         if (cookieConsentOptions.enabled) {
           logger.info('\n' + 'initialize core module');
 
+          // Build the localized text content block once, here, and hand
+          // it to the constructor as the `content` property. The Lit
+          // component reads it directly from the property and skips the
+          // XHR fetch entirely.
+          //
+          // Dropped from the constructor call:
+          //
+          //   - `contentURL`       — the XHR endpoint is no longer
+          //                          consulted by the component
+          //   - `xhrDataElement`   — referred to a placeholder element
+          //                          that the component no longer uses
+          //   - `dialogContainerID`— the component owns its own host
+          //                          element (<j1-cookie-consent>)
+          //   - `reloadPageOnChange`— never read inside .mjs;
+          //                          cbCookie() already reads it from
+          //                          `cookieConsentOptions` directly
+          //
+          // All four are still present in cookieConsentOptions for
+          // back-compat with anything else that may inspect them; they
+          // simply no longer cross the constructor boundary.
+          //
+          const consentContent = buildModalContent(cookieConsentOptions);
+
           j1.cookieConsent = new CookieConsent({
-            contentURL:             cookieConsentOptions.contentURL,           // dialog content (modals) for all supported languages
-            cookieName:             cookie_names.user_consent,                 // name of the consent cookie
-            cookieStorageDays:      expires,                                   // lifetime of a cookie [0..365], 0: session cookie
-            cookieSameSite:         same_site,                                 // restrict consent cookie
-            cookieSecure:           secure,                                    // only sent to the server with an encrypted request over HTTPS
-            cookieDomain:           domainAttribute,                           // set domain (hostname|domain)
-            whitelisted:            cookieConsentOptions.whitelisted,          // pages NO cookie dialog is shown
-            reloadPageOnChange:     cookieConsentOptions.reloadPageOnChange,   // reload if settings has changed
-            dialogContainerID:      cookieConsentOptions.dialogContainerID,    // container, the dialog modal is (dynamically) loaded
-            xhrDataElement:         cookieConsentOptions.xhrDataElement,       // container for all language-specific dialogs (modals)
-            postSelectionCallback:  cookieConsentOptions.postSelectionCallback // callback function, called after the user has made his selection
+            content:                consentContent,                             // localized text block (title, body, privacy, labels)
+            cookieName:             cookie_names.user_consent,                  // name of the consent cookie
+            cookieStorageDays:      expires,                                    // lifetime of a cookie [0..365], 0: session cookie
+            cookieSameSite:         same_site,                                  // restrict consent cookie
+            cookieSecure:           secure,                                     // only sent to the server with an encrypted request over HTTPS
+            cookieDomain:           domainAttribute,                            // set domain (hostname|domain)
+            autoShowDialog:         cookieConsentOptions.autoShowDialog,        // auto-show dialog on first visit
+            whitelisted:            cookieConsentOptions.whitelisted,           // pages NO cookie dialog is shown
+            postSelectionCallback:  cookieConsentOptions.postSelectionCallback  // callback function, called after the user has made his selection
           });
         } else {
           logger.warn('\n' + 'module is disabled');
@@ -390,7 +430,6 @@ j1.adapter.cookieConsent = ((j1, window) => {
     // -------------------------------------------------------------------------
     cbCookie: (options) => {
 
-      // J1 CookieConsent optimizations #1
       // The original implementation re-derived `url`, `hostname` and
       // `cookie_names` here even though they are already available from
       // the module closure (set in init()). It also declared
@@ -405,7 +444,6 @@ j1.adapter.cookieConsent = ((j1, window) => {
       logger.info('\n' + 'entered post selection callback from CookieConsent');
       logger.info('\n' + 'current values from CookieConsent: ' + JSON.stringify(user_consent));
 
-      // J1 CookieConsent optimizations #1
       // Cache the jQuery selector. The original code looked up
       // #quickLinksCookieButton twice in immediate succession.
       //
@@ -414,7 +452,6 @@ j1.adapter.cookieConsent = ((j1, window) => {
         $quickLinksCookieButton.css('display', 'block');
       }
 
-      // J1 CookieConsent optimizations #1
       // Whether the user denied at least one of analysis /
       // personalization. Computed once and reused.
       //
@@ -433,7 +470,6 @@ j1.adapter.cookieConsent = ((j1, window) => {
         if (requiredOnly) {
           syncTranslateCookieFromConsent(cookie_names, user_consent, user_translate, secure);
 
-          // J1 CookieConsent optimizations #1
           // BUG FIX. The original code expired the persistent cookies
           // unconditionally on this branch, but on the parallel branch
           // below it only expired them when expireCookiesOnRequiredOnly
@@ -482,7 +518,6 @@ j1.adapter.cookieConsent = ((j1, window) => {
         }
       } // END if tracking_enabled
 
-      // J1 CookieConsent optimizations #1
       // The reload logic was duplicated at the bottom of both branches;
       // hoist it out. Also: `location.reload(true)` - the
       // `forceReload` parameter is non-standard and ignored by every
@@ -501,7 +536,7 @@ j1.adapter.cookieConsent = ((j1, window) => {
     // manage messages send from other J1 modules
     // -------------------------------------------------------------------------
     messageHandler: (sender, message) => {
-      // J1 CookieConsent optimizations #1
+      
       // Only build the JSON dump when debug logging is actually
       // enabled. JSON.stringify on every inbound message is wasted
       // work in production where debug is off.

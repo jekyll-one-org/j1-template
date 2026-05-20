@@ -10,6 +10,28 @@
 # J1 Template is licensed under the MIT License.
 # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE
 # ------------------------------------------------------------------------------
+#
+# All configurable text for the consent modal has been consolidated into
+# this defaults file. Previously, the button labels, section headings,
+# and per-category descriptions were hardcoded as `| default:` fallbacks
+# inside the cookieconsent.html Liquid template (and would only become
+# configurable if a site-level override under `modules.cookieconsent.labels`
+# was published). They now live under `modal_settings.labels` here, so
+# they:
+#
+#   1. participate in the standard defaults/settings merge chain
+#      (defaults <- site overrides), giving full i18n with no template
+#      edits required;
+#   2. travel to the client via the adapter's `cookieConsentOptions`
+#      object (i.e. directly in the JS bundle) rather than through a
+#      separate XHR fetch of /assets/data/cookieconsent.
+#
+# Descriptions for the three consent categories are now proper YAML
+# arrays. The old "pipe-separated string" representation, only needed
+# because Liquid's `default:` filter could not carry list literals, is
+# gone.
+#
+# ------------------------------------------------------------------------------
 
 # ------------------------------------------------------------------------------
 # Description
@@ -35,11 +57,17 @@ defaults:
 
   reloadPageOnChange:                   true
   autoShowDialog:                       true                                    # show consent dialog if NO consent cookie found
-  contentURL:                           /assets/data/cookieconsent              # dialog content modal
-  reloadPageOnChange:                   true                                    # reload current page if user settings has been changed
+
+  # `contentURL` is retained for backward compatibility with deployments
+  # that still XHR-fetch the JSON payload from cookieconsent.html, but it
+  # is no longer required by cookieConsent.mjs. The module receives its
+  # text content directly from the adapter via the `content` constructor
+  # property.
+  contentURL:                           /assets/data/cookieconsent              # dialog content modal (legacy XHR endpoint)
+
   whitelisted:                          []                                      # pages NO consent issued
-  xhrDataElement:                       consent-data                            # container for the consent modal
-  dialogContainerID:                    consent-dialog                          # container, the dialog modal
+  xhrDataElement:                       consent-data                            # container for the consent modal (legacy)
+  dialogContainerID:                    consent-dialog                          # container, the dialog modal (legacy)
   postSelectionCallback:                j1.adapter.cookieConsent.cbCookie       # called after the user has made his selection
 
   modal_settings:
@@ -106,6 +134,44 @@ defaults:
                                             </p>
                                           </li>
                                         </ul>
+
+    # claude - improve cookieConsent code using lit #2
+    # Localized text strings (button labels, section headings, and the
+    # per-category descriptions) for the consent modal. To translate the
+    # modal, override any of these keys under
+    # `modules.cookieconsent.settings.modal_settings.labels` in the
+    # site-level configuration; missing keys fall back to the defaults
+    # below.
+    #
+    # The `*Desc` keys are YAML lists; each list item renders as a
+    # separate `<li>` under the corresponding switch.
+    labels:
+      privacyNotice:                    Privacy Notice
+      mySettings:                       My Settings
+
+      necessary:                        Necessary
+      necessaryDesc:
+        -                               Required to run the website
+
+      analysis:                         Analysis
+      analysisDesc:
+        -                               Usage monitoring for this site
+        -                               Optimizing of the performance for this site
+        -                               Optimizing of content for all visitors
+
+      personalization:                  Personalization
+      personalizationDesc:
+        -                               Enable Translation services
+        -                               Enable Advertising services
+        -                               Storage of personal preferences from previous visits
+        -                               Enable Comment services to exchange visitor's experiences
+
+      buttonDoNotAgree:                 I Do not Agree
+      buttonDoNothing:                  Do Nothing
+      buttonAgree:                      I Agree
+      buttonSave:                       Save selection
+      buttonAgreeAll:                   Agree on all
+      close:                            Close
 
 # ------------------------------------------------------------------------------
 # END config

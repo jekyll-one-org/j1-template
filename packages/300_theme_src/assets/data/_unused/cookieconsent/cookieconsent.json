@@ -7,50 +7,37 @@ exclude_from_search:                    true
 
 {% comment %}
  # -----------------------------------------------------------------------------
- # ~/assets/data/cookieconsent.html (3)
+ # ~/assets/data/cookieconsent.json (0)
  # Liquid PROCEDURE to generate the data payload used by the
  # J1 Cookie Consent module
  #
  # Product/Info:
  # https://jekyll.one
  #
- # Copyright (C) 2023-2026 Juergen Adams
+ # Copyright (C) 2026 Juergen Adams
  #
  # J1 Template is licensed under the MIT License.
  # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE
  # -----------------------------------------------------------------------------
  # claude - improve cookieConsent code using lit #1
- # -----------------------------------------------------------------------------
+ # ---------------------------------------------------------------------------
  # Refactored to emit a JSON configuration payload instead of HTML
  # markup. The Lit-based <j1-cookie-consent> component renders the
  # modal declaratively from this configuration, so the HTML structure
  # is no longer transmitted from server to client. Only the localized
  # text strings (plus a few labels) flow through this endpoint.
  #
- # claude - improve cookieConsent code using lit #2
- # -----------------------------------------------------------------------------
- # LEGACY endpoint. The Lit component no longer fetches this file —
- # cookieConsent.mjs now receives its localized text content directly
- # from the adapter (via the `content` constructor property), which in
- # turn reads it from the merged `cookieConsentOptions.modal_settings`
- # data structure.
+ # Original responsibility (still preserved):
+ #   - Read site/module config via Jekyll/Liquid
+ #   - Deliver localized text content to the client
  #
- # This template is retained for:
- #   - backward compatibility with any deployment or tooling that still
- #     XHR-fetches /assets/data/cookieconsent
- #   - debug / inspection workflows (curl this URL to see exactly which
- #     strings will be rendered into the modal)
- #
- # Reads from the new location:
- #
- #   modules.cookieconsent.settings.modal_settings.labels  (overrides)
- #   modules.defaults.cookieconsent.defaults.modal_settings.labels
- #     (defaults — populated, no longer falls through to `| default:`
- #     filters)
- #
- # The `| default:` fallbacks below are now a third-tier safety net
- # rather than the primary source of label text.
- # -----------------------------------------------------------------------------
+ # Removed responsibility:
+ #   - Shipping Bootstrap modal markup (now baked into the component)
+ #   - Carrying element IDs that the JS needs to query for
+ #   - Going through the compress_html / strip_html_comments pipeline
+ #     (not applicable to a JSON payload, and was a source of the bug
+ #     where `.modal-dialog` got stripped under aggressive minification)
+ # ---------------------------------------------------------------------------
 {% endcomment %}
 
 {% comment %} Set global settings
@@ -67,49 +54,28 @@ exclude_from_search:                    true
 -------------------------------------------------------------------------------- {% endcomment %}
 {% assign consent_options  = consent_defaults | merge: consent_settings %}
 
-{% comment %} claude - improve cookieConsent code using lit #2
-   Labels now live INSIDE `modal_settings.labels` in the merged
-   options, so a single read against `consent_options.modal_settings`
-   sees defaults + site overrides without a separate sibling lookup.
-
-   The previous version read from `modules.cookieconsent.labels` (no
-   merge with defaults), which meant the only way to actually
-   configure these strings without changing this template was the
-   `| default:` fallbacks below. Those fallbacks are kept as a safety
-   net for the case where a project's YAML defaults file pre-dates
-   #2 and does not yet ship a `modal_settings.labels` block.
+{% comment %} Optional override block: a module may publish localized
+   button/section labels under `modules.cookieconsent.labels` to fully
+   internationalize the modal. If absent, English defaults are used.
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign modal_settings   = consent_options.modal_settings %}
-{% assign consent_labels   = modal_settings.labels %}
+{% assign consent_labels   = modules.cookieconsent.labels %}
 
 {
-  "title":         {{ modal_settings.title          | jsonify }},
-  "bodyText":      {{ modal_settings.body_text      | jsonify }},
-  "privacyNotice": {{ modal_settings.privacy_notice | jsonify }},
+  "title":         {{ consent_options.modal_settings.title          | jsonify }},
+  "bodyText":      {{ consent_options.modal_settings.body_text      | jsonify }},
+  "privacyNotice": {{ consent_options.modal_settings.privacy_notice | jsonify }},
   "labels": {
     "privacyNotice":       {{ consent_labels.privacyNotice       | default: "Privacy Notice"  | jsonify }},
     "mySettings":          {{ consent_labels.mySettings          | default: "My Settings"     | jsonify }},
 
     "necessary":           {{ consent_labels.necessary           | default: "Necessary"       | jsonify }},
-    "necessaryDesc":       {%- if consent_labels.necessaryDesc -%}
-                             {{ consent_labels.necessaryDesc | jsonify }}
-                           {%- else -%}
-                             {{ "Required to run the website" | split: "|" | jsonify }}
-                           {%- endif -%},
+    "necessaryDesc":       {{ consent_labels.necessaryDesc       | default: "Required to run the website" | split: "|" | jsonify }},
 
     "analysis":            {{ consent_labels.analysis            | default: "Analysis"        | jsonify }},
-    "analysisDesc":        {%- if consent_labels.analysisDesc -%}
-                             {{ consent_labels.analysisDesc | jsonify }}
-                           {%- else -%}
-                             {{ "Usage monitoring for this site|Optimizing of the performance for this site|Optimizing of content for all visitors" | split: "|" | jsonify }}
-                           {%- endif -%},
+    "analysisDesc":        {{ consent_labels.analysisDesc        | default: "Usage monitoring for this site|Optimizing of the performance for this site|Optimizing of content for all visitors" | split: "|" | jsonify }},
 
     "personalization":     {{ consent_labels.personalization     | default: "Personalization" | jsonify }},
-    "personalizationDesc": {%- if consent_labels.personalizationDesc -%}
-                             {{ consent_labels.personalizationDesc | jsonify }}
-                           {%- else -%}
-                             {{ "Enable Translation services|Enable Advertising services|Storage of personal preferences from previous visits|Enable Comment services to exchange visitor's experiences" | split: "|" | jsonify }}
-                           {%- endif -%},
+    "personalizationDesc": {{ consent_labels.personalizationDesc | default: "Enable Translation services|Enable Advertising services|Storage of personal preferences from previous visits|Enable Comment services to exchange visitor's experiences" | split: "|" | jsonify }},
 
     "buttonDoNotAgree":    {{ consent_labels.buttonDoNotAgree    | default: "I Do not Agree"  | jsonify }},
     "buttonDoNothing":     {{ consent_labels.buttonDoNothing     | default: "Do Nothing"      | jsonify }},
@@ -132,3 +98,4 @@ exclude_from_search:                    true
 {% comment %} Reset page cache
 -------------------------------------------------------------------------------- {% endcomment %}
 {%- assign cache = false -%}
+

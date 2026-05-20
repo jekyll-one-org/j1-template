@@ -57,6 +57,7 @@ window.platform              = require('platform');
 // window.j1.fab             = require('./js/fab/fab.js');                      // cannot used until NOT rewritten to jQuery
 // window.ejs                = require('./js/ejs/ejs.js');                      // currently NOT used
 // window.j1.lazyCSSLoader   = require('./js/lazyCSS/lazyCSSLoader.js');        // currently NOT used
+// window.j1.api.ts2sec         = require('./js/api/tools/timestamps2seconds.js');
 
 window.j1.adapter            = require('./js/adapter/adapter.js');
 
@@ -67,8 +68,6 @@ window.j1.api.consoleFilters = require('./js/api/console_filter/consoleFilters.j
 window.j1.api.errorFilters   = require('./js/api/error_filter/errorFilters.js');
 window.j1.api.navigator      = require('./js/api/navigator/navigator.js');
 window.j1.api.scrollSmooth   = require('./js/api/scroll-smooth/scroll-smooth.js');
-
-// window.j1.api.ts2sec         = require('./js/api/tools/timestamps2seconds.js');
 
 window.j1.modules            = {};                                              // placeholder object for all J1 Modules
 window.j1.env                = 'prod';
@@ -82,6 +81,7 @@ window.j1.env                = 'prod';
 // const J1MmenuLight        = require('./js/mmenu-light/mmenu.js');
 // const BootstrapJS         = require('./node_modules/bootstrap/dist/js/bootstrap.js');
 // const J1SCarousel         = require('./js/modules/carousel/carousel.js');
+// const J1Lit               = require('./js/modules/lit/index.js');
 
 const J1Tocbot               = require('./js/modules/tocbot/tocbot.js');
 const J1AttrChangeListener   = require('./js/modules/jquery-extensions/attrchange.js');
@@ -90,7 +90,6 @@ const J1Speak2Me             = require('./js/modules/jquery-extensions/speak2me/
 // Additional Vanilla JS helpers
 // -----------------------------------------------------------------------------
 const J1AdocResultViewer     = require('./js/api/asciidoctor/view_results.js');
-
 
 // Passing log data over Internet|SeeMe (currently NOT used)
 // -----------------------------------------------------------------------------
