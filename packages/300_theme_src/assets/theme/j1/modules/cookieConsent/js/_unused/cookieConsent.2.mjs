@@ -59,7 +59,7 @@
  #     dedicated footer button is more discoverable than a small
  #     inline link, and keeping both would have introduced two
  #     controls for the same action.
-
+ #
  #
  # improve cookieConsent code using lit #3
  # -----------------------------------------------------------------------------

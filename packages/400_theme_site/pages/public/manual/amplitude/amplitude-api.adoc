@@ -7,7 +7,11 @@ date:                                   2026-05-07
 #last_modified:                         2026-01-01
 
 description: >
-                                        Amplitude is a JavaScript library to control the design of audio media elements on web pages. The concept allows designers to fully control the look and feel of audio players without deep scripting knowledge.
+                                        Amplitude is a JavaScript library to control
+                                        the design of audio media elements on web pages.
+                                        The concept allows designers to fully control
+                                        the look and feel of audio players without deep
+                                        scripting knowledge.
 keywords: >
                                         open source, free, template, jekyll, jekyllone, web,
                                         sites, static, jamstack, bootstrap, html, html5, audio,

@@ -1,8 +1,44 @@
+---
+regenerate: true
+---
+
+{%- capture cache -%}
+
+{% comment %}
+ # -----------------------------------------------------------------------------
+ # ~/assets/theme/j1/modules/cookieConsent/js/cookieConsent.mjs (3)
+ # Provides JS Core for J1 Module BS Cookie Consent
+ #
+ #  Product/Info:
+ #  https://shaack.com
+ #  http://jekyll.one
+ #
+ #  Copyright (C) 2020 Stefan Haack
+ #  Copyright (C) 2023-2026 Juergen Adams
+ #
+ #  bootstrap-cookie-banner is licensed under MIT License.
+ #  See: https://github.com/shaack/bootstrap-cookie-banner/blob/master/LICENSE
+ #  J1 Theme is licensed under MIT License.
+ #  See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE
+ # -----------------------------------------------------------------------------
+{% endcomment %}
+
+{% comment %} Set global settings
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign environment = site.environment %}
+
+{% comment %} Detect prod mode
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign production = false %}
+{% if environment == 'prod' or environment == 'production' %}
+  {% assign production = true %}
+{% endif %}
+
+
 /*
  # -----------------------------------------------------------------------------
  # ~/assets/theme/j1/modules/cookieConsent/js/cookieConsent.mjs
  # Provides JS Core for J1 Module BS Cookie Consent
- # Version 1.0.2
  #
  #  Product/Info:
  #  http://jekyll.one
@@ -11,6 +47,8 @@
  #
  #  J1 Theme is licensed under MIT License.
  #  See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE
+ # -----------------------------------------------------------------------------
+ #  Module generated: {{site.time}}
  # -----------------------------------------------------------------------------
  #
  # improve cookieConsent code using lit #1
@@ -59,7 +97,6 @@
  #     dedicated footer button is more discoverable than a small
  #     inline link, and keeping both would have introduced two
  #     controls for the same action.
-
  #
  # improve cookieConsent code using lit #3
  # -----------------------------------------------------------------------------
@@ -256,7 +293,6 @@
  #
  # -----------------------------------------------------------------------------
 */
-
 'use strict';
 
 // Lit is imported from a CDN-served ESM bundle so this file works when
@@ -998,3 +1034,13 @@ export function CookieConsent(props) {
 if (typeof window !== 'undefined') {
   window.CookieConsent = CookieConsent;
 }
+
+{%- endcapture -%}
+
+{%- if production -%}
+  {{ cache|minifyJS }}
+{%- else -%}
+  {{ cache|strip_empty_lines }}
+{%- endif -%}
+
+{%- assign cache = false -%}

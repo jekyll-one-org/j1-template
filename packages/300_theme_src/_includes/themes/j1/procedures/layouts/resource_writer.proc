@@ -125,7 +125,8 @@ if placement == 'head' or placement == 'body'
           {% assign split_count = splitted_resource | size %}
 
             {% if split_count > 1 %}
-              {% assign resource_ext = splitted_resource | last %}
+              {% assign resource_ext  = splitted_resource | last %}
+              {% assign resource_name = splitted_resource | first %}
 
               {% case resource_ext %}
                 {% when 'json' %}
@@ -141,12 +142,20 @@ if placement == 'head' or placement == 'body'
                       <script {{script_load}} src="{{base_path}}/{{file}}"></script>
                     {% endif %}
                   {% when 'mjs' %}
-                    {% if url_detected > 1 %}
-                      <script {{script_load}} src="{{file}}" type="module"></script>
+                    {% if environment == 'development' %}
+                      {% if url_detected > 1 %}
+                        <script {{script_load}} src="{{resource_name}}.mjs" type="module"></script>
+                      {% else %}
+                        <script {{script_load}} src="{{base_path}}/{{resource_name}}.mjs" type="module"></script>
+                      {% endif %} 
                     {% else %}
-                      <script {{script_load}} src="{{base_path}}/{{file}}" type="module"></script>
-                    {% endif %}                    
-                {% when 'css' %}
+                      {% if url_detected > 1 %}
+                        <script {{script_load}} src="{{resource_name}}.min.mjs" type="module"></script>
+                      {% else %}
+                        <script {{script_load}} src="{{base_path}}/{{resource_name}}.min.mjs" type="module"></script>
+                      {% endif %} 
+                    {% endif %}
+                  {% when 'css' %}
                   {% if url_detected > 1 %}
                     <link rel="stylesheet" href="{{file}}">
                   {% else %}
