@@ -2118,7 +2118,6 @@ resources:
 
       data:
         css:                            []
-#       files:                          [ modules/pdf/js/pdf.mjs ]              # JS Module
         files:                          []
         js:                             [
                                           modules/pdf/js/pdf,                   # PDF text extraction
@@ -2167,7 +2166,7 @@ resources:
       data: 
         css:                            []
         js:                             []
-        files:                          [ modules/lit3/js/lit-all.mjs]
+        files:                          [ modules/lit3/js/lit-all.mjs ]         # JS Module
         init_function:                  []
 
   # ----------------------------------------------------------------------------
