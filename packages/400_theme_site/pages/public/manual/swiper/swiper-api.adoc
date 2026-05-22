@@ -26,7 +26,7 @@ image:
   height:                               1280
 
 compress:                               true
-regenerate:                             true
+regenerate:                             false
 permalink:                              /pages/public/manual/module/carousel/swiper/
 
 resources:                              [

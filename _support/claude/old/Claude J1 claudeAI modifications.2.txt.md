@@ -358,7 +358,7 @@ The changes: the apiKey is no longer injected, and `apiEndpoint` is resolved fro
 
 ```javascript
 ---
-regenerate:                             true
+regenerate:                             false
 ---
 
 {%- capture cache -%}

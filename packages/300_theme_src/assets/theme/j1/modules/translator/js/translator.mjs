@@ -1,13 +1,13 @@
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/modules/translator/js/translator.mjs (2)
+ # ~/assets/theme/j1/modules/translator/js/translator.mjs
  # Provides JS Core for J1 Module BS Translator
- # Version 1.0.0
+ # Version 1.0.2
  #
  #  Product/Info:
  #  http://jekyll.one
  #
- #  Copyright (C) 2023-2026 Juergen Adams
+ #  Copyright (C) 2026 Juergen Adams
  #
  #  J1 Theme is licensed under MIT License.
  #  See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE

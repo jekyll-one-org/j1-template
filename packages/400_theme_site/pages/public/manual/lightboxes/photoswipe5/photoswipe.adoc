@@ -26,7 +26,7 @@ image:
   height:                               1280
 
 attic:                                  false
-regenerate:                             true
+regenerate:                             false
 personalization:                        true
 permalink:                              /pages/public/manual/module/lightboxes/photoswipe/
 
