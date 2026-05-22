@@ -6,7 +6,7 @@ regenerate:                             true
 
 {% comment %}
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/adapter/js/translator.js (8)
+ # ~/assets/theme/j1/adapter/js/translator.js (7)
  # Liquid template to create the Template Adapter for J1 Translator
  #
  # Product/Info:
@@ -51,7 +51,7 @@ regenerate:                             true
 
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/adapter/js/translator.js (8)
+ # ~/assets/theme/j1/adapter/js/translator.js (7)
  # JS Adapter for J1 Translator
  #
  #  Product/Info:
@@ -429,16 +429,6 @@ j1.adapter.translator = ((j1, window) => {
             translatorLanguagesElement: translatorOptions.translatorLanguages,      // JSON element key
             translationLanguages:       translatorOptions.translationLanguages,
             defaultLanguage:            translatorOptions.defaultLanguage,
-            // claude - improve translator code using lit #4
-            // Pass the page's source language down to the Lit
-            // component so its "Don't translate" handler can reset
-            // `translationLanguage` back to the page's native
-            // language. Without this, the dropdown would keep showing
-            // the last translation target (e.g. 'es') even after the
-            // user opted out of translation. See `_onDisableTranslation`
-            // and `_resolveResetLanguage` in translator.mjs.
-            //
-            siteLanguage:               siteLanguage,
             disableLanguageSelector:    translatorOptions.disableLanguageSelector,
             postSelectionCallback:      translatorOptions.postSelectionCallback     // 'j1.adapter.translator.cbGoogle'
           });

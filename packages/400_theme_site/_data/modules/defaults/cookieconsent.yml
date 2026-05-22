@@ -210,7 +210,7 @@ defaults:
     #
     labels:
       privacyNotice:                    Privacy Notice
-      mySettings:                       My Settings
+      mySettings:                       Current settings
 
       necessary:                        Necessary
       necessaryDesc:

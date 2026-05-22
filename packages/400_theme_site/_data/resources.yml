@@ -961,8 +961,11 @@ resources:
 
       data:
         css:                            [ modules/translator/css/translator ]
-        files:                          [ adapter/js/translator.js ]
-        js:                             [ modules/translator/js/translator ]
+        files:                          [
+                                          modules/translator/js/translator.mjs,
+                                          adapter/js/translator.js
+                                        ]
+        js:                             []
         init_function:                  [ j1.adapter.translator.init ]
 
   # ----------------------------------------------------------------------------

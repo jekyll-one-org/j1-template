@@ -59,8 +59,8 @@
     "admin_key": "your-algolia-admin-key"
   },
   "wds": {
-    "common": "../200_theme_js/wp4_configs/webpack.common.js",
-    "develop": "../200_theme_js/wp4_configs/webpack.develop.js"
+    "common": "../200_theme_js/wp_configs/webpack.common.js",
+    "develop": "../200_theme_js/wp_configs/webpack.develop.js"
   },
   "rackup": {
     "web_server": "puma"
