@@ -17,6 +17,7 @@
   color: $black !important;
 }
 
+
 // jadams 2023-02-25
 // .btn:hover {
 //   background-color: $gray-50;                                                     
@@ -37,9 +38,9 @@
 }
 
 .btn:disabled {
-    color: $gray-300 !important;
-    background-color: $gray-900;
-    border-color: $gray-900;
+  color: $gray-300 !important;
+  background-color: $gray-900;
+  border-color: $gray-900;
 }
 
 .btn.btn-light {
@@ -52,14 +53,43 @@
 }
 
 .btn.btn-dark {
-    background-color: $gray;
-    border-color: $gray;
+  background-color: $gray;
+  border-color: $gray;
 }
 
 .btn-sm, .btn-group-sm > .btn {
-    --bs-btn-border-radius: $border-radius;
+  --bs-btn-border-radius: $border-radius;
 }
 
 .btn-lg, .btn-group-lg > .btn {
-    --bs-btn-border-radius: $border-radius;
+  --bs-btn-border-radius: $border-radius;
+}
+
+
+// jadams 2026-05-23
+// Use the SVG as a CSS `mask` (cleaner, color via plain `background-color`)
+// -----------------------------------------------------------------------------
+
+.btn-close {
+  --bs-btn-close-color: var(--md-gray-900);
+  --bs-btn-close-hover-color: var(--md-gray-400);
+  --bs-btn-close-mask: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath d='M.293.293a1 1 0 0 1 1.414 0L8 6.586 14.293.293a1 1 0 1 1 1.414 1.414L9.414 8l6.293 6.293a1 1 0 0 1-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 0 1-1.414-1.414L6.586 8 .293 1.707a1 1 0 0 1 0-1.414'/%3e%3c/svg%3e");
+
+  box-sizing: content-box;
+  width: 1em;
+  height: 1em;
+  padding: 0.25em 0.25em;
+  background-color: var(--bs-btn-close-color);
+  background-image: none;
+  -webkit-mask: var(--bs-btn-close-mask) center / 1em auto no-repeat;
+          mask: var(--bs-btn-close-mask) center / 1em auto no-repeat;
+  border: 0;
+  border-radius: 0.375rem;
+  opacity: 1;
+}
+
+.btn-close:hover {
+  background-color: var(--bs-btn-close-hover-color);
+  opacity: 1;
+  text-decoration: none;
 }

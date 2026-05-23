@@ -1,0 +1,194 @@
+{% comment %}
+ # -----------------------------------------------------------------------------
+ # ~/_includes/templates/j1/modules/searcher/procedures/topsearch.proc (8)
+ # Liquid PROCEDURE template to create search input for J1 site_search
+ #
+ # Product/Info:
+ # https://jekyll.one
+ #
+ # Copyright (C) 2023-2026 Juergen Adams
+ #
+ # J1 Template is licensed under the MIT License.
+ # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE
+ # -----------------------------------------------------------------------------
+ # Test data:
+ #   liquid_var: {{ liquid_var | debug }}
+ #   topsearch_options: {{ topsearch_options | debug }}
+ # -----------------------------------------------------------------------------
+{% endcomment %}
+
+{% comment %} Liquid procedure parameter|s
+topsearch_options.enabled: {{topsearch_options.enabled | debug}}
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign topsearch_options = include.options %}
+
+{% comment %} Liquid procedures
+-------------------------------------------------------------------------------- {% endcomment %}
+
+{% comment %} Set site_search properties
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign topsearch_id            = topsearch_options.container_id %}
+{% assign icon_family             = topsearch_options.icon_family | downcase %}
+{% assign placeholder             = topsearch_options.placeholder %}
+{% assign history_enabled         = topsearch_options.search_history_enabled %}
+{% assign search_heading_lead     = topsearch_options.search_heading_lead %}
+{% assign result_heading_lead     = topsearch_options.result_heading_lead %}
+{% assign search_icon             = topsearch_options.search_icon %}
+{% assign clear_icon              = topsearch_options.clear_icon %}
+
+{% assign quick_search            = false %}
+{% assign elastic_search          = false %}
+
+{% if topsearch_options.type == 'site_search' %}
+  {% assign quick_search = true %}
+{% endif %}
+
+{% if topsearch_options.type == 'elasticsearch' %}
+  {% assign elastic_search = true %}
+  {% assign quick_search   = false %}
+{% endif %}
+
+{% if topsearch_options.icon_family     == 'FontAwesome' or topsearch_options.icon_family == 'FontAwesome4' or topsearch_options.icon_family == 'FontAwesome5' %}
+  {% assign icon_family = 'fa' %}
+{% elsif topsearch_options.icon_family  == 'MDI' or topsearch_options.icon_family == 'Material Design Icons'%}
+  {% assign icon_family = 'mdi' %}
+{% else %}
+  {% assign icon_family = 'mdi' %}
+{% endif %}
+
+
+{% comment %} Main
+-------------------------------------------------------------------------------- {% endcomment %}
+{% if topsearch_options.enabled %}
+
+  {% comment %} Modal Top Search
+  ------------------------------------------------------------------------------ {% endcomment %}
+  {% if quick_search %}
+    <!-- [INFO   ] [~/includes/themes/j1/modules/searcher/procedures/topsearch.proc ] [ PLACE: modal top search: searchModal ] -->
+
+    {%- comment -%} claude - improve topSearch code using lit #1
+      The interactive portion of the modal body (input + clear button +
+      send-to-history icon + results list) is now produced by the
+      <j1-topsearch> Lit web component. The Bootstrap modal shell stays
+      as Liquid-rendered static HTML because:
+
+        - The modal lifecycle is driven by data-bs-* attributes that
+          Bootstrap reads at boot time; making the shell a custom
+          element would just complicate that without any benefit.
+        - Heading text and the close button never change at runtime,
+          so they don't need reactivity.
+
+      The component renders into the LIGHT DOM (it overrides
+      createRenderRoot() to return `this`). That means every selector
+      in uno.css (#search-query, #clear-topsearch, .top-search-input,
+      .input-container, .top-search, .search-results, .list-search-
+      results, etc.) keeps matching with no CSS changes required, and
+      any legacy controller code that hooks the input by ID continues
+      to work.
+
+      Configuration is passed in via attributes:
+        placeholder           : input placeholder text
+        history-enabled       : show the send-to-history icon
+        result-heading-lead   : optional heading above results
+
+      The controller (Lunr search adapter) interacts with the
+      component through DOM events and a `results` property -- see
+      the migration note in topsearch-element.js.
+    {%- endcomment -%}
+
+    <!-- Modal TopSearch -->
+    <div id="{{topsearch_id}}"
+      class="modal fade"
+      data-bs-backdrop="static"
+      data-bs-keyboard="false"
+      tabindex="-1"
+      role="document"
+      aria-labelledby="Modal TopSearch">
+
+      <!-- Modal Container -->
+      <div
+        class="modal-dialog modal-frame modal-top modal-notify modal-primary">
+
+        <!-- MODAL Content -->
+        <div class="modal-content">
+
+          <!-- MODAL Header -->
+          <div class="modal-header">
+            <p class="lead">{{search_heading_lead}}</p>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+
+          <!-- MODAL Body -->
+          <div class="modal-body">
+
+            {%- comment -%} claude - improve topSearch code using lit #1
+              Single custom element replaces the previous tree of
+              hand-managed DOM (#search_history_select_wrapper +
+              #navigator_nav_topsearch + form-group + input-group +
+              .input-container + .search-results). All of that markup
+              now lives in the component's render() method, which keeps
+              the DOM, IDs and classes byte-identical so uno.css
+              continues to apply.
+            {%- endcomment -%}
+            <j1-topsearch
+              id="topsearch-component"
+              placeholder="{{ placeholder | default: 'Your search expression ...' | escape }}"
+              {% if history_enabled %}history-enabled{% endif %}
+              result-heading-lead="{{ result_heading_lead | escape }}">
+            </j1-topsearch>
+
+          </div>
+          <!-- END MODAL Body -->
+        </div>
+        <!-- END MODAL Content -->
+      </div>
+      <!-- END Modal Container -->
+    </div>
+    <!-- END Modal TopSearch -->
+    <!-- [INFO   ] [~/includes/themes/j1/modules/searcher/procedures/topsearch.proc ] [ END modal top search: searchModal] -->
+
+    {%- comment -%} claude - improve topSearch code using lit #1
+      Register the custom element. Native ES module import; modern
+      browsers (the J1 baseline) support type="module" out of the box.
+      No legacy fallback is shipped on purpose -- if you need IE11 or
+      pre-2018 Safari, bundle this through your build chain instead
+      of using the CDN ESM endpoint referenced inside the module.
+
+      The module is side-effecting: importing it runs
+      customElements.define('j1-topsearch', ...), at which point any
+      already-parsed <j1-topsearch> elements are upgraded. We place
+      the <script> AFTER the element so the connectedCallback runs
+      against a DOM that already has the host node in place, but
+      either order is correct -- custom elements upgrade
+      retroactively.
+    {%- endcomment -%}
+
+    <script type="module"
+      src="{{ '/assets/theme/j1/modules/searcher/topsearch-element.mjs' | relative_url }}">  
+    </script>
+
+    {%- comment -%} claude - improve topSearch code using lit #1
+      The old Mustache template block (<script id="search-results-
+      template" type="text/mustache">) has been removed. Result items
+      are now rendered by the <j1-topsearch> component from its
+      `results` property, which the controller assigns directly:
+
+        const topsearch = document.getElementById('topsearch-component');
+        topsearch.addEventListener('topsearch-query', (e) => {
+          const hits = lunrIndex.search(e.detail.query).map(toDoc);
+          topsearch.results = hits;
+        });
+        topsearch.addEventListener('topsearch-clear', () => {
+          // optional: reset any controller-side state
+        });
+
+      Removing the Mustache template also removes Mustache from the
+      runtime dependency surface of this module. If Mustache is used
+      elsewhere on the site it can stay loaded; if not, it can now
+      be dropped from the asset bundle.
+    {%- endcomment -%}
+
+  {% endif %}
+  <!-- [INFO   ] [~/includes/themes/j1/modules/searcher/procedures/topsearch.proc   ] [ END: processing: top search ] -->
+
+{% endif %}
