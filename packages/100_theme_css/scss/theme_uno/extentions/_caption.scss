@@ -1,6 +1,6 @@
 /*
  # -----------------------------------------------------------------------------
- # ~/scss/theme_uno/extensions/_caption.scss (0)
+ # ~/scss/theme_uno/extensions/_caption.scss (1)
  #
  # Product/Info:
  # https://jekyll.one
@@ -14,86 +14,106 @@
 
 // General
 // -----------------------------------------------------------------------------
+// claude - J1 Masonry CSS modifications #1
+// The base .caption no longer needs `display: none` + `position: relative` -
+// each position variant (.bottom / .top / .center) now positions the caption
+// absolutely and toggles via opacity. Keeping the visual properties
+// (padding, color, background, font, z-index) here so the look is unchanged.
+//
 .caption {
-  display: none;                                                                /* hidden by default */
-  position: relative;                                                           /* positions set by translate/transform */
-  margin-top: 1px;                                                              /* place caption top position */
-  padding: 10px 5px 10px 5px;                                                   /* space around a caption */
-  color: #E0E0E0;                                                             /* caption text color */
-  background: rgba(0, 0, 0, 1);                                               /* caption background color */
+  position: absolute;                                                           // out of flow - card no longer grows on hover
+  display: block;                                                               // always rendered; opacity toggles visibility
+  left: 0;                                                                      // span the full width of the positioning context
+  right: 0;
+  margin: 0;                                                                    // was margin-top: 1px - irrelevant once absolute, and would offset 1px
+  padding: 10px 5px 10px 5px;                                                   // space around a caption
+  color: #E0E0E0;                                                             // caption text color
+  background: rgba(0, 0, 0, 1);                                               // caption background color
   width: 100%;
   font-size: 12px;
   font-weight: 300;
   font-family: sans-serif;
   z-index: 1;
+  opacity: 0;                                                                   // hidden by default - opacity, not display, so it animates
+  pointer-events: none;                                                         // do not eat clicks while invisible
+  transition: opacity 0.25s ease;                                               // animatable; `all 0.25s` no longer needed
 }
 
-.caption:hover {
-  display: block;                                                               /* show caption */
-}
+// claude - J1 Masonry CSS modifications #1
+// `.caption:hover` is removed - the wrapper-hover rules below handle reveal.
+// A `:hover` on the caption itself only fires once the caption is already
+// visible, which made the original `.caption:hover { display: block }` a no-op
+// in practice (and inconsistent with the wrapper-hover rules).
 
 // Positions
 // -----------------------------------------------------------------------------
 
+// Wrappers establish the positioning context for the absolute caption.
+// Covers BOTH markup shapes:
+//   <div class="card bottom"> ... </div>          (compound class)
+//   <div class="card"><div class="bottom">...     (nested wrapper)
+// claude - J1 Masonry CSS modifications #1
+//
+.bottom,
+.top,
+.center {
+  position: relative;
+}
+
 // Top
-// TODO: Fix top position if NO gutters are used:
-// top: 5px;
-// width: 97%;
 // -----------------------------------------------------------------------------
+// claude - J1 Masonry CSS modifications #1
+// Anchored to the top edge; no transform needed.
 .top .caption {
-  display: none;                                                                /* hidden by default */
   top: 0;
-  transform: translate(0, 0);                                                   
-  -moz-transform: translate(0, 0);
-  -webkit-transform: translate(0, 0);
-  transition: all 0.25s;
-  -moz-transition: all 0.25s;
-  -webkit-transition: all 0.25s;
-  transition-delay: 0.25s;
-  -moz-transition-delay: 0.25s;
-  -webkit-transition-delay: 0.25s;
 }
 
 .top:hover .caption {
-  display: block;                                                               /* show caption */
+  opacity: 1;
+  pointer-events: auto;
 }
 
 // Bottom
 // -----------------------------------------------------------------------------
-/* jadams, 2024-11-11: ToDo (fix) */
-/* workaround: make cover images +1 pixel higher for caption text overlay */
+// claude - J1 Masonry CSS modifications #1
+// Anchored to the bottom edge. The original `transform: translate(0, -100%)`
+// is gone: it was trying to lift a relatively-positioned caption above its
+// own block, but transforms do not remove an element from flow, which is
+// exactly why the card grew. With `position: absolute; bottom: 0` the
+// caption sits flush with the bottom edge of the wrapper and the card
+// keeps its size.
+//
 .bottom .caption {
-  display: none;                                                                /* hidden by default */
-  transform: translate(0, -100%);
-  -moz-transform: translate(0, -100%);
-  -webkit-transform: translate(0, -100%);
-  transition: all 0.25s;
-  -moz-transition: all 0.25s;
-  -webkit-transition: all 0.25s;
+  bottom: 0;
 }
 
 .bottom:hover .caption {
-  display: block;                                                               /* show caption */
+  opacity: 1;
+  pointer-events: auto;
 }
 
 // Centered
 // -----------------------------------------------------------------------------
+// claude - J1 Masonry CSS modifications #1
+// Vertical centering via `top: 50%` + translateY(-50%). Safe to use a
+// transform here because the caption is already absolutely positioned -
+// the transform is purely cosmetic, not faking removal-from-flow.
 .center .caption {
-  display: none;                                                                /* hidden by default */
   top: 50%;
-  transform: translate(0, -50%);
-  -moz-transform: translate(0, -50%);
-  -webkit-transform: translate(0, -50%);
-  transition: all 0.25s;
-  -moz-transition: all 0.25s;
-  -webkit-transition: all 0.25s;
-  transition-delay: 0.25s;
-  -moz-transition-delay: 0.25s;
-  -webkit-transition-delay: 0.25s;
+  transform: translateY(-50%);
 }
 
 .center:hover .caption {
-  display: block;                                                               /* show caption */
+  opacity: 1;
+  pointer-events: auto;
+}
+
+// claude - J1 Masonry CSS modifications #1
+// Respect reduced-motion preference.
+@media (prefers-reduced-motion: reduce) {
+  .caption {
+    transition: none;
+  }
 }
 
 // Captions|Video: Bottom

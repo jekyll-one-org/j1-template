@@ -189,19 +189,19 @@ j1.adapter.gallery = ((j1, window) => {
 
           // initialize state flag
           _this.setState('started');
-          logger.debug('state: ' + _this.getState());
-          logger.info('module is being initialized');
+          logger.debug('\n' + 'state: ' + _this.getState());
+          logger.info('\n' + 'module is being initialized');
 
          // workaround to delay/wait for HTML loads are finished
           setTimeout(() => {
             _this.initGallery(galleryOptions);
 
             _this.setState('finished');
-            logger.debug('state: ' + _this.getState());
-            logger.info('module initialized successfully');
+            logger.debug('\n' + 'state: ' + _this.getState());
+            logger.info('\n' + 'module initialized successfully');
 
             endTimeModule = Date.now();
-            logger.info('module initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
+            logger.info('\n' + 'module initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
 
           }, 500);
 
@@ -227,7 +227,7 @@ j1.adapter.gallery = ((j1, window) => {
       dependenciesTimeout = setTimeout(function () {
         if (dependency_met_page_ready) {
           clearInterval(dependency_met_page_ready);
-          logger.warn('gallery init aborted: page-ready conditions not met within 5s');
+          logger.warn('\n' + 'gallery init aborted: page-ready conditions not met within 5s');
         }
       }, 5000);
     }, // END init
@@ -242,7 +242,7 @@ j1.adapter.gallery = ((j1, window) => {
       var dependency;
 
       _this.setState('running');
-      logger.debug('state: ' + _this.getState());
+      logger.debug('\n' + 'state: ' + _this.getState());
 
       {% for gallery in gallery_options.galleries %}
         {% assign gallery_arg  = gallery %}
@@ -256,7 +256,7 @@ j1.adapter.gallery = ((j1, window) => {
 
           var galleryID = document.getElementById("{{gallery_id}}");
           if ( galleryID !== null) {
-            logger.info('found gallery in page on id: ' + '{{gallery_id}}');
+            logger.info('\n' + 'found gallery in page on id: ' + '{{gallery_id}}');
 
             // create dynamic loader variable to setup the grid on id {{gallery_id}}
             dependency = 'dependencies_met_html_loaded_{{gallery_id}}';
@@ -270,7 +270,7 @@ j1.adapter.gallery = ((j1, window) => {
               if (xhrLoadState === 'success') {
                 var $grid_{{gallery_id}} = $('#{{gallery_id}}');                  // used for later access
 
-                logger.debug('dyn_loader, initialize gallery on id: ' + '{{gallery_id}}');
+                logger.debug('\n' + 'dyn_loader, initialize gallery on id: ' + '{{gallery_id}}');
 
                 j1.jg.callback.{{gallery_id}} = 'waiting';
 
@@ -291,8 +291,8 @@ j1.adapter.gallery = ((j1, window) => {
 
                   // setup the lightbox
                   //
-                  logger.debug('dyn_loader, callback "jg.complete" entered on id: ' + '{{gallery_id}}');
-                  logger.debug('dyn_loader, initialize lightGallery on id: ' + '{{gallery_id}}');
+                  logger.debug('\n' + 'dyn_loader, callback "jg.complete" entered on id: ' + '{{gallery_id}}');
+                  logger.debug('\n' + 'dyn_loader, initialize lightGallery on id: ' + '{{gallery_id}}');
 
                   var lg = document.getElementById("{{gallery_id}}");
                   lightGallery(lg, {
@@ -390,8 +390,8 @@ j1.adapter.gallery = ((j1, window) => {
                 //
                 setTimeout(() => {
                   if (j1.jg.callback.{{gallery_id}} == 'waiting') {
-                    logger.debug('dyn_loader, callback "jg.callback": ' + j1.jg.callback.{{gallery_id}})
-                    logger.debug('dyn_loader, initialize lightGallery on id: ' + '{{gallery_id}}');
+                    logger.debug('\n' + 'dyn_loader, callback "jg.callback": ' + j1.jg.callback.{{gallery_id}})
+                    logger.debug('\n' + 'dyn_loader, initialize lightGallery on id: ' + '{{gallery_id}}');
 
                     var lg = document.getElementById("{{gallery_id}}");
                     lightGallery(lg, {
@@ -485,7 +485,7 @@ j1.adapter.gallery = ((j1, window) => {
             load_dependencies['html_loaded_timeout_{{gallery_id}}'] = setTimeout(function () {
               if (load_dependencies['dependencies_met_html_loaded_{{gallery_id}}']) {
                 clearInterval(load_dependencies['dependencies_met_html_loaded_{{gallery_id}}']);
-                logger.warn('gallery init aborted for {{gallery_id}}: HTML did not load within 30s (xhrDOMState=' + j1.xhrDOMState['#{{gallery_id}}_parent'] + ')');
+                logger.warn('\n' + 'gallery init aborted for {{gallery_id}}: HTML did not load within 30s (xhrDOMState=' + j1.xhrDOMState['#{{gallery_id}}_parent'] + ')');
               }
             }, 30000);
 
@@ -539,7 +539,7 @@ j1.adapter.gallery = ((j1, window) => {
       var json_message = JSON.stringify(message, undefined, 2);
 
       logText = 'received message from ' + sender + ': ' + json_message;
-      logger.debug(logText);
+      logger.debug('\n' + logText);
 
       // -----------------------------------------------------------------------
       //  process commands|actions
@@ -550,7 +550,7 @@ j1.adapter.gallery = ((j1, window) => {
         // place handling of command|action here
         //
 
-        logger.info(message.text);
+        logger.info('\n' + message.text);
       }
 
       //
