@@ -50,8 +50,8 @@ settings:
       gutters:                          1
 
       image_base_path:                  /assets/image/module/swiper/simple/mega_city/image
-      image_styles:                     img-fluid
-      image_height:                     300
+    # image_styles:                     img-fluid
+    # image_height:                     300
 
       # ------------------------------------------------------------------------
       # Bootstrap responsive options
@@ -69,7 +69,7 @@ settings:
       #
       lightbox:
         enabled:                        true
-        type:                           ps                                      # ps | lb | lg
+        type:                           lg                                      # ps | lb | lg
 
       # ------------------------------------------------------------------------
       # claude - split J1 Masonry data #2
@@ -83,18 +83,14 @@ settings:
 
       # ------------------------------------------------------------------------
       # lightGallery options
+      # claude - split J1 Masonry data #2
+      # `download` and `alignThumbnails` removed — already defined with
+      # identical values in masonry.yml defaults.lightGallery.options.      
       #
       lightGallery:
-#       plugins:                        lgFullscreen, lgRotate, lgThumbnail
-        plugins:                        lgThumbnail
-
+        plugins:                        lgFullscreen, lgThumbnail, lgZoom
         options:
-#         licenseKey:                   0000-0000-000-0000
-          # claude - split J1 Masonry data #2
-          # `download` and `alignThumbnails` removed — already defined with
-          # identical values in masonry.yml defaults.lightGallery.options.
-          animateThumb:                 true
-
+          alignThumbnails:              left
 
     # --------------------------------------------------------------------------
     # VIDEO PLAYERS

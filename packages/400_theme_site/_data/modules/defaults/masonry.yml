@@ -115,32 +115,6 @@ defaults:
             rotate:                     0
             zoom:                       1
 
-    # Vimeo
-    # --------------------------------------------------------------------------
-    vimeoPlayer:
-      enabled:                          true
-      api:                              native                                  # native|videojs
-
-      options:
-        autoPlay:                       true
-        muted:                          true
-#       byline:                         0
-#       portrait:                       0
-#       color:                          var(--md-gray-100)
-
-
-    # Wistia
-    # --------------------------------------------------------------------------
-    wistiaPlayer:
-      enabled:                          true
-      api:                              native                                  # native|videojs
-
-      options:
-        autoPlay:                       true
-        fullscreenButton:               true
-        muted:                          false
-        qualityControl:                 false
-
     # Youtube
     # --------------------------------------------------------------------------
     youTubePlayer:
@@ -153,7 +127,6 @@ defaults:
         showinfo:                       true
         controls:                       true
 
-
   # ----------------------------------------------------------------------------
   # Lightbox settings
   # See settings for lightbox:     https://jekyll.one/pages/public/manuals/modules/lightbox/
@@ -165,14 +138,18 @@ defaults:
     type:                               ps                                      # ps | lb | lg
 
   lightGallery:
-    plugins:                            lgFullscreen, lgRotate, lgThumbnail
+    plugins:                            lgFullscreen, lgRotate, lgThumbnail, lgZoom
     options:
       licenseKey:                       0000-0000-000-0000
       download:                         false
       alignThumbnails:                  left
       animateThumb:                     true
-
-
+    # custom thumbnails
+    # --------------------------------------------------------------------------
+    # addClass:                         lg-uno-thumbnails                       # customized thumbnails
+    # appendThumbnailsTo:               .lg-outer                               # required for customized thumbnails
+    # animateThumb:                     false                                   # required for customized thumbnails
+    # allowMediaOverlap:                true                                    # required for customized thumbnails
 
   # ----------------------------------------------------------------------------
   # Masonry MODULE options

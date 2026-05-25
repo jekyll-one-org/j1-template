@@ -102,6 +102,7 @@ exclude_from_search:                    true
      exactly as before — no changes needed in the per-grid markup.
   ------------------------------------------------------------------------------ {% endcomment %}
   {% comment %} claude - split J1 Masonry data #2
+  {% raw %}
      Per-grid merge precedence is now:
        masonry_default <- player_grid <- playlist_match
      Settings identical across every grid (e.g. caption, gutters, the
@@ -111,6 +112,7 @@ exclude_from_search:                    true
      on each `grid` object so downstream markup (e.g. {{grid.caption.*}})
      keeps working unchanged. Per-grid values still override defaults
      key-by-key thanks to deep_merge.
+  {% endraw %}
   ------------------------------------------------------------------------------ {% endcomment %}
   {% for player_grid in grids %}
     {% assign playlist_match = playlists_sorted | where: 'id', player_grid.id | first %}
@@ -410,8 +412,9 @@ exclude_from_search:                    true
             <!-- see: https://www.lightgalleryjs.com/docs/getting-started/#the-markup -->
             <div class="{{grid.caption.position}}">
               <a
+                class="lg-item"
                 href="{{grid.image_base_path}}/{{image.file}}"
-                class="lg-item">
+                data-sub-html="{{image.caption|strip|strip_newlines}}">
                 <img
                   id="{{forloop.index}}"
                   class="img-responsive"

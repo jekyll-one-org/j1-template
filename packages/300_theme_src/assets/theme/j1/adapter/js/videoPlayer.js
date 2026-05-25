@@ -1,5 +1,5 @@
 ---
-regenerate: true
+regenerate:                             true
 ---
 
 {%- capture cache -%}
