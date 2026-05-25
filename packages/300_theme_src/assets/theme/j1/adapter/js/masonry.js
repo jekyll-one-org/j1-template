@@ -42,7 +42,7 @@ regenerate:                             true
 {% comment %} Set config data (settings only)
 -------------------------------------------------------------------------------- {% endcomment %}
 
-{% comment %} claude - split J1 Masonry data #3
+{% comment %} split J1 Masonry data #3
 --------------------------------------------------------------------------------
    Replaced single-file read (modules.masonry.settings) with the same
    split-source approach used by masonry.html. The adapter now reads:
@@ -62,7 +62,7 @@ regenerate:                             true
 {% comment %} Set config options (settings only)
 -------------------------------------------------------------------------------- {% endcomment %}
 
-{% comment %} claude - split J1 Masonry data #3
+{% comment %} split J1 Masonry data #3
 --------------------------------------------------------------------------------
    Top-level deep_merge mirrors masonry.html. Gives masonry_options
    correct top-level keys (xhr_data_path, initTimeout, hideDisabled,
@@ -72,7 +72,7 @@ regenerate:                             true
 -------------------------------------------------------------------------------- {% endcomment %}
 {% assign masonry_options   = masonry_default | deep_merge: masonry_player | deep_merge: masonry_playlist %}
 
-{% comment %} claude - split J1 Masonry data #3
+{% comment %} split J1 Masonry data #3
 --------------------------------------------------------------------------------
    Sort player configs and playlist content by `id` so each player
    config can be paired with its content via `where: 'id', ...`.
@@ -178,7 +178,7 @@ j1.adapter.masonry = ((j1, window) => {
       logger = log4javascript.getLogger('j1.adapter.masonry');
 
       // Load  module DEFAULTS|CONFIG
-      // claude - split J1 Masonry data #3
+      // split J1 Masonry data #3
       // Serialize the three split sources into JS objects, then deep-extend
       // them on the JS side in the same order masonry.html uses on the
       // Liquid side: defaults <- player <- playlist. Runtime code only
@@ -214,7 +214,7 @@ j1.adapter.masonry = ((j1, window) => {
           logger.debug('\n' + 'state: ' + _this.getState());
           logger.info('\n' + 'module is being initialized');
 
-          {% comment %} claude - split J1 Masonry data #3
+          {% comment %} split J1 Masonry data #3
           ----------------------------------------------------------------------
              Per-grid merge mirrors masonry.html exactly:
                masonry_default <- player_grid <- playlist_match (by id)
@@ -240,7 +240,7 @@ j1.adapter.masonry = ((j1, window) => {
               {% comment %} load default grid options
               ------------------------------------------------------------------ {% endcomment %}
 
-              {% comment %} claude - split J1 Masonry data #3
+              {% comment %} split J1 Masonry data #3
               ------------------------------------------------------------------
                  Renamed masonry_defaults -> masonry_default to match the
                  split-source variable used by masonry.html. The keys read
@@ -264,7 +264,7 @@ j1.adapter.masonry = ((j1, window) => {
               {% comment %} overload defaults by grid element options
               ------------------------------------------------------------------ {% endcomment %}
 
-              {% comment %} claude - split J1 Masonry data #3
+              {% comment %} split J1 Masonry data #3
               ------------------------------------------------------------------
                  The per-grid `options` block has been removed from
                  masonry_player.yml (see comment #2 there) because all

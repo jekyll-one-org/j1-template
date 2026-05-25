@@ -72,7 +72,7 @@ settings:
         type:                           lg                                      # ps | lb | lg
 
       # ------------------------------------------------------------------------
-      # claude - split J1 Masonry data #2
+      # split J1 Masonry data #2
       # `caption` and Masonry `options` blocks removed from per-grid config.
       # Values were identical across all grids in masonry_player.yml and
       # have been moved to masonry.yml defaults. Each grid inherits them
@@ -83,7 +83,7 @@ settings:
 
       # ------------------------------------------------------------------------
       # lightGallery options
-      # claude - split J1 Masonry data #2
+      # split J1 Masonry data #2
       # `download` and `alignThumbnails` removed — already defined with
       # identical values in masonry.yml defaults.lightGallery.options.      
       #
@@ -198,7 +198,7 @@ settings:
 
         options:
           licenseKey:                   0000-0000-000-0000
-          # claude - split J1 Masonry data #2
+          # split J1 Masonry data #2
           # `download` and `alignThumbnails` removed — already defined with
           # identical values in masonry.yml defaults.lightGallery.options.
           addClass:                     lg-uno-thumbnails                         # customized thumbnails
@@ -207,7 +207,7 @@ settings:
           allowMediaOverlap:            true                                      # required for customized thumbnails
 
       # ------------------------------------------------------------------------
-      # claude - split J1 Masonry data #2
+      # split J1 Masonry data #2
       # `caption` and Masonry `options` blocks removed from per-grid config.
       # Values were identical across all grids in masonry_player.yml and
       # have been moved to masonry.yml defaults. Each grid inherits them

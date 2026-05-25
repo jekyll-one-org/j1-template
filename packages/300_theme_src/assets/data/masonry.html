@@ -46,7 +46,7 @@ exclude_from_search:                    true
 
 {% comment %} Set config options
 -------------------------------------------------------------------------------- {% endcomment %}
-{% comment %} claude - split J1 Masonry data #1
+{% comment %} split J1 Masonry data #1
    Deep-merge the top-level config (defaults <- player <- playlist).
    NOTE: this gives masonry_options correct top-level keys (e.g. filters),
    but `players` is an ARRAY and deep_merge replaces arrays wholesale.
@@ -55,7 +55,7 @@ exclude_from_search:                    true
 -------------------------------------------------------------------------------- {% endcomment %}
 {% assign masonry_options     = masonry_default | deep_merge: masonry_player, masonry_playlist %}
 
-{% comment %} claude - split J1 Masonry data #1
+{% comment %} split J1 Masonry data #1
    Sort player configs and playlist content by grid ID so each player
    config can be matched to its content by `id`. The sorted player array
    is exposed as `grids` and drives the Collect grids loop below.
@@ -94,14 +94,14 @@ exclude_from_search:                    true
   <body>
   {% comment %} Collect grids
   ------------------------------------------------------------------------------ {% endcomment %}
-  {% comment %} claude - split J1 Masonry data #1
+  {% comment %} split J1 Masonry data #1
      Iterate the ID-sorted player grids. For each entry, look up the
      matching playlist entry by `id` and deep_merge the playlist content
      (images / videos) into the player config. The resulting `grid` is
      used by all downstream blocks (post / collection / image / video)
      exactly as before — no changes needed in the per-grid markup.
   ------------------------------------------------------------------------------ {% endcomment %}
-  {% comment %} claude - split J1 Masonry data #2
+  {% comment %} split J1 Masonry data #2
   {% raw %}
      Per-grid merge precedence is now:
        masonry_default <- player_grid <- playlist_match

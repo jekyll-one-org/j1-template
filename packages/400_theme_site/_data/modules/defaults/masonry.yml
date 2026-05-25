@@ -187,7 +187,7 @@ defaults:
     xl:                                 4                                       # viewport: ≥ 1200px, 4 colum|s
 
   # ----------------------------------------------------------------------------
-  # claude - split J1 Masonry data #2
+  # split J1 Masonry data #2
   # Default per-grid caption settings. Moved here from masonry_player.yml
   # because all grids declared the same values (enabled:true, position:bottom).
   # Grids inherit these via deep_merge in masonry.html; override per grid
