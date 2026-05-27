@@ -69,7 +69,7 @@ settings:
       #
       lightbox:
         enabled:                        true
-        type:                           lg                                      # ps | lb | lg
+        type:                           ps                                      # ps | lb | lg
 
       # ------------------------------------------------------------------------
       # split J1 Masonry data #2
