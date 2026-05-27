@@ -42,7 +42,7 @@ render(){if(!this._open)return nothing;const t=this.content||J1CookieConsent._fa
             </div>
 
             <div class="modal-body mt-4">
-              <div class="bccs-body-text r-text-300">
+              <div class="bccs-body-text r-text-300 mb-3">
                 ${unsafeHTML(t.bodyText||"")}
               </div>
 

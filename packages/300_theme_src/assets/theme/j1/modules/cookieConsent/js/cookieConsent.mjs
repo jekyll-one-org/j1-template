@@ -617,7 +617,7 @@ class J1CookieConsent extends LitElement {
                 illegal inside <p>. unsafeHTML renders the trusted
                 YAML-sourced markup instead of escaping it.
               -->
-              <div class="bccs-body-text r-text-300">
+              <div class="bccs-body-text r-text-300 mb-3">
                 ${unsafeHTML(t.bodyText || '')}
               </div>
 

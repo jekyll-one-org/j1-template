@@ -43,12 +43,12 @@ regenerate: true
 {% comment %} Set config data
 -------------------------------------------------------------------------------- {% endcomment %}
 {% assign amplitude_default   = modules.defaults.amplitude.defaults %}
-{% assign amplitude_player    = modules.amplitude_player.settings %}
+{% assign amplitude_control   = modules.amplitude_control.settings %}
 {% assign amplitude_playlist  = modules.amplitude_playlist.settings %}
 
 {% comment %} Set config options
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign amplitude_options   = amplitude_default | deep_merge: amplitude_player, amplitude_playlist %}
+{% assign amplitude_options   = amplitude_default | deep_merge: amplitude_control, amplitude_playlist %}
 
 {% comment %} Detect prod mode
 -------------------------------------------------------------------------------- {% endcomment %}
@@ -167,7 +167,7 @@ regenerate: true
   var apiInitialized                  = { state: false };
 
   var amplitudeDefaults               = $.extend({}, {{amplitude_default  | replace: 'nil', 'null' | replace: '=>', ':' }});
-  var amplitudePlayers                = $.extend({}, {{amplitude_player   | replace: 'nil', 'null' | replace: '=>', ':' }});
+  var amplitudePlayers                = $.extend({}, {{amplitude_control   | replace: 'nil', 'null' | replace: '=>', ':' }});
   var amplitudePlaylists              = $.extend({}, {{amplitude_playlist | replace: 'nil', 'null' | replace: '=>', ':' }});
   var amplitudeOptions                = $.extend(true, {}, amplitudeDefaults, amplitudePlayers, amplitudePlaylists);
 
@@ -838,7 +838,7 @@ regenerate: true
 
       if (ytApiReady && ytPlayerReady) {
 
-        {% for player in amplitude_player.players %}{% if player.enabled %}
+        {% for player in amplitude_control.players %}{% if player.enabled %}
 
           {% if player.source == empty %}
             {% assign player_source = amplitude_default.player.source %}

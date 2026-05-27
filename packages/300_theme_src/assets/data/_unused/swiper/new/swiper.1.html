@@ -14,7 +14,7 @@ exclude_from_search:                    true
  # Product/Info:
  # https://jekyll.one
  #
- # Copyright (C) 2023-2026 Juergen Adams
+ # Copyright (C) 2026 Juergen Adams
  #
  # J1 Template is licensed under the MIT License.
  # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE
@@ -39,14 +39,25 @@ exclude_from_search:                    true
 
 {% comment %} Set config data
 -------------------------------------------------------------------------------- {% endcomment %}
+
+{% comment %} split J1 Swiper data #1
+--------------------------------------------------------------------------------
+   The defaults file now lives at `_data/modules/defaults/swiper.yml` and
+   carries every key that used to be repeated verbatim across each entry
+   in `_data/modules/swiper_player.yml` — `captions`, the full `lightbox`
+   block (which used to be misplaced at the top level of the file),
+   `swiper_classes`, `container_classes` and `wrapper_styles`. Renamed
+   the Liquid var from `swiper_defaults` to `swiper_default` (singular)
+   to match the `masonry_default` convention.
+-------------------------------------------------------------------------------- {% endcomment %}
 {% assign environment       = site.environment %}
-{% assign swiper_defaults   = modules.defaults.swiper.defaults %}
-{% assign swiper_settings   = modules.swiper_control.settings %}
+{% assign swiper_default    = modules.defaults.swiper.defaults %}
+{% assign swiper_settings   = modules.swiper_player.settings %}
 {% assign swiper_playlists  = modules.swiper_playlist.settings.playlists %}
 
 {% comment %} Set config options
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign swiper_options    = swiper_defaults | merge: swiper_settings %}
+{% assign swiper_options    = swiper_default | merge: swiper_settings %}
 {% assign swipers           = swiper_settings.swipers %}
 
 {% comment %} Configure permalink settings
@@ -65,7 +76,7 @@ exclude_from_search:                    true
 
 {% comment %} Collect CSS image filters
 ------------------------------------------------------------------------------- {% endcomment %}
-{% assign css_filters   = swiper_defaults.filters | merge: swiper.filters %}
+{% assign css_filters   = swiper_default.filters | merge: swiper.filters %}
 {% assign image_filters = 'filter:' %}
 
 {% if css_filters.enabled %}
@@ -106,8 +117,24 @@ playlist.image_defaults: {{playlist.image_defaults | debug}}
 
     <!-- [INFO   ] [~/assets/data/swiper.html                      ] [generate HTML portion for all sliders configured ] -->
     {% comment %} Generate HTML portion for all sliders enabled
-    ---------------------------------------------------------------------------- {% endcomment %}     
-    {% for swiper in swipers %} {% if swiper.enabled %}
+    ---------------------------------------------------------------------------- {% endcomment %}
+
+    {% comment %} split J1 Swiper data #1
+    ----------------------------------------------------------------------------
+       Iterate the configured swipers. For each entry, deep_merge the
+       defaults from `_data/modules/defaults/swiper.yml` into the
+       per-swiper config so that every swiper object exposes the full
+       set of keys (captions, lightbox sub-blocks, swiper_classes,
+       container_classes, wrapper_styles, ...) without each entry having
+       to repeat them. Per-swiper values override defaults key-by-key
+       thanks to deep_merge — no downstream markup needs to change.
+       The iterator variable is renamed `swiper_entry` and the merged
+       object is bound to `swiper` so every existing `swiper.*` access
+       below works unchanged.
+    ---------------------------------------------------------------------------- {% endcomment %}
+    {% for swiper_entry in swipers %}
+      {% assign swiper = swiper_default | deep_merge: swiper_entry %}
+      {% if swiper.enabled %}
 
       {% comment %} Detect type and layout
       -------------------------------------------------------------------------- {% endcomment %}      
@@ -120,7 +147,7 @@ playlist.image_defaults: {{playlist.image_defaults | debug}}
       ========================================================================== {% endcomment %}
       {% if swiper_type == 'text' and swiper_layout == 'base' %}
 
-      <!-- Text Swipers, Layout Base -->
+      <!-- [INFO   ] Text Swiper, Layout Base, id: {{swiper.id}} -->
       <div id="{{swiper.id}}">
         <!-- Swiper elements (El) -->
         <div class="swiper swiper-container {{swiper.container_classes}}">
@@ -154,7 +181,7 @@ playlist.image_defaults: {{playlist.image_defaults | debug}}
       ========================================================================== {% endcomment %}
       {% if swiper_type == 'text' and swiper_layout == 'parallax' %}
 
-      <!-- Text Swipers, Layout Parallax -->
+      <!-- [INFO   ] Text Swiper, Layout Parallax, id: {{swiper.id}} -->
       <div id="{{swiper.id}}">
         <!-- Swiper elements (El) -->
         <div class="swiper swiper-container {{swiper.container_classes}}">
@@ -235,7 +262,7 @@ playlist.image_defaults: {{playlist.image_defaults | debug}}
       ========================================================================== {% endcomment %}
       {% if swiper_type == 'image' and swiper_layout == 'base' %}
 
-      <!-- Image Swipers, Layout Base -->
+      <!-- [INFO   ] Image Swiper, Layout Base, id: {{swiper.id}} -->
       {% if swiper.swiper_classes %}
       <div id="{{swiper.id}}" class="{{swiper.swiper_classes}}">
       {% else %}
@@ -343,8 +370,8 @@ playlist.image_defaults: {{playlist.image_defaults | debug}}
       layout: image/thumb
       ========================================================================== {% endcomment %}
       {% if swiper_type == 'image' and swiper_layout == 'thumbs' %}
-  
-      <!-- Image Swipers, Layout Thumb -->
+
+      <!-- [INFO   ] Extended Image Swiper, Layout Thumbs, id: {{swiper.id}} -->
       {% if swiper.swiper_classes %}
       <div id="{{swiper.id}}" class="{{swiper.swiper_classes}}">
       {% else %}
@@ -445,8 +472,8 @@ playlist.image_defaults: {{playlist.image_defaults | debug}}
       layout: image/panorama
       ========================================================================== {% endcomment %}
       {% if swiper_type == 'image' and swiper_layout == 'panorama' %}
-  
-      <!-- Image Swipers, Layout Panorama -->
+
+      <!-- [INFO   ] Extended Image Swiper, Layout Panorama, id: {{swiper.id}} -->
       {% if swiper.swiper_classes %}
       <div id="{{swiper.id}}" class="{{swiper.swiper_classes}}">
       {% else %}
@@ -555,8 +582,8 @@ playlist.image_defaults: {{playlist.image_defaults | debug}}
       layout: image/neighbor
       ========================================================================== {% endcomment %}
       {% if swiper_type == 'image' and swiper_layout == 'neighbor' %}
-  
-      <!-- Image Swipers, Layout Neighbor -->
+
+      <!-- [INFO   ] Extended Image Swiper, Layout Neighbor, id: {{swiper.id}} -->
       {% if swiper.swiper_classes %}
       <div id="{{swiper.id}}" class="{{swiper.swiper_classes}}">
       {% else %}
@@ -666,7 +693,7 @@ playlist.image_defaults: {{playlist.image_defaults | debug}}
       ========================================================================== {% endcomment %}
       {% if swiper_type == 'image' and swiper_layout == 'stacked' %}
 
-      <!-- Image Swipers, Layout Stacked -->
+      <!-- [INFO   ] Extended Image Swiper, Layout Stacked, id: {{swiper.id}} -->
       {% if swiper.swiper_classes %}
       <div id="{{swiper.id}}" class="{{swiper.swiper_classes}}">
       {% else %}
@@ -775,8 +802,8 @@ playlist.image_defaults: {{playlist.image_defaults | debug}}
       layout: image/expanded
       ========================================================================== {% endcomment %}
       {% if swiper_type == 'image' and swiper_layout == 'expanded' %}
-  
-      <!-- Image Swipers, Layout Expanded -->
+
+      <!-- [INFO   ] Extended Image Swiper, Layout Expanded, id: {{swiper.id}} -->
       {% if swiper.swiper_classes %}
       <div id="{{swiper.id}}" class="{{swiper.swiper_classes}}">
       {% else %}

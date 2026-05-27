@@ -1,6 +1,6 @@
 # ------------------------------------------------------------------------------
-# ~/_data/modules/masonry.player.yml (1)
-# User configuration settings for J1 Masonry module (player)
+# ~/_data/modules/masonry_control.yml (1)
+# User configuration (control) settings for J1 Masonry module
 #
 # Product/Info:
 # //jekyll.one
@@ -16,8 +16,8 @@
 #
 description:
   caption:                              J1 Masonry
-  scope:                                User settings (player)
-  location:                             _data/modules/masonry.player.yml
+  scope:                                User settings (control)
+  location:                             _data/modules/masonry_control.yml
 
 # ------------------------------------------------------------------------------
 # User configuration settings

@@ -1,7 +1,7 @@
 ---
 title:                                  Video
-title_extention:                        J1 Video Apps
-tagline:                                J1 Video Apps
+title_extention:                        Video players
+tagline:                                J1 Video
 
 date:                                   2026-05-07
 #last_modified:                         2026-01-01
@@ -35,14 +35,15 @@ resource_options:
   - toccer:
       collapseDepth:                    3
   - attic:
-      slides:
+      opacity:                          .7
+      padding_top:                      600
+      slides:      
         - url:                          /assets/video/headers/present_videos/modern-dance.mp4
           alt:                          AI generated video
           title:                        Video Player
-          tagline:                      Playback Video
+          tagline:                      Playback Video Files
           isVideo:                      true
           mute:                         true
-#         loop:                         false
 ---
 
 // Page Initializer
@@ -216,7 +217,7 @@ modern MP4 encoder you can fit:
 * up to *10 minutes* of HD 720p video (1280 x 720 pixels).
 ====
 
-.Local MP4 Video · Justified Gallery + LightGallery
+.Justified Gallery
 gallery::jg_video_html5[role="mb-4"]
 
 
@@ -229,11 +230,11 @@ video platform on the Internet. With the J1 Template, you can pick a
 selection of YouTube videos and show them as a single gallery on your
 page -- great for music collections, tutorials, or interviews.
 
-.Masonry
+.Masonry Gallery
 masonry::youtube[role="mb-4"]
 
-.Justified Gallery
-gallery::jg_video_youtube_james_and_adele[role="mb-4"]
+// .Justified Gallery
+// gallery::jg_video_youtube_james_and_adele[role="mb-4"]
 
 
 [role="mt-5"]

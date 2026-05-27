@@ -47,16 +47,16 @@ regenerate:                             true
    Replaced single-file read (modules.masonry.settings) with the same
    split-source approach used by masonry.html. The adapter now reads:
      - modules.defaults.masonry.defaults  -> masonry_default
-     - modules.masonry_player.settings    -> masonry_player    (per-grid configs)
+     - modules.masonry_control.settings    -> masonry_control  (per-grid configs)
      - modules.masonry_playlist.settings  -> masonry_playlist  (per-grid content)
    This makes the JS adapter consume the SAME data sources the static
    HTML data file (masonry.html) consumes, so per-grid overrides defined
-   in masonry_player.settings (e.g. skipButtonsPlugin.options.forward,
+   in masonry_control.settings (e.g. skipButtonsPlugin.options.forward,
    gutters, responsive, lightbox/lightGallery, videojs.*) take precedence
    over masonry.yml defaults — identical to the HTML's merge order.
 -------------------------------------------------------------------------------- {% endcomment %}
 {% assign masonry_default   = modules.defaults.masonry.defaults %}
-{% assign masonry_player    = modules.masonry_player.settings %}
+{% assign masonry_control   = modules.masonry_control.settings %}
 {% assign masonry_playlist  = modules.masonry_playlist.settings %}
 
 {% comment %} Set config options (settings only)
@@ -70,7 +70,7 @@ regenerate:                             true
    deep_merge — fine here, because the per-grid (player+playlist) merge
    is done ID-wise inside the loop below, not via this top-level merge.
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign masonry_options   = masonry_default | deep_merge: masonry_player | deep_merge: masonry_playlist %}
+{% assign masonry_options   = masonry_default | deep_merge: masonry_control | deep_merge: masonry_playlist %}
 
 {% comment %} split J1 Masonry data #3
 --------------------------------------------------------------------------------
@@ -79,7 +79,7 @@ regenerate:                             true
    `grids` is the canonical iteration source for the per-grid JS init
    loop further down — same name/role as in masonry.html.
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign players_sorted    = masonry_player.players   | sort: 'id' %}
+{% assign players_sorted    = masonry_control.players   | sort: 'id' %}
 {% assign playlists_sorted  = masonry_playlist.players | sort: 'id' %}
 {% assign grids             = players_sorted %}
 
@@ -190,7 +190,7 @@ j1.adapter.masonry = ((j1, window) => {
       // by the Liquid loop below, not at runtime.
       //
       masonryDefaults = $.extend({}, {{masonry_default   | replace: 'nil', 'null' | replace: '=>', ':' }});
-      masonryPlayer   = $.extend({}, {{masonry_player    | replace: 'nil', 'null' | replace: '=>', ':' }});
+      masonryPlayer   = $.extend({}, {{masonry_control   | replace: 'nil', 'null' | replace: '=>', ':' }});
       masonryPlaylist = $.extend({}, {{masonry_playlist  | replace: 'nil', 'null' | replace: '=>', ':' }});
       masonryOptions  = $.extend(true, {}, masonryDefaults, masonryPlayer, masonryPlaylist);
       masonryOptions.grids = masonryPlayer.players;
@@ -267,7 +267,7 @@ j1.adapter.masonry = ((j1, window) => {
               {% comment %} split J1 Masonry data #3
               ------------------------------------------------------------------
                  The per-grid `options` block has been removed from
-                 masonry_player.yml (see comment #2 there) because all
+                 masonry_control.yml (see comment #2 there) because all
                  grids used identical Masonry options. The `if`s below
                  therefore evaluate falsy and the defaults loaded above
                  are used — no behavioural change. The block is kept so

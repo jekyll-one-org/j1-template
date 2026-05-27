@@ -8,7 +8,7 @@ exclude_from_search:                    true
 {% comment %}
  # -----------------------------------------------------------------------------
  # ~/assets/data/apps/amplitude.html (38)
- # Generate the HTML portion for all J1 Amplitude Apps (Player)
+ # Generate the HTML portion for J1 Amplitude player (contoller)
  #
  # Product/Info:
  # https://jekyll.one
@@ -33,12 +33,12 @@ exclude_from_search:                    true
 {% assign environment           = site.environment %}
 
 {% assign amplitude_default     = modules.defaults.amplitude.defaults %}
-{% assign amplitude_player      = modules.amplitude_player.settings %}
+{% assign amplitude_control     = modules.amplitude_control.settings %}
 {% assign amplitude_playlist    = modules.amplitude_playlist.settings %}
 
 {% comment %} Set config options
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign amplitude_options     = amplitude_default | deep_merge: amplitude_player, amplitude_playlist %}
+{% assign amplitude_options     = amplitude_default | deep_merge: amplitude_control, amplitude_playlist %}
 
 {% comment %} set permalink setting
 -------------------------------------------------------------------------------- {% endcomment %}

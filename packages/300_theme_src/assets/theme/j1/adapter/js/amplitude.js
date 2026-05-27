@@ -42,7 +42,7 @@ regenerate:                             true
 {% comment %} Set config data
 -------------------------------------------------------------------------------- {% endcomment %}
 {% assign amplitude_default   = modules.defaults.amplitude.defaults %}
-{% assign amplitude_player    = modules.amplitude_player.settings %}
+{% assign amplitude_control   = modules.amplitude_control.settings %}
 {% assign amplitude_playlist  = modules.amplitude_playlist.settings %}
 
 {% comment %} Set config data (test)
@@ -55,7 +55,7 @@ regenerate:                             true
 {% comment %} Set config options
 {% assign amplitude_options_test   = amplitude_default_test | deep_merge: amplitude_player_test, amplitude_playlist_test %}
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign amplitude_options   = amplitude_default | deep_merge: amplitude_player, amplitude_playlist %}
+{% assign amplitude_options        = amplitude_default | deep_merge: amplitude_control, amplitude_playlist %}
 
 {% comment %} Detect prod mode
 -------------------------------------------------------------------------------- {% endcomment %}
@@ -265,7 +265,7 @@ j1.adapter.amplitude = ((j1, window) => {
       // global variable settings
       // -----------------------------------------------------------------------
       amplitudeDefaults = $.extend({}, {{amplitude_default  | replace: 'nil', 'null' | replace: '=>', ':' }});
-      amplitudePlayers  = $.extend({}, {{amplitude_player   | replace: 'nil', 'null' | replace: '=>', ':' }});
+      amplitudePlayers  = $.extend({}, {{amplitude_control   | replace: 'nil', 'null' | replace: '=>', ':' }});
       amplitudeOptioss  = $.extend({}, {{amplitude_options  | replace: 'nil', 'null' | replace: '=>', ':' }});
 
 //    var amplitudeDefaultTest = $.extend({}, {{amplitude_default_test  | replace: 'nil', 'null' | replace: '=>', ':' }});
