@@ -9,17 +9,16 @@ exclude_from_search:                    true
  # -----------------------------------------------------------------------------
  # ~/assets/data/masonry.html (3)
  # Liquid procedure to generate the HTML portion for all Masonry Grids
- # configured
  #
  # Product/Info:
  # https://jekyll.one
  #
- # Copyright (C) 2023-2026 Juergen Adams
+ # Copyright (C) 2026 Juergen Adams
  #
  # J1 Template is licensed under the MIT License.
  # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE
  # -----------------------------------------------------------------------------
- # NOTE: Data loaded dynamically by J1 Masonry module (AJAX)
+ # NOTE: Data loaded dynamically by J1 Masonry module (XHR)
  # -----------------------------------------------------------------------------
  # Test data:
  #    {{variable | debug}}
@@ -42,28 +41,31 @@ exclude_from_search:                    true
 {% assign environment         = site.environment %}
 {% assign masonry_default     = modules.defaults.masonry.defaults %}
 {% assign masonry_control     = modules.masonry_control.settings %}
-{% assign masonry_playlist    = modules.masonry_playlist.settings %}
+{% assign masonry_media       = modules.masonry_media.settings %}
 
 {% comment %} Set config options
 -------------------------------------------------------------------------------- {% endcomment %}
-{% comment %} split J1 Masonry data #1
-   Deep-merge the top-level config (defaults <- player <- playlist).
-   NOTE: this gives masonry_options correct top-level keys (e.g. filters),
-   but `players` is an ARRAY and deep_merge replaces arrays wholesale.
-   The per-grid merge (config + content) is therefore handled separately
-   below, ID-wise.
--------------------------------------------------------------------------------- {% endcomment %}
-{% assign masonry_options     = masonry_default | deep_merge: masonry_control, masonry_playlist %}
 
 {% comment %} split J1 Masonry data #1
-   Sort player configs and playlist content by grid ID so each player
-   config can be matched to its content by `id`. The sorted player array
-   is exposed as `grids` and drives the Collect grids loop below.
-   Playlist content (images/videos) is merged into the matching player
-   grid inside the loop via deep_merge.
+--------------------------------------------------------------------------------
+  Deep-merge the top-level config (defaults <- player <- playlist).
+  NOTE: this gives masonry_options correct top-level keys (e.g. filters),
+  but `players` is an ARRAY and deep_merge replaces arrays wholesale.
+  The per-grid merge (config + content) is therefore handled separately
+  below, ID-wise.
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign players_sorted      = masonry_control.players  | sort: 'id' %}
-{% assign playlists_sorted    = masonry_playlist.players | sort: 'id' %}
+{% assign masonry_options     = masonry_default | deep_merge: masonry_control, masonry_media %}
+
+{% comment %} split J1 Masonry data #1
+--------------------------------------------------------------------------------
+  Sort player configs and playlist content by grid ID so each player
+  config can be matched to its content by `id`. The sorted player array
+  is exposed as `grids` and drives the Collect grids loop below.
+  Playlist content (images/videos) is merged into the matching player
+  grid inside the loop via deep_merge.
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign players_sorted      = masonry_control.players | sort: 'id' %}
+{% assign playlists_sorted    = masonry_media.players   | sort: 'id' %}
 {% assign grids               = players_sorted %}
 
 {% comment %} Configure permalink settings
@@ -94,24 +96,28 @@ exclude_from_search:                    true
   <body>
   {% comment %} Collect grids
   ------------------------------------------------------------------------------ {% endcomment %}
+
   {% comment %} split J1 Masonry data #1
-     Iterate the ID-sorted player grids. For each entry, look up the
-     matching playlist entry by `id` and deep_merge the playlist content
-     (images / videos) into the player config. The resulting `grid` is
-     used by all downstream blocks (post / collection / image / video)
-     exactly as before — no changes needed in the per-grid markup.
+  ------------------------------------------------------------------------------
+    Iterate the ID-sorted player grids. For each entry, look up the
+    matching playlist entry by `id` and deep_merge the playlist content
+    (images / videos) into the player config. The resulting `grid` is
+    used by all downstream blocks (post / collection / image / video)
+    exactly as before — no changes needed in the per-grid markup.
   ------------------------------------------------------------------------------ {% endcomment %}
+
   {% comment %} split J1 Masonry data #2
+  ------------------------------------------------------------------------------
   {% raw %}
-     Per-grid merge precedence is now:
-       masonry_default <- player_grid <- playlist_match
-     Settings identical across every grid (e.g. caption, gutters, the
-     Masonry `options` block, common lightGallery.options) were moved
-     to masonry_default and removed from masonry_control.yml. Pulling
-     `masonry_default` into the merge here makes those keys available
-     on each `grid` object so downstream markup (e.g. {{grid.caption.*}})
-     keeps working unchanged. Per-grid values still override defaults
-     key-by-key thanks to deep_merge.
+    Per-grid merge precedence is now:
+      masonry_default <- player_grid <- playlist_match
+    Settings identical across every grid (e.g. caption, gutters, the
+    Masonry `options` block, common lightGallery.options) were moved
+    to masonry_default and removed from masonry_control.yml. Pulling
+    `masonry_default` into the merge here makes those keys available
+    on each `grid` object so downstream markup (e.g. {{grid.caption.*}})
+    keeps working unchanged. Per-grid values still override defaults
+    key-by-key thanks to deep_merge.
   {% endraw %}
   ------------------------------------------------------------------------------ {% endcomment %}
   {% for player_grid in grids %}

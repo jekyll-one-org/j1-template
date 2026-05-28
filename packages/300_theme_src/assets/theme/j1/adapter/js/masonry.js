@@ -46,9 +46,11 @@ regenerate:                             true
 --------------------------------------------------------------------------------
    Replaced single-file read (modules.masonry.settings) with the same
    split-source approach used by masonry.html. The adapter now reads:
-     - modules.defaults.masonry.defaults  -> masonry_default
-     - modules.masonry_control.settings    -> masonry_control  (per-grid configs)
-     - modules.masonry_playlist.settings  -> masonry_playlist  (per-grid content)
+
+   - modules.defaults.masonry.defaults  -> masonry_default
+   - modules.masonry_control.settings   -> masonry_control (per-grid configs)
+   - modules.masonry_media.settings     -> masonry_media   (per-grid media content)
+
    This makes the JS adapter consume the SAME data sources the static
    HTML data file (masonry.html) consumes, so per-grid overrides defined
    in masonry_control.settings (e.g. skipButtonsPlugin.options.forward,
@@ -57,7 +59,7 @@ regenerate:                             true
 -------------------------------------------------------------------------------- {% endcomment %}
 {% assign masonry_default   = modules.defaults.masonry.defaults %}
 {% assign masonry_control   = modules.masonry_control.settings %}
-{% assign masonry_playlist  = modules.masonry_playlist.settings %}
+{% assign masonry_media     = modules.masonry_media.settings %}
 
 {% comment %} Set config options (settings only)
 -------------------------------------------------------------------------------- {% endcomment %}
@@ -70,7 +72,7 @@ regenerate:                             true
    deep_merge — fine here, because the per-grid (player+playlist) merge
    is done ID-wise inside the loop below, not via this top-level merge.
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign masonry_options   = masonry_default | deep_merge: masonry_control | deep_merge: masonry_playlist %}
+{% assign masonry_options   = masonry_default | deep_merge: masonry_control | deep_merge: masonry_media %}
 
 {% comment %} split J1 Masonry data #3
 --------------------------------------------------------------------------------
@@ -79,8 +81,8 @@ regenerate:                             true
    `grids` is the canonical iteration source for the per-grid JS init
    loop further down — same name/role as in masonry.html.
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign players_sorted    = masonry_control.players   | sort: 'id' %}
-{% assign playlists_sorted  = masonry_playlist.players | sort: 'id' %}
+{% assign players_sorted    = masonry_control.players | sort: 'id' %}
+{% assign media_sorted      = masonry_media.players   | sort: 'id' %}
 {% assign grids             = players_sorted %}
 
 {% comment %} Variables
@@ -191,7 +193,7 @@ j1.adapter.masonry = ((j1, window) => {
       //
       masonryDefaults = $.extend({}, {{masonry_default   | replace: 'nil', 'null' | replace: '=>', ':' }});
       masonryPlayer   = $.extend({}, {{masonry_control   | replace: 'nil', 'null' | replace: '=>', ':' }});
-      masonryPlaylist = $.extend({}, {{masonry_playlist  | replace: 'nil', 'null' | replace: '=>', ':' }});
+      masonryPlaylist = $.extend({}, {{masonry_media  | replace: 'nil', 'null' | replace: '=>', ':' }});
       masonryOptions  = $.extend(true, {}, masonryDefaults, masonryPlayer, masonryPlaylist);
       masonryOptions.grids = masonryPlayer.players;
 
@@ -226,7 +228,7 @@ j1.adapter.masonry = ((j1, window) => {
              single-file masonry.settings.grids iteration.
           ---------------------------------------------------------------------- {% endcomment %}
           {% for player_grid in grids %}
-            {% assign playlist_match = playlists_sorted | where: 'id', player_grid.id | first %}
+            {% assign playlist_match = media_sorted | where: 'id', player_grid.id | first %}
             {% if playlist_match %}
               {% assign grid = masonry_default | deep_merge: player_grid | deep_merge: playlist_match %}
             {% else %}
