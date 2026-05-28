@@ -121,6 +121,7 @@ settings:
                                         <h2>GrandPa</h2>
                                         <h3>Annual journey</h3>
 
+
     # --------------------------------------------------------------------------
     # Gallery Mega Cities
     #
@@ -130,7 +131,6 @@ settings:
       id:                               jg_mega_cities
       type:                             image
       image_base_path:                  /assets/image/module/swiper/simple/mega_city/image
-
 
       # ------------------------------------------------------------------------
       # Justified Gallery settings
@@ -432,6 +432,7 @@ settings:
 
           tracks::                      []
 
+
     # --------------------------------------------------------------------------
     # Online VIDEO Carpool Karaoke (YouTube)
     #
@@ -580,194 +581,6 @@ settings:
 
           tracks:                       []                                      # jadams !!!
 
-    # --------------------------------------------------------------------------
-    # Online VIDEO (Vimeo)
-    #
-    - gallery:
-      enabled:                          true
-
-      id:                               jg_video_online_vimeo
-      type:                             video
-      video:                            vimeo
-      image_base_path:                  /assets/video/poster/vimeo
-
-      # ------------------------------------------------------------------------
-      # Justified Gallery settings
-      # ------------------------------------------------------------------------
-      #
-      gallery_options:
-        rowHeight:                      250
-        gutters:                        3
-
-      # ------------------------------------------------------------------------
-      # Lightbox|lightGallery settings
-      # ------------------------------------------------------------------------
-      #
-      lightbox:
-        enabled:                        true
-        type:                           lg
-
-      lightGallery:
-        plugins:                        lgThumbnail, lgVideo
-
-        options:
-          licenseKey:                   0000-0000-000-0000
-          download:                     false
-          alignThumbnails:              left
-          animateThumb:                 true
-          autoplayFirstVideo:           true
-          videojs:                      false
-
-        videojsOptions:
-          enabled:                      false
-
-        playerParams:
-          enabled:                      false
-          autoplay:                     1
-          byline:                       0
-          portrait:                     0
-          color:                        var(--md-gray-100)
-          muted:                        0
-
-      # ------------------------------------------------------------------------
-      # CSS filter options
-      #
-      filters:
-        enabled:                        false
-        grayscale:                      0
-        contrast:                       1
-        brightness:                     1
-
-      # ------------------------------------------------------------------------
-      # Video settings
-      # ------------------------------------------------------------------------
-      #
-      videos:
-
-        - video:                        # video 1
-          enabled:                      true
-
-          name:                         Forever 21
-          type:                         vimeo
-          size:                         1280-720
-          source:                       //vimeo.com/179528528
-          poster_image:                 kick_it_old_school.jpg
-          pinterest_prefix:             Pin video
-          tweet_prefix:                 Try video
-          caption_text:                 Forever 21 &middot; Kick It Old School
-          description: >
-                                        <h2>Forever 21</h2>
-                                        <h3>Kick It Old School</h3>
-
-          playerParams:
-            start:                      50                                      # seconds to start
-
-        - video:                        # video 2
-          enabled:                      true
-
-          name:                         Forever 21
-          type:                         vimeo
-          size:                         1280-720
-          source:                       //vimeo.com/33929033
-          poster_image:                 fall_2011.jpg
-          pinterest_prefix:             Pin video
-          tweet_prefix:                 Try video
-          caption_text:                 Forever 21 &middot; Fall 2011
-          description: >
-                                        <h2>Forever 21</h2>
-                                        <h3>Fall 2011</h3>
-
-          playerParams:
-            start:                      50                                      # seconds to start
-
-    # --------------------------------------------------------------------------
-    # Online VIDEO (Dailymotion)
-    #
-    - gallery:
-      enabled:                          true
-
-      id:                               jg_video_online_dailymotion
-      type:                             video
-      video:                            dailymotion
-      image_base_path:                  /assets/video/poster/dailymotion
-
-      # ------------------------------------------------------------------------
-      # Justified Gallery settings
-      # ------------------------------------------------------------------------
-      #
-      gallery_options:
-        rowHeight:                      250
-        gutters:                        3
-
-      # ------------------------------------------------------------------------
-      # Lightbox|lightGallery settings
-      # ------------------------------------------------------------------------
-      #
-      lightbox:
-        enabled:                        true
-        type:                           lg
-
-      lightGallery:
-        plugins:                        lgThumbnail, lgVideo
-
-        options:
-          licenseKey:                   0000-0000-000-0000
-          download:                     false
-          alignThumbnails:              left
-          animateThumb:                 true
-          autoplayFirstVideo:           true
-          videojs:                      false
-
-        videojsOptions:
-          enabled:                      false
-
-        playerParams:
-          enabled:                      false
-
-      # ------------------------------------------------------------------------
-      # CSS filter options
-      #
-      filters:
-        enabled:                        false
-        grayscale:                      0
-        contrast:                       1
-        brightness:                     1
-
-      # ------------------------------------------------------------------------
-      # Video settings
-      # ------------------------------------------------------------------------
-      #
-      videos:
-
-        - video:                        # video 1
-          enabled:                      true
-
-          name:                         SELF Channel
-          type:                         dailymotion
-          size:                         1280-720
-          source:                       //dai.ly/x887s09
-          poster_image:                 meditation.jpg
-          pinterest_prefix:             Pin video
-          tweet_prefix:                 Try video
-          caption_text:                 SELF Channel &middot; Morning Energy
-          description: >
-                                        <h2>SELF Channel</h2>
-                                        <h3>Guided Meditation: Morning Energy</h3>
-
-        - video:                        # video 2
-          enabled:                      true
-
-          name:                         SELF Channel
-          type:                         dailymotion
-          size:                         1280-720
-          source:                       //dai.ly/x87ycik
-          poster_image:                 pilates.jpg
-          pinterest_prefix:             Pin video
-          tweet_prefix:                 Try video
-          caption_text:                 SELF Channel &middot; Pilates Core Workout
-          description: >
-                                        <h2>SELF Channel</h2>
-                                        <h3>Beginner Mat Pilates: Core Workout</h3>
 
     # --------------------------------------------------------------------------
     # HTML5 VIDEO (over VideoJS)
@@ -893,6 +706,7 @@ settings:
           description: >
                                         <h2>Rollin` Wild</h2>
                                         <h3>Short Funny Animated Clip created at the Film Academy</h3>
+
 
     # --------------------------------------------------------------------------
     # TinyDesk Concerts, Latin (YouTube)

@@ -1,5 +1,5 @@
 ---
-regenerate:                             true
+regenerate:                             false
 exclude_from_search:                    true
 ---
 
@@ -98,7 +98,7 @@ exclude_from_search:                    true
 
      <!-- START Image Galleries -->
      {% if gallery.lightbox.type == 'ps' %}
-      <div id="{{gallery.id}}" data-photoswipe-lightbox="{{gallery.id}}">
+      <div data-photoswipe-lightbox="{{gallery.id}}">
      {% else %}
       <div id="{{gallery.id}}">
      {% endif %}
@@ -138,8 +138,8 @@ exclude_from_search:                    true
         </a>
         {% elsif gallery.lightbox.type == 'lg' %}
         <a
-          class="lg-item"
           href="{{gallery.image_base_path}}/{{image.file}}"
+          class="lg-item"
           data-sub-html="{{description|strip|strip_newlines}}">
           <img
             id="{{gallery.id}}_{{forloop.index}}"
