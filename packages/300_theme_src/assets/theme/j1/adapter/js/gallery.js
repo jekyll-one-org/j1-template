@@ -88,7 +88,7 @@ regenerate:                             true
 
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/adapter/js/gallery.js (6)
+ # ~/assets/theme/j1/adapter/js/gallery.js (7)
  # JS Adapter for the module J1 Gallery (justifiedGallery)
  #
  # Product/Info:

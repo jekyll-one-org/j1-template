@@ -7,13 +7,13 @@ exclude_from_search:                    true
 
 {% comment %}
  # -----------------------------------------------------------------------------
- # ~/assets/data/apps/amplitude.html (38)
- # Generate the HTML portion for J1 Amplitude player (contoller)
+ # ~/assets/data/apps/amplitude.html (39)
+ # Generate the HTML portion for J1 Amplitude players
  #
  # Product/Info:
  # https://jekyll.one
  #
- # Copyright (C) 2023-2026 Juergen Adams
+ # Copyright (C) 2026 Juergen Adams
  #
  # J1 Template is licensed under the MIT License.
  # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE
@@ -34,11 +34,11 @@ exclude_from_search:                    true
 
 {% assign amplitude_default     = modules.defaults.amplitude.defaults %}
 {% assign amplitude_control     = modules.amplitude_control.settings %}
-{% assign amplitude_playlist    = modules.amplitude_playlist.settings %}
+{% assign amplitude_media       = modules.amplitude_media.settings %}
 
 {% comment %} Set config options
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign amplitude_options     = amplitude_default | deep_merge: amplitude_control, amplitude_playlist %}
+{% assign amplitude_options     = amplitude_default | deep_merge: amplitude_control, amplitude_media %}
 
 {% comment %} set permalink setting
 -------------------------------------------------------------------------------- {% endcomment %}
@@ -73,7 +73,7 @@ exclude_from_search:                    true
   {% comment %} create player instances
   ------------------------------------------------------------------------------
   player.volume_slider:             {{player.volume_slider | debug}}
-  amplitude_default.volume_slider: {{amplitude_default.player.volume_slider | debug}}
+  amplitude_default.volume_slider:  {{amplitude_default.player.volume_slider | debug}}
   volume_slider:                    {{volume_slider}}
   ------------------------------------------------------------------------------ {% endcomment %}
 

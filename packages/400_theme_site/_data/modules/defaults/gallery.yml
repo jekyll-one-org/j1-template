@@ -88,7 +88,7 @@ defaults:
   #
   lightbox:
     enabled:                            true
-    type:                               lg                                      # lightGallery
+    type:                               lg                                      # ps | lb | lg
 
   # ----------------------------------------------------------------------------
   # lightGallery settings
