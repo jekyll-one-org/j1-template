@@ -26,9 +26,11 @@
     - title:                            Image
       href:                             /pages/public/tour/image_data/
       icon:                             image
+
     - title:                            Audio
       href:                             /pages/public/tour/audio_data/
       icon:                             volume-high
+
     - title:                            Video
       href:                             /pages/public/tour/video_data/
       icon:                             video
@@ -36,15 +38,19 @@
     - title:                            Typography
       href:                             /pages/public/tour/typography/
       icon:                             format-text
+
     - title:                            Icons
       href:                             /pages/public/tour/mdi_icon_font/
       icon:                             fan
+
     - title:                            Extensions
       href:                             /pages/public/tour/asciidoc_extensions/
       icon:                             format-annotation-plus
+
     - title:                            Modals
       href:                             /pages/public/tour/modals/
       icon:                             image
+
     - title:                            Tables
       href:                             /pages/public/tour/responsive_tables/
       icon:                             table
@@ -52,9 +58,11 @@
     - title:                            Themes
       href:                             /pages/public/tour/themes/
       icon:                             theme-light-dark
+
     - title:                            Highligher
       href:                             /pages/public/tour/rouge/
       icon:                             code-parentheses
+
     - title:                            Search
       href:                             /pages/public/tour/site_search/
       icon:                             magnify
@@ -118,9 +126,9 @@
           target:                       _blank
 
 
-      # - title:                        Site Development
-      #   href:                         //jekyll.one/pages/public/learn/devstart/
-      #   icon:                         launch
+        - title:                        Site Development
+          href:                         //jekyll.one/pages/public/learn/devstart/
+          icon:                         launch
 
         - title:                        Jekyll In A Day
           icon:                         alpha-j-box
@@ -198,6 +206,81 @@
     - title:                            Archive
       href:                             /pages/public/blog/navigator/archive/allview/
       icon:                             archive
+
+# ------------------------------------------------------------------------------
+# Menu MANUAL
+#
+- item:                                 Manual
+  sublevel:
+
+  # - title:                            Where to go
+  #   href:                             /pages/public/manuals/where_to_go/
+  #   icon:                             foot-print
+
+    # --------------------------------------------------------------------------
+    # Modules
+    #
+    - title:                            Modules
+      icon:                             alpha-m-box
+      dropdown:
+
+        - title:                        Amplitude
+          href:                         /pages/public/manuals/amplitude/amplitude_api/
+          icon:                         speaker
+
+        - title:                        Swiper
+          href:                         /pages/public/manual/module/carousel/swiper/
+          icon:                         view-carousel 
+
+    #  - title:                         Galleries
+    #    href:                          /pages/public/manuals/modules/gallery/
+    #    icon:                          view-dashboard-variant
+
+        - title:                        Lightboxes
+          icon:                         alpha-l-box
+          dropdown:
+
+            - title:                    Lightbox v3
+              href:                     /pages/public/manual/module/lightboxes/lightbox/
+              icon:                     flashlight
+            - title:                    PhotoSwipe V5
+              href:                     /pages/public/manual/module/lightboxes/photoswipe/
+              icon:                     flashlight
+            - title:                    lightGallery V2
+              href:                     /pages/public/manual/module/lightboxes/lightgallery/
+              icon:                     flashlight
+
+# ------------------------------------------------------------------------------
+# Menu TEST
+#
+- item:                                 Test
+  sublevel:
+
+    - title:                            Video player
+      href:                             /pages/public/tools/test/videoPlayer/
+      icon:                             video
+
+# ------------------------------------------------------------------------------
+# Menu CLAUDE AI
+#
+- item:                                 Chat
+  sublevel:
+
+    - title:                            ChatBot
+      icon:                             robot
+      href:                             /pages/public/tools/claudeAI/chat/
+
+    - title:                            Knowledge Base
+      icon:                             cog
+      href:                             /pages/public/tools/claudeAI/kb/
+
+    - title:                            Chat Help
+      icon:                             information-variant
+      href:                             /pages/public/tools/claudeAI/chatHelp/
+
+    - title:                            Knowledge Base Help
+      icon:                             information-variant
+      href:                             /pages/public/tools/claudeAI/kbHelp/
 
 # ------------------------------------------------------------------------------
 # Menu ONLINE
@@ -384,13 +467,17 @@
 - item:                                 About
   sublevel:
 
-    - title:                            Starter Web
+    - title:                            This Site
       icon:                             home-variant-outline
       href:                             /pages/public/about/starter/
 
     - title:                            Privacy
       icon:                             heart
       href:                             /pages/public/legal/en/privacy/      
+
+    - title:                            Features
+      icon:                             wrench
+      href:                             /pages/public/about/features/
 
     - title:                            Issues
       icon:                             bug

@@ -159,11 +159,11 @@ j1.adapter.videoPlayer = ( function (j1, window) {
           _this.initialize( videoPlayerOptions );
 
           _this.setState('finished');
-          logger.debug('state: ' + _this.getState());
-          logger.info('initializing module finished');
+          logger.debug('\n' + 'state: ' + _this.getState());
+          logger.info('\n' + 'initializing module finished');
 
           endTimeModule = Date.now();
-          logger.info('module initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
+          logger.info('\n' + 'module initializing time: ' + (endTimeModule-startTimeModule) + 'ms');
 
           clearInterval(dependencies_met_page_ready);
         } // END pageVisible

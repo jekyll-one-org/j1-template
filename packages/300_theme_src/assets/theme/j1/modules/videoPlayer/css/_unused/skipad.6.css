@@ -1,0 +1,711 @@
+/*
+ # -----------------------------------------------------------------------------
+ # ~/assets/theme/j1/modules/skipAd/css/skipAd.css (6)
+ # Provides styles for J1 Module skipAd
+ #
+ # Product/Info:
+ # https://jekyll.one
+ #
+ # Copyright (C) 2023-2026 Juergen Adams
+ #
+ # J1 Template is licensed under the MIT License.
+ # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE
+ # -----------------------------------------------------------------------------
+*/
+
+/* Version 3.1.6 for J1 Template */
+
+/* -----------------------------------------------------------------------------
+   CSS Custom Properties
+  ------------------------------------------------------------------------------ */
+
+:root {
+  --border-color: #d2d2d7;
+  --card-background: #ffffff;
+  --secondary-color: #86868b;
+  --shadow-color: rgba(0,0,0,.1);
+  --text-color: #1d1d1f;
+}
+
+/* -----------------------------------------------------------------------------
+   Icon Overrides
+  ------------------------------------------------------------------------------ */
+
+.fa-file-clipboard:before,
+.fa-paste:before {
+  content: "\f0ea";
+}
+
+/* -----------------------------------------------------------------------------
+   Input / URL Bar
+  ------------------------------------------------------------------------------ */
+
+input {
+  background-color: var(--card-background);
+  border: none;
+  border-radius: 8px;
+  color: var(--text-color);
+  flex: 1;
+  font-size: 1rem;
+  padding: .8rem 1rem;
+  transition: all .3s ease;
+  width: 100%;
+}
+
+#videoUrl {
+  background: none !important;
+  border: 1px solid var(--border-color) !important;
+  /* border-radius: 8px !important; */
+  box-shadow: none !important;
+  color: var(--text-color) !important;
+  font-size: 1.01rem !important;
+  padding: .8rem 1rem .8rem 5.5rem !important;
+  transition: border-color .2s, box-shadow .2s;
+}
+
+.input-wrapper {
+  align-items: center;
+  background: transparent;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  margin: 0 auto 1.5rem;
+  padding: 1.2rem;
+  width: 90%;
+}
+
+.input-container {
+  align-items: center;
+  display: flex;
+  flex: 1 1 0%;
+  position: relative;
+  width: 100%;
+  justify-content: center;
+}
+
+.input-container #videoUrl {
+  padding-left: 5.5rem !important;
+}
+
+.paste-btn-inside {
+  align-items: center;
+  background: #9c9c9e26;
+  border: none;
+  border-radius: 6px;
+  color: var(--text-color);
+  cursor: pointer;
+  display: flex;
+  font-size: .85rem;
+  font-weight: 500;
+  gap: .4rem;
+  height: auto;
+  justify-content: center;
+  left: .5rem;
+  min-width: auto;
+  padding: .4rem .6rem;
+  position: absolute;
+  top: 36%;
+  transform: translateY(-50%);
+  transition: all .3s ease;
+  white-space: nowrap;
+  width: auto;
+  z-index: 2;
+}
+
+.paste-btn-inside:hover {
+  background-color: var(--bs-primary);
+  box-shadow: 0 2px 8px var(--shadow-color);
+  color: #fff;
+}
+
+.watch-adfree-btn {
+  background: linear-gradient(90deg, var(--md-green-500), var(--md-green-700));
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px var(--shadow-color);
+  color: #fff;
+  flex-shrink: 0;
+  font-size: 1.08rem;
+  font-weight: 600;
+  letter-spacing: .01em;
+  margin-bottom: .5rem;
+  margin-left: .75rem;
+  padding: .85rem 2.2rem;
+  transition: background .2s, box-shadow .2s, transform .1s;
+}
+
+.watch-adfree-btn:focus,
+.watch-adfree-btn:hover {
+  background: linear-gradient(90deg, var(--md-green-700), var(--md-green-500));
+  box-shadow: 0 4px 16px var(--shadow-color);
+  outline: none;
+  transform: translateY(-2px) scale(1.03);
+}
+
+.export-playlist-btn {
+  background: linear-gradient(90deg, var(--md-green-500), var(--md-green-700));
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px var(--shadow-color);
+  color: #000;
+  flex-shrink: 0;
+  font-size: 1.08rem;
+  font-weight: 600;
+  letter-spacing: .01em;
+  margin-bottom: .5rem;
+  margin-left: .75rem;
+  padding: .85rem 2.2rem;
+  transition: background .2s, box-shadow .2s, transform .1s;
+}
+
+.export-playlist-btn:focus,
+.export-playlist-btn:hover {
+  background: linear-gradient(90deg, var(--md-green-700), var(--md-green-500));
+  box-shadow: 0 4px 16px var(--shadow-color);
+  outline: none;
+  transform: translateY(-2px) scale(1.03);
+}
+
+.import-playlist-btn {
+  background: linear-gradient(90deg, var(--md-yellow-500), var(--md-yellow-700));
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px var(--shadow-color);
+  color: #000;
+  flex-shrink: 0;
+  font-size: 1.08rem;
+  font-weight: 600;
+  letter-spacing: .01em;
+  margin-bottom: .5rem;
+  margin-left: .75rem;
+  padding: .85rem 2.2rem;
+  transition: background .2s, box-shadow .2s, transform .1s;
+}
+
+.import-playlist-btn:focus,
+.import-playlist-btn:hover {
+  background: linear-gradient(90deg, var(--md-yellow-700), var(--md-yellow-500));
+  box-shadow: 0 4px 16px var(--shadow-color);
+  outline: none;
+  transform: translateY(-2px) scale(1.03);
+}
+
+.delete-playlist-btn {
+  background: linear-gradient(90deg, var(--md-red-500), var(--md-red-700));
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px var(--shadow-color);
+  color: #000;
+  flex-shrink: 0;
+  font-size: 1.08rem;
+  font-weight: 600;
+  letter-spacing: .01em;
+  margin-bottom: .5rem;
+  margin-left: .75rem;
+  padding: .85rem 2.2rem;
+  transition: background .2s, box-shadow .2s, transform .1s;
+}
+
+.delete-playlist-btn:focus,
+.delete-playlist-btn:hover {
+  background: linear-gradient(90deg, var(--md-red-700), var(--md-red-500));
+  box-shadow: 0 4px 16px var(--shadow-color);
+  outline: none;
+  transform: translateY(-2px) scale(1.03);
+}
+
+/* -----------------------------------------------------------------------------
+   Video Player
+  ------------------------------------------------------------------------------ */
+
+.video-section {
+  margin: 2rem 0;
+  width: 100%;
+}
+
+.video-container {
+  aspect-ratio: 16/9;
+  background-color: var(--card-background);
+  box-shadow: 0 4px 6px var(--shadow-color);
+  max-width: 100vw;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+}
+
+/* emulate CSS style text-overflow ellipsis */
+.video-title {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  line-clamp: 1;
+  overflow: hidden;  
+}
+
+/*
+.empty-player-overlay {
+  align-items: center;
+  background: var(--card-background);
+  border: 2px dashed var(--border-color);
+  bottom: 0;
+  box-shadow: 0 4px 6px var(--shadow-color);
+  display: flex;
+  flex: 1 1 0%;
+  justify-content: center;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  transition: .3s;
+  z-index: 5;
+}
+*/
+
+.empty-player-overlay {
+    align-items: center;
+    background: var(--bs-gray-100);
+    border: 2px dashed var(--bs-gray-600);
+    bottom: 0;
+    box-shadow: 0 4px 6px var(
+  --shadow-color);
+    display: flex;
+    flex: 1 1 0%;
+    justify-content: center;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    transition: .3s;
+    z-index: 5;
+}
+
+.empty-player-content {
+  max-width: 100%;
+  padding: 2rem;
+  text-align: center;
+}
+
+/* -----------------------------------------------------------------------------
+   Shared Card Base
+  ------------------------------------------------------------------------------ */
+
+.card-base {
+  background: var(--card-background);
+  border: 1px solid var(--border-color);
+  transition: transform .3s ease, background-color .3s ease;
+}
+
+/* -----------------------------------------------------------------------------
+   History & Playlist Lists
+  ------------------------------------------------------------------------------ */
+
+/*
+.playlist {
+  background-color: var(--card-background);
+  padding: 1rem;
+}
+*/
+
+.playlist {
+  /*
+  background: none;
+  background-color: var(--card-background);
+  padding: 1rem;
+  */
+  gap: 1.2rem;
+  grid-template-columns: repeat(4, 1fr);
+  padding-top: .5rem;
+}
+
+.playlist.list-mode {
+  display: flex !important;
+  flex-direction: column;
+  gap: 12px;
+  grid-template-columns: none !important;
+  padding-top: .5rem;
+}
+
+.playlist.card-mode {
+  display: grid;
+}
+
+/* -----------------------------------------------------------------------------
+   Shared Thumbnail & Text Truncation
+  ------------------------------------------------------------------------------ */
+
+.playlist-thumb-wrapper,
+.playlist-row .playlist-thumb-wrapper {
+  aspect-ratio: 16/9;
+  background: #000;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+}
+
+.playlist-thumb,
+.playlist-row .playlist-thumb {
+  display: block;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition: transform .3s ease;
+  width: 100%;
+}
+
+.playlist-title,
+.playlist-author-row,
+.playlist-row .playlist-title .playlist-url {
+  -webkit-box-orient: vertical;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  line-clamp: 1;
+  overflow: hidden;
+}
+
+.playlist-play-overlay {
+  align-items: center;
+  backdrop-filter: blur(10px);
+  background: rgba(0,0,0,.549);
+  border: 1px solid #ffffff23;
+  border-radius: 50%;
+  box-shadow: 0 10px 30px rgba(0,0,0,.2);
+  cursor: pointer;
+  color: #fff;
+  display: flex;
+  font-size: 20px;
+  height: 60px;
+  justify-content: center;
+  left: 50%;
+  opacity: 0;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  transition: opacity .3s ease;
+  width: 60px;
+}
+
+.featured-badge,
+.playlist-duration,
+.playlist-badge-overlay {
+  backdrop-filter: blur(5px);
+  bottom: 8px;
+  color: #fff;
+  font-family: Segoe UI, Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.2;
+  position: absolute;
+  z-index: 2;
+}
+
+.playlist-duration,
+.playlist-badge-overlay {
+  background: rgba(0,0,0,.8);
+  border-radius: 3px;
+  font-size: 12px;
+  font-weight: 500;
+  padding: 2px 6px;
+  right: 8px;
+}
+
+/* -----------------------------------------------------------------------------
+   History Card (Grid View)
+  ------------------------------------------------------------------------------ */
+
+.playlist-card {
+  background: var(--card-background);
+  border: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  height: auto;
+  overflow: hidden;
+  transition: all .3s ease;
+}
+
+.playlist-info {
+  display: flex;
+  flex-direction: column;
+  height: auto;
+  justify-content: space-between;
+  padding: 12px;
+}
+
+.playlist-title {
+  color: var(--text-primary);
+  font-size: 1.0rem;
+  font-weight: 600;
+  line-height: 1.2;
+  margin-bottom: 12px;
+}
+
+.playlist-author {
+  color: var(--secondary-color);
+  font-size: .85rem;
+  line-height: 1.3;
+  margin-bottom: 4px;
+  word-break: break-word;
+}
+
+.playlist-time-info {
+  color: var(--secondary-color);
+  font-size: .85rem;
+  line-height: 1.3;
+  margin-bottom: 2px;
+  word-break: break-word;
+}
+
+.playlist-card-actions {
+  border-top: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  justify-content: space-evenly;
+  margin-top: 12px;
+  padding-top: 8px;
+}
+
+.playlist-btn {
+  align-items: center;
+  background: var(--bg-secondary);
+  border: none;
+  border-radius: 8px;
+  box-shadow: none;
+  color: var(--secondary-color);
+  cursor: pointer;
+  display: inline-flex;
+  font-size: 1rem;
+  height: 32px;
+  justify-content: center;
+  margin: 0 2px;
+  outline: none;
+  transition: all .3s ease;
+  width: 32px;
+}
+
+.playlist-btn:hover {
+  background: var(--bs-primary);
+  border-color: var(--bs-primary);
+  box-shadow: 0 4px 8px rgba(0,0,0,.1);
+  color: #fff;
+  outline: none;
+  transform: translateY(-2px);
+}
+
+/* -----------------------------------------------------------------------------
+   History Row (List / Playlist View)
+  ------------------------------------------------------------------------------ */
+
+.playlist-row {
+  align-items: center;
+  background: var(--card-background);
+  border: 1px solid var(--border-color);
+  cursor: default;
+  display: flex;
+  gap: 16px;
+  overflow: hidden;
+  position: relative;
+  transition: all .3s ease;
+}
+
+.playlist-row-content {
+  align-items: center;
+  display: flex;
+  flex: 1;
+  gap: 16px;
+  min-width: 0;
+}
+
+.playlist-row .playlist-thumb-wrapper {
+  flex-shrink: 0;
+  height: 90px;
+  min-width: 160px;
+  width: 160px;
+}
+
+.playlist-row .playlist-thumb-wrapper:hover .playlist-thumb {
+  transform: scale(1.05);
+}
+
+.playlist-row .playlist-title {
+  color: var(--text-primary);
+  font-size: .95rem;
+  font-weight: 600;
+  line-height: 1.4;
+  margin-top: 8px;
+  margin-bottom: 0;
+}
+
+.playlist-row .playlist-url {
+  color: var(--text-primary);
+  font-size: .85rem;
+  line-height: 1.3;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.playlist-row .playlist-author {
+  color: var(--text-primary);
+  font-size: .85rem;
+  line-height: 1.3;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.playlist-row .playlist-duration,
+.playlist-row .playlist-badge-overlay {
+  font-size: 11px;
+  padding: 2px 5px;
+}
+
+.playlist-info-row {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.playlist-author-row {
+  font-size: .85rem;
+}
+
+.playlist-author-row,
+.playlist-duration-row {
+  color: var(--secondary-color);
+  line-height: 1.3;
+}
+
+.playlist-playlist-actions {
+  align-items: center;
+  display: flex;
+  flex-shrink: 0;
+  gap: 8px;
+  justify-content: flex-end;
+}
+
+.drag-handle {
+  align-items: center;
+  color: var(--secondary-color);
+  cursor: grab;
+  display: flex;
+  flex-shrink: 0;
+  height: 32px;
+  justify-content: center;
+  transition: color .2s ease;
+  width: 32px;
+}
+
+.playlist-row-action-delete {
+  align-items: center;
+  color: var(--secondary-color);
+  cursor: grab;
+  display: flex;
+  flex-shrink: 0;
+  height: 32px;
+  justify-content: center;
+  transition: color .2s ease;
+  width: 32px;
+}
+
+/* -----------------------------------------------------------------------------
+   History Manager
+  ------------------------------------------------------------------------------ */
+
+.playlist-row .playlist-play-overlay {
+  align-items: center;
+  backdrop-filter: blur(10px);
+  background: rgba(0,0,0,.549);
+  border: 1px solid #ffffff23;
+  border-radius: 50%;
+  box-shadow: 0 10px 30px rgba(0,0,0,.2);
+  color: #fff;
+  display: flex;
+  font-size: 20px;
+  height: 60px;
+  justify-content: center;
+  left: 50%;
+  opacity: 0;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%,-50%);
+  transition: opacity .3s ease;
+  width: 60px;
+  z-index: 2;
+}
+
+.playlist-thumb-wrapper:hover {
+  transform: none;
+}
+
+.playlist-thumb-wrapper:hover .playlist-play-overlay {
+  opacity: 1;
+}
+
+.playlist-filters {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+  gap: 1rem;
+}
+
+.playlist-filters input, .playlist-filters select {
+  color: var(--text-color);
+  background: var(--card-background);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 0.5rem;
+}
+
+.playlist-block-title {
+  display: flex;
+  align-items: center;
+  text-rendering: optimizeLegibility;
+  text-align: left;
+  line-height: 1.25;
+  font-size: 1.125rem;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+
+/* -----------------------------------------------------------------------------
+   Footer / Branding
+  ------------------------------------------------------------------------------ */
+
+.powered-by {
+  background-color: var(--bs-primary);
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+  margin-bottom: 3rem !important;
+  padding: 4px 8px;
+}
+
+/* -----------------------------------------------------------------------------
+   Media brekpoints (unused)
+  ------------------------------------------------------------------------------ */
+
+/*
+@media  only screen and (max-width: 991.98px) {
+  #video_title .video-title {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    line-clamp: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
+*/
+
+/*
+@media only screen and (max-width: 991.98px) {
+  #video_title .video-title {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2; 
+    line-clamp: 2;
+    overflow: hidden;
+  }
+}
+*/
+
