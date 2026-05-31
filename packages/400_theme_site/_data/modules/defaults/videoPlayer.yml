@@ -5,7 +5,7 @@
 # Product/Info:
 # https://jekyll.one
 #
-# Copyright (C) 2023-2026 Juergen Adams
+# Copyright (C) 2026 Juergen Adams
 #
 # J1 Template is licensed under the MIT License.
 # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE
@@ -26,9 +26,7 @@ description:
 #
 defaults:
 
-  # ----------------------------------------------------------------------------
   # GENERAL options
-  # ----------------------------------------------------------------------------
   #
   enabled:                              false
 
@@ -60,22 +58,19 @@ defaults:
   # MODULE options
   # ----------------------------------------------------------------------------
 
-  # ----------------------------------------------------------------------------
   # videoJS settings
-  # ----------------------------------------------------------------------------
+  # 
   videoJS:
 
     autoStart:                          true
     preloadVideo:                       true                                    # preload: 'auto' | 'metadata' | 'none'
 
-    # --------------------------------------------------------------------------
     # videoJS playback rate settings
-    # --------------------------------------------------------------------------
+    #
     playbackRates:
       enabled:                          true
       values:                           [ 0.25, 0.5, 1, 1.5, 2 ]
 
-    # --------------------------------------------------------------------------
     # videoJS native (HTML5) player settings
     # --------------------------------------------------------------------------
     # claude - change skipAd API to local files #1
@@ -83,13 +78,14 @@ defaults:
     # All YouTube-specific parameters (cc_load_policy, disablekb, enablejsapi,
     # modestbranding, rel, showinfo, etc.) have been removed.
     # --------------------------------------------------------------------------
+    #
     players:
 
       native:
 
         # player parameters
         #
-        autoplay:                       false                                   # true | false | 'muted' | 'play' | 'any'
+        autoplay:                       true                                    # true | false | 'muted' | 'play' | 'any'
         controls:                       true
         fluid:                          true                                    # responsive, fills container width
         fill:                           false                                   # stretch to container dimensions
@@ -108,9 +104,8 @@ defaults:
         #
         sourceOrder:                    [ mp4, webm, ogv ]
 
-    # --------------------------------------------------------------------------
     # videoJS Plugin settings
-    # --------------------------------------------------------------------------
+    #
     plugins:
 
       autoCaption:

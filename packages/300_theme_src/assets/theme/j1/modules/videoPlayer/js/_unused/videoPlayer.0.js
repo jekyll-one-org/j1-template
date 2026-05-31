@@ -1,6 +1,6 @@
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/modules/videoPlayer/js/videoPlayer.js (2)
+ # ~/assets/theme/j1/modules/videoPlayer/js/videoPlayer.js (0)
  # Provides JS Core for J1 Module videoPlayer
  # claude - change skipAd API to local files #2
  #
@@ -215,11 +215,6 @@
       this._editHandlerInitialized        = false;
       this._infoLinkHandlerInitialized    = false;
       this._videoLinkHandlerInitialized   = false;
-      // claude - Fix J1 VideoPlayer #5
-      // Added missing guard flags for play and delete handlers.
-      // Without these, calling init twice would register duplicate listeners.
-      this._playHandlerInitialized        = false;
-      this._deleteHandlerInitialized      = false;
       this._searchResults                 = null;
       this._searchIndex                   = null;
       this._currentSort                   = 'watchDate';
@@ -796,10 +791,7 @@
         this._manageHiddenMode(true);
       }
 
-      // claude - Fix J1 VideoPlayer #2
-      // ID corrected from 'playlistHistory' (non-existent) to
-      // 'videoplayer_playlist_parent' to match the actual page element.
-      const historyEl = document.getElementById('videoplayer_playlist_parent');
+      const historyEl = document.getElementById('playlistHistory');
       if (historyEl) {
         if (this._displayMode === 'list') {
           historyEl.className = 'playlist list-mode';
@@ -826,26 +818,8 @@
         this.initInfoLinkHandler();
       }
 
-      // claude - Fix J1 VideoPlayer #2
-      // Typo fixed: '_vidoLinkHandlerInitialized' → '_videoLinkHandlerInitialized'
-      // (missing 'e'). The constructor declares '_videoLinkHandlerInitialized', so
-      // the old misspelled name was always undefined, causing duplicate handler
-      // registration on every renderCurrent() call.
-      if (!this._videoLinkHandlerInitialized) {
+      if (!this._vidoLinkHandlerInitialized) {
         this.initVideoLinkHandler();
-      }
-
-      // claude - Fix J1 VideoPlayer #5
-      // initPlayHandler and initDeleteHandler were never called from
-      // renderCurrent(), so clicking the play overlay or the delete button had
-      // no effect.  Both handlers already existed; they just needed to be wired
-      // in here, guarded by the new flags added to the constructor.
-      if (!this._playHandlerInitialized) {
-        this.initPlayHandler();
-      }
-
-      if (!this._deleteHandlerInitialized) {
-        this.initDeleteHandler();
       }
 
       this._updateSortSelectVisibility();
@@ -864,11 +838,8 @@
       this._updateLoopSwitchVisibility();
     }
 
-    // claude - Fix J1 VideoPlayer #2
-    // ID corrected from 'playlistHistory' (non-existent) to
-    // 'videoplayer_playlist_parent' which is the actual element in the page.
     _getPlaylistContainer() {
-      const el = document.getElementById('videoplayer_playlist_parent');
+      const el = document.getElementById('playlistHistory');
       if (!el) {
         consoleLog('ERROR', MODULE_NAME, 'playlist container element not found');
         consoleLog('WARN',  MODULE_NAME, 'processing playlist skipped');
@@ -1024,12 +995,8 @@
     // -------------------------------------------------------------------------
 
     initDeleteHandler() {
-      const playlistContainer = document.getElementById('videoplayer_playlist_parent') // claude - Fix J1 VideoPlayer #2: corrected ID;
+      const playlistContainer = document.getElementById('playlistHistory');
       if (!playlistContainer) return;
-
-      // claude - Fix J1 VideoPlayer #5
-      // Guard flag set here to prevent duplicate listener registration.
-      this._deleteHandlerInitialized = true;
 
       playlistContainer.addEventListener('click', (event) => {
         const deleteBtn = event.target.closest('.playlist-btn.delete');
@@ -1079,13 +1046,8 @@
     }
 
     initPlayHandler() {
-      const playlistContainer = document.getElementById('videoplayer_playlist_parent') // claude - Fix J1 VideoPlayer #2: corrected ID;
+      const playlistContainer = document.getElementById('playlistHistory');
       if (!playlistContainer) return;
-
-      // claude - Fix J1 VideoPlayer #5
-      // Guard flag set here so renderCurrent() can protect against duplicate
-      // listener registration (same pattern used by initRateHandler, etc.).
-      this._playHandlerInitialized = true;
 
       playlistContainer.addEventListener('click', (event) => {
         const playOverlay = event.target.closest('.playlist-play-overlay');
@@ -1260,7 +1222,7 @@
     initRateHandler() {
       if (this._rateHandlerInitialized) return;
 
-      const playlistContainer = document.getElementById('videoplayer_playlist_parent') // claude - Fix J1 VideoPlayer #2: corrected ID;
+      const playlistContainer = document.getElementById('playlistHistory');
       if (!playlistContainer) return;
 
       this._rateHandlerInitialized = true;
@@ -1596,7 +1558,7 @@
     initEditHandler() {
       if (this._editHandlerInitialized) return;
 
-      const playlistContainer = document.getElementById('videoplayer_playlist_parent') // claude - Fix J1 VideoPlayer #2: corrected ID;
+      const playlistContainer = document.getElementById('playlistHistory');
       if (!playlistContainer) return;
 
       this._editHandlerInitialized = true;
@@ -1619,7 +1581,7 @@
     initInfoLinkHandler() {
       if (this._infoLinkHandlerInitialized) return;
 
-      const playlistContainer = document.getElementById('videoplayer_playlist_parent') // claude - Fix J1 VideoPlayer #2: corrected ID;
+      const playlistContainer = document.getElementById('playlistHistory');
       if (!playlistContainer) return;
 
       this._infoLinkHandlerInitialized = true;
@@ -1636,7 +1598,7 @@
     initVideoLinkHandler() {
       if (this._videoLinkHandlerInitialized) return;
 
-      const playlistContainer = document.getElementById('videoplayer_playlist_parent') // claude - Fix J1 VideoPlayer #2: corrected ID;
+      const playlistContainer = document.getElementById('playlistHistory');
       if (!playlistContainer) return;
 
       this._videoLinkHandlerInitialized = true;

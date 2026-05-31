@@ -1,6 +1,6 @@
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/modules/videoPlayer/js/videoPlayer.js (2)
+ # ~/assets/theme/j1/modules/videoPlayer/js/videoPlayer.js (1)
  # Provides JS Core for J1 Module videoPlayer
  # claude - change skipAd API to local files #2
  #
@@ -215,11 +215,6 @@
       this._editHandlerInitialized        = false;
       this._infoLinkHandlerInitialized    = false;
       this._videoLinkHandlerInitialized   = false;
-      // claude - Fix J1 VideoPlayer #5
-      // Added missing guard flags for play and delete handlers.
-      // Without these, calling init twice would register duplicate listeners.
-      this._playHandlerInitialized        = false;
-      this._deleteHandlerInitialized      = false;
       this._searchResults                 = null;
       this._searchIndex                   = null;
       this._currentSort                   = 'watchDate';
@@ -835,19 +830,6 @@
         this.initVideoLinkHandler();
       }
 
-      // claude - Fix J1 VideoPlayer #5
-      // initPlayHandler and initDeleteHandler were never called from
-      // renderCurrent(), so clicking the play overlay or the delete button had
-      // no effect.  Both handlers already existed; they just needed to be wired
-      // in here, guarded by the new flags added to the constructor.
-      if (!this._playHandlerInitialized) {
-        this.initPlayHandler();
-      }
-
-      if (!this._deleteHandlerInitialized) {
-        this.initDeleteHandler();
-      }
-
       this._updateSortSelectVisibility();
       this._updateModeSwitchVisibility();
       this._updateMergeSwitchVisibility();
@@ -1027,10 +1009,6 @@
       const playlistContainer = document.getElementById('videoplayer_playlist_parent') // claude - Fix J1 VideoPlayer #2: corrected ID;
       if (!playlistContainer) return;
 
-      // claude - Fix J1 VideoPlayer #5
-      // Guard flag set here to prevent duplicate listener registration.
-      this._deleteHandlerInitialized = true;
-
       playlistContainer.addEventListener('click', (event) => {
         const deleteBtn = event.target.closest('.playlist-btn.delete');
         if (!deleteBtn) return;
@@ -1081,11 +1059,6 @@
     initPlayHandler() {
       const playlistContainer = document.getElementById('videoplayer_playlist_parent') // claude - Fix J1 VideoPlayer #2: corrected ID;
       if (!playlistContainer) return;
-
-      // claude - Fix J1 VideoPlayer #5
-      // Guard flag set here so renderCurrent() can protect against duplicate
-      // listener registration (same pattern used by initRateHandler, etc.).
-      this._playHandlerInitialized = true;
 
       playlistContainer.addEventListener('click', (event) => {
         const playOverlay = event.target.closest('.playlist-play-overlay');

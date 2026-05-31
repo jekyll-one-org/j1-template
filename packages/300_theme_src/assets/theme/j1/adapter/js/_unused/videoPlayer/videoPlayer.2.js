@@ -6,7 +6,7 @@ regenerate:                             true
 
 {% comment %}
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/adapter/js/videoPlayer.js (3)
+ # ~/assets/theme/j1/adapter/js/videoPlayer.js (2)
  # J1 Adapter for the module VideoPlayer (native videoJS)
  #
  # Product/Info:
@@ -68,7 +68,7 @@ regenerate:                             true
 
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/adapter/js/videoPlayer.js (3)
+ # ~/assets/theme/j1/adapter/js/videoPlayer.js (2)
  # J1 Adapter for the module VideoPlayer (native HTML5/videoJS)
  #
  # Product/Info:
@@ -264,32 +264,15 @@ j1.adapter.videoPlayer = ((j1, window) => {
         logger.info('\n' + 'initHandlers: playlistIOHandler skipped (playlist disabled)');
       }
 
-      // claude - Fix J1 VideoPlayer #4
-      // 2a. initPlayHandler — listen for the 'playlist-play' CustomEvent bubbled
-      //     from PlaylistCards._onPlayClick() and forward it to the module's
-      //     play logic.
-      //
-      //     Background: #3 added `new videoPlayer.initPlayHandler(options)` but
-      //     initPlayHandler is NOT exported as a constructor class by the module.
-      //     PlaylistCards already handles the UI side by dispatching a
-      //     'playlist-play' CustomEvent that bubbles up through the light DOM;
-      //     the adapter must wire an addEventListener, NOT call new on a
-      //     non-existent class.
+      // claude - Fix J1 VideoPlayer #3
+      // 2a. initPlayHandler — .playlist-play-overlay click → load & play video
+      //     Listens for the 'playlist-play' CustomEvent dispatched by PlaylistCards
+      //     (or for delegated clicks on .playlist-play-overlay inside #playlistHistory).
       //
       if (options.playlist && options.playlist.enabled) {
         try {
-          const playlistHistory = document.getElementById('playlistHistory');
-          if (playlistHistory) {
-            playlistHistory.addEventListener('playlist-play', (e) => {
-              const videoId = e.detail && e.detail.videoId;
-              if (videoId && typeof videoPlayer.loadAndPlay === 'function') {
-                videoPlayer.loadAndPlay(videoId);
-              }
-            });
-            logger.debug('\n' + 'initHandlers: initPlayHandler (event listener) — OK');
-          } else {
-            logger.warn('\n' + 'initHandlers: initPlayHandler skipped — #playlistHistory not found');
-          }
+          new videoPlayer.initPlayHandler(options);
+          logger.debug('\n' + 'initHandlers: initPlayHandler — OK');
         } catch (e) {
           logger.error('\n' + 'initHandlers: initPlayHandler failed: ' + e);
         }
@@ -297,28 +280,15 @@ j1.adapter.videoPlayer = ((j1, window) => {
         logger.info('\n' + 'initHandlers: initPlayHandler skipped (playlist disabled)');
       }
 
-      // claude - Fix J1 VideoPlayer #4
-      // 2b. initDeleteHandler — listen for the 'playlist-delete' CustomEvent
-      //     bubbled from PlaylistCards._onDeleteClick() and forward it to the
-      //     module's delete logic.
-      //
-      //     Same root cause as 2a: #3 incorrectly used `new videoPlayer.initDeleteHandler`.
-      //     The handler must be wired as an addEventListener on #playlistHistory.
+      // claude - Fix J1 VideoPlayer #3
+      // 2b. initDeleteHandler — .playlist-btn.delete click → remove card + playlist entry
+      //     Listens for the 'playlist-delete' CustomEvent dispatched by PlaylistCards
+      //     (or for delegated clicks on .playlist-btn.delete inside #playlistHistory).
       //
       if (options.playlist && options.playlist.enabled) {
         try {
-          const playlistHistory = document.getElementById('playlistHistory');
-          if (playlistHistory) {
-            playlistHistory.addEventListener('playlist-delete', (e) => {
-              const videoId = e.detail && e.detail.videoId;
-              if (videoId && typeof videoPlayer.deleteEntry === 'function') {
-                videoPlayer.deleteEntry(videoId);
-              }
-            });
-            logger.debug('\n' + 'initHandlers: initDeleteHandler (event listener) — OK');
-          } else {
-            logger.warn('\n' + 'initHandlers: initDeleteHandler skipped — #playlistHistory not found');
-          }
+          new videoPlayer.initDeleteHandler(options);
+          logger.debug('\n' + 'initHandlers: initDeleteHandler — OK');
         } catch (e) {
           logger.error('\n' + 'initHandlers: initDeleteHandler failed: ' + e);
         }

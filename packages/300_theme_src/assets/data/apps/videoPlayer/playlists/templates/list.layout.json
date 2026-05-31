@@ -1,0 +1,29 @@
+{
+  "meta_data": {
+    "category": "Dokutainment",
+    "created": "2026-01-01T00:00:00Z",
+    "description": "Harnas - Abenteuer Afrika. SWR-Dokuserie deren Schauplatz die Tierrettungsstation „Harnas“ am Rand der afrikanischen Kalahari-Wüste ist.",
+    "infoLink": "https://fernsehserien.de/das-waisenhaus-fuer-wilde-tiere",
+    "itens": 24
+  },
+  "playlist": [
+    {
+      "author": "The Late Late Show with James Corden",
+      "category": "Showact",
+      "duration": 933,
+      "episode": 0,
+      "lastDate": "",
+      "rating": 0,
+      "series": false,
+      "tags": [],
+      "title": "Carpool Karaoke w/ Sam Smith ft. Fifth Harmony",
+      "type": "video",
+      "url": "https://youtu.be/z2FHKVzGhgA",
+      "videoId": "z2FHKVzGhgA",
+      "infoLink": "",
+      "lastPosition": 0,
+      "issueDate": "",
+      "watchDate": "2026-01-01T00:00:00Z"
+    }
+  ]
+}

@@ -125,6 +125,7 @@ watching YouTube videos undisturbed.
           </div>
         </div>
       </div>
+
     </div>
   </div>
 
@@ -141,7 +142,7 @@ watching YouTube videos undisturbed.
       <div id="video_container" class="video-container not-spoken mb-4">
         <div id="emptyPlayerOverlay" class="empty-player-overlay">
           <div class="empty-player-content">
-            <img src="/assets/image/icon/j1/j1-512x512.png" style="margin-bottom: 2rem" alt="SkipAd - All ads instantly blocked for free." width="1024" height="256">
+            <img src="/assets/image/icon/j1/j1-512x512.png"  alt="SkipAd - All ads instantly blocked for free." width="512" height="512">
           </div>
         </div>
       </div>
@@ -149,19 +150,19 @@ watching YouTube videos undisturbed.
   </div>
 
   <div class="sect1 mt-4">
-    <!-- h2 id="yourPlaylist">Your playlist</h2 -->
+    <h2 id="yourPlaylist">Your playlist</h2>
     <div class="sectionbody">
 
-      <!-- div class="paragraph">
+      <div class="paragraph">
         <p>
           SkipAd creates a playlist based on the videos you've recently watched
           and stores it in your browser. Export your <strong>current playlist</strong>,
           load an <strong>archived</strong> one from a file or
           <strong>clear your current</strong> personal video list.
         </p>
-      </div -->
+      </div>
 
-      <!-- div id="historyIOWrapper" class="input-wrapper input-section not-spoken mt-4">
+      <div id="historyIOWrapper" class="input-wrapper input-section not-spoken mt-4">
         <div class="input-container d-flex justify-content-center flex-wrap">
           <input type="file" id="playlistImportFile" accept=".json,application/json" style="display: none;" aria-hidden="true">
           <button id="playlistExportButton" class="export-playlist-btn" title="Export playlist to file">
@@ -177,7 +178,7 @@ watching YouTube videos undisturbed.
           <span>Clear Playlist</span>
           </button>
         </div>
-      </div -->
+      </div>
 
       <div id="playlistSearch" class="sect2 mt-4" style="display: none">
         <div class="paragraph">
@@ -239,7 +240,7 @@ watching YouTube videos undisturbed.
           </select>
         </div>
 
-        <div id="skipad_playlist_parent" class="not-spoken"></div>
+        <div id="videoplayer_playlist_parent" class="not-spoken"></div>
 
         <p class="mt-3">
           Have fun watching again your favorite videos. To load a new video

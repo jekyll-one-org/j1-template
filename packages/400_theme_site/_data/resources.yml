@@ -2192,7 +2192,10 @@ resources:
       data: 
         css:                            [ modules/videoPlayer/css/videoPlayer ]
         js:                             [ modules/videoPlayer/js/videoPlayer ]
-        files:                          [ adapter/js/videoPlayer.js ]
+        files:                          [ 
+                                          modules/videoPlayer/js/playlistCards.mjs,
+                                          adapter/js/videoPlayer.js
+                                        ]
         init_function:                  [ j1.adapter.videoPlayer.init ]
 
 # ------------------------------------------------------------------------------
