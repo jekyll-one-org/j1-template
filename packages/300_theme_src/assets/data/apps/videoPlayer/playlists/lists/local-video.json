@@ -1,0 +1,51 @@
+{
+  "meta_data": {
+    "category": "Entertainment",
+    "created": "2026-01-01T00:00:00Z",
+    "description": "Asanda - Best Auditions",
+    "infoLink": "",
+    "itens": 1
+  },
+  "playlist": [
+    {
+      "author": "",
+      "category": "Entertainment",
+      "description": "",
+      "duration": 138,
+      "infoLink": "",
+      "issueDate": "",
+      "episode": 1,
+      "lastPosition": 0,
+      "poster": "",
+      "rating": 0,
+      "series": 1,
+      "src": "http://localhost:41000/assets/video/html5/peck_pocketed.mp4",
+      "tags": [],
+      "title": "Peck Pocketed",
+      "type": "video",
+      "videoLink": "http://localhost:41000/assets/video/html5/peck_pocketed.mp4",
+      "videoId": "peck_pocketed",
+      "watchDate": "2026-05-31T19:16:03.157Z"
+    },
+    {
+      "author": "",
+      "category": "Entertainment",
+      "description": "",
+      "duration": 119,
+      "infoLink": "",
+      "issueDate": "",
+      "episode": 2,
+      "lastPosition": 0,
+      "poster": "",
+      "rating": 0,
+      "series": 1,
+      "src": "http://localhost:41000/assets/video/html5/rolling_wild.mp4",
+      "tags": [],
+      "title": "Rolling Wild",
+      "type": "video",
+      "videoLink": "http://localhost:41000/assets/video/html5/rolling_wild.mp4",
+      "videoId": "rolling_wild",
+      "watchDate": "2026-05-31T19:16:08.070Z"
+    }
+  ]
+}

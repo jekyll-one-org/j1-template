@@ -1,9 +1,0 @@
-[
-  { "name": "CBS - Carpool Karaoke (English)",  "file": "lists/carpool-karaoke.json" },
-  { "name": "NPR - Tiny Desk Concerts (English)", "file": "lists/tinydesk-concerts.json" },
-  { "name": "AGT - Legendary Contestants (English)", "file": "lists/agt-legendary-auditions.json" },
-  { "name": "BGT - Legendary Contestants (English)", "file": "lists/bgt-legendary-auditions.json" },  
-  { "name": "YTP - Rick Astley (Series)", "file": "lists/ytp-rick-astley.json" },
-  { "name": "YTP - Bea and her business (Series)", "file": "lists/ytp-bea-and-her-business.json" },
-  { "name": "BBC - The Next Step, Season 1 (Series/English)", "file": "lists/the-next-step-season-1.json" }
-]

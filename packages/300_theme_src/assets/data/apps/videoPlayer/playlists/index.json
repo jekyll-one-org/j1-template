@@ -1,4 +1,4 @@
 [
-  { "name": "CBS - Carpool Karaoke (English)",  "file": "lists/carpool-karaoke.json" },
-  { "name": "NPR - Tiny Desk Concerts (English)", "file": "lists/tinydesk-concerts.json" }
+  { "name": "Local Video files", "file": "lists/local-video.json" },
+  { "name": "BBC - The Next Step, Season 1 (Series/English)", "file": "lists/the-next-step-season-1.json" }
 ]

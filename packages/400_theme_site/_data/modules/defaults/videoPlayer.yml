@@ -49,7 +49,7 @@ defaults:
       enabled:                          true
       pip:                              false
 
-    type:                               cards                                   # list | cards
+    type:                               list                                    # list | cards
 
     cards:
       perRow:                           4
