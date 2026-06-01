@@ -1,6 +1,6 @@
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/modules/videoPlayer/js/videoPlayer.js (5)
+ # ~/assets/theme/j1/modules/videoPlayer/js/videoPlayer.js (4)
  # Provides JS Core for J1 Module videoPlayer
  # claude - Extend J1 VideoPlayer #1
  #
@@ -14,7 +14,7 @@
  # -----------------------------------------------------------------------------
 */
 
-/* Version 3.1.5 for J1 Template */
+/* Version 3.1.4 for J1 Template */
 
 // -----------------------------------------------------------------------------
 // ESLint shimming
@@ -54,9 +54,6 @@
     /youtube\.com\/embed\/([a-zA-Z0-9_-]{11})/,
     /youtube\.com\/v\/([a-zA-Z0-9_-]{11})/
   ]);
-
-  const YOUTUBE_ID_RE = /(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|shorts\/))([A-Za-z0-9_-]{11})/;
-  const YOUTUBE_POSTER_QUALITY = 'mqdefault';
 
   // claude - change skipAd API to local files #2
   // VIDEO_URL_PATTERNS matches local paths (/assets/...) and remote URLs
@@ -908,7 +905,6 @@
 
       const data = this._searchResults || this.load() || [];
       this._applySortOrder(data);
-
       playlistContainer.innerHTML = data.map((item, index) => {
         const hasDuration   = (item.duration && item.duration > 0) ? true : false;
         const duration      = hasDuration ? this._formatDuration(item.duration) : '';
@@ -922,15 +918,7 @@
 
         // claude - change skipAd API to local files #2
         // Thumbnail uses local poster field; falls back to DEFAULT_POSTER.
-        let thumbSrc = item.poster || DEFAULT_POSTER;
-
-        // overload thumbSrc for thumbnail images for youtube items
-        // 
-        const ytID = item.videoLink.match(YOUTUBE_ID_RE);
-        const isYt = (ytID) ? true : false;
-        if (isYt) {
-          thumbSrc = `https://img.youtube.com/vi/${ytID[1]}/${YOUTUBE_POSTER_QUALITY}.jpg`;
-        }
+        const thumbSrc = item.poster || DEFAULT_POSTER;
 
         return `
           <div class="playlist-row card-base" data-index="${index}" data-video-id="${item.videoId}">
@@ -990,7 +978,6 @@
 
       const data = this._searchResults || this.load() || [];
       this._applySortOrder(data);
-
       playlistContainer.innerHTML = data.map(v => {
         const hasDuration  = v.duration && v.duration > 0;
         const duration     = hasDuration ? this._formatDuration(v.duration) : '';
@@ -1003,15 +990,7 @@
 
         // claude - change skipAd API to local files #2
         // Thumbnail uses local poster field; falls back to DEFAULT_POSTER.
-        let thumbSrc = v.poster || DEFAULT_POSTER;
-
-        // overload thumbSrc for thumbnail images for youtube items
-        // 
-        const ytID = v.videoLink.match(YOUTUBE_ID_RE);
-        const isYt = (ytID) ? true : false;
-        if (isYt) {
-          thumbSrc = `https://img.youtube.com/vi/${ytID[1]}/${YOUTUBE_POSTER_QUALITY}.jpg`;
-        }
+        const thumbSrc = v.poster || DEFAULT_POSTER;
 
         return `
           <div class="playlist-card card-base" data-video-id="${v.videoId}">
@@ -2638,16 +2617,11 @@
         textEl.textContent = player.ytVideoTitle;
       }
 
-      // claude - Extend J1 VideoPlayer #3
-      // Added 'poster' field: resolves to the highest-quality YouTube thumbnail
-      // (maxresdefault.jpg) so list and card items show the real poster image
-      // instead of falling back to DEFAULT_POSTER.
       const media = {
         videoId:      vid,
         title:        vd.title  || player.ytVideoTitle || '',
         author:       vd.author || '',
         infoLink:     `https://youtu.be/watch?v=${vid}`,
-        poster:       vid ? `//img.youtube.com/vi/${vid}/maxresdefault.jpg` : '',
         duration:     player.duration(),
         lastPosition: 0
       };

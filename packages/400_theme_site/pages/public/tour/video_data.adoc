@@ -96,7 +96,6 @@ own website and from online sources like YouTube.
 </div>
 ++++
 
-
 // Include sub-documents (if any)
 // See: https://docs.asciidoctor.org/asciidoc/latest/macros/audio-and-video/
 // -----------------------------------------------------------------------------

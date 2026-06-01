@@ -46,13 +46,13 @@ defaults:
       enabled:                          true
 
     loop:
-      enabled:                          true
+      enabled:                          false
       pip:                              false
 
     type:                               list                                    # list | cards
 
     cards:
-      perRow:                           4
+      perRow:                           2
 
   # ----------------------------------------------------------------------------
   # MODULE options
@@ -71,7 +71,12 @@ defaults:
       enabled:                          true
       values:                           [ 0.25, 0.5, 1, 1.5, 2 ]
 
-    # videoJS native (HTML5) player settings
+    # videoJS poster settings
+    #
+    default_poster:                     /assets/image/icon/videojs/videojs-poster.png
+
+
+    # videoJS player settings
     # --------------------------------------------------------------------------
     # claude - change skipAd API to local files #1
     # Replaced YouTube player tech with native HTML5 video.js player.
@@ -95,14 +100,47 @@ defaults:
 
         # video parameters
         #
-        default_poster:                 /assets/image/icon/videojs/videojs-poster.png
-        poster:                         poster.jpg                             # local poster image (same folder as video)
-        end:                            true                                    # set end (trim) of a video allowed
+        #default_poster:                /assets/image/icon/videojs/videojs-poster.png
+        poster_base:                    video-folder                            # same folder as video
+        poster:                         poster.jpg                              # poster image
         start:                          true                                    # set start (trim) of a video allowed
+        end:                            true                                    # set end (trim) of a video allowed
 
         # source type priorities (tried in order)
         #
         sourceOrder:                    [ mp4, webm, ogv ]
+
+      # ------------------------------------------------------------------------
+      # claude - Extend J1 VideoPlayer #2
+      # The YouTube player used by J1 VideoPlayer (skipad.js) now reads ALL its
+      # player parameters from the players.native key above.  The players.youtube
+      # section below is retained for backward-compatibility with other modules
+      # (e.g. Amplitude/YTP) that still reference it directly; it is NO LONGER
+      # used by VideoPlayer's YouTube playback path.
+      # ------------------------------------------------------------------------
+      youtube:
+
+        # player parameters
+        #
+        autoplay:                       true
+        cc_load_policy:                 0                                       # 0|1, captions are initially hidden
+        controls:                       1                                       # 0|1, disable|enable (vjs) controlbar
+        disablekb:                      1
+        enablejsapi:                    1    
+        fs:                             0
+        iv_load_policy:                 3                                       # video annotations not shown
+        loop:                           0
+        modestbranding:                 1
+        rel:                            0
+        showinfo:                       0
+
+        # video parameters
+        #
+        # default_poster:               /assets/image/icon/videojs/videojs-poster.png
+        poster_base:                    //img.youtube.com/vi
+        poster_qualty:                  mqdefault                               # poster taken from poster_base at medium resolution
+        start:                          true                                    # set start (trim) of a video allowed
+        end:                            true                                    # set end (trim) of a video allowed
 
     # videoJS Plugin settings
     #

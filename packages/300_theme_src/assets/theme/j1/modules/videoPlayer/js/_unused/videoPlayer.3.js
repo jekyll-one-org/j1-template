@@ -1,6 +1,6 @@
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/modules/videoPlayer/js/videoPlayer.js (5)
+ # ~/assets/theme/j1/modules/videoPlayer/js/videoPlayer.js (3)
  # Provides JS Core for J1 Module videoPlayer
  # claude - Extend J1 VideoPlayer #1
  #
@@ -14,7 +14,7 @@
  # -----------------------------------------------------------------------------
 */
 
-/* Version 3.1.5 for J1 Template */
+/* Version 3.1.3 for J1 Template */
 
 // -----------------------------------------------------------------------------
 // ESLint shimming
@@ -54,9 +54,6 @@
     /youtube\.com\/embed\/([a-zA-Z0-9_-]{11})/,
     /youtube\.com\/v\/([a-zA-Z0-9_-]{11})/
   ]);
-
-  const YOUTUBE_ID_RE = /(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|shorts\/))([A-Za-z0-9_-]{11})/;
-  const YOUTUBE_POSTER_QUALITY = 'mqdefault';
 
   // claude - change skipAd API to local files #2
   // VIDEO_URL_PATTERNS matches local paths (/assets/...) and remote URLs
@@ -908,7 +905,6 @@
 
       const data = this._searchResults || this.load() || [];
       this._applySortOrder(data);
-
       playlistContainer.innerHTML = data.map((item, index) => {
         const hasDuration   = (item.duration && item.duration > 0) ? true : false;
         const duration      = hasDuration ? this._formatDuration(item.duration) : '';
@@ -922,15 +918,7 @@
 
         // claude - change skipAd API to local files #2
         // Thumbnail uses local poster field; falls back to DEFAULT_POSTER.
-        let thumbSrc = item.poster || DEFAULT_POSTER;
-
-        // overload thumbSrc for thumbnail images for youtube items
-        // 
-        const ytID = item.videoLink.match(YOUTUBE_ID_RE);
-        const isYt = (ytID) ? true : false;
-        if (isYt) {
-          thumbSrc = `https://img.youtube.com/vi/${ytID[1]}/${YOUTUBE_POSTER_QUALITY}.jpg`;
-        }
+        const thumbSrc = item.poster || DEFAULT_POSTER;
 
         return `
           <div class="playlist-row card-base" data-index="${index}" data-video-id="${item.videoId}">
@@ -990,7 +978,6 @@
 
       const data = this._searchResults || this.load() || [];
       this._applySortOrder(data);
-
       playlistContainer.innerHTML = data.map(v => {
         const hasDuration  = v.duration && v.duration > 0;
         const duration     = hasDuration ? this._formatDuration(v.duration) : '';
@@ -1003,15 +990,7 @@
 
         // claude - change skipAd API to local files #2
         // Thumbnail uses local poster field; falls back to DEFAULT_POSTER.
-        let thumbSrc = v.poster || DEFAULT_POSTER;
-
-        // overload thumbSrc for thumbnail images for youtube items
-        // 
-        const ytID = v.videoLink.match(YOUTUBE_ID_RE);
-        const isYt = (ytID) ? true : false;
-        if (isYt) {
-          thumbSrc = `https://img.youtube.com/vi/${ytID[1]}/${YOUTUBE_POSTER_QUALITY}.jpg`;
-        }
+        const thumbSrc = v.poster || DEFAULT_POSTER;
 
         return `
           <div class="playlist-card card-base" data-video-id="${v.videoId}">
@@ -2519,22 +2498,17 @@
             });
           }
 
-          // claude - Extend J1 VideoPlayer #2
-          // For YouTube, hide the VJS control bar when configured.
-          // players.youtube.controls === 0 means the YouTube IFrame API hides
-          // its own chrome; the VJS control bar is hidden separately here.
-          // For native videos the control bar is always shown.
-          const ytControls = videoPlayerOptions.videoJS.players.youtube
-            ? videoPlayerOptions.videoJS.players.youtube.controls
-            : undefined;
-          if (isYouTube && (videoPlayerOptions.videoJS.hideControlBar || ytControls === 0)) {
+          // claude - Extend J1 VideoPlayer #1
+          // For YouTube, hide the VJS control bar when configured (identical
+          // to skipad.js).  For native videos, the control bar is always shown.
+          if (isYouTube && videoPlayerOptions.videoJS.hideControlBar) {
             isDev && logger.debug('\n'+ 'hiding vjs controlbar for YT video');
             vjsPlayer.addClass('vjs-youtube-hide-controlbar');
           }
 
-          // claude - Extend J1 VideoPlayer #2
-          // Autoplay: read from players.youtube for YouTube, players.native for
-          // native video — both driven by the defaults in videoPlayer.yml.
+          // claude - Extend J1 VideoPlayer #1
+          // Autoplay: check players.youtube for YouTube, players.native for
+          // native video (mirrors skipad.js for the YouTube path).
           const autoplay = isYouTube
             ? (videoPlayerOptions.videoJS.players.youtube && videoPlayerOptions.videoJS.players.youtube.autoplay)
             : (videoPlayerOptions.videoJS.players.native  && videoPlayerOptions.videoJS.players.native.autoplay);
@@ -2638,16 +2612,11 @@
         textEl.textContent = player.ytVideoTitle;
       }
 
-      // claude - Extend J1 VideoPlayer #3
-      // Added 'poster' field: resolves to the highest-quality YouTube thumbnail
-      // (maxresdefault.jpg) so list and card items show the real poster image
-      // instead of falling back to DEFAULT_POSTER.
       const media = {
         videoId:      vid,
         title:        vd.title  || player.ytVideoTitle || '',
         author:       vd.author || '',
         infoLink:     `https://youtu.be/watch?v=${vid}`,
-        poster:       vid ? `//img.youtube.com/vi/${vid}/maxresdefault.jpg` : '',
         duration:     player.duration(),
         lastPosition: 0
       };
@@ -2822,40 +2791,15 @@
     let videoConfig;
 
     if (isYouTube) {
-      // claude - Extend J1 VideoPlayer #2
-      // YouTube tech configuration: all player parameters are now read from
-      // videoPlayerOptions.videoJS.players.youtube (videoPlayer.yml) instead
-      // of being hardcoded.  This replaces the static skipad.js equivalent.
-      const vpo     = (typeof j1 !== 'undefined' && j1.adapter && j1.adapter.videoPlayer)
-        ? j1.adapter.videoPlayer.videoPlayerOptions
-        : null;
-      const ytCfg   = (vpo && vpo.videoJS && vpo.videoJS.players && vpo.videoJS.players.youtube)
-        ? vpo.videoJS.players.youtube
-        : {};
-
-      // Build the YouTube playerVars object from players.youtube defaults.
-      // Only numeric / string params that the YouTube IFrame API accepts are
-      // forwarded; boolean flags (end, start) are used elsewhere in the module
-      // and are intentionally excluded from playerVars.
-      const ytPlayerVars = {};
-      const ytParamKeys = [
-        'cc_load_policy', 'controls', 'disablekb', 'enablejsapi',
-        'fs', 'iv_load_policy', 'loop', 'modestbranding', 'rel', 'showinfo'
-      ];
-      ytParamKeys.forEach(key => {
-        if (key in ytCfg) ytPlayerVars[key] = ytCfg[key];
-      });
-
+      // claude - Extend J1 VideoPlayer #1
+      // YouTube tech configuration (identical to skipad.js createVideoJsPlayer).
       videoConfig = {
-        fluid:     !!(ytCfg.fluid !== undefined ? ytCfg.fluid : true),
+        fluid:     true,
         techOrder: ['youtube', 'html5'],
         sources: [{
           type: 'video/youtube',
           src:  `//youtu.be/${videoId}`
         }],
-        youtube: {
-          playerVars: ytPlayerVars
-        },
         controlBar: {
           pictureInPictureToggle: false,
           volumePanel: {
@@ -2863,22 +2807,8 @@
           }
         }
       };
-
-      isDev && consoleLog('INFO', MODULE_NAME, `createVideoJsPlayer: YouTube playerVars from players.youtube: ${JSON.stringify(ytPlayerVars)}`);
-
     } else {
-      // claude - Extend J1 VideoPlayer #2
-      // Native HTML5 tech configuration: all player parameters are now read
-      // from videoPlayerOptions.videoJS.players.native (videoPlayer.yml)
-      // instead of being hardcoded.  Static defaults are used as fallback
-      // values when videoPlayerOptions is not yet available.
-      const vpo      = (typeof j1 !== 'undefined' && j1.adapter && j1.adapter.videoPlayer)
-        ? j1.adapter.videoPlayer.videoPlayerOptions
-        : null;
-      const ntvCfg   = (vpo && vpo.videoJS && vpo.videoJS.players && vpo.videoJS.players.native)
-        ? vpo.videoJS.players.native
-        : {};
-
+      // claude - change skipAd API to local files #2
       // Auto-detect MIME type from the file extension so that MP4, WebM
       // and OGV sources are all accepted without hardcoding.
       const extMap = {
@@ -2892,15 +2822,10 @@
       const srcExt  = (videoSrc || '').split('?')[0].split('.').pop().toLowerCase();
       const srcType = extMap[srcExt] || 'video/mp4';
 
-      // videoJS configuration: HTML5 tech only.
-      // Boolean/string player params are taken from players.native defaults;
-      // static fallback values match the previous hardcoded behaviour.
+      // claude - change skipAd API to local files #2
+      // videoJS configuration: HTML5 tech only, no YouTube tech.
       videoConfig = {
-        fluid:       !!(ntvCfg.fluid       !== undefined ? ntvCfg.fluid       : true),
-        fill:        !!(ntvCfg.fill        !== undefined ? ntvCfg.fill        : false),
-        responsive:  !!(ntvCfg.responsive  !== undefined ? ntvCfg.responsive  : true),
-        playsinline: !!(ntvCfg.playsinline !== undefined ? ntvCfg.playsinline : true),
-        preload:     ntvCfg.preload || 'auto',
+        fluid:     true,
         sources: [{
           type: srcType,
           src:  videoSrc
@@ -2912,15 +2837,6 @@
           }
         }
       };
-
-      // Apply poster from players.native if no dedicated poster is present
-      // on the entry itself (poster resolution happens later in nativePlayer
-      // plugin; this sets the initial VJS poster attribute).
-      if (ntvCfg.default_poster) {
-        videoConfig.poster = ntvCfg.default_poster;
-      }
-
-      isDev && consoleLog('INFO', MODULE_NAME, `createVideoJsPlayer: native config from players.native: fluid=${videoConfig.fluid}, responsive=${videoConfig.responsive}, preload=${videoConfig.preload}`);
     }
 
     if (typeof videojs !== 'undefined') {

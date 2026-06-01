@@ -72,6 +72,8 @@ resource_options:
 // See: https://docs.asciidoctor.org/asciidoc/latest/macros/audio-and-video/
 //
 
+// Page content
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 [role="dropcap"]
 HTML5 makes it easy to add *audio* to a web page. Every modern browser
 has a *built-in audio player* with the standard play, pause, and volume

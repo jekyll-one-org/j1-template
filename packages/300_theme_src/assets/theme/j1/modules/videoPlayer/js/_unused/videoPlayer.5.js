@@ -56,7 +56,7 @@
   ]);
 
   const YOUTUBE_ID_RE = /(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|shorts\/))([A-Za-z0-9_-]{11})/;
-  const YOUTUBE_POSTER_QUALITY = 'mqdefault';
+  const YOUTUBE_POSTER_QUALITY = 'maxresdefault';
 
   // claude - change skipAd API to local files #2
   // VIDEO_URL_PATTERNS matches local paths (/assets/...) and remote URLs

@@ -1,7 +1,7 @@
 ---
 title:                                  Video player
-title_extention:                        Native Player
-tagline:                                Native player
+title_extention:                        J1 Player
+tagline:                                Playback Video
 
 date:                                   2026-04-17
 #last_modified:                         2026-01-01
@@ -61,24 +61,20 @@ SkipAd embeds an excellent video player to block all ads on YouTube
 videos instantly for a better viewing experience. No more pre-roll,
 mid-roll, or overlay ads.
 
-The SkipAd page provides an *100% free alternative* to e.g.
-*YouTube Premium plans* or often useless *browser plugins* for
-watching YouTube videos undisturbed.
-
 // Include sub-documents (if any)
 // -----------------------------------------------------------------------------
 ++++
-<div id="content" class="container mb-5">
+<div id="content" class="mb-5">
 
-  <div class="sect1 mt-5">
+  <div class="sect1 mt-4">
     <h2 id="videoSelection">Video selection</h2>
     <div class="sectionbody">
-      <div class="paragraph">
+      <!-- div class="paragraph">
         <p>
           Paste a link or the ID of a video to the input element below.
         </p>
-      </div>
-      <div class="input-wrapper input-section not-spoken">
+      </div -->
+      <!-- div class="input-wrapper input-section not-spoken">
         <div class="input-container">
           <button id="pasteButton" class="paste-btn-inside" title="Paste from clipboard">
             <i class="fas fa-paste"></i>
@@ -96,7 +92,7 @@ watching YouTube videos undisturbed.
           <i class="fas fa-video mt-1 mr-2"></i>
           <span>Watch Video</span>
         </button>
-      </div>
+      </div -->
 
       <div class="sect2">
         <div class="paragraph">
@@ -124,16 +120,35 @@ watching YouTube videos undisturbed.
             </button>
           </div>
         </div>
+
+        <div id="historyIOWrapper" class="input-wrapper input-section not-spoken mt-4">
+          <div class="input-container d-flex justify-content-start flex-wrap">
+            <input type="file" id="playlistImportFile" accept=".json,application/json" style="display: none;" aria-hidden="true">
+            <button id="playlistExportButton" class="export-playlist-btn" title="Export playlist to file">
+            <i class="fas fa-file-export mr-2"></i>
+            <span>Export Playlist</span>
+            </button>
+            <button id="playlistImportButton" class="import-playlist-btn" title="Import playlist from file">
+            <i class="fas fa-file-import mr-2"></i>
+            <span>Import Playlist</span>
+            </button>
+            <button id="playlistClearButton" class="delete-playlist-btn" title="Clear playlist">
+            <i class="fas fa-trash-alt mr-2"></i>
+            <span>Clear Playlist</span>
+            </button>
+          </div>
+        </div>
+
       </div>
 
     </div>
   </div>
 
-  <div class="sect1 mt-4">
+  <div class="sect1 mt-5">
     <h2 id="videoPlayer">Video player</h2>
     <div class="sectionbody">
       <div class="paragraph">
-        <p>Enjoy watching YouTube video ad-free.</p>
+        <p>Enjoy watching your playlist.</p>
       </div>
       <div id="video_title" class="video-title not-spoken" style="display: none">
         <i class="mdib mdib-video mdib-24px mr-2"></i>
@@ -142,7 +157,10 @@ watching YouTube videos undisturbed.
       <div id="video_container" class="video-container not-spoken mb-4">
         <div id="emptyPlayerOverlay" class="empty-player-overlay">
           <div class="empty-player-content">
-            <img src="/assets/image/icon/j1/j1-512x512.png"  alt="SkipAd - All ads instantly blocked for free." width="512" height="512">
+            <img
+              src="/assets/image/icon/videojs/videojs-logo.png"
+              alt="VideoJS Player"
+              width="500" height="200">
           </div>
         </div>
       </div>
@@ -150,19 +168,19 @@ watching YouTube videos undisturbed.
   </div>
 
   <div class="sect1 mt-4">
-    <h2 id="yourPlaylist">Your playlist</h2>
-    <div class="sectionbody">
+    <!-- h2 id="yourPlaylist">Your playlist</h2>
+    <div class="sectionbody" -->
 
-      <div class="paragraph">
+      <!-- div class="paragraph">
         <p>
           SkipAd creates a playlist based on the videos you've recently watched
           and stores it in your browser. Export your <strong>current playlist</strong>,
           load an <strong>archived</strong> one from a file or
           <strong>clear your current</strong> personal video list.
         </p>
-      </div>
+      </div -->
 
-      <div id="historyIOWrapper" class="input-wrapper input-section not-spoken mt-4">
+      <!-- div id="historyIOWrapper" class="input-wrapper input-section not-spoken mt-4">
         <div class="input-container d-flex justify-content-center flex-wrap">
           <input type="file" id="playlistImportFile" accept=".json,application/json" style="display: none;" aria-hidden="true">
           <button id="playlistExportButton" class="export-playlist-btn" title="Export playlist to file">
@@ -178,9 +196,9 @@ watching YouTube videos undisturbed.
           <span>Clear Playlist</span>
           </button>
         </div>
-      </div>
+      </div -->
 
-      <div id="playlistSearch" class="sect2 mt-4" style="display: none">
+      <!-- div id="playlistSearch" class="sect2 mt-4" style="display: none">
         <div class="paragraph">
           <p>
             To ease the management of a large number of items in your playlist,
@@ -200,9 +218,9 @@ watching YouTube videos undisturbed.
             <span id="playlistSearchResultCount"></span>
           </div>
         </div>
-      </div>
+      </div -->
 
-      <div id="playlistBlock" class="not-spoken mt-6" style="display: none">
+      <div id="playlistBlock" class="not-spoken mt-0" style="display: none">
         <div class="playlist-block-title">
           <i class="mdib mdib-list-box-outline mdib-24px mr-2"></i> Playlist 
           <div id="playlistModeSwitch" class="switch not-spoken">
