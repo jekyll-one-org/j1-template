@@ -6,7 +6,7 @@ regenerate:                             true
 
 {% comment %}
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/adapter/js/videoPlayer.js (5)
+ # ~/assets/theme/j1/adapter/js/videoPlayer.js (4)
  # J1 Adapter for the module VideoPlayer (native videoJS)
  #
  # Product/Info:
@@ -68,7 +68,7 @@ regenerate:                             true
 
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/adapter/js/videoPlayer.js (5)
+ # ~/assets/theme/j1/adapter/js/videoPlayer.js (4)
  # J1 Adapter for the module VideoPlayer (native HTML5/videoJS)
  #
  # Product/Info:
@@ -218,14 +218,31 @@ j1.adapter.videoPlayer = ((j1, window) => {
       var togglePlaylistSpan = togglePlaylistBtn  ? togglePlaylistBtn.querySelector('span')  : null;
       var togglePlaylistImg  = togglePlaylistBtn  ? togglePlaylistBtn.querySelector('img')   : null;
 
-      // claude - Modify J1 VideoPlayer #4
-      // shared helper: close the playlist and reset the toggle button label/icon.
-      // Delegates to the public adapter method j1.adapter.videoPlayer.closePlaylist()
-      // so that the module (e.g. doPostOnPlaying) can call it for full toggle-reset
-      // without duplicating the DOM logic.
-      //
+      // shared helper: close the playlist and reset the toggle button label/icon
       function _closePlaylist() {
-        _this.closePlaylist(togglePlaylistBtn, togglePlaylistSpan, togglePlaylistImg);
+        var playlistScreen = document.getElementById("playlist_screen_video_player");
+        if (playlistScreen === null) return;
+
+        playlistScreen.classList.remove('slide-in-top');
+        playlistScreen.classList.add('slide-out-top');
+        playlistScreen.style.display = "none";
+        playlistScreen.style.zIndex  = "1";
+
+        // reset toggle button to "Show Playlist" state
+        if (togglePlaylistBtn !== null) {
+          togglePlaylistBtn.dataset.playlistOpen = "false";
+          if (togglePlaylistSpan !== null) { togglePlaylistSpan.textContent = "Show Playlist"; }
+          if (togglePlaylistImg  !== null) {
+            togglePlaylistImg.src       = "/assets/theme/j1/modules/videoPlayer/icons/player/dark/playlist-show.svg";
+            togglePlaylistImg.alt       = "Show playlist";
+            togglePlaylistImg.setAttribute('aria-label', "Show playlist");
+          }
+        }
+
+        // enable scrolling
+        if ($('body').hasClass('stop-scrolling')) {
+          $('body').removeClass('stop-scrolling');
+        }
       } // END _closePlaylist
 
       if (togglePlaylistBtn !== null) {
@@ -499,52 +516,6 @@ j1.adapter.videoPlayer = ((j1, window) => {
       logger.info('\n' + 'initializing playlist handlers: finished');
 
     }, // END initHandlers
-
-    // -------------------------------------------------------------------------
-    // claude - Modify J1 VideoPlayer #4
-    // closePlaylist()
-    // Public adapter method that closes the playlist panel and fully resets the
-    // toggle button (label + icon + data-state) to its "Show Playlist" state.
-    //
-    // Promoted from the private _closePlaylist() closure in initPlayerUiEvents()
-    // so the module can call  j1.adapter.videoPlayer.closePlaylist()  from
-    // doPostOnPlaying (and any future call site) without duplicating DOM logic.
-    //
-    // Parameters are optional — when called without arguments the method looks
-    // the elements up from the DOM itself (safe for calls originating outside
-    // initPlayerUiEvents where the closure variables are not in scope).
-    // -------------------------------------------------------------------------
-    closePlaylist: (toggleBtn, toggleSpan, toggleImg) => {
-      var playlistScreen = document.getElementById("playlist_screen_video_player");
-      if (playlistScreen === null) return;
-
-      playlistScreen.classList.remove('slide-in-top');
-      playlistScreen.classList.add('slide-out-top');
-      playlistScreen.style.display = "none";
-      playlistScreen.style.zIndex  = "1";
-
-      // Resolve button references — use the caller-supplied ones (fast path inside
-      // initPlayerUiEvents) or fall back to fresh DOM lookups (call from module).
-      var btn  = toggleBtn  || document.getElementById("show_playlist_video_player");
-      var span = toggleSpan || (btn ? btn.querySelector('span') : null);
-      var img  = toggleImg  || (btn ? btn.querySelector('img')  : null);
-
-      // Reset toggle button to "Show Playlist" state
-      if (btn !== null) {
-        btn.dataset.playlistOpen = "false";
-        if (span !== null) { span.textContent = "Show Playlist"; }
-        if (img  !== null) {
-          img.src = "/assets/theme/j1/modules/videoPlayer/icons/player/dark/playlist-show.svg";
-          img.alt = "Show playlist";
-          img.setAttribute('aria-label', "Show playlist");
-        }
-      }
-
-      // Re-enable body scrolling
-      if ($('body').hasClass('stop-scrolling')) {
-        $('body').removeClass('stop-scrolling');
-      }
-    }, // END closePlaylist
 
     // -------------------------------------------------------------------------
     // messageHandler()

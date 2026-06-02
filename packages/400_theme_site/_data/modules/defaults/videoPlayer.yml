@@ -45,14 +45,20 @@ defaults:
     sort:
       enabled:                          true
 
+    modeSwitch:
+      enabled:                          true
+
+    mergeSwitch:
+      enabled:                          false
+
     loop:
       enabled:                          false
       pip:                              false
 
-    type:                               list                                    # list | cards
+    type:                               cards                                   # list | cards
 
     cards:
-      perRow:                           2
+      perRow:                           4
 
   # ----------------------------------------------------------------------------
   # MODULE options
