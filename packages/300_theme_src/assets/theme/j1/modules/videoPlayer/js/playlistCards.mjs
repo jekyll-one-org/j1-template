@@ -26,12 +26,12 @@ import { LitElement, html, nothing } from 'https://cdn.jsdelivr.net/npm/lit@3/+e
 import { repeat }                    from 'https://cdn.jsdelivr.net/npm/lit@3/directives/repeat.js/+esm';
 import { classMap }                  from 'https://cdn.jsdelivr.net/npm/lit@3/directives/class-map.js/+esm';
 
-// claude - Extend J1 VideoPlayer #3
+// Extend J1 VideoPlayer #3
 // DEFAULT_POSTER mirrors the constant in videoPlayer.js so this component
 // can resolve the fallback poster independently of the main module.
 const DEFAULT_POSTER = '/assets/image/icon/videojs/videojs-poster.png';
 
-// claude - Extend J1 VideoPlayer #4
+// Extend J1 VideoPlayer #4
 // YOUTUBE_POSTER_QUALITY defines the YouTube thumbnail quality used when
 // back-filling posters for entries loaded from an existing playlist.
 // "maxresdefault" matches the value set in videoPlayer.yml
@@ -102,7 +102,7 @@ export class PlaylistCards extends LitElement {
     return `${months} month${months > 1 ? 's' : ''} ago`;
   }
 
-  // ---- claude - Extend J1 VideoPlayer #4 ------------------------------------
+  // ---- Extend J1 VideoPlayer #4 ------------------------------------
   // _resolvedPoster(v)
   // Returns the best available poster URL for a playlist entry.
   //
@@ -167,7 +167,7 @@ export class PlaylistCards extends LitElement {
     }
   }
 
-  // ---- claude - Fix J1 VideoPlayer #4 --------------------------------------
+  // ---- Fix J1 VideoPlayer #4 --------------------------------------
   // Inline click handlers for the two actions that are wired on the adapter
   // side via addEventListener on #playlistHistory (videoPlayer.js initHandlers,
   // steps 2a / 2b).  Both dispatch a CustomEvent that bubbles through the light
@@ -221,7 +221,7 @@ export class PlaylistCards extends LitElement {
       <div class="playlist-card card-base" data-video-id=${v.videoId}>
 
         <div class="playlist-thumb-wrapper">
-          <!-- claude - Extend J1 VideoPlayer #4
+          <!-- Extend J1 VideoPlayer #4
                Use _resolvedPoster() so that YouTube entries loaded from an
                existing playlist (where v.poster may be absent or stale) always
                show maxresdefault.jpg. The previous v.poster || DEFAULT_POSTER
@@ -230,7 +230,7 @@ export class PlaylistCards extends LitElement {
           <img class="playlist-thumb"
                src=${this._resolvedPoster(v)}
                alt="playlist-thumb">
-          <!-- claude - Fix J1 VideoPlayer #3: @click was missing — overlay did nothing -->
+          <!-- Fix J1 VideoPlayer #3: @click was missing — overlay did nothing -->
           <div class="playlist-play-overlay"
                @click=${(e) => this._onPlayClick(e, v.videoId)}>
             <i class="fas fa-play"></i>
@@ -280,7 +280,7 @@ export class PlaylistCards extends LitElement {
                     aria-label="Edit item">
               <i class="fas fa-edit"></i>
             </button>
-            <!-- claude - Fix J1 VideoPlayer #3: @click was missing — delete button did nothing -->
+            <!-- Fix J1 VideoPlayer #3: @click was missing — delete button did nothing -->
             <button class="playlist-btn delete"
                     title="Delete from playlist"
                     aria-label="Delete from playlist"

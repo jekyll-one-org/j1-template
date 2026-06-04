@@ -1,0 +1,217 @@
+---
+title:                                  Video player
+title_extention:                        J1 Player
+tagline:                                Playback Video
+
+date:                                   2026-04-17
+#last_modified:                         2026-01-01
+
+description: >
+                                        Native Player
+keywords: >
+                                        open source, free, template, jekyll, jekyllone, web,
+                                        sites, static, jamstack, bootstrap
+
+categories:                             [ Tools ]
+tags:                                   [ videoPlayer ]
+
+image:
+  path:                                 /assets/image/module/attic/1920x1280/j1-launch.jpg
+  width:                                1920
+  height:                               1280
+
+regenerate:                             false
+permalink:                              /pages/public/tools/test/videoPlayer/
+
+resources:                              [ videoPlayer, videojs ]
+resource_options:
+  - attic:
+      opacity:                          .8
+      padding_top:                      600
+      slides:
+        - url:                          /assets/image/module/attic/1920x1280/j1-launch.jpg
+          alt:                          skipad-promo-image
+---
+
+// Page Initializer
+// =============================================================================
+// Enable the Liquid Preprocessor
+:page-liquid:
+
+// Set page (local) attributes here
+// -----------------------------------------------------------------------------
+// :page--attr:                         <attr-value>
+
+{% comment %} Liquid procedures
+-------------------------------------------------------------------------------- {% endcomment %}
+{% capture load_attributes %}themes/{{site.template.name}}/procedures/global/attributes_loader.proc{% endcapture %}
+
+// Load page attributes
+// -----------------------------------------------------------------------------
+{% include {{load_attributes}} scope="none" %}
+
+{% comment %} Debugging
+site.biography: {{ site.biography | debug }}
+-------------------------------------------------------------------------------- {% endcomment %}
+
+// Page content
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[role="dropcap"]
+SkipAd embeds an excellent video player to block all ads on YouTube
+videos instantly for a better viewing experience. No more pre-roll,
+mid-roll, or overlay ads.
+
+// Include sub-documents (if any)
+// -----------------------------------------------------------------------------
+++++
+<div id="content" class="mb-5">
+
+  <div class="sect1 mt-4">
+    <h2 id="videoSelection">Video selection</h2>
+    <div class="sectionbody">
+
+      <!-- div class="paragraph">
+        <p>
+          Paste a link or the ID of a video to the input element below.
+        </p>
+      </div>
+      <div class="input-wrapper input-section not-spoken">
+        <div class="input-container">
+          <button id="pasteButton" class="paste-btn-inside" title="Paste from clipboard">
+            <i class="fas fa-paste"></i>
+            <span>Paste</span>
+          </button>
+          <input id="videoUrlInput" type="text" placeholder="https://youtube.com/watch?v=xxxx or xxxx">
+          <button id="playlistInputClear"
+            title="Clear YouTube video selection"
+            aria-label="Clear YouTube video selection"
+            style="display: none;">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+        <button id="loadVideo"  class="watch-adfree-btn">
+          <i class="fas fa-video mt-1 mr-2"></i>
+          <span>Watch Video</span>
+        </button>
+      </div -->
+
+      <div class="sect2">
+        <div class="paragraph">
+          <p>
+            SkipAd provides <strong>already prepared</strong> lists of videos
+            at YouTube you may have not seen yet. You can import such a hand-picked
+            video selection to your <strong>personal playlist</strong>.
+          </p>
+        </div>
+        <div class="input-container input-section not-spoken mt-3 mb-4">
+          <button id="selectPlaylistButton" class="select-btn-inside" title="Select playlist">
+          <i class="fas fa-check"></i>
+          <span>Select</span>
+          </button>
+          <div class="input-container d-flex justify-content-start flex-wrap">
+            <select id="serverPlaylistSelect" class="server-playlist-select" form="playlist"></select>
+            <button id="playlistSelectClear"
+              title="Clear selection"
+              aria-label="Clear selection"
+              style="display: none;">
+            <i class="fas fa-times"></i>
+            </button>
+            <button id="serverPlaylistLoadButton" class="import-playlist-btn" title="Import playlist">
+            <i class="fas fa-file-import mr-2"></i> <span>Import Playlist</span>
+            </button>
+          </div>
+        </div>
+        <div id="historyIOWrapper" class="input-wrapper input-section not-spoken mt-4">
+          <div class="input-container d-flex justify-content-start flex-wrap">
+            <input type="file" id="playlistImportFile" accept=".json,application/json" style="display: none;" aria-hidden="true">
+            <button id="playlistExportButton" class="export-playlist-btn" title="Export playlist to file">
+            <i class="fas fa-file-export mr-2"></i>
+            <span>Export Playlist</span>
+            </button>
+            <button id="playlistImportButton" class="import-playlist-btn" title="Import playlist from file">
+            <i class="fas fa-file-import mr-2"></i>
+            <span>Import Playlist</span>
+            </button>
+            <button id="playlistClearButton" class="delete-playlist-btn" title="Clear playlist">
+            <i class="fas fa-trash-alt mr-2"></i>
+            <span>Clear Playlist</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="sect1 mt-5">
+    <h2 id="videoPlayer">Video player</h2>
+
+    <div class="sectionbody">
+
+      <div class="paragraph">
+        <p>Enjoy watching the playlist.</p>
+      </div>
+
+      <div id="video_title" class="video-title not-spoken" style="display: none">
+        <i class="mdib mdib-video mdib-24px mr-2"></i>
+        <span id="video_title_text">placeholder</span>
+      </div>
+
+      <!-- claude - Modify J1 VideoPlayer #5 -->
+      <!-- Replaced the bare <img> toggle with an accessible <button> so that  -->
+      <!-- the element is keyboard-focusable, fires click events on Enter/Space, -->
+      <!-- and satisfies ARIA best-practice (interactive elements should be      -->
+      <!-- natively focusable). The <span> (label text) and <img> (SVG icon)    -->
+      <!-- are preserved as children so the JS toggle logic in                  -->
+      <!-- initPlayerUiEvents / closePlaylist() continues to work unchanged via  -->
+      <!-- btn.querySelector('span') and btn.querySelector('img').               -->
+      <div id="show_playlist_video_player" class="video-player-header show-playlist">
+        <span>Show Playlist</span>
+        <button
+          id="video_player_header_arrows"
+          class="video-player-header-arrows"
+          title="Show playlist"
+          aria-label="Show playlist">
+          <img
+            src="/assets/theme/j1/modules/videoPlayer/icons/player/dark/playlist-show.svg"
+            alt="Show playlist">
+        </button>
+      </div> <!-- END show_playlist_video_player -->
+      <div id="video_container" class="video-container not-spoken mb-4">
+        <div id="emptyPlayerOverlay" class="empty-player-overlay">
+          <div class="empty-player-content">
+            <img
+              src="/assets/image/icon/videojs/videojs-logo.png"
+              alt="VideoJS Player"
+              width="500" height="200">
+          </div>
+        </div>
+      </div> <!-- END video_container -->
+
+      <div
+        id="playlist_screen_video_player"
+        class="compact-player-playlist slide-out-top"
+        style="display: none; z-index: 1;">
+
+        <div class="input-container">
+          <span class="search-icon-inside"><i class="fas fa-search"></i></span>
+          <input id="playlistSearchInput" type="text" placeholder="Search the playlist for items by description, title, author, category, type, or tag" autocomplete="off" aria-label="Search playlist">
+          <button id="playlistSearchClear" title="Clear search expression" aria-label="Clear search expression">
+          <i class="fas fa-times"></i>
+          </button>
+          <span id="playlistSearchResultCount"></span>
+        </div>
+
+        <div id="playlistBlock" class="not-spoken mt-3" style="display: none">
+          <div class="playlist-block-title">
+            <i class="mdib mdib-cog mdib-24px ml-2"></i>
+          </div>
+          <div id="videoplayer_playlist_parent" class="not-spoken"></div>
+        </div>
+      </div> <!-- END playlist_screen_video_player -->
+
+    </div> <!-- END section -->
+
+  </div> <!-- END Video Player -->
+</div> <!-- END content -->
+++++

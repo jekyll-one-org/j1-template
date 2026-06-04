@@ -1,6 +1,6 @@
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/modules/videoPlayer/js/videoPlayer.js (9)
+ # ~/assets/theme/j1/modules/videoPlayer/js/videoPlayer.js (7)
  # Provides JS Core for J1 Module videoPlayer
  # Extend J1 VideoPlayer
  #
@@ -14,7 +14,7 @@
  # -----------------------------------------------------------------------------
 */
 
-/* Version 3.1.9 for J1 Template */
+/* Version 3.1.7 for J1 Template */
 
 // -----------------------------------------------------------------------------
 // ESLint shimming
@@ -174,15 +174,6 @@
 
   let loopConfigEnabled     = false;
   let pipConfigEnabled      = false;
-
-  // claude - Modify J1 VideoPlayer #9
-  // Moved from the initEditPlaylistHandler block (was declared with `let`
-  // immediately before the function definition at ~line 2793).  A `let`
-  // declaration is NOT hoisted, so placing it after the call-site at
-  // ~line 1956 caused a TDZ ReferenceError the moment initEditPlaylistHandler()
-  // ran.  Declaring it here — with all other module-level flags — ensures it
-  // is initialised before any code in this factory function executes.
-  let _editPlaylistHandlerInit = false;
 
   var logger                = log4javascript.getLogger(MODULE_NAME);
 
@@ -1956,14 +1947,6 @@
     }
   }
 
-  // claude - Modify J1 VideoPlayer #8
-  // Register the edit_playlist toggle handler once the module initialises.
-  // The handler is safe to call here because the DOM elements it references
-  // (#edit_playlist, #playlist_edit_screen, #video_container) are declared in
-  // the page HTML above the <script> block that loads this module, so they
-  // are already present when this line executes.
-  initEditPlaylistHandler();
-
   // ---------------------------------------------------------------------------
   // Picture-in-Picture helpers (unchanged)
   // ---------------------------------------------------------------------------
@@ -2775,116 +2758,6 @@
     }
 
     isDev && logger.debug('\n' + '_resetPlaylistToggleUI: toggle reset to "Show Playlist" state');
-  }
-
-  // ---------------------------------------------------------------------------
-  // initEditPlaylistHandler
-  // claude - Modify J1 VideoPlayer #8
-  //
-  // Wires the #edit_playlist button so that clicking it:
-  //   1.  Toggles the visibility of #playlist_edit_screen.
-  //   2a. ON OPEN : replaces the content of #video_container with the
-  //       #playlist_edit_screen div (the edit panel is moved inside the
-  //       video container so it occupies the same visual slot as the player).
-  //   2b. ON CLOSE: restores #video_container to its saved snapshot and moves
-  //       #playlist_edit_screen back to its original position (hidden).
-  //
-  // Why move instead of overlay?
-  //   The #video_container has CSS that sizes and positions the player area.
-  //   Injecting the edit panel *inside* that container reuses the same layout
-  //   box without adding new positioning rules.  The original container HTML
-  //   (module-level `containerHTML`) is restored verbatim on close, which is
-  //   the same strategy already used by createVideoJsPlayer().
-  //
-  // Guard: the handler is registered only once via _editPlaylistHandlerInit.
-  // claude - Modify J1 VideoPlayer #9
-  // NOTE: _editPlaylistHandlerInit is declared in the module variables section
-  // (above) rather than here.  The original `let` placement immediately before
-  // this function caused a TDZ ReferenceError because initEditPlaylistHandler()
-  // is called at module init time (~line 1956), before this `let` would have
-  // been reached.  See the module variables section for the declaration.
-  // ---------------------------------------------------------------------------
-
-  function initEditPlaylistHandler() {
-    if (_editPlaylistHandlerInit) return;
-
-    const editBtn     = document.getElementById('edit_playlist');
-    const editScreen  = document.getElementById('playlist_edit_screen');
-    const videoContnr = document.getElementById('video_container');
-
-    if (!editBtn || !editScreen || !videoContnr) {
-      isDev && logger.warn('\n' + 'initEditPlaylistHandler: required element(s) not found — handler skipped');
-      return;
-    }
-
-    _editPlaylistHandlerInit = true;
-
-    // Remember the edit screen's original parent and next sibling so it can
-    // be re-inserted at exactly the same position when the panel is closed.
-    const editScreenOriginalParent  = editScreen.parentNode;
-    const editScreenOriginalSibling = editScreen.nextSibling;
-
-    // Track whether the edit panel is currently shown inside video_container.
-    let _editScreenVisible = false;
-
-    editBtn.addEventListener('click', () => {
-
-      if (!_editScreenVisible) {
-        // ── OPEN ──────────────────────────────────────────────────────────
-        // 1. Dispose any live videoJS player so it does not leak resources
-        //    while the video_container is replaced.
-        if (player) {
-          isDev && logger.debug('\n' + 'initEditPlaylistHandler: disposing videoJS player before showing edit screen');
-          player.dispose();
-          player = null;
-        }
-
-        // 2. Move #playlist_edit_screen into #video_container.
-        //    The edit screen was hidden (display:none) in the source HTML;
-        //    make it visible now that it occupies the player slot.
-        editScreen.style.display  = 'block';
-        videoContnr.innerHTML     = '';
-        videoContnr.appendChild(editScreen);
-
-        // 3. Update button aria state.
-        editBtn.setAttribute('aria-expanded', 'true');
-        editBtn.title       = 'Close playlist editor';
-        editBtn.setAttribute('aria-label', 'Close playlist editor');
-
-        _editScreenVisible = true;
-
-        isDev && logger.debug('\n' + 'initEditPlaylistHandler: edit screen shown inside video_container');
-
-      } else {
-        // ── CLOSE ─────────────────────────────────────────────────────────
-        // 1. Remove the edit screen from video_container and put it back at
-        //    its original DOM position (hidden, as the HTML declares it).
-        editScreen.style.display = 'none';
-
-        if (editScreenOriginalParent) {
-          if (editScreenOriginalSibling && editScreenOriginalSibling.parentNode === editScreenOriginalParent) {
-            editScreenOriginalParent.insertBefore(editScreen, editScreenOriginalSibling);
-          } else {
-            editScreenOriginalParent.appendChild(editScreen);
-          }
-        }
-
-        // 2. Restore the video_container to its original snapshot
-        //    (same mechanism used by createVideoJsPlayer).
-        videoContnr.innerHTML = containerHTML;
-
-        // 3. Update button aria state.
-        editBtn.setAttribute('aria-expanded', 'false');
-        editBtn.title       = 'Edit playlist';
-        editBtn.setAttribute('aria-label', 'Edit playlist');
-
-        _editScreenVisible = false;
-
-        isDev && logger.debug('\n' + 'initEditPlaylistHandler: video_container restored, edit screen hidden');
-      }
-    });
-
-    isDev && logger.info('\n' + 'initEditPlaylistHandler: edit-playlist toggle handler registered');
   }
 
   /**

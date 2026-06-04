@@ -13,8 +13,8 @@
  # -----------------------------------------------------------------------------
 */
 
-/* Version 3.1.37 for J1 Template */
-/* claude - optimize css 2a */
+/* Version 3.1.39 for J1 Template */
+/* optimize css 2a */
 
 /*
 #wrapper-inner {
@@ -56,7 +56,7 @@ code, pre {
 .video-player-header {
   position: relative;
   padding: 15px;
-  cursor: pointer;
+  /* cursor: pointer; */
   text-align: center;
   font-family: "Lato", sans-serif;
   font-weight: 600;
@@ -64,10 +64,45 @@ code, pre {
   background-color: var(--ajs-theme-uno--dark-silver);
 }
 
+/* Modify J1 VideoPlayer #5
+   .video-player-header-arrows was previously applied to a bare <img> element.
+   It is now applied to a <button> that wraps the SVG <img> icon.
+   The button is fully reset (no browser chrome) and positioned exactly where
+   the old <img> sat.  A dedicated img child rule constrains the icon size so
+   layout is pixel-identical to the previous implementation. */
 .video-player-header-arrows {
-  position: absolute;
-  top: 23px;
-  left: 15px;
+  /* button reset */
+  background:   none;
+  border:       none;
+  padding:      0;
+  margin:       0;
+  line-height:  0;
+  /* original positioning */
+  cursor:       pointer;
+  position:     absolute;
+  top:          23px;
+  left:         15px;
+}
+
+.video-player-header-arrows:focus-visible {
+  outline:        2px solid var(--ajs-theme-uno--white);
+  outline-offset: 3px;
+  border-radius:  2px;
+}
+
+.video-player-header-arrows img {
+  display: block;
+}
+
+/* Modify J1 VideoPlayer #6
+   #edit_playlist shares all .video-player-header-arrows button-reset and
+   focus-visible styles but must be anchored to the RIGHT side of the header,
+   mirroring the left-anchored show/hide toggle button on the opposite side.
+   The right/top values match the existing left/top values (15 px / 23 px) so
+   both icons sit at identical vertical positions and equal inset distances. */
+#edit_playlist {
+  left:  unset;
+  right: 15px;
 }
 
 
@@ -221,7 +256,7 @@ select[data-value-filled="true"] {
   transition: border-color .2s, box-shadow .2s;
 }
 
-/* claude - optimize css 2: removed redundant "background: none"
+/* optimize css 2: removed redundant "background: none"
    (already set with !important in the combined
     #serverPlaylistSelect, #playlistSearchInput rule above)            */
 #serverPlaylistSelect {
@@ -244,10 +279,11 @@ select[data-value-filled="true"] {
   margin-top: .75rem;
 }
 
-/* claude - optimize css 2: removed redundant "background: none"
+/* optimize css 2: removed redundant "background: none"
    (already set with !important in the combined
     #serverPlaylistSelect, #playlistSearchInput rule above)            */
 #playlistSearchInput {
+  font-size: .8rem;
   border: 1px solid var(--border-color);
   border-radius: 0px;
   padding: .8rem 1rem .8rem 3.5rem;
@@ -260,7 +296,7 @@ select[data-value-filled="true"] {
   opacity: 0.7;
 }
 
-/* claude - optimize css 2: removed unused #videoUrl rule
+/* optimize css 2: removed unused #videoUrl rule
    (the HTML only uses #videoUrlInput; #videoUrl was orphaned)         */
 
 /* -----------------------------------------------------------------------------
@@ -313,7 +349,7 @@ select[data-value-filled="true"] {
   min-width: auto;
   padding: 0.5rem 0.6rem;
   position: absolute;
-  top: 25%;
+  top: 42%;
   transform: translateY(-50%);
   transition: all 0.3s ease;
   white-space: nowrap;
@@ -343,7 +379,7 @@ select[data-value-filled="true"] {
    Input Clear Buttons
   ------------------------------------------------------------------------------ */
 
-/* claude - optimize css 2: merged identical clear-button properties
+/* optimize css 2: merged identical clear-button properties
    into a shared rule; only 'top' differs per element                   */
 #playlistInputClear,
 #playlistSelectClear {
@@ -360,6 +396,7 @@ select[data-value-filled="true"] {
   justify-content: center;
   padding: 0.5rem;
   position: absolute;
+  top: 32% !important;
   right: .5rem;
   transform: translateY(-50%);
   transition: color 0.2s;
@@ -407,7 +444,7 @@ select[data-value-filled="true"] {
    Action Buttons: Watch / Export / Import / Delete
   ------------------------------------------------------------------------------ */
 
-/* claude - optimize css 2: extracted shared action-button properties
+/* optimize css 2: extracted shared action-button properties
    into a single base rule; per-button rules now carry only their
    unique background, color and margin overrides                        */
 .watch-adfree-btn,
@@ -422,6 +459,7 @@ select[data-value-filled="true"] {
   font-weight: 600;
   letter-spacing: .01em;
   padding: .85rem 2.2rem;
+  min-width: 220px;
   transition: background .2s, box-shadow .2s, transform .1s;
 }
 
@@ -504,7 +542,7 @@ select[data-value-filled="true"] {
   background-color: var(--card-background);
   box-shadow: 0 4px 6px var(--shadow-color);
   max-width: 100vw;
-  overflow: hidden;
+  /* overflow: hidden; */
   position: relative;
   width: 100%;
 }
@@ -828,7 +866,7 @@ select[data-value-filled="true"] {
   transform: scale(1.05);
 }
 
-/* claude - optimize css 2: reduced to override-only — all other
+/* optimize css 2: reduced to override-only — all other
    properties cascade from the base .playlist-play-overlay rule         */
 .playlist-row .playlist-play-overlay {
   z-index: 2;
@@ -891,7 +929,7 @@ select[data-value-filled="true"] {
   justify-content: flex-end;
 }
 
-/* claude - optimize css 2: merged identical .drag-handle and
+/* optimize css 2: merged identical .drag-handle and
    .playlist-row-action-delete into a single rule                       */
 .drag-handle,
 .playlist-row-action-delete {
@@ -1148,7 +1186,7 @@ select[data-value-filled="true"] {
   border: 1px solid var(--border-color);
   border-radius: 0px;
   color: var(--text-color);
-  font-size: 0.95rem;
+  font-size: 0.85rem;
   padding: 0.5rem 0.75rem;
   transition: border-color 0.2s ease;
   width: 100%;

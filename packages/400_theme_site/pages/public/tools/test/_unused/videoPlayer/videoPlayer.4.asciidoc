@@ -68,22 +68,22 @@ Enjoy watching the playlist.
 // Include Player HTML
 // -----------------------------------------------------------------------------
 ++++
-<div id="player_1" class="not-spoken mt-4 mb-5">
+<div id="player_1" class="mt-4 mb-5">
 
   <div id="video_title" class="video-title not-spoken" style="display: none">
     <i class="mdib mdib-video mdib-24px mr-2"></i>
     <span id="video_title_text">placeholder</span>
   </div>
 
-  <!-- Modify J1 VideoPlayer #5 -->
-  <!-- Replaced the bare <img> toggle with an accessible <button> so that    -->
+  <!-- claude - Modify J1 VideoPlayer #5 -->
+  <!-- Replaced the bare <img> toggle with an accessible <button> so that  -->
   <!-- the element is keyboard-focusable, fires click events on Enter/Space, -->
   <!-- and satisfies ARIA best-practice (interactive elements should be      -->
-  <!-- natively focusable). The <span> (label text) and <img> (SVG icon)     -->
-  <!-- are preserved as children so the JS toggle logic in                   -->
+  <!-- natively focusable). The <span> (label text) and <img> (SVG icon)    -->
+  <!-- are preserved as children so the JS toggle logic in                  -->
   <!-- initPlayerUiEvents / closePlaylist() continues to work unchanged via  -->
   <!-- btn.querySelector('span') and btn.querySelector('img').               -->
-  <div id="video_player_container" class="video-player-header not-spoken">
+  <div id="show_playlist_video_player" class="video-player-header show-playlist">
     <span>Show Playlist</span>
     <button
       id="toggle_playlist"
@@ -94,8 +94,8 @@ Enjoy watching the playlist.
         src="/assets/theme/j1/modules/videoPlayer/icons/player/dark/playlist-show.svg"
         alt="Show playlist">
     </button>
-    <!-- Modify J1 VideoPlayer #6 -->
-    <!-- Added edit_playlist button at the end of the header container.      -->
+    <!-- claude - Modify J1 VideoPlayer #6 -->
+    <!-- Added edit_playlist button at the end of the header container.     -->
     <!-- The button shares the .video-player-header-arrows button-reset and  -->
     <!-- focus-visible styles; a dedicated #edit_playlist override in the    -->
     <!-- CSS anchors it to the right side of the header (mirroring the       -->
@@ -109,8 +109,7 @@ Enjoy watching the playlist.
         src="/assets/theme/j1/modules/videoPlayer/icons/player/dark/playlist-edit.svg"
         alt="Edit playlist">
     </button>
-  </div> <!-- END video_player_container -->
-
+  </div> <!-- END show_playlist_video_player -->
   <div id="video_container" class="video-container not-spoken mb-4">
     <div id="emptyPlayerOverlay" class="empty-player-overlay">
       <div class="empty-player-content">
@@ -122,7 +121,10 @@ Enjoy watching the playlist.
     </div>
   </div> <!-- END video_container -->
 
-  <div id="playlist_screen" class="compact-player-playlist slide-out-top" style="display: none; z-index: 1;">
+  <div
+    id="playlist_screen"
+    class="compact-player-playlist slide-out-top"
+    style="display: none; z-index: 1;">
 
     <div class="input-container">
       <span class="search-icon-inside"><i class="fas fa-search"></i></span>
@@ -139,60 +141,71 @@ Enjoy watching the playlist.
       </div>
       <div id="videoplayer_playlist_parent" class="not-spoken"></div>
     </div>
-
   </div> <!-- END playlist_screen -->
 
-  <div id="playlist_edit_screen" class="compact-player-playlist slide-out-top ml-3 mr-3" style="display: none; z-index: 1;">
+  <div
+    id="playlist_edit_screen"
+    class="compact-player-playlist slide-out-top"
+    style="display: none; z-index: 1;">
 
-    <div class="input-wrapper input-section not-spoken mt-3">
-      <div class="input-container">
-        <button id="pasteButton" class="paste-btn-inside" title="Paste from clipboard">
-          <i class="fas fa-paste"></i>
-          <span>Paste</span>
-        </button>
-        <input id="videoUrlInput" type="text" placeholder="Paste a video link to add ...">
-        <button id="playlistInputClear"
-          title="Clear YouTube video selection"
-          aria-label="Clear YouTube video selection"
-          style="display: none;">
-          <i class="fas fa-times"></i>
-        </button>
-      </div>
-    </div>
+    <div class="sectionbody">
 
-    <div class="input-container input-section not-spoken mt-3 mb-4">
-      <button
-        id="serverPlaylistLoadButton"
-        class="select-btn-inside"
-        title="Select playlist">
-          <i class="fas fa-file-import"></i>
-        <span>Import</span>
-      </button>
-      <div class="input-container d-flex justify-content-start flex-wrap">
-        <select id="serverPlaylistSelect" class="server-playlist-select" form="playlist"></select>
-        <button id="playlistSelectClear"
-          title="Clear selection"
-          aria-label="Clear selection"
-          style="display: none;">
+      <div class="input-wrapper input-section not-spoken">
+        <div class="input-container">
+          <button id="pasteButton" class="paste-btn-inside" title="Paste from clipboard">
+            <i class="fas fa-paste"></i>
+            <span>Paste</span>
+          </button>
+          <input id="videoUrlInput" type="text" placeholder="Paste a video link to add ...">
+          <button id="playlistInputClear"
+            title="Clear YouTube video selection"
+            aria-label="Clear YouTube video selection"
+            style="display: none;">
             <i class="fas fa-times"></i>
-        </button>
+          </button>
+        </div>
       </div>
-    </div>
 
-    <div class="input-container d-flex justify-content-center flex-wrap">
-      <input type="file" id="playlistImportFile" accept=".json,application/json" style="display: none;" aria-hidden="true">
-      <button id="playlistExportButton" class="export-playlist-btn" title="Export playlist to file">
-      <i class="fas fa-file-export mr-2"></i>
-      <span>Export Playlist</span>
-      </button>
-      <button id="playlistImportButton" class="import-playlist-btn" title="Import playlist from file">
-      <i class="fas fa-file-import mr-2"></i>
-      <span>Import Playlist</span>
-      </button>
-      <button id="playlistClearButton" class="delete-playlist-btn" title="Clear playlist">
-      <i class="fas fa-trash-alt mr-2"></i>
-      <span>Clear Playlist</span>
-      </button>
+      <div class="sect2">
+
+        <div class="input-container input-section not-spoken mt-3 mb-4">
+          <button id="selectPlaylistButton" class="select-btn-inside" title="Select playlist">
+          <i class="fas fa-check"></i>
+          <span>Select</span>
+          </button>
+          <div class="input-container d-flex justify-content-start flex-wrap">
+            <select id="serverPlaylistSelect" class="server-playlist-select" form="playlist"></select>
+            <button id="playlistSelectClear"
+              title="Clear selection"
+              aria-label="Clear selection"
+              style="display: none;">
+            <i class="fas fa-times"></i>
+            </button>
+            <button id="serverPlaylistLoadButton" class="import-playlist-btn" title="Import playlist">
+            <i class="fas fa-file-import mr-2"></i> <span>Import Playlist</span>
+            </button>
+          </div>
+        </div>
+
+        <div id="historyIOWrapper" class="input-wrapper input-section not-spoken mt-4">
+          <div class="input-container d-flex justify-content-start flex-wrap">
+            <input type="file" id="playlistImportFile" accept=".json,application/json" style="display: none;" aria-hidden="true">
+            <button id="playlistExportButton" class="export-playlist-btn" title="Export playlist to file">
+            <i class="fas fa-file-export mr-2"></i>
+            <span>Export Playlist</span>
+            </button>
+            <button id="playlistImportButton" class="import-playlist-btn" title="Import playlist from file">
+            <i class="fas fa-file-import mr-2"></i>
+            <span>Import Playlist</span>
+            </button>
+            <button id="playlistClearButton" class="delete-playlist-btn" title="Clear playlist">
+            <i class="fas fa-trash-alt mr-2"></i>
+            <span>Clear Playlist</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
     </div>
 
   </div> <!-- END playlist_edit_screen -->

@@ -6,7 +6,7 @@ regenerate:                             true
 
 {% comment %}
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/adapter/js/videoPlayer.js (8)
+ # ~/assets/theme/j1/adapter/js/videoPlayer.js (7)
  # J1 Adapter for the module VideoPlayer (native videoJS)
  #
  # Product/Info:
@@ -17,7 +17,7 @@ regenerate:                             true
  # J1 Template is licensed under the MIT License.
  # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE
  # -----------------------------------------------------------------------------
- # Fix J1 VideoPlayer #1
+ # claude - Fix J1 VideoPlayer #1
  # Adapter created from scratch for the native-video videoPlayer module.
  # Follows the same pattern as j1.adapter.claudeAI / j1.adapter.mmenu:
  #
@@ -68,7 +68,7 @@ regenerate:                             true
 
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/adapter/js/videoPlayer.js (8)
+ # ~/assets/theme/j1/adapter/js/videoPlayer.js (7)
  # J1 Adapter for the module VideoPlayer (native HTML5/videoJS)
  #
  # Product/Info:
@@ -211,10 +211,10 @@ j1.adapter.videoPlayer = ((j1, window) => {
     // -------------------------------------------------------------------------
     initPlayerUiEvents: () => {
 
-      // Modify J1 VideoPlayer #1
-      // toggle playlist (video_player_container acts as a true toggle)
+      // claude - Modify J1 VideoPlayer #1
+      // toggle playlist (show_playlist_video_player acts as a true toggle)
       //
-      // Modify J1 VideoPlayer #5
+      // claude - Modify J1 VideoPlayer #5
       // The toggle element is now <button id="toggle_playlist">.
       // querySelector('span') still resolves the sibling <span> inside the
       // parent .video-player-header div; querySelector('img') resolves the
@@ -226,7 +226,7 @@ j1.adapter.videoPlayer = ((j1, window) => {
       var togglePlaylistSpan = togglePlaylistBtn  ? togglePlaylistBtn.closest('.video-player-header').querySelector('span') : null;
       var togglePlaylistImg  = togglePlaylistBtn  ? togglePlaylistBtn.querySelector('img') : null;
 
-      // Modify J1 VideoPlayer #4
+      // claude - Modify J1 VideoPlayer #4
       // shared helper: close the playlist and reset the toggle button label/icon.
       // Delegates to the public adapter method j1.adapter.videoPlayer.closePlaylist()
       // so that the module (e.g. doPostOnPlaying) can call it for full toggle-reset
@@ -254,7 +254,7 @@ j1.adapter.videoPlayer = ((j1, window) => {
             playlistScreen.style.zIndex  = "199";
 
             togglePlaylistBtn.dataset.playlistOpen = "true";
-            // Modify J1 VideoPlayer #5
+            // claude - Modify J1 VideoPlayer #5
             // Set accessibility attributes on the <button>; update alt on child <img>.
             togglePlaylistBtn.title = "Hide playlist";
             togglePlaylistBtn.setAttribute('aria-label', "Hide playlist");
@@ -277,71 +277,25 @@ j1.adapter.videoPlayer = ((j1, window) => {
       var hidePlaylist = document.getElementById("hide_playlist_video_player");
       if (hidePlaylist !== null) {
         hidePlaylist.addEventListener('click', function(event) {
-          // Modify J1 VideoPlayer #1
+          // claude - Modify J1 VideoPlayer #1
           // delegate to the shared helper so the toggle button stays in sync
           _closePlaylist();
         }); // END addEventListener
       } // END if hidePlaylist
 
-      // Modify J1 VideoPlayer #7
-      // edit playlist button — toggles #playlist_edit_screen.
-      // Mirrors the toggle_playlist pattern exactly:
-      //   • data-editOpen flag tracks open/closed state on the button itself
-      //   • slide-in-top / slide-out-top CSS classes drive the animation
-      //   • title, aria-label, and child <img> alt/src are updated on every toggle
-      //   • opening the edit screen closes #playlist_screen (mutually exclusive)
-      //   • closing the edit screen is also delegated to the public
-      //     closeEditPlaylist() adapter method so the module can call it from
-      //     any future call-site without duplicating DOM logic
-      // Follows the guard-flag pattern to prevent duplicate listener registration.
+      // claude - Modify J1 VideoPlayer #6
+      // edit playlist button — opens/closes the playlist-edit mode.
+      // Follows the guard-flag pattern used by all init*Handler() methods to
+      // prevent duplicate event-listener registration if initPlayerUiEvents()
+      // is ever called more than once.
       // -------------------------------------------------------
       if (!_this._editPlaylistHandlerInitialized) {
         var editPlaylistBtn = document.getElementById("edit_playlist");
         if (editPlaylistBtn !== null) {
-
-          // shared helper: close the edit screen and reset the button state.
-          // Delegates to the public adapter method so external callers (e.g.
-          // the module's doPostOnPlaying) can reuse it without duplicating DOM logic.
-          //
-          function _closeEditPlaylist() {
-            _this.closeEditPlaylist(editPlaylistBtn);
-          } // END _closeEditPlaylist
-
-          // initialise toggle state
-          editPlaylistBtn.dataset.editOpen = "false";
-
           editPlaylistBtn.addEventListener('click', function(event) {
-            var editScreen = document.getElementById("playlist_edit_screen");
-            if (editScreen === null) return;
-
-            var isOpen = (editPlaylistBtn.dataset.editOpen === "true");
-
-            if (!isOpen) {
-              // ----- OPEN -----
-              // close the playlist panel first (mutually exclusive)
-              _closePlaylist();
-
-              editScreen.classList.remove('slide-out-top');
-              editScreen.classList.add('slide-in-top');
-              editScreen.style.display = "block";
-              editScreen.style.zIndex  = "199";
-
-              editPlaylistBtn.dataset.editOpen = "true";
-              editPlaylistBtn.title = "Close playlist editor";
-              editPlaylistBtn.setAttribute('aria-label', "Close playlist editor");
-              var editImg = editPlaylistBtn.querySelector('img');
-              if (editImg !== null) {
-                editImg.src = "/assets/theme/j1/modules/videoPlayer/icons/player/dark/playlist-edit-close.svg";
-                editImg.alt = "Close playlist editor";
-              }
-
-            } else {
-              // ----- CLOSE -----
-              _closeEditPlaylist();
-            }
-
+            logger.info('\n' + 'edit_playlist: clicked');
+            // TODO: implement playlist-edit mode toggle
           }); // END addEventListener
-
           _this._editPlaylistHandlerInitialized = true;
           logger.debug('\n' + 'initPlayerUiEvents: editPlaylistHandler — OK');
         } else {
@@ -352,7 +306,7 @@ j1.adapter.videoPlayer = ((j1, window) => {
     },
 
     // -------------------------------------------------------------------------
-    // Fix J1 VideoPlayer #1
+    // claude - Fix J1 VideoPlayer #1
     // initHandlers()
     // Initialize all playlist and UI handler classes exported by the
     // videoPlayer module.  Called from within dependencies_met_page_ready
@@ -410,7 +364,7 @@ j1.adapter.videoPlayer = ((j1, window) => {
         logger.info('\n' + 'initHandlers: playlistIOHandler skipped (playlist disabled)');
       }
 
-      // Fix J1 VideoPlayer #4
+      // claude - Fix J1 VideoPlayer #4
       // 2a. initPlayHandler — listen for the 'playlist-play' CustomEvent bubbled
       //     from PlaylistCards._onPlayClick() and forward it to the module's
       //     play logic.
@@ -443,7 +397,7 @@ j1.adapter.videoPlayer = ((j1, window) => {
         logger.info('\n' + 'initHandlers: initPlayHandler skipped (playlist disabled)');
       }
 
-      // Fix J1 VideoPlayer #4
+      // claude - Fix J1 VideoPlayer #4
       // 2b. initDeleteHandler — listen for the 'playlist-delete' CustomEvent
       //     bubbled from PlaylistCards._onDeleteClick() and forward it to the
       //     module's delete logic.
@@ -578,7 +532,7 @@ j1.adapter.videoPlayer = ((j1, window) => {
     }, // END initHandlers
 
     // -------------------------------------------------------------------------
-    // Modify J1 VideoPlayer #4
+    // claude - Modify J1 VideoPlayer #4
     // closePlaylist()
     // Public adapter method that closes the playlist panel and fully resets the
     // toggle button (label + icon + data-state) to its "Show Playlist" state.
@@ -591,7 +545,7 @@ j1.adapter.videoPlayer = ((j1, window) => {
     // the elements up from the DOM itself (safe for calls originating outside
     // initPlayerUiEvents where the closure variables are not in scope).
     //
-    // Modify J1 VideoPlayer #5
+    // claude - Modify J1 VideoPlayer #5
     // The toggle element is now a <button id="toggle_playlist"> that
     // wraps a child <img> (icon) and the outer <span> sibling (label text).
     // Accessibility attributes (title, aria-label) are updated on the button
@@ -617,7 +571,7 @@ j1.adapter.videoPlayer = ((j1, window) => {
       // Reset toggle button to "Show Playlist" state
       if (btn !== null) {
         btn.dataset.playlistOpen = "false";
-        // Modify J1 VideoPlayer #5
+        // claude - Modify J1 VideoPlayer #5
         // Update accessibility attributes on the <button> element itself.
         btn.title = "Show playlist";
         btn.setAttribute('aria-label', "Show playlist");
@@ -633,46 +587,6 @@ j1.adapter.videoPlayer = ((j1, window) => {
         $('body').removeClass('stop-scrolling');
       }
     }, // END closePlaylist
-
-    // -------------------------------------------------------------------------
-    // Modify J1 VideoPlayer #7
-    // closeEditPlaylist()
-    // Public adapter method that closes the playlist-edit panel and fully resets
-    // the edit_playlist button (icon + data-state + accessibility attributes)
-    // to its "Edit playlist" state.
-    //
-    // Promoted to the public adapter API (parallel to closePlaylist()) so the
-    // module can call  j1.adapter.videoPlayer.closeEditPlaylist()  from any
-    // future call-site (e.g. doPostOnPlaying) without duplicating DOM logic.
-    //
-    // The optional btn parameter is supplied by the _closeEditPlaylist() closure
-    // inside initPlayerUiEvents() for a fast path; external callers omit it and
-    // the method falls back to a fresh DOM lookup.
-    // -------------------------------------------------------------------------
-    closeEditPlaylist: (btn) => {
-      var editScreen = document.getElementById("playlist_edit_screen");
-      if (editScreen === null) return;
-
-      editScreen.classList.remove('slide-in-top');
-      editScreen.classList.add('slide-out-top');
-      editScreen.style.display = "none";
-      editScreen.style.zIndex  = "1";
-
-      // Resolve button reference — use caller-supplied one (fast path inside
-      // initPlayerUiEvents) or fall back to a fresh DOM lookup.
-      var editBtn = btn || document.getElementById("edit_playlist");
-
-      if (editBtn !== null) {
-        editBtn.dataset.editOpen = "false";
-        editBtn.title = "Edit playlist";
-        editBtn.setAttribute('aria-label', "Edit playlist");
-        var editImg = editBtn.querySelector('img');
-        if (editImg !== null) {
-          editImg.src = "/assets/theme/j1/modules/videoPlayer/icons/player/dark/playlist-edit.svg";
-          editImg.alt = "Edit playlist";
-        }
-      }
-    }, // END closeEditPlaylist
 
     // -------------------------------------------------------------------------
     // messageHandler()
