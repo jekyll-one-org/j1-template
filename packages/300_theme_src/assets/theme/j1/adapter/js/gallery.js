@@ -70,8 +70,9 @@ regenerate:                             true
   gallery_media as a stray second positional argument the deep_merge filter does
   not consume, dropping the media layer. Chaining applies defaults <- control
   <- media in order, identical to the per-gallery merge done in initGallery.
+{% assign gallery_options   = gallery_defaults | deep_merge: gallery_control | deep_merge: gallery_media %}  
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign gallery_options   = gallery_defaults | deep_merge: gallery_control | deep_merge: gallery_media %}
+{% assign gallery_options   = gallery_defaults | deep_merge: gallery_control, gallery_media %}
 
 {% assign controls_sorted   = gallery_control.galleries  | sort: 'id' %}
 {% assign media_sorted      = gallery_media.galleries | sort: 'id' %}

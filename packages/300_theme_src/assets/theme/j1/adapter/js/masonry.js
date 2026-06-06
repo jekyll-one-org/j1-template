@@ -71,8 +71,9 @@ regenerate:                             true
    filters, lightGallery, ...). Arrays are replaced wholesale by
    deep_merge — fine here, because the per-grid (player+playlist) merge
    is done ID-wise inside the loop below, not via this top-level merge.
--------------------------------------------------------------------------------- {% endcomment %}
 {% assign masonry_options   = masonry_default | deep_merge: masonry_control | deep_merge: masonry_media %}
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign masonry_options   = masonry_default | deep_merge: masonry_control, masonry_media %}
 
 {% comment %} split J1 Masonry data #3
 --------------------------------------------------------------------------------

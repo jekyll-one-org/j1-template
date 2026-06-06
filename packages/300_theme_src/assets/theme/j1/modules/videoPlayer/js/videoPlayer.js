@@ -2491,12 +2491,9 @@
           }
         } // END if isYouTube / else
 
-        // Options reference changed from j1.adapter.skipad.skipAdOptions
-        // to j1.adapter.videoPlayer.videoPlayerOptions.
         videoPlayerOptions = j1.adapter.videoPlayer.videoPlayerOptions;
-
-        loopConfigEnabled = !!(videoPlayerOptions.playlist && videoPlayerOptions.playlist.loop && videoPlayerOptions.playlist.loop.enabled);
-        pipConfigEnabled  = !!(videoPlayerOptions.playlist && videoPlayerOptions.playlist.loop && videoPlayerOptions.playlist.loop.pip);
+        loopConfigEnabled  = !!(videoPlayerOptions.playlist && videoPlayerOptions.playlist.loop && videoPlayerOptions.playlist.loop.enabled);
+        pipConfigEnabled   = !!(videoPlayerOptions.playlist && videoPlayerOptions.playlist.loop && videoPlayerOptions.playlist.loop.pip);
 
         if (videoPlayerOptions.videoJS.autoStart) {
 
@@ -2766,6 +2763,13 @@
 
       if (typeof j1.adapter.videoPlayer.closePlaylist === 'function') {
         j1.adapter.videoPlayer.closePlaylist();
+      }
+
+      // jadams, 2026-06-06
+      // re-enable editBtn by emulating a button close
+      //
+      if (typeof j1.adapter.videoPlayer.closeEditPlaylist === 'function') {
+        j1.adapter.videoPlayer.closeEditPlaylist();
       }
 
       // Modify J1 VideoPlayer #5
@@ -3615,14 +3619,20 @@
     }
 
     handleClear() {
-      // Reference changed from this._skipAdOptions to this._videoPlayerOptions.
       const opts = this._videoPlayerOptions;
-      if (opts === null || !opts.enabled) {
-        return;
-      }
+      // jadams, 2026-06-06, disabled temporarily
+      //
+      // if (opts === null || !opts.enabled) {
+      //   return;
+      // }
 
+      // jadams, 2026-06-06, reload should made unnecessary. Requures
+      // additional checks for the toggle_playlist button if a playlist
+      // is loaded/available
+      //
+      const reload  = true;
       const cleared = playlistManager.clearPlaylist();
-      if (cleared) {
+      if (cleared && reload) {
         location.reload();
       }
     }

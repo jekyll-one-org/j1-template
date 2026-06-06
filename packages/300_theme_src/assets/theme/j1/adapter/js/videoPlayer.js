@@ -51,11 +51,20 @@ regenerate:                             true
 {% comment %} Set config data
 -------------------------------------------------------------------------------- {% endcomment %}
 {% assign videoplayer_defaults    = modules.defaults.videoPlayer.defaults %}
-{% assign videoplayer_settings    = modules.videoPlayer.settings %}
+{% assign videoplayer_control     = modules.videoplayer_control.settings %}
+{% assign videoplayer_media       = modules.videoplayer_media.settings %}
+{% assign videoplayer_settings    = modules.videoplayer_control.settings %}
 
 {% comment %} Set config options (deep merge: defaults <- user settings)
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign videoplayer_options     = videoplayer_defaults | merge: videoplayer_settings %}
+{% assign videoplayer_options     = videoplayer_defaults | deep_merge: videoplayer_control, videoplayer_media %}
+
+{% comment %} Unused data
+--------------------------------------------------------------------------------
+{% assign controls_sorted         = videoplayer_control.players | sort: 'id' %}
+{% assign media_sorted            = videoplayer_media.players   | sort: 'id' %}
+{% assign players                 = controls_sorted %}
+-------------------------------------------------------------------------------- {% endcomment %}
 
 
 {% comment %} Detect prod mode
@@ -715,19 +724,25 @@ j1.adapter.videoPlayer = ((j1, window) => {
       var editScreen = document.getElementById("playlist_edit_screen");
       if (editScreen === null) return;
 
-      editScreen.classList.remove('slide-in-top');
-      editScreen.classList.add('slide-out-top');
       editScreen.style.display = "none";
       editScreen.style.zIndex  = "1";
+      editScreen.classList.remove('slide-in-top');
+      editScreen.classList.add('slide-out-top');
 
       // Resolve button reference — use caller-supplied one (fast path inside
       // initPlayerUiEvents) or fall back to a fresh DOM lookup.
       var editBtn = btn || document.getElementById("edit_playlist");
-
       if (editBtn !== null) {
-        editBtn.dataset.editOpen = "false";
-        editBtn.title = "Manage playlist";
+        editBtn.disabled          = false;
+        editBtn.title             = "Manage playlist";
+        editBtn.style.cursor      = 'pointer';
+        editBtn.dataset.editOpen  = "false";
+
+        editBtn.classList.remove('disabled');
+        editBtn.setAttribute('aria-disabled', 'false');
         editBtn.setAttribute('aria-label', "Manage playlist");
+        editBtn.style.removeProperty('opacity');
+
         var editImg = editBtn.querySelector('img');
         if (editImg !== null) {
           editImg.src = "/assets/theme/j1/modules/videoPlayer/icons/player/dark/playlist-edit.svg";

@@ -1,0 +1,41 @@
+# ------------------------------------------------------------------------------
+# ~/_data/modules/videoPlayer_control.yml
+# User (control) configuration settings for the module J1 videoPlayer
+#
+# Product/Info:
+# https://jekyll.one
+#
+# Copyright (C) 2026 Juergen Adams
+#
+# J1 Template is licensed under the MIT License.
+# See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE
+# ------------------------------------------------------------------------------
+
+# ------------------------------------------------------------------------------
+# Description
+#
+description:
+  title:                                J1 videoPlayer
+  scope:                                User control settings
+  location:                             _data/modules/videoPlayer_control.yml
+
+# ------------------------------------------------------------------------------
+# User control settings
+#
+settings:
+
+  players:
+
+    # GENERAL options
+    #
+    enabled:                            true
+
+    toolbox:
+      enabled:                          false
+
+    playlist:
+      cards:
+        perRow:                         2
+
+# ------------------------------------------------------------------------------
+# END config
