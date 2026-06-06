@@ -410,6 +410,10 @@ j1.adapter.videoPlayer = ((j1, window) => {
         logger.info('\n' + 'initHandlers: playlistIOHandler skipped (playlist disabled)');
       }
 
+      // Fix J1 VideoPlayer #2
+      // ID corrected from 'playlistHistory' (non-existent) to
+      // 'videoplayer_playlist_parent' to match the actual page element.
+      //
       // Fix J1 VideoPlayer #4
       // 2a. initPlayHandler — listen for the 'playlist-play' CustomEvent bubbled
       //     from PlaylistCards._onPlayClick() and forward it to the module's
@@ -424,7 +428,7 @@ j1.adapter.videoPlayer = ((j1, window) => {
       //
       if (options.playlist && options.playlist.enabled) {
         try {
-          const playlistHistory = document.getElementById('playlistHistory');
+          const playlistHistory = document.getElementById('videoplayer_playlist_parent');
           if (playlistHistory) {
             playlistHistory.addEventListener('playlist-play', (e) => {
               const videoId = e.detail && e.detail.videoId;
@@ -434,7 +438,7 @@ j1.adapter.videoPlayer = ((j1, window) => {
             });
             logger.debug('\n' + 'initHandlers: initPlayHandler (event listener) — OK');
           } else {
-            logger.warn('\n' + 'initHandlers: initPlayHandler skipped — #playlistHistory not found');
+            logger.warn('\n' + 'initHandlers: initPlayHandler skipped — #videoplayer_playlist_parent not found');
           }
         } catch (e) {
           logger.error('\n' + 'initHandlers: initPlayHandler failed: ' + e);
@@ -453,7 +457,7 @@ j1.adapter.videoPlayer = ((j1, window) => {
       //
       if (options.playlist && options.playlist.enabled) {
         try {
-          const playlistHistory = document.getElementById('playlistHistory');
+          const playlistHistory = document.getElementById('videoplayer_playlist_parent');
           if (playlistHistory) {
             playlistHistory.addEventListener('playlist-delete', (e) => {
               const videoId = e.detail && e.detail.videoId;
@@ -463,7 +467,7 @@ j1.adapter.videoPlayer = ((j1, window) => {
             });
             logger.debug('\n' + 'initHandlers: initDeleteHandler (event listener) — OK');
           } else {
-            logger.warn('\n' + 'initHandlers: initDeleteHandler skipped — #playlistHistory not found');
+            logger.warn('\n' + 'initHandlers: initDeleteHandler skipped — #videoplayer_playlist_parent not found');
           }
         } catch (e) {
           logger.error('\n' + 'initHandlers: initDeleteHandler failed: ' + e);

@@ -1,6 +1,6 @@
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/modules/videoPlayer/js/videoPlayer.js (11)
+ # ~/assets/theme/j1/modules/videoPlayer/js/videoPlayer.js (10)
  # Provides JS Core for J1 Module videoPlayer
  # Extend J1 VideoPlayer
  #
@@ -14,7 +14,7 @@
  # -----------------------------------------------------------------------------
 */
 
-/* Version 3.1.11 for J1 Template */
+/* Version 3.1.10 for J1 Template */
 
 // -----------------------------------------------------------------------------
 // ESLint shimming
@@ -1841,46 +1841,20 @@
     // _updateSortSelectVisibility, _updateModeSwitchVisibility, etc. and is
     // called unconditionally from renderCurrent() so the button state is
     // always in sync with the actual playlist contents.
-    //
-    // claude - Modify J1 VideoPlayer #13
-    // Also blocks #toggle_playlist whenever the playlist editor is open
-    // (#edit_playlist has data-edit-open="true").  While the editor occupies
-    // the video-container slot, toggling the playlist panel is meaningless and
-    // could leave the UI in an inconsistent state, so the button is disabled
-    // (same visual treatment as the empty-playlist case) for the duration of
-    // the edit session.  The block is lifted automatically as soon as the
-    // editor is closed (data-edit-open attribute becomes "false" or absent).
     _updateTogglePlaylistButton() {
       const btn = document.getElementById('toggle_playlist');
       if (!btn) return;
-
-      // claude - Modify J1 VideoPlayer #13
-      // Check whether the playlist editor is currently open.
-      const editBtn    = document.getElementById('edit_playlist');
-      const editIsOpen = editBtn && editBtn.getAttribute('data-edit-open') === 'true';
-
-      if (editIsOpen) {
-        btn.setAttribute('disabled', '');
-        btn.setAttribute('aria-disabled', 'true');
-        btn.style.opacity = '0.35';
-        btn.style.cursor  = 'not-allowed';
-        btn.title         = 'Close the playlist editor first';
-        isDev && logger.debug('\n' + '_updateTogglePlaylistButton: button blocked — playlist editor is open');
-        return;
-      }
 
       const data    = this._searchResults || this.load() || [];
       const hasData = data.length > 0;
 
       if (hasData) {
         btn.removeAttribute('disabled');
-        btn.setAttribute('aria-disabled', 'false');
         btn.style.removeProperty('opacity');
         btn.style.removeProperty('cursor');
         btn.title       = btn.getAttribute('aria-label') || 'Show playlist';
       } else {
         btn.setAttribute('disabled', '');
-        btn.setAttribute('aria-disabled', 'true');
         btn.style.opacity = '0.35';
         btn.style.cursor  = 'not-allowed';
         btn.title         = 'No playlist loaded';
@@ -2922,22 +2896,6 @@
         editBtn.title       = 'Close playlist editor';
         editBtn.setAttribute('aria-label', 'Close playlist editor');
 
-        // claude - Modify J1 VideoPlayer #13
-        // Mark the editor as open so _updateTogglePlaylistButton() (and any
-        // other consumer) can read the state without tracking a private flag.
-        editBtn.setAttribute('data-edit-open', 'true');
-
-        // claude - Modify J1 VideoPlayer #13
-        // Block #toggle_playlist while the editor occupies the player slot.
-        const toggleBtn = document.getElementById('toggle_playlist');
-        if (toggleBtn) {
-          toggleBtn.setAttribute('disabled', '');
-          toggleBtn.setAttribute('aria-disabled', 'true');
-          toggleBtn.style.opacity = '0.35';
-          toggleBtn.style.cursor  = 'not-allowed';
-          toggleBtn.title         = 'Close the playlist editor first';
-        }
-
         _editScreenVisible = true;
 
         isDev && logger.debug('\n' + 'initEditPlaylistHandler: edit screen shown inside video_container');
@@ -2962,19 +2920,8 @@
 
         // 3. Update button aria state.
         editBtn.setAttribute('aria-expanded', 'false');
-        editBtn.title       = 'Manage playlist';
-        editBtn.setAttribute('aria-label', 'Manage playlist');
-
-        // claude - Modify J1 VideoPlayer #13
-        // Clear the open marker so the toggle button can be re-enabled.
-        editBtn.setAttribute('data-edit-open', 'false');
-
-        // claude - Modify J1 VideoPlayer #13
-        // Re-enable #toggle_playlist now that the editor is closed.
-        // Delegate to _updateTogglePlaylistButton() so empty-playlist logic
-        // is respected automatically (button stays disabled when the list is
-        // empty, rather than being blindly re-enabled here).
-        playlistManager._updateTogglePlaylistButton();
+        editBtn.title       = 'Edit playlist';
+        editBtn.setAttribute('aria-label', 'Edit playlist');
 
         _editScreenVisible = false;
 

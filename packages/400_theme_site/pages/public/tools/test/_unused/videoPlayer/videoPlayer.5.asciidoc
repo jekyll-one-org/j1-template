@@ -113,11 +113,11 @@ Enjoy watching the playlist.
     <button
       id="edit_playlist"
       class="video-player-header-arrows"
-      title="Manage playlist"
-      aria-label="Manage playlist">
+      title="Edit playlist"
+      aria-label="Edit playlist">
       <img
         src="/assets/theme/j1/modules/videoPlayer/icons/player/dark/playlist-edit.svg"
-        alt="Manage playlist">
+        alt="Edit playlist">
     </button>
   </div> <!-- END video_player_container -->
 

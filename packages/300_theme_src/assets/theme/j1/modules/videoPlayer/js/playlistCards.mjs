@@ -34,9 +34,9 @@ const DEFAULT_POSTER = '/assets/image/icon/videojs/videojs-poster.png';
 // Extend J1 VideoPlayer #4
 // YOUTUBE_POSTER_QUALITY defines the YouTube thumbnail quality used when
 // back-filling posters for entries loaded from an existing playlist.
-// "maxresdefault" matches the value set in videoPlayer.yml
-// (players.youtube.poster: maxresdefault.jpg).
-const YOUTUBE_POSTER_QUALITY = 'maxresdefault';
+// "mqdefault" matches the value set in videoPlayer.yml
+// (players.youtube.poster: mqdefault.jpg).
+const YOUTUBE_POSTER_QUALITY = 'mqdefault';
 
 // youtube video-id patterns — same regex used in the videoPlayer module.
 const YOUTUBE_ID_RE = /(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|shorts\/))([A-Za-z0-9_-]{11})/;
@@ -118,7 +118,7 @@ export class PlaylistCards extends LitElement {
   //      that were already back-filled by doPostOnPlaying during a previous
   //      session that saved the updated entry back to storage).
   //   2. v.videoId contains a bare 11-char YouTube ID, OR v.url / v.source
-  //      matches the YouTube URL pattern  → derive maxresdefault.jpg from the
+  //      matches the YouTube URL pattern  → derive mqdefault.jpg from the
   //      YouTube image CDN.  This handles all entries in existing playlists
   //      regardless of when they were saved.
   //   3. Fallback to DEFAULT_POSTER.
@@ -224,7 +224,7 @@ export class PlaylistCards extends LitElement {
           <!-- Extend J1 VideoPlayer #4
                Use _resolvedPoster() so that YouTube entries loaded from an
                existing playlist (where v.poster may be absent or stale) always
-               show maxresdefault.jpg. The previous v.poster || DEFAULT_POSTER
+               show mqdefault.jpg. The previous v.poster || DEFAULT_POSTER
                only worked for newly-added entries; loaded entries showed the
                generic fallback icon. -->
           <img class="playlist-thumb"

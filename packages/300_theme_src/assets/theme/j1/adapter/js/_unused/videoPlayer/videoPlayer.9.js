@@ -241,21 +241,13 @@ j1.adapter.videoPlayer = ((j1, window) => {
         togglePlaylistBtn.dataset.playlistOpen = "false";
 
         togglePlaylistBtn.addEventListener('click', function(event) {
-          var editBtn = document.getElementById('edit_playlist');
-
-          var playlistScreen = document.getElementById("playlist_screen");          
+          var playlistScreen = document.getElementById("playlist_screen");
           if (playlistScreen === null) return;
 
           var isOpen = (togglePlaylistBtn.dataset.playlistOpen === "true");
 
           if (!isOpen) {
             // ----- OPEN -----
-            editBtn.setAttribute('disabled', '');
-            editBtn.setAttribute('aria-disabled', 'true');
-            editBtn.style.opacity = '0.4';
-            editBtn.style.cursor  = 'not-allowed';
-            editBtn.title         = 'Hide current playlist first';
-
             playlistScreen.classList.remove('slide-out-top');
             playlistScreen.classList.add('slide-in-top');
             playlistScreen.style.display = "block";
@@ -279,23 +271,17 @@ j1.adapter.videoPlayer = ((j1, window) => {
             // the edit button to stay active while the playlist is visible would
             // produce a confusing UX where both panels fight over the same screen
             // area.  Disabling the button makes the constraint visible to the user.
-            //
-            // var editBtn = document.getElementById("edit_playlist");
-            // if (editBtn !== null) {
-            //   editBtn.disabled = true;
-            //   editBtn.classList.add('disabled');
-            //   editBtn.setAttribute('aria-disabled', 'true');
-            //   editBtn.title = "Close the playlist before editing";
-            //   editBtn.setAttribute('aria-label', "Close the playlist before editing");
-            // }
+            var editBtn = document.getElementById("edit_playlist");
+            if (editBtn !== null) {
+              editBtn.disabled = true;
+              editBtn.classList.add('disabled');
+              editBtn.setAttribute('aria-disabled', 'true');
+              editBtn.title = "Close the playlist before editing";
+              editBtn.setAttribute('aria-label', "Close the playlist before editing");
+            }
 
           } else {
             // ----- CLOSE -----
-            editBtn.removeAttribute('disabled');
-            editBtn.setAttribute('aria-disabled', 'false');
-            editBtn.style.removeProperty('opacity');
-            editBtn.style.removeProperty('cursor');
-
             _closePlaylist();
           }
 
@@ -316,7 +302,6 @@ j1.adapter.videoPlayer = ((j1, window) => {
       // Modify J1 VideoPlayer #7
       // edit playlist button — toggles #playlist_edit_screen.
       // Mirrors the toggle_playlist pattern exactly:
-      //
       //   • data-editOpen flag tracks open/closed state on the button itself
       //   • slide-in-top / slide-out-top CSS classes drive the animation
       //   • title, aria-label, and child <img> alt/src are updated on every toggle
@@ -324,7 +309,6 @@ j1.adapter.videoPlayer = ((j1, window) => {
       //   • closing the edit screen is also delegated to the public
       //     closeEditPlaylist() adapter method so the module can call it from
       //     any future call-site without duplicating DOM logic
-      //
       // Follows the guard-flag pattern to prevent duplicate listener registration.
       // -------------------------------------------------------
       if (!_this._editPlaylistHandlerInitialized) {
@@ -350,12 +334,6 @@ j1.adapter.videoPlayer = ((j1, window) => {
 
             if (!isOpen) {
               // ----- OPEN -----
-              togglePlaylistBtn.setAttribute('disabled', '');
-              togglePlaylistBtn.setAttribute('aria-disabled', 'true');
-              togglePlaylistBtn.style.opacity = '0.4';
-              togglePlaylistBtn.style.cursor  = 'not-allowed';
-              togglePlaylistBtn.title         = 'Hide current playlist first';
-
               // close the playlist panel first (mutually exclusive)
               _closePlaylist();
 
@@ -375,11 +353,6 @@ j1.adapter.videoPlayer = ((j1, window) => {
 
             } else {
               // ----- CLOSE -----
-              togglePlaylistBtn.removeAttribute('disabled');
-              togglePlaylistBtn.setAttribute('aria-disabled', 'false');
-              togglePlaylistBtn.style.removeProperty('opacity');
-              togglePlaylistBtn.style.removeProperty('cursor');
-
               _closeEditPlaylist();
             }
 
@@ -684,15 +657,15 @@ j1.adapter.videoPlayer = ((j1, window) => {
       // Re-enable the edit_playlist button now that the playlist panel is closed.
       // The button was disabled when the playlist was opened (see OPEN branch in
       // the toggle_playlist click listener) to make the mutual-exclusion
-      // constraint visible.  Restore the default "Manage playlist" state so the
+      // constraint visible.  Restore the default "Edit playlist" state so the
       // user can open the editor from the closed-playlist baseline.
       var editBtn = document.getElementById("edit_playlist");
       if (editBtn !== null) {
         editBtn.disabled = false;
         editBtn.classList.remove('disabled');
         editBtn.setAttribute('aria-disabled', 'false');
-        editBtn.title = "Manage playlist";
-        editBtn.setAttribute('aria-label', "Manage playlist");
+        editBtn.title = "Edit playlist";
+        editBtn.setAttribute('aria-label', "Edit playlist");
       }
     }, // END closePlaylist
 
@@ -701,7 +674,7 @@ j1.adapter.videoPlayer = ((j1, window) => {
     // closeEditPlaylist()
     // Public adapter method that closes the playlist-edit panel and fully resets
     // the edit_playlist button (icon + data-state + accessibility attributes)
-    // to its "Manage playlist" state.
+    // to its "Edit playlist" state.
     //
     // Promoted to the public adapter API (parallel to closePlaylist()) so the
     // module can call  j1.adapter.videoPlayer.closeEditPlaylist()  from any
@@ -726,12 +699,12 @@ j1.adapter.videoPlayer = ((j1, window) => {
 
       if (editBtn !== null) {
         editBtn.dataset.editOpen = "false";
-        editBtn.title = "Manage playlist";
-        editBtn.setAttribute('aria-label', "Manage playlist");
+        editBtn.title = "Edit playlist";
+        editBtn.setAttribute('aria-label', "Edit playlist");
         var editImg = editBtn.querySelector('img');
         if (editImg !== null) {
           editImg.src = "/assets/theme/j1/modules/videoPlayer/icons/player/dark/playlist-edit.svg";
-          editImg.alt = "Manage playlist";
+          editImg.alt = "Edit playlist";
         }
       }
     }, // END closeEditPlaylist
