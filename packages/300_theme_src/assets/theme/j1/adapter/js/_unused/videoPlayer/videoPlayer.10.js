@@ -50,14 +50,14 @@ regenerate:                             true
 
 {% comment %} Set config data
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign videoplayer_default    = modules.defaults.videoPlayer.defaults %}
+{% assign videoplayer_defaults    = modules.defaults.videoPlayer.defaults %}
 {% assign videoplayer_control     = modules.videoPlayer_control.settings %}
 {% assign videoplayer_media       = modules.videoPlayer_media.settings %}
 {% assign videoplayer_settings    = modules.videoPlayer_control.settings %}
 
 {% comment %} Set config options (deep merge: defaults <- user settings)
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign videoplayer_options     = videoplayer_default | merge: videoplayer_control | merge: videoplayer_media %}
+{% assign videoplayer_options     = videoplayer_defaults | merge: videoplayer_control | merge: videoplayer_media %}
 {% assign controls_sorted         = videoplayer_control.players | sort: 'id' %}
 {% assign media_sorted            = videoplayer_media.players   | sort: 'id' %}
 {% assign players                 = controls_sorted %}
@@ -133,9 +133,6 @@ j1.adapter.videoPlayer = ((j1, window) => {
     // adapter initializer
     // -------------------------------------------------------------------------
     init: (options) => {
-      var xhrLoadState      = 'pending';                                        // (initial) load state for the HTML portion of the slider
-      var load_dependencies = {};
-      var dependency;      
 
       // -----------------------------------------------------------------------
       // default module settings
@@ -154,9 +151,9 @@ j1.adapter.videoPlayer = ((j1, window) => {
       // -----------------------------------------------------------------------
       // merge default + user YAML settings
       // -----------------------------------------------------------------------
-      videoPlayerDefaults = $.extend({}, {{videoplayer_default | replace: 'nil', 'null' | replace: '=>', ':' }});
-      videoPlayers        = $.extend({}, {{videoplayer_control | replace: 'nil', 'null' | replace: '=>', ':' }});
-      videoPlayerPlaylist = $.extend({}, {{videoplayer_media   | replace: 'nil', 'null' | replace: '=>', ':' }});
+      videoPlayerDefaults = $.extend({}, {{videoplayer_defaults | replace: 'nil', 'null' | replace: '=>', ':' }});
+      videoPlayers        = $.extend({}, {{videoplayer_control  | replace: 'nil', 'null' | replace: '=>', ':' }});
+      videoPlayerPlaylist = $.extend({}, {{videoplayer_media    | replace: 'nil', 'null' | replace: '=>', ':' }});
       videoPlayerOptions  = $.extend(true, {}, videoPlayerDefaults, videoPlayers, videoPlayerPlaylist);
 
       // Expose the merged options on the adapter object so the module can
@@ -182,57 +179,10 @@ j1.adapter.videoPlayer = ((j1, window) => {
           logger.debug('\n' + 'state: ' + _this.getState());
           logger.info('\n' + 'module is being initialized');
 
-          {% comment %} split J1 Masonry data #3
-          ----------------------------------------------------------------------
-            Per-grid merge mirrors masonry.html exactly:
-              videoplayer_default <- player <- playlist_match (by id)
-            This makes the merged `grid` Liquid var expose the SAME keys
-            downstream code reads (grid.id, grid.enabled, grid.lightbox.*,
-            grid.lightGallery.*, grid.videojs.*, grid.options.*). Per-grid
-            values still override defaults key-by-key thanks to deep_merge,
-            so JS-side per-grid behaviour stays unchanged vs. the old
-            single-file masonry.settings.grids iteration.
-          ---------------------------------------------------------------------- {% endcomment %}
-          {% for video_player in players %}
-            {% assign playlist_match = media_sorted  | where: 'id', video_player.id | first %}
-            {% if playlist_match %}
-              {% assign player = videoplayer_default | merge: video_player | merge: playlist_match %}
-            {% else %}
-              {% assign player = videoplayer_default | merge: video_player %}
-            {% endif %}          
-
-            {% if player.enabled %}
-              {% assign player_id = player.id %}
-              logger.debug('\n' + 'found video player on id: ' + '{{player_id}}');
-
-              // create dynamic loader variable to setup the grid on id {{grid.id}}
-              dependency = 'dependencies_met_html_loaded_{player.id}}';
-              load_dependencies[dependency] = '';
-
-              // initialize the grid if HTML portion successfully loaded
-              load_dependencies['dependencies_met_html_loaded_{{player.id}}'] = setInterval (() => {
-                // check if HTML portion of the grid is loaded successfully
-                xhrLoadState = j1.xhrDOMState['#{{player.id}}_parent'];
-                if (xhrLoadState === 'success') {
-                  // Initialize UI handlers and PLAYER events
-                  //
-                  _this.initHandlers(videoPlayerOptions);
-                  _this.initPlayerUiEvents();
-                }
-                clearInterval(load_dependencies['dependencies_met_html_loaded_{{player.id}}']);
-              }, 10); // END dependencies_met_html_loaded              
-
-            {% else %}
-
-              logger.info('\n' + 'found player disabled on id: {{player.id}}');
-              {% if videoplayer_options.hideDisabled %}
-                // hide a grid if disabled
-                logger.debug('\n' + 'hide video player disabled on id: {{player.id}}');
-                $('#{{player.id}}').hide();
-              {% endif %}
-            {% endif %} // ENDIF player enabled
-
-          {% endfor %} // ENDFOR (all) grids
+          // Initialize UI handlers and PLAYER events
+          //
+          _this.initHandlers(videoPlayerOptions);
+          _this.initPlayerUiEvents();
 
           _this.setState('finished');
           logger.debug('\n' + 'state: ' + _this.getState());

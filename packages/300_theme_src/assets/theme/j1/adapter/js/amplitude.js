@@ -47,7 +47,7 @@ regenerate:                             false
 
 {% comment %} Set config options
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign amplitude_options   = amplitude_default | deep_merge: amplitude_control, amplitude_media %}
+{% assign amplitude_options   = amplitude_default | merge: amplitude_control | merge: amplitude_media %}
 
 
 {% comment %} Detect prod mode
@@ -854,7 +854,7 @@ j1.adapter.amplitude = ((j1, window) => {
         j1.modules.amplitudejs.data.atp.activeIndex = songIndex;
         j1.modules.amplitudejs.data.atp.playlist = playlist;
 
-        isDev && logger.warn('\n' + `DO NOTHING on StateChange for playlist: ${playlist} at trackID|state: ${trackID}|${AT_PLAYER_STATE_NAMES[state]}`);
+        isDev && logger.debug('\n' + `DO NOTHING on StateChange for playlist: ${playlist} at trackID|state: ${trackID}|${AT_PLAYER_STATE_NAMES[state]}`);
 
       } // END doNothingOnStateChange
 

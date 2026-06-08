@@ -63,19 +63,15 @@ regenerate:                             true
 {% comment %} split J1 Gallery data #2
 --------------------------------------------------------------------------------
   CHAINED deep_merge to match the Masonry adapter exactly:
-
-    masonry.js:  masonry_default | deep_merge: masonry_control | deep_merge: masonry_media
-
   The previous comma form (`deep_merge: gallery_control, gallery_media`) passes
   gallery_media as a stray second positional argument the deep_merge filter does
   not consume, dropping the media layer. Chaining applies defaults <- control
-  <- media in order, identical to the per-gallery merge done in initGallery.
-{% assign gallery_options   = gallery_defaults | deep_merge: gallery_control | deep_merge: gallery_media %}  
+  <- media in order, identical to the per-gallery merge done in initGallery.  
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign gallery_options   = gallery_defaults | deep_merge: gallery_control, gallery_media %}
+{% assign gallery_options   = gallery_defaults | merge: gallery_control | merge: gallery_media %}
 
-{% assign controls_sorted   = gallery_control.galleries  | sort: 'id' %}
-{% assign media_sorted      = gallery_media.galleries | sort: 'id' %}
+{% assign controls_sorted   = gallery_control.galleries | sort: 'id' %}
+{% assign media_sorted      = gallery_media.galleries   | sort: 'id' %}
 {% assign galleries         = controls_sorted %}
 
 
@@ -288,9 +284,9 @@ j1.adapter.gallery = ((j1, window) => {
       {% for gallery_item in galleries %}
         {% assign playlist_match = media_sorted | where: 'id', gallery_item.id | first %}
         {% if playlist_match %}
-          {% assign gallery = gallery_defaults | deep_merge: gallery_item | deep_merge: playlist_match %}
+          {% assign gallery = gallery_defaults  | merge: gallery_item | merge: playlist_match %}
         {% else %}
-          {% assign gallery = gallery_defaults | deep_merge: gallery_item %}
+          {% assign gallery = gallery_defaults  | merge: gallery_item %}
         {% endif %}
         {% assign gallery_arg  = gallery %}
 

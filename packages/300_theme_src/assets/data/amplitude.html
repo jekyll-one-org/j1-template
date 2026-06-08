@@ -38,7 +38,7 @@ exclude_from_search:                    true
 
 {% comment %} Set config options
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign amplitude_options     = amplitude_default | deep_merge: amplitude_control, amplitude_media %}
+{% assign amplitude_options     = amplitude_default | merge: amplitude_control | merge: amplitude_media %}
 
 {% comment %} set permalink setting
 -------------------------------------------------------------------------------- {% endcomment %}

@@ -69,16 +69,13 @@ exclude_from_search:                    true
 {% comment %} split J1 Gallery data #2
 --------------------------------------------------------------------------------
   CHAINED deep_merge to match the Masonry adapter exactly:
-
-    masonry.js/html:  masonry_default | deep_merge: masonry_control | deep_merge: masonry_media
-
   The previous comma form (`deep_merge: gallery_control, gallery_media`) passes
   gallery_media as a stray second positional argument the deep_merge filter does
   not consume, so the media layer was effectively dropped from the top-level
   merge. Chaining applies the layers in order (defaults <- control <- media),
   identical to the per-gallery merge used in the Collect Galleries loop below.
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign gallery_options     = gallery_defaults | deep_merge: gallery_control | deep_merge: gallery_media %}
+{% assign gallery_options     = gallery_defaults | merge: gallery_control | merge: gallery_media %}
 
 {% comment %} split J1 Gallery data #1
 --------------------------------------------------------------------------------
@@ -134,9 +131,9 @@ exclude_from_search:                    true
   {% for gallery_item in galleries %}
     {% assign playlist_match = playlists_sorted | where: 'id', gallery_item.id | first %}
     {% if playlist_match %}
-      {% assign gallery = gallery_defaults | deep_merge: gallery_item | deep_merge: playlist_match %}
+      {% assign gallery = gallery_defaults | merge: gallery_item | merge: playlist_match %}
     {% else %}
-      {% assign gallery = gallery_defaults | deep_merge: gallery_item %}
+      {% assign gallery = gallery_defaults | merge: gallery_item %}
     {% endif %}
     {% if gallery.enabled %}
 

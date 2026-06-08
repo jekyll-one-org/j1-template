@@ -54,7 +54,7 @@ exclude_from_search:                    true
   The per-grid merge (config + content) is therefore handled separately
   below, ID-wise.
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign masonry_options     = masonry_default | deep_merge: masonry_control, masonry_media %}
+{% assign masonry_options     = masonry_default | merge: masonry_control | merge: masonry_media %}
 
 {% comment %} split J1 Masonry data #1
 --------------------------------------------------------------------------------
@@ -123,9 +123,9 @@ exclude_from_search:                    true
   {% for player_grid in grids %}
     {% assign playlist_match = playlists_sorted | where: 'id', player_grid.id | first %}
     {% if playlist_match %}
-      {% assign grid = masonry_default | deep_merge: player_grid | deep_merge: playlist_match %}
+      {% assign grid = masonry_default | merge: player_grid | merge: playlist_match %}
     {% else %}
-      {% assign grid = masonry_default | deep_merge: player_grid %}
+      {% assign grid = masonry_default | merge: player_grid %}
     {% endif %}
     {% if grid.enabled %}
 

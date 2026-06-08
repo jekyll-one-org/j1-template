@@ -65,6 +65,11 @@ mid-roll, or overlay ads.
 
 Enjoy watching the playlist.
 
+.NPR Tiny Desk Concerts
+videoPlayer::player_1[role="mt-4 mb-5"]
+
+
+
 // Include Player HTML
 // -----------------------------------------------------------------------------
 ++++
@@ -113,11 +118,11 @@ Enjoy watching the playlist.
     <button
       id="edit_playlist"
       class="video-player-header-arrows"
-      title="Edit playlist"
-      aria-label="Edit playlist">
+      title="Manage playlist"
+      aria-label="Manage playlist">
       <img
         src="/assets/theme/j1/modules/videoPlayer/icons/player/dark/playlist-edit.svg"
-        alt="Edit playlist">
+        alt="Manage playlist">
     </button>
   </div> <!-- END video_player_container -->
 

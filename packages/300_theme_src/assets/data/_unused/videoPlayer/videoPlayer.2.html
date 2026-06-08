@@ -1,0 +1,239 @@
+---
+regenerate:                             true
+exclude_from_search:                    true
+---
+
+{%- capture cache -%}
+
+{% comment %}
+ # -----------------------------------------------------------------------------
+ # ~/assets/data/videoPlayer.html (2)
+ # Liquid procedure to generate the HTML portion for J1 videoPlayer
+ #
+ # Product/Info:
+ # https://jekyll.one
+ #
+ # Copyright (C) 2026 Juergen Adams
+ #
+ # J1 Template is licensed under the MIT License.
+ # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE
+ # -----------------------------------------------------------------------------
+ # NOTE: Data loaded dynamically by videoPlayer module (XHR)
+ # -----------------------------------------------------------------------------
+ # Test data:
+ #    {{variable | debug}}
+ # -----------------------------------------------------------------------------
+{% endcomment %}
+
+{% comment %} Liquid procedures
+-------------------------------------------------------------------------------- {% endcomment %}
+
+{% comment %} Liquid var initialization
+-------------------------------------------------------------------------------- {% endcomment %}
+
+{% comment %} Set config files
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign template_config       = site.data.j1_config %}
+{% assign modules               = site.data.modules %}
+
+{% comment %} Set config data
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign environment           = site.environment %}
+
+{% comment %} split J1 Gallery data #1
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign videoPlayer_defaults  = modules.defaults.videoPlayer.defaults %}
+{% assign videoPlayer_control   = modules.videoPlayer_control.settings %}
+{% assign videoPlayer_media     = modules.videoPlayer_media.settings %}
+
+{% comment %} Set config options
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign videoPlayer_options   = videoPlayer_defaults | merge: videoPlayer_control | merge: videoPlayer_media %}
+
+{% comment %} split data
+--------------------------------------------------------------------------------
+  Sort control configs and playlist content by gallery ID so each control
+  config can be matched to its content by `id`. The sorted control array
+  is exposed as `players` and drives the Collect players loop below.
+  Playlist content (images/videos) is merged into the matching control
+  gallery inside the loop via deep_merge.
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign controls_sorted       = videoPlayer_control.players %}
+{% assign players_sorted        = videoPlayer_media.players | sort: 'id' %}
+{% assign players               = players_sorted %}
+
+{% comment %} Configure permalink settings
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign ext = '' %}
+{% if site.permalink == 'none' %}
+  {% assign ext = '.html' %}
+{% endif %}
+
+{% comment %} Detect prod mode
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign production = false %}
+{% if environment == 'prod' or environment == 'production' %}
+  {% assign production = true %}
+{% endif %}
+
+
+{% comment %} Main
+  videoPlayer_options:  {{videoPlayer_options | debug}}
+================================================================================ {% endcomment %}
+<!DOCTYPE {{site.doctype}}>
+<html lang="{{site.language}}">
+  <head>
+    <!-- [INFO   ] [~/assets/data/videoPlayer.html              ]  [ set meta data (robots) to exclude HTML datafiles from index ] -->
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="videoPlayer" content="module data file">
+  </head>
+  <body>
+
+  {% comment %} Collect players
+  players {{players | debug}}
+  ------------------------------------------------------------------------------ {% endcomment %}
+
+   <!-- [INFO   ] [~/assets/data/videoPlayer.html               ]  [start collecting all players] -->
+  {% for player in players %} {% if player.enabled %}
+   
+    <!-- START Player: {{player.id}} -->
+    <div id="{{player.id}}" class="not-spoken">
+
+      <!-- div id="video_title" class="video-title not-spoken" style="display: none">
+        <i class="mdib mdib-video mdib-24px mr-2"></i>
+        <span id="video_title_text">placeholder</span>
+      </div -->
+
+      <div id="video_player_container" class="video-player-header not-spoken">
+        <span>Show Playlist</span>
+        <button
+          id="toggle_playlist"
+          class="video-player-header-arrows"
+          title="No playlist loaded"
+          aria-label="Show playlist"
+          aria-expanded="false"
+          disabled
+          style="opacity: 0.35; cursor: not-allowed;">
+          <img
+            src="/assets/theme/j1/modules/videoPlayer/icons/player/dark/playlist-show.svg"
+            alt="Show playlist">
+        </button>
+
+        <button
+          id="edit_playlist"
+          class="video-player-header-arrows"
+          title="Manage playlist"
+          aria-label="Manage playlist">
+          <img
+            src="/assets/theme/j1/modules/videoPlayer/icons/player/dark/playlist-edit.svg"
+            alt="Manage playlist">
+        </button>
+      </div> <!-- END video_player_container -->
+
+      <div id="video_container" class="video-container not-spoken mb-4">
+        <div id="emptyPlayerOverlay" class="empty-player-overlay">
+          <div class="empty-player-content">
+            <img
+              src="/assets/image/icon/videojs/videojs-logo.png"
+              alt="VideoJS Player"
+              width="500" height="200">
+          </div>
+        </div>
+      </div> <!-- END video_container -->
+
+      <div id="playlist_screen"
+        class="compact-player-playlist slide-out-top" style="display: none; z-index: 1;">
+
+        <div class="input-container">
+          <span class="search-icon-inside"><i class="fas fa-search"></i></span>
+          <input id="playlistSearchInput" type="text" placeholder="Search the playlist for items by description, title, author, category, type, or tag" autocomplete="off" aria-label="Search playlist">
+          <button id="playlistSearchClear" title="Clear search expression" aria-label="Clear search expression">
+          <i class="fas fa-times"></i>
+          </button>
+          <span id="playlistSearchResultCount"></span>
+        </div>
+
+        <!-- playlist screen block -->
+        <div id="playlistBlock" class="not-spoken mt-3" style="display: none">
+          <div class="playlist-block-title">
+            <i class="mdib mdib-cog mdib-24px ml-2"></i>
+          </div>
+          <div id="videoplayer_playlist_parent" class="not-spoken"></div>
+        </div>
+
+      </div> <!-- END playlist_screen -->
+
+      <div id="playlist_edit_screen" class="compact-player-playlist slide-out-top" style="display: none; z-index: 1;">
+        <div class="input-wrapper input-section not-spoken mt-3">
+          <div class="input-container">
+            <button id="pasteButton" class="paste-btn-inside" title="Paste from clipboard">
+              <i class="fas fa-paste"></i>
+              <span>Paste</span>
+            </button>
+            <input id="videoUrlInput" type="text" placeholder="Paste a video link to add ...">
+            <button id="playlistInputClear"
+              title="Clear YouTube video selection"
+              aria-label="Clear YouTube video selection"
+              style="display: none;">
+              <i class="fas fa-times"></i>
+            </button>
+          </div>
+        </div>
+
+        <div class="input-container input-section not-spoken mt-3 mb-4">
+          <button
+            id="serverPlaylistLoadButton"
+            class="select-btn-inside"
+            title="Select playlist">
+              <i class="fas fa-file-import"></i>
+            <span>Import</span>
+          </button>
+          <div class="input-container d-flex justify-content-start flex-wrap">
+            <select id="serverPlaylistSelect" class="server-playlist-select" form="playlist"></select>
+            <button id="playlistSelectClear"
+              title="Clear selection"
+              aria-label="Clear selection"
+              style="display: none;">
+                <i class="fas fa-times"></i>
+            </button>
+          </div>
+        </div>
+
+        <div class="input-container d-flex justify-content-center flex-wrap">
+          <input type="file" id="playlistImportFile" accept=".json,application/json" style="display: none;" aria-hidden="true">
+          <button id="playlistExportButton" class="export-playlist-btn" title="Export playlist to file">
+          <i class="fas fa-file-export mr-2"></i>
+          <span>Export Playlist</span>
+          </button>
+          <button id="playlistImportButton" class="import-playlist-btn" title="Import playlist from file">
+          <i class="fas fa-file-import mr-2"></i>
+          <span>Import Playlist</span>
+          </button>
+          <button id="playlistClearButton" class="delete-playlist-btn" title="Clear playlist">
+          <i class="fas fa-trash-alt mr-2"></i>
+          <span>Clear Playlist</span>
+          </button>
+        </div>
+
+      </div> <!-- END playlist_edit_screen -->
+
+    </div>
+    <!-- END player: {{player.id}} -->
+
+  {% endif %} {% endfor %}
+  <!-- [INFO   ] [~/assets/data/videoPlayer.html               ]  [end collecting all players] -->
+  </body>
+</html>
+{%- endcapture -%}
+
+{% comment %} Beautify|Compress page
+-------------------------------------------------------------------------------- {% endcomment %}
+{%- if production -%}
+  {% capture _LINE_FEED %}{% endcapture %}{% if site.compress_html.ignore.envs contains jekyll.environment %}{{ cache | strip_html_comments }}{% else %}{% capture _content %}{{ cache | strip_html_comments }}{% endcapture %}{% assign _profile = site.compress_html.profile %}{% if site.compress_html.endings == "all" %}{% assign _endings = "html head body li dt dd p rt rp optgroup option colgroup caption thead tbody tfoot tr td th" | split: " " %}{% else %}{% assign _endings = site.compress_html.endings %}{% endif %}{% for _element in _endings %}{% capture _END %}</{{ _element }}>{% endcapture %}{% assign _content = _content | remove: _END %}{% endfor %}{% if _profile and _endings %}{% assign _profile_endings = _content | size | plus: 1 %}{% endif %}{% for _element in site.compress_html.startings %}{% capture _start %}<{{ _element }}>{% endcapture %}{% assign _content = _content | remove: _start %}{% endfor %}{% if _profile and site.compress_html.startings %}{% assign _profile_startings = _content | size | plus: 1 %}{% endif %}{% if site.compress_html.comments == "all" %}{% assign _comments = "<!-- -->" | split: " " %}{% else %}{% assign _comments = site.compress_html.comments %}{% endif %}{% if _comments.size == 2 %}{% capture _comment_befores %}.{{ _content }}{% endcapture %}{% assign _comment_befores = _comment_befores | split: _comments.first %}{% for _comment_before in _comment_befores %}{% if forloop.first %}{% continue %}{% endif %}{% capture _comment_outside %}{% if _carry %}{{ _comments.first }}{% endif %}{{ _comment_before }}{% endcapture %}{% capture _comment %}{% unless _carry %}{{ _comments.first }}{% endunless %}{{ _comment_outside | split: _comments.last | first }}{% if _comment_outside contains _comments.last %}{{ _comments.last }}{% assign _carry = false %}{% else %}{% assign _carry = true %}{% endif %}{% endcapture %}{% assign _content = _content | remove_first: _comment %}{% endfor %}{% if _profile %}{% assign _profile_comments = _content | size | plus: 1 %}{% endif %}{% endif %}{% assign _pre_befores = _content | split: "<pre" %}{% assign _content = "" %}{% for _pre_before in _pre_befores %}{% assign _pres = _pre_before | split: "</pre>" %}{% assign _pres_after = "" %}{% if _pres.size != 0 %}{% if site.compress_html.blanklines %}{% assign _lines = _pres.last | split: _LINE_FEED %}{% capture _pres_after %}{% for _line in _lines %}{% assign _trimmed = _line | split: " " | join: " " %}{% if _trimmed != empty or forloop.last %}{% unless forloop.first %}{{ _LINE_FEED }}{% endunless %}{{ _line }}{% endif %}{% endfor %}{% endcapture %}{% else %}{% assign _pres_after = _pres.last | split: " " | join: " " %}{% endif %}{% endif %}{% capture _content %}{{ _content }}{% if _pre_before contains "</pre>" %}<pre{{ _pres.first }}</pre>{% endif %}{% unless _pre_before contains "</pre>" and _pres.size == 1 %}{{ _pres_after }}{% endunless %}{% endcapture %}{% endfor %}{% if _profile %}{% assign _profile_collapse = _content | size | plus: 1 %}{% endif %}{% if site.compress_html.clippings == "all" %}{% assign _clippings = "html head title base link meta style body article section nav aside h1 h2 h3 h4 h5 h6 hgroup header footer address p hr blockquote ol ul li dl dt dd figure figcaption main div table caption colgroup col tbody thead tfoot tr td th" | split: " " %}{% else %}{% assign _clippings = site.compress_html.clippings %}{% endif %}{% for _element in _clippings %}{% assign _edges = " <e;<e; </e>;</e>;</e> ;</e>" | replace: "e", _element | split: ";" %}{% assign _content = _content | replace: _edges[0], _edges[1] | replace: _edges[2], _edges[3] | replace: _edges[4], _edges[5] %}{% endfor %}{% if _profile and _clippings %}{% assign _profile_clippings = _content | size | plus: 1 %}{% endif %}{{ _content }}{% if _profile %} <table id="compress_html_profile_{{ site.time | date: "%Y%m%d" }}" class="compress_html_profile"> <thead> <tr> <td>Step <td>Bytes <tbody> <tr> <td>raw <td>{{ cache | strip_html_comments | size }}{% if _profile_endings %} <tr> <td>endings <td>{{ _profile_endings }}{% endif %}{% if _profile_startings %} <tr> <td>startings <td>{{ _profile_startings }}{% endif %}{% if _profile_comments %} <tr> <td>comments <td>{{ _profile_comments }}{% endif %}{% if _profile_collapse %} <tr> <td>collapse <td>{{ _profile_collapse }}{% endif %}{% if _profile_clippings %} <tr> <td>clippings <td>{{ _profile_clippings }}{% endif %} </table>{% endif %}{% endif %}
+{%- else -%}
+  {{ cache | remove:'<html><body>' | remove:'</body></html>' | strip_empty_lines }}
+{%- endif -%}
+
+{% comment %} Reset page cache
+-------------------------------------------------------------------------------- {% endcomment %}
+{%- assign cache = false -%}

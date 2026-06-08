@@ -71,9 +71,8 @@ regenerate:                             true
    filters, lightGallery, ...). Arrays are replaced wholesale by
    deep_merge — fine here, because the per-grid (player+playlist) merge
    is done ID-wise inside the loop below, not via this top-level merge.
-{% assign masonry_options   = masonry_default | deep_merge: masonry_control | deep_merge: masonry_media %}
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign masonry_options   = masonry_default | deep_merge: masonry_control, masonry_media %}
+{% assign masonry_options   = masonry_default | merge: masonry_control | merge: masonry_media %}
 
 {% comment %} split J1 Masonry data #3
 --------------------------------------------------------------------------------
@@ -231,9 +230,9 @@ j1.adapter.masonry = ((j1, window) => {
           {% for player_grid in grids %}
             {% assign playlist_match = media_sorted | where: 'id', player_grid.id | first %}
             {% if playlist_match %}
-              {% assign grid = masonry_default | deep_merge: player_grid | deep_merge: playlist_match %}
+              {% assign grid = masonry_default | merge: player_grid | merge: playlist_match %}
             {% else %}
-              {% assign grid = masonry_default | deep_merge: player_grid %}
+              {% assign grid = masonry_default | merge: player_grid %}
             {% endif %}
 
             {% if grid.enabled %}
