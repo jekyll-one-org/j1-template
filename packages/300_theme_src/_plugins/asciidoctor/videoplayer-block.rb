@@ -35,7 +35,7 @@ Asciidoctor::Extensions.register do
 
     def process parent, target, attributes
 
-      title_html = (attributes.has_key? 'title') ? %(<div id="video_title" class="videoPlayer-title"> <i class="mdib mdib-video mdib-24px mr-2"></i> <span id="video_title_text">#{attributes['title']}</span> </div>\n) : nil
+      title_html = (attributes.has_key? 'title') ? %(<div id="video_title" class="video-title"> <i class="mdib mdib-video mdib-24px mr-2"></i> <span id="video_title_text">#{attributes['title']}</span> </div>\n) : nil
 
       html = %(
         <div class="#{attributes['role']}">

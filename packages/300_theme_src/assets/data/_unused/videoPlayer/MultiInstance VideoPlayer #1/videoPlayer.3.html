@@ -7,7 +7,7 @@ exclude_from_search:                    true
 
 {% comment %}
  # -----------------------------------------------------------------------------
- # ~/assets/data/videoPlayer.html (2)
+ # ~/assets/data/videoPlayer.html (3)
  # Liquid procedure to generate the HTML portion for J1 videoPlayer
  #
  # Product/Info:
@@ -20,8 +20,12 @@ exclude_from_search:                    true
  # -----------------------------------------------------------------------------
  # NOTE: Data loaded dynamically by videoPlayer module (XHR)
  # -----------------------------------------------------------------------------
- # Test data:
- #    {{variable | debug}}
+ # claude - MultiInstance VideoPlayer #2
+ # All element IDs that were bare (video_container, playlist_screen,
+ # playlist_edit_screen, edit_playlist, emptyPlayerOverlay, etc.) are now
+ # namespaced with {{player.id}} so that multiple players on the same page
+ # never share a DOM id.  The adapter and module code that look these elements
+ # up must use the matching namespaced IDs (see videoPlayer.js fix below).
  # -----------------------------------------------------------------------------
 {% endcomment %}
 
@@ -40,7 +44,7 @@ exclude_from_search:                    true
 -------------------------------------------------------------------------------- {% endcomment %}
 {% assign environment           = site.environment %}
 
-{% comment %} split J1 Gallery data #1
+{% comment %} Set config data
 -------------------------------------------------------------------------------- {% endcomment %}
 {% assign videoPlayer_defaults  = modules.defaults.videoPlayer.defaults %}
 {% assign videoPlayer_control   = modules.videoPlayer_control.settings %}
@@ -50,16 +54,10 @@ exclude_from_search:                    true
 -------------------------------------------------------------------------------- {% endcomment %}
 {% assign videoPlayer_options   = videoPlayer_defaults | merge: videoPlayer_control | merge: videoPlayer_media %}
 
-{% comment %} split data
---------------------------------------------------------------------------------
-  Sort control configs and playlist content by gallery ID so each control
-  config can be matched to its content by `id`. The sorted control array
-  is exposed as `players` and drives the Collect players loop below.
-  Playlist content (images/videos) is merged into the matching control
-  gallery inside the loop via deep_merge.
+{% comment %} Split data — sort by id so control and media configs align
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign controls_sorted       = videoPlayer_control.players %}
-{% assign players_sorted        = videoPlayer_media.players | sort: 'id' %}
+{% assign controls_sorted       = videoPlayer_control.players | sort: 'id' %}
+{% assign players_sorted        = videoPlayer_media.players   | sort: 'id' %}
 {% assign players               = players_sorted %}
 
 {% comment %} Configure permalink settings
@@ -78,7 +76,6 @@ exclude_from_search:                    true
 
 
 {% comment %} Main
-  videoPlayer_options:  {{videoPlayer_options | debug}}
 ================================================================================ {% endcomment %}
 <!DOCTYPE {{site.doctype}}>
 <html lang="{{site.language}}">
@@ -89,25 +86,23 @@ exclude_from_search:                    true
   </head>
   <body>
 
-  {% comment %} Collect players
-  players {{players | debug}}
-  ------------------------------------------------------------------------------ {% endcomment %}
-
-   <!-- [INFO   ] [~/assets/data/videoPlayer.html               ]  [start collecting all players] -->
+  <!-- [INFO   ] [~/assets/data/videoPlayer.html               ]  [start collecting all players] -->
   {% for player in players %} {% if player.enabled %}
-   
+
     <!-- START Player: {{player.id}} -->
     <div id="{{player.id}}" class="not-spoken">
 
-      <!-- div id="video_title" class="video-title not-spoken" style="display: none">
-        <i class="mdib mdib-video mdib-24px mr-2"></i>
-        <span id="video_title_text">placeholder</span>
-      </div -->
-
-      <div id="video_player_container" class="video-player-header not-spoken">
+      <!-- claude - MultiInstance VideoPlayer #2
+           video_player_container, toggle_playlist_*, edit_playlist,
+           video_container, emptyPlayerOverlay, playlist_screen,
+           playlist_edit_screen and every inner interactive element are
+           now namespaced with {{player.id}} so that each player instance
+           owns a fully independent set of DOM nodes.
+      -->
+      <div id="video_player_container_{{player.id}}" class="video-player-header not-spoken">
         <span>Show Playlist</span>
         <button
-          id="toggle_playlist"
+          id="toggle_playlist_{{player.id}}"
           class="video-player-header-arrows"
           title="No playlist loaded"
           aria-label="Show playlist"
@@ -120,7 +115,7 @@ exclude_from_search:                    true
         </button>
 
         <button
-          id="edit_playlist"
+          id="edit_playlist_{{player.id}}"
           class="video-player-header-arrows"
           title="Manage playlist"
           aria-label="Manage playlist">
@@ -128,10 +123,10 @@ exclude_from_search:                    true
             src="/assets/theme/j1/modules/videoPlayer/icons/player/dark/playlist-edit.svg"
             alt="Manage playlist">
         </button>
-      </div> <!-- END video_player_container -->
+      </div> <!-- END video_player_container_{{player.id}} -->
 
-      <div id="video_container" class="video-container not-spoken mb-4">
-        <div id="emptyPlayerOverlay" class="empty-player-overlay">
+      <div id="video_container_{{player.id}}" class="video-container not-spoken mb-4">
+        <div id="emptyPlayerOverlay_{{player.id}}" class="empty-player-overlay">
           <div class="empty-player-content">
             <img
               src="/assets/image/icon/videojs/videojs-logo.png"
@@ -139,39 +134,47 @@ exclude_from_search:                    true
               width="500" height="200">
           </div>
         </div>
-      </div> <!-- END video_container -->
+      </div> <!-- END video_container_{{player.id}} -->
 
-      <div id="playlist_screen"
+      <div id="playlist_screen_{{player.id}}"
         class="compact-player-playlist slide-out-top" style="display: none; z-index: 1;">
 
         <div class="input-container">
           <span class="search-icon-inside"><i class="fas fa-search"></i></span>
-          <input id="playlistSearchInput" type="text" placeholder="Search the playlist for items by description, title, author, category, type, or tag" autocomplete="off" aria-label="Search playlist">
-          <button id="playlistSearchClear" title="Clear search expression" aria-label="Clear search expression">
-          <i class="fas fa-times"></i>
+          <input id="playlistSearchInput_{{player.id}}" type="text"
+            placeholder="Search the playlist for items by description, title, author, category, type, or tag"
+            autocomplete="off" aria-label="Search playlist">
+          <button id="playlistSearchClear_{{player.id}}"
+            title="Clear search expression"
+            aria-label="Clear search expression">
+            <i class="fas fa-times"></i>
           </button>
-          <span id="playlistSearchResultCount"></span>
+          <span id="playlistSearchResultCount_{{player.id}}"></span>
         </div>
 
         <!-- playlist screen block -->
-        <div id="playlistBlock" class="not-spoken mt-3" style="display: none">
+        <div id="playlistBlock_{{player.id}}" class="not-spoken mt-3" style="display: none">
           <div class="playlist-block-title">
             <i class="mdib mdib-cog mdib-24px ml-2"></i>
           </div>
-          <div id="videoplayer_playlist_parent" class="not-spoken"></div>
+          <div id="videoplayer_playlist_parent_{{player.id}}" class="not-spoken"></div>
         </div>
 
-      </div> <!-- END playlist_screen -->
+      </div> <!-- END playlist_screen_{{player.id}} -->
 
-      <div id="playlist_edit_screen" class="compact-player-playlist slide-out-top" style="display: none; z-index: 1;">
+      <div id="playlist_edit_screen_{{player.id}}"
+        class="compact-player-playlist slide-out-top" style="display: none; z-index: 1;">
+
         <div class="input-wrapper input-section not-spoken mt-3">
           <div class="input-container">
-            <button id="pasteButton" class="paste-btn-inside" title="Paste from clipboard">
+            <button id="pasteButton_{{player.id}}" class="paste-btn-inside"
+              title="Paste from clipboard">
               <i class="fas fa-paste"></i>
               <span>Paste</span>
             </button>
-            <input id="videoUrlInput" type="text" placeholder="Paste a video link to add ...">
-            <button id="playlistInputClear"
+            <input id="videoUrlInput_{{player.id}}" type="text"
+              placeholder="Paste a video link to add ...">
+            <button id="playlistInputClear_{{player.id}}"
               title="Clear YouTube video selection"
               aria-label="Clear YouTube video selection"
               style="display: none;">
@@ -182,15 +185,16 @@ exclude_from_search:                    true
 
         <div class="input-container input-section not-spoken mt-3 mb-4">
           <button
-            id="serverPlaylistLoadButton"
+            id="serverPlaylistLoadButton_{{player.id}}"
             class="select-btn-inside"
             title="Select playlist">
               <i class="fas fa-file-import"></i>
             <span>Import</span>
           </button>
           <div class="input-container d-flex justify-content-start flex-wrap">
-            <select id="serverPlaylistSelect" class="server-playlist-select" form="playlist"></select>
-            <button id="playlistSelectClear"
+            <select id="serverPlaylistSelect_{{player.id}}"
+              class="server-playlist-select" form="playlist"></select>
+            <button id="playlistSelectClear_{{player.id}}"
               title="Clear selection"
               aria-label="Clear selection"
               style="display: none;">
@@ -200,22 +204,26 @@ exclude_from_search:                    true
         </div>
 
         <div class="input-container d-flex justify-content-center flex-wrap">
-          <input type="file" id="playlistImportFile" accept=".json,application/json" style="display: none;" aria-hidden="true">
-          <button id="playlistExportButton" class="export-playlist-btn" title="Export playlist to file">
-          <i class="fas fa-file-export mr-2"></i>
-          <span>Export Playlist</span>
+          <input type="file" id="playlistImportFile_{{player.id}}"
+            accept=".json,application/json" style="display: none;" aria-hidden="true">
+          <button id="playlistExportButton_{{player.id}}"
+            class="export-playlist-btn" title="Export playlist to file">
+            <i class="fas fa-file-export mr-2"></i>
+            <span>Export Playlist</span>
           </button>
-          <button id="playlistImportButton" class="import-playlist-btn" title="Import playlist from file">
-          <i class="fas fa-file-import mr-2"></i>
-          <span>Import Playlist</span>
+          <button id="playlistImportButton_{{player.id}}"
+            class="import-playlist-btn" title="Import playlist from file">
+            <i class="fas fa-file-import mr-2"></i>
+            <span>Import Playlist</span>
           </button>
-          <button id="playlistClearButton" class="delete-playlist-btn" title="Clear playlist">
-          <i class="fas fa-trash-alt mr-2"></i>
-          <span>Clear Playlist</span>
+          <button id="playlistClearButton_{{player.id}}"
+            class="delete-playlist-btn" title="Clear playlist">
+            <i class="fas fa-trash-alt mr-2"></i>
+            <span>Clear Playlist</span>
           </button>
         </div>
 
-      </div> <!-- END playlist_edit_screen -->
+      </div> <!-- END playlist_edit_screen_{{player.id}} -->
 
     </div>
     <!-- END player: {{player.id}} -->

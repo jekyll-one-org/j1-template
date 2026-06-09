@@ -356,8 +356,6 @@ j1.adapter.videoPlayer = ((j1, window) => {
             playlistScreen.style.zIndex  = "199";
 
             togglePlaylistBtn.dataset.playlistOpen = "true";
-            // Modify J1 VideoPlayer #5
-            // Set accessibility attributes on the <button>; update alt on child <img>.
             togglePlaylistBtn.title = "Hide playlist";
             togglePlaylistBtn.setAttribute('aria-label', "Hide playlist");
             if (togglePlaylistSpan !== null) { togglePlaylistSpan.textContent = "Hide Playlist"; }
@@ -365,24 +363,6 @@ j1.adapter.videoPlayer = ((j1, window) => {
               togglePlaylistImg.src = "/assets/theme/j1/modules/videoPlayer/icons/player/dark/playlist-hide.svg";
               togglePlaylistImg.alt = "Hide playlist";
             }
-
-            // claude - Modify J1 VideoPlayer #12
-            // Disable the edit_playlist button while the playlist panel is open.
-            // The two panels are mutually exclusive: the edit screen always closes
-            // the playlist first (see editPlaylistBtn click handler), so allowing
-            // the edit button to stay active while the playlist is visible would
-            // produce a confusing UX where both panels fight over the same screen
-            // area.  Disabling the button makes the constraint visible to the user.
-            //
-            // var editBtn = document.getElementById("edit_playlist");
-            // if (editBtn !== null) {
-            //   editBtn.disabled = true;
-            //   editBtn.classList.add('disabled');
-            //   editBtn.setAttribute('aria-disabled', 'true');
-            //   editBtn.title = "Close the playlist before editing";
-            //   editBtn.setAttribute('aria-label', "Close the playlist before editing");
-            // }
-
           } else {
             // ----- CLOSE -----
             editBtn.removeAttribute('disabled');
@@ -482,7 +462,7 @@ j1.adapter.videoPlayer = ((j1, window) => {
           _this._editPlaylistHandlerInitialized = true;
           logger.debug('\n' + 'initPlayerUiEvents: editPlaylistHandler — OK');
         } else {
-          logger.warn('\n' + 'initPlayerUiEvents: editPlaylistHandler skipped — #edit_playlist not found');
+          logger.warn('\n' + 'initPlayerUiEvents: editPlaylistHandler skipped — edit_playlist button not found');
         }
       } // END if !_editPlaylistHandlerInitialized
 
@@ -775,11 +755,13 @@ j1.adapter.videoPlayer = ((j1, window) => {
       }
 
       // claude - Modify J1 VideoPlayer #12
-      // Re-enable the edit_playlist button now that the playlist panel is closed.
-      // The button was disabled when the playlist was opened (see OPEN branch in
-      // the toggle_playlist click listener) to make the mutual-exclusion
-      // constraint visible.  Restore the default "Manage playlist" state so the
-      // user can open the editor from the closed-playlist baseline.
+      // Re-enable the edit_playlist button now that the playlist panel
+      // is closed. The button was disabled when the playlist was opened
+      // (see OPEN branch in the toggle_playlist click listener) to make the
+      // mutual-exclusion constraint visible.
+      // Restore the default "Manage playlist" state so the user can open
+      // the editor from the closed-playlist baseline.
+      //
       var editBtn = document.getElementById("edit_playlist");
       if (editBtn !== null) {
         editBtn.disabled = false;
@@ -793,17 +775,17 @@ j1.adapter.videoPlayer = ((j1, window) => {
     // -------------------------------------------------------------------------
     // Modify J1 VideoPlayer #7
     // closeEditPlaylist()
-    // Public adapter method that closes the playlist-edit panel and fully resets
-    // the edit_playlist button (icon + data-state + accessibility attributes)
-    // to its "Manage playlist" state.
+    // Public adapter method that closes the playlist-edit panel and fully
+    // resets the edit_playlist button (icon + data-state + accessibility
+    // attributes) to its "Manage playlist" state.
     //
-    // Promoted to the public adapter API (parallel to closePlaylist()) so the
-    // module can call  j1.adapter.videoPlayer.closeEditPlaylist()  from any
+    // Promoted to the public adapter API - parallel to closePlaylist() - so
+    // the module can call  j1.adapter.videoPlayer.closeEditPlaylist() from any
     // future call-site (e.g. doPostOnPlaying) without duplicating DOM logic.
     //
-    // The optional btn parameter is supplied by the _closeEditPlaylist() closure
-    // inside initPlayerUiEvents() for a fast path; external callers omit it and
-    // the method falls back to a fresh DOM lookup.
+    // The optional btn parameter is supplied by the _closeEditPlaylist()
+    // closure inside initPlayerUiEvents() for a fast path; external callers
+    // omit it and the method falls back to a fresh DOM lookup.
     // -------------------------------------------------------------------------
     closeEditPlaylist: (btn) => {
       var editScreen = document.getElementById("playlist_edit_screen");

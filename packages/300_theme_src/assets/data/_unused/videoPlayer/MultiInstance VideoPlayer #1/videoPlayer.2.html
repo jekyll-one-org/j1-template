@@ -7,7 +7,7 @@ exclude_from_search:                    true
 
 {% comment %}
  # -----------------------------------------------------------------------------
- # ~/assets/data/videoPlayer.html (1)
+ # ~/assets/data/videoPlayer.html (2)
  # Liquid procedure to generate the HTML portion for J1 videoPlayer
  #
  # Product/Info:
@@ -107,7 +107,7 @@ exclude_from_search:                    true
       <div id="video_player_container" class="video-player-header not-spoken">
         <span>Show Playlist</span>
         <button
-          id="toggle_playlist"
+          id="toggle_playlist_{{player.id}}"
           class="video-player-header-arrows"
           title="No playlist loaded"
           aria-label="Show playlist"

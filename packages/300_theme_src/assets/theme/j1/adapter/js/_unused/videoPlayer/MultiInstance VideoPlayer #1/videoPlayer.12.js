@@ -6,7 +6,7 @@ regenerate:                             true
 
 {% comment %}
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/adapter/js/videoPlayer.js (10)
+ # ~/assets/theme/j1/adapter/js/videoPlayer.js (12)
  # J1 Adapter for the module VideoPlayer (native videoJS)
  #
  # Product/Info:
@@ -72,7 +72,7 @@ regenerate:                             true
 
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/adapter/js/videoPlayer.js (10)
+ # ~/assets/theme/j1/adapter/js/videoPlayer.js (11)
  # J1 Adapter for the module VideoPlayer (native HTML5/videoJS)
  #
  # Product/Info:
@@ -158,6 +158,7 @@ j1.adapter.videoPlayer = ((j1, window) => {
       videoPlayers        = $.extend({}, {{videoplayer_control | replace: 'nil', 'null' | replace: '=>', ':' }});
       videoPlayerPlaylist = $.extend({}, {{videoplayer_media   | replace: 'nil', 'null' | replace: '=>', ':' }});
       videoPlayerOptions  = $.extend(true, {}, videoPlayerDefaults, videoPlayers, videoPlayerPlaylist);
+      var videoPlayerSettings = $.extend(true, {}, videoPlayers, videoPlayerPlaylist);
 
       // Expose the merged options on the adapter object so the module can
       // read them via  j1.adapter.videoPlayer.videoPlayerOptions.
@@ -182,6 +183,27 @@ j1.adapter.videoPlayer = ((j1, window) => {
           logger.debug('\n' + 'state: ' + _this.getState());
           logger.info('\n' + 'module is being initialized');
 
+          // -------------------------------------------------------------------------
+          // Build the merged options object from YAML config
+          // -------------------------------------------------------------------------
+          var adapterOptions = $.extend({}, videoPlayerDefaults, videoPlayerSettings);
+
+          // -------------------------------------------------------------------------
+          // claude - MultiInstance VideoPlayer #8
+          // Forward adapter options to the module directly via the public-API setter.
+          // This call is now safe at any time — before or after createInstance() —
+          // because setAdapterOptions() writes straight to the module-level
+          // `adapterOptions` variable and the `isDev` flag.
+          //
+          // The previous call was:
+          //   videoPlayer.playlistManager.setAdapterOptions(adapterOptions);
+          // which required a VideoPlayerInstance (and therefore a PlaylistManager)
+          // to already exist, causing a race condition that produced the warning
+          // "playlistManager still null after 2 s".
+          // -------------------------------------------------------------------------
+          // claude - MultiInstance VideoPlayer #8
+          videoPlayer.setAdapterOptions(adapterOptions);
+
           {% comment %} split J1 Masonry data #3
           ----------------------------------------------------------------------
             Per-grid merge mirrors masonry.html exactly:
@@ -205,22 +227,28 @@ j1.adapter.videoPlayer = ((j1, window) => {
               {% assign player_id = player.id %}
               logger.debug('\n' + 'found video player on id: ' + '{{player_id}}');
 
-              // create dynamic loader variable to setup the grid on id {{grid.id}}
-              dependency = 'dependencies_met_html_loaded_{player.id}}';
-              load_dependencies[dependency] = '';
-
-              // initialize the grid if HTML portion successfully loaded
-              load_dependencies['dependencies_met_html_loaded_{{player.id}}'] = setInterval (() => {
-                // check if HTML portion of the grid is loaded successfully
-                xhrLoadState = j1.xhrDOMState['#{{player.id}}_parent'];
-                if (xhrLoadState === 'success') {
-                  // Initialize UI handlers and PLAYER events
-                  //
-                  _this.initHandlers(videoPlayerOptions);
-                  _this.initPlayerUiEvents();
-                }
-                clearInterval(load_dependencies['dependencies_met_html_loaded_{{player.id}}']);
-              }, 10); // END dependencies_met_html_loaded              
+              // claude - MultiInstance VideoPlayer #2
+              // The dependency key and the xhrDOMState lookup key are now built
+              // from a JS variable (pid) that is captured at Liquid render time
+              // as a string literal — NOT via Liquid interpolation inside the
+              // arrow-function body.  This guarantees every instance closes
+              // over its own correct id even when multiple players are on the
+              // same page.
+              //
+              (function(pid) {
+                var depKey = 'dependencies_met_html_loaded_' + pid;
+                load_dependencies[depKey] = '';
+                load_dependencies[depKey] = setInterval(function() {
+                  xhrLoadState = j1.xhrDOMState['#' + pid + '_parent'];
+                  if (xhrLoadState === 'success') {
+                    // Initialize UI handlers and PLAYER events per instance
+                    //
+                    _this.initHandlers(videoPlayerOptions, pid);
+                    _this.initPlayerUiEvents(pid);
+                  }
+                  clearInterval(load_dependencies[depKey]);
+                }, 10); // END dependencies_met_html_loaded
+              })('{{player_id}}');
 
             {% else %}
 
@@ -303,20 +331,21 @@ j1.adapter.videoPlayer = ((j1, window) => {
     // -------------------------------------------------------------------------
     // initPlayerUiEvents
     // -------------------------------------------------------------------------
-    initPlayerUiEvents: () => {
+    // claude - MultiInstance VideoPlayer #2
+    // Accepts playerId so every DOM lookup uses the namespaced IDs emitted by
+    // videoPlayer.html (e.g. "toggle_playlist_player_1", "edit_playlist_player_1").
+    // No Liquid interpolation is used inside this function body — all IDs are
+    // assembled at runtime from the playerId JS argument.
+    // -------------------------------------------------------------------------
+    initPlayerUiEvents: (playerId) => {
 
       // Modify J1 VideoPlayer #1
       // toggle playlist (video_player_container acts as a true toggle)
       //
       // Modify J1 VideoPlayer #5
-      // The toggle element is now <button id="toggle_playlist">.
-      // querySelector('span') still resolves the sibling <span> inside the
-      // parent .video-player-header div; querySelector('img') resolves the
-      // child <img> inside the button.  Accessibility attributes (title,
-      // aria-label) are now updated on the button itself in both OPEN and CLOSE
-      // branches; alt is updated on the child <img>.
+      // The toggle element is now <button id="toggle_playlist_<id>">.
       // -------------------------------------------------------
-      var togglePlaylistBtn  = document.getElementById("toggle_playlist_{{player.id}}");
+      var togglePlaylistBtn  = document.getElementById("toggle_playlist_" + playerId);
       var togglePlaylistSpan = togglePlaylistBtn  ? togglePlaylistBtn.closest('.video-player-header').querySelector('span') : null;
       var togglePlaylistImg  = togglePlaylistBtn  ? togglePlaylistBtn.querySelector('img') : null;
 
@@ -327,7 +356,7 @@ j1.adapter.videoPlayer = ((j1, window) => {
       // without duplicating the DOM logic.
       //
       function _closePlaylist() {
-        _this.closePlaylist(togglePlaylistBtn, togglePlaylistSpan, togglePlaylistImg);
+        _this.closePlaylist(playerId, togglePlaylistBtn, togglePlaylistSpan, togglePlaylistImg);
       } // END _closePlaylist
 
       if (togglePlaylistBtn !== null) {
@@ -335,9 +364,12 @@ j1.adapter.videoPlayer = ((j1, window) => {
         togglePlaylistBtn.dataset.playlistOpen = "false";
 
         togglePlaylistBtn.addEventListener('click', function(event) {
-          var editBtn = document.getElementById('edit_playlist');
+          // claude - MultiInstance VideoPlayer #2
+          // editBtn now looks up the namespaced id so each player instance
+          // controls its own edit button.
+          var editBtn = document.getElementById('edit_playlist_' + playerId);
 
-          var playlistScreen = document.getElementById("playlist_screen");          
+          var playlistScreen = document.getElementById("playlist_screen_" + playerId);
           if (playlistScreen === null) return;
 
           var isOpen = (togglePlaylistBtn.dataset.playlistOpen === "true");
@@ -378,7 +410,11 @@ j1.adapter.videoPlayer = ((j1, window) => {
 
       // hide playlist (secondary close button inside the playlist screen)
       // -------------------------------------------------------
-      var hidePlaylist = document.getElementById("hide_playlist_video_player");
+      // claude - MultiInstance VideoPlayer #5
+      // Namespaced to hide_playlist_video_player_<playerId> so each player
+      // instance wires its own secondary-close button independently.
+      //
+      var hidePlaylist = document.getElementById("hide_playlist_video_player_" + playerId);
       if (hidePlaylist !== null) {
         hidePlaylist.addEventListener('click', function(event) {
           // Modify J1 VideoPlayer #1
@@ -388,36 +424,29 @@ j1.adapter.videoPlayer = ((j1, window) => {
       } // END if hidePlaylist
 
       // Modify J1 VideoPlayer #7
-      // edit playlist button — toggles #playlist_edit_screen.
-      // Mirrors the toggle_playlist pattern exactly:
-      //
-      //   • data-editOpen flag tracks open/closed state on the button itself
-      //   • slide-in-top / slide-out-top CSS classes drive the animation
-      //   • title, aria-label, and child <img> alt/src are updated on every toggle
-      //   • opening the edit screen closes #playlist_screen (mutually exclusive)
-      //   • closing the edit screen is also delegated to the public
-      //     closeEditPlaylist() adapter method so the module can call it from
-      //     any future call-site without duplicating DOM logic
-      //
-      // Follows the guard-flag pattern to prevent duplicate listener registration.
+      // edit playlist button — toggles #playlist_edit_screen_<id>.
       // -------------------------------------------------------
-      if (!_this._editPlaylistHandlerInitialized) {
-        var editPlaylistBtn = document.getElementById("edit_playlist");
+      // claude - MultiInstance VideoPlayer #2
+      // Guard flag is now keyed by playerId so each instance initialises
+      // its own handler exactly once even when initPlayerUiEvents is called
+      // multiple times (once per renderCurrent cycle).
+      //
+      var editHandlerFlagKey = '_editPlaylistHandlerInitialized_' + playerId;
+      if (!_this[editHandlerFlagKey]) {
+        var editPlaylistBtn = document.getElementById("edit_playlist_" + playerId);
         if (editPlaylistBtn !== null) {
 
           // shared helper: close the edit screen and reset the button state.
-          // Delegates to the public adapter method so external callers (e.g.
-          // the module's doPostOnPlaying) can reuse it without duplicating DOM logic.
           //
           function _closeEditPlaylist() {
-            _this.closeEditPlaylist(editPlaylistBtn);
+            _this.closeEditPlaylist(playerId, editPlaylistBtn);
           } // END _closeEditPlaylist
 
           // initialise toggle state
           editPlaylistBtn.dataset.editOpen = "false";
 
           editPlaylistBtn.addEventListener('click', function(event) {
-            var editScreen = document.getElementById("playlist_edit_screen");
+            var editScreen = document.getElementById("playlist_edit_screen_" + playerId);
             if (editScreen === null) return;
 
             var isOpen = (editPlaylistBtn.dataset.editOpen === "true");
@@ -459,12 +488,12 @@ j1.adapter.videoPlayer = ((j1, window) => {
 
           }); // END addEventListener
 
-          _this._editPlaylistHandlerInitialized = true;
-          logger.debug('\n' + 'initPlayerUiEvents: editPlaylistHandler — OK');
+          _this[editHandlerFlagKey] = true;
+          logger.debug('\n' + 'initPlayerUiEvents: editPlaylistHandler[' + playerId + '] — OK');
         } else {
-          logger.warn('\n' + 'initPlayerUiEvents: editPlaylistHandler skipped — edit_playlist button not found');
+          logger.warn('\n' + 'initPlayerUiEvents: editPlaylistHandler[' + playerId + '] skipped — edit_playlist button not found');
         }
-      } // END if !_editPlaylistHandlerInitialized
+      } // END if !editHandlerFlagKey
 
     },
 
@@ -472,7 +501,7 @@ j1.adapter.videoPlayer = ((j1, window) => {
     // Fix J1 VideoPlayer #1
     // initHandlers()
     // Initialize all playlist and UI handler classes exported by the
-    // videoPlayer module.  Called from within dependencies_met_page_ready
+    // videoPlayer module.  Called from within dependencies_met_html_loaded
     // once the J1 core and the page are both ready.
     //
     // Handler init order mirrors the skipad adapter:
@@ -488,10 +517,16 @@ j1.adapter.videoPlayer = ((j1, window) => {
     //   9. inputValueBackgroundHandler   — input fill-state background sync
     //  10. navbarSmoothScrollHandler     — same-page anchor smooth-scroll
     //
+    // claude - MultiInstance VideoPlayer #2
+    // Added playerId parameter so all element-ID lookups use the correct
+    // namespaced IDs.  setAdapterOptions is now called on the per-instance
+    // module API (videoPlayer.getInstance(playerId).playlistManager) when
+    // available, falling back to the singleton path for backward-compat.
+    //
     // -------------------------------------------------------------------------
-    initHandlers: (options) => {
+    initHandlers: (options, playerId) => {
 
-      logger.info('\n' + 'initializing playlist handlers: started');
+      logger.info('\n' + 'initializing playlist handlers [' + playerId + ']: started');
 
       // Guard: videoPlayer module must be loaded before the adapter tries
       // to call its API.
@@ -501,24 +536,61 @@ j1.adapter.videoPlayer = ((j1, window) => {
         return;
       }
 
-      // 1. Push the merged adapter options into the module scope so that
-      //    all module-internal code that reads the module-level variable
-      //    `videoPlayerOptions` (set via j1.adapter.videoPlayer.videoPlayerOptions)
-      //    and the playlistManager-level `adapterOptions` / `isDev` have
-      //    consistent, adapter-sourced values.
+      // 1. Push the merged adapter options into the module scope.
+      //
+      // claude - MultiInstance VideoPlayer #2
+      // Prefer the per-instance API (videoPlayer.getInstance(playerId)) when
+      // available so the multi-instance module can keep per-player state
+      // isolated.  Falls back to the legacy singleton path so single-instance
+      // deployments are unaffected.
+      // setAdapterOptions is called inside a short retry loop because the
+      // module's own init (VideoJS boot + playlist load) may not have
+      // completed by the time the HTML-loaded poller fires.
       //
       try {
-        videoPlayer.playlistManager.setAdapterOptions(options);
-        logger.debug('\n' + 'initHandlers: setAdapterOptions — OK');
+        var moduleInstance = (typeof videoPlayer.getInstance === 'function')
+          ? videoPlayer.getInstance(playerId)
+          : null;
+        var pm = (moduleInstance && moduleInstance.playlistManager)
+          ? moduleInstance.playlistManager
+          : (videoPlayer.playlistManager || null);
+
+        if (pm !== null) {
+          pm.setAdapterOptions(options);
+          logger.debug('\n' + 'initHandlers: setAdapterOptions [' + playerId + '] — OK');
+        } else {
+          // playlistManager not ready yet — retry up to 20× at 100 ms
+          var retries = 0;
+          var retryTimer = setInterval(function() {
+            var inst = (typeof videoPlayer.getInstance === 'function')
+              ? videoPlayer.getInstance(playerId)
+              : null;
+            var pm2 = (inst && inst.playlistManager)
+              ? inst.playlistManager
+              : (videoPlayer.playlistManager || null);
+            if (pm2 !== null) {
+              pm2.setAdapterOptions(options);
+              logger.debug('\n' + 'initHandlers: setAdapterOptions [' + playerId + '] — OK (retry ' + retries + ')');
+              clearInterval(retryTimer);
+            } else if (++retries >= 20) {
+              logger.warn('\n' + 'initHandlers: setAdapterOptions [' + playerId + '] — playlistManager still null after 2 s, skipping');
+              clearInterval(retryTimer);
+            }
+          }, 100);
+        }
       } catch (e) {
-        logger.error('\n' + 'initHandlers: setAdapterOptions failed: ' + e);
+        logger.error('\n' + 'initHandlers: setAdapterOptions [' + playerId + '] failed: ' + e);
       }
 
       // 2. playlistIOHandler — import / export / clear / server-playlist buttons
       //
       if (options.playlist && options.playlist.enabled) {
         try {
-          new videoPlayer.playlistIOHandler(options);
+          // claude - MultiInstance VideoPlayer #5
+          // playerId passed so the handler resolves the namespaced element IDs
+          // (serverPlaylistSelect_<id>, serverPlaylistLoadButton_<id>, etc.)
+          // emitted by videoPlayer.html instead of the bare legacy IDs.
+          new videoPlayer.playlistIOHandler(options, playerId);
           logger.debug('\n' + 'initHandlers: playlistIOHandler — OK');
         } catch (e) {
           logger.error('\n' + 'initHandlers: playlistIOHandler failed: ' + e);
@@ -536,16 +608,13 @@ j1.adapter.videoPlayer = ((j1, window) => {
       //     from PlaylistCards._onPlayClick() and forward it to the module's
       //     play logic.
       //
-      //     Background: #3 added `new videoPlayer.initPlayHandler(options)` but
-      //     initPlayHandler is NOT exported as a constructor class by the module.
-      //     PlaylistCards already handles the UI side by dispatching a
-      //     'playlist-play' CustomEvent that bubbles up through the light DOM;
-      //     the adapter must wire an addEventListener, NOT call new on a
-      //     non-existent class.
+      // claude - MultiInstance VideoPlayer #2
+      // Element id is now namespaced: videoplayer_playlist_parent_<playerId>
       //
       if (options.playlist && options.playlist.enabled) {
         try {
-          const playlistHistory = document.getElementById('videoplayer_playlist_parent');
+          var playlistParentId = 'videoplayer_playlist_parent_' + playerId;
+          var playlistHistory  = document.getElementById(playlistParentId);
           if (playlistHistory) {
             playlistHistory.addEventListener('playlist-play', (e) => {
               const videoId = e.detail && e.detail.videoId;
@@ -555,7 +624,7 @@ j1.adapter.videoPlayer = ((j1, window) => {
             });
             logger.debug('\n' + 'initHandlers: initPlayHandler (event listener) — OK');
           } else {
-            logger.warn('\n' + 'initHandlers: initPlayHandler skipped — #videoplayer_playlist_parent not found');
+            logger.warn('\n' + 'initHandlers: initPlayHandler skipped — #' + playlistParentId + ' not found');
           }
         } catch (e) {
           logger.error('\n' + 'initHandlers: initPlayHandler failed: ' + e);
@@ -569,12 +638,13 @@ j1.adapter.videoPlayer = ((j1, window) => {
       //     bubbled from PlaylistCards._onDeleteClick() and forward it to the
       //     module's delete logic.
       //
-      //     Same root cause as 2a: #3 incorrectly used `new videoPlayer.initDeleteHandler`.
-      //     The handler must be wired as an addEventListener on #playlistHistory.
+      // claude - MultiInstance VideoPlayer #2
+      // Element id is now namespaced: videoplayer_playlist_parent_<playerId>
       //
       if (options.playlist && options.playlist.enabled) {
         try {
-          const playlistHistory = document.getElementById('videoplayer_playlist_parent');
+          var playlistParentId = 'videoplayer_playlist_parent_' + playerId;
+          var playlistHistory  = document.getElementById(playlistParentId);
           if (playlistHistory) {
             playlistHistory.addEventListener('playlist-delete', (e) => {
               const videoId = e.detail && e.detail.videoId;
@@ -584,7 +654,7 @@ j1.adapter.videoPlayer = ((j1, window) => {
             });
             logger.debug('\n' + 'initHandlers: initDeleteHandler (event listener) — OK');
           } else {
-            logger.warn('\n' + 'initHandlers: initDeleteHandler skipped — #videoplayer_playlist_parent not found');
+            logger.warn('\n' + 'initHandlers: initDeleteHandler skipped — #' + playlistParentId + ' not found');
           }
         } catch (e) {
           logger.error('\n' + 'initHandlers: initDeleteHandler failed: ' + e);
@@ -598,7 +668,10 @@ j1.adapter.videoPlayer = ((j1, window) => {
       if (options.playlist && options.playlist.enabled &&
           options.playlist.search && options.playlist.search.enabled) {
         try {
-          new videoPlayer.playlistSearchHandler();
+          // claude - MultiInstance VideoPlayer #5
+          // playerId passed so the handler resolves playlistSearchInput_<id>
+          // and playlistSearchClear_<id>.
+          new videoPlayer.playlistSearchHandler(playerId);
           logger.debug('\n' + 'initHandlers: playlistSearchHandler — OK');
         } catch (e) {
           logger.error('\n' + 'initHandlers: playlistSearchHandler failed: ' + e);
@@ -612,7 +685,9 @@ j1.adapter.videoPlayer = ((j1, window) => {
       if (options.playlist && options.playlist.enabled &&
           options.playlist.modeSwitch && options.playlist.modeSwitch.enabled) {
         try {
-          new videoPlayer.playlistModeSwitchHandler(options);
+          // claude - MultiInstance VideoPlayer #5
+          // playerId passed so the handler resolves its namespaced toggle element.
+          new videoPlayer.playlistModeSwitchHandler(options, playerId);
           logger.debug('\n' + 'initHandlers: playlistModeSwitchHandler — OK');
         } catch (e) {
           logger.error('\n' + 'initHandlers: playlistModeSwitchHandler failed: ' + e);
@@ -626,7 +701,9 @@ j1.adapter.videoPlayer = ((j1, window) => {
       if (options.playlist && options.playlist.enabled &&
           options.playlist.mergeSwitch && options.playlist.mergeSwitch.enabled) {
         try {
-          new videoPlayer.playlistMergeSwitchHandler(options);
+          // claude - MultiInstance VideoPlayer #5
+          // playerId passed so the handler resolves its namespaced element.
+          new videoPlayer.playlistMergeSwitchHandler(options, playerId);
           logger.debug('\n' + 'initHandlers: playlistMergeSwitchHandler — OK');
         } catch (e) {
           logger.error('\n' + 'initHandlers: playlistMergeSwitchHandler failed: ' + e);
@@ -640,7 +717,9 @@ j1.adapter.videoPlayer = ((j1, window) => {
       if (options.playlist && options.playlist.enabled &&
           options.playlist.loop && options.playlist.loop.enabled !== undefined) {
         try {
-          new videoPlayer.playlistLoopSwitchHandler(options);
+          // claude - MultiInstance VideoPlayer #5
+          // playerId passed so the handler resolves its namespaced element.
+          new videoPlayer.playlistLoopSwitchHandler(options, playerId);
           logger.debug('\n' + 'initHandlers: playlistLoopSwitchHandler — OK');
         } catch (e) {
           logger.error('\n' + 'initHandlers: playlistLoopSwitchHandler failed: ' + e);
@@ -654,7 +733,9 @@ j1.adapter.videoPlayer = ((j1, window) => {
       if (options.playlist && options.playlist.enabled &&
           options.playlist.sort && options.playlist.sort.enabled) {
         try {
-          new videoPlayer.playlistSortHandler();
+          // claude - MultiInstance VideoPlayer #5
+          // playerId passed so the handler resolves its namespaced <select>.
+          new videoPlayer.playlistSortHandler(playerId);
           logger.debug('\n' + 'initHandlers: playlistSortHandler — OK');
         } catch (e) {
           logger.error('\n' + 'initHandlers: playlistSortHandler failed: ' + e);
@@ -666,7 +747,11 @@ j1.adapter.videoPlayer = ((j1, window) => {
       // 8. inputWrapperHandler — URL input field, paste button, load-video button
       //
       try {
-        new videoPlayer.inputWrapperHandler();
+        // claude - MultiInstance VideoPlayer #5
+        // playerId passed so the handler resolves videoUrlInput_<id>,
+        // pasteButton_<id>, playlistInputClear_<id>, and
+        // serverPlaylistLoadButton_<id> (which calls loadPlaylistIndex).
+        new videoPlayer.inputWrapperHandler(playerId);
         logger.debug('\n' + 'initHandlers: inputWrapperHandler — OK');
       } catch (e) {
         logger.error('\n' + 'initHandlers: inputWrapperHandler failed: ' + e);
@@ -675,7 +760,9 @@ j1.adapter.videoPlayer = ((j1, window) => {
       // 9. inputValueBackgroundHandler — visual fill-state sync on all inputs
       //
       try {
-        videoPlayer.inputValueBackgroundHandler();
+        // claude - MultiInstance VideoPlayer #5
+        // playerId passed so only this player's inputs are scoped.
+        videoPlayer.inputValueBackgroundHandler(playerId);
         logger.debug('\n' + 'initHandlers: inputValueBackgroundHandler — OK');
       } catch (e) {
         logger.error('\n' + 'initHandlers: inputValueBackgroundHandler failed: ' + e);
@@ -685,7 +772,9 @@ j1.adapter.videoPlayer = ((j1, window) => {
       //
       if (options.smoothScroll && options.smoothScroll.enabled) {
         try {
-          videoPlayer.navbarSmoothScrollHandler();
+          // claude - MultiInstance VideoPlayer #5
+          // playerId passed for consistency with the per-instance handler pattern.
+          videoPlayer.navbarSmoothScrollHandler(playerId);
           logger.debug('\n' + 'initHandlers: navbarSmoothScrollHandler — OK');
         } catch (e) {
           logger.error('\n' + 'initHandlers: navbarSmoothScrollHandler failed: ' + e);
@@ -704,24 +793,14 @@ j1.adapter.videoPlayer = ((j1, window) => {
     // Public adapter method that closes the playlist panel and fully resets the
     // toggle button (label + icon + data-state) to its "Show Playlist" state.
     //
-    // Promoted from the private _closePlaylist() closure in initPlayerUiEvents()
-    // so the module can call  j1.adapter.videoPlayer.closePlaylist()  from
-    // doPostOnPlaying (and any future call site) without duplicating DOM logic.
-    //
-    // Parameters are optional — when called without arguments the method looks
-    // the elements up from the DOM itself (safe for calls originating outside
-    // initPlayerUiEvents where the closure variables are not in scope).
-    //
-    // Modify J1 VideoPlayer #5
-    // The toggle element is now a <button id="toggle_playlist"> that
-    // wraps a child <img> (icon) and the outer <span> sibling (label text).
-    // Accessibility attributes (title, aria-label) are updated on the button
-    // itself; alt is updated on the child <img>.  The btn.querySelector('span')
-    // and btn.querySelector('img') lookups are unchanged because the DOM
-    // structure is preserved — only the outer tag changed from <img> to <button>.
+    // claude - MultiInstance VideoPlayer #2
+    // Added playerId as the first parameter so DOM lookups resolve the correct
+    // namespaced elements.  All call-sites supply playerId; the method also
+    // falls back to fresh DOM lookups when btn/span/img are omitted (external
+    // calls from the module).
     // -------------------------------------------------------------------------
-    closePlaylist: (toggleBtn, toggleSpan, toggleImg) => {
-      var playlistScreen = document.getElementById("playlist_screen");
+    closePlaylist: (playerId, toggleBtn, toggleSpan, toggleImg) => {
+      var playlistScreen = document.getElementById("playlist_screen_" + playerId);
       if (playlistScreen === null) return;
 
       playlistScreen.classList.remove('slide-in-top');
@@ -731,15 +810,13 @@ j1.adapter.videoPlayer = ((j1, window) => {
 
       // Resolve button references — use the caller-supplied ones (fast path inside
       // initPlayerUiEvents) or fall back to fresh DOM lookups (call from module).
-      var btn  = toggleBtn  || document.getElementById("toggle_playlist_{{player.id}}");
+      var btn  = toggleBtn  || document.getElementById("toggle_playlist_" + playerId);
       var span = toggleSpan || (btn ? btn.querySelector('span') : null);
       var img  = toggleImg  || (btn ? btn.querySelector('img')  : null);
 
       // Reset toggle button to "Show Playlist" state
       if (btn !== null) {
         btn.dataset.playlistOpen = "false";
-        // Modify J1 VideoPlayer #5
-        // Update accessibility attributes on the <button> element itself.
         btn.title = "Show playlist";
         btn.setAttribute('aria-label', "Show playlist");
         if (span !== null) { span.textContent = "Show Playlist"; }
@@ -755,14 +832,11 @@ j1.adapter.videoPlayer = ((j1, window) => {
       }
 
       // claude - Modify J1 VideoPlayer #12
-      // Re-enable the edit_playlist button now that the playlist panel
-      // is closed. The button was disabled when the playlist was opened
-      // (see OPEN branch in the toggle_playlist click listener) to make the
-      // mutual-exclusion constraint visible.
-      // Restore the default "Manage playlist" state so the user can open
-      // the editor from the closed-playlist baseline.
+      // Re-enable the edit_playlist button now that the playlist panel is closed.
+      // claude - MultiInstance VideoPlayer #2
+      // Lookup uses namespaced ID edit_playlist_<playerId>.
       //
-      var editBtn = document.getElementById("edit_playlist");
+      var editBtn = document.getElementById("edit_playlist_" + playerId);
       if (editBtn !== null) {
         editBtn.disabled = false;
         editBtn.classList.remove('disabled');
@@ -779,16 +853,13 @@ j1.adapter.videoPlayer = ((j1, window) => {
     // resets the edit_playlist button (icon + data-state + accessibility
     // attributes) to its "Manage playlist" state.
     //
-    // Promoted to the public adapter API - parallel to closePlaylist() - so
-    // the module can call  j1.adapter.videoPlayer.closeEditPlaylist() from any
-    // future call-site (e.g. doPostOnPlaying) without duplicating DOM logic.
-    //
-    // The optional btn parameter is supplied by the _closeEditPlaylist()
-    // closure inside initPlayerUiEvents() for a fast path; external callers
-    // omit it and the method falls back to a fresh DOM lookup.
+    // claude - MultiInstance VideoPlayer #2
+    // Added playerId as the first parameter so DOM lookups use the namespaced
+    // IDs.  All internal call-sites supply playerId; external callers (module)
+    // pass playerId and may omit btn for a fresh DOM lookup.
     // -------------------------------------------------------------------------
-    closeEditPlaylist: (btn) => {
-      var editScreen = document.getElementById("playlist_edit_screen");
+    closeEditPlaylist: (playerId, btn) => {
+      var editScreen = document.getElementById("playlist_edit_screen_" + playerId);
       if (editScreen === null) return;
 
       editScreen.style.display = "none";
@@ -798,7 +869,7 @@ j1.adapter.videoPlayer = ((j1, window) => {
 
       // Resolve button reference — use caller-supplied one (fast path inside
       // initPlayerUiEvents) or fall back to a fresh DOM lookup.
-      var editBtn = btn || document.getElementById("edit_playlist");
+      var editBtn = btn || document.getElementById("edit_playlist_" + playerId);
       if (editBtn !== null) {
         editBtn.disabled          = false;
         editBtn.title             = "Manage playlist";
