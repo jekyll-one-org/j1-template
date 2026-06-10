@@ -1,6 +1,6 @@
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/modules/videoPlayer/js/videoPlayer.js (23)
+ # ~/assets/theme/j1/modules/videoPlayer/js/videoPlayer.js (22)
  # Provides JS Core for J1 Module videoPlayer
  # Extend J1 VideoPlayer
  #
@@ -14,7 +14,7 @@
  # -----------------------------------------------------------------------------
 */
 
-/* Version 3.1.23 for J1 Template */
+/* Version 3.1.22 for J1 Template */
 
 // -----------------------------------------------------------------------------
 // ESLint shimming
@@ -282,21 +282,8 @@
     // Corrected bare ids ('playlistSearch', 'playlistBlock') to match the
     // actual element ids in videoPlayer.html ('playlist_screen', 'playlistBlock')
     // and resolved through _pid() so the suffixed form is used at runtime.
-    //
-    // claude - Unique J1 VideoPlayer #9
-    // Removed 'playlist_screen' from this data-driven show/hide list.  The outer
-    // #playlist_screen panel is the TOGGLE target: its visibility is owned solely
-    // by the #toggle_playlist button (initTogglePlaylistHandler) and by the
-    // public closePlaylist() API.  Previously _manageHiddenMode(true) forced
-    // #playlist_screen to display:block whenever a playlist existed, and because
-    // it is called on every renderCurrent()/renderCards()/renderPlaylist() run,
-    // the panel was re-opened on each render — including on page load/reload with
-    // a loaded playlist.  That silently undid the adapter's closePlaylist() call
-    // (the close worked, then the next render re-showed the panel), so the panel
-    // appeared "stuck open".  Only the INNER #playlistBlock is data-driven here;
-    // the #playlist_screen panel now stays closed until the user opens it.
     _manageHiddenMode(visible) {
-      const ids = ['playlistBlock'];
+      const ids = ['playlist_screen', 'playlistBlock'];
       ids.forEach(id => {
         const el = document.getElementById(_pid(id));
         if (el) {
@@ -3395,16 +3382,6 @@
         }
         isDev && consoleLog('INFO', MODULE_NAME, `Loading YouTube video with id: ${youtubeId}`);
         this.loadAdFreeVideo(youtubeId);
-
-        //  closeEditPlaylist(btn, playerId) — same pattern as closePlaylist.
-        // force closinb the playlisz_edit_screen when a playlist is loaded
-        const button  = _pid('edit_playlist');
-        const playerID = button.replace("edit_playlist_", "");
-        j1.adapter.videoPlayer.closeEditPlaylist(button, playerID);
-
-        // update the playListButton (to be enabled when a playlist is loaded)
-        playlistManager._updateTogglePlaylistButton();   
-
         return;
       }
 
@@ -3424,19 +3401,10 @@
       if (videoSrc) {
         isDev && consoleLog('INFO', MODULE_NAME, `Loading video from src: ${videoSrc}`);
         this.loadVideo(videoSrc);
-
-        //  closeEditPlaylist(btn, playerId) — same pattern as closePlaylist.
-        // force closinb the playlisz_edit_screen when a playlist is loaded
-        const button  = _pid('edit_playlist');
-        const playerID = button.replace("edit_playlist_", "");
-        j1.adapter.videoPlayer.closeEditPlaylist(button, playerID);
-
-        // update the playListButton (to be enabled when a playlist is loaded)
-        playlistManager._updateTogglePlaylistButton();
       } else {
         isDev && consoleLog('ERROR', MODULE_NAME, MESSAGES.INVALID_URL);
       }
-    } // END processUrl()
+    }
 
     /**
      * extractVideoId
@@ -3668,15 +3636,6 @@
             container.innerHTML = containerHTML;
           }
 
-          //  closeEditPlaylist(btn, playerId) — same pattern as closePlaylist.
-          // force closinb the playlisz_edit_screen when a playlist is loaded
-          const button  = _pid('edit_playlist');
-          const playerID = button.replace("edit_playlist_", "");
-          j1.adapter.videoPlayer.closeEditPlaylist(button, playerID);
-
-          // update the playListButton (to be enabled when a playlist is loaded)
-          playlistManager._updateTogglePlaylistButton();
-
           playlistManager.renderCurrent();
 
           const videoElement = document.getElementById(_pid('video_player_container'));
@@ -3835,15 +3794,6 @@
         isDev && logger.debug('\n' + `Restoring container and overlay for new video`);
         container.innerHTML = containerHTML;
       }
-
-      //  closeEditPlaylist(btn, playerId) — same pattern as closePlaylist.
-      // force closinb the playlisz_edit_screen when a playlist is loaded
-      const button  = _pid('edit_playlist');
-      const playerID = button.replace("edit_playlist_", "");
-      j1.adapter.videoPlayer.closeEditPlaylist(button, playerID);
-
-      // update the playListButton (to be enabled when a playlist is loaded)
-      playlistManager._updateTogglePlaylistButton();
 
       const videoElement = document.getElementById(_pid('video_player_container'));
       if (videoElement) {
@@ -4584,30 +4534,19 @@
     const editScreen  = document.getElementById(_pid('playlist_edit_screen'));
     const videoContnr = document.getElementById(_pid('video_container'));
 
-    // claude - Unique J1 VideoPlayer #9
-    // Previously this function early-returned (doing nothing) unless the edit
-    // button carried data-edit-open="true".  That made a programmatic call from
-    // the adapter on page load a silent no-op, so the caller could not rely on
-    // closeEditPlaylist() to enforce the closed state.  The function is now
-    // idempotent: it always hides #playlist_edit_screen and resets the
-    // #edit_playlist button to its "Manage playlist" state, while the single
-    // DESTRUCTIVE step — overwriting #video_container with the saved snapshot —
-    // still runs ONLY when the editor was genuinely open (data-edit-open="true").
-    // The wasOpen guard preserves the original protection that prevented this
-    // call from wiping a live, playing video (e.g. when invoked from
-    // doPostOnPlaying after a playlist card was started).
-    const wasOpen = !!editBtn && editBtn.getAttribute('data-edit-open') === 'true';
+    // Nothing to close if the editor is not open.
+    if (!editBtn || editBtn.getAttribute('data-edit-open') !== 'true') return;
 
     if (editScreen) {
       editScreen.style.display = 'none';
     }
 
-    // Restore the video_container snapshot only if the editor had replaced it.
-    if (wasOpen && videoContnr && containerHTML) {
+    // Restore the video_container to its saved snapshot.
+    if (videoContnr && containerHTML) {
       videoContnr.innerHTML = containerHTML;
     }
 
-    // Reset button aria / title / open-marker state (idempotent).
+    // Reset button aria / title state.
     if (editBtn) {
       editBtn.setAttribute('aria-expanded', 'false');
       editBtn.title = 'Manage playlist';
@@ -4619,7 +4558,7 @@
     // to the guard method so the empty-playlist rule is respected.
     playlistManager._updateTogglePlaylistButton();
 
-    isDev && logger.debug('\n' + `closeEditPlaylist: playlist edit screen closed (wasOpen=${wasOpen})`);
+    isDev && logger.debug('\n' + 'closeEditPlaylist: playlist edit screen closed');
   }
 
   // ---------------------------------------------------------------------------

@@ -8,7 +8,7 @@ exclude_from_search:                    true
 {% comment %}
  # -----------------------------------------------------------------------------
  # ~/assets/data/videoPlayer.html (2)
- # Liquid procedure to generate the HTML portion for J1 videoPlayer
+ # Liquid procedure to generate the HTML portion for J1 videoPlayer (unique player)
  #
  # Product/Info:
  # https://jekyll.one
@@ -19,36 +19,6 @@ exclude_from_search:                    true
  # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE
  # -----------------------------------------------------------------------------
  # NOTE: Data loaded dynamically by videoPlayer module (XHR)
- # -----------------------------------------------------------------------------
- # claude - Unique J1 VideoPlayer #1
- # Every element id inside the per-player block is now suffixed with
- # _{{player.id}} so that multiple players can coexist on the same page
- # without duplicate-id conflicts.  The outer wrapper keeps its own
- # id="{{player.id}}" unchanged (that is the XHR anchor used by the
- # adapter).  All ids listed below have been made unique:
- #
- #   video_player_container_{{player.id}}
- #   toggle_playlist_{{player.id}}
- #   edit_playlist_{{player.id}}
- #   video_container_{{player.id}}
- #   emptyPlayerOverlay_{{player.id}}
- #   playlist_screen_{{player.id}}
- #   playlistSearchInput_{{player.id}}
- #   playlistSearchClear_{{player.id}}
- #   playlistSearchResultCount_{{player.id}}
- #   playlistBlock_{{player.id}}
- #   videoplayer_playlist_parent_{{player.id}}
- #   playlist_edit_screen_{{player.id}}
- #   pasteButton_{{player.id}}
- #   videoUrlInput_{{player.id}}
- #   playlistInputClear_{{player.id}}
- #   serverPlaylistLoadButton_{{player.id}}
- #   serverPlaylistSelect_{{player.id}}
- #   playlistSelectClear_{{player.id}}
- #   playlistImportFile_{{player.id}}
- #   playlistExportButton_{{player.id}}
- #   playlistImportButton_{{player.id}}
- #   playlistClearButton_{{player.id}}
  # -----------------------------------------------------------------------------
  # Test data:
  #    {{variable | debug}}
@@ -125,58 +95,40 @@ exclude_from_search:                    true
 
    <!-- [INFO   ] [~/assets/data/videoPlayer.html               ]  [start collecting all players] -->
   {% for player in players %} {% if player.enabled %}
-
-    <!-- claude - Unique J1 VideoPlayer #1 -->
+   
     <!-- START Player: {{player.id}} -->
     <div id="{{player.id}}" class="not-spoken">
 
-      <!-- div id="video_title_{{player.id}}" class="video-title not-spoken" style="display: none">
+      <!-- div id="video_title" class="video-title not-spoken" style="display: none">
         <i class="mdib mdib-video mdib-24px mr-2"></i>
-        <span id="video_title_text_{{player.id}}">placeholder</span>
+        <span id="video_title_text">placeholder</span>
       </div -->
 
-      <!-- claude - Unique J1 VideoPlayer #3
-           Replaced the old absolute-positioned button layout with a flexbox
-           3-slot structure so no bare ID selectors are needed in CSS.
-           Left  slot: toggle_playlist button (show/hide playlist panel)
-           Centre slot: title span (always geometrically centred)
-           Right slot: edit_playlist button (open playlist editor)
-           Both buttons share the class .video-player-header-arrows for
-           button-reset and focus-visible styles; positioning is handled
-           entirely by the parent flex container and its slot children. -->
       <div id="video_player_container_{{player.id}}" class="video-player-header not-spoken">
+        <span>Show Playlist</span>
+        <button
+          id="toggle_playlist_{{player.id}}"
+          class="video-player-header-arrows"
+          title="No playlist loaded"
+          aria-label="Show playlist"
+          aria-expanded="false"
+          disabled
+          style="opacity: 0.35; cursor: not-allowed;">
+          <img
+            src="/assets/theme/j1/modules/videoPlayer/icons/player/dark/playlist-show.svg"
+            alt="Show playlist">
+        </button>
 
-        <!-- left slot: toggle playlist button -->
-        <div class="video-player-header-slot">
-          <button id="toggle_playlist_{{player.id}}"
-            class="video-player-header-arrows"
-            title="No playlist loaded"
-            aria-label="Show playlist"
-            aria-expanded="false"
-            disabled
-            style="opacity: 0.35; cursor: not-allowed;">
-            <img
-              src="/assets/theme/j1/modules/videoPlayer/icons/player/dark/playlist-show.svg"
-              alt="Show playlist">
-          </button>
-        </div>
-
-        <!-- centre slot: title -->
-        <span class="video-player-header-title">Show Playlist</span>
-
-        <!-- right slot: edit playlist button -->
-        <div class="video-player-header-slot video-player-header-slot--right">
-          <button id="edit_playlist_{{player.id}}"
-            class="video-player-header-arrows"
-            title="Manage playlist"
-            aria-label="Manage playlist">
-            <img
-              src="/assets/theme/j1/modules/videoPlayer/icons/player/dark/playlist-edit.svg"
-              alt="Manage playlist">
-          </button>
-        </div>
-
-      </div> <!-- END video_player_container_{{player.id}} -->
+        <button
+          id="edit_playlist_{{player.id}}"
+          class="video-player-header-arrows"
+          title="Manage playlist"
+          aria-label="Manage playlist">
+          <img
+            src="/assets/theme/j1/modules/videoPlayer/icons/player/dark/playlist-edit.svg"
+            alt="Manage playlist">
+        </button>
+      </div> <!-- END video_player_container -->
 
       <div id="video_container_{{player.id}}" class="video-container not-spoken mb-4">
         <div id="emptyPlayerOverlay_{{player.id}}" class="empty-player-overlay">
@@ -187,10 +139,11 @@ exclude_from_search:                    true
               width="500" height="200">
           </div>
         </div>
-      </div> <!-- END video_container_{{player.id}} -->
+      </div> <!-- END video_container -->
 
       <div id="playlist_screen_{{player.id}}"
-        class="compact-player-playlist slide-out-top" style="display: none; z-index: 1;">
+        class="compact-player-playlist slide-out-top"
+        style="display: none; z-index: 1;">
 
         <div class="input-container">
           <span class="search-icon-inside"><i class="fas fa-search"></i></span>
@@ -209,7 +162,7 @@ exclude_from_search:                    true
           <div id="videoplayer_playlist_parent_{{player.id}}" class="not-spoken"></div>
         </div>
 
-      </div> <!-- END playlist_screen_{{player.id}} -->
+      </div> <!-- END playlist_screen -->
 
       <div id="playlist_edit_screen_{{player.id}}" class="compact-player-playlist slide-out-top" style="display: none; z-index: 1;">
         <div class="input-wrapper input-section not-spoken mt-3">
@@ -229,7 +182,8 @@ exclude_from_search:                    true
         </div>
 
         <div class="input-container input-section not-spoken mt-3 mb-4">
-          <button id="serverPlaylistLoadButton_{{player.id}}"
+          <button
+            id="serverPlaylistLoadButton_{{player.id}}"
             class="select-btn-inside"
             title="Select playlist">
               <i class="fas fa-file-import"></i>
@@ -247,22 +201,22 @@ exclude_from_search:                    true
         </div>
 
         <div class="input-container d-flex justify-content-center flex-wrap">
-          <input type="file" id="playlistImportFile_{{player.id}}" accept=".json,application/json" style="display: none;" aria-hidden="true">
+          <input id="playlistImportFile_{{player.id}}" type="file" accept=".json,application/json" style="display: none;" aria-hidden="true">
           <button id="playlistExportButton_{{player.id}}" class="export-playlist-btn" title="Export playlist to file">
           <i class="fas fa-file-export mr-2"></i>
           <span>Export Playlist</span>
           </button>
           <button id="playlistImportButton_{{player.id}}" class="import-playlist-btn" title="Import playlist from file">
-          <i class="fas fa-file-import mr-2"></i>
-          <span>Import Playlist</span>
+            <i class="fas fa-file-import mr-2"></i>
+            <span>Import Playlist</span>
           </button>
           <button id="playlistClearButton_{{player.id}}" class="delete-playlist-btn" title="Clear playlist">
-          <i class="fas fa-trash-alt mr-2"></i>
-          <span>Clear Playlist</span>
+            <i class="fas fa-trash-alt mr-2"></i>
+            <span>Clear Playlist</span>
           </button>
         </div>
 
-      </div> <!-- END playlist_edit_screen_{{player.id}} -->
+      </div> <!-- END playlist_edit_screen -->
 
     </div>
     <!-- END player: {{player.id}} -->

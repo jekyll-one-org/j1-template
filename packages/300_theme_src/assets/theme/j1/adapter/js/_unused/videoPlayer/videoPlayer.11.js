@@ -6,7 +6,7 @@ regenerate:                             true
 
 {% comment %}
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/adapter/js/videoPlayer.js (13)
+ # ~/assets/theme/j1/adapter/js/videoPlayer.js (11)
  # J1 Adapter for the module VideoPlayer (native videoJS)
  #
  # Product/Info:
@@ -99,7 +99,7 @@ regenerate:                             true
 
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/adapter/js/videoPlayer.js (13)
+ # ~/assets/theme/j1/adapter/js/videoPlayer.js (11)
  # J1 Adapter for the module VideoPlayer (native HTML5/videoJS)
  #
  # Product/Info:
@@ -237,23 +237,11 @@ j1.adapter.videoPlayer = ((j1, window) => {
               dependency = 'dependencies_met_html_loaded_{{player_id}}';
               load_dependencies[dependency] = '';
 
-              // claude - Unique J1 VideoPlayer #7
-              // initialize the player if HTML portion successfully loaded AND
-              // the videoPlayer module is already defined.
-              //
-              // Previously clearInterval() fired unconditionally on every tick,
-              // so initHandlers() was called exactly once — even when the module
-              // had not finished loading yet — causing the
-              // "videoPlayer module not found" guard to abort handler init with
-              // no further retry.
-              //
-              // Fix: keep the interval running until BOTH conditions are true;
-              // only then call initHandlers / initPlayerUiEvents and clear.
-              //
+              // initialize the player if HTML portion successfully loaded
               load_dependencies['dependencies_met_html_loaded_{{player_id}}'] = setInterval (() => {
                 // check if HTML portion of the player is loaded successfully
                 xhrLoadState = j1.xhrDOMState['#{{player_id}}_parent'];
-                if (xhrLoadState === 'success' && typeof videoPlayer !== 'undefined') {
+                if (xhrLoadState === 'success') {
                   // Initialize UI handlers and PLAYER events
                   // claude - Unique J1 VideoPlayer #1
                   // Pass the scoped player id so every DOM lookup inside
@@ -262,8 +250,8 @@ j1.adapter.videoPlayer = ((j1, window) => {
                   //
                   _this.initHandlers(videoPlayerOptions, '{{player_id}}');
                   _this.initPlayerUiEvents('{{player_id}}');
-                  clearInterval(load_dependencies['dependencies_met_html_loaded_{{player_id}}']);
                 }
+                clearInterval(load_dependencies['dependencies_met_html_loaded_{{player_id}}']);
               }, 10); // END dependencies_met_html_loaded              
 
             {% else %}
@@ -426,11 +414,7 @@ j1.adapter.videoPlayer = ((j1, window) => {
             editBtn.style.removeProperty('opacity');
             editBtn.style.removeProperty('cursor');
 
-            // claude - Unique J1 VideoPlayer #5
-            // Pass playerId so closePlaylist() looks up the correct
-            // scoped element (playlist_screen_<playerId>) instead of
-            // the unsuffixed id which does not exist in the DOM.
-            _closePlaylist(playerId);
+            _closePlaylist();
           }
 
         }); // END EventListener
@@ -444,10 +428,7 @@ j1.adapter.videoPlayer = ((j1, window) => {
         hidePlaylist.addEventListener('click', function(event) {
           // Modify J1 VideoPlayer #1
           // delegate to the shared helper so the toggle button stays in sync
-          //
-          // claude - Unique J1 VideoPlayer #5
-          // Pass playerId so closePlaylist() targets the correct player instance.
-          _closePlaylist(playerId);
+          _closePlaylist();
         }); // END addEventListener
       } // END if hidePlaylist
 
@@ -498,12 +479,7 @@ j1.adapter.videoPlayer = ((j1, window) => {
               togglePlaylistBtn.title         = 'Hide current playlist first';
 
               // close the playlist panel first (mutually exclusive)
-              //
-              // claude - Unique J1 VideoPlayer #5
-              // Pass playerId so closePlaylist() targets the correct
-              // scoped element (playlist_screen_<playerId>) instead of
-              // the unsuffixed id which does not exist in the DOM.
-              _closePlaylist(playerId);
+              _closePlaylist();
 
               editScreen.classList.remove('slide-out-top');
               editScreen.classList.add('slide-in-top');
@@ -890,8 +866,7 @@ j1.adapter.videoPlayer = ((j1, window) => {
 
       // Resolve button reference — use caller-supplied one (fast path inside
       // initPlayerUiEvents) or fall back to a fresh DOM lookup.
-      // var editBtn = btn || document.getElementById('edit_playlist' + idSuffix);
-      var editBtn = document.getElementById('edit_playlist' + idSuffix);
+      var editBtn = btn || document.getElementById('edit_playlist' + idSuffix);
       if (editBtn !== null) {
         editBtn.disabled          = false;
         editBtn.title             = 'Manage playlist';

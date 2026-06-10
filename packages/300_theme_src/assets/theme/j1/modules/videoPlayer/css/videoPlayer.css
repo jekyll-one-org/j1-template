@@ -53,56 +53,69 @@ code, pre {
 }
 
 
+/* claude - Unique J1 VideoPlayer #3
+   Replace the absolute-positioned button layout with a flexbox 3-slot
+   header.  The old approach used position:absolute on both buttons and
+   relied on a bare #edit_playlist ID override (Modify #6) that no longer
+   resolves now that every element id carries the _{{player.id}} suffix.
+   The new layout:
+     - .video-player-header      → flex row, space-between, vertically centred
+     - .video-player-header-slot → neutral flex child (left / right)
+     - .video-player-header-title → grows to fill the centre, text-centred
+   .video-player-header-arrows stays as the button-reset class but is no
+   longer absolutely positioned; it just sizes and styles the icon button.
+   No bare ID selectors are used; all rules are class-based and therefore
+   work correctly for every player instance on the page. */
+
 .video-player-header {
-  position: relative;
-  padding: 15px;
-  /* cursor: pointer; */
-  text-align: center;
-  font-family: "Lato", sans-serif;
-  font-weight: 600;
-  color: var(--ajs-theme-uno--white);
+  align-items:      center;
   background-color: var(--ajs-theme-uno--dark-silver);
+  color:            var(--ajs-theme-uno--white);
+  display:          flex;
+  font-family:      "Lato", sans-serif;
+  font-weight:      600;
+  justify-content:  space-between;
+  padding:          10px 15px;
 }
 
-/* Modify J1 VideoPlayer #5
-   .video-player-header-arrows was previously applied to a bare <img> element.
-   It is now applied to a <button> that wraps the SVG <img> icon.
-   The button is fully reset (no browser chrome) and positioned exactly where
-   the old <img> sat.  A dedicated img child rule constrains the icon size so
-   layout is pixel-identical to the previous implementation. */
+/* Left and right button slots — each the same fixed width so the centre
+   title always remains geometrically centred regardless of button presence */
+.video-player-header-slot {
+  align-items:  center;
+  display:      flex;
+  flex-shrink:  0;
+  width:        36px;
+}
+
+.video-player-header-slot--right {
+  justify-content: flex-end;
+}
+
+/* Centre title span — grows to fill remaining space */
+.video-player-header-title {
+  flex:       1;
+  text-align: center;
+}
+
+/* Button reset — no absolute positioning; let flexbox place the button */
 .video-player-header-arrows {
-  /* button reset */
-  background:   none;
-  border:       none;
-  padding:      0;
-  margin:       0;
-  line-height:  0;
-  /* original positioning */
-  cursor:       pointer;
-  position:     absolute;
-  top:          23px;
-  left:         15px;
+  background:  none;
+  border:      none;
+  cursor:      pointer;
+  display:     flex;
+  line-height: 0;
+  margin:      0;
+  padding:     0;
 }
 
 .video-player-header-arrows:focus-visible {
+  border-radius:  2px;
   outline:        2px solid var(--ajs-theme-uno--white);
   outline-offset: 3px;
-  border-radius:  2px;
 }
 
 .video-player-header-arrows img {
   display: block;
-}
-
-/* Modify J1 VideoPlayer #6
-   #edit_playlist shares all .video-player-header-arrows button-reset and
-   focus-visible styles but must be anchored to the RIGHT side of the header,
-   mirroring the left-anchored show/hide toggle button on the opposite side.
-   The right/top values match the existing left/top values (15 px / 23 px) so
-   both icons sit at identical vertical positions and equal inset distances. */
-#edit_playlist {
-  left:  unset;
-  right: 15px;
 }
 
 
@@ -146,7 +159,9 @@ code, pre {
 }
 
 /* align content to the left */
-.input-container:has(#serverPlaylistSelect) {
+/* claude - Unique J1 VideoPlayer #4: #serverPlaylistSelect → .server-playlist-select
+   (element id is now player-scoped; the <select> carries class="server-playlist-select") */
+.input-container:has(.server-playlist-select) {
   justify-content: flex-start !important;
 }
 
@@ -210,8 +225,11 @@ select:autofill {
    #playlistSearchInput.
   ------------------------------------------------------------------------------ */
 
-#serverPlaylistSelect,
-#playlistSearchInput {
+/* claude - Unique J1 VideoPlayer #4: bare #serverPlaylistSelect and #playlistSearchInput
+   replaced with [id^=...] attribute-prefix selectors that match all player-scoped
+   variants (serverPlaylistSelect_<id> and playlistSearchInput_<id>).              */
+[id^="serverPlaylistSelect_"],
+[id^="playlistSearchInput_"] {
   background: none !important;
 }
 
@@ -248,7 +266,9 @@ select[data-value-filled="true"] {
    Input Elements: Specific Fields
   ------------------------------------------------------------------------------ */
 
-#videoUrlInput {
+/* claude - Unique J1 VideoPlayer #4: #videoUrlInput → [id^="videoUrlInput_"]
+   (element id is now player-scoped: videoUrlInput_<playerID>)                  */
+[id^="videoUrlInput_"] {
   background: none !important;
   border: 1px solid var(--border-color);
   border-radius: 0px;
@@ -258,8 +278,10 @@ select[data-value-filled="true"] {
 
 /* optimize css 2: removed redundant "background: none"
    (already set with !important in the combined
-    #serverPlaylistSelect, #playlistSearchInput rule above)            */
-#serverPlaylistSelect {
+    [id^="serverPlaylistSelect_"], [id^="playlistSearchInput_"] rule above) */
+/* claude - Unique J1 VideoPlayer #4: #serverPlaylistSelect → .server-playlist-select
+   (element id is now player-scoped; the <select> carries class="server-playlist-select") */
+.server-playlist-select {
   border: 1px solid var(--border-color);
   box-shadow: none;
   color: var(--text-color);
@@ -271,18 +293,24 @@ select[data-value-filled="true"] {
 }
 
 /* center the load button below the server playlist select */
-#serverPlaylistSelect ~ #serverPlaylistLoadButton,
-#serverPlaylistSelect ~ .import-playlist-btn {
+/* claude - Unique J1 VideoPlayer #4: the old "#serverPlaylistSelect ~ #serverPlaylistLoadButton"
+   sibling rule is replaced.  In the new HTML the load button (.select-btn-inside) precedes
+   the select in DOM order, so the general-sibling combinator never fired.  The import button
+   (.import-playlist-btn) lives in a separate parent div.  Both are now targeted by class so
+   all player instances are covered without relying on the defunct ~ relationship.           */
+.select-btn-inside,
+.import-playlist-btn {
   flex-basis: auto;
-  margin-left: 0;
-  margin-right: auto;
+  /* margin-left: 0; */
   margin-top: .75rem;
 }
 
 /* optimize css 2: removed redundant "background: none"
    (already set with !important in the combined
-    #serverPlaylistSelect, #playlistSearchInput rule above)            */
-#playlistSearchInput {
+    [id^="serverPlaylistSelect_"], [id^="playlistSearchInput_"] rule above) */
+/* claude - Unique J1 VideoPlayer #4: #playlistSearchInput → [id^="playlistSearchInput_"]
+   (element id is now player-scoped: playlistSearchInput_<playerID>)              */
+[id^="playlistSearchInput_"] {
   font-size: .8rem;
   border: 1px solid var(--border-color);
   border-radius: 0px;
@@ -291,7 +319,9 @@ select[data-value-filled="true"] {
   width: 100%;
 }
 
-#playlistSearchInput::placeholder {
+/* claude - Unique J1 VideoPlayer #4: #playlistSearchInput::placeholder
+   → [id^="playlistSearchInput_"]::placeholder                                  */
+[id^="playlistSearchInput_"]::placeholder {
   color: var(--secondary-color);
   opacity: 0.7;
 }
@@ -349,7 +379,7 @@ select[data-value-filled="true"] {
   min-width: auto;
   padding: 0.5rem 0.6rem;
   position: absolute;
-  top: 42%;
+  top: 38%;
   transform: translateY(-50%);
   transition: all 0.3s ease;
   white-space: nowrap;
@@ -381,8 +411,11 @@ select[data-value-filled="true"] {
 
 /* optimize css 2: merged identical clear-button properties
    into a shared rule; only 'top' differs per element                   */
-#playlistInputClear,
-#playlistSelectClear {
+/* claude - Unique J1 VideoPlayer #4: #playlistInputClear / #playlistSelectClear
+   → [id^="playlistInputClear_"] / [id^="playlistSelectClear_"]
+   (element ids are now player-scoped: playlistInputClear_<id> / playlistSelectClear_<id>) */
+[id^="playlistInputClear_"],
+[id^="playlistSelectClear_"] {
   align-items: center;
   background: transparent;
   border-color: initial;
@@ -402,15 +435,17 @@ select[data-value-filled="true"] {
   transition: color 0.2s;
 }
 
-#playlistInputClear {
+[id^="playlistInputClear_"] {
   top: 33%;
 }
 
-#playlistSelectClear {
+[id^="playlistSelectClear_"] {
   top: 14%;
 }
 
-#playlistSearchClear {
+/* claude - Unique J1 VideoPlayer #4: #playlistSearchClear → [id^="playlistSearchClear_"]
+   (element id is now player-scoped: playlistSearchClear_<playerID>)              */
+[id^="playlistSearchClear_"] {
   align-items: center;
   background: transparent;
   border: none;
@@ -427,11 +462,14 @@ select[data-value-filled="true"] {
   transition: color .2s ease;
 }
 
-#playlistSearchClear:hover {
+[id^="playlistSearchClear_"]:hover {
   color: var(--text-color);
 }
 
-#playlistSearchResultCount {
+/* claude - Unique J1 VideoPlayer #4: #playlistSearchResultCount
+   → [id^="playlistSearchResultCount_"]
+   (element id is now player-scoped: playlistSearchResultCount_<playerID>)        */
+[id^="playlistSearchResultCount_"] {
   align-self: center;
   color: var(--secondary-color);
   display: none;
@@ -622,6 +660,9 @@ select[data-value-filled="true"] {
   grid-template-columns: repeat(1, 1fr) !important;
 }
 
+  /* claude - Unique J1 VideoPlayer #4: #playlistModeSwitch is dynamically created by
+     playlistModeSwitchHandler in videoPlayer.js using a bare (non-player-scoped) id.
+     The selector is intentionally kept as a plain ID until the JS is also updated. */
   #playlistModeSwitch {
   display: none !important;
 }
@@ -1007,6 +1048,9 @@ select[data-value-filled="true"] {
   margin-left: 0.5rem;
 }
 
+/* claude - Unique J1 VideoPlayer #4: #playlistModeSwitch is dynamically created by
+   playlistModeSwitchHandler in videoPlayer.js using a bare (non-player-scoped) id.
+   The selector is intentionally kept as a plain ID until the JS is also updated.  */
 #playlistModeSwitch {
   margin-left: 1rem;
 }
@@ -1015,25 +1059,11 @@ select[data-value-filled="true"] {
    Playlist Search Input
   ------------------------------------------------------------------------------ */
 
-/* align search wrapper to the left */
-#playlistSearchWrapper {
-  background: transparent;
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  margin: 0 4.75rem 1.5rem 0;
-}
-
-/* align search input to the left inside wrapper */
-#playlistSearchWrapper .input-container {
-  align-items: center;
-  display: flex;
-  flex: 1 1 0%;
-  justify-content: flex-start;
-  position: relative;
-  width: 100%;
-}
+/* claude - Unique J1 VideoPlayer #4: #playlistSearchWrapper rules removed.
+   No element with id="playlistSearchWrapper" (or any player-scoped variant)
+   exists in videoPlayer.html or is created by videoPlayer.js.
+   The playlist search input (.input-container inside #playlist_screen_<id>)
+   is already covered by the generic .input-container rules above.               */
 
 /* -----------------------------------------------------------------------------
    Rating Modal & Stars

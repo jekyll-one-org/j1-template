@@ -3395,16 +3395,6 @@
         }
         isDev && consoleLog('INFO', MODULE_NAME, `Loading YouTube video with id: ${youtubeId}`);
         this.loadAdFreeVideo(youtubeId);
-
-        //  closeEditPlaylist(btn, playerId) — same pattern as closePlaylist.
-        // force closinb the playlisz_edit_screen when a playlist is loaded
-        const button  = _pid('edit_playlist');
-        const playerID = button.replace("edit_playlist_", "");
-        j1.adapter.videoPlayer.closeEditPlaylist(button, playerID);
-
-        // update the playListButton (to be enabled when a playlist is loaded)
-        playlistManager._updateTogglePlaylistButton();   
-
         return;
       }
 
@@ -3424,19 +3414,10 @@
       if (videoSrc) {
         isDev && consoleLog('INFO', MODULE_NAME, `Loading video from src: ${videoSrc}`);
         this.loadVideo(videoSrc);
-
-        //  closeEditPlaylist(btn, playerId) — same pattern as closePlaylist.
-        // force closinb the playlisz_edit_screen when a playlist is loaded
-        const button  = _pid('edit_playlist');
-        const playerID = button.replace("edit_playlist_", "");
-        j1.adapter.videoPlayer.closeEditPlaylist(button, playerID);
-
-        // update the playListButton (to be enabled when a playlist is loaded)
-        playlistManager._updateTogglePlaylistButton();
       } else {
         isDev && consoleLog('ERROR', MODULE_NAME, MESSAGES.INVALID_URL);
       }
-    } // END processUrl()
+    }
 
     /**
      * extractVideoId
@@ -3668,15 +3649,6 @@
             container.innerHTML = containerHTML;
           }
 
-          //  closeEditPlaylist(btn, playerId) — same pattern as closePlaylist.
-          // force closinb the playlisz_edit_screen when a playlist is loaded
-          const button  = _pid('edit_playlist');
-          const playerID = button.replace("edit_playlist_", "");
-          j1.adapter.videoPlayer.closeEditPlaylist(button, playerID);
-
-          // update the playListButton (to be enabled when a playlist is loaded)
-          playlistManager._updateTogglePlaylistButton();
-
           playlistManager.renderCurrent();
 
           const videoElement = document.getElementById(_pid('video_player_container'));
@@ -3835,15 +3807,6 @@
         isDev && logger.debug('\n' + `Restoring container and overlay for new video`);
         container.innerHTML = containerHTML;
       }
-
-      //  closeEditPlaylist(btn, playerId) — same pattern as closePlaylist.
-      // force closinb the playlisz_edit_screen when a playlist is loaded
-      const button  = _pid('edit_playlist');
-      const playerID = button.replace("edit_playlist_", "");
-      j1.adapter.videoPlayer.closeEditPlaylist(button, playerID);
-
-      // update the playListButton (to be enabled when a playlist is loaded)
-      playlistManager._updateTogglePlaylistButton();
 
       const videoElement = document.getElementById(_pid('video_player_container'));
       if (videoElement) {
