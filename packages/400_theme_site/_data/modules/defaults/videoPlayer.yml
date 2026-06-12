@@ -27,6 +27,7 @@ defaults:
   # GENERAL options
   #
   enabled:                              false
+  env:                                  dev
   xhr_data_path:                        /assets/data/videoPlayer 
 
   # ----------------------------------------------------------------------------
@@ -84,7 +85,7 @@ defaults:
     type:                               cards                                   # list | cards
 
     cards:
-      perRow:                           4
+      perRow:                           2
 
   # ----------------------------------------------------------------------------
   # MODULE options
@@ -170,7 +171,7 @@ defaults:
         #
         # default_poster:               /assets/image/icon/videojs/videojs-poster.png
         poster_base:                    //img.youtube.com/vi
-        poster_qualty:                  mqdefault                               # poster taken from poster_base at medium resolution
+        poster_qualty:                  hqdefault                               # poster taken from poster_base at high quality resolution
         start:                          true                                    # set start (trim) of a video allowed
         end:                            true                                    # set end (trim) of a video allowed
 

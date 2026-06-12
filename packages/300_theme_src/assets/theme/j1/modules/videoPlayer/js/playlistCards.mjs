@@ -1,4 +1,18 @@
-// playlistCards.mjs (1)
+/*
+ # -----------------------------------------------------------------------------
+ # ~/assets/theme/j1/modules/videoPlayer/js/playlistCards.mjs (1)
+ # Provides Drop-in Lit web component for J1 Module videoPlayer
+ #
+ # Product/Info:
+ # https://jekyll.one
+ #
+ # Copyright (C) 2026 Juergen Adams
+ #
+ # J1 Template is licensed under the MIT License.
+ # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE
+ # -----------------------------------------------------------------------------
+*/
+
 // -----------------------------------------------------------------------------
 // Drop-in Lit web component that replaces the imperative string-template
 // rendering inside playlistManager.renderCards().
@@ -18,7 +32,7 @@
 // * Keyed by videoId via the `repeat` directive — sorting, filtering and
 //   incremental updates (rate change, delete one entry) touch only the
 //   affected card's DOM, not the whole grid.
-// =============================================================================
+// -----------------------------------------------------------------------------
 
 // Lit browser-loads
 //
@@ -34,9 +48,9 @@ const DEFAULT_POSTER = '/assets/image/icon/videojs/videojs-poster.png';
 // Extend J1 VideoPlayer #4
 // YOUTUBE_POSTER_QUALITY defines the YouTube thumbnail quality used when
 // back-filling posters for entries loaded from an existing playlist.
-// "mqdefault" matches the value set in videoPlayer.yml
-// (players.youtube.poster: mqdefault.jpg).
-const YOUTUBE_POSTER_QUALITY = 'mqdefault';
+// "hqdefault" matches the value set in videoPlayer.yml
+// (players.youtube.poster: hqdefault.jpg).
+const YOUTUBE_POSTER_QUALITY = 'hqdefault';
 
 // youtube video-id patterns — same regex used in the videoPlayer module.
 const YOUTUBE_ID_RE = /(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|shorts\/))([A-Za-z0-9_-]{11})/;
@@ -108,7 +122,7 @@ export class PlaylistCards extends LitElement {
   //
   // Problem: entries loaded from an existing playlist (localStorage / server
   // JSON) were saved before fix #3 introduced the `poster` field, or were
-  // saved with a stale thumbnail (mqdefault / empty). When these entries are
+  // saved with a stale thumbnail (hqdefault / empty). When these entries are
   // rendered on load the card shows DEFAULT_POSTER instead of the proper
   // YouTube thumbnail.
   //
@@ -118,7 +132,7 @@ export class PlaylistCards extends LitElement {
   //      that were already back-filled by doPostOnPlaying during a previous
   //      session that saved the updated entry back to storage).
   //   2. v.videoId contains a bare 11-char YouTube ID, OR v.url / v.source
-  //      matches the YouTube URL pattern  → derive mqdefault.jpg from the
+  //      matches the YouTube URL pattern  → derive hqdefault.jpg from the
   //      YouTube image CDN.  This handles all entries in existing playlists
   //      regardless of when they were saved.
   //   3. Fallback to DEFAULT_POSTER.
@@ -224,7 +238,7 @@ export class PlaylistCards extends LitElement {
           <!-- Extend J1 VideoPlayer #4
                Use _resolvedPoster() so that YouTube entries loaded from an
                existing playlist (where v.poster may be absent or stale) always
-               show mqdefault.jpg. The previous v.poster || DEFAULT_POSTER
+               show hqdefault.jpg. The previous v.poster || DEFAULT_POSTER
                only worked for newly-added entries; loaded entries showed the
                generic fallback icon. -->
           <img class="playlist-thumb"

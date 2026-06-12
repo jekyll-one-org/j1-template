@@ -42,14 +42,6 @@
   const MODULE_NAME         = 'videoPlayer.core';
   const PASTE_DELAY         = 10;
   const VIDEO_START_DELAY   = 250;
-  // claude - Clipboard Document is not focused #2
-  // Bounded window (ms) to wait for the document to (re)gain focus after the
-  // paste click before attempting navigator.clipboard.readText(). The click
-  // itself returns focus to the document, but the browser may not have
-  // committed it yet when handlePasteClick() runs. A focus event after a click
-  // normally fires within one or two frames, so this is generous headroom while
-  // still falling back to manual paste quickly when the page is truly embedded.
-  const CLIPBOARD_FOCUS_TIMEOUT = 300;
 
   // Extend J1 VideoPlayer #1
   // Re-added YOUTUBE_PATTERNS so that YouTube URLs are recognised and
@@ -82,10 +74,6 @@
   const MESSAGES = Object.freeze({
     NO_CLIPBOARD_API:   'Clipboard API not available. Please use Ctrl+V.',
     CLIPBOARD_DENIED:   'Clipboard access failed. Please paste URL manually.',
-    // claude - Clipboard Document is not focused
-    // Dedicated message for the "Document is not focused" case so it can be
-    // distinguished from a hard permission denial in the logs.
-    CLIPBOARD_NO_FOCUS: 'Clipboard read skipped: document not focused. Click the input and press Ctrl+V to paste.',
     // Extend J1 VideoPlayer #1
     // Updated error message: references both YouTube URLs and local video files.
     INVALID_URL:        'Invalid URL. Accepted: YouTube URL/ID or local video path (MP4, WebM, OGV).',
@@ -150,8 +138,7 @@
   // Module variables
   // ---------------------------------------------------------------------------
 
-//let isDev                     = false;
-  let isDev                     = (j1.env === "development" || j1.env === "dev") ? true : false;
+  let isDev                     = false;
 
   let player                    = null;
   let lastState                 = null;
@@ -1011,9 +998,15 @@
       this._updateSortSelectVisibility();
       this._updateModeSwitchVisibility();
       this._updateMergeSwitchVisibility();
+
       // claude - Modify J1 VideoPlayer #11
       // Keep the toggle button in sync with actual playlist state.
       this._updateTogglePlaylistButton();
+
+      // claude - Modify J1 VideoPlayer #18
+      // Keep the edit ("Manage playlist") button in sync too — disabled while
+      // the playlist panel is open and on an empty list (see method header).
+      this._updateToggleEditPlaylistButton();
 
       if (loopConfigEnabled && !this._loopSwitchInitialized) {
         const titleBar = document.querySelector('.playlist-block-title');
@@ -2076,7 +2069,6 @@
     // handler's SHOW branch and closePlaylist() (panel open ↔ close), and the
     // editor close paths — the same call sites that drive its #toggle_playlist
     // sibling.
-    //
     _updateToggleEditPlaylistButton() {
       const editBtn = document.getElementById(_pid('edit_playlist'));
       if (!editBtn) return;
@@ -3233,6 +3225,13 @@
         // empty, rather than being blindly re-enabled here).
         playlistManager._updateTogglePlaylistButton();
 
+        // claude - Modify J1 VideoPlayer #18
+        // Editor is closed → re-evaluate #edit_playlist itself. With the panel
+        // also closed, the helper falls through to the empty-list rule, so a
+        // playlist cleared from inside the editor leaves the button correctly
+        // disabled ("No playlist to manage") instead of stale-enabled.
+        playlistManager._updateToggleEditPlaylistButton();
+
         _editScreenVisible = false;
 
         isDev && logger.debug('\n' + 'initEditPlaylistHandler: video_container restored, edit screen hidden');
@@ -3546,142 +3545,22 @@
     }
 
     async handlePasteClick() {
-      // claude - Clipboard Document is not focused
-      // navigator.clipboard.readText() requires the *document* to have focus.
-      // It rejects with NotAllowedError ("Document is not focused") when the
-      // active focus lives somewhere this document cannot control, e.g.:
-      //   - the page is rendered inside an iframe / live-preview pane that does
-      //     not hold focus,
-      //   - DevTools (undocked or a focused panel) currently owns focus,
-      //   - a programmatic window.focus() failed to actually focus the window.
-      // The old code called window.focus() (a no-op / blocked in most browsers,
-      // and unreliable as a focus guarantee) and then awaited readText()
-      // regardless of the real focus state, so it surfaced the error as a hard
-      // failure instead of recovering.
-      if (!navigator.clipboard || !navigator.clipboard.readText) {
-        isDev && consoleLog('WARN', MODULE_NAME, MESSAGES.NO_CLIPBOARD_API);
-        this._focusInputForManualPaste();
-        return;
-      }
-
-      // claude - Clipboard Document is not focused #2
-      // Focus the input (this is the element the user expects to type into and
-      // is enough to give THIS document focus when the click originated here).
-      this.elements.videoUrlInput && this.elements.videoUrlInput.focus();
-
-      // claude - Clipboard Document is not focused #2
-      // Best-effort window.focus(): a harmless no-op in a normal foreground tab,
-      // but occasionally helps reattach focus when the page is embedded. It is
-      // NOT relied upon as a guarantee.
-      try { typeof window !== 'undefined' && window.focus && window.focus(); }
-      catch (_e) { /* ignore - window.focus may be blocked */ }
-
-      // claude - Clipboard Document is not focused #2
-      // ROOT CAUSE of the persisting warning: fix #1 read document.hasFocus()
-      // *synchronously* right after the click and bailed when it was false.
-      // But the click is itself the gesture that returns focus to the document;
-      // the browser may not have committed that focus yet at this point (and in
-      // a dev session DevTools may still own focus for a frame or two). So the
-      // guard fired on every legitimate paste, skipping the read and forcing the
-      // manual-paste fallback each time.
-      //
-      // Instead of skipping immediately, give the document a brief, bounded
-      // window to actually gain focus. _waitForDocumentFocus() resolves true the
-      // instant the document holds focus, or false only if the timeout elapses
-      // without it (the genuinely-embedded / focus-never-returns case).
-      const documentFocused = await this._waitForDocumentFocus(CLIPBOARD_FOCUS_TIMEOUT);
-      if (!documentFocused) {
-        isDev && consoleLog('WARN', MODULE_NAME, MESSAGES.CLIPBOARD_NO_FOCUS);
-        this._focusInputForManualPaste();
-        return;
-      }
-
       try {
+        if (!navigator.clipboard || !navigator.clipboard.readText) {
+          isDev && consoleLog('WARN', MODULE_NAME, MESSAGES.NO_CLIPBOARD_API);
+          return;
+        }
+
+        window.focus();
+        this.elements.videoUrlInput.focus();
+
         const text = await navigator.clipboard.readText();
-        const value = (text || '').trim();
-        this.elements.videoUrlInput.value = value;
-        this._toggleClearButton(value);
+        this.elements.videoUrlInput.value = text.trim();
+        this._toggleClearButton(text.trim());
         this.processUrl();
       } catch (err) {
-        // claude - Clipboard Document is not focused
-        // Treat the focus-related rejection as a recoverable condition: fall
-        // back to manual paste rather than reporting a hard error. Any other
-        // failure is still logged for diagnosis.
-        if (err && err.name === 'NotAllowedError') {
-          isDev && consoleLog('WARN', MODULE_NAME, MESSAGES.CLIPBOARD_NO_FOCUS);
-          this._focusInputForManualPaste();
-        } else {
-          isDev && consoleLog('ERROR', MODULE_NAME, `Clipboard read error: ${err}`);
-        }
+        isDev && consoleLog('ERROR', MODULE_NAME, `Clipboard read error: ${err}`);
       }
-    }
-
-    // claude - Clipboard Document is not focused #2
-    // Resolve true as soon as the document holds focus, or false when timeoutMs
-    // elapses without it. Resolves synchronously-fast when focus is already held.
-    // Otherwise it listens for the window 'focus' event AND polls via
-    // requestAnimationFrame, so a focus change is detected even if the event is
-    // missed. This converts fix #1's immediate hard skip into a bounded retry,
-    // giving the focus granted by the paste click time to commit before
-    // navigator.clipboard.readText() is attempted.
-    _waitForDocumentFocus(timeoutMs) {
-      return new Promise((resolve) => {
-        // Cannot assess focus (non-browser / unusual host): assume OK and let
-        // readText() decide via its own try/catch.
-        if (typeof document === 'undefined' || typeof document.hasFocus !== 'function') {
-          resolve(true);
-          return;
-        }
-        if (document.hasFocus()) {
-          resolve(true);
-          return;
-        }
-
-        const hasWindow = (typeof window !== 'undefined');
-        const raf = (hasWindow && window.requestAnimationFrame)
-          ? window.requestAnimationFrame.bind(window)
-          : (cb) => setTimeout(cb, 16);
-        const now = () => ((typeof performance !== 'undefined' && performance.now)
-          ? performance.now()
-          : Date.now());
-
-        const start = now();
-        let settled = false;
-
-        const onFocus = () => { if (document.hasFocus()) finish(true); };
-
-        function cleanup() {
-          if (hasWindow) window.removeEventListener('focus', onFocus, true);
-        }
-        function finish(ok) {
-          if (settled) return;
-          settled = true;
-          cleanup();
-          resolve(ok);
-        }
-
-        if (hasWindow) window.addEventListener('focus', onFocus, true);
-
-        const poll = () => {
-          if (settled) return;
-          if (document.hasFocus()) { finish(true); return; }
-          if ((now() - start) >= timeoutMs) { finish(false); return; }
-          raf(poll);
-        };
-        raf(poll);
-      });
-    }
-
-    // claude - Clipboard Document is not focused
-    // Shared fallback for every path where programmatic clipboard read is not
-    // possible. Focuses (and selects) the input so the user can immediately
-    // press Ctrl+V; the existing 'paste' listener (handleDirectPaste) then
-    // processes the manually pasted value.
-    _focusInputForManualPaste() {
-      const input = this.elements.videoUrlInput;
-      if (!input) return;
-      input.focus();
-      if (typeof input.select === 'function') input.select();
     }
 
     handleDirectPaste(_event) {
@@ -3954,9 +3833,7 @@
     }
 
     handleFileSelected(event) {
-      const reload  = true;
-      const file    = event.target.files[0];
-
+      const file = event.target.files[0];
       if (!file) return;
 
       const reader = new FileReader();
@@ -4019,24 +3896,12 @@
           // update the playListButton (to be enabled when a playlist is loaded)
           playlistManager._updateTogglePlaylistButton();
 
-          // claude - Modify J1 VideoPlayer #18
-          // Counterpart to _updateTogglePlaylistButton() for the #edit_playlist
-          // ("Manage playlist") button.  Keeps that button's enabled/disabled visual
-          // state in sync with the rest of the UI, applying the SAME two guards that
-          // _updateTogglePlaylistButton() applies.    
-          // playlistManager._updateToggleEditPlaylistButton();
-
           playlistManager.renderCurrent();
 
-          // const videoElement = document.getElementById(_pid('video_player_container'));
-          // if (videoElement) {
-          //   scrollToElement(videoElement);
-          // }          
-
-          if (reload) {
-            location.reload();
+          const videoElement = document.getElementById(_pid('video_player_container'));
+          if (videoElement) {
+            scrollToElement(videoElement);
           }
-
         } catch (err) {
           logger.error('\n' + `import from file failed: ${err}`);
         }
@@ -4050,7 +3915,7 @@
     }
 
     handleClear() {
-      const reload  = true;
+      const reload  = false;
       const opts    = this._videoPlayerOptions;
 
       // jadams, 2026-06-06, disabled temporarily
@@ -4130,13 +3995,6 @@
       // this; the explicit call guarantees the final button state regardless of
       // which branches above ran.
       playlistManager._updateTogglePlaylistButton();
-
-      // claude - Modify J1 VideoPlayer #18
-      // Counterpart to _updateTogglePlaylistButton() for the #edit_playlist
-      // ("Manage playlist") button.  Keeps that button's enabled/disabled visual
-      // state in sync with the rest of the UI, applying the SAME two guards that
-      // _updateTogglePlaylistButton() applies.    
-      // playlistManager._updateToggleEditPlaylistButton();
 
       // jadams, 2026-06-06, reload should made unnecessary but requires
       // additional checks for the toggle_playlist button if a playlist
@@ -4230,7 +4088,6 @@
     }
 
     async handleLoadFromServer() {
-      const reload                    = true;
       const { serverPlaylistSelect }  = this.elements;
       const selectedFile              = serverPlaylistSelect ? serverPlaylistSelect.value : '';
 
@@ -4282,25 +4139,10 @@
       // update the playListButton (to be enabled when a playlist is loaded)
       playlistManager._updateTogglePlaylistButton();
 
-      // claude - Modify J1 VideoPlayer #18
-      // Counterpart to _updateTogglePlaylistButton() for the #edit_playlist
-      // ("Manage playlist") button.  Keeps that button's enabled/disabled visual
-      // state in sync with the rest of the UI, applying the SAME two guards that
-      // _updateTogglePlaylistButton() applies.    
-      //playlistManager._updateToggleEditPlaylistButton();      
-
-      // const videoElement = document.getElementById(_pid('video_player_container'));
-      // if (videoElement) {
-      //   scrollToElement(videoElement);
-      // }
-
-      // jadams, 2026-06-06, reload should made unnecessary but requires
-      // additional checks for the toggle_playlist button if a playlist
-      // is loaded/available
-      //
-      if (reload) {
-        location.reload();
-      }         
+      const videoElement = document.getElementById(_pid('video_player_container'));
+      if (videoElement) {
+        scrollToElement(videoElement);
+      }
     }
   } // END playlistIOHandler
 
@@ -4885,13 +4727,13 @@
   function navbarSmoothScrollHandler() {
     const navMenu = document.getElementById('navigator_nav_menu');
     if (!navMenu) {
-      isDev && logger.debug('\n' + 'navbarSmoothScrollHandler: navigator_nav_menu not found');
+      isDev && logger.warn('\n' + 'navbarSmoothScrollHandler: navigator_nav_menu not found');
       return;
     }
 
     const anchors = navMenu.querySelectorAll('a.nav-link[href^="/#"]');
     if (!anchors.length) {
-      isDev && logger.debug('\n' +  'navbarSmoothScrollHandler: no same-page anchor links found');
+      isDev && logger.warn('\n' +  'navbarSmoothScrollHandler: no same-page anchor links found');
       return;
     }
 
@@ -4908,7 +4750,7 @@
         if (typeof j1 !== 'undefined' && typeof j1.scrollToAnchor === 'function') {
           j1.scrollToAnchor();
         } else {
-          isDev && logger.debug('\n' +  'navbarSmoothScrollHandler: j1.scrollToAnchor not available');
+          isDev && logger.warn('\n' +  'navbarSmoothScrollHandler: j1.scrollToAnchor not available');
         }
       });
     });
@@ -4987,6 +4829,12 @@
           img.setAttribute('alt', 'Hide playlist');
         }
 
+        // claude - Modify J1 VideoPlayer #18
+        // Panel is now open → block #edit_playlist (mutual exclusion). Delegated
+        // to the helper so the editor-open exemption and empty-list rules stay
+        // in one place.
+        playlistManager._updateToggleEditPlaylistButton();
+
         isDev && logger.debug('\n' + 'initTogglePlaylistHandler: playlist panel shown');
       }
     });
@@ -5015,6 +4863,12 @@
     // Reset the toggle button back to the "Show Playlist" state so it is
     // always in sync with the now-hidden panel.
     _resetPlaylistToggleUI();
+
+    // claude - Modify J1 VideoPlayer #18
+    // Panel is now closed → re-evaluate #edit_playlist. The helper re-enables
+    // it (data present) or keeps it disabled (empty list), so the mutual-
+    // exclusion block applied on open is lifted correctly.
+    playlistManager._updateToggleEditPlaylistButton();
 
     isDev && logger.debug('\n' + 'closePlaylist: playlist panel closed');
   }
@@ -5070,6 +4924,11 @@
     // Re-enable #toggle_playlist now that the editor is closed, delegating
     // to the guard method so the empty-playlist rule is respected.
     playlistManager._updateTogglePlaylistButton();
+
+    // claude - Modify J1 VideoPlayer #18
+    // Likewise re-evaluate #edit_playlist after a programmatic close so its
+    // enabled/disabled state matches the (now closed) editor + current list.
+    playlistManager._updateToggleEditPlaylistButton();
 
     isDev && logger.debug('\n' + `closeEditPlaylist: playlist edit screen closed (wasOpen=${wasOpen})`);
   }

@@ -1,0 +1,92 @@
+Prompt
+  https://claude.ai/chat/40280d79-5b8c-45e0-8ff7-87425341fbd8
+--------------------------------------------------------------------------------
+
+Wie kann man Metadaten zu einem Video von den Seiten der ARD Mediathek
+erunterladen?
+
+
+Claude
+--------------------------------------------------------------------------------
+
+Hier sind die verschiedenen Methoden, um Metadaten von ARD-Mediathek-Videos abzurufen:
+
+
+## Methode 2: ARD Mediathek API direkt (inoffiziell, aber stabil)
+
+Die ARD stellt eine inoffizielle REST-API bereit. Der API-Endpoint für
+einzelne Assets lautet:
+
+    `https://api.ardmediathek.de/page-gateway/widgets/ard/asset/{ID}`.
+
+Die Video-ID steht am Ende der URL, z. B.:
+```
+https://www.ardmediathek.de/video/sendung/titel/sender/Y3JpZDovL3dkci5kZS8xMjM0
+                                                              ^^^^^^^^^^^^^^^^^^^^^^^^
+                                                              das ist die Base64-codierte ID
+```
+
+Emanple:
+--------
+https://api.ardmediathek.de/page-gateway/widgets/ard/asset/Y3JpZDovL3dkci5kZS9CZWl0cmFnLXNvcGhvcmEtMjhjZTcxNGItOGNjNC00YjNiLWFlYWMtZWEwNjlmMDRkZTQ2
+
+
+
+Direkter API-Aufruf:
+```bash
+# Einzelnes Video
+curl "https://api.ardmediathek.de/page-gateway/widgets/ard/asset/Y3JpZDovL3dkci5kZS8xMjM0" \
+  | jq '{title: .teasers[0].longTitle, desc: .teasers[0].synopsis, image: .teasers[0].images}'
+```
+
+Das JSON enthält typischerweise:
+- `longTitle`, `shortTitle`, `synopsis`
+- `images` (verschiedene Größen/Seitenverhältnisse)
+- `duration` (in Sekunden)
+- `broadcastedOn`
+- `links.target.href` (Stream-URL)
+
+---
+
+## Methode 3: MediathekViewWeb API (für Suche + Metadaten)
+
+Über `https://mediathekviewweb.de/api/query` kann man per POST-Request nach ARD-Inhalten suchen und bekommt Metadaten wie Titel, Kanal, Beschreibung, Dauer und direkte Video-URLs zurück:
+
+```javascript
+const query = {
+  queries: [
+    { fields: ["title", "topic"], query: "Tatort" },
+    { fields: ["channel"], query: "ard" }
+  ],
+  sortBy: "timestamp",
+  sortOrder: "desc",
+  future: false,
+  offset: 0,
+  size: 10
+};
+
+const response = await fetch("https://mediathekviewweb.de/api/query", {
+  method: "POST",
+  body: JSON.stringify(query),
+  headers: { "Content-Type": "text/plain" }  // wichtig: text/plain, nicht application/json!
+});
+const data = await response.json();
+// data.result.results enthält die Metadaten
+```
+
+---
+
+## Welche Methode für welchen Zweck?
+
+| Ziel | Empfehlung |
+|---|---|
+| Poster-Bild für Video.js | API direkt oder yt-dlp `--print "%(thumbnail)s"` |
+| Titel, Beschreibung, Dauer | API direkt (schnellste Methode) |
+| Stream-URLs (HLS) | yt-dlp `--dump-json` → Feld `formats` |
+| Batch-Abfragen / Suche | MediathekViewWeb API |
+
+Da du ja bereits mit dem CORS-Problem für Poster-Bilder zu kämpfen hattest:
+Über die ARD-API kriegst du die Thumbnail-URLs als einfache JSON-Werte
+zurück — die Bilder selbst lassen sich dann meist direkt einbetten, weil
+die Bild-CDNs der ARD in der Regel keine CORS-Probleme machen (im Gegensatz
+zu Video-Streams).

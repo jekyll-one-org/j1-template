@@ -1,6 +1,6 @@
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/modules/videoPlayer/js/videoPlayer.js (29)
+ # ~/assets/theme/j1/modules/videoPlayer/js/videoPlayer.js (25)
  # Provides JS Core for J1 Module videoPlayer
  # Extend J1 VideoPlayer
  #
@@ -14,7 +14,7 @@
  # -----------------------------------------------------------------------------
 */
 
-/* Version 3.1.29 for J1 Template */
+/* Version 3.1.25 for J1 Template */
 
 // -----------------------------------------------------------------------------
 // ESLint shimming
@@ -42,14 +42,6 @@
   const MODULE_NAME         = 'videoPlayer.core';
   const PASTE_DELAY         = 10;
   const VIDEO_START_DELAY   = 250;
-  // claude - Clipboard Document is not focused #2
-  // Bounded window (ms) to wait for the document to (re)gain focus after the
-  // paste click before attempting navigator.clipboard.readText(). The click
-  // itself returns focus to the document, but the browser may not have
-  // committed it yet when handlePasteClick() runs. A focus event after a click
-  // normally fires within one or two frames, so this is generous headroom while
-  // still falling back to manual paste quickly when the page is truly embedded.
-  const CLIPBOARD_FOCUS_TIMEOUT = 300;
 
   // Extend J1 VideoPlayer #1
   // Re-added YOUTUBE_PATTERNS so that YouTube URLs are recognised and
@@ -61,7 +53,7 @@
     /youtube\.com\/v\/([a-zA-Z0-9_-]{11})/
   ]);
 
-  const YOUTUBE_ID_RE = /(?:youtu\.be\/.*|youtube\.com\/(?:embed\/|v\/|watch\?v=|shorts\/))([A-Za-z0-9_-]{11})/;
+  const YOUTUBE_ID_RE = /(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|shorts\/))([A-Za-z0-9_-]{11})/;
   const YOUTUBE_POSTER_QUALITY = 'hqdefault';
 
   // VIDEO_URL_PATTERNS matches local paths (/assets/...) and remote URLs
@@ -82,10 +74,6 @@
   const MESSAGES = Object.freeze({
     NO_CLIPBOARD_API:   'Clipboard API not available. Please use Ctrl+V.',
     CLIPBOARD_DENIED:   'Clipboard access failed. Please paste URL manually.',
-    // claude - Clipboard Document is not focused
-    // Dedicated message for the "Document is not focused" case so it can be
-    // distinguished from a hard permission denial in the logs.
-    CLIPBOARD_NO_FOCUS: 'Clipboard read skipped: document not focused. Click the input and press Ctrl+V to paste.',
     // Extend J1 VideoPlayer #1
     // Updated error message: references both YouTube URLs and local video files.
     INVALID_URL:        'Invalid URL. Accepted: YouTube URL/ID or local video path (MP4, WebM, OGV).',
@@ -150,8 +138,7 @@
   // Module variables
   // ---------------------------------------------------------------------------
 
-//let isDev                     = false;
-  let isDev                     = (j1.env === "development" || j1.env === "dev") ? true : false;
+  let isDev                     = false;
 
   let player                    = null;
   let lastState                 = null;
@@ -223,29 +210,22 @@
 
   /**
    * consoleLog - formatted console output with timestamp and unique ID
-   *
-   * claude - J1 videoPlayer optimizations #1
-   * Clarity: the INFO/WARN/default branches previously used a
-   * `isDev ? console.x(...) : null` ternary purely for its side effect, which
-   * reads as if it returns a value.  Replaced with plain `if (isDev)` guards.
-   * Behaviour is identical (ERROR still logs unconditionally).
    */
   function consoleLog(level, module, message) {
     const timestamp = new Date().toISOString().slice(11, 23);
-    const line      = `[${timestamp}] [${CONSOLE_LOG_ID}] [${level}] [${module}] \n${message}`;
 
     switch (level) {
       case 'INFO':
-        if (isDev) console.log(line);
+        isDev ? console.log(`[${timestamp}] [${CONSOLE_LOG_ID}] [${level}] [${module}] \n${message}`) : null;
         break;
       case 'WARN':
-        if (isDev) console.warn(line);
+        isDev ? console.warn(`[${timestamp}] [${CONSOLE_LOG_ID}] [${level}] [${module}] \n${message}`) : null;
         break;
       case 'ERROR':
-        console.error(line);
+        console.error(`[${timestamp}] [${CONSOLE_LOG_ID}] [${level}] [${module}] \n${message}`);
         break;
       default:
-        if (isDev) console.log(line);
+        isDev ? console.log(`[${timestamp}] [${CONSOLE_LOG_ID}] [${level}] [${module}] \n${message}`) : null;
         break;
     }
   }
@@ -442,8 +422,6 @@
     // are backfilled with empty strings so the rest of the code can always
     // access entry.src and entry.poster without null-checks.
     _normalizeEntry(entry) {
-      let ytID;
-
       if (entry && typeof entry === 'object' && !('author' in entry)) {
         entry.author = '';
       }
@@ -472,33 +450,21 @@
       // leave it untouched.  The else-branch must also not overwrite a valid
       // native-video poster with DEFAULT_POSTER; it should only fill the gap
       // when both the stored poster and the videoLink yield nothing.
-      //
       if (entry && typeof entry === 'object') {
         if (!('src' in entry))    entry.src    = '';
         if (!('poster' in entry)) entry.poster = '';
 
         // Synthesise a poster only when none is already stored.
-        if (!entry.poster || entry.poster === DEFAULT_POSTER) {
-
-          // jadams, 2026-06-12 - to be fixed: entry.videoLink should always set
-          //
-          if (entry.videoLink) {
-            ytID = entry.videoLink ? entry.videoLink.match(YOUTUBE_ID_RE) : null;
-          } else if (entry.infoLink) {
-            ytID = entry.infoLink ? entry.infoLink.match(YOUTUBE_ID_RE) : null;
-          }
-
-          // overload the stored/default poster for YouTube entries
-          const isYt = (ytID) ? true : false;
-          if (isYt) {
+        if (!entry.poster) {
+          const ytID = entry.videoLink ? entry.videoLink.match(YOUTUBE_ID_RE) : null;
+          if (ytID) {
             entry.poster = `https://img.youtube.com/vi/${ytID[1]}/${YOUTUBE_POSTER_QUALITY}.jpg`;
-          } else {
-            // For non-YouTube entries leave entry.poster as '' so the render
-            // helpers can fall back to DEFAULT_POSTER at display time (they
-            // already do: `item.poster || DEFAULT_POSTER`).  Storing
-            // DEFAULT_POSTER in the playlist record would prevent a real poster
-            // from ever being recognised as "missing" in future normalise calls.
           }
+          // For non-YouTube entries leave entry.poster as '' so the render
+          // helpers can fall back to DEFAULT_POSTER at display time (they
+          // already do: `item.poster || DEFAULT_POSTER`).  Storing
+          // DEFAULT_POSTER in the playlist record would prevent a real poster
+          // from ever being recognised as "missing" in future normalise calls.
         }
       }
 
@@ -565,11 +531,7 @@
     addEntry(entry) {
       const playlist = this.load() || [];
 
-      // claude - J1 videoPlayer optimizations #1
-      // Clarity: `found` was computed with `(playlist.find(...)) ? true : false`,
-      // a redundant boolean cast around an already-boolean-ish value.  Use a
-      // direct boolean (`some`) and short-circuit on duplicate.
-      const found = playlist.some(item => item.videoId === entry.videoId);
+      const found = (playlist.find(item => item.videoId === entry.videoId)) ? true : false;
       if (found) {
         consoleLog('INFO', MODULE_NAME, `playlistmanager: skip adding entry with title: ${entry.title}`);
         return;
@@ -599,15 +561,9 @@
         watchDate:    new Date().toISOString()
       };
 
-      // claude - J1 videoPlayer optimizations #1
-      // Performance: the previous code re-scanned the whole list with
-      // `playlist.filter(item => item.videoId !== entry.videoId)` before
-      // unshifting.  Because the duplicate case already returned above, that
-      // filter could never remove anything — it was an extra O(n) copy on every
-      // add.  `load()` returns a fresh array each call, so unshifting into it
-      // directly is safe and equivalent.
-      playlist.unshift(record);
-      this.save(playlist);
+      const filtered = playlist.filter(item => item.videoId !== entry.videoId);
+      filtered.unshift(record);
+      this.save(filtered);
 
       consoleLog('INFO', MODULE_NAME, `playlistmanager: entry added for videoId: ${entry.videoId}`);
 
@@ -815,47 +771,13 @@
           return;
         }
         const data = await res.json();
-
-        // claude - Modify J1 VideoPlayer #16
-        //
-        // Bug: a YouTube (or any) playlist loaded via 'serverPlaylistLoadButton*'
-        // never reached _normalizeEntry().
-        //
-        // Root cause: server playlists exported by this module (see
-        // exportToFile(), which writes `JSON.stringify(this.load())`) and legacy
-        // YouTube/skipad playlists are *plain JSON arrays*. The previous guard
-        //
-        //     if (data && typeof data === 'object' && !data.playlist) { return; }
-        //
-        // returned early for every plain array, because `typeof [] === 'object'`
-        // is true and an array has no `.playlist` property — so `!data.playlist`
-        // is true. The function bailed out before the
-        // `playlist.forEach(entry => this._normalizeEntry(entry))` line below
-        // was ever reached.
-        //
-        // A secondary defect: when `data` was a wrapped object *without*
-        // meta_data (`{ playlist: [...] }`), the old line
-        // `hasMetaData ? data.playlist : data` assigned the whole object (not its
-        // array) to `playlist`, and the later `playlist.forEach(...)` threw a
-        // TypeError — again never reaching _normalizeEntry.
-        //
-        // Fix: normalise both supported shapes to a real array before iterating:
-        //
-        //   1. plain array        ->  [ {...}, {...} ]
-        //   2. wrapped object     ->  { meta_data?: {...}, playlist: [ {...} ] }
-        //
-        // Reject only genuinely invalid payloads (no usable array of entries).
-        //
-        const playlist = Array.isArray(data)
-          ? data
-          : (data && typeof data === 'object' && Array.isArray(data.playlist)
-              ? data.playlist
-              : null);
-
-        if (!Array.isArray(playlist)) {
-          consoleLog('ERROR', MODULE_NAME, 'imported URL does not contain a valid playlist (expected a JSON array or an object with a "playlist" array)');
+        if (data && typeof data === 'object' && !data.playlist) {
+          consoleLog('ERROR', MODULE_NAME, 'imported URL does not contain a playlist');
           return;
         }
+
+        const hasMetaData = (data && typeof data === 'object' && data.meta_data) ? true : false;
+        const playlist    = hasMetaData ? data.playlist : data;
 
         playlist.forEach(entry => this._normalizeEntry(entry));
 
@@ -1299,13 +1221,7 @@
                       <span class="rating-star" data-value="4"><i class="fas fa-star"></i></span>
                       <span class="rating-star" data-value="5"><i class="fas fa-star"></i></span>
                     </div>
-                    <!-- claude - J1 videoPlayer optimizations #1
-                         Bug: the opening tag was malformed ('<p ... class="rating-label"</p>'
-                         — the '>' that closes the start tag was missing).  The HTML parser
-                         recovered unpredictably, so #ratingLabel could fail to materialise as a
-                         real element and updateStarDisplay()'s textContent write was silently
-                         lost.  Closed the start tag properly. -->
-                    <p id="ratingLabel" class="rating-label"></p>
+                    <p id="ratingLabel" class="rating-label"</p>
                   </div>
                   <div class="rating-modal-footer mb-2">
                     <button id="clearRatingBtn" class="rating-modal-btn rating-modal-btn-warning">Clear</button>
@@ -2040,93 +1956,6 @@
       isDev && logger.debug('\n' + `_updateTogglePlaylistButton: button ${hasData ? 'enabled' : 'disabled'} (${data.length} items)`);
     }
 
-    // claude - Modify J1 VideoPlayer #18
-    // Counterpart to _updateTogglePlaylistButton() for the #edit_playlist
-    // ("Manage playlist") button.  Keeps that button's enabled/disabled visual
-    // state in sync with the rest of the UI, applying the SAME two guards that
-    // _updateTogglePlaylistButton() applies — just mirrored onto this button:
-    //
-    //   1. BLOCK WHILE THE PLAYLIST PANEL IS OPEN  (mirror of Modify #13)
-    //      _updateTogglePlaylistButton() blocks #toggle_playlist while the
-    //      editor is open; the inverse constraint is that #edit_playlist must
-    //      be blocked while the playlist panel (#playlist_screen) is open, so
-    //      the two surfaces can never be open at the same time.  This is the
-    //      same mutual-exclusion the adapter expresses imperatively in its
-    //      toggle_playlist OPEN branch / closePlaylist() pair; here it is
-    //      expressed declaratively so it can be re-evaluated from any call site.
-    //
-    //   2. DISABLE WHEN THE PLAYLIST IS EMPTY      (mirror of Modify #11)
-    //      With no entries there is nothing to manage, so the button is greyed
-    //      out exactly like #toggle_playlist is on an empty list.
-    //
-    // IMPORTANT — editor-open exemption:
-    //      While the editor is OPEN (#edit_playlist has data-edit-open="true")
-    //      this very button IS the "Close playlist editor" control, so it must
-    //      stay enabled regardless of rules 1 and 2.  In particular, clearing
-    //      the list from inside the open editor must NOT disable the button the
-    //      user needs to close it.  The early-return below preserves that.
-    //
-    //      The icon / title / aria-label that distinguish the open ("Close
-    //      playlist editor") vs closed ("Manage playlist") states are owned by
-    //      initEditPlaylistHandler() and closeEditPlaylist(); to avoid fighting
-    //      that owner this helper only manages disabled / aria-disabled /
-    //      opacity / cursor (plus the disabled-state tooltip), never the icon.
-    //
-    // Wired into renderCurrent() (initial render + data changes), the toggle
-    // handler's SHOW branch and closePlaylist() (panel open ↔ close), and the
-    // editor close paths — the same call sites that drive its #toggle_playlist
-    // sibling.
-    //
-    _updateToggleEditPlaylistButton() {
-      const editBtn = document.getElementById(_pid('edit_playlist'));
-      if (!editBtn) return;
-
-      // Editor-open exemption: keep the close control live no matter what.
-      const editIsOpen = editBtn.getAttribute('data-edit-open') === 'true';
-      if (editIsOpen) {
-        editBtn.removeAttribute('disabled');
-        editBtn.setAttribute('aria-disabled', 'false');
-        editBtn.style.removeProperty('opacity');
-        editBtn.style.removeProperty('cursor');
-        isDev && logger.debug('\n' + '_updateToggleEditPlaylistButton: left enabled — editor is open (close control)');
-        return;
-      }
-
-      // (1) Mirror of Modify #13 — block while the playlist panel is open.
-      const screen      = document.getElementById(_pid('playlist_screen'));
-      const panelIsOpen = !!screen && screen.style.display !== 'none' && screen.style.display !== '';
-
-      if (panelIsOpen) {
-        editBtn.setAttribute('disabled', '');
-        editBtn.setAttribute('aria-disabled', 'true');
-        editBtn.style.opacity = '0.35';
-        editBtn.style.cursor  = 'not-allowed';
-        editBtn.title         = 'Hide the playlist first';
-        isDev && logger.debug('\n' + '_updateToggleEditPlaylistButton: button blocked — playlist panel is open');
-        return;
-      }
-
-      // (2) Mirror of Modify #11 — disable when the playlist is empty.
-      const data    = this._searchResults || this.load() || [];
-      const hasData = data.length > 0;
-
-      if (hasData) {
-        editBtn.removeAttribute('disabled');
-        editBtn.setAttribute('aria-disabled', 'false');
-        editBtn.style.removeProperty('opacity');
-        editBtn.style.removeProperty('cursor');
-        editBtn.title       = editBtn.getAttribute('aria-label') || 'Manage playlist';
-      } else {
-        editBtn.setAttribute('disabled', '');
-        editBtn.setAttribute('aria-disabled', 'true');
-        editBtn.style.opacity = '0.35';
-        editBtn.style.cursor  = 'not-allowed';
-        editBtn.title         = 'No playlist to manage';
-      }
-
-      isDev && logger.debug('\n' + `_updateToggleEditPlaylistButton: button ${hasData ? 'enabled' : 'disabled'} (${data.length} items)`);
-    }
-
     _updateSortSelectVisibility() {
       const sortSelect = document.getElementById('playlistSortSelect');
       if (!sortSelect) return;
@@ -2154,7 +1983,7 @@
     }
 
     _updateLoopSwitchVisibility() {
-      const loopSwitch = document.getElementById('playlistLoopSwitch');
+      const loopSwitch = document.getElementById('playlisLoopSwitch');
       if (!loopSwitch) return;
 
       if (!loopConfigEnabled) {
@@ -2781,15 +2610,7 @@
 
           // add|skip skipButtons plugin
           if (piSkipButtons.enabled) {
-            // claude - J1 videoPlayer optimizations #1
-            // Bug: backwardIndex was initialised from piSkipButtons.backward
-            // (the skip *amount* in seconds, e.g. 10) instead of from
-            // piSkipButtons.backwardIndex (the control-bar slot index, e.g. 1).
-            // forwardIndex correctly read .forwardIndex, so the two sides were
-            // asymmetric.  This only surfaced when surroundPlayButton was false
-            // (the surround branch below overwrites both to 0/1), which is why it
-            // stayed latent under the default config.  Read the matching key.
-            let backwardIndex = piSkipButtons.backwardIndex;
+            let backwardIndex = piSkipButtons.backward;
             let forwardIndex  = piSkipButtons.forwardIndex;
 
             if (piSkipButtons.surroundPlayButton) {
@@ -3546,142 +3367,22 @@
     }
 
     async handlePasteClick() {
-      // claude - Clipboard Document is not focused
-      // navigator.clipboard.readText() requires the *document* to have focus.
-      // It rejects with NotAllowedError ("Document is not focused") when the
-      // active focus lives somewhere this document cannot control, e.g.:
-      //   - the page is rendered inside an iframe / live-preview pane that does
-      //     not hold focus,
-      //   - DevTools (undocked or a focused panel) currently owns focus,
-      //   - a programmatic window.focus() failed to actually focus the window.
-      // The old code called window.focus() (a no-op / blocked in most browsers,
-      // and unreliable as a focus guarantee) and then awaited readText()
-      // regardless of the real focus state, so it surfaced the error as a hard
-      // failure instead of recovering.
-      if (!navigator.clipboard || !navigator.clipboard.readText) {
-        isDev && consoleLog('WARN', MODULE_NAME, MESSAGES.NO_CLIPBOARD_API);
-        this._focusInputForManualPaste();
-        return;
-      }
-
-      // claude - Clipboard Document is not focused #2
-      // Focus the input (this is the element the user expects to type into and
-      // is enough to give THIS document focus when the click originated here).
-      this.elements.videoUrlInput && this.elements.videoUrlInput.focus();
-
-      // claude - Clipboard Document is not focused #2
-      // Best-effort window.focus(): a harmless no-op in a normal foreground tab,
-      // but occasionally helps reattach focus when the page is embedded. It is
-      // NOT relied upon as a guarantee.
-      try { typeof window !== 'undefined' && window.focus && window.focus(); }
-      catch (_e) { /* ignore - window.focus may be blocked */ }
-
-      // claude - Clipboard Document is not focused #2
-      // ROOT CAUSE of the persisting warning: fix #1 read document.hasFocus()
-      // *synchronously* right after the click and bailed when it was false.
-      // But the click is itself the gesture that returns focus to the document;
-      // the browser may not have committed that focus yet at this point (and in
-      // a dev session DevTools may still own focus for a frame or two). So the
-      // guard fired on every legitimate paste, skipping the read and forcing the
-      // manual-paste fallback each time.
-      //
-      // Instead of skipping immediately, give the document a brief, bounded
-      // window to actually gain focus. _waitForDocumentFocus() resolves true the
-      // instant the document holds focus, or false only if the timeout elapses
-      // without it (the genuinely-embedded / focus-never-returns case).
-      const documentFocused = await this._waitForDocumentFocus(CLIPBOARD_FOCUS_TIMEOUT);
-      if (!documentFocused) {
-        isDev && consoleLog('WARN', MODULE_NAME, MESSAGES.CLIPBOARD_NO_FOCUS);
-        this._focusInputForManualPaste();
-        return;
-      }
-
       try {
+        if (!navigator.clipboard || !navigator.clipboard.readText) {
+          isDev && consoleLog('WARN', MODULE_NAME, MESSAGES.NO_CLIPBOARD_API);
+          return;
+        }
+
+        window.focus();
+        this.elements.videoUrlInput.focus();
+
         const text = await navigator.clipboard.readText();
-        const value = (text || '').trim();
-        this.elements.videoUrlInput.value = value;
-        this._toggleClearButton(value);
+        this.elements.videoUrlInput.value = text.trim();
+        this._toggleClearButton(text.trim());
         this.processUrl();
       } catch (err) {
-        // claude - Clipboard Document is not focused
-        // Treat the focus-related rejection as a recoverable condition: fall
-        // back to manual paste rather than reporting a hard error. Any other
-        // failure is still logged for diagnosis.
-        if (err && err.name === 'NotAllowedError') {
-          isDev && consoleLog('WARN', MODULE_NAME, MESSAGES.CLIPBOARD_NO_FOCUS);
-          this._focusInputForManualPaste();
-        } else {
-          isDev && consoleLog('ERROR', MODULE_NAME, `Clipboard read error: ${err}`);
-        }
+        isDev && consoleLog('ERROR', MODULE_NAME, `Clipboard read error: ${err}`);
       }
-    }
-
-    // claude - Clipboard Document is not focused #2
-    // Resolve true as soon as the document holds focus, or false when timeoutMs
-    // elapses without it. Resolves synchronously-fast when focus is already held.
-    // Otherwise it listens for the window 'focus' event AND polls via
-    // requestAnimationFrame, so a focus change is detected even if the event is
-    // missed. This converts fix #1's immediate hard skip into a bounded retry,
-    // giving the focus granted by the paste click time to commit before
-    // navigator.clipboard.readText() is attempted.
-    _waitForDocumentFocus(timeoutMs) {
-      return new Promise((resolve) => {
-        // Cannot assess focus (non-browser / unusual host): assume OK and let
-        // readText() decide via its own try/catch.
-        if (typeof document === 'undefined' || typeof document.hasFocus !== 'function') {
-          resolve(true);
-          return;
-        }
-        if (document.hasFocus()) {
-          resolve(true);
-          return;
-        }
-
-        const hasWindow = (typeof window !== 'undefined');
-        const raf = (hasWindow && window.requestAnimationFrame)
-          ? window.requestAnimationFrame.bind(window)
-          : (cb) => setTimeout(cb, 16);
-        const now = () => ((typeof performance !== 'undefined' && performance.now)
-          ? performance.now()
-          : Date.now());
-
-        const start = now();
-        let settled = false;
-
-        const onFocus = () => { if (document.hasFocus()) finish(true); };
-
-        function cleanup() {
-          if (hasWindow) window.removeEventListener('focus', onFocus, true);
-        }
-        function finish(ok) {
-          if (settled) return;
-          settled = true;
-          cleanup();
-          resolve(ok);
-        }
-
-        if (hasWindow) window.addEventListener('focus', onFocus, true);
-
-        const poll = () => {
-          if (settled) return;
-          if (document.hasFocus()) { finish(true); return; }
-          if ((now() - start) >= timeoutMs) { finish(false); return; }
-          raf(poll);
-        };
-        raf(poll);
-      });
-    }
-
-    // claude - Clipboard Document is not focused
-    // Shared fallback for every path where programmatic clipboard read is not
-    // possible. Focuses (and selects) the input so the user can immediately
-    // press Ctrl+V; the existing 'paste' listener (handleDirectPaste) then
-    // processes the manually pasted value.
-    _focusInputForManualPaste() {
-      const input = this.elements.videoUrlInput;
-      if (!input) return;
-      input.focus();
-      if (typeof input.select === 'function') input.select();
     }
 
     handleDirectPaste(_event) {
@@ -3727,20 +3428,14 @@
         isDev && consoleLog('INFO', MODULE_NAME, `Loading YouTube video with id: ${youtubeId}`);
         this.loadAdFreeVideo(youtubeId);
 
-        // claude - J1 videoPlayer optimizations #1
-        // Force the playlist edit screen closed when a video/playlist is loaded.
-        // Was: j1.adapter.videoPlayer.closeEditPlaylist(button, playerID) with
-        // button = _pid('edit_playlist') passed as a *string*.  The adapter path
-        // used bare (un-suffixed) ids and silently failed on multi-player pages
-        // (see Unique #6); passing a string where a DOM element was expected made
-        // the call a no-op at best.  Call the module-local, idempotent
-        // closeEditPlaylist() directly — it resolves every id through _pid(),
-        // matching the handleClear()/doPostOnPlaying() approach (Modify #17 /
-        // Unique #6).
-        closeEditPlaylist();
+        //  closeEditPlaylist(btn, playerId) — same pattern as closePlaylist.
+        // force closinb the playlisz_edit_screen when a playlist is loaded
+        const button  = _pid('edit_playlist');
+        const playerID = button.replace("edit_playlist_", "");
+        j1.adapter.videoPlayer.closeEditPlaylist(button, playerID);
 
         // update the playListButton (to be enabled when a playlist is loaded)
-        playlistManager._updateTogglePlaylistButton();
+        playlistManager._updateTogglePlaylistButton();   
 
         return;
       }
@@ -3762,13 +3457,11 @@
         isDev && consoleLog('INFO', MODULE_NAME, `Loading video from src: ${videoSrc}`);
         this.loadVideo(videoSrc);
 
-        // claude - J1 videoPlayer optimizations #1
-        // Force the playlist edit screen closed when a native video is loaded.
-        // See the YouTube branch above for the full rationale: the previous
-        // j1.adapter.videoPlayer.closeEditPlaylist(button, playerID) call passed
-        // a string id and went through the bare-id adapter path (Unique #6), so
-        // it did nothing useful.  Use the module-local idempotent function.
-        closeEditPlaylist();
+        //  closeEditPlaylist(btn, playerId) — same pattern as closePlaylist.
+        // force closinb the playlisz_edit_screen when a playlist is loaded
+        const button  = _pid('edit_playlist');
+        const playerID = button.replace("edit_playlist_", "");
+        j1.adapter.videoPlayer.closeEditPlaylist(button, playerID);
 
         // update the playListButton (to be enabled when a playlist is loaded)
         playlistManager._updateTogglePlaylistButton();
@@ -3954,9 +3647,7 @@
     }
 
     handleFileSelected(event) {
-      const reload  = true;
-      const file    = event.target.files[0];
-
+      const file = event.target.files[0];
       if (!file) return;
 
       const reader = new FileReader();
@@ -3964,12 +3655,42 @@
         try {
           const data = JSON.parse(e.target.result);
 
-          const hasMetaData = (data && typeof data === 'object' && data.backup_date) ? true : false;
-          const playlist    = hasMetaData ? data.playlist : data;
+          // claude - Modify J1 VideoPlayer #16
+          // Bug: the importButton path (handleImport -> file picker ->
+          // handleFileSelected) only recognised a bare JSON array or a
+          // `{ backup_date, playlist }` backup wrapper.  A YouTube / server
+          // playlist file is saved in the `{ meta_data, playlist }` shape
+          // instead (the same shape importFromUrlAsync keys off via
+          // `data.meta_data`).  Because `data.backup_date` was undefined,
+          // `hasMetaData` was false and `playlist` was set to the *wrapper
+          // object* rather than its inner array.  `object.forEach(...)` then
+          // threw a TypeError that the catch below swallowed as
+          // "import from file failed" — so _normalizeEntry() (and the entire
+          // import) was never reached.
+          //
+          // Fix: treat ANY non-array object that exposes a `.playlist` array as
+          // the wrapper format (covers both `backup_date` backups and
+          // `meta_data` YouTube/server playlists), unwrap to that inner array,
+          // and hard-guard that the resolved value really is an array before
+          // iterating so a malformed file fails loudly instead of silently.
+          const isWrapped = data && typeof data === 'object' &&
+                            !Array.isArray(data) && Array.isArray(data.playlist);
+          const playlist  = isWrapped ? data.playlist : data;
 
-          if (hasMetaData) {
-            const bkupDate = data.backup_date.replace('T', ' ').substring(0, 16);
+          if (!Array.isArray(playlist)) {
+            logger.error('\n' + 'import from file failed: file does not contain a playlist array ' +
+              '(expected a JSON array, or a { meta_data | backup_date, playlist } object)');
+            return;
+          }
+
+          // claude - Modify J1 VideoPlayer #16
+          // Report the source date from whichever metadata key the file carries
+          // without assuming an unverified meta_data field shape.
+          if (isWrapped && data.backup_date) {
+            const bkupDate = String(data.backup_date).replace('T', ' ').substring(0, 16);
             isDev && logger.info('\n'+ `import playlist from backup file of date: ${bkupDate}`);
+          } else if (isWrapped && data.meta_data) {
+            isDev && logger.info('\n'+ 'import playlist from meta_data-wrapped (server/YouTube) file');
           }
 
           playlist.forEach(entry => playlistManager._normalizeEntry(entry));
@@ -4009,34 +3730,21 @@
             container.innerHTML = containerHTML;
           }
 
-          // claude - J1 videoPlayer optimizations #1
-          // Force the playlist edit screen closed after a file import.  Replaces
-          // the no-op j1.adapter.videoPlayer.closeEditPlaylist(button, playerID)
-          // call (string arg + bare-id adapter path, Unique #6) with the
-          // module-local idempotent function that resolves ids via _pid().
-          closeEditPlaylist();
+          //  closeEditPlaylist(btn, playerId) — same pattern as closePlaylist.
+          // force closinb the playlisz_edit_screen when a playlist is loaded
+          const button  = _pid('edit_playlist');
+          const playerID = button.replace("edit_playlist_", "");
+          j1.adapter.videoPlayer.closeEditPlaylist(button, playerID);
 
           // update the playListButton (to be enabled when a playlist is loaded)
           playlistManager._updateTogglePlaylistButton();
 
-          // claude - Modify J1 VideoPlayer #18
-          // Counterpart to _updateTogglePlaylistButton() for the #edit_playlist
-          // ("Manage playlist") button.  Keeps that button's enabled/disabled visual
-          // state in sync with the rest of the UI, applying the SAME two guards that
-          // _updateTogglePlaylistButton() applies.    
-          // playlistManager._updateToggleEditPlaylistButton();
-
           playlistManager.renderCurrent();
 
-          // const videoElement = document.getElementById(_pid('video_player_container'));
-          // if (videoElement) {
-          //   scrollToElement(videoElement);
-          // }          
-
-          if (reload) {
-            location.reload();
+          const videoElement = document.getElementById(_pid('video_player_container'));
+          if (videoElement) {
+            scrollToElement(videoElement);
           }
-
         } catch (err) {
           logger.error('\n' + `import from file failed: ${err}`);
         }
@@ -4050,101 +3758,22 @@
     }
 
     handleClear() {
-      const reload  = true;
-      const opts    = this._videoPlayerOptions;
-
+      const opts = this._videoPlayerOptions;
       // jadams, 2026-06-06, disabled temporarily
       //
       // if (opts === null || !opts.enabled) {
       //   return;
       // }
 
-      // claude - Modify J1 VideoPlayer #17
-      // The page reload (`location.reload()`) previously used here is removed.
-      // The reload was a blunt way to return the whole module to a pristine
-      // state after wiping the playlist; this now happens in place, mirroring
-      // the no-reload restore path already used by handleFileSelected() /
-      // handleLoadFromServer() (just inverted, since we are clearing rather than
-      // loading).  The reload also masked the data-edit-open desync risk that
-      // #16 flagged for this exact path — closing the editor explicitly below
-      // covers it now that the page is no longer thrown away.
-      //
-      // clearPlaylist() already: drops the localStorage entry, invalidates the
-      // search index, runs _manageHiddenMode(false) and renderCurrent() (which
-      // disables #toggle_playlist for the now-empty list).  It returns false
-      // when the playlist was already empty — nothing to reset in that case.
-      const cleared = playlistManager.clearPlaylist();
-      if (!cleared) {
-        return;
-      }
-
-      // claude - Modify J1 VideoPlayer #17
-      // Close the playlist editor BEFORE touching the video container.  The
-      // module-local closeEditPlaylist() is idempotent and clears the
-      // data-edit-open marker, so the editor state can no longer desync once
-      // the reload is gone (the precise risk #16 called out for this path).
-      // Its single destructive step — restoring the #video_container snapshot —
-      // runs only when the editor was genuinely open (wasOpen guard), which is
-      // exactly the case where the container is currently holding the edit
-      // screen and needs to be returned to the empty-player overlay.
-      // Called directly (not via the adapter) per the Unique #6 rationale:
-      // the module-local function resolves every id through _pid(), so it is
-      // correct on multi-player pages.
-      closeEditPlaylist();
-
-      // claude - Modify J1 VideoPlayer #17
-      // Tear down any still-live videoJS player and restore the empty-player
-      // overlay so a video that was playing when Clear was pressed does not keep
-      // running headless — the reload used to handle this implicitly.  When the
-      // editor branch above already restored the snapshot (overlay present) or
-      // no player was ever created, these guards make the work a harmless no-op.
-      if (pipWindow && !pipWindow.closed) {
-        pipWindow.close();
-        pipWindow = null;
-      }
-      pipVisibilityBound = false;
-      pipEnabled         = false;
-
-      if (player) {
-        isDev && logger.debug('\n' + 'handleClear: disposing videoJS player after clearing the playlist');
-        player.dispose();
-        player = null;
-      }
-
-      const overlayExists = document.getElementById(_pid('emptyPlayerOverlay'));
-      if (!overlayExists && container && containerHTML) {
-        isDev && logger.debug('\n' + 'handleClear: restoring empty-player overlay');
-        container.innerHTML = containerHTML;
-      }
-
-      // claude - Modify J1 VideoPlayer #17
-      // Collapse the playlist panel back to its closed ("Show Playlist") state.
-      // _manageHiddenMode() intentionally no longer owns #playlist_screen
-      // (Unique #9), so an open panel would otherwise stay open over an empty
-      // list; closePlaylist() also re-syncs the #toggle_playlist button label.
-      closePlaylist();
-
-      // claude - Modify J1 VideoPlayer #17
-      // Keep #toggle_playlist disabled now that the list is empty.  Both
-      // clearPlaylist()->renderCurrent() and closeEditPlaylist() already call
-      // this; the explicit call guarantees the final button state regardless of
-      // which branches above ran.
-      playlistManager._updateTogglePlaylistButton();
-
-      // claude - Modify J1 VideoPlayer #18
-      // Counterpart to _updateTogglePlaylistButton() for the #edit_playlist
-      // ("Manage playlist") button.  Keeps that button's enabled/disabled visual
-      // state in sync with the rest of the UI, applying the SAME two guards that
-      // _updateTogglePlaylistButton() applies.    
-      // playlistManager._updateToggleEditPlaylistButton();
-
-      // jadams, 2026-06-06, reload should made unnecessary but requires
+      // jadams, 2026-06-06, reload should made unnecessary. Requures
       // additional checks for the toggle_playlist button if a playlist
       // is loaded/available
       //
+      const reload  = true;
+      const cleared = playlistManager.clearPlaylist();
       if (cleared && reload) {
         location.reload();
-      }      
+      }
     }
 
     handleClearServerSelect() {
@@ -4230,7 +3859,6 @@
     }
 
     async handleLoadFromServer() {
-      const reload                    = true;
       const { serverPlaylistSelect }  = this.elements;
       const selectedFile              = serverPlaylistSelect ? serverPlaylistSelect.value : '';
 
@@ -4270,37 +3898,19 @@
         container.innerHTML = containerHTML;
       }
 
-      // claude - J1 videoPlayer optimizations #1
-      // Force the playlist edit screen closed after a server playlist load.
-      // Replaces the no-op j1.adapter.videoPlayer.closeEditPlaylist(button,
-      // playerID) call (string arg + bare-id adapter path, Unique #6) with the
-      // module-local idempotent function that resolves ids via _pid().  This is
-      // the "explicit closeEditPlaylist() on server load" case flagged for the
-      // no-reload path.
-      closeEditPlaylist();
+      //  closeEditPlaylist(btn, playerId) — same pattern as closePlaylist.
+      // force closinb the playlisz_edit_screen when a playlist is loaded
+      const button  = _pid('edit_playlist');
+      const playerID = button.replace("edit_playlist_", "");
+      j1.adapter.videoPlayer.closeEditPlaylist(button, playerID);
 
       // update the playListButton (to be enabled when a playlist is loaded)
       playlistManager._updateTogglePlaylistButton();
 
-      // claude - Modify J1 VideoPlayer #18
-      // Counterpart to _updateTogglePlaylistButton() for the #edit_playlist
-      // ("Manage playlist") button.  Keeps that button's enabled/disabled visual
-      // state in sync with the rest of the UI, applying the SAME two guards that
-      // _updateTogglePlaylistButton() applies.    
-      //playlistManager._updateToggleEditPlaylistButton();      
-
-      // const videoElement = document.getElementById(_pid('video_player_container'));
-      // if (videoElement) {
-      //   scrollToElement(videoElement);
-      // }
-
-      // jadams, 2026-06-06, reload should made unnecessary but requires
-      // additional checks for the toggle_playlist button if a playlist
-      // is loaded/available
-      //
-      if (reload) {
-        location.reload();
-      }         
+      const videoElement = document.getElementById(_pid('video_player_container'));
+      if (videoElement) {
+        scrollToElement(videoElement);
+      }
     }
   } // END playlistIOHandler
 
@@ -4628,11 +4238,11 @@
         return;
       }
 
-      let loopModeSwitch = document.getElementById('playlistLoopSwitch');
+      let loopModeSwitch = document.getElementById('playlisLoopSwitch');
 
       if (!loopModeSwitch) {
         loopModeSwitch            = document.createElement('div');
-        loopModeSwitch.id         = 'playlistLoopSwitch';
+        loopModeSwitch.id         = 'playlisLoopSwitch';
         loopModeSwitch.className  = 'switch not-spoken';
         loopModeSwitch.innerHTML  = `
           <label>
@@ -4885,13 +4495,13 @@
   function navbarSmoothScrollHandler() {
     const navMenu = document.getElementById('navigator_nav_menu');
     if (!navMenu) {
-      isDev && logger.debug('\n' + 'navbarSmoothScrollHandler: navigator_nav_menu not found');
+      isDev && logger.warn('\n' + 'navbarSmoothScrollHandler: navigator_nav_menu not found');
       return;
     }
 
     const anchors = navMenu.querySelectorAll('a.nav-link[href^="/#"]');
     if (!anchors.length) {
-      isDev && logger.debug('\n' +  'navbarSmoothScrollHandler: no same-page anchor links found');
+      isDev && logger.warn('\n' +  'navbarSmoothScrollHandler: no same-page anchor links found');
       return;
     }
 
@@ -4908,7 +4518,7 @@
         if (typeof j1 !== 'undefined' && typeof j1.scrollToAnchor === 'function') {
           j1.scrollToAnchor();
         } else {
-          isDev && logger.debug('\n' +  'navbarSmoothScrollHandler: j1.scrollToAnchor not available');
+          isDev && logger.warn('\n' +  'navbarSmoothScrollHandler: j1.scrollToAnchor not available');
         }
       });
     });

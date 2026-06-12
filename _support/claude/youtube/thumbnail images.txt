@@ -1,0 +1,54 @@
+Prompt
+  https://claude.ai/chat/5692929f-a4bd-4ed9-97f0-ea85e381c6d8
+--------------------------------------------------------------------------------
+
+All available resolutions of thumbnail images taken from //img.youtube.com/vi
+in markdown format as a table.
+
+
+Claude
+--------------------------------------------------------------------------------
+
+| Resolution Name | URL Pattern | Dimensions |
+|---|---|---|
+| Default thumbnail | `//img.youtube.com/vi/VIDEO_ID/default.jpg` | 120 × 90 |
+| Medium quality | `//img.youtube.com/vi/VIDEO_ID/mqdefault.jpg` | 320 × 180 |
+| High quality | `//img.youtube.com/vi/VIDEO_ID/hqdefault.jpg` | 480 × 360 |
+| Standard definition | `//img.youtube.com/vi/VIDEO_ID/sddefault.jpg` | 640 × 480 |
+| Max resolution | `//img.youtube.com/vi/VIDEO_ID/maxresdefault.jpg` | 1280 × 720 |
+| **Auto-generated frames** | | |
+| Frame 0 (poster/auto) | `//img.youtube.com/vi/VIDEO_ID/0.jpg` | 480 × 360 |
+| Frame 1 | `//img.youtube.com/vi/VIDEO_ID/1.jpg` | 120 × 90 |
+| Frame 2 | `//img.youtube.com/vi/VIDEO_ID/2.jpg` | 120 × 90 |
+| Frame 3 | `//img.youtube.com/vi/VIDEO_ID/3.jpg` | 120 × 90 |
+
+**Notes:**
+- `0.jpg` is the same as `hqdefault.jpg` in most cases — it's the auto-selected poster frame.
+- `1.jpg`, `2.jpg`, `3.jpg` are thumbnail frames taken at different points in the video.
+- `maxresdefault.jpg` may return a 404 or a placeholder for videos that were never uploaded in HD.
+- Replace `VIDEO_ID` with the actual YouTube video ID (e.g. `dQw4w9WgXcQ`).
+- The `vi` path also has a WebP equivalent via `vi_webp`: `//img.youtube.com/vi_webp/VIDEO_ID/maxresdefault.webp`.
+
+**URL patterns** 
+Two base paths exist:
+
+- JPEG: `https://img.youtube.com/vi/{VIDEO_ID}/{filename}`
+- WebP: `https://img.youtube.com/vi_webp/{VIDEO_ID}/{filename}` (same filenames, better compression)
+
+**Reliability**
+`hqdefault.jpg` (480×360) is the safest choice for guaranteed availability
+across all videos. `maxresdefault.jpg` only exists for videos that were
+uploaded in HD, and will return a 404 or a generic placeholder for
+older/low-res uploads.
+
+**Aspect ratio quirk**
+`sddefault.jpg` and the three stills (`1.jpg`, `2.jpg`, `3.jpg`) are 4:3
+(120×90 or 640×480). If the original video is 16:9, these will have black
+letterbox bars. `mqdefault.jpg` and above are true 16:9.
+
+**Recommended fallback strategy in code:**
+
+```js
+const sizes = ['maxresdefault', 'sddefault', 'hqdefault', 'mqdefault', 'default'];
+// Try each in order, fall back on error
+```

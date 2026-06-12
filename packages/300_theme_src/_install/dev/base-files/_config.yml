@@ -1,6 +1,6 @@
 # ------------------------------------------------------------------------------
 # ~/_config.yml
-# Global Jekyll site configuration (development)
+# Global Jekyll site configuration
 #
 # Product/Info:
 # https://jekyll.one
@@ -10,7 +10,6 @@
 # J1 Template is licensed under the MIT License.
 # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE
 # ------------------------------------------------------------------------------
-
 
 # ==============================================================================
 # 1. BUILD configuration
@@ -40,7 +39,7 @@
 #   _config.yml file.
 #
 # ------------------------------------------------------------------------------
-#
+
 # environment
 # ------------------------------------------------------------------------------
 # Sets the build environment of the website
@@ -54,7 +53,7 @@ environment:                            development
 # ------------------------------------------------------------------------------
 # Sets the build version of the site
 #
-version:                               2026.0.16
+version:                                2026.0.16
 
 # copyright
 # ------------------------------------------------------------------------------

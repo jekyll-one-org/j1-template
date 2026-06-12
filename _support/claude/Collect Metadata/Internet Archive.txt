@@ -1,0 +1,762 @@
+Prompt
+  https://claude.ai/chat/40280d79-5b8c-45e0-8ff7-87425341fbd8
+--------------------------------------------------------------------------------
+
+Wie kann man Metadaten zu einem Video von den Seiten des Internet Archive
+herunterladen?
+
+Claude
+--------------------------------------------------------------------------------
+
+Es gibt mehrere Wege, Metadaten zu einem Video vom Internet Archive abzurufen:
+
+---
+
+## 1. Metadata API (einfachster Weg)
+
+Die Metadata Read API ist der schnellste und flexibelste Weg, Metadaten für
+Items auf archive.org abzurufen.
+
+Das URL-Schema ist simpel:
+
+```
+https://archive.org/metadata/{IDENTIFIER}
+```
+
+Den **Identifier** findest du in der URL des Videos, z.B.:
+
+
+`https://archive.org/details/my-video-id` → Identifier = `my-video-id`
+
+Die Antwort kommt als **JSON** und enthält Titel, Beschreibung, Datum,
+Dateigröße, Format, etc.
+
+
+## 2. Nur einen Teil der Metadaten abrufen
+
+Du kannst auch gezielt einzelne Felder abfragen:
+
+```bash
+# Nur die item-Metadaten (Titel, Beschreibung, etc.)
+curl https://archive.org/metadata/my-video-id/metadata
+
+# Nur die Dateiliste
+curl https://archive.org/metadata/my-video-id/files
+```
+
+## Hinweis zum Identifier
+
+Falls du nur die Video-URL hast, z.B.:
+
+```
+https://archive.org/details/some-cool-video_202301
+```
+→ der Identifier ist der letzte Teil des Pfades: `some-cool-video_202301`
+
+Brauchst du die Metadaten für einen bestimmten Zweck (z.B. in deinem
+J1-Template-Projekt für Video.js)?
+
+
+
+
+
+
+
+
+
+
+"https://archive.org/download/job-556732-sendeton-1920x-1080-50p-5000kbit/JOB_556732__sendeton_1920x1080-50p-5000kbit.mp4"
+
+https://archive.org/details/job-556732-sendeton-1920x-1080-50p-5000kbit
+
+https://archive.org/metadata/job-556732-sendeton-1920x-1080-50p-5000kbit
+
+
+https://archive.org/metadata/{IDENTIFIER}
+https://archive.org/metadata/job-556732-sendeton-1920x-1080-50p-5000kbit		OK
+https://archive.org/metadata/JOB_556732__sendeton_1920x1080-50p-5000kbit		KO
+
+
+https://archive.org/metadata/job-556732-sendeton-1920x-1080-50p-5000kbit.thumbs/JOB_556732__sendeton_1920x1080-50p-5000kbit_000001.jpg   KO
+
+
+
+https://ia801708.us.archive.org/0/items/job-556732-sendeton-1920x-1080-50p-5000kbit/urn_ard_image_27ea256f22888390.jpeg	OK
+
+https://ia801708.us.archive.org/0/items/job-556732-sendeton-1920x-1080-50p-5000kbit/__ia_thumb.jpg						OK													
+
+
+https://archive.org/metadata/job-556732-sendeton-1920x-1080-50p-5000kbit
+
+{
+  "created": 1781117907,
+  "d1": "ia601708.us.archive.org",
+  "d2": "ia801708.us.archive.org",
+  "dir": "/0/items/job-556732-sendeton-1920x-1080-50p-5000kbit",
+  "files": [
+    {
+      "name": "JOB_556732__sendeton_1920x1080-50p-5000kbit.mp4",
+      "source": "original",
+      "mtime": "1756742745",
+      "size": "1311186884",
+      "md5": "91efe489b4084b662a48b6999fc8b0c8",
+      "crc32": "7a02a5ac",
+      "sha1": "67b2a3673eac05a3e2a3bb86988561f8b613c9ed",
+      "format": "MPEG4",
+      "length": "2933.96",
+      "width": "1920",
+      "height": "1080"
+    },
+    {
+      "name": "__ia_thumb.jpg",
+      "source": "original",
+      "mtime": "1756744760",
+      "size": "7446",
+      "md5": "49f51aa0b8315eaf6cf25b060a8a2252",
+      "crc32": "36e432f6",
+      "sha1": "22825c7680d6456cfab3e508463152abd338beb8",
+      "format": "Item Tile"
+    },
+    {
+      "name": "job-556732-sendeton-1920x-1080-50p-5000kbit.thumbs/JOB_556732__sendeton_1920x1080-50p-5000kbit_000001.jpg",
+      "source": "derivative",
+      "format": "Thumbnail",
+      "original": "JOB_556732__sendeton_1920x1080-50p-5000kbit.mp4",
+      "mtime": "1756743584",
+      "size": "37077",
+      "md5": "b9c749ab9acacaabdb8070d12157a55e",
+      "crc32": "5ec6409c",
+      "sha1": "407b5a69a2c8f1c952c47869befbb969429352b0"
+    },
+    {
+      "name": "job-556732-sendeton-1920x-1080-50p-5000kbit.thumbs/JOB_556732__sendeton_1920x1080-50p-5000kbit_000114.jpg",
+      "source": "derivative",
+      "format": "Thumbnail",
+      "original": "JOB_556732__sendeton_1920x1080-50p-5000kbit.mp4",
+      "mtime": "1756743594",
+      "size": "28607",
+      "md5": "bd79f6bc9a48b1439d52efa9ab35550e",
+      "crc32": "38c2550b",
+      "sha1": "4718f016de584771a7ff899f7e2f9eb2375fd169"
+    },
+    {
+      "name": "job-556732-sendeton-1920x-1080-50p-5000kbit.thumbs/JOB_556732__sendeton_1920x1080-50p-5000kbit_000174.jpg",
+      "source": "derivative",
+      "format": "Thumbnail",
+      "original": "JOB_556732__sendeton_1920x1080-50p-5000kbit.mp4",
+      "mtime": "1756743606",
+      "size": "50116",
+      "md5": "4b9d0ebe41edd06e3fa710a0b4fbe0c4",
+      "crc32": "5c7b15b7",
+      "sha1": "3707fdbfd69bc0bc549860b89d152b9e89f9b6da"
+    },
+    {
+      "name": "job-556732-sendeton-1920x-1080-50p-5000kbit.thumbs/JOB_556732__sendeton_1920x1080-50p-5000kbit_000234.jpg",
+      "source": "derivative",
+      "format": "Thumbnail",
+      "original": "JOB_556732__sendeton_1920x1080-50p-5000kbit.mp4",
+      "mtime": "1756743617",
+      "size": "63317",
+      "md5": "9b5576b6a1f38e634e7e09dde473d0f4",
+      "crc32": "fc3a9845",
+      "sha1": "56013592003e79aee0107927190dff9ee817fbca"
+    },
+    {
+      "name": "job-556732-sendeton-1920x-1080-50p-5000kbit.thumbs/JOB_556732__sendeton_1920x1080-50p-5000kbit_000294.jpg",
+      "source": "derivative",
+      "format": "Thumbnail",
+      "original": "JOB_556732__sendeton_1920x1080-50p-5000kbit.mp4",
+      "mtime": "1756743628",
+      "size": "77282",
+      "md5": "6dd70bc517a00106d832678c59c65bd0",
+      "crc32": "61a79f80",
+      "sha1": "f6d07f38098e4fca7694199a7c04010ee90f891c"
+    },
+    {
+      "name": "job-556732-sendeton-1920x-1080-50p-5000kbit.thumbs/JOB_556732__sendeton_1920x1080-50p-5000kbit_000354.jpg",
+      "source": "derivative",
+      "format": "Thumbnail",
+      "original": "JOB_556732__sendeton_1920x1080-50p-5000kbit.mp4",
+      "mtime": "1756743638",
+      "size": "107335",
+      "md5": "b2dff170a2df36546ed371f5fff61aff",
+      "crc32": "6dbbe65b",
+      "sha1": "a772f9eb7a961ac6301e03031be8d2c813464c57"
+    },
+    {
+      "name": "job-556732-sendeton-1920x-1080-50p-5000kbit.thumbs/JOB_556732__sendeton_1920x1080-50p-5000kbit_000414.jpg",
+      "source": "derivative",
+      "format": "Thumbnail",
+      "original": "JOB_556732__sendeton_1920x1080-50p-5000kbit.mp4",
+      "mtime": "1756743649",
+      "size": "89631",
+      "md5": "722199c6a25602dfad524c5823032a5a",
+      "crc32": "fb6c25c3",
+      "sha1": "1267ebaaa8d6d6ec50d79b7ef8a37d32cfef4df2"
+    },
+    {
+      "name": "job-556732-sendeton-1920x-1080-50p-5000kbit.thumbs/JOB_556732__sendeton_1920x1080-50p-5000kbit_000474.jpg",
+      "source": "derivative",
+      "format": "Thumbnail",
+      "original": "JOB_556732__sendeton_1920x1080-50p-5000kbit.mp4",
+      "mtime": "1756743660",
+      "size": "41522",
+      "md5": "5c6296735bbd33f8c2b34d36c5385490",
+      "crc32": "4ae4c27f",
+      "sha1": "8144d3fe5a8bcacb75e8b16333689acbe1978981"
+    },
+    {
+      "name": "job-556732-sendeton-1920x-1080-50p-5000kbit.thumbs/JOB_556732__sendeton_1920x1080-50p-5000kbit_000534.jpg",
+      "source": "derivative",
+      "format": "Thumbnail",
+      "original": "JOB_556732__sendeton_1920x1080-50p-5000kbit.mp4",
+      "mtime": "1756743672",
+      "size": "62402",
+      "md5": "18986955b68def29ba569ed189bd7c22",
+      "crc32": "17138b8d",
+      "sha1": "23827e350552ddc110f8c6c406796aa165a11f2d"
+    },
+    {
+      "name": "job-556732-sendeton-1920x-1080-50p-5000kbit.thumbs/JOB_556732__sendeton_1920x1080-50p-5000kbit_000594.jpg",
+      "source": "derivative",
+      "format": "Thumbnail",
+      "original": "JOB_556732__sendeton_1920x1080-50p-5000kbit.mp4",
+      "mtime": "1756743683",
+      "size": "75147",
+      "md5": "4dc131a26803771b680d320e83ba1335",
+      "crc32": "d6727718",
+      "sha1": "23c1179ab12508abe490ff1322cce152722cf116"
+    },
+    {
+      "name": "job-556732-sendeton-1920x-1080-50p-5000kbit.thumbs/JOB_556732__sendeton_1920x1080-50p-5000kbit_000654.jpg",
+      "source": "derivative",
+      "format": "Thumbnail",
+      "original": "JOB_556732__sendeton_1920x1080-50p-5000kbit.mp4",
+      "mtime": "1756743695",
+      "size": "69889",
+      "md5": "c0c9ccbd76df00b6a4ce457047c5e689",
+      "crc32": "ccaae0eb",
+      "sha1": "ca384dc44e6f8d055078ea130e9c4afb06bf0553"
+    },
+    {
+      "name": "job-556732-sendeton-1920x-1080-50p-5000kbit.thumbs/JOB_556732__sendeton_1920x1080-50p-5000kbit_000714.jpg",
+      "source": "derivative",
+      "format": "Thumbnail",
+      "original": "JOB_556732__sendeton_1920x1080-50p-5000kbit.mp4",
+      "mtime": "1756743706",
+      "size": "81646",
+      "md5": "126041a68fd90a285b20cae94114f11a",
+      "crc32": "28d4a4e7",
+      "sha1": "928e3cb8a0a9e4699c4fe8354ecf65b6a7442470"
+    },
+    {
+      "name": "job-556732-sendeton-1920x-1080-50p-5000kbit.thumbs/JOB_556732__sendeton_1920x1080-50p-5000kbit_000774.jpg",
+      "source": "derivative",
+      "format": "Thumbnail",
+      "original": "JOB_556732__sendeton_1920x1080-50p-5000kbit.mp4",
+      "mtime": "1756743717",
+      "size": "72336",
+      "md5": "3627127551221e8d26b48b6518940bc0",
+      "crc32": "a0cce892",
+      "sha1": "12c6f25b6cd60e7f0aceee1e9d1033085b50b030"
+    },
+    {
+      "name": "job-556732-sendeton-1920x-1080-50p-5000kbit.thumbs/JOB_556732__sendeton_1920x1080-50p-5000kbit_000834.jpg",
+      "source": "derivative",
+      "format": "Thumbnail",
+      "original": "JOB_556732__sendeton_1920x1080-50p-5000kbit.mp4",
+      "mtime": "1756743727",
+      "size": "41090",
+      "md5": "0f594a6244bfd3890419422aea186f97",
+      "crc32": "0c83546b",
+      "sha1": "9657065b5cc8035ce0c460a163f7f64b1e8e6b56"
+    },
+    {
+      "name": "job-556732-sendeton-1920x-1080-50p-5000kbit.thumbs/JOB_556732__sendeton_1920x1080-50p-5000kbit_000894.jpg",
+      "source": "derivative",
+      "format": "Thumbnail",
+      "original": "JOB_556732__sendeton_1920x1080-50p-5000kbit.mp4",
+      "mtime": "1756743738",
+      "size": "68532",
+      "md5": "4d4c51e6c9a4ceca89d947327742d46b",
+      "crc32": "36252bce",
+      "sha1": "b170904c71817eb8ca5ee90a77ca45ff5fa7e75a"
+    },
+    {
+      "name": "job-556732-sendeton-1920x-1080-50p-5000kbit.thumbs/JOB_556732__sendeton_1920x1080-50p-5000kbit_000954.jpg",
+      "source": "derivative",
+      "format": "Thumbnail",
+      "original": "JOB_556732__sendeton_1920x1080-50p-5000kbit.mp4",
+      "mtime": "1756743748",
+      "size": "116016",
+      "md5": "c45b0e9901816d41adbe2c8d0c219e21",
+      "crc32": "269632cb",
+      "sha1": "c3dff8fa8b972b2f4df8c0aa833fed212ae3dd0a"
+    },
+    {
+      "name": "job-556732-sendeton-1920x-1080-50p-5000kbit.thumbs/JOB_556732__sendeton_1920x1080-50p-5000kbit_001014.jpg",
+      "source": "derivative",
+      "format": "Thumbnail",
+      "original": "JOB_556732__sendeton_1920x1080-50p-5000kbit.mp4",
+      "mtime": "1756743759",
+      "size": "63418",
+      "md5": "bb54605e127d34a4585d1a3a71865538",
+      "crc32": "1d2871c8",
+      "sha1": "5ed8db93b72dce2b89b66c358d54aa4a3dad63cc"
+    },
+    {
+      "name": "job-556732-sendeton-1920x-1080-50p-5000kbit.thumbs/JOB_556732__sendeton_1920x1080-50p-5000kbit_001074.jpg",
+      "source": "derivative",
+      "format": "Thumbnail",
+      "original": "JOB_556732__sendeton_1920x1080-50p-5000kbit.mp4",
+      "mtime": "1756743771",
+      "size": "74848",
+      "md5": "9015de1772225fd8f06a3bc3a9a757a1",
+      "crc32": "26850611",
+      "sha1": "c64cd950c224a0ca98db5b370f82de6d7df29a72"
+    },
+    {
+      "name": "job-556732-sendeton-1920x-1080-50p-5000kbit.thumbs/JOB_556732__sendeton_1920x1080-50p-5000kbit_001134.jpg",
+      "source": "derivative",
+      "format": "Thumbnail",
+      "original": "JOB_556732__sendeton_1920x1080-50p-5000kbit.mp4",
+      "mtime": "1756743781",
+      "size": "94191",
+      "md5": "5a2fa70ac0b11eeaf6830628a2d570b0",
+      "crc32": "6e574399",
+      "sha1": "7837373759135769836d65c06fc7c0fe35dc2ffb"
+    },
+    {
+      "name": "job-556732-sendeton-1920x-1080-50p-5000kbit.thumbs/JOB_556732__sendeton_1920x1080-50p-5000kbit_001194.jpg",
+      "source": "derivative",
+      "format": "Thumbnail",
+      "original": "JOB_556732__sendeton_1920x1080-50p-5000kbit.mp4",
+      "mtime": "1756743793",
+      "size": "64675",
+      "md5": "5e91c4570222197e6f7503e0d93261b3",
+      "crc32": "edad7b07",
+      "sha1": "7cbaff96ed81792f3561d55ce1d5e178089871fd"
+    },
+    {
+      "name": "job-556732-sendeton-1920x-1080-50p-5000kbit.thumbs/JOB_556732__sendeton_1920x1080-50p-5000kbit_001254.jpg",
+      "source": "derivative",
+      "format": "Thumbnail",
+      "original": "JOB_556732__sendeton_1920x1080-50p-5000kbit.mp4",
+      "mtime": "1756743804",
+      "size": "97229",
+      "md5": "a0ea68a0ebd4e0375581357283486d86",
+      "crc32": "2f6ad122",
+      "sha1": "59f4704a4e8dd36ec3fa2e81e7506f3db1f326c5"
+    },
+    {
+      "name": "job-556732-sendeton-1920x-1080-50p-5000kbit.thumbs/JOB_556732__sendeton_1920x1080-50p-5000kbit_001314.jpg",
+      "source": "derivative",
+      "format": "Thumbnail",
+      "original": "JOB_556732__sendeton_1920x1080-50p-5000kbit.mp4",
+      "mtime": "1756743816",
+      "size": "63289",
+      "md5": "bd9798c9cd1029144ab2512f3663924d",
+      "crc32": "347312fb",
+      "sha1": "700100920a9721a78e7be088eced2737d5e29bef"
+    },
+    {
+      "name": "job-556732-sendeton-1920x-1080-50p-5000kbit.thumbs/JOB_556732__sendeton_1920x1080-50p-5000kbit_001374.jpg",
+      "source": "derivative",
+      "format": "Thumbnail",
+      "original": "JOB_556732__sendeton_1920x1080-50p-5000kbit.mp4",
+      "mtime": "1756743827",
+      "size": "96069",
+      "md5": "9d7418efac5e2f38b3ff077144608f6f",
+      "crc32": "328cf9ca",
+      "sha1": "f9ecc46cf608c2d38060e1d60766b592429c9082"
+    },
+    {
+      "name": "job-556732-sendeton-1920x-1080-50p-5000kbit.thumbs/JOB_556732__sendeton_1920x1080-50p-5000kbit_001434.jpg",
+      "source": "derivative",
+      "format": "Thumbnail",
+      "original": "JOB_556732__sendeton_1920x1080-50p-5000kbit.mp4",
+      "mtime": "1756743838",
+      "size": "58059",
+      "md5": "12e3768a291745dfa0a5f1256f59082f",
+      "crc32": "e6f269f2",
+      "sha1": "0b9852e9c360e955f08dbc49adfa0e698833880b"
+    },
+    {
+      "name": "job-556732-sendeton-1920x-1080-50p-5000kbit.thumbs/JOB_556732__sendeton_1920x1080-50p-5000kbit_001494.jpg",
+      "source": "derivative",
+      "format": "Thumbnail",
+      "original": "JOB_556732__sendeton_1920x1080-50p-5000kbit.mp4",
+      "mtime": "1756743849",
+      "size": "44752",
+      "md5": "695b320cf95600615b5b7fec4f824e7e",
+      "crc32": "8c4bfe31",
+      "sha1": "ba89b9c51469252b80e8e1bf5b92c3b9aef641f7"
+    },
+    {
+      "name": "job-556732-sendeton-1920x-1080-50p-5000kbit.thumbs/JOB_556732__sendeton_1920x1080-50p-5000kbit_001554.jpg",
+      "source": "derivative",
+      "format": "Thumbnail",
+      "original": "JOB_556732__sendeton_1920x1080-50p-5000kbit.mp4",
+      "mtime": "1756743860",
+      "size": "70741",
+      "md5": "c182c0ba78683eccfe56f64f14563a5b",
+      "crc32": "dcea42e7",
+      "sha1": "0585e711c20710eb32fa3f39cf71c75f7abcfab4"
+    },
+    {
+      "name": "job-556732-sendeton-1920x-1080-50p-5000kbit.thumbs/JOB_556732__sendeton_1920x1080-50p-5000kbit_001614.jpg",
+      "source": "derivative",
+      "format": "Thumbnail",
+      "original": "JOB_556732__sendeton_1920x1080-50p-5000kbit.mp4",
+      "mtime": "1756743871",
+      "size": "72036",
+      "md5": "66979b87c3c2606d34be16a235283912",
+      "crc32": "84a812d9",
+      "sha1": "c869e18eb21b15fb6e801dfe1ba97dd96918479a"
+    },
+    {
+      "name": "job-556732-sendeton-1920x-1080-50p-5000kbit.thumbs/JOB_556732__sendeton_1920x1080-50p-5000kbit_001674.jpg",
+      "source": "derivative",
+      "format": "Thumbnail",
+      "original": "JOB_556732__sendeton_1920x1080-50p-5000kbit.mp4",
+      "mtime": "1756743884",
+      "size": "77550",
+      "md5": "ac15a070b1ad5b625693291a7ad1adca",
+      "crc32": "5d131e33",
+      "sha1": "24f39c18f349ad1a58f76242f958c8fe0318deeb"
+    },
+    {
+      "name": "job-556732-sendeton-1920x-1080-50p-5000kbit.thumbs/JOB_556732__sendeton_1920x1080-50p-5000kbit_001734.jpg",
+      "source": "derivative",
+      "format": "Thumbnail",
+      "original": "JOB_556732__sendeton_1920x1080-50p-5000kbit.mp4",
+      "mtime": "1756743896",
+      "size": "94847",
+      "md5": "f03a2b5f29e7c77bcca94b9d2849175c",
+      "crc32": "bc1c1f78",
+      "sha1": "ad142d03793e198466e8e480c1f79475841275ab"
+    },
+    {
+      "name": "job-556732-sendeton-1920x-1080-50p-5000kbit.thumbs/JOB_556732__sendeton_1920x1080-50p-5000kbit_001794.jpg",
+      "source": "derivative",
+      "format": "Thumbnail",
+      "original": "JOB_556732__sendeton_1920x1080-50p-5000kbit.mp4",
+      "mtime": "1756743907",
+      "size": "105964",
+      "md5": "f017e5b02cb9dede0a81c7f8a8b60224",
+      "crc32": "80244e52",
+      "sha1": "542290109560b16804c54d15af632fbad707c07d"
+    },
+    {
+      "name": "job-556732-sendeton-1920x-1080-50p-5000kbit.thumbs/JOB_556732__sendeton_1920x1080-50p-5000kbit_001854.jpg",
+      "source": "derivative",
+      "format": "Thumbnail",
+      "original": "JOB_556732__sendeton_1920x1080-50p-5000kbit.mp4",
+      "mtime": "1756743918",
+      "size": "92358",
+      "md5": "338517f2edd0e31d0e5aa2f33c7f0843",
+      "crc32": "d5937bfc",
+      "sha1": "7382e4a9e98048918441a95d55fff7f3f2ba6530"
+    },
+    {
+      "name": "job-556732-sendeton-1920x-1080-50p-5000kbit.thumbs/JOB_556732__sendeton_1920x1080-50p-5000kbit_001914.jpg",
+      "source": "derivative",
+      "format": "Thumbnail",
+      "original": "JOB_556732__sendeton_1920x1080-50p-5000kbit.mp4",
+      "mtime": "1756743928",
+      "size": "111673",
+      "md5": "44a2028db58de4327700a2f3477a6476",
+      "crc32": "3e2440e6",
+      "sha1": "cc69f99362902231c0e33d558e64b5fd390b907e"
+    },
+    {
+      "name": "job-556732-sendeton-1920x-1080-50p-5000kbit.thumbs/JOB_556732__sendeton_1920x1080-50p-5000kbit_001974.jpg",
+      "source": "derivative",
+      "format": "Thumbnail",
+      "original": "JOB_556732__sendeton_1920x1080-50p-5000kbit.mp4",
+      "mtime": "1756743939",
+      "size": "69886",
+      "md5": "5b7004e20e74875aa6dbb567a185fb4d",
+      "crc32": "669fe8fe",
+      "sha1": "8b0466b1312e4db2a8e33cf9f3e666726f55bb4a"
+    },
+    {
+      "name": "job-556732-sendeton-1920x-1080-50p-5000kbit.thumbs/JOB_556732__sendeton_1920x1080-50p-5000kbit_002034.jpg",
+      "source": "derivative",
+      "format": "Thumbnail",
+      "original": "JOB_556732__sendeton_1920x1080-50p-5000kbit.mp4",
+      "mtime": "1756743950",
+      "size": "73831",
+      "md5": "79792d5af595063ea6d5be562aab6165",
+      "crc32": "95cda41c",
+      "sha1": "3623aba136f47052eeebcff40d8d974c4733c993"
+    },
+    {
+      "name": "job-556732-sendeton-1920x-1080-50p-5000kbit.thumbs/JOB_556732__sendeton_1920x1080-50p-5000kbit_002094.jpg",
+      "source": "derivative",
+      "format": "Thumbnail",
+      "original": "JOB_556732__sendeton_1920x1080-50p-5000kbit.mp4",
+      "mtime": "1756743961",
+      "size": "101622",
+      "md5": "e14b41f1627cc9eee844a5dc14f4fe7b",
+      "crc32": "a19a90e5",
+      "sha1": "0a4e7f38faa486304f69f1c8895922850c4576e5"
+    },
+    {
+      "name": "job-556732-sendeton-1920x-1080-50p-5000kbit.thumbs/JOB_556732__sendeton_1920x1080-50p-5000kbit_002154.jpg",
+      "source": "derivative",
+      "format": "Thumbnail",
+      "original": "JOB_556732__sendeton_1920x1080-50p-5000kbit.mp4",
+      "mtime": "1756743972",
+      "size": "70679",
+      "md5": "de57214566774b01b00cb1f14ba2d56c",
+      "crc32": "903ef5c3",
+      "sha1": "2510a973dd73e5fb4360fb434d501d5cb587f019"
+    },
+    {
+      "name": "job-556732-sendeton-1920x-1080-50p-5000kbit.thumbs/JOB_556732__sendeton_1920x1080-50p-5000kbit_002214.jpg",
+      "source": "derivative",
+      "format": "Thumbnail",
+      "original": "JOB_556732__sendeton_1920x1080-50p-5000kbit.mp4",
+      "mtime": "1756743985",
+      "size": "90974",
+      "md5": "36df5eeee1f367b20738650a3f306dc7",
+      "crc32": "3133afc1",
+      "sha1": "552a79814941c90c535716e7fda7f17054a2bdc3"
+    },
+    {
+      "name": "job-556732-sendeton-1920x-1080-50p-5000kbit.thumbs/JOB_556732__sendeton_1920x1080-50p-5000kbit_002274.jpg",
+      "source": "derivative",
+      "format": "Thumbnail",
+      "original": "JOB_556732__sendeton_1920x1080-50p-5000kbit.mp4",
+      "mtime": "1756743996",
+      "size": "77335",
+      "md5": "628f63d9827310b01f0599e6eccb7e96",
+      "crc32": "b744fe15",
+      "sha1": "7f624f8df5f4b125588e98f0e1f5c6ff226b66da"
+    },
+    {
+      "name": "job-556732-sendeton-1920x-1080-50p-5000kbit.thumbs/JOB_556732__sendeton_1920x1080-50p-5000kbit_002334.jpg",
+      "source": "derivative",
+      "format": "Thumbnail",
+      "original": "JOB_556732__sendeton_1920x1080-50p-5000kbit.mp4",
+      "mtime": "1756744010",
+      "size": "71367",
+      "md5": "779b076a813c5c47b98e4b7e05a10816",
+      "crc32": "65f9c855",
+      "sha1": "014559a8b79dcaa18ca2becbcc1a3701540f9dcf"
+    },
+    {
+      "name": "job-556732-sendeton-1920x-1080-50p-5000kbit.thumbs/JOB_556732__sendeton_1920x1080-50p-5000kbit_002394.jpg",
+      "source": "derivative",
+      "format": "Thumbnail",
+      "original": "JOB_556732__sendeton_1920x1080-50p-5000kbit.mp4",
+      "mtime": "1756744022",
+      "size": "73158",
+      "md5": "4dafd3200dfec7bd9bb7417810edffea",
+      "crc32": "8627fef2",
+      "sha1": "d6f11d0f71120d169e33822e28fc67dfe6fe5a74"
+    },
+    {
+      "name": "job-556732-sendeton-1920x-1080-50p-5000kbit.thumbs/JOB_556732__sendeton_1920x1080-50p-5000kbit_002454.jpg",
+      "source": "derivative",
+      "format": "Thumbnail",
+      "original": "JOB_556732__sendeton_1920x1080-50p-5000kbit.mp4",
+      "mtime": "1756744033",
+      "size": "65712",
+      "md5": "c4702165e0473425323c8ab7c9109668",
+      "crc32": "56acc213",
+      "sha1": "b792e7aef612bc96e22e01267ae0fea19e8efedc"
+    },
+    {
+      "name": "job-556732-sendeton-1920x-1080-50p-5000kbit.thumbs/JOB_556732__sendeton_1920x1080-50p-5000kbit_002514.jpg",
+      "source": "derivative",
+      "format": "Thumbnail",
+      "original": "JOB_556732__sendeton_1920x1080-50p-5000kbit.mp4",
+      "mtime": "1756744045",
+      "size": "59064",
+      "md5": "69fa5ea136e4fbe6da8efdc47c6a47b8",
+      "crc32": "99a9d34f",
+      "sha1": "b7a470a0bc5f79a8f9a1c04373dcea2c040f03cb"
+    },
+    {
+      "name": "job-556732-sendeton-1920x-1080-50p-5000kbit.thumbs/JOB_556732__sendeton_1920x1080-50p-5000kbit_002574.jpg",
+      "source": "derivative",
+      "format": "Thumbnail",
+      "original": "JOB_556732__sendeton_1920x1080-50p-5000kbit.mp4",
+      "mtime": "1756744056",
+      "size": "55190",
+      "md5": "7ed8b9ca52abba2e8e2d5c38b0177d60",
+      "crc32": "92e7439d",
+      "sha1": "27243dfbb1bc974c0aec5537b4d05c4bd52edd09"
+    },
+    {
+      "name": "job-556732-sendeton-1920x-1080-50p-5000kbit.thumbs/JOB_556732__sendeton_1920x1080-50p-5000kbit_002634.jpg",
+      "source": "derivative",
+      "format": "Thumbnail",
+      "original": "JOB_556732__sendeton_1920x1080-50p-5000kbit.mp4",
+      "mtime": "1756744067",
+      "size": "56333",
+      "md5": "a640f898f6ba758c09b26050c3b51afc",
+      "crc32": "d9f7b261",
+      "sha1": "9e96508ddf80bb2a6c83309764fdcac5d3e87bfe"
+    },
+    {
+      "name": "job-556732-sendeton-1920x-1080-50p-5000kbit.thumbs/JOB_556732__sendeton_1920x1080-50p-5000kbit_002694.jpg",
+      "source": "derivative",
+      "format": "Thumbnail",
+      "original": "JOB_556732__sendeton_1920x1080-50p-5000kbit.mp4",
+      "mtime": "1756744078",
+      "size": "40337",
+      "md5": "d9f4b5e91cb1ace84ad77d8a0762bd7a",
+      "crc32": "047b6da0",
+      "sha1": "f103549dcb37d3c1881cbb607dc44775bfaaab7f"
+    },
+    {
+      "name": "job-556732-sendeton-1920x-1080-50p-5000kbit.thumbs/JOB_556732__sendeton_1920x1080-50p-5000kbit_002754.jpg",
+      "source": "derivative",
+      "format": "Thumbnail",
+      "original": "JOB_556732__sendeton_1920x1080-50p-5000kbit.mp4",
+      "mtime": "1756744089",
+      "size": "60126",
+      "md5": "6364c775937752cbaed8d273e23de117",
+      "crc32": "054e737a",
+      "sha1": "8828c7787a3d403c44dc9f200d0c4c6812d06f21"
+    },
+    {
+      "name": "job-556732-sendeton-1920x-1080-50p-5000kbit.thumbs/JOB_556732__sendeton_1920x1080-50p-5000kbit_002814.jpg",
+      "source": "derivative",
+      "format": "Thumbnail",
+      "original": "JOB_556732__sendeton_1920x1080-50p-5000kbit.mp4",
+      "mtime": "1756744100",
+      "size": "61114",
+      "md5": "e368ff054b7f37b701d6dbd935470dd5",
+      "crc32": "4077d330",
+      "sha1": "e83edf40127091fbe00bc71f31573a38ce5b70f7"
+    },
+    {
+      "name": "job-556732-sendeton-1920x-1080-50p-5000kbit.thumbs/JOB_556732__sendeton_1920x1080-50p-5000kbit_002874.jpg",
+      "source": "derivative",
+      "format": "Thumbnail",
+      "original": "JOB_556732__sendeton_1920x1080-50p-5000kbit.mp4",
+      "mtime": "1756744113",
+      "size": "32555",
+      "md5": "e9f2a7780e3d25d3556d0682cf6346d2",
+      "crc32": "d30ab803",
+      "sha1": "7a90d0b16bb5a3e905b5cbf33ad157825073da7e"
+    },
+    {
+      "name": "job-556732-sendeton-1920x-1080-50p-5000kbit.thumbs/JOB_556732__sendeton_1920x1080-50p-5000kbit_002932.jpg",
+      "source": "derivative",
+      "format": "Thumbnail",
+      "original": "JOB_556732__sendeton_1920x1080-50p-5000kbit.mp4",
+      "mtime": "1756744125",
+      "size": "39461",
+      "md5": "a80ec3e590da82bfeca904a0178b4318",
+      "crc32": "e9898fa9",
+      "sha1": "98e9f286caa7fa42dd788bb17446d34a040387c0"
+    },
+    {
+      "name": "job-556732-sendeton-1920x-1080-50p-5000kbit_archive.torrent",
+      "source": "metadata",
+      "btih": "07f2a6663461f92d782efda521ce89b475e1c181",
+      "mtime": "1767589429",
+      "size": "27517",
+      "md5": "6f699189315170351999eea8d69ae5d1",
+      "crc32": "9a942e9f",
+      "sha1": "53737543e624cb838f2c697165e9f700247641d6",
+      "format": "Archive BitTorrent"
+    },
+    {
+      "name": "job-556732-sendeton-1920x-1080-50p-5000kbit_files.xml",
+      "source": "original",
+      "format": "Metadata",
+      "md5": "cb17daa59b648f297c90dd1aab6f3613",
+      "summation": "md5"
+    },
+    {
+      "name": "job-556732-sendeton-1920x-1080-50p-5000kbit_meta.sqlite",
+      "source": "original",
+      "mtime": "1756743218",
+      "size": "28672",
+      "md5": "cff0735b6545352586111aa0d0b5da1e",
+      "crc32": "c4d14be9",
+      "sha1": "8c2bf6fb49308fbdf3101bf3d5a54b614d04c54e",
+      "format": "Metadata"
+    },
+    {
+      "name": "job-556732-sendeton-1920x-1080-50p-5000kbit_meta.xml",
+      "source": "original",
+      "mtime": "1767589407",
+      "size": "1386",
+      "md5": "35f8682bd952654db2f6af7a5e0a09bb",
+      "crc32": "e213a29c",
+      "sha1": "dcfd85e18592c955a07ef125c6b11fe7c69dc6eb",
+      "format": "Metadata"
+    },
+    {
+      "name": "urn_ard_image_27ea256f22888390.jpeg",
+      "source": "original",
+      "mtime": "1756743202",
+      "size": "186174",
+      "md5": "3739e17bc196e7ac3833d3c305fd7b96",
+      "crc32": "8980cf86",
+      "sha1": "de3bde7499e0f49e96fb8899514c31d9de5915c9",
+      "format": "JPEG"
+    },
+    {
+      "name": "urn_ard_image_27ea256f22888390_thumb.jpg",
+      "source": "derivative",
+      "format": "JPEG Thumb",
+      "original": "urn_ard_image_27ea256f22888390.jpeg",
+      "mtime": "1756744311",
+      "size": "8141",
+      "md5": "147de02b7f2393a0858a3dcdf3704458",
+      "crc32": "f670213c",
+      "sha1": "4bb98ac3b81b512883afa0961fb860d7048c6643"
+    }
+  ],
+  "files_count": 57,
+  "item_last_updated": 1767589429,
+  "item_size": 1314908608,
+  "metadata": {
+    "identifier": "job-556732-sendeton-1920x-1080-50p-5000kbit",
+    "mediatype": "movies",
+    "collection": [
+      "gameshows_miscellaneous",
+      "gameshows",
+      "television"
+    ],
+    "creator": "ARD",
+    "date": "2025-08-01",
+    "description": "Team ,,Spaß\" gegen den Olymp<div>mit Jürgen Vogel und Torsten Sträter</div><div><br /></div><div>Schauspieler Jürgen Vogel und Comedian Torsten Sträter wurden vielfach ausgezeichnet und gelten beide als Meister ihres Fachs. Sie überzeugen auf der Bühne und der Leinwand – aber wie überzeugend ist ihre Vorstellung gegen den Olymp?</div>",
+    "language": "ger",
+    "scanner": "Internet Archive HTML5 Uploader 1.7.0",
+    "subject": [
+      "TV Series",
+      "TV Episodes",
+      "Gameshow",
+      "Quizshow"
+    ],
+    "title": "Quizduell Olymp vom 1. August 2025",
+    "uploader": "asusoke566@gmail.com",
+    "publicdate": "2025-09-01 16:06:09",
+    "addeddate": "2025-09-01 16:06:09",
+    "curation": "[curator]validator@archive.org[/curator][date]20250901160755[/date][comment]checked for malware[/comment]",
+    "collection_added": [
+      "television",
+      "gameshows"
+    ]
+  },
+  "server": "ia801708.us.archive.org",
+  "uniq": 2044361744,
+  "workable_servers": [
+    "ia801708.us.archive.org",
+    "ia601708.us.archive.org"
+  ]
+}
+
+
+
+
+

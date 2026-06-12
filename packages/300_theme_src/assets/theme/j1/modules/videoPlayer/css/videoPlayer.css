@@ -650,7 +650,7 @@ select[data-value-filled="true"] {
 
 .playlist.card-mode {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(2, 1fr);
 }
 
 /* media breakpoint cards perRow */
@@ -1216,7 +1216,7 @@ select[data-value-filled="true"] {
   border: 1px solid var(--border-color);
   border-radius: 0px;
   color: var(--text-color);
-  font-size: 0.85rem;
+  font-size: 0.85rem !important;
   padding: 0.5rem 0.75rem;
   transition: border-color 0.2s ease;
   width: 100%;

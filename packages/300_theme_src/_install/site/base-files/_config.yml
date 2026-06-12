@@ -1,6 +1,6 @@
 # ------------------------------------------------------------------------------
 # ~/_config.yml
-# Global Jekyll site configuration (development)
+# Global Jekyll site configuration
 #
 # Product/Info:
 # https://jekyll.one
@@ -39,7 +39,7 @@
 #   _config.yml file.
 #
 # ------------------------------------------------------------------------------
-#
+
 # environment
 # ------------------------------------------------------------------------------
 # Sets the build environment of the website
