@@ -1,7 +1,7 @@
 /*
  # -----------------------------------------------------------------------------
  # ~/assets/theme/j1/modules/videoPlayer/js/playlistCards.mjs (1)
- # Provides Drop-in Lit web component for J1 Module videoPlayer
+ # Drop-in Lit web component for J1 Module videoPlayer
  #
  # Product/Info:
  # https://jekyll.one
@@ -13,10 +13,7 @@
  # -----------------------------------------------------------------------------
 */
 
-// -----------------------------------------------------------------------------
-// Drop-in Lit web component that replaces the imperative string-template
-// rendering inside playlistManager.renderCards().
-//
+// =============================================================================
 // Design notes
 // -----------------------------------------------------------------------------
 // * Renders into LIGHT DOM (createRenderRoot returns `this`) so the existing

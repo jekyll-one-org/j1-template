@@ -30,11 +30,10 @@ settings:
     # Player 1 – Tiny Desk Concerts
     #
     - player:
-
-      # GENERAL options
-      #    
       enabled:                          true
 
+      # GENERAL options
+      #   
       id:                               player_1
       description:                      NPR Tiny Desk Concerts
 
@@ -47,6 +46,34 @@ settings:
         enabled:                        false
 
       playlist:
+
+        # Playlists are merged into the instance's localStorage on page load.
+        # Relative filenames are resolved against playlist_url_base.
+        preload:                        [ tinydesk-concerts.json ]
+
+        cards:
+          perRow:                       4
+
+    # --------------------------------------------------------------------------
+    # Player 2 – Carpool Karaoke
+    #
+    - player: 
+      enabled:                          true
+
+      # GENERAL options
+      #   
+      id:                               player_2
+      description:                      Carpool Karaoke
+
+      videoJS:
+        autoStart:                      true
+
+      toolbox:
+        enabled:                        false
+
+      playlist:
+
+        preload:                        [ carpool-karaoke.json ]
         cards:
           perRow:                       4
 

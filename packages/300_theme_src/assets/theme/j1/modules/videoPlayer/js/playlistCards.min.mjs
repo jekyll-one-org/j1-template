@@ -1,7 +1,7 @@
 /*
  # -----------------------------------------------------------------------------
  # ~/assets/theme/j1/modules/videoPlayer/js/playlistCards.min.mjs
- # Provides Drop-in Lit web component for J1 Module videoPlayer
+ # Drop-in Lit web component for J1 Module videoPlayer
  #
  # Product/Info:
  # https://jekyll.one

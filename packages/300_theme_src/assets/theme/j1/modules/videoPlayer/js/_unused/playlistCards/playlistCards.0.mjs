@@ -1,8 +1,19 @@
-// playlistCards.mjs (1)
-// -----------------------------------------------------------------------------
-// Drop-in Lit web component that replaces the imperative string-template
-// rendering inside playlistManager.renderCards().
-//
+/*
+ # -----------------------------------------------------------------------------
+ # ~/assets/theme/j1/modules/videoPlayer/js/playlistCards.mjs (0)
+ # Drop-in Lit web component for J1 Module videoPlayer
+ #
+ # Product/Info:
+ # https://jekyll.one
+ #
+ # Copyright (C) 2026 Juergen Adams
+ #
+ # J1 Template is licensed under the MIT License.
+ # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE
+ # -----------------------------------------------------------------------------
+*/
+
+// =============================================================================
 // Design notes
 // -----------------------------------------------------------------------------
 // * Renders into LIGHT DOM (createRenderRoot returns `this`) so the existing
@@ -25,21 +36,6 @@
 import { LitElement, html, nothing } from 'https://cdn.jsdelivr.net/npm/lit@3/+esm';
 import { repeat }                    from 'https://cdn.jsdelivr.net/npm/lit@3/directives/repeat.js/+esm';
 import { classMap }                  from 'https://cdn.jsdelivr.net/npm/lit@3/directives/class-map.js/+esm';
-
-// claude - Extend J1 VideoPlayer #3
-// DEFAULT_POSTER mirrors the constant in videoPlayer.js so this component
-// can resolve the fallback poster independently of the main module.
-const DEFAULT_POSTER = '/assets/image/icon/videojs/videojs-poster.png';
-
-// claude - Extend J1 VideoPlayer #4
-// YOUTUBE_POSTER_QUALITY defines the YouTube thumbnail quality used when
-// back-filling posters for entries loaded from an existing playlist.
-// "maxresdefault" matches the value set in videoPlayer.yml
-// (players.youtube.poster: maxresdefault.jpg).
-const YOUTUBE_POSTER_QUALITY = 'maxresdefault';
-
-// youtube video-id patterns — same regex used in the videoPlayer module.
-const YOUTUBE_ID_RE = /(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|shorts\/))([A-Za-z0-9_-]{11})/;
 
 export class PlaylistCards extends LitElement {
 
@@ -102,61 +98,6 @@ export class PlaylistCards extends LitElement {
     return `${months} month${months > 1 ? 's' : ''} ago`;
   }
 
-  // ---- claude - Extend J1 VideoPlayer #4 ------------------------------------
-  // _resolvedPoster(v)
-  // Returns the best available poster URL for a playlist entry.
-  //
-  // Problem: entries loaded from an existing playlist (localStorage / server
-  // JSON) were saved before fix #3 introduced the `poster` field, or were
-  // saved with a stale thumbnail (mqdefault / empty). When these entries are
-  // rendered on load the card shows DEFAULT_POSTER instead of the proper
-  // YouTube thumbnail.
-  //
-  // Resolution order:
-  //   1. v.poster — already set and does not look like the generic fallback
-  //      → use it unchanged (covers native video entries and YouTube entries
-  //      that were already back-filled by doPostOnPlaying during a previous
-  //      session that saved the updated entry back to storage).
-  //   2. v.videoId contains a bare 11-char YouTube ID, OR v.url / v.source
-  //      matches the YouTube URL pattern  → derive maxresdefault.jpg from the
-  //      YouTube image CDN.  This handles all entries in existing playlists
-  //      regardless of when they were saved.
-  //   3. Fallback to DEFAULT_POSTER.
-  //
-  // The returned URL is used only for rendering; v.poster is NOT mutated here.
-  // Persistent back-filling (so re-renders after sort/search also use the
-  // correct poster) is done by playlistPosterRepairHandler in videoPlayer.js.
-  // ---------------------------------------------------------------------------
-  _resolvedPoster(v) {
-    // 1. Already have a non-fallback poster — use it.
-    if (v.poster && v.poster !== DEFAULT_POSTER) {
-      return v.poster;
-    }
-
-    // 2. Try to derive a YouTube poster from videoId or url/source.
-    let ytId = null;
-
-    // 2a. v.videoId — the module stores the bare YouTube video-id here for
-    //     YouTube entries (set by extractYouTubeId / doPostOnPlaying).
-    if (v.videoId && /^[A-Za-z0-9_-]{11}$/.test(v.videoId)) {
-      ytId = v.videoId;
-    }
-
-    // 2b. Fall back to scanning v.url or v.source for the video-id.
-    if (!ytId) {
-      const candidate = v.url || v.source || '';
-      const m = candidate.match(YOUTUBE_ID_RE);
-      if (m) ytId = m[1];
-    }
-
-    if (ytId) {
-      return `https://img.youtube.com/vi/${ytId}/${YOUTUBE_POSTER_QUALITY}.jpg`;
-    }
-
-    // 3. Generic fallback.
-    return DEFAULT_POSTER;
-  }
-
   _isValidUrl(str) {
     if (!str || typeof str !== 'string') return false;
     try {
@@ -165,37 +106,6 @@ export class PlaylistCards extends LitElement {
     } catch (_) {
       return false;
     }
-  }
-
-  // ---- claude - Fix J1 VideoPlayer #4 --------------------------------------
-  // Inline click handlers for the two actions that are wired on the adapter
-  // side via addEventListener on #playlistHistory (videoPlayer.js initHandlers,
-  // steps 2a / 2b).  Both dispatch a CustomEvent that bubbles through the light
-  // DOM; the adapter's event listeners catch them and forward to the module's
-  // loadAndPlay() / deleteEntry() API.
-  //
-  // Note: #3 added these dispatchers correctly but wired the adapter side
-  // incorrectly (new videoPlayer.initPlayHandler / new videoPlayer.initDeleteHandler
-  // — neither is a constructor class). #4 fixes the adapter wiring; no changes
-  // are required to the dispatch logic below.
-  // ---- play overlay ---------------------------------------------------------
-  _onPlayClick(e, videoId) {
-    e.stopPropagation();
-    this.dispatchEvent(new CustomEvent('playlist-play', {
-      bubbles:  true,
-      composed: false,        // light DOM — stays in the document tree
-      detail:   { videoId }
-    }));
-  }
-
-  // ---- delete button --------------------------------------------------------
-  _onDeleteClick(e, videoId) {
-    e.stopPropagation();
-    this.dispatchEvent(new CustomEvent('playlist-delete', {
-      bubbles:  true,
-      composed: false,
-      detail:   { videoId }
-    }));
   }
 
   // ---- per-card template ----------------------------------------------------
@@ -221,18 +131,10 @@ export class PlaylistCards extends LitElement {
       <div class="playlist-card card-base" data-video-id=${v.videoId}>
 
         <div class="playlist-thumb-wrapper">
-          <!-- claude - Extend J1 VideoPlayer #4
-               Use _resolvedPoster() so that YouTube entries loaded from an
-               existing playlist (where v.poster may be absent or stale) always
-               show maxresdefault.jpg. The previous v.poster || DEFAULT_POSTER
-               only worked for newly-added entries; loaded entries showed the
-               generic fallback icon. -->
           <img class="playlist-thumb"
-               src=${this._resolvedPoster(v)}
+               src=${`//img.youtube.com/vi/${v.videoId}/mqdefault.jpg`}
                alt="playlist-thumb">
-          <!-- claude - Fix J1 VideoPlayer #3: @click was missing — overlay did nothing -->
-          <div class="playlist-play-overlay"
-               @click=${(e) => this._onPlayClick(e, v.videoId)}>
+          <div class="playlist-play-overlay">
             <i class="fas fa-play"></i>
           </div>
           ${duration
@@ -280,11 +182,9 @@ export class PlaylistCards extends LitElement {
                     aria-label="Edit item">
               <i class="fas fa-edit"></i>
             </button>
-            <!-- claude - Fix J1 VideoPlayer #3: @click was missing — delete button did nothing -->
             <button class="playlist-btn delete"
                     title="Delete from playlist"
-                    aria-label="Delete from playlist"
-                    @click=${(e) => this._onDeleteClick(e, v.videoId)}>
+                    aria-label="Delete from playlist">
               <i class="fas fa-trash"></i>
             </button>
           </div>

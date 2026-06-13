@@ -2,7 +2,6 @@
  # -----------------------------------------------------------------------------
  # ~/assets/theme/j1/modules/videoPlayer/js/videoPlayer.js (27)
  # Provides JS Core for J1 Module videoPlayer
- # Extend J1 VideoPlayer
  #
  # Product/Info:
  # https://jekyll.one
@@ -28,7 +27,6 @@
   } else if (typeof exports === 'object') {
     module.exports = factory();       // CommonJS: call factory, export result
   } else {
-    // Renamed global export from skipAd → videoPlayer.
     root['videoPlayer'] = factory();  // Browser global: call factory, assign result
   }
 }(this, function () {
@@ -36,7 +34,6 @@
 
   // ---------------------------------------------------------------------------
   // Constants
-  // MODULE_NAME renamed from 'skipad.core' to 'videoPlayer.core'.
   // ---------------------------------------------------------------------------
 
   const MODULE_NAME         = 'videoPlayer.core';
@@ -45,7 +42,7 @@
 
   // Extend J1 VideoPlayer #1
   // Re-added YOUTUBE_PATTERNS so that YouTube URLs are recognised and
-  // routed to the YouTube tech path (identical to skipad.js).
+  // routed to the YouTube tech path
   const YOUTUBE_PATTERNS = Object.freeze([
     /(?:youtube\.com\/watch\?v=|youtu\.be\/)([a-zA-Z0-9_-]{11})/,
     /^([a-zA-Z0-9_-]{11})$/,
@@ -418,9 +415,9 @@
     }
 
     // _normalizeEntry: added 'src' and 'poster' fields for native video entries.
-    // Legacy entries (imported from skipad playlists) that lack these fields
-    // are backfilled with empty strings so the rest of the code can always
-    // access entry.src and entry.poster without null-checks.
+    // Legacy entries that lack these fields are backfilled with empty strings
+    // so the rest of the code can always access entry.src and entry.poster
+    // without null-checks.
     _normalizeEntry(entry) {
       let ytID;
 
@@ -534,13 +531,27 @@
      * playlistManager
      * addEntry - add a new video to the playlist in localStorage.
      *
-     * change skipAd API to local files #2
      * @param {Object} entry
      * @param {string}  [entry.src]          - full local or remote video URL/path
      * @param {string}  [entry.poster]       - poster image URL for the video
      * @param {string}  [entry.videoId]      - derived filename-without-extension key
      * @param {string}  [entry.videoLink]    - full video URL (identical to src for native)
-     * (all other fields unchanged from skipad)
+     * @param {string}  [entry.author]        - author name
+     * @param {string}  [entry.category]      - category
+     * @param {string}  [entry.description]   - description text, limited to 50 words
+     * @param {number}  [entry.duration]      - video duration in seconds
+     * @param {string}  [entry.infoLink]      - Info URL
+     * @param {string}  [entry.issueDate]     - issue date (ISO string or free text)
+     * @param {number}  [entry.episode]       - episode no for series
+     * @param {number}  [entry.lastPosition]  - playback position in seconds
+     * @param {number}  [entry.rating]        - video rating 1-5
+     * @param {number}  [entry.series]        - set to series no
+     * @param {array}   [entry.tags]          - array of tags
+     * @param {string}  [entry.title ]        - video title
+     * @param {string}  [entry.type ]         - element type
+     * @param {string}  [entry.videoLink]     - full YouTube Video URL
+     * @param {string}  [entry.videoId]       - YouTube video ID
+     * @param {string}  [entry.watchDate]     - ISO date of watching
      */
     addEntry(entry) {
       const playlist = this.load() || [];
@@ -557,6 +568,7 @@
       const record = {
         author:       entry.author        || '',
         category:     entry.category      || '',
+        creator:      'videoPlayer',
         description:  entry.description   || '',
         duration:     entry.duration      || 0,
         infoLink:     entry.infoLink      || '',
@@ -793,7 +805,7 @@
         //
         // Root cause: server playlists exported by this module (see
         // exportToFile(), which writes `JSON.stringify(this.load())`) and legacy
-        // YouTube/skipad playlists are *plain JSON arrays*. The previous guard
+        // YouTube playlists are *plain JSON arrays*. The previous guard
         //
         //     if (data && typeof data === 'object' && !data.playlist) { return; }
         //
@@ -886,7 +898,6 @@
       fileInput.click();
     }
 
-    // Export filename changed from 'skipAd-playlist_...' to 'videoPlayer-playlist_...'.
     exportToFile(filename) {
       if (!filename) {
         filename = `videoPlayer-playlist_${this._formatTimestamp()}.json`;
@@ -2475,7 +2486,6 @@
         if (isYouTube) {
           // ---------------------------------------------------------------
           // Extend J1 VideoPlayer #1
-          // YouTube tech path: mirror the onReady logic from skipad.js.
           // Metadata is read from the YouTube tech's videoData() / ytPlayer.
           // ---------------------------------------------------------------
           const applyVideoData = (videoData) => {
@@ -2749,7 +2759,7 @@
    * doPostOnPlaying - post-processing after state change to 'playing'
    * Extend J1 VideoPlayer #1
    * Extended to handle both YouTube (player.ytVideoData) and native
-   * (player.videoData) metadata, mirroring skipad.js for the YouTube path.
+   * (player.videoData) metadata
    * @param {number} state - player state code
    */
   function doPostOnPlaying(state) {
@@ -2768,7 +2778,6 @@
     const isYouTubePlayer = !!(player && player.ytVideoData);
 
     if (isYouTubePlayer) {
-      // YouTube path - mirror skipad.js doPostOnPlaying()
       document.dispatchEvent(new CustomEvent('videoPlayingStarted', {
         detail: { videoId: player.ytVideoData?.video_id || '' },
         bubbles: true
@@ -3141,12 +3150,8 @@
    * createVideoJsPlayer
    * Extend J1 VideoPlayer #1
    * Extended to support YouTube tech when isYouTube is true.
-   * When isYouTube is true the player is configured identically to
-   * skipad.js (techOrder: ['youtube', 'html5'], type: 'video/youtube',
-   * src: '//youtu.be/<videoId>').
    * When isYouTube is false the original HTML5-only path is used unchanged.
    *
-   * change skipAd API to local files #2
    * Replaced YouTube-tech player creation with native HTML5 tech (native path).
    * - techOrder: ['html5']   (was ['youtube', 'html5'])
    * - source type: auto-detected from file extension (was 'video/youtube')
@@ -3214,7 +3219,7 @@
       // Extend J1 VideoPlayer #2
       // YouTube tech configuration: all player parameters are now read from
       // videoPlayerOptions.videoJS.players.youtube (videoPlayer.yml) instead
-      // of being hardcoded.  This replaces the static skipad.js equivalent.
+      // of being hardcoded.
       const vpo     = (typeof j1 !== 'undefined' && j1.adapter && j1.adapter.videoPlayer)
         ? j1.adapter.videoPlayer.videoPlayerOptions
         : null;
@@ -3358,8 +3363,8 @@
    * Extend J1 VideoPlayer #1
    * Supports both YouTube URLs/IDs (routed to YouTube tech) and native
    * local/remote video URLs (routed to HTML5 tech).  YouTube detection
-   * uses YOUTUBE_PATTERNS (identical to skipad.js); native video detection
-   * uses VIDEO_URL_PATTERNS.  The class keeps the same public interface.
+   * uses YOUTUBE_PATTERNS, native video detection uses VIDEO_URL_PATTERNS.
+   * The class keeps the same public interface.
    */
   class inputWrapperHandler {
     constructor() {
@@ -3474,7 +3479,7 @@
           return;
         }
         isDev && consoleLog('INFO', MODULE_NAME, `Loading YouTube video with id: ${youtubeId}`);
-        this.loadAdFreeVideo(youtubeId);
+        this.loadYtVideo(youtubeId);
 
         //  closeEditPlaylist(btn, playerId) — same pattern as closePlaylist.
         // force closinb the playlisz_edit_screen when a playlist is loaded
@@ -3521,9 +3526,8 @@
     /**
      * extractVideoId
      * Extend J1 VideoPlayer #1
-     * Detects YouTube URLs and bare video IDs using YOUTUBE_PATTERNS
-     * (identical to skipad.js).  Returns the 11-character video ID on
-     * a match, otherwise returns null.
+     * Detects YouTube URLs and bare video IDs using YOUTUBE_PATTERNS.
+     * Returns the 11-character video ID on a match, otherwise returns null.
      * @param {string} url - raw input from the URL field
      * @returns {string|null} - YouTube video ID or null
      */
@@ -3538,13 +3542,12 @@
     }
 
     /**
-     * loadAdFreeVideo
+     * loadYtVideo
      * Extend J1 VideoPlayer #1
      * Loads a YouTube video by ID through the YouTube tech path.
-     * Mirrors the loadAdFreeVideo() method from skipad.js.
      * @param {string} videoId - YouTube video ID
      */
-    loadAdFreeVideo(videoId) {
+    loadYtVideo(videoId) {
       isDev && logger.info('\n'+ `Loading YouTube video with id: ${videoId}`);
 
       const event = new CustomEvent('videoLoad', {
@@ -3565,7 +3568,6 @@
 
     /**
      * extractVideoSrc
-     * change skipAd API to local files #2
      * Replaces extractVideoId (YouTube).  Returns the trimmed URL/path when
      * it matches VIDEO_URL_PATTERNS, otherwise returns null.
      * A bare value with no extension is also accepted as a fallback so that
@@ -3590,8 +3592,7 @@
 
     /**
      * loadVideo
-     * change skipAd API to local files #2
-     * Renamed from loadAdFreeVideo (YouTube) to loadVideo (native).
+     * Renamed from loadYtVideo (YouTube) to loadVideo (native).
      * Dispatches 'videoLoad' with the video src URL instead of a YouTube ID.
      * @param {string} videoSrc - validated video URL/path
      */
@@ -3617,9 +3618,6 @@
 
   // ---------------------------------------------------------------------------
   // playlistIOHandler
-  //
-  // DOM ID 'skipad_playlist_parent' replaced with 'videoplayer_playlist_parent'
-  // in all scroll-to-element calls.
   // ---------------------------------------------------------------------------
   class playlistIOHandler {
     constructor(options) {
@@ -3783,77 +3781,15 @@
       //   return;
       // }
 
-      // claude - Modify J1 VideoPlayer #17
-      // The page reload (`location.reload()`) previously used here is removed.
-      // The reload was a blunt way to return the whole module to a pristine
-      // state after wiping the playlist; this now happens in place, mirroring
-      // the no-reload restore path already used by handleFileSelected() /
-      // handleLoadFromServer() (just inverted, since we are clearing rather than
-      // loading).  The reload also masked the data-edit-open desync risk that
-      // #16 flagged for this exact path — closing the editor explicitly below
-      // covers it now that the page is no longer thrown away.
+      // jadams, 2026-06-06, reload should made unnecessary. Requures
+      // additional checks for the toggle_playlist button if a playlist
+      // is loaded/available
       //
-      // clearPlaylist() already: drops the localStorage entry, invalidates the
-      // search index, runs _manageHiddenMode(false) and renderCurrent() (which
-      // disables #toggle_playlist for the now-empty list).  It returns false
-      // when the playlist was already empty — nothing to reset in that case.
+      const reload  = true;
       const cleared = playlistManager.clearPlaylist();
-      if (!cleared) {
-        return;
+      if (cleared && reload) {
+        location.reload();
       }
-
-      // claude - Modify J1 VideoPlayer #17
-      // Close the playlist editor BEFORE touching the video container.  The
-      // module-local closeEditPlaylist() is idempotent and clears the
-      // data-edit-open marker, so the editor state can no longer desync once
-      // the reload is gone (the precise risk #16 called out for this path).
-      // Its single destructive step — restoring the #video_container snapshot —
-      // runs only when the editor was genuinely open (wasOpen guard), which is
-      // exactly the case where the container is currently holding the edit
-      // screen and needs to be returned to the empty-player overlay.
-      // Called directly (not via the adapter) per the Unique #6 rationale:
-      // the module-local function resolves every id through _pid(), so it is
-      // correct on multi-player pages.
-      closeEditPlaylist();
-
-      // claude - Modify J1 VideoPlayer #17
-      // Tear down any still-live videoJS player and restore the empty-player
-      // overlay so a video that was playing when Clear was pressed does not keep
-      // running headless — the reload used to handle this implicitly.  When the
-      // editor branch above already restored the snapshot (overlay present) or
-      // no player was ever created, these guards make the work a harmless no-op.
-      if (pipWindow && !pipWindow.closed) {
-        pipWindow.close();
-        pipWindow = null;
-      }
-      pipVisibilityBound = false;
-      pipEnabled         = false;
-
-      if (player) {
-        isDev && logger.debug('\n' + 'handleClear: disposing videoJS player after clearing the playlist');
-        player.dispose();
-        player = null;
-      }
-
-      const overlayExists = document.getElementById(_pid('emptyPlayerOverlay'));
-      if (!overlayExists && container && containerHTML) {
-        isDev && logger.debug('\n' + 'handleClear: restoring empty-player overlay');
-        container.innerHTML = containerHTML;
-      }
-
-      // claude - Modify J1 VideoPlayer #17
-      // Collapse the playlist panel back to its closed ("Show Playlist") state.
-      // _manageHiddenMode() intentionally no longer owns #playlist_screen
-      // (Unique #9), so an open panel would otherwise stay open over an empty
-      // list; closePlaylist() also re-syncs the #toggle_playlist button label.
-      closePlaylist();
-
-      // claude - Modify J1 VideoPlayer #17
-      // Keep #toggle_playlist disabled now that the list is empty.  Both
-      // clearPlaylist()->renderCurrent() and closeEditPlaylist() already call
-      // this; the explicit call guarantees the final button state regardless of
-      // which branches above ran.
-      playlistManager._updateTogglePlaylistButton();
     }
 
     handleClearServerSelect() {
@@ -4190,7 +4126,6 @@
   class playlistMergeSwitchHandler {
 
     constructor(options) {
-      // Constructor parameter renamed from _skipAdOptions to _videoPlayerOptions.
       this._videoPlayerOptions = options || null;
       this.elements            = this.cacheElements();
       this.init();
@@ -4279,8 +4214,6 @@
 
   // ---------------------------------------------------------------------------
   // playlistLoopSwitchHandler
-  //
-  // Options reference renamed from _skipAdOptions to _videoPlayerOptions.
   // ---------------------------------------------------------------------------
   class playlistLoopSwitchHandler {
 
@@ -4570,7 +4503,7 @@
   }
 
   // ---------------------------------------------------------------------------
-  // navbarSmoothScrollHandler (unchanged)
+  // navbarSmoothScrollHandler
   // ---------------------------------------------------------------------------
   function navbarSmoothScrollHandler() {
     const navMenu = document.getElementById('navigator_nav_menu');
@@ -4581,7 +4514,7 @@
 
     const anchors = navMenu.querySelectorAll('a.nav-link[href^="/#"]');
     if (!anchors.length) {
-      isDev && logger.warn('\n' +  'navbarSmoothScrollHandler: no same-page anchor links found');
+      // isDev && logger.warn('\n' +  'navbarSmoothScrollHandler: no same-page anchor links found');
       return;
     }
 
@@ -4765,7 +4698,7 @@
   }
 
   // ---------------------------------------------------------------------------
-  // Public API (unchanged handler names for backward compatibility)
+  // Public API
   // ---------------------------------------------------------------------------
   return {
     playlistManager:              playlistManager,
@@ -4778,10 +4711,6 @@
     inputWrapperHandler:          inputWrapperHandler,
     inputValueBackgroundHandler:  inputValueBackgroundHandler,
     navbarSmoothScrollHandler:    navbarSmoothScrollHandler,
-    // claude - Unique J1 VideoPlayer #6
-    // Expose the per-player toggle and close functions so the adapter can
-    // delegate to them.  All three use _pid() internally, making them safe
-    // for multi-player pages where every element id carries a player suffix.
     initTogglePlaylistHandler:    initTogglePlaylistHandler,
     closePlaylist:                closePlaylist,
     closeEditPlaylist:            closeEditPlaylist

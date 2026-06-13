@@ -68,33 +68,34 @@ mid-roll, or overlay ads.
 
 Enjoy watching the playlist.
 
+
+[role="mt-4"]
+=== Tiny Desk Concerts
+
+Tiny Desk Concerts is a popular, award-winning video series featuring live
+music performances at an actual office desk, hosted by NPR Music. Started
+in 2008 by radio host Bob Boilen and producer Stephen Thompson. The show has
+grown from a small platform for folk and indie artists into a worldwide
+pop-culture hit.
+
 .NPR Tiny Desk Concerts
 videoPlayer::player_1[role="mb-5"]
 
 
+// [role="mt-4"]
+// === Carpool Karaoke
 
-// ++++
-// <script>
-//   const query = {
-//     queries: [
-//       { fields: ["title", "topic"], query: "Einsame Weihnachten" },
-//       { fields: ["channel"], query: "one" }
-//     ],
-//     sortBy: "timestamp",
-//     sortOrder: "desc",
-//     future: false,
-//     offset: 0,
-//     size: 10
-//   };
+// Carpool Karaoke was one of the most successful and widely distributed viral
+// video formats in modern television history. It originally started as a
+// recurring segment on the American late-night show The Late Late Show with
+// James Corden on CBS. 
 
-//   const response = await fetch("https://mediathekviewweb.de/api/query", {
-//     method: "POST",
-//     body: JSON.stringify(query),
-//     headers: { "Content-Type": "text/plain" }  // wichtig: text/plain, nicht application/json!
-//   });
-//   const data = await response.json();
-//   // data.result.results enthält die Metadaten
+// Host James Corden drives around town (usually in Los Angeles or London) with
+// world-famous musicians and celebrities, conducting personal interviews and
+// singing along to the car radio with their greatest hits.
 
-// </script>
-// ++++
+// .Carpool Karaoke
+// videoPlayer::player_2[role="mb-5"]
+
+
 

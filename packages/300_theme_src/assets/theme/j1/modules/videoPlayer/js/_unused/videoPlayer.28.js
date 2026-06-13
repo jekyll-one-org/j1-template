@@ -2,7 +2,6 @@
  # -----------------------------------------------------------------------------
  # ~/assets/theme/j1/modules/videoPlayer/js/videoPlayer.js (28)
  # Provides JS Core for J1 Module videoPlayer
- # Extend J1 VideoPlayer
  #
  # Product/Info:
  # https://jekyll.one
@@ -28,7 +27,6 @@
   } else if (typeof exports === 'object') {
     module.exports = factory();       // CommonJS: call factory, export result
   } else {
-    // Renamed global export from skipAd → videoPlayer.
     root['videoPlayer'] = factory();  // Browser global: call factory, assign result
   }
 }(this, function () {
@@ -36,16 +34,14 @@
 
   // ---------------------------------------------------------------------------
   // Constants
-  // MODULE_NAME renamed from 'skipad.core' to 'videoPlayer.core'.
   // ---------------------------------------------------------------------------
 
   const MODULE_NAME         = 'videoPlayer.core';
   const PASTE_DELAY         = 10;
   const VIDEO_START_DELAY   = 250;
 
-  // Extend J1 VideoPlayer #1
   // Re-added YOUTUBE_PATTERNS so that YouTube URLs are recognised and
-  // routed to the YouTube tech path (identical to skipad.js).
+  // routed to the YouTube tech path
   const YOUTUBE_PATTERNS = Object.freeze([
     /(?:youtube\.com\/watch\?v=|youtu\.be\/)([a-zA-Z0-9_-]{11})/,
     /^([a-zA-Z0-9_-]{11})$/,
@@ -74,8 +70,6 @@
   const MESSAGES = Object.freeze({
     NO_CLIPBOARD_API:   'Clipboard API not available. Please use Ctrl+V.',
     CLIPBOARD_DENIED:   'Clipboard access failed. Please paste URL manually.',
-    // Extend J1 VideoPlayer #1
-    // Updated error message: references both YouTube URLs and local video files.
     INVALID_URL:        'Invalid URL. Accepted: YouTube URL/ID or local video path (MP4, WebM, OGV).',
     NO_URL:             'No URL entered.',
     VIDEO_EXISTS:       'Video|Player already exists.',
@@ -164,17 +158,17 @@
   // Declaring here — with all other module-level flags — ensures it
   // is initialised before any code in this factory function executes.
   //
-  let _startedFromPlaylist      = false;  // Modify J1 VideoPlayer #3
-  let _editPlaylistHandlerInit  = false;  //  Modify J1 VideoPlayer #9
-  let _togglePlaylistHandlerInit = false; // claude - Unique J1 VideoPlayer #8
+  let _startedFromPlaylist      = false;
+  let _editPlaylistHandlerInit  = false;
+  let _togglePlaylistHandlerInit = false;
 
-  // claude - fixed Unique J1 VideoPlayer #2
   // Player-scoped element ID support.
-  // The HTML data file (videoPlayer.html) now suffixes every per-player element
-  // id with _{{player.id}} so that multiple players can coexist on the same page
-  // without duplicate-id conflicts.  _playerID stores the current player id set
-  // by the adapter (via playlistManager.setPlayerID), and _pid() converts a bare
-  // element name to its scoped form for all getElementById / querySelector calls.
+  // The HTML data file (videoPlayer.html) suffixes every per-player element
+  // id with _{{player.id}} so that multiple players can coexist on the
+  // same page without duplicate-id conflicts.
+  // _playerID stores the current player id set by the adapter
+  // (via playlistManager.setPlayerID), and _pid() converts a bare element
+  // name to its scoped form for all getElementById / querySelector calls.
   let _playerID = '';
 
   /**
@@ -210,29 +204,22 @@
 
   /**
    * consoleLog - formatted console output with timestamp and unique ID
-   *
-   * claude - J1 videoPlayer optimizations #1
-   * Clarity: the INFO/WARN/default branches previously used a
-   * `isDev ? console.x(...) : null` ternary purely for its side effect, which
-   * reads as if it returns a value.  Replaced with plain `if (isDev)` guards.
-   * Behaviour is identical (ERROR still logs unconditionally).
    */
   function consoleLog(level, module, message) {
     const timestamp = new Date().toISOString().slice(11, 23);
-    const line      = `[${timestamp}] [${CONSOLE_LOG_ID}] [${level}] [${module}] \n${message}`;
 
     switch (level) {
       case 'INFO':
-        if (isDev) console.log(line);
+        isDev ? console.log(`[${timestamp}] [${CONSOLE_LOG_ID}] [${level}] [${module}] \n${message}`) : null;
         break;
       case 'WARN':
-        if (isDev) console.warn(line);
+        isDev ? console.warn(`[${timestamp}] [${CONSOLE_LOG_ID}] [${level}] [${module}] \n${message}`) : null;
         break;
       case 'ERROR':
-        console.error(line);
+        console.error(`[${timestamp}] [${CONSOLE_LOG_ID}] [${level}] [${module}] \n${message}`);
         break;
       default:
-        if (isDev) console.log(line);
+        isDev ? console.log(`[${timestamp}] [${CONSOLE_LOG_ID}] [${level}] [${module}] \n${message}`) : null;
         break;
     }
   }
@@ -276,7 +263,6 @@
         : false;
     }
 
-    // claude - fixed Unique J1 VideoPlayer #2
     // Registers the player id so that _pid() can resolve all per-player element
     // ids to their suffixed form (e.g. 'videoplayer_playlist_parent_myPlayer').
     // Called by the adapter immediately after instantiating the handlers.
@@ -285,23 +271,24 @@
       isDev && logger.debug('\n' + `playlistManager: player id set to "${_playerID}"`);
     }
 
-    // claude - fixed Unique J1 VideoPlayer #2
     // Corrected bare ids ('playlistSearch', 'playlistBlock') to match the
     // actual element ids in videoPlayer.html ('playlist_screen', 'playlistBlock')
     // and resolved through _pid() so the suffixed form is used at runtime.
     //
-    // claude - Unique J1 VideoPlayer #9
-    // Removed 'playlist_screen' from this data-driven show/hide list.  The outer
-    // #playlist_screen panel is the TOGGLE target: its visibility is owned solely
-    // by the #toggle_playlist button (initTogglePlaylistHandler) and by the
-    // public closePlaylist() API.  Previously _manageHiddenMode(true) forced
-    // #playlist_screen to display:block whenever a playlist existed, and because
-    // it is called on every renderCurrent()/renderCards()/renderPlaylist() run,
-    // the panel was re-opened on each render — including on page load/reload with
-    // a loaded playlist.  That silently undid the adapter's closePlaylist() call
-    // (the close worked, then the next render re-showed the panel), so the panel
-    // appeared "stuck open".  Only the INNER #playlistBlock is data-driven here;
-    // the #playlist_screen panel now stays closed until the user opens it.
+    // Removed 'playlist_screen' from this data-driven show/hide list.
+    // The outer #playlist_screen panel is the TOGGLE target: its visibility
+    // is owned solely by the #toggle_playlist button (initTogglePlaylistHandler)
+    // and by the public closePlaylist() API.
+    // Previously _manageHiddenMode(true) forced #playlist_screen to display:block 
+    // whenever a playlist existed, and because it is called on every
+    // renderCurrent()/renderCards()/renderPlaylist() run, the panel was
+    // re-opened on each render — including on page load/reload with
+    // a loaded playlist.
+    // That silently undid the adapter's closePlaylist() call (the close
+    // worked, then the next render re-showed the panel), so the panel
+    // appeared "stuck open".
+    // Only the INNER #playlistBlock is data-driven here; the #playlist_screen panel
+    // now stays closed until the user opens it.
     _manageHiddenMode(visible) {
       const ids = ['playlistBlock'];
       ids.forEach(id => {
@@ -425,9 +412,9 @@
     }
 
     // _normalizeEntry: added 'src' and 'poster' fields for native video entries.
-    // Legacy entries (imported from skipad playlists) that lack these fields
-    // are backfilled with empty strings so the rest of the code can always
-    // access entry.src and entry.poster without null-checks.
+    // Legacy entries that lack these fields are backfilled with empty strings
+    // so the rest of the code can always access entry.src and entry.poster
+    // without null-checks.
     _normalizeEntry(entry) {
       let ytID;
 
@@ -444,7 +431,7 @@
       }
 
       // Ensure native-video fields exist on every entry.
-      // claude - Modify J1 VideoPlayer #15
+      //
       // Bug: the guard `if ('poster' in entry)` was always true because the
       // line above (`if (!('poster' in entry)) entry.poster = ''`) ensures the
       // key is present on every entry before the check runs.  As a result
@@ -541,22 +528,32 @@
      * playlistManager
      * addEntry - add a new video to the playlist in localStorage.
      *
-     * change skipAd API to local files #2
      * @param {Object} entry
      * @param {string}  [entry.src]          - full local or remote video URL/path
      * @param {string}  [entry.poster]       - poster image URL for the video
      * @param {string}  [entry.videoId]      - derived filename-without-extension key
      * @param {string}  [entry.videoLink]    - full video URL (identical to src for native)
-     * (all other fields unchanged from skipad)
+     * @param {string}  [entry.author]        - author name
+     * @param {string}  [entry.category]      - category
+     * @param {string}  [entry.description]   - description text, limited to 50 words
+     * @param {number}  [entry.duration]      - video duration in seconds
+     * @param {string}  [entry.infoLink]      - Info URL
+     * @param {string}  [entry.issueDate]     - issue date (ISO string or free text)
+     * @param {number}  [entry.episode]       - episode no for series
+     * @param {number}  [entry.lastPosition]  - playback position in seconds
+     * @param {number}  [entry.rating]        - video rating 1-5
+     * @param {number}  [entry.series]        - set to series no
+     * @param {array}   [entry.tags]          - array of tags
+     * @param {string}  [entry.title ]        - video title
+     * @param {string}  [entry.type ]         - element type
+     * @param {string}  [entry.videoLink]     - full YouTube Video URL
+     * @param {string}  [entry.videoId]       - YouTube video ID
+     * @param {string}  [entry.watchDate]     - ISO date of watching
      */
     addEntry(entry) {
       const playlist = this.load() || [];
 
-      // claude - J1 videoPlayer optimizations #1
-      // Clarity: `found` was computed with `(playlist.find(...)) ? true : false`,
-      // a redundant boolean cast around an already-boolean-ish value.  Use a
-      // direct boolean (`some`) and short-circuit on duplicate.
-      const found = playlist.some(item => item.videoId === entry.videoId);
+      const found = (playlist.find(item => item.videoId === entry.videoId)) ? true : false;
       if (found) {
         consoleLog('INFO', MODULE_NAME, `playlistmanager: skip adding entry with title: ${entry.title}`);
         return;
@@ -568,6 +565,7 @@
       const record = {
         author:       entry.author        || '',
         category:     entry.category      || '',
+        creator:      'videoPlayer',
         description:  entry.description   || '',
         duration:     entry.duration      || 0,
         infoLink:     entry.infoLink      || '',
@@ -586,15 +584,9 @@
         watchDate:    new Date().toISOString()
       };
 
-      // claude - J1 videoPlayer optimizations #1
-      // Performance: the previous code re-scanned the whole list with
-      // `playlist.filter(item => item.videoId !== entry.videoId)` before
-      // unshifting.  Because the duplicate case already returned above, that
-      // filter could never remove anything — it was an extra O(n) copy on every
-      // add.  `load()` returns a fresh array each call, so unshifting into it
-      // directly is safe and equivalent.
-      playlist.unshift(record);
-      this.save(playlist);
+      const filtered = playlist.filter(item => item.videoId !== entry.videoId);
+      filtered.unshift(record);
+      this.save(filtered);
 
       consoleLog('INFO', MODULE_NAME, `playlistmanager: entry added for videoId: ${entry.videoId}`);
 
@@ -803,16 +795,14 @@
         }
         const data = await res.json();
 
-        // claude - Modify J1 VideoPlayer #16
-        //
         // Bug: a YouTube (or any) playlist loaded via 'serverPlaylistLoadButton*'
         // never reached _normalizeEntry().
         //
         // Root cause: server playlists exported by this module (see
         // exportToFile(), which writes `JSON.stringify(this.load())`) and legacy
-        // YouTube/skipad playlists are *plain JSON arrays*. The previous guard
+        // YouTube playlists are *plain JSON arrays*. The previous guard
         //
-        //     if (data && typeof data === 'object' && !data.playlist) { return; }
+        //  if (data && typeof data === 'object' && !data.playlist) { return; }
         //
         // returned early for every plain array, because `typeof [] === 'object'`
         // is true and an array has no `.playlist` property — so `!data.playlist`
@@ -903,7 +893,6 @@
       fileInput.click();
     }
 
-    // Export filename changed from 'skipAd-playlist_...' to 'videoPlayer-playlist_...'.
     exportToFile(filename) {
       if (!filename) {
         filename = `videoPlayer-playlist_${this._formatTimestamp()}.json`;
@@ -930,6 +919,53 @@
       URL.revokeObjectURL(url);
 
       consoleLog('INFO', MODULE_NAME, `exported ${playlist.length} items to file: ${filename}`);
+    }
+
+    // backupToFile - write a downloadable safety backup of the current
+    // playlist BEFORE a destructive operation (e.g. clearPlaylist).
+    //
+    // Unlike exportToFile (which writes a bare array), the backup is wrapped
+    // in a { backup_date, playlist } envelope so that re-importing it through
+    // handleFileSelected() is recognised as a dated backup file (the import
+    // path keys off the presence of `backup_date`).
+    //
+    // Returns true when a backup was written, false when there was nothing to
+    // back up (mirrors clearPlaylist()'s empty-guard so callers can branch).
+    //
+    // @param {string} [filename] - download file name
+    //                              (defaults to videoPlayer-playlist-backup.json)
+    backupToFile(filename) {
+      if (!filename) {
+        filename = 'videoPlayer-playlist-backup.json';
+      }
+      const playlist = this.load();
+      if (!playlist || playlist.length === 0) {
+        consoleLog('WARN', MODULE_NAME, 'no playlist data to back up');
+        return false;
+      }
+
+      const backup = {
+        backup_date : new Date().toISOString(),
+        playlist    : playlist
+      };
+
+      const blob = new Blob(
+        [JSON.stringify(backup, null, 2)],
+        { type: 'application/json' }
+      );
+      const url = URL.createObjectURL(blob);
+      const a   = document.createElement('a');
+
+      a.href     = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+
+      consoleLog('INFO', MODULE_NAME, `backed up ${playlist.length} items to file: ${filename}`);
+      return true;
     }
 
     // Rendering
@@ -998,8 +1034,6 @@
       this._updateSortSelectVisibility();
       this._updateModeSwitchVisibility();
       this._updateMergeSwitchVisibility();
-      // claude - Modify J1 VideoPlayer #11
-      // Keep the toggle button in sync with actual playlist state.
       this._updateTogglePlaylistButton();
 
       if (loopConfigEnabled && !this._loopSwitchInitialized) {
@@ -1286,13 +1320,7 @@
                       <span class="rating-star" data-value="4"><i class="fas fa-star"></i></span>
                       <span class="rating-star" data-value="5"><i class="fas fa-star"></i></span>
                     </div>
-                    <!-- claude - J1 videoPlayer optimizations #1
-                         Bug: the opening tag was malformed ('<p ... class="rating-label"</p>'
-                         — the '>' that closes the start tag was missing).  The HTML parser
-                         recovered unpredictably, so #ratingLabel could fail to materialise as a
-                         real element and updateStarDisplay()'s textContent write was silently
-                         lost.  Closed the start tag properly. -->
-                    <p id="ratingLabel" class="rating-label"></p>
+                    <p id="ratingLabel" class="rating-label"</p>
                   </div>
                   <div class="rating-modal-footer mb-2">
                     <button id="clearRatingBtn" class="rating-modal-btn rating-modal-btn-warning">Clear</button>
@@ -1778,11 +1806,6 @@
       this._videoLinkHandlerInitialized = true;
 
       playlistContainer.addEventListener('click', (event) => {
-        // claude - Modify J1 VideoPlayer #14
-        // Copy-paste error from initInfoLinkHandler: this handler was listening
-        // on '.playlist-info-link' instead of '.playlist-video-link', so video-
-        // link clicks were silently intercepted by the info-link handler and
-        // never reached the correct branch.
         const videoLink = event.target.closest('.playlist-video-link');
         if (!videoLink) return;
         event.stopPropagation();
@@ -1969,7 +1992,6 @@
       return data;
     }
 
-    // claude - Modify J1 VideoPlayer #11
     // Enables the #toggle_playlist button only when at least one playlist
     // entry exists in localStorage.  When the playlist is empty the button
     // receives the HTML `disabled` attribute and a reduced opacity so it is
@@ -1980,7 +2002,6 @@
     // called unconditionally from renderCurrent() so the button state is
     // always in sync with the actual playlist contents.
     //
-    // claude - Modify J1 VideoPlayer #13
     // Also blocks #toggle_playlist whenever the playlist editor is open
     // (#edit_playlist has data-edit-open="true").  While the editor occupies
     // the video-container slot, toggling the playlist panel is meaningless and
@@ -1988,11 +2009,11 @@
     // (same visual treatment as the empty-playlist case) for the duration of
     // the edit session.  The block is lifted automatically as soon as the
     // editor is closed (data-edit-open attribute becomes "false" or absent).
+    //
     _updateTogglePlaylistButton() {
       const btn = document.getElementById(_pid('toggle_playlist'));
       if (!btn) return;
 
-      // claude - Modify J1 VideoPlayer #13
       // Check whether the playlist editor is currently open.
       const editBtn    = document.getElementById(_pid('edit_playlist'));
       const editIsOpen = editBtn && editBtn.getAttribute('data-edit-open') === 'true';
@@ -2054,7 +2075,7 @@
     }
 
     _updateLoopSwitchVisibility() {
-      const loopSwitch = document.getElementById('playlistLoopSwitch');
+      const loopSwitch = document.getElementById('playlisLoopSwitch');
       if (!loopSwitch) return;
 
       if (!loopConfigEnabled) {
@@ -2155,7 +2176,6 @@
     }
   }
 
-  // claude - Modify J1 VideoPlayer #8
   // Register the edit_playlist toggle handler once the module initialises.
   // The handler is safe to call here because the DOM elements it references
   // (#edit_playlist, #playlist_edit_screen, #video_container) are declared in
@@ -2163,7 +2183,6 @@
   // are already present when this line executes.
   initEditPlaylistHandler();
 
-  // claude - Unique J1 VideoPlayer #6
   // Register the toggle_playlist click handler.  The adapter's toggle handler
   // used bare (un-suffixed) element IDs, which broke after every per-player id
   // was made unique.  This module-level handler resolves all ids via _pid().
@@ -2498,7 +2517,6 @@
         if (isYouTube) {
           // ---------------------------------------------------------------
           // Extend J1 VideoPlayer #1
-          // YouTube tech path: mirror the onReady logic from skipad.js.
           // Metadata is read from the YouTube tech's videoData() / ytPlayer.
           // ---------------------------------------------------------------
           const applyVideoData = (videoData) => {
@@ -2681,15 +2699,7 @@
 
           // add|skip skipButtons plugin
           if (piSkipButtons.enabled) {
-            // claude - J1 videoPlayer optimizations #1
-            // Bug: backwardIndex was initialised from piSkipButtons.backward
-            // (the skip *amount* in seconds, e.g. 10) instead of from
-            // piSkipButtons.backwardIndex (the control-bar slot index, e.g. 1).
-            // forwardIndex correctly read .forwardIndex, so the two sides were
-            // asymmetric.  This only surfaced when surroundPlayButton was false
-            // (the surround branch below overwrites both to 0/1), which is why it
-            // stayed latent under the default config.  Read the matching key.
-            let backwardIndex = piSkipButtons.backwardIndex;
+            let backwardIndex = piSkipButtons.backward;
             let forwardIndex  = piSkipButtons.forwardIndex;
 
             if (piSkipButtons.surroundPlayButton) {
@@ -2780,26 +2790,22 @@
    * doPostOnPlaying - post-processing after state change to 'playing'
    * Extend J1 VideoPlayer #1
    * Extended to handle both YouTube (player.ytVideoData) and native
-   * (player.videoData) metadata, mirroring skipad.js for the YouTube path.
+   * (player.videoData) metadata
    * @param {number} state - player state code
    */
   function doPostOnPlaying(state) {
-    // claude - fixed Unique J1 VideoPlayer #2
-    // All three element ids are player-scoped in videoPlayer.html.
     const titleElement = document.getElementById(_pid("video_title"));
     const videoElement = document.getElementById(_pid("video_container"));
     const textEl       = document.getElementById(_pid('video_title_text'));
 
     isDev && logger.debug('\n'+ `do post processing on state: ${vjsStateEventNameMap[state]}`);
 
-    // Extend J1 VideoPlayer #1
     // Choose the right video-data source depending on which tech is active.
     // YouTube: player.ytVideoData (set in onReady YouTube branch).
     // Native:  player.videoData  (set by nativePlayer plugin via 'videoDataResolved').
     const isYouTubePlayer = !!(player && player.ytVideoData);
 
     if (isYouTubePlayer) {
-      // YouTube path - mirror skipad.js doPostOnPlaying()
       document.dispatchEvent(new CustomEvent('videoPlayingStarted', {
         detail: { videoId: player.ytVideoData?.video_id || '' },
         bubbles: true
@@ -2826,12 +2832,12 @@
         textEl.textContent = player.ytVideoTitle;
       }
 
-      // Extend J1 VideoPlayer #3
       // Added 'poster' field: resolves to the highest-quality YouTube thumbnail
       // (maxresdefault.jpg) so list and card items show the real poster image
       // instead of falling back to DEFAULT_POSTER.
-      // claude - Modify J1 VideoPlayer #14
+      //
       // Two fixes in the YouTube media object:
+      //
       // 1. infoLink used the wrong URL format ('https://youtu.be/watch?v=ID'
       //    mixes the youtu.be short-link domain with the youtube.com/watch path
       //    and produces a broken link).  Correct format: 'https://youtu.be/ID'.
@@ -2839,6 +2845,7 @@
       //    but src is also absent from the YouTube media object, so videoLink
       //    was always stored as ''.  For YouTube items videoLink should equal
       //    the same canonical watch URL as infoLink.
+      //
       const media = {
         videoId:      vid,
         title:        vd.title  || player.ytVideoTitle || '',
@@ -2915,7 +2922,6 @@
       titleElement.style.display = "flex";
     }
 
-    // Modify J1 VideoPlayer #3
     // When the video was started by clicking a playlist card, collapse the
     // playlist panel so the video container has the full viewport while
     // playing.  The flag is reset immediately so subsequent non-playlist
@@ -2923,14 +2929,15 @@
     if (_startedFromPlaylist) {
       _startedFromPlaylist = false;
 
-      // claude - Unique J1 VideoPlayer #6
       // Previously these delegated to j1.adapter.videoPlayer.closePlaylist()
       // and j1.adapter.videoPlayer.closeEditPlaylist(), which used bare (un-
-      // suffixed) element IDs and silently failed after every per-player element
-      // id was made unique.  Call the module-local functions directly: they
-      // resolve all ids through _pid() so multi-player pages work correctly.
-      // closePlaylist() now also calls _resetPlaylistToggleUI() internally, so
-      // the separate call below (Modify J1 VideoPlayer #5) is no longer needed.
+      // suffixed) element IDs and silently failed after every per-player
+      // element id was made unique.
+      // Call the module-local functions directly: they resolve all ids
+      // through _pid() so multi-player pages work correctly.
+      // closePlaylist() now also calls _resetPlaylistToggleUI() internally,
+      // so the separate call below (Modify J1 VideoPlayer #5) is no
+      // longer needed.
       closePlaylist();
       closeEditPlaylist();
     }
@@ -2942,7 +2949,6 @@
 
   /**
    * _resetPlaylistToggleUI
-   * Modify J1 VideoPlayer #5
    *
    * Resets the playlist toggle button (#video_player_header_arrows) and its
    * sibling <span> inside #video_player_container to the "closed" state.
@@ -2974,11 +2980,12 @@
       span.textContent = 'Show Playlist';
     }
 
-    // claude - Modify J1 VideoPlayer #11
-    // Corrected button ID from 'video_player_header_arrows' (does not exist in
-    // the page template) to 'toggle_playlist' (the actual rendered element ID).
-    // The previous ID caused a silent no-op: btn was always null so the icon,
-    // title and aria attributes were never reset after closePlaylist().
+    // Corrected button ID from 'video_player_header_arrows' (does not
+    // exist in the page template) to 'toggle_playlist' (the actual
+    // rendered element ID).
+    // The previous ID caused a silent no-op: btn was always null so the
+    // icon, title and aria attributes were never reset after closePlaylist().
+    //
     const btn = document.getElementById(_pid('toggle_playlist'));
     if (btn) {
       btn.title                             = 'Show playlist';
@@ -2987,10 +2994,9 @@
 
       const img = btn.querySelector('img');
       if (img) {
-        // Derive the icon base path from the current src so the helper works
-        // even if the asset root is customised (e.g. a subdirectory deploy).
         const currentSrc  = img.getAttribute('src') || '';
         const showIconSrc = currentSrc.replace('playlist-hide.svg', 'playlist-show.svg');
+
         img.setAttribute('src', showIconSrc);
         img.setAttribute('alt', 'Show playlist');
       }
@@ -3001,7 +3007,6 @@
 
   // ---------------------------------------------------------------------------
   // initEditPlaylistHandler
-  // claude - Modify J1 VideoPlayer #8
   //
   // Wires the #edit_playlist button so that clicking it:
   //   1.  Toggles the visibility of #playlist_edit_screen.
@@ -3019,7 +3024,6 @@
   //   the same strategy already used by createVideoJsPlayer().
   //
   // Guard: the handler is registered only once via _editPlaylistHandlerInit.
-  // claude - Modify J1 VideoPlayer #9
   // NOTE: _editPlaylistHandlerInit is declared in the module variables section
   // (above) rather than here.  The original `let` placement immediately before
   // this function caused a TDZ ReferenceError because initEditPlaylistHandler()
@@ -3029,11 +3033,11 @@
   //
   function initEditPlaylistHandler() {
 
-    // claude - Unique J1 VideoPlayer #6
     // Removed the temporary `return;` that disabled this handler.  Now that
     // every element id is resolved through _pid() the handler correctly finds
     // the suffixed elements (e.g. edit_playlist_myPlayer) even when multiple
     // players share the same page, so it is safe to re-enable it here.
+    //
     if (_editPlaylistHandlerInit) return;
 
     const editBtn     = document.getElementById(_pid('edit_playlist'));
@@ -3047,8 +3051,6 @@
 
     _editPlaylistHandlerInit = true;
 
-    // Remember the edit screen's original parent and next sibling so it can
-    // be re-inserted at exactly the same position when the panel is closed.
     const editScreenOriginalParent  = editScreen.parentNode;
     const editScreenOriginalSibling = editScreen.nextSibling;
 
@@ -3058,7 +3060,7 @@
     editBtn.addEventListener('click', () => {
 
       if (!_editScreenVisible) {
-        // ── OPEN ──────────────────────────────────────────────────────────
+        // --- OPEN ------------------------------------------------------------
         // 1. Dispose any live videoJS player so it does not leak resources
         //    while the video_container is replaced.
         if (player) {
@@ -3079,12 +3081,10 @@
         editBtn.title       = 'Close playlist editor';
         editBtn.setAttribute('aria-label', 'Close playlist editor');
 
-        // claude - Modify J1 VideoPlayer #13
         // Mark the editor as open so _updateTogglePlaylistButton() (and any
         // other consumer) can read the state without tracking a private flag.
         editBtn.setAttribute('data-edit-open', 'true');
 
-        // claude - Modify J1 VideoPlayer #13
         // Block #toggle_playlist while the editor occupies the player slot.
         const toggleBtn = document.getElementById(_pid('toggle_playlist'));
         if (toggleBtn) {
@@ -3100,7 +3100,7 @@
         isDev && logger.debug('\n' + 'initEditPlaylistHandler: edit screen shown inside video_container');
 
       } else {
-        // ── CLOSE ─────────────────────────────────────────────────────────
+        // --- CLOSE -----------------------------------------------------------
         // 1. Remove the edit screen from video_container and put it back at
         //    its original DOM position (hidden, as the HTML declares it).
         editScreen.style.display = 'none';
@@ -3122,11 +3122,9 @@
         editBtn.title       = 'Manage playlist';
         editBtn.setAttribute('aria-label', 'Manage playlist');
 
-        // claude - Modify J1 VideoPlayer #13
         // Clear the open marker so the toggle button can be re-enabled.
         editBtn.setAttribute('data-edit-open', 'false');
 
-        // claude - Modify J1 VideoPlayer #13
         // Re-enable #toggle_playlist now that the editor is closed.
         // Delegate to _updateTogglePlaylistButton() so empty-playlist logic
         // is respected automatically (button stays disabled when the list is
@@ -3170,14 +3168,9 @@
 
   /**
    * createVideoJsPlayer
-   * Extend J1 VideoPlayer #1
    * Extended to support YouTube tech when isYouTube is true.
-   * When isYouTube is true the player is configured identically to
-   * skipad.js (techOrder: ['youtube', 'html5'], type: 'video/youtube',
-   * src: '//youtu.be/<videoId>').
    * When isYouTube is false the original HTML5-only path is used unchanged.
    *
-   * change skipAd API to local files #2
    * Replaced YouTube-tech player creation with native HTML5 tech (native path).
    * - techOrder: ['html5']   (was ['youtube', 'html5'])
    * - source type: auto-detected from file extension (was 'video/youtube')
@@ -3242,10 +3235,9 @@
     let videoConfig;
 
     if (isYouTube) {
-      // Extend J1 VideoPlayer #2
       // YouTube tech configuration: all player parameters are now read from
       // videoPlayerOptions.videoJS.players.youtube (videoPlayer.yml) instead
-      // of being hardcoded.  This replaces the static skipad.js equivalent.
+      // of being hardcoded.
       const vpo     = (typeof j1 !== 'undefined' && j1.adapter && j1.adapter.videoPlayer)
         ? j1.adapter.videoPlayer.videoPlayerOptions
         : null;
@@ -3287,7 +3279,6 @@
       isDev && consoleLog('INFO', MODULE_NAME, `createVideoJsPlayer: YouTube playerVars from players.youtube: ${JSON.stringify(ytPlayerVars)}`);
 
     } else {
-      // Extend J1 VideoPlayer #2
       // Native HTML5 tech configuration: all player parameters are now read
       // from videoPlayerOptions.videoJS.players.native (videoPlayer.yml)
       // instead of being hardcoded.  Static defaults are used as fallback
@@ -3386,11 +3377,10 @@
 
   /**
    * inputWrapperHandler
-   * Extend J1 VideoPlayer #1
    * Supports both YouTube URLs/IDs (routed to YouTube tech) and native
    * local/remote video URLs (routed to HTML5 tech).  YouTube detection
-   * uses YOUTUBE_PATTERNS (identical to skipad.js); native video detection
-   * uses VIDEO_URL_PATTERNS.  The class keeps the same public interface.
+   * uses YOUTUBE_PATTERNS, native video detection uses VIDEO_URL_PATTERNS.
+   * The class keeps the same public interface.
    */
   class inputWrapperHandler {
     constructor() {
@@ -3495,7 +3485,6 @@
         return;
       }
 
-      // Extend J1 VideoPlayer #1
       // Try YouTube first; fall back to native video URL matching.
       const youtubeId = this.extractVideoId(url);
       if (youtubeId) {
@@ -3505,22 +3494,16 @@
           return;
         }
         isDev && consoleLog('INFO', MODULE_NAME, `Loading YouTube video with id: ${youtubeId}`);
-        this.loadAdFreeVideo(youtubeId);
+        this.loadYtVideo(youtubeId);
 
-        // claude - J1 videoPlayer optimizations #1
-        // Force the playlist edit screen closed when a video/playlist is loaded.
-        // Was: j1.adapter.videoPlayer.closeEditPlaylist(button, playerID) with
-        // button = _pid('edit_playlist') passed as a *string*.  The adapter path
-        // used bare (un-suffixed) ids and silently failed on multi-player pages
-        // (see Unique #6); passing a string where a DOM element was expected made
-        // the call a no-op at best.  Call the module-local, idempotent
-        // closeEditPlaylist() directly — it resolves every id through _pid(),
-        // matching the handleClear()/doPostOnPlaying() approach (Modify #17 /
-        // Unique #6).
-        closeEditPlaylist();
+        // closeEditPlaylist(btn, playerId) — same pattern as closePlaylist.
+        // force closinb the playlisz_edit_screen when a playlist is loaded
+        const button  = _pid('edit_playlist');
+        const playerID = button.replace("edit_playlist_", "");
+        j1.adapter.videoPlayer.closeEditPlaylist(button, playerID);
 
         // update the playListButton (to be enabled when a playlist is loaded)
-        playlistManager._updateTogglePlaylistButton();
+        playlistManager._updateTogglePlaylistButton();   
 
         return;
       }
@@ -3542,13 +3525,11 @@
         isDev && consoleLog('INFO', MODULE_NAME, `Loading video from src: ${videoSrc}`);
         this.loadVideo(videoSrc);
 
-        // claude - J1 videoPlayer optimizations #1
-        // Force the playlist edit screen closed when a native video is loaded.
-        // See the YouTube branch above for the full rationale: the previous
-        // j1.adapter.videoPlayer.closeEditPlaylist(button, playerID) call passed
-        // a string id and went through the bare-id adapter path (Unique #6), so
-        // it did nothing useful.  Use the module-local idempotent function.
-        closeEditPlaylist();
+        //  closeEditPlaylist(btn, playerId) — same pattern as closePlaylist.
+        // force closinb the playlisz_edit_screen when a playlist is loaded
+        const button  = _pid('edit_playlist');
+        const playerID = button.replace("edit_playlist_", "");
+        j1.adapter.videoPlayer.closeEditPlaylist(button, playerID);
 
         // update the playListButton (to be enabled when a playlist is loaded)
         playlistManager._updateTogglePlaylistButton();
@@ -3559,10 +3540,8 @@
 
     /**
      * extractVideoId
-     * Extend J1 VideoPlayer #1
-     * Detects YouTube URLs and bare video IDs using YOUTUBE_PATTERNS
-     * (identical to skipad.js).  Returns the 11-character video ID on
-     * a match, otherwise returns null.
+     * Detects YouTube URLs and bare video IDs using YOUTUBE_PATTERNS.
+     * Returns the 11-character video ID on a match, otherwise returns null.
      * @param {string} url - raw input from the URL field
      * @returns {string|null} - YouTube video ID or null
      */
@@ -3577,13 +3556,11 @@
     }
 
     /**
-     * loadAdFreeVideo
-     * Extend J1 VideoPlayer #1
+     * loadYtVideo
      * Loads a YouTube video by ID through the YouTube tech path.
-     * Mirrors the loadAdFreeVideo() method from skipad.js.
      * @param {string} videoId - YouTube video ID
      */
-    loadAdFreeVideo(videoId) {
+    loadYtVideo(videoId) {
       isDev && logger.info('\n'+ `Loading YouTube video with id: ${videoId}`);
 
       const event = new CustomEvent('videoLoad', {
@@ -3604,7 +3581,6 @@
 
     /**
      * extractVideoSrc
-     * change skipAd API to local files #2
      * Replaces extractVideoId (YouTube).  Returns the trimmed URL/path when
      * it matches VIDEO_URL_PATTERNS, otherwise returns null.
      * A bare value with no extension is also accepted as a fallback so that
@@ -3629,8 +3605,7 @@
 
     /**
      * loadVideo
-     * change skipAd API to local files #2
-     * Renamed from loadAdFreeVideo (YouTube) to loadVideo (native).
+     * Renamed from loadYtVideo (YouTube) to loadVideo (native).
      * Dispatches 'videoLoad' with the video src URL instead of a YouTube ID.
      * @param {string} videoSrc - validated video URL/path
      */
@@ -3656,13 +3631,9 @@
 
   // ---------------------------------------------------------------------------
   // playlistIOHandler
-  //
-  // DOM ID 'skipad_playlist_parent' replaced with 'videoplayer_playlist_parent'
-  // in all scroll-to-element calls.
   // ---------------------------------------------------------------------------
   class playlistIOHandler {
     constructor(options) {
-      // claude - fixed Unique J1 VideoPlayer #2
       // Use the scoped video_container_{{player.id}} id instead of the
       // class selector '.video-container' so the correct player container is
       // captured when multiple players exist on the same page.
@@ -3787,12 +3758,11 @@
             container.innerHTML = containerHTML;
           }
 
-          // claude - J1 videoPlayer optimizations #1
-          // Force the playlist edit screen closed after a file import.  Replaces
-          // the no-op j1.adapter.videoPlayer.closeEditPlaylist(button, playerID)
-          // call (string arg + bare-id adapter path, Unique #6) with the
-          // module-local idempotent function that resolves ids via _pid().
-          closeEditPlaylist();
+          // closeEditPlaylist(btn, playerId) — same pattern as closePlaylist.
+          // force closinb the playlisz_edit_screen when a playlist is loaded
+          const button  = _pid('edit_playlist');
+          const playerID = button.replace("edit_playlist_", "");
+          j1.adapter.videoPlayer.closeEditPlaylist(button, playerID);
 
           // update the playListButton (to be enabled when a playlist is loaded)
           playlistManager._updateTogglePlaylistButton();
@@ -3816,94 +3786,25 @@
     }
 
     handleClear() {
-      const reload  = true;
-      const opts    = this._videoPlayerOptions;
+      const opts = this._videoPlayerOptions;
 
-      // jadams, 2026-06-06, disabled temporarily
-      //
-      // if (opts === null || !opts.enabled) {
-      //   return;
-      // }
-
-      // claude - Modify J1 VideoPlayer #17
-      // The page reload (`location.reload()`) previously used here is removed.
-      // The reload was a blunt way to return the whole module to a pristine
-      // state after wiping the playlist; this now happens in place, mirroring
-      // the no-reload restore path already used by handleFileSelected() /
-      // handleLoadFromServer() (just inverted, since we are clearing rather than
-      // loading).  The reload also masked the data-edit-open desync risk that
-      // #16 flagged for this exact path — closing the editor explicitly below
-      // covers it now that the page is no longer thrown away.
-      //
-      // clearPlaylist() already: drops the localStorage entry, invalidates the
-      // search index, runs _manageHiddenMode(false) and renderCurrent() (which
-      // disables #toggle_playlist for the now-empty list).  It returns false
-      // when the playlist was already empty — nothing to reset in that case.
-      const cleared = playlistManager.clearPlaylist();
-      if (!cleared) {
-        return;
-      }
-
-      // claude - Modify J1 VideoPlayer #17
-      // Close the playlist editor BEFORE touching the video container.  The
-      // module-local closeEditPlaylist() is idempotent and clears the
-      // data-edit-open marker, so the editor state can no longer desync once
-      // the reload is gone (the precise risk #16 called out for this path).
-      // Its single destructive step — restoring the #video_container snapshot —
-      // runs only when the editor was genuinely open (wasOpen guard), which is
-      // exactly the case where the container is currently holding the edit
-      // screen and needs to be returned to the empty-player overlay.
-      // Called directly (not via the adapter) per the Unique #6 rationale:
-      // the module-local function resolves every id through _pid(), so it is
-      // correct on multi-player pages.
-      closeEditPlaylist();
-
-      // claude - Modify J1 VideoPlayer #17
-      // Tear down any still-live videoJS player and restore the empty-player
-      // overlay so a video that was playing when Clear was pressed does not keep
-      // running headless — the reload used to handle this implicitly.  When the
-      // editor branch above already restored the snapshot (overlay present) or
-      // no player was ever created, these guards make the work a harmless no-op.
-      if (pipWindow && !pipWindow.closed) {
-        pipWindow.close();
-        pipWindow = null;
-      }
-      pipVisibilityBound = false;
-      pipEnabled         = false;
-
-      if (player) {
-        isDev && logger.debug('\n' + 'handleClear: disposing videoJS player after clearing the playlist');
-        player.dispose();
-        player = null;
-      }
-
-      const overlayExists = document.getElementById(_pid('emptyPlayerOverlay'));
-      if (!overlayExists && container && containerHTML) {
-        isDev && logger.debug('\n' + 'handleClear: restoring empty-player overlay');
-        container.innerHTML = containerHTML;
-      }
-
-      // claude - Modify J1 VideoPlayer #17
-      // Collapse the playlist panel back to its closed ("Show Playlist") state.
-      // _manageHiddenMode() intentionally no longer owns #playlist_screen
-      // (Unique #9), so an open panel would otherwise stay open over an empty
-      // list; closePlaylist() also re-syncs the #toggle_playlist button label.
-      closePlaylist();
-
-      // claude - Modify J1 VideoPlayer #17
-      // Keep #toggle_playlist disabled now that the list is empty.  Both
-      // clearPlaylist()->renderCurrent() and closeEditPlaylist() already call
-      // this; the explicit call guarantees the final button state regardless of
-      // which branches above ran.
-      playlistManager._updateTogglePlaylistButton();
-
-      // jadams, 2026-06-06, reload should made unnecessary but requires
+      // jadams, 2026-06-06, reload should made unnecessary. Requures
       // additional checks for the toggle_playlist button if a playlist
       // is loaded/available
       //
+      // "Clear with backup": trigger a downloadable safety backup of the
+      // current playlist BEFORE it is removed. The anchor download is
+      // initiated synchronously, so it is committed by the browser before
+      // the subsequent clearPlaylist()/location.reload() runs. backupToFile()
+      // is a no-op (returns false, no download) when the playlist is already
+      // empty, matching clearPlaylist()'s own empty-guard.
+      playlistManager.backupToFile();
+
+      const reload  = true;
+      const cleared = playlistManager.clearPlaylist();
       if (cleared && reload) {
         location.reload();
-      }      
+      }
     }
 
     handleClearServerSelect() {
@@ -4028,14 +3929,11 @@
         container.innerHTML = containerHTML;
       }
 
-      // claude - J1 videoPlayer optimizations #1
-      // Force the playlist edit screen closed after a server playlist load.
-      // Replaces the no-op j1.adapter.videoPlayer.closeEditPlaylist(button,
-      // playerID) call (string arg + bare-id adapter path, Unique #6) with the
-      // module-local idempotent function that resolves ids via _pid().  This is
-      // the "explicit closeEditPlaylist() on server load" case flagged for the
-      // no-reload path.
-      closeEditPlaylist();
+      //  closeEditPlaylist(btn, playerId) — same pattern as closePlaylist.
+      // force closinb the playlisz_edit_screen when a playlist is loaded
+      const button  = _pid('edit_playlist');
+      const playerID = button.replace("edit_playlist_", "");
+      j1.adapter.videoPlayer.closeEditPlaylist(button, playerID);
 
       // update the playListButton (to be enabled when a playlist is loaded)
       playlistManager._updateTogglePlaylistButton();
@@ -4124,7 +4022,6 @@
       const results = playlistManager.searchPlaylist(trimmed);
 
       if (resultCount) {
-//      resultCount.textContent = `${results.length} result${results.length !== 1 ? 's' : ''} found`;
         resultCount.textContent = `${results.length} item${results.length !== 1 ? 's' : ''} found`;        
         resultCount.style.display = 'inline';
       }
@@ -4156,7 +4053,7 @@
   } // END playlistSearchHandler
 
   // ---------------------------------------------------------------------------
-  // playlistModeSwitchHandler (unchanged)
+  // playlistModeSwitchHandler
   // ---------------------------------------------------------------------------
   class playlistModeSwitchHandler {
     constructor() {
@@ -4238,12 +4135,11 @@
   } // END playlistModeSwitchHandler
 
   // ---------------------------------------------------------------------------
-  // playlistMergeSwitchHandler (unchanged)
+  // playlistMergeSwitchHandler
   // ---------------------------------------------------------------------------
   class playlistMergeSwitchHandler {
 
     constructor(options) {
-      // Constructor parameter renamed from _skipAdOptions to _videoPlayerOptions.
       this._videoPlayerOptions = options || null;
       this.elements            = this.cacheElements();
       this.init();
@@ -4332,8 +4228,6 @@
 
   // ---------------------------------------------------------------------------
   // playlistLoopSwitchHandler
-  //
-  // Options reference renamed from _skipAdOptions to _videoPlayerOptions.
   // ---------------------------------------------------------------------------
   class playlistLoopSwitchHandler {
 
@@ -4371,11 +4265,11 @@
         return;
       }
 
-      let loopModeSwitch = document.getElementById('playlistLoopSwitch');
+      let loopModeSwitch = document.getElementById('playlisLoopSwitch');
 
       if (!loopModeSwitch) {
         loopModeSwitch            = document.createElement('div');
-        loopModeSwitch.id         = 'playlistLoopSwitch';
+        loopModeSwitch.id         = 'playlisLoopSwitch';
         loopModeSwitch.className  = 'switch not-spoken';
         loopModeSwitch.innerHTML  = `
           <label>
@@ -4439,7 +4333,7 @@
   } // END playlistLoopSwitchHandler
 
   // ---------------------------------------------------------------------------
-  // playlistSortHandler (unchanged)
+  // playlistSortHandler
   // ---------------------------------------------------------------------------
   class playlistSortHandler {
     constructor() {
@@ -4549,7 +4443,7 @@
   } // END playlistSortHandler
 
   // ---------------------------------------------------------------------------
-  // inputValueBackgroundHandler (unchanged)
+  // inputValueBackgroundHandler
   // ---------------------------------------------------------------------------
   function inputValueBackgroundHandler() {
 
@@ -4623,7 +4517,7 @@
   }
 
   // ---------------------------------------------------------------------------
-  // navbarSmoothScrollHandler (unchanged)
+  // navbarSmoothScrollHandler
   // ---------------------------------------------------------------------------
   function navbarSmoothScrollHandler() {
     const navMenu = document.getElementById('navigator_nav_menu');
@@ -4634,7 +4528,7 @@
 
     const anchors = navMenu.querySelectorAll('a.nav-link[href^="/#"]');
     if (!anchors.length) {
-      isDev && logger.warn('\n' +  'navbarSmoothScrollHandler: no same-page anchor links found');
+      // isDev && logger.warn('\n' +  'navbarSmoothScrollHandler: no same-page anchor links found');
       return;
     }
 
@@ -4661,7 +4555,6 @@
 
   // ---------------------------------------------------------------------------
   // initTogglePlaylistHandler
-  // claude - Unique J1 VideoPlayer #6
   //
   // Wires the #toggle_playlist button so that clicking it shows or hides the
   // #playlist_screen panel.  Prior to this fix the toggle handler lived
@@ -4678,7 +4571,6 @@
   //   • updates the button's icon, span label, title, and aria attributes in
   //     sync with the actual panel visibility (show ↔ hide)
   //
-  // claude - Unique J1 VideoPlayer #8
   // NOTE: _togglePlaylistHandlerInit is declared in the module variables section
   // (near the top of this factory) rather than here.  The original `let`
   // placement immediately before this function caused a TDZ ReferenceError
@@ -4687,7 +4579,7 @@
   // before this `let` would have been reached at runtime.  See the module
   // variables section for the declaration.
   // ---------------------------------------------------------------------------
-
+  //
   function initTogglePlaylistHandler() {
     if (_togglePlaylistHandlerInit) return;
 
@@ -4709,10 +4601,10 @@
       const isVisible = screen.style.display !== 'none' && screen.style.display !== '';
 
       if (isVisible) {
-        // ── HIDE ──────────────────────────────────────────────────────────
+        // --- HIDE ------------------------------------------------------------
         closePlaylist();
       } else {
-        // ── SHOW ──────────────────────────────────────────────────────────
+        // --- SHOW ------------------------------------------------------------
         screen.style.display = 'block';
 
         btn.title = 'Hide playlist';
@@ -4739,7 +4631,6 @@
 
   // ---------------------------------------------------------------------------
   // closePlaylist
-  // claude - Unique J1 VideoPlayer #6
   //
   // Hides the #playlist_screen panel and resets the #toggle_playlist button
   // to its "Show Playlist" state.  All element ids are resolved through _pid()
@@ -4764,7 +4655,6 @@
 
   // ---------------------------------------------------------------------------
   // closeEditPlaylist
-  // claude - Unique J1 VideoPlayer #6
   //
   // Programmatically closes the playlist edit screen and restores the
   // #video_container to the snapshot saved in `containerHTML`.  All element
@@ -4779,17 +4669,17 @@
     const editScreen  = document.getElementById(_pid('playlist_edit_screen'));
     const videoContnr = document.getElementById(_pid('video_container'));
 
-    // claude - Unique J1 VideoPlayer #9
-    // Previously this function early-returned (doing nothing) unless the edit
-    // button carried data-edit-open="true".  That made a programmatic call from
-    // the adapter on page load a silent no-op, so the caller could not rely on
-    // closeEditPlaylist() to enforce the closed state.  The function is now
-    // idempotent: it always hides #playlist_edit_screen and resets the
-    // #edit_playlist button to its "Manage playlist" state, while the single
-    // DESTRUCTIVE step — overwriting #video_container with the saved snapshot —
-    // still runs ONLY when the editor was genuinely open (data-edit-open="true").
-    // The wasOpen guard preserves the original protection that prevented this
-    // call from wiping a live, playing video (e.g. when invoked from
+    // Previously this function early-returned (doing nothing) unless the
+    // edit button carried data-edit-open="true".  That made a programmatic
+    // call from the adapter on page load a silent no-op, so the caller could
+    // not rely on closeEditPlaylist() to enforce the closed state.
+    // The function is now idempotent: it always hides #playlist_edit_screen
+    // and resets the #edit_playlist button to its "Manage playlist" state,
+    // while the single DESTRUCTIVE step — overwriting #video_container with
+    // the saved snapshot — still runs ONLY when the editor was genuinely
+    // open (data-edit-open="true").
+    // The wasOpen guard preserves the original protection that prevented
+    // this call from wiping a live, playing video (e.g. when invoked from
     // doPostOnPlaying after a playlist card was started).
     const wasOpen = !!editBtn && editBtn.getAttribute('data-edit-open') === 'true';
 
@@ -4818,7 +4708,7 @@
   }
 
   // ---------------------------------------------------------------------------
-  // Public API (unchanged handler names for backward compatibility)
+  // Public API
   // ---------------------------------------------------------------------------
   return {
     playlistManager:              playlistManager,
@@ -4831,10 +4721,6 @@
     inputWrapperHandler:          inputWrapperHandler,
     inputValueBackgroundHandler:  inputValueBackgroundHandler,
     navbarSmoothScrollHandler:    navbarSmoothScrollHandler,
-    // claude - Unique J1 VideoPlayer #6
-    // Expose the per-player toggle and close functions so the adapter can
-    // delegate to them.  All three use _pid() internally, making them safe
-    // for multi-player pages where every element id carries a player suffix.
     initTogglePlaylistHandler:    initTogglePlaylistHandler,
     closePlaylist:                closePlaylist,
     closeEditPlaylist:            closeEditPlaylist

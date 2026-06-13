@@ -144,10 +144,12 @@
 .volume-container img {
   display: block;
   float: left;
+  margin-top: -12px;
 }
 
 .compact-player-amplitude-mute {
   margin-left: 22px;
+  margin-top: -12px;
 }
 
 /* Player BOTTOM
