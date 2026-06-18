@@ -58,7 +58,7 @@
 /* workaround, height: make image -1 pixel smaller */     
 /* height: calc(100% + 1px); */
 
- picture > img {
+picture > img {
   max-width: 100%;
 }
 
@@ -83,7 +83,6 @@
   opacity: 0;
   transition: visibility 1s, opacity 1s;
 }
-
 
 /* manage time (display) divider, remaining-time */
 .vjs-theme-uno .vjs-time-divider,
@@ -154,9 +153,9 @@
 }
 
 .vjs-volume-bar.vjs-slider-vertical {
-    width: 0.3em;
-    height: 5em !important;
-    margin: 1.35em auto;
+  width: 0.3em;
+  height: 5em !important;
+  margin: 1.35em auto;
 }
 
 .vjs-theme-uno .vjs-volume-panel:hover .vjs-volume-control.vjs-volume-horizontal {
@@ -175,8 +174,8 @@
 
 /* move tbe volume slider up: +2em */
 .video-js .vjs-volume-vertical {
-    bottom: 10em;
-    background-color: rgba(43, 51, 63, 0.7);
+  bottom: 10em;
+  background-color: rgba(43, 51, 63, 0.7);
 }
 
 
@@ -185,26 +184,26 @@
 
 /* styles|positioning for the (custom) progressBar container */
 .video-js .custom-progressbar-container {
-    position: absolute;
-    align-items: center;
-    top: -26px;
-    bottom: 100%;                       /* place the container ABOVE the controlbar */
-    left: 0;
-    right: 0;
-    width: 100%;
-    height: 30px;                       /* set heigth of the progressbar container */
-    display: flex;
-    background-color: transparent;
-    box-sizing: border-box;
+  position: absolute;
+  align-items: center;
+  top: -26px;
+  bottom: 100%;                       /* place the container ABOVE the controlbar */
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 30px;                       /* set heigth of the progressbar container */
+  display: flex;
+  background-color: transparent;
+  box-sizing: border-box;
 }
 
 /* styles for the progressControlSlider */
 .video-js .custom-progressbar-container .vjs-progress-control {
-    flex-grow: 1;                       /* Lässt den Slider den verfügbaren Platz einnehmen */
-    position: static;                   /* Setzt die Position zurück, da der Parent schon Position hat */
-    height: 100%;                       /* Slider füllt die Höhe des Containers aus */
-    display: flex;                      /* Muss auch Flexbox sein, um die internen Elemente zu layouten */
-    align-items: center;
+  flex-grow: 1;                       /* Lässt den Slider den verfügbaren Platz einnehmen */
+  position: static;                   /* Setzt die Position zurück, da der Parent schon Position hat */
+  height: 100%;                       /* Slider füllt die Höhe des Containers aus */
+  display: flex;                      /* Muss auch Flexbox sein, um die internen Elemente zu layouten */
+  align-items: center;
 }
 
 .vjs-theme-uno .video-js .vjs-progress-control .vjs-progress-holder {
@@ -240,25 +239,25 @@
 }
 /* styles for custom timeDisplay */
 .video-js .custom-time-display {
-    color: #fff;
-    /* font-size: 0.9em; */
-    min-width: 50px;
-    text-align: center;
+  color: #fff;
+  /* font-size: 0.9em; */
+  min-width: 50px;
+  text-align: center;
 }
 
 /* placenment for the time displays within the custom progressBar container */
 .video-js .custom-progressbar-container .vjs-current-time-display {
-    order: -1;
-    /* font-size: 1.6em; */
+  order: -1;
+  /* font-size: 1.6em; */
 }
 
 /* Adjust the sizes for time-display elements */
 .video-js .vjs-remaining-time-display,
 .video-js .vjs-duration-display {
-    color: #fff;
-    /* font-size: 0.9em; */
-    padding: 0 5px;
-    white-space: nowrap;
+  color: #fff;
+  /* font-size: 0.9em; */
+  padding: 0 5px;
+  white-space: nowrap;
 }
 
 /* Adjusting the height and position UPWARDS for the custom progressBar container  */

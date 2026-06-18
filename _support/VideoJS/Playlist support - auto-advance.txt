@@ -1,0 +1,84 @@
+Prompt
+  https://claude.ai/chat/08cc9465-f67e-48bb-94c5-364e462b37ed
+--------------------------------------------------------------------------------
+
+What is the auto-advance behavior provided with Native Core Playlist
+Plugin for Video.js?
+
+
+
+Claude
+--------------------------------------------------------------------------------
+
+The project files include the bundled Video.js core (with the internal VHS/HLS playlist machinery) but not the standalone `videojs-playlist` plugin source where auto-advance lives. Let me verify the current behavior against the official plugin docs so I give you accurate, version-correct detail.Short version: the core `videojs-playlist` plugin (what you're on at v5.2.0) doesn't auto-advance at all by default.
+
+You opt in explicitly through `player.playlist.autoadvance()`.
+
+How it behaves once enabled:
+
+`player.playlist.autoadvance(delay)` takes a delay in **seconds**. The plugin
+listens for the player's `ended` event on the current item, then waits `delay`
+seconds before loading and playing the next item.
+
+- `autoadvance(0)` — advance to the next item immediately when the current one ends.
+- `autoadvance(5)` — wait 5 seconds after `ended`, then advance.
+- `autoadvance()` with no argument  **cancels** auto-advance and returns the playlist to manual control.
+
+A few behavioral details worth keeping in mind for the VideoPlayer module:
+
+The delay is implemented as a timeout armed on `ended`. If something else 
+changes the current item during that window (a manual `next()`, `previous()`,
+`currentItem()`, or a fresh `playlist()` call), the pending timeout is
+reset/cancelled so you don't get a double-advance. This is the same mechanism
+behind the classic "calling `first()` triggers an immediate advance" gotcha
+some people hit.
+
+At the **end of the playlist** (last item ends), auto-advance does nothing
+further — unless repeat is on. With `player.playlist.repeat(true)`,
+auto-advance wraps from the last item back to the first instead of stopping.
+So repeat-awareness is a property of the playlist, and auto-advance simply
+honors it at the boundary.
+
+One thing the plugin does *not* do: it doesn't manage whether the next item
+actually starts playing versus just loading — that follows from normal Video.js
+source-load/autoplay behavior. In practice, since the trigger is `ended`
+(the player was already playing), the next item plays through.
+
+This is relevant to your `nextPrevButtons` / `skipButtons` boundary-disabling
+logic — the repeat state that auto-advance consults at the playlist boundary
+is the same `player.playlist.repeat()` flag your buttons should read for their
+repeat-aware disabling, so it's worth keeping a single source of truth for
+that flag rather than tracking repeat state independently.
+
+Want me to check exactly how (or whether) `videoPlayer.js` currently wires
+`autoadvance` and `repeat`, so the navigation buttons and the auto-advance
+boundary stay consistent?
+
+
+Google
+--------------------------------------------------------------------------------
+
+Das Auto-Advance-Verhalten des offiziellen [videojs-playlist Plugins](https://github.com/videojs/videojs-playlist) für Video.js steuert den automatischen Übergang zum nächsten Video, sobald das aktuelle Video beendet ist. Standardmäßig ist dieses Verhalten deaktiviert, kann aber über die Methode player.playlist.autoadvance() konfiguriert werden. [1, 2] 
+Das Verhalten lässt sich wie folgt steuern und anpassen:
+## Kernfunktionalitäten des Auto-Advance
+
+* Verzögerter Übergang: Durch Übergabe einer Zahl in Sekunden, wie z. B. player.playlist.autoadvance(5), wartet der Player nach dem Ende eines Videos exakt 5 Sekunden, bevor er das nächste Video lädt und abspielt. [2] 
+* Sofortiger Übergang: Die Übergabe von Null (player.playlist.autoadvance(0)) sorgt dafür, dass das nächste Video ohne jegliche Verzögerung direkt im Anschluss startet. [2, 3, 4, 5, 6] 
+* Abbrechen/Zurücksetzen: Wenn die Methode ohne Argumente (player.playlist.autoadvance()) oder mit einem ungültigen Wert (keine positive, endliche Ganzzahl) aufgerufen wird, wird das automatische Weiterschalten komplett deaktiviert. [2] 
+
+## Wichtige Verhaltensregeln und Einschränkungen
+
+* Manuelle Änderungen während der Verzögerung: Wenn Sie den autoadvance-Wert ändern, während der Timer für das nächste Video bereits läuft (z. B. während der 5 Sekunden Wartezeit), wird das sofortige Weiterschalten für das aktuelle Video abgebrochen. Der neue Timer-Wert greift erst ab dem darauffolgenden Video. [2] 
+* Interaktion mit der Playlist-Wiederholung: Das Auto-Advance-Verhalten stoppt standardmäßig nach dem letzten Video der Playlist. Wenn die Playlist am Ende wieder von vorne beginnen soll, muss dies zusätzlich über player.playlist.repeat(true) aktiviert werden. [3, 4, 6, 7] 
+* Abhängigkeit von Browser-Richtlinien: Da Auto-Advance das nächste Video automatisch startet, greifen hierbei die Autoplay-Richtlinien der modernen Browser. Schlägt das automatische Abspielen des nächsten Videos aufgrund von Browsereinschränkungen fehl, bleibt der Player meist mit dem Play-Symbol auf dem ersten Frame des neuen Videos stehen, bis der Nutzer interagiert. [5, 6, 8] 
+
+Möchten Sie erfahren, wie Sie Ereignisse (Events) abfangen, wenn ein Video automatisch wechselt, oder benötigen Sie ein konkretes Code-Beispiel für die Implementierung? [4] 
+
+[1] [https://github.com](https://github.com/videojs/videojs-playlist)
+[2] [https://stackoverflow.com](https://stackoverflow.com/questions/40855425/video-js-playlist-repeatedly-plays-video-at-index-1)
+[3] [https://github.com](https://github.com/brightcove/videojs-playlist/issues/108)
+[4] [https://www.npmjs.com](https://www.npmjs.com/package/fw-videojs-playlist)
+[5] [https://videojs.org](https://videojs.org/blog/autoplay-best-practices-with-video-js)
+[6] [https://github.com](https://github.com/videojs/videojs-playlist/issues/161)
+[7] [https://support.playlister.app](https://support.playlister.app/hc/en-us/articles/360018025013-How-to-use-Action-Buttons-Auto-advance-Loop-and-Pause-Media-in-a-Playlist)
+[8] [https://legacy.videojs.org](https://legacy.videojs.org/guides/faqs/)

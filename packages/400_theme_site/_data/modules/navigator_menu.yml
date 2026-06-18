@@ -260,6 +260,10 @@
       href:                             /pages/public/tools/test/videoPlayer/
       icon:                             video
 
+    - title:                            VideoJS Playlist Test Tool
+      href:                             /pages/public/tools/test/videojs-playlist/
+      icon:                             video
+
 # ------------------------------------------------------------------------------
 # Menu CLAUDE AI
 #

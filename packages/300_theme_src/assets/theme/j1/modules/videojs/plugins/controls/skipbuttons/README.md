@@ -1,7 +1,7 @@
 # videojs-seek-buttons
 
 Plugin for video.js to add seek buttons to the control bar. These buttons 
-llow the user to skip forward or back by a configured number of seconds.
+allow the user to skip forward or back by a configured number of seconds.
 
 ## Table of Contents
 

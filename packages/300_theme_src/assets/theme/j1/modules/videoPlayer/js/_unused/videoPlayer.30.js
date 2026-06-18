@@ -1,6 +1,6 @@
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/modules/videoPlayer/js/videoPlayer.js (35)
+ # ~/assets/theme/j1/modules/videoPlayer/js/videoPlayer.js (30)
  # Provides JS Core for J1 Module videoPlayer
  #
  # Product/Info:
@@ -13,7 +13,7 @@
  # -----------------------------------------------------------------------------
 */
 
-/* Version 3.1.35 for J1 Template */
+/* Version 3.1.30 for J1 Template */
 
 // -----------------------------------------------------------------------------
 // ESLint shimming
@@ -85,7 +85,7 @@
   // playable video.
   //
   // Returns an empty array when no playable source can be derived; the caller
-  // (convertVideoPlayerPlaylist) drops such entries so player.src() never
+  // (_convertVideoPlayerPlaylist) drops such entries so player.src() never
   // receives an empty/invalid source list.
   // ---------------------------------------------------------------------------
   function _buildPlaylistItemSources(entry) {
@@ -263,7 +263,6 @@
 
   let loopConfigEnabled           = false;
   let pipConfigEnabled            = false;
-  let _playlistActiveVideoId      = null;
 
   let logger                      = log4javascript.getLogger(MODULE_NAME);
 
@@ -371,12 +370,6 @@
       this._mergeMode                     = localStorage.getItem('mergeMode') === 'true';
       this._loopEnabled                   = localStorage.getItem('playlistLoop') === 'true';
       this._loopSwitchInitialized         = false;
-      // claude - Modify J1 VideoPlayer #21
-      // Tracks the videoId of the entry that is currently in the 'playing'
-      // state. The matching card/list element gets data-item-active="true";
-      // null means no entry is active. Re-applied after every render so the
-      // active marker survives renderCurrent()/renderCards()/renderPlaylist().
-      this._activeVideoId                 = null;
     }
 
     setAdapterOptions(options) {
@@ -641,7 +634,7 @@
 
     // claude - Modify J1 VideoPlayer #19
     // -------------------------------------------------------------------------
-    // convertVideoPlayerPlaylist
+    // _convertVideoPlayerPlaylist
     //
     // Maps and converts the raw record set produced by load() (the J1
     // localStorage playlist shape) into the item-array shape expected by the
@@ -656,7 +649,7 @@
     // @param  {Array<Object>} rawPlaylist  result of playlistManager.load()
     // @return {Array<Object>}              videojs-playlist ready item list
     // -------------------------------------------------------------------------
-    convertVideoPlayerPlaylist(rawPlaylist, poster) {
+    _convertVideoPlayerPlaylist(rawPlaylist) {
       if (!Array.isArray(rawPlaylist)) return [];
 
       const items = [];
@@ -672,11 +665,7 @@
           let value;
 
           if (typeof rule === 'function') {
-            if (targetKey === 'poster' && !poster) {
-              value = null;
-            } else {
-              value = rule(entry);
-            }            
+            value = rule(entry);
           } else if (typeof rule === 'string') {
             value = entry[rule];
           }
@@ -916,18 +905,6 @@
       this.save(updated);
       consoleLog('INFO', MODULE_NAME, `playlist entry deleted for videoId: ${videoId}`);
 
-      // claude - Modify J1 VideoPlayer #22
-      // Guard: if the deleted entry is the one currently marked active, drop
-      // the tracked active videoId. Otherwise _activeVideoId keeps pointing at
-      // a videoId that no longer has a matching element. That is harmless for
-      // the render that follows (nothing to mark), but it is a stale value
-      // that would wrongly re-activate an element if the same videoId were
-      // re-added later. renderCurrent() below then re-renders with the cleared
-      // state, so every entry ends up with data-item-active="false".
-      if (this._activeVideoId && this._activeVideoId === videoId) {
-        this._activeVideoId = null;
-      }
-
       this.renderCurrent();
     }
 
@@ -941,14 +918,6 @@
       this._invalidateSearchIndex();
 
       consoleLog('INFO', MODULE_NAME, `cleared ${playlist.length} items from localStorage key: ${this.STORAGE_KEY}`);
-
-      // claude - Modify J1 VideoPlayer #22
-      // Same guard as deleteEntry(), for the bulk case: clearing the playlist
-      // removes every entry (including any active one), so the tracked active
-      // videoId must be dropped to avoid a stale value re-activating a future
-      // entry. Also covers the "Clear with backup" path, which routes through
-      // clearPlaylist().
-      this._activeVideoId = null;
 
       this._manageHiddenMode(false);
       this.renderCurrent();
@@ -1293,11 +1262,8 @@
         const hasVideoLink  = this._isValidUrl(item.videoLink);
         const thumbSrc      = item.poster || DEFAULT_POSTER; // fallback DEFAULT_POSTER
 
-        // claude - Modify J1 VideoPlayer #21
-        // data-item-active is rendered from the live active videoId so a
-        // re-render while a video is playing keeps the correct row marked.
         return `
-          <div class="playlist-row card-base" data-item-active="${(this._activeVideoId && item.videoId === this._activeVideoId) ? 'true' : 'false'}" data-index="${index}" data-video-id="${item.videoId}">
+          <div class="playlist-row card-base" data-index="${index}" data-video-id="${item.videoId}">
             <div class="playlist-row-content">
               <div class="playlist-thumb-wrapper">
                 <img class="playlist-thumb" src="${thumbSrc}" alt="playlist-thumb">
@@ -1365,11 +1331,8 @@
         const hasVideoLink = this._isValidUrl(v.videoLink);
         const thumbSrc     = v.poster || DEFAULT_POSTER; // fallback to DEFAULT_POSTER
 
-        // claude - Modify J1 VideoPlayer #21
-        // data-item-active is rendered from the live active videoId so a
-        // re-render while a video is playing keeps the correct card marked.
         return `
-          <div class="playlist-card card-base" data-item-active="${(this._activeVideoId && v.videoId === this._activeVideoId) ? 'true' : 'false'}" data-video-id="${v.videoId}">
+          <div class="playlist-card card-base" data-video-id="${v.videoId}">
             <div class="playlist-thumb-wrapper">
               <img class="playlist-thumb" src="${thumbSrc}" alt="playlist-thumb">
               <div class="playlist-play-overlay"><i class="fas fa-play"></i></div>
@@ -1403,48 +1366,6 @@
       if (!this._editHandlerInitialized) {
         this.initEditHandler();
       }
-    }
-
-    // claude - Modify J1 VideoPlayer #21
-    // Active-item state management
-    // -------------------------------------------------------------------------
-    // The playlist is rendered (as cards or list rows) under
-    // #videoplayer_playlist_parent_<id>. Every entry element carries
-    // data-item-active="false" by default. While a video taken from the
-    // playlist is in the 'playing' state, the matching element is flipped to
-    // data-item-active="true" so the UI can highlight the now-playing item.
-    //
-    // setActiveItem(videoId)  -> remember videoId and mark its element active
-    // clearActiveItem()       -> forget the active videoId and reset all marks
-    // _applyActiveItem()      -> re-apply the current mark to the live DOM
-    //                            (called by the render methods after they
-    //                            rebuild innerHTML with all marks reset).
-
-    // claude - Modify J1 VideoPlayer #21
-    setActiveItem(videoId) {
-      this._activeVideoId = videoId || null;
-      this._applyActiveItem();
-    }
-
-    // claude - Modify J1 VideoPlayer #21
-    clearActiveItem() {
-      this._activeVideoId = null;
-      this._applyActiveItem();
-    }
-
-    // claude - Modify J1 VideoPlayer #21
-    _applyActiveItem() {
-      const playlistContainer = document.getElementById(_pid('videoplayer_playlist_parent'));
-      if (!playlistContainer) return;
-
-      // Reset every entry, then mark the active one (if any). Iterating and
-      // comparing dataset.videoId avoids CSS-selector escaping issues for
-      // videoIds that contain special characters.
-      const items = playlistContainer.querySelectorAll('[data-item-active]');
-      items.forEach(el => {
-        const isActive = !!this._activeVideoId && el.getAttribute('data-video-id') === this._activeVideoId;
-        el.setAttribute('data-item-active', isActive ? 'true' : 'false');
-      });
     }
 
     // Event delegation
@@ -2668,14 +2589,6 @@
     // reset lastState so state change events fire correctly for the new player
     lastState = null;
 
-    // claude - Modify J1 VideoPlayer #23
-    // A new player is being built. Forget the playlist-plugin active id from any
-    // prior embed so doPostOnPlaying() cannot fall back onto a stale value
-    // before the fresh player's 'playlistitem'/videoData resolution repopulates
-    // it. (For empty/disabled playlists no 'playlistitem' fires, so leaving a
-    // stale id here would otherwise mis-mark the first 'playing' event.)
-    _playlistActiveVideoId = null;
-
     // target mode for the vjs player
     playerMode = (mode === undefined) ? null : mode;
 
@@ -2716,16 +2629,6 @@
           const stateName = vjsStateEventNameMap[state] || (state < 0 ? 'loadstart' : String(state));
           isDev && logger.debug('\n'+ `changed player to state: ${stateName}`);
 
-          if (vjsStateEventNameMap[state] === 'loadstart') {
-            var piPlaylist        = (vjsPlayer.activePlugins_.playlist) ? true : false;
-            var piPlaylistDefaults = j1.adapter.videoPlayer.videoPlayerDefaults;
-            var piPlaylistOptions = j1.adapter.videoPlayer.videoPlayerOptions;
-
-            if (piPlaylist && piPlaylistOptions.videoJS.plugins.playlist.autoplay) {
-              vjsPlayer.play();
-            }
-          }
-
           if (vjsStateEventNameMap[state] === 'playing') {
             doPostOnPlaying(state);
           }
@@ -2733,12 +2636,6 @@
           // persist the current playback position when the video is
           // paused or has ended so the user can resume later.
           if (vjsStateEventNameMap[state] === 'paused' || vjsStateEventNameMap[state] === 'ended') {
-            // claude - Modify J1 VideoPlayer #21
-            // The video is no longer playing, so clear the active marker on
-            // the playlist card/row. In loop mode the next video's 'playing'
-            // event re-marks the following entry via setActiveItem().
-            playlistManager.clearActiveItem();
-
             try {
               const currentPos    = player.currentTime();
               const totalDuration = player.duration();
@@ -2952,54 +2849,23 @@
             // (core.js). The raw load() entries have no `sources` array, so
             // passing them straight to vjsPlayer.playlist() would make
             // player.src() fail. The mapping/derivation is centralised in
-            // mapVideoPlayerPlaylist + convertVideoPlayerPlaylist().
+            // mapVideoPlayerPlaylist + _convertVideoPlayerPlaylist().
             //
             const rawPlaylist = playlistManager.load() || [];
-            const playlist    = playlistManager.convertVideoPlayerPlaylist(rawPlaylist, piPlaylist.poster);
+            const playlist    = playlistManager._convertVideoPlayerPlaylist(rawPlaylist);
 
             vjsPlayer.playlist(playlist);
-
-            // claude - Modify J1 VideoPlayer #23
-            // Mirror plugin-driven item changes onto the active-item indicator.
-            //
-            // core.js (playItem) fires 'playlistitem' every time the plugin
-            // loads a new item — including via the previous/next control-bar
-            // buttons (skipButtons / nextPrevButtons -> playlist.previous()/
-            // .next()), autoadvance and currentItem(). The event hash is the
-            // item object, which carries the J1 `videoId` copied through by
-            // mapVideoPlayerPlaylist. Recording it here keeps doPostOnPlaying()
-            // from re-marking the previous entry (player.videoData /
-            // player.ytVideoData are not refreshed on these in-player source
-            // swaps) and the immediate setActiveItem() call makes the marker
-            // jump as soon as the user presses prev/next, before 'playing'.
-            //
-            // Attached AFTER playlist() (so the function exists) and BEFORE the
-            // synced currentItem() jump below, so the initial sync is captured
-            // too. Video.js passes the trigger hash as the handler's 2nd arg.
-            vjsPlayer.on('playlistitem', (event, item) => {
-              const switchedId = (item && item.videoId) ? item.videoId : '';
-              _playlistActiveVideoId = switchedId || null;
-              if (switchedId) {
-                isDev && logger.debug('\n' + `playlistitem: active item follows plugin to videoId: ${switchedId}`);
-                playlistManager.setActiveItem(switchedId);
-              }
-            });
-
-            if (piPlaylist.autoadvance) {
-              vjsPlayer.playlist.autoadvance(piPlaylist.autoadvance_delay);
-            }
 
             // claude - Modify J1 VideoPlayer #20
             // Sync the (converted) playlist index to the active vjsVideoId.
             //
             // vjsPlayer.playlist() is loaded with the *converted* `playlist`,
             // whose entry order can diverge from `rawPlaylist`:
-            // convertVideoPlayerPlaylist() silently drops entries that have no
+            // _convertVideoPlayerPlaylist() silently drops entries that have no
             // playable `sources` array. A rawPlaylist index can therefore NOT be
             // reused directly as the videojs-playlist currentItem() index.
             //
             // Strategy:
-            //
             //   1. Locate the active vjsVideoId inside rawPlaylist (rawIndex) -
             //      the authoritative position in the J1 record set.
             //   2. Resolve the matching index inside the converted `playlist`
@@ -3008,7 +2874,6 @@
             //   3. currentIndex := syncedIndex, then load it via
             //      currentItem(currentIndex) so the video identified by
             //      vjsVideoId becomes the current item.
-            //
             const rawIndex = rawPlaylist.findIndex(
               (entry) => entry && entry.videoId === vjsVideoId
             );
@@ -3018,7 +2883,6 @@
             // playlist (videoId match). Falls back to the existing
             // currentItem() (or 0) when the active video is absent from / was
             // dropped during conversion of the converted playlist.
-            //
             let syncedIndex = playlist.findIndex(
               (item) => item && item.videoId === vjsVideoId
             );
@@ -3101,61 +2965,6 @@
           // placed AFTER skipButtons, so (button) placement resolves
           if (piNextPrevButtons.enabled) {
             vjsPlayer.nextPrevButtons();
-
-            // claude - Modify J1 VideoPlayer #25
-            // Hide the playlist panel when the user starts the previous/next
-            // video from the playlist plugin's navigation buttons
-            // (class="vjs-playlist-button skip-next/skip-forward").
-            //
-            // The #toggle_playlist button owns the panel's open state; once the
-            // user navigates to another playlist item from the control bar the
-            // panel is no longer relevant and would otherwise stay open on top
-            // of the now-playing video. The toggle button continues to control
-            // show/hide as before — this only adds an automatic hide for the
-            // prev/next case.
-            //
-            // A single delegated click listener is attached to the control bar
-            // (rather than to each button) so it:
-            //   • survives any internal re-creation of the button elements by
-            //     the plugin (repeat-aware enable/disable rebuilds),
-            //   • catches clicks that bubble up from inner icon/span children
-            //     (resolved via closest('.vjs-playlist-button')),
-            //   • targets ONLY the playlist nav buttons — the skipButtons seek
-            //     buttons do not carry the .vjs-playlist-button class.
-            //
-            // The disabled guard skips boundary-disabled buttons (the repeat-off
-            // ends of the playlist) so the panel is closed only when a video is
-            // actually started. closePlaylist() is idempotent, so closing an
-            // already-closed panel is a harmless no-op (e.g. when the panel was
-            // never opened). Each embedRunVideo() builds a fresh player/control
-            // bar, so exactly one listener is bound per player and is disposed
-            // together with that player.
-            //
-            const _npbControlBarEl = (vjsPlayer.controlBar && typeof vjsPlayer.controlBar.el === 'function')
-              ? vjsPlayer.controlBar.el() 
-              : null; // claude - Modify J1 VideoPlayer #25
-
-            // claude - Modify J1 VideoPlayer #25
-            if (_npbControlBarEl) {
-              _npbControlBarEl.addEventListener('click', (ev) => {
-                const navBtn = (ev.target && typeof ev.target.closest === 'function')
-                  ? ev.target.closest('.vjs-playlist-button')
-                  : null; // claude - Modify J1 VideoPlayer #25
-
-                if (!navBtn) return;
-
-                // claude - Modify J1 VideoPlayer #25
-                const isDisabled = navBtn.classList.contains('vjs-disabled')
-                  || navBtn.getAttribute('aria-disabled') === 'true'
-                  || navBtn.disabled === true;
-
-                if (isDisabled) return;
-
-                // claude - Modify J1 VideoPlayer #25
-                closePlaylist();
-                isDev && logger.debug('\n' + 'nextPrevButtons: playlist panel hidden after prev/next navigation');
-              });
-            }
           }
 
           // For YouTube, hide the VJS control bar when configured.
@@ -3244,30 +3053,6 @@
     // YouTube: player.ytVideoData (set in onReady YouTube branch).
     // Native:  player.videoData  (set by nativePlayer plugin via 'videoDataResolved').
     const isYouTubePlayer = !!(player && player.ytVideoData);
-
-    // claude - Modify J1 VideoPlayer #21
-    // The player just entered the 'playing' state. Resolve the videoId for
-    // the active tech (YouTube vs native) and mark its playlist card/row as
-    // active. Done before addEntry()/updateWatchDate() below, which trigger
-    // renderCurrent(); setting it here lets those re-renders inline the
-    // correct data-item-active value, and setActiveItem() also updates any
-    // already-rendered element directly.
-    //
-    // claude - Modify J1 VideoPlayer #23
-    // Prefer the id recorded by the 'playlistitem' listener. When the source
-    // change was driven by the videojs-playlist plugin (previous/next buttons,
-    // autoadvance), the per-tech metadata below is stale — it still describes
-    // the entry from the last embedRunVideo() — so resolving from it alone
-    // would re-mark the previously playing entry. _playlistActiveVideoId
-    // reflects the item the plugin actually loaded; fall back to the per-tech
-    // resolution for plain (non-playlist) plays where it is null.
-    const _resolvedFromTech = isYouTubePlayer
-      ? ((player.ytVideoData && player.ytVideoData.video_id) ? player.ytVideoData.video_id : '')
-      : ((player.videoData   && player.videoData.videoId)    ? player.videoData.videoId    : '');
-    const _activePlayingId = _playlistActiveVideoId || _resolvedFromTech;
-    if (_activePlayingId) {
-      playlistManager.setActiveItem(_activePlayingId);
-    }
 
     if (isYouTubePlayer) {
       document.dispatchEvent(new CustomEvent('videoPlayingStarted', {
@@ -4403,29 +4188,6 @@
 
       // update the playListButton (to be enabled when a playlist is loaded)
       playlistManager._updateTogglePlaylistButton();
-
-      // claude - Modify J1 VideoPlayer #26
-      // When a playlist is loaded from the server, load the first video of the
-      // (display-ordered) list into the player and start it in the 'paused'
-      // state. The display order is reproduced by applying the active sort
-      // criterion (_currentSort) to a fresh copy of the stored playlist — the
-      // same ordering renderCards()/renderPlaylist() apply — so the entry
-      // chosen here matches the first row the user sees. Going through the
-      // playlistManager.embedRunVideo(videoId, 'pause') wrapper resolves the
-      // entry's src and, via playerMode === 'pause', pauses playback right
-      // after start (see the autoplay branch in embedRunVideo). The 'pause'
-      // mode (instead of playEntry()) is deliberate: it does NOT set
-      // _startedFromPlaylist, so the playlist panel is left open after load.
-      //
-      const firstList  = playlistManager.load() || [];
-      playlistManager._applySortOrder(firstList);
-      const firstEntry = firstList[0];
-      if (firstEntry && firstEntry.videoId) {
-        isDev && logger.info('\n' + `playlistManager: loading first server-playlist video in paused state (videoId: ${firstEntry.videoId})`);
-        playlistManager.embedRunVideo(firstEntry.videoId, 'pause');
-      } else {
-        isDev && logger.warn('\n' + 'playlistManager: no playable first entry found after server playlist load');
-      }
 
       const videoElement = document.getElementById(_pid('video_player_container'));
       if (videoElement) {

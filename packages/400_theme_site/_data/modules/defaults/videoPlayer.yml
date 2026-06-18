@@ -169,15 +169,26 @@ defaults:
 
         # video parameters
         #
-        # default_poster:               /assets/image/icon/videojs/videojs-poster.png
+        default_poster:                 /assets/image/icon/videojs/videojs-poster.png
         poster_base:                    //img.youtube.com/vi
-        poster_qualty:                  hqdefault                               # poster taken from poster_base at high quality resolution
+        poster_qualty:                  hqdefault                               # hqdefault|mqdefault, poster taken from poster_base at high quality resolution
         start:                          true                                    # set start (trim) of a video allowed
         end:                            true                                    # set end (trim) of a video allowed
 
     # videoJS Plugin settings
     #
     plugins:
+
+      playlist:
+        enabled:                        true
+        autoplay:                       true
+        autoadvance:                    true                                    # play next item when current video ends
+        autoadvance_delay:              0                                       # delay (seconds) for playing next video
+        repeat:                         false
+        reverse:                        false
+        repeat:                         false
+        shuffle:                        false                                   # Randomize the contents of the playlist
+        poster:                         false
 
       autoCaption:
         enabled:                        false
@@ -209,6 +220,9 @@ defaults:
         forwardIndex:                   1
         forward:                        10
         backward:                       10
+
+      nextPrevButtons:
+        enabled:                        true
 
       zoomButtons:
         enabled:                        false

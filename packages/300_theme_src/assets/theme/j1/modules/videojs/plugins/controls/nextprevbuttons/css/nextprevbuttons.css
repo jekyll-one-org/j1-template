@@ -1,0 +1,28 @@
+/*
+ # -----------------------------------------------------------------------------
+ # ~/modules/videojs/css/plugins/controls/nextPrevButtons/css/nextprevbuttons.css
+ # Provides CSS Styles for the VideoJS (V8) plugin nextPrevButtons
+ #
+ # Product/Info:
+ # https://github.com/brightcove/videojs-playlist
+ # http://jekyll.one
+ #
+ # Copyright (C) 2026 Juergen Adams
+ #
+ # videojs-playlist is licensed under the Apache License 2.0.
+ # See: https://github.com/brightcove/videojs-playlist/blob/main/LICENSE
+ # J1 Theme is licensed under MIT License.
+ # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE
+ # -----------------------------------------------------------------------------
+*/
+
+.video-js .vjs-playlist-button {
+    cursor: pointer
+}
+
+/* dim the button when it cannot move further in the playlist
+*/
+.video-js .vjs-playlist-button.vjs-disabled {
+    cursor: default;
+    opacity: .5
+}

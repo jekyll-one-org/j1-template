@@ -1,6 +1,6 @@
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/modules/videoPlayer/js/videoPlayer.js (35)
+ # ~/assets/theme/j1/modules/videoPlayer/js/videoPlayer.js (34)
  # Provides JS Core for J1 Module videoPlayer
  #
  # Product/Info:
@@ -13,7 +13,7 @@
  # -----------------------------------------------------------------------------
 */
 
-/* Version 3.1.35 for J1 Template */
+/* Version 3.1.34 for J1 Template */
 
 // -----------------------------------------------------------------------------
 // ESLint shimming
@@ -4403,29 +4403,6 @@
 
       // update the playListButton (to be enabled when a playlist is loaded)
       playlistManager._updateTogglePlaylistButton();
-
-      // claude - Modify J1 VideoPlayer #26
-      // When a playlist is loaded from the server, load the first video of the
-      // (display-ordered) list into the player and start it in the 'paused'
-      // state. The display order is reproduced by applying the active sort
-      // criterion (_currentSort) to a fresh copy of the stored playlist — the
-      // same ordering renderCards()/renderPlaylist() apply — so the entry
-      // chosen here matches the first row the user sees. Going through the
-      // playlistManager.embedRunVideo(videoId, 'pause') wrapper resolves the
-      // entry's src and, via playerMode === 'pause', pauses playback right
-      // after start (see the autoplay branch in embedRunVideo). The 'pause'
-      // mode (instead of playEntry()) is deliberate: it does NOT set
-      // _startedFromPlaylist, so the playlist panel is left open after load.
-      //
-      const firstList  = playlistManager.load() || [];
-      playlistManager._applySortOrder(firstList);
-      const firstEntry = firstList[0];
-      if (firstEntry && firstEntry.videoId) {
-        isDev && logger.info('\n' + `playlistManager: loading first server-playlist video in paused state (videoId: ${firstEntry.videoId})`);
-        playlistManager.embedRunVideo(firstEntry.videoId, 'pause');
-      } else {
-        isDev && logger.warn('\n' + 'playlistManager: no playable first entry found after server playlist load');
-      }
 
       const videoElement = document.getElementById(_pid('video_player_container'));
       if (videoElement) {

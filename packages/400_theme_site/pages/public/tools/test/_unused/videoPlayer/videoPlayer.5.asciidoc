@@ -68,8 +68,6 @@ Enjoy watching the playlist.
 .NPR Tiny Desk Concerts
 videoPlayer::player_1[role="mt-4 mb-5"]
 
-
-
 // Include Player HTML
 // -----------------------------------------------------------------------------
 ++++
