@@ -1,6 +1,6 @@
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/modules/videoPlayer/js/videoPlayer.js (35)
+ # ~/assets/theme/j1/modules/videoPlayer/js/videoPlayer.js (38)
  # Provides JS Core for J1 Module videoPlayer
  #
  # Product/Info:
@@ -13,7 +13,7 @@
  # -----------------------------------------------------------------------------
 */
 
-/* Version 3.1.35 for J1 Template */
+/* Version 3.1.38 for J1 Template */
 
 // -----------------------------------------------------------------------------
 // ESLint shimming
@@ -1276,7 +1276,7 @@
 
       playlistContainer.className = 'playlist list-mode';
 
-      isDev && logger.info('\n'+ `render playlist`);
+      isDev && logger.info('\n' + `render playlist`);
 
       const data = this._searchResults || this.load() || [];
       this._applySortOrder(data);
@@ -1470,7 +1470,7 @@
         }
       });
 
-      isDev && logger.info('\n'+ 'playlistManager: delete handler initialized');
+      isDev && logger.info('\n' + 'playlistManager: delete handler initialized');
     }
 
     // playEntry now resolves the video src from the playlist entry and passes
@@ -1481,8 +1481,8 @@
         return;
       }
 
-      isDev && logger.info('\n'+ `playlistmanager: playing entry for videoId: ${videoId}`);
-      _startedFromPlaylist = true;                                           // Modify J1 VideoPlayer #3
+      isDev && logger.info('\n' + `playlistmanager: playing entry for videoId: ${videoId}`);
+      _startedFromPlaylist = true; // Modify J1 VideoPlayer #3
       this.embedRunVideo(videoId);
     }
 
@@ -1494,7 +1494,7 @@
         return;
       }
 
-      isDev && logger.info('\n'+ `playlistManager: embedding video for videoId: ${videoId}`);
+      isDev && logger.info('\n' + `playlistManager: embedding video for videoId: ${videoId}`);
 
       // Resolve the src from the playlist entry; fall back to videoId as-is
       const playlist = this.load() || [];
@@ -1525,7 +1525,7 @@
         }
       });
 
-      isDev && logger.info('\n'+ 'playlistManager: play handler initialized');
+      isDev && logger.info('\n' + 'playlistManager: play handler initialized');
     }
 
     // _createRatingModal: thumbnail src now uses entry.poster or DEFAULT_POSTER
@@ -2026,7 +2026,7 @@
         }
       });
 
-      isDev && logger.info('\n'+ 'playlistManager: edit handler initialized');
+      isDev && logger.info('\n' + 'playlistManager: edit handler initialized');
     }
 
     initInfoLinkHandler() {
@@ -2043,7 +2043,7 @@
         event.stopPropagation();
       });
 
-      isDev && logger.info('\n'+ 'playlistManager: infoLink handler initialized');
+      isDev && logger.info('\n' + 'playlistManager: infoLink handler initialized');
     }
 
     initVideoLinkHandler() {
@@ -2060,7 +2060,7 @@
         event.stopPropagation();
       });
 
-      isDev && logger.info('\n'+ 'playlistManager: videoLink handler initialized');
+      isDev && logger.info('\n' + 'playlistManager: videoLink handler initialized');
     }
 
     // search engine
@@ -2070,7 +2070,7 @@
       if (!this._searchIndex) return;
       try {
         localStorage.setItem(this.INDEX_KEY, JSON.stringify(this._searchIndex));
-        isDev && logger.info('\n'+ 'playlistManager: search index saved to localStorage');
+        isDev && logger.info('\n' + 'playlistManager: search index saved to localStorage');
       } catch (e) {
         logger.error('\n' + `playlistManager: failed to save search index: ${e}`);
       }
@@ -2127,7 +2127,7 @@
         }, this);
       });
 
-      isDev && logger.info('\n'+ `playlistManager: search index built with ${data.length} entries`);
+      isDev && logger.info('\n' + `playlistManager: search index built with ${data.length} entries`);
 
       this._saveSearchIndex();
     }
@@ -2450,7 +2450,7 @@
   async function _enterDocumentPiP(vjsPlayer) {
     if (!vjsPlayer) return false;
     if (pipWindow && !pipWindow.closed) {
-      isDev && logger.info('\n'+ 'pip: Document PiP window already open');
+      isDev && logger.info('\n' + 'pip: Document PiP window already open');
       return true;
     }
 
@@ -2503,10 +2503,10 @@
         playerEl.style.height = '';
 
         pipWindow = null;
-        isDev && logger.info('\n'+ 'pip: Document PiP window closed, player restored');
+        isDev && logger.info('\n' + 'pip: Document PiP window closed, player restored');
       });
 
-      isDev && logger.info('\n'+ `pip: entered Document PiP (${width}x${height})`);
+      isDev && logger.info('\n' + `pip: entered Document PiP (${width}x${height})`);
       pipEnabled = true;
       return true;
 
@@ -2526,7 +2526,7 @@
 
       if (videoEl && typeof videoEl.requestPictureInPicture === 'function') {
         await videoEl.requestPictureInPicture();
-        isDev && logger.info('\n'+ 'pip: entered standard video PiP');
+        isDev && logger.info('\n' + 'pip: entered standard video PiP');
         pipEnabled = true;
         return true;
       }
@@ -2541,7 +2541,7 @@
     if (pipWindow && !pipWindow.closed) {
       pipWindow.close();
       pipWindow = null;
-      isDev && logger.info('\n'+ 'pip: closed Document PiP window');
+      isDev && logger.info('\n' + 'pip: closed Document PiP window');
       return;
     }
 
@@ -2580,21 +2580,21 @@
       if (document.visibilityState === 'hidden') {
         const paused = vjsPlayer.paused();
         if (!paused) {
-          isDev && logger.info('\n'+ 'pip: tab hidden while playing, requesting PiP');
+          isDev && logger.info('\n' + 'pip: tab hidden while playing, requesting PiP');
           const ok = await _requestPictureInPicture(vjsPlayer);
           if (!ok) {
-            isDev && logger.info('\n'+ 'pip: PiP unavailable, playback may pause in background');
+            isDev && logger.info('\n' + 'pip: PiP unavailable, playback may pause in background');
           }
         }
       } else if (document.visibilityState === 'visible') {
         if (pipWindow && !pipWindow.closed) {
-          isDev && logger.info('\n'+ 'pip: tab visible again, closing PiP window');
+          isDev && logger.info('\n' + 'pip: tab visible again, closing PiP window');
           await _exitPictureInPicture(vjsPlayer);
         }
       }
     });
 
-    isDev && logger.info('\n'+ 'pip: auto-PiP visibility handler installed');
+    isDev && logger.info('\n' + 'pip: auto-PiP visibility handler installed');
   }
 
   function _playWhenVisible(vjsPlayer) {
@@ -2608,7 +2608,7 @@
         });
       }
     } else {
-      isDev && logger.info('\n'+ 'play deferred: page is hidden, attempting PiP before fallback');
+      isDev && logger.info('\n' + 'play deferred: page is hidden, attempting PiP before fallback');
 
       (async () => {
         const pipOk = pipConfigEnabled ? await _requestPictureInPicture(vjsPlayer) : false;
@@ -2650,6 +2650,7 @@
   // Renamed parameter: videoId → videoSrc.  The function now accepts a full
   // local or remote video file URL (e.g. /assets/video/my.mp4 or
   // https://cdn.example.com/video.mp4) instead of a YouTube video ID.
+  //
   // The videoId for playlist keying is derived from the filename without
   // its extension so existing playlist-management logic is unaffected.
   // ---------------------------------------------------------------------------
@@ -2663,7 +2664,7 @@
   const embedRunVideo = (videoSrc, mode) => {
     logger = log4javascript.getLogger(MODULE_NAME);
 
-    isDev && logger.debug('\n'+ `embedding video from src: ${videoSrc}`);
+    isDev && logger.debug('\n' + `embedding video from src: ${videoSrc}`);
 
     // reset lastState so state change events fire correctly for the new player
     lastState = null;
@@ -2714,14 +2715,15 @@
           }
 
           const stateName = vjsStateEventNameMap[state] || (state < 0 ? 'loadstart' : String(state));
-          isDev && logger.debug('\n'+ `changed player to state: ${stateName}`);
+          isDev && logger.debug('\n' + `changed player to state: ${stateName}`);
 
+          // jadams, 2026-06-20: autoplay nextPrevButtons (playlist plugin)
+          //
           if (vjsStateEventNameMap[state] === 'loadstart') {
-            var piPlaylist        = (vjsPlayer.activePlugins_.playlist) ? true : false;
-            var piPlaylistDefaults = j1.adapter.videoPlayer.videoPlayerDefaults;
+            var piNextPrevButtons = (vjsPlayer.activePlugins_.nextPrevButtons) ? true : false;
             var piPlaylistOptions = j1.adapter.videoPlayer.videoPlayerOptions;
 
-            if (piPlaylist && piPlaylistOptions.videoJS.plugins.playlist.autoplay) {
+            if (piNextPrevButtons && piPlaylistOptions.videoJS.plugins.nextPrevButtons.autoplay) {
               vjsPlayer.play();
             }
           }
@@ -2737,7 +2739,9 @@
             // The video is no longer playing, so clear the active marker on
             // the playlist card/row. In loop mode the next video's 'playing'
             // event re-marks the following entry via setActiveItem().
-            playlistManager.clearActiveItem();
+            //
+            // jadams, 2026-06-18: disabled
+            // playlistManager.clearActiveItem();
 
             try {
               const currentPos    = player.currentTime();
@@ -2783,18 +2787,18 @@
 
       // videoJS event: onReady
       onReady: (player) => {
-        isDev && logger.info('\n'+ 'vjs player initialized and ready');
+        isDev && logger.info('\n' + 'vjs player initialized and ready');
 
         if (isYouTube) {
-          // ---------------------------------------------------------------
-          // Metadata is read from the YouTube tech's videoData() / ytPlayer.
-          // ---------------------------------------------------------------
+          // -------------------------------------------------------------------
+          // Metadata is read from the YouTube tech's videoData() / ytPlayer
+          // -------------------------------------------------------------------
           const applyVideoData = (videoData) => {
             if (!videoData) return;
             const title  = videoData.title  || '';
             const author = videoData.author || '';
 
-            isDev && logger.debug('\n'+ `YT video data resolved - title: ${title}`);
+            isDev && logger.debug('\n' + `YT video data resolved - title: ${title}`);
 
             player.ytVideoData  = videoData;
             player.ytVideoTitle = title;
@@ -2820,7 +2824,7 @@
               }
             }
           } catch (e) {
-            isDev && logger.debug('\n'+ `immediate YT video data read skipped: ${e}`);
+            isDev && logger.debug('\n' + `immediate YT video data read skipped: ${e}`);
           }
 
           // playlistManager, fixed video duration (YouTube)
@@ -2864,7 +2868,7 @@
             const title  = videoData.title  || '';
             const author = videoData.author || '';
 
-            isDev && logger.debug('\n'+ `video data resolved - title: ${title}`);
+            isDev && logger.debug('\n' + `video data resolved - title: ${title}`);
 
             player.videoData  = videoData;
             player.videoTitle = title;
@@ -2927,7 +2931,7 @@
 
         if (videoPlayerOptions.videoJS.autoStart) {
 
-          isDev && logger.info('\n'+ 'vjs player started');
+          isDev && logger.info('\n' + 'vjs player started');
 
           const vjsPlaybackRates  = videoPlayerOptions.videoJS.playbackRates.values;
 
@@ -2938,7 +2942,7 @@
           const piNextPrevButtons = videoPlayerOptions.videoJS.plugins.nextPrevButtons;          
           const piZoomButtons     = videoPlayerOptions.videoJS.plugins.zoomButtons;
 
-          isDev && logger.debug('\n'+ 'customize vjs player (controls)');
+          isDev && logger.debug('\n' + 'customize vjs player (controls)');
 
           const vjsPlayer   = player;
           const vjsVideoId  = videoId;
@@ -3116,6 +3120,7 @@
             //
             // A single delegated click listener is attached to the control bar
             // (rather than to each button) so it:
+            //
             //   • survives any internal re-creation of the button elements by
             //     the plugin (repeat-aware enable/disable rebuilds),
             //   • catches clicks that bubble up from inner icon/span children
@@ -3152,8 +3157,10 @@
                 if (isDisabled) return;
 
                 // claude - Modify J1 VideoPlayer #25
-                closePlaylist();
-                isDev && logger.debug('\n' + 'nextPrevButtons: playlist panel hidden after prev/next navigation');
+                if (videoPlayerOptions.playlist.close_on_play) {
+                  closePlaylist();
+                  isDev && logger.debug('\n' + 'nextPrevButtons: playlist panel hidden after prev/next navigation');
+                }
               });
             }
           }
@@ -3166,7 +3173,7 @@
             ? videoPlayerOptions.videoJS.players.youtube.controls
             : undefined;
           if (isYouTube && (videoPlayerOptions.videoJS.hideControlBar || ytControls === 0)) {
-            isDev && logger.debug('\n'+ 'hiding vjs controlbar for YT video');
+            isDev && logger.debug('\n' + 'hiding vjs controlbar for YT video');
             vjsPlayer.addClass('vjs-youtube-hide-controlbar');
           }
 
@@ -3235,10 +3242,10 @@
    */
   function doPostOnPlaying(state) {
     const titleElement = document.getElementById(_pid("video_title"));
-    const videoElement = document.getElementById(_pid("video_container"));
+    const videoTitleElement = document.getElementById('video_title');    
     const textEl       = document.getElementById(_pid('video_title_text'));
 
-    isDev && logger.debug('\n'+ `do post processing on state: ${vjsStateEventNameMap[state]}`);
+    isDev && logger.debug('\n' + `do post processing on state: ${vjsStateEventNameMap[state]}`);
 
     // Choose the right video-data source depending on which tech is active.
     // YouTube: player.ytVideoData (set in onReady YouTube branch).
@@ -3393,21 +3400,14 @@
     if (_startedFromPlaylist) {
       _startedFromPlaylist = false;
 
-      // Previously these delegated to j1.adapter.videoPlayer.closePlaylist()
-      // and j1.adapter.videoPlayer.closeEditPlaylist(), which used bare (un-
-      // suffixed) element IDs and silently failed after every per-player
-      // element id was made unique.
-      // Call the module-local functions directly: they resolve all ids
-      // through _pid() so multi-player pages work correctly.
-      // closePlaylist() now also calls _resetPlaylistToggleUI() internally,
-      // so the separate call below (Modify J1 VideoPlayer #5) is no
-      // longer needed.
-      closePlaylist();
-      closeEditPlaylist();
+      if (videoPlayerOptions.playlist.close_on_play) {
+        closePlaylist();
+        closeEditPlaylist();
+      }
     }
 
-    if (videoElement) {
-      scrollToElement(videoElement);
+    if (videoTitleElement) {
+      scrollToElement(videoTitleElement);
     }
   }
 
@@ -3496,6 +3496,27 @@
   // ---------------------------------------------------------------------------
   //
   function initEditPlaylistHandler() {
+
+    // claude - Modify J1 VideoPlayer #29
+    // ------------------------------------------------------------------------
+    // DEPRECATED — handler ownership moved to the adapter.
+    //
+    // The edit-playlist click is now owned exclusively by the adapter's
+    // initPlayerUiEvents(playerId) (per-player loop, suffixed ids). That path
+    // implements the overlay model (#29): the edit screen is positioned
+    // absolutely OVER #video_container as a sibling and the live player is
+    // left running underneath — it is never disposed and the container
+    // innerHTML is never replaced.
+    //
+    // This module-level handler used the legacy "move editScreen inside
+    // video_container + dispose player + snapshot-restore innerHTML" model,
+    // which conflicts with the overlay approach and, in practice, never bound
+    // anyway: it runs at module-IIFE load when _playerID is still '' so
+    // _pid('edit_playlist') resolves to the unsuffixed id and the guard below
+    // bails. We make the deprecation explicit with a hard early-return while
+    // preserving the original body for reference (deprecation, not deletion).
+    return;
+    // ------------------------------------------------------------------------
 
     // Removed the temporary `return;` that disabled this handler.  Now that
     // every element id is resolved through _pid() the handler correctly finds
@@ -3614,7 +3635,7 @@
     const scrollOffset      = (window.innerWidth >= 720) ? -180 : -130;
     const position          = targetElmPosition + scrollOffset;
 
-    isDev && logger.debug('\n'+ `scroll page to vertical position: ${position}`);
+    isDev && logger.debug('\n' + `scroll page to vertical position: ${position}`);
     window.scrollTo(0, position);
   }
 
@@ -4026,7 +4047,7 @@
      * @param {string} videoId - YouTube video ID
      */
     loadYtVideo(videoId) {
-      isDev && logger.info('\n'+ `Loading YouTube video with id: ${videoId}`);
+      isDev && logger.info('\n' + `Loading YouTube video with id: ${videoId}`);
 
       const event = new CustomEvent('videoLoad', {
         detail: { videoId },
@@ -4075,7 +4096,7 @@
      * @param {string} videoSrc - validated video URL/path
      */
     loadVideo(videoSrc) {
-      isDev && logger.info('\n'+ `Loading video from: ${videoSrc}`);
+      isDev && logger.info('\n' + `Loading video from: ${videoSrc}`);
 
       const event = new CustomEvent('videoLoad', {
         detail: { videoSrc },
@@ -4159,7 +4180,7 @@
 
       this.loadPlaylistIndex();
 
-      isDev && logger.info('\n'+ 'playlistManager: IOHandler initialized');
+      isDev && logger.info('\n' + 'playlistManager: IOHandler initialized');
     }
 
     handleImport() {
@@ -4170,6 +4191,8 @@
       }
     }
 
+    // called on handleImport()
+    //
     handleFileSelected(event) {
       const file = event.target.files[0];
       if (!file) return;
@@ -4184,7 +4207,7 @@
 
           if (hasMetaData) {
             const bkupDate = data.backup_date.replace('T', ' ').substring(0, 16);
-            isDev && logger.info('\n'+ `import playlist from backup file of date: ${bkupDate}`);
+            isDev && logger.info('\n' + `import playlist from backup file of date: ${bkupDate}`);
           }
 
           playlist.forEach(entry => playlistManager._normalizeEntry(entry));
@@ -4210,11 +4233,11 @@
               sortSelect.value = 'episode';
             }
             playlistManager.sortPlaylist('episode');
-            isDev && logger.info('\n'+ 'playlistManager: series/episode entries detected - auto-sorted by episode');
+            isDev && logger.info('\n' + 'playlistManager: series/episode entries detected - auto-sorted by episode');
           }
 
           if (!playlistManager._searchIndex && !playlistManager._loadSearchIndex()) {
-            isDev && logger.info('\n'+ 'playlistManager: build search index from scratch');
+            isDev && logger.info('\n' + 'playlistManager: build search index from scratch');
             playlistManager.buildSearchIndex();
           }
 
@@ -4235,10 +4258,37 @@
 
           playlistManager.renderCurrent();
 
-          const videoElement = document.getElementById(_pid('video_player_container'));
-          if (videoElement) {
-            scrollToElement(videoElement);
+          // claude - Modify J1 VideoPlayer #27
+          // Mirror of "Modify J1 VideoPlayer #26" (handleLoadFromServer): when a
+          // playlist file is imported here, load the first video of the
+          // (display-ordered) list into the player and start it in the 'paused'
+          // state. The display order is reproduced by applying the active sort
+          // criterion (_currentSort) to a fresh copy of the stored playlist —
+          // the same ordering renderCards()/renderPlaylist() apply — so the
+          // entry chosen here matches the first row the user sees. Going through
+          // the playlistManager.embedRunVideo(videoId, 'pause') wrapper resolves
+          // the entry's src and, via playerMode === 'pause', pauses playback
+          // right after start (see the autoplay branch in embedRunVideo). The
+          // 'pause' mode (instead of playEntry()) is deliberate: it does NOT set
+          // _startedFromPlaylist, so the playlist panel is left open after load.
+          // As with #26, the paused-after-start behaviour depends on the
+          // autoplay config being enabled.
+          //
+          const firstList  = playlistManager.load() || [];
+          playlistManager._applySortOrder(firstList);
+          const firstEntry = firstList[0];
+          if (firstEntry && firstEntry.videoId) {
+            isDev && logger.info('\n' + `playlistManager: loading first imported-playlist video in paused state (videoId: ${firstEntry.videoId})`);
+            playlistManager.embedRunVideo(firstEntry.videoId, 'pause');
+          } else {
+            isDev && logger.warn('\n' + 'playlistManager: no playable first entry found after playlist file import');
           }
+
+          const videoTitleElement = document.getElementById('video_title');
+          if (videoTitleElement) {
+            scrollToElement(videoTitleElement);
+          }
+
         } catch (err) {
           logger.error('\n' + `import from file failed: ${err}`);
         }
@@ -4278,7 +4328,7 @@
       if (serverPlaylistSelect) {
         serverPlaylistSelect.selectedIndex = 0;
         this._toggleServerSelectClear('');
-        isDev && logger.info('\n'+ 'playlistManager: server playlist selection cleared');
+        isDev && logger.info('\n' + 'playlistManager: server playlist selection cleared');
       }
     }
 
@@ -4365,7 +4415,7 @@
       }
 
       const url = `${PLAYLIST_URL_BASE}/${selectedFile}`;
-      isDev && logger.info('\n'+ `playlistManager: loading server playlist from: ${url}`);
+      isDev && logger.info('\n' + `playlistManager: loading server playlist from: ${url}`);
 
       await playlistManager.importFromUrlAsync(url);
 
@@ -4427,10 +4477,11 @@
         isDev && logger.warn('\n' + 'playlistManager: no playable first entry found after server playlist load');
       }
 
-      const videoElement = document.getElementById(_pid('video_player_container'));
-      if (videoElement) {
-        scrollToElement(videoElement);
+      const videoTitleElement = document.getElementById('video_title');
+      if (videoTitleElement) {
+        scrollToElement(videoTitleElement);
       }
+
     }
   } // END playlistIOHandler
 
@@ -4587,9 +4638,9 @@
           titleBar.appendChild(listModeSwitch);
         }
 
-        isDev && logger.debug('\n'+ 'playlistModeSwitchHandler: created dynamic switch');
+        isDev && logger.debug('\n' + 'playlistModeSwitchHandler: created dynamic switch');
       } else {
-        isDev && logger.debug('\n'+ 'playlistModeSwitchHandler: reusing existing static switch');
+        isDev && logger.debug('\n' + 'playlistModeSwitchHandler: reusing existing static switch');
       }
 
       const checkbox = document.getElementById('playlistMode');
@@ -4604,11 +4655,11 @@
         if (e.target.checked) {
           playlistManager._displayMode = 'cards';
           localStorage.setItem('playlistMode', 'cards');
-          isDev && logger.info('\n'+ 'playlistModeSwitchHandler: switched to card mode');
+          isDev && logger.info('\n' + 'playlistModeSwitchHandler: switched to card mode');
         } else {
           playlistManager._displayMode = 'list';
           localStorage.setItem('playlistMode', 'list');
-          isDev && logger.info('\n'+ 'playlistModeSwitchHandler: switched to list mode');
+          isDev && logger.info('\n' + 'playlistModeSwitchHandler: switched to list mode');
         }
         playlistManager.renderCurrent();
       });
@@ -4620,7 +4671,7 @@
         listModeSwitch.style.display = 'none';
       }
 
-      isDev && logger.info('\n'+ 'playlistModeSwitchHandler: modeSwitchHandler initialized');
+      isDev && logger.info('\n' + 'playlistModeSwitchHandler: modeSwitchHandler initialized');
     }
 
   } // END playlistModeSwitchHandler
@@ -4713,7 +4764,7 @@
         mergeModeSwitch.style.display = 'none';
       }
 
-      isDev && logger.info('\n'+ 'playlistManager: mergeSwitchHandler initialized');
+      isDev && logger.info('\n' + 'playlistManager: mergeSwitchHandler initialized');
     }
 
   } // END playlistMergeSwitchHandler
@@ -4820,7 +4871,7 @@
         checkbox.checked = false;
       }
 
-      isDev && logger.info('\n'+ 'playlistManager: loopSwitchHandler initialized');
+      isDev && logger.info('\n' + 'playlistManager: loopSwitchHandler initialized');
     }
 
   } // END playlistLoopSwitchHandler
@@ -4929,7 +4980,7 @@
           o.textContent = opt.label;
           selectEl.appendChild(o);
 
-          isDev && logger.debug('\n'+ `playlistSortHandler: injected missing option "${opt.value}"`);
+          isDev && logger.debug('\n' + `playlistSortHandler: injected missing option "${opt.value}"`);
         }
       });
     }
@@ -5044,7 +5095,7 @@
       });
     });
 
-    isDev && logger.info('\n'+ 'navbarSmoothScrollHandler: registered ' + anchors.length + ' click handler(s)');
+    isDev && logger.info('\n' + 'navbarSmoothScrollHandler: registered ' + anchors.length + ' click handler(s)');
   }
 
   // ---------------------------------------------------------------------------
@@ -5181,10 +5232,18 @@
       editScreen.style.display = 'none';
     }
 
-    // Restore the video_container snapshot only if the editor had replaced it.
-    if (wasOpen && videoContnr && containerHTML) {
+    // claude - Modify J1 VideoPlayer #29
+    // Under the overlay model the edit screen is positioned OVER
+    // #video_container as a sibling and never replaces its contents, so the
+    // snapshot-restore step below is no longer required and would, if it ran,
+    // wipe a live player. The legacy "move editScreen inside container" path
+    // that this restore paired with is now disabled (see initEditPlaylistHandler
+    // deprecation), so this branch is gated off. Preserved (not deleted) for
+    // reference. The `void` keeps `containerHTML`/`videoContnr` referenced.
+    if (false && wasOpen && videoContnr && containerHTML) {
       videoContnr.innerHTML = containerHTML;
     }
+    void wasOpen; void videoContnr; void containerHTML;
 
     // Reset button aria / title / open-marker state (idempotent).
     if (editBtn) {

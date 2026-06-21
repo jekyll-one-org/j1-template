@@ -65,6 +65,7 @@ defaults:
 
   playlist:
     enabled:                            true
+    close_on_play:                      false
 
     search:
       enabled:                          true
@@ -123,7 +124,7 @@ defaults:
 
         # player parameters
         #
-        autoplay:                       true                                    # true | false | 'muted' | 'play' | 'any'
+        autoplay:                       true                                    # true | false
         controls:                       true
         fluid:                          true                                    # responsive, fills container width
         fill:                           false                                   # stretch to container dimensions
@@ -131,11 +132,12 @@ defaults:
         preload:                        auto                                    # auto | metadata | none
         playsinline:                    true                                    # prevent fullscreen on iOS by default
 
-        # video parameters
-        #
-        #default_poster:                /assets/image/icon/videojs/videojs-poster.png
+        default_poster:                 /assets/image/icon/videojs/videojs-poster.png
         poster_base:                    video-folder                            # same folder as video
         poster:                         poster.jpg                              # poster image
+
+        # video parameters
+        #
         start:                          true                                    # set start (trim) of a video allowed
         end:                            true                                    # set end (trim) of a video allowed
 
@@ -155,7 +157,7 @@ defaults:
 
         # player parameters
         #
-        autoplay:                       true
+        autoplay:                       true                                    # true | false
         cc_load_policy:                 0                                       # 0|1, captions are initially hidden
         controls:                       1                                       # 0|1, disable|enable (vjs) controlbar
         disablekb:                      1
@@ -167,11 +169,13 @@ defaults:
         rel:                            0
         showinfo:                       0
 
-        # video parameters
-        #
+#       poster:                         false
         default_poster:                 /assets/image/icon/videojs/videojs-poster.png
         poster_base:                    //img.youtube.com/vi
         poster_qualty:                  hqdefault                               # hqdefault|mqdefault, poster taken from poster_base at high quality resolution
+
+        # video parameters
+        #
         start:                          true                                    # set start (trim) of a video allowed
         end:                            true                                    # set end (trim) of a video allowed
 
@@ -181,14 +185,13 @@ defaults:
 
       playlist:
         enabled:                        true
-        autoplay:                       true
-        autoadvance:                    true                                    # play next item when current video ends
+#       autoplay:                       true                                    # play video after load
+        autoadvance:                    true                                    # play next item when current/active video ends
         autoadvance_delay:              0                                       # delay (seconds) for playing next video
-        repeat:                         false
-        reverse:                        false
-        repeat:                         false
-        shuffle:                        false                                   # Randomize the contents of the playlist
-        poster:                         false
+        poster:                         false                                   # enable|disable poster settings
+#       repeat:                         false                                   # NOT supported, run playlist in (endless) loop
+#       reverse:                        false                                   # NOT supported, run playlist in reverse order
+#       shuffle:                        false                                   # NOT supported, randomize the contents of the playlist
 
       autoCaption:
         enabled:                        false
@@ -223,6 +226,7 @@ defaults:
 
       nextPrevButtons:
         enabled:                        true
+        autoplay:                       true                                    # play video after load
 
       zoomButtons:
         enabled:                        false

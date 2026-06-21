@@ -1,6 +1,6 @@
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/modules/videoPlayer/js/videoPlayer.js (35)
+ # ~/assets/theme/j1/modules/videoPlayer/js/videoPlayer.js (36)
  # Provides JS Core for J1 Module videoPlayer
  #
  # Product/Info:
@@ -13,7 +13,7 @@
  # -----------------------------------------------------------------------------
 */
 
-/* Version 3.1.35 for J1 Template */
+/* Version 3.1.36 for J1 Template */
 
 // -----------------------------------------------------------------------------
 // ESLint shimming
@@ -740,7 +740,8 @@
 
       const found = (playlist.find(item => item.videoId === entry.videoId)) ? true : false;
       if (found) {
-        consoleLog('INFO', MODULE_NAME, `playlistmanager: skip adding entry with title: ${entry.title}`);
+        // consoleLog('INFO', MODULE_NAME, `playlistmanager: skip adding entry with title: ${entry.title}`);
+        logger.info('\n' + `playlistmanager: skip adding entry with title: ${entry.title}`);
         return;
       }
 
@@ -773,7 +774,8 @@
       filtered.unshift(record);
       this.save(filtered);
 
-      consoleLog('INFO', MODULE_NAME, `playlistmanager: entry added for videoId: ${entry.videoId}`);
+      // consoleLog('INFO', MODULE_NAME, `playlistmanager: entry added for videoId: ${entry.videoId}`);
+      isDev && logger.info('\n' + `playlistmanager: entry added for videoId: ${entry.videoId}`);
 
       this.renderCurrent();
     }
@@ -788,7 +790,7 @@
       entry.duration = durationSeconds;
       this.save(playlist);
 
-      consoleLog('INFO', MODULE_NAME, `playlistmanager: duration updated for video with id: ${videoId} - ${this._formatDuration(durationSeconds)}`);
+      isDev && logger.info('\n' + `playlistmanager: duration updated for video with id: ${videoId} - ${this._formatDuration(durationSeconds)}`);
 
       this.renderCurrent();
     }
@@ -2690,16 +2692,22 @@
       return null;
     })();
 
-    const isYouTube = !!youtubeMatch;
+    const isYouTube     = !!youtubeMatch;
+
+    // jadams, 2026-06-18: fix for invalid IDs
+    // generate a synthetic video ID for native videos
+    const nativeVideoId = j1.generateId(11);
+
+    // const videoId = isYouTube
+    //   ? youtubeMatch
+    //   : (videoSrc
+    //       ? videoSrc.split('?')[0].split('/').pop().replace(/\.[^.]+$/, '') || videoSrc
+    //       : '');
 
     // Derive a stable videoId for playlist keying:
     //   - YouTube:  the 11-char video ID extracted from the URL
-    //   - Native:   filename without extension (unchanged from #2)
-    const videoId = isYouTube
-      ? youtubeMatch
-      : (videoSrc
-          ? videoSrc.split('?')[0].split('/').pop().replace(/\.[^.]+$/, '') || videoSrc
-          : '');
+    //   - Native:   the synthetic video ID generated
+    const videoId = (isYouTube) ? youtubeMatch : nativeVideoId;
 
     const vjsPlayer = createVideoJsPlayer(videoId, videoSrc, isYouTube, {
       title: '',
@@ -2746,11 +2754,15 @@
               const totalDuration = player.duration();
 
               // For YouTube videos use player.ytVideoData.video_id;
-              // for native videos use player.videoData.videoId (unchanged from #2).
+              // for native videos use videoId passed over
               const currentVideoId = isYouTube
                 ? ((player.ytVideoData && player.ytVideoData.video_id) ? player.ytVideoData.video_id : videoId)
-                : ((player.videoData   && player.videoData.videoId)    ? player.videoData.videoId    : videoId);
+                : videoId;
 
+              // const currentVideoId = isYouTube
+              //   ? ((player.ytVideoData && player.ytVideoData.video_id) ? player.ytVideoData.video_id : videoId)
+              //   : ((player.videoData   && player.videoData.videoId)    ? player.videoData.videoId    : videoId);
+              
               if (currentVideoId && currentPos > 0) {
                 const positionToSave = (vjsStateEventNameMap[state] === 'ended') ? 0 : currentPos;
                 playlistManager.updateEntryPosition(currentVideoId, positionToSave);
@@ -3026,8 +3038,7 @@
             );
 
             if (syncedIndex < 0) {
-              isDev && consoleLog('WARN', MODULE_NAME,
-                `playlist sync: vjsVideoId '${vjsVideoId}' not found in converted playlist ` +
+              isDev && logger.warn('\n' + `playlist sync: vjsVideoId '${vjsVideoId}' not found in converted playlist ` +
                 `(rawIndex: ${rawIndex}); keeping current item`);
 
               const fallbackIndex = vjsPlayer.playlist.currentItem();
@@ -3040,8 +3051,7 @@
             // currentIndex (for loading the video) is the synced index.
             let currentIndex = syncedIndex;
 
-            isDev && consoleLog('INFO', MODULE_NAME,
-              `playlist sync: vjsVideoId '${vjsVideoId}' rawIndex=${rawIndex} syncedIndex=${syncedIndex}`);
+            isDev && logger.info('\n' + `playlist sync: vjsVideoId '${vjsVideoId}' rawIndex=${rawIndex} syncedIndex=${syncedIndex}`);
 
             // claude - Modify J1 VideoPlayer #19
             // Guard the currentItem() jump so a short or empty converted
@@ -4238,6 +4248,32 @@
           playlistManager._updateTogglePlaylistButton();
 
           playlistManager.renderCurrent();
+
+          // claude - Modify J1 VideoPlayer #27
+          // Mirror of "Modify J1 VideoPlayer #26" (handleLoadFromServer): when a
+          // playlist file is imported here, load the first video of the
+          // (display-ordered) list into the player and start it in the 'paused'
+          // state. The display order is reproduced by applying the active sort
+          // criterion (_currentSort) to a fresh copy of the stored playlist —
+          // the same ordering renderCards()/renderPlaylist() apply — so the
+          // entry chosen here matches the first row the user sees. Going through
+          // the playlistManager.embedRunVideo(videoId, 'pause') wrapper resolves
+          // the entry's src and, via playerMode === 'pause', pauses playback
+          // right after start (see the autoplay branch in embedRunVideo). The
+          // 'pause' mode (instead of playEntry()) is deliberate: it does NOT set
+          // _startedFromPlaylist, so the playlist panel is left open after load.
+          // As with #26, the paused-after-start behaviour depends on the
+          // autoplay config being enabled.
+          //
+          const firstList  = playlistManager.load() || [];
+          playlistManager._applySortOrder(firstList);
+          const firstEntry = firstList[0];
+          if (firstEntry && firstEntry.videoId) {
+            isDev && logger.info('\n' + `playlistManager: loading first imported-playlist video in paused state (videoId: ${firstEntry.videoId})`);
+            playlistManager.embedRunVideo(firstEntry.videoId, 'pause');
+          } else {
+            isDev && logger.warn('\n' + 'playlistManager: no playable first entry found after playlist file import');
+          }
 
           const videoElement = document.getElementById(_pid('video_player_container'));
           if (videoElement) {

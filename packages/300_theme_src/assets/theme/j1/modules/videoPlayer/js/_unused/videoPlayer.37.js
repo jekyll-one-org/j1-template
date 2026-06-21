@@ -1,6 +1,6 @@
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/modules/videoPlayer/js/videoPlayer.js (35)
+ # ~/assets/theme/j1/modules/videoPlayer/js/videoPlayer.js (37)
  # Provides JS Core for J1 Module videoPlayer
  #
  # Product/Info:
@@ -13,7 +13,7 @@
  # -----------------------------------------------------------------------------
 */
 
-/* Version 3.1.35 for J1 Template */
+/* Version 3.1.37 for J1 Template */
 
 // -----------------------------------------------------------------------------
 // ESLint shimming
@@ -159,16 +159,16 @@
   // A rule that yields `undefined` is omitted from the produced item.
   // ---------------------------------------------------------------------------
   const mapVideoPlayerPlaylist = Object.freeze({
-    // --- videojs-playlist core (REQUIRED) ----------------------------------
+    // --- videojs-playlist core (REQUIRED) ------------------------------------
     sources:      (entry) => _buildPlaylistItemSources(entry),
 
-    // --- videojs-playlist-ui menu fields -----------------------------------
+    // --- videojs-playlist-ui menu fields -------------------------------------
     name:         (entry) => entry.title || entry.videoId || 'Untitled',
     description:  (entry) => entry.description || '',
     poster:       (entry) => entry.poster || DEFAULT_POSTER,
     duration:     (entry) => (typeof entry.duration === 'number' ? entry.duration : 0),
 
-    // --- J1 metadata carried through (verbatim copies) ---------------------
+    // --- J1 metadata carried through (verbatim copies) -----------------------
     videoId:      'videoId',
     videoLink:    'videoLink',
     infoLink:     'infoLink',
@@ -617,6 +617,65 @@
         }
       }
 
+      // claude - Modify J1 VideoPlayer #28
+      // Make the native playlist record self-describing for the videojs-playlist
+      // plugin: attach the plugin item shape (sources / name / duration) directly
+      // onto the entry. Because load() normalises every entry, load() now returns
+      // playlist items that can be handed to vjsPlayer.playlist() verbatim, so the
+      // separate mapVideoPlayerPlaylist / convertVideoPlayerPlaylist() conversion
+      // pass is no longer required on the consumption path.
+      this._attachPlaylistItemShape(entry);
+
+      return entry;
+    }
+
+    // claude - Modify J1 VideoPlayer #28
+    // -------------------------------------------------------------------------
+    // _attachPlaylistItemShape
+    //
+    // Augments a single native J1 playlist record (the localStorage entry shape)
+    // IN PLACE with the fields the videojs-playlist plugin (core.js) and
+    // videojs-playlist-ui expect, so the native format *is* the plugin format
+    // and no record -> item conversion is needed any more:
+    //
+    //   sources:     [{ src, type }]   REQUIRED by core.js playItem()/player.src()
+    //   name:        menu title        (videojs-playlist-ui)
+    //   duration:    menu duration     (videojs-playlist-ui, numeric seconds)
+    //
+    // This intentionally produces the same values the now-retired
+    // mapVideoPlayerPlaylist rules produced, but writes them onto the entry
+    // itself instead of into a separate, freshly-built item object:
+    //
+    //   * sources  - reuses _buildPlaylistItemSources() (single source of truth
+    //                for YouTube vs. native src/type derivation) and is RE-derived
+    //                on every call so later edits to entry.src / entry.videoLink
+    //                propagate on the next load()/normalise cycle (idempotent).
+    //   * name     - title || videoId || 'Untitled'; added only as a NEW field so
+    //                the J1 render helpers that read entry.title are untouched.
+    //   * duration - coerced to a number (parsing "mm:ss"/"h:mm:ss" strings) so
+    //                videojs-playlist-ui always gets a numeric duration.
+    //
+    // description and poster are deliberately NOT rewritten here: description is
+    // already a native field, and poster is owned by _normalizeEntry()'s existing
+    // policy (synthesised YouTube poster, '' kept for native entries so a real
+    // poster is still recognised as "missing" on later loads). Both core.js
+    // playItem() (`player.poster(item.poster || '')`) and the J1 render helpers
+    // (`item.poster || DEFAULT_POSTER`) already tolerate an empty/absent poster.
+    // -------------------------------------------------------------------------
+    _attachPlaylistItemShape(entry) {
+      if (!entry || typeof entry !== 'object') return entry;
+
+      entry.sources = _buildPlaylistItemSources(entry);
+      entry.name    = entry.title || entry.videoId || 'Untitled';
+
+      if (typeof entry.duration !== 'number' || isNaN(entry.duration)) {
+        entry.duration = this._parseDuration(entry.duration) || 0;
+      }
+
+      if (typeof entry.description !== 'string') {
+        entry.description = (entry.description == null) ? '' : String(entry.description);
+      }
+
       return entry;
     }
 
@@ -634,11 +693,26 @@
         }
         return parsed;
       } catch (e) {
-        consoleLog('ERROR', MODULE_NAME, `error parsing localStorage data: ${e}`);
+        logger.error('\n' +  `error parsing localStorage data: ${e}`);
         return null;
       }
     }
 
+    // claude - Modify J1 VideoPlayer #28
+    // -------------------------------------------------------------------------
+    // DEPRECATED / RETIRED as of #28.
+    //
+    // The native playlist record is now self-describing: _normalizeEntry() ->
+    // _attachPlaylistItemShape() attaches `sources` / `name` / `duration` onto
+    // every entry, so load() already returns videojs-playlist ready items and
+    // the consumption path (createVideoJsPlayer) hands load() output straight to
+    // vjsPlayer.playlist() after a simple "has a playable source" filter.
+    //
+    // This method (together with mapVideoPlayerPlaylist and the per-call object
+    // building it performed) is therefore no longer on the hot path. It is kept
+    // intact only for backward compatibility / external callers and as a thin
+    // safety net; it can be removed once nothing else references it.
+    // -------------------------------------------------------------------------
     // claude - Modify J1 VideoPlayer #19
     // -------------------------------------------------------------------------
     // convertVideoPlayerPlaylist
@@ -657,7 +731,7 @@
     // @return {Array<Object>}              videojs-playlist ready item list
     // -------------------------------------------------------------------------
     convertVideoPlayerPlaylist(rawPlaylist, poster) {
-      if (!Array.isArray(rawPlaylist)) return [];
+      if (!Array.isArray(rawPlaylist) || rawPlaylist.length == 0) return [];
 
       const items = [];
 
@@ -689,14 +763,14 @@
 
         // Guard: a playlist item without a playable source is unusable.
         if (!Array.isArray(item.sources) || item.sources.length === 0 || !item.sources[0].src) {
-          consoleLog('WARN', MODULE_NAME, `playlistmanager: skipped entry without a playable source (videoId: ${entry.videoId || 'n/a'})`);
+          logger.warn('\n' + `playlistmanager: skipped entry without a playable source (videoId: ${entry.videoId || 'n/a'})`);
           return;
         }
 
         items.push(item);
       });
 
-      isDev && consoleLog('INFO', MODULE_NAME, `playlistmanager: converted ${items.length}/${rawPlaylist.length} entries for videojs-playlist`);
+      isDev && logger.info('\n' +  `playlistmanager: converted ${items.length}/${rawPlaylist.length} entries for videojs-playlist`);
 
       return items;
     }
@@ -714,10 +788,10 @@
      * addEntry - add a new video to the playlist in localStorage.
      *
      * @param {Object} entry
-     * @param {string}  [entry.src]          - full local or remote video URL/path
-     * @param {string}  [entry.poster]       - poster image URL for the video
-     * @param {string}  [entry.videoId]      - derived filename-without-extension key
-     * @param {string}  [entry.videoLink]    - full video URL (identical to src for native)
+     * @param {string}  [entry.src]           - full local or remote video URL/path
+     * @param {string}  [entry.poster]        - poster image URL for the video
+     * @param {string}  [entry.videoId]       - derived filename-without-extension key
+     * @param {string}  [entry.videoLink]     - full video URL (identical to src for native)
      * @param {string}  [entry.author]        - author name
      * @param {string}  [entry.category]      - category
      * @param {string}  [entry.description]   - description text, limited to 50 words
@@ -740,7 +814,7 @@
 
       const found = (playlist.find(item => item.videoId === entry.videoId)) ? true : false;
       if (found) {
-        consoleLog('INFO', MODULE_NAME, `playlistmanager: skip adding entry with title: ${entry.title}`);
+        logger.info('\n' +  `playlistmanager: skip adding entry with title: ${entry.title}`);
         return;
       }
 
@@ -773,7 +847,7 @@
       filtered.unshift(record);
       this.save(filtered);
 
-      consoleLog('INFO', MODULE_NAME, `playlistmanager: entry added for videoId: ${entry.videoId}`);
+      logger.info('\n' +  `playlistmanager: entry added for videoId: ${entry.videoId}`);
 
       this.renderCurrent();
     }
@@ -788,7 +862,7 @@
       entry.duration = durationSeconds;
       this.save(playlist);
 
-      consoleLog('INFO', MODULE_NAME, `playlistmanager: duration updated for video with id: ${videoId} - ${this._formatDuration(durationSeconds)}`);
+      logger.info('\n' +  `playlistmanager: duration updated for video with id: ${videoId} - ${this._formatDuration(durationSeconds)}`);
 
       this.renderCurrent();
     }
@@ -808,7 +882,7 @@
       entry.author = author;
       this.save(playlist);
 
-      consoleLog('INFO', MODULE_NAME, `playlist entry author updated for videoId: ${videoId} - ${author}`);
+      logger.info('\n' +  `playlist entry author updated for videoId: ${videoId} - ${author}`);
 
       this.renderCurrent();
     }
@@ -823,7 +897,7 @@
       entry.lastPosition = positionSeconds;
       this.save(playlist);
 
-      consoleLog('INFO', MODULE_NAME, `playlistmanager: position updated for video with id: ${videoId} - ${positionSeconds}s`);
+      logger.info('\n' +  `playlistmanager: position updated for video with id: ${videoId} - ${positionSeconds}s`);
     }
 
     updateWatchDate(videoId) {
@@ -836,7 +910,7 @@
       entry.watchDate = new Date().toISOString();
       this.save(playlist);
 
-      consoleLog('INFO', MODULE_NAME, `playlistmanager: watchDate updated for video with id: ${videoId}`);
+      logger.info('\n' +  `playlistmanager: watchDate updated for video with id: ${videoId}`);
 
       this.renderCurrent();
     }
@@ -851,7 +925,7 @@
       entry.rating = rating;
       this.save(playlist);
 
-      consoleLog('INFO', MODULE_NAME, `playlistmanager: rating updated for videoId: ${videoId} - ${rating}`);
+      logger.info('\n' +  `playlistmanager: rating updated for videoId: ${videoId} - ${rating}`);
 
       this.renderCurrent();
     }
@@ -875,7 +949,7 @@
 
       this.save(playlist);
 
-      consoleLog('INFO', MODULE_NAME, `playlistmanager: fields updated for videoId: ${videoId}`);
+      logger.info('\n' +  `playlistmanager: fields updated for videoId: ${videoId}`);
 
       this.renderCurrent();
     }
@@ -909,12 +983,12 @@
       const updated = playlist.filter(item => item.videoId !== videoId);
 
       if (updated.length === playlist.length) {
-        consoleLog('WARN', MODULE_NAME, `playlist entry not found for videoId: ${videoId}`);
+        logger.warn('\n' + `playlist entry not found for videoId: ${videoId}`);
         return;
       }
 
       this.save(updated);
-      consoleLog('INFO', MODULE_NAME, `playlist entry deleted for videoId: ${videoId}`);
+      logger.info('\n' +  `playlist entry deleted for videoId: ${videoId}`);
 
       // claude - Modify J1 VideoPlayer #22
       // Guard: if the deleted entry is the one currently marked active, drop
@@ -940,7 +1014,7 @@
       localStorage.removeItem(this.STORAGE_KEY);
       this._invalidateSearchIndex();
 
-      consoleLog('INFO', MODULE_NAME, `cleared ${playlist.length} items from localStorage key: ${this.STORAGE_KEY}`);
+      logger.info('\n' +  `cleared ${playlist.length} items from localStorage key: ${this.STORAGE_KEY}`);
 
       // claude - Modify J1 VideoPlayer #22
       // Same guard as deleteEntry(), for the bulk case: clearing the playlist
@@ -967,7 +1041,7 @@
         })
         .then(data => {
           if (!Array.isArray(data)) {
-            consoleLog('ERROR', MODULE_NAME, 'imported URL does not contain a JSON array');
+            logger.error('\n' +  'imported URL does not contain a JSON array');
             return;
           }
           const hasMetaData = data.some(entry => entry.type === 'metaData');
@@ -981,21 +1055,21 @@
             const newEntries  = videos.filter(e => !existingIds.has(e.videoId));
             const merged      = existing.concat(newEntries);
             this.save(merged);
-            consoleLog('INFO', MODULE_NAME, `merged ${newEntries.length} new items (${videos.length - newEntries.length} duplicates skipped) into localStorage on key: ${this.STORAGE_KEY}`);
+            logger.info('\n' +  `merged ${newEntries.length} new items (${videos.length - newEntries.length} duplicates skipped) into localStorage on key: ${this.STORAGE_KEY}`);
           } else {
             this.save(videos);
-            consoleLog('INFO', MODULE_NAME, `imported ${videos.length} of ${data.length} items into localStorage on key: ${this.STORAGE_KEY}`);
+            logger.info('\n' +  `imported ${videos.length} of ${data.length} items into localStorage on key: ${this.STORAGE_KEY}`);
           }
           this.renderCurrent();
         })
-        .catch(err => consoleLog('ERROR', MODULE_NAME, `import from URL failed: ${err}`));
+        .catch(err => logger.error('\n' +  `import from URL failed: ${err}`));
     }
 
     async importFromUrlAsync(url) {
       try {
         const res  = await fetch(url);
         if (!res.ok) {
-          consoleLog('ERROR', MODULE_NAME, `import from URL failed: HTTP ${res.status}`);
+          logger.error('\n' +  `import from URL failed: HTTP ${res.status}`);
           return;
         }
         const data = await res.json();
@@ -1035,7 +1109,7 @@
               : null);
 
         if (!Array.isArray(playlist)) {
-          consoleLog('ERROR', MODULE_NAME, 'imported URL does not contain a valid playlist (expected a JSON array or an object with a "playlist" array)');
+          logger.error('\n' +  'imported URL does not contain a valid playlist (expected a JSON array or an object with a "playlist" array)');
           return;
         }
 
@@ -1047,14 +1121,14 @@
           const newEntries  = playlist.filter(e => !existingIds.has(e.videoId));
           const merged      = existing.concat(newEntries);
           this.save(merged);
-          consoleLog('INFO', MODULE_NAME, `merged ${newEntries.length} new items (${playlist.length - newEntries.length} duplicates skipped) into localStorage on key: ${this.STORAGE_KEY}`);
+          logger.info('\n' +  `merged ${newEntries.length} new items (${playlist.length - newEntries.length} duplicates skipped) into localStorage on key: ${this.STORAGE_KEY}`);
         } else {
           this.save(playlist);
-          consoleLog('INFO', MODULE_NAME, `imported ${playlist.length} items into localStorage on key: ${this.STORAGE_KEY}`);
+          logger.info('\n' +  `imported ${playlist.length} items into localStorage on key: ${this.STORAGE_KEY}`);
         }
         this.renderCurrent();
       } catch (err) {
-        consoleLog('ERROR', MODULE_NAME, `import from URL failed: ${err}`);
+        logger.error('\n' +  `import from URL failed: ${err}`);
       }
     }
 
@@ -1078,18 +1152,18 @@
             if (data && typeof data === 'object' && data.playlist) {
               videos     = data.playlist;
               totalCount = videos.length + (data.meta_data ? 1 : 0);
-              consoleLog('INFO', MODULE_NAME, 'imported file uses new format (meta_data + playlist)');
+              logger.info('\n' +  'imported file uses new format (meta_data + playlist)');
             } else {
-              consoleLog('ERROR', MODULE_NAME, 'imported file does not contain a valid playlist format');
+              logger.error('\n' +  'imported file does not contain a valid playlist format');
               return;
             }
 
             videos.forEach(entry => this._normalizeEntry(entry));
             this.save(videos);
-            consoleLog('INFO', MODULE_NAME, `imported ${videos.length} of ${totalCount} items from file: ${file.name}`);
+            logger.info('\n' +  `imported ${videos.length} of ${totalCount} items from file: ${file.name}`);
             this.renderCurrent();
           } catch (err) {
-            consoleLog('ERROR', MODULE_NAME, `import from file failed: ${err}`);
+            logger.error('\n' +  `import from file failed: ${err}`);
           }
         };
         reader.readAsText(file);
@@ -1104,7 +1178,7 @@
       }
       const playlist = this.load();
       if (!playlist || playlist.length === 0) {
-        consoleLog('WARN', MODULE_NAME, 'no playlist data to export');
+        logger.warn('\n' + 'no playlist data to export');
         return;
       }
 
@@ -1123,7 +1197,7 @@
       document.body.removeChild(a);
       URL.revokeObjectURL(url);
 
-      consoleLog('INFO', MODULE_NAME, `exported ${playlist.length} items to file: ${filename}`);
+      logger.info('\n' +  `exported ${playlist.length} items to file: ${filename}`);
     }
 
     // backupToFile - write a downloadable safety backup of the current
@@ -1145,7 +1219,7 @@
       }
       const playlist = this.load();
       if (!playlist || playlist.length === 0) {
-        consoleLog('WARN', MODULE_NAME, 'no playlist data to back up');
+        logger.warn('\n' + 'no playlist data to back up');
         return false;
       }
 
@@ -1169,7 +1243,7 @@
       document.body.removeChild(a);
       URL.revokeObjectURL(url);
 
-      consoleLog('INFO', MODULE_NAME, `backed up ${playlist.length} items to file: ${filename}`);
+      logger.info('\n' +  `backed up ${playlist.length} items to file: ${filename}`);
       return true;
     }
 
@@ -1243,7 +1317,7 @@
         if (titleBar) {
           this._loopSwitchInitialized = true;
           new playlistLoopSwitchHandler();
-          consoleLog('INFO', MODULE_NAME, 'playlistManager: loop switch initialized (lazy)');
+          logger.info('\n' +  'playlistManager: loop switch initialized (lazy)');
         }
       }
 
@@ -1255,8 +1329,8 @@
     _getPlaylistContainer() {
       const el = document.getElementById(_pid('videoplayer_playlist_parent'));
       if (!el) {
-        consoleLog('ERROR', MODULE_NAME, 'playlist container element not found');
-        consoleLog('WARN',  MODULE_NAME, 'processing playlist skipped');
+        logger.error('\n' +  'playlist container element not found');
+        logger.warn('\n'  +  'processing playlist skipped');
       }
       return el;
     }
@@ -1451,7 +1525,8 @@
     // -------------------------------------------------------------------------
 
     initDeleteHandler() {
-      const playlistContainer = document.getElementById(_pid('videoplayer_playlist_parent')) // Fix J1 VideoPlayer #2: corrected ID;
+      // Fix J1 VideoPlayer #2: corrected ID
+      const playlistContainer = document.getElementById(_pid('videoplayer_playlist_parent'));
       if (!playlistContainer) return;
 
       // Fix J1 VideoPlayer #5
@@ -1482,7 +1557,7 @@
       }
 
       isDev && logger.info('\n'+ `playlistmanager: playing entry for videoId: ${videoId}`);
-      _startedFromPlaylist = true;                                           // Modify J1 VideoPlayer #3
+      _startedFromPlaylist = true;  // Modify J1 VideoPlayer #3
       this.embedRunVideo(videoId);
     }
 
@@ -1505,7 +1580,8 @@
     }
 
     initPlayHandler() {
-      const playlistContainer = document.getElementById(_pid('videoplayer_playlist_parent')) // Fix J1 VideoPlayer #2: corrected ID;
+      // Fix J1 VideoPlayer #2: corrected ID;
+      const playlistContainer = document.getElementById(_pid('videoplayer_playlist_parent'))
       if (!playlistContainer) return;
 
       // Fix J1 VideoPlayer #5
@@ -1681,7 +1757,8 @@
     initRateHandler() {
       if (this._rateHandlerInitialized) return;
 
-      const playlistContainer = document.getElementById(_pid('videoplayer_playlist_parent')) // Fix J1 VideoPlayer #2: corrected ID;
+      // Fix J1 VideoPlayer #2: corrected ID;
+      const playlistContainer = document.getElementById(_pid('videoplayer_playlist_parent'));
       if (!playlistContainer) return;
 
       this._rateHandlerInitialized = true;
@@ -2009,7 +2086,8 @@
     initEditHandler() {
       if (this._editHandlerInitialized) return;
 
-      const playlistContainer = document.getElementById(_pid('videoplayer_playlist_parent')) // Fix J1 VideoPlayer #2: corrected ID;
+      // Fix J1 VideoPlayer #2: corrected ID
+      const playlistContainer = document.getElementById(_pid('videoplayer_playlist_parent'));
       if (!playlistContainer) return;
 
       this._editHandlerInitialized = true;
@@ -2032,7 +2110,8 @@
     initInfoLinkHandler() {
       if (this._infoLinkHandlerInitialized) return;
 
-      const playlistContainer = document.getElementById(_pid('videoplayer_playlist_parent')) // Fix J1 VideoPlayer #2: corrected ID;
+      // Fix J1 VideoPlayer #2: corrected ID
+      const playlistContainer = document.getElementById(_pid('videoplayer_playlist_parent'));
       if (!playlistContainer) return;
 
       this._infoLinkHandlerInitialized = true;
@@ -2049,7 +2128,8 @@
     initVideoLinkHandler() {
       if (this._videoLinkHandlerInitialized) return;
 
-      const playlistContainer = document.getElementById(_pid('videoplayer_playlist_parent')) // Fix J1 VideoPlayer #2: corrected ID;
+      // Fix J1 VideoPlayer #2: corrected ID
+      const playlistContainer = document.getElementById(_pid('videoplayer_playlist_parent'));
       if (!playlistContainer) return;
 
       this._videoLinkHandlerInitialized = true;
@@ -2628,7 +2708,7 @@
               const p = vjsPlayer.play();
               if (p && typeof p.catch === 'function') {
                 p.catch(err => {
-                  consoleLog('WARN', MODULE_NAME, `deferred play() rejected: ${err}`);
+                  logger.warn('\n' + `deferred play() rejected: ${err}`);
                 });
               }
             }
@@ -2716,15 +2796,19 @@
           const stateName = vjsStateEventNameMap[state] || (state < 0 ? 'loadstart' : String(state));
           isDev && logger.debug('\n'+ `changed player to state: ${stateName}`);
 
-          if (vjsStateEventNameMap[state] === 'loadstart') {
-            var piPlaylist        = (vjsPlayer.activePlugins_.playlist) ? true : false;
-            var piPlaylistDefaults = j1.adapter.videoPlayer.videoPlayerDefaults;
-            var piPlaylistOptions = j1.adapter.videoPlayer.videoPlayerOptions;
+          // jadams, 2026-06-19: disabled 
+          //
+          // if (vjsStateEventNameMap[state] === 'loadstart') {
+          //   var piPlaylist        = (vjsPlayer.activePlugins_.playlist) ? true : false;
+          //   var piPlaylistDefaults = j1.adapter.videoPlayer.videoPlayerDefaults;
+          //   var piPlaylistOptions = j1.adapter.videoPlayer.videoPlayerOptions;
 
-            if (piPlaylist && piPlaylistOptions.videoJS.plugins.playlist.autoplay) {
-              vjsPlayer.play();
-            }
-          }
+          //   // jadams, 2026-06-19: disabled because this cause double play() requests when enabled
+          //   //            
+          //   if (piPlaylist && piPlaylistOptions.videoJS.plugins.playlist.autoplay) {
+          //     vjsPlayer.play();
+          //   }
+          // }
 
           if (vjsStateEventNameMap[state] === 'playing') {
             doPostOnPlaying(state);
@@ -2851,7 +2935,7 @@
               player.off('playing', onFirstPlayingYT);
               setTimeout(() => {
                 player.currentTime(savedPositionYT);
-                consoleLog('INFO', MODULE_NAME, `resumed YouTube video id: ${videoId} at last position ${savedPositionYT}s`);
+                logger.info('\n' +  `resumed YouTube video id: ${videoId} at last position ${savedPositionYT}s`);
               }, 250);
             };
             player.on('playing', onFirstPlayingYT);
@@ -2916,7 +3000,7 @@
               player.off('playing', onFirstPlaying);
               setTimeout(() => {
                 player.currentTime(savedPosition);
-                consoleLog('INFO', MODULE_NAME, `resumed video with id: ${videoId} at last position ${savedPosition}s`);
+                logger.info('\n' +  `resumed video with id: ${videoId} at last position ${savedPosition}s`);
               }, 250);
             };
             player.on('playing', onFirstPlaying);
@@ -2948,16 +3032,27 @@
           // manage playlist (piPlaylist) plugin (first)
           if (piPlaylist.enabled) {
 
-            // claude - Modify J1 VideoPlayer #19
-            // Convert the raw playlistManager record set (localStorage shape)
-            // into the item shape required by the videojs-playlist plugin
-            // (core.js). The raw load() entries have no `sources` array, so
-            // passing them straight to vjsPlayer.playlist() would make
-            // player.src() fail. The mapping/derivation is centralised in
-            // mapVideoPlayerPlaylist + convertVideoPlayerPlaylist().
+            // claude - Modify J1 VideoPlayer #28
+            // No record -> item conversion any more. load() now returns entries
+            // already in the videojs-playlist item shape (sources / name /
+            // poster / duration attached by _normalizeEntry ->
+            // _attachPlaylistItemShape), so they can be fed to
+            // vjsPlayer.playlist() directly.
             //
-            const rawPlaylist = playlistManager.load() || [];
-            const playlist    = playlistManager.convertVideoPlayerPlaylist(rawPlaylist, piPlaylist.poster);
+            // The only remaining step is to drop entries that yielded no
+            // playable `sources` array (legacy/corrupt records): core.js
+            // playItem() calls player.src(item.sources) and an empty/missing
+            // source list would put the player into an error state.
+            //
+            // `rawPlaylist` and `playlist` are kept as (identical) references so
+            // the downstream index-sync logic (#20/#23) below — which matches by
+            // `videoId` across both — continues to work unchanged. Because the
+            // filtered list reuses the same entry objects (no field remapping),
+            // their videoId index spaces are now identical.
+            const rawPlaylist = (playlistManager.load() || []).filter(
+              (item) => item && Array.isArray(item.sources) && item.sources.length > 0 && item.sources[0].src
+            );
+            const playlist = rawPlaylist; // claude - Modify J1 VideoPlayer #28
 
             vjsPlayer.playlist(playlist);
 
@@ -2978,6 +3073,7 @@
             // Attached AFTER playlist() (so the function exists) and BEFORE the
             // synced currentItem() jump below, so the initial sync is captured
             // too. Video.js passes the trigger hash as the handler's 2nd arg.
+            //
             vjsPlayer.on('playlistitem', (event, item) => {
               const switchedId = (item && item.videoId) ? item.videoId : '';
               _playlistActiveVideoId = switchedId || null;
@@ -3026,7 +3122,7 @@
             );
 
             if (syncedIndex < 0) {
-              isDev && consoleLog('WARN', MODULE_NAME,
+              isDev && logger.warn('\n' + 
                 `playlist sync: vjsVideoId '${vjsVideoId}' not found in converted playlist ` +
                 `(rawIndex: ${rawIndex}); keeping current item`);
 
@@ -3040,7 +3136,7 @@
             // currentIndex (for loading the video) is the synced index.
             let currentIndex = syncedIndex;
 
-            isDev && consoleLog('INFO', MODULE_NAME,
+            isDev && logger.info('\n' + 
               `playlist sync: vjsVideoId '${vjsVideoId}' rawIndex=${rawIndex} syncedIndex=${syncedIndex}`);
 
             // claude - Modify J1 VideoPlayer #19
@@ -3217,7 +3313,7 @@
               nativePiP.hide();
             }
 
-            consoleLog('INFO', MODULE_NAME, 'pip: custom Document PiP button added to control bar');
+            logger.info('\n' +  'pip: custom Document PiP button added to control bar');
           } else {
             const nativePiP = vjsPlayer.controlBar.getChild('pictureInPictureToggle');
             if (nativePiP) {
@@ -3653,12 +3749,12 @@
   function createVideoJsPlayer(videoId, videoSrc, isYouTube, options = {}) {
 
     if (!container) {
-      consoleLog('ERROR', MODULE_NAME, `Container or overlay element not found`);
+      logger.error('\n' +  `Container or overlay element not found`);
       return null;
     }
 
     if (player) {
-      isDev && consoleLog('INFO', MODULE_NAME, `Disposing existing videoJS player: ${player.id_}`);
+      isDev && logger.info('\n' +  `Disposing existing videoJS player: ${player.id_}`);
 
       if (pipWindow && !pipWindow.closed) {
         pipWindow.close();
@@ -3673,13 +3769,13 @@
 
     const overlayExists = document.getElementById(_pid('emptyPlayerOverlay'));
     if (!overlayExists) {
-      isDev && consoleLog('INFO', MODULE_NAME, `Restoring container and overlay for new video`);
+      isDev && logger.info('\n' +  `Restoring container and overlay for new video`);
       container.innerHTML = containerHTML;
     }
 
     const currentOverlay = document.getElementById(_pid('emptyPlayerOverlay'));
     if (!currentOverlay) {
-      isDev && consoleLog('ERROR', MODULE_NAME, `Overlay element could not be restored`);
+      isDev && logger.error('\n' +  `Overlay element could not be restored`);
       return null;
     }
 
@@ -3742,7 +3838,7 @@
         }
       };
 
-      isDev && consoleLog('INFO', MODULE_NAME, `createVideoJsPlayer: YouTube playerVars from players.youtube: ${JSON.stringify(ytPlayerVars)}`);
+      isDev && logger.info('\n' +  `createVideoJsPlayer: YouTube playerVars from players.youtube: ${JSON.stringify(ytPlayerVars)}`);
 
     } else {
       // Native HTML5 tech configuration: all player parameters are now read
@@ -3798,12 +3894,12 @@
         videoConfig.poster = ntvCfg.default_poster;
       }
 
-      isDev && consoleLog('INFO', MODULE_NAME, `createVideoJsPlayer: native config from players.native: fluid=${videoConfig.fluid}, responsive=${videoConfig.responsive}, preload=${videoConfig.preload}`);
+      isDev && logger.info('\n' +  `createVideoJsPlayer: native config from players.native: fluid=${videoConfig.fluid}, responsive=${videoConfig.responsive}, preload=${videoConfig.preload}`);
     }
 
     if (typeof videojs !== 'undefined') {
       player = videojs(playerElementId, videoConfig, function onPlayerReady() {
-        isDev && consoleLog('INFO', MODULE_NAME, `player ready on id: ${playerElementId}`);
+        isDev && logger.info('\n' +  `player ready on id: ${playerElementId}`);
 
         if (options.onStateChange) {
           const vjsPlayer = this;
@@ -3821,9 +3917,9 @@
           // DOM events that the adapter (onReady) and loop mode rely on.
           if (typeof this.nativePlayer === 'function') {
             this.nativePlayer({ title: options.title || '' });
-            isDev && consoleLog('INFO', MODULE_NAME, `nativePlayer plugin activated on: ${playerElementId}`);
+            isDev && logger.info('\n' +  `nativePlayer plugin activated on: ${playerElementId}`);
           } else {
-            isDev && consoleLog('WARN', MODULE_NAME, `nativePlayer plugin not available - custom events will not be dispatched`);
+            isDev && logger.warn('\n' + `nativePlayer plugin not available - custom events will not be dispatched`);
           }
         }
 
@@ -3905,7 +4001,7 @@
     async handlePasteClick() {
       try {
         if (!navigator.clipboard || !navigator.clipboard.readText) {
-          isDev && consoleLog('WARN', MODULE_NAME, MESSAGES.NO_CLIPBOARD_API);
+          isDev && logger.warn('\n' + MESSAGES.NO_CLIPBOARD_API);
           return;
         }
 
@@ -3917,7 +4013,7 @@
         this._toggleClearButton(text.trim());
         this.processUrl();
       } catch (err) {
-        isDev && consoleLog('ERROR', MODULE_NAME, `Clipboard read error: ${err}`);
+        isDev && logger.error('\n' +  `Clipboard read error: ${err}`);
       }
     }
 
@@ -3948,7 +4044,7 @@
     processUrl() {
       const url = this.elements.videoUrlInput.value.trim();
       if (url === "") {
-        isDev && consoleLog('WARN', MODULE_NAME, MESSAGES.NO_URL);
+        isDev && logger.warn('\n' + MESSAGES.NO_URL);
         return;
       }
 
@@ -3957,10 +4053,10 @@
       if (youtubeId) {
         // duplicate check using the YouTube video ID
         if (previousPlayerId !== null && youtubeId === previousPlayerId) {
-          isDev && consoleLog('WARN', MODULE_NAME, `player already exists with id: ${youtubeId}`);
+          isDev && logger.warn('\n' + `player already exists with id: ${youtubeId}`);
           return;
         }
-        isDev && consoleLog('INFO', MODULE_NAME, `Loading YouTube video with id: ${youtubeId}`);
+        isDev && logger.info('\n' +  `Loading YouTube video with id: ${youtubeId}`);
         this.loadYtVideo(youtubeId);
 
         // closeEditPlaylist(btn, playerId) — same pattern as closePlaylist.
@@ -3984,12 +4080,12 @@
         : null;
 
       if (previousPlayerId !== null && videoId === previousPlayerId) {
-        isDev && consoleLog('WARN', MODULE_NAME, `player already exists with id: ${videoId}`);
+        isDev && logger.warn('\n' + `player already exists with id: ${videoId}`);
         return;
       }
 
       if (videoSrc) {
-        isDev && consoleLog('INFO', MODULE_NAME, `Loading video from src: ${videoSrc}`);
+        isDev && logger.info('\n' +  `Loading video from src: ${videoSrc}`);
         this.loadVideo(videoSrc);
 
         //  closeEditPlaylist(btn, playerId) — same pattern as closePlaylist.
@@ -4001,7 +4097,7 @@
         // update the playListButton (to be enabled when a playlist is loaded)
         playlistManager._updateTogglePlaylistButton();
       } else {
-        isDev && consoleLog('ERROR', MODULE_NAME, MESSAGES.INVALID_URL);
+        isDev && logger.error('\n' +  MESSAGES.INVALID_URL);
       }
     } // END processUrl()
 
@@ -4238,6 +4334,32 @@
           playlistManager._updateTogglePlaylistButton();
 
           playlistManager.renderCurrent();
+
+          // claude - Modify J1 VideoPlayer #27
+          // Mirror of "Modify J1 VideoPlayer #26" (handleLoadFromServer): when a
+          // playlist file is imported here, load the first video of the
+          // (display-ordered) list into the player and start it in the 'paused'
+          // state. The display order is reproduced by applying the active sort
+          // criterion (_currentSort) to a fresh copy of the stored playlist —
+          // the same ordering renderCards()/renderPlaylist() apply — so the
+          // entry chosen here matches the first row the user sees. Going through
+          // the playlistManager.embedRunVideo(videoId, 'pause') wrapper resolves
+          // the entry's src and, via playerMode === 'pause', pauses playback
+          // right after start (see the autoplay branch in embedRunVideo). The
+          // 'pause' mode (instead of playEntry()) is deliberate: it does NOT set
+          // _startedFromPlaylist, so the playlist panel is left open after load.
+          // As with #26, the paused-after-start behaviour depends on the
+          // autoplay config being enabled.
+          //
+          const firstList  = playlistManager.load() || [];
+          playlistManager._applySortOrder(firstList);
+          const firstEntry = firstList[0];
+          if (firstEntry && firstEntry.videoId) {
+            isDev && logger.info('\n' + `playlistManager: loading first imported-playlist video in paused state (videoId: ${firstEntry.videoId})`);
+            playlistManager.embedRunVideo(firstEntry.videoId, 'pause');
+          } else {
+            isDev && logger.warn('\n' + 'playlistManager: no playable first entry found after playlist file import');
+          }
 
           const videoElement = document.getElementById(_pid('video_player_container'));
           if (videoElement) {
@@ -4849,7 +4971,7 @@
     init() {
       const { titleBar } = this.elements;
       if (!titleBar) {
-        consoleLog('WARN', MODULE_NAME, 'playlistSortHandler: .playlist-block-title not found');
+        logger.warn('\n' + 'playlistSortHandler: .playlist-block-title not found');
         return;
       }
 

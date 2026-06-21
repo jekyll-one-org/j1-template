@@ -1,6 +1,6 @@
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/modules/videoPlayer/js/videoPlayer.js (35)
+ # ~/assets/theme/j1/modules/videoPlayer/js/videoPlayer.js (36)
  # Provides JS Core for J1 Module videoPlayer
  #
  # Product/Info:
@@ -13,7 +13,7 @@
  # -----------------------------------------------------------------------------
 */
 
-/* Version 3.1.35 for J1 Template */
+/* Version 3.1.36 for J1 Template */
 
 // -----------------------------------------------------------------------------
 // ESLint shimming
@@ -1482,7 +1482,7 @@
       }
 
       isDev && logger.info('\n'+ `playlistmanager: playing entry for videoId: ${videoId}`);
-      _startedFromPlaylist = true;                                           // Modify J1 VideoPlayer #3
+      _startedFromPlaylist = true; // Modify J1 VideoPlayer #3
       this.embedRunVideo(videoId);
     }
 
@@ -3395,17 +3395,10 @@
     if (_startedFromPlaylist) {
       _startedFromPlaylist = false;
 
-      // Previously these delegated to j1.adapter.videoPlayer.closePlaylist()
-      // and j1.adapter.videoPlayer.closeEditPlaylist(), which used bare (un-
-      // suffixed) element IDs and silently failed after every per-player
-      // element id was made unique.
-      // Call the module-local functions directly: they resolve all ids
-      // through _pid() so multi-player pages work correctly.
-      // closePlaylist() now also calls _resetPlaylistToggleUI() internally,
-      // so the separate call below (Modify J1 VideoPlayer #5) is no
-      // longer needed.
-      closePlaylist();
-      closeEditPlaylist();
+      if (videoPlayerOptions.playlist.close_on_play) {
+        closePlaylist();
+        closeEditPlaylist();
+      }
     }
 
     if (videoElement) {
@@ -4238,6 +4231,32 @@
           playlistManager._updateTogglePlaylistButton();
 
           playlistManager.renderCurrent();
+
+          // claude - Modify J1 VideoPlayer #27
+          // Mirror of "Modify J1 VideoPlayer #26" (handleLoadFromServer): when a
+          // playlist file is imported here, load the first video of the
+          // (display-ordered) list into the player and start it in the 'paused'
+          // state. The display order is reproduced by applying the active sort
+          // criterion (_currentSort) to a fresh copy of the stored playlist —
+          // the same ordering renderCards()/renderPlaylist() apply — so the
+          // entry chosen here matches the first row the user sees. Going through
+          // the playlistManager.embedRunVideo(videoId, 'pause') wrapper resolves
+          // the entry's src and, via playerMode === 'pause', pauses playback
+          // right after start (see the autoplay branch in embedRunVideo). The
+          // 'pause' mode (instead of playEntry()) is deliberate: it does NOT set
+          // _startedFromPlaylist, so the playlist panel is left open after load.
+          // As with #26, the paused-after-start behaviour depends on the
+          // autoplay config being enabled.
+          //
+          const firstList  = playlistManager.load() || [];
+          playlistManager._applySortOrder(firstList);
+          const firstEntry = firstList[0];
+          if (firstEntry && firstEntry.videoId) {
+            isDev && logger.info('\n' + `playlistManager: loading first imported-playlist video in paused state (videoId: ${firstEntry.videoId})`);
+            playlistManager.embedRunVideo(firstEntry.videoId, 'pause');
+          } else {
+            isDev && logger.warn('\n' + 'playlistManager: no playable first entry found after playlist file import');
+          }
 
           const videoElement = document.getElementById(_pid('video_player_container'));
           if (videoElement) {

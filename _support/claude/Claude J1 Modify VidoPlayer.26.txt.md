@@ -34,6 +34,7 @@ Key decisions behind it:
   via `_applySortOrder(_currentSort)`. By re-applying the same sort here,
   the entry I pick is the first *visible* row — important because the
   auto-sort path may have just switched `_currentSort` to `'episode'`.
+
 - **`'pause'` mode, not `playEntry()`**
   The existing `playerMode === 'pause'` contract (the autoplay branch
   in `embedRunVideo` calls `vjsPlayer.pause()` after `VIDEO_START_DELAY`)
@@ -41,6 +42,7 @@ Key decisions behind it:
   bypassed `playEntry()` so `_startedFromPlaylist` is *not* set. That flag
   would collapse the playlist panel in `doPostOnPlaying()`, which you don't
   want immediately after loading a playlist.
+
 - **Container/overlay**
   is already restored above (line ~4392) and `createVideoJsPlayer` restores
   it again defensively, so the embed lands cleanly.

@@ -1,7 +1,7 @@
 ---
-title:                                  Video player
-title_extention:                        J1 Player
-tagline:                                Playback Video
+title:                                  J1 Video Player
+title_extention:                        Playback Playlists
+tagline:                                Playback Playlists
 
 date:                                   2026-04-17
 #last_modified:                         2026-01-01
@@ -60,17 +60,17 @@ mid-roll, or overlay ads.
 
 // Include sub-documents (if any)
 // -----------------------------------------------------------------------------
+// [role="mt-5"]
+// == Video player
+
+// // .Local Video over VideoJS
+// // videojs::/assets/video//html5/peck_pocketed.mp4[poster="/assets/image/icon/videojs/videojs-poster.png", role="mb-5"]
+
+// Enjoy watching the playlist.
+
+
 [role="mt-5"]
-== Video player
-
-// .Local Video over VideoJS
-// videojs::/assets/video//html5/peck_pocketed.mp4[poster="/assets/image/icon/videojs/videojs-poster.png", role="mb-5"]
-
-Enjoy watching the playlist.
-
-
-[role="mt-4"]
-=== Tiny Desk Concerts
+== Tiny Desk Concerts
 
 Tiny Desk Concerts is a popular, award-winning video series featuring live
 music performances at an actual office desk, hosted by NPR Music. Started
@@ -83,7 +83,7 @@ videoPlayer::player_1[role="mb-5"]
 
 
 // [role="mt-4"]
-// === Carpool Karaoke
+// == Carpool Karaoke
 
 // Carpool Karaoke was one of the most successful and widely distributed viral
 // video formats in modern television history. It originally started as a

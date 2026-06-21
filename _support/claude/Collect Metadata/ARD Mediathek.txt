@@ -55,14 +55,14 @@ Das JSON enthält typischerweise:
 ```javascript
 const query = {
   queries: [
-    { fields: ["title", "topic"], query: "Tatort" },
-    { fields: ["channel"], query: "ard" }
+    { fields: ["title", "topic"], query: "Joan" },
+    { fields: ["channel"], query: "one" }
   ],
   sortBy: "timestamp",
   sortOrder: "desc",
   future: false,
   offset: 0,
-  size: 10
+  size: 100
 };
 
 const response = await fetch("https://mediathekviewweb.de/api/query", {
