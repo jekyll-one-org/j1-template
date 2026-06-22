@@ -668,6 +668,13 @@ select[data-value-filled="true"] {
   grid-template-columns: repeat(2, 1fr);
 }
 
+.playlist_screen {
+  padding-right: 0.5rem;
+  padding-left: 0.5rem;
+  max-height: 589px;
+  overflow-y: scroll;
+}
+
 /* media breakpoint cards perRow */
 /* Medium devices (tablets, less than 992px) */
 @media (max-width: 991.98px) {

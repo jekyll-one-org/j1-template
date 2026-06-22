@@ -1,6 +1,6 @@
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/modules/videoPlayer/js/videoPlayer.js (40)
+ # ~/assets/theme/j1/modules/videoPlayer/js/videoPlayer.js (39)
  # Provides JS Core for J1 Module videoPlayer
  #
  # Product/Info:
@@ -13,7 +13,7 @@
  # -----------------------------------------------------------------------------
 */
 
-/* Version 3.1.40 for J1 Template */
+/* Version 3.1.39 for J1 Template */
 
 // -----------------------------------------------------------------------------
 // ESLint shimming
@@ -377,7 +377,16 @@
       // state. The matching card/list element gets data-item-active="true";
       // null means no entry is active. Re-applied after every render so the
       // active marker survives renderCurrent()/renderCards()/renderPlaylist().
-      // this.data-item-active                 = null;
+      //
+      // claude - Modify J1 VideoPlayer #30
+      // This is invalid JS (`this.data - item - active`), so `node --check` fails
+      // on it and the whole module won't load in a browser. It's far from my edit
+      // and almost certainly a find/replace accident — the comment above it and
+      // every other reference use `this._activeVideoId`, so the line should read
+      // `this._activeVideoId = null;`.
+      //
+      // this.data-item-active            = null;
+      this._activeVideoId                 = null;
     }
 
     setAdapterOptions(options) {
@@ -2407,213 +2416,6 @@
       this._currentSort = criterion || 'watchDate';
       isDev && logger.debug('\n' + `playlistManager: sort criterion set to "${this._currentSort}"`);
       this.renderCurrent();
-      // claude - Modify J1 VideoPlayer #31
-      // Re-sync the videojs-playlist plugin order on a sort change.
-      //
-      // Problem (follow-on candidate left open by #30): #30 only re-feeds the
-      // plugin from the sorted display source inside embedRunVideo(), i.e. when
-      // a video is (re)selected and the player is rebuilt. If the user changes
-      // the sort dropdown mid-playback WITHOUT selecting a new video,
-      // renderCurrent() (above) re-renders the visible panel in the new order,
-      // but the plugin keeps its previous internal order — so the control-bar
-      // prev/next buttons (nextPrevButtons -> playlist.previous()/.next()) and
-      // autoadvance navigate in the OLD order until the next selection.
-      //
-      // Fix: push the freshly sorted order into the live plugin via the
-      // module-level `player` handle (declared at the module variables block),
-      // keeping the currently-playing item as the plugin's current item so only
-      // the navigation sequence changes, not which video is loaded. The heavy
-      // lifting (guards, display-source build, active-item resolution, playback
-      // preservation) is centralised in _resyncPluginPlaylist().
-      this._resyncPluginPlaylist();
-    }
-
-    // claude - Modify J1 VideoPlayer #31
-    // Re-feed the live videojs-playlist plugin with the current display order.
-    //
-    // Mirrors the #30 source-build pipeline (displaySource -> _applySortOrder()
-    // copy -> convertVideoPlayerPlaylist()) so the plugin's item order matches
-    // exactly what renderPlaylist()/renderCards() shows, then re-points the
-    // plugin's current item at the video that is playing right now (resolved by
-    // videoId, the #20/#23 index space) so the active source is preserved.
-    //
-    // Unlike #30 (which runs while embedRunVideo() is rebuilding the player and
-    // a fresh source load is expected), this runs mid-playback with no rebuild.
-    // The videojs-playlist public API exposes no "reorder without reload", so
-    // re-feeding necessarily reloads the active source; the current time and
-    // play/pause state are captured beforehand and restored after the reload
-    // using the same one-shot listener + 250ms-seek pattern the resume logic in
-    // embedRunVideo() already relies on for both the native and YouTube techs.
-    //
-    // Heavily guarded and purely additive: it no-ops unless a non-disposed
-    // player with the playlist plugin loaded exists, the playlist has at least
-    // two items (ordering is meaningless otherwise), the active video resolves
-    // inside the freshly converted list, AND the order actually changed — so a
-    // sort selection that yields an identical sequence never disturbs playback.
-    _resyncPluginPlaylist() {
-      // claude - Modify J1 VideoPlayer #31
-      // Guard: a live, non-disposed player with the playlist plugin loaded.
-      if (!player) return;
-      if (typeof player.isDisposed === 'function' && player.isDisposed()) return;
-      if (typeof player.playlist !== 'function') return;
-
-      // claude - Modify J1 VideoPlayer #31
-      // Guard: the playlist plugin must be enabled in config (same source #30
-      // reads). Read defensively straight from the adapter options so this does
-      // not depend on the module-level videoPlayerOptions having been assigned.
-      let piPlaylist = null;
-      try {
-        const opts = (j1 && j1.adapter && j1.adapter.videoPlayer && j1.adapter.videoPlayer.videoPlayerOptions)
-          ? j1.adapter.videoPlayer.videoPlayerOptions
-          : videoPlayerOptions;
-        piPlaylist = opts && opts.videoJS && opts.videoJS.plugins
-          ? opts.videoJS.plugins.playlist
-          : null;
-      } catch (e) {
-        piPlaylist = null;
-      }
-      if (!piPlaylist || !piPlaylist.enabled) return;
-
-      // claude - Modify J1 VideoPlayer #31
-      // Resolve the video that is playing RIGHT NOW, BEFORE the list is touched.
-      // Re-feeding fires 'playlistitem' (the #23 listener) and would otherwise
-      // clobber _playlistActiveVideoId, so the active id is captured up front.
-      //   1) _playlistActiveVideoId  - the #23 tracker that follows plugin nav.
-      //   2) the current plugin item - via the pre-reorder list + currentItem().
-      //   3) player.*VideoData       - last-resort tech-side fallback.
-      let activeVideoId = _playlistActiveVideoId || null;
-
-      // claude - Modify J1 VideoPlayer #31
-      // Snapshot the plugin's current (pre-reorder) list + index. Used both for
-      // the activeVideoId fallback and for the order-changed comparison below.
-      let currentList = null;
-      let currentIdx  = -1;
-      try {
-        currentList = player.playlist();
-        if (typeof player.playlist.currentItem === 'function') {
-          currentIdx = player.playlist.currentItem();
-        }
-      } catch (e) {
-        currentList = null;
-      }
-
-      if (!activeVideoId && Array.isArray(currentList) &&
-          typeof currentIdx === 'number' && currentIdx >= 0 &&
-          currentList[currentIdx] && currentList[currentIdx].videoId) {
-        activeVideoId = currentList[currentIdx].videoId;
-      }
-
-      if (!activeVideoId) {
-        if (player.ytVideoData && player.ytVideoData.video_id) {
-          activeVideoId = player.ytVideoData.video_id;
-        } else if (player.videoData && player.videoData.videoId) {
-          activeVideoId = player.videoData.videoId;
-        }
-      }
-
-      // claude - Modify J1 VideoPlayer #31
-      // Build the new plugin source from the SAME display source the panel uses
-      // and sort it with the SAME _applySortOrder() before conversion (#30
-      // pipeline). _applySortOrder() sorts in place and returns the array, so a
-      // defensive .slice() copy is sorted to avoid mutating _searchResults / the
-      // stored playlist here.
-      const displaySource = this._searchResults || this.load() || [];
-      const rawPlaylist   = this._applySortOrder(displaySource.slice());
-      const playlist      = this.convertVideoPlayerPlaylist(rawPlaylist, piPlaylist.poster);
-
-      // claude - Modify J1 VideoPlayer #31
-      // Guard: ordering only matters with at least two playable items.
-      if (!Array.isArray(playlist) || playlist.length < 2) return;
-
-      // claude - Modify J1 VideoPlayer #31
-      // Resolve the active video inside the freshly converted list (videoId
-      // match, the #20 index space). convertVideoPlayerPlaylist() silently drops
-      // entries without playable sources, so a raw index cannot be reused. If
-      // the active video is absent from the converted list, do NOT reload — that
-      // would interrupt playback for no navigational benefit.
-      const syncedIndex = playlist.findIndex(
-        (item) => item && item.videoId === activeVideoId
-      );
-      if (syncedIndex < 0) {
-        isDev && consoleLog('WARN', MODULE_NAME,
-          `playlist re-sync: active videoId '${activeVideoId}' not in converted list; skipping re-feed`);
-        return;
-      }
-
-      // claude - Modify J1 VideoPlayer #31
-      // Guard: skip the re-feed entirely when the order did not actually change
-      // (e.g. the chosen sort criterion yields the same sequence). Comparing the
-      // videoId sequence of the live plugin list against the new converted list
-      // avoids an unnecessary source reload — and the playback hiccup it causes.
-      if (Array.isArray(currentList) && currentList.length === playlist.length) {
-        let identical = true;
-        for (let i = 0; i < playlist.length; i++) {
-          const a = currentList[i] && currentList[i].videoId;
-          const b = playlist[i] && playlist[i].videoId;
-          if (a !== b) { identical = false; break; }
-        }
-        if (identical) {
-          isDev && logger.debug('\n' + 'playlist re-sync: order unchanged, no re-feed');
-          return;
-        }
-      }
-
-      // claude - Modify J1 VideoPlayer #31
-      // Capture playback state so the reload (below) is transparent to the user.
-      let resumeTime = 0;
-      let wasPaused  = true;
-      try {
-        if (typeof player.currentTime === 'function') resumeTime = player.currentTime() || 0;
-        if (typeof player.paused === 'function')      wasPaused  = player.paused();
-      } catch (e) {
-        resumeTime = 0;
-        wasPaused  = true;
-      }
-
-      // claude - Modify J1 VideoPlayer #31
-      // Re-feed the live plugin and re-point its current item at the active
-      // video (same two-step pattern as #30: playlist(list) then currentItem()).
-      // The intermediate playlist() load of item 0 fires a transient
-      // 'playlistitem' that the #23 listener self-corrects on the currentItem()
-      // jump, so the active-item marker lands on the right entry.
-      try {
-        player.playlist(playlist);
-        if (syncedIndex >= 0 && syncedIndex < playlist.length) {
-          player.playlist.currentItem(syncedIndex);
-        }
-      } catch (e) {
-        isDev && consoleLog('WARN', MODULE_NAME, `playlist re-sync: re-feed failed: ${e}`);
-        return;
-      }
-
-      // claude - Modify J1 VideoPlayer #31
-      // Restore playback after the source reload triggered by the re-feed.
-      // 'loadedmetadata' fires regardless of play state (covers both a playing
-      // and a paused video), and the 250ms-deferred seek mirrors the resume
-      // logic embedRunVideo() already uses successfully on both techs. Play/
-      // pause state is re-asserted because currentItem() may auto-start the
-      // reloaded source. All operations are wrapped so a tech-side rejection can
-      // never break the sort handler.
-      const onResyncLoaded = () => {
-        player.off('loadedmetadata', onResyncLoaded);
-        setTimeout(() => {
-          try {
-            if (resumeTime > 0) player.currentTime(resumeTime);
-          } catch (e) { /* tech may reject an early seek; harmless */ }
-          try {
-            if (wasPaused) {
-              player.pause();
-            } else {
-              const p = player.play();
-              if (p && typeof p.catch === 'function') p.catch(() => {});
-            }
-          } catch (e) { /* play()/pause() rejection is non-fatal */ }
-        }, 250);
-      };
-      player.on('loadedmetadata', onResyncLoaded);
-
-      isDev && consoleLog('INFO', MODULE_NAME,
-        `playlist re-sync: re-fed plugin in new order; active videoId '${activeVideoId}' kept at index ${syncedIndex}`);
     }
 
     clearSearch() {
