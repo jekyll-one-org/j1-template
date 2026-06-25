@@ -1,6 +1,6 @@
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/modules/videoPlayer/js/videoPlayer.js (46)
+ # ~/assets/theme/j1/modules/videoPlayer/js/videoPlayer.js (45)
  # Provides JS Core for J1 Module videoPlayer
  #
  # Product/Info:
@@ -13,7 +13,7 @@
  # -----------------------------------------------------------------------------
 */
 
-/* Version 3.1.46 for J1 Template */
+/* Version 3.1.45 for J1 Template */
 
 // -----------------------------------------------------------------------------
 // ESLint shimming
@@ -3835,33 +3835,6 @@
               if (switchedId) {
                 isDev && logger.debug('\n' + `playlistitem: active item follows plugin to videoId: ${switchedId}`);
                 playlistManager.setActiveItem(switchedId);
-
-                // claude - Modify J1 VideoPlayer #37
-                // Keep the centre header span (.video-player-header-title) in
-                // sync the moment the videojs-playlist plugin switches item, so
-                // a skip-backward / skip-forward / prev / next control-bar click
-                // flips the header title to the newly loaded video immediately —
-                // not only once (and only if) the 'playing' state is reached.
-                //
-                // Background: the header was set exclusively from
-                // doPostOnPlaying() (#35), which reads the title from the
-                // per-tech metadata (player.ytVideoData / player.videoData).
-                // On an in-player source swap driven by the plugin that metadata
-                // is NOT refreshed (see the #23 note above), so the header kept
-                // showing the previously loaded video's title even though the
-                // correct video had loaded.
-                //
-                // The canonical title is read back from the playlist record by
-                // the switched videoId (the same source doPostOnPlaying() uses),
-                // falling back to the converted item's name and then the videoId
-                // so the header is never blank. The authoritative resync added to
-                // doPostOnPlaying() (#37) later confirms the same value.
-                const _entrySwitched = playlistManager.getEntry(switchedId);
-                _updateHeaderTitle(
-                  (_entrySwitched && _entrySwitched.title) ||
-                  (item && item.name) ||
-                  switchedId
-                );
               }
             });
 
@@ -4336,34 +4309,6 @@
       if (vid && !media.poster) {
         playlistManager.generatePosterForEntry(vid)
           .catch((e) => { isDev && logger.warn('\n' + `native poster generation failed for videoId: ${vid} - ${e}`); });
-      }
-    }
-
-    // claude - Modify J1 VideoPlayer #37
-    // Authoritative header-title resync for plugin-driven source swaps.
-    //
-    // The per-tech branches above set the centre header span
-    // (.video-player-header-title) from player.ytVideoData / player.videoData
-    // (#35). On an in-player source swap driven by the videojs-playlist plugin
-    // (the playlist nav / skip-backward / skip-forward / prev / next control-bar
-    // buttons and autoadvance) that per-tech metadata is NOT refreshed - it still
-    // describes the entry from the last embedRunVideo() (see the #23 note above) -
-    // so the branch above re-writes the *previously* loaded video's title and the
-    // header stops matching the video that actually loaded.
-    //
-    // _activePlayingId already prefers _playlistActiveVideoId (the id the plugin
-    // really switched to, recorded by the 'playlistitem' listener) and falls back
-    // to the per-tech id for plain plays, so it is the correct id in BOTH cases.
-    // Reading the canonical title back from that entry and writing it LAST (after
-    // the per-tech writes above) makes the header follow the plugin without
-    // disturbing the normal, non-playlist path: there _activePlayingId equals the
-    // per-tech id, so this resolves the same title and the write is idempotent.
-    // Only writes when a titled entry resolves, so a missing record never blanks
-    // a header the branch above already set.
-    if (_activePlayingId) {
-      const _entryActive = playlistManager.getEntry(_activePlayingId);
-      if (_entryActive && _entryActive.title) {
-        _updateHeaderTitle(_entryActive.title);
       }
     }
 

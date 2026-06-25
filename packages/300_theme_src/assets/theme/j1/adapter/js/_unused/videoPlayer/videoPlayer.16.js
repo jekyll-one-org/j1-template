@@ -6,7 +6,7 @@ regenerate:                             true
 
 {% comment %}
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/adapter/js/videoPlayer.js (18)
+ # ~/assets/theme/j1/adapter/js/videoPlayer.js (16)
  # J1 Adapter for the module VideoPlayer (native videoJS)
  #
  # Product/Info:
@@ -97,7 +97,7 @@ regenerate:                             true
 
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/adapter/js/videoPlayer.js (18)
+ # ~/assets/theme/j1/adapter/js/videoPlayer.js (16)
  # J1 Adapter for the module VideoPlayer (native HTML5/videoJS)
  #
  # Product/Info:
@@ -451,48 +451,6 @@ j1.adapter.videoPlayer = ((j1, window) => {
           }
 
         }); // END EventListener
-
-        // claude - Modify J1 VideoPlayer #38
-        // Make the header title <span> (.video-player-header-title) a second
-        // trigger for opening/closing the playlist screen, so a click on the
-        // live video title behaves EXACTLY like a click on the
-        // <button id="toggle_playlist_<playerId>">.
-        //
-        // The title span is a sibling of the toggle button inside
-        // .video-player-header (it is the same element resolved above as
-        // togglePlaylistSpan — the first/only <span> in the header), so a click
-        // on it does NOT bubble to the button; a dedicated listener is required.
-        //
-        // Implementation note: rather than duplicate the OPEN/CLOSE branch logic
-        // (icon swap, edit-button gating, slide animation, data-playlistOpen
-        // bookkeeping), this listener simply re-dispatches a click on
-        // togglePlaylistBtn. That keeps a single source of truth — any future
-        // change to the toggle handler is automatically inherited by the title,
-        // and the open/close state can never drift between the two triggers.
-        //
-        // No init-once guard is needed here: initPlayerUiEvents() runs exactly
-        // once per player (the load-dependency interval clears immediately after
-        // the call), mirroring the unguarded toggle-button listener above.
-        var headerTitleSpan = togglePlaylistBtn.closest('.video-player-header')
-                                ? togglePlaylistBtn.closest('.video-player-header').querySelector('.video-player-header-title')
-                                : null;
-        if (headerTitleSpan === null) { headerTitleSpan = togglePlaylistSpan; } // claude - Modify J1 VideoPlayer #38
-
-        if (headerTitleSpan !== null) {
-          // claude - Modify J1 VideoPlayer #38
-          // Affordance: present the title as interactive and avoid text-selection
-          // flicker on repeated toggles. Applied inline so the behaviour ships
-          // with the handler and needs no companion CSS rule.
-          headerTitleSpan.style.cursor     = 'pointer';
-          headerTitleSpan.style.userSelect = 'none';
-
-          headerTitleSpan.addEventListener('click', function(event) {
-            // claude - Modify J1 VideoPlayer #38
-            // Re-dispatch to the canonical toggle handler (single source of truth).
-            togglePlaylistBtn.click();
-          }); // END EventListener (header title toggle)
-        } // END if headerTitleSpan
-
       } // END if togglePlaylistBtn
 
       // hide playlist (secondary close button inside the playlist screen)

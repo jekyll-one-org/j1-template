@@ -6,7 +6,7 @@ regenerate:                             true
 
 {% comment %}
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/adapter/js/videoPlayer.js (18)
+ # ~/assets/theme/j1/adapter/js/videoPlayer.js (17)
  # J1 Adapter for the module VideoPlayer (native videoJS)
  #
  # Product/Info:
@@ -97,7 +97,7 @@ regenerate:                             true
 
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/adapter/js/videoPlayer.js (18)
+ # ~/assets/theme/j1/adapter/js/videoPlayer.js (17)
  # J1 Adapter for the module VideoPlayer (native HTML5/videoJS)
  #
  # Product/Info:

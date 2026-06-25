@@ -1,6 +1,6 @@
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/modules/videoPlayer/js/videoPlayer.js (46)
+ # ~/assets/theme/j1/modules/videoPlayer/js/videoPlayer.js (44)
  # Provides JS Core for J1 Module videoPlayer
  #
  # Product/Info:
@@ -13,7 +13,7 @@
  # -----------------------------------------------------------------------------
 */
 
-/* Version 3.1.46 for J1 Template */
+/* Version 3.1.44 for J1 Template */
 
 // -----------------------------------------------------------------------------
 // ESLint shimming
@@ -1389,18 +1389,6 @@
       const playlist = this.load() || [];
       const entry   = playlist.find(item => item.videoId === videoId);
       return (entry && entry.lastPosition > 0) ? entry.lastPosition : 0;
-    }
-
-    // claude - Modify J1 VideoPlayer #35
-    // getEntry
-    // Returns the full playlist entry record for a given videoId, or null when
-    // none exists. Added so callers (e.g. the header-title updater in
-    // doPostOnPlaying) can read the canonical entry.title back from the
-    // persisted playlist rather than re-deriving it from per-tech metadata.
-    getEntry(videoId) {
-      if (!videoId) return null;
-      const playlist = this.load() || [];
-      return playlist.find(item => item.videoId === videoId) || null;
     }
 
     getNextVideoId(currentVideoId) {
@@ -3835,33 +3823,6 @@
               if (switchedId) {
                 isDev && logger.debug('\n' + `playlistitem: active item follows plugin to videoId: ${switchedId}`);
                 playlistManager.setActiveItem(switchedId);
-
-                // claude - Modify J1 VideoPlayer #37
-                // Keep the centre header span (.video-player-header-title) in
-                // sync the moment the videojs-playlist plugin switches item, so
-                // a skip-backward / skip-forward / prev / next control-bar click
-                // flips the header title to the newly loaded video immediately —
-                // not only once (and only if) the 'playing' state is reached.
-                //
-                // Background: the header was set exclusively from
-                // doPostOnPlaying() (#35), which reads the title from the
-                // per-tech metadata (player.ytVideoData / player.videoData).
-                // On an in-player source swap driven by the plugin that metadata
-                // is NOT refreshed (see the #23 note above), so the header kept
-                // showing the previously loaded video's title even though the
-                // correct video had loaded.
-                //
-                // The canonical title is read back from the playlist record by
-                // the switched videoId (the same source doPostOnPlaying() uses),
-                // falling back to the converted item's name and then the videoId
-                // so the header is never blank. The authoritative resync added to
-                // doPostOnPlaying() (#37) later confirms the same value.
-                const _entrySwitched = playlistManager.getEntry(switchedId);
-                _updateHeaderTitle(
-                  (_entrySwitched && _entrySwitched.title) ||
-                  (item && item.name) ||
-                  switchedId
-                );
               }
             });
 
@@ -4245,15 +4206,6 @@
       playlistManager.createEntry(media);
       playlistManager.enrichEntry(vid, media);
 
-      // claude - Modify J1 VideoPlayer #35
-      // Reflect the now-loaded video's title in the centre header span
-      // (.video-player-header-title). Read the canonical entry.title back from
-      // the playlist (just created / enriched above); fall back to the locally
-      // resolved media.title, then to the videoId, so the header is never blank
-      // for a loaded video.
-      const _entryYT = playlistManager.getEntry(vid);
-      _updateHeaderTitle((_entryYT && _entryYT.title) || media.title || vid);
-
       if (vid && vd.author) {
         playlistManager.updateEntryAuthor(vid, vd.author);
       }
@@ -4305,13 +4257,6 @@
       playlistManager.createEntry(media);
       playlistManager.enrichEntry(vid, media);
 
-      // claude - Modify J1 VideoPlayer #35
-      // Reflect the now-loaded native video's title in the centre header span
-      // (.video-player-header-title). Read entry.title back from the playlist,
-      // falling back to the resolved media.title and then the videoId.
-      const _entryNV = playlistManager.getEntry(vid);
-      _updateHeaderTitle((_entryNV && _entryNV.title) || media.title || vid);
-
       if (vid && vd.author) {
         playlistManager.updateEntryAuthor(vid, vd.author);
       }
@@ -4336,34 +4281,6 @@
       if (vid && !media.poster) {
         playlistManager.generatePosterForEntry(vid)
           .catch((e) => { isDev && logger.warn('\n' + `native poster generation failed for videoId: ${vid} - ${e}`); });
-      }
-    }
-
-    // claude - Modify J1 VideoPlayer #37
-    // Authoritative header-title resync for plugin-driven source swaps.
-    //
-    // The per-tech branches above set the centre header span
-    // (.video-player-header-title) from player.ytVideoData / player.videoData
-    // (#35). On an in-player source swap driven by the videojs-playlist plugin
-    // (the playlist nav / skip-backward / skip-forward / prev / next control-bar
-    // buttons and autoadvance) that per-tech metadata is NOT refreshed - it still
-    // describes the entry from the last embedRunVideo() (see the #23 note above) -
-    // so the branch above re-writes the *previously* loaded video's title and the
-    // header stops matching the video that actually loaded.
-    //
-    // _activePlayingId already prefers _playlistActiveVideoId (the id the plugin
-    // really switched to, recorded by the 'playlistitem' listener) and falls back
-    // to the per-tech id for plain plays, so it is the correct id in BOTH cases.
-    // Reading the canonical title back from that entry and writing it LAST (after
-    // the per-tech writes above) makes the header follow the plugin without
-    // disturbing the normal, non-playlist path: there _activePlayingId equals the
-    // per-tech id, so this resolves the same title and the write is idempotent.
-    // Only writes when a titled entry resolves, so a missing record never blanks
-    // a header the branch above already set.
-    if (_activePlayingId) {
-      const _entryActive = playlistManager.getEntry(_activePlayingId);
-      if (_entryActive && _entryActive.title) {
-        _updateHeaderTitle(_entryActive.title);
       }
     }
 
@@ -4412,56 +4329,15 @@
    *   /assets/theme/j1/modules/videoPlayer/icons/player/dark/playlist-hide.svg
    * The "show" variant is selected here because the panel is being closed.
    */
-  // claude - Modify J1 VideoPlayer #35
-  // _updateHeaderTitle
-  //
-  // Sets the centre header span (.video-player-header-title) to the supplied
-  // text so the header shows the title of the currently loaded video. This
-  // span previously doubled as the playlist toggle label ("Show/Hide
-  // Playlist"); that behaviour has been removed (see _resetPlaylistToggleUI
-  // and initTogglePlaylistHandler), making the span a dedicated "now playing"
-  // title.
-  //
-  // The lookup is scoped to THIS player instance's #video_player_container so
-  // the correct span is updated when several players share one page. A
-  // defensive fall-back to the first <span> inside the container keeps the
-  // helper working even if the .video-player-header-title class is ever
-  // renamed. An empty / missing title clears the span rather than printing
-  // 'undefined'.
-  function _updateHeaderTitle(title) {
-    const container = document.getElementById(_pid('video_player_container'));
-    if (!container) return;
-
-    const span = container.querySelector('.video-player-header-title')
-              || container.querySelector('span');
-    if (!span) return;
-
-    const text = (title != null && String(title).trim() !== '')
-      ? String(title)
-      : '';
-    span.textContent = text;
-
-    isDev && logger.debug('\n' + `_updateHeaderTitle: header title set to "${text}"`);
-  }
-
   function _resetPlaylistToggleUI() {
     const wrapper = document.getElementById(_pid('video_player_container'));
     if (!wrapper) return;
 
-    // claude - Modify J1 VideoPlayer #35
-    // The centre header <span> (.video-player-header-title) no longer doubles
-    // as the playlist toggle label; it now shows the title of the currently
-    // loaded video (set by _updateHeaderTitle() from doPostOnPlaying()).
-    // Writing "Show Playlist" here would clobber that title every time the
-    // panel closes, so the legacy span-label write is disabled. Show/hide
-    // state is still conveyed by the toggle button's title / aria-label / icon
-    // (updated below), so accessibility is unaffected.
-    // Original (deprecated, preserved for reference):
-    //   const span = wrapper.querySelector('span');
-    //   if (span) {
-    //     span.textContent = 'Show Playlist';
-    //   }
-    void wrapper;
+    // Reset the sibling <span> label to "Show Playlist"
+    const span = wrapper.querySelector('span');
+    if (span) {
+      span.textContent = 'Show Playlist';
+    }
 
     // Corrected button ID from 'video_player_header_arrows' (does not
     // exist in the page template) to 'toggle_playlist' (the actual
@@ -6176,21 +6052,6 @@
 
     _togglePlaylistHandlerInit = true;
 
-    // claude - Modify J1 VideoPlayer #35
-    // The centre header span is now a "now playing" title that is filled on
-    // play by _updateHeaderTitle(). If the rendered template still seeded that
-    // span with the legacy toggle label, clear the stale text so it isn't
-    // shown before the first video loads. Only the known legacy labels are
-    // cleared, so a real title set by an early play is never clobbered.
-    const _titleSpan = container.querySelector('.video-player-header-title')
-                    || container.querySelector('span');
-    if (_titleSpan) {
-      const _legacy = (_titleSpan.textContent || '').trim();
-      if (_legacy === 'Show Playlist' || _legacy === 'Hide Playlist') {
-        _titleSpan.textContent = '';
-      }
-    }
-
     btn.addEventListener('click', () => {
       // Re-check disabled state at click time (guards empty-playlist / edit-open).
       if (btn.disabled || btn.getAttribute('aria-disabled') === 'true') return;
@@ -6208,15 +6069,8 @@
         btn.setAttribute('aria-label',    'Hide playlist');
         btn.setAttribute('aria-expanded', 'true');
 
-        // claude - Modify J1 VideoPlayer #35
-        // The centre header span (.video-player-header-title) is now a
-        // "now playing" title, not the toggle label, so the legacy
-        // "Hide Playlist" span write is disabled. The button's title /
-        // aria-label / icon (set above and below) still signal the open state.
-        // Original (deprecated, preserved for reference):
-        //   const span = container.querySelector('span');
-        //   if (span) span.textContent = 'Hide Playlist';
-        void container;
+        const span = container.querySelector('span');
+        if (span) span.textContent = 'Hide Playlist';
 
         const img = btn.querySelector('img');
         if (img) {

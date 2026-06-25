@@ -671,7 +671,7 @@ select[data-value-filled="true"] {
 .playlist_screen {
   padding-right: 0.5rem;
   padding-left: 0.5rem;
-  max-height: 589px;
+  max-height: 685px;
   overflow-y: scroll;
 }
 

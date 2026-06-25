@@ -1,5 +1,6 @@
 [
   { "name": "Local Video files", "file": "lists/local-video.json" },
+  { "name": "Joan", "file": "lists/native-video-joan.json" },
   { "name": "NDR - Hofgeschichten, 2021 (Series/German)", "file": "lists/hofgeschichten-2021.json" },  
   { "name": "CBS - Carpool Karaoke (English)",  "file": "lists/carpool-karaoke.json" },
   { "name": "NPR - Tiny Desk Concerts (English)", "file": "lists/tinydesk-concerts.json" },

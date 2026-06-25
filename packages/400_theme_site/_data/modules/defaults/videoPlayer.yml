@@ -92,6 +92,31 @@ defaults:
   # MODULE options
   # ----------------------------------------------------------------------------
 
+  # ----------------------------------------------------------------------------
+  # Default settings
+  #
+  #   videoJS.poster.autoGenerate
+  #   --------------------------------------------------------------------------
+  #   If true, the left and right navigation arrows which appear
+  #   on mouse hover when viewing image sets will always be visible
+  #   on devices which support touch.
+  #
+  #   values:                         boolean (false|true)
+  #   default:                        false
+  #
+  #  ---------------------------------------------------------------------------
+  #   enabled          master on/off switch
+  #   capturePosition  capture point in SECONDS (configurable start position).
+  #                    When <= 0 the captureFraction is used instead.
+  #   captureFraction  fraction (0..100) percent of the duration used as
+  #                    the image capture point when capturePosition <= 0
+  #   maxWidth         output is downscaled to at most this width in px
+  #                    (aspect preserved); 0 keeps the native frame size.
+  #   mimeType         output image type ('jpeg'|'png' |'webp')
+  #   quality          0..1 encoder quality (jpeg/webp only)
+  #
+  # ----------------------------------------------------------------------------
+
   # videoJS settings
   # 
   videoJS:
@@ -99,18 +124,24 @@ defaults:
     autoStart:                          true
     preloadVideo:                       true                                    # preload: 'auto' | 'metadata' | 'none'
 
-    # videoJS playback rate settings
+    # playback rate settings
     #
     playbackRates:
       enabled:                          true
       values:                           [ 0.25, 0.5, 1, 1.5, 2 ]
 
-    # videoJS poster settings
+    # poster settings
     #
-    default_poster:                     /assets/image/icon/videojs/videojs-poster.png
+    poster:
+      autoGenerate:
+        enabled:                        true
+        capturePosition:                5                                       # default: 5,    start position (seconds), when ≤ 0 captureFraction is used
+        captureFraction:                10                                      # default: 10,   start position (percent from duration)
+        maxWidth:                       320                                     # default: 320,  pixel (4/3 ratio)
+        mimeType:                       webp                                    # default: webp, image type (jpeg|png|webp)
+        quality:                        0.6                                     # default: 0.6,  0..1 encoder quality
 
-
-    # videoJS player settings
+    # player settings
     # --------------------------------------------------------------------------
     # claude - change skipAd API to local files #1
     # Replaced YouTube player tech with native HTML5 video.js player.
@@ -122,7 +153,7 @@ defaults:
 
       native:
 
-        # player parameters
+        # player settings
         #
         autoplay:                       true                                    # true | false
         controls:                       true
@@ -132,11 +163,14 @@ defaults:
         preload:                        auto                                    # auto | metadata | none
         playsinline:                    true                                    # prevent fullscreen on iOS by default
 
+        # poster settings
+        #
+        poster:                         true
         default_poster:                 /assets/image/icon/videojs/videojs-poster.png
         poster_base:                    video-folder                            # same folder as video
-        poster:                         poster.jpg                              # poster image
+        poster_image:                   poster.jpg                              # poster image
 
-        # video parameters
+        # video settings
         #
         start:                          true                                    # set start (trim) of a video allowed
         end:                            true                                    # set end (trim) of a video allowed
@@ -155,10 +189,10 @@ defaults:
       # ------------------------------------------------------------------------
       youtube:
 
-        # player parameters
+        # player settings
         #
-        autoplay:                       true                                    # true | false
-        cc_load_policy:                 0                                       # 0|1, captions are initially hidden
+        autoplay:                       true                                    # true|false, play video after load
+        cc_load_policy:                 0                                       # 0|1, captions initially hidden
         controls:                       1                                       # 0|1, disable|enable (vjs) controlbar
         disablekb:                      1
         enablejsapi:                    1    
@@ -169,26 +203,28 @@ defaults:
         rel:                            0
         showinfo:                       0
 
-#       poster:                         false
+        # poster settings
+        #
+        poster:                         false
         default_poster:                 /assets/image/icon/videojs/videojs-poster.png
         poster_base:                    //img.youtube.com/vi
         poster_qualty:                  hqdefault                               # hqdefault|mqdefault, poster taken from poster_base at high quality resolution
 
-        # video parameters
+        # video settings
         #
         start:                          true                                    # set start (trim) of a video allowed
         end:                            true                                    # set end (trim) of a video allowed
 
-    # videoJS Plugin settings
+    # Plugin settings
     #
     plugins:
 
       playlist:
         enabled:                        true
-#       autoplay:                       true                                    # play video after load
+        autoplay:                       false                                   # play video after load
         autoadvance:                    true                                    # play next item when current/active video ends
         autoadvance_delay:              0                                       # delay (seconds) for playing next video
-        poster:                         false                                   # enable|disable poster settings
+        poster:                         true                                    # enable|disable poster settings
 #       repeat:                         false                                   # NOT supported, run playlist in (endless) loop
 #       reverse:                        false                                   # NOT supported, run playlist in reverse order
 #       shuffle:                        false                                   # NOT supported, randomize the contents of the playlist
@@ -226,7 +262,7 @@ defaults:
 
       nextPrevButtons:
         enabled:                        true
-        autoplay:                       true                                    # play video after load
+        autoplay:                       false                                   # play video after load
 
       zoomButtons:
         enabled:                        false

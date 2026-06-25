@@ -1,6 +1,6 @@
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/modules/videoPlayer/js/videoPlayer.js (46)
+ # ~/assets/theme/j1/modules/videoPlayer/js/videoPlayer.js (41)
  # Provides JS Core for J1 Module videoPlayer
  #
  # Product/Info:
@@ -13,7 +13,7 @@
  # -----------------------------------------------------------------------------
 */
 
-/* Version 3.1.46 for J1 Template */
+/* Version 3.1.41 for J1 Template */
 
 // -----------------------------------------------------------------------------
 // ESLint shimming
@@ -48,9 +48,8 @@
     /youtube\.com\/v\/([a-zA-Z0-9_-]{11})/
   ]);
 
-  const YOUTUBE_RE              = /(?:youtu\.be\/.*|youtube\.com\/.*)/;
-  const YOUTUBE_ID_RE           = /(?:youtu\.be\/.*|youtube\.com\/(?:embed\/|v\/|watch\?v=|shorts\/))([A-Za-z0-9_-]{11})/;
-  const YOUTUBE_POSTER_QUALITY  = 'hqdefault';
+  const YOUTUBE_ID_RE = /(?:youtu\.be\/.*|youtube\.com\/(?:embed\/|v\/|watch\?v=|shorts\/))([A-Za-z0-9_-]{11})/;
+  const YOUTUBE_POSTER_QUALITY = 'hqdefault';
 
   // VIDEO_URL_PATTERNS matches local paths (/assets/...) and remote URLs
   // for MP4, WebM, OGV, OGG, M4V and MOV video files.  A bare filename
@@ -66,220 +65,6 @@
 
   // Default poster image used when a playlist entry has no poster URL.
   const DEFAULT_POSTER = '/assets/image/icon/videojs/videojs-poster.png';
-
-  // claude - Modify J1 VideoPlayer #33
-  // ---------------------------------------------------------------------------
-  // Native-video poster auto-generation
-  //
-  // For native videos (MP4, WebM, OGV/OGG, M4V, MOV) the playlist would
-  // otherwise only ever show DEFAULT_POSTER, because — unlike YouTube, which
-  // exposes a thumbnail CDN — a local/remote video file carries no ready-made
-  // poster image. The helpers below grab a single still frame from the file
-  // off-screen (a detached <video> element decodes the frame, a <canvas>
-  // captures it) and return it as a Base64 data-URL that is stored in the
-  // playlist record (localStorage) and used as the list/card thumbnail.
-  //
-  // NATIVE_POSTER_DEFAULTS provides the fall-back configuration; any subset of
-  // these keys may be overridden through videoPlayer.yml ->
-  // videoPlayerOptions.videoJS.poster (see _resolveNativePosterConfig()).
-  //
-  //   enabled          master on/off switch
-  //   capturePosition  capture point in SECONDS (configurable start position).
-  //                    When <= 0 the captureFraction is used instead.
-  //   captureFraction  fraction (0..100) percent of the duration used as
-  //                    the capture point when capturePosition <= 0
-  //   maxWidth         output is downscaled to at most this width in px
-  //                    (aspect preserved); 0 keeps the native frame size.
-  //   mimeType         output image type ('jpeg'|'png' |'webp')
-  //   quality          0..1 encoder quality (jpeg/webp only)
-  //   generate_timeout hard timeout so a bad/slow file can never hang capture
-  //
-  // ---------------------------------------------------------------------------
-  const NATIVE_POSTER_DEFAULTS = Object.freeze({
-    enabled:            true,
-    capturePosition:    5.0,
-    captureFraction:    10,
-    maxWidth:           320,
-    mimeType:           'webp',
-    quality:            0.60,
-    generate_timeout:   8000
-  });
-
-  // claude - Modify J1 VideoPlayer #33
-  // Resolves the effective native-poster config by overlaying any values found
-  // under videoPlayerOptions.videoJS.poster onto NATIVE_POSTER_DEFAULTS. Reads
-  // defensively (module-level videoPlayerOptions first, then the adapter
-  // namespace) so it is safe to call before the adapter has assigned options.
-  function _resolveNativePosterConfig() {
-    let opts = (typeof videoPlayerOptions === 'object' && videoPlayerOptions)
-      ? videoPlayerOptions
-      : null;
-
-    if (!opts && typeof j1 !== 'undefined' && j1 && j1.adapter && j1.adapter.videoPlayer) {
-      opts = j1.adapter.videoPlayer.videoPlayerOptions || null;
-    }
-
-    const cfg = (opts && opts.videoJS.poster.autoGenerate)
-      ? opts.videoJS.poster.autoGenerate
-      : {};
-
-    const settings = Object.assign({}, NATIVE_POSTER_DEFAULTS, cfg);
-
-    return settings;
-  }
-
-  // claude - Modify J1 VideoPlayer #33
-  // True when the URL/path points at a native (browser-decodable) video file
-  // rather than a YouTube watch URL/id.  Reuses VIDEO_URL_PATTERNS so exactly
-  // the same extensions accepted elsewhere in the module are accepted here.
-  function _isNativeVideoSource(src) {
-    if (!src || typeof src !== 'string') return false;
-    return VIDEO_URL_PATTERNS.some((re) => re.test(src));
-  }
-
-  // claude - Modify J1 VideoPlayer #33
-  // ---------------------------------------------------------------------------
-  // generateNativePoster
-  //
-  // Extracts a single still frame from a native video file and returns it as a
-  // Base64 data-URL, suitable for storing in the playlist record (localStorage)
-  // and for use directly as an <img> src in the list/card views.
-  //
-  // Mechanism (the element never needs to be inserted into the DOM):
-  //   1. create a detached <video> (muted, preload=metadata, crossOrigin)
-  //   2. on 'loadedmetadata' the duration / intrinsic size are known
-  //   3. seek to the configured capture position; absolute seconds when
-  //      capturePosition > 0, otherwise (captureFraction/100) * duration:
-  //      clamped so the seek target always lies inside the media
-  //   4. on 'seeked' draw the current frame into a <canvas> sized to the video
-  //      (optionally downscaled to maxWidth, aspect preserved)
-  //   5. resolve with canvas.toDataURL(mimeType, quality)
-  //
-  // The promise NEVER rejects: on any failure (unsupported file, decode error,
-  // tainted cross-origin canvas without CORS headers, or timeout) it resolves
-  // to '' so callers can simply fall back to DEFAULT_POSTER.  A hard timeout
-  // guarantees the returned promise always settles and the <video> is released.
-  //
-  // @param  {string} src            native video URL/path
-  // @param  {Object} [opts]         per-call overrides for the resolved config
-  // @return {Promise<string>}       Base64 data-URL, or '' on failure
-  // ---------------------------------------------------------------------------
-  function generateNativePoster(src, opts) {
-    return new Promise((resolve) => {
-      if (!_isNativeVideoSource(src)) { resolve(''); return; }
-
-      const cfg = Object.assign(_resolveNativePosterConfig(), opts || {});
-
-      let settled = false;
-      let video   = document.createElement('video');
-
-      const cleanup = () => {
-        if (!video) return;
-        try {
-          video.removeAttribute('src');
-          video.load();                 // abort any in-flight network fetch
-        } catch (_e) { /* ignore */ }
-        video = null;
-      };
-
-      const finish = (dataUrl) => {
-        if (settled) return;
-        settled = true;
-        clearTimeout(timer);
-        cleanup();
-        resolve(dataUrl || '');
-      };
-
-      const timer = setTimeout(() => {
-        isDev && logger.debug('\n' + `generateNativePoster: timed out after ${cfg.generate_timeout}ms for src: ${src}`);
-        finish('');
-      }, cfg.generate_timeout);
-
-      const drawFrame = () => {
-        try {
-          const vw = video.videoWidth  || 0;
-          const vh = video.videoHeight || 0;
-          if (!vw || !vh) { finish(''); return; }
-
-          let cw = vw, ch = vh;
-          if (cfg.maxWidth > 0 && vw > cfg.maxWidth) {
-            cw = cfg.maxWidth;
-            ch = Math.round(vh * (cfg.maxWidth / vw));
-          }
-
-          const canvas  = document.createElement('canvas');
-          canvas.width  = cw;
-          canvas.height = ch;
-
-          const ctx = canvas.getContext('2d');
-          if (!ctx) { finish(''); return; }
-          ctx.drawImage(video, 0, 0, cw, ch);
-
-          // toDataURL() throws a SecurityError on a tainted (cross-origin)
-          // canvas — caught below and reported as '' (fall back to default).
-          const dataUrl = canvas.toDataURL(`image/${cfg.mimeType}`, cfg.quality);
-          finish(dataUrl);
-        } catch (e) {
-          isDev && logger.warn('\n' + `generateNativePoster: frame capture failed for src: ${src} - ${e}`);
-          finish('');
-        }
-      };
-
-      video.addEventListener('error', () => {
-        isDev && logger.warn('\n' + `generateNativePoster: media error for src: ${src}`);
-        finish('');
-      }, { once: true });
-
-      video.addEventListener('loadedmetadata', () => {
-        const duration = isFinite(video.duration) ? video.duration : 0;
-
-        // Resolve the seek target (configurable start position).
-        let target = (cfg.capturePosition > 0)
-          ? cfg.capturePosition
-          : (duration > 0 ? duration * (cfg.captureFraction/100) : 0);
-
-        // Clamp into (0, duration) so the seek lands on a decodable frame.
-        if (duration > 0) {
-          const maxSeek = Math.max(0, duration - 0.1);
-          if (target > maxSeek) target = maxSeek;
-        }
-
-        if (!(target > 0)) {
-          // No seek needed — draw the first decoded frame. Some browsers fire
-          // 'seeked' for currentTime=0, some do not, so key off 'loadeddata'.
-          video.addEventListener('loadeddata', drawFrame, { once: true });
-          if (video.readyState >= 2) drawFrame();
-          return;
-        }
-
-        // 'seeked' fires once the target frame is decoded and available.
-        video.addEventListener('seeked', drawFrame, { once: true });
-        try {
-          video.currentTime = target;
-        } catch (_e) {
-          // Some browsers refuse currentTime before data is buffered; fall
-          // back to drawing the first available frame.
-          video.addEventListener('loadeddata', drawFrame, { once: true });
-        }
-      }, { once: true });
-
-      // crossOrigin must be set BEFORE src so the CORS request is issued. A
-      // same-origin file is unaffected; a cross-origin file with proper CORS
-      // headers yields an untainted canvas; otherwise toDataURL() throws and
-      // the capture resolves to '' (handled in drawFrame).
-      video.crossOrigin = 'anonymous';
-      video.muted       = true;
-      video.playsInline = true;
-      video.preload     = 'metadata';
-
-      try {
-        video.src = src;
-        video.load();
-      } catch (_e) {
-        finish('');
-      }
-    });
-  }
 
   // claude - Modify J1 VideoPlayer #19
   // ---------------------------------------------------------------------------
@@ -581,27 +366,25 @@
   class PlaylistManager {
 
     constructor() {
+
       this.STORAGE_KEY                    = 'playlist';
       this.INDEX_KEY                      = 'index';
-
-      // guard flags
-      //
+      this._escapeHtmlEl                  = document.createElement('div');
       this._rateHandlerInitialized        = false;
       this._editHandlerInitialized        = false;
       this._infoLinkHandlerInitialized    = false;
       this._videoLinkHandlerInitialized   = false;
+      // Fix J1 VideoPlayer #5
+      // Added missing guard flags for play and delete handlers.
+      // Without these, calling init twice would register duplicate listeners.
       this._playHandlerInitialized        = false;
       this._deleteHandlerInitialized      = false;
-
-      // initial settings
-      //
       this._searchResults                 = null;
       this._searchIndex                   = null;
       this._currentSort                   = 'watchDate';
       this._displayMode                   = localStorage.getItem('playlistMode') || 'cards';
       this._mergeMode                     = localStorage.getItem('mergeMode') === 'true';
       this._loopEnabled                   = localStorage.getItem('playlistLoop') === 'true';
-      this._escapeHtmlEl                  = document.createElement('div');
       this._loopSwitchInitialized         = false;
 
       // claude - Modify J1 VideoPlayer #21
@@ -609,7 +392,7 @@
       // state. The matching card/list element gets data-item-active="true";
       // null means no entry is active. Re-applied after every render so the
       // active marker survives renderCurrent()/renderCards()/renderPlaylist().
-      this._activeVideoId                 = null;
+      // this.data-item-active                 = null;
     }
 
     setAdapterOptions(options) {
@@ -778,11 +561,6 @@
         entry.author = '';
       }
 
-      // claude - Add new field title VidoPlayer #1
-      if (entry && typeof entry === 'object' && !('title' in entry)) {
-        entry.title = '';
-      }
-
       if (entry && typeof entry === 'object' && !('infoLink' in entry)) {
         entry.infoLink = '';
       }
@@ -872,7 +650,7 @@
         }
         return parsed;
       } catch (e) {
-        logger.error('\n' + `error parsing localStorage data: ${e}`);
+        consoleLog('ERROR', MODULE_NAME, `error parsing localStorage data: ${e}`);
         return null;
       }
     }
@@ -897,20 +675,11 @@
     convertVideoPlayerPlaylist(rawPlaylist, poster) {
       if (!Array.isArray(rawPlaylist)) return [];
 
-      var ytID    = false;
       const items = [];
 
       rawPlaylist.forEach((entry) => {
         if (!entry || typeof entry !== 'object') return;
 
-        // jadams, 2026-06-25: check if YT poster
-        //
-        if (entry.poster) {
-          ytID = entry.poster ? entry.poster.match(YOUTUBE_RE) : null;
-        }
-
-        // overload the stored/default poster for YouTube entries
-        const isYt = (ytID) ? true : false;   
         const item = {};
 
         // Apply every rule from the mapping object.
@@ -919,8 +688,7 @@
           let value;
 
           if (typeof rule === 'function') {
-            // jadams, 2026-ß6-25: enable|disable vjs poster (plugins.playlist.poster)
-            if (targetKey === 'poster' && poster && isYt) {
+            if (targetKey === 'poster' && !poster) {
               value = null;
             } else {
               value = rule(entry);
@@ -937,14 +705,14 @@
 
         // Guard: a playlist item without a playable source is unusable.
         if (!Array.isArray(item.sources) || item.sources.length === 0 || !item.sources[0].src) {
-          logger.warn('\n' + `playlistmanager: skipped entry without a playable source (videoId: ${entry.videoId || 'n/a'})`);
+          consoleLog('WARN', MODULE_NAME, `playlistmanager: skipped entry without a playable source (videoId: ${entry.videoId || 'n/a'})`);
           return;
         }
 
         items.push(item);
       });
 
-      isDev && logger.info('\n' + `playlistmanager: converted ${items.length}/${rawPlaylist.length} entries for videojs-playlist`);
+      isDev && consoleLog('INFO', MODULE_NAME, `playlistmanager: converted ${items.length}/${rawPlaylist.length} entries for videojs-playlist`);
 
       return items;
     }
@@ -961,11 +729,11 @@
      * playlistManager
      * addEntry - add a new video to the playlist in localStorage.
      *
-     * @param {Object}  entry
-     * @param {string}  [entry.src]           - full local or remote video URL/path
-     * @param {string}  [entry.poster]        - poster image URL for the video
-     * @param {string}  [entry.videoId]       - derived filename-without-extension key
-     * @param {string}  [entry.videoLink]     - full video URL (identical to src for native)
+     * @param {Object} entry
+     * @param {string}  [entry.src]          - full local or remote video URL/path
+     * @param {string}  [entry.poster]       - poster image URL for the video
+     * @param {string}  [entry.videoId]      - derived filename-without-extension key
+     * @param {string}  [entry.videoLink]    - full video URL (identical to src for native)
      * @param {string}  [entry.author]        - author name
      * @param {string}  [entry.category]      - category
      * @param {string}  [entry.description]   - description text, limited to 50 words
@@ -983,26 +751,12 @@
      * @param {string}  [entry.videoId]       - YouTube video ID
      * @param {string}  [entry.watchDate]     - ISO date of watching
      */
-
-    // claude - Modify J1 VideoPlayer #34
-    // DEPRECATED. addEntry() performed "late" creation: it was invoked from
-    // doPostOnPlaying() only once the player reached the 'playing' state, so a
-    // playlist record never existed until the video actually started playing.
-    // It is superseded by the separated pair createEntry() (early creation, at
-    // the moment the video is created in embedRunVideo()) + enrichEntry()
-    // (back-fills title/author/poster/duration as the tech resolves them).
-    // addEntry() also could NOT update an entry that already existed - it
-    // simply skipped - which is exactly why metadata back-filling now goes
-    // through enrichEntry(). The method is retained unchanged for backward
-    // compatibility (external/legacy callers); the module itself no longer
-    // calls it. Prefer createEntry()/enrichEntry() for new code.
-    //
     addEntry(entry) {
       const playlist = this.load() || [];
 
       const found = (playlist.find(item => item.videoId === entry.videoId)) ? true : false;
       if (found) {
-        logger.info('\n' + `playlistmanager: skip adding entry with title: ${entry.title}`);
+        consoleLog('INFO', MODULE_NAME, `playlistmanager: skip adding entry with title: ${entry.title}`);
         return;
       }
 
@@ -1035,155 +789,9 @@
       filtered.unshift(record);
       this.save(filtered);
 
-      logger.info('\n' + `playlistmanager: entry added for videoId: ${entry.videoId}`);
+      consoleLog('INFO', MODULE_NAME, `playlistmanager: entry added for videoId: ${entry.videoId}`);
 
       this.renderCurrent();
-    }
-
-    // claude - Modify J1 VideoPlayer #34
-    // createEntry - EARLY, isolated playlist creation.
-    //
-    // Creates the playlist record as soon as the video is *created* (its source
-    // is known in embedRunVideo()), decoupled from playback. This replaces the
-    // "late" addEntry() path that only ran on the 'playing' state.
-    //
-    // Only the fields known at creation time need to be supplied; everything
-    // the tech resolves asynchronously (title, author, duration, native poster)
-    // is back-filled later by enrichEntry()/updateEntry*(). The record shape is
-    // identical to the one addEntry() produced, plus a `createDate` marker.
-    //
-    // Idempotent: if a record for entry.videoId already exists it is returned
-    // untouched (no overwrite, no re-render, no duplicate), so re-embedding the
-    // same video - or the defensive createEntry() call still left in
-    // doPostOnPlaying() - never resets or duplicates it.
-    //
-    // watchDate is seeded to the creation timestamp so the existing watchDate
-    // sort order behaves exactly as it did when addEntry() stamped it on first
-    // play; updateWatchDate() refreshes it on the first 'playing' event.
-    //
-    // @param  {Object}      entry            same field set accepted by addEntry()
-    // @return {Object|null}                  the created (or pre-existing) record
-    //
-    createEntry(entry) {
-      if (!entry || !entry.videoId) {
-        isDev && logger.warn('\n' + 'playlistmanager: createEntry skipped - missing videoId');
-        return null;
-      }
-
-      const playlist = this.load() || [];
-
-      const existing = playlist.find(item => item.videoId === entry.videoId);
-      if (existing) {
-        isDev && logger.debug('\n' + `playlistmanager: createEntry - entry already exists for videoId: ${entry.videoId}`);
-        return existing;
-      }
-
-      const now = new Date().toISOString();
-
-      const record = {
-        author:       entry.author        || '',
-        category:     entry.category      || '',
-        creator:      'videoPlayer',
-        description:  entry.description   || '',
-        duration:     entry.duration      || 0,
-        infoLink:     entry.infoLink      || '',
-        issueDate:    this._normalizeIssueDate(entry.issueDate || ''),
-        episode:      entry.episode       || 0,
-        lastPosition: entry.lastPosition  || 0,
-        poster:       entry.poster        || '',
-        rating:       entry.rating        || 0,
-        series:       entry.series        || 0,
-        src:          entry.src           || '',
-        tags:         entry.tags          || [],
-        title:        entry.title         || '',
-        type:         entry.type          || 'video/mp4',
-        videoLink:    entry.videoLink     || entry.src || '',
-        videoId:      entry.videoId,
-        createDate:   now,
-        watchDate:    entry.watchDate     || now
-      };
-
-      playlist.unshift(record);
-      this.save(playlist);
-
-      logger.info('\n' + `playlistmanager: entry created (early) for videoId: ${entry.videoId}`);
-
-      this.renderCurrent();
-      return record;
-    }
-
-    // claude - Modify J1 VideoPlayer #34
-    // enrichEntry - back-fill metadata that only becomes available AFTER the
-    // record was created: title/author resolved by the tech, the real poster,
-    // the measured duration, canonical links. It is the "separated" counterpart
-    // to createEntry(): creation captures what is known at load time;
-    // enrichEntry() fills in the rest as it arrives.
-    //
-    // By default a field is written ONLY when the stored value is still empty /
-    // a placeholder (poster === DEFAULT_POSTER counts as empty), so it never
-    // clobbers a value the user edited in the playlist panel or one an earlier
-    // resolution already supplied. Pass force=true to overwrite regardless.
-    //
-    // This is exactly what addEntry() could not do - addEntry() skipped any
-    // record that already existed, leaving the early-created stub un-enriched.
-    //
-    // @param  {string}  videoId
-    // @param  {Object}  meta              { title, author, infoLink, videoLink,
-    //                                        src, type, poster, duration }
-    // @param  {boolean} [force]           overwrite non-empty fields too
-    // @return {boolean}                   true when at least one field changed
-    //
-    enrichEntry(videoId, meta, force) {
-      if (!videoId || !meta) return false;
-
-      const playlist = this.load() || [];
-      const entry    = playlist.find(item => item.videoId === videoId);
-      if (!entry) return false;
-
-      let changed = false;
-
-      const isBlank = (v) => (v === undefined || v === null || v === '');
-
-      const fillString = (key, value) => {
-        if (isBlank(value)) return;
-        if (!force && !isBlank(entry[key])) return;
-        if (entry[key] === value) return;
-        entry[key] = value;
-        changed = true;
-      };
-
-      fillString('title',     meta.title);
-      fillString('author',    meta.author);
-      fillString('infoLink',  meta.infoLink);
-      fillString('videoLink', meta.videoLink);
-      fillString('src',       meta.src);
-      fillString('type',      meta.type);
-
-      // duration: 0 counts as "not yet measured"
-      if (typeof meta.duration === 'number' && meta.duration > 0) {
-        if ((force || !entry.duration) && entry.duration !== meta.duration) {
-          entry.duration = meta.duration;
-          changed = true;
-        }
-      }
-
-      // poster: DEFAULT_POSTER is treated as "no real poster yet"
-      if (meta.poster) {
-        const hasReal = entry.poster && entry.poster !== DEFAULT_POSTER;
-        if ((force || !hasReal) && entry.poster !== meta.poster) {
-          entry.poster = meta.poster;
-          changed = true;
-        }
-      }
-
-      if (!changed) return false;
-
-      this.save(playlist);
-
-      logger.info('\n' + `playlistmanager: entry enriched for videoId: ${videoId}`);
-
-      this.renderCurrent();
-      return true;
     }
 
     updateEntryDuration(videoId, durationSeconds) {
@@ -1196,102 +804,9 @@
       entry.duration = durationSeconds;
       this.save(playlist);
 
-      logger.info('\n' + `playlistmanager: duration updated for video with id: ${videoId} - ${this._formatDuration(durationSeconds)}`);
+      consoleLog('INFO', MODULE_NAME, `playlistmanager: duration updated for video with id: ${videoId} - ${this._formatDuration(durationSeconds)}`);
 
       this.renderCurrent();
-    }
-
-    // claude - Modify J1 VideoPlayer #33
-    // updateEntryPoster - store a poster (a Base64 data-URL produced by
-    // generateNativePoster(), or any URL) on the playlist entry identified by
-    // videoId and persist it to localStorage. By default it only writes when
-    // the entry has no real poster yet (empty string or DEFAULT_POSTER) so an
-    // explicitly supplied poster is never clobbered; pass force=true to
-    // overwrite. The write and re-render are skipped when nothing changed.
-    // Returns true when the entry was updated.
-    updateEntryPoster(videoId, poster, force) {
-      if (!videoId || !poster) return false;
-
-      const playlist = this.load() || [];
-      const entry    = playlist.find(item => item.videoId === videoId);
-      if (!entry) return false;
-
-      const hasReal = entry.poster && entry.poster !== DEFAULT_POSTER;
-      if (hasReal && !force)      return false;
-      if (entry.poster === poster) return false;
-
-      entry.poster = poster;
-      this.save(playlist);
-
-      logger.info('\n' + `playlistmanager: poster updated for videoId: ${videoId} (${poster.length} bytes)`);
-
-      this.renderCurrent();
-      return true;
-    }
-
-    // claude - Modify J1 VideoPlayer #33
-    // generatePosterForEntry - resolve the native src of a single playlist
-    // entry and, when it still has no poster, capture one off-screen via
-    // generateNativePoster() and store it through updateEntryPoster(). YouTube
-    // entries and entries that already carry a real poster are skipped.
-    // Returns a Promise<boolean> indicating whether a poster was stored.
-    generatePosterForEntry(videoId) {
-      if (!videoId) return Promise.resolve(false);
-
-      const cfg = _resolveNativePosterConfig();
-      if (!cfg.enabled) return Promise.resolve(false);
-
-      const playlist = this.load() || [];
-      const entry    = playlist.find(item => item.videoId === videoId);
-      if (!entry) return Promise.resolve(false);
-
-      // Already has a usable poster -> nothing to do.
-      if (entry.poster && entry.poster !== DEFAULT_POSTER) return Promise.resolve(false);
-
-      const src = entry.src || entry.videoLink || '';
-      if (!_isNativeVideoSource(src)) return Promise.resolve(false);
-
-      return generateNativePoster(src).then((dataUrl) => {
-        if (!dataUrl) return false;
-        return this.updateEntryPoster(videoId, dataUrl);
-      });
-    }
-
-    // claude - Modify J1 VideoPlayer #33
-    // generateMissingNativePosters - scan the stored playlist for native-video
-    // entries that still lack a real poster and generate one for each. Runs
-    // SEQUENTIALLY (one decode at a time) so importing a large playlist does
-    // not spawn dozens of concurrent <video> decodes; each capture is bounded
-    // by the generator's own timeout. updateEntryPoster() already re-renders
-    // per stored poster; a final renderCurrent() guarantees the view reflects
-    // the last write. Returns a Promise<number> = count of posters generated.
-    generateMissingNativePosters() {
-      const cfg = _resolveNativePosterConfig();
-      if (!cfg.enabled) return Promise.resolve(0);
-
-      const playlist = this.load() || [];
-      const pending  = playlist.filter((entry) => {
-        if (!entry || typeof entry !== 'object') return false;
-        if (entry.poster && entry.poster !== DEFAULT_POSTER) return false;
-        const src = entry.src || entry.videoLink || '';
-        return _isNativeVideoSource(src);
-      });
-
-      if (pending.length === 0) return Promise.resolve(0);
-
-      isDev && logger.info('\n' + `playlistmanager: generating posters for ${pending.length} native entr${pending.length === 1 ? 'y' : 'ies'}`);
-
-      let count = 0;
-
-      return pending.reduce((chain, entry) => {
-        return chain.then(() => this.generatePosterForEntry(entry.videoId).then((done) => {
-          if (done) count++;
-        }));
-      }, Promise.resolve()).then(() => {
-        if (count > 0) this.renderCurrent();
-        isDev && logger.info('\n' + `playlistmanager: generated ${count} native poster(s)`);
-        return count;
-      });
     }
 
     // updateEntryAuthor retained for compatibility; for native videos the
@@ -1309,7 +824,7 @@
       entry.author = author;
       this.save(playlist);
 
-      logger.info('\n' + `playlist entry author updated for videoId: ${videoId} - ${author}`);
+      consoleLog('INFO', MODULE_NAME, `playlist entry author updated for videoId: ${videoId} - ${author}`);
 
       this.renderCurrent();
     }
@@ -1324,7 +839,7 @@
       entry.lastPosition = positionSeconds;
       this.save(playlist);
 
-      logger.info('\n' + `playlistmanager: position updated for video with id: ${videoId} - ${positionSeconds}s`);
+      consoleLog('INFO', MODULE_NAME, `playlistmanager: position updated for video with id: ${videoId} - ${positionSeconds}s`);
     }
 
     updateWatchDate(videoId) {
@@ -1337,7 +852,7 @@
       entry.watchDate = new Date().toISOString();
       this.save(playlist);
 
-      logger.info('\n' + `playlistmanager: watchDate updated for video with id: ${videoId}`);
+      consoleLog('INFO', MODULE_NAME, `playlistmanager: watchDate updated for video with id: ${videoId}`);
 
       this.renderCurrent();
     }
@@ -1352,7 +867,7 @@
       entry.rating = rating;
       this.save(playlist);
 
-      logger.info('\n' + `playlistmanager: rating updated for videoId: ${videoId} - ${rating}`);
+      consoleLog('INFO', MODULE_NAME, `playlistmanager: rating updated for videoId: ${videoId} - ${rating}`);
 
       this.renderCurrent();
     }
@@ -1364,9 +879,7 @@
       const entry   = playlist.find(item => item.videoId === videoId);
       if (!entry) return;
 
-      // claude - Add new field title VidoPlayer #1
       if ('category'    in fields) entry.category     = fields.category;
-      if ('title'       in fields) entry.title        = fields.title;
       if ('description' in fields) entry.description  = fields.description;
       if ('episode'     in fields) entry.episode      = fields.episode;
       if ('infoLink'    in fields) entry.infoLink     = fields.infoLink;
@@ -1378,7 +891,7 @@
 
       this.save(playlist);
 
-      logger.info('\n' + `playlistmanager: fields updated for videoId: ${videoId}`);
+      consoleLog('INFO', MODULE_NAME, `playlistmanager: fields updated for videoId: ${videoId}`);
 
       this.renderCurrent();
     }
@@ -1389,18 +902,6 @@
       const playlist = this.load() || [];
       const entry   = playlist.find(item => item.videoId === videoId);
       return (entry && entry.lastPosition > 0) ? entry.lastPosition : 0;
-    }
-
-    // claude - Modify J1 VideoPlayer #35
-    // getEntry
-    // Returns the full playlist entry record for a given videoId, or null when
-    // none exists. Added so callers (e.g. the header-title updater in
-    // doPostOnPlaying) can read the canonical entry.title back from the
-    // persisted playlist rather than re-deriving it from per-tech metadata.
-    getEntry(videoId) {
-      if (!videoId) return null;
-      const playlist = this.load() || [];
-      return playlist.find(item => item.videoId === videoId) || null;
     }
 
     getNextVideoId(currentVideoId) {
@@ -1424,12 +925,12 @@
       const updated = playlist.filter(item => item.videoId !== videoId);
 
       if (updated.length === playlist.length) {
-        logger.warn('\n' + `playlist entry not found for videoId: ${videoId}`);
+        consoleLog('WARN', MODULE_NAME, `playlist entry not found for videoId: ${videoId}`);
         return;
       }
 
       this.save(updated);
-      logger.info('\n' + `playlist entry deleted for videoId: ${videoId}`);
+      consoleLog('INFO', MODULE_NAME, `playlist entry deleted for videoId: ${videoId}`);
 
       // claude - Modify J1 VideoPlayer #22
       // Guard: if the deleted entry is the one currently marked active, drop
@@ -1455,7 +956,7 @@
       localStorage.removeItem(this.STORAGE_KEY);
       this._invalidateSearchIndex();
 
-      logger.info('\n' + `cleared ${playlist.length} items from localStorage key: ${this.STORAGE_KEY}`);
+      consoleLog('INFO', MODULE_NAME, `cleared ${playlist.length} items from localStorage key: ${this.STORAGE_KEY}`);
 
       // claude - Modify J1 VideoPlayer #22
       // Same guard as deleteEntry(), for the bulk case: clearing the playlist
@@ -1482,7 +983,7 @@
         })
         .then(data => {
           if (!Array.isArray(data)) {
-            logger.error('\n' + 'imported URL does not contain a JSON array');
+            consoleLog('ERROR', MODULE_NAME, 'imported URL does not contain a JSON array');
             return;
           }
           const hasMetaData = data.some(entry => entry.type === 'metaData');
@@ -1496,21 +997,21 @@
             const newEntries  = videos.filter(e => !existingIds.has(e.videoId));
             const merged      = existing.concat(newEntries);
             this.save(merged);
-            logger.info('\n' + `merged ${newEntries.length} new items (${videos.length - newEntries.length} duplicates skipped) into localStorage on key: ${this.STORAGE_KEY}`);
+            consoleLog('INFO', MODULE_NAME, `merged ${newEntries.length} new items (${videos.length - newEntries.length} duplicates skipped) into localStorage on key: ${this.STORAGE_KEY}`);
           } else {
             this.save(videos);
-            logger.info('\n' + `imported ${videos.length} of ${data.length} items into localStorage on key: ${this.STORAGE_KEY}`);
+            consoleLog('INFO', MODULE_NAME, `imported ${videos.length} of ${data.length} items into localStorage on key: ${this.STORAGE_KEY}`);
           }
           this.renderCurrent();
         })
-        .catch(err => logger.error('\n' + `import from URL failed: ${err}`));
+        .catch(err => consoleLog('ERROR', MODULE_NAME, `import from URL failed: ${err}`));
     }
 
     async importFromUrlAsync(url) {
       try {
         const res  = await fetch(url);
         if (!res.ok) {
-          logger.error('\n' + `import from URL failed: HTTP ${res.status}`);
+          consoleLog('ERROR', MODULE_NAME, `import from URL failed: HTTP ${res.status}`);
           return;
         }
         const data = await res.json();
@@ -1550,7 +1051,7 @@
               : null);
 
         if (!Array.isArray(playlist)) {
-          logger.error('\n' + 'imported URL does not contain a valid playlist (expected a JSON array or an object with a "playlist" array)');
+          consoleLog('ERROR', MODULE_NAME, 'imported URL does not contain a valid playlist (expected a JSON array or an object with a "playlist" array)');
           return;
         }
 
@@ -1562,14 +1063,14 @@
           const newEntries  = playlist.filter(e => !existingIds.has(e.videoId));
           const merged      = existing.concat(newEntries);
           this.save(merged);
-          logger.info('\n' + `merged ${newEntries.length} new items (${playlist.length - newEntries.length} duplicates skipped) into localStorage on key: ${this.STORAGE_KEY}`);
+          consoleLog('INFO', MODULE_NAME, `merged ${newEntries.length} new items (${playlist.length - newEntries.length} duplicates skipped) into localStorage on key: ${this.STORAGE_KEY}`);
         } else {
           this.save(playlist);
-          logger.info('\n' + `imported ${playlist.length} items into localStorage on key: ${this.STORAGE_KEY}`);
+          consoleLog('INFO', MODULE_NAME, `imported ${playlist.length} items into localStorage on key: ${this.STORAGE_KEY}`);
         }
         this.renderCurrent();
       } catch (err) {
-        logger.error('\n' + `import from URL failed: ${err}`);
+        consoleLog('ERROR', MODULE_NAME, `import from URL failed: ${err}`);
       }
     }
 
@@ -1593,18 +1094,18 @@
             if (data && typeof data === 'object' && data.playlist) {
               videos     = data.playlist;
               totalCount = videos.length + (data.meta_data ? 1 : 0);
-              logger.info('\n' + 'imported file uses new format (meta_data + playlist)');
+              consoleLog('INFO', MODULE_NAME, 'imported file uses new format (meta_data + playlist)');
             } else {
-              logger.error('\n' + 'imported file does not contain a valid playlist format');
+              consoleLog('ERROR', MODULE_NAME, 'imported file does not contain a valid playlist format');
               return;
             }
 
             videos.forEach(entry => this._normalizeEntry(entry));
             this.save(videos);
-            logger.info('\n' + `imported ${videos.length} of ${totalCount} items from file: ${file.name}`);
+            consoleLog('INFO', MODULE_NAME, `imported ${videos.length} of ${totalCount} items from file: ${file.name}`);
             this.renderCurrent();
           } catch (err) {
-            logger.error('\n' + `import from file failed: ${err}`);
+            consoleLog('ERROR', MODULE_NAME, `import from file failed: ${err}`);
           }
         };
         reader.readAsText(file);
@@ -1619,7 +1120,7 @@
       }
       const playlist = this.load();
       if (!playlist || playlist.length === 0) {
-        logger.warn('\n' + 'no playlist data to export');
+        consoleLog('WARN', MODULE_NAME, 'no playlist data to export');
         return;
       }
 
@@ -1638,7 +1139,7 @@
       document.body.removeChild(a);
       URL.revokeObjectURL(url);
 
-      logger.info('\n' + `exported ${playlist.length} items to file: ${filename}`);
+      consoleLog('INFO', MODULE_NAME, `exported ${playlist.length} items to file: ${filename}`);
     }
 
     // backupToFile - write a downloadable safety backup of the current
@@ -1660,7 +1161,7 @@
       }
       const playlist = this.load();
       if (!playlist || playlist.length === 0) {
-        logger.warn('\n' + 'no playlist data to back up');
+        consoleLog('WARN', MODULE_NAME, 'no playlist data to back up');
         return false;
       }
 
@@ -1684,7 +1185,7 @@
       document.body.removeChild(a);
       URL.revokeObjectURL(url);
 
-      logger.info('\n' + `backed up ${playlist.length} items to file: ${filename}`);
+      consoleLog('INFO', MODULE_NAME, `backed up ${playlist.length} items to file: ${filename}`);
       return true;
     }
 
@@ -1758,7 +1259,7 @@
         if (titleBar) {
           this._loopSwitchInitialized = true;
           new playlistLoopSwitchHandler();
-          logger.info('\n' + 'playlistManager: loop switch initialized (lazy)');
+          consoleLog('INFO', MODULE_NAME, 'playlistManager: loop switch initialized (lazy)');
         }
       }
 
@@ -1770,8 +1271,8 @@
     _getPlaylistContainer() {
       const el = document.getElementById(_pid('videoplayer_playlist_parent'));
       if (!el) {
-        logger.error('\n' + 'playlist container element not found');
-        logger.warn('\n' + 'processing playlist skipped');
+        consoleLog('ERROR', MODULE_NAME, 'playlist container element not found');
+        consoleLog('WARN',  MODULE_NAME, 'processing playlist skipped');
       }
       return el;
     }
@@ -2274,11 +1775,6 @@
                   </div>
 
                   <div class="edit-field-group">
-                    <label class="edit-field-label" for="editFieldTitle">Title</label>
-                    <input id="editFieldTitle" class="edit-field-input" placeholder="Title ..." ></input>
-                  </div>
-
-                  <div class="edit-field-group">
                     <label class="edit-field-label" for="editFieldDescription">Description</label>
                     <textarea id="editFieldDescription" class="edit-field-input" placeholder="Description text ..." rows="3" style="overflow-y: auto; resize: vertical;"></textarea>
                   </div>
@@ -2371,8 +1867,7 @@
 
       clearBtn.addEventListener('click', () => {
         document.getElementById('editFieldCategory').value      = '';
-        document.getElementById('editFieldTitle').value         = '';
-        document.getElementById('editFieldDescription').value   = '';        
+        document.getElementById('editFieldDescription').value   = '';
         document.getElementById('editFieldEpisode').value       = '';
         document.getElementById('editFieldInfoLink').value      = '';
         document.getElementById('editFieldVideoLink').value     = '';
@@ -2417,8 +1912,7 @@
 
           const fields = {
             category:     document.getElementById('editFieldCategory').value.trim(),
-            title:        document.getElementById('editFieldTitle').value.trim(),
-            description:  document.getElementById('editFieldDescription').value.trim(),            
+            description:  document.getElementById('editFieldDescription').value.trim(),
             episode:      parseInt(document.getElementById('editFieldEpisode').value, 10) || 0,
             infoLink:     document.getElementById('editFieldInfoLink').value.trim(),
             videoLink:    document.getElementById('editFieldVideoLink').value.trim(),
@@ -2504,7 +1998,6 @@
       if (thumbEl)  thumbEl.src = entry.poster || DEFAULT_POSTER;
 
       document.getElementById('editFieldCategory').value      = entry.category    || '';
-      document.getElementById('editFieldTitle').value         = entry.title       || '';
       document.getElementById('editFieldDescription').value   = entry.description || '';
       document.getElementById('editFieldEpisode').value       = entry.episode     || '';
       document.getElementById('editFieldInfoLink').value      = entry.infoLink    || '';
@@ -3103,7 +2596,7 @@
           player.playlist.currentItem(syncedIndex);
         }
       } catch (e) {
-        isDev && logger.warn('\n' + `playlist re-sync: re-feed failed: ${e}`);
+        isDev && consoleLog('WARN', MODULE_NAME, `playlist re-sync: re-feed failed: ${e}`);
         return;
       }
 
@@ -3133,7 +2626,7 @@
       };
       player.on('loadedmetadata', onResyncLoaded);
 
-      isDev && logger.info('\n' +
+      isDev && consoleLog('INFO', MODULE_NAME,
         `playlist re-sync: re-fed plugin in new order; active videoId '${activeVideoId}' kept at index ${syncedIndex}`);
     }
 
@@ -3357,7 +2850,7 @@
               const p = vjsPlayer.play();
               if (p && typeof p.catch === 'function') {
                 p.catch(err => {
-                  logger.warn('\n' + `deferred play() rejected: ${err}`);
+                  consoleLog('WARN', MODULE_NAME, `deferred play() rejected: ${err}`);
                 });
               }
             }
@@ -3430,66 +2923,6 @@
       : (videoSrc
           ? videoSrc.split('?')[0].split('/').pop().replace(/\.[^.]+$/, '') || videoSrc
           : '');
-
-    // jadams, 2026-06-25: check videoId for invalid chars
-    //
-    // const INVALID_VIDEOID_CHAR_RE = '/[.]/';
-    // const invalidVideoID = `${INVALID_VIDEOID_CHAR_RE}.test(${videoId})`;
-    // const invalidVideoID = /[.]/.test(videoId);
-    if (/[.]/.test(videoId)) {
-      // Validation failed
-      logger.error('\n' + `invalid char found in videoId: ${videoId}`);
-    }
-
-    // claude - Modify J1 VideoPlayer #34
-    // EARLY, isolated playlist creation.
-    //
-    // Historically the playlist record was created "late", inside
-    // doPostOnPlaying() -> playlistManager.addEntry(), which only runs once the
-    // player reaches the 'playing' state - tying record creation to playback.
-    // Here we create the record the moment the video is *created* (its source
-    // is known), independent of whether or when it actually starts playing.
-    //
-    // Only the fields known now are written. Title/author/duration are resolved
-    // asynchronously by the tech and back-filled later via enrichEntry() /
-    // updateEntry*() (see onReady and doPostOnPlaying). createEntry() is
-    // idempotent: an existing entry for this videoId is left untouched, so
-    // re-embedding the same video never duplicates or resets it.
-    //
-    // Doing it here also means the videojs-playlist plugin, built in onReady
-    // from playlistManager.load(), already sees this entry on first setup
-    // instead of only after the first 'playing' event.
-    //
-    if (videoId) {
-      if (isYouTube) {
-        // For YouTube the poster and canonical links are derivable immediately
-        // from the id. `type` is intentionally left to the createEntry default
-        // ('video/mp4'), matching the shape addEntry() previously stored - the
-        // playable source type is derived independently in
-        // _buildPlaylistItemSources() from videoLink, so this has no effect on
-        // playback.
-        playlistManager.createEntry({
-          videoId:   videoId,
-          poster:    `//img.youtube.com/vi/${videoId}/maxresdefault.jpg`,
-          infoLink:  `https://youtu.be/${videoId}`,
-          videoLink: `https://youtu.be/${videoId}`
-        });
-      } else {
-        playlistManager.createEntry({
-          videoId:   videoId,
-          src:       videoSrc,
-          videoLink: videoSrc,
-          type:      'video/mp4'
-        });
-
-        // The source is already known, so a poster can be captured off-screen
-        // right away instead of waiting for the 'playing' event. Fire-and-
-        // forget: generatePosterForEntry() is config-gated, only writes when
-        // the entry still lacks a real poster, and never rejects.
-        playlistManager.generatePosterForEntry(videoId)
-          .catch((e) => { isDev && logger.warn('\n' + `early native poster generation failed for videoId: ${videoId} - ${e}`); });
-      }
-    }
 
     const vjsPlayer = createVideoJsPlayer(videoId, videoSrc, isYouTube, {
       title: '',
@@ -3663,7 +3096,7 @@
               player.off('playing', onFirstPlayingYT);
               setTimeout(() => {
                 player.currentTime(savedPositionYT);
-                logger.info('\n' + `resumed YouTube video id: ${videoId} at last position ${savedPositionYT}s`);
+                consoleLog('INFO', MODULE_NAME, `resumed YouTube video id: ${videoId} at last position ${savedPositionYT}s`);
               }, 250);
             };
             player.on('playing', onFirstPlayingYT);
@@ -3728,7 +3161,7 @@
               player.off('playing', onFirstPlaying);
               setTimeout(() => {
                 player.currentTime(savedPosition);
-                logger.info('\n' + `resumed video with id: ${videoId} at last position ${savedPosition}s`);
+                consoleLog('INFO', MODULE_NAME, `resumed video with id: ${videoId} at last position ${savedPosition}s`);
               }, 250);
             };
             player.on('playing', onFirstPlaying);
@@ -3835,33 +3268,6 @@
               if (switchedId) {
                 isDev && logger.debug('\n' + `playlistitem: active item follows plugin to videoId: ${switchedId}`);
                 playlistManager.setActiveItem(switchedId);
-
-                // claude - Modify J1 VideoPlayer #37
-                // Keep the centre header span (.video-player-header-title) in
-                // sync the moment the videojs-playlist plugin switches item, so
-                // a skip-backward / skip-forward / prev / next control-bar click
-                // flips the header title to the newly loaded video immediately —
-                // not only once (and only if) the 'playing' state is reached.
-                //
-                // Background: the header was set exclusively from
-                // doPostOnPlaying() (#35), which reads the title from the
-                // per-tech metadata (player.ytVideoData / player.videoData).
-                // On an in-player source swap driven by the plugin that metadata
-                // is NOT refreshed (see the #23 note above), so the header kept
-                // showing the previously loaded video's title even though the
-                // correct video had loaded.
-                //
-                // The canonical title is read back from the playlist record by
-                // the switched videoId (the same source doPostOnPlaying() uses),
-                // falling back to the converted item's name and then the videoId
-                // so the header is never blank. The authoritative resync added to
-                // doPostOnPlaying() (#37) later confirms the same value.
-                const _entrySwitched = playlistManager.getEntry(switchedId);
-                _updateHeaderTitle(
-                  (_entrySwitched && _entrySwitched.title) ||
-                  (item && item.name) ||
-                  switchedId
-                );
               }
             });
 
@@ -3904,7 +3310,7 @@
             );
 
             if (syncedIndex < 0) {
-              isDev && logger.warn('\n' +
+              isDev && consoleLog('WARN', MODULE_NAME,
                 `playlist sync: vjsVideoId '${vjsVideoId}' not found in converted playlist ` +
                 `(rawIndex: ${rawIndex}); keeping current item`);
 
@@ -3917,6 +3323,9 @@
             // claude - Modify J1 VideoPlayer #20
             // currentIndex (for loading the video) is the synced index.
             let currentIndex = syncedIndex;
+
+            isDev && consoleLog('INFO', MODULE_NAME,
+              `playlist sync: vjsVideoId '${vjsVideoId}' rawIndex=${rawIndex} syncedIndex=${syncedIndex}`);
 
             // claude - Modify J1 VideoPlayer #19
             // Guard the currentItem() jump so a short or empty converted
@@ -4127,7 +3536,7 @@
               nativePiP.hide();
             }
 
-            logger.info('\n' + 'pip: custom Document PiP button added to control bar');
+            consoleLog('INFO', MODULE_NAME, 'pip: custom Document PiP button added to control bar');
           } else {
             const nativePiP = vjsPlayer.controlBar.getChild('pictureInPictureToggle');
             if (nativePiP) {
@@ -4232,27 +3641,9 @@
         duration:     player.duration(),
         lastPosition: 0
       };
+      const newItem = [ media ];
 
-      // claude - Modify J1 VideoPlayer #34
-      // Creation now happens early in embedRunVideo(). createEntry() here is a
-      // defensive no-op when the record already exists (it is idempotent) and
-      // only creates one in the rare case the early creation was skipped (e.g.
-      // a direct doPostOnPlaying() path). enrichEntry() then back-fills the
-      // metadata that just became available from the live YouTube player
-      // (title/author/duration) onto the existing record - something addEntry()
-      // could not do because it skips records that already exist.
-      //
-      playlistManager.createEntry(media);
-      playlistManager.enrichEntry(vid, media);
-
-      // claude - Modify J1 VideoPlayer #35
-      // Reflect the now-loaded video's title in the centre header span
-      // (.video-player-header-title). Read the canonical entry.title back from
-      // the playlist (just created / enriched above); fall back to the locally
-      // resolved media.title, then to the videoId, so the header is never blank
-      // for a loaded video.
-      const _entryYT = playlistManager.getEntry(vid);
-      _updateHeaderTitle((_entryYT && _entryYT.title) || media.title || vid);
+      newItem.forEach(entry => playlistManager.addEntry(entry));
 
       if (vid && vd.author) {
         playlistManager.updateEntryAuthor(vid, vd.author);
@@ -4294,23 +3685,9 @@
         duration:     player.duration(),
         lastPosition: 0
       };
+      const newItem = [ media ];
 
-      // claude - Modify J1 VideoPlayer #34
-      // Creation now happens early in embedRunVideo(). createEntry() here is a
-      // defensive no-op when the record already exists (idempotent); enrichEntry()
-      // back-fills the title/author/duration resolved during playback onto the
-      // existing record. The native poster is captured early in embedRunVideo()
-      // and, as a fallback, again below.
-      //
-      playlistManager.createEntry(media);
-      playlistManager.enrichEntry(vid, media);
-
-      // claude - Modify J1 VideoPlayer #35
-      // Reflect the now-loaded native video's title in the centre header span
-      // (.video-player-header-title). Read entry.title back from the playlist,
-      // falling back to the resolved media.title and then the videoId.
-      const _entryNV = playlistManager.getEntry(vid);
-      _updateHeaderTitle((_entryNV && _entryNV.title) || media.title || vid);
+      newItem.forEach(entry => playlistManager.addEntry(entry));
 
       if (vid && vd.author) {
         playlistManager.updateEntryAuthor(vid, vd.author);
@@ -4323,47 +3700,6 @@
 
       if (vid) {
         playlistManager.updateWatchDate(vid);
-      }
-
-      // claude - Modify J1 VideoPlayer #33
-      // The native entry just added above may have arrived without a poster
-      // (the media object's poster came through empty). Capture a still frame
-      // from the file off-screen and store it so the playlist list/card views
-      // show a real thumbnail instead of the DEFAULT_POSTER placeholder.
-      // Fire-and-forget: generateNativePoster() never rejects and only writes
-      // when the entry still lacks a real poster, so this is safe to run on
-      // every native play.
-      if (vid && !media.poster) {
-        playlistManager.generatePosterForEntry(vid)
-          .catch((e) => { isDev && logger.warn('\n' + `native poster generation failed for videoId: ${vid} - ${e}`); });
-      }
-    }
-
-    // claude - Modify J1 VideoPlayer #37
-    // Authoritative header-title resync for plugin-driven source swaps.
-    //
-    // The per-tech branches above set the centre header span
-    // (.video-player-header-title) from player.ytVideoData / player.videoData
-    // (#35). On an in-player source swap driven by the videojs-playlist plugin
-    // (the playlist nav / skip-backward / skip-forward / prev / next control-bar
-    // buttons and autoadvance) that per-tech metadata is NOT refreshed - it still
-    // describes the entry from the last embedRunVideo() (see the #23 note above) -
-    // so the branch above re-writes the *previously* loaded video's title and the
-    // header stops matching the video that actually loaded.
-    //
-    // _activePlayingId already prefers _playlistActiveVideoId (the id the plugin
-    // really switched to, recorded by the 'playlistitem' listener) and falls back
-    // to the per-tech id for plain plays, so it is the correct id in BOTH cases.
-    // Reading the canonical title back from that entry and writing it LAST (after
-    // the per-tech writes above) makes the header follow the plugin without
-    // disturbing the normal, non-playlist path: there _activePlayingId equals the
-    // per-tech id, so this resolves the same title and the write is idempotent.
-    // Only writes when a titled entry resolves, so a missing record never blanks
-    // a header the branch above already set.
-    if (_activePlayingId) {
-      const _entryActive = playlistManager.getEntry(_activePlayingId);
-      if (_entryActive && _entryActive.title) {
-        _updateHeaderTitle(_entryActive.title);
       }
     }
 
@@ -4412,56 +3748,15 @@
    *   /assets/theme/j1/modules/videoPlayer/icons/player/dark/playlist-hide.svg
    * The "show" variant is selected here because the panel is being closed.
    */
-  // claude - Modify J1 VideoPlayer #35
-  // _updateHeaderTitle
-  //
-  // Sets the centre header span (.video-player-header-title) to the supplied
-  // text so the header shows the title of the currently loaded video. This
-  // span previously doubled as the playlist toggle label ("Show/Hide
-  // Playlist"); that behaviour has been removed (see _resetPlaylistToggleUI
-  // and initTogglePlaylistHandler), making the span a dedicated "now playing"
-  // title.
-  //
-  // The lookup is scoped to THIS player instance's #video_player_container so
-  // the correct span is updated when several players share one page. A
-  // defensive fall-back to the first <span> inside the container keeps the
-  // helper working even if the .video-player-header-title class is ever
-  // renamed. An empty / missing title clears the span rather than printing
-  // 'undefined'.
-  function _updateHeaderTitle(title) {
-    const container = document.getElementById(_pid('video_player_container'));
-    if (!container) return;
-
-    const span = container.querySelector('.video-player-header-title')
-              || container.querySelector('span');
-    if (!span) return;
-
-    const text = (title != null && String(title).trim() !== '')
-      ? String(title)
-      : '';
-    span.textContent = text;
-
-    isDev && logger.debug('\n' + `_updateHeaderTitle: header title set to "${text}"`);
-  }
-
   function _resetPlaylistToggleUI() {
     const wrapper = document.getElementById(_pid('video_player_container'));
     if (!wrapper) return;
 
-    // claude - Modify J1 VideoPlayer #35
-    // The centre header <span> (.video-player-header-title) no longer doubles
-    // as the playlist toggle label; it now shows the title of the currently
-    // loaded video (set by _updateHeaderTitle() from doPostOnPlaying()).
-    // Writing "Show Playlist" here would clobber that title every time the
-    // panel closes, so the legacy span-label write is disabled. Show/hide
-    // state is still conveyed by the toggle button's title / aria-label / icon
-    // (updated below), so accessibility is unaffected.
-    // Original (deprecated, preserved for reference):
-    //   const span = wrapper.querySelector('span');
-    //   if (span) {
-    //     span.textContent = 'Show Playlist';
-    //   }
-    void wrapper;
+    // Reset the sibling <span> label to "Show Playlist"
+    const span = wrapper.querySelector('span');
+    if (span) {
+      span.textContent = 'Show Playlist';
+    }
 
     // Corrected button ID from 'video_player_header_arrows' (does not
     // exist in the page template) to 'toggle_playlist' (the actual
@@ -4692,12 +3987,12 @@
   function createVideoJsPlayer(videoId, videoSrc, isYouTube, options = {}) {
 
     if (!container) {
-      logger.error('\n' + `Container or overlay element not found`);
+      consoleLog('ERROR', MODULE_NAME, `Container or overlay element not found`);
       return null;
     }
 
     if (player) {
-      isDev && logger.info('\n' + `Disposing existing videoJS player: ${player.id_}`);
+      isDev && consoleLog('INFO', MODULE_NAME, `Disposing existing videoJS player: ${player.id_}`);
 
       if (pipWindow && !pipWindow.closed) {
         pipWindow.close();
@@ -4712,13 +4007,13 @@
 
     const overlayExists = document.getElementById(_pid('emptyPlayerOverlay'));
     if (!overlayExists) {
-      isDev && logger.info('\n' + `Restoring container and overlay for new video`);
+      isDev && consoleLog('INFO', MODULE_NAME, `Restoring container and overlay for new video`);
       container.innerHTML = containerHTML;
     }
 
     const currentOverlay = document.getElementById(_pid('emptyPlayerOverlay'));
     if (!currentOverlay) {
-      isDev && logger.error('\n' + `Overlay element could not be restored`);
+      isDev && consoleLog('ERROR', MODULE_NAME, `Overlay element could not be restored`);
       return null;
     }
 
@@ -4781,7 +4076,7 @@
         }
       };
 
-      isDev && logger.info('\n' + `createVideoJsPlayer: YouTube playerVars from players.youtube: ${JSON.stringify(ytPlayerVars)}`);
+      isDev && consoleLog('INFO', MODULE_NAME, `createVideoJsPlayer: YouTube playerVars from players.youtube: ${JSON.stringify(ytPlayerVars)}`);
 
     } else {
       // Native HTML5 tech configuration: all player parameters are now read
@@ -4837,12 +4132,12 @@
         videoConfig.poster = ntvCfg.default_poster;
       }
 
-      isDev && logger.info('\n' + `createVideoJsPlayer: native config from players.native: fluid=${videoConfig.fluid}, responsive=${videoConfig.responsive}, preload=${videoConfig.preload}`);
+      isDev && consoleLog('INFO', MODULE_NAME, `createVideoJsPlayer: native config from players.native: fluid=${videoConfig.fluid}, responsive=${videoConfig.responsive}, preload=${videoConfig.preload}`);
     }
 
     if (typeof videojs !== 'undefined') {
       player = videojs(playerElementId, videoConfig, function onPlayerReady() {
-        isDev && logger.info('\n' + `player ready on id: ${playerElementId}`);
+        isDev && consoleLog('INFO', MODULE_NAME, `player ready on id: ${playerElementId}`);
 
         if (options.onStateChange) {
           const vjsPlayer = this;
@@ -4860,9 +4155,9 @@
           // DOM events that the adapter (onReady) and loop mode rely on.
           if (typeof this.nativePlayer === 'function') {
             this.nativePlayer({ title: options.title || '' });
-            isDev && logger.info('\n' + `nativePlayer plugin activated on: ${playerElementId}`);
+            isDev && consoleLog('INFO', MODULE_NAME, `nativePlayer plugin activated on: ${playerElementId}`);
           } else {
-            isDev && logger.warn('\n' + `nativePlayer plugin not available - custom events will not be dispatched`);
+            isDev && consoleLog('WARN', MODULE_NAME, `nativePlayer plugin not available - custom events will not be dispatched`);
           }
         }
 
@@ -4944,7 +4239,7 @@
     async handlePasteClick() {
       try {
         if (!navigator.clipboard || !navigator.clipboard.readText) {
-          isDev && logger.warn('\n' + MESSAGES.NO_CLIPBOARD_API);
+          isDev && consoleLog('WARN', MODULE_NAME, MESSAGES.NO_CLIPBOARD_API);
           return;
         }
 
@@ -4956,7 +4251,7 @@
         this._toggleClearButton(text.trim());
         this.processUrl();
       } catch (err) {
-        isDev && logger.error('\n' + `Clipboard read error: ${err}`);
+        isDev && consoleLog('ERROR', MODULE_NAME, `Clipboard read error: ${err}`);
       }
     }
 
@@ -4987,7 +4282,7 @@
     processUrl() {
       const url = this.elements.videoUrlInput.value.trim();
       if (url === "") {
-        isDev && logger.warn('\n' + MESSAGES.NO_URL);
+        isDev && consoleLog('WARN', MODULE_NAME, MESSAGES.NO_URL);
         return;
       }
 
@@ -4996,10 +4291,10 @@
       if (youtubeId) {
         // duplicate check using the YouTube video ID
         if (previousPlayerId !== null && youtubeId === previousPlayerId) {
-          isDev && logger.warn('\n' + `player already exists with id: ${youtubeId}`);
+          isDev && consoleLog('WARN', MODULE_NAME, `player already exists with id: ${youtubeId}`);
           return;
         }
-        isDev && logger.info('\n' + `Loading YouTube video with id: ${youtubeId}`);
+        isDev && consoleLog('INFO', MODULE_NAME, `Loading YouTube video with id: ${youtubeId}`);
         this.loadYtVideo(youtubeId);
 
         // closeEditPlaylist(btn, playerId) — same pattern as closePlaylist.
@@ -5017,19 +4312,18 @@
       // extractVideoSrc returns the raw URL/path for native video files.
       const videoSrc = this.extractVideoSrc(url);
 
-      // jadams
       // Duplicate check uses filename-without-extension as the id key.
       const videoId  = videoSrc
         ? videoSrc.split('?')[0].split('/').pop().replace(/\.[^.]+$/, '') || videoSrc
         : null;
 
       if (previousPlayerId !== null && videoId === previousPlayerId) {
-        isDev && logger.warn('\n' + `player already exists with id: ${videoId}`);
+        isDev && consoleLog('WARN', MODULE_NAME, `player already exists with id: ${videoId}`);
         return;
       }
 
       if (videoSrc) {
-        isDev && logger.info('\n' + `Loading video from src: ${videoSrc}`);
+        isDev && consoleLog('INFO', MODULE_NAME, `Loading video from src: ${videoSrc}`);
         this.loadVideo(videoSrc);
 
         //  closeEditPlaylist(btn, playerId) — same pattern as closePlaylist.
@@ -5041,7 +4335,7 @@
         // update the playListButton (to be enabled when a playlist is loaded)
         playlistManager._updateTogglePlaylistButton();
       } else {
-        isDev && logger.error('\n' + MESSAGES.INVALID_URL);
+        isDev && consoleLog('ERROR', MODULE_NAME, MESSAGES.INVALID_URL);
       }
     } // END processUrl()
 
@@ -5279,14 +4573,6 @@
 
           playlistManager.renderCurrent();
 
-          // claude - Modify J1 VideoPlayer #33
-          // Backfill posters for imported native-video entries that arrived
-          // without one. Runs asynchronously after the initial render so the
-          // list appears immediately (with DEFAULT_POSTER placeholders) and the
-          // real thumbnails fill in as each frame is captured.
-          playlistManager.generateMissingNativePosters()
-            .catch((e) => { isDev && logger.warn('\n' + `poster backfill (file import) failed: ${e}`); });
-
           // claude - Modify J1 VideoPlayer #27
           // Mirror of "Modify J1 VideoPlayer #26" (handleLoadFromServer): when a
           // playlist file is imported here, load the first video of the
@@ -5482,14 +4768,6 @@
 
       // update the playListButton (to be enabled when a playlist is loaded)
       playlistManager._updateTogglePlaylistButton();
-
-      // claude - Modify J1 VideoPlayer #33
-      // Backfill posters for server-loaded native-video entries that arrived
-      // without one (mirror of the handleFileSelected() backfill). Runs
-      // asynchronously so the list appears immediately and the real thumbnails
-      // fill in as each frame is captured off-screen.
-      playlistManager.generateMissingNativePosters()
-        .catch((e) => { isDev && logger.warn('\n' + `poster backfill (server load) failed: ${e}`); });
 
       // claude - Modify J1 VideoPlayer #26
       // When a playlist is loaded from the server, load the first video of the
@@ -5933,7 +5211,7 @@
     init() {
       const { titleBar } = this.elements;
       if (!titleBar) {
-        logger.warn('\n' + 'playlistSortHandler: .playlist-block-title not found');
+        consoleLog('WARN', MODULE_NAME, 'playlistSortHandler: .playlist-block-title not found');
         return;
       }
 
@@ -6176,21 +5454,6 @@
 
     _togglePlaylistHandlerInit = true;
 
-    // claude - Modify J1 VideoPlayer #35
-    // The centre header span is now a "now playing" title that is filled on
-    // play by _updateHeaderTitle(). If the rendered template still seeded that
-    // span with the legacy toggle label, clear the stale text so it isn't
-    // shown before the first video loads. Only the known legacy labels are
-    // cleared, so a real title set by an early play is never clobbered.
-    const _titleSpan = container.querySelector('.video-player-header-title')
-                    || container.querySelector('span');
-    if (_titleSpan) {
-      const _legacy = (_titleSpan.textContent || '').trim();
-      if (_legacy === 'Show Playlist' || _legacy === 'Hide Playlist') {
-        _titleSpan.textContent = '';
-      }
-    }
-
     btn.addEventListener('click', () => {
       // Re-check disabled state at click time (guards empty-playlist / edit-open).
       if (btn.disabled || btn.getAttribute('aria-disabled') === 'true') return;
@@ -6208,15 +5471,8 @@
         btn.setAttribute('aria-label',    'Hide playlist');
         btn.setAttribute('aria-expanded', 'true');
 
-        // claude - Modify J1 VideoPlayer #35
-        // The centre header span (.video-player-header-title) is now a
-        // "now playing" title, not the toggle label, so the legacy
-        // "Hide Playlist" span write is disabled. The button's title /
-        // aria-label / icon (set above and below) still signal the open state.
-        // Original (deprecated, preserved for reference):
-        //   const span = container.querySelector('span');
-        //   if (span) span.textContent = 'Hide Playlist';
-        void container;
+        const span = container.querySelector('span');
+        if (span) span.textContent = 'Hide Playlist';
 
         const img = btn.querySelector('img');
         if (img) {
