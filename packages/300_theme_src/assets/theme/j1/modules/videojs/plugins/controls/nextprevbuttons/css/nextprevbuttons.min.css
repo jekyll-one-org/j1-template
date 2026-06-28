@@ -1,6 +1,6 @@
 /*
  # -----------------------------------------------------------------------------
- # ~/modules/videojs/css/plugins/controls/nextPrevButtons/css/nextprevbuttons.css
+ # ~/modules/videojs/css/plugins/controls/nextPrevButtons/css/nextprevbuttons.min.css
  # Provides CSS Styles for the VideoJS (V8) plugin nextPrevButtons
  #
  # Product/Info:
@@ -13,13 +13,4 @@
  # -----------------------------------------------------------------------------
 */
 
-.video-js .vjs-playlist-button {
-    cursor: pointer
-}
-
-/* dim the button when it cannot move further in the playlist
-*/
-.video-js .vjs-playlist-button.vjs-disabled {
-    cursor: default;
-    opacity: .5
-}
+.video-js .vjs-playlist-button{cursor:pointer}.video-js .vjs-playlist-button.vjs-disabled{cursor:default;opacity:.5}

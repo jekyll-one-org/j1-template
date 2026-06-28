@@ -1,6 +1,6 @@
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/modules/videoPlayer/js/videoPlayer.js (51)
+ # ~/assets/theme/j1/modules/videoPlayer/js/videoPlayer.js (50)
  # Provides JS Core for J1 Module videoPlayer
  #
  # Product/Info:
@@ -13,7 +13,7 @@
  # -----------------------------------------------------------------------------
 */
 
-/* Version 3.1.51 for J1 Template */
+/* Version 3.1.50 for J1 Template */
 
 // -----------------------------------------------------------------------------
 // ESLint shimming
@@ -1020,53 +1020,6 @@
       this._invalidateSearchIndex();
     }
 
-    // claude - Modify J1 VideoPlayer #45
-    // -------------------------------------------------------------------------
-    // _loadFromKey(storageKey) / _saveToKey(storageKey, playlistArray)
-    //
-    // Explicit-key variants of load()/save(). They read/write the localStorage
-    // key passed to them rather than the *shared, mutable* instance property
-    // this.STORAGE_KEY.
-    //
-    // Rationale (issue #45 — concurrent preload cross-contamination):
-    // PlaylistManager is a SINGLETON (one instance for the whole page, created
-    // once by the UMD factory: `const playlistManager = new PlaylistManager()`).
-    // setPlayerID() re-points the single instance's STORAGE_KEY/INDEX_KEY and
-    // the module-level _playerID. preloadPlaylists() is async and `await`s a
-    // fetch() per file; while one player's preload is suspended on its fetch, a
-    // sibling player's setPlayerID() (driven by the adapter's per-player init
-    // loop) mutates the same STORAGE_KEY. When the suspended preload resumes,
-    // this.load()/this.save() inside _preloadMergeFromUrl() therefore read and
-    // write the WRONG player's key — so every preloaded list collapses onto a
-    // single player's storage and the players render the same (first) playlist.
-    //
-    // These helpers let the preload path pin the destination key ONCE (computed
-    // from the owning playerId at call time) and stay immune to any concurrent
-    // STORAGE_KEY change. They do NOT touch INDEX_KEY: the search index is
-    // rebuilt scope-correctly at the end of preloadPlaylists() via
-    // buildSearchIndex(); here we only drop the in-memory index reference.
-    // -------------------------------------------------------------------------
-    _loadFromKey(storageKey) {
-      try {
-        const data = localStorage.getItem(storageKey);
-        if (!data) return null;
-        const parsed = JSON.parse(data);
-        if (Array.isArray(parsed)) {
-          parsed.forEach(entry => this._normalizeEntry(entry));
-        }
-        return parsed;
-      } catch (e) {
-        logger.error('\n' + `error parsing localStorage data (key: ${storageKey}): ${e}`);
-        return null;
-      }
-    }
-
-    // claude - Modify J1 VideoPlayer #45
-    _saveToKey(storageKey, playlistArray) {
-      localStorage.setItem(storageKey, JSON.stringify(playlistArray));
-      this._searchIndex = null;
-    }
-
     // CRUD operations
     // -------------------------------------------------------------------------
 
@@ -1731,29 +1684,13 @@
       const base = String(baseUrl || PLAYLIST_URL_BASE).replace(/\/+$/, '');
       let totalAdded = 0;
 
-      // claude - Modify J1 VideoPlayer #45
-      // Pin the destination localStorage key ONCE, derived from the owning
-      // playerId passed by the adapter, using the same rule setPlayerID() uses
-      // (bare base key when no id). Every merge below writes to THIS key via the
-      // explicit-key helpers, so a sibling player's setPlayerID() firing while
-      // this async preload is suspended on a fetch() can no longer redirect the
-      // merge to the wrong player's storage. When playerId is falsy the value
-      // falls back to the currently configured STORAGE_KEY, preserving the
-      // single-player / test behaviour unchanged.
-      const targetStorageKey = playerId
-        ? `${this._BASE_STORAGE_KEY}_${playerId}`
-        : this.STORAGE_KEY;
-
       for (let i = 0; i < preloadList.length; i++) {
         const fileName = preloadList[i];
         if (!fileName || typeof fileName !== 'string') continue;
 
         const url = this._resolvePreloadUrl(fileName, base);
         try {
-          // claude - Modify J1 VideoPlayer #45
-          // Original (deprecated, preserved for reference):
-          //   const added = await this._preloadMergeFromUrl(url);
-          const added = await this._preloadMergeFromUrl(url, targetStorageKey);
+          const added = await this._preloadMergeFromUrl(url);
           totalAdded += added;
           isDev && logger.info('\n' + `playlistManager: preload "${url}" — ${added} new entr${added === 1 ? 'y' : 'ies'} merged`);
         } catch (e) {
@@ -1806,16 +1743,7 @@
     // current localStorage playlist. Accepts both the plain-array and the
     // { playlist: [...] } shapes (same as importFromUrlAsync()). Returns the
     // number of newly added entries (0 when nothing new, or on error).
-    // claude - Modify J1 VideoPlayer #45
-    // Original signature (deprecated, preserved for reference):
-    //   async _preloadMergeFromUrl(url) {
-    // A second, optional `storageKey` argument pins the localStorage key for
-    // this merge. When omitted it defaults to the shared this.STORAGE_KEY so
-    // any other caller keeps the previous behaviour; preloadPlaylists() always
-    // passes the per-player key it derived up front (issue #45).
-    async _preloadMergeFromUrl(url, storageKey) {
-      // claude - Modify J1 VideoPlayer #45
-      const _key = storageKey || this.STORAGE_KEY;
+    async _preloadMergeFromUrl(url) {
       const res = await fetch(url);
       if (!res.ok) {
         logger.error('\n' + `playlistManager: preload fetch failed: HTTP ${res.status} (${url})`);
@@ -1835,10 +1763,7 @@
 
       incoming.forEach(entry => this._normalizeEntry(entry));
 
-      // claude - Modify J1 VideoPlayer #45
-      // Original (deprecated, preserved for reference):
-      //   const existing    = this.load() || [];
-      const existing    = this._loadFromKey(_key) || [];
+      const existing    = this.load() || [];
       const existingIds  = new Set(existing.map(e => e && e.videoId));
       const newEntries   = incoming.filter(e => e && e.videoId && !existingIds.has(e.videoId));
 
@@ -1847,10 +1772,7 @@
         return 0;
       }
 
-      // claude - Modify J1 VideoPlayer #45
-      // Original (deprecated, preserved for reference):
-      //   this.save(existing.concat(newEntries));
-      this._saveToKey(_key, existing.concat(newEntries));
+      this.save(existing.concat(newEntries));
       return newEntries.length;
     }
 

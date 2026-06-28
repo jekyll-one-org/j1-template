@@ -1,18 +1,15 @@
 /*
  # -----------------------------------------------------------------------------
  # ~/modules/videojs/js/plugins/controls/nextprevbuttons/js/nextprevbuttons.js
- # Provides the nextPrevButtons plugin for Video.js V8 and newer
+ # Provides the nextPrevButtons plugin for Video.js V8 and newer.
  # Adds previous-/next-item buttons to the control bar that drive a playlist
  # managed by the videojs-playlist plugin.
  #
  # Product/Info:
- # https://github.com/brightcove/videojs-playlist
  # http://jekyll.one
  #
  # Copyright (C) 2026 Juergen Adams
  #
- # videojs-playlist is licensed under the Apache License 2.0.
- # See: https://github.com/brightcove/videojs-playlist/blob/main/LICENSE
  # J1 Theme is licensed under MIT License.
  # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE
  # -----------------------------------------------------------------------------

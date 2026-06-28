@@ -1,6 +1,6 @@
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/modules/videoPlayer/js/videoPlayer.js (51)
+ # ~/assets/theme/j1/modules/videoPlayer/js/videoPlayer.js (47)
  # Provides JS Core for J1 Module videoPlayer
  #
  # Product/Info:
@@ -13,7 +13,7 @@
  # -----------------------------------------------------------------------------
 */
 
-/* Version 3.1.51 for J1 Template */
+/* Version 3.1.47 for J1 Template */
 
 // -----------------------------------------------------------------------------
 // ESLint shimming
@@ -509,38 +509,6 @@
   let _editPlaylistHandlerInit    = false;
   let _togglePlaylistHandlerInit  = false;
 
-  // claude - Modify J1 VideoPlayer #41
-  // Guards the page-load "auto-load first playlist entry in paused state"
-  // behaviour (autoLoadFirstEntryOnReload()) so it fires at most once per
-  // page load even if the triggering handler init runs more than once or
-  // several callers invoke it. Hoisted here with the other module-level
-  // flags so it is initialised before any factory code runs
-  // (TDZ pitfall — see #32).
-  let _autoLoadFirstOnReloadDone  = false;
-
-  // claude - Modify J1 VideoPlayer #43
-  // Per-player keying of the auto-load-on-reload once-only guard.
-  //
-  // The #41 flag above (_autoLoadFirstOnReloadDone) is a SINGLETON: a single
-  // module-level boolean shared by every player on the page. On a multi-player
-  // page the first player to run autoLoadFirstEntryOnReload() set it true,
-  // after which every sibling player short-circuited at the guard and never
-  // restored ITS OWN stored first entry — so only one player auto-loaded.
-  //
-  // We replace that single boolean with a registry keyed by the owning player
-  // id (_playerID — the same scope _pid() and this.load()/this.STORAGE_KEY use,
-  // set per instance by setPlayerID()). Each distinct player id (including the
-  // empty-string '' single-player / test fallback) gets its own "done" slot, so
-  // every player auto-loads its own first entry exactly once, independently of
-  // the others. Object.create(null) avoids prototype-key collisions for ids
-  // like 'toString'. Declared here with the other module-level flags so it is
-  // initialised before any factory code runs (TDZ pitfall — see #32).
-  //
-  // The original boolean is left in place (deprecated, unreferenced) rather
-  // than deleted, in line with the additive convention; nothing reads or writes
-  // it after the autoLoadFirstEntryOnReload() reads/writes are rerouted below.
-  const _autoLoadFirstOnReloadDoneByPid = Object.create(null);
-
   // Player-scoped element ID support.
   // The HTML data file (videoPlayer.html) suffixes every per-player element
   // id with _{{player.id}} so that multiple players can coexist on the
@@ -1018,53 +986,6 @@
     save(playlistArray) {
       localStorage.setItem(this.STORAGE_KEY, JSON.stringify(playlistArray));
       this._invalidateSearchIndex();
-    }
-
-    // claude - Modify J1 VideoPlayer #45
-    // -------------------------------------------------------------------------
-    // _loadFromKey(storageKey) / _saveToKey(storageKey, playlistArray)
-    //
-    // Explicit-key variants of load()/save(). They read/write the localStorage
-    // key passed to them rather than the *shared, mutable* instance property
-    // this.STORAGE_KEY.
-    //
-    // Rationale (issue #45 — concurrent preload cross-contamination):
-    // PlaylistManager is a SINGLETON (one instance for the whole page, created
-    // once by the UMD factory: `const playlistManager = new PlaylistManager()`).
-    // setPlayerID() re-points the single instance's STORAGE_KEY/INDEX_KEY and
-    // the module-level _playerID. preloadPlaylists() is async and `await`s a
-    // fetch() per file; while one player's preload is suspended on its fetch, a
-    // sibling player's setPlayerID() (driven by the adapter's per-player init
-    // loop) mutates the same STORAGE_KEY. When the suspended preload resumes,
-    // this.load()/this.save() inside _preloadMergeFromUrl() therefore read and
-    // write the WRONG player's key — so every preloaded list collapses onto a
-    // single player's storage and the players render the same (first) playlist.
-    //
-    // These helpers let the preload path pin the destination key ONCE (computed
-    // from the owning playerId at call time) and stay immune to any concurrent
-    // STORAGE_KEY change. They do NOT touch INDEX_KEY: the search index is
-    // rebuilt scope-correctly at the end of preloadPlaylists() via
-    // buildSearchIndex(); here we only drop the in-memory index reference.
-    // -------------------------------------------------------------------------
-    _loadFromKey(storageKey) {
-      try {
-        const data = localStorage.getItem(storageKey);
-        if (!data) return null;
-        const parsed = JSON.parse(data);
-        if (Array.isArray(parsed)) {
-          parsed.forEach(entry => this._normalizeEntry(entry));
-        }
-        return parsed;
-      } catch (e) {
-        logger.error('\n' + `error parsing localStorage data (key: ${storageKey}): ${e}`);
-        return null;
-      }
-    }
-
-    // claude - Modify J1 VideoPlayer #45
-    _saveToKey(storageKey, playlistArray) {
-      localStorage.setItem(storageKey, JSON.stringify(playlistArray));
-      this._searchIndex = null;
     }
 
     // CRUD operations
@@ -1731,29 +1652,13 @@
       const base = String(baseUrl || PLAYLIST_URL_BASE).replace(/\/+$/, '');
       let totalAdded = 0;
 
-      // claude - Modify J1 VideoPlayer #45
-      // Pin the destination localStorage key ONCE, derived from the owning
-      // playerId passed by the adapter, using the same rule setPlayerID() uses
-      // (bare base key when no id). Every merge below writes to THIS key via the
-      // explicit-key helpers, so a sibling player's setPlayerID() firing while
-      // this async preload is suspended on a fetch() can no longer redirect the
-      // merge to the wrong player's storage. When playerId is falsy the value
-      // falls back to the currently configured STORAGE_KEY, preserving the
-      // single-player / test behaviour unchanged.
-      const targetStorageKey = playerId
-        ? `${this._BASE_STORAGE_KEY}_${playerId}`
-        : this.STORAGE_KEY;
-
       for (let i = 0; i < preloadList.length; i++) {
         const fileName = preloadList[i];
         if (!fileName || typeof fileName !== 'string') continue;
 
         const url = this._resolvePreloadUrl(fileName, base);
         try {
-          // claude - Modify J1 VideoPlayer #45
-          // Original (deprecated, preserved for reference):
-          //   const added = await this._preloadMergeFromUrl(url);
-          const added = await this._preloadMergeFromUrl(url, targetStorageKey);
+          const added = await this._preloadMergeFromUrl(url);
           totalAdded += added;
           isDev && logger.info('\n' + `playlistManager: preload "${url}" — ${added} new entr${added === 1 ? 'y' : 'ies'} merged`);
         } catch (e) {
@@ -1806,16 +1711,7 @@
     // current localStorage playlist. Accepts both the plain-array and the
     // { playlist: [...] } shapes (same as importFromUrlAsync()). Returns the
     // number of newly added entries (0 when nothing new, or on error).
-    // claude - Modify J1 VideoPlayer #45
-    // Original signature (deprecated, preserved for reference):
-    //   async _preloadMergeFromUrl(url) {
-    // A second, optional `storageKey` argument pins the localStorage key for
-    // this merge. When omitted it defaults to the shared this.STORAGE_KEY so
-    // any other caller keeps the previous behaviour; preloadPlaylists() always
-    // passes the per-player key it derived up front (issue #45).
-    async _preloadMergeFromUrl(url, storageKey) {
-      // claude - Modify J1 VideoPlayer #45
-      const _key = storageKey || this.STORAGE_KEY;
+    async _preloadMergeFromUrl(url) {
       const res = await fetch(url);
       if (!res.ok) {
         logger.error('\n' + `playlistManager: preload fetch failed: HTTP ${res.status} (${url})`);
@@ -1835,10 +1731,7 @@
 
       incoming.forEach(entry => this._normalizeEntry(entry));
 
-      // claude - Modify J1 VideoPlayer #45
-      // Original (deprecated, preserved for reference):
-      //   const existing    = this.load() || [];
-      const existing    = this._loadFromKey(_key) || [];
+      const existing    = this.load() || [];
       const existingIds  = new Set(existing.map(e => e && e.videoId));
       const newEntries   = incoming.filter(e => e && e.videoId && !existingIds.has(e.videoId));
 
@@ -1847,10 +1740,7 @@
         return 0;
       }
 
-      // claude - Modify J1 VideoPlayer #45
-      // Original (deprecated, preserved for reference):
-      //   this.save(existing.concat(newEntries));
-      this._saveToKey(_key, existing.concat(newEntries));
+      this.save(existing.concat(newEntries));
       return newEntries.length;
     }
 
@@ -2300,151 +2190,6 @@
       embedRunVideo(videoSrc, mode);
     }
 
-    // claude - Modify J1 VideoPlayer #41
-    // autoLoadFirstEntryOnReload()
-    //
-    // Page-load counterpart to the load-and-pause behaviour the
-    // playlistIOHandler applies after a user-triggered load
-    // (handleLoadFromServer() / #26 and handleFileSelected() / #27):
-    // When a playlist is ALREADY present in the instance's localStorage
-    // (i.e. it was loaded in an earlier session/visit and the whole page
-    // is now reloaded), load the first video of the display-ordered list
-    // into the player and start it in the 'paused' state —
-    // exactly as if the user had just (re)loaded that playlist.
-    //
-    // The display order is reproduced by applying the active sort criterion
-    // (_currentSort) to a fresh copy of the stored playlist — the same
-    // ordering renderCards()/renderPlaylist() apply — so the entry chosen
-    // here matches the first row the user sees. Going through
-    // embedRunVideo(videoId, 'pause') resolves the entry's src and, via
-    // playerMode === 'pause', pauses playback right after start (see the
-    // autoplay branch in embedRunVideo). 'pause' mode (instead of playEntry())
-    // is deliberate and mirrors #26/#27: it does NOT set _startedFromPlaylist,
-    // so the playlist panel is left open after load.
-    // As with #26/#27, the paused-after-start behaviour depends on the
-    // autoplay config being enabled.
-    //
-    // Differences from preloadPlaylists() (#39) are intentional: preload only
-    // SEEDS/merges configured playlist files and explicitly does NOT
-    // auto-embed (to avoid clashing with the autoStart/init path on a first
-    // visit). This method, by contrast, only ever acts on a playlist that
-    // is ALREADY in localStorage at load time — it never fetches or merges —
-    // so on a fresh first visit (empty list) it is a no-op and the autoStart
-    // path is left untouched.
-    //
-    // Once-only: guarded by the module-level _autoLoadFirstOnReloadDone
-    // flag so repeated handler init or multiple callers cannot double-load.
-    // The flag is set only on the success path, so a not-ready or empty-list
-    // call remains retriable (e.g. an adapter call after async setup
-    // completes).
-    //
-    // claude - Modify J1 VideoPlayer #43
-    // The once-only guard described above is now keyed per player
-    // (_autoLoadFirstOnReloadDoneByPid[_playerID]) rather than a single shared
-    // boolean, so on a multi-player page each player auto-loads its own stored
-    // first entry exactly once. NOTE: this keys the guard correctly, but for
-    // every player to actually auto-load, autoLoadFirstEntryOnReload() must be
-    // invoked once PER PLAYER with _playerID set to that player's id. The
-    // current call site is playlistSortHandler.init() — a single, page-global
-    // handler (see the timing/scope note below) — so the adapter still needs to
-    // drive this method per-instance (it is exported on playlistManager) for
-    // multi-player auto-load to take full effect. Flagged for review.
-    //
-    // Timing/scope (flagged for review): this is invoked from
-    // playlistSortHandler.init(), a page-load handler the adapter
-    // instantiates after its dependencies (videojs + j1.adapter.videoPlayer.videoPlayerOptions)
-    // are met, so embedRunVideo() is callable by then — the same readiness the
-    // IO handlers rely on at click time. A defensive readiness check below
-    // skips (without consuming the once-only flag) if the adapter options
-    // are not yet present.
-    // Because playlistSortHandler is a single, page-global handler (it resolves
-    // '.playlist-block-title'/'#playlistSortSelect' without _pid()), this
-    // auto-load targets the playlistManager's current player scope, matching
-    // that handler's existing load()/save()/renderCurrent() behaviour.
-    // The method is also reachable via the public playlistManager export,
-    // so the adapter can drive it per-instance at a more precise point if
-    // multi-instance auto-load on reload is later required.
-    //
-    // @return {boolean} true if a first entry was auto-loaded, false otherwise.
-    //
-    autoLoadFirstEntryOnReload() {
-      // claude - Modify J1 VideoPlayer #41
-      // Once-only guard: never auto-load more than once per page load.
-      // claude - Modify J1 VideoPlayer #43
-      // Now keyed by the current player scope (_playerID) instead of a single
-      // shared boolean, so each player on a multi-player page is guarded
-      // independently and one player's completed auto-load no longer suppresses
-      // its siblings'. See the registry declaration near the module-level flags.
-      // Original (deprecated, preserved for reference):
-      //   if (_autoLoadFirstOnReloadDone) {
-      //     isDev && logger.debug('\n' + 'playlistManager: auto-load on reload already done — skipping');
-      //     return false;
-      //   }
-      if (_autoLoadFirstOnReloadDoneByPid[_playerID]) {
-        isDev && logger.debug('\n' + `playlistManager: auto-load on reload already done for player "${_playerID}" — skipping`);
-        return false;
-      }
-
-      // claude - Modify J1 VideoPlayer #41
-      // Defensive readiness check. embedRunVideo() reads
-      // j1.adapter.videoPlayer.videoPlayerOptions (and relies on videojs).
-      // If the adapter has not finished wiring yet, skip WITHOUT consuming
-      // the once-only flag so a later (adapter-driven) call can still succeed.
-      //
-      if (typeof j1 === 'undefined' || !j1 || !j1.adapter || !j1.adapter.videoPlayer
-          || !j1.adapter.videoPlayer.videoPlayerOptions) {
-        isDev && logger.debug('\n' + 'playlistManager: auto-load on reload deferred — adapter not ready yet');
-        return false;
-      }
-
-      // claude - Modify J1 VideoPlayer #41
-      // Resolve the display-first entry from the ALREADY-stored playlist (no
-      // fetch/merge). _applySortOrder() sorts in place on a fresh load() copy.
-      const currentList = this.load() || [];
-      this._applySortOrder(currentList);
-      const firstEntry = currentList[0];
-
-      if (!firstEntry || !firstEntry.videoId) {
-        // Empty/invalid list: nothing was "already loaded", so there is nothing
-        // to restore on reload. Leave the once-only flag unset (retriable).
-        isDev && logger.debug('\n' + 'playlistManager: no stored playlist on reload — nothing to auto-load');
-        return false;
-      }
-
-      // claude - Modify J1 VideoPlayer #41
-      // Mirror of the IO-handler container guard (#26/#33): if a previous
-      // session teardown left the player slot without its empty-player overlay,
-      // restore the pristine container markup before embedding. On a normal
-      // reload the overlay is already present (server-rendered), so this
-      // branch is inert.
-      // Guarded on container/containerHTML because those module-level refs
-      // are only populated once playlistIOHandler has been constructed.
-      //
-      try {
-        const overlayExists = document.getElementById(_pid('emptyPlayerOverlay'));
-        if (!overlayExists && container && containerHTML) {
-          isDev && logger.debug('\n' + 'playlistManager: restoring container/overlay before reload auto-load');
-          container.innerHTML = containerHTML;
-        }
-      } catch (e) {
-        isDev && logger.warn('\n' + `playlistManager: reload container restore skipped: ${e}`);
-      }
-
-      // claude - Modify J1 VideoPlayer #41
-      // Consume the once-only guard now (success path) and load the first entry
-      // in the paused state, exactly as handleLoadFromServer()/handleFileSelected().
-      // claude - Modify J1 VideoPlayer #43
-      // Mark the once-only guard consumed for THIS player only (keyed by
-      // _playerID) so sibling players on the same page can still auto-load their
-      // own stored first entry. Mirrors the per-player read guard above.
-      // Original (deprecated, preserved for reference):
-      //   _autoLoadFirstOnReloadDone = true;
-      _autoLoadFirstOnReloadDoneByPid[_playerID] = true;
-      isDev && logger.info('\n' + `playlistManager: loading first stored-playlist video in paused state on reload (videoId: ${firstEntry.videoId})`);
-      this.embedRunVideo(firstEntry.videoId, 'pause');
-      return true;
-    }
-
     initPlayHandler() {
       const playlistContainer = document.getElementById(_pid('videoplayer_playlist_parent')) // Fix J1 VideoPlayer #2: corrected ID;
       if (!playlistContainer) return;
@@ -2469,8 +2214,8 @@
       isDev && logger.info('\n' + 'playlistManager: play handler initialized');
     }
 
-    // _createRatingModal: thumbnail src now uses entry.poster or
-    // DEFAULT_POSTER instead of the YouTube CDN (img.youtube.com).
+    // _createRatingModal: thumbnail src now uses entry.poster or DEFAULT_POSTER
+    // instead of the YouTube CDN (img.youtube.com).
     _createRatingModal(videoId) {
       if (document.getElementById('ratingModal')) return;
 
@@ -3475,15 +3220,15 @@
 
       // claude - Modify J1 VideoPlayer #31
       // Resolve the active video inside the freshly converted list (videoId
-      // match, the #20 index space). convertVideoPlayerPlaylist() silently
-      // drops entries without playable sources, so a raw index cannot be
-      // reused. If the active video is absent from the converted list,
-      // do NOT reload — that would interrupt playback for no navigational
-      // benefit.
-      const syncedIndex = playlist.findIndex((item) => item && item.videoId === activeVideoId);
+      // match, the #20 index space). convertVideoPlayerPlaylist() silently drops
+      // entries without playable sources, so a raw index cannot be reused. If
+      // the active video is absent from the converted list, do NOT reload — that
+      // would interrupt playback for no navigational benefit.
+      const syncedIndex = playlist.findIndex(
+        (item) => item && item.videoId === activeVideoId
+      );
       if (syncedIndex < 0) {
-        // jadams, 2026-06-28: logging disabled
-        //isDev && logger.warn('\n' + `playlist re-sync for active videoId '${activeVideoId}' not in converted list: skipping re-feed`);
+        isDev && logger.warn('\n' + `playlist re-sync: active videoId '${activeVideoId}' not in converted list; skipping re-feed`);
         return;
       }
 
@@ -3543,7 +3288,6 @@
       // never break the sort handler.
       const onResyncLoaded = () => {
         player.off('loadedmetadata', onResyncLoaded);
-
         setTimeout(() => {
           try {
             if (resumeTime > 0) player.currentTime(resumeTime);
@@ -3811,81 +3555,6 @@
   // its extension so existing playlist-management logic is unaffected.
   // ---------------------------------------------------------------------------
 
-  // claude - VideoPlayer permanently turn off YouTube captions #1
-  // ---------------------------------------------------------------------------
-  // Permanently disable YouTube closed captions / subtitles via the IFrame API.
-  //
-  // Why the player var alone is not enough:
-  //   cc_load_policy=0 only sets the *initial* load policy ("do not show CC by
-  //   default"). It does NOT prevent captions from appearing when the viewer's
-  //   YouTube account / browser preference has captions switched on, and there
-  //   is no player var that hard-disables them.
-  //
-  // The reliable mechanism (per the IFrame API) is to unload the caption module
-  // once it becomes available. The module only loads AFTER playback starts and
-  // signals availability through the `onApiChange` event. Because YouTube
-  // (re)loads the module on every new video, we must re-apply on each fire —
-  // hence a persistent `onApiChange` listener rather than a one-shot call.
-  // This keeps captions off across in-player playlist navigation too.
-  //
-  // Two module names exist: 'captions' (HTML5 player) and 'cc' (legacy AS3).
-  // We only act on whichever is currently present (via getOptions) so we never
-  // throw on an unloaded module and never loop on the unload-triggered event.
-  //
-  // @param {object} ytPlayer - underlying YT.Player from the videojs-youtube
-  //                            tech (player.tech().ytPlayer)
-  // ---------------------------------------------------------------------------
-  const _disableYouTubeCaptions = (ytPlayer) => {                           
-    if (!ytPlayer) return;                                                  
-
-    const CC_MODULES = ['captions', 'cc'];                                  
-
-    const unloadCaptionModules = () => {                                    
-      let loaded = [];                                                      
-      try {                                                                 
-        loaded = (typeof ytPlayer.getOptions === 'function')                
-          ? (ytPlayer.getOptions() || [])                                   
-          : [];                                                             
-      } catch (e) {                                                         
-        loaded = [];                                                        
-      }                                                                     
-
-      CC_MODULES.forEach((mod) => {                                         
-        if (loaded.indexOf(mod) === -1) return;                             
-        try {                                                               
-          // Belt: clear the active track first (empty track = captions off)
-          if (typeof ytPlayer.setOption === 'function') {
-            ytPlayer.setOption(mod, 'track', {});
-          }
-          // Suspenders: unload the module entirely so the CC button/track go
-          if (typeof ytPlayer.unloadModule === 'function') {                
-            ytPlayer.unloadModule(mod);
-          }                                                                 
-          isDev && logger && logger.info('\n' + `YouTube captions disabled (module: ${mod})`);
-        } catch (e) {                                                       
-          isDev && logger && logger.debug('\n' + `unload of caption module '${mod}' skipped: ${e}`);
-        }                                                                   
-      });                                                                   
-    };                                                                      
-
-    // claude - VideoPlayer permanently turn off YouTube captions #1
-    // Best-effort immediate pass (no-op if the module has not loaded yet)
-    unloadCaptionModules();
-
-    // claude - VideoPlayer permanently turn off YouTube captions #1
-    // Persistent hook: onApiChange fires whenever a module (incl. captions) is
-    // loaded/unloaded. Re-apply on every fire so captions never re-appear, even
-    // across new videos loaded into the same player by the playlist plugin 
-    if (typeof ytPlayer.addEventListener === 'function' && !ytPlayer._j1CcDisableBound) {
-      ytPlayer._j1CcDisableBound = true;
-      try {                                                                 
-        ytPlayer.addEventListener('onApiChange', unloadCaptionModules);
-      } catch (e) {
-        isDev && logger && logger.debug('\n' + `onApiChange bind for captions skipped: ${e}`);
-      }
-    }
-  };                                                                        
-
   /**
    * embedRunVideo - embed and play a video via videoJS.
    * Accepts either a YouTube video ID / URL or a native file URL/path.
@@ -4139,35 +3808,6 @@
             isDev && logger.debug('\n' + `immediate YT video data read skipped: ${e}`);
           }
 
-    
-          // Permanently suppress YouTube CC/subtitles for this player. The
-          // underlying YT.Player is exposed by the videojs-youtube tech as
-          // tech.ytPlayer; _disableYouTubeCaptions() attaches a persistent
-          // onApiChange listener so captions stay off across every video the
-          // playlist plugin loads into this same player instance.
-          try {
-            const ccTech     = player.tech({ IWillNotUseThisInPlugins: true });
-            const ccYtPlayer = ccTech && ccTech.ytPlayer;
-            if (ccYtPlayer) {
-              _disableYouTubeCaptions(ccYtPlayer);
-            } else {
-              // tech.ytPlayer is created asynchronously; retry once it exists ..
-              const ccWait = setInterval(() => {
-                const t  = player.tech({ IWillNotUseThisInPlugins: true });
-                const yt = t && t.ytPlayer;
-                if (yt) {
-                  clearInterval(ccWait);
-                  _disableYouTubeCaptions(yt);
-                }
-              }, 150);
-        
-              // stop polling after ~3s so we never leak the interval ..
-              setTimeout(() => clearInterval(ccWait), 3000);
-            }
-          } catch (e) {
-            isDev && logger.debug('\n' + `YouTube caption disable skipped: ${e}`);
-          }
-
           // playlistManager, fixed video duration (YouTube)
           player.on('durationchange', () => {
             const durationDisplay = player.controlBar && player.controlBar.durationDisplay;
@@ -4191,9 +3831,7 @@
           const savedPositionYT = videoPlayer.playlistManager.getEntryPosition(videoId);
           if (savedPositionYT > 0) {
             const onFirstPlayingYT = () => {
-        
               player.off('playing', onFirstPlayingYT);
-
               setTimeout(() => {
                 player.currentTime(savedPositionYT);
                 logger.info('\n' + `resumed YouTube video id: ${videoId} at last position ${savedPositionYT}s`);
@@ -4257,15 +3895,13 @@
           // resume from saved position if available (native)
           const savedPosition = videoPlayer.playlistManager.getEntryPosition(videoId);
           if (savedPosition > 0) {
-            const onFirstPlaying = () => {             
+            const onFirstPlaying = () => {
               player.off('playing', onFirstPlaying);
-
               setTimeout(() => {
                 player.currentTime(savedPosition);
                 logger.info('\n' + `resumed video with id: ${videoId} at last position ${savedPosition}s`);
               }, 250);
             };
-
             player.on('playing', onFirstPlaying);
           }
         } // END if isYouTube / else
@@ -4473,9 +4109,8 @@
             // loadstart autoplay may run normally without colliding with a
             // pending currentItem() src().
             //
-            const _onPlaylistSetupSettled = () => {           
+            const _onPlaylistSetupSettled = () => {
               vjsPlayer.off('loadedmetadata', _onPlaylistSetupSettled);
-
               _playlistSetupInProgress = false;
               isDev && logger.debug('\n' + 'playlist setup settled; loadstart autoplay re-enabled');
             };
@@ -4488,9 +4123,8 @@
             // permanently for subsequent navigations.
             ////
             setTimeout(() => {
-              if (_playlistSetupInProgress) {               
+              if (_playlistSetupInProgress) {
                 vjsPlayer.off('loadedmetadata', _onPlaylistSetupSettled);
-
                 _playlistSetupInProgress = false;
                 isDev && logger.debug('\n' + 'playlist setup guard cleared by timeout fallback');
               }
@@ -4605,16 +4239,6 @@
                 }
               });
             }
-          }
-
-          if (piZoomButtons.enabled && !isYouTube) {
-            // piZoomButtons
-            vjsPlayer.zoomButtons({
-              moveX:  piZoomButtons.moveX,
-              moveY:  piZoomButtons.moveY,
-              rotate: piZoomButtons.rotate,
-              zoom:   piZoomButtons.zoom
-            }); 
           }
 
           // For YouTube, hide the VJS control bar when configured.
@@ -5244,23 +4868,17 @@
     }
 
     if (player) {
-      const isPlayerLoaded = (document.getElementById(player.id_) !== null) ? true : false;
+      isDev && logger.info('\n' + `Disposing existing videoJS player: ${player.id_}`);
 
-      // jadams, 2026-06-28: prevent error like:
-      // video.js:210 VIDEOJS: ERROR: TypeError: player.off is not a function      
-      if (isPlayerLoaded) {
-        isDev && logger.info('\n' + `Disposing existing videoJS player: ${player.id_}`);
-
-        if (pipWindow && !pipWindow.closed) {
-          pipWindow.close();
-          pipWindow = null;
-        }
-        pipVisibilityBound = false;
-        pipEnabled         = false;
-    
-        // player.dispose();  // trigger player.off
-        // player = null;
+      if (pipWindow && !pipWindow.closed) {
+        pipWindow.close();
+        pipWindow = null;
       }
+      pipVisibilityBound = false;
+      pipEnabled         = false;
+
+      player.dispose();
+      player = null;
     }
 
     const overlayExists = document.getElementById(_pid('emptyPlayerOverlay'));
@@ -5315,14 +4933,6 @@
       ytParamKeys.forEach(key => {
         if (key in ytCfg) ytPlayerVars[key] = ytCfg[key];
       });
-
-
-      // Hard-set the initial caption load policy to 0 ("do not show captions by
-      // default") regardless of the players.youtube config value. This only
-      // governs the INITIAL state; the permanent enforcement is done at runtime
-      // via _disableYouTubeCaptions() (onApiChange -> unloadModule). Setting it
-      // here avoids a brief caption flash before the module is unloaded.
-      ytPlayerVars.cc_load_policy = 0;
 
       videoConfig = {
         fluid:     !!(ytCfg.fluid !== undefined ? ytCfg.fluid : true),
@@ -5864,9 +5474,9 @@
           // As with #26, the paused-after-start behaviour depends on the
           // autoplay config being enabled.
           //
-          const currentList = playlistManager.load() || [];
-          playlistManager._applySortOrder(currentList);
-          const firstEntry = currentList[0];
+          const firstList  = playlistManager.load() || [];
+          playlistManager._applySortOrder(firstList);
+          const firstEntry = firstList[0];
           if (firstEntry && firstEntry.videoId) {
             isDev && logger.info('\n' + `playlistManager: loading first imported-playlist video in paused state (videoId: ${firstEntry.videoId})`);
             playlistManager.embedRunVideo(firstEntry.videoId, 'pause');
@@ -6065,9 +5675,9 @@
       // mode (instead of playEntry()) is deliberate: it does NOT set
       // _startedFromPlaylist, so the playlist panel is left open after load.
       //
-      const currentList = playlistManager.load() || [];
-      playlistManager._applySortOrder(currentList);
-      const firstEntry = currentList[0];
+      const firstList  = playlistManager.load() || [];
+      playlistManager._applySortOrder(firstList);
+      const firstEntry = firstList[0];
       if (firstEntry && firstEntry.videoId) {
         isDev && logger.info('\n' + `playlistManager: loading first server-playlist video in paused state (videoId: ${firstEntry.videoId})`);
         playlistManager.embedRunVideo(firstEntry.videoId, 'pause');
@@ -6550,17 +6160,6 @@
         playlistManager.save(playlist);
         playlistManager.renderCurrent();
       }
-
-      // claude - Modify J1 VideoPlayer #41
-      // When a playlist is already present in localStorage on (re)load, restore
-      // the same "first entry loaded in paused state" behaviour the IO handlers
-      // apply after a user-triggered load (#26/#27). This runs here because
-      // playlistSortHandler.init() is a page-load handler that already touches
-      // the stored playlist (load/sort/render above) and runs after the adapter
-      // has wired videojs + videoPlayerOptions, so embedRunVideo() is callable.
-      // The method is once-only-guarded, no-ops on an empty list, and skips
-      // gracefully if the adapter is not ready yet (see autoLoadFirstEntryOnReload).
-      playlistManager.autoLoadFirstEntryOnReload();
 
       select.addEventListener('change', (e) => {
         localStorage.setItem('searchMode', e.target.value);

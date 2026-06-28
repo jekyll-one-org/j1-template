@@ -77,13 +77,13 @@ defaults:
       enabled:                          true
 
     mergeSwitch:
-      enabled:                          false
+      enabled:                          true
 
     loop:
       enabled:                          false
       pip:                              false
 
-    type:                               cards                                   # list | cards
+    type:                               list                                   # list | cards
 
     cards:
       perRow:                           2
@@ -221,7 +221,7 @@ defaults:
 
       playlist:
         enabled:                        true
-        autoplay:                       false                                   # play video after load
+        autoplay:                       true                                    # play video after load
         autoadvance:                    true                                    # play next item when current/active video ends
         autoadvance_delay:              0                                       # delay (seconds) for playing next video
         poster:                         true                                    # enable|disable poster settings
@@ -262,10 +262,10 @@ defaults:
 
       nextPrevButtons:
         enabled:                        true
-        autoplay:                       false                                   # play video after load
+        autoplay:                       true                                    # play video after load
 
       zoomButtons:
-        enabled:                        false
+        enabled:                        true
 
         moveX:                          0
         moveY:                          0

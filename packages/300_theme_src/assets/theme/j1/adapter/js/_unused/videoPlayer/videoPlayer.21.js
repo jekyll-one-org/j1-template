@@ -870,6 +870,8 @@ j1.adapter.videoPlayer = ((j1, window) => {
 
       logger.info('\n' + 'initializing playlist handlers [' + playerId + ']: finished');
 
+
+
       // claude - Modify J1 VideoPlayer #39
       // 11. preloadPlaylists — load the per-player `playlist.preload` files
       //     (configured in videoPlayer_control.yml) into this instance's
@@ -976,35 +978,35 @@ j1.adapter.videoPlayer = ((j1, window) => {
       //      altogether. That is a one-line change to the #42 invocation line and
       //      is left to your decision rather than made here.
       //
-      if (options.playlist && options.playlist.enabled) {
-        try {
-          if (videoPlayer.playlistManager &&
-              typeof videoPlayer.playlistManager.setPlayerID === 'function') {
-            videoPlayer.playlistManager.setPlayerID(playerId);
-            logger.debug('\n' + 'initHandlers: autoLoad scope pinned (setPlayerID re-assert) [' + playerId + ']');
-          } else {
-            logger.info('\n' + 'initHandlers: autoLoad scope pin skipped — setPlayerID not present [' + playerId + ']');
-          }
-        } catch (e) {
-          logger.error('\n' + 'initHandlers: autoLoad scope pin (setPlayerID re-assert) failed: ' + e);
-        }
-      }
+      if (options.playlist && options.playlist.enabled) {                                  // claude - Modify J1 VideoPlayer #44
+        try {                                                                              // claude - Modify J1 VideoPlayer #44
+          if (videoPlayer.playlistManager &&                                               // claude - Modify J1 VideoPlayer #44
+              typeof videoPlayer.playlistManager.setPlayerID === 'function') {              // claude - Modify J1 VideoPlayer #44
+            videoPlayer.playlistManager.setPlayerID(playerId);                              // claude - Modify J1 VideoPlayer #44
+            logger.debug('\n' + 'initHandlers: autoLoad scope pinned (setPlayerID re-assert) [' + playerId + '] — #43 guard keys on this id'); // claude - Modify J1 VideoPlayer #44
+          } else {                                                                         // claude - Modify J1 VideoPlayer #44
+            logger.info('\n' + 'initHandlers: autoLoad scope pin skipped — setPlayerID not present [' + playerId + ']'); // claude - Modify J1 VideoPlayer #44
+          }                                                                                // claude - Modify J1 VideoPlayer #44
+        } catch (e) {                                                                      // claude - Modify J1 VideoPlayer #44
+          logger.error('\n' + 'initHandlers: autoLoad scope pin (setPlayerID re-assert) failed: ' + e); // claude - Modify J1 VideoPlayer #44
+        }                                                                                  // claude - Modify J1 VideoPlayer #44
+      }                                                                                    // claude - Modify J1 VideoPlayer #44
 
-      if (options.playlist && options.playlist.enabled) {
-        try {
-          if (videoPlayer.playlistManager &&
-              typeof videoPlayer.playlistManager.autoLoadFirstEntryOnReload === 'function') {
-            var autoLoaded = videoPlayer.playlistManager.autoLoadFirstEntryOnReload();
-            logger.debug('\n' + 'initHandlers: autoLoadFirstEntryOnReload [' + playerId + ']');
-          } else {
-            logger.info('\n' + 'initHandlers: autoLoadFirstEntryOnReload skipped — method not present (core module predates #41) [' + playerId + ']');
-          }
-        } catch (e) {
-          logger.error('\n' + 'initHandlers: autoLoadFirstEntryOnReload failed: ' + e);
-        }
-      } else {
-        logger.info('\n' + 'initHandlers: autoLoadFirstEntryOnReload skipped (playlist disabled)');
-      }
+      if (options.playlist && options.playlist.enabled) {                                  // claude - Modify J1 VideoPlayer #42
+        try {                                                                              // claude - Modify J1 VideoPlayer #42
+          if (videoPlayer.playlistManager &&                                               // claude - Modify J1 VideoPlayer #42
+              typeof videoPlayer.playlistManager.autoLoadFirstEntryOnReload === 'function') { // claude - Modify J1 VideoPlayer #42
+            var autoLoaded = videoPlayer.playlistManager.autoLoadFirstEntryOnReload();      // claude - Modify J1 VideoPlayer #42
+            logger.debug('\n' + 'initHandlers: autoLoadFirstEntryOnReload [' + playerId + '] — ' + (autoLoaded ? 'loaded first stored entry (paused)' : 'no-op (none stored / already done / not ready)')); // claude - Modify J1 VideoPlayer #42
+          } else {                                                                         // claude - Modify J1 VideoPlayer #42
+            logger.info('\n' + 'initHandlers: autoLoadFirstEntryOnReload skipped — method not present (core module predates #41) [' + playerId + ']'); // claude - Modify J1 VideoPlayer #42
+          }                                                                                // claude - Modify J1 VideoPlayer #42
+        } catch (e) {                                                                      // claude - Modify J1 VideoPlayer #42
+          logger.error('\n' + 'initHandlers: autoLoadFirstEntryOnReload failed: ' + e);    // claude - Modify J1 VideoPlayer #42
+        }                                                                                  // claude - Modify J1 VideoPlayer #42
+      } else {                                                                             // claude - Modify J1 VideoPlayer #42
+        logger.info('\n' + 'initHandlers: autoLoadFirstEntryOnReload skipped (playlist disabled)'); // claude - Modify J1 VideoPlayer #42
+      }                                                                                    // claude - Modify J1 VideoPlayer #42
 
       logger.info('\n' + 'initializing playlist handlers [' + playerId + ']: finished');
 

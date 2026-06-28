@@ -6,7 +6,7 @@ regenerate:                             true
 
 {% comment %}
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/adapter/js/videoPlayer.js (21)
+ # ~/assets/theme/j1/adapter/js/videoPlayer.js (13a)
  # J1 Adapter for the module VideoPlayer (native videoJS)
  #
  # Product/Info:
@@ -78,12 +78,12 @@ regenerate:                             true
 {% comment %} Set config data
 -------------------------------------------------------------------------------- {% endcomment %}
 {% assign videoplayer_default     = modules.defaults.videoPlayer.defaults %}
-{% assign videoplayer_settings    = modules.videoPlayer.settings %}
 {% assign videoplayer_control     = modules.videoPlayer_control.settings %}
+{% assign videoplayer_settings    = modules.videoPlayer_control.settings %}
 
 {% comment %} Set config options (deep merge: defaults <- user settings)
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign videoplayer_options     = videoplayer_default | merge: videoplayer_settings | merge: videoplayer_control%}
+{% assign videoplayer_options     = videoplayer_default | merge: videoplayer_control | merge: videoplayer_media %}
 {% assign controls_sorted         = videoplayer_control.players | sort: 'id' %}
 {% assign players                 = controls_sorted %}
 
@@ -97,7 +97,7 @@ regenerate:                             true
 
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/adapter/js/videoPlayer.js (21)
+ # ~/assets/theme/j1/adapter/js/videoPlayer.js (13a)
  # J1 Adapter for the module VideoPlayer (native HTML5/videoJS)
  #
  # Product/Info:
@@ -128,7 +128,7 @@ j1.adapter.videoPlayer = ((j1, window) => {
   const isDev = (env === 'development' || env === 'dev') ? true : false;
 
   var videoPlayerDefaults;
-  var videoPlayerSettings;
+  var videoPlayerPlaylist;
   var videoPlayerOptions;
   var videoPlayers;
 
@@ -179,10 +179,10 @@ j1.adapter.videoPlayer = ((j1, window) => {
       // -----------------------------------------------------------------------
       // merge default + user YAML settings
       // -----------------------------------------------------------------------
-      videoPlayerDefaults = $.extend({},   {{videoplayer_default  | replace: 'nil', 'null' | replace: '=>', ':' }});
-      videoPlayerSettings = $.extend({},   {{videoplayer_settings | replace: 'nil', 'null' | replace: '=>', ':' }});
-      videoPlayers        = $.extend({},   {{videoplayer_control  | replace: 'nil', 'null' | replace: '=>', ':' }});
-      videoPlayerOptions  = $.extend(true, {}, videoPlayerDefaults, videoPlayerSettings);
+      videoPlayerDefaults = $.extend({}, {{videoplayer_default | replace: 'nil', 'null' | replace: '=>', ':' }});
+      videoPlayers        = $.extend({}, {{videoplayer_control | replace: 'nil', 'null' | replace: '=>', ':' }});
+      videoPlayerPlaylist = $.extend({}, {{videoplayer_media   | replace: 'nil', 'null' | replace: '=>', ':' }});
+      videoPlayerOptions  = $.extend(true, {}, videoPlayerDefaults, videoPlayers, videoPlayerPlaylist);
 
       // Expose the merged options on the adapter object so the module can
       // read them via  j1.adapter.videoPlayer.videoPlayerOptions.
@@ -207,14 +207,19 @@ j1.adapter.videoPlayer = ((j1, window) => {
           logger.debug('\n' + 'state: ' + _this.getState());
           logger.info('\n' + 'module is being initialized');
 
-          {% comment %} iterate all players
+          {% comment %} split J1 Masonry data #3
+          ----------------------------------------------------------------------
+            Per-grid merge mirrors masonry.html exactly:
+              videoplayer_default <- player <- playlist_match (by id)
+            This makes the merged `grid` Liquid var expose the SAME keys
+            downstream code reads (grid.id, grid.enabled, grid.lightbox.*,
+            grid.lightGallery.*, grid.videojs.*, grid.options.*). Per-grid
+            values still override defaults key-by-key thanks to deep_merge,
+            so JS-side per-grid behaviour stays unchanged vs. the old
+            single-file masonry.settings.grids iteration.
           ---------------------------------------------------------------------- {% endcomment %}
           {% for video_player in players %}
-
-            {% comment %} create accumulated player data
-            player:  {{ player | debug }}
-            -------------------------------------------------------------------- {% endcomment %}
-            {% assign playlist_match = controls_sorted | where: 'id', video_player.id | first %}
+            {% assign playlist_match = media_sorted  | where: 'id', video_player.id | first %}
             {% if playlist_match %}
               {% assign player = videoplayer_default | merge: video_player | merge: playlist_match %}
             {% else %}
@@ -382,17 +387,6 @@ j1.adapter.videoPlayer = ((j1, window) => {
         // initialise toggle state
         togglePlaylistBtn.dataset.playlistOpen = 'false';
 
-        // claude - Modify J1 VideoPlayer #36
-        // The header <span> (.video-player-header-title) is now the live
-        // title display for the currently loaded video. The module pushes
-        // entry.title into it on the 'playing' state (see Modify J1
-        // VideoPlayer #35); it is no longer a static "Show Playlist" toggle
-        // label. A video that is loaded but never played pushes no title, so
-        // seed the span with an empty string here at setup time instead of
-        // leaving the markup default in place. Subsequent label writes by the
-        // toggle handler are disabled below (see #36 OPEN/closePlaylist).
-        if (togglePlaylistSpan !== null) { togglePlaylistSpan.textContent = ''; }
-
         togglePlaylistBtn.addEventListener('click', function(event) {
           // claude - Unique J1 VideoPlayer #1
           var editBtn = document.getElementById('edit_playlist_' + playerId);
@@ -418,15 +412,7 @@ j1.adapter.videoPlayer = ((j1, window) => {
             togglePlaylistBtn.dataset.playlistOpen = 'true';
             togglePlaylistBtn.title = 'Hide playlist';
             togglePlaylistBtn.setAttribute('aria-label', 'Hide playlist');
-            // claude - Modify J1 VideoPlayer #36
-            // DISABLED: the header <span> is now the live video-title display
-            // (.video-player-header-title, fed by the module per #35). Writing
-            // 'Hide Playlist' here would clobber the currently shown title on
-            // every toggle. The accessible label still lives on the <button>
-            // (title + aria-label above) and the icon swap below, so dropping
-            // the span text is purely cosmetic-label removal, not a11y loss.
-            // Original line kept for reference:
-            // if (togglePlaylistSpan !== null) { togglePlaylistSpan.textContent = 'Hide Playlist'; }
+            if (togglePlaylistSpan !== null) { togglePlaylistSpan.textContent = 'Hide Playlist'; }
             if (togglePlaylistImg  !== null) {
               togglePlaylistImg.src = '/assets/theme/j1/modules/videoPlayer/icons/player/dark/playlist-hide.svg';
               togglePlaylistImg.alt = 'Hide playlist';
@@ -446,48 +432,6 @@ j1.adapter.videoPlayer = ((j1, window) => {
           }
 
         }); // END EventListener
-
-        // claude - Modify J1 VideoPlayer #38
-        // Make the header title <span> (.video-player-header-title) a second
-        // trigger for opening/closing the playlist screen, so a click on the
-        // live video title behaves EXACTLY like a click on the
-        // <button id="toggle_playlist_<playerId>">.
-        //
-        // The title span is a sibling of the toggle button inside
-        // .video-player-header (it is the same element resolved above as
-        // togglePlaylistSpan — the first/only <span> in the header), so a click
-        // on it does NOT bubble to the button; a dedicated listener is required.
-        //
-        // Implementation note: rather than duplicate the OPEN/CLOSE branch logic
-        // (icon swap, edit-button gating, slide animation, data-playlistOpen
-        // bookkeeping), this listener simply re-dispatches a click on
-        // togglePlaylistBtn. That keeps a single source of truth — any future
-        // change to the toggle handler is automatically inherited by the title,
-        // and the open/close state can never drift between the two triggers.
-        //
-        // No init-once guard is needed here: initPlayerUiEvents() runs exactly
-        // once per player (the load-dependency interval clears immediately after
-        // the call), mirroring the unguarded toggle-button listener above.
-        var headerTitleSpan = togglePlaylistBtn.closest('.video-player-header')
-                                ? togglePlaylistBtn.closest('.video-player-header').querySelector('.video-player-header-title')
-                                : null;
-        if (headerTitleSpan === null) { headerTitleSpan = togglePlaylistSpan; } // claude - Modify J1 VideoPlayer #38
-
-        if (headerTitleSpan !== null) {
-          // claude - Modify J1 VideoPlayer #38
-          // Affordance: present the title as interactive and avoid text-selection
-          // flicker on repeated toggles. Applied inline so the behaviour ships
-          // with the handler and needs no companion CSS rule.
-          headerTitleSpan.style.cursor     = 'pointer';
-          headerTitleSpan.style.userSelect = 'none';
-
-          headerTitleSpan.addEventListener('click', function(event) {
-            // claude - Modify J1 VideoPlayer #38
-            // Re-dispatch to the canonical toggle handler (single source of truth).
-            togglePlaylistBtn.click();
-          }); // END EventListener (header title toggle)
-        } // END if headerTitleSpan
-
       } // END if togglePlaylistBtn
 
       // hide playlist (secondary close button inside the playlist screen)
@@ -559,49 +503,6 @@ j1.adapter.videoPlayer = ((j1, window) => {
               // the unsuffixed id which does not exist in the DOM.
               _closePlaylist(playerId);
 
-              // claude - Modify J1 VideoPlayer #29
-              // Overlay the edit screen ON TOP OF the video container box
-              // (mirrors the amplitude compact-player list view behaviour).
-              //
-              // The edit screen stays a SIBLING of #video_container_<id> in
-              // the DOM — it is NEVER moved inside the container — so it is
-              // immune to the innerHTML rebuilds performed by the import and
-              // load-from-server flows. We position it absolutely over the
-              // container using the container's live box geometry, while the
-              // player keeps running underneath, fully covered by the opaque
-              // overlay. A resize handler keeps the overlay aligned while open.
-              var _vpEditVideoContainer = document.getElementById('video_container_' + playerId);
-              var _vpEditPlayerWrapper  = document.getElementById(playerId);
-              if (_vpEditVideoContainer !== null && _vpEditPlayerWrapper !== null) {
-                // Guarantee a positioning context on the player wrapper so the
-                // absolutely positioned edit screen anchors to it. The HTML
-                // template already declares position:relative, but we re-assert
-                // it here defensively in case the inline style is absent.
-                if (window.getComputedStyle(_vpEditPlayerWrapper).position === 'static') {
-                  _vpEditPlayerWrapper.style.position = 'relative';
-                }
-
-                var _vpPositionEditOverlay = function() {
-                  editScreen.style.position   = 'absolute';
-                  editScreen.style.top        = _vpEditVideoContainer.offsetTop + 'px';
-                  editScreen.style.left       = _vpEditVideoContainer.offsetLeft + 'px';
-                  editScreen.style.width      = _vpEditVideoContainer.offsetWidth + 'px';
-                  editScreen.style.height     = _vpEditVideoContainer.offsetHeight + 'px';
-                  editScreen.style.margin     = '0';
-                  editScreen.style.overflowY  = 'auto';
-                  editScreen.style.boxSizing  = 'border-box';
-                  editScreen.style.background = 'var(--card-background)';
-                }; // END _vpPositionEditOverlay
-
-                _vpPositionEditOverlay();
-
-                // Keep the overlay aligned with the container on viewport
-                // resize while it is open. The handler reference is stashed on
-                // the element so closeEditPlaylist() can detach it.
-                editScreen._vpEditResizeHandler = _vpPositionEditOverlay;
-                window.addEventListener('resize', editScreen._vpEditResizeHandler);
-              }
-
               editScreen.classList.remove('slide-out-top');
               editScreen.classList.add('slide-in-top');
               editScreen.style.display = 'block';
@@ -661,7 +562,6 @@ j1.adapter.videoPlayer = ((j1, window) => {
     //   8. inputWrapperHandler           — URL input + paste + load-video button
     //   9. inputValueBackgroundHandler   — input fill-state background sync
     //  10. navbarSmoothScrollHandler     — same-page anchor smooth-scroll
-    //  11. preloadPlaylists              — load the per-player `playlist.preload` files
     //
     // -------------------------------------------------------------------------
     initHandlers: (options, playerId) => {
@@ -868,8 +768,6 @@ j1.adapter.videoPlayer = ((j1, window) => {
         logger.info('\n' + 'initHandlers: navbarSmoothScrollHandler skipped (smoothScroll disabled)');
       }
 
-      logger.info('\n' + 'initializing playlist handlers [' + playerId + ']: finished');
-
       // claude - Modify J1 VideoPlayer #39
       // 11. preloadPlaylists — load the per-player `playlist.preload` files
       //     (configured in videoPlayer_control.yml) into this instance's
@@ -895,115 +793,6 @@ j1.adapter.videoPlayer = ((j1, window) => {
         }
       } else {
         logger.info('\n' + 'initHandlers: preloadPlaylists skipped (playlist disabled)');
-      }
-
-      // claude - Modify J1 VideoPlayer #42
-      // 12. autoLoadFirstEntryOnReload — explicit adapter-side trigger for the
-      //     "first stored-playlist entry loaded in the paused state on (re)load"
-      //     behaviour introduced in the core module as #41.
-      //
-      //     #41 wired this from inside the core module's page-global
-      //     playlistSortHandler.init() (which resolves '.playlist-block-title' /
-      //     '#playlistSortSelect' WITHOUT _pid(), so it only ever targets the
-      //     playlistManager's *current* player scope). This adapter-side call is
-      //     the explicit counterpart requested after #41: it runs here inside the
-      //     per-player initHandlers(options, playerId) loop, AFTER setPlayerID(
-      //     playerId) (step 1) has scoped the playlistManager to THIS instance and
-      //     AFTER the player + videojs + videoPlayerOptions are wired, so
-      //     embedRunVideo() is callable and the stored playlist is read from the
-      //     correct per-instance localStorage namespace (#40).
-      //
-      //     Placed after the #39 preloadPlaylists dispatch on purpose:
-      //     autoLoadFirstEntryOnReload() acts ONLY on an ALREADY-stored playlist
-      //     (it never fetches/merges), so it does not depend on the async preload
-      //     completing — on a reload the stored entries are available immediately.
-      //
-      //     Safe to run alongside the #41 sort-handler hook: the method is guarded
-      //     by the module-level once-only flag _autoLoadFirstOnReloadDone, so
-      //     whichever path fires first consumes the flag and the other becomes an
-      //     inert no-op — the first entry is never double-loaded. It also no-ops on
-      //     an empty / absent stored playlist (fresh first visit, autoStart path
-      //     untouched) and skips WITHOUT consuming the flag if the adapter is not
-      //     ready yet.
-      //
-      //     DESIGN NOTE (flagged for review): the #41 once-only guard is
-      //     module-level, NOT keyed by playerId. On a multi-player page only the
-      //     FIRST player to reach an auto-load path restores its paused first
-      //     entry; later players are skipped by the guard. Making this truly
-      //     per-instance requires keying that guard by playerId in the core module
-      //     (candidate #43). This adapter call is already positioned correctly for
-      //     that future change.
-      //
-      //     To make this the SOLE trigger ("instead of" the sort-handler hook),
-      //     remove the autoLoadFirstEntryOnReload() invocation from the core
-      //     module's playlistSortHandler.init(); this call then becomes the single,
-      //     deterministic, per-player-scoped trigger.
-      //
-
-      // claude - Modify J1 VideoPlayer #44
-      // 12a. Per-instance scope pin for autoLoadFirstEntryOnReload (#42 below).
-      //
-      //      WHY this exists: #43 keys the core module's once-only auto-load
-      //      guard (_autoLoadFirstOnReloadDone) by playerID, giving each player an
-      //      INDEPENDENT guard slot. But for a slot to be consumed for the RIGHT
-      //      player, autoLoadFirstEntryOnReload() must run while the (singleton)
-      //      playlistManager._playerID equals THIS player's id. Keying the guard
-      //      (#43) is the enabler; driving the method once per player with the
-      //      correct _playerID is what actually makes every player auto-load.
-      //
-      //      The core module's own trigger — playlistSortHandler.init() — is a
-      //      single page-global handler that resolves '.playlist-block-title' /
-      //      '#playlistSortSelect' WITHOUT _pid() (exactly as #41 flagged), so it
-      //      cannot drive auto-load per instance. This adapter therefore becomes
-      //      the authoritative per-instance driver: the #42 invocation below runs
-      //      inside the per-player initHandlers(options, playerId) loop, and this
-      //      #44 step pins the manager scope to this player immediately before it.
-      //
-      //      setPlayerID(playerId) was already called once at step 1 (see ~line
-      //      688). This is an IDEMPOTENT re-assert placed directly before the #42
-      //      call, defending against any earlier handler in this same run — most
-      //      notably the page-global playlistSortHandler instantiated at step 7,
-      //      whose un-_pid()'d selectors operate on the manager's *current* scope
-      //      — having moved the shared _playerID. Re-asserting the id this player
-      //      already owns is side-effect-free and guarantees the #43 guard is
-      //      evaluated/consumed for THIS player's slot rather than a sibling's.
-      //
-      //      DESIGN NOTE (flagged for review): the additive-only convention
-      //      prevents altering the existing #42 invocation. If the #43 core
-      //      method now accepts an explicit playerID argument, passing it directly
-      //      — autoLoadFirstEntryOnReload(playerId) — would make the per-instance
-      //      scope explicit and drop the reliance on the shared _playerID
-      //      altogether. That is a one-line change to the #42 invocation line and
-      //      is left to your decision rather than made here.
-      //
-      if (options.playlist && options.playlist.enabled) {
-        try {
-          if (videoPlayer.playlistManager &&
-              typeof videoPlayer.playlistManager.setPlayerID === 'function') {
-            videoPlayer.playlistManager.setPlayerID(playerId);
-            logger.debug('\n' + 'initHandlers: autoLoad scope pinned (setPlayerID re-assert) [' + playerId + ']');
-          } else {
-            logger.info('\n' + 'initHandlers: autoLoad scope pin skipped — setPlayerID not present [' + playerId + ']');
-          }
-        } catch (e) {
-          logger.error('\n' + 'initHandlers: autoLoad scope pin (setPlayerID re-assert) failed: ' + e);
-        }
-      }
-
-      if (options.playlist && options.playlist.enabled) {
-        try {
-          if (videoPlayer.playlistManager &&
-              typeof videoPlayer.playlistManager.autoLoadFirstEntryOnReload === 'function') {
-            var autoLoaded = videoPlayer.playlistManager.autoLoadFirstEntryOnReload();
-            logger.debug('\n' + 'initHandlers: autoLoadFirstEntryOnReload [' + playerId + ']');
-          } else {
-            logger.info('\n' + 'initHandlers: autoLoadFirstEntryOnReload skipped — method not present (core module predates #41) [' + playerId + ']');
-          }
-        } catch (e) {
-          logger.error('\n' + 'initHandlers: autoLoadFirstEntryOnReload failed: ' + e);
-        }
-      } else {
-        logger.info('\n' + 'initHandlers: autoLoadFirstEntryOnReload skipped (playlist disabled)');
       }
 
       logger.info('\n' + 'initializing playlist handlers [' + playerId + ']: finished');
@@ -1035,11 +824,6 @@ j1.adapter.videoPlayer = ((j1, window) => {
       }
       return [];
     }, // END _resolvePreloadList
-
-
-
-
-
 
     // -------------------------------------------------------------------------
     // Modify J1 VideoPlayer #4
@@ -1091,14 +875,7 @@ j1.adapter.videoPlayer = ((j1, window) => {
         // Update accessibility attributes on the <button> element itself.
         btn.title = 'Show playlist';
         btn.setAttribute('aria-label', 'Show playlist');
-        // claude - Modify J1 VideoPlayer #36
-        // DISABLED: the header <span> is now the live video-title display
-        // (.video-player-header-title, fed by the module per #35). Writing
-        // 'Show Playlist' here on close would clobber the currently shown
-        // title. The accessible label is preserved on the <button>
-        // (title + aria-label above) and via the icon swap below.
-        // Original line kept for reference:
-        // if (span !== null) { span.textContent = 'Show Playlist'; }
+        if (span !== null) { span.textContent = 'Show Playlist'; }
         if (img  !== null) {
           img.src = '/assets/theme/j1/modules/videoPlayer/icons/player/dark/playlist-show.svg';
           img.alt = 'Show playlist';
@@ -1156,25 +933,6 @@ j1.adapter.videoPlayer = ((j1, window) => {
 
       var editScreen = document.getElementById('playlist_edit_screen' + idSuffix);
       if (editScreen === null) return;
-
-      // claude - Modify J1 VideoPlayer #29
-      // Tear down the overlay positioning applied on OPEN: detach the resize
-      // handler and strip the inline geometry styles so the edit screen
-      // returns to its original (hidden, sibling) layout state. Safe to run
-      // even if the overlay path never executed (idempotent).
-      if (editScreen._vpEditResizeHandler) {
-        window.removeEventListener('resize', editScreen._vpEditResizeHandler);
-        editScreen._vpEditResizeHandler = null;
-      }
-      editScreen.style.removeProperty('position');
-      editScreen.style.removeProperty('top');
-      editScreen.style.removeProperty('left');
-      editScreen.style.removeProperty('width');
-      editScreen.style.removeProperty('height');
-      editScreen.style.removeProperty('margin');
-      editScreen.style.removeProperty('overflow-y');
-      editScreen.style.removeProperty('box-sizing');
-      editScreen.style.removeProperty('background');
 
       editScreen.style.display = 'none';
       editScreen.style.zIndex  = '1';

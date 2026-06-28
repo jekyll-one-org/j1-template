@@ -6,7 +6,7 @@ regenerate:                             true
 
 {% comment %}
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/adapter/js/videoPlayer.js (21)
+ # ~/assets/theme/j1/adapter/js/videoPlayer.js (20)
  # J1 Adapter for the module VideoPlayer (native videoJS)
  #
  # Product/Info:
@@ -97,7 +97,7 @@ regenerate:                             true
 
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/adapter/js/videoPlayer.js (21)
+ # ~/assets/theme/j1/adapter/js/videoPlayer.js (20)
  # J1 Adapter for the module VideoPlayer (native HTML5/videoJS)
  #
  # Product/Info:
@@ -870,6 +870,8 @@ j1.adapter.videoPlayer = ((j1, window) => {
 
       logger.info('\n' + 'initializing playlist handlers [' + playerId + ']: finished');
 
+
+
       // claude - Modify J1 VideoPlayer #39
       // 11. preloadPlaylists — load the per-player `playlist.preload` files
       //     (configured in videoPlayer_control.yml) into this instance's
@@ -939,72 +941,21 @@ j1.adapter.videoPlayer = ((j1, window) => {
       //     module's playlistSortHandler.init(); this call then becomes the single,
       //     deterministic, per-player-scoped trigger.
       //
-
-      // claude - Modify J1 VideoPlayer #44
-      // 12a. Per-instance scope pin for autoLoadFirstEntryOnReload (#42 below).
-      //
-      //      WHY this exists: #43 keys the core module's once-only auto-load
-      //      guard (_autoLoadFirstOnReloadDone) by playerID, giving each player an
-      //      INDEPENDENT guard slot. But for a slot to be consumed for the RIGHT
-      //      player, autoLoadFirstEntryOnReload() must run while the (singleton)
-      //      playlistManager._playerID equals THIS player's id. Keying the guard
-      //      (#43) is the enabler; driving the method once per player with the
-      //      correct _playerID is what actually makes every player auto-load.
-      //
-      //      The core module's own trigger — playlistSortHandler.init() — is a
-      //      single page-global handler that resolves '.playlist-block-title' /
-      //      '#playlistSortSelect' WITHOUT _pid() (exactly as #41 flagged), so it
-      //      cannot drive auto-load per instance. This adapter therefore becomes
-      //      the authoritative per-instance driver: the #42 invocation below runs
-      //      inside the per-player initHandlers(options, playerId) loop, and this
-      //      #44 step pins the manager scope to this player immediately before it.
-      //
-      //      setPlayerID(playerId) was already called once at step 1 (see ~line
-      //      688). This is an IDEMPOTENT re-assert placed directly before the #42
-      //      call, defending against any earlier handler in this same run — most
-      //      notably the page-global playlistSortHandler instantiated at step 7,
-      //      whose un-_pid()'d selectors operate on the manager's *current* scope
-      //      — having moved the shared _playerID. Re-asserting the id this player
-      //      already owns is side-effect-free and guarantees the #43 guard is
-      //      evaluated/consumed for THIS player's slot rather than a sibling's.
-      //
-      //      DESIGN NOTE (flagged for review): the additive-only convention
-      //      prevents altering the existing #42 invocation. If the #43 core
-      //      method now accepts an explicit playerID argument, passing it directly
-      //      — autoLoadFirstEntryOnReload(playerId) — would make the per-instance
-      //      scope explicit and drop the reliance on the shared _playerID
-      //      altogether. That is a one-line change to the #42 invocation line and
-      //      is left to your decision rather than made here.
-      //
-      if (options.playlist && options.playlist.enabled) {
-        try {
-          if (videoPlayer.playlistManager &&
-              typeof videoPlayer.playlistManager.setPlayerID === 'function') {
-            videoPlayer.playlistManager.setPlayerID(playerId);
-            logger.debug('\n' + 'initHandlers: autoLoad scope pinned (setPlayerID re-assert) [' + playerId + ']');
-          } else {
-            logger.info('\n' + 'initHandlers: autoLoad scope pin skipped — setPlayerID not present [' + playerId + ']');
-          }
-        } catch (e) {
-          logger.error('\n' + 'initHandlers: autoLoad scope pin (setPlayerID re-assert) failed: ' + e);
-        }
-      }
-
-      if (options.playlist && options.playlist.enabled) {
-        try {
-          if (videoPlayer.playlistManager &&
-              typeof videoPlayer.playlistManager.autoLoadFirstEntryOnReload === 'function') {
-            var autoLoaded = videoPlayer.playlistManager.autoLoadFirstEntryOnReload();
-            logger.debug('\n' + 'initHandlers: autoLoadFirstEntryOnReload [' + playerId + ']');
-          } else {
-            logger.info('\n' + 'initHandlers: autoLoadFirstEntryOnReload skipped — method not present (core module predates #41) [' + playerId + ']');
-          }
-        } catch (e) {
-          logger.error('\n' + 'initHandlers: autoLoadFirstEntryOnReload failed: ' + e);
-        }
-      } else {
-        logger.info('\n' + 'initHandlers: autoLoadFirstEntryOnReload skipped (playlist disabled)');
-      }
+      if (options.playlist && options.playlist.enabled) {                                  // claude - Modify J1 VideoPlayer #42
+        try {                                                                              // claude - Modify J1 VideoPlayer #42
+          if (videoPlayer.playlistManager &&                                               // claude - Modify J1 VideoPlayer #42
+              typeof videoPlayer.playlistManager.autoLoadFirstEntryOnReload === 'function') { // claude - Modify J1 VideoPlayer #42
+            var autoLoaded = videoPlayer.playlistManager.autoLoadFirstEntryOnReload();      // claude - Modify J1 VideoPlayer #42
+            logger.debug('\n' + 'initHandlers: autoLoadFirstEntryOnReload [' + playerId + '] — ' + (autoLoaded ? 'loaded first stored entry (paused)' : 'no-op (none stored / already done / not ready)')); // claude - Modify J1 VideoPlayer #42
+          } else {                                                                         // claude - Modify J1 VideoPlayer #42
+            logger.info('\n' + 'initHandlers: autoLoadFirstEntryOnReload skipped — method not present (core module predates #41) [' + playerId + ']'); // claude - Modify J1 VideoPlayer #42
+          }                                                                                // claude - Modify J1 VideoPlayer #42
+        } catch (e) {                                                                      // claude - Modify J1 VideoPlayer #42
+          logger.error('\n' + 'initHandlers: autoLoadFirstEntryOnReload failed: ' + e);    // claude - Modify J1 VideoPlayer #42
+        }                                                                                  // claude - Modify J1 VideoPlayer #42
+      } else {                                                                             // claude - Modify J1 VideoPlayer #42
+        logger.info('\n' + 'initHandlers: autoLoadFirstEntryOnReload skipped (playlist disabled)'); // claude - Modify J1 VideoPlayer #42
+      }                                                                                    // claude - Modify J1 VideoPlayer #42
 
       logger.info('\n' + 'initializing playlist handlers [' + playerId + ']: finished');
 

@@ -6,7 +6,7 @@ regenerate:                             true
 
 {% comment %}
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/adapter/js/videoPlayer.js (21)
+ # ~/assets/theme/j1/adapter/js/videoPlayer.js (19)
  # J1 Adapter for the module VideoPlayer (native videoJS)
  #
  # Product/Info:
@@ -97,7 +97,7 @@ regenerate:                             true
 
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/adapter/js/videoPlayer.js (21)
+ # ~/assets/theme/j1/adapter/js/videoPlayer.js (19)
  # J1 Adapter for the module VideoPlayer (native HTML5/videoJS)
  #
  # Product/Info:
@@ -870,6 +870,8 @@ j1.adapter.videoPlayer = ((j1, window) => {
 
       logger.info('\n' + 'initializing playlist handlers [' + playerId + ']: finished');
 
+
+
       // claude - Modify J1 VideoPlayer #39
       // 11. preloadPlaylists — load the per-player `playlist.preload` files
       //     (configured in videoPlayer_control.yml) into this instance's
@@ -895,115 +897,6 @@ j1.adapter.videoPlayer = ((j1, window) => {
         }
       } else {
         logger.info('\n' + 'initHandlers: preloadPlaylists skipped (playlist disabled)');
-      }
-
-      // claude - Modify J1 VideoPlayer #42
-      // 12. autoLoadFirstEntryOnReload — explicit adapter-side trigger for the
-      //     "first stored-playlist entry loaded in the paused state on (re)load"
-      //     behaviour introduced in the core module as #41.
-      //
-      //     #41 wired this from inside the core module's page-global
-      //     playlistSortHandler.init() (which resolves '.playlist-block-title' /
-      //     '#playlistSortSelect' WITHOUT _pid(), so it only ever targets the
-      //     playlistManager's *current* player scope). This adapter-side call is
-      //     the explicit counterpart requested after #41: it runs here inside the
-      //     per-player initHandlers(options, playerId) loop, AFTER setPlayerID(
-      //     playerId) (step 1) has scoped the playlistManager to THIS instance and
-      //     AFTER the player + videojs + videoPlayerOptions are wired, so
-      //     embedRunVideo() is callable and the stored playlist is read from the
-      //     correct per-instance localStorage namespace (#40).
-      //
-      //     Placed after the #39 preloadPlaylists dispatch on purpose:
-      //     autoLoadFirstEntryOnReload() acts ONLY on an ALREADY-stored playlist
-      //     (it never fetches/merges), so it does not depend on the async preload
-      //     completing — on a reload the stored entries are available immediately.
-      //
-      //     Safe to run alongside the #41 sort-handler hook: the method is guarded
-      //     by the module-level once-only flag _autoLoadFirstOnReloadDone, so
-      //     whichever path fires first consumes the flag and the other becomes an
-      //     inert no-op — the first entry is never double-loaded. It also no-ops on
-      //     an empty / absent stored playlist (fresh first visit, autoStart path
-      //     untouched) and skips WITHOUT consuming the flag if the adapter is not
-      //     ready yet.
-      //
-      //     DESIGN NOTE (flagged for review): the #41 once-only guard is
-      //     module-level, NOT keyed by playerId. On a multi-player page only the
-      //     FIRST player to reach an auto-load path restores its paused first
-      //     entry; later players are skipped by the guard. Making this truly
-      //     per-instance requires keying that guard by playerId in the core module
-      //     (candidate #43). This adapter call is already positioned correctly for
-      //     that future change.
-      //
-      //     To make this the SOLE trigger ("instead of" the sort-handler hook),
-      //     remove the autoLoadFirstEntryOnReload() invocation from the core
-      //     module's playlistSortHandler.init(); this call then becomes the single,
-      //     deterministic, per-player-scoped trigger.
-      //
-
-      // claude - Modify J1 VideoPlayer #44
-      // 12a. Per-instance scope pin for autoLoadFirstEntryOnReload (#42 below).
-      //
-      //      WHY this exists: #43 keys the core module's once-only auto-load
-      //      guard (_autoLoadFirstOnReloadDone) by playerID, giving each player an
-      //      INDEPENDENT guard slot. But for a slot to be consumed for the RIGHT
-      //      player, autoLoadFirstEntryOnReload() must run while the (singleton)
-      //      playlistManager._playerID equals THIS player's id. Keying the guard
-      //      (#43) is the enabler; driving the method once per player with the
-      //      correct _playerID is what actually makes every player auto-load.
-      //
-      //      The core module's own trigger — playlistSortHandler.init() — is a
-      //      single page-global handler that resolves '.playlist-block-title' /
-      //      '#playlistSortSelect' WITHOUT _pid() (exactly as #41 flagged), so it
-      //      cannot drive auto-load per instance. This adapter therefore becomes
-      //      the authoritative per-instance driver: the #42 invocation below runs
-      //      inside the per-player initHandlers(options, playerId) loop, and this
-      //      #44 step pins the manager scope to this player immediately before it.
-      //
-      //      setPlayerID(playerId) was already called once at step 1 (see ~line
-      //      688). This is an IDEMPOTENT re-assert placed directly before the #42
-      //      call, defending against any earlier handler in this same run — most
-      //      notably the page-global playlistSortHandler instantiated at step 7,
-      //      whose un-_pid()'d selectors operate on the manager's *current* scope
-      //      — having moved the shared _playerID. Re-asserting the id this player
-      //      already owns is side-effect-free and guarantees the #43 guard is
-      //      evaluated/consumed for THIS player's slot rather than a sibling's.
-      //
-      //      DESIGN NOTE (flagged for review): the additive-only convention
-      //      prevents altering the existing #42 invocation. If the #43 core
-      //      method now accepts an explicit playerID argument, passing it directly
-      //      — autoLoadFirstEntryOnReload(playerId) — would make the per-instance
-      //      scope explicit and drop the reliance on the shared _playerID
-      //      altogether. That is a one-line change to the #42 invocation line and
-      //      is left to your decision rather than made here.
-      //
-      if (options.playlist && options.playlist.enabled) {
-        try {
-          if (videoPlayer.playlistManager &&
-              typeof videoPlayer.playlistManager.setPlayerID === 'function') {
-            videoPlayer.playlistManager.setPlayerID(playerId);
-            logger.debug('\n' + 'initHandlers: autoLoad scope pinned (setPlayerID re-assert) [' + playerId + ']');
-          } else {
-            logger.info('\n' + 'initHandlers: autoLoad scope pin skipped — setPlayerID not present [' + playerId + ']');
-          }
-        } catch (e) {
-          logger.error('\n' + 'initHandlers: autoLoad scope pin (setPlayerID re-assert) failed: ' + e);
-        }
-      }
-
-      if (options.playlist && options.playlist.enabled) {
-        try {
-          if (videoPlayer.playlistManager &&
-              typeof videoPlayer.playlistManager.autoLoadFirstEntryOnReload === 'function') {
-            var autoLoaded = videoPlayer.playlistManager.autoLoadFirstEntryOnReload();
-            logger.debug('\n' + 'initHandlers: autoLoadFirstEntryOnReload [' + playerId + ']');
-          } else {
-            logger.info('\n' + 'initHandlers: autoLoadFirstEntryOnReload skipped — method not present (core module predates #41) [' + playerId + ']');
-          }
-        } catch (e) {
-          logger.error('\n' + 'initHandlers: autoLoadFirstEntryOnReload failed: ' + e);
-        }
-      } else {
-        logger.info('\n' + 'initHandlers: autoLoadFirstEntryOnReload skipped (playlist disabled)');
       }
 
       logger.info('\n' + 'initializing playlist handlers [' + playerId + ']: finished');
