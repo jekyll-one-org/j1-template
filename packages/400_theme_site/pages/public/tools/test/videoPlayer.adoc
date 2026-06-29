@@ -78,7 +78,7 @@ in 2008 by radio host Bob Boilen and producer Stephen Thompson. The show has
 grown from a small platform for folk and indie artists into a worldwide
 pop-culture hit.
 
-.NPR Tiny Desk Concerts
+.VideoJS Multi-Player
 videoPlayer::player_1[role="mb-5"]
 
 

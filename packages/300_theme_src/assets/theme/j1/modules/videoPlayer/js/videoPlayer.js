@@ -3972,7 +3972,7 @@
         // playback.
         playlistManager.createEntry({
           videoId:   videoId,
-          poster:    `//img.youtube.com/vi/${videoId}/maxresdefault.jpg`,
+          poster:    `//img.youtube.com/vi/${videoId}/${YOUTUBE_POSTER_QUALITY}.jpg`,
           infoLink:  `https://youtu.be/${videoId}`,
           videoLink: `https://youtu.be/${videoId}`
         });
@@ -4775,7 +4775,7 @@
         author:       vd.author || '',
         infoLink:     vid ? `https://youtu.be/${vid}` : '',
         videoLink:    vid ? `https://youtu.be/${vid}` : '',
-        poster:       vid ? `//img.youtube.com/vi/${vid}/maxresdefault.jpg` : '',
+        poster:       vid ? `//img.youtube.com/vi/${vid}/${YOUTUBE_POSTER_QUALITY}.jpg` : '',
         duration:     player.duration(),
         lastPosition: 0
       };
