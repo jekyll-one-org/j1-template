@@ -1,6 +1,6 @@
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/modules/videoPlayer/js/videoPlayer.js (51)
+ # ~/assets/theme/j1/modules/videoPlayer/js/videoPlayer.js (52)
  # Provides JS Core for J1 Module videoPlayer
  #
  # Product/Info:
@@ -13,7 +13,7 @@
  # -----------------------------------------------------------------------------
 */
 
-/* Version 3.1.51 for J1 Template */
+/* Version 3.1.52 for J1 Template */
 
 // -----------------------------------------------------------------------------
 // ESLint shimming
@@ -3886,6 +3886,31 @@
     }
   };                                                                        
 
+  // claude - VideoPlayer fix videoID #1
+  // sanitizeVideoId - normalize a derived videoId so it is safe for playlist
+  // keying, localStorage keys and [data-video-id] selectors. Native filenames
+  // can carry characters outside the id space - most commonly an embedded dot
+  // in quality/version markers, e.g. after stripping the final extension from
+  // ".../TV-20251021-0955-0000.1080.mp4" the id is still
+  // "TV-20251021-0955-0000.1080" (the ".1080" survives). Every character that
+  // is not part of the codebase's canonical id charset [A-Za-z0-9_-] (the same
+  // set used in YOUTUBE_ID_RE and the 11-char YouTube check) is replaced by a
+  // single hyphen. The transform is deterministic and idempotent - sanitizing
+  // an already-clean id (e.g. an 11-char YouTube id) is a no-op - so the same
+  // source URL always yields the same key on every derivation site.
+  //
+  // DESIGN NOTE (for review): the invalid set is the complement of
+  // [A-Za-z0-9_-], not "dots only". Narrow the regex to /\./g to strip dots
+  // exclusively. Consecutive invalid chars map 1:1 to hyphens (no collapsing);
+  // append .replace(/-+/g, '-').replace(/^-+|-+$/g, '') if collapsing/trimming
+  // is wanted. This one helper is deliberately shared by both derivation sites
+  // (embedRunVideo and inputWrapperHandler.processUrl) so the duplicate-check
+  // id can never drift from the persisted key.
+  function sanitizeVideoId(rawId) {                                           // claude - VideoPlayer fix videoID #1
+    if (!rawId) return rawId;                                                 // claude - VideoPlayer fix videoID #1
+    return String(rawId).replace(/[^A-Za-z0-9_-]/g, '-');                     // claude - VideoPlayer fix videoID #1
+  }                                                                           // claude - VideoPlayer fix videoID #1
+
   /**
    * embedRunVideo - embed and play a video via videoJS.
    * Accepts either a YouTube video ID / URL or a native file URL/path.
@@ -3927,21 +3952,49 @@
     // Derive a stable videoId for playlist keying:
     //   - YouTube:  the 11-char video ID extracted from the URL
     //   - Native:   filename without extension (unchanged from #2)
-    const videoId = isYouTube
-      ? youtubeMatch
-      : (videoSrc
-          ? videoSrc.split('?')[0].split('/').pop().replace(/\.[^.]+$/, '') || videoSrc
-          : '');
+    // Original (deprecated, preserved for reference):
+    // const videoId = isYouTube
+    //   ? youtubeMatch
+    //   : (videoSrc
+    //       ? videoSrc.split('?')[0].split('/').pop().replace(/\.[^.]+$/, '') || videoSrc
+    //       : '');
+    // claude - VideoPlayer fix videoID #1
+    // const -> let so the derived id can be repaired in place by the sanitize
+    // step below. All downstream references - including the pass into
+    // createVideoJsPlayer(videoId, ...) further down, from which previousPlayerId
+    // is later set - then observe the cleaned id.
+    let videoId = isYouTube                                                   // claude - VideoPlayer fix videoID #1
+      ? youtubeMatch                                                          // claude - VideoPlayer fix videoID #1
+      : (videoSrc                                                             // claude - VideoPlayer fix videoID #1
+          ? videoSrc.split('?')[0].split('/').pop().replace(/\.[^.]+$/, '') || videoSrc  // claude - VideoPlayer fix videoID #1
+          : '');                                                              // claude - VideoPlayer fix videoID #1
+
+    // claude - VideoPlayer fix videoID #1
+    // Repair (not reject) ids carrying characters invalid for keying. The prior
+    // reject guard (kept as a deprecated comment below) rejected any dotted id
+    // via `return`, so a native file such as
+    // ".../TV-20251021-0955-0000.1080.mp4" -> "TV-20251021-0955-0000.1080"
+    // never played. sanitizeVideoId() maps every out-of-charset character to a
+    // hyphen -> "TV-20251021-0955-0000-1080". YouTube ids are already clean and
+    // pass through untouched. Reassign/log only when something actually changed,
+    // to keep the id stable and the logs quiet.
+    if (videoId) {                                                            // claude - VideoPlayer fix videoID #1
+      const sanitizedVideoId = sanitizeVideoId(videoId);                      // claude - VideoPlayer fix videoID #1
+      if (sanitizedVideoId !== videoId) {                                     // claude - VideoPlayer fix videoID #1
+        isDev && logger.warn('\n' + `videoId sanitized for keying: "${videoId}" -> "${sanitizedVideoId}"`);  // claude - VideoPlayer fix videoID #1
+        videoId = sanitizedVideoId;                                           // claude - VideoPlayer fix videoID #1
+      }                                                                       // claude - VideoPlayer fix videoID #1
+    }                                                                         // claude - VideoPlayer fix videoID #1
 
     // jadams, 2026-06-25: check videoId for invalid chars
-    //
-    // const INVALID_VIDEOID_CHAR_RE = '/[.]/';
-    // const invalidVideoID = `${INVALID_VIDEOID_CHAR_RE}.test(${videoId})`;
-    // const invalidVideoID = /[.]/.test(videoId);
-    if (/[.]/.test(videoId)) {
-      // Validation failed
-      logger.error('\n' + `invalid char found in videoId: ${videoId}`);
-    }
+    // Original (deprecated, preserved for reference) - superseded by the
+    // sanitize step above (claude - VideoPlayer fix videoID #1), which repairs
+    // the id in place instead of rejecting the whole video:
+    // if (/[.]/.test(videoId)) {
+    //   // Validation failed
+    //   logger.error('\n' + `invalid char found in videoId: ${videoId}`);
+    //   return;
+    // }
 
     // claude - Modify J1 VideoPlayer #34
     // EARLY, isolated playlist creation.
@@ -5580,9 +5633,20 @@
 
       // jadams
       // Duplicate check uses filename-without-extension as the id key.
-      const videoId  = videoSrc
-        ? videoSrc.split('?')[0].split('/').pop().replace(/\.[^.]+$/, '') || videoSrc
-        : null;
+      // Original (deprecated, preserved for reference):
+      // const videoId  = videoSrc
+      //   ? videoSrc.split('?')[0].split('/').pop().replace(/\.[^.]+$/, '') || videoSrc
+      //   : null;
+      // claude - VideoPlayer fix videoID #1
+      // Apply the same sanitize embedRunVideo() uses so this duplicate-check id
+      // matches previousPlayerId (set from embedRunVideo's cleaned id). Without
+      // it, a native id containing an invalid char (e.g. a dot) would be compared
+      // unsanitized here vs. sanitized there and never match, silently defeating
+      // the "player already exists" guard. null/'' pass through unchanged
+      // (sanitizeVideoId returns falsy input as-is).
+      const videoId  = videoSrc                                               // claude - VideoPlayer fix videoID #1
+        ? sanitizeVideoId(videoSrc.split('?')[0].split('/').pop().replace(/\.[^.]+$/, '') || videoSrc)  // claude - VideoPlayer fix videoID #1
+        : null;                                                               // claude - VideoPlayer fix videoID #1
 
       if (previousPlayerId !== null && videoId === previousPlayerId) {
         isDev && logger.warn('\n' + `player already exists with id: ${videoId}`);
