@@ -1,6 +1,6 @@
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/modules/videoPlayer/js/videoPlayer.js (52)
+ # ~/assets/theme/j1/modules/videoPlayer/js/videoPlayer.js (54)
  # Provides JS Core for J1 Module videoPlayer
  #
  # Product/Info:
@@ -13,7 +13,7 @@
  # -----------------------------------------------------------------------------
 */
 
-/* Version 3.1.52 for J1 Template */
+/* Version 3.1.54 for J1 Template */
 
 // -----------------------------------------------------------------------------
 // ESLint shimming
@@ -66,6 +66,24 @@
 
   // Default poster image used when a playlist entry has no poster URL.
   const DEFAULT_POSTER = '/assets/image/icon/videojs/videojs-poster.png';
+
+  // Claude - J1 videoPlayer optimizations #2 (e)
+  // Performance: this timezone map was an object literal allocated INSIDE
+  // _normalizeIssueDate() on every single call. _normalizeIssueDate() runs
+  // once per entry with an issueDate on every load(), and load() itself runs
+  // several times per render pass — so the literal was rebuilt hundreds of
+  // times per page interaction for identical, immutable data. Hoisted here
+  // as a frozen module-level constant (same pattern as YOUTUBE_PATTERNS /
+  // NATIVE_POSTER_DEFAULTS). Content is byte-identical to the original.
+  const ISSUE_DATE_TZ_MAP = Object.freeze({
+    'ET': '-0500', 'EST': '-0500', 'EDT': '-0400',
+    'CT': '-0600', 'CST': '-0600', 'CDT': '-0500',
+    'MT': '-0700', 'MST': '-0700', 'MDT': '-0600',
+    'PT': '-0800', 'PST': '-0800', 'PDT': '-0700',
+    'UTC': '+0000', 'GMT': '+0000',
+    'BST': '+0100', 'CET': '+0100', 'CEST': '+0200',
+    'IST': '+0530', 'JST': '+0900', 'AEST': '+1000'
+  });
 
   // claude - Modify J1 VideoPlayer #33
   // ---------------------------------------------------------------------------
@@ -808,15 +826,21 @@
 
       if (/^\d{4}-\d{2}-\d{2}$/.test(trimmed)) return trimmed;
 
-      const tzMap = {
-        'ET': '-0500', 'EST': '-0500', 'EDT': '-0400',
-        'CT': '-0600', 'CST': '-0600', 'CDT': '-0500',
-        'MT': '-0700', 'MST': '-0700', 'MDT': '-0600',
-        'PT': '-0800', 'PST': '-0800', 'PDT': '-0700',
-        'UTC': '+0000', 'GMT': '+0000',
-        'BST': '+0100', 'CET': '+0100', 'CEST': '+0200',
-        'IST': '+0530', 'JST': '+0900', 'AEST': '+1000'
-      };
+      // Claude - J1 videoPlayer optimizations #2 (e)
+      // The map is now the module-level frozen constant ISSUE_DATE_TZ_MAP
+      // (see the constants block) instead of a literal re-allocated on every
+      // call. Lookup semantics are unchanged.
+      // Original (deprecated, preserved for reference):
+      //   const tzMap = {
+      //     'ET': '-0500', 'EST': '-0500', 'EDT': '-0400',
+      //     'CT': '-0600', 'CST': '-0600', 'CDT': '-0500',
+      //     'MT': '-0700', 'MST': '-0700', 'MDT': '-0600',
+      //     'PT': '-0800', 'PST': '-0800', 'PDT': '-0700',
+      //     'UTC': '+0000', 'GMT': '+0000',
+      //     'BST': '+0100', 'CET': '+0100', 'CEST': '+0200',
+      //     'IST': '+0530', 'JST': '+0900', 'AEST': '+1000'
+      //   };
+      const tzMap = ISSUE_DATE_TZ_MAP;
 
       let dateTxt = trimmed.replace(
         /\b([A-Z]{2,4})\s*$/,
@@ -963,7 +987,18 @@
     convertVideoPlayerPlaylist(rawPlaylist, poster) {
       if (!Array.isArray(rawPlaylist)) return [];
 
-      var ytID    = false;
+      // Claude - J1 videoPlayer optimizations #2 (a)
+      // Correctness: `ytID` was declared OUTSIDE the forEach and was only
+      // re-assigned when an entry actually HAD a poster. Every entry WITHOUT
+      // a poster therefore inherited the PREVIOUS entry's YouTube
+      // classification (stale match). On playlists mixing YouTube and native
+      // entries, a poster-less native entry that follows a YouTube entry was
+      // wrongly treated as YouTube — and with the vjs `poster` option enabled
+      // its mapped poster was suppressed (value = null). The match is now a
+      // loop-local const computed fresh for every entry; no state can leak
+      // between iterations.
+      // Original (deprecated, preserved for reference):
+      //   var ytID    = false;
       const items = [];
 
       rawPlaylist.forEach((entry) => {
@@ -971,11 +1006,16 @@
 
         // jadams, 2026-06-25: check if YT poster
         //
-        if (entry.poster) {
-          ytID = entry.poster ? entry.poster.match(YOUTUBE_RE) : null;
-        }
+        // Claude - J1 videoPlayer optimizations #2 (a)
+        // Original (deprecated, preserved for reference):
+        //   if (entry.poster) {
+        //     ytID = entry.poster ? entry.poster.match(YOUTUBE_RE) : null;
+        //   }
+        const ytID = entry.poster ? entry.poster.match(YOUTUBE_RE) : null;
 
         // overload the stored/default poster for YouTube entries
+        // Claude - J1 videoPlayer optimizations #2 (a)
+        // (unchanged logic; `ytID` is now guaranteed per-entry, see above)
         const isYt = (ytID) ? true : false;   
         const item = {};
 
@@ -2029,10 +2069,27 @@
         this.initDeleteHandler();
       }
 
-      this._updateSortSelectVisibility();
-      this._updateModeSwitchVisibility();
-      this._updateMergeSwitchVisibility();
-      this._updateTogglePlaylistButton();
+      // Claude - J1 videoPlayer optimizations #2 (d)
+      // Performance: each of the five UI helpers below independently resolved
+      // its data via `this._searchResults || this.load() || []`, so a single
+      // renderCurrent() pass JSON-parsed and re-normalised the ENTIRE playlist
+      // from localStorage up to five additional times (on top of the render
+      // itself). The view data is now resolved ONCE here — reusing the
+      // `currentData` already loaded at the top of renderCurrent() — and
+      // passed down. Every helper keeps its original no-argument behaviour as
+      // the fallback (see the optional `data` parameters), so all external
+      // call sites remain untouched.
+      const viewData = this._searchResults || currentData;
+
+      // Original (deprecated, preserved for reference):
+      //   this._updateSortSelectVisibility();
+      //   this._updateModeSwitchVisibility();
+      //   this._updateMergeSwitchVisibility();
+      //   this._updateTogglePlaylistButton();
+      this._updateSortSelectVisibility(viewData);
+      this._updateModeSwitchVisibility(viewData);
+      this._updateMergeSwitchVisibility(viewData);
+      this._updateTogglePlaylistButton(viewData);
 
       if (loopConfigEnabled && !this._loopSwitchInitialized) {
         const titleBar = document.querySelector('.playlist-block-title');
@@ -2043,7 +2100,10 @@
         }
       }
 
-      this._updateLoopSwitchVisibility();
+      // Claude - J1 videoPlayer optimizations #2 (d)
+      // Original (deprecated, preserved for reference):
+      //   this._updateLoopSwitchVisibility();
+      this._updateLoopSwitchVisibility(viewData);
     }
 
     // ID corrected from 'playlistHistory' (non-existent) to
@@ -2074,7 +2134,15 @@
 
       isDev && logger.info('\n' + `render playlist`);
 
-      const data = this._searchResults || this.load() || [];
+      // Claude - J1 videoPlayer optimizations #2 (c)
+      // Performance: the method parsed the full playlist out of localStorage
+      // TWICE per render — once for the empty pre-check above and again here.
+      // load() JSON-parses and re-normalises every entry, so the second parse
+      // is pure duplicate work. Reuse the pre-check result; behaviour is
+      // identical (same key, same call, microseconds apart).
+      // Original (deprecated, preserved for reference):
+      //   const data = this._searchResults || this.load() || [];
+      const data = this._searchResults || preCheckData;
       this._applySortOrder(data);
 
       playlistContainer.innerHTML = data.map((item, index) => {
@@ -2086,12 +2154,26 @@
         const hasRating     = (item.rating && item.rating > 0) ? true : false;
         const ratingStars   = hasRating ? '<i class="fas fa-star"></i>'.repeat(item.rating) : '';
         const hasInfoLink   = this._isValidUrl(item.infoLink);
-        const hasVideoLink  = this._isValidUrl(item.videoLink);
+        // Claude - J1 videoPlayer optimizations #2 (g)
+        // Clarity/performance: `hasVideoLink` is never referenced in the row
+        // template below (the video-link open button lives in the EDIT modal,
+        // driven by _updateVideoLinkButton(), not in the playlist row) — yet
+        // _isValidUrl() constructed a `new URL()` per row per render for it.
+        // Deprecated in place; re-enable if a row-level video-link control is
+        // ever added.
+        // Original (deprecated, preserved for reference):
+        //   const hasVideoLink  = this._isValidUrl(item.videoLink);
         const thumbSrc      = item.poster || DEFAULT_POSTER; // fallback DEFAULT_POSTER
 
         // claude - Modify J1 VideoPlayer #21
         // data-item-active is rendered from the live active videoId so a
         // re-render while a video is playing keeps the correct row marked.
+        // Claude - J1 videoPlayer optimizations #2 (g)
+        // Clarity: the rate-button icon ternary evaluated to 'fa-star' in
+        // BOTH branches (no-op); the rated/unrated distinction is carried by
+        // the button's ' rated' class. Replaced with the plain class string.
+        // Original (deprecated, preserved for reference):
+        //   <i class="fas ${item.rating ? 'fa-star' : 'fa-star'}"></i>
         return `
           <div class="playlist-row card-base" data-item-active="${(this._activeVideoId && item.videoId === this._activeVideoId) ? 'true' : 'false'}" data-index="${index}" data-video-id="${item.videoId}">
             <div class="playlist-row-content">
@@ -2108,7 +2190,7 @@
               </div>
               <div class="playlist-playlist-actions">
                 <button class="playlist-btn rate ${item.rating ? ' rated' : ''}" title="Set rating${item.rating ? ' (' + item.rating + '/5)' : ''}" aria-label="Set rating">
-                  <i class="fas ${item.rating ? 'fa-star' : 'fa-star'}"></i>
+                  <i class="fas fa-star"></i>
                 </button>
                 <button class="playlist-btn edit" title="Edit item" aria-label="Edit item">
                   <i class="fas fa-edit"></i>
@@ -2147,7 +2229,13 @@
 
       playlistContainer.className = 'playlist card-mode';
 
-      const data = this._searchResults || this.load() || [];
+      // Claude - J1 videoPlayer optimizations #2 (c)
+      // Performance: same duplicate-parse pattern as renderPlaylist() — the
+      // playlist was JSON-parsed from localStorage twice per render (empty
+      // pre-check + display source). Reuse the pre-check result.
+      // Original (deprecated, preserved for reference):
+      //   const data = this._searchResults || this.load() || [];
+      const data = this._searchResults || preCheckData;
       this._applySortOrder(data);
 
       playlistContainer.innerHTML = data.map(v => {
@@ -2158,12 +2246,20 @@
         const hasRating    = v.rating && v.rating > 0;
         const ratingStars  = hasRating ? '<i class="fas fa-star"></i>'.repeat(v.rating) : '';
         const hasInfoLink  = this._isValidUrl(v.infoLink);
-        const hasVideoLink = this._isValidUrl(v.videoLink);
+        // Claude - J1 videoPlayer optimizations #2 (g)
+        // Clarity/performance: dead variable — see the identical note in
+        // renderPlaylist().
+        // Original (deprecated, preserved for reference):
+        //   const hasVideoLink = this._isValidUrl(v.videoLink);
         const thumbSrc     = v.poster || DEFAULT_POSTER; // fallback to DEFAULT_POSTER
 
         // claude - Modify J1 VideoPlayer #21
         // data-item-active is rendered from the live active videoId so a
         // re-render while a video is playing keeps the correct card marked.
+        // Claude - J1 videoPlayer optimizations #2 (g)
+        // Clarity: same no-op 'fa-star'/'fa-star' ternary as renderPlaylist().
+        // Original (deprecated, preserved for reference):
+        //   <i class="fas ${v.rating ? 'fa-star' : 'fa-star'}"></i>
         return `
           <div class="playlist-card card-base" data-item-active="${(this._activeVideoId && v.videoId === this._activeVideoId) ? 'true' : 'false'}" data-video-id="${v.videoId}">
             <div class="playlist-thumb-wrapper">
@@ -2178,7 +2274,7 @@
               <div class="playlist-time-info">${timeAgo}</div>
               <div class="playlist-card-actions">
                 <button class="playlist-btn rate ${v.rating ? ' rated' : ''}" title="Set rating ${v.rating ? ' (' + v.rating + '/5)' : ''}" aria-label="Set rating">
-                  <i class="fas ${v.rating ? 'fa-star' : 'fa-star'}"></i>
+                  <i class="fas fa-star"></i>
                 </button>
                 <button class="playlist-btn edit" title="Edit item" aria-label="Edit item">
                   <i class="fas fa-edit"></i>
@@ -3054,6 +3150,14 @@
         this.field('author',   { boost: 5 });
         this.field('category', { boost: 3 });
         this.field('tags',     { boost: 3 });
+        // Claude - J1 videoPlayer optimizations #2 (b)
+        // Correctness: the document objects passed to add() below have always
+        // carried a `description` property, but the field was never DECLARED
+        // via this.field() — and lunr silently ignores undeclared fields at
+        // add() time, so descriptions were never indexed and a search for
+        // description text returned no hits. Declaring the field makes the
+        // already-supplied data searchable; no add() change needed.
+        this.field('description', { boost: 2 });
         this.field('infoLink');
         this.field('videoLink');
         this.field('issueDate');
@@ -3120,6 +3224,31 @@
       return results;
     }
 
+    // Claude - J1 videoPlayer optimizations #2 (h)
+    // Performance helper for the date criteria of _applySortOrder(): the
+    // original comparators constructed TWO `new Date(...)` objects on EVERY
+    // comparison, i.e. ~2·n·log(n) Date parses per sort (a 200-entry list
+    // sorts with roughly 3000 short-lived Date allocations — on every render
+    // while a date criterion is active). The timestamp is now computed ONCE
+    // per element (decorate-sort pattern via a Map keyed by the element
+    // reference) and the comparator reduces to a numeric subtraction.
+    // Order semantics are IDENTICAL to the originals, including the
+    // invalid-date case: an unparseable date yields NaN, the subtraction
+    // yields NaN, and Array.prototype.sort treats a NaN comparator result
+    // exactly like 0 — the same behaviour the `new Date(a) - new Date(b)`
+    // comparators had. Sorting stays in place on `data`, preserving the
+    // method's contract.
+    //
+    // @param {Array<Object>} data  playlist entries (sorted in place)
+    // @param {Function}      tsOf  entry -> numeric timestamp (may be NaN)
+    // @param {boolean}       desc  true = newest first
+    _sortByTimestamp(data, tsOf, desc) {
+      const ts = new Map();
+      data.forEach(e => ts.set(e, tsOf(e)));
+      data.sort((a, b) => desc ? (ts.get(b) - ts.get(a)) : (ts.get(a) - ts.get(b)));
+      return data;
+    }
+
     _applySortOrder(data) {
       if (!data || data.length === 0) return data;
 
@@ -3127,10 +3256,16 @@
 
       switch (criterion) {
         case 'watchDate':
-          data.sort((a, b) => new Date(b.watchDate) - new Date(a.watchDate));
+          // Claude - J1 videoPlayer optimizations #2 (h)
+          // Original (deprecated, preserved for reference):
+          //   data.sort((a, b) => new Date(b.watchDate) - new Date(a.watchDate));
+          this._sortByTimestamp(data, e => new Date(e.watchDate).getTime(), true);
           break;
         case 'watchDateAsc':
-          data.sort((a, b) => new Date(a.watchDate) - new Date(b.watchDate));
+          // Claude - J1 videoPlayer optimizations #2 (h)
+          // Original (deprecated, preserved for reference):
+          //   data.sort((a, b) => new Date(a.watchDate) - new Date(b.watchDate));
+          this._sortByTimestamp(data, e => new Date(e.watchDate).getTime(), false);
           break;
         case 'title':
           data.sort((a, b) => (a.title || '').localeCompare(b.title || '', undefined, { sensitivity: 'base' }));
@@ -3154,18 +3289,26 @@
           data.sort((a, b) => (a.type || '').localeCompare(b.type || '', undefined, { sensitivity: 'base' }));
           break;
         case 'issueDate':
-          data.sort((a, b) => {
-            const da = a.issueDate ? new Date(a.issueDate) : new Date(0);
-            const db = b.issueDate ? new Date(b.issueDate) : new Date(0);
-            return db - da;
-          });
+          // Claude - J1 videoPlayer optimizations #2 (h)
+          // Original (deprecated, preserved for reference):
+          //   data.sort((a, b) => {
+          //     const da = a.issueDate ? new Date(a.issueDate) : new Date(0);
+          //     const db = b.issueDate ? new Date(b.issueDate) : new Date(0);
+          //     return db - da;
+          //   });
+          // The empty-issueDate fallback (`new Date(0)` == epoch == 0) is
+          // reproduced as the numeric literal 0.
+          this._sortByTimestamp(data, e => e.issueDate ? new Date(e.issueDate).getTime() : 0, true);
           break;
         case 'issueDateAsc':
-          data.sort((a, b) => {
-            const da = a.issueDate ? new Date(a.issueDate) : new Date(0);
-            const db = b.issueDate ? new Date(b.issueDate) : new Date(0);
-            return da - db;
-          });
+          // Claude - J1 videoPlayer optimizations #2 (h)
+          // Original (deprecated, preserved for reference):
+          //   data.sort((a, b) => {
+          //     const da = a.issueDate ? new Date(a.issueDate) : new Date(0);
+          //     const db = b.issueDate ? new Date(b.issueDate) : new Date(0);
+          //     return da - db;
+          //   });
+          this._sortByTimestamp(data, e => e.issueDate ? new Date(e.issueDate).getTime() : 0, false);
           break;
         case 'episode':
           data.sort((a, b) => {
@@ -3208,7 +3351,14 @@
     // the edit session.  The block is lifted automatically as soon as the
     // editor is closed (data-edit-open attribute becomes "false" or absent).
     //
-    _updateTogglePlaylistButton() {
+    // Claude - J1 videoPlayer optimizations #2 (d)
+    // Optional `data` parameter: when renderCurrent() passes its already-
+    // resolved view snapshot, the extra localStorage parse is skipped. All
+    // pre-existing no-argument call sites keep the original behaviour via
+    // the fallback below.
+    // Original (deprecated, preserved for reference):
+    //   _updateTogglePlaylistButton() {
+    _updateTogglePlaylistButton(data) {
       const btn = document.getElementById(_pid('toggle_playlist'));
       if (!btn) return;
 
@@ -3226,7 +3376,10 @@
         return;
       }
 
-      const data    = this._searchResults || this.load() || [];
+      // Claude - J1 videoPlayer optimizations #2 (d)
+      // Original (deprecated, preserved for reference):
+      //   const data    = this._searchResults || this.load() || [];
+      if (!data) data = this._searchResults || this.load() || [];
       const hasData = data.length > 0;
 
       if (hasData) {
@@ -3246,33 +3399,55 @@
       isDev && logger.debug('\n' + `_updateTogglePlaylistButton: button ${hasData ? 'enabled' : 'disabled'} (${data.length} items)`);
     }
 
-    _updateSortSelectVisibility() {
+    // Claude - J1 videoPlayer optimizations #2 (d)
+    // Optional `data` parameter on the three helpers below — see the
+    // renderCurrent() note. No-argument calls behave exactly as before.
+    // Original (deprecated, preserved for reference):
+    //   _updateSortSelectVisibility() {
+    //     ...
+    //     const data = this._searchResults || this.load() || [];
+    _updateSortSelectVisibility(data) {
       const sortSelect = document.getElementById('playlistSortSelect');
       if (!sortSelect) return;
 
-      const data = this._searchResults || this.load() || [];
+      if (!data) data = this._searchResults || this.load() || [];
       sortSelect.style.display = data.length > 0 ? '' : 'none';
 
       this._updateSortOptionsVisibility(sortSelect, data);
     }
 
-    _updateModeSwitchVisibility() {
+    // Claude - J1 videoPlayer optimizations #2 (d)
+    // Original (deprecated, preserved for reference):
+    //   _updateModeSwitchVisibility() {
+    //     ...
+    //     const data = this._searchResults || this.load() || [];
+    _updateModeSwitchVisibility(data) {
       const listModeSwitch = document.getElementById('playlistModeSwitch');
       if (!listModeSwitch) return;
 
-      const data = this._searchResults || this.load() || [];
+      if (!data) data = this._searchResults || this.load() || [];
       listModeSwitch.style.display = data.length > 0 ? '' : 'none';
     }
 
-    _updateMergeSwitchVisibility() {
+    // Claude - J1 videoPlayer optimizations #2 (d)
+    // Original (deprecated, preserved for reference):
+    //   _updateMergeSwitchVisibility() {
+    //     ...
+    //     const data = this._searchResults || this.load() || [];
+    _updateMergeSwitchVisibility(data) {
       const mergeModeSwitch = document.getElementById('playlistMergeSwitch');
       if (!mergeModeSwitch) return;
 
-      const data = this._searchResults || this.load() || [];
+      if (!data) data = this._searchResults || this.load() || [];
       mergeModeSwitch.style.display = data.length > 0 ? '' : 'none';
     }
 
-    _updateLoopSwitchVisibility() {
+    // Claude - J1 videoPlayer optimizations #2 (d)
+    // Optional `data` parameter — see the renderCurrent() note. No-argument
+    // calls behave exactly as before.
+    // Original (deprecated, preserved for reference):
+    //   _updateLoopSwitchVisibility() {
+    _updateLoopSwitchVisibility(data) {
       const loopSwitch = document.getElementById('playlisLoopSwitch');
       if (!loopSwitch) return;
 
@@ -3287,7 +3462,10 @@
         return;
       }
 
-      const data      = this._searchResults || this.load() || [];
+      // Claude - J1 videoPlayer optimizations #2 (d)
+      // Original (deprecated, preserved for reference):
+      //   const data      = this._searchResults || this.load() || [];
+      if (!data) data = this._searchResults || this.load() || [];
       const allSeries = data.length > 0 && data.every(e => e.series && e.series >= 1);
 
       if (allSeries) {
@@ -3906,10 +4084,10 @@
   // is wanted. This one helper is deliberately shared by both derivation sites
   // (embedRunVideo and inputWrapperHandler.processUrl) so the duplicate-check
   // id can never drift from the persisted key.
-  function sanitizeVideoId(rawId) {                                           // claude - VideoPlayer fix videoID #1
-    if (!rawId) return rawId;                                                 // claude - VideoPlayer fix videoID #1
-    return String(rawId).replace(/[^A-Za-z0-9_-]/g, '-');                     // claude - VideoPlayer fix videoID #1
-  }                                                                           // claude - VideoPlayer fix videoID #1
+  function sanitizeVideoId(rawId) {
+    if (!rawId) return rawId;
+    return String(rawId).replace(/[^A-Za-z0-9_-]/g, '-');
+  }
 
   /**
    * embedRunVideo - embed and play a video via videoJS.
@@ -3949,25 +4127,16 @@
 
     const isYouTube = !!youtubeMatch;
 
-    // Derive a stable videoId for playlist keying:
-    //   - YouTube:  the 11-char video ID extracted from the URL
-    //   - Native:   filename without extension (unchanged from #2)
-    // Original (deprecated, preserved for reference):
-    // const videoId = isYouTube
-    //   ? youtubeMatch
-    //   : (videoSrc
-    //       ? videoSrc.split('?')[0].split('/').pop().replace(/\.[^.]+$/, '') || videoSrc
-    //       : '');
     // claude - VideoPlayer fix videoID #1
     // const -> let so the derived id can be repaired in place by the sanitize
     // step below. All downstream references - including the pass into
     // createVideoJsPlayer(videoId, ...) further down, from which previousPlayerId
     // is later set - then observe the cleaned id.
-    let videoId = isYouTube                                                   // claude - VideoPlayer fix videoID #1
-      ? youtubeMatch                                                          // claude - VideoPlayer fix videoID #1
-      : (videoSrc                                                             // claude - VideoPlayer fix videoID #1
-          ? videoSrc.split('?')[0].split('/').pop().replace(/\.[^.]+$/, '') || videoSrc  // claude - VideoPlayer fix videoID #1
-          : '');                                                              // claude - VideoPlayer fix videoID #1
+    let videoId = isYouTube
+      ? youtubeMatch
+      : (videoSrc
+          ? videoSrc.split('?')[0].split('/').pop().replace(/\.[^.]+$/, '') || videoSrc
+          : '');
 
     // claude - VideoPlayer fix videoID #1
     // Repair (not reject) ids carrying characters invalid for keying. The prior
@@ -3978,23 +4147,13 @@
     // hyphen -> "TV-20251021-0955-0000-1080". YouTube ids are already clean and
     // pass through untouched. Reassign/log only when something actually changed,
     // to keep the id stable and the logs quiet.
-    if (videoId) {                                                            // claude - VideoPlayer fix videoID #1
-      const sanitizedVideoId = sanitizeVideoId(videoId);                      // claude - VideoPlayer fix videoID #1
-      if (sanitizedVideoId !== videoId) {                                     // claude - VideoPlayer fix videoID #1
-        isDev && logger.warn('\n' + `videoId sanitized for keying: "${videoId}" -> "${sanitizedVideoId}"`);  // claude - VideoPlayer fix videoID #1
-        videoId = sanitizedVideoId;                                           // claude - VideoPlayer fix videoID #1
-      }                                                                       // claude - VideoPlayer fix videoID #1
-    }                                                                         // claude - VideoPlayer fix videoID #1
-
-    // jadams, 2026-06-25: check videoId for invalid chars
-    // Original (deprecated, preserved for reference) - superseded by the
-    // sanitize step above (claude - VideoPlayer fix videoID #1), which repairs
-    // the id in place instead of rejecting the whole video:
-    // if (/[.]/.test(videoId)) {
-    //   // Validation failed
-    //   logger.error('\n' + `invalid char found in videoId: ${videoId}`);
-    //   return;
-    // }
+    if (videoId) {
+      const sanitizedVideoId = sanitizeVideoId(videoId);
+      if (sanitizedVideoId !== videoId) {
+        isDev && logger.warn('\n' + `videoId sanitized for keying: "${videoId}" -> "${sanitizedVideoId}"`);
+        videoId = sanitizedVideoId;
+      }
+    }
 
     // claude - Modify J1 VideoPlayer #34
     // EARLY, isolated playlist creation.
@@ -4308,13 +4467,13 @@
             // and is the sole consumer, so no other 'videoDataResolved' listener
             // observes the mutation. If a non-mutating copy is preferred, clone
             // videoData first and sanitize the clone.
-            if (videoData.videoId) {                                            // claude - VideoPlayer fix videoID #2
-              const _sanitizedNativeId = sanitizeVideoId(videoData.videoId);    // claude - VideoPlayer fix videoID #2
-              if (_sanitizedNativeId !== videoData.videoId) {                   // claude - VideoPlayer fix videoID #2
-                isDev && logger.warn('\n' + `native videoData.videoId sanitized for keying: "${videoData.videoId}" -> "${_sanitizedNativeId}"`);  // claude - VideoPlayer fix videoID #2
-                videoData.videoId = _sanitizedNativeId;                         // claude - VideoPlayer fix videoID #2
-              }                                                                 // claude - VideoPlayer fix videoID #2
-            }                                                                   // claude - VideoPlayer fix videoID #2
+            if (videoData.videoId) {
+              const _sanitizedNativeId = sanitizeVideoId(videoData.videoId);
+              if (_sanitizedNativeId !== videoData.videoId) {
+                isDev && logger.warn('\n' + `native videoData.videoId sanitized for keying: "${videoData.videoId}" -> "${_sanitizedNativeId}"`);
+                videoData.videoId = _sanitizedNativeId;
+              }
+            }
 
             player.videoData  = videoData;
             player.videoTitle = title;
@@ -5378,9 +5537,24 @@
       return null;
     }
 
-    // Ensure the player element ID is always a valid CSS selector by
-    // prepending 'vjs-' (unchanged from original pattern).
-//  const playerElementId = `vjs-${videoId}`;
+    // claude - VidoPlayer fix videoID #3
+    // The element id is kept as the raw videoId (bare, no 'vjs-' prefix) so
+    // player.id_, the videojs player registry key, previousPlayerId and the
+    // playlist keys all stay identical - nothing downstream changes.
+    //
+    // IMPORTANT: an id like "8eba89d3-..._AVC-1080" (ARD Mediathek native
+    // files are GUID-named) is a perfectly LEGAL "id" attribute in HTML5,
+    // and sanitizeVideoId() (#1) correctly leaves it untouched - every char
+    // is inside [A-Za-z0-9_-]. But it is NOT a legal CSS *identifier*: a CSS
+    // ident must not start with a digit (nor a hyphen followed by a digit).
+    // querySelector('#8eba...') therefore throws a SyntaxError. video.js's
+    // videojs(id) -> getPlayer(id) does exactly that querySelector when the
+    // player is not yet in its registry, which is why creation crashed for
+    // these sources. The fix is applied at the videojs() call below: the
+    // freshly created <video> ELEMENT is passed instead of the id string,
+    // so no '#id' selector is ever built. getElementById()-based lookups
+    // (e.g. the dispose guard above) are unaffected - getElementById has no
+    // CSS-identifier restriction.
     const playerElementId = videoId;
 
     const video       = document.createElement('video');
@@ -5506,7 +5680,40 @@
     }
 
     if (typeof videojs !== 'undefined') {
-      player = videojs(playerElementId, videoConfig, function onPlayerReady() {
+      // claude - VidoPlayer fix videoID #3
+      // Companion guard: because dispose() is intentionally skipped above
+      // (see the "player.off is not a function" note), a previously created
+      // player can linger in video.js's global registry under the same id.
+      // With the string-based call this returned that STALE player (its DOM
+      // element long since replaced via container.innerHTML) instead of a
+      // new one. Clearing the slot to null first - video.js's own convention
+      // for disposed players - guarantees the element-based call below always
+      // yields a fresh, working player, and keeps registry lookups by id
+      // (videojs.getPlayer) pointing at the live instance afterwards.
+      try {
+        const vjsRegistry = (typeof videojs.getPlayers === 'function') ? videojs.getPlayers() : null;
+        if (vjsRegistry && vjsRegistry[playerElementId]) {
+          isDev && logger.info('\n' + `clearing stale videojs registry entry for id: ${playerElementId}`);
+          vjsRegistry[playerElementId] = null;
+        }
+      } catch (e) {
+        isDev && logger.warn('\n' + `videojs registry cleanup skipped: ${e}`);
+      }
+
+      // claude - VidoPlayer fix videoID #3
+      // Pass the <video> ELEMENT created above - NOT the id string. When
+      // videojs() receives a string it routes through videojs.getPlayer(),
+      // which resolves an unknown id via document.querySelector('#' + id).
+      // A videoId with a leading digit (e.g. ARD Mediathek GUID filenames:
+      // "8eba89d3-..._AVC-1080") is a valid HTML id but an invalid CSS
+      // identifier, so that querySelector throws:
+      //   SyntaxError: '#8eba...' is not a valid selector
+      // Passing the element skips the selector path entirely and works for
+      // ANY id (this also covers YouTube ids that start with a digit, e.g.
+      // "9bZkp7q19f0", which had the same latent problem). video.js still
+      // registers the player under video.id, so later registry lookups via
+      // videojs.getPlayer(videoId) / player.id_ keep working unchanged.
+      player = videojs(video, videoConfig, function onPlayerReady() {
         isDev && logger.info('\n' + `player ready on id: ${playerElementId}`);
 
         if (options.onStateChange) {
@@ -5682,12 +5889,6 @@
       // extractVideoSrc returns the raw URL/path for native video files.
       const videoSrc = this.extractVideoSrc(url);
 
-      // jadams
-      // Duplicate check uses filename-without-extension as the id key.
-      // Original (deprecated, preserved for reference):
-      // const videoId  = videoSrc
-      //   ? videoSrc.split('?')[0].split('/').pop().replace(/\.[^.]+$/, '') || videoSrc
-      //   : null;
       // claude - VideoPlayer fix videoID #1
       // Apply the same sanitize embedRunVideo() uses so this duplicate-check id
       // matches previousPlayerId (set from embedRunVideo's cleaned id). Without
@@ -5695,9 +5896,9 @@
       // unsanitized here vs. sanitized there and never match, silently defeating
       // the "player already exists" guard. null/'' pass through unchanged
       // (sanitizeVideoId returns falsy input as-is).
-      const videoId  = videoSrc                                               // claude - VideoPlayer fix videoID #1
-        ? sanitizeVideoId(videoSrc.split('?')[0].split('/').pop().replace(/\.[^.]+$/, '') || videoSrc)  // claude - VideoPlayer fix videoID #1
-        : null;                                                               // claude - VideoPlayer fix videoID #1
+      const videoId  = videoSrc
+        ? sanitizeVideoId(videoSrc.split('?')[0].split('/').pop().replace(/\.[^.]+$/, '') || videoSrc)
+        : null;
 
       if (previousPlayerId !== null && videoId === previousPlayerId) {
         isDev && logger.warn('\n' + `player already exists with id: ${videoId}`);
@@ -6757,9 +6958,28 @@
       }
     }
 
+    // Claude - J1 videoPlayer optimizations #2 (f)
+    // Performance: syncAll() is driven by a PERMANENT setInterval(…, 500)
+    // below (needed to catch browser autofill and programmatic value changes
+    // that fire no input/change event). That means a full-document
+    // querySelectorAll + per-element class sync twice a second for the whole
+    // page lifetime — including while the tab is in the background, where the
+    // work is invisible by definition. The poll now no-ops while
+    // document.hidden is true; a visibilitychange listener runs one immediate
+    // catch-up pass when the tab becomes visible again, so any value change
+    // that happened while hidden is reflected without waiting for the next
+    // tick. Foreground behaviour is completely unchanged.
     function syncAll() {
+      // Claude - J1 videoPlayer optimizations #2 (f)
+      if (document.hidden) return;
       document.querySelectorAll(SELECTOR).forEach(syncBackground);
     }
+
+    // Claude - J1 videoPlayer optimizations #2 (f)
+    // Immediate catch-up pass when the tab returns to the foreground.
+    document.addEventListener('visibilitychange', () => {
+      if (!document.hidden) syncAll();
+    });
 
     document.addEventListener('input', (e) => {
       if (e.target.matches && e.target.matches(SELECTOR)) {
