@@ -1,7 +1,7 @@
 ---
 title:                                  J1 Video Player
-title_extention:                        Playback Playlists
-tagline:                                Playback Playlists
+title_extention:                        Create & Playback Playlists
+tagline:                                Create and Playback Playlists
 
 date:                                   2026-04-17
 #last_modified:                         2026-01-01
@@ -82,18 +82,18 @@ pop-culture hit.
 videoPlayer::player_1[role="mb-5"]
 
 
-// [role="mt-4"]
-// == Carpool Karaoke
+[role="mt-4"]
+== Carpool Karaoke
 
-// Carpool Karaoke was one of the most successful and widely distributed viral
-// video formats in modern television history. It originally started as a
-// recurring segment on the American late-night show The Late Late Show with
-// James Corden on CBS. 
+Carpool Karaoke was one of the most successful and widely distributed viral
+video formats in modern television history. It originally started as a
+recurring segment on the American late-night show The Late Late Show with
+James Corden on CBS. 
 
-// Host James Corden drives around town (usually in Los Angeles or London) with
-// world-famous musicians and celebrities, conducting personal interviews and
-// singing along to the car radio with their greatest hits.
+Host James Corden drives around town (usually in Los Angeles or London) with
+world-famous musicians and celebrities, conducting personal interviews and
+singing along to the car radio with their greatest hits.
 
-// .Carpool Karaoke
-// videoPlayer::player_2[role="mb-5"]
+.Carpool Karaoke
+videoPlayer::player_2[role="mb-5"]
 

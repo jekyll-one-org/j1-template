@@ -6,7 +6,7 @@ regenerate:                             true
 
 {% comment %}
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/adapter/js/videoPlayer.js (23)
+ # ~/assets/theme/j1/adapter/js/videoPlayer.js (22)
  # J1 Adapter for the module VideoPlayer (native videoJS)
  #
  # Product/Info:
@@ -120,7 +120,7 @@ regenerate:                             true
 
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/adapter/js/videoPlayer.js (23)
+ # ~/assets/theme/j1/adapter/js/videoPlayer.js (22)
  # J1 Adapter for the module VideoPlayer (native HTML5/videoJS)
  #
  # Product/Info:
@@ -685,7 +685,6 @@ j1.adapter.videoPlayer = ((j1, window) => {
     //   9. inputValueBackgroundHandler   — input fill-state background sync
     //  10. navbarSmoothScrollHandler     — same-page anchor smooth-scroll
     //  11. preloadPlaylists              — load the per-player `playlist.preload` files
-    //  13. loadFirstAfterPreload         — fresh-visit path: load the first entry (paused) once the async #39 preload has merged  // claude - J1 VideoPlayer MultiInstance #7
     //
     // -------------------------------------------------------------------------
     initHandlers: (options, playerId) => {
@@ -1033,59 +1032,6 @@ j1.adapter.videoPlayer = ((j1, window) => {
             // var autoLoaded = videoPlayer.playlistManager.autoLoadFirstEntryOnReload();      // claude - Modify J1 VideoPlayer #42
             var autoLoaded = vp.playlistManager.autoLoadFirstEntryOnReload();  // claude - J1 VideoPlayer MultiInstance #3
             logger.debug('\n' + 'initHandlers: autoLoadFirstEntryOnReload [' + playerId + '] — ' + (autoLoaded ? 'loaded first stored entry (paused)' : 'no-op (none stored / already done / not ready)')); // claude - Modify J1 VideoPlayer #42
-
-            // claude - J1 VideoPlayer MultiInstance #7
-            // FRESH-VISIT PRELOAD LOAD
-            // When a playlist is PRELOADED for this player, the first entry must
-            // be loaded (paused) even on a FRESH first visit — not only on a
-            // later reload. The #42 call above no-ops on a fresh visit because
-            // the #39 preloadPlaylists fetch+merge is async and this instance's
-            // per-player store (#40) is still empty at this point, so
-            // autoLoadFirstEntryOnReload() returns falsy (autoLoaded === false).
-            //
-            //   autoLoaded === true  → RELOAD path: the store was already
-            //                          populated, the first entry was loaded and
-            //                          the once-per-page guard consumed — no
-            //                          preload-wait is needed, nothing to do.
-            //   autoLoaded === false → FRESH-VISIT path: if a preload list IS
-            //                          configured for this player, wait for the
-            //                          async #39 merge and THEN load the first
-            //                          entry; if NO preload list is configured
-            //                          leave the autoStart path untouched (this
-            //                          preserves the #42 fresh-visit contract).
-            //
-            // _loadFirstAfterPreload() re-uses the SAME paused first-entry load
-            // (autoLoadFirstEntryOnReload) via a bounded, self-cancelling retry,
-            // so behaviour is identical to the reload path and the module's
-            // once-per-page guard still prevents any double-load.
-            //
-            // DESIGN NOTE (flagged for jadams/Juergen review):
-            //   • The retry re-invokes autoLoadFirstEntryOnReload(). This assumes
-            //     the early (empty-store) #42 call does NOT consume the
-            //     once-per-page guard _autoLoadFirstOnReloadDone — it returned
-            //     falsy, i.e. nothing was loaded. If a future core-module change
-            //     makes the empty-store call consume the guard, this retry would
-            //     silently time out and behaviour would fall back to exactly
-            //     today's (first entry appears on the NEXT reload) — no
-            //     regression, but the fresh-visit load would be lost. Keep the
-            //     "load nothing ⇒ do not set done" invariant in the core module.
-            //   • Per-player correctness of the deferred load depends on the
-            //     per-player guard keying added in the core module (#43/#44);
-            //     the retry re-scopes the shared singleton via setPlayerID()
-            //     before every attempt (see _loadFirstAfterPreload) because
-            //     other players' initHandlers() may re-scope it in between.
-            //
-            try {                                                                            // claude - J1 VideoPlayer MultiInstance #7
-              var preloadConfigured = _this._resolvePreloadList(playerId);                   // claude - J1 VideoPlayer MultiInstance #7
-              if (!autoLoaded && preloadConfigured && preloadConfigured.length) {            // claude - J1 VideoPlayer MultiInstance #7
-                logger.debug('\n' + 'initHandlers: fresh visit with preload [' + playerId + '] — scheduling loadFirstAfterPreload'); // claude - J1 VideoPlayer MultiInstance #7
-                _this._loadFirstAfterPreload(vp, playerId);                                  // claude - J1 VideoPlayer MultiInstance #7
-              } else {                                                                       // claude - J1 VideoPlayer MultiInstance #7
-                logger.debug('\n' + 'initHandlers: loadFirstAfterPreload not needed [' + playerId + '] (' + (autoLoaded ? 'reload path — already loaded' : 'no preload configured') + ')'); // claude - J1 VideoPlayer MultiInstance #7
-              }                                                                              // claude - J1 VideoPlayer MultiInstance #7
-            } catch (e) {                                                                    // claude - J1 VideoPlayer MultiInstance #7
-              logger.error('\n' + 'initHandlers: loadFirstAfterPreload dispatch failed [' + playerId + ']: ' + e); // claude - J1 VideoPlayer MultiInstance #7
-            }                                                                                // claude - J1 VideoPlayer MultiInstance #7
           } else {                                                                         // claude - Modify J1 VideoPlayer #42
             logger.info('\n' + 'initHandlers: autoLoadFirstEntryOnReload skipped — method not present (core module predates #41) [' + playerId + ']'); // claude - Modify J1 VideoPlayer #42
           }                                                                                // claude - Modify J1 VideoPlayer #42
@@ -1125,70 +1071,6 @@ j1.adapter.videoPlayer = ((j1, window) => {
       }
       return [];
     }, // END _resolvePreloadList
-
-    // -------------------------------------------------------------------------
-    // claude - J1 VideoPlayer MultiInstance #7
-    // _loadFirstAfterPreload(vp, playerId)
-    // Deferred, per-player "load the first playlist entry (paused)" trigger for
-    // the FRESH-VISIT case, where the #39 preloadPlaylists fetch+merge has not
-    // populated this instance's store yet at initHandlers() time (see the #7
-    // dispatch inside the #42 block).
-    //
-    // The #39 preload is async / non-blocking and (in the current core module)
-    // does not return a thenable the adapter can await, so this uses a bounded,
-    // self-cancelling retry: it re-attempts the established paused first-entry
-    // load (autoLoadFirstEntryOnReload) until it succeeds (returns truthy) or a
-    // hard cap is reached. Because that method is idempotent and guarded by the
-    // core module's once-per-page flag, repeated calls never double-load.
-    //
-    // Correctness notes:
-    //   • setPlayerID(playerId) is re-applied before EVERY attempt: the
-    //     playlistManager is a module-level singleton, and other players'
-    //     initHandlers()/retries may re-scope it between our async ticks.
-    //   • The retry stops on the FIRST successful load; on a store that never
-    //     fills (e.g. a preload fetch failure) it stops after MAX_ATTEMPTS with
-    //     an info log and no side effects — behaviour then matches today's
-    //     (first entry appears on the next reload).
-    // -------------------------------------------------------------------------
-    _loadFirstAfterPreload: (vp, playerId) => {
-      try {
-        if (!vp || !vp.playlistManager ||
-            typeof vp.playlistManager.autoLoadFirstEntryOnReload !== 'function') {
-          logger.info('\n' + '_loadFirstAfterPreload: skipped — autoLoadFirstEntryOnReload not available [' + playerId + ']');
-          return;
-        }
-
-        var MAX_ATTEMPTS = 40;   // 40 × 250ms ≈ 10s ceiling for the async preload merge
-        var INTERVAL_MS  = 250;
-        var attempts     = 0;
-
-        var poll = setInterval(function () {
-          attempts++;
-          try {
-            // Re-scope the shared singleton to THIS player before probing/loading.
-            if (typeof vp.playlistManager.setPlayerID === 'function') {
-              vp.playlistManager.setPlayerID(playerId);
-            }
-            var loaded = vp.playlistManager.autoLoadFirstEntryOnReload();
-            if (loaded) {
-              clearInterval(poll);
-              logger.debug('\n' + '_loadFirstAfterPreload: first entry loaded (paused) after preload [' + playerId + '] (attempt ' + attempts + ')');
-              return;
-            }
-          } catch (e) {
-            clearInterval(poll);
-            logger.error('\n' + '_loadFirstAfterPreload: retry failed [' + playerId + ']: ' + e);
-            return;
-          }
-          if (attempts >= MAX_ATTEMPTS) {
-            clearInterval(poll);
-            logger.info('\n' + '_loadFirstAfterPreload: gave up after ' + attempts + ' attempts — preload store not ready [' + playerId + '] (first entry will load on next reload)');
-          }
-        }, INTERVAL_MS);
-      } catch (e) {
-        logger.error('\n' + '_loadFirstAfterPreload failed [' + playerId + ']: ' + e);
-      }
-    }, // END _loadFirstAfterPreload
 
 
 

@@ -27,15 +27,15 @@ defaults:
   # GENERAL options
   #
   enabled:                              false
-  env:                                  dev
-  xhr_data_path:                        /assets/data/videoPlayer 
+  xhr_data_path:                        /assets/data/videoPlayer
+  env:                                  dev                                     # should overwritten by adapter
 
   # ----------------------------------------------------------------------------
   # MODULE options
   # ============================================================================
   #
   #  initTimeout
-  #  ----------------------------------------------------------------------------
+  #  ---------------------------------------------------------------------------
   #  Delays the initialization of a grid after the HTML code is loaded.
   #  The delay depends on the browser used repectively how long it takes
   #  the DOM is updated for the dynamically loaded HTML code (AJAX).
@@ -58,7 +58,7 @@ defaults:
   playlist_url_base:                    /assets/data/apps/videoPlayer/playlists/lists
 
   smoothScroll:
-    enabled:                            true
+    enabled:                            false
 
   toolbox:
     enabled:                            false
@@ -83,7 +83,7 @@ defaults:
       enabled:                          false
       pip:                              false
 
-    type:                               list                                   # list | cards
+    type:                               list                                    # list | cards
 
     cards:
       perRow:                           2
@@ -135,11 +135,11 @@ defaults:
     poster:
       autoGenerate:
         enabled:                        true
-        capturePosition:                5                                       # default: 5,    start position (seconds), when ≤ 0 captureFraction is used
+        capturePosition:                5                                      # default: 5,    start position (seconds), when ≤ 0 captureFraction is used
         captureFraction:                10                                      # default: 10,   start position (percent from duration)
-        maxWidth:                       320                                     # default: 320,  pixel (4/3 ratio)
+        maxWidth:                       540                                     # default: 320,  pixel (4/3 ratio)
         mimeType:                       webp                                    # default: webp, image type (jpeg|png|webp)
-        quality:                        0.6                                     # default: 0.6,  0..1 encoder quality
+        quality:                        0.8                                     # default: 0.6,  0..1 encoder quality
 
     # player settings
     # --------------------------------------------------------------------------

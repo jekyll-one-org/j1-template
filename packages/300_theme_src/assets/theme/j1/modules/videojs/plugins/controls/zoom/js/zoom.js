@@ -503,7 +503,7 @@ function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'defau
 
         handleClick() {
             const modal = this.player().getChild('ZoomModal');
-            videojs.log('[~Zoom Plugin] button handleClick');
+//          videojs.log('[~Zoom Plugin] button handleClick');
             this.isOpen = !this.isOpen;
             modal.toggle();
         }
@@ -515,7 +515,7 @@ function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'defau
             var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 
             super(player, options);
-            videojs.log('[~Zoom Plugin] start ', options);
+//          videojs.log('[~Zoom Plugin] start ', options);
             this.player = player.el();
 
             this.listeners = {

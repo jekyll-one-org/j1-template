@@ -1,6 +1,6 @@
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/modules/videoPlayer/js/videoPlayer.js (53)
+ # ~/assets/theme/j1/modules/videoPlayer/js/videoPlayer.js (53a)
  # Provides JS Core for J1 Module videoPlayer
  #
  # Product/Info:
@@ -13,7 +13,7 @@
  # -----------------------------------------------------------------------------
 */
 
-/* Version 3.1.53 for J1 Template */
+/* Version 3.1.53a for J1 Template */
 
 // -----------------------------------------------------------------------------
 // ESLint shimming
@@ -209,7 +209,7 @@
       };
 
       const timer = setTimeout(() => {
-        isDev && logger.debug('\n' + `generateNativePoster: timed out after ${cfg.generate_timeout}ms for src: ${src}`);
+        logger.debug('\n' + `generateNativePoster: timed out after ${cfg.generate_timeout}ms for src: ${src}`);
         finish('');
       }, cfg.generate_timeout);
 
@@ -238,13 +238,13 @@
           const dataUrl = canvas.toDataURL(`image/${cfg.mimeType}`, cfg.quality);
           finish(dataUrl);
         } catch (e) {
-          isDev && logger.warn('\n' + `generateNativePoster: frame capture failed for src: ${src} - ${e}`);
+          logger.warn('\n' + `generateNativePoster: frame capture failed for src: ${src} - ${e}`);
           finish('');
         }
       };
 
       video.addEventListener('error', () => {
-        isDev && logger.warn('\n' + `generateNativePoster: media error for src: ${src}`);
+        logger.warn('\n' + `generateNativePoster: media error for src: ${src}`);
         finish('');
       }, { once: true });
 
@@ -707,8 +707,8 @@
       this.STORAGE_KEY = _playerID ? `${this._BASE_STORAGE_KEY}_${_playerID}` : this._BASE_STORAGE_KEY;
       this.INDEX_KEY   = _playerID ? `${this._BASE_INDEX_KEY}_${_playerID}`   : this._BASE_INDEX_KEY;
 
-      isDev && logger.debug('\n' + `playlistManager: player id set to "${_playerID}"`);
-      isDev && logger.debug('\n' + `playlistManager: storage key set to "${this.STORAGE_KEY}", index key set to "${this.INDEX_KEY}"`);
+      logger.debug('\n' + `playlistManager: player id set to "${_playerID}"`);
+      logger.debug('\n' + `playlistManager: storage key set to "${this.STORAGE_KEY}", index key set to "${this.INDEX_KEY}"`);
     }
 
     // Corrected bare ids ('playlistSearch', 'playlistBlock') to match the
@@ -1043,14 +1043,14 @@
 
         // Guard: a playlist item without a playable source is unusable.
         if (!Array.isArray(item.sources) || item.sources.length === 0 || !item.sources[0].src) {
-          isDev && logger.warn('\n' + `playlistmanager: skipped entry without a playable source (videoId: ${entry.videoId || 'n/a'})`);
+          logger.warn('\n' + `playlistmanager: skipped entry without a playable source (videoId: ${entry.videoId || 'n/a'})`);
           return;
         }
 
         items.push(item);
       });
 
-      isDev && logger.info('\n' + `playlistmanager: converted ${items.length}/${rawPlaylist.length} entries for videojs-playlist`);
+      logger.info('\n' + `playlistmanager: converted ${items.length}/${rawPlaylist.length} entries for videojs-playlist`);
 
       return items;
     }
@@ -1155,7 +1155,7 @@
 
       const found = (playlist.find(item => item.videoId === entry.videoId)) ? true : false;
       if (found) {
-        isDev && logger.info('\n' + `playlistmanager: skip adding entry with title: ${entry.title}`);
+        logger.info('\n' + `playlistmanager: skip adding entry with title: ${entry.title}`);
         return;
       }
 
@@ -1188,7 +1188,7 @@
       filtered.unshift(record);
       this.save(filtered);
 
-      isDev && logger.info('\n' + `playlistmanager: entry added for videoId: ${entry.videoId}`);
+      logger.info('\n' + `playlistmanager: entry added for videoId: ${entry.videoId}`);
 
       this.renderCurrent();
     }
@@ -1219,7 +1219,7 @@
     //
     createEntry(entry) {
       if (!entry || !entry.videoId) {
-        isDev && logger.warn('\n' + 'playlistmanager: createEntry skipped - missing videoId');
+        logger.warn('\n' + 'playlistmanager: createEntry skipped - missing videoId');
         return null;
       }
 
@@ -1227,7 +1227,7 @@
 
       const existing = playlist.find(item => item.videoId === entry.videoId);
       if (existing) {
-        isDev && logger.debug('\n' + `playlistmanager: createEntry - entry already exists for videoId: ${entry.videoId}`);
+        logger.debug('\n' + `playlistmanager: createEntry - entry already exists for videoId: ${entry.videoId}`);
         return existing;
       }
 
@@ -1259,7 +1259,7 @@
       playlist.unshift(record);
       this.save(playlist);
 
-      isDev && logger.info('\n' + `playlistmanager: entry created (early) for videoId: ${entry.videoId}`);
+      logger.info('\n' + `playlistmanager: entry created (early) for videoId: ${entry.videoId}`);
 
       this.renderCurrent();
       return record;
@@ -1333,7 +1333,7 @@
 
       this.save(playlist);
 
-      isDev && logger.info('\n' + `playlistmanager: entry enriched for videoId: ${videoId}`);
+      logger.info('\n' + `playlistmanager: entry enriched for videoId: ${videoId}`);
 
       this.renderCurrent();
       return true;
@@ -1349,7 +1349,7 @@
       entry.duration = durationSeconds;
       this.save(playlist);
 
-      isDev && logger.info('\n' + `playlistmanager: duration updated for video with id: ${videoId} - ${this._formatDuration(durationSeconds)}`);
+      logger.info('\n' + `playlistmanager: duration updated for video with id: ${videoId} - ${this._formatDuration(durationSeconds)}`);
 
       this.renderCurrent();
     }
@@ -1376,7 +1376,7 @@
       entry.poster = poster;
       this.save(playlist);
 
-      isDev && logger.info('\n' + `playlistmanager: poster updated for videoId: ${videoId} (${poster.length} bytes)`);
+      logger.info('\n' + `playlistmanager: poster updated for videoId: ${videoId} (${poster.length} bytes)`);
 
       this.renderCurrent();
       return true;
@@ -1432,7 +1432,7 @@
 
       if (pending.length === 0) return Promise.resolve(0);
 
-      isDev && logger.info('\n' + `playlistmanager: generating posters for ${pending.length} native entr${pending.length === 1 ? 'y' : 'ies'}`);
+      logger.info('\n' + `playlistmanager: generating posters for ${pending.length} native entr${pending.length === 1 ? 'y' : 'ies'}`);
 
       let count = 0;
 
@@ -1442,7 +1442,7 @@
         }));
       }, Promise.resolve()).then(() => {
         if (count > 0) this.renderCurrent();
-        isDev && logger.info('\n' + `playlistmanager: generated ${count} native poster(s)`);
+        logger.info('\n' + `playlistmanager: generated ${count} native poster(s)`);
         return count;
       });
     }
@@ -1462,7 +1462,7 @@
       entry.author = author;
       this.save(playlist);
 
-      isDev && logger.info('\n' + `playlist entry author updated for videoId: ${videoId} - ${author}`);
+      logger.info('\n' + `playlist entry author updated for videoId: ${videoId} - ${author}`);
 
       this.renderCurrent();
     }
@@ -1477,7 +1477,7 @@
       entry.lastPosition = positionSeconds;
       this.save(playlist);
 
-      isDev && logger.info('\n' + `playlistmanager: position updated for video with id: ${videoId} - ${positionSeconds}s`);
+      logger.info('\n' + `playlistmanager: position updated for video with id: ${videoId} - ${positionSeconds}s`);
     }
 
     updateWatchDate(videoId) {
@@ -1490,7 +1490,7 @@
       entry.watchDate = new Date().toISOString();
       this.save(playlist);
 
-      isDev && logger.info('\n' + `playlistmanager: watchDate updated for video with id: ${videoId}`);
+      logger.info('\n' + `playlistmanager: watchDate updated for video with id: ${videoId}`);
 
       this.renderCurrent();
     }
@@ -1505,7 +1505,7 @@
       entry.rating = rating;
       this.save(playlist);
 
-      isDev && logger.info('\n' + `playlistmanager: rating updated for videoId: ${videoId} - ${rating}`);
+      logger.info('\n' + `playlistmanager: rating updated for videoId: ${videoId} - ${rating}`);
 
       this.renderCurrent();
     }
@@ -1531,7 +1531,7 @@
 
       this.save(playlist);
 
-      isDev && logger.info('\n' + `playlistmanager: fields updated for videoId: ${videoId}`);
+      logger.info('\n' + `playlistmanager: fields updated for videoId: ${videoId}`);
 
       this.renderCurrent();
     }
@@ -1577,12 +1577,12 @@
       const updated = playlist.filter(item => item.videoId !== videoId);
 
       if (updated.length === playlist.length) {
-        isDev && logger.warn('\n' + `playlist entry not found for videoId: ${videoId}`);
+        logger.warn('\n' + `playlist entry not found for videoId: ${videoId}`);
         return;
       }
 
       this.save(updated);
-      isDev && logger.info('\n' + `playlist entry deleted for videoId: ${videoId}`);
+      logger.info('\n' + `playlist entry deleted for videoId: ${videoId}`);
 
       // claude - Modify J1 VideoPlayer #22
       // Guard: if the deleted entry is the one currently marked active, drop
@@ -1608,7 +1608,7 @@
       localStorage.removeItem(this.STORAGE_KEY);
       this._invalidateSearchIndex();
 
-      isDev && logger.info('\n' + `cleared ${playlist.length} items from localStorage key: ${this.STORAGE_KEY}`);
+      logger.info('\n' + `cleared ${playlist.length} items from localStorage key: ${this.STORAGE_KEY}`);
 
       // claude - Modify J1 VideoPlayer #22
       // Same guard as deleteEntry(), for the bulk case: clearing the playlist
@@ -1649,10 +1649,10 @@
             const newEntries  = videos.filter(e => !existingIds.has(e.videoId));
             const merged      = existing.concat(newEntries);
             this.save(merged);
-            isDev && logger.info('\n' + `merged ${newEntries.length} new items (${videos.length - newEntries.length} duplicates skipped) into localStorage on key: ${this.STORAGE_KEY}`);
+            logger.info('\n' + `merged ${newEntries.length} new items (${videos.length - newEntries.length} duplicates skipped) into localStorage on key: ${this.STORAGE_KEY}`);
           } else {
             this.save(videos);
-            isDev && logger.info('\n' + `imported ${videos.length} of ${data.length} items into localStorage on key: ${this.STORAGE_KEY}`);
+            logger.info('\n' + `imported ${videos.length} of ${data.length} items into localStorage on key: ${this.STORAGE_KEY}`);
           }
           this.renderCurrent();
         })
@@ -1715,10 +1715,10 @@
           const newEntries  = playlist.filter(e => !existingIds.has(e.videoId));
           const merged      = existing.concat(newEntries);
           this.save(merged);
-          isDev && logger.info('\n' + `merged ${newEntries.length} new items (${playlist.length - newEntries.length} duplicates skipped) into localStorage on key: ${this.STORAGE_KEY}`);
+          logger.info('\n' + `merged ${newEntries.length} new items (${playlist.length - newEntries.length} duplicates skipped) into localStorage on key: ${this.STORAGE_KEY}`);
         } else {
           this.save(playlist);
-          isDev && logger.info('\n' + `imported ${playlist.length} items into localStorage on key: ${this.STORAGE_KEY}`);
+          logger.info('\n' + `imported ${playlist.length} items into localStorage on key: ${this.STORAGE_KEY}`);
         }
         this.renderCurrent();
       } catch (err) {
@@ -1764,7 +1764,7 @@
     // -------------------------------------------------------------------------
     async preloadPlaylists(preloadList, baseUrl, playerId) {
       if (!Array.isArray(preloadList) || preloadList.length === 0) {
-        isDev && logger.info('\n' + 'playlistManager: preload skipped — no playlists configured');
+        logger.info('\n' + 'playlistManager: preload skipped — no playlists configured');
         return 0;
       }
 
@@ -1795,7 +1795,7 @@
           //   const added = await this._preloadMergeFromUrl(url);
           const added = await this._preloadMergeFromUrl(url, targetStorageKey);
           totalAdded += added;
-          isDev && logger.info('\n' + `playlistManager: preload "${url}" — ${added} new entr${added === 1 ? 'y' : 'ies'} merged`);
+          logger.info('\n' + `playlistManager: preload "${url}" — ${added} new entr${added === 1 ? 'y' : 'ies'} merged`);
         } catch (e) {
           logger.error('\n' + `playlistManager: preload "${url}" failed: ${e}`);
         }
@@ -1811,7 +1811,7 @@
       try {
         if (typeof lunr !== 'undefined') this.buildSearchIndex();
       } catch (e) {
-        isDev && logger.warn('\n' + `playlistManager: preload search-index rebuild failed: ${e}`);
+        logger.warn('\n' + `playlistManager: preload search-index rebuild failed: ${e}`);
       }
 
       // Reflect the preloaded playlist in the UI (panel content + toggle button).
@@ -1821,10 +1821,10 @@
       // (mirror of the server-load backfill). Fire-and-forget.
       if (typeof this.generateMissingNativePosters === 'function') {
         this.generateMissingNativePosters()
-          .catch((e) => { isDev && logger.warn('\n' + `playlistManager: preload poster backfill failed: ${e}`); });
+          .catch((e) => { logger.warn('\n' + `playlistManager: preload poster backfill failed: ${e}`); });
       }
 
-      isDev && logger.info('\n' + `playlistManager: preload finished — ${totalAdded} new entr${totalAdded === 1 ? 'y' : 'ies'} added from ${preloadList.length} file(s)`);
+      logger.info('\n' + `playlistManager: preload finished — ${totalAdded} new entr${totalAdded === 1 ? 'y' : 'ies'} added from ${preloadList.length} file(s)`);
       return totalAdded;
     }
 
@@ -1883,7 +1883,7 @@
       const newEntries   = incoming.filter(e => e && e.videoId && !existingIds.has(e.videoId));
 
       if (newEntries.length === 0) {
-        isDev && logger.debug('\n' + `playlistManager: preload "${url}" — all entries already present, nothing merged`);
+        logger.debug('\n' + `playlistManager: preload "${url}" — all entries already present, nothing merged`);
         return 0;
       }
 
@@ -1914,7 +1914,7 @@
             if (data && typeof data === 'object' && data.playlist) {
               videos     = data.playlist;
               totalCount = videos.length + (data.meta_data ? 1 : 0);
-              isDev && logger.info('\n' + 'imported file uses new format (meta_data + playlist)');
+              logger.info('\n' + 'imported file uses new format (meta_data + playlist)');
             } else {
               logger.error('\n' + 'imported file does not contain a valid playlist format');
               return;
@@ -1922,7 +1922,7 @@
 
             videos.forEach(entry => this._normalizeEntry(entry));
             this.save(videos);
-            isDev && logger.info('\n' + `imported ${videos.length} of ${totalCount} items from file: ${file.name}`);
+            logger.info('\n' + `imported ${videos.length} of ${totalCount} items from file: ${file.name}`);
             this.renderCurrent();
           } catch (err) {
             logger.error('\n' + `import from file failed: ${err}`);
@@ -1940,7 +1940,7 @@
       }
       const playlist = this.load();
       if (!playlist || playlist.length === 0) {
-        isDev && logger.warn('\n' + 'no playlist data to export');
+        logger.warn('\n' + 'no playlist data to export');
         return;
       }
 
@@ -1959,7 +1959,7 @@
       document.body.removeChild(a);
       URL.revokeObjectURL(url);
 
-      isDev && logger.info('\n' + `exported ${playlist.length} items to file: ${filename}`);
+      logger.info('\n' + `exported ${playlist.length} items to file: ${filename}`);
     }
 
     // backupToFile - write a downloadable safety backup of the current
@@ -1981,7 +1981,7 @@
       }
       const playlist = this.load();
       if (!playlist || playlist.length === 0) {
-        isDev && logger.warn('\n' + 'no playlist data to back up');
+        logger.warn('\n' + 'no playlist data to back up');
         return false;
       }
 
@@ -2005,7 +2005,7 @@
       document.body.removeChild(a);
       URL.revokeObjectURL(url);
 
-      isDev && logger.info('\n' + `backed up ${playlist.length} items to file: ${filename}`);
+      logger.info('\n' + `backed up ${playlist.length} items to file: ${filename}`);
       return true;
     }
 
@@ -2096,7 +2096,7 @@
         if (titleBar) {
           this._loopSwitchInitialized = true;
           new playlistLoopSwitchHandler();
-          isDev && logger.info('\n' + 'playlistManager: loop switch initialized (lazy)');
+          logger.info('\n' + 'playlistManager: loop switch initialized (lazy)');
         }
       }
 
@@ -2112,7 +2112,7 @@
       const el = document.getElementById(_pid('videoplayer_playlist_parent'));
       if (!el) {
         logger.error('\n' + 'playlist container element not found');
-        isDev && logger.warn('\n' + 'processing playlist skipped');
+        logger.warn('\n' + 'processing playlist skipped');
       }
       return el;
     }
@@ -2132,7 +2132,7 @@
 
       playlistContainer.className = 'playlist list-mode';
 
-      isDev && logger.info('\n' + `render playlist`);
+      logger.info('\n' + `render playlist`);
 
       // Claude - J1 videoPlayer optimizations #2 (c)
       // Performance: the method parsed the full playlist out of localStorage
@@ -2362,18 +2362,18 @@
         }
       });
 
-      isDev && logger.info('\n' + 'playlistManager: delete handler initialized');
+      logger.info('\n' + 'playlistManager: delete handler initialized');
     }
 
     // playEntry now resolves the video src from the playlist entry and passes
     // it to embedRunVideo so the native player receives a proper file URL.
     playEntry(videoId) {
       if (!videoId) {
-        isDev && logger.warn('\n' + 'playlistManager: playEntry called without a videoId');
+        logger.warn('\n' + 'playlistManager: playEntry called without a videoId');
         return;
       }
 
-      isDev && logger.info('\n' + `playlistmanager: playing entry for videoId: ${videoId}`);
+      logger.info('\n' + `playlistmanager: playing entry for videoId: ${videoId}`);
       _startedFromPlaylist = true; // Modify J1 VideoPlayer #3
       this.embedRunVideo(videoId);
     }
@@ -2382,11 +2382,11 @@
     // so that the native player receives the correct local/remote file URL.
     embedRunVideo(videoId, mode) {
       if (!videoId) {
-        isDev && logger.warn('\n' + 'playlistManager: embedRunVideo called without a videoId');
+        logger.warn('\n' + 'playlistManager: embedRunVideo called without a videoId');
         return;
       }
 
-      isDev && logger.info('\n' + `playlistManager: embedding video for videoId: ${videoId}`);
+      logger.info('\n' + `playlistManager: embedding video for videoId: ${videoId}`);
 
       // Resolve the src from the playlist entry; fall back to videoId as-is
       const playlist = this.load() || [];
@@ -2473,11 +2473,11 @@
       // its siblings'. See the registry declaration near the module-level flags.
       // Original (deprecated, preserved for reference):
       //   if (_autoLoadFirstOnReloadDone) {
-      //     isDev && logger.debug('\n' + 'playlistManager: auto-load on reload already done — skipping');
+      //     logger.debug('\n' + 'playlistManager: auto-load on reload already done — skipping');
       //     return false;
       //   }
       if (_autoLoadFirstOnReloadDoneByPid[_playerID]) {
-        isDev && logger.debug('\n' + `playlistManager: auto-load on reload already done for player "${_playerID}" — skipping`);
+        logger.debug('\n' + `playlistManager: auto-load on reload already done for player "${_playerID}" — skipping`);
         return false;
       }
 
@@ -2489,7 +2489,7 @@
       //
       if (typeof j1 === 'undefined' || !j1 || !j1.adapter || !j1.adapter.videoPlayer
           || !j1.adapter.videoPlayer.videoPlayerOptions) {
-        isDev && logger.debug('\n' + 'playlistManager: auto-load on reload deferred — adapter not ready yet');
+        logger.debug('\n' + 'playlistManager: auto-load on reload deferred — adapter not ready yet');
         return false;
       }
 
@@ -2503,7 +2503,7 @@
       if (!firstEntry || !firstEntry.videoId) {
         // Empty/invalid list: nothing was "already loaded", so there is nothing
         // to restore on reload. Leave the once-only flag unset (retriable).
-        isDev && logger.debug('\n' + 'playlistManager: no stored playlist on reload — nothing to auto-load');
+        logger.debug('\n' + 'playlistManager: no stored playlist on reload — nothing to auto-load');
         return false;
       }
 
@@ -2519,11 +2519,11 @@
       try {
         const overlayExists = document.getElementById(_pid('emptyPlayerOverlay'));
         if (!overlayExists && container && containerHTML) {
-          isDev && logger.debug('\n' + 'playlistManager: restoring container/overlay before reload auto-load');
+          logger.debug('\n' + 'playlistManager: restoring container/overlay before reload auto-load');
           container.innerHTML = containerHTML;
         }
       } catch (e) {
-        isDev && logger.warn('\n' + `playlistManager: reload container restore skipped: ${e}`);
+        logger.warn('\n' + `playlistManager: reload container restore skipped: ${e}`);
       }
 
       // claude - Modify J1 VideoPlayer #41
@@ -2536,7 +2536,7 @@
       // Original (deprecated, preserved for reference):
       //   _autoLoadFirstOnReloadDone = true;
       _autoLoadFirstOnReloadDoneByPid[_playerID] = true;
-      isDev && logger.info('\n' + `playlistManager: loading first stored-playlist video in paused state on reload (videoId: ${firstEntry.videoId})`);
+      logger.info('\n' + `playlistManager: loading first stored-playlist video in paused state on reload (videoId: ${firstEntry.videoId})`);
       this.embedRunVideo(firstEntry.videoId, 'pause');
       return true;
     }
@@ -2562,7 +2562,7 @@
         }
       });
 
-      isDev && logger.info('\n' + 'playlistManager: play handler initialized');
+      logger.info('\n' + 'playlistManager: play handler initialized');
     }
 
     // _createRatingModal: thumbnail src now uses entry.poster or
@@ -2674,7 +2674,7 @@
       saveBtn.addEventListener('click', () => {
         if (this._ratingModalVideoId) {
           this.updateEntryRating(this._ratingModalVideoId, this._ratingModalValue);
-          isDev && logger.debug('\n' + `playlistmanager: rating set to ${this._ratingModalValue} for videoId: ${this._ratingModalVideoId}`);
+          logger.debug('\n' + `playlistmanager: rating set to ${this._ratingModalValue} for videoId: ${this._ratingModalVideoId}`);
         }
       });
 
@@ -2735,7 +2735,7 @@
         }
       });
 
-      isDev && logger.debug('\n' + 'playlistManager: rate handler initialized');
+      logger.debug('\n' + 'playlistManager: rate handler initialized');
     }
 
     // _createEditModal: thumbnail uses entry.poster; video link defaults to
@@ -2951,7 +2951,7 @@
           };
 
           this.updateEntryFields(this._editModalVideoId, fields);
-          isDev && logger.debug('\n' + `playlistmanager: fields saved for videoId: ${this._editModalVideoId}`);
+          logger.debug('\n' + `playlistmanager: fields saved for videoId: ${this._editModalVideoId}`);
         }
       });
 
@@ -3071,7 +3071,7 @@
         }
       });
 
-      isDev && logger.info('\n' + 'playlistManager: edit handler initialized');
+      logger.info('\n' + 'playlistManager: edit handler initialized');
     }
 
     initInfoLinkHandler() {
@@ -3088,7 +3088,7 @@
         event.stopPropagation();
       });
 
-      isDev && logger.info('\n' + 'playlistManager: infoLink handler initialized');
+      logger.info('\n' + 'playlistManager: infoLink handler initialized');
     }
 
     initVideoLinkHandler() {
@@ -3105,7 +3105,7 @@
         event.stopPropagation();
       });
 
-      isDev && logger.info('\n' + 'playlistManager: videoLink handler initialized');
+      logger.info('\n' + 'playlistManager: videoLink handler initialized');
     }
 
     // search engine
@@ -3115,7 +3115,7 @@
       if (!this._searchIndex) return;
       try {
         localStorage.setItem(this.INDEX_KEY, JSON.stringify(this._searchIndex));
-        isDev && logger.info('\n' + 'playlistManager: search index saved to localStorage');
+        logger.info('\n' + 'playlistManager: search index saved to localStorage');
       } catch (e) {
         logger.error('\n' + `playlistManager: failed to save search index: ${e}`);
       }
@@ -3126,10 +3126,10 @@
         const stored = localStorage.getItem(this.INDEX_KEY);
         if (!stored) return false;
         this._searchIndex = lunr.Index.load(JSON.parse(stored));
-        isDev && logger.info('\n' + 'playlistManager: search index loaded from localStorage');
+        logger.info('\n' + 'playlistManager: search index loaded from localStorage');
         return true;
       } catch (e) {
-        isDev && logger.debug('\n' + `playlistManager: failed to load search index from localStorage: ${e}`);
+        logger.debug('\n' + `playlistManager: failed to load search index from localStorage: ${e}`);
         this._searchIndex = null;
         return false;
       }
@@ -3180,7 +3180,7 @@
         }, this);
       });
 
-      isDev && logger.info('\n' + `playlistManager: search index built with ${data.length} entries`);
+      logger.info('\n' + `playlistManager: search index built with ${data.length} entries`);
 
       this._saveSearchIndex();
     }
@@ -3196,7 +3196,7 @@
       }
 
       if (!this._searchIndex) {
-        isDev && logger.warn('\n' + 'playlistManager: search index not available');
+        logger.warn('\n' + 'playlistManager: search index not available');
         return [];
       }
 
@@ -3204,7 +3204,7 @@
       try {
         lunrResults = this._searchIndex.search(query);
       } catch (e) {
-        isDev && logger.warn('\n' + `playlistManager: lunr search error: ${e}`);
+        logger.warn('\n' + `playlistManager: lunr search error: ${e}`);
         lunrResults = [];
       }
 
@@ -3218,7 +3218,7 @@
 
       this._searchResults = results;
 
-      isDev && logger.debug('\n' + `playlistManager: search for "${query}" returned ${results.length} results`);
+      logger.debug('\n' + `playlistManager: search for "${query}" returned ${results.length} results`);
 
       this.renderCurrent();
       return results;
@@ -3372,7 +3372,7 @@
         btn.style.opacity = '0.35';
         btn.style.cursor  = 'not-allowed';
         btn.title         = 'Close the playlist editor first';
-        isDev && logger.debug('\n' + '_updateTogglePlaylistButton: button blocked — playlist editor is open');
+        logger.debug('\n' + '_updateTogglePlaylistButton: button blocked — playlist editor is open');
         return;
       }
 
@@ -3396,7 +3396,7 @@
         btn.title         = 'No playlist loaded';
       }
 
-      isDev && logger.debug('\n' + `_updateTogglePlaylistButton: button ${hasData ? 'enabled' : 'disabled'} (${data.length} items)`);
+      logger.debug('\n' + `_updateTogglePlaylistButton: button ${hasData ? 'enabled' : 'disabled'} (${data.length} items)`);
     }
 
     // Claude - J1 videoPlayer optimizations #2 (d)
@@ -3476,7 +3476,7 @@
         if (this._loopEnabled) {
           this._loopEnabled = false;
           localStorage.setItem('playlistLoop', 'false');
-          isDev && logger.debug('\n' + '_updateLoopSwitchVisibility: loop mode disabled (not all items are series)');
+          logger.debug('\n' + '_updateLoopSwitchVisibility: loop mode disabled (not all items are series)');
         }
         const checkbox = document.getElementById('loopMode');
         if (checkbox) {
@@ -3531,7 +3531,7 @@
 
     sortPlaylist(criterion) {
       this._currentSort = criterion || 'watchDate';
-      isDev && logger.debug('\n' + `playlistManager: sort criterion set to "${this._currentSort}"`);
+      logger.debug('\n' + `playlistManager: sort criterion set to "${this._currentSort}"`);
       this.renderCurrent();
       // claude - Modify J1 VideoPlayer #31
       // Re-sync the videojs-playlist plugin order on a sort change.
@@ -3661,7 +3661,7 @@
       const syncedIndex = playlist.findIndex((item) => item && item.videoId === activeVideoId);
       if (syncedIndex < 0) {
         // jadams, 2026-06-28: logging disabled
-        //isDev && logger.warn('\n' + `playlist re-sync for active videoId '${activeVideoId}' not in converted list: skipping re-feed`);
+        //logger.warn('\n' + `playlist re-sync for active videoId '${activeVideoId}' not in converted list: skipping re-feed`);
         return;
       }
 
@@ -3678,7 +3678,7 @@
           if (a !== b) { identical = false; break; }
         }
         if (identical) {
-          isDev && logger.debug('\n' + 'playlist re-sync: order unchanged, no re-feed');
+          logger.debug('\n' + 'playlist re-sync: order unchanged, no re-feed');
           return;
         }
       }
@@ -3707,7 +3707,7 @@
           player.playlist.currentItem(syncedIndex);
         }
       } catch (e) {
-        isDev && logger.warn('\n' + `playlist re-sync: re-feed failed: ${e}`);
+        logger.warn('\n' + `playlist re-sync: re-feed failed: ${e}`);
         return;
       }
 
@@ -3738,14 +3738,14 @@
       };
       player.on('loadedmetadata', onResyncLoaded);
 
-      isDev && logger.info('\n' +
+      logger.info('\n' +
         `playlist re-sync: re-fed plugin in new order; active videoId '${activeVideoId}' kept at index ${syncedIndex}`);
     }
 
     clearSearch() {
       this._searchResults = null;
       this.renderCurrent();
-      isDev && logger.debug('\n' + 'playlistManager: search cleared');
+      logger.debug('\n' + 'playlistManager: search cleared');
     }
 
   } // END PlaylistManager
@@ -3784,7 +3784,7 @@
   async function _enterDocumentPiP(vjsPlayer) {
     if (!vjsPlayer) return false;
     if (pipWindow && !pipWindow.closed) {
-      isDev && logger.info('\n' + 'pip: Document PiP window already open');
+      logger.info('\n' + 'pip: Document PiP window already open');
       return true;
     }
 
@@ -3837,15 +3837,15 @@
         playerEl.style.height = '';
 
         pipWindow = null;
-        isDev && logger.info('\n' + 'pip: Document PiP window closed, player restored');
+        logger.info('\n' + 'pip: Document PiP window closed, player restored');
       });
 
-      isDev && logger.info('\n' + `pip: entered Document PiP (${width}x${height})`);
+      logger.info('\n' + `pip: entered Document PiP (${width}x${height})`);
       pipEnabled = true;
       return true;
 
     } catch (err) {
-      isDev && logger.warn('\n' + `pip: Document PiP request failed: ${err}`);
+      logger.warn('\n' + `pip: Document PiP request failed: ${err}`);
       pipWindow = null;
       return false;
     }
@@ -3860,12 +3860,12 @@
 
       if (videoEl && typeof videoEl.requestPictureInPicture === 'function') {
         await videoEl.requestPictureInPicture();
-        isDev && logger.info('\n' + 'pip: entered standard video PiP');
+        logger.info('\n' + 'pip: entered standard video PiP');
         pipEnabled = true;
         return true;
       }
     } catch (err) {
-      isDev && logger.warn('\n' + `pip: standard video PiP failed: ${err}`);
+      logger.warn('\n' + `pip: standard video PiP failed: ${err}`);
     }
 
     return false;
@@ -3875,16 +3875,16 @@
     if (pipWindow && !pipWindow.closed) {
       pipWindow.close();
       pipWindow = null;
-      isDev && logger.info('\n' + 'pip: closed Document PiP window');
+      logger.info('\n' + 'pip: closed Document PiP window');
       return;
     }
 
     if (document.pictureInPictureElement) {
       try {
         await document.exitPictureInPicture();
-        isDev && logger.debug('\n' + 'pip: exited standard video PiP');
+        logger.debug('\n' + 'pip: exited standard video PiP');
       } catch (err) {
-        isDev && logger.warn('\n' + `pip: exitPictureInPicture failed: ${err}`);
+        logger.warn('\n' + `pip: exitPictureInPicture failed: ${err}`);
       }
     }
   }
@@ -3900,7 +3900,7 @@
       return _enterVideoPiP(vjsPlayer);
     }
 
-    isDev && logger.warn('\n' + 'pip: no PiP API supported by this browser');
+    logger.warn('\n' + 'pip: no PiP API supported by this browser');
     return false;
   }
 
@@ -3914,21 +3914,21 @@
       if (document.visibilityState === 'hidden') {
         const paused = vjsPlayer.paused();
         if (!paused) {
-          isDev && logger.info('\n' + 'pip: tab hidden while playing, requesting PiP');
+          logger.info('\n' + 'pip: tab hidden while playing, requesting PiP');
           const ok = await _requestPictureInPicture(vjsPlayer);
           if (!ok) {
-            isDev && logger.info('\n' + 'pip: PiP unavailable, playback may pause in background');
+            logger.info('\n' + 'pip: PiP unavailable, playback may pause in background');
           }
         }
       } else if (document.visibilityState === 'visible') {
         if (pipWindow && !pipWindow.closed) {
-          isDev && logger.info('\n' + 'pip: tab visible again, closing PiP window');
+          logger.info('\n' + 'pip: tab visible again, closing PiP window');
           await _exitPictureInPicture(vjsPlayer);
         }
       }
     });
 
-    isDev && logger.info('\n' + 'pip: auto-PiP visibility handler installed');
+    logger.info('\n' + 'pip: auto-PiP visibility handler installed');
   }
 
   function _playWhenVisible(vjsPlayer) {
@@ -3938,11 +3938,11 @@
       const p = vjsPlayer.play();
       if (p && typeof p.catch === 'function') {
         p.catch(err => {
-          isDev && logger.warn('\n' + `play() rejected: ${err}`);
+          logger.warn('\n' + `play() rejected: ${err}`);
         });
       }
     } else {
-      isDev && logger.info('\n' + 'play deferred: page is hidden, attempting PiP before fallback');
+      logger.info('\n' + 'play deferred: page is hidden, attempting PiP before fallback');
 
       (async () => {
         const pipOk = pipConfigEnabled ? await _requestPictureInPicture(vjsPlayer) : false;
@@ -3950,19 +3950,19 @@
           const p = vjsPlayer.play();
           if (p && typeof p.catch === 'function') {
             p.catch(err => {
-              isDev && logger.warn('\n' + `play() inside PiP rejected: ${err}`);
+              logger.warn('\n' + `play() inside PiP rejected: ${err}`);
             });
           }
         } else {
-          isDev && logger.debug('\n' + 'pip: falling back to visibility-deferred play()');
+          logger.debug('\n' + 'pip: falling back to visibility-deferred play()');
           const onVisible = () => {
             if (document.visibilityState === 'visible') {
               document.removeEventListener('visibilitychange', onVisible);
-              isDev && logger.debug('\n' + 'page became visible, starting deferred play()');
+              logger.debug('\n' + 'page became visible, starting deferred play()');
               const p = vjsPlayer.play();
               if (p && typeof p.catch === 'function') {
                 p.catch(err => {
-                  isDev && logger.warn('\n' + `deferred play() rejected: ${err}`);
+                  logger.warn('\n' + `deferred play() rejected: ${err}`);
                 });
               }
             }
@@ -4039,9 +4039,9 @@
           if (typeof ytPlayer.unloadModule === 'function') {                
             ytPlayer.unloadModule(mod);
           }                                                                 
-          isDev && logger && logger.info('\n' + `YouTube captions disabled (module: ${mod})`);
+          logger && logger.info('\n' + `YouTube captions disabled (module: ${mod})`);
         } catch (e) {                                                       
-          isDev && logger && logger.debug('\n' + `unload of caption module '${mod}' skipped: ${e}`);
+          logger && logger.debug('\n' + `unload of caption module '${mod}' skipped: ${e}`);
         }                                                                   
       });                                                                   
     };                                                                      
@@ -4059,7 +4059,7 @@
       try {                                                                 
         ytPlayer.addEventListener('onApiChange', unloadCaptionModules);
       } catch (e) {
-        isDev && logger && logger.debug('\n' + `onApiChange bind for captions skipped: ${e}`);
+        logger && logger.debug('\n' + `onApiChange bind for captions skipped: ${e}`);
       }
     }
   };                                                                        
@@ -4098,7 +4098,7 @@
   const embedRunVideo = (videoSrc, mode) => {
     logger = log4javascript.getLogger(MODULE_NAME);
 
-    isDev && logger.debug('\n' + `embedding video from src: ${videoSrc}`);
+    logger.debug('\n' + `embedding video from src: ${videoSrc}`);
 
     // reset lastState so state change events fire correctly for the new player
     lastState = null;
@@ -4150,7 +4150,7 @@
     if (videoId) {
       const sanitizedVideoId = sanitizeVideoId(videoId);
       if (sanitizedVideoId !== videoId) {
-        isDev && logger.warn('\n' + `videoId sanitized for keying: "${videoId}" -> "${sanitizedVideoId}"`);
+        logger.warn('\n' + `videoId sanitized for keying: "${videoId}" -> "${sanitizedVideoId}"`);
         videoId = sanitizedVideoId;
       }
     }
@@ -4201,7 +4201,7 @@
         // forget: generatePosterForEntry() is config-gated, only writes when
         // the entry still lacks a real poster, and never rejects.
         playlistManager.generatePosterForEntry(videoId)
-          .catch((e) => { isDev && logger.warn('\n' + `early native poster generation failed for videoId: ${videoId} - ${e}`); });
+          .catch((e) => { logger.warn('\n' + `early native poster generation failed for videoId: ${videoId} - ${e}`); });
       }
     }
 
@@ -4218,7 +4218,7 @@
           }
 
           const stateName = vjsStateEventNameMap[state] || (state < 0 ? 'loadstart' : String(state));
-          isDev && logger.debug('\n' + `changed player to state: ${stateName}`);
+          logger.debug('\n' + `changed player to state: ${stateName}`);
 
           // jadams, 2026-06-20: autoplay nextPrevButtons (playlist plugin)
           //
@@ -4246,7 +4246,7 @@
               const pAutoLoadstart = vjsPlayer.play();
               if (pAutoLoadstart && typeof pAutoLoadstart.catch === 'function') {
                 pAutoLoadstart.catch(err => {
-                  isDev && logger.warn('\n' + `loadstart autoplay play() rejected: ${err}`);
+                  logger.warn('\n' + `loadstart autoplay play() rejected: ${err}`);
                 });
               }
             }
@@ -4286,7 +4286,7 @@
               if (vjsStateEventNameMap[state] === 'ended' && loopConfigEnabled && playlistManager._loopEnabled) {
                 const nextId = playlistManager.getNextVideoId(currentVideoId);
                 if (nextId) {
-                  isDev && logger.debug('\n' + `loop mode: advancing from videoId ${currentVideoId} to next videoId ${nextId}`);
+                  logger.debug('\n' + `loop mode: advancing from videoId ${currentVideoId} to next videoId ${nextId}`);
                   // For native entries, resolve src from the playlist entry;
                   // for YouTube entries, the nextId itself is the video ID.
                   const playlist  = playlistManager.load() || [];
@@ -4296,12 +4296,12 @@
                     embedRunVideo(nextSrc);
                   }, VIDEO_START_DELAY);
                 } else {
-                  isDev && logger.debug('\n' + `loop mode: reached last playlist item, stopping loop`);
+                  logger.debug('\n' + `loop mode: reached last playlist item, stopping loop`);
                 }
               }
 
             } catch (e) {
-              isDev && logger.warn('\n' + `failed to save playback position: ${e}`);
+              logger.warn('\n' + `failed to save playback position: ${e}`);
             }
           }
 
@@ -4311,7 +4311,7 @@
 
       // videoJS event: onReady
       onReady: (player) => {
-        isDev && logger.info('\n' + 'vjs player initialized and ready');
+        logger.info('\n' + 'vjs player initialized and ready');
 
         if (isYouTube) {
           // -------------------------------------------------------------------
@@ -4322,7 +4322,7 @@
             const title  = videoData.title  || '';
             const author = videoData.author || '';
 
-            isDev && logger.debug('\n' + `YT video data resolved - title: ${title}`);
+            logger.debug('\n' + `YT video data resolved - title: ${title}`);
 
             player.ytVideoData  = videoData;
             player.ytVideoTitle = title;
@@ -4348,7 +4348,7 @@
               }
             }
           } catch (e) {
-            isDev && logger.debug('\n' + `immediate YT video data read skipped: ${e}`);
+            logger.debug('\n' + `immediate YT video data read skipped: ${e}`);
           }
 
     
@@ -4377,7 +4377,7 @@
               setTimeout(() => clearInterval(ccWait), 3000);
             }
           } catch (e) {
-            isDev && logger.debug('\n' + `YouTube caption disable skipped: ${e}`);
+            logger.debug('\n' + `YouTube caption disable skipped: ${e}`);
           }
 
           // playlistManager, fixed video duration (YouTube)
@@ -4423,7 +4423,7 @@
             const title  = videoData.title  || '';
             const author = videoData.author || '';
 
-            isDev && logger.debug('\n' + `video data resolved - title: ${title}`);
+            logger.debug('\n' + `video data resolved - title: ${title}`);
 
             // claude - VideoPlayer fix videoID #2
             // ROOT CAUSE OF THE DOUBLE-ADD (native videos only):
@@ -4470,7 +4470,7 @@
             if (videoData.videoId) {
               const _sanitizedNativeId = sanitizeVideoId(videoData.videoId);
               if (_sanitizedNativeId !== videoData.videoId) {
-                isDev && logger.warn('\n' + `native videoData.videoId sanitized for keying: "${videoData.videoId}" -> "${_sanitizedNativeId}"`);
+                logger.warn('\n' + `native videoData.videoId sanitized for keying: "${videoData.videoId}" -> "${_sanitizedNativeId}"`);
                 videoData.videoId = _sanitizedNativeId;
               }
             }
@@ -4538,7 +4538,7 @@
 
         if (videoPlayerOptions.videoJS.autoStart) {
 
-          isDev && logger.info('\n' + 'vjs player started');
+          logger.info('\n' + 'vjs player started');
 
           const vjsPlaybackRates  = videoPlayerOptions.videoJS.playbackRates.values;
 
@@ -4549,7 +4549,7 @@
           const piNextPrevButtons = videoPlayerOptions.videoJS.plugins.nextPrevButtons;          
           const piZoomButtons     = videoPlayerOptions.videoJS.plugins.zoomButtons;
 
-          isDev && logger.debug('\n' + 'customize vjs player (controls)');
+          logger.debug('\n' + 'customize vjs player (controls)');
 
           const vjsPlayer   = player;
           const vjsVideoId  = videoId;
@@ -4630,7 +4630,7 @@
               const switchedId = (item && item.videoId) ? item.videoId : '';
               _playlistActiveVideoId = switchedId || null;
               if (switchedId) {
-                isDev && logger.debug('\n' + `playlistitem: active item follows plugin to videoId: ${switchedId}`);
+                logger.debug('\n' + `playlistitem: active item follows plugin to videoId: ${switchedId}`);
                 playlistManager.setActiveItem(switchedId);
 
                 // claude - Modify J1 VideoPlayer #37
@@ -4701,7 +4701,7 @@
             );
 
             if (syncedIndex < 0) {
-              isDev && logger.warn('\n' +
+              logger.warn('\n' +
                 `playlist sync: vjsVideoId '${vjsVideoId}' not found in converted playlist ` +
                 `(rawIndex: ${rawIndex}); keeping current item`);
 
@@ -4739,7 +4739,7 @@
               vjsPlayer.off('loadedmetadata', _onPlaylistSetupSettled);
 
               _playlistSetupInProgress = false;
-              isDev && logger.debug('\n' + 'playlist setup settled; loadstart autoplay re-enabled');
+              logger.debug('\n' + 'playlist setup settled; loadstart autoplay re-enabled');
             };
             vjsPlayer.on('loadedmetadata', _onPlaylistSetupSettled);
 
@@ -4754,7 +4754,7 @@
                 vjsPlayer.off('loadedmetadata', _onPlaylistSetupSettled);
 
                 _playlistSetupInProgress = false;
-                isDev && logger.debug('\n' + 'playlist setup guard cleared by timeout fallback');
+                logger.debug('\n' + 'playlist setup guard cleared by timeout fallback');
               }
             }, 2000);
 
@@ -4863,7 +4863,7 @@
                 // claude - Modify J1 VideoPlayer #25
                 if (videoPlayerOptions.playlist.close_on_play) {
                   closePlaylist();
-                  isDev && logger.debug('\n' + 'nextPrevButtons: playlist panel hidden after prev/next navigation');
+                  logger.debug('\n' + 'nextPrevButtons: playlist panel hidden after prev/next navigation');
                 }
               });
             }
@@ -4887,7 +4887,7 @@
             ? videoPlayerOptions.videoJS.players.youtube.controls
             : undefined;
           if (isYouTube && (videoPlayerOptions.videoJS.hideControlBar || ytControls === 0)) {
-            isDev && logger.debug('\n' + 'hiding vjs controlbar for YT video');
+            logger.debug('\n' + 'hiding vjs controlbar for YT video');
             vjsPlayer.addClass('vjs-youtube-hide-controlbar');
           }
 
@@ -4936,7 +4936,7 @@
               nativePiP.hide();
             }
 
-            isDev && logger.info('\n' + 'pip: custom Document PiP button added to control bar');
+            logger.info('\n' + 'pip: custom Document PiP button added to control bar');
           } else {
             const nativePiP = vjsPlayer.controlBar.getChild('pictureInPictureToggle');
             if (nativePiP) {
@@ -4959,7 +4959,7 @@
     const videoTitleElement = document.getElementById('video_title');    
     const textEl       = document.getElementById(_pid('video_title_text'));
 
-    isDev && logger.debug('\n' + `do post processing on state: ${vjsStateEventNameMap[state]}`);
+    logger.debug('\n' + `do post processing on state: ${vjsStateEventNameMap[state]}`);
 
     // Choose the right video-data source depending on which tech is active.
     // YouTube: player.ytVideoData (set in onReady YouTube branch).
@@ -5144,7 +5144,7 @@
       // every native play.
       if (vid && !media.poster) {
         playlistManager.generatePosterForEntry(vid)
-          .catch((e) => { isDev && logger.warn('\n' + `native poster generation failed for videoId: ${vid} - ${e}`); });
+          .catch((e) => { logger.warn('\n' + `native poster generation failed for videoId: ${vid} - ${e}`); });
       }
     }
 
@@ -5250,7 +5250,7 @@
       : '';
     span.textContent = text;
 
-    isDev && logger.debug('\n' + `_updateHeaderTitle: header title set to "${text}"`);
+    logger.debug('\n' + `_updateHeaderTitle: header title set to "${text}"`);
   }
 
   function _resetPlaylistToggleUI() {
@@ -5294,7 +5294,7 @@
       }
     }
 
-    isDev && logger.debug('\n' + '_resetPlaylistToggleUI: toggle reset to "Show Playlist" state');
+    logger.debug('\n' + '_resetPlaylistToggleUI: toggle reset to "Show Playlist" state');
   }
 
   // ---------------------------------------------------------------------------
@@ -5359,7 +5359,7 @@
     const videoContnr = document.getElementById(_pid('video_container'));
 
     if (!editBtn || !editScreen || !videoContnr) {
-      isDev && logger.warn('\n' + 'initEditPlaylistHandler: required element(s) not found — handler skipped');
+      logger.warn('\n' + 'initEditPlaylistHandler: required element(s) not found — handler skipped');
       return;
     }
 
@@ -5378,7 +5378,7 @@
         // 1. Dispose any live videoJS player so it does not leak resources
         //    while the video_container is replaced.
         if (player) {
-          isDev && logger.debug('\n' + 'initEditPlaylistHandler: disposing videoJS player before showing edit screen');
+          logger.debug('\n' + 'initEditPlaylistHandler: disposing videoJS player before showing edit screen');
           player.dispose();
           player = null;
         }
@@ -5411,7 +5411,7 @@
 
         _editScreenVisible = true;
 
-        isDev && logger.debug('\n' + 'initEditPlaylistHandler: edit screen shown inside video_container');
+        logger.debug('\n' + 'initEditPlaylistHandler: edit screen shown inside video_container');
 
       } else {
         // --- CLOSE -----------------------------------------------------------
@@ -5447,11 +5447,11 @@
 
         _editScreenVisible = false;
 
-        isDev && logger.debug('\n' + 'initEditPlaylistHandler: video_container restored, edit screen hidden');
+        logger.debug('\n' + 'initEditPlaylistHandler: video_container restored, edit screen hidden');
       }
     });
 
-    isDev && logger.info('\n' + 'initEditPlaylistHandler: edit-playlist toggle handler registered');
+    logger.info('\n' + 'initEditPlaylistHandler: edit-playlist toggle handler registered');
   }
 
   /**
@@ -5464,7 +5464,7 @@
     const scrollOffset      = (window.innerWidth >= 720) ? -180 : -130;
     const position          = targetElmPosition + scrollOffset;
 
-    isDev && logger.debug('\n' + `scroll page to vertical position: ${position}`);
+    logger.debug('\n' + `scroll page to vertical position: ${position}`);
     window.scrollTo(0, position);
   }
 
@@ -5511,7 +5511,7 @@
       // jadams, 2026-06-28: prevent error like:
       // video.js:210 VIDEOJS: ERROR: TypeError: player.off is not a function      
       if (isPlayerLoaded) {
-        isDev && logger.info('\n' + `Disposing existing videoJS player: ${player.id_}`);
+        logger.info('\n' + `Disposing existing videoJS player: ${player.id_}`);
 
         if (pipWindow && !pipWindow.closed) {
           pipWindow.close();
@@ -5527,13 +5527,13 @@
 
     const overlayExists = document.getElementById(_pid('emptyPlayerOverlay'));
     if (!overlayExists) {
-      isDev && logger.info('\n' + `Restoring container and overlay for new video`);
+      logger.info('\n' + `Restoring container and overlay for new video`);
       container.innerHTML = containerHTML;
     }
 
     const currentOverlay = document.getElementById(_pid('emptyPlayerOverlay'));
     if (!currentOverlay) {
-      isDev && logger.error('\n' + `Overlay element could not be restored`);
+      logger.error('\n' + `Overlay element could not be restored`);
       return null;
     }
 
@@ -5620,7 +5620,7 @@
         }
       };
 
-      isDev && logger.info('\n' + `createVideoJsPlayer: YouTube playerVars from players.youtube: ${JSON.stringify(ytPlayerVars)}`);
+      logger.info('\n' + `createVideoJsPlayer: YouTube playerVars from players.youtube: ${JSON.stringify(ytPlayerVars)}`);
 
     } else {
       // Native HTML5 tech configuration: all player parameters are now read
@@ -5676,7 +5676,7 @@
         videoConfig.poster = ntvCfg.default_poster;
       }
 
-      isDev && logger.info('\n' + `createVideoJsPlayer: native config from players.native: fluid=${videoConfig.fluid}, responsive=${videoConfig.responsive}, preload=${videoConfig.preload}`);
+      logger.info('\n' + `createVideoJsPlayer: native config from players.native: fluid=${videoConfig.fluid}, responsive=${videoConfig.responsive}, preload=${videoConfig.preload}`);
     }
 
     if (typeof videojs !== 'undefined') {
@@ -5693,11 +5693,11 @@
       try {
         const vjsRegistry = (typeof videojs.getPlayers === 'function') ? videojs.getPlayers() : null;
         if (vjsRegistry && vjsRegistry[playerElementId]) {
-          isDev && logger.info('\n' + `clearing stale videojs registry entry for id: ${playerElementId}`);
+          logger.info('\n' + `clearing stale videojs registry entry for id: ${playerElementId}`);
           vjsRegistry[playerElementId] = null;
         }
       } catch (e) {
-        isDev && logger.warn('\n' + `videojs registry cleanup skipped: ${e}`);
+        logger.warn('\n' + `videojs registry cleanup skipped: ${e}`);
       }
 
       // claude - VidoPlayer fix videoID #3
@@ -5714,7 +5714,7 @@
       // registers the player under video.id, so later registry lookups via
       // videojs.getPlayer(videoId) / player.id_ keep working unchanged.
       player = videojs(video, videoConfig, function onPlayerReady() {
-        isDev && logger.info('\n' + `player ready on id: ${playerElementId}`);
+        logger.info('\n' + `player ready on id: ${playerElementId}`);
 
         if (options.onStateChange) {
           const vjsPlayer = this;
@@ -5732,9 +5732,9 @@
           // DOM events that the adapter (onReady) and loop mode rely on.
           if (typeof this.nativePlayer === 'function') {
             this.nativePlayer({ title: options.title || '' });
-            isDev && logger.info('\n' + `nativePlayer plugin activated on: ${playerElementId}`);
+            logger.info('\n' + `nativePlayer plugin activated on: ${playerElementId}`);
           } else {
-            isDev && logger.warn('\n' + `nativePlayer plugin not available - custom events will not be dispatched`);
+            logger.warn('\n' + `nativePlayer plugin not available - custom events will not be dispatched`);
           }
         }
 
@@ -5816,7 +5816,7 @@
     async handlePasteClick() {
       try {
         if (!navigator.clipboard || !navigator.clipboard.readText) {
-          isDev && logger.warn('\n' + MESSAGES.NO_CLIPBOARD_API);
+          logger.warn('\n' + MESSAGES.NO_CLIPBOARD_API);
           return;
         }
 
@@ -5828,7 +5828,7 @@
         this._toggleClearButton(text.trim());
         this.processUrl();
       } catch (err) {
-        isDev && logger.error('\n' + `Clipboard read error: ${err}`);
+        logger.error('\n' + `Clipboard read error: ${err}`);
       }
     }
 
@@ -5859,7 +5859,7 @@
     processUrl() {
       const url = this.elements.videoUrlInput.value.trim();
       if (url === "") {
-        isDev && logger.warn('\n' + MESSAGES.NO_URL);
+        logger.warn('\n' + MESSAGES.NO_URL);
         return;
       }
 
@@ -5868,10 +5868,10 @@
       if (youtubeId) {
         // duplicate check using the YouTube video ID
         if (previousPlayerId !== null && youtubeId === previousPlayerId) {
-          isDev && logger.warn('\n' + `player already exists with id: ${youtubeId}`);
+          logger.warn('\n' + `player already exists with id: ${youtubeId}`);
           return;
         }
-        isDev && logger.info('\n' + `Loading YouTube video with id: ${youtubeId}`);
+        logger.info('\n' + `Loading YouTube video with id: ${youtubeId}`);
         this.loadYtVideo(youtubeId);
 
         // closeEditPlaylist(btn, playerId) — same pattern as closePlaylist.
@@ -5901,12 +5901,12 @@
         : null;
 
       if (previousPlayerId !== null && videoId === previousPlayerId) {
-        isDev && logger.warn('\n' + `player already exists with id: ${videoId}`);
+        logger.warn('\n' + `player already exists with id: ${videoId}`);
         return;
       }
 
       if (videoSrc) {
-        isDev && logger.info('\n' + `Loading video from src: ${videoSrc}`);
+        logger.info('\n' + `Loading video from src: ${videoSrc}`);
         this.loadVideo(videoSrc);
 
         //  closeEditPlaylist(btn, playerId) — same pattern as closePlaylist.
@@ -5918,7 +5918,7 @@
         // update the playListButton (to be enabled when a playlist is loaded)
         playlistManager._updateTogglePlaylistButton();
       } else {
-        isDev && logger.error('\n' + MESSAGES.INVALID_URL);
+        logger.error('\n' + MESSAGES.INVALID_URL);
       }
     } // END processUrl()
 
@@ -5945,7 +5945,7 @@
      * @param {string} videoId - YouTube video ID
      */
     loadYtVideo(videoId) {
-      isDev && logger.info('\n' + `Loading YouTube video with id: ${videoId}`);
+      logger.info('\n' + `Loading YouTube video with id: ${videoId}`);
 
       const event = new CustomEvent('videoLoad', {
         detail: { videoId },
@@ -5957,7 +5957,7 @@
       document.addEventListener('videoPlayingStarted', () => {
         this.elements.videoUrlInput.value = '';
         this._toggleClearButton('');
-        isDev && logger.debug('\n' + 'inputWrapperHandler: input cleared after video started');
+        logger.debug('\n' + 'inputWrapperHandler: input cleared after video started');
       }, { once: true });
 
       embedRunVideo(videoId);
@@ -5994,7 +5994,7 @@
      * @param {string} videoSrc - validated video URL/path
      */
     loadVideo(videoSrc) {
-      isDev && logger.info('\n' + `Loading video from: ${videoSrc}`);
+      logger.info('\n' + `Loading video from: ${videoSrc}`);
 
       const event = new CustomEvent('videoLoad', {
         detail: { videoSrc },
@@ -6006,7 +6006,7 @@
       document.addEventListener('videoPlayingStarted', () => {
         this.elements.videoUrlInput.value = '';
         this._toggleClearButton('');
-        isDev && logger.debug('\n' + 'inputWrapperHandler: input cleared after video started');
+        logger.debug('\n' + 'inputWrapperHandler: input cleared after video started');
       }, { once: true });
 
       embedRunVideo(videoSrc);
@@ -6078,7 +6078,7 @@
 
       this.loadPlaylistIndex();
 
-      isDev && logger.info('\n' + 'playlistManager: IOHandler initialized');
+      logger.info('\n' + 'playlistManager: IOHandler initialized');
     }
 
     handleImport() {
@@ -6105,7 +6105,7 @@
 
           if (hasMetaData) {
             const bkupDate = data.backup_date.replace('T', ' ').substring(0, 16);
-            isDev && logger.info('\n' + `import playlist from backup file of date: ${bkupDate}`);
+            logger.info('\n' + `import playlist from backup file of date: ${bkupDate}`);
           }
 
           playlist.forEach(entry => playlistManager._normalizeEntry(entry));
@@ -6116,7 +6116,7 @@
             const newEntries  = playlist.filter(e => !existingIds.has(e.videoId));
             const merged      = existing.concat(newEntries);
             playlistManager.save(merged);
-            isDev && logger.debug('\n' + `merged ${newEntries.length} new items (${playlist.length - newEntries.length} duplicates skipped) from file`);
+            logger.debug('\n' + `merged ${newEntries.length} new items (${playlist.length - newEntries.length} duplicates skipped) from file`);
           } else {
             playlistManager.save(playlist);
           }
@@ -6131,17 +6131,17 @@
               sortSelect.value = 'episode';
             }
             playlistManager.sortPlaylist('episode');
-            isDev && logger.info('\n' + 'playlistManager: series/episode entries detected - auto-sorted by episode');
+            logger.info('\n' + 'playlistManager: series/episode entries detected - auto-sorted by episode');
           }
 
           if (!playlistManager._searchIndex && !playlistManager._loadSearchIndex()) {
-            isDev && logger.info('\n' + 'playlistManager: build search index from scratch');
+            logger.info('\n' + 'playlistManager: build search index from scratch');
             playlistManager.buildSearchIndex();
           }
 
           const overlayExists = document.getElementById(_pid('emptyPlayerOverlay'));
           if (!overlayExists) {
-            isDev && logger.debug('\n' + `Restoring container and overlay for new video`);
+            logger.debug('\n' + `Restoring container and overlay for new video`);
             container.innerHTML = containerHTML;
           }
 
@@ -6162,7 +6162,7 @@
           // list appears immediately (with DEFAULT_POSTER placeholders) and the
           // real thumbnails fill in as each frame is captured.
           playlistManager.generateMissingNativePosters()
-            .catch((e) => { isDev && logger.warn('\n' + `poster backfill (file import) failed: ${e}`); });
+            .catch((e) => { logger.warn('\n' + `poster backfill (file import) failed: ${e}`); });
 
           // claude - Modify J1 VideoPlayer #27
           // Mirror of "Modify J1 VideoPlayer #26" (handleLoadFromServer): when a
@@ -6184,10 +6184,10 @@
           playlistManager._applySortOrder(currentList);
           const firstEntry = currentList[0];
           if (firstEntry && firstEntry.videoId) {
-            isDev && logger.info('\n' + `playlistManager: loading first imported-playlist video in paused state (videoId: ${firstEntry.videoId})`);
+            logger.info('\n' + `playlistManager: loading first imported-playlist video in paused state (videoId: ${firstEntry.videoId})`);
             playlistManager.embedRunVideo(firstEntry.videoId, 'pause');
           } else {
-            isDev && logger.warn('\n' + 'playlistManager: no playable first entry found after playlist file import');
+            logger.warn('\n' + 'playlistManager: no playable first entry found after playlist file import');
           }
 
           const videoTitleElement = document.getElementById('video_title');
@@ -6234,7 +6234,7 @@
       if (serverPlaylistSelect) {
         serverPlaylistSelect.selectedIndex = 0;
         this._toggleServerSelectClear('');
-        isDev && logger.info('\n' + 'playlistManager: server playlist selection cleared');
+        logger.info('\n' + 'playlistManager: server playlist selection cleared');
       }
     }
 
@@ -6264,7 +6264,7 @@
       if (!selectEl) {
         if (attempt <= maxAttempts) {
           const delay = 500 * attempt;
-          isDev && logger.warn('\n' + `loadPlaylistIndex: serverPlaylistSelect not in DOM, retry ${attempt}/${maxAttempts} in ${delay}ms`);
+          logger.warn('\n' + `loadPlaylistIndex: serverPlaylistSelect not in DOM, retry ${attempt}/${maxAttempts} in ${delay}ms`);
           setTimeout(() => this.loadPlaylistIndex(attempt + 1, maxAttempts), delay);
         } else {
           logger.error('\n' + 'loadPlaylistIndex: serverPlaylistSelect element not found after ' + maxAttempts + ' attempts');
@@ -6279,7 +6279,7 @@
         })
         .then(index => {
           if (!Array.isArray(index) || index.length === 0) {
-            isDev && logger.warn('\n' + 'playlist index is empty or not an array');
+            logger.warn('\n' + 'playlist index is empty or not an array');
             return;
           }
 
@@ -6296,14 +6296,14 @@
             selectEl.appendChild(option);
           });
 
-          isDev && logger.debug('\n' + `playlistManager: loaded ${index.length} playlists from index`);
+          logger.debug('\n' + `playlistManager: loaded ${index.length} playlists from index`);
         })
         .catch(err => {
           logger.error('\n' + `playlistManager: failed to load playlist index: ${err}`);
 
           if (attempt < maxAttempts) {
             const delay = 1000 * attempt;
-            isDev && logger.warn('\n' + `loadPlaylistIndex: fetch failed, retry ${attempt}/${maxAttempts} in ${delay}ms`);
+            logger.warn('\n' + `loadPlaylistIndex: fetch failed, retry ${attempt}/${maxAttempts} in ${delay}ms`);
             setTimeout(() => this.loadPlaylistIndex(attempt + 1, maxAttempts), delay);
           } else {
             logger.error('\n' + 'loadPlaylistIndex: all ' + maxAttempts + ' attempts failed - playlist index not loaded');
@@ -6316,12 +6316,12 @@
       const selectedFile              = serverPlaylistSelect ? serverPlaylistSelect.value : '';
 
       if (!selectedFile) {
-        isDev && logger.warn('\n' + 'playlistManager: no server playlist selected');
+        logger.warn('\n' + 'playlistManager: no server playlist selected');
         return;
       }
 
       const url = `${PLAYLIST_URL_BASE}/${selectedFile}`;
-      isDev && logger.info('\n' + `playlistManager: loading server playlist from: ${url}`);
+      logger.info('\n' + `playlistManager: loading server playlist from: ${url}`);
 
       await playlistManager.importFromUrlAsync(url);
 
@@ -6335,11 +6335,11 @@
           sortSelect.value = 'episode';
         }
         playlistManager.sortPlaylist('episode');
-        isDev && logger.debug('\n' + 'playlistManager: series/episode entries detected - auto-sorted by episode');
+        logger.debug('\n' + 'playlistManager: series/episode entries detected - auto-sorted by episode');
       }
 
       if (!playlistManager._searchIndex && !playlistManager._loadSearchIndex()) {
-        isDev && logger.debug('\n' + 'playlistManager: build search index from scratch');
+        logger.debug('\n' + 'playlistManager: build search index from scratch');
         playlistManager.buildSearchIndex();
       }
 
@@ -6347,7 +6347,7 @@
 
       const overlayExists = document.getElementById(_pid('emptyPlayerOverlay'));
       if (!overlayExists) {
-        isDev && logger.debug('\n' + `Restoring container and overlay for new video`);
+        logger.debug('\n' + `Restoring container and overlay for new video`);
         container.innerHTML = containerHTML;
       }
 
@@ -6366,7 +6366,7 @@
       // asynchronously so the list appears immediately and the real thumbnails
       // fill in as each frame is captured off-screen.
       playlistManager.generateMissingNativePosters()
-        .catch((e) => { isDev && logger.warn('\n' + `poster backfill (server load) failed: ${e}`); });
+        .catch((e) => { logger.warn('\n' + `poster backfill (server load) failed: ${e}`); });
 
       // claude - Modify J1 VideoPlayer #26
       // When a playlist is loaded from the server, load the first video of the
@@ -6385,10 +6385,10 @@
       playlistManager._applySortOrder(currentList);
       const firstEntry = currentList[0];
       if (firstEntry && firstEntry.videoId) {
-        isDev && logger.info('\n' + `playlistManager: loading first server-playlist video in paused state (videoId: ${firstEntry.videoId})`);
+        logger.info('\n' + `playlistManager: loading first server-playlist video in paused state (videoId: ${firstEntry.videoId})`);
         playlistManager.embedRunVideo(firstEntry.videoId, 'pause');
       } else {
-        isDev && logger.warn('\n' + 'playlistManager: no playable first entry found after server playlist load');
+        logger.warn('\n' + 'playlistManager: no playable first entry found after server playlist load');
       }
 
       const videoTitleElement = document.getElementById('video_title');
@@ -6448,7 +6448,7 @@
         });
       }
 
-      isDev && logger.info('\n' + 'playlistManager: searchHandler initialized');
+      logger.info('\n' + 'playlistManager: searchHandler initialized');
     }
 
     _debounceSearch(query, delayMs) {
@@ -6527,7 +6527,7 @@
     init() {
       const { titleBar } = this.elements;
       if (!titleBar) {
-        isDev && logger.warn('\n' + 'playlistModeSwitchHandler: .playlist-block-title not found');
+        logger.warn('\n' + 'playlistModeSwitchHandler: .playlist-block-title not found');
         return;
       }
 
@@ -6552,9 +6552,9 @@
           titleBar.appendChild(listModeSwitch);
         }
 
-        isDev && logger.debug('\n' + 'playlistModeSwitchHandler: created dynamic switch');
+        logger.debug('\n' + 'playlistModeSwitchHandler: created dynamic switch');
       } else {
-        isDev && logger.debug('\n' + 'playlistModeSwitchHandler: reusing existing static switch');
+        logger.debug('\n' + 'playlistModeSwitchHandler: reusing existing static switch');
       }
 
       const checkbox = document.getElementById('playlistMode');
@@ -6569,11 +6569,11 @@
         if (e.target.checked) {
           playlistManager._displayMode = 'cards';
           localStorage.setItem('playlistMode', 'cards');
-          isDev && logger.info('\n' + 'playlistModeSwitchHandler: switched to card mode');
+          logger.info('\n' + 'playlistModeSwitchHandler: switched to card mode');
         } else {
           playlistManager._displayMode = 'list';
           localStorage.setItem('playlistMode', 'list');
-          isDev && logger.info('\n' + 'playlistModeSwitchHandler: switched to list mode');
+          logger.info('\n' + 'playlistModeSwitchHandler: switched to list mode');
         }
         playlistManager.renderCurrent();
       });
@@ -6585,7 +6585,7 @@
         listModeSwitch.style.display = 'none';
       }
 
-      isDev && logger.info('\n' + 'playlistModeSwitchHandler: modeSwitchHandler initialized');
+      logger.info('\n' + 'playlistModeSwitchHandler: modeSwitchHandler initialized');
     }
 
   } // END playlistModeSwitchHandler
@@ -6616,7 +6616,7 @@
 
       const { titleBar } = this.elements;
       if (!titleBar) {
-        isDev && logger.warn('\n' + 'playlistMergeSwitchHandler: .playlist-block-title not found');
+        logger.warn('\n' + 'playlistMergeSwitchHandler: .playlist-block-title not found');
         return;
       }
 
@@ -6645,9 +6645,9 @@
           titleBar.appendChild(mergeModeSwitch);
         }
 
-        isDev && logger.debug('\n' + 'playlistMergeSwitchHandler: created dynamic switch');
+        logger.debug('\n' + 'playlistMergeSwitchHandler: created dynamic switch');
       } else {
-        isDev && logger.debug('\n' + 'playlistMergeSwitchHandler: reusing existing static switch');
+        logger.debug('\n' + 'playlistMergeSwitchHandler: reusing existing static switch');
       }
 
       const checkbox = document.getElementById('mergeMode');
@@ -6662,11 +6662,11 @@
         if (e.target.checked) {
           playlistManager._mergeMode = true;
           localStorage.setItem('mergeMode', 'true');
-          isDev && logger.debug('\n' + 'playlistMergeSwitchHandler: merge mode enabled');
+          logger.debug('\n' + 'playlistMergeSwitchHandler: merge mode enabled');
         } else {
           playlistManager._mergeMode = false;
           localStorage.setItem('mergeMode', 'false');
-          isDev && logger.debug('\n' + 'playlistMergeSwitchHandler: merge mode disabled');
+          logger.debug('\n' + 'playlistMergeSwitchHandler: merge mode disabled');
         }
         playlistManager.renderCurrent();
       });
@@ -6678,7 +6678,7 @@
         mergeModeSwitch.style.display = 'none';
       }
 
-      isDev && logger.info('\n' + 'playlistManager: mergeSwitchHandler initialized');
+      logger.info('\n' + 'playlistManager: mergeSwitchHandler initialized');
     }
 
   } // END playlistMergeSwitchHandler
@@ -6710,7 +6710,7 @@
 
       const { titleBar } = this.elements;
       if (!titleBar) {
-        isDev && logger.warn('\n' + 'playlistLoopSwitchHandler: .playlist-block-title not found');
+        logger.warn('\n' + 'playlistLoopSwitchHandler: .playlist-block-title not found');
         return;
       }
 
@@ -6718,7 +6718,7 @@
       pipConfigEnabled  = !!(opts.playlist && opts.playlist.loop && opts.playlist.loop.pip);
 
       if (!loopConfigEnabled) {
-        isDev && logger.debug('\n' + 'playlistLoopSwitchHandler: loop mode disabled by config, skipping init');
+        logger.debug('\n' + 'playlistLoopSwitchHandler: loop mode disabled by config, skipping init');
         return;
       }
 
@@ -6747,9 +6747,9 @@
           titleBar.appendChild(loopModeSwitch);
         }
 
-        isDev && logger.debug('\n' + 'playlistLoopSwitchHandler: created dynamic switch');
+        logger.debug('\n' + 'playlistLoopSwitchHandler: created dynamic switch');
       } else {
-        isDev && logger.debug('\n' + 'playlistLoopSwitchHandler: reusing existing static switch');
+        logger.debug('\n' + 'playlistLoopSwitchHandler: reusing existing static switch');
       }
 
       const checkbox = document.getElementById('loopMode');
@@ -6764,11 +6764,11 @@
         if (e.target.checked) {
           playlistManager._loopEnabled = true;
           localStorage.setItem('playlistLoop', 'true');
-          isDev && logger.debug('\n' + 'playlistLoopSwitchHandler: loop mode enabled');
+          logger.debug('\n' + 'playlistLoopSwitchHandler: loop mode enabled');
         } else {
           playlistManager._loopEnabled = false;
           localStorage.setItem('playlistLoop', 'false');
-          isDev && logger.debug('\n' + 'playlistLoopSwitchHandler: loop mode disabled');
+          logger.debug('\n' + 'playlistLoopSwitchHandler: loop mode disabled');
         }
       });
 
@@ -6785,7 +6785,7 @@
         checkbox.checked = false;
       }
 
-      isDev && logger.info('\n' + 'playlistManager: loopSwitchHandler initialized');
+      logger.info('\n' + 'playlistManager: loopSwitchHandler initialized');
     }
 
   } // END playlistLoopSwitchHandler
@@ -6810,7 +6810,7 @@
     init() {
       const { titleBar } = this.elements;
       if (!titleBar) {
-        isDev && logger.warn('\n' + 'playlistSortHandler: .playlist-block-title not found');
+        logger.warn('\n' + 'playlistSortHandler: .playlist-block-title not found');
         return;
       }
 
@@ -6834,7 +6834,7 @@
 
       if (select) {
         this._ensureOptions(select, canonicalOptions);
-        isDev && logger.debug('\n' + 'playlistSortHandler: reusing existing static <select>');
+        logger.debug('\n' + 'playlistSortHandler: reusing existing static <select>');
       } else {
         select            = document.createElement('select');
         select.id         = 'playlistSortSelect';
@@ -6858,7 +6858,7 @@
       playlistManager._currentSort = sortCriterion;
       select.value = sortCriterion;
 
-      isDev && logger.debug('\n' + `playlistSortHandler: sort criterion restored to "${sortCriterion}" (stored: ${storedSortMode || 'none'})`);
+      logger.debug('\n' + `playlistSortHandler: sort criterion restored to "${sortCriterion}" (stored: ${storedSortMode || 'none'})`);
 
       const playlist = playlistManager.load() || [];
       if (playlist.length > 0) {
@@ -6890,7 +6890,7 @@
         select.style.display = 'none';
       }
 
-      isDev && logger.debug('\n' + 'playlistManager: sortHandler initialized');
+      logger.debug('\n' + 'playlistManager: sortHandler initialized');
     }
 
     _ensureOptions(selectEl, canonical) {
@@ -6905,7 +6905,7 @@
           o.textContent = opt.label;
           selectEl.appendChild(o);
 
-          isDev && logger.debug('\n' + `playlistSortHandler: injected missing option "${opt.value}"`);
+          logger.debug('\n' + `playlistSortHandler: injected missing option "${opt.value}"`);
         }
       });
     }
@@ -7002,7 +7002,7 @@
       }
     }, true);
 
-    isDev && logger.debug('\n' + 'inputValueBackgroundHandler: initialized');
+    logger.debug('\n' + 'inputValueBackgroundHandler: initialized');
   }
 
   // ---------------------------------------------------------------------------
@@ -7011,13 +7011,13 @@
   function navbarSmoothScrollHandler() {
     const navMenu = document.getElementById('navigator_nav_menu');
     if (!navMenu) {
-      isDev && logger.warn('\n' + 'navbarSmoothScrollHandler: navigator_nav_menu not found');
+      logger.warn('\n' + 'navbarSmoothScrollHandler: navigator_nav_menu not found');
       return;
     }
 
     const anchors = navMenu.querySelectorAll('a.nav-link[href^="/#"]');
     if (!anchors.length) {
-      // isDev && logger.warn('\n' +  'navbarSmoothScrollHandler: no same-page anchor links found');
+      // logger.warn('\n' +  'navbarSmoothScrollHandler: no same-page anchor links found');
       return;
     }
 
@@ -7034,12 +7034,12 @@
         if (typeof j1 !== 'undefined' && typeof j1.scrollToAnchor === 'function') {
           j1.scrollToAnchor();
         } else {
-          isDev && logger.warn('\n' +  'navbarSmoothScrollHandler: j1.scrollToAnchor not available');
+          logger.warn('\n' +  'navbarSmoothScrollHandler: j1.scrollToAnchor not available');
         }
       });
     });
 
-    isDev && logger.info('\n' + 'navbarSmoothScrollHandler: registered ' + anchors.length + ' click handler(s)');
+    logger.info('\n' + 'navbarSmoothScrollHandler: registered ' + anchors.length + ' click handler(s)');
   }
 
   // ---------------------------------------------------------------------------
@@ -7077,7 +7077,7 @@
     const container   = document.getElementById(_pid('video_player_container'));
 
     if (!btn || !screen || !container) {
-      isDev && logger.warn('\n' + 'initTogglePlaylistHandler: required element(s) not found — handler skipped');
+      logger.warn('\n' + 'initTogglePlaylistHandler: required element(s) not found — handler skipped');
       return;
     }
 
@@ -7133,11 +7133,11 @@
           img.setAttribute('alt', 'Hide playlist');
         }
 
-        isDev && logger.debug('\n' + 'initTogglePlaylistHandler: playlist panel shown');
+        logger.debug('\n' + 'initTogglePlaylistHandler: playlist panel shown');
       }
     });
 
-    isDev && logger.info('\n' + 'initTogglePlaylistHandler: toggle-playlist click handler registered');
+    logger.info('\n' + 'initTogglePlaylistHandler: toggle-playlist click handler registered');
   }
 
   // ---------------------------------------------------------------------------
@@ -7161,7 +7161,7 @@
     // always in sync with the now-hidden panel.
     _resetPlaylistToggleUI();
 
-    isDev && logger.debug('\n' + 'closePlaylist: playlist panel closed');
+    logger.debug('\n' + 'closePlaylist: playlist panel closed');
   }
 
   // ---------------------------------------------------------------------------
@@ -7223,7 +7223,7 @@
     // to the guard method so the empty-playlist rule is respected.
     playlistManager._updateTogglePlaylistButton();
 
-    isDev && logger.debug('\n' + `closeEditPlaylist: playlist edit screen closed (wasOpen=${wasOpen})`);
+    logger.debug('\n' + `closeEditPlaylist: playlist edit screen closed (wasOpen=${wasOpen})`);
   }
 
   // ---------------------------------------------------------------------------
