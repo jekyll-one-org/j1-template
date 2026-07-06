@@ -109,7 +109,7 @@
   // claude - J1 VideoPlayer MultiInstance #2
   // Module version, exposed as videoPlayer.VERSION (video.js parity:
   // videojs.VERSION). Keep in sync with the file header above.
-  const VERSION = '3.1.55';
+  const VERSION = '3.1.57';
 
   // Page-global one-shot guards for the two page-scoped handlers (see the
   // tagged notes inside those functions).
@@ -2509,7 +2509,9 @@
     // -------------------------------------------------------------------------
 
     initDeleteHandler() {
-      const playlistContainer = document.getElementById(_pid('videoplayer_playlist_parent')) // Fix J1 VideoPlayer #2: corrected ID;
+
+      // Fix J1 VideoPlayer #2: corrected ID
+      const playlistContainer = document.getElementById(_pid('videoplayer_playlist_parent'));
       if (!playlistContainer) return;
 
       // Fix J1 VideoPlayer #5
@@ -2708,7 +2710,9 @@
     }
 
     initPlayHandler() {
-      const playlistContainer = document.getElementById(_pid('videoplayer_playlist_parent')) // Fix J1 VideoPlayer #2: corrected ID;
+
+      // Fix J1 VideoPlayer #2: corrected ID
+      const playlistContainer = document.getElementById(_pid('videoplayer_playlist_parent'));
       if (!playlistContainer) return;
 
       // Fix J1 VideoPlayer #5
@@ -2884,7 +2888,8 @@
     initRateHandler() {
       if (this._rateHandlerInitialized) return;
 
-      const playlistContainer = document.getElementById(_pid('videoplayer_playlist_parent')) // Fix J1 VideoPlayer #2: corrected ID;
+      // Fix J1 VideoPlayer #2: corrected ID
+      const playlistContainer = document.getElementById(_pid('videoplayer_playlist_parent'));
       if (!playlistContainer) return;
 
       this._rateHandlerInitialized = true;
@@ -3220,7 +3225,8 @@
     initEditHandler() {
       if (this._editHandlerInitialized) return;
 
-      const playlistContainer = document.getElementById(_pid('videoplayer_playlist_parent')) // Fix J1 VideoPlayer #2: corrected ID;
+      // Fix J1 VideoPlayer #2: corrected ID;
+      const playlistContainer = document.getElementById(_pid('videoplayer_playlist_parent'))
       if (!playlistContainer) return;
 
       this._editHandlerInitialized = true;
@@ -3243,7 +3249,8 @@
     initInfoLinkHandler() {
       if (this._infoLinkHandlerInitialized) return;
 
-      const playlistContainer = document.getElementById(_pid('videoplayer_playlist_parent')) // Fix J1 VideoPlayer #2: corrected ID;
+      // Fix J1 VideoPlayer #2: corrected ID;
+      const playlistContainer = document.getElementById(_pid('videoplayer_playlist_parent'))
       if (!playlistContainer) return;
 
       this._infoLinkHandlerInitialized = true;
@@ -3260,7 +3267,8 @@
     initVideoLinkHandler() {
       if (this._videoLinkHandlerInitialized) return;
 
-      const playlistContainer = document.getElementById(_pid('videoplayer_playlist_parent')) // Fix J1 VideoPlayer #2: corrected ID;
+      // Fix J1 VideoPlayer #2: corrected ID;
+      const playlistContainer = document.getElementById(_pid('videoplayer_playlist_parent'))
       if (!playlistContainer) return;
 
       this._videoLinkHandlerInitialized = true;
@@ -3311,18 +3319,18 @@
       const self = this;
 
       this._searchIndex = lunr(function () {
-        this.ref('videoId');
-        this.field('title',    { boost: 10 });
-        this.field('author',   { boost: 5 });
-        this.field('category', { boost: 3 });
-        this.field('tags',     { boost: 3 });
         // Claude - J1 videoPlayer optimizations #2 (b)
         // Correctness: the document objects passed to add() below have always
         // carried a `description` property, but the field was never DECLARED
         // via this.field() — and lunr silently ignores undeclared fields at
         // add() time, so descriptions were never indexed and a search for
         // description text returned no hits. Declaring the field makes the
-        // already-supplied data searchable; no add() change needed.
+        // already-supplied data searchable; no add() change needed.        
+        this.ref('videoId');
+        this.field('title',    { boost: 10 });
+        this.field('author',   { boost: 5 });
+        this.field('category', { boost: 3 });
+        this.field('tags',     { boost: 3 });
         this.field('description', { boost: 2 });
         this.field('infoLink');
         this.field('videoLink');
@@ -3580,7 +3588,7 @@
       // show/hide-on-empty behaviour would silently stop working.
       // Original (deprecated, preserved for reference):
       //   const sortSelect = document.getElementById('playlistSortSelect');
-      const sortSelect = document.getElementById(_pid('playlistSortSelect')); // claude - J1 VideoPlayer MultiInstance #4
+      const sortSelect = document.getElementById(_pid('playlistSortSelect'));
       if (!sortSelect) return;
 
       if (!data) data = this._searchResults || this.load() || [];
@@ -3599,7 +3607,7 @@
       // Match the player-scoped id created by playlistModeSwitchHandler.
       // Original (deprecated, preserved for reference):
       //   const listModeSwitch = document.getElementById('playlistModeSwitch');
-      const listModeSwitch = document.getElementById(_pid('playlistModeSwitch')); // claude - J1 VideoPlayer MultiInstance #4
+      const listModeSwitch = document.getElementById(_pid('playlistModeSwitch'));
       if (!listModeSwitch) return;
 
       if (!data) data = this._searchResults || this.load() || [];
@@ -6380,7 +6388,7 @@
             // auto-sort reflects in THIS player's own control.
             // Original (deprecated, preserved for reference):
             //   const sortSelect = document.getElementById('playlistSortSelect');
-            const sortSelect = document.getElementById(_pid('playlistSortSelect')); // claude - J1 VideoPlayer MultiInstance #4
+            const sortSelect = document.getElementById(_pid('playlistSortSelect'));
             if (sortSelect) {
               sortSelect.value = 'episode';
             }
@@ -6590,7 +6598,7 @@
         // Match the player-scoped sort <select> id (server-playlist load path).
         // Original (deprecated, preserved for reference):
         //   const sortSelect = document.getElementById('playlistSortSelect');
-        const sortSelect = document.getElementById(_pid('playlistSortSelect')); // claude - J1 VideoPlayer MultiInstance #4
+        const sortSelect = document.getElementById(_pid('playlistSortSelect'));
         if (sortSelect) {
           sortSelect.value = 'episode';
         }
@@ -6791,9 +6799,9 @@
       // the single-player fallback when no player id is set.
       // Original (deprecated, preserved for reference):
       //   titleBar:       document.querySelector('.playlist-block-title'),
-      const _scope = document.getElementById(_pid('playlist_screen')) || document.getElementById(_pid('playlistBlock')); // claude - J1 VideoPlayer MultiInstance #4
+      const _scope = document.getElementById(_pid('playlist_screen')) || document.getElementById(_pid('playlistBlock'));
       return {
-        titleBar:       _scope ? _scope.querySelector('.playlist-block-title') : document.querySelector('.playlist-block-title'), // claude - J1 VideoPlayer MultiInstance #4
+        titleBar:       _scope ? _scope.querySelector('.playlist-block-title') : document.querySelector('.playlist-block-title'),
         listModeSwitch: null
       };
     }
@@ -6813,7 +6821,7 @@
       // title bar. _pid('playlistModeSwitch') keys the control to this player.
       // Original (deprecated, preserved for reference):
       //   let listModeSwitch = document.getElementById('playlistModeSwitch');
-      let listModeSwitch = document.getElementById(_pid('playlistModeSwitch')); // claude - J1 VideoPlayer MultiInstance #4
+      let listModeSwitch = document.getElementById(_pid('playlistModeSwitch'));
 
       if (!listModeSwitch) {
         listModeSwitch            = document.createElement('div');
@@ -6917,9 +6925,9 @@
       // player 1's title bar and never appeared for later players.
       // Original (deprecated, preserved for reference):
       //   titleBar:        document.querySelector('.playlist-block-title'),
-      const _scope = document.getElementById(_pid('playlist_screen')) || document.getElementById(_pid('playlistBlock')); // claude - J1 VideoPlayer MultiInstance #4
+      const _scope = document.getElementById(_pid('playlist_screen')) || document.getElementById(_pid('playlistBlock'));
       return {
-        titleBar:        _scope ? _scope.querySelector('.playlist-block-title') : document.querySelector('.playlist-block-title'), // claude - J1 VideoPlayer MultiInstance #4
+        titleBar:        _scope ? _scope.querySelector('.playlist-block-title') : document.querySelector('.playlist-block-title'),
         mergeModeSwitch: null
       };
     }
@@ -6940,13 +6948,14 @@
       // Player-scope the merge switch id (see playlistModeSwitchHandler note).
       // Original (deprecated, preserved for reference):
       //   let mergeModeSwitch = document.getElementById('playlistMergeSwitch');
-      let mergeModeSwitch = document.getElementById(_pid('playlistMergeSwitch')); // claude - J1 VideoPlayer MultiInstance #4
+      let mergeModeSwitch = document.getElementById(_pid('playlistMergeSwitch'));
 
       if (!mergeModeSwitch) {
         mergeModeSwitch           = document.createElement('div');
+        // claude - J1 VideoPlayer MultiInstance #4
         // Original (deprecated, preserved for reference):
         //   mergeModeSwitch.id        = 'playlistMergeSwitch';
-        mergeModeSwitch.id        = _pid('playlistMergeSwitch'); // claude - J1 VideoPlayer MultiInstance #4
+        mergeModeSwitch.id        = _pid('playlistMergeSwitch');
         mergeModeSwitch.className = 'switch not-spoken';
         // claude - J1 VideoPlayer MultiInstance #4
         // Player-scope the checkbox id (read back below via _pid('mergeMode')).
@@ -6960,11 +6969,12 @@
           </label>
         `;
 
+        // claude - J1 VideoPlayer MultiInstance #4
         // Original (deprecated, preserved for reference):
         //   const listModeSwitch = document.getElementById('playlistModeSwitch');
         //   const sortSelect     = document.getElementById('playlistSortSelect');
-        const listModeSwitch = document.getElementById(_pid('playlistModeSwitch')); // claude - J1 VideoPlayer MultiInstance #4
-        const sortSelect     = document.getElementById(_pid('playlistSortSelect')); // claude - J1 VideoPlayer MultiInstance #4
+        const listModeSwitch = document.getElementById(_pid('playlistModeSwitch'));
+        const sortSelect     = document.getElementById(_pid('playlistSortSelect'));
 
         if (listModeSwitch && listModeSwitch.nextSibling) {
           titleBar.insertBefore(mergeModeSwitch, listModeSwitch.nextSibling);
@@ -6979,9 +6989,10 @@
         isDev && logger.debug('\n' + 'playlistMergeSwitchHandler: reusing existing static switch');
       }
 
+      // claude - J1 VideoPlayer MultiInstance #4
       // Original (deprecated, preserved for reference):
       //   const checkbox = document.getElementById('mergeMode');
-      const checkbox = document.getElementById(_pid('mergeMode')); // claude - J1 VideoPlayer MultiInstance #4
+      const checkbox = document.getElementById(_pid('mergeMode'));
       if (!checkbox) {
         logger.error('\n' + 'playlistMergeSwitchHandler: checkbox #mergeMode not found');
         return;
@@ -6996,15 +7007,19 @@
         // checkbox id created in init() (fix #4), keeping key and DOM in lockstep.
         if (e.target.checked) {
           playlistManager._mergeMode = true;
+
+          // claude - J1 VideoPlayer MultiInstance #6
           // Original (deprecated, preserved for reference):
           //   localStorage.setItem('mergeMode', 'true');
-          localStorage.setItem(_pid('mergeMode'), 'true'); // claude - J1 VideoPlayer MultiInstance #6
+          localStorage.setItem(_pid('mergeMode'), 'true');
           isDev && logger.debug('\n' + 'playlistMergeSwitchHandler: merge mode enabled');
         } else {
           playlistManager._mergeMode = false;
+
+          // claude - J1 VideoPlayer MultiInstance #6
           // Original (deprecated, preserved for reference):
           //   localStorage.setItem('mergeMode', 'false');
-          localStorage.setItem(_pid('mergeMode'), 'false'); // claude - J1 VideoPlayer MultiInstance #6
+          localStorage.setItem(_pid('mergeMode'), 'false');
           isDev && logger.debug('\n' + 'playlistMergeSwitchHandler: merge mode disabled');
         }
         playlistManager.renderCurrent();
@@ -7038,9 +7053,9 @@
       // Per-player title-bar scoping (see playlistModeSwitchHandler note).
       // Original (deprecated, preserved for reference):
       //   titleBar:       document.querySelector('.playlist-block-title'),
-      const _scope = document.getElementById(_pid('playlist_screen')) || document.getElementById(_pid('playlistBlock')); // claude - J1 VideoPlayer MultiInstance #4
+      const _scope = document.getElementById(_pid('playlist_screen')) || document.getElementById(_pid('playlistBlock'));
       return {
-        titleBar:       _scope ? _scope.querySelector('.playlist-block-title') : document.querySelector('.playlist-block-title'), // claude - J1 VideoPlayer MultiInstance #4
+        titleBar:       _scope ? _scope.querySelector('.playlist-block-title') : document.querySelector('.playlist-block-title'),
         loopModeSwitch: null
       };
     }
@@ -7072,13 +7087,15 @@
       // identifier and is preserved verbatim; only the _pid() scope is added.
       // Original (deprecated, preserved for reference):
       //   let loopModeSwitch = document.getElementById('playlisLoopSwitch');
-      let loopModeSwitch = document.getElementById(_pid('playlisLoopSwitch')); // claude - J1 VideoPlayer MultiInstance #4
+      let loopModeSwitch = document.getElementById(_pid('playlisLoopSwitch'));
 
       if (!loopModeSwitch) {
         loopModeSwitch            = document.createElement('div');
+
+        // claude - J1 VideoPlayer MultiInstance #4
         // Original (deprecated, preserved for reference):
         //   loopModeSwitch.id         = 'playlisLoopSwitch';
-        loopModeSwitch.id         = _pid('playlisLoopSwitch'); // claude - J1 VideoPlayer MultiInstance #4
+        loopModeSwitch.id         = _pid('playlisLoopSwitch');
         loopModeSwitch.className  = 'switch not-spoken';
         // claude - J1 VideoPlayer MultiInstance #4
         // Player-scope the checkbox id (read back below via _pid('loopMode')).
@@ -7092,11 +7109,12 @@
           </label>
         `;
 
+        // claude - J1 VideoPlayer MultiInstance #4
         // Original (deprecated, preserved for reference):
         //   const mergeModeSwitch = document.getElementById('playlistMergeSwitch');
         //   const sortSelect      = document.getElementById('playlistSortSelect');
-        const mergeModeSwitch = document.getElementById(_pid('playlistMergeSwitch')); // claude - J1 VideoPlayer MultiInstance #4
-        const sortSelect      = document.getElementById(_pid('playlistSortSelect')); // claude - J1 VideoPlayer MultiInstance #4
+        const mergeModeSwitch = document.getElementById(_pid('playlistMergeSwitch'));
+        const sortSelect      = document.getElementById(_pid('playlistSortSelect'));
 
         if (mergeModeSwitch && mergeModeSwitch.nextSibling) {
           titleBar.insertBefore(loopModeSwitch, mergeModeSwitch.nextSibling);
@@ -7111,9 +7129,10 @@
         isDev && logger.debug('\n' + 'playlistLoopSwitchHandler: reusing existing static switch');
       }
 
+      // claude - J1 VideoPlayer MultiInstance #4
       // Original (deprecated, preserved for reference):
       //   const checkbox = document.getElementById('loopMode');
-      const checkbox = document.getElementById(_pid('loopMode')); // claude - J1 VideoPlayer MultiInstance #4
+      const checkbox = document.getElementById(_pid('loopMode'));
       if (!checkbox) {
         logger.error('\n' + 'playlistLoopSwitchHandler: checkbox #loopMode not found');
         return;
@@ -7130,13 +7149,13 @@
           playlistManager._loopEnabled = true;
           // Original (deprecated, preserved for reference):
           //   localStorage.setItem('playlistLoop', 'true');
-          localStorage.setItem(_pid('playlistLoop'), 'true'); // claude - J1 VideoPlayer MultiInstance #6
+          localStorage.setItem(_pid('playlistLoop'), 'true');
           isDev && logger.debug('\n' + 'playlistLoopSwitchHandler: loop mode enabled');
         } else {
           playlistManager._loopEnabled = false;
           // Original (deprecated, preserved for reference):
           //   localStorage.setItem('playlistLoop', 'false');
-          localStorage.setItem(_pid('playlistLoop'), 'false'); // claude - J1 VideoPlayer MultiInstance #6
+          localStorage.setItem(_pid('playlistLoop'), 'false');
           isDev && logger.debug('\n' + 'playlistLoopSwitchHandler: loop mode disabled');
         }
       });
@@ -7153,7 +7172,7 @@
           // Player-scope this UI-preference write (see the change-listener note).
           // Original (deprecated, preserved for reference):
           //   localStorage.setItem('playlistLoop', 'false');
-          localStorage.setItem(_pid('playlistLoop'), 'false'); // claude - J1 VideoPlayer MultiInstance #6
+          localStorage.setItem(_pid('playlistLoop'), 'false');
         }
         checkbox.checked = false;
       }
@@ -7178,9 +7197,9 @@
       // Per-player title-bar scoping (see playlistModeSwitchHandler note).
       // Original (deprecated, preserved for reference):
       //   titleBar:   document.querySelector('.playlist-block-title'),
-      const _scope = document.getElementById(_pid('playlist_screen')) || document.getElementById(_pid('playlistBlock')); // claude - J1 VideoPlayer MultiInstance #4
+      const _scope = document.getElementById(_pid('playlist_screen')) || document.getElementById(_pid('playlistBlock'));
       return {
-        titleBar:   _scope ? _scope.querySelector('.playlist-block-title') : document.querySelector('.playlist-block-title'), // claude - J1 VideoPlayer MultiInstance #4
+        titleBar:   _scope ? _scope.querySelector('.playlist-block-title') : document.querySelector('.playlist-block-title'),
         sortSelect: null
       };
     }
@@ -7213,16 +7232,17 @@
       // control in its own title bar (see playlistModeSwitchHandler note).
       // Original (deprecated, preserved for reference):
       //   let select = document.getElementById('playlistSortSelect');
-      let select = document.getElementById(_pid('playlistSortSelect')); // claude - J1 VideoPlayer MultiInstance #4
+      let select = document.getElementById(_pid('playlistSortSelect'));
 
       if (select) {
         this._ensureOptions(select, canonicalOptions);
         isDev && logger.debug('\n' + 'playlistSortHandler: reusing existing static <select>');
       } else {
         select            = document.createElement('select');
+        // claude - J1 VideoPlayer MultiInstance #4
         // Original (deprecated, preserved for reference):
         //   select.id         = 'playlistSortSelect';
-        select.id         = _pid('playlistSortSelect'); // claude - J1 VideoPlayer MultiInstance #4
+        select.id         = _pid('playlistSortSelect');
         select.className  = 'playlist-sort-select';
         select.title      = 'Sort playlist';
         select.setAttribute('aria-label', 'Sort playlist');
@@ -7245,7 +7265,7 @@
       // series identifier and is preserved verbatim; only the _pid() scope is added.)
       // Original (deprecated, preserved for reference):
       //   const storedSortMode = localStorage.getItem('searchMode');
-      const storedSortMode = localStorage.getItem(_pid('searchMode')); // claude - J1 VideoPlayer MultiInstance #6
+      const storedSortMode = localStorage.getItem(_pid('searchMode'));
       const sortCriterion  = storedSortMode || playlistManager._currentSort || 'watchDate';
 
       playlistManager._currentSort = sortCriterion;
@@ -7708,12 +7728,12 @@
   // below. Every original line follows, commented out and unchanged.
   // ===========================================================================
   //   // claude - J1 VideoPlayer MultiInstance #1
-  //   // ===========================================================================
+  //   // ======================================================================
   //   // Module (registry) API — this is what the UMD wrapper exports as
   //   // `videoPlayer` (browser global) / module.exports / AMD.
-  //   // ===========================================================================
+  //   // ======================================================================
   //
-  //   // ---------------------------------------------------------------------------
+  //   // ----------------------------------------------------------------------
   //   // createInstance
   //   //
   //   // Returns the instance registered under instanceID, creating it on first
@@ -7726,7 +7746,7 @@
   //   //
   //   // @param  {string} instanceID - player id; '' selects the default instance
   //   // @return {Object}            - the per-instance API
-  //   // ---------------------------------------------------------------------------
+  //   // ----------------------------------------------------------------------
   //   function createInstance(instanceID = '') {
   //     const key = String(instanceID || '');
   //     if (_instances.has(key)) {
@@ -7737,17 +7757,17 @@
   //     return instance;
   //   }
   //
-  //   // ---------------------------------------------------------------------------
+  //   // ----------------------------------------------------------------------
   //   // getInstance
   //   //
   //   // Read-only lookup: returns the instance registered under instanceID or
   //   // null when it has not been created yet (never creates).
-  //   // ---------------------------------------------------------------------------
+  //   // ----------------------------------------------------------------------
   //   function getInstance(instanceID = '') {
   //     return _instances.get(String(instanceID || '')) || null;
   //   }
   //
-  //   // ---------------------------------------------------------------------------
+  //   // ----------------------------------------------------------------------
   //   // hasInstance / listInstances / removeInstance
   //   //
   //   // Registry housekeeping. removeInstance() only drops the registry
@@ -7755,7 +7775,7 @@
   //   // rebuild the player DOM); it does NOT tear down DOM listeners or dispose
   //   // the video.js player of the removed instance — a full destroy() lifecycle
   //   // is out of scope for MultiInstance #1 (the singleton had none either).
-  //   // ---------------------------------------------------------------------------
+  //   // ----------------------------------------------------------------------
   //   function hasInstance(instanceID = '') {
   //     return _instances.has(String(instanceID || ''));
   //   }
@@ -7768,7 +7788,7 @@
   //     return _instances.delete(String(instanceID || ''));
   //   }
   //
-  //   // ---------------------------------------------------------------------------
+  //   // ----------------------------------------------------------------------
   //   // Default (legacy) instance
   //   //
   //   // Created lazily under the empty id '' on first access of any legacy
@@ -7784,7 +7804,7 @@
   //   // own init (setAdapterOptions / handler construction), so the effective
   //   // ordering is unchanged; pages that never touch the module now simply pay
   //   // no cost at all.
-  //   // ---------------------------------------------------------------------------
+  //   // ----------------------------------------------------------------------
   //   let _defaultInstance = null;
   //
   //   function _getDefaultInstance() {
@@ -7803,7 +7823,7 @@
   //     getDefaultInstance:   _getDefaultInstance
   //   };
   //
-  //   // ---------------------------------------------------------------------------
+  //   // ----------------------------------------------------------------------
   //   // Backward-compatible legacy surface
   //   //
   //   // Every member of the former singleton API is mirrored on the module object
@@ -7811,7 +7831,7 @@
   //   // adapter code — `videoPlayer.playlistManager.…`,
   //   // `new videoPlayer.playlistIOHandler({…})`, `videoPlayer.closePlaylist()`,
   //   // etc. — keeps working with zero changes on single-player pages.
-  //   // ---------------------------------------------------------------------------
+  //   // ----------------------------------------------------------------------
   //   const LEGACY_INSTANCE_KEYS = [
   //     'playlistManager',
   //     'playlistIOHandler',
@@ -7961,11 +7981,11 @@
   videoPlayer.VideoPlayer = VideoPlayer;                // instance class export
   videoPlayer.players     = VideoPlayer.players;        // live registry reference
 
-  videoPlayer.getPlayer = function (playerId = '') {    // videojs.getPlayer(id)
+  videoPlayer.getPlayer = function (playerId = '') {
     return VideoPlayer.players[String(playerId || '')] || null;
   };
 
-  videoPlayer.getPlayers = function () {                // videojs.getPlayers()
+  videoPlayer.getPlayers = function () {
     return VideoPlayer.players;
   };
 
@@ -7979,23 +7999,29 @@
   // the ambient DEFAULT instance ('' auto-creation via property getters) is
   // intentionally NOT carried over — it caused the multi-player failure.
   // ---------------------------------------------------------------------------
-  videoPlayer.createInstance = function (instanceID = '') {   // deprecated -> videoPlayer(id)
+
+  // deprecated -> videoPlayer(id)
+  videoPlayer.createInstance = function (instanceID = '') {
     return videoPlayer(instanceID);
   };
 
-  videoPlayer.getInstance = function (instanceID = '') {      // deprecated -> getPlayer(id)
+   // deprecated -> getPlayer(id)
+  videoPlayer.getInstance = function (instanceID = '') {
     return videoPlayer.getPlayer(instanceID);
   };
 
-  videoPlayer.hasInstance = function (instanceID = '') {      // deprecated -> !!getPlayer(id)
+  // deprecated -> !!getPlayer(id)
+  videoPlayer.hasInstance = function (instanceID = '') { 
     return !!videoPlayer.getPlayer(instanceID);
   };
 
-  videoPlayer.listInstances = function () {                   // deprecated -> Object.keys(players)
+  // deprecated -> Object.keys(players)
+  videoPlayer.listInstances = function () {
     return Object.keys(VideoPlayer.players);
   };
 
-  videoPlayer.removeInstance = function (instanceID = '') {   // deprecated -> vp.dispose()
+  // deprecated -> vp.dispose()
+  videoPlayer.removeInstance = function (instanceID = '') {
     const vp = videoPlayer.getPlayer(instanceID);
     if (!vp) { return false; }
     vp.dispose();

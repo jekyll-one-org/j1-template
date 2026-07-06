@@ -207,6 +207,9 @@ j1.adapter.videoPlayer = ((j1, window) => {
       videoPlayers        = $.extend({},   {{videoplayer_control  | replace: 'nil', 'null' | replace: '=>', ':' }});
       videoPlayerOptions  = $.extend(true, {}, videoPlayerDefaults, videoPlayerSettings);
 
+      // update environment setting
+      videoPlayerOptions.env = env;
+
       // Expose the merged options on the adapter object so the module can
       // read them via  j1.adapter.videoPlayer.videoPlayerOptions.
       //

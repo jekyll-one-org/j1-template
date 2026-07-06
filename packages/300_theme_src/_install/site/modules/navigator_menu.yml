@@ -1,5 +1,5 @@
 # ------------------------------------------------------------------------------
-# ~/_data/modules/j1_navigator_menu.yml (development)
+# ~/_data/modules/j1_navigator_menu.yml
 # Configuration of the J1 NAV Module for the main navigation bar
 #
 # Product/Info:
@@ -76,14 +76,6 @@
     - title:                            Where to go
       href:                             /pages/public/learn/where_to_go/
       icon:                             foot-print
-
-#   - title:                            Core Web Vitals
-#     href:                             /pages/public/learn/core_web_vitals/
-#     icon:                             quadcopter
-#
-#   - title:                            BS Sass Variables
-#     href:                             /pages/public/learn/bs_sass_variables/
-#     icon:                             code-tags
 
     # --------------------------------------------------------------------------
     # Collections
@@ -177,18 +169,6 @@
               target:                   _blank
 
 # ------------------------------------------------------------------------------
-# TopLevel item FEATURES
-#
-# - item:                                 Features
-#   href:                                 /#panel_home_intro
-
-# ------------------------------------------------------------------------------
-# TopLevel item BLOG
-#
-# - item:                                 Blog
-#   href:                                 /#home_news_panel
-
-# ------------------------------------------------------------------------------
 # Menu BLOG
 #
 - item:                                 Blog
@@ -206,81 +186,6 @@
     - title:                            Archive
       href:                             /pages/public/blog/navigator/archive/allview/
       icon:                             archive
-
-# ------------------------------------------------------------------------------
-# Menu MANUAL
-#
-- item:                                 Manual
-  sublevel:
-
-  # - title:                            Where to go
-  #   href:                             /pages/public/manuals/where_to_go/
-  #   icon:                             foot-print
-
-    # --------------------------------------------------------------------------
-    # Modules
-    #
-    - title:                            Modules
-      icon:                             alpha-m-box
-      dropdown:
-
-        - title:                        Amplitude
-          href:                         /pages/public/manuals/amplitude/amplitude_api/
-          icon:                         speaker
-
-        - title:                        Swiper
-          href:                         /pages/public/manual/module/carousel/swiper/
-          icon:                         view-carousel 
-
-    #  - title:                         Galleries
-    #    href:                          /pages/public/manuals/modules/gallery/
-    #    icon:                          view-dashboard-variant
-
-        - title:                        Lightboxes
-          icon:                         alpha-l-box
-          dropdown:
-
-            - title:                    Lightbox v3
-              href:                     /pages/public/manual/module/lightboxes/lightbox/
-              icon:                     flashlight
-            - title:                    PhotoSwipe V5
-              href:                     /pages/public/manual/module/lightboxes/photoswipe/
-              icon:                     flashlight
-            - title:                    lightGallery V2
-              href:                     /pages/public/manual/module/lightboxes/lightgallery/
-              icon:                     flashlight
-
-# ------------------------------------------------------------------------------
-# Menu TEST
-#
-- item:                                 Test
-  sublevel:
-
-    - title:                            Video player
-      href:                             /pages/public/tools/test/videoPlayer/
-      icon:                             video
-
-# ------------------------------------------------------------------------------
-# Menu CLAUDE AI
-#
-- item:                                 Chat
-  sublevel:
-
-    - title:                            ChatBot
-      icon:                             robot
-      href:                             /pages/public/tools/claudeAI/chat/
-
-    - title:                            Knowledge Base
-      icon:                             cog
-      href:                             /pages/public/tools/claudeAI/kb/
-
-    - title:                            Chat Help
-      icon:                             information-variant
-      href:                             /pages/public/tools/claudeAI/chatHelp/
-
-    - title:                            Knowledge Base Help
-      icon:                             information-variant
-      href:                             /pages/public/tools/claudeAI/kbHelp/
 
 # ------------------------------------------------------------------------------
 # Menu ONLINE
