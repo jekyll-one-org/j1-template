@@ -58,7 +58,7 @@ defaults:
   playlist_url_base:                    /assets/data/apps/videoPlayer/playlists/lists
 
   smoothScroll:
-    enabled:                            false
+    enabled:                            true
 
   toolbox:
     enabled:                            false

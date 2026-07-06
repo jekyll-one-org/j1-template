@@ -224,6 +224,10 @@
       icon:                             alpha-m-box
       dropdown:
 
+        - title:                        J1 VideoPlayer
+          href:                         /pages/public/manuals/videoplayer/videoplayer_api/
+          icon:                         video
+
         - title:                        Amplitude
           href:                         /pages/public/manuals/amplitude/amplitude_api/
           icon:                         speaker

@@ -807,12 +807,12 @@
       // (default instance) _pid() returns the bare key, so single-player behaviour
       // is unchanged. Mirrors the STORAGE_KEY/INDEX_KEY namespacing of #40.
       // Original (deprecated, preserved for reference):
-      //   this._displayMode                   = localStorage.getItem('playlistMode') || 'cards';
-      //   this._mergeMode                     = localStorage.getItem('mergeMode') === 'true';
-      //   this._loopEnabled                   = localStorage.getItem('playlistLoop') === 'true';
-      this._displayMode                   = localStorage.getItem(_pid('playlistMode')) || 'cards';  // claude - J1 VideoPlayer MultiInstance #6
-      this._mergeMode                     = localStorage.getItem(_pid('mergeMode')) === 'true';      // claude - J1 VideoPlayer MultiInstance #6
-      this._loopEnabled                   = localStorage.getItem(_pid('playlistLoop')) === 'true';   // claude - J1 VideoPlayer MultiInstance #6
+//    this._displayMode                   = localStorage.getItem('playlistMode') || 'cards';
+//    this._mergeMode                     = localStorage.getItem('mergeMode') === 'true';
+//    this._loopEnabled                   = localStorage.getItem('playlistLoop') === 'true';
+      this._displayMode                   = localStorage.getItem(_pid('playlistMode')) || 'list'; // jadams
+      this._mergeMode                     = localStorage.getItem(_pid('mergeMode')) === 'true';
+      this._loopEnabled                   = localStorage.getItem(_pid('playlistLoop')) === 'true';
       this._escapeHtmlEl                  = document.createElement('div');
       this._loopSwitchInitialized         = false;
 
@@ -3616,7 +3616,7 @@
       // Match the player-scoped id created by playlistMergeSwitchHandler.
       // Original (deprecated, preserved for reference):
       //   const mergeModeSwitch = document.getElementById('playlistMergeSwitch');
-      const mergeModeSwitch = document.getElementById(_pid('playlistMergeSwitch')); // claude - J1 VideoPlayer MultiInstance #4
+      const mergeModeSwitch = document.getElementById(_pid('playlistMergeSwitch'));
       if (!mergeModeSwitch) return;
 
       if (!data) data = this._searchResults || this.load() || [];
@@ -3634,7 +3634,7 @@
       // (switch: _pid('playlisLoopSwitch'), checkbox: _pid('loopMode')).
       // Original (deprecated, preserved for reference):
       //   const loopSwitch = document.getElementById('playlisLoopSwitch');
-      const loopSwitch = document.getElementById(_pid('playlisLoopSwitch')); // claude - J1 VideoPlayer MultiInstance #4
+      const loopSwitch = document.getElementById(_pid('playlisLoopSwitch'));
       if (!loopSwitch) return;
 
       if (!loopConfigEnabled) {
@@ -3647,11 +3647,11 @@
           // matches the key read back in the constructor and the loop checkbox id.
           // Original (deprecated, preserved for reference):
           //   localStorage.setItem('playlistLoop', 'false');
-          localStorage.setItem(_pid('playlistLoop'), 'false'); // claude - J1 VideoPlayer MultiInstance #6
+          localStorage.setItem(_pid('playlistLoop'), 'false');
         }
         // Original (deprecated, preserved for reference):
         //   const checkbox = document.getElementById('loopMode');
-        const checkbox = document.getElementById(_pid('loopMode')); // claude - J1 VideoPlayer MultiInstance #4
+        const checkbox = document.getElementById(_pid('loopMode'));
         if (checkbox) checkbox.checked = false;
         return;
       }
@@ -3673,12 +3673,13 @@
           // Player-scope this UI-preference write (see the constructor-read note).
           // Original (deprecated, preserved for reference):
           //   localStorage.setItem('playlistLoop', 'false');
-          localStorage.setItem(_pid('playlistLoop'), 'false'); // claude - J1 VideoPlayer MultiInstance #6
+          localStorage.setItem(_pid('playlistLoop'), 'false');
           isDev && logger.debug('\n' + '_updateLoopSwitchVisibility: loop mode disabled (not all items are series)');
         }
+        // claude - J1 VideoPlayer MultiInstance #4
         // Original (deprecated, preserved for reference):
         //   const checkbox = document.getElementById('loopMode');
-        const checkbox = document.getElementById(_pid('loopMode')); // claude - J1 VideoPlayer MultiInstance #4
+        const checkbox = document.getElementById(_pid('loopMode'));
         if (checkbox) {
           checkbox.checked = false;
         }
@@ -3687,16 +3688,16 @@
 
     _updateSortOptionsVisibility(selectEl, data) {
       const fieldTests = {
-        title:       (d) => d.some(e => e.title       && e.title.trim()    !== ''),
-        author:      (d) => d.some(e => e.author      && e.author.trim()   !== ''),
+        title:       (d) => d.some(e => e.title       && e.title.trim()       !== ''),
+        author:      (d) => d.some(e => e.author      && e.author.trim()      !== ''),
         duration:    (d) => d.some(e => e.duration    && e.duration > 0),
         durationAsc: (d) => d.some(e => e.duration    && e.duration > 0),
         rating:      (d) => d.some(e => e.rating      && e.rating > 0),
-        category:    (d) => d.some(e => e.category    && e.category.trim() !== ''),
+        category:    (d) => d.some(e => e.category    && e.category.trim()    !== ''),
         description: (d) => d.some(e => e.description && e.description.trim() !== ''),
-        type:        (d) => d.some(e => e.type        && e.type.trim()     !== ''),
-        issueDate:   (d) => d.some(e => e.issueDate   && e.issueDate.trim() !== ''),
-        issueDateAsc:(d) => d.some(e => e.issueDate   && e.issueDate.trim() !== ''),
+        type:        (d) => d.some(e => e.type        && e.type.trim()        !== ''),
+        issueDate:   (d) => d.some(e => e.issueDate   && e.issueDate.trim()   !== ''),
+        issueDateAsc:(d) => d.some(e => e.issueDate   && e.issueDate.trim()   !== ''),
         episode:     (d) => d.some(e => e.series),
       };
 
@@ -5200,7 +5201,9 @@
   function doPostOnPlaying(state) {
     const titleElement = document.getElementById(_pid("video_title"));
     const videoTitleElement = document.getElementById('video_title');    
+//  const videoTitleElement = document.getElementById(_pid('videoplayer_playlist_parent'));    
     const textEl       = document.getElementById(_pid('video_title_text'));
+
 
     isDev && logger.debug('\n' + `do post processing on state: ${vjsStateEventNameMap[state]}`);
 
@@ -5436,9 +5439,12 @@
       }
     }
 
-    if (videoTitleElement) {
-      scrollToElement(videoTitleElement);
-    }
+    // jadams, 2026-07-05: disable scrolling on playimg video
+    //
+    // if (videoTitleElement) {
+    //   scrollToElement(videoTitleElement);
+    // }
+
   }
 
   /**
@@ -6438,7 +6444,9 @@
             isDev && logger.warn('\n' + 'playlistManager: no playable first entry found after playlist file import');
           }
 
-          const videoTitleElement = document.getElementById('video_title');
+          // document.getElementById(_pid('playlistSortSelect')); 
+          const videoTitleElement = document.getElementById(_pid('videoplayer_playlist_parent'));
+          // const videoTitleElement = document.getElementById('video_title');
           if (videoTitleElement) {
             scrollToElement(videoTitleElement);
           }
@@ -6643,7 +6651,8 @@
         isDev && logger.warn('\n' + 'playlistManager: no playable first entry found after server playlist load');
       }
 
-      const videoTitleElement = document.getElementById('video_title');
+      // const videoTitleElement = document.getElementById('video_title');
+      const videoTitleElement = document.getElementById(_pid('videoplayer_playlist_parent'));
       if (videoTitleElement) {
         scrollToElement(videoTitleElement);
       }
@@ -6808,10 +6817,12 @@
 
       if (!listModeSwitch) {
         listModeSwitch            = document.createElement('div');
+        // claude - J1 VideoPlayer MultiInstance #4
         // Original (deprecated, preserved for reference):
-        //   listModeSwitch.id         = 'playlistModeSwitch';
-        listModeSwitch.id         = _pid('playlistModeSwitch'); // claude - J1 VideoPlayer MultiInstance #4
+  //    listModeSwitch.id         = 'playlistModeSwitch';
+        listModeSwitch.id         = _pid('playlistModeSwitch');
         listModeSwitch.className  = 'switch not-spoken';
+
         // claude - J1 VideoPlayer MultiInstance #4
         // Player-scope the checkbox id too (it is read back below via
         // getElementById(_pid('playlistMode'))). The label wraps the input, so
@@ -6826,9 +6837,10 @@
           </label>
         `;
 
+        // claude - J1 VideoPlayer MultiInstance #4
         // Original (deprecated, preserved for reference):
-        //   const sortSelect = document.getElementById('playlistSortSelect');
-        const sortSelect = document.getElementById(_pid('playlistSortSelect')); // claude - J1 VideoPlayer MultiInstance #4
+//      const sortSelect = document.getElementById('playlistSortSelect');
+        const sortSelect = document.getElementById(_pid('playlistSortSelect'));
         if (sortSelect) {
           titleBar.insertBefore(listModeSwitch, sortSelect);
         } else {
@@ -6840,14 +6852,16 @@
         isDev && logger.debug('\n' + 'playlistModeSwitchHandler: reusing existing static switch');
       }
 
+      // claude - J1 VideoPlayer MultiInstance #4
       // Original (deprecated, preserved for reference):
-      //   const checkbox = document.getElementById('playlistMode');
-      const checkbox = document.getElementById(_pid('playlistMode')); // claude - J1 VideoPlayer MultiInstance #4
+//    const checkbox = document.getElementById('playlistMode');
+      const checkbox = document.getElementById(_pid('playlistMode'));
       if (!checkbox) {
         logger.error('\n' + 'playlistModeSwitchHandler: checkbox #playlistMode not found');
         return;
       }
 
+      // jadams
       checkbox.checked = (playlistManager._displayMode === 'cards');
 
       checkbox.addEventListener('change', (e) => {
@@ -6857,15 +6871,17 @@
         // checkbox id created in init() (fix #4), keeping key and DOM in lockstep.
         if (e.target.checked) {
           playlistManager._displayMode = 'cards';
+          // claude - J1 VideoPlayer MultiInstance #6
           // Original (deprecated, preserved for reference):
-          //   localStorage.setItem('playlistMode', 'cards');
-          localStorage.setItem(_pid('playlistMode'), 'cards'); // claude - J1 VideoPlayer MultiInstance #6
+//        localStorage.setItem('playlistMode', 'cards');
+          localStorage.setItem(_pid('playlistMode'), 'cards');
           isDev && logger.info('\n' + 'playlistModeSwitchHandler: switched to card mode');
         } else {
           playlistManager._displayMode = 'list';
+          // claude - J1 VideoPlayer MultiInstance #6
           // Original (deprecated, preserved for reference):
-          //   localStorage.setItem('playlistMode', 'list');
-          localStorage.setItem(_pid('playlistMode'), 'list'); // claude - J1 VideoPlayer MultiInstance #6
+//        localStorage.setItem('playlistMode', 'list');
+          localStorage.setItem(_pid('playlistMode'), 'list');
           isDev && logger.info('\n' + 'playlistModeSwitchHandler: switched to list mode');
         }
         playlistManager.renderCurrent();

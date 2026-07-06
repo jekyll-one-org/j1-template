@@ -50,8 +50,8 @@ settings:
 
         # Playlists are merged into the instance's localStorage on page load.
         # Relative filenames are resolved against playlist_url_base.
-#       preload:                        []
-        preload:                        [ tinydesk-concerts.json ]
+        preload:                        []
+#       preload:                        [ tinydesk-concerts.json ]
 
         cards:
           perRow:                       4
@@ -80,6 +80,30 @@ settings:
 
         cards:
           perRow:                       3
+
+    # --------------------------------------------------------------------------
+    # Player 3 – Tiny Desk Concerts
+    #
+    - player:
+      enabled:                          true
+
+      # GENERAL options
+      #   
+      id:                               player_tiny_desk_concerts
+      description:                      NPR Tiny Desk Concerts
+
+      videoJS:
+        autoStart:                      true
+
+      toolbox:
+        enabled:                        false
+
+      playlist:
+#       preload:                        []
+        preload:                        [ tinydesk-concerts.json ]
+
+        cards:
+          perRow:                       4
 
 # ------------------------------------------------------------------------------
 # END config

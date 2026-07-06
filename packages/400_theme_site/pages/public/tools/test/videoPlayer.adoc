@@ -54,21 +54,14 @@ resource_options:
 // Page content
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 [role="dropcap"]
-SkipAd embeds an excellent video player to block all ads on YouTube
-videos instantly for a better viewing experience. No more pre-roll,
-mid-roll, or overlay ads.
+J1 VideoPlayer a complete video player engine built on top of VideoJS.
+It gives every video the same good-looking, skinnable player, and it adds
+a full playlist on top: a searchable, sortable list of videos that the
+viewer can play, rate, and continue from where they left off. It plays two
+kinds of video: native videos and YouTube videos.
 
 // Include sub-documents (if any)
 // -----------------------------------------------------------------------------
-// [role="mt-5"]
-// == Video player
-
-// // .Local Video over VideoJS
-// // videojs::/assets/video//html5/peck_pocketed.mp4[poster="/assets/image/icon/videojs/videojs-poster.png", role="mb-5"]
-
-// Enjoy watching the playlist.
-
-
 [role="mt-5"]
 == Tiny Desk Concerts
 
@@ -82,18 +75,18 @@ pop-culture hit.
 videoPlayer::player_1[role="mb-5"]
 
 
-[role="mt-4"]
-== Carpool Karaoke
+// [role="mt-4"]
+// == Carpool Karaoke
 
-Carpool Karaoke was one of the most successful and widely distributed viral
-video formats in modern television history. It originally started as a
-recurring segment on the American late-night show The Late Late Show with
-James Corden on CBS. 
+// Carpool Karaoke was one of the most successful and widely distributed viral
+// video formats in modern television history. It originally started as a
+// recurring segment on the American late-night show The Late Late Show with
+// James Corden on CBS. 
 
-Host James Corden drives around town (usually in Los Angeles or London) with
-world-famous musicians and celebrities, conducting personal interviews and
-singing along to the car radio with their greatest hits.
+// Host James Corden drives around town (usually in Los Angeles or London) with
+// world-famous musicians and celebrities, conducting personal interviews and
+// singing along to the car radio with their greatest hits.
 
-.Carpool Karaoke
-videoPlayer::player_2[role="mb-5"]
+// .Carpool Karaoke
+// videoPlayer::player_2[role="mb-5"]
 

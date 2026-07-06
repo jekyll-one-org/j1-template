@@ -359,7 +359,6 @@ j1.adapter.videoPlayer = ((j1, window) => {
       _this.setState('data_loaded');
     }, // END loadPlayerHTML
 
-
     // -------------------------------------------------------------------------
     // claude - Unique J1 VideoPlayer #1
     // initPlayerUiEvents(playerId)
@@ -729,13 +728,14 @@ j1.adapter.videoPlayer = ((j1, window) => {
       //    consistent, adapter-sourced values.
       //
       try {
+        // claude - J1 VideoPlayer MultiInstance #3
         // Original (deprecated, preserved for reference):
         // videoPlayer.playlistManager.setAdapterOptions(options);
-        vp.playlistManager.setAdapterOptions(options);  // claude - J1 VideoPlayer MultiInstance #3
+        vp.playlistManager.setAdapterOptions(options);
         // claude - fixed Unique J1 VideoPlayer #2, z.B. 'player_1'
         // Original (deprecated, preserved for reference):
         // videoPlayer.playlistManager.setPlayerID(playerId);
-        vp.playlistManager.setPlayerID(playerId);  // claude - J1 VideoPlayer MultiInstance #3
+        vp.playlistManager.setPlayerID(playerId);
 
         logger.debug('\n' + 'initHandlers: setAdapterOptions — OK');
       } catch (e) {
@@ -746,9 +746,10 @@ j1.adapter.videoPlayer = ((j1, window) => {
       //
       if (options.playlist && options.playlist.enabled) {
         try {
+          // claude - J1 VideoPlayer MultiInstance #3
           // Original (deprecated, preserved for reference):
           // new videoPlayer.playlistIOHandler(options);
-          new vp.playlistIOHandler(options);  // claude - J1 VideoPlayer MultiInstance #3
+          new vp.playlistIOHandler(options);
           logger.debug('\n' + 'initHandlers: playlistIOHandler — OK');
         } catch (e) {
           logger.error('\n' + 'initHandlers: playlistIOHandler failed: ' + e);
@@ -775,12 +776,13 @@ j1.adapter.videoPlayer = ((j1, window) => {
           if (playlistParent) {
             playlistParent.addEventListener('playlist-play', (e) => {
               const videoId = e.detail && e.detail.videoId;
+              // claude - J1 VideoPlayer MultiInstance #3
               // Original (deprecated, preserved for reference):
               // if (videoId && typeof videoPlayer.loadAndPlay === 'function') {
-              if (videoId && typeof vp.loadAndPlay === 'function') {  // claude - J1 VideoPlayer MultiInstance #3
+              if (videoId && typeof vp.loadAndPlay === 'function') {
                 // Original (deprecated, preserved for reference):
                 // videoPlayer.loadAndPlay(videoId);
-                vp.loadAndPlay(videoId);  // claude - J1 VideoPlayer MultiInstance #3
+                vp.loadAndPlay(videoId);
               }
             });
             logger.debug('\n' + 'initHandlers: initPlayHandler (event listener) [' + playerId + '] — OK');
@@ -808,12 +810,13 @@ j1.adapter.videoPlayer = ((j1, window) => {
           if (playlistParent) {
             playlistParent.addEventListener('playlist-delete', (e) => {
               const videoId = e.detail && e.detail.videoId;
+              // claude - J1 VideoPlayer MultiInstance #3
               // Original (deprecated, preserved for reference):
               // if (videoId && typeof videoPlayer.deleteEntry === 'function') {
-              if (videoId && typeof vp.deleteEntry === 'function') {  // claude - J1 VideoPlayer MultiInstance #3
+              if (videoId && typeof vp.deleteEntry === 'function') {
                 // Original (deprecated, preserved for reference):
                 // videoPlayer.deleteEntry(videoId);
-                vp.deleteEntry(videoId);  // claude - J1 VideoPlayer MultiInstance #3
+                vp.deleteEntry(videoId);
               }
             });
             logger.debug('\n' + 'initHandlers: initDeleteHandler (event listener) [' + playerId + '] — OK');
@@ -832,9 +835,11 @@ j1.adapter.videoPlayer = ((j1, window) => {
       if (options.playlist && options.playlist.enabled &&
           options.playlist.search && options.playlist.search.enabled) {
         try {
+
+          // claude - J1 VideoPlayer MultiInstance #3
           // Original (deprecated, preserved for reference):
           // new videoPlayer.playlistSearchHandler();
-          new vp.playlistSearchHandler();  // claude - J1 VideoPlayer MultiInstance #3
+          new vp.playlistSearchHandler();
           logger.debug('\n' + 'initHandlers: playlistSearchHandler — OK');
         } catch (e) {
           logger.error('\n' + 'initHandlers: playlistSearchHandler failed: ' + e);
@@ -848,9 +853,10 @@ j1.adapter.videoPlayer = ((j1, window) => {
       if (options.playlist && options.playlist.enabled &&
           options.playlist.modeSwitch && options.playlist.modeSwitch.enabled) {
         try {
+          // claude - J1 VideoPlayer MultiInstance #3
           // Original (deprecated, preserved for reference):
           // new videoPlayer.playlistModeSwitchHandler(options);
-          new vp.playlistModeSwitchHandler(options);  // claude - J1 VideoPlayer MultiInstance #3
+          new vp.playlistModeSwitchHandler(options);
           logger.debug('\n' + 'initHandlers: playlistModeSwitchHandler — OK');
         } catch (e) {
           logger.error('\n' + 'initHandlers: playlistModeSwitchHandler failed: ' + e);
@@ -864,9 +870,10 @@ j1.adapter.videoPlayer = ((j1, window) => {
       if (options.playlist && options.playlist.enabled &&
           options.playlist.mergeSwitch && options.playlist.mergeSwitch.enabled) {
         try {
+          // claude - J1 VideoPlayer MultiInstance #3
           // Original (deprecated, preserved for reference):
           // new videoPlayer.playlistMergeSwitchHandler(options);
-          new vp.playlistMergeSwitchHandler(options);  // claude - J1 VideoPlayer MultiInstance #3
+          new vp.playlistMergeSwitchHandler(options);
           logger.debug('\n' + 'initHandlers: playlistMergeSwitchHandler — OK');
         } catch (e) {
           logger.error('\n' + 'initHandlers: playlistMergeSwitchHandler failed: ' + e);
@@ -880,9 +887,10 @@ j1.adapter.videoPlayer = ((j1, window) => {
       if (options.playlist && options.playlist.enabled &&
           options.playlist.loop && options.playlist.loop.enabled !== undefined) {
         try {
+          // claude - J1 VideoPlayer MultiInstance #3
           // Original (deprecated, preserved for reference):
           // new videoPlayer.playlistLoopSwitchHandler(options);
-          new vp.playlistLoopSwitchHandler(options);  // claude - J1 VideoPlayer MultiInstance #3
+          new vp.playlistLoopSwitchHandler(options);
           logger.debug('\n' + 'initHandlers: playlistLoopSwitchHandler — OK');
         } catch (e) {
           logger.error('\n' + 'initHandlers: playlistLoopSwitchHandler failed: ' + e);
@@ -896,9 +904,10 @@ j1.adapter.videoPlayer = ((j1, window) => {
       if (options.playlist && options.playlist.enabled &&
           options.playlist.sort && options.playlist.sort.enabled) {
         try {
+          // claude - J1 VideoPlayer MultiInstance #3
           // Original (deprecated, preserved for reference):
           // new videoPlayer.playlistSortHandler();
-          new vp.playlistSortHandler();  // claude - J1 VideoPlayer MultiInstance #3
+          new vp.playlistSortHandler();
           logger.debug('\n' + 'initHandlers: playlistSortHandler — OK');
         } catch (e) {
           logger.error('\n' + 'initHandlers: playlistSortHandler failed: ' + e);
@@ -910,9 +919,10 @@ j1.adapter.videoPlayer = ((j1, window) => {
       // 8. inputWrapperHandler — URL input field, paste button, load-video button
       //
       try {
+        // claude - J1 VideoPlayer MultiInstance #3
         // Original (deprecated, preserved for reference):
         // new videoPlayer.inputWrapperHandler();
-        new vp.inputWrapperHandler();  // claude - J1 VideoPlayer MultiInstance #3
+        new vp.inputWrapperHandler();
         logger.debug('\n' + 'initHandlers: inputWrapperHandler — OK');
       } catch (e) {
         logger.error('\n' + 'initHandlers: inputWrapperHandler failed: ' + e);
@@ -921,9 +931,10 @@ j1.adapter.videoPlayer = ((j1, window) => {
       // 9. inputValueBackgroundHandler — visual fill-state sync on all inputs
       //
       try {
+        // claude - J1 VideoPlayer MultiInstance #3
         // Original (deprecated, preserved for reference):
         // videoPlayer.inputValueBackgroundHandler();
-        vp.inputValueBackgroundHandler();  // claude - J1 VideoPlayer MultiInstance #3
+        vp.inputValueBackgroundHandler();
         logger.debug('\n' + 'initHandlers: inputValueBackgroundHandler — OK');
       } catch (e) {
         logger.error('\n' + 'initHandlers: inputValueBackgroundHandler failed: ' + e);
@@ -933,9 +944,10 @@ j1.adapter.videoPlayer = ((j1, window) => {
       //
       if (options.smoothScroll && options.smoothScroll.enabled) {
         try {
+          // claude - J1 VideoPlayer MultiInstance #3
           // Original (deprecated, preserved for reference):
           // videoPlayer.navbarSmoothScrollHandler();
-          vp.navbarSmoothScrollHandler();  // claude - J1 VideoPlayer MultiInstance #3
+          vp.navbarSmoothScrollHandler();
           logger.debug('\n' + 'initHandlers: navbarSmoothScrollHandler — OK');
         } catch (e) {
           logger.error('\n' + 'initHandlers: navbarSmoothScrollHandler failed: ' + e);
@@ -945,8 +957,6 @@ j1.adapter.videoPlayer = ((j1, window) => {
       }
 
       logger.info('\n' + 'initializing playlist handlers [' + playerId + ']: finished');
-
-
 
       // claude - Modify J1 VideoPlayer #39
       // 11. preloadPlaylists — load the per-player `playlist.preload` files
@@ -961,13 +971,14 @@ j1.adapter.videoPlayer = ((j1, window) => {
         try {
           var preloadList = _this._resolvePreloadList(playerId);
           if (preloadList && preloadList.length &&
+              // claude - J1 VideoPlayer MultiInstance #3
               // Original (deprecated, preserved for reference):
               // typeof videoPlayer.playlistManager.preloadPlaylists === 'function') {
-              typeof vp.playlistManager.preloadPlaylists === 'function') {  // claude - J1 VideoPlayer MultiInstance #3
+              typeof vp.playlistManager.preloadPlaylists === 'function') {
             var preloadBase = (options && options.playlist_url_base) ? options.playlist_url_base : null;
             // Original (deprecated, preserved for reference):
             // videoPlayer.playlistManager.preloadPlaylists(preloadList, preloadBase, playerId);
-            vp.playlistManager.preloadPlaylists(preloadList, preloadBase, playerId);  // claude - J1 VideoPlayer MultiInstance #3
+            vp.playlistManager.preloadPlaylists(preloadList, preloadBase, playerId);
             logger.debug('\n' + 'initHandlers: preloadPlaylists dispatched [' + playerId + '] (' + preloadList.length + ' file(s))');
           } else {
             logger.info('\n' + 'initHandlers: preloadPlaylists skipped — none configured [' + playerId + ']');
@@ -1021,17 +1032,17 @@ j1.adapter.videoPlayer = ((j1, window) => {
       //     module's playlistSortHandler.init(); this call then becomes the single,
       //     deterministic, per-player-scoped trigger.
       //
-      if (options.playlist && options.playlist.enabled) {                                  // claude - Modify J1 VideoPlayer #42
-        try {                                                                              // claude - Modify J1 VideoPlayer #42
+      if (options.playlist && options.playlist.enabled) {
+        try {
+          // claude - J1 VideoPlayer MultiInstance #3
           // Original (deprecated, preserved for reference):
-          // if (videoPlayer.playlistManager &&                                               // claude - Modify J1 VideoPlayer #42
-          if (vp.playlistManager &&  // claude - J1 VideoPlayer MultiInstance #3
+          if (vp.playlistManager &&
               // Original (deprecated, preserved for reference):
               // typeof videoPlayer.playlistManager.autoLoadFirstEntryOnReload === 'function') { // claude - Modify J1 VideoPlayer #42
-              typeof vp.playlistManager.autoLoadFirstEntryOnReload === 'function') {  // claude - J1 VideoPlayer MultiInstance #3
+              typeof vp.playlistManager.autoLoadFirstEntryOnReload === 'function') {
             // Original (deprecated, preserved for reference):
             // var autoLoaded = videoPlayer.playlistManager.autoLoadFirstEntryOnReload();      // claude - Modify J1 VideoPlayer #42
-            var autoLoaded = vp.playlistManager.autoLoadFirstEntryOnReload();  // claude - J1 VideoPlayer MultiInstance #3
+            var autoLoaded = vp.playlistManager.autoLoadFirstEntryOnReload();
             logger.debug('\n' + 'initHandlers: autoLoadFirstEntryOnReload [' + playerId + '] — ' + (autoLoaded ? 'loaded first stored entry (paused)' : 'no-op (none stored / already done / not ready)')); // claude - Modify J1 VideoPlayer #42
 
             // claude - J1 VideoPlayer MultiInstance #7
@@ -1060,6 +1071,7 @@ j1.adapter.videoPlayer = ((j1, window) => {
             // once-per-page guard still prevents any double-load.
             //
             // DESIGN NOTE (flagged for jadams/Juergen review):
+            //
             //   • The retry re-invokes autoLoadFirstEntryOnReload(). This assumes
             //     the early (empty-store) #42 call does NOT consume the
             //     once-per-page guard _autoLoadFirstOnReloadDone — it returned
@@ -1075,26 +1087,27 @@ j1.adapter.videoPlayer = ((j1, window) => {
             //     before every attempt (see _loadFirstAfterPreload) because
             //     other players' initHandlers() may re-scope it in between.
             //
-            try {                                                                            // claude - J1 VideoPlayer MultiInstance #7
-              var preloadConfigured = _this._resolvePreloadList(playerId);                   // claude - J1 VideoPlayer MultiInstance #7
-              if (!autoLoaded && preloadConfigured && preloadConfigured.length) {            // claude - J1 VideoPlayer MultiInstance #7
-                logger.debug('\n' + 'initHandlers: fresh visit with preload [' + playerId + '] — scheduling loadFirstAfterPreload'); // claude - J1 VideoPlayer MultiInstance #7
-                _this._loadFirstAfterPreload(vp, playerId);                                  // claude - J1 VideoPlayer MultiInstance #7
-              } else {                                                                       // claude - J1 VideoPlayer MultiInstance #7
-                logger.debug('\n' + 'initHandlers: loadFirstAfterPreload not needed [' + playerId + '] (' + (autoLoaded ? 'reload path — already loaded' : 'no preload configured') + ')'); // claude - J1 VideoPlayer MultiInstance #7
-              }                                                                              // claude - J1 VideoPlayer MultiInstance #7
-            } catch (e) {                                                                    // claude - J1 VideoPlayer MultiInstance #7
-              logger.error('\n' + 'initHandlers: loadFirstAfterPreload dispatch failed [' + playerId + ']: ' + e); // claude - J1 VideoPlayer MultiInstance #7
-            }                                                                                // claude - J1 VideoPlayer MultiInstance #7
-          } else {                                                                         // claude - Modify J1 VideoPlayer #42
-            logger.info('\n' + 'initHandlers: autoLoadFirstEntryOnReload skipped — method not present (core module predates #41) [' + playerId + ']'); // claude - Modify J1 VideoPlayer #42
-          }                                                                                // claude - Modify J1 VideoPlayer #42
-        } catch (e) {                                                                      // claude - Modify J1 VideoPlayer #42
-          logger.error('\n' + 'initHandlers: autoLoadFirstEntryOnReload failed: ' + e);    // claude - Modify J1 VideoPlayer #42
-        }                                                                                  // claude - Modify J1 VideoPlayer #42
-      } else {                                                                             // claude - Modify J1 VideoPlayer #42
-        logger.info('\n' + 'initHandlers: autoLoadFirstEntryOnReload skipped (playlist disabled)'); // claude - Modify J1 VideoPlayer #42
-      }                                                                                    // claude - Modify J1 VideoPlayer #42
+            // claude - J1 VideoPlayer MultiInstance #7
+            try {
+              var preloadConfigured = _this._resolvePreloadList(playerId);
+              if (!autoLoaded && preloadConfigured && preloadConfigured.length) {
+                logger.debug('\n' + 'initHandlers: fresh visit with preload [' + playerId + '] — scheduling loadFirstAfterPreload');
+                _this._loadFirstAfterPreload(vp, playerId);
+              } else {
+                logger.debug('\n' + 'initHandlers: loadFirstAfterPreload not needed [' + playerId + '] (' + (autoLoaded ? 'reload path — already loaded' : 'no preload configured') + ')');
+              }
+            } catch (e) {
+              logger.error('\n' + 'initHandlers: loadFirstAfterPreload dispatch failed [' + playerId + ']: ' + e);
+            }
+          } else {
+            logger.info('\n' + 'initHandlers: autoLoadFirstEntryOnReload skipped — method not present (core module predates #41) [' + playerId + ']');
+          }
+        } catch (e) {
+          logger.error('\n' + 'initHandlers: autoLoadFirstEntryOnReload failed: ' + e);
+        }
+      } else {
+        logger.info('\n' + 'initHandlers: autoLoadFirstEntryOnReload skipped (playlist disabled)');
+      }
 
       logger.info('\n' + 'initializing playlist handlers [' + playerId + ']: finished');
 
@@ -1189,11 +1202,6 @@ j1.adapter.videoPlayer = ((j1, window) => {
         logger.error('\n' + '_loadFirstAfterPreload failed [' + playerId + ']: ' + e);
       }
     }, // END _loadFirstAfterPreload
-
-
-
-
-
 
     // -------------------------------------------------------------------------
     // Modify J1 VideoPlayer #4
