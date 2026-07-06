@@ -190,7 +190,7 @@ feature. Viewers can search, sort, play, rate videos, and pick up right where
 they left off.
 
 .Tiny Desk Concerts
-videoPlayer::player_1[role="mb-5"]
+videoPlayer::player_tiny_desk_concerts[role="mb-5"]
 
 
 [role="mt-5"]
