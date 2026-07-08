@@ -76,4 +76,3 @@ button id string in four places — the adapter side should be checked
 for an unguarded `getElementById` on that id (and for any adapter-level
 wiring of the two buttons). Worth a look in a follow-on session with
 the adapter file.
-
