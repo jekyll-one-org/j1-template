@@ -1,8 +1,27 @@
-/* eslint no-var: off */
-/* eslint-disable no-redeclare */
+/*
+ # -----------------------------------------------------------------------------
+ # ~/js/tocbot/tocbot/import/scroll-smooth/index.js
+ # Tocbot v4.36.4
+ #
+ # Product/Info:
+ # https://jekyll.one
+ # https://tscanlin.github.io/tocbot
+ # https://github.com/tscanlin/tocbot
+ #
+ # Copyright (C) 2016 Tim Scanlin
+ # Copyright (C) 2023-2026 Juergen Adams
+ #
+ # Tocbot is licensed under the MIT License.
+ # For details, https://github.com/tscanlin/tocbot/blob/master/LICENSE
+ # J1 Theme is licensed under MIT License.
+ # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE 
+ # -----------------------------------------------------------------------------
+*/
+
+/* eslint no-var: off                                                           */
+/* eslint-disable no-redeclare                                                  */
 
 export default function initSmoothScrolling(options) {
-  // if (isCssSmoothSCrollSupported()) { return }
 
   var duration = options.duration;
   var offset = options.offset;

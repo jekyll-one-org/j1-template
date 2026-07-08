@@ -17,6 +17,5 @@
  #  See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE
  # -----------------------------------------------------------------------------
 */
-"use strict";
-import*as tocbot from"./import/index.js";
-((e,o)=>{"function"==typeof define&&define.amd?define([],o(e)):"object"!=typeof exports||exports instanceof HTMLElement?e.tocbot=o(e):module.exports=o(e)})(("undefined"==typeof global||global instanceof HTMLElement)&&window||global,e=>{const o=!!(e&&e.document&&e.document.querySelector&&e.addEventListener);if("undefined"!=typeof window||o)return e.tocbot=tocbot,tocbot});
+
+import*as tocbot from"./import/index.min.js";((e,o)=>{"function"==typeof define&&define.amd?define([],o(e)):"object"!=typeof exports||exports instanceof HTMLElement?e.tocbot=o(e):module.exports=o(e)})(("undefined"==typeof global||global instanceof HTMLElement)&&window||global,e=>{const o=!!(e&&e.document&&e.document.querySelector&&e.addEventListener);if("undefined"!=typeof window||o)return e.tocbot=tocbot,tocbot});

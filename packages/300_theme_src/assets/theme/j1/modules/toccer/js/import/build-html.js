@@ -1,8 +1,23 @@
-/**
- * Building the DOM and updating DOM state for tocbot.
- *
- * @author Tim Scanlin
- */
+/*
+ # -----------------------------------------------------------------------------
+ # ~/js/tocbot/tocbot/import/build-html.js
+ # Building the DOM and updating DOM state for tocbot
+ # Tocbot v4.36.4
+ #
+ # Product/Info:
+ # https://jekyll.one
+ # https://tscanlin.github.io/tocbot
+ # https://github.com/tscanlin/tocbot
+ #
+ # Copyright (C) 2016 Tim Scanlin
+ # Copyright (C) 2023-2026 Juergen Adams
+ #
+ # Tocbot is licensed under the MIT License.
+ # For details, https://github.com/tscanlin/tocbot/blob/master/LICENSE
+ # J1 Theme is licensed under MIT License.
+ # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE 
+ # -----------------------------------------------------------------------------
+*/
 
 // -----------------------------------------------------------------------------
 // ESLint shimming
