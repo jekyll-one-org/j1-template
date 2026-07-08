@@ -57,7 +57,7 @@ window.platform              = require('platform');
 // window.j1.fab             = require('./js/fab/fab.js');                      // cannot used until NOT rewritten to jQuery
 // window.ejs                = require('./js/ejs/ejs.js');                      // currently NOT used
 // window.j1.lazyCSSLoader   = require('./js/lazyCSS/lazyCSSLoader.js');        // currently NOT used
-// window.j1.api.ts2sec         = require('./js/api/tools/timestamps2seconds.js');
+// window.j1.api.ts2sec      = require('./js/api/tools/timestamps2seconds.js');
 
 window.j1.adapter            = require('./js/adapter/adapter.js');
 
@@ -82,21 +82,10 @@ window.j1.env                = 'prod';
 // const BootstrapJS         = require('./node_modules/bootstrap/dist/js/bootstrap.js');
 // const J1SCarousel         = require('./js/modules/carousel/carousel.js');
 // const J1Lit               = require('./js/modules/lit/index.js');
+// const J1Speak2Me          = require('./js/modules/jquery-extensions/speak2me/speak2me.js');
 
 const J1Tocbot               = require('./js/modules/tocbot/tocbot.js');
 const J1AttrChangeListener   = require('./js/modules/jquery-extensions/attrchange.js');
-const J1Speak2Me             = require('./js/modules/jquery-extensions/speak2me/speak2me.js');
-
-// claude - improve SpeakToMe code using lit #1
-// Register the Lit-based <j1-speak2me-modal> custom element used by the
-// Liquid template at ~/assets/data/speak2me.html.  The require() has the
-// side effect of calling customElements.define() exactly once (the file
-// guards against double-registration internally), so simply pulling it in
-// is enough — no init call is required.  The exported class is kept on
-// window.j1.modules.Speak2MeModal in case downstream code wants to subclass
-// or programmatically instantiate it.
-const J1Speak2MeModal           = require('./js/modules/lit/speak2me-modal.lit.js');
-window.j1.modules.Speak2MeModal = J1Speak2MeModal;
 
 // Additional Vanilla JS helpers
 // -----------------------------------------------------------------------------

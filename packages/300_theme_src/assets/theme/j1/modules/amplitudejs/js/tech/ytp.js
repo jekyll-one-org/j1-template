@@ -75,9 +75,8 @@ regenerate:                             true
 "use strict";
 
   // J1 Amplitude optimizations #1
-  // CLARITY: `(expr) ? true : false` is just `Boolean(expr)` -- or, since
-  // logical OR/comparison already returns a boolean, just `expr` itself.
-  const isDev = j1.env === "development" || j1.env === "dev";
+  const env   = '{{environment}}';
+  const isDev = (env === 'development' || env === 'dev') ? true : false;
 
   // date|time monitoring
   //----------------------------------------------------------------------------

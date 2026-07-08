@@ -56,6 +56,7 @@ regenerate:                             true
   {% assign production = true %}
 {% endif %}
 
+
 /*
  # -----------------------------------------------------------------------------
  # ~/assets/theme/j1/adapter/js/swiper.js
@@ -81,15 +82,19 @@ regenerate:                             true
 "use strict";
 j1.adapter.swiper = ((j1, window) => {
 
-  const isDev = (j1.env === "development" || j1.env === "dev") ? true : false;
+  {% comment %} Set global constants
+  ------------------------------------------------------------------------------ {% endcomment %}
+  const MODULE_NAME     = 'j1.adapter.swiper';
+  const CONSOLE_LOG_ID  = Math.random().toString(36).substring(2, 13);
+  const env             = j1.getEnv();
+  const isDev           = (env === 'dev') ? true : false;
 
   {% comment %} Set global variables
   ------------------------------------------------------------------------------ {% endcomment %}
-  var environment         = '{{environment}}';
-  var cookie_names        = j1.getCookieNames();
-  var user_state          = j1.readCookie(cookie_names.user_state);
-  var viewport_width      = $(window).width();
-  var state               = 'not_started';
+  var cookie_names      = j1.getCookieNames();
+  var user_state        = j1.readCookie(cookie_names.user_state);
+  var viewport_width    = $(window).width();
+  var state             = 'not_started';
 
   var swiperDefaults;
   var swiperSettings;
@@ -111,6 +116,7 @@ j1.adapter.swiper = ((j1, window) => {
   var endTimeModule;
   var timeSeconds;
 
+
   // ---------------------------------------------------------------------------
   // main
   // ---------------------------------------------------------------------------
@@ -120,24 +126,23 @@ j1.adapter.swiper = ((j1, window) => {
     // adapter initializer
     // -------------------------------------------------------------------------
     init: (options) => {
+
       var xhrLoadState                  = 'pending';                            // (initial) load state for the HTML portion of the swiper
       var load_dependencies             = {};                                   // dynamic variable
       var carouselResponsiveSettingsOBJ = {};                                   // initial object for responsive settings
       var reload_on_resize              = false;
+
       var dependency;
       var carouselResponsiveSettingsYAML;
       var carouselResponsiveSettingsSTRING;
       var swiper_lightbox_enabled;
 
-      // [INFO   ] [j1.adapter.comments                    ] [ detected comments provider (j1_config): {{comments_provider}}} ]
-      // [INFO   ] [j1.adapter.comments                    ] [ start processing load region head, layout: {{page.layout}} ]
-
       // -----------------------------------------------------------------------
       // default module settings
       // -----------------------------------------------------------------------
       var settings = $.extend({
-        module_name: 'j1.adapter.swiper',
-        generated:   '{{site.time}}'
+        module_name:  MODULE_NAME,
+        generated:    '{{site.time}}'
       }, options);
 
       // -----------------------------------------------------------------------
@@ -145,13 +150,13 @@ j1.adapter.swiper = ((j1, window) => {
       // -----------------------------------------------------------------------
 
       // create settings object from module options
-      swiperDefaults = $.extend({}, {{swiper_defaults | replace: 'nil', 'null' | replace: '=>', ':' }});
-      swiperSettings = $.extend({}, {{swiper_settings | replace: 'nil', 'null' | replace: '=>', ':' }});
-      swiperOptions  = $.extend(true, {}, swiperDefaults, swiperSettings);
+      swiperDefaults  = $.extend({}, {{swiper_defaults | replace: 'nil', 'null' | replace: '=>', ':' }});
+      swiperSettings  = $.extend({}, {{swiper_settings | replace: 'nil', 'null' | replace: '=>', ':' }});
+      swiperOptions   = $.extend(true, {}, swiperDefaults, swiperSettings);
 
-      _this        = j1.adapter.swiper;
-      theme        = user_state.theme_name;
-      logger       = log4javascript.getLogger('j1.adapter.swiper');
+      _this           = j1.adapter.swiper;
+      theme           = user_state.theme_name;
+      logger          = log4javascript.getLogger(MODULE_NAME);
 
       // -----------------------------------------------------------------------
       // module initializer
@@ -376,25 +381,27 @@ j1.adapter.swiper = ((j1, window) => {
       var xhrDataPath     = options.xhr_data_path + '/index.html';
       var xhrContainerId;
 
-      console.debug('number of swipers found: ' + numSwipers);
+      j1.consoleLog(isDev, 'DEBUG', CONSOLE_LOG_ID, MODULE_NAME, `number of swipers found: ${numSwipers}`);
 
       _this.setState('load_data');
       Object.keys(swipers).forEach ((key) => {
         if (swipers[key].enabled) {
           xhrContainerId = swipers[key].id + '_app';
 
-          console.debug('load HTML data on swiper id: ' + swipers[key].id);
+          j1.consoleLog(isDev, 'DEBUG', CONSOLE_LOG_ID, MODULE_NAME, `load HTML data on swiper id: ${swipers[key].id}`);
+
           j1.loadHTML({
             xhr_container_id: xhrContainerId,
             xhr_data_path:    xhrDataPath,
             xhr_data_element: swipers[key].id
           });
         } else {
-          console.debug('swiper found disabled on id: ' + swipers[key].id);
+          j1.consoleLog(isDev, 'DEBUG', CONSOLE_LOG_ID, MODULE_NAME, `swiper found disabled on swiper id: ${swipers[key].id}`);
           activeSwipers--;
         }
       });
-      console.debug('swipers loaded in page enabled|all: ' + activeSwipers + '|' + numSwipers);
+
+      j1.consoleLog(isDev, 'DEBUG', CONSOLE_LOG_ID, MODULE_NAME, `swipers loaded in page enabled|all: ${activeSwipers}|${numSwipers}`);
       _this.setState('data_loaded');
     }, // END loadSwiperHTML
 

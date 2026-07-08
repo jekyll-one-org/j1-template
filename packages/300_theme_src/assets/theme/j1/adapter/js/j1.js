@@ -3278,6 +3278,41 @@ var j1 = ((options) => {
       return state;
     }, // END getState
 
+    // -------------------------------------------------------------------------
+    // getEnv()
+    // returns the current environment settings (dev|prod)
+    // -------------------------------------------------------------------------
+    getEnv: () => {
+      const env   = '{{environment}}';
+      const isEnv = (env === 'development' || env === 'dev') ? 'dev' : 'prod';
+
+      return (env === 'development' || env === 'dev') ? 'dev' : 'prod';
+    }, // END getEnv
+
+    // -------------------------------------------------------------------------
+    // consoleLog 
+    // formatted console output with timestamp and unique ID
+    // 
+    // -------------------------------------------------------------------------
+    consoleLog: (isDev, level, logID, module, message) => {
+      const timestamp = new Date().toISOString().slice(11, 23);
+
+      switch (level) {
+        case 'INFO':
+          isDev ? console.log(`[${timestamp}] [${logID}] [${level}] [${module}] \n${message}`) : null;
+          break;
+        case 'WARN':
+          isDev ? console.warn(`[${timestamp}] [${logID}] [${level}] [${module}] \n${message}`) : null;
+          break;
+        case 'ERROR':
+          console.error(`[${timestamp}] [${logID}] [${level}] [${module}] \n${message}`);
+          break;
+        default:
+          isDev ? console.log(`[${timestamp}] [${logID}] [${level}] [${module}] \n${message}`) : null;
+          break;
+      }
+    },
+
     isValidCaption: (caption) => {
       return (typeof caption !== 'undefined' && caption.length > 0);
     }

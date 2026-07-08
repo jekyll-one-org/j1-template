@@ -112,14 +112,19 @@ regenerate:                             true
 "use strict";
 j1.adapter.gallery = ((j1, window) => {
 
-  const environment = '{{environment}}';
-  const isDev       = (environment === "development" || environment === "dev") ? true : false;
+  {% comment %} Set global constants
+  ------------------------------------------------------------------------------ {% endcomment %}
+
+  const MODULE_NAME     = 'j1.adapter.gallery';
+  const CONSOLE_LOG_ID  = Math.random().toString(36).substring(2, 13);
+  const env             = j1.getEnv();
+  const isDev           = (env === 'dev') ? true : false;
 
   {% comment %} Global variables
   ------------------------------------------------------------------------------ {% endcomment %}
   
-  var state         = 'not_started';
-  var play_button   = '/assets/theme/j1/modules/lightGallery/css/themes/uno/icons/play-button.png';
+  var state             = 'not_started';
+  var play_button       = '/assets/theme/j1/modules/lightGallery/css/themes/uno/icons/play-button.png';
 
   var url;
   var origin;
@@ -144,9 +149,6 @@ j1.adapter.gallery = ((j1, window) => {
   //
   var dependenciesTimeout;
 
-  // ---------------------------------------------------------------------------
-  // helper functions
-  // ---------------------------------------------------------------------------
 
   // ---------------------------------------------------------------------------
   // main
@@ -169,15 +171,15 @@ j1.adapter.gallery = ((j1, window) => {
       // default module settings
       // -----------------------------------------------------------------------
       var settings = $.extend({
-        module_name: 'j1.adapter.gallery',
-        generated:   '{{site.time}}'
+        module_name:  MODULE_NAME,
+        generated:    '{{site.time}}'
       }, options);
 
       // -----------------------------------------------------------------------
       // global variable settings
       // -----------------------------------------------------------------------
       _this  = j1.adapter.gallery;
-      logger = log4javascript.getLogger('j1.adapter.gallery');
+      logger = log4javascript.getLogger(MODULE_NAME);
 
       // Load  module DEFAULTS|CONFIG
       // split J1 Gallery data #1
@@ -477,26 +479,26 @@ j1.adapter.gallery = ((j1, window) => {
       var xhr_data_path = options.xhr_data_path + '/index.html';
       var xhr_container_id;
 
-      isDev && console.debug('j1.adapter.gallery: number of galleries found: ' + active_grids);
+      j1.consoleLog(isDev, 'DEBUG', CONSOLE_LOG_ID, MODULE_NAME, `number of galleries found: ${active_grids}`);
       _this.setState('load_data');
 
       Object.keys(galleries).forEach((key) => {
         if (galleries[key].enabled) {
           xhr_container_id = galleries[key].id + '_parent';
 
-          isDev && console.debug('j1.adapter.gallery: load HTML portion on gallery id: ' + galleries[key].id);
+          j1.consoleLog(isDev, 'DEBUG', CONSOLE_LOG_ID, MODULE_NAME, `load HTML portion on gallery id: ${galleries[key].id}`);
           j1.loadHTML({
             xhr_container_id: xhr_container_id,
             xhr_data_path:    xhr_data_path,
             xhr_data_element: galleries[key].id
           });
         } else {
-          isDev && console.debug('j1.adapter.gallery: gallery found disabled on id: ' + galleries[key].id);
+          j1.consoleLog(isDev, 'DEBUG', CONSOLE_LOG_ID, MODULE_NAME, `gallery found disabled on id: ${galleries[key].id}`);
           active_grids--;
         }
       });
 
-      isDev && console.debug('j1.adapter.gallery: galleries loaded in page enabled|all: ' + active_grids + '|' + numGalleries);
+      j1.consoleLog(isDev, 'DEBUG', CONSOLE_LOG_ID, MODULE_NAME, `galleries loaded in page enabled|all: ${active_grids}|${numGalleries}`);
       _this.setState('data_loaded');
     }, // END loadGalleryHTML
 
