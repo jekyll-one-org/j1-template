@@ -57,6 +57,10 @@ defaults:
 
   playlist_url_base:                    /assets/data/apps/videoPlayer/playlists/lists
 
+  ui_elements:
+    edit_playlist_button:               true
+    show_playlist_button:               true
+
   smoothScroll:
     enabled:                            true
 

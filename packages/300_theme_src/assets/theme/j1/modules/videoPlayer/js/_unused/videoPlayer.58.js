@@ -1,6 +1,6 @@
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/modules/videoPlayer/js/videoPlayer.js
+ # ~/assets/theme/j1/modules/videoPlayer/js/videoPlayer.js (58)
  # Provides JS Core for J1 Module videoPlayer
  # Version 3.1.58 for J1 Template
  #

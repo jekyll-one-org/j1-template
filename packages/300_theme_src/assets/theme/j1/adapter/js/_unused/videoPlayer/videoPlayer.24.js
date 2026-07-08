@@ -716,9 +716,11 @@ j1.adapter.videoPlayer = ((j1, window) => {
       try {
         vp = videoPlayer(playerId, options);
       } catch (e) {
-        // logger.error('\n' + 'initHandlers: videoPlayer(playerId, options) factory failed [' + playerId + ']: ' + e);
-        logger.error('\n' + `initHandlers: ${e}`);
-        logger.warn('\n' + `initHandlers: no videoPlayer instance for id ${playerId}: handler NOT initialized`);
+        logger.error('\n' + 'initHandlers: videoPlayer(playerId, options) factory failed [' + playerId + ']: ' + e);
+        return;
+      }
+      if (!vp) {
+        logger.error('\n' + 'initHandlers: no videoPlayer instance for id "' + playerId + '" — handlers NOT initialized');
         return;
       }
 

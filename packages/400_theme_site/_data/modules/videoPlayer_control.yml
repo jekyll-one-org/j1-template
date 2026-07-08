@@ -96,6 +96,9 @@ settings:
       videoJS:
         autoStart:                      true
 
+      ui_elements:
+        edit_playlist_button:           false
+
       toolbox:
         enabled:                        false
 
