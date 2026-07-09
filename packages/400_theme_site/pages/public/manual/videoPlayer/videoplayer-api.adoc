@@ -3,7 +3,7 @@ title:                                  J1 VideoPlayer
 title_extention:                        Video over VideoJS
 tagline:                                Playback from Playlists
 
-date:                                   2026-07-05
+date:                                   2026-07-09
 #last_modified:                         2026-01-01
 
 description: >
@@ -54,6 +54,32 @@ resource_options:
 // Video.js). Written for beginners: it favours configuration (YAML) and
 // concepts over deep JavaScript. The document structure mirrors the J1
 // Amplitude API manual (amplitude-api.adoc).
+//
+// =============================================================================
+
+// claude - J1 VideoPlayer manual #2
+// =============================================================================
+// Updated edition. Aligned with the current module state: core module fixes
+// up to "Modify J1 VideoPlayer #49", the multi-instance architecture
+// (MultiInstance #1-#6) and the template fixes #46/#48. Changes over #1:
+//
+//   - NEW section "UI Elements": documents the ui_elements block and the
+//     per-player visibility of the two header buttons
+//     (show_playlist_button / edit_playlist_button), including the full
+//     three-layer inheritance chain (defaults <- settings <- player)
+//   - Playlist options aligned with the current defaults file: pip is now
+//     playlist.pip; the switch keys moved to ui_elements
+//   - Per-Player Settings: per-player videoJS overrides (autoStart,
+//     playbackRates, plugins, ...) now take effect per player (#49) and
+//     are documented with an example
+//   - Native player: sourceOrder default corrected to [ mp4 ]
+//   - NOTE added: YouTube playback reads its player settings from
+//     players.native; the players.youtube block is kept for other modules
+//   - The Player on the Page: header buttons can be hidden per player
+//   - Notes on Implementation: new notes on per-player option resolution
+//     and on the cards view (Lit web component)
+//   - Examples: new example "Hiding a Header Button"
+//
 // =============================================================================
 
 // Page Initializer
@@ -89,7 +115,7 @@ resource_options:
 // See: https://github.com/videojs/videojs-playlist
 
 [role="dropcap"]
-J1 VideoPlayer a complete video player engine built on top of VideoJS.
+J1 VideoPlayer is a complete video player engine built on top of VideoJS.
 It gives every video the same good-looking, skinnable player, and it adds
 a full playlist on top: a searchable, sortable list of videos that the
 viewer can play, rate, and continue from where they left off. It plays two
@@ -111,10 +137,10 @@ that you host yourself) and YouTube videos.
 
 You do not need to write any JavaScript to use it. You describe your players
 in a few simple *YAML* files and J1 builds the HTML for you. You can put
-*multiple players on one page* and each one keeps its own separate playlist.
-The rest of this manual explains every setting you can change, the shape of
-a playlist file, and -- for advanced users -- the JavaScript methods the
-module exposes.
+*multiple players on one page* and each one keeps its own separate playlist
+and its own settings. The rest of this manual explains every setting you can
+change, the shape of a playlist file, and -- for advanced users -- the
+JavaScript methods the module exposes.
 
 Before diving into the settings, it helps to know the *four pieces* that
 make up a J1 VideoPlayer. You never touch most of them directly, but knowing
@@ -154,13 +180,22 @@ YouTube video::
   plays the video through Video.js. The poster image is taken from YouTube
   automatically.
 
+[NOTE]
+====
+Both kinds are configured in *one place*: the `players.native` block (see
+<<Player Options (videoJS)>>). The older `players.youtube` block still
+exists in the defaults file, but it is only kept for other J1 modules that
+read it -- the VideoPlayer itself no longer uses it.
+====
+
 [role="mt-4"]
 === Several Players on a Page
 
 You can place as many players on a page as you like. Every player has its
 own *id* (a short name such as `player_1`), its own playlist, and its own
 settings. Nothing leaks from one player to another: a video you add to
-`player_1` never shows up in `player_2`. Internally each player is a separate
+`player_1` never shows up in `player_2`, and a setting you change for one
+player never changes another. Internally each player is a separate
 *instance* of the module, created through a factory function -- exactly the
 same idea Video.js uses. This is explained in <<Notes on Implementation>>.
 
@@ -198,9 +233,12 @@ can give every player its own id, its own playlist, and its own look.
 
 [NOTE]
 ====
-The merge is *shallow per section*. A per-player `videoJS:` block only needs
-the keys you want to change; every missing key falls back to the value in
-the defaults file. You never have to copy the whole defaults block.
+The merge chain is:
+*defaults* -> overridden by *global settings* -> overridden by *per-player
+settings*. The merge works *per key*: a per-player `videoJS:` block only
+needs the keys you want to change; every missing key falls back to the
+global settings and then to the defaults. You never have to copy a whole
+block.
 ====
 
 [role="mt-5"]
@@ -218,16 +256,6 @@ These live at the top of the settings and control the module as a whole.
 |Master on/off switch for the module. Set it to `true` in your global
 `videoPlayer.yml` to turn the player on.
 
-|`initTimeout`
-|`1200`
-|A short delay in milliseconds before a player starts up. It gives the
-browser time to finish drawing the (AJAX-loaded) HTML first.
-
-|`hideDisabled`
-|`true`
-|When a player is disabled, hide its box completely instead of showing an
-empty frame.
-
 |`playlist_url_base`
 |`/assets/data/apps/videoPlayer/playlists/lists`
 |The folder where your ready-made playlist files live. A short file name in
@@ -237,6 +265,71 @@ a `preload` list is looked up in this folder.
 |`/assets/data/videoPlayer`
 |The folder the module reads its generated data from.
 |===
+
+[role="mt-5"]
+=== UI Elements
+
+The `ui_elements:` block controls which controls (buttons and switches) of a
+player are shown at all. Each key stands for one visible element and takes
+`true` (show it) or `false` (hide it).
+
+The two *header buttons* can be switched on and off *per player*: set the key
+in the defaults for everyone, in your global `videoPlayer.yml` for all
+players of your site, or inside one player's entry in
+`videoPlayer_control.yml` for that player only. As everywhere else, the most
+specific setting wins.
+
+.UI elements
+[cols="4a,2a,6a", options="header", width="100%", role="rtable mt-3"]
+|===
+|Option |Default |Description
+
+|`ui_elements.show_playlist_button`
+|`true`
+|The *Show/Hide Playlist* button on the left of the header bar. When set to
+`false` the button is not rendered for this player; the header title stays
+centred and starts empty.
+
+|`ui_elements.edit_playlist_button`
+|`true`
+|The *Manage Playlists* button on the right of the header bar. When set to
+`false` the button is not rendered, so the viewer cannot open the edit
+panel of this player.
+
+|`ui_elements.search`
+|`true`
+|The *search box* above the playlist.
+
+|`ui_elements.sort`
+|`true`
+|The *sort* control of the playlist.
+
+|`ui_elements.modeSwitch`
+|`true`
+|The switch that flips the playlist between the *list* and the *cards*
+layout.
+
+|`ui_elements.mergeSwitch`
+|`true`
+|The *merge* switch. When on, importing another playlist adds its videos to
+the current one instead of replacing it.
+
+|`ui_elements.loop`
+|`false`
+|The *loop* switch that repeats the playlist from the top when the last
+video finishes.
+|===
+
+[NOTE]
+====
+The playlist-panel controls (search, sort, and the switches) also manage
+themselves: they hide automatically while the playlist is *empty* and appear
+as soon as it has content. The *loop* switch is extra careful -- it only
+appears when *every* item in the list belongs to a series, because looping
+only makes sense for a complete series. Sort options that would do nothing
+(for example sorting by rating when no video is rated yet) are hidden as
+well.
+====
 
 [role="mt-5"]
 === Playlist Options
@@ -257,41 +350,20 @@ player.
 |`false`
 |Close the playlist panel automatically as soon as a video starts playing.
 
-|`playlist.search.enabled`
-|`true`
-|Show the search box above the playlist. The viewer can type to filter the
-list by title, author, description, category, type, or tag.
-
-|`playlist.sort.enabled`
-|`true`
-|Show the sort control so the viewer can reorder the list (for example by
-watch date or rating).
-
-|`playlist.modeSwitch.enabled`
-|`true`
-|Show the switch that flips the playlist between a plain *list* and a grid
-of *cards*.
-
-|`playlist.mergeSwitch.enabled`
-|`true`
-|Show the *merge* switch. When on, importing another playlist adds its
-videos to the current one instead of replacing it.
-
-|`playlist.loop.enabled`
+|`playlist.pip`
 |`false`
-|Start over from the first video when the last one finishes.
-
-|`playlist.loop.pip`
-|`false`
-|Allow picture-in-picture (a small floating video window) while looping.
+|Allow picture-in-picture: a small floating video window that keeps playing
+while the viewer scrolls or switches tabs.
 
 |`playlist.type`
 |`list`
-|The starting layout of the playlist: `list` or `cards`.
+|The starting layout of the playlist: `list` (compact rows) or `cards`
+(a grid of preview cards).
 
 |`playlist.cards.perRow`
 |`2`
-|How many cards to show per row when the playlist is in *cards* mode.
+|How many cards to show per row when the playlist is in *cards* mode. Each
+player can have its own value.
 |===
 
 [role="mt-5"]
@@ -322,8 +394,9 @@ how fast it can play, and how poster (preview) images are made.
 |The speeds available in that menu (`1` is normal speed).
 |===
 
-The `players.native` block sets the behaviour for self-hosted videos. The
-most useful keys are shown below.
+The `players.native` block sets the behaviour of the player itself. Despite
+its name it is used for *both* video kinds -- native files and YouTube
+videos play through the same settings. The most useful keys are shown below.
 
 .Native player options
 [cols="4a,3a,6a", options="header", width="100%", role="rtable mt-3"]
@@ -355,8 +428,9 @@ most useful keys are shown below.
 |The image shown before a video plays, when no other poster is available.
 
 |`sourceOrder`
-|`[ mp4, webm, ogv ]`
-|The order in which video file types are tried.
+|`[ mp4 ]`
+|The order in which video file types are tried. Add more types (for example
+`[ mp4, webm, ogv ]`) when you host the same video in several formats.
 |===
 
 [role="mt-5"]
@@ -459,13 +533,26 @@ page and is used to build all of the player's element ids.
 |`playlist.preload`
 |A list of playlist files to load into this player on page load. A short file
 name is looked up in `playlist_url_base`; a full URL or a path starting with
-`/` is used as-is. See <<Playlist Files and Preloading>>.
+`/` is used as-is. See <<Playlist and Preloading>>.
+
+|`ui_elements`
+|Show or hide this player's controls, for example
+`ui_elements.edit_playlist_button: false` to remove the *Manage Playlists*
+button from this player only. See <<UI Elements>>.
 
 |`videoJS`, `playlist`, `toolbox`, ...
 |Any option from the sections above, applied to *this player only*.
 |===
 
-A minimal control file with one player looks like this:
+[IMPORTANT]
+====
+Per-player `videoJS` settings *really are per-player*. Every player resolves
+its own `autoStart`, its own `playbackRates`, its own `plugins`, and so on.
+Two players on the same page can, for example, offer different speed menus.
+You only write the keys you want to change; everything else is inherited.
+====
+
+A control file with one fully customised player looks like this:
 
 [source, yaml]
 ----
@@ -473,15 +560,25 @@ settings:
   players:
 
     - player:
-      enabled:      true
-      id:           player_1
-      description:  NPR Tiny Desk Concerts
+      enabled:            true
+      id:                 player_tiny_desk_concerts
+      description:        NPR Tiny Desk Concerts
+
+      # hide the edit button for this player only
+      ui_elements:
+        edit_playlist_button: false
+
+      # this player gets its own speed menu
       videoJS:
-        autoStart:  true
+        autoStart:        true
+        playbackRates:
+          enabled:        true
+          values:         [ 0.5, 1, 1.5, 2 ]
+
       playlist:
-        preload:    [ tinydesk-concerts.json ]
+        preload:          [ tinydesk-concerts.json ]
         cards:
-          perRow:   4
+          perRow:         4
 ----
 
 
@@ -501,10 +598,15 @@ Show / Hide Playlist button (left)::
   Opens and closes the playlist panel. It is disabled and greyed out until a
   playlist is loaded.
 Title (centre)::
-  A short label, for example "Show Playlist".
+  A short label, for example the title of the running video.
 Manage Playlists button (right)::
   Opens the *edit panel*, where the viewer can add, import, export, or clear
   videos.
+
+Either button can be *hidden per player* through the `ui_elements` keys
+`show_playlist_button` and `edit_playlist_button` (see <<UI Elements>>).
+The header keeps its three-slot layout even when a button is hidden, so the
+title always stays centred.
 
 [role="mt-5"]
 === The Video Area
@@ -522,12 +624,12 @@ When opened, the playlist panel shows:
 * a *list / cards* switch to change the layout;
 * a *merge* switch that decides whether importing adds to or replaces the
   list;
-* a *loop* switch to repeat the playlist;
+* a *loop* switch to repeat the playlist (shown only for series);
 * the videos themselves, each with its poster, title, author, and a star
   rating.
 
-Which of these appear depends on the matching options in the `playlist:`
-block described above.
+Which of these appear depends on the matching options in the `ui_elements:`
+block, and the controls hide themselves while the playlist is empty.
 
 [role="mt-5"]
 === The Edit Panel
@@ -967,6 +1069,16 @@ handlers. There is no hidden "default" player that everything shares -- that
 older design caused several players to fight over one set of settings, so it
 was removed.
 
+[role="mt-4"]
+=== Per-Player Settings Win
+
+Whenever a player needs one of its `videoJS` settings, it looks in a fixed
+order: first the *options handed to its own factory call* (that is, the
+merged per-player configuration), then the page-global options, and only
+then an internal fallback. In short: the setting closest to the player wins.
+This is why two players on one page can autostart differently, offer
+different speed menus, or run different plugins.
+
 [role="mt-5"]
 === Each Player Has Its Own Storage
 
@@ -974,8 +1086,9 @@ Because every player keeps its playlist in the browser's local storage, the
 module gives each player its *own* storage name by adding the player id to
 it (for example `playlist_player_1`). This is why a video added to one
 player never appears in another. The same scoping applies to the small UI
-preferences, such as whether the playlist was last shown as a list or as
-cards.
+preferences -- whether the playlist was last shown as a list or as cards,
+the merge switch, the loop switch, and the last search mode are all
+remembered *per player*.
 
 [role="mt-4"]
 === Native and YouTube Share One Path
@@ -984,7 +1097,18 @@ Both native and YouTube videos play through the same Video.js player. The
 module looks at the item's link to decide which one it is: a YouTube link is
 recognised and played through YouTube; anything else is treated as a native
 file and loaded from its `src`. Posters follow the same rule -- YouTube
-posters come from YouTube, native posters are generated from the video.
+posters come from YouTube, native posters are generated from the video. The
+player settings for *both* kinds come from the `players.native` block.
+
+[role="mt-4"]
+=== The Cards View Is a Web Component
+
+The *cards* layout of the playlist is rendered by a small, modern *web
+component* (built with Lit). It draws each video as a card and updates only
+the card that changed -- rating one video or deleting one entry never
+redraws the whole grid. It renders into the normal page (light DOM), so all
+existing styles and click handling keep working. You never interact with it
+directly; the mode switch and `playlist.type` control it for you.
 
 [role="mt-4"]
 === Preloading Is Non-Destructive
@@ -1019,17 +1143,35 @@ playlist file on page load and shows it as a grid of cards, four per row.
 settings:
   players:
 
+    # --------------------------------------------------------------------------
+    # Tiny Desk Concerts
+    #
     - player:
-      enabled:      true
-      id:           player_1
-      description:  NPR Tiny Desk Concerts
+      enabled:                          true
+
+      id:                               player_tiny_desk_concerts
+      description:                      NPR Tiny Desk Concerts
+
+      ui_elements:
+        edit_playlist_button:           false
+
       videoJS:
-        autoStart:  true
+        autoStart:                      true
+
+        playbackRates:
+          enabled:                      true
+          values:                       [ 0.5, 1, 1.5, 2 ]
+
+        plugins:
+
+          playlist:
+            enabled:                    true
+
       playlist:
-        preload:    [ tinydesk-concerts.json ]
-        type:       cards
+        preload:                        [ tinydesk-concerts.json ]
+
         cards:
-          perRow:   4
+          perRow:                       4
 ----
 
 Tiny Desk Concerts is a popular, award-winning video series featuring live
@@ -1043,7 +1185,7 @@ videoPlayer::player_tiny_desk_concerts[role="mb-5"]
 
 
 [role="mt-5"]
-=== Two Players on a Page
+=== Multiple Players on a Page
 
 Each player has its own id, its own preloaded playlist, and its own card
 layout. They do not share anything.
@@ -1070,6 +1212,39 @@ settings:
         preload:    [ carpool-karaoke.json ]
         cards:
           perRow:   3
+----
+
+[role="mt-5"]
+=== Hiding a Header Button
+
+A "read-only" player: the viewer can watch and browse the preloaded
+playlist, but the *Manage Playlists* button is hidden, so the playlist
+cannot be changed from the page. The player also gets its own, shorter
+speed menu.
+
+[source, yaml]
+----
+settings:
+  players:
+
+    - player:
+      enabled:      true
+      id:           player_tiny_desk_concerts
+      description:  NPR Tiny Desk Concerts
+
+      ui_elements:
+        edit_playlist_button: false
+
+      videoJS:
+        autoStart:  true
+        playbackRates:
+          enabled:  true
+          values:   [ 0.5, 1, 1.5, 2 ]
+
+      playlist:
+        preload:    [ tinydesk-concerts.json ]
+        cards:
+          perRow:   4
 ----
 
 [role="mt-5"]
@@ -1132,4 +1307,3 @@ if (vp) {
   vp.playlistManager.playEntry('abcXYZ12345');
 }
 ----
-
