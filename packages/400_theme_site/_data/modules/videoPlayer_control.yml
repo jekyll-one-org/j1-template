@@ -93,17 +93,24 @@ settings:
       id:                               player_tiny_desk_concerts
       description:                      NPR Tiny Desk Concerts
 
-      videoJS:
-        autoStart:                      true
-
       ui_elements:
         edit_playlist_button:           false
 
-      toolbox:
-        enabled:                        false
+      videoJS:
+        autoStart:                      true
+
+        playbackRates:
+          enabled:                      true
+          values:                       [ 0.5, 1, 1.5, 2 ]
+
+        # PLUGIN options
+        # 
+        plugins:
+
+          playlist:
+            enabled:                    true
 
       playlist:
-#       preload:                        []
         preload:                        [ tinydesk-concerts.json ]
 
         cards:

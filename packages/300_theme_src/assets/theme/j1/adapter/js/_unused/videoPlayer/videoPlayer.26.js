@@ -6,7 +6,7 @@ regenerate:                             true
 
 {% comment %}
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/adapter/js/videoPlayer.js (27)
+ # ~/assets/theme/j1/adapter/js/videoPlayer.js (26)
  # J1 Adapter for the module VideoPlayer (native videoJS)
  #
  # Product/Info:
@@ -137,43 +137,6 @@ regenerate:                             true
  #     file (its only payload is the players array, read separately); the
  #     per-player accumulation in the page-ready loop now follows the chain
  #     defaults <- settings <- player (used for enabled/id gating only).
- #
- # -----------------------------------------------------------------------------
- #
- # -----------------------------------------------------------------------------
- # claude - Modify J1 VideoPlayer #50
- # ADAPTER-SIDE COUNTERPART OF CORE-MODULE #49 (per-instance options resolver)
- #
- # AUDIT RESULT (the #49 adapter contract is ALREADY satisfied by #48):
- #
- #   • getInstanceOptions(playerId) deep-merges the COMPLETE raw control
- #     entry (videoPlayers.players[<id>]) — including the per-player videoJS
- #     subtree — over defaults <- user settings. The defaults layer always
- #     carries videoJS, so the merged instance object always satisfies the
- #     core resolver's "carries a videoJS subtree" acceptance test.
- #
- #   • The SINGLE factory site (initHandlers: vp = videoPlayer(playerId,
- #     options)) and the SINGLE setAdapterOptions site receive that merged
- #     object; no code path hands the module the global namespace only.
- #
- #   • The init loop forwards each player's OWN playlist.preload list,
- #     playlist_url_base and playerId to preloadPlaylists() (#39/#45 item).
- #
- # REMAINING GAP CLOSED BY THIS FIX (all tagged
- # "claude - Modify J1 VideoPlayer #50"):
- #
- #   • _loadFirstAfterPreload() — the bounded async retry re-scoped the
- #     playlistManager via setPlayerID(playerId) before every attempt but did
- #     NOT re-assert this instance's per-player OPTIONS. Between async ticks,
- #     another player's initHandlers() calls setAdapterOptions(<its options>);
- #     on cores where the playlistManager is shared across instances the
- #     deferred paused first-entry load then runs under the OTHER player's
- #     effective options — and since core-module #49 every videoJS.* consumer
- #     on that load path resolves options via adapterOptions FIRST. The retry
- #     now re-asserts setAdapterOptions(getInstanceOptions(playerId)) next to
- #     the setPlayerID() re-scope: cheap (cached #48 merge), idempotent, and
- #     a harmless no-op on cores with strictly per-instance playlistManagers.
- #
  # -----------------------------------------------------------------------------
  #
  # -----------------------------------------------------------------------------
@@ -197,7 +160,6 @@ regenerate:                             true
  #   get, keyed by playerId) and routes EVERY handler through vp.* instead of
  #   the retired singleton surface videoPlayer.* . All original lines are
  #   preserved in place, commented out, per the additive-only convention.
- #
  # -----------------------------------------------------------------------------
 {% endcomment %}
 
@@ -225,7 +187,6 @@ regenerate:                             true
 {% assign videoplayer_control     = modules.videoPlayer_control.settings %}
 
 {% comment %} claude - Modify J1 VideoPlayer #48
---------------------------------------------------------------------------------
  Set config options (merge chain: defaults <- user settings).
  The control file is NO LONGER merged into the global options: its only
  top-level payload is the per-player array (players), which is read
@@ -247,7 +208,7 @@ regenerate:                             true
 
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/adapter/js/videoPlayer.js (27)
+ # ~/assets/theme/j1/adapter/js/videoPlayer.js (26)
  # J1 Adapter for the module VideoPlayer (native HTML5/videoJS)
  #
  # Product/Info:
@@ -336,9 +297,9 @@ j1.adapter.videoPlayer = ((j1, window) => {
       // -----------------------------------------------------------------------
       // merge default + user YAML settings
       // -----------------------------------------------------------------------
-      videoPlayerDefaults = $.extend({}, {{videoplayer_default  | replace: 'nil', 'null' | replace: '=>', ':' }});
-      videoPlayerSettings = $.extend({}, {{videoplayer_settings | replace: 'nil', 'null' | replace: '=>', ':' }});
-      videoPlayers        = $.extend({}, {{videoplayer_control  | replace: 'nil', 'null' | replace: '=>', ':' }});
+      videoPlayerDefaults = $.extend({},   {{videoplayer_default  | replace: 'nil', 'null' | replace: '=>', ':' }});
+      videoPlayerSettings = $.extend({},   {{videoplayer_settings | replace: 'nil', 'null' | replace: '=>', ':' }});
+      videoPlayers        = $.extend({},   {{videoplayer_control  | replace: 'nil', 'null' | replace: '=>', ':' }});
 
       // claude - Modify J1 VideoPlayer #48
       // Build the GLOBAL (module-level) options with the same _deepMerge
@@ -349,7 +310,6 @@ j1.adapter.videoPlayer = ((j1, window) => {
       // a higher layer supplies a SHORTER array.
       // Original (deprecated, preserved for reference):
       // videoPlayerOptions  = $.extend(true, {}, videoPlayerDefaults, videoPlayerSettings);
-      //
       videoPlayerOptions  = _this._deepMerge({}, videoPlayerDefaults, videoPlayerSettings);
 
       // update environment setting
@@ -392,7 +352,6 @@ j1.adapter.videoPlayer = ((j1, window) => {
           {% for video_player in players %}
 
             {% comment %} claude - Modify J1 VideoPlayer #48
-            --------------------------------------------------------------------
             create accumulated player data
             player:  {{ player | debug }}
 
@@ -450,7 +409,6 @@ j1.adapter.videoPlayer = ((j1, window) => {
                   // this player's effective settings.
                   // Original (deprecated, preserved for reference):
                   // _this.initHandlers(videoPlayerOptions, '{{player_id}}');
-                  //
                   _this.initHandlers(_this.getInstanceOptions('{{player_id}}'), '{{player_id}}');
                   _this.initPlayerUiEvents('{{player_id}}');
                   clearInterval(load_dependencies['dependencies_met_html_loaded_{{player_id}}']);
@@ -1455,24 +1413,13 @@ j1.adapter.videoPlayer = ((j1, window) => {
     // core module's once-per-page flag, repeated calls never double-load.
     //
     // Correctness notes:
-    //
     //   • setPlayerID(playerId) is re-applied before EVERY attempt: the
     //     playlistManager is a module-level singleton, and other players'
     //     initHandlers()/retries may re-scope it between our async ticks.
-    //
-    //   • claude - Modify J1 VideoPlayer #50: setAdapterOptions(
-    //     getInstanceOptions(playerId)) is likewise re-applied before EVERY
-    //     attempt, for the same interleaving reason — the core-module #49
-    //     resolver prefers adapterOptions, so the paused first-entry load
-    //     must run under THIS player's effective (three-layer merged)
-    //     options, not those of whichever player configured the manager
-    //     last.
-    //
     //   • The retry stops on the FIRST successful load; on a store that never
     //     fills (e.g. a preload fetch failure) it stops after MAX_ATTEMPTS with
     //     an info log and no side effects — behaviour then matches today's
     //     (first entry appears on the next reload).
-    //
     // -------------------------------------------------------------------------
     _loadFirstAfterPreload: (vp, playerId) => {
       try {
@@ -1492,25 +1439,6 @@ j1.adapter.videoPlayer = ((j1, window) => {
             // Re-scope the shared singleton to THIS player before probing/loading.
             if (typeof vp.playlistManager.setPlayerID === 'function') {
               vp.playlistManager.setPlayerID(playerId);
-            }
-
-            // claude - Modify J1 VideoPlayer #50
-            // Re-assert THIS instance's per-player options alongside the
-            // setPlayerID() re-scope. Between async ticks another player's
-            // initHandlers() calls setAdapterOptions(<its own options>); when
-            // the playlistManager is shared, the deferred first-entry load
-            // below would otherwise execute under the OTHER player's
-            // effective options — since core-module #49, every videoJS.*
-            // consumer on the load path (embedRunVideo/onReady,
-            // createVideoJsPlayer, ...) resolves options via adapterOptions
-            // FIRST. getInstanceOptions() returns the CACHED #48 three-layer
-            // deep merge (defaults <- user settings <- player settings)
-            // including the videoJS subtree, so the call is cheap and
-            // idempotent; on cores with strictly per-instance
-            // playlistManagers it is a harmless no-op.
-            //
-            if (typeof vp.playlistManager.setAdapterOptions === 'function') {
-              vp.playlistManager.setAdapterOptions(_this.getInstanceOptions(playerId));
             }
             var loaded = vp.playlistManager.autoLoadFirstEntryOnReload();
             if (loaded) {

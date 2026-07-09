@@ -45,7 +45,6 @@ exclude_from_search:                    true
 {% assign videoPlayer_control   = modules.videoPlayer_control.settings %}
 
 {% comment %} claude - Modify J1 VideoPlayer #48
---------------------------------------------------------------------------------
  Set config options (merge chain: defaults <- user settings).
 
  The USER settings layer (_data/modules/videoPlayer.yml) was previously
@@ -100,7 +99,6 @@ exclude_from_search:                    true
   {% for player in players %} {% if player.enabled %}
 
     {% comment %} claude - Modify J1 VideoPlayer #46
-    ----------------------------------------------------------------------------
      Per-instance UI element visibility for the header buttons.
 
      claude - Modify J1 VideoPlayer #48
@@ -123,7 +121,6 @@ exclude_from_search:                    true
      value is kept. Per-key resolution also side-steps the SHALLOW semantics
      of the Liquid 'merge' filter (a partial ui_elements hash on a higher
      layer would otherwise clobber the whole ui_elements hash beneath it).
-     ---------------------------------------------------------------------------
     {% endcomment %}
 
     {% assign show_playlist_button = videoPlayer_defaults.ui_elements.show_playlist_button %}
