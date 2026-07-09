@@ -208,7 +208,7 @@ Which elements appear in the playlist panel depends on the configuration
 options set for the *playlist* block.
 ====
 
-[role="mt-4"]
+[role="mt-5"]
 === The Player
 
 Tiny Desk Concerts is a popular, award-winning video series featuring live
