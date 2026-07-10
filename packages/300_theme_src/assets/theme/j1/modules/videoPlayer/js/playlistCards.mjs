@@ -1,6 +1,6 @@
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/modules/videoPlayer/js/playlistCards.mjs (2)
+ # ~/assets/theme/j1/modules/videoPlayer/js/playlistCards.mjs (3)
  # Drop-in Lit web component for J1 Module videoPlayer
  #
  # Product/Info:
@@ -52,6 +52,15 @@ const YOUTUBE_POSTER_QUALITY = 'hqdefault';
 // youtube video-id patterns — same regex used in the videoPlayer module.
 const YOUTUBE_ID_RE = /(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|shorts\/))([A-Za-z0-9_-]{11})/;
 
+// claude - Modify J1 VideoPlayer #51
+// Card-grid column count. Mirrors the constants in videoPlayer.js so this
+// component can drive the grid on its own when an adapter renders the cards
+// through <playlist-cards> instead of through playlistManager.renderCards().
+//
+const CARDS_PER_ROW_CSS_VAR = '--playlist-cards-per-row';
+const CARDS_PER_ROW_MIN     = 1;
+const CARDS_PER_ROW_MAX     = 6;
+
 export class PlaylistCards extends LitElement {
 
   // ---- light DOM rendering --------------------------------------------------
@@ -77,6 +86,16 @@ export class PlaylistCards extends LitElement {
     // an HTML attribute. Changing it triggers a keyed re-render that flips the
     // data-item-active marker on exactly the affected cards.
     activeVideoId: { attribute: false },
+
+    // claude - Modify J1 VideoPlayer #51
+    // cardsPerRow — number of cards per grid row (playlist.cards.perRow).
+    // OPTIONAL. Leave it null (the default) whenever the cards are hosted
+    // inside #videoplayer_playlist_parent_<id> and videoPlayer.js already
+    // applies the column count itself (_applyCardsPerRow) — the component then
+    // does not touch the grid at all. Set it (el.cardsPerRow = 4) only when an
+    // adapter drives <playlist-cards> outside that container and needs the
+    // component to own the grid geometry.
+    cardsPerRow: { attribute: false },
   };
 
   constructor() {
@@ -85,6 +104,9 @@ export class PlaylistCards extends LitElement {
     this.entries = [];
     // claude - Modify J1 VideoPlayer #24
     this.activeVideoId = null;
+    // claude - Modify J1 VideoPlayer #51
+    // null => "not managed by this component" (see the property note above).
+    this.cardsPerRow = null;
   }
 
   connectedCallback() {
@@ -92,6 +114,48 @@ export class PlaylistCards extends LitElement {
     // Layout-transparent so the parent CSS grid sees .playlist-card
     // as direct children rather than as descendants of this host.
     this.style.display = 'contents';
+
+    // claude - Modify J1 VideoPlayer #51
+    // parentElement is available from connectedCallback onwards.
+    this._applyCardsPerRow();
+  }
+
+  // claude - Modify J1 VideoPlayer #51
+  // Re-apply whenever the property changes (Lit reactive update cycle).
+  updated(changedProperties) {
+    super.updated(changedProperties);
+    if (changedProperties.has('cardsPerRow')) {
+      this._applyCardsPerRow();
+    }
+  }
+
+  // ---- claude - Modify J1 VideoPlayer #51 -----------------------------------
+  // _applyCardsPerRow()
+  //
+  // Writes the column count onto the GRID CONTAINER, which is this host's
+  // parentElement — NOT the host itself. The host carries `display: contents`,
+  // so it generates no box: `grid-template-columns` set on it would be ignored,
+  // and although custom properties do inherit, they inherit DOWNWARDS, never up
+  // to the parent that actually owns `display: grid`.
+  //
+  // No-ops while `cardsPerRow` is null/undefined so the component never fights
+  // videoPlayer.js (_applyCardsPerRow), which writes the very same two
+  // declarations onto the same element on each renderCurrent().
+  // ---------------------------------------------------------------------------
+  _applyCardsPerRow() {
+    const grid = this.parentElement;
+    if (!grid || this.cardsPerRow === null || this.cardsPerRow === undefined) return;
+
+    const requested = parseInt(this.cardsPerRow, 10);
+    if (!Number.isFinite(requested) || requested < CARDS_PER_ROW_MIN) {
+      grid.style.removeProperty(CARDS_PER_ROW_CSS_VAR);
+      grid.style.removeProperty('grid-template-columns');
+      return;
+    }
+
+    const perRow = Math.min(requested, CARDS_PER_ROW_MAX);
+    grid.style.setProperty(CARDS_PER_ROW_CSS_VAR, String(perRow));
+    grid.style.gridTemplateColumns = `repeat(${perRow}, 1fr)`;
   }
 
   // ---- pure formatting helpers ----------------------------------------------

@@ -95,6 +95,9 @@ settings:
 
       ui_elements:
         edit_playlist_button:           false
+        playlist_rate_button:           false
+        playlist_edit_button:           false
+        playlist_delete_button:         false
 
       videoJS:
         autoStart:                      true

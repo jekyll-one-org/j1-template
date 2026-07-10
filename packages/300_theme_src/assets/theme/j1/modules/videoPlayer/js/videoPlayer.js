@@ -2,7 +2,7 @@
  # -----------------------------------------------------------------------------
  # ~/assets/theme/j1/modules/videoPlayer/js/videoPlayer.js
  # Provides JS Core for J1 Module videoPlayer
- # Version 3.1.59 for J1 Template
+ # Version 3.1.60 for J1 Template
  #
  # Product/Info:
  # https://jekyll.one
@@ -772,6 +772,133 @@
    */
   function _pid(bare) {
     return _playerID ? `${bare}_${_playerID}` : bare;
+  }
+
+  // claude - Modify J1 VideoPlayer #51
+  // ---------------------------------------------------------------------------
+  // Playlist CARD-MODE grid columns (playlist.cards.perRow)
+  //
+  // The playlist toggles between LIST and CARD mode through the per-player
+  // control #playlistModeSwitch_<id> (playlistModeSwitchHandler), which flips
+  // the class on the top-level container #videoplayer_playlist_parent_<id> and
+  // re-renders through renderCurrent(). In card mode videoPlayer.css laid the
+  // container out as a CSS grid with a HARD-WIRED column count:
+  //
+  //     .playlist.card-mode {
+  //       display: grid;
+  //       grid-template-columns: repeat(2, 1fr);
+  //     }
+  //
+  // The configuration key that is supposed to drive that count
+  //
+  //     playlist:
+  //       cards:
+  //         perRow:  4
+  //
+  // (defaults in videoPlayer.yml, per-player override in videoPlayer_control.yml)
+  // was never read anywhere in this module, so it had no effect: every player
+  // always rendered exactly 2 cards per row.
+  //
+  // #51 resolves the effective value through _resolveVideoPlayerEffectiveOptions()
+  // — so a per-player override wins over the page-global merged defaults, in
+  // line with the resolution contract established by #49 — and writes it onto
+  // THIS player's own container as two element-attached (inline) declarations:
+  //
+  //   1. the custom property  --playlist-cards-per-row: N
+  //      consumed by the updated rule
+  //        grid-template-columns: repeat(var(--playlist-cards-per-row, 2), 1fr)
+  //
+  //   2. the resolved longhand  grid-template-columns: repeat(N, 1fr)
+  //      written as well so that a page still served a CACHED, pre-#51
+  //      videoPlayer.css (no var() in the rule) also gets the correct column
+  //      count. Where the updated stylesheet is loaded, (1) and (2) agree.
+  //
+  // Cascade note: an inline declaration outranks a normal author rule, but NOT
+  // an author `!important` declaration. The existing responsive overrides
+  //
+  //     .playlist.list-mode { grid-template-columns: none !important; }
+  //     @media (max-width: 991.98px) {
+  //       .playlist.card-mode { grid-template-columns: repeat(1, 1fr) !important; }
+  //     }
+  //
+  // therefore keep winning: list mode and small screens are unaffected by
+  // perRow, exactly as before. _clearCardsPerRow() additionally strips both
+  // declarations when switching back to list mode so the container carries no
+  // stale grid geometry.
+  //
+  // Scoping: every write goes through the element handed in by the caller,
+  // which is always resolved via _pid('videoplayer_playlist_parent'). On a
+  // multi-player page each instance therefore styles only its own grid.
+  // ---------------------------------------------------------------------------
+  const CARDS_PER_ROW_CSS_VAR   = '--playlist-cards-per-row';
+  const CARDS_PER_ROW_DEFAULT   = 2;
+  const CARDS_PER_ROW_MIN       = 1;
+  const CARDS_PER_ROW_MAX       = 6;
+
+  /**
+   * _resolveCardsPerRow - effective number of playlist cards per row.
+   *
+   * Reads playlist.cards.perRow from the EFFECTIVE options of this instance
+   * (per-player factory options -> page-global adapter options -> module
+   * snapshot). Every level is read defensively: renderCurrent() may run before
+   * the adapter has assigned any options, and older option sets carry no
+   * playlist.cards subtree at all. Non-numeric, missing or out-of-range values
+   * fall back to CARDS_PER_ROW_DEFAULT (2) — the value the stylesheet hard-wired
+   * before #51, so behaviour is unchanged whenever the key is absent.
+   *
+   * @returns {number} integer in [CARDS_PER_ROW_MIN .. CARDS_PER_ROW_MAX]
+   */
+  function _resolveCardsPerRow() {
+    const opts = _resolveVideoPlayerEffectiveOptions();
+
+    const raw = (opts && opts.playlist && opts.playlist.cards)
+      ? opts.playlist.cards.perRow
+      : undefined;
+
+    const perRow = parseInt(raw, 10);
+
+    if (!Number.isFinite(perRow) || perRow < CARDS_PER_ROW_MIN) {
+      return CARDS_PER_ROW_DEFAULT;
+    }
+
+    return Math.min(perRow, CARDS_PER_ROW_MAX);
+  }
+
+  /**
+   * _applyCardsPerRow - writes the resolved column count onto the top-level
+   * playlist container (#videoplayer_playlist_parent_<id>) as inline styles.
+   * Called on every switch into, and every re-render of, card mode.
+   *
+   * @param  {HTMLElement} containerEl - the player-scoped playlist container
+   * @returns {number} the perRow value that was applied
+   */
+  function _applyCardsPerRow(containerEl) {
+    if (!containerEl || !containerEl.style) return CARDS_PER_ROW_DEFAULT;
+
+    const perRow = _resolveCardsPerRow();
+
+    containerEl.style.setProperty(CARDS_PER_ROW_CSS_VAR, String(perRow));
+    containerEl.style.gridTemplateColumns = `repeat(${perRow}, 1fr)`;
+
+    isDev && logger.debug('\n' + `playlistManager: card mode grid set to ${perRow} card(s) per row`);
+
+    return perRow;
+  }
+
+  /**
+   * _clearCardsPerRow - removes the inline card-grid declarations again.
+   * Called when the container is switched (back) to list mode. The list-mode
+   * rule uses !important and would win regardless; stripping the declarations
+   * keeps the element free of stale geometry and makes the DOM readable while
+   * debugging.
+   *
+   * @param {HTMLElement} containerEl - the player-scoped playlist container
+   */
+  function _clearCardsPerRow(containerEl) {
+    if (!containerEl || !containerEl.style) return;
+
+    containerEl.style.removeProperty(CARDS_PER_ROW_CSS_VAR);
+    containerEl.style.removeProperty('grid-template-columns');
   }
 
   // ---------------------------------------------------------------------------
@@ -2230,8 +2357,17 @@
       if (historyEl) {
         if (this._displayMode === 'list') {
           historyEl.className = 'playlist list-mode';
+          // claude - Modify J1 VideoPlayer #51
+          // Drop the card-grid geometry when leaving card mode.
+          _clearCardsPerRow(historyEl);
         } else {
           historyEl.className = 'playlist card-mode';
+          // claude - Modify J1 VideoPlayer #51
+          // Apply playlist.cards.perRow to THIS player's grid container. Done
+          // here (and not only in renderCards()) because renderCards() bails out
+          // early on an empty playlist, while renderCurrent() always owns the
+          // container's mode class.
+          _applyCardsPerRow(historyEl);
         }
       }
 
@@ -2343,6 +2479,13 @@
 
       playlistContainer.className = 'playlist list-mode';
 
+      // claude - Modify J1 VideoPlayer #51
+      // renderPlaylist() re-asserts the mode class on every render; re-assert
+      // the (absence of) card-grid geometry with it. Assigning className does
+      // NOT touch the style attribute, so the inline declarations written by
+      // _applyCardsPerRow() would otherwise survive the switch to list mode.
+      _clearCardsPerRow(playlistContainer);
+
       isDev && logger.info('\n' + `render playlist`);
 
       // Claude - J1 videoPlayer optimizations #2 (c)
@@ -2439,6 +2582,12 @@
       if (!playlistContainer) return;
 
       playlistContainer.className = 'playlist card-mode';
+
+      // claude - Modify J1 VideoPlayer #51
+      // Re-assert the configured column count on every card render (sort,
+      // search, delete, rate, ...) so a re-render can never fall back to the
+      // stylesheet's hard-wired 2 columns.
+      _applyCardsPerRow(playlistContainer);
 
       // Claude - J1 videoPlayer optimizations #2 (c)
       // Performance: same duplicate-parse pattern as renderPlaylist() — the
