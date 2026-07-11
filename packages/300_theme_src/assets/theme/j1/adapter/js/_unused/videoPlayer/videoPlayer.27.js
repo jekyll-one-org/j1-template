@@ -208,11 +208,9 @@ regenerate:                             true
  #     factory call videoPlayer(playerId, options), which may synchronously
  #     render cards): writes the three resolved flags onto the per-player
  #     playlist container as data attributes
- #
  #       data-playlist-rate-button   = 'true' | 'false'
  #       data-playlist-edit-button   = 'true' | 'false'
  #       data-playlist-delete-button = 'true' | 'false'
- #
  #     Null-safe (#47 pattern): missing container or missing ui_elements
  #     subtree degrade to defaults (all buttons visible), never throw.
  #
@@ -981,12 +979,6 @@ j1.adapter.videoPlayer = ((j1, window) => {
           cardFlagsParent.dataset.playlistRateButton   = (uiElements.playlist_rate_button   !== false) ? 'true' : 'false';
           cardFlagsParent.dataset.playlistEditButton   = (uiElements.playlist_edit_button   !== false) ? 'true' : 'false';
           cardFlagsParent.dataset.playlistDeleteButton = (uiElements.playlist_delete_button !== false) ? 'true' : 'false';
-
-          // logger.debug('\n' + 'initHandlers: card action-button flags [' + playerId + ']:\n - rate: '
-          //   + cardFlagsParent.dataset.playlistRateButton   + '\n - edit: '
-          //   + cardFlagsParent.dataset.playlistEditButton   + '\n - delete: '
-          //   + cardFlagsParent.dataset.playlistDeleteButton);
-
           logger.debug('\n' + 'initHandlers: card action-button flags [' + playerId + '] — rate: '
             + cardFlagsParent.dataset.playlistRateButton   + ', edit: '
             + cardFlagsParent.dataset.playlistEditButton   + ', delete: '

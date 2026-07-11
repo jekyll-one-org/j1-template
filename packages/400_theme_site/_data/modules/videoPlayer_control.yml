@@ -32,7 +32,7 @@ settings:
     - player:
       enabled:                          true
 
-      # GENERAL options
+      # GENERAL settings
       #   
       id:                               player_1
 #     description:                      NPR Tiny Desk Concerts
@@ -62,7 +62,7 @@ settings:
     - player:
       enabled:                          true
 
-      # GENERAL options
+      # GENERAL settings
       #   
       id:                               player_2
 #     description:                      Carpool Karaoke
@@ -86,38 +86,42 @@ settings:
     # Player 3 – Tiny Desk Concerts
     #
     - player:
-      enabled:                          true
 
-      # GENERAL options
-      #   
+      # GENERAL settings
+      enabled:                          true
       id:                               player_tiny_desk_concerts
       description:                      NPR Tiny Desk Concerts
 
+      # PLAYLIST settings
+      #  
+      playlist:
+        preload:                        [ tinydesk-concerts.json ]
+
+        cards:
+          perRow:                       4
+
+      # UI interface settings
+      #  
       ui_elements:
         edit_playlist_button:           false
         playlist_rate_button:           false
         playlist_edit_button:           false
         playlist_delete_button:         false
 
+      # VIDEOJS settings
+      #  
       videoJS:
         autoStart:                      true
 
         playbackRates:
           enabled:                      true
-          values:                       [ 0.5, 1, 1.5, 2 ]
+          values:                       [ 0.5, 1, 2 ]
 
-        # PLUGIN options
-        # 
         plugins:
+          enabled:                      true
 
           playlist:
             enabled:                    true
-
-      playlist:
-        preload:                        [ tinydesk-concerts.json ]
-
-        cards:
-          perRow:                       4
 
 # ------------------------------------------------------------------------------
 # END config

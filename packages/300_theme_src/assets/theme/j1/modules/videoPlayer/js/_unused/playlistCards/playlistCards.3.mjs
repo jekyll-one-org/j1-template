@@ -1,6 +1,6 @@
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/modules/videoPlayer/js/playlistCards.mjs (4)
+ # ~/assets/theme/j1/modules/videoPlayer/js/playlistCards.mjs (3)
  # Drop-in Lit web component for J1 Module videoPlayer
  #
  # Product/Info:
@@ -16,7 +16,6 @@
 // =============================================================================
 // Design notes
 // -----------------------------------------------------------------------------
-//
 // * Renders into LIGHT DOM (createRenderRoot returns `this`) so the existing
 //   global rules in skipad.css (.playlist-card, .playlist-thumb-wrapper, etc.)
 //   apply unchanged.
@@ -30,7 +29,6 @@
 // * Keyed by videoId via the `repeat` directive — sorting, filtering and
 //   incremental updates (rate change, delete one entry) touch only the
 //   affected card's DOM, not the whole grid.
-//
 // * claude - Modify J1 VideoPlayer #52
 //   Per-player on|off control for the three card action buttons
 //   (button.playlist-btn.rate|edit|delete) via the YAML keys
@@ -40,20 +38,6 @@
 //   component mirrors them into showRateButton / showEditButton /
 //   showDeleteButton (see _applyUiElementFlags) and renders the buttons
 //   conditionally in _cardTemplate.
-//
-// * claude - Modify J1 VideoPlayer #53
-//   #52 read the published flags exactly ONCE, from connectedCallback(). The
-//   publisher (videoPlayer.js _applyUiElementFlags, added by #53 — the "step
-//   0" that #52 assumed was never implemented) runs at RENDER time, i.e.
-//   typically AFTER this component has connected, so the one-shot read found
-//   an empty dataset and the constructor defaults (all visible) always won —
-//   the YAML keys had no effect. #53 keeps the connect-time read (covers
-//   attributes published BEFORE connection) and additionally observes the
-//   container's three data attributes with a MutationObserver, so flags
-//   published or changed at ANY time are mirrored into the reactive
-//   properties and re-render the affected buttons. The observer is
-//   disconnected in disconnectedCallback() (no leaks across re-parents).
-//
 // -----------------------------------------------------------------------------
 
 // Lit browser-loads
@@ -154,16 +138,10 @@ export class PlaylistCards extends LitElement {
     this.showRateButton   = true;
     this.showEditButton   = true;
     this.showDeleteButton = true;
-    // claude - Modify J1 VideoPlayer #53
-    // MutationObserver handle for the container's ui_elements data
-    // attributes (see _observeUiElementFlags). Held so disconnectedCallback
-    // can release it.
-    this._uiFlagsObserver = null;
   }
 
   connectedCallback() {
     super.connectedCallback();
-
     // Layout-transparent so the parent CSS grid sees .playlist-card
     // as direct children rather than as descendants of this host.
     this.style.display = 'contents';
@@ -177,61 +155,6 @@ export class PlaylistCards extends LitElement {
     // onwards; resolve the per-player card action-button flags now, BEFORE
     // Lit's first render of this connection cycle.
     this._applyUiElementFlags();
-
-    // claude - Modify J1 VideoPlayer #53
-    // The connect-time read above only covers flags published BEFORE this
-    // component connected. The publisher (videoPlayer.js
-    // _applyUiElementFlags, #53) runs on every render — usually AFTER
-    // connection — so additionally observe the container's data attributes
-    // and re-apply on every change. Makes the flag pickup fully
-    // order-independent between publisher and component.
-    this._observeUiElementFlags();
-  }
-
-  // claude - Modify J1 VideoPlayer #53
-  // Release the container observer when the host leaves the document; a
-  // later re-parent/re-connect re-arms it via connectedCallback.
-  disconnectedCallback() {
-    super.disconnectedCallback();
-
-    if (this._uiFlagsObserver) {
-      this._uiFlagsObserver.disconnect();
-      this._uiFlagsObserver = null;
-    }
-  }
-
-  // ---- claude - Modify J1 VideoPlayer #53 -----------------------------------
-  // _observeUiElementFlags()
-  //
-  // Arms a MutationObserver on div#videoplayer_playlist_parent_<playerId>
-  // (resolved via closest, same rule as _applyUiElementFlags) that is
-  // restricted — via attributeFilter — to exactly the three published data
-  // attributes. Every mutation funnels back into _applyUiElementFlags(),
-  // which mirrors the dataset into the reactive properties; Lit's update
-  // cycle then re-renders only the affected buttons (keyed repeat).
-  //
-  // No-throw guarantee: absent container or environments without
-  // MutationObserver degrade silently to the connect-time read (#52
-  // behavior). Re-entrant safe: an existing observer is disconnected before
-  // a new one is armed (repeated connect cycles).
-  // ---------------------------------------------------------------------------
-  _observeUiElementFlags() {
-    const container = this.closest('[id^="videoplayer_playlist_parent_"]');
-    if (!container || typeof MutationObserver === 'undefined') return;
-
-    if (this._uiFlagsObserver) {
-      this._uiFlagsObserver.disconnect();
-    }
-
-    this._uiFlagsObserver = new MutationObserver(() => this._applyUiElementFlags());
-    this._uiFlagsObserver.observe(container, {
-      attributes:      true,
-      attributeFilter: [
-        'data-playlist-rate-button',
-        'data-playlist-edit-button',
-        'data-playlist-delete-button',
-      ],
-    });
   }
 
   // ---- claude - Modify J1 VideoPlayer #52 -----------------------------------
