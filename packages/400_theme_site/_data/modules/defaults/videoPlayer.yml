@@ -119,12 +119,30 @@ defaults:
   #
   playlist:
     enabled:                            true
+
+    preload:                            []
+    preload_attempts:                   2
+
     close_on_play:                      false
     pip:                                false
     type:                               list                                    # list | cards
+
     cards:
       perRow:                           2                                       # 1..6, cards per row in card mode
-
+  
+  # ----------------------------------------------------------------------------
+  # VIDEOJS options
+  # ============================================================================
+  #
+  #   autoStart
+  #   --------------------------------------------------------------------------
+  #
+  #
+  #   values:                           boolean
+  #   default:                          true
+  #
+  # ----------------------------------------------------------------------------
+  #
   videoJS:
 
     autoStart:                          true

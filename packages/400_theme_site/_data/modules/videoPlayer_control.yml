@@ -38,19 +38,6 @@ settings:
       id:                               player_1
       description:                      VideoJS Multi-Player 1
 
-      # PLAYLIST settings
-      #
-      playlist:
-        preload:                        []
-
-        cards:
-          perRow:                       6
-
-      # VIDEOJS settings
-      #
-      videoJS:
-        autoStart:                      true
-
     # --------------------------------------------------------------------------
     # Player 2
     #
@@ -68,7 +55,7 @@ settings:
         preload:                        []
 
         cards:
-          perRow:                       6
+          perRow:                       2
 
       # VIDEOJS settings
       #

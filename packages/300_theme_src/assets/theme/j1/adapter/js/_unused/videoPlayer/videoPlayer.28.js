@@ -1609,8 +1609,7 @@ j1.adapter.videoPlayer = ((j1, window) => {
           logger.info('\n' + '_loadFirstAfterPreload: skipped — autoLoadFirstEntryOnReload not available [' + playerId + ']');
           return;
         }
-        // MAX_ATTEMPTS: 40 × 250ms ≈ 10s ceiling for the async preload merge
-//      var MAX_ATTEMPTS = 40;
+
         // claude - Modify J1 VideoPlayer #54
         // FLAGGED, out of scope (candidate for a future numbered fix, no
         // behaviour changed here): `var attempts = 0;` below re-declares the
@@ -1622,8 +1621,11 @@ j1.adapter.videoPlayer = ((j1, window) => {
         // `playlist.preload_attempts` is absent, MAX_ATTEMPTS becomes
         // undefined and `attempts >= undefined` is ALWAYS false: the poll
         // never self-terminates. Candidate fix: distinct counter name plus a
-        // numeric-default fallback (e.g. 40).
-        var MAX_ATTEMPTS = attempts;
+        // numeric-default fallback (e.g. 4).
+        // Was: MAX_ATTEMPTS: 40 × 250ms ≈ 10s ceiling for the async preload merge
+        // var MAX_ATTEMPTS = 40;        
+        //
+        var MAX_ATTEMPTS = attempts || 2;
         var INTERVAL_MS  = 250;
         var attempts     = 0;
 
