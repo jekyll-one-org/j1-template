@@ -1,5 +1,5 @@
 # ------------------------------------------------------------------------------
-# ~/_data/modules/defaults/videoPlayer.yml (2)
+# ~/_data/modules/defaults/videoPlayer.yml
 # Default configuration settings for J1 VideoPlayer module
 #
 # Product/Info:
@@ -87,7 +87,8 @@ defaults:
 
     modeSwitch:                         true
     mergeSwitch:                        true
-    loop:                               false
+
+    loop:                               true
     search:                             true
     sort:                               true
 
@@ -136,7 +137,7 @@ defaults:
     poster:
       autoGenerate:
         enabled:                        true
-        capturePosition:                5                                      # default: 5,    start position (seconds), when ≤ 0 captureFraction is used
+        capturePosition:                5                                       # default: 5,    start position (seconds), when ≤ 0 captureFraction is used
         captureFraction:                10                                      # default: 10,   start position (percent from duration)
         maxWidth:                       540                                     # default: 320,  pixel (4/3 ratio)
         mimeType:                       webp                                    # default: webp, image type (jpeg|png|webp)
