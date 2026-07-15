@@ -208,28 +208,6 @@
     {
       "author": "NPR Music",
       "category": "Music",
-      "description": "Usher Raymond IV, born in 1978, is an American R&B singer, dancer, and actor. He rose to fame with hits like \"Nice & Slow\" and \"Yeah!\". An eight-time Grammy winner, he is known for his smooth vocals and dynamic performances.",
-      "duration": 1486,
-      "infoLink": "https://www.npr.org/2022/06/30/1103306435/usher-tiny-desk-concert/",
-      "issueDate": "2022-06-30",
-      "episode": 0,
-      "lastPosition": 0,
-      "rating": 0,
-      "series": 0,
-      "tags": [
-        "concert",
-        "pop",
-        "music"
-      ],
-      "title": "Usher: Tiny Desk Concert",
-      "type": "video",
-      "videoLink": "https://youtu.be/up8ODGFWgFg",
-      "videoId": "up8ODGFWgFg",
-      "watchDate": "2026-01-01T00:00:00Z"
-    },
-    {
-      "author": "NPR Music",
-      "category": "Music",
       "description": "Becky G, born Rebbeca Marie Gomez in 1997, is an American singer, rapper, and actress. She gained fame through her YouTube covers and hit songs like 'Shower' and 'Mayores'. As a multi-platinum artist, she blends pop music with Latin influences.",
       "duration": 1261,
       "infoLink": "https://www.npr.org/2023/10/13/1200583124/becky-g-tiny-desk-concert/",
@@ -381,28 +359,6 @@
       "type": "video",
       "videoLink": "https://youtu.be/F4neLJQC1_E",
       "videoId": "F4neLJQC1_E",
-      "watchDate": "2026-01-01T00:00:00Z"
-    },
-    {
-      "author": "NPR Music",
-      "category": "Music",
-      "description": "Nelly Furtado is a Canadian singer born in 1978. She is well-known for her hits such as \"I'm Like a Bird\" and \"Promiscuous.\" Her musical style blends pop, folk, and hip-hop influences. Nelly has won a Grammy Award and has sold more than 45 million records worldwide.",
-      "duration": 1297,
-      "infoLink": "https://www.npr.org/2024/05/24/g-s1-276/tiny-desk-concert-nelly-furtado/",
-      "issueDate": "2024-05-24",
-      "episode": 0,
-      "lastPosition": 0,
-      "rating": 0,
-      "series": 0,
-      "tags": [
-        "concert",
-        "pop",
-        "music"
-      ],
-      "title": "Nelly Furtado: Tiny Desk Concert",
-      "type": "video",
-      "videoLink": "https://youtu.be/y-PLr-BPxKU",
-      "videoId": "y-PLr-BPxKU",
       "watchDate": "2026-01-01T00:00:00Z"
     },
     {
@@ -624,6 +580,30 @@
       "videoLink": "https://youtu.be/fOAIrUZbOwo",
       "videoId": "fOAIrUZbOwo",
       "watchDate": "2026-01-01T00:00:00Z"
-    }
+    },
+    {
+      "author": "NPR Music",
+      "category": "Music",
+      "creator": "videoPlayer",
+      "description": "Ludovico Einaudi is an Italian composer and pianist who writes simple, emotive music for piano and other instruments. He often uses the piano together with strings, light electronics, or percussion. His pieces can sound like a mix of classical, folk, and modern ambient styles.\n\nSET LIST\n\n\"Experience\"\n\"Fly\"\n\"Flora\"\n\"Low Mist\"\n\nMUSICIANS\n\nLudovico Einaudi: piano\nFederico Mecozzi: violin\nRedi Hasa: cello\nFrancesco Arcuri: percussion",
+      "duration": 1281,
+      "infoLink": "https://www.npr.org/2022/07/15/1109357515/ludovico-einaudi-tiny-desk-concert",
+      "issueDate": "2022-07-15",
+      "episode": 0,
+      "lastPosition": 0,
+      "poster": "//img.youtube.com/vi/2oyZ9OM-neM/maxresdefault.jpg",
+      "rating": 0,
+      "series": 0,
+      "src": "",
+      "tags": [
+        "concert",
+        "music"
+      ],
+      "title": "Ludovico Einaudi: Tiny Desk Concert",
+      "type": "video",
+      "videoLink": "https://youtu.be/2oyZ9OM-neM",
+      "videoId": "2oyZ9OM-neM",
+      "watchDate": "2026-01-01T00:00:00Z"
+    }    
   ]
 }

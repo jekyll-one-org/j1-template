@@ -206,29 +206,29 @@ can build a *playlist* of YouTube videos the same way you would build
 a playlist of normal MP3 files.
 ====
 
-// [role="mt-4"]
-// ==== Bea and her Business
-
-// Bea (Wheeler) is a young British pop singer. Her songs are about real
-// life, feelings, and growing up. Many people enjoy her music because it
-// is honest, funny, and authentic.
-
-// .Bea and her Business · YouTube 2025
-// amplitude::bea_yt_large[]
-
 [role="mt-4"]
-==== Ludovico Einaudi
+==== Bea and her Business
 
-Ludovico Einaudi is an Italian composer and pianist who writes simple,
-emotive music for piano and other instruments. He often uses the piano
-together with strings, light electronics, or percussion. His pieces can
-sound like a mix of classical, folk, and modern ambient styles.
+Bea (Wheeler) is a young British pop singer. Her songs are about real
+life, feelings, and growing up. Many people enjoy her music because it
+is honest, funny, and authentic.
 
-Many people recognize his songs like *Nuvole Bianche* (White Clauds) and
-*I Giorni* (The Days), which often used in films, TV, and on the internet.
+.Bea and her Business · YouTube 2025
+amplitude::bea_yt_large[]
 
-.Ludovico Einaudi · YouTube
-amplitude::einaudi_yt_large[]
+// [role="mt-4"]
+// ==== Ludovico Einaudi
+
+// Ludovico Einaudi is an Italian composer and pianist who writes simple,
+// emotive music for piano and other instruments. He often uses the piano
+// together with strings, light electronics, or percussion. His pieces can
+// sound like a mix of classical, folk, and modern ambient styles.
+
+// Many people recognize his songs like *Nuvole Bianche* (White Clauds) and
+// *I Giorni* (The Days), which often used in films, TV, and on the internet.
+
+// .Ludovico Einaudi · YouTube
+// amplitude::einaudi_yt_large[]
 
 
 [role="mt-5"]
