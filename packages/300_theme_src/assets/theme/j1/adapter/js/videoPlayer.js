@@ -407,7 +407,8 @@ j1.adapter.videoPlayer = ((j1, window) => {
       // Original (deprecated, preserved for reference):
       // videoPlayerOptions  = $.extend(true, {}, videoPlayerDefaults, videoPlayerSettings);
       //
-      videoPlayerOptions  = _this._deepMerge({}, videoPlayerDefaults, videoPlayerSettings);
+      // </playerId>videoPlayerOptions  = _this._deepMerge({}, videoPlayerDefaults, videoPlayerSettings);
+      videoPlayerOptions  = $.extend(true, {}, videoPlayerDefaults, videoPlayerSettings);
 
       // update environment setting
       videoPlayerOptions.env = env;

@@ -81,67 +81,6 @@ regenerate:                             true
  # -----------------------------------------------------------------------------
 {% endcomment %}
 
-{% comment %} claude - Fix Amplitude YAML data processing #2
- # -----------------------------------------------------------------------------
- # INIT-TIME CRASH OF FIX #1 (module self-reference _this not yet bound)
- #
- # With fix #1 installed, the adapter failed on EVERY page load (single or
- # multiple players) by:
- #
- #   Uncaught TypeError: Cannot read properties of undefined (reading
- #   '_deepMerge') at Object.init (amplitude.js:216:32)
- #
- # ROOT CAUSE (ordering, NOT a multi-instance issue):
- #
- #   The module keeps its own object reference in the module-scoped var
- #   '_this' (declared, but NOT initialized, at the top of the module).
- #   The reference is bound INSIDE init() in the section
- #
- #     // control|logging settings
- #     _this  = j1.adapter.amplitude;
- #
- #   which is located WELL BELOW the global options block. Fix #1 inserted
- #   the new global merge chain
- #
- #     amplitudeOptions = _this._deepMerge({}, amplitudeDefaults, ...);
- #
- #   ABOVE that binding: at that point _this is still 'undefined' on a
- #   fresh page load, so the property read '_deepMerge' throws. Rendered by
- #   Liquid (front matter, Liquid comments and empty lines stripped) this
- #   statement IS line 216, and column 32 IS the position of the property
- #   name '_deepMerge' — the trace points exactly at that statement.
- #
- #   The pattern was ported from the J1 VideoPlayer adapter (fix #48/#49),
- #   where the very same merge chain works because there '_this' is bound
- #   BEFORE the merge block (videoPlayer.js: _this at line 390, _deepMerge
- #   call at line 410). In the AmplitudeJS adapter the binding site is at
- #   the OPPOSITE side of the block, so the order was inverted.
- #
- #   NOTE: init() is defined as an ARROW function ('init: (options) => {}'),
- #   so 'this' is NOT bound to the module object and cannot be used as a
- #   substitute. The module object is available as j1.adapter.amplitude:
- #   the module IIFE has returned long before init() is called from the
- #   page (document ready handler), so the reference is always valid at
- #   init() runtime.
- #
- # Changes (all tagged "claude - Fix Amplitude YAML data processing #2"):
- #
- #   • JS: init() — _this is bound to j1.adapter.amplitude as the FIRST
- #     statement of init(), i.e. before ANY use of the module reference.
- #     The original (late) binding in the 'control|logging settings'
- #     section is KEPT unchanged (now a harmless re-assignment) so the
- #     former code path stays intact.
- #   • JS: _self() — new module-scope helper resolving the module object
- #     independent of the init() state: (_this || j1.adapter.amplitude).
- #     Used at the _deepMerge()|getInstanceOptions() call sites so that a
- #     call from the module or a plugin (ytp) can NEVER fail again by an
- #     unbound _this, even if called before|without init().
- #   • JS: getInstanceOptions() — the logger calls are guarded (logger is
- #     assigned in init() as well and is 'undefined' on early calls; the
- #     error handlers would have thrown a follow-up TypeError).
- # -----------------------------------------------------------------------------
-{% endcomment %}
-
 {% comment %} Liquid procedures
 -------------------------------------------------------------------------------- {% endcomment %}
 
@@ -194,6 +133,7 @@ regenerate:                             true
 {% if amplitude_control.playlist %}
   {% assign amplitude_playlist_global = amplitude_playlist_global | deep_merge: amplitude_control.playlist %}
 {% endif %}
+
 
 {% comment %} Detect prod mode
 -------------------------------------------------------------------------------- {% endcomment %}
@@ -400,18 +340,6 @@ j1.adapter.amplitude = ((j1, window) => {
     throw new Error("GENERATED JavaScript error!");
   }
 
-  // claude - Fix Amplitude YAML data processing #2
-  // _self()
-  // Resolves the module object independent of the init() state. The module
-  // keeps its self-reference in the module-scoped var _this that is bound
-  // INSIDE init() only. Any method called before|outside init() (e.g. by a
-  // plugin like ytp) would fail on _this being 'undefined'. Because init()
-  // and all module methods are ARROW functions, 'this' is NOT bound to the
-  // module object and cannot be used here. j1.adapter.amplitude is assigned
-  // when the module IIFE returned, so the fallback is valid at ANY runtime
-  // call (it is evaluated lazily, NOT at module load time).
-  var _self = () => (_this || j1.adapter.amplitude);
-
   // ---------------------------------------------------------------------------
   // main
   // ---------------------------------------------------------------------------
@@ -421,21 +349,6 @@ j1.adapter.amplitude = ((j1, window) => {
     // adapter initializer
     // -------------------------------------------------------------------------
     init: (options) => {
-
-      // -----------------------------------------------------------------------
-      // claude - Fix Amplitude YAML data processing #2
-      // bind the module self-reference (EARLY)
-      // -----------------------------------------------------------------------
-      // The module reference _this MUST be bound before ANY use of it. The
-      // global options chain of fix #1 (see 'global variable settings' below)
-      // calls _this._deepMerge() while the ORIGINAL binding of _this is done
-      // FAR BELOW (section 'control|logging settings'), leaving _this
-      // 'undefined' at that point on a fresh page load:
-      //   TypeError: Cannot read properties of undefined (reading '_deepMerge')
-      // NOTE: init() is an ARROW function, 'this' is NOT bound to the module
-      // object. j1.adapter.amplitude is assigned when the module IIFE returned
-      // and is therefore always valid at init() runtime.
-      _this = j1.adapter.amplitude;
 
       // -----------------------------------------------------------------------
       // set console log filters (early)
@@ -486,21 +399,10 @@ j1.adapter.amplitude = ((j1, window) => {
       Object.keys(amplitudePlayers || {}).forEach(function (key) {
         if (key !== 'players') { amplitudeUserSettings[key] = amplitudePlayers[key]; }
       });
-      {% comment %} claude - Fix Amplitude YAML data processing #2
-      The call site is kept, but the module reference is resolved by the
-      _self() helper now (see module-scope helper functions). _this is
-      bound at the TOP of init() by fix #2; _self() additionally covers
-      the (theoretical) case of a call before|without init().
-      Original (deprecated, preserved for reference):
       amplitudeOptions = _this._deepMerge({}, amplitudeDefaults, amplitudeUserSettings);
       amplitudeInstanceOptions = {};
       _this['amplitudeOptions']         = amplitudeOptions;
       _this['amplitudeInstanceOptions'] = amplitudeInstanceOptions;
-      {% endcomment %}
-      amplitudeOptions = _self()._deepMerge({}, amplitudeDefaults, amplitudeUserSettings);
-      amplitudeInstanceOptions = {};
-      _self()['amplitudeOptions']         = amplitudeOptions;
-      _self()['amplitudeInstanceOptions'] = amplitudeInstanceOptions;
 
       // set AmplitudeJS data for later use (e.g events)
       //
@@ -549,10 +451,6 @@ j1.adapter.amplitude = ((j1, window) => {
 
       // control|logging settings
       //
-      // claude - Fix Amplitude YAML data processing #2
-      // KEPT (superseded): _this is bound at the TOP of init() now, this
-      // line is a harmless re-assignment of the same reference. The former
-      // code path is left intact on purpose.
       _this  = j1.adapter.amplitude;
       logger = log4javascript.getLogger('j1.adapter.amplitude');
 
@@ -2636,13 +2534,7 @@ j1.adapter.amplitude = ((j1, window) => {
           var srcVal = source[key];
           if (isPlainObject(srcVal)) {
             if (!isPlainObject(target[key])) { target[key] = {}; }
-            {% comment %} claude - Fix Amplitude YAML data processing #2
-            Recursion resolved by _self(): _this is bound INSIDE init() only,
-            so the recursion failed for any call before|without init().
-            Original (deprecated, preserved for reference):
             _this._deepMerge(target[key], srcVal);
-            {% endcomment %}
-            _self()._deepMerge(target[key], srcVal);
           } else if (Array.isArray(srcVal)) {
             target[key] = srcVal.slice();
           } else if (srcVal !== undefined) {
@@ -2693,11 +2585,7 @@ j1.adapter.amplitude = ((j1, window) => {
           if (key !== 'players') { userSettings[key] = amplitudePlayers[key]; }
         });
       } catch (e) {
-        {% comment %} claude - Fix Amplitude YAML data processing #2
-        Original (deprecated, preserved for reference):
         logger.error('\n' + 'getInstanceOptions: user settings lookup failed [' + playerId + ']: ' + e);
-        {% endcomment %}
-        logger && logger.error('\n' + 'getInstanceOptions: user settings lookup failed [' + playerId + ']: ' + e);
       }
 
       // resolve the player entry from the RAW control settings
@@ -2713,33 +2601,16 @@ j1.adapter.amplitude = ((j1, window) => {
           }
         }
       } catch (e) {
-        {% comment %} claude - Fix Amplitude YAML data processing #2
-        Original (deprecated, preserved for reference):
         logger.error('\n' + 'getInstanceOptions: control lookup failed [' + playerId + ']: ' + e);
-        {% endcomment %}
-        logger && logger.error('\n' + 'getInstanceOptions: control lookup failed [' + playerId + ']: ' + e);
       }
 
       if (playerEntry === null) {
-        {% comment %} claude - Fix Amplitude YAML data processing #2
-        Original (deprecated, preserved for reference):
         logger.warn('\n' + 'getInstanceOptions: no control entry found [' + playerId + '] — instance falls back to defaults <- user settings');
-        {% endcomment %}
-        logger && logger.warn('\n' + 'getInstanceOptions: no control entry found [' + playerId + '] — instance falls back to defaults <- user settings');
       }
 
       // build the per-instance chain:
       // player settings -> overload user settings -> overload default settings
-      {% comment %} claude - Fix Amplitude YAML data processing #2
-      Module reference resolved by _self() (see helper functions).
-      Original (deprecated, preserved for reference):
       var instanceOptions = _this._deepMerge(
-        {},
-        amplitudeDefaults,
-        userSettings
-      );
-      {% endcomment %}
-      var instanceOptions = _self()._deepMerge(
         {},
         amplitudeDefaults,
         userSettings
@@ -2750,30 +2621,16 @@ j1.adapter.amplitude = ((j1, window) => {
       if (instanceOptions.player === undefined || instanceOptions.player === null) {
         instanceOptions.player = {};
       }
-      {% comment %} claude - Fix Amplitude YAML data processing #2
-      Original (deprecated, preserved for reference):
       _this._deepMerge(instanceOptions.player, playerEntry || {});
-      {% endcomment %}
-      _self()._deepMerge(instanceOptions.player, playerEntry || {});
 
       // update environment setting (parity with the global amplitudeOptions)
       instanceOptions.env = environment;
 
       // cache + expose
       amplitudeInstanceOptions[playerId]   = instanceOptions;
-      {% comment %} claude - Fix Amplitude YAML data processing #2
-      Original (deprecated, preserved for reference):
       _this['amplitudeInstanceOptions']    = amplitudeInstanceOptions;
-      {% endcomment %}
-      _self()['amplitudeInstanceOptions']  = amplitudeInstanceOptions;
 
-      {% comment %} claude - Fix Amplitude YAML data processing #2
-      logger guarded: logger is assigned in init() as well and is 'undefined'
-      for calls placed before|without init().
-      Original (deprecated, preserved for reference):
       logger.debug('\n' + 'getInstanceOptions: per-instance options resolved [' + playerId + ']');
-      {% endcomment %}
-      logger && logger.debug('\n' + 'getInstanceOptions: per-instance options resolved [' + playerId + ']');
       return instanceOptions;
     }, // END getInstanceOptions
 

@@ -1,7 +1,6 @@
 # ------------------------------------------------------------------------------
-# ~/_data/modules/videoPlayer_control.yml
-# User (control) configuration settings for the module J1 videoPlayer
-# to setup per-player configuration options
+# ~/_data/modules/amplitude_control.yml
+# User (control) configuration settings for the module AmplitudeJS
 #
 # Product/Info:
 # https://jekyll.one
@@ -16,97 +15,188 @@
 # Description
 #
 description:
-  title:                                J1 videoPlayer
+  title:                                AmplitudeJS
   scope:                                User control settings
-  location:                             _data/modules/videoPlayer_control.yml
+  location:                             _data/modules/amplitude_control.yml
 
 # ------------------------------------------------------------------------------
-# User control settings
+# User settings
 #
 settings:
 
+  # ----------------------------------------------------------------------------
+  # claude - Fix Amplitude YAML data processing #1
+  # GLOBAL (user) settings, optional
+  #
+  # All keys of the DEFAULTS configuration (see
+  # _data/modules/defaults/amplitude.yml, sections 'player' and 'playlist')
+  # can be overloaded here for ALL players|playlists of a page. Per-player
+  # overloads are placed on the players[] entries below. The effective
+  # settings for ONE player instance are resolved as a DEEP merge of the
+  # inheritance chain (later overloads earlier):
+  #
+  #   player settings -> overload user settings -> overload default settings
+  #
+  # Example:
+  #
+  # player:
+  #   display_hours:                    true                                    # show hours in ALL players of a page
+  #   player_scroller_song_element_min: 8                                       # scrollbar threshold for ALL players
+  #
+  # playlist:
+  #   audio_info:                       true                                    # info links in ALL playlists
+  # ----------------------------------------------------------------------------
+
+  # ----------------------------------------------------------------------------
+  # PLAYER settings
+  # ----------------------------------------------------------------------------
+  #
   players:
 
     # --------------------------------------------------------------------------
-    # Player 1
-    #
-    - player:
-
-      # GENERAL settings
-      #
-      enabled:                          true      
-      id:                               player_1
-      description:                      VideoJS Multi-Player 1
-
+    # MINI player, Emancipator
     # --------------------------------------------------------------------------
-    # Player 2
     #
     - player:
 
+      # ------------------------------------------------------------------------
       # GENERAL settings
-      #
+      #       
       enabled:                          true
-      id:                               player_2
-      description:                      VideoJS Multi-Player 2
+
+      # ------------------------------------------------------------------------
+      # PLAYER settings
+      #  
+      id:                               emancipator_mini
+      type:                             mini
 
       # PLAYLIST settings
       #
       playlist:
-        preload:                        []
-
-        cards:
-          perRow:                       2
-
-      # VIDEOJS settings
-      #
-      videoJS:
-        autoStart:                      true
+        name:                           emancipator
 
     # --------------------------------------------------------------------------
-    # Player 3 – Tiny Desk Concerts
+    # COMPACT player, Emancipator
+    # --------------------------------------------------------------------------
     #
     - player:
 
+      # ------------------------------------------------------------------------
       # GENERAL settings
-      #
+      #       
       enabled:                          true
-      id:                               player_tiny_desk_concerts
-      description:                      NPR Tiny Desk Concerts
 
+      # ------------------------------------------------------------------------
+      # PLAYER settings
+      #  
+      id:                               emancipator_compact
+      type:                             compact
+
+      # ------------------------------------------------------------------------
       # PLAYLIST settings
       #
       playlist:
-        preload:                        [ tinydesk-concerts.json ]
-        preload_attempts:               4
+        name:                           emancipator
 
-        cards:
-          perRow:                       4
-
-      # UI interface settings
+      # ------------------------------------------------------------------------
+      # CONTROL settings
       #
-      ui_elements:
-        edit_playlist_button:           false
-
-        playlist_rate_button:           false
-        playlist_edit_button:           false
-        playlist_delete_button:         false
-
-        mergeSwitch:                    false
-
-      # VIDEOJS settings
+      # skip_forward_backward_button:     true                                  # default: true
+      # song_progress_bar:              false                                   # currently dont work om player level
+      # forward_backward_skip_seconds:  30                                      # currently dont work on player level
       #
-      videoJS:
-        autoStart:                      true
+      # claude - Fix Amplitude YAML data processing #1
+      # NOTE: per-player overloads of skip_forward_backward_button and
+      # song_progress_bar are WORKING since this fix (resolved by key
+      # presence via the deep_merge inheritance chain; boolean false
+      # overloads a default|user true). forward_backward_skip_seconds is
+      # still consumed page-globally by the adapter (candidate for a later
+      # fix: per-instance skip seconds at the UI event sites).
 
-        playbackRates:
-          enabled:                      true
-          values:                       [ 0.5, 1, 2 ]
+    # --------------------------------------------------------------------------
+    # LARGE player, Emancipator
+    # --------------------------------------------------------------------------
+    #
+    - player:
 
-        plugins:
-          enabled:                      true
+      # ------------------------------------------------------------------------
+      # GENERAL settings
+      #     
+      enabled:                          true
 
-          playlist:
-            enabled:                    true
+      # ------------------------------------------------------------------------
+      # PLAYER settings
+      #
+      id:                               emancipator_large
+      type:                             large
+
+      # ------------------------------------------------------------------------
+      # PLAYLIST settings
+      #
+      playlist:
+        name:                           emancipator
+
+    # --------------------------------------------------------------------------
+    # LARGE player, Ludovico Einaudi
+    # --------------------------------------------------------------------------
+    #
+    - player:
+
+      # ------------------------------------------------------------------------
+      # GENERAL settings
+      #     
+      enabled:                          true
+
+      # ------------------------------------------------------------------------
+      # PLAYER settings
+      #
+      id:                               einaudi_yt_large
+      type:                             large
+      source:                           video
+
+      # ------------------------------------------------------------------------
+      # PLAYLIST settings
+      #
+      playlist:
+        name:                           ludovico_einaudi_yt
+
+      # ------------------------------------------------------------------------
+      # PLUGIN settings
+      #
+      plugin_manager:
+        enabled:                        true
+        plugins:                        [ ytp ]
+
+    # --------------------------------------------------------------------------
+    # LARGE player, Bea and her Business
+    # --------------------------------------------------------------------------
+    #
+    - player:
+
+      # ------------------------------------------------------------------------
+      # GENERAL settings
+      #    
+      enabled:                          true
+
+      # ------------------------------------------------------------------------
+      # PLAYER settings
+      #
+      id:                               bea_yt_large
+      type:                             large
+      source:                           video
+
+      # ------------------------------------------------------------------------
+      # PLAYLIST settings
+      #      
+      playlist:
+        name:                           bea_yt
+
+      # ------------------------------------------------------------------------
+      # PLUGIN settings
+      #
+      plugin_manager:
+        enabled:                        true
+        plugins:                        [ ytp ]
 
 # ------------------------------------------------------------------------------
 # END config

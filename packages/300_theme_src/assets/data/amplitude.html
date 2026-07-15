@@ -7,7 +7,7 @@ exclude_from_search:                    true
 
 {% comment %}
  # -----------------------------------------------------------------------------
- # ~/assets/data/apps/amplitude.html (41)
+ # ~/assets/data/apps/amplitude.html (42)
  # Generate the HTML portion for J1 Amplitude players
  #
  # Product/Info:
@@ -38,7 +38,7 @@ exclude_from_search:                    true
 
 {% comment %} Set config options
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign amplitude_options     = amplitude_default | merge: amplitude_control | merge: amplitude_media %}
+{% assign amplitude_options     = amplitude_default | deep_merge: amplitude_control %}
 
 {% comment %} set permalink setting
 -------------------------------------------------------------------------------- {% endcomment %}
@@ -70,14 +70,14 @@ exclude_from_search:                    true
   </head>
 
   <body>
+
   {% comment %} create player instances
   ------------------------------------------------------------------------------
   player.volume_slider:             {{player.volume_slider | debug}}
   amplitude_default.volume_slider:  {{amplitude_default.player.volume_slider | debug}}
   volume_slider:                    {{volume_slider}}
   ------------------------------------------------------------------------------ {% endcomment %}
-
-  {% for player in amplitude_options.players %} {% if player.enabled %}
+  {% for player in amplitude_control.players %} {% if player.enabled %}
 
     {% comment %} player default settings
     ---------------------------------------------------------------------------- {% endcomment %}
@@ -114,61 +114,53 @@ exclude_from_search:                    true
     {% assign player_id                     = player.id %}
     {% assign player_playlist               = player.playlist.name | strip %}
 
-    {% if player.type %}
-      {% assign player_type = player.type %}
+    {% assign player_effective = amplitude_default.player %}
+    {% if amplitude_control.player %}
+      {% assign player_effective = player_effective | deep_merge: amplitude_control.player %}
     {% endif %}
 
-    {% if player.playlist.controls %}
-      {% assign playlist_controls = player.playlist.controls %}
-    {% else %}
-      {% assign playlist_controls = playlist_controls %}
-    {% endif %}      
-
-    {% if player.song_progress_bar %}
-      {% assign song_progress_bar = player.song_progress_bar %}
+    {% assign player_effective        = player_effective | deep_merge: player %}
+    {% assign playlist_pane_effective = player_effective.playlist_pane %}
+    {% if player.playlist %}
+      {% assign playlist_pane_effective = playlist_pane_effective | deep_merge: player.playlist %}
     {% endif %}
 
-    {% if shuffle_button or player.shuffle_button %}
-      {% assign shuffle_button = player.shuffle_button %}
-    {% endif %}
-
-    {% if repeat_button or player.repeat_button %}
-      {% assign repeat_button = player.repeat_button %}
-    {% endif %}
-
-    {% if display_hours or player.display_hours %}
-      {% assign display_hours = player.display_hours %}
-    {% endif %}
-
-    {% if player.playlist.audio_info %}
-      {% assign player_audio_info_enabled = player.playlist.audio_info %}
-    {% else %}
-      {% assign player_audio_info_enabled = playlist_audio_info %}
-    {% endif %}
-
-    {% if player.playlist.audio_rating %}
-      {% assign player_audio_rating_enabled = player.playlist.audio_rating %}
-    {% else %}
-      {% assign player_audio_rating_enabled = playlist_audio_rating %}
-    {% endif %}
-
-    {% comment %} unused
+    {% comment %} claude - Fix Amplitude YAML data processing #
     ----------------------------------------------------------------------------
-    {% unless player.playlist.scrollbar %}
-      {% assign player_scrollbar_class = 'hide-scrollbar' %}
-    {% else %}
-      {% unless amplitude_default.player.playlist.scrollbar %}
-        {% assign player_scrollbar_class = 'hide-scrollbar' %}
-      {% else %}
-        {% assign player_scrollbar_class = '' %}
-      {% endunless %}
-    {% endunless %}
+    re-assign the settings variables from the EFFECTIVE chain. The default
+    assigns above are kept (unchanged) and are superseded here; the former
+    truthiness overload blocks below are deprecated (preserved for
+    reference).
     ---------------------------------------------------------------------------- {% endcomment %}
+    {% assign player_type                   = player_effective.type %}
+    {% assign source_media                  = player_effective.source %}
+    {% assign song_progress_bar             = player_effective.song_progress_bar %}
+    {% assign audio_rating                  = player_effective.audio_rating %}
+    {% assign display_hours                 = player_effective.display_hours %}
+    {% assign volume_slider                 = player_effective.volume_slider.enabled %}
+    {% assign volume_slider_min             = player_effective.volume_slider.min_value %}
+    {% assign volume_slider_max             = player_effective.volume_slider.max_value %}
+    {% assign volume_slider_step            = player_effective.volume_slider.slider_step %}
+    {% assign repeat_button                 = player_effective.repeat_button %}
+    {% assign shuffle_button                = player_effective.shuffle_button %}
+    {% assign skip_forward_backward_button  = player_effective.skip_forward_backward_button %}
+
+    {% assign playlist_controls             = playlist_pane_effective.controls %}
+    {% assign playlist_audio_info           = playlist_pane_effective.audio_info %}
+    {% assign playlist_audio_rating         = playlist_pane_effective.audio_rating %}
+    {% assign player_audio_info_enabled     = playlist_pane_effective.audio_info %}
+    {% assign player_audio_rating_enabled   = playlist_pane_effective.audio_rating %}
+
+    {% if player_effective.source == 'video' %}
+      {% assign source_media_attribute = 'youtube' %}
+    {% else %}
+      {% assign source_media_attribute = 'audio' %}
+    {% endif %}
 
     {% comment %} collect playlist items
     ---------------------------------------------------------------------------- {% endcomment %}
     <!-- START collect playlist items for player on ID: {{player_id}} -->
-    {% for playlist in amplitude_options.playlists %} {% if playlist.enabled %}
+    {% for playlist in amplitude_media.playlists %} {% if playlist.enabled %}
       {% assign playlist_name = playlist.name | strip %}
 
       {% if playlist_name == player_playlist %}
@@ -670,16 +662,6 @@ exclude_from_search:                    true
       -------------------------------------------------------------------------- {% endcomment %}
       {% when 'large' %} {% if player_enabled %}
 
-      {% if player.source %}
-        {% assign source_media = player.source %}
-      {% endif %}
-
-      {% if player.source == 'video' %}
-        {% assign source_media_attribute = 'youtube' %}
-      {% else %}
-        {% assign source_media_attribute = 'audio' %}
-      {% endif %}
-
       <!-- START Large Player instance on ID: {{player_id}} of type: {{player_type}} -->
       <!-- START PLAYER LEFT - playlist view --> 
       {% capture large_player_left_side %}
@@ -1029,7 +1011,17 @@ exclude_from_search:                    true
                     </div> <!-- END audio-meta-data -->
 
                     <!-- jadams, 2024-11-05: ??? -->
+                    {% comment %} claude - Fix Amplitude YAML data processing #
+                    ------------------------------------------------------------
+                    read display_hours from the EFFECTIVE chain (a raw
+                    player key ignores the default and user layers)
+                    Original (deprecated, preserved for reference):
+                    {raw}
                     {% if player.display_hours %}
+                    {% endif %}
+                    {endraw}
+                    ------------------------------------------------------------ {% endcomment %}
+                    {% if display_hours %}
                     <span class="audio-duration">{{item.duration}}</span>
                     {% else %}
                     <span class="audio-duration">{{item.duration}}</span>
