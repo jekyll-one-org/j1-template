@@ -839,11 +839,7 @@ j1.adapter.amplitude = ((j1, window) => {
       // wrraper for states that are not processed
       // -----------------------------------------------------------------------
       function doNothingOnStateChange(state) {
-        // claude - Fix J1 Amplitude playerID #1
-        // removed the (unused) playerID calculated from the playlist name;
-        // playerID is an independent value (YAML key "id", set via the HTML
-        // attribute "data-amplitude-player") and cannot be derived from a
-        // playlist name
+        // Fix J1 Amplitude playerID #1. Removed the (unused) playerID
         var playlist, songMetaData,
             songIndex, trackID;
 

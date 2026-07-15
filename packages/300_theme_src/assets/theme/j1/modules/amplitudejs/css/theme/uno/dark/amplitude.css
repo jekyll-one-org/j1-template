@@ -93,6 +93,12 @@ a {
 
 /* 2. Components
 # ------------------------------------------------------------------------------ */
+
+.audio-info-link {
+  text-decoration: none;
+  border-bottom: none;
+}
+
 .album-cover-image {
   display: block;
 }
@@ -170,7 +176,7 @@ a {
   opacity: 0.5;
   font-family: "Lato", sans-serif;
   font-size: 16px;
-  color: var(--ajs-theme-uno--gray-200);
+  color: var(--ajs-theme-uno--gray-50);
 }
 
 .amplitude-scroller::-webkit-scrollbar,

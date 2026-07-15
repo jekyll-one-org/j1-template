@@ -33,7 +33,7 @@ permalink:                              /pages/public/tour/audio_data/
 resources:                              [ amplitudejs ]
 resource_options:
   - toccer:
-      collapseDepth:                    4
+      collapseDepth:                    3
   - attic:
       opacity:                          .7
       padding_top:                      600
@@ -206,29 +206,27 @@ can build a *playlist* of YouTube videos the same way you would build
 a playlist of normal MP3 files.
 ====
 
-// [role="mt-4"]
-// ==== Bea and her Business
+[role="mt-4"]
+==== Bea and her Business
 
-// Bea (Wheeler) is a young British pop singer. Her songs are about real
-// life, feelings, and growing up. Many people enjoy her music because it
-// is honest, funny, and authentic.
+Bea (Wheeler) is a young British pop singer. Her songs are about real
+life, feelings, and growing up. Many people enjoy her music because it
+is honest, funny, and authentic.
 
-// .Bea and her Business · YouTube 2025
-// amplitude::bea_yt_large[]
+.Bea and her Business · YouTube 2025
+amplitude::bea_yt_large[]
 
 [role="mt-4"]
-==== Ludovico Einaudi
+==== Diana Krall
 
-Ludovico Einaudi is an Italian composer and pianist who writes simple,
-emotive music for piano and other instruments. He often uses the piano
-together with strings, light electronics, or percussion. His pieces can
-sound like a mix of classical, folk, and modern ambient styles.
+Diana Krall is a famous Canadian jazz singer and pianist. She was born on
+November 16, 1964, in Nanaimo, British Columbia. She became a star with
+albums such as Stepping Out (1993) and When I Look in Your Eyes (1999),
+which earned her a Grammy for Best Jazz Vocal. Her style mixes classic jazz
+standards with her deep voice and strong piano skills.
 
-Many people recognize his songs like *Nuvole Bianche* (White Clauds) and
-*I Giorni* (The Days), which often used in films, TV, and on the internet.
-
-.Ludovico Einaudi · YouTube
-amplitude::einaudi_yt_large[]
+.Diana Krall · YouTube
+amplitude::diana_krall_yt_large[]
 
 
 [role="mt-5"]

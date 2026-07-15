@@ -215,7 +215,7 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  color: var(--ajs-theme-uno--gray-300);
+  color: var(--ajs-theme-uno--gray-50);
 }
 
 .audio-artist.large-player-item-header {

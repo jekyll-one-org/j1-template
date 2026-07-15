@@ -193,17 +193,17 @@ settings:
 
       # ------------------------------------------------------------------------
       # TITLE settings (songs)
-      # Nuvole Bianche (Live at The Steve Jobs Theatre, 2019)
+      #
       items:
 
         # title 01
         - item:
           enabled:                      true
           <<:                           *album_einaudi_yt
-          title:                        Nuvole Bianche (White Clauds)
+          title:                        Nuvole Bianche
           audio:                        watch?v=VUCI-1vIbUo
           rating:                       4
-          start:                        "00:00:40"                              # false | timestamp
+          start:                        "00:00:10"                              # false | timestamp
           end:                          false                                   # false | timestamp          
           audio_info:                   //youtube.com/watch?v=VUCI-1vIbUo
           cover_image:                  //img.youtube.com/vi/Htk5IuW5JHE/maxresdefault.jpg
@@ -214,7 +214,7 @@ settings:
         - item:
           enabled:                      true
           <<:                           *album_einaudi_yt
-          title:                        I Giorni (The Days)
+          title:                        I Giorni (Live at The Royal Albert Hall)
           audio:                        watch?v=Htk5IuW5JHE
           rating:                       4
           start:                        "00:00:10"                              # false | timestamp
