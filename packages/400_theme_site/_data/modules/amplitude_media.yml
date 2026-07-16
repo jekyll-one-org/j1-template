@@ -223,10 +223,9 @@ settings:
           cover_image:                  //img.youtube.com/vi/Htk5IuW5JHE/maxresdefault.jpg
           duration:                     "00:05:54"
 
-
     # --------------------------------------------------------------------------
-    # Bea and her Business
-    # https://www.beaandher.business/
+    # Olivia Dean
+    # https://www.youtube.com/playlist?list=PL1dfVf_Yq5rGGTKx4Fi5PwX5TfPBXNP8p
     #
     - playlist:
 
@@ -238,19 +237,19 @@ settings:
       # ------------------------------------------------------------------------
       # PLAYLIST settings
       #
-      name:                             bea_yt
+      name:                             olivia_dean_yt
 
       # ------------------------------------------------------------------------
       # ALBUM settings
       #
-      album:                            &album_bea_yt
+      album:                            &album_olivia_dean_yt
 
-        playlist:                       bea_yt
-        name:                           YouTube Playlist
-        artist:                         Bea and her Business
+        playlist:                       olivia_dean_yt
+        name:                           The Art Of Loving
+        artist:                         Olivia Dean
         audio_base:                     //youtube.com
         cover_image:                    /assets/audio/cover/default/placeholder-blue.jpg
-        audio_fade:                     true
+        audio_fade:                     false
         audio_single:                   false
         repeat:                         false
         shuffle:                        false
@@ -263,210 +262,158 @@ settings:
         # title 01
         - item:
           enabled:                      true
-          <<:                           *album_bea_yt
-          title:                        Safety Net (Official Video)
-          audio:                        watch?v=fTXrSVzkIXI
-          rating:                       5
-          start:                        "00:00:03"                              # false | timestamp
-          end:                          "00:03:20"                              # false | timestamp
-          audio_info:                   //youtube.com/channel/UC_qruKTFPfMUJW6gsPGcwgA
-          cover_image:                  //img.youtube.com/vi/fTXrSVzkIXI/maxresdefault.jpg
-          duration:                     "00:03:26"
+          <<:                           *album_olivia_dean_yt
+          title:                        Nice To Each Other
+          audio:                        watch?v=VI0NDsh2b8k
+          rating:                       3
+          start:                        "00:00:01"                              # false | timestamp
+          end:                          "00:03:30"                              # false | timestamp
+          audio_info:                   //youtube.com/playlist?list=PL1dfVf_Yq5rGGTKx4Fi5PwX5TfPBXNP8p
+          cover_image:                  //img.youtube.com/vi/NM4e606yFJg/maxresdefault.jpg
+          duration:                     "00:03:30"
 
         # title 02
         - item:
           enabled:                      true
-          <<:                           *album_bea_yt
-          title:                        Good Things
-          audio:                        watch?v=dM7CmIHwJnU
+          <<:                           *album_olivia_dean_yt
+          title:                        Lady Lady
+          audio:                        watch?v=JN_Vyg_wURY
           rating:                       3
-          start:                        "00:00:03"
-          end:                          "00:02:56"
-          audio_info:                   //youtube.com/channel/UC_qruKTFPfMUJW6gsPGcwgA
-          cover_image:                  //img.youtube.com/vi/dM7CmIHwJnU/maxresdefault.jpg
-          duration:                     "00:02:58"
+          start:                        "00:00:01"
+          end:                          "00:03:29"
+          audio_info:                   //youtube.com/playlist?list=PL1dfVf_Yq5rGGTKx4Fi5PwX5TfPBXNP8p
+          cover_image:                  //img.youtube.com/vi/NM4e606yFJg/maxresdefault.jpg
+          duration:                     "00:03:29"
 
         # title 03
         - item:
           enabled:                      true
-          <<:                           *album_bea_yt
-          title:                        Me Against My Head
-          audio:                        watch?v=bvXV4pfIzog
-          rating:                       4
-          start:                        "00:00:03"
-          end:                          "00:03:14"
-          audio_info:                   //youtube.com/channel/UC_qruKTFPfMUJW6gsPGcwgA
-          cover_image:                  //img.youtube.com/vi/dM7CmIHwJnU/maxresdefault.jpg
-          duration:                     "00:03:21"
+          <<:                           *album_olivia_dean_yt
+          title:                        Close Up
+          audio:                        watch?v=YFSEc_cANhw
+          rating:                       3
+          start:                        "00:00:01"
+          end:                          "00:03:10"
+          audio_info:                   //youtube.com/playlist?list=PL1dfVf_Yq5rGGTKx4Fi5PwX5TfPBXNP8p
+          cover_image:                  //img.youtube.com/vi/NM4e606yFJg/maxresdefault.jpg
+          duration:                     "00:03:10"
 
         # title 04
         - item:
           enabled:                      true
-          <<:                           *album_bea_yt
-          title:                        Never Ever Love a Liar (Live Session)
-          audio:                        watch?v=npctqyR5ZdU
-          rating:                       4
-          start:                        "00:00:03"
-          end:                          false # "00:02:50"
-          audio_info:                   //youtube.com/channel/UC_qruKTFPfMUJW6gsPGcwgA
-          cover_image:                  //img.youtube.com/vi/npctqyR5ZdU/maxresdefault.jpg
-          duration:                     "00:02:53"
+          <<:                           *album_olivia_dean_yt
+          title:                        So Easy (To Fall In Love)
+          audio:                        watch?v=3sur4BmjQt8
+          rating:                       3
+          start:                        "00:00:10"
+          end:                          "00:02:58"
+          audio_info:                   //youtube.com/playlist?list=PL1dfVf_Yq5rGGTKx4Fi5PwX5TfPBXNP8p
+          cover_image:                  //img.youtube.com/vi/NM4e606yFJg/maxresdefault.jpg
+          duration:                     "00:02:48"
 
         # title 05
         - item:
           enabled:                      true
-          <<:                           *album_bea_yt
-          title:                        Smoking Lessons (Live Session)
-          audio:                        watch?v=DMxz1Sp8RPA
-          rating:                       4
-          start:                        "00:00:03"
-          end:                          false
-          audio_info:                   //youtube.com/channel/UC_qruKTFPfMUJW6gsPGcwgA
-          cover_image:                  //img.youtube.com/vi/DMxz1Sp8RPA/maxresdefault.jpg
-          duration:                     "00:02:58"
+          <<:                           *album_olivia_dean_yt
+          title:                        Let Alone The One You Love
+          audio:                        watch?v=uxIjDwmc3uU
+          rating:                       3
+          start:                        "00:00:1"
+          end:                          "00:03:30"
+          audio_info:                   //youtube.com/playlist?list=PL1dfVf_Yq5rGGTKx4Fi5PwX5TfPBXNP8p
+          cover_image:                  //img.youtube.com/vi/NM4e606yFJg/maxresdefault.jpg
+          duration:                     "00:03:30"
 
         # title 06
         - item:
           enabled:                      true
-          <<:                           *album_bea_yt
-          title:                        Too Loud (And That's The Way I'm Going Out)
-          audio:                        watch?v=PcDCR8s0IU4
-          rating:                       4
-          start:                        "00:00:03"
-          end:                          false
-          audio_info:                   //youtube.com/channel/UC_qruKTFPfMUJW6gsPGcwgA
-          cover_image:                  //img.youtube.com/vi/PcDCR8s0IU4/maxresdefault.jpg
-          duration:                     "00:02:58"
+          <<:                           *album_olivia_dean_yt
+          title:                        Man I Need
+          audio:                        watch?v=oIv_Y2RPQ_A
+          rating:                       3
+          start:                        "00:00:02"
+          end:                          "00:03:06"
+          audio_info:                   //youtube.com/playlist?list=PL1dfVf_Yq5rGGTKx4Fi5PwX5TfPBXNP8p
+          cover_image:                  //img.youtube.com/vi/NM4e606yFJg/maxresdefault.jpg
+          duration:                     "00:03:04"
 
         # title 07
         - item:
           enabled:                      true
-          <<:                           *album_bea_yt
-          title:                        We're Not The Same
-          audio:                        watch?v=915zXRLgirM
+          <<:                           *album_olivia_dean_yt
+          title:                        Something Inbetween
+          audio:                        watch?v=DXt6EGHFkWc
           rating:                       3
           start:                        "00:00:03"
-          end:                          false
-          audio_info:                   //youtube.com/channel/UC_qruKTFPfMUJW6gsPGcwgA
-          cover_image:                  //img.youtube.com/vi/915zXRLgirM/maxresdefault.jpg
-          duration:                     "00:03:16"
+          end:                          "00:03:30"
+          audio_info:                   //youtube.com/playlist?list=PL1dfVf_Yq5rGGTKx4Fi5PwX5TfPBXNP8p
+          cover_image:                  //img.youtube.com/vi/NM4e606yFJg/maxresdefault.jpg
+          duration:                     "00:03:27"
 
         # title 08
         - item:
           enabled:                      true
-          <<:                           *album_bea_yt
-          title:                        Born To Be Alive
-          audio:                        watch?v=hu8VcmkM0yI
+          <<:                           *album_olivia_dean_yt
+          title:                        Loud
+          audio:                        watch?v=paKBrvjuemo
           rating:                       3
-          start:                        "00:00:03"
-          end:                          false
-          audio_info:                   //youtube.com/channel/UC_qruKTFPfMUJW6gsPGcwgA
-          cover_image:                  //img.youtube.com/vi/hu8VcmkM0yI/maxresdefault.jpg
-          duration:                     "00:02:37"
+          start:                        "00:00:01"
+          end:                          "00:03:01"
+          audio_info:                   //youtube.com/playlist?list=PL1dfVf_Yq5rGGTKx4Fi5PwX5TfPBXNP8p
+          cover_image:                  //img.youtube.com/vi/NM4e606yFJg/maxresdefault.jpg
+          duration:                     "00:03:00"
 
         # title 09
         - item:
           enabled:                      true
-          <<:                           *album_bea_yt
-          title:                        If I Was A God
-          audio:                        watch?v=eVcXzVMKf0I
+          <<:                           *album_olivia_dean_yt
+          title:                        Baby Steps
+          audio:                        watch?v=6kLEQi0u5rA
           rating:                       3
-          start:                        "00:00:03"
-          end:                          false
-          audio_info:                   //youtube.com/channel/UC_qruKTFPfMUJW6gsPGcwgA
-          cover_image:                  //img.youtube.com/vi/eVcXzVMKf0I/maxresdefault.jpg
-          duration:                     "00:02:55"
+          start:                        "00:00:02"
+          end:                          "00:03:14"
+          audio_info:                   //youtube.com/playlist?list=PL1dfVf_Yq5rGGTKx4Fi5PwX5TfPBXNP8p
+          cover_image:                  //img.youtube.com/vi/NM4e606yFJg/maxresdefault.jpg
+          duration:                     "00:03:12"
 
         # title 10
         - item:
           enabled:                      true
-          <<:                           *album_bea_yt
-          title:                        Safety Net (Cry in your bed version)
-          audio:                        watch?v=W5uafrpOZ6M
-          rating:                       5
-          start:                        "00:00:03"
+          <<:                           *album_olivia_dean_yt
+          title:                        A Couple Minutes
+          audio:                        watch?v=lrS1LC2cu-U
+          rating:                       3
+          start:                        false
           end:                          false
-          audio_info:                   //youtube.com/channel/UC_qruKTFPfMUJW6gsPGcwgA
-          cover_image:                  //img.youtube.com/vi/W5uafrpOZ6M/maxresdefault.jpg
-          duration:                     "00:02:55"
+          audio_info:                   //youtube.com/playlist?list=PL1dfVf_Yq5rGGTKx4Fi5PwX5TfPBXNP8p
+          cover_image:                  //img.youtube.com/vi/NM4e606yFJg/maxresdefault.jpg
+          duration:                     "00:03:32"
 
         # title 11
         - item:
           enabled:                      true
-          <<:                           *album_bea_yt
-          title:                        Rich
-          audio:                        watch?v=gyquo0Z6ngY
-          rating:                       2
-          start:                        "00:00:03"
-          end:                          false
-          audio_info:                   //youtube.com/channel/UC_qruKTFPfMUJW6gsPGcwgA
-          cover_image:                  //img.youtube.com/vi/gyquo0Z6ngY/maxresdefault.jpg
-          duration:                     "00:02:31"
+          <<:                           *album_olivia_dean_yt
+          title:                        I've Seen It
+          audio:                        watch?v=_hgu16lRfbQ
+          rating:                       3
+          start:                        "00:00:01"
+          end:                          "00:02:04"
+          audio_info:                   //youtube.com/playlist?list=PL1dfVf_Yq5rGGTKx4Fi5PwX5TfPBXNP8p
+          cover_image:                  //img.youtube.com/vi/NM4e606yFJg/maxresdefault.jpg
+          duration:                     "00:02:00"
 
         # title 12
         - item:
           enabled:                      true
-          <<:                           *album_bea_yt
-          title:                        The Scientist
-          audio:                        watch?v=UXMMm3CdRdI
+          <<:                           *album_olivia_dean_yt
+          title:                        Man I Need (Live)
+          audio:                        watch?v=JUGCQK8dUhc
           rating:                       3
-          start:                        "00:00:03"
-          end:                          false
-          audio_info:                   //youtube.com/channel/UC_qruKTFPfMUJW6gsPGcwgA
-          cover_image:                  //img.youtube.com/vi/UXMMm3CdRdI/maxresdefault.jpg
-          duration:                     "00:02:31"
-
-        # title 13
-        - item:
-          enabled:                      true
-          <<:                           *album_bea_yt
-          title:                        Sunburnt Shoulders
-          audio:                        watch?v=6-B2hDMR7S0
-          rating:                       3
-          start:                        "00:00:03"
-          end:                          false
-          audio_info:                   //youtube.com/channel/UC_qruKTFPfMUJW6gsPGcwgA
-          cover_image:                  //img.youtube.com/vi/6-B2hDMR7S0/maxresdefault.jpg
-          duration:                     "00:02:31"
-
-        # title 14
-        - item:
-          enabled:                      true
-          <<:                           *album_bea_yt
-          title:                        Nightmare Being 19 
-          audio:                        watch?v=s74aKArgOvU
-          rating:                       3
-          start:                        "00:00:03"
-          end:                          false
-          audio_info:                   //youtube.com/channel/UC_qruKTFPfMUJW6gsPGcwgA
-          cover_image:                  //img.youtube.com/vi/s74aKArgOvU/maxresdefault.jpg
-          duration:                     "00:02:31"
-
-        # title 15
-        - item:
-          enabled:                      true
-          <<:                           *album_bea_yt
-          title:                        WOW!
-          audio:                        watch?v=R0UJgMJJaio
-          rating:                       3
-          start:                        "00:00:03"
-          end:                          false
-          audio_info:                   //youtube.com/channel/UC_qruKTFPfMUJW6gsPGcwgA
-          cover_image:                  //img.youtube.com/vi/R0UJgMJJaio/maxresdefault.jpg
-          duration:                     "00:02:50"
-
-        # title 16
-        - item:
-          enabled:                      true
-          <<:                           *album_bea_yt
-          title:                        All The Boys
-          audio:                        watch?v=ffjNBbYa_oA
-          rating:                       3
-          start:                        "00:00:03"
-          end:                          false
-          audio_info:                   //youtube.com/channel/UC_qruKTFPfMUJW6gsPGcwgA
-          cover_image:                  //img.youtube.com/vi/ffjNBbYa_oA/maxresdefault.jpg
-          duration:                     "00:02:50"
+          start:                        "00:00:01"
+          end:                          "00:02:03"
+          audio_info:                   //youtu.be/JUGCQK8dUhc
+          cover_image:                  //img.youtube.com/vi/NM4e606yFJg/maxresdefault.jpg
+          duration:                     "00:02:00"
 
 # ------------------------------------------------------------------------------
 # END config

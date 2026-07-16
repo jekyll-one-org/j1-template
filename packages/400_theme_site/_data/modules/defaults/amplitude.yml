@@ -297,8 +297,10 @@ defaults:
     player_repeat:                      false                                   # enable|disable repeating the playlist on end (loop)
     player_shuffle:                     false                                   # enable|disable random play (playlist)
 
-    player_playback_rate:               small                                   # YT video resolution
-    player_fade_audio:                  true                                    # enable|disable audio faden in|out
+    player_playback_rate:               small   
+    player_fade_audio_speed:            slow                                    # speed for fading in|out (default|slow|slower|slowest)
+    player_fade_audio_in:               true                                    # enable|disable audio fade in
+    player_fade_audio_out:              false                                   # enable|disable audio fade out
     player_scroll_control:              false                                   # additional control on scrolling player song items
     player_auto_scroll_song_element:    true                                    # auto scroll of active player song items 
     player_scroller_song_element_min:   5                                       # number of player song items a scrollbat is added
@@ -360,6 +362,9 @@ defaults:
     volume_slider:                                                              # defaults only
       enabled:                          true                                    # true|false, enable volume slider in player
       preset_value:                     50                                      # default volume level (percent)
+      min_value:                        0
+      max_value:                        100
+      slider_step:                      1
 
     # --------------------------------------------------------------------------
     # PLAYER LEFT (playlist view)

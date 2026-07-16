@@ -39,8 +39,8 @@ regenerate:                             true
  #   3. _data/modules/amplitude_control.yml   (settings.players[] ..)  player
  #
  # Before this fix, the adapter read ALL runtime settings from the DEFAULTS
- # layer only ({{amplitude_default.player.*}}); per-player keys were read
- # RAW ({{player.*}}) without any fallthrough to the user or default layer,
+ # layer only (amplitude_default.player.*) per-player keys were read
+ # RAW (player.*) without any fallthrough to the user or default layer,
  # and the global options were built with the SHALLOW merge filter (any key
  # set on a higher layer dropped ALL sibling default keys of its subtree).
  # In addition, the (renamed) config variable amplitude_player was still
@@ -78,8 +78,7 @@ regenerate:                             true
  #     chain. The former expression fell back to the DEFAULT when a player
  #     set plugin_manager.enabled to FALSE (string 'false' is neither
  #     empty nor 'true'), so per-player false could not overload.
- # -----------------------------------------------------------------------------
-{% endcomment %}
+ # ----------------------------------------------------------------------------- {% endcomment %}
 
 {% comment %} claude - Fix Amplitude YAML data processing #2
  # -----------------------------------------------------------------------------
@@ -139,8 +138,7 @@ regenerate:                             true
  #   • JS: getInstanceOptions() — the logger calls are guarded (logger is
  #     assigned in init() as well and is 'undefined' on early calls; the
  #     error handlers would have thrown a follow-up TypeError).
- # -----------------------------------------------------------------------------
-{% endcomment %}
+ # ----------------------------------------------------------------------------- {% endcomment %}
 
 {% comment %} Liquid procedures
 -------------------------------------------------------------------------------- {% endcomment %}
@@ -167,32 +165,37 @@ regenerate:                             true
 
 {% comment %} Set config options
 -------------------------------------------------------------------------------- {% endcomment %}
+
 {% comment %} claude - Fix Amplitude YAML data processing #1
+--------------------------------------------------------------------------------
  Global options: DEEP merge of the chain defaults <- control (user settings).
  The media file is NO LONGER merged in: its only payload is the playlists
  array, read separately from amplitude_media.playlists. The former SHALLOW
  merge filter replaced the top-level 'player' and 'playlist' subtrees as a
  whole, so ANY key set on a higher layer silently dropped ALL sibling
  default keys of that subtree.
+
  Original (deprecated, preserved for reference):
-{% assign amplitude_options   = amplitude_default | merge: amplitude_control | merge: amplitude_media %}
-{% endcomment %}
-{% assign amplitude_options   = amplitude_default | deep_merge: amplitude_control %}
+  {% assign amplitude_options = amplitude_default | merge: amplitude_control | merge: amplitude_media %} 
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign amplitude_options   = amplitude_default | merge: amplitude_control %}
 
 {% comment %} claude - Fix Amplitude YAML data processing #1
+--------------------------------------------------------------------------------
  Global EFFECTIVE subtrees (chain: defaults <- user settings). Source for
  the page-global runtime variables of the adapter. The user layer is the
  optional GLOBAL 'player' | 'playlist' section of amplitude_control.yml
  (applies to ALL players of a page); per-player overloads are resolved at
  the loop sites (player_effective) and by getInstanceOptions().
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign amplitude_player_global   = amplitude_default.player %}
+{% assign amplitude_player_global     = amplitude_default.player %}
 {% if amplitude_control.player %}
-  {% assign amplitude_player_global = amplitude_player_global | deep_merge: amplitude_control.player %}
+  {% assign amplitude_player_global   = amplitude_player_global | merge: amplitude_control.player %}
 {% endif %}
+
 {% assign amplitude_playlist_global   = amplitude_default.playlist %}
 {% if amplitude_control.playlist %}
-  {% assign amplitude_playlist_global = amplitude_playlist_global | deep_merge: amplitude_control.playlist %}
+  {% assign amplitude_playlist_global = amplitude_playlist_global | merge: amplitude_control.playlist %}
 {% endif %}
 
 {% comment %} Detect prod mode

@@ -110,5 +110,98 @@ settings:
           playlist:
             enabled:                    true
 
+
+
+      # GENERAL settings
+      #
+      enabled:                          true
+      id:                               player_tiny_desk_concerts
+      description:                      NPR Tiny Desk Concerts
+
+      # PLAYLIST settings
+      #
+      playlist:
+        preload:                        [ tinydesk-concerts.json ]
+        preload_attempts:               4
+
+        type:                           cards                                   # list | cards
+
+        cards:
+          perRow:                       3
+
+      # UI interface settings
+      #
+      ui_elements:
+        edit_playlist_button:           false
+
+        playlist_rate_button:           true
+        playlist_edit_button:           true
+        playlist_delete_button:         false
+
+        mergeSwitch:                    false
+
+      # VIDEOJS settings
+      #
+      videoJS:
+        autoStart:                      true
+
+        playbackRates:
+          enabled:                      true
+          values:                       [ 0.5, 1, 2 ]
+
+        plugins:
+          enabled:                      true
+
+          playlist:
+            enabled:                    true
+
+    # --------------------------------------------------------------------------
+    # Player 4 – Olivia Dean
+    #
+    - player:
+
+      # GENERAL settings
+      #
+      enabled:                          true
+      id:                               player_olivia_dean
+      description:                      Olivia Dean - The Art Of Loving
+
+      # PLAYLIST settings
+      #
+      playlist:
+        preload:                        [ olivia-dean.json ]
+        preload_attempts:               4
+
+        type:                           cards                                   # list | cards
+
+        cards:
+          perRow:                       3
+
+      # UI interface settings
+      #
+      ui_elements:
+        edit_playlist_button:           false
+
+        playlist_rate_button:           true
+        playlist_edit_button:           true
+        playlist_delete_button:         false
+
+        mergeSwitch:                    false
+
+      # VIDEOJS settings
+      #
+      videoJS:
+        autoStart:                      true
+
+        playbackRates:
+          enabled:                      true
+          values:                       [ 0.5, 1, 2 ]
+
+        plugins:
+          enabled:                      true
+
+          playlist:
+            enabled:                    true
+
 # ------------------------------------------------------------------------------
 # END config

@@ -182,7 +182,9 @@ regenerate:                             true
   var playerScrollerSongElementMin    = {{amplitude_default.player.player_scroller_song_element_min}};
   var playerScrollControl             = {{amplitude_default.player.player_scroll_control}};
   var playerAutoScrollSongElement     = {{amplitude_default.player.player_auto_scroll_song_element}};
-  var playerFadeAudio                 = {{amplitude_default.player.player_fade_audio}};
+  var playerFadeAudioIn               = {{amplitude_default.player.player_fade_audio_in}};
+  var playerFadeAudioOut              = {{amplitude_default.player.player_fade_audio_out}};
+  var playerFadeAudioSpeed            = '{{amplitude_default.player.player_fade_audio_speed}}';  
   var playerPlaybackRate              = '{{amplitude_default.player.player_playback_rate}}';
 
   var muteAfterVideoSwitchInterval    = {{amplitude_default.player.mute_after_video_switch_interval}};
@@ -239,13 +241,13 @@ regenerate:                             true
     ytpSeekTo(player, startSec, true);
 
     // fade-in audio (if enabled)
-    if (playerFadeAudio) {
+    if (playerFadeAudioIn) {
       currentVolume = player.getVolume();
-      isDev && logger.debug('\n' + `FADE-IN audio on StateChange at trackID|VideoID: ${trackID}|${videoID}`);
+      isDev && logger.debug('\n' + `FADE-IN audio on StateChange at trackID|VideoID: ${trackID}|${videoID} at ${currentVolume}%`);
       ytpFadeInAudio({
         playerID:     playerID,
         targetVolume: currentVolume,
-        speed:        'default'
+        speed:        playerFadeAudioSpeed
       });
     } // END if playerFadeAudio
 
@@ -280,11 +282,11 @@ regenerate:                             true
     }
 
     // fade-out audio (if enabled)
-    if (isVideoChanged && playerFadeAudio) {
+    if (isVideoChanged && playerFadeAudioOut) {
       isDev && logger.debug('\n' + `FADE-OUT audio on processOnVideoEnd at trackID|VideoID: ${trackID}|${activeVideoID}`);
       ytpFadeOutAudio({
-      playerID:     playerID,
-      speed:        'default'
+        playerID:     playerID,
+        speed:        playerFadeAudioSpeed
       });
     } // END if playerFadeAudio
 

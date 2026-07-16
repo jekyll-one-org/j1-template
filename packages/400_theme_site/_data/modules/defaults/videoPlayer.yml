@@ -125,6 +125,7 @@ defaults:
 
     close_on_play:                      false
     pip:                                false
+
     type:                               list                                    # list | cards
 
     cards:
