@@ -7,7 +7,7 @@ exclude_from_search:                    true
 
 {% comment %}
  # -----------------------------------------------------------------------------
- # ~/assets/data/swiper.html (2)
+ # ~/assets/data/swiper.html (3)
  # Generate the HTML portion for all SwiperJS Sliders
  #
  # Product/Info:
@@ -22,6 +22,39 @@ exclude_from_search:                    true
  # -----------------------------------------------------------------------------
  # Test data:
  #    {{variable | debug}}
+ # -----------------------------------------------------------------------------
+ # Fix J1 SwiperJS HTML processing #1
+ #
+ # Issue reported by the HTML|A11y validators:
+ #   "Lists do not contain only <li> elements and script supporting elements
+ #    (<script> and <template>)."                            [Lighthouse|axe]
+ #   "Element style not allowed as child of element ul in this context."  [Nu]
+ #
+ # Cause (HTML portion, this file):
+ #   Layout text/parallax emitted two <style> elements as DIRECT children of
+ #   <ul class="swiper-wrapper">. The content model of ul|ol|menu permits <li>
+ #   and script-supporting elements (<script>, <template>) ONLY.
+ #
+ # Cause (runtime, see ~/assets/theme/j1/adapter/js/swiper.js):
+ #   The SwiperJS a11y module (enabled by DEFAULT) stamps role="group" on every
+ #   .swiper-slide (parameter a11y.slideRole, default 'group'). On the ul|li
+ #   markup used here, that overrides the implicit role 'listitem' of the <li>
+ #   elements, so the <ul> ends up with NO listitem children at all. Fixed in
+ #   the adapter, NOT in this file.
+ #
+ # Fix (this file):
+ #   Both <style> elements (and the Liquid var initialization they depend on)
+ #   are RELOCATED out of the swiper wrapper. Nothing is deleted. The swiper
+ #   wrapper now contains <li class="swiper-slide"> elements only.
+ #
+ # Out of scope (flagged for a follow-up fix):
+ #   1. <style> in <body> is itself rejected by the Nu validator ("Element
+ #      style not allowed as child of element div in this context"). The
+ #      parallax CSS should move to a real stylesheet or be injected into
+ #      <head> by the adapter.
+ #   2. The parallax CSS is NOT scoped by swiper id. Two enabled swipers of
+ #      layout text/parallax overwrite each others background-image and
+ #      quote-text color.
  # -----------------------------------------------------------------------------
 {% endcomment %}
 
@@ -100,7 +133,7 @@ media_set.image_defaults: {{media_set.image_defaults | debug}}
     <!-- [INFO   ] [~/assets/data/swiper.html                      ] [ exclude data file from GLOBAL _site/sitemap.xml (robots) ] -->
     <meta name="robots" content="noindex, nofollow">
     <!-- [INFO   ] [~/assets/data/swiper.html                      ] [ exclude data file from LOCAL search index _site/assets/data/lunr-index.json ] -->
-    <meta type="module" content="html data file">
+    <meta type="swiper" content="html data file">
   </head>
   <body>
 
@@ -156,6 +189,76 @@ media_set.image_defaults: {{media_set.image_defaults | debug}}
       {% if swiper_type == 'text' and swiper_layout == 'parallax' %}
 
       <!-- Text Swipers, Layout Parallax -->
+
+      {% comment %} Fix J1 SwiperJS HTML processing #1
+      --------------------------------------------------------------------------
+      RELOCATED (not deleted). The Liquid var initialization AND both <style>
+      elements below were placed INSIDE <ul class="swiper-wrapper"> before. The
+      content model of a list (ul|ol|menu) allows <li> and script-supporting
+      elements (<script>, <template>) ONLY. Any <style> found as a direct child
+      of the wrapper makes the list structure invalid:
+
+        [Nu]         Element "style" not allowed as child of element "ul"
+                     in this context.
+        [Lighthouse] Lists do not contain only <li> elements and script
+                     supporting elements (<script> and <template>).
+
+      Both <style> elements depend on the (current) swiper ONLY, NOT on the
+      media_set being processed. They were nested in the media_set loop by
+      accident and are hoisted OUT of the wrapper (and out of the loop) here.
+      Original position: see marker "Fix J1 SwiperJS HTML processing #1
+      (styles relocated)" below.
+      -------------------------------------------------------------------------- {% endcomment %}
+
+      {% comment %} set default or configured background-image
+      Fix J1 SwiperJS HTML processing #1
+      -------------------------------------------------------------------------- {% endcomment %}
+      {% assign background-image = '/assets/image/quote/default.jpg' %}
+      {% if swiper.background-image and swiper.background-image != empty %}
+        {% assign background-image = swiper.background-image %}
+      {% endif %}
+
+      {% comment %} set default or configured quote-text color
+      Fix J1 SwiperJS HTML processing #1
+      -------------------------------------------------------------------------- {% endcomment %}
+      {% assign quote-text-color = 'rgba(255, 255, 255, .75)' %}
+      {% if swiper.quote-text-color and swiper.quote-text-color != empty %}
+        {% assign quote-text-color = swiper.quote-text-color %}
+      {% endif %}
+
+      {% comment %} Place 1-pixel grid on background-image if enabled
+      -------------------------------------------------------------------------- {% endcomment %}
+      {% if swiper.gridify %}
+      <!-- Fix J1 SwiperJS HTML processing #1: style hoisted out of the wrapper -->
+      <style>
+      .swiper-text-parallax:before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: url(/assets/image/pattern/image/gridtile.png) repeat;
+      }
+      </style>
+      {% endif %}
+
+      {% comment %} jadams. 2025-02-26: place background-image|quote-text color
+      -------------------------------------------------------------------------- {% endcomment %}
+      <!-- Fix J1 SwiperJS HTML processing #1: style hoisted out of the wrapper -->
+      <style>
+        .swiper-text-parallax {
+          width: 100%;
+          height: 100%;
+          padding: 75px 0 75px 0;
+          position: relative;
+          background: url({{background-image}}) 50% 0 repeat fixed;
+        }
+        .swiper-text-parallax .swiper-wrapper .swiper-slide p {
+          color: {{quote-text-color}};
+        }
+      </style>
+
       <div id="{{swiper.id}}">
         <!-- Swiper elements (El) -->
         <div class="swiper swiper-container {{swiper.container_classes}}">
@@ -164,51 +267,13 @@ media_set.image_defaults: {{media_set.image_defaults | debug}}
           <ul class="swiper-wrapper">
           {% for media_set in swiper_media_sets %} {% if media_set.enabled %} {% if media_set.name == swiper.media_set %}
 
-            {% comment %} Place 1-pixel grid on background-image if enabled
+            {% comment %} Fix J1 SwiperJS HTML processing #1 (styles relocated)
+            --------------------------------------------------------------------
+            Original position of the Liquid var initialization and of both
+            <style> elements. Moved OUT of <ul class="swiper-wrapper"> and out
+            of the media_set loop, see the fix block above. The wrapper now
+            contains <li> elements only.
             -------------------------------------------------------------------- {% endcomment %}
-            {% if swiper.gridify %}
-            <style>              
-            .swiper-text-parallax:before {
-              content: "";
-              position: absolute;
-              top: 0;
-              left: 0;
-              width: 100%;
-              height: 100%;
-              background: url(/assets/image/pattern/image/gridtile.png) repeat;
-            }            
-            </style>
-            {% endif %}
-
-            {% comment %} set default or configured background-image
-            -------------------------------------------------------------------- {% endcomment %}
-            {% assign background-image = '/assets/image/quote/default.jpg' %}
-            {% if swiper.background-image and swiper.background-image != empty %}
-              {% assign background-image = swiper.background-image %}
-            {% endif %}
-
-            {% comment %} set default or configured quote-text color
-            -------------------------------------------------------------------- {% endcomment %}
-            {% assign quote-text-color = 'rgba(255, 255, 255, .75)' %}
-            {% if swiper.quote-text-color and swiper.quote-text-color != empty %}
-              {% assign quote-text-color = swiper.quote-text-color %}
-            {% endif %}
-
-            {% comment %} jadams. 2025-02-26: place background-image|quote-text color
-            -------------------------------------------------------------------- {% endcomment %}
-            <style>
-              .swiper-text-parallax {
-                width: 100%;
-                height: 100%;
-                padding: 75px 0 75px 0;
-                position: relative;
-                background: url({{background-image}}) 50% 0 repeat fixed;
-              }
-              .swiper-text-parallax .swiper-wrapper .swiper-slide p {
-                color: {{quote-text-color}};
-              }
-            </style>
-
 
             {% for slide in media_set.items %} {% if slide.enabled  %}
             <li class="swiper-slide">

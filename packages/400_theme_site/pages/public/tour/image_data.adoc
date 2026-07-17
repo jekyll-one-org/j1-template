@@ -399,15 +399,12 @@ gallery::jg_mega_cities[role="mt-4 mb-4"]
 == What next
 
 We hope you enjoyed exploring what the J1 Template can do with images.
-But there is much more  -- next up is *audio*.
-
-The J1 Template plays both *audio* and *video* on web pages using
-*HTML5*, the modern web standard. HTML5 plays audio and video right
-in the browser, so visitors do not need any extra software.
-
-Older players such as *Flash Player*, *QuickTime*, and *Silverlight*
-are no longer needed. The J1 Template plays media files from your own
-website *and* from online sources on the Internet.
+But there is much more -- next up is *audio*. The J1 Template plays both
+*audio* and *video* on web pages using *HTML5*, the modern web standard.
+HTML5 plays audio and video right in the browser, so visitors do not need
+any extra software. Older players such as *Flash Player*, *QuickTime*,
+and *Silverlight* are no longer needed. The J1 Template plays media files
+from your own website *and* from online sources on the Internet.
 
 Curious? Have a look at the link:{url-tour--audio_data}[Audio Player]
 page next.

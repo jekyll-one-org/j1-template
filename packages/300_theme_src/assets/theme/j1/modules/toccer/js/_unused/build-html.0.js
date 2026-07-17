@@ -1,8 +1,8 @@
 /*
  # -----------------------------------------------------------------------------
- # ~/js/tocbot/tocbot/import/build-html.js (1)
+ # ~/js/tocbot/tocbot/import/build-html.js (0)
  # Building the DOM and updating DOM state for tocbot
- # Tocbot v4.36.4, fix #1
+ # Tocbot v4.36.4
  #
  # Product/Info:
  # https://jekyll.one
@@ -208,18 +208,10 @@ export default function (options) {
     const clickedHref = (event && event.target && event.target.getAttribute)
       ? event.target.getAttribute('href')
       : null;
-
-    // Fix J1 Toccer offsetTop issue #1
-    // The click listener is bound to the *document* (option `scrollContainer`
-    // is null in J1 Toccer). Therefore EVERY anchor of a page passes this
-    // function, not only the links of the TOC: dropdown|collapse|tab toggles,
-    // back-to-top buttons, mmenu controls or plain `href="#"` links.
-    // For those hrefs NO heading element exists, `document.getElementById()`
-    // returned null and reading `offsetTop` on null threw the TypeError.
-    // The id is now extracted defensively and verified to exist in the DOM.
-    //
-    const clickedId = getIdFromHref(clickedHref);
-    const isBottomMode = clickedId ? getIsHeaderBottomMode(clickedId) : false;
+    const isBottomMode =
+      clickedHref && clickedHref.charAt(0) === '#'
+        ? getIsHeaderBottomMode(clickedHref.replace('#', ''))
+        : false;
     const shouldUpdate = currentlyHighlighting || isBottomMode;
     if (event && eventCount < 5) {
       eventCount++;
@@ -228,29 +220,11 @@ export default function (options) {
     if (shouldUpdate && !!tocElement && headings.length > 0) {
       const topHeader = getTopHeader(headings);
 
-      // Fix J1 Toccer offsetTop issue #1
-      // `getTopHeader()` may return undefined (e.g. if the headings of the
-      // content got replaced|removed by an AJAX load while a click or scroll
-      // event is still queued). Reading `topHeader.id` crashed in that case.
-      //
-      if (!topHeader) {
-        return;
-      }
-
       const oldActiveTocLink = tocElement.querySelector(
         `.${options.activeLinkClass}`
       );
 
-      // Fix J1 Toccer offsetTop issue #1
-      // Keep the RAW id and the CSS-escaped id apart:
-      // `document.getElementById()` expects the RAW id while `querySelector()`
-      // needs the escaped variant. Passing the escaped id (backslashes added)
-      // to `getIsHeaderBottomMode()` made `getElementById()` return null for
-      // all ids containing special characters (dots, colons, brackets, GUIDs)
-      // which caused the very same `offsetTop` TypeError.
-      //
-      const topHeaderRawId = topHeader.id || '';
-      const topHeaderId = topHeaderRawId.replace(
+      const topHeaderId = topHeader.id.replace(
         /([ #;&,.+*~':"!^$[\]()=>|/\\@])/g,
         '\\$1'
       );
@@ -259,16 +233,13 @@ export default function (options) {
 
       // Handle case where they clicked a link that cannot be scrolled to.
       const isPageBottomMode = getIsPageBottomMode();
-      if (clickedId && isBottomMode) {
-        activeId = clickedId;
+      if (clickedHref && isBottomMode) {
+        activeId = clickedHref.replace('#', '');
       } else if (
         hashId &&
-        // Fix J1 Toccer offsetTop issue #1
-        // compare the hash (raw) against the RAW id, not the escaped one
-        //
-        hashId !== topHeaderRawId &&
+        hashId !== topHeaderId &&
         isPageBottomMode &&
-        (getIsHeaderBottomMode(topHeaderRawId) || eventCount <= 2)
+        (getIsHeaderBottomMode(topHeaderId) || eventCount <= 2)
       ) {
         // This is meant to handle the case
         // of showing the items as highlighted when they
@@ -396,68 +367,9 @@ export default function (options) {
     return currentlyHighlighting;
   }
 
-  /**
-   * Extract the RAW element id out of an in-page href like '#section-1'.
-   * Returns an empty string for all hrefs that do NOT address an in-page
-   * anchor ('#', '', '/page#id', 'https://...', null).
-   * Fix J1 Toccer offsetTop issue #1
-   * 
-   * @param {string|null} href
-   * @return {string}
-   */
-  function getIdFromHref(href) {
-    if (typeof href !== 'string' || href.charAt(0) !== '#') {
-      return '';
-    }
-    return href.slice(1);
-  }
-
-  /**
-   * Resolve a heading element for a given id. Returns null (instead of
-   * throwing) if the id is empty or no element of that id exists.
-   * Percent encoded ids (e.g. umlauts taken from `location.hash`) are
-   * resolved by a decoded fallback lookup.
-   * Fix J1 Toccer offsetTop issue #1
-   * 
-   * @param {string} headerId RAW (unescaped) element id
-   * @return {HTMLElement|null}
-   */
-  function findHeadingById(headerId) {
-    if (typeof headerId !== 'string' || headerId === '') {
-      return null;
-    }
-
-    let heading = document.getElementById(headerId);
-    if (!heading) {
-      try {
-        const decodedId = decodeURIComponent(headerId);
-        if (decodedId !== headerId) {
-          heading = document.getElementById(decodedId);
-        }
-      } catch (e) {
-        // malformed URI sequence, keep heading null
-      }
-    }
-    return heading;
-  }
-
   function getIsHeaderBottomMode(headerId) {
-    // Fix J1 Toccer offsetTop issue #1
-    // Bail out if the id does NOT belong to a heading (or any element) of
-    // the current page. This is the actual cause of the runtime error
-    // "Cannot read properties of null (reading 'offsetTop')": the heading
-    // was looked up unchecked and `null.offsetTop` was read.
-    //
-    const activeHeading = findHeadingById(headerId);
-    if (!activeHeading) {
-      return false;
-    }
-
     const scrollEl = getScrollEl();
-    if (!scrollEl) {
-      return false;
-    }
-
+    const activeHeading = document.getElementById(headerId);
     const isBottomMode =
       activeHeading.offsetTop >
       scrollEl.offsetHeight -

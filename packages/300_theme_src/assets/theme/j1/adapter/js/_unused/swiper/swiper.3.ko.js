@@ -6,7 +6,7 @@ regenerate:                             true
 
 {% comment %}
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/adapter/js/swiper.js (2)
+ # ~/assets/theme/j1/adapter/js/swiper.js (3)
  # Liquid template to adapt J1 SwiperJS Apps
  #
  # Product/Info:
@@ -19,6 +19,53 @@ regenerate:                             true
  # Test data:
  #  {{ liquid_var | debug }}
  #  swiper_options:  {{ swiper_options | debug }}
+ # -----------------------------------------------------------------------------
+ # Fix J1 SwiperJS HTML processing #1
+ #
+ # Issue reported by the HTML validators:
+ #
+ #   "Lists do not contain only <li> elements and script supporting elements
+ #    (<script> and <template>)."                               [Lighthouse|axe]
+ #   "An li element that is a descendant of a ul, ol, or menu element with no
+ #    explicit role value ... must not have any role value other than
+ #    listitem."                                                            [Nu]
+ #   "An element with role=group must not be a child of an element with
+ #    role=list."                                                           [Nu]
+ #
+ # Cause:
+ #
+ #   ~/assets/data/swiper.html builds the swiper wrapper as a LIST:
+ #     <ul class="swiper-wrapper"><li class="swiper-slide"> ... </li></ul>
+ #   The SwiperJS a11y module is enabled by DEFAULT (a11y.enabled: true) and
+ #   stamps the value of a11y.slideRole (default: 'group') on EVERY slide once
+ #   the Swiper is created:
+ #     <li class="swiper-slide" role="group" aria-label="1 / 5">
+ #   An explicit role REPLACES the implicit role of an element. So each <li>
+ #   loses its implicit role 'listitem' and the <ul> (implicit role 'list') is
+ #   left with zero listitem children -> the list structure is reported as
+ #   broken. The validators inspect the LIVE DOM, which is why the authored
+ #   HTML portion looks correct and the sliders still work error-free.
+ #
+ # Fix:
+ #
+ #   New method enforceListSemantics() checks the tag name of the swiper
+ #   wrapper. On a list based wrapper (ul|ol|menu) the a11y slide role is
+ #   turned OFF (a11y.slideRole: '') so SwiperJS does NOT stamp a role and the
+ #   <li> elements keep their implicit role 'listitem'. Wrappers built as
+ #   <div> and an explicitly configured slideRole other than 'group' are left
+ #   untouched. To apply the fix, the Swiper parameters are built as an object
+ #   FIRST and post-processed before the Swiper is created.
+ #
+ # Out of scope (flagged for a follow-up fix):
+ #
+ #   1. {% raw %}{% if swiper_layout != 'Base' or swiper_layout != 'Parallax' %}{% endraw %}
+ #      is always TRUE (a != x OR a != y can never be false). Layout modules
+ #      are added unconditionally.
+ #
+ #   2. swiper.modules.navigation (layouts panorama|neighbor|stacked|expanded)
+ #      vs swiper.module_settings.navigation (layout base|thumbs) in
+ #      ~/assets/data/swiper.html: inconsistent config key.
+ #
  # -----------------------------------------------------------------------------
 {% endcomment %}
 
@@ -59,7 +106,7 @@ regenerate:                             true
 
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/adapter/js/swiper.js (2)
+ # ~/assets/theme/j1/adapter/js/swiper.js (3)
  # J1 Adapter for the swiper module
  #
  # Product/Info:
@@ -205,7 +252,10 @@ j1.adapter.swiper = ((j1, window) => {
               const swiperEl      = slider.querySelector('.swiper');
 
               {% if swiper_layout != 'Stacked' %}
-              const {{swiper.id}} = new Swiper(swiperEl, {             
+              // Fix J1 SwiperJS HTML processing #1
+              // Original (deprecated, preserved for reference):
+              // const {{swiper.id}} = new Swiper(swiperEl, {
+              var swiperParams_{{swiper.id}} = {
                 // set swiper CORE parameter settings
                 {% if swiper.parameters %}
                 {% for setting in swiper.parameters %}
@@ -245,15 +295,38 @@ j1.adapter.swiper = ((j1, window) => {
                 {% endif %}
                 // end swiper EVENT settings
 
-              }); // end setup slider
+              // Fix J1 SwiperJS HTML processing #1
+              // Original (deprecated, preserved for reference):
+              // }); // end setup slider
+              };                                                                
+
+              // keep the list structure of the swiper wrapper valid
+              // Fix J1 SwiperJS HTML processing #1
+              // ---------------------------------------------------------------
+              _this.enforceListSemantics(swiperEl, swiperParams_{{swiper.id}});
+
+              const {{swiper.id}} = new Swiper(swiperEl, swiperParams_{{swiper.id}});
               {% else %}
-              const {{swiper.id}} = new Swiper(swiperEl, {             
+              // Fix J1 SwiperJS HTML processing #1
+              // Original (deprecated, preserved for reference):
+              // const {{swiper.id}} = new Swiper(swiperEl, {
+              var swiperParams_{{swiper.id}} = {
                 // set swiper LAYOUT module settings
                 // -------------------------------------------------------------
                 {% if swiper_layout != 'Base' or swiper_layout != 'Parallax' %}
                 modules: [Layout{{swiper_layout}}],
                 {% endif %}
-              }); // end setup slider              
+              // Fix J1 SwiperJS HTML processing #1
+              // Original (deprecated, preserved for reference):
+              // }); // end setup slider
+              };
+
+              // keep the list structure of the swiper wrapper valid
+              // Fix J1 SwiperJS HTML processing #1
+              // ---------------------------------------------------------------
+              _this.enforceListSemantics(swiperEl, swiperParams_{{swiper.id}});
+
+              const {{swiper.id}} = new Swiper(swiperEl, swiperParams_{{swiper.id}});
               {% endif %}
 
               {% if swiper.lightbox.enabled %}
@@ -404,6 +477,78 @@ j1.adapter.swiper = ((j1, window) => {
       j1.consoleLog(isDev, 'DEBUG', CONSOLE_LOG_ID, MODULE_NAME, `swipers loaded in page enabled|all: ${activeSwipers}|${numSwipers}`);
       _this.setState('data_loaded');
     }, // END loadSwiperHTML
+
+    // -------------------------------------------------------------------------
+    // Fix J1 SwiperJS HTML processing #1
+    // enforceListSemantics(swiperEl, params)
+    // Keep the LIST structure of a swiper wrapper valid.
+    //
+    // The HTML portion (~/assets/data/swiper.html) builds the swiper wrapper
+    // as a list:
+    //
+    //   <ul class="swiper-wrapper">
+    //     <li class="swiper-slide"> ... </li>
+    //   </ul>
+    //
+    // The SwiperJS a11y module is enabled by DEFAULT and stamps the value of
+    // a11y.slideRole (default: 'group') on every .swiper-slide once the Swiper
+    // is created. An explicit role REPLACES the implicit role of an element,
+    // so every <li> loses its implicit role 'listitem' and the <ul> is left
+    // with no listitem children. Validators inspecting the live DOM report:
+    //
+    //   [Lighthouse|axe] Lists do not contain only <li> elements and script
+    //                    supporting elements (<script> and <template>).
+    //   [Nu]             An element with role=group must not be a child of an
+    //                    element with role=list.
+    //
+    // On a list based wrapper (ul|ol|menu) the slide role is turned OFF, so
+    // NO role attribute is written and the <li> elements keep their implicit
+    // role 'listitem'. The aria-label of a slide (a11y.slideLabelMessage) is
+    // valid on role 'listitem' and stays untouched.
+    //
+    // NOT modified:
+    //   - wrappers built as <div> (stock SwiperJS markup): role 'group' is the
+    //     recommended ARIA carousel pattern there
+    //   - a11y explicitly disabled: no roles are stamped anyway
+    //   - a11y.slideRole explicitly configured (YAML) to a value other than
+    //     the SwiperJS default 'group'
+    //
+    // Returns the params object (modified in place).
+    // -------------------------------------------------------------------------
+    enforceListSemantics: (swiperEl, params) => {
+      var listTags = ['UL', 'OL', 'MENU'];
+      var wrapperEl;
+      var a11y;
+
+      if (!swiperEl || !params) {
+        return params;
+      }
+
+      wrapperEl = swiperEl.querySelector('.swiper-wrapper');
+      if (!wrapperEl || listTags.indexOf(wrapperEl.tagName.toUpperCase()) === -1) {
+        return params;                                                          // wrapper is NOT a list, nothing to do
+      }
+
+      // a11y switched off explicitly: no roles are stamped at all
+      if (params.a11y === false || (params.a11y && params.a11y.enabled === false)) {
+        return params;
+      }
+
+      a11y = (params.a11y === true || params.a11y === undefined || params.a11y === null)
+             ? {}
+             : params.a11y;
+
+      // respect an explicitly configured (YAML) slide role
+      if (a11y.slideRole === undefined || a11y.slideRole === 'group') {
+        a11y.slideRole = '';                                                    // falsy: SwiperJS skips addElRole() on the slides
+      }
+      params.a11y = a11y;
+
+      logger.debug('\n' + `list based swiper wrapper detected on tag: ${wrapperEl.tagName.toLowerCase()}`);
+      logger.debug('\n' + `a11y slide role set to: ${a11y.slideRole === '' ? '(none)' : a11y.slideRole}`);
+
+      return params;
+    }, // END enforceListSemantics
 
     // -------------------------------------------------------------------------
     // findModuleByName(array, functionName)

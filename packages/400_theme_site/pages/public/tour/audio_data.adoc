@@ -250,12 +250,10 @@ We hope you enjoyed exploring the J1 Audio features. The J1 Template
 can do much more with multimedia, of course -- starting with *video*.
 The J1 Template supports playing video on web pages with *HTML5 video*,
 the modern web standard and using VideoJS a free, open-source video player
-for the web.
-
-The Template system provides VideoJS to play your own video files and video
-from several online platforms such as YouTube. VideoJS supports plugins that
-add new features. With plugins, the same player can show videos from many
-different sources, all with the same look and feel — a much better experience
-for your visitors.
+for the web. The Template system provides VideoJS to play your own video
+files and video from several online platforms such as YouTube. VideoJS
+supports plugins that add new features. With plugins, the same player
+can show videos from many different sources, all with the same look and
+feel -- a much better experience for your visitors.
 
 Curious? Have a look at the following page: link:{url-tour--video_data}[Video Player].

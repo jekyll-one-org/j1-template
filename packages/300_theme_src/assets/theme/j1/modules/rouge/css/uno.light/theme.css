@@ -81,7 +81,7 @@
   font-weight: bold;
 }
 .highlight .gu {
-  color: #aaaaaa;
+  color: #424242;
 }
 .highlight .gt {
   color: #aa0000;
@@ -179,7 +179,9 @@
   color: #616161;
 }
 .highlight .nb {
-  color: #0086B3;
+  /* color: #0086B3; */
+  color: #455A64;
+  font-weight: bold;
 }
 .highlight .nc {
   color: #445588;

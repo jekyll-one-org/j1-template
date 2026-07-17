@@ -320,17 +320,13 @@ masonry::youtube[role="mb-4"]
 [role="mt-5"]
 == What next
 
-Images and videos can be powerful, but on most websites the *most
-important* element is still the text -- and how that text looks.
+Images and videos are powerful visual tools, but on most websites, the most
+important element is still the text and how it looks. Many website templates
+have trouble making text work well on different screen sizes. They might
+resize boxes and images, but the text size often stays the same. The J1 Template 
+fixes this with responsive text, which automatically changes its size and
+line height so it is always easy to read on any device. In the J1 Template,
+typography is seen as a key part of your website’s branding.
 
-Many website templates do not handle text well on different screen
-sizes. They resize boxes and images, but the text size stays the same.
-The J1 Template fixes this with *responsive text*: text that
-automatically scales in size and line height to stay easy to read on
-every device.
-
-In the J1 Template, *typography* -- the way text looks -- is treated as
-one of the most important branding elements of your website. Good
-typography gives your site a clear character, almost like a logo.
-
+Good typography gives your site a clear character, almost like a logo.
 Want to see how it works? Move on to link:{url-tour--typography}[Typography].
