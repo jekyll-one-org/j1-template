@@ -6,7 +6,7 @@ regenerate:                             true
 
 {% comment %}
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/adapter/js/swiper.js (2)
+ # ~/assets/theme/j1/adapter/js/swiper.js (3)
  # Liquid template to adapt J1 SwiperJS Apps
  #
  # Product/Info:
@@ -21,6 +21,93 @@ regenerate:                             true
  #  swiper_options:  {{ swiper_options | debug }}
  # -----------------------------------------------------------------------------
 {% endcomment %}
+
+{% comment %} claude - Fix J1 Swiper YAML data processing #1
+ # -----------------------------------------------------------------------------
+ # PER-SWIPER CONFIG INHERITANCE CHAIN (adapter)
+ #
+ #   swiper settings -> overload user settings -> overload default settings
+ #
+ # Effective settings for ONE swiper instance are now built as a DEEP merge
+ # of the three YAML layers (later layers overwrite earlier layers per key,
+ # missing keys fall through):
+ #
+ #   1. _data/modules/defaults/swiper.yml   (defaults ..............)  base
+ #   2. _data/modules/swiper_control.yml    (settings, w/o swipers ..)  user
+ #                                          optional GLOBAL section
+ #   3. _data/modules/swiper_control.yml    (settings.swipers[] ....)  swiper
+ #
+ # Before this fix the adapter read EVERY per-swiper key RAW from the loop
+ # variable (swiper.parameters, swiper.module_settings, swiper.lightbox.*,
+ # swiper.events) with NO fallthrough to the user or default layer. A key not
+ # declared on the swiper entry resolved to Liquid 'nil' — NOT to its
+ # default, so the defaults file had NO effect on any swiper instance.
+ #
+ # The most severe consequence was in the PhotoSwipe Lightbox setup: the
+ # blocks there are guarded by the truthiness of 'swiper.lightbox.parameters',
+ # 'swiper.lightbox.ui_controls' and 'swiper.lightbox.kbd_controls'
+ # respectively. For a swiper that carries only
+ # 'lightbox: {enabled: true}' (the layout intended by the "split J1 Swiper
+ # data #1" cleanup of swiper.yml, which moved those subtrees INTO the
+ # defaults and removed them from the per-swiper entries), all three guards
+ # were nil, so the Lightbox was constructed with 'gallery' and 'pswpModule'
+ # ONLY — every configured parameter, ui control and kbd control was
+ # silently dropped. 5 of the 11 configured swipers are in exactly that
+ # state today and would hit this the moment their lightbox is enabled.
+ #
+ # In addition the global options were built with the SHALLOW 'merge' filter
+ # in Liquid (any key set on a higher layer dropped ALL sibling default keys
+ # of its subtree) and with $.extend(true, ...) in JS (which merges ARRAYS
+ # INDEX-WISE, so a shorter higher-layer array leaves stale tail elements of
+ # the lower layer in place).
+ #
+ # This is the same defect class fixed for the J1 Amplitude module by
+ # "claude - Fix Amplitude YAML data processing #1" and is resolved here by
+ # the same mechanism.
+ #
+ # Changes (all tagged "claude - Fix J1 Swiper YAML data processing #1"):
+ #
+ #   • Liquid: swiper_options — global chain built with deep_merge
+ #     (defaults <- control/user) instead of the shallow 'merge' filter.
+ #   • Liquid: the swiper loop iterates 'swiper_entry' (RAW control entry)
+ #     now and assigns the EFFECTIVE object to 'swiper' as the FIRST
+ #     statement of each iteration. The whole loop body is therefore
+ #     UNCHANGED and reads the effective chain through the same 'swiper.*'
+ #     expressions it always used.
+ #
+ #     NOTE on Liquid scoping (why the loop var is renamed): an 'assign'
+ #     tag writes to the OUTERMOST scope, while a 'for' loop var lives in
+ #     the loop's own (innermost) scope and SHADOWS it. Assigning to the
+ #     loop var's own name from inside the loop would therefore have NO
+ #     effect (verified against Liquid 5.4, the engine used by Jekyll).
+ #     Renaming the loop var to 'swiper_entry' frees the name 'swiper' so
+ #     the assigned effective object is what the body resolves.
+ #   • JS: _deepMerge(target, ...sources) — deep merge helper (plain objects
+ #     merged recursively, ARRAYS REPLACE as a whole, scalars overload; same
+ #     semantics as the J1 Amplitude adapter fix #1 and the J1 VideoPlayer
+ #     adapter fix #48).
+ #   • JS: _self() — module-scope helper resolving the module object
+ #     independent of the init() state: (_this || j1.adapter.swiper).
+ #   • JS: init() — _this is bound to j1.adapter.swiper as the FIRST
+ #     statement of init(). This is REQUIRED here: the ORIGINAL binding of
+ #     _this sits BELOW the swiperOptions assignment, so calling
+ #     _this._deepMerge() from that assignment would throw
+ #       TypeError: Cannot read properties of undefined (reading '_deepMerge')
+ #     on every page load — exactly the init-time crash that had to be
+ #     repaired for the AmplitudeJS adapter afterwards by
+ #     "claude - Fix Amplitude YAML data processing #2". The lesson is
+ #     applied UP FRONT here. The original (late) binding is KEPT unchanged
+ #     (now a harmless re-assignment) so the former code path stays intact.
+ #     NOTE: init() is an ARROW function, so 'this' is NOT bound to the
+ #     module object and cannot be used as a substitute.
+ #   • JS: swiperOptions — built by _deepMerge (chain: defaults <- user
+ #     settings) instead of $.extend(true, ...). Exposed as
+ #     j1.adapter.swiper.swiperOptions.
+ #   • JS: getInstanceOptions(swiperId) — public method returning the cached
+ #     EFFECTIVE options object for ONE swiper instance (defaults <- user
+ #     settings <- swiper entry). Exposed as
+ #     j1.adapter.swiper.swiperInstanceOptions.
+ # ----------------------------------------------------------------------------- {% endcomment %}
 
 {% comment %} Liquid procedures
 -------------------------------------------------------------------------------- {% endcomment %}
@@ -46,6 +133,19 @@ regenerate:                             true
 
 {% comment %} Set config options (settings only)
 -------------------------------------------------------------------------------- {% endcomment %}
+
+{% comment %} claude - Fix J1 Swiper YAML data processing #1
+--------------------------------------------------------------------------------
+ Global options: DEEP merge of the chain defaults <- swiper_settings (user
+ settings). The former SHALLOW 'merge' filter replaced whole subtrees: any
+ key set on a higher layer silently dropped ALL sibling default keys of that
+ subtree. swiper_options is the BASE of the per-swiper chain resolved in the
+ swiper loop below. Mirrors the same assignment in swiper.html so both the
+ HTML data file and the adapter resolve an IDENTICAL chain.
+
+ Original (deprecated, preserved for reference):
+  {% assign swiper_options      = swiper_defaults | merge: swiper_settings %}
+-------------------------------------------------------------------------------- {% endcomment %}
 {% assign swiper_options      = swiper_defaults | merge: swiper_settings %}
 {% assign swipers             = swiper_settings.swipers %}
 
@@ -59,7 +159,7 @@ regenerate:                             true
 
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/adapter/js/swiper.js (2)
+ # ~/assets/theme/j1/adapter/js/swiper.js (3)
  # J1 Adapter for the swiper module
  #
  # Product/Info:
@@ -109,6 +209,14 @@ j1.adapter.swiper = ((j1, window) => {
   var logger;
   var logText;
 
+  // claude - Fix J1 Swiper YAML data processing #1
+  // per-instance options cache, keyed by swiperId. Each cache entry is the
+  // deep merge of the inheritance chain:
+  //   swiper settings -> overload user settings -> overload default settings
+  // Populated lazily by getInstanceOptions().
+  //
+  var swiperInstanceOptions = {};
+
   // date|time
   var startTime;
   var endTime;
@@ -116,6 +224,22 @@ j1.adapter.swiper = ((j1, window) => {
   var endTimeModule;
   var timeSeconds;
 
+  // ---------------------------------------------------------------------------
+  // helper functions
+  // ---------------------------------------------------------------------------
+
+  // claude - Fix J1 Swiper YAML data processing #1
+  // _self()
+  // Resolves the module object independent of the init() state. The module
+  // keeps its self-reference in the module-scoped var _this that is bound
+  // INSIDE init() only. Any method called before|outside init() would fail
+  // on _this being 'undefined'. Because init() and all module methods are
+  // ARROW functions, 'this' is NOT bound to the module object and cannot be
+  // used here. j1.adapter.swiper is assigned when the module IIFE returned,
+  // so the fallback is valid at ANY runtime call (it is evaluated lazily,
+  // NOT at module load time).
+  //
+  var _self = () => (_this || j1.adapter.swiper);
 
   // ---------------------------------------------------------------------------
   // main
@@ -126,6 +250,25 @@ j1.adapter.swiper = ((j1, window) => {
     // adapter initializer
     // -------------------------------------------------------------------------
     init: (options) => {
+
+      // -----------------------------------------------------------------------
+      // claude - Fix J1 Swiper YAML data processing #1
+      // bind the module self-reference (EARLY)
+      // -----------------------------------------------------------------------
+      // The module reference _this MUST be bound before ANY use of it. The
+      // global options chain below calls _self()._deepMerge() while the
+      // ORIGINAL binding of _this is done FURTHER DOWN (right after the
+      // 'global variable settings' block), leaving _this 'undefined' at that
+      // point on a fresh page load:
+      //   TypeError: Cannot read properties of undefined (reading '_deepMerge')
+      // That is exactly the init-time crash the AmplitudeJS adapter had to be
+      // repaired for afterwards ("claude - Fix Amplitude YAML data processing
+      // #2"); the lesson is applied UP FRONT here.
+      // NOTE: init() is an ARROW function, 'this' is NOT bound to the module
+      // object. j1.adapter.swiper is assigned when the module IIFE returned
+      // and is therefore always valid at init() runtime.
+      //
+      _this = j1.adapter.swiper;
 
       var xhrLoadState                  = 'pending';                            // (initial) load state for the HTML portion of the swiper
       var load_dependencies             = {};                                   // dynamic variable
@@ -152,8 +295,34 @@ j1.adapter.swiper = ((j1, window) => {
       // create settings object from module options
       swiperDefaults  = $.extend({}, {{swiper_defaults | replace: 'nil', 'null' | replace: '=>', ':' }});
       swiperSettings  = $.extend({}, {{swiper_settings | replace: 'nil', 'null' | replace: '=>', ':' }});
-      swiperOptions   = $.extend(true, {}, swiperDefaults, swiperSettings);
 
+      // claude - Fix J1 Swiper YAML data processing #1
+      // Build the GLOBAL (module-level) options with the _deepMerge helper
+      // (chain: defaults <- user settings). $.extend(true, ...) merges ARRAYS
+      // INDEX-WISE: a shorter array on a higher layer leaves the stale tail
+      // elements of the lower layer in place. _deepMerge REPLACES arrays as a
+      // whole, which is the semantics the config layers require (relevant for
+      // the 'swipers' array and for any array-valued parameter such as
+      // 'breakpoints' overloads).
+      // Reset + expose the PER-INSTANCE options cache so the module can read
+      // the effective per-swiper chain via
+      // j1.adapter.swiper.swiperInstanceOptions[swiperId] resp.
+      // j1.adapter.swiper.getInstanceOptions(swiperId).
+      //
+      // Original (deprecated, preserved for reference):
+      // swiperOptions   = $.extend(true, {}, swiperDefaults, swiperSettings);
+      //
+      swiperOptions   = _self()._deepMerge({}, swiperDefaults, swiperSettings);
+
+      swiperInstanceOptions = {};
+      _self()['swiperOptions']         = swiperOptions;
+      _self()['swiperInstanceOptions'] = swiperInstanceOptions;
+
+      // claude - Fix J1 Swiper YAML data processing #1
+      // KEPT (superseded): _this is bound at the TOP of init() now, this
+      // line is a harmless re-assignment of the same reference. The former
+      // code path is left intact on purpose.
+      //
       _this           = j1.adapter.swiper;
       theme           = user_state.theme_name;
       logger          = log4javascript.getLogger(MODULE_NAME);
@@ -177,7 +346,27 @@ j1.adapter.swiper = ((j1, window) => {
           logger.debug('\n' + `state: ${_this.getState()}`);
           logger.info('\n' + 'module is being initialized');
 
+          {% comment %} claude - Fix J1 Swiper YAML data processing #1
+          ----------------------------------------------------------------------
+          The loop iterates the RAW control entries as 'swiper_entry' now.
+          The EFFECTIVE options of the instance are resolved as the FIRST
+          statement of the iteration and assigned to 'swiper', so the
+          complete loop body below stays UNCHANGED and resolves the full
+          inheritance chain
+
+            swiper settings -> overload user settings -> overload default settings
+
+          through the very same 'swiper.*' expressions it used before. This
+          is what restores the lightbox parameters|ui_controls|kbd_controls
+          for swipers that carry 'lightbox: {enabled: true}' only.
+
+          Original (deprecated, preserved for reference):
           {% for swiper in swipers %}{% if swiper.enabled %}
+          {% endif %}{% endfor %}
+          ---------------------------------------------------------------------- {% endcomment %}
+          {% for swiper_entry in swipers %}
+          {% assign swiper = swiper_options | merge: swiper_entry %}
+          {% if swiper.enabled %}
           logger.info('\n' + `initialize swiper on id: {{swiper.id}}`);
 
           // create dynamic loader variable
@@ -530,6 +719,139 @@ j1.adapter.swiper = ((j1, window) => {
 
       return true;
     }, // END messageHandler
+
+    // -------------------------------------------------------------------------
+    // claude - Fix J1 Swiper YAML data processing #1
+    // _deepMerge(target, ...sources)
+    // Deep merge helper implementing the layer semantics of the config
+    // inheritance chain (same semantics as the J1 Amplitude adapter fix #1
+    // and the J1 VideoPlayer adapter fix #48):
+    //
+    //   • plain objects are merged RECURSIVELY (missing keys fall through
+    //     to the lower layer, present keys overload it)
+    //   • ARRAYS REPLACE the lower layer's value as a whole (copied via
+    //     slice() so layers never share array references) — no index-wise
+    //     merging as done by $.extend(true, ...)
+    //   • scalars (string/number/boolean/null) overload the lower layer;
+    //     'undefined' source values are skipped (key stays inherited)
+    //
+    // Sources are applied left to right: the LAST source wins.
+    // -------------------------------------------------------------------------
+    //
+    _deepMerge: (target, ...sources) => {
+      var isPlainObject = function (v) {
+        return (v !== null && typeof v === 'object' && !Array.isArray(v));
+      };
+
+      sources.forEach(function (source) {
+        if (!isPlainObject(source)) { return; }
+        Object.keys(source).forEach(function (key) {
+          var srcVal = source[key];
+          if (isPlainObject(srcVal)) {
+            if (!isPlainObject(target[key])) { target[key] = {}; }
+            // recursion resolved by _self(): _this is bound INSIDE init()
+            // only, so the recursion would fail for any call before|without
+            // init()
+            _self()._deepMerge(target[key], srcVal);
+          } else if (Array.isArray(srcVal)) {
+            target[key] = srcVal.slice();
+          } else if (srcVal !== undefined) {
+            target[key] = srcVal;
+          }
+        });
+      });
+
+      return target;
+    }, // END _deepMerge
+
+    // -------------------------------------------------------------------------
+    // claude - Fix J1 Swiper YAML data processing #1
+    // getInstanceOptions(swiperId)
+    // Returns the EFFECTIVE options for ONE swiper instance, built from the
+    // config inheritance chain (later overloads earlier):
+    //
+    //   1. swiperDefaults   — _data/modules/defaults/swiper.yml
+    //   2. user settings    — _data/modules/swiper_control.yml
+    //                         (GLOBAL keys of settings, w/o 'swipers')
+    //   3. swiper entry     — _data/modules/swiper_control.yml
+    //                         (settings.swipers[], matched by id)
+    //
+    // All default keys are available on the result; keys present in the user
+    // settings overload the defaults, keys present in the swiper entry
+    // overload both. The swiper entry keys are applied at TOP scope (the
+    // per-swiper entries use the same flat key layout as the defaults file:
+    // parameters, captions, lightbox, filters, ...). When no control entry
+    // exists for the given id, the result equals the global chain
+    // (defaults <- user settings).
+    //
+    // Results are cached per swiperId and exposed on the adapter object as
+    // j1.adapter.swiper.swiperInstanceOptions[swiperId].
+    //
+    // This is the RUNTIME counterpart of the build-time Liquid chain
+    // resolved in the init() loop and in swiper.html; both resolve the same
+    // layers in the same order.
+    // -------------------------------------------------------------------------
+    //
+    getInstanceOptions: (swiperId) => {
+      // fast path: already resolved for this instance
+      if (swiperInstanceOptions[swiperId]) {
+        return swiperInstanceOptions[swiperId];
+      }
+
+      // user layer: all GLOBAL top-level keys of the control settings,
+      // excluding the per-swiper array 'swipers'
+      var userSettings = {};
+      try {
+        Object.keys(swiperSettings || {}).forEach(function (key) {
+          if (key !== 'swipers') { userSettings[key] = swiperSettings[key]; }
+        });
+      } catch (e) {
+        // logger is assigned in init() and is 'undefined' on early calls
+        logger && logger.error('\n' + 'getInstanceOptions: user settings lookup failed [' + swiperId + ']: ' + e);
+      }
+
+      // resolve the swiper entry from the RAW control settings
+      var swiperEntry = null;
+      try {
+        var entries = (swiperSettings && Array.isArray(swiperSettings.swipers))
+          ? swiperSettings.swipers
+          : [];
+        for (var i = 0; i < entries.length; i++) {
+          if (entries[i] && entries[i].id === swiperId) {
+            swiperEntry = entries[i];
+            break;
+          }
+        }
+      } catch (e) {
+        logger && logger.error('\n' + 'getInstanceOptions: control lookup failed [' + swiperId + ']: ' + e);
+      }
+
+      if (swiperEntry === null) {
+        logger && logger.warn('\n' + 'getInstanceOptions: no control entry found [' + swiperId + '] — instance falls back to defaults <- user settings');
+      }
+
+      // build the per-instance chain:
+      // swiper settings -> overload user settings -> overload default settings
+      var instanceOptions = _self()._deepMerge(
+        {},
+        swiperDefaults,
+        userSettings,
+        swiperEntry || {}
+      );
+
+      // the 'swipers' array is control data, NOT an option of an instance:
+      // drop it from the result so an instance can never read it back
+      if (instanceOptions.swipers !== undefined) {
+        delete instanceOptions.swipers;
+      }
+
+      // cache + expose
+      swiperInstanceOptions[swiperId]  = instanceOptions;
+      _self()['swiperInstanceOptions'] = swiperInstanceOptions;
+
+      logger && logger.debug('\n' + 'getInstanceOptions: per-instance options resolved [' + swiperId + ']');
+      return instanceOptions;
+    }, // END getInstanceOptions
 
     // -------------------------------------------------------------------------
     // setState()

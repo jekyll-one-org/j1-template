@@ -7,7 +7,7 @@ exclude_from_search:                    true
 
 {% comment %}
  # -----------------------------------------------------------------------------
- # ~/assets/data/swiper.html (2)
+ # ~/assets/data/swiper.html (3)
  # Generate the HTML portion for all SwiperJS Sliders
  #
  # Product/Info:
@@ -24,6 +24,63 @@ exclude_from_search:                    true
  #    {{variable | debug}}
  # -----------------------------------------------------------------------------
 {% endcomment %}
+
+{% comment %} claude - Fix J1 Swiper YAML data processing #1
+ # -----------------------------------------------------------------------------
+ # PER-SWIPER CONFIG INHERITANCE CHAIN (HTML data file)
+ #
+ #   swiper settings -> overload user settings -> overload default settings
+ #
+ # Effective settings for ONE swiper instance are now built as a DEEP merge
+ # of the three YAML layers (later layers overwrite earlier layers per key,
+ # missing keys fall through):
+ #
+ #   1. _data/modules/defaults/swiper.yml   (defaults ..............)  base
+ #   2. _data/modules/swiper_control.yml    (settings, w/o swipers ..)  user
+ #                                          optional GLOBAL section
+ #   3. _data/modules/swiper_control.yml    (settings.swipers[] ....)  swiper
+ #
+ # Before this fix, EVERY per-swiper key was read RAW from the loop variable
+ # (swiper.captions.*, swiper.lightbox.*, swiper.wrapper_styles, ...) with
+ # NO fallthrough to the user or default layer. A key not declared on the
+ # swiper entry resolved to Liquid 'nil' — NOT to its default. The defaults
+ # file therefore had no effect on any swiper: of the 11 top-level default
+ # keys, only 'filters' was ever read (and that read was itself broken, see
+ # below). The global options var swiper_options was built with the SHALLOW
+ # 'merge' filter (any key set on a higher layer dropped ALL sibling default
+ # keys of its subtree) and was never read at all.
+ #
+ # This is the same defect class fixed for the J1 Amplitude module by
+ # "claude - Fix Amplitude YAML data processing #1" and is resolved here by
+ # the same mechanism (deep_merge chain, resolved per instance INSIDE the
+ # swiper loop).
+ #
+ # Changes (all tagged "claude - Fix J1 Swiper YAML data processing #1"):
+ #
+ #   • Liquid: swiper_options — global chain built with deep_merge
+ #     (defaults <- control/user) instead of the shallow 'merge' filter.
+ #     swiper_media is NOT merged in (its only payload is the media_sets
+ #     array, read separately from swiper_media_sets).
+ #   • Liquid: css_filters — the former expression merged 'swiper.filters'
+ #     at a point where the loop var 'swiper' does not exist yet (the swiper
+ #     loop starts further down), so the merge operand was ALWAYS nil and no
+ #     per-swiper filter could ever apply. The chain is built from the user
+ #     layer (swiper_settings.filters) here; the per-swiper layer is applied
+ #     inside the loop via the effective object.
+ #   • Liquid: the swiper loop iterates 'swiper_entry' (RAW control entry)
+ #     now and assigns the EFFECTIVE object to 'swiper' as the FIRST
+ #     statement of each iteration. The whole loop body is therefore
+ #     UNCHANGED and reads the effective chain through the same 'swiper.*'
+ #     expressions it always used.
+ #
+ #     NOTE on Liquid scoping (why the loop var is renamed): an 'assign'
+ #     tag writes to the OUTERMOST scope, while a 'for' loop var lives in
+ #     the loop's own (innermost) scope and SHADOWS it. Assigning to the
+ #     loop var's own name from inside the loop would therefore have NO
+ #     effect (verified against Liquid 5.4, the engine used by Jekyll).
+ #     Renaming the loop var to 'swiper_entry' frees the name 'swiper' so
+ #     the assigned effective object is what the body resolves.
+ # ----------------------------------------------------------------------------- {% endcomment %}
 
 {% comment %} Liquid procedures
 -------------------------------------------------------------------------------- {% endcomment %}
@@ -45,6 +102,20 @@ exclude_from_search:                    true
 
 {% comment %} Set config options
 -------------------------------------------------------------------------------- {% endcomment %}
+
+{% comment %} claude - Fix J1 Swiper YAML data processing #1
+--------------------------------------------------------------------------------
+ Global options: DEEP merge of the chain defaults <- swiper_settings (user
+ settings). The former SHALLOW 'merge' filter replaced whole subtrees: any
+ key set on a higher layer silently dropped ALL sibling default keys of that
+ subtree (e.g. a user 'lightbox: {enabled: true}' would have dropped
+ lightbox.parameters, lightbox.ui_controls and lightbox.kbd_controls).
+ swiper_options is the BASE of the per-swiper chain resolved in the swiper
+ loop below (see 'swiper_effective').
+
+ Original (deprecated, preserved for reference):
+  {% assign swiper_options    = swiper_defaults | merge: swiper_settings %}
+-------------------------------------------------------------------------------- {% endcomment %}
 {% assign swiper_options    = swiper_defaults | merge: swiper_settings %}
 {% assign swipers           = swiper_settings.swipers %}
 
@@ -64,7 +135,25 @@ exclude_from_search:                    true
 
 {% comment %} Collect CSS image filters
 ------------------------------------------------------------------------------- {% endcomment %}
-{% assign css_filters   = swiper_defaults.filters | merge: swiper.filters %}
+
+{% comment %} claude - Fix J1 Swiper YAML data processing #1
+--------------------------------------------------------------------------------
+ The merge operand 'swiper.filters' was read OUTSIDE the swiper loop (the
+ loop var 'swiper' is bound further down, at 'Generate HTML portion for all
+ sliders enabled'), so the operand was ALWAYS nil: no per-swiper filter set
+ could ever reach css_filters. Built from the chain defaults <- user
+ settings here (global scope); the per-swiper layer is available inside the
+ loop as 'swiper.filters' on the EFFECTIVE object.
+
+ NOTE (out of scope, flagged for a later fix): 'image_filters' is captured
+ here but NEVER read anywhere in this file — the CSS filter feature is not
+ wired to any slide markup. Fixing the operand restores the intended chain
+ but does not make the filters visible.
+
+ Original (deprecated, preserved for reference):
+  {% assign css_filters   = swiper_defaults.filters | merge: swiper.filters %}
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign css_filters   = swiper_defaults.filters | merge: swiper_settings.filters %}
 {% assign image_filters = 'filter:' %}
 
 {% if css_filters.enabled %}
@@ -107,7 +196,33 @@ media_set.image_defaults: {{media_set.image_defaults | debug}}
     <!-- [INFO   ] [~/assets/data/swiper.html                      ] [generate HTML portion for all sliders configured ] -->
     {% comment %} Generate HTML portion for all sliders enabled
     ---------------------------------------------------------------------------- {% endcomment %}     
-    {% for swiper in swipers %} {% if swiper.enabled %}
+
+    {% comment %} claude - Fix J1 Swiper YAML data processing #1
+    ----------------------------------------------------------------------------
+    The loop iterates the RAW control entries as 'swiper_entry' now. The
+    EFFECTIVE options of the instance are resolved as the FIRST statement of
+    the iteration and assigned to 'swiper', so the complete loop body below
+    stays UNCHANGED and resolves the full inheritance chain
+
+      swiper settings -> overload user settings -> overload default settings
+
+    through the very same 'swiper.*' expressions it used before. The base
+    'swiper_options' already carries the chain defaults <- user settings (see
+    'Set config options' above); the deep_merge here applies the third layer,
+    the per-swiper entry.
+
+    The assign is placed BEFORE the 'enabled' guard on purpose: 'enabled'
+    itself is part of the chain (the defaults declare 'enabled: false', the
+    entry overloads it), so the guard must be evaluated on the EFFECTIVE
+    object, not on the raw entry.
+
+    Original (deprecated, preserved for reference):
+      {% for swiper in swipers %} {% if swiper.enabled %}
+      {% endif %} {% endfor %}
+    ---------------------------------------------------------------------------- {% endcomment %}
+    {% for swiper_entry in swipers %}
+    {% assign swiper = swiper_options | merge: swiper_entry %}
+    {% if swiper.enabled %}
 
       {% comment %} Detect type and layout
       -------------------------------------------------------------------------- {% endcomment %}      
@@ -208,7 +323,6 @@ media_set.image_defaults: {{media_set.image_defaults | debug}}
                 color: {{quote-text-color}};
               }
             </style>
-
 
             {% for slide in media_set.items %} {% if slide.enabled  %}
             <li class="swiper-slide">
