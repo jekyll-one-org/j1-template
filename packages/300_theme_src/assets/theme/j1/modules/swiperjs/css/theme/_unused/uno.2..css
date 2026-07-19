@@ -1,6 +1,6 @@
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/modules/swiper/css/theme/uno.css
+ # ~/assets/theme/j1/modules/swiper/css/theme/uno.css (2)
  # Provides SwiperJS v11.2.0 (January, 2025) CSS styles for theme Uno
  # -----------------------------------------------------------------------------
  #
@@ -17,7 +17,7 @@
 /* Global styles
 -------------------------------------------------------------------------------- */
 
-/* Theme styles
+/* Global Theme styles
 -------------------------------------------------------------------- */
 :root {
   --swiper-theme-color: var(--bs-primary);
@@ -25,17 +25,25 @@
   --swiper-wrapper-transition-timing-function: initial;
 }
 
+/* Navigation styles
+-------------------------------------------------------------------- */
+:root {
+  --swiper-navigation-color: var(--bs-gray-100);
+  --swiper-navigation-size: 44px;
+  --swiper-navigation-top-offset: 50%;
+  --swiper-navigation-sides-offset: 20px;
+}
+
 /* Pagination styles
 -------------------------------------------------------------------- */
-
-:root { 
+:root {
   --swiper-pagination-color: var(--swiper-theme-color);
   --swiper-pagination-left: auto;
   --swiper-pagination-right: 8px;
   --swiper-pagination-bottom: 8px;
   --swiper-pagination-top: auto;
   --swiper-pagination-fraction-color: inherit;
-  --swiper-pagination-progressbar-bg-color: rgba(0,0,0,0.25);
+  --swiper-pagination-progressbar-bg-color: rgba(0, 0, 0, 0.25);
   --swiper-pagination-progressbar-size: 4px;
   --swiper-pagination-bullet-size: 8px;
   --swiper-pagination-bullet-width: 8px;
@@ -74,6 +82,7 @@
   font-weight: 500;
   margin-bottom: .5rem;
 }
+
 .swp-caption-content {
   display: none;
   position: absolute; 
@@ -107,7 +116,13 @@ ul.swiper-wrapper {
   cursor: pointer !important;  /* override zoom cursor */
 }
 
-/* Slides
+/* Slider
+-------------------------------------------------------------------- */
+.thumbs-slider-top {
+  margin-top: -8px;
+}
+
+/* Slide
 -------------------------------------------------------------------- */
 .swiper-slide {
   text-align: center;
@@ -141,20 +156,104 @@ ul.swiper-wrapper {
   left: auto;
 }
 
-/* Navigation
--------------------------------------------------------------------------------- */
+/* Navigation buttons, PhotoSwipe-style
+   Modify SwiperJS nav buttons #1
+--------------------------------------------------------------------------------
+ * Make the SwiperJS navigation arrows look and sit exactly like the
+ * PhotoSwipe lightbox arrows (.pswp__button--arrow--prev / --next):
+ * the same geometry (75x100 hit area, a 60x60 icon, vertically centred
+ * and edge-flush) and the SAME arrow shape (PhotoSwipe's #pswp__icn-arrow
+ * path). This is a CSS-only override -- the J1 swiper fragment keeps its
+ * empty <div class="swiper-button-prev|next"></div> markup and every
+ * slider inherits the look automatically. No change to the XHR HTML
+ * fragment is required.
+ *
+ * DECISIONS (for review, not changed automatically):
+ *  1) The tag string is used verbatim as requested ("SwiperJJ"). This
+ *     looks like a typo for "SwiperJS" but is left as-is so a grep for the
+ *     exact tag matches. Correct all occurrences here + in the HTML
+ *     snippet if the "SwiperJS" spelling was intended.
+ *  2) --swiper-navigation-sides-offset is set to 0 to reproduce
+ *     PhotoSwipe's edge-flush arrows. Set it back to 20px (or remove the
+ *     :root override below) for an inset look; the existing offset rules
+ *     in the Buttons section above stay in effect either way.
+ *  3) The arrow follows --swiper-navigation-color (default --bs-gray-100,
+ *     i.e. near-white, like PhotoSwipe's white icon) via `mask`, and a
+ *     drop-shadow approximates PhotoSwipe's 2px icon stroke for contrast
+ *     on light slides. For the pixel-exact stroke, use the inline-<svg>
+ *     button variant (accompanying HTML snippet); the :has(> svg) rules
+ *     below hand the rendering over to that real SVG when present.
+-------------------------------------------------------------------------------- 
+*/
 
-/* Global vars
--------------------------------------------------------------------- */
-:root {
-  --swiper-navigation-size: 44px;
-  --swiper-navigation-top-offset: 50%;
-  --swiper-navigation-sides-offset: 10px;
-  --swiper-navigation-color: var(--swiper-theme-color);
+/* Modify SwiperJS nav buttons #1 : PhotoSwipe arrow geometry */
+.swiper-button-prev,
+.swiper-button-next {
+  width: 75px !important;                 /* .pswp__button--arrow width  */
+  height: 100px !important;               /* .pswp__button--arrow height */
+  top: 50% !important;
+  margin-top: -50px !important;           /* -(height / 2): vertical centre */
 }
 
-/* Styles
--------------------------------------------------------------------- */
+/* Modify SwiperJS nav buttons #1 : edge-flush like PhotoSwipe */
+:root {
+  --swiper-navigation-sides-offset: 0px;  /* PhotoSwipe: left:0 / right:0 */
+}
+
+/* Modify SwiperJS nav buttons #1 : replace swiper-icons glyph */
+.swiper-button-prev::after,
+.swiper-button-next::after {
+  content: "" !important;                 /* drop the swiper-icons font arrow */
+  display: block;
+  width: 60px;                            /* .pswp__button--arrow .pswp__icn */
+  height: 60px;
+  background-color: var(--swiper-navigation-color, var(--bs-gray-100));
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 60'%3E%3Cpath d='M29 43l-3 3-16-16 16-16 3 3-13 13 13 13z'/%3E%3C/svg%3E") center / contain no-repeat;
+          mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 60'%3E%3Cpath d='M29 43l-3 3-16-16 16-16 3 3-13 13 13 13z'/%3E%3C/svg%3E") center / contain no-repeat;
+  filter: drop-shadow(0 0 2px var(--pswp-icon-stroke-color, #4f4f4f));
+}
+
+/* Modify SwiperJS nav buttons #1 : mirror the "next" glyph */
+.swiper-button-next::after {
+  transform: scale(-1, 1);                /* PhotoSwipe next = mirrored prev */
+}
+
+/* Modify SwiperJS nav buttons #1 : inline-<svg> variant support */
+.swiper-button-prev:has(> svg)::after,
+.swiper-button-next:has(> svg)::after {
+  display: none !important;               /* real SVG present -> hide mask glyph */
+}
+.swiper-button-prev > svg,
+.swiper-button-next > svg {
+  width: 60px !important;                 /* size the real SVG like .pswp__icn */
+  height: 60px !important;
+  object-fit: contain;
+  fill: var(--swiper-navigation-color, var(--bs-gray-100));
+  filter: drop-shadow(0 0 2px var(--pswp-icon-stroke-color, #4f4f4f));
+}
+.swiper-button-next > svg {
+  transform: scale(-1, 1);                /* mirror next (shared prev path) */
+}
+
+/* Pagination, absolute (relative to the swiper container/parent)
+-------------------------------------------------------------------------------- */
+.swiper-pagination,
+.swiper-pagination-inner {
+  position: absolute;
+  text-align: center;
+  transition: 300ms opacity;
+  transform: translate3d(0, 0, 0);
+  z-index: 10;
+}
+
+.swiper-pagination-outer {
+  padding-top: 12px;
+  bottom: unset !important;
+  text-align: center;
+  transition: 300ms opacity;
+  transform: translate3d(0, 0, 0);
+}
+
 .swiper-pagination-bullet {
   width: 25px !important;
   height: 25px !important;
@@ -164,7 +263,7 @@ ul.swiper-wrapper {
   font-weight: 400;
   color: var(--bs-black) !important;
   opacity: .6 !important;
-  background: rgba(0, 0, 0, 0.3) !important
+  background: rgba(0, 0, 0, 0.5) !important
 }
 
 .swiper-pagination-bullet-active {
@@ -208,7 +307,6 @@ ul.swiper-wrapper {
   transform: rotate(-90deg);
 }
 
-
 /* Text Swipers
 -------------------------------------------------------------------------------- */
 
@@ -226,20 +324,27 @@ ul.swiper-wrapper {
   text-align: left;
   color: var(--md-gray-700);
   background: var(--md-gray-50);
+  overflow-x: hidden;
 }
 
 /* PARALLAX Text Swipers
 -------------------------------------------------------------------- */
+
+/* jadams. 2025-02-25: configurable background image placed via /assets/data/swiper_app.html (styles) */
+/*
 .swiper-text-parallax {
   width: 100%;
   height: 100%;
-  padding: 75px 0 75px 75px !important;
+  padding: 75px 0 75px 0;
   position: relative;
   background: url(/assets/image/quote/default.jpg) 50% 0 repeat fixed;
 }
+/*
 
+/* jadams. 2025-02-25: placed via /assets/data/swiper_app.html (styles) if swiper.gridify enabled */
+/*
 .swiper-text-parallax:before {
-  content: " ";
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
@@ -247,11 +352,18 @@ ul.swiper-wrapper {
   height: 100%;
   background: url(/assets/image/pattern/image/gridtile.png) repeat;
 }
+*/
 
 .swiper-text-parallax .swiper-wrapper .swiper-slide p {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); 
   font-size: 1.5rem;
   font-weight: 500;   
   text-align: left;
+  color: rgba(255, 255, 255, .75);
+  overflow-x: hidden;
 }
 
 

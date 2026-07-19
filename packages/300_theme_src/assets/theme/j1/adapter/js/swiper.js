@@ -144,10 +144,13 @@ regenerate:                             true
  HTML data file and the adapter resolve an IDENTICAL chain.
 
  Original (deprecated, preserved for reference):
-  {% assign swiper_options      = swiper_defaults | merge: swiper_settings %}
+  {% assign swiper_options    = swiper_defaults | merge: swiper_settings %}
+  {% assign swipers           = swiper_settings.swipers %}
+
+# swipers : {{ swipers | debug }}
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign swiper_options      = swiper_defaults | merge: swiper_settings %}
-{% assign swipers             = swiper_settings.swipers %}
+{% assign swiper_options      = swiper_defaults | deep_merge: swiper_settings %}
+{% assign swipers             = swiper_options.swipers %}
 
 {% comment %} Detect prod mode
 -------------------------------------------------------------------------------- {% endcomment %}
@@ -260,8 +263,10 @@ j1.adapter.swiper = ((j1, window) => {
       // ORIGINAL binding of _this is done FURTHER DOWN (right after the
       // 'global variable settings' block), leaving _this 'undefined' at that
       // point on a fresh page load:
+      //
       //   TypeError: Cannot read properties of undefined (reading '_deepMerge')
-      // That is exactly the init-time crash the AmplitudeJS adapter had to be
+      //
+      // // That is exactly the init-time crash the AmplitudeJS adapter had to be
       // repaired for afterwards ("claude - Fix Amplitude YAML data processing
       // #2"); the lesson is applied UP FRONT here.
       // NOTE: init() is an ARROW function, 'this' is NOT bound to the module
@@ -310,13 +315,13 @@ j1.adapter.swiper = ((j1, window) => {
       // j1.adapter.swiper.getInstanceOptions(swiperId).
       //
       // Original (deprecated, preserved for reference):
-      // swiperOptions   = $.extend(true, {}, swiperDefaults, swiperSettings);
+      //  swiperOptions = $.extend(true, {}, swiperDefaults, swiperSettings);
       //
-      swiperOptions   = _self()._deepMerge({}, swiperDefaults, swiperSettings);
+      swiperOptions = _self()._deepMerge({}, swiperDefaults, swiperSettings);
 
-      swiperInstanceOptions = {};
-      _self()['swiperOptions']         = swiperOptions;
-      _self()['swiperInstanceOptions'] = swiperInstanceOptions;
+      swiperInstanceOptions             = {};
+      _self()['swiperOptions']          = swiperOptions;
+      _self()['swiperInstanceOptions']  = swiperInstanceOptions;
 
       // claude - Fix J1 Swiper YAML data processing #1
       // KEPT (superseded): _this is bound at the TOP of init() now, this
@@ -361,8 +366,8 @@ j1.adapter.swiper = ((j1, window) => {
           for swipers that carry 'lightbox: {enabled: true}' only.
 
           Original (deprecated, preserved for reference):
-          {% for swiper in swipers %}{% if swiper.enabled %}
-          {% endif %}{% endfor %}
+            {% for swiper in swipers %}{% if swiper.enabled %}
+            {% endif %}{% endfor %}
           ---------------------------------------------------------------------- {% endcomment %}
           {% for swiper_entry in swipers %}
           {% assign swiper = swiper_options | merge: swiper_entry %}

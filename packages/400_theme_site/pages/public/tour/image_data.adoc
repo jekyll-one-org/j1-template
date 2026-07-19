@@ -34,17 +34,13 @@ resources:                              [
                                         ]
 resource_options:
   - toccer:
-      collapseDepth:                    3
+      collapseDepth:                    4
   - attic:
       opacity:                          .7
       padding_top:                      600
       slides:
         - url:                          /assets/image/module/attic/1920x1280/modern-dance.jpg
           alt:                          Photo Gemini AI
-#          badge:
-#            type:                       unsplash
-#            author:                     Quino Al Angel
-#            href:                       //unsplash.com/@quinoal
 ---
 
 // Page Initializer
@@ -221,6 +217,7 @@ how many slides there are.
 .Image Slider · Full-width + Pagination
 swiper::swiper_image_base_full_width_pagination[role="mt-3 mb-4"]
 
+
 [role="mt-4"]
 ==== Image Slider + Lightbox
 
@@ -267,7 +264,6 @@ which takes more space but shows the images at their best.
 .Extendend Swiper · Layout Thumb Top
 swiper::thumb_slider_top[role="mb-5"]
 
-
 // [role="mt-5"]
 // [[image_thumbs_right_left]]
 // ==== Layout Thumb Right|Left
@@ -283,7 +279,6 @@ swiper::thumb_slider_top[role="mb-5"]
 // Adding a *Lightbox* to a *single-line* swiper allows users to *enlarge* the
 // presented *images*.
 // ====
-
 
 [role="mt-5"]
 ==== Layout Neighbor
@@ -302,7 +297,6 @@ do not need extra navigation buttons or arrows.
 
 .Extendend Swiper · Layout Neighbor
 swiper::neighbor_slider[role="mb-5"]
-
 
 [role="mt-5"]
 ==== Layout Panorama
@@ -354,8 +348,6 @@ resize your window, or rotate your device, and watch the columns
 rearrange.
 ====
 
-// .Old times
-// gallery::jg_old_times[role="mt-4 mb-4"]
 
 [role="mt-4"]
 === Grid Gallery
@@ -372,6 +364,7 @@ link:{url-j1-masonry-previewer}[Masonry Preview, {browser-window--new}] page.
 
 .Grid Image Gallery
 masonry::image_fixed_height_lb[role="mt-4 mb-5"]
+
 
 [role="mt-4"]
 === Justified Gallery

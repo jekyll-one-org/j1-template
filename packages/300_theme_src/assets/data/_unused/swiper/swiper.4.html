@@ -7,7 +7,7 @@ exclude_from_search:                    true
 
 {% comment %}
  # -----------------------------------------------------------------------------
- # ~/assets/data/swiper.html (5)
+ # ~/assets/data/swiper.html (4)
  # Generate the HTML portion for all SwiperJS Sliders
  #
  # Product/Info:
@@ -464,7 +464,7 @@ media_set.image_defaults: {{media_set.image_defaults | debug}}
       <div id="{{swiper.id}}">
       {% endif %}
         <!-- Swiper elements (El) -->
-        <div class="swiper swiper-container thumbs-slider-top {{swiper.swiper_container_classes}}">
+        <div class="swiper swiper-container {{swiper.swiper_container_classes}}">
   
           {% assign wrapper_styles = '' %}
           {% if swiper.wrapper_styles %}
@@ -473,7 +473,7 @@ media_set.image_defaults: {{media_set.image_defaults | debug}}
   
           <!-- Swiper Wrapper (slides) -->
           {% if swiper.wrapper_styles %}
-          <div class="swiper-wrapper" style="{{wrapper_styles;}}">
+          <div class="swiper-wrapper" style="{{wrapper_styles}}">
           {% else %}
           <div class="swiper-wrapper">
           {% endif %}
@@ -641,19 +641,8 @@ media_set.image_defaults: {{media_set.image_defaults | debug}}
   
           {% if swiper.modules.navigation %}
           <!-- Navigation -->
-          <!-- Modify SwiperJS nav buttons #1 : prev -->
-          <div class="swiper-button-prev" role="button" tabindex="0" aria-label="Previous">
-            <svg aria-hidden="true" viewBox="0 0 60 60" width="60" height="60">
-              <path d="M29 43l-3 3-16-16 16-16 3 3-13 13 13 13z"></path>
-            </svg>
-          </div>
-
-          <!-- Modify SwiperJS nav buttons #1 : next -->
-          <div class="swiper-button-next" role="button" tabindex="0" aria-label="Next">
-            <svg aria-hidden="true" viewBox="0 0 60 60" width="60" height="60">
-              <path d="M29 43l-3 3-16-16 16-16 3 3-13 13 13 13z"></path>
-            </svg>
-          </div>
+          <div class="swiper-button-prev"></div>
+          <div class="swiper-button-next"></div>
           {% endif %}
   
           {% assign pagination_el       = swiper.module_settings.pagination.el | split: '-' %}

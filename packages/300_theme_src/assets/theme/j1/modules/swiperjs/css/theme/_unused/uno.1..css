@@ -1,6 +1,6 @@
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/modules/swiper/css/theme/uno.css (2)
+ # ~/assets/theme/j1/modules/swiper/css/theme/uno.css (1)
  # Provides SwiperJS v11.2.0 (January, 2025) CSS styles for theme Uno
  # -----------------------------------------------------------------------------
  #
@@ -154,85 +154,6 @@ ul.swiper-wrapper {
 .swiper-rtl .swiper-button-prev {
   right: var(--swiper-navigation-sides-offset, 20px) !important;
   left: auto;
-}
-
-/* Navigation buttons, PhotoSwipe-style
-   Modify SwiperJS nav buttons #1
---------------------------------------------------------------------------------
- * Make the SwiperJS navigation arrows look and sit exactly like the
- * PhotoSwipe lightbox arrows (.pswp__button--arrow--prev / --next):
- * the same geometry (75x100 hit area, a 60x60 icon, vertically centred
- * and edge-flush) and the SAME arrow shape (PhotoSwipe's #pswp__icn-arrow
- * path). This is a CSS-only override -- the J1 swiper fragment keeps its
- * empty <div class="swiper-button-prev|next"></div> markup and every
- * slider inherits the look automatically. No change to the XHR HTML
- * fragment is required.
- *
- * DECISIONS (for review, not changed automatically):
- *  1) The tag string is used verbatim as requested ("SwiperJJ"). This
- *     looks like a typo for "SwiperJS" but is left as-is so a grep for the
- *     exact tag matches. Correct all occurrences here + in the HTML
- *     snippet if the "SwiperJS" spelling was intended.
- *  2) --swiper-navigation-sides-offset is set to 0 to reproduce
- *     PhotoSwipe's edge-flush arrows. Set it back to 20px (or remove the
- *     :root override below) for an inset look; the existing offset rules
- *     in the Buttons section above stay in effect either way.
- *  3) The arrow follows --swiper-navigation-color (default --bs-gray-100,
- *     i.e. near-white, like PhotoSwipe's white icon) via `mask`, and a
- *     drop-shadow approximates PhotoSwipe's 2px icon stroke for contrast
- *     on light slides. For the pixel-exact stroke, use the inline-<svg>
- *     button variant (accompanying HTML snippet); the :has(> svg) rules
- *     below hand the rendering over to that real SVG when present.
--------------------------------------------------------------------------------- 
-*/
-
-/* Modify SwiperJS nav buttons #1 : PhotoSwipe arrow geometry */
-.swiper-button-prev,
-.swiper-button-next {
-  width: 75px !important;                 /* .pswp__button--arrow width  */
-  height: 100px !important;               /* .pswp__button--arrow height */
-  top: 50% !important;
-  margin-top: -50px !important;           /* -(height / 2): vertical centre */
-}
-
-/* Modify SwiperJS nav buttons #1 : edge-flush like PhotoSwipe */
-:root {
-  --swiper-navigation-sides-offset: 0px;  /* PhotoSwipe: left:0 / right:0 */
-}
-
-/* Modify SwiperJS nav buttons #1 : replace swiper-icons glyph */
-.swiper-button-prev::after,
-.swiper-button-next::after {
-  content: "" !important;                 /* drop the swiper-icons font arrow */
-  display: block;
-  width: 60px;                            /* .pswp__button--arrow .pswp__icn */
-  height: 60px;
-  background-color: var(--swiper-navigation-color, var(--bs-gray-100));
-  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 60'%3E%3Cpath d='M29 43l-3 3-16-16 16-16 3 3-13 13 13 13z'/%3E%3C/svg%3E") center / contain no-repeat;
-          mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 60'%3E%3Cpath d='M29 43l-3 3-16-16 16-16 3 3-13 13 13 13z'/%3E%3C/svg%3E") center / contain no-repeat;
-  filter: drop-shadow(0 0 2px var(--pswp-icon-stroke-color, #4f4f4f));
-}
-
-/* Modify SwiperJS nav buttons #1 : mirror the "next" glyph */
-.swiper-button-next::after {
-  transform: scale(-1, 1);                /* PhotoSwipe next = mirrored prev */
-}
-
-/* Modify SwiperJS nav buttons #1 : inline-<svg> variant support */
-.swiper-button-prev:has(> svg)::after,
-.swiper-button-next:has(> svg)::after {
-  display: none !important;               /* real SVG present -> hide mask glyph */
-}
-.swiper-button-prev > svg,
-.swiper-button-next > svg {
-  width: 60px !important;                 /* size the real SVG like .pswp__icn */
-  height: 60px !important;
-  object-fit: contain;
-  fill: var(--swiper-navigation-color, var(--bs-gray-100));
-  filter: drop-shadow(0 0 2px var(--pswp-icon-stroke-color, #4f4f4f));
-}
-.swiper-button-next > svg {
-  transform: scale(-1, 1);                /* mirror next (shared prev path) */
 }
 
 /* Pagination, absolute (relative to the swiper container/parent)

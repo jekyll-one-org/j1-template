@@ -7,7 +7,7 @@ exclude_from_search:                    true
 
 {% comment %}
  # -----------------------------------------------------------------------------
- # ~/assets/data/swiper.html (5)
+ # ~/assets/data/swiper.html (3)
  # Generate the HTML portion for all SwiperJS Sliders
  #
  # Product/Info:
@@ -23,64 +23,40 @@ exclude_from_search:                    true
  # Test data:
  #    {{variable | debug}}
  # -----------------------------------------------------------------------------
-{% endcomment %}
-
-{% comment %} claude - Fix J1 Swiper YAML data processing #1
+ # Fix J1 SwiperJS HTML processing #1
+ #
+ # Issue reported by the HTML|A11y validators:
+ #   "Lists do not contain only <li> elements and script supporting elements
+ #    (<script> and <template>)."                            [Lighthouse|axe]
+ #   "Element style not allowed as child of element ul in this context."  [Nu]
+ #
+ # Cause (HTML portion, this file):
+ #   Layout text/parallax emitted two <style> elements as DIRECT children of
+ #   <ul class="swiper-wrapper">. The content model of ul|ol|menu permits <li>
+ #   and script-supporting elements (<script>, <template>) ONLY.
+ #
+ # Cause (runtime, see ~/assets/theme/j1/adapter/js/swiper.js):
+ #   The SwiperJS a11y module (enabled by DEFAULT) stamps role="group" on every
+ #   .swiper-slide (parameter a11y.slideRole, default 'group'). On the ul|li
+ #   markup used here, that overrides the implicit role 'listitem' of the <li>
+ #   elements, so the <ul> ends up with NO listitem children at all. Fixed in
+ #   the adapter, NOT in this file.
+ #
+ # Fix (this file):
+ #   Both <style> elements (and the Liquid var initialization they depend on)
+ #   are RELOCATED out of the swiper wrapper. Nothing is deleted. The swiper
+ #   wrapper now contains <li class="swiper-slide"> elements only.
+ #
+ # Out of scope (flagged for a follow-up fix):
+ #   1. <style> in <body> is itself rejected by the Nu validator ("Element
+ #      style not allowed as child of element div in this context"). The
+ #      parallax CSS should move to a real stylesheet or be injected into
+ #      <head> by the adapter.
+ #   2. The parallax CSS is NOT scoped by swiper id. Two enabled swipers of
+ #      layout text/parallax overwrite each others background-image and
+ #      quote-text color.
  # -----------------------------------------------------------------------------
- # PER-SWIPER CONFIG INHERITANCE CHAIN (HTML data file)
- #
- #   swiper settings -> overload user settings -> overload default settings
- #
- # Effective settings for ONE swiper instance are now built as a DEEP merge
- # of the three YAML layers (later layers overwrite earlier layers per key,
- # missing keys fall through):
- #
- #   1. _data/modules/defaults/swiper.yml   (defaults ..............)  base
- #   2. _data/modules/swiper_control.yml    (settings, w/o swipers ..)  user
- #                                          optional GLOBAL section
- #   3. _data/modules/swiper_control.yml    (settings.swipers[] ....)  swiper
- #
- # Before this fix, EVERY per-swiper key was read RAW from the loop variable
- # (swiper.captions.*, swiper.lightbox.*, swiper.wrapper_styles, ...) with
- # NO fallthrough to the user or default layer. A key not declared on the
- # swiper entry resolved to Liquid 'nil' — NOT to its default. The defaults
- # file therefore had no effect on any swiper: of the 11 top-level default
- # keys, only 'filters' was ever read (and that read was itself broken, see
- # below). The global options var swiper_options was built with the SHALLOW
- # 'merge' filter (any key set on a higher layer dropped ALL sibling default
- # keys of its subtree) and was never read at all.
- #
- # This is the same defect class fixed for the J1 Amplitude module by
- # "claude - Fix Amplitude YAML data processing #1" and is resolved here by
- # the same mechanism (deep_merge chain, resolved per instance INSIDE the
- # swiper loop).
- #
- # Changes (all tagged "claude - Fix J1 Swiper YAML data processing #1"):
- #
- #   • Liquid: swiper_options — global chain built with deep_merge
- #     (defaults <- control/user) instead of the shallow 'merge' filter.
- #     swiper_media is NOT merged in (its only payload is the media_sets
- #     array, read separately from swiper_media_sets).
- #   • Liquid: css_filters — the former expression merged 'swiper.filters'
- #     at a point where the loop var 'swiper' does not exist yet (the swiper
- #     loop starts further down), so the merge operand was ALWAYS nil and no
- #     per-swiper filter could ever apply. The chain is built from the user
- #     layer (swiper_settings.filters) here; the per-swiper layer is applied
- #     inside the loop via the effective object.
- #   • Liquid: the swiper loop iterates 'swiper_entry' (RAW control entry)
- #     now and assigns the EFFECTIVE object to 'swiper' as the FIRST
- #     statement of each iteration. The whole loop body is therefore
- #     UNCHANGED and reads the effective chain through the same 'swiper.*'
- #     expressions it always used.
- #
- #     NOTE on Liquid scoping (why the loop var is renamed): an 'assign'
- #     tag writes to the OUTERMOST scope, while a 'for' loop var lives in
- #     the loop's own (innermost) scope and SHADOWS it. Assigning to the
- #     loop var's own name from inside the loop would therefore have NO
- #     effect (verified against Liquid 5.4, the engine used by Jekyll).
- #     Renaming the loop var to 'swiper_entry' frees the name 'swiper' so
- #     the assigned effective object is what the body resolves.
- # ----------------------------------------------------------------------------- {% endcomment %}
+{% endcomment %}
 
 {% comment %} Liquid procedures
 -------------------------------------------------------------------------------- {% endcomment %}
@@ -102,20 +78,6 @@ exclude_from_search:                    true
 
 {% comment %} Set config options
 -------------------------------------------------------------------------------- {% endcomment %}
-
-{% comment %} claude - Fix J1 Swiper YAML data processing #1
---------------------------------------------------------------------------------
- Global options: DEEP merge of the chain defaults <- swiper_settings (user
- settings). The former SHALLOW 'merge' filter replaced whole subtrees: any
- key set on a higher layer silently dropped ALL sibling default keys of that
- subtree (e.g. a user 'lightbox: {enabled: true}' would have dropped
- lightbox.parameters, lightbox.ui_controls and lightbox.kbd_controls).
- swiper_options is the BASE of the per-swiper chain resolved in the swiper
- loop below (see 'swiper_effective').
-
- Original (deprecated, preserved for reference):
-  {% assign swiper_options    = swiper_defaults | merge: swiper_settings %}
--------------------------------------------------------------------------------- {% endcomment %}
 {% assign swiper_options    = swiper_defaults | merge: swiper_settings %}
 {% assign swipers           = swiper_settings.swipers %}
 
@@ -135,25 +97,7 @@ exclude_from_search:                    true
 
 {% comment %} Collect CSS image filters
 ------------------------------------------------------------------------------- {% endcomment %}
-
-{% comment %} claude - Fix J1 Swiper YAML data processing #1
---------------------------------------------------------------------------------
- The merge operand 'swiper.filters' was read OUTSIDE the swiper loop (the
- loop var 'swiper' is bound further down, at 'Generate HTML portion for all
- sliders enabled'), so the operand was ALWAYS nil: no per-swiper filter set
- could ever reach css_filters. Built from the chain defaults <- user
- settings here (global scope); the per-swiper layer is available inside the
- loop as 'swiper.filters' on the EFFECTIVE object.
-
- NOTE (out of scope, flagged for a later fix): 'image_filters' is captured
- here but NEVER read anywhere in this file — the CSS filter feature is not
- wired to any slide markup. Fixing the operand restores the intended chain
- but does not make the filters visible.
-
- Original (deprecated, preserved for reference):
-  {% assign css_filters   = swiper_defaults.filters | merge: swiper.filters %}
--------------------------------------------------------------------------------- {% endcomment %}
-{% assign css_filters   = swiper_defaults.filters | merge: swiper_settings.filters %}
+{% assign css_filters   = swiper_defaults.filters | merge: swiper.filters %}
 {% assign image_filters = 'filter:' %}
 
 {% if css_filters.enabled %}
@@ -189,40 +133,14 @@ media_set.image_defaults: {{media_set.image_defaults | debug}}
     <!-- [INFO   ] [~/assets/data/swiper.html                      ] [ exclude data file from GLOBAL _site/sitemap.xml (robots) ] -->
     <meta name="robots" content="noindex, nofollow">
     <!-- [INFO   ] [~/assets/data/swiper.html                      ] [ exclude data file from LOCAL search index _site/assets/data/lunr-index.json ] -->
-    <meta type="module" content="html data file">
+    <meta type="swiper" content="html data file">
   </head>
   <body>
 
     <!-- [INFO   ] [~/assets/data/swiper.html                      ] [generate HTML portion for all sliders configured ] -->
     {% comment %} Generate HTML portion for all sliders enabled
     ---------------------------------------------------------------------------- {% endcomment %}     
-
-    {% comment %} claude - Fix J1 Swiper YAML data processing #1
-    ----------------------------------------------------------------------------
-    The loop iterates the RAW control entries as 'swiper_entry' now. The
-    EFFECTIVE options of the instance are resolved as the FIRST statement of
-    the iteration and assigned to 'swiper', so the complete loop body below
-    stays UNCHANGED and resolves the full inheritance chain
-
-      swiper settings -> overload user settings -> overload default settings
-
-    through the very same 'swiper.*' expressions it used before. The base
-    'swiper_options' already carries the chain defaults <- user settings (see
-    'Set config options' above); the deep_merge here applies the third layer,
-    the per-swiper entry.
-
-    The assign is placed BEFORE the 'enabled' guard on purpose: 'enabled'
-    itself is part of the chain (the defaults declare 'enabled: false', the
-    entry overloads it), so the guard must be evaluated on the EFFECTIVE
-    object, not on the raw entry.
-
-    Original (deprecated, preserved for reference):
-      {% for swiper in swipers %} {% if swiper.enabled %}
-      {% endif %} {% endfor %}
-    ---------------------------------------------------------------------------- {% endcomment %}
-    {% for swiper_entry in swipers %}
-    {% assign swiper = swiper_options | merge: swiper_entry %}
-    {% if swiper.enabled %}
+    {% for swiper in swipers %} {% if swiper.enabled %}
 
       {% comment %} Detect type and layout
       -------------------------------------------------------------------------- {% endcomment %}      
@@ -244,19 +162,19 @@ media_set.image_defaults: {{media_set.image_defaults | debug}}
         <div class="swiper swiper-container {{swiper.container_classes}}">
 
           <!-- Swiper Wrapper (slides) -->
-          <div class="swiper-wrapper">
+          <ul class="swiper-wrapper">
           {% for media_set in swiper_media_sets %} {% if media_set.enabled %} {% if media_set.name == swiper.media_set %}
 
             {% for slide in media_set.items %}
             {% if slide.enabled  %}
-            <div class="swiper-slide">
+            <li class="swiper-slide">
               <p>
                 {{slide.text}}
               </p>
-            </div>
+            </li>
             {% endif %} {% endfor %}
           {% endif %} {% endif %} {% endfor %}
-          </div> <!-- END Swiper Wrapper (slides) -->
+          </ul> <!-- END Swiper Wrapper (slides) -->
 
         </div> <!-- END Swiper Container (elements) -->
       </div> <!-- END Swiper {{swiper.id}} -->
@@ -271,69 +189,102 @@ media_set.image_defaults: {{media_set.image_defaults | debug}}
       {% if swiper_type == 'text' and swiper_layout == 'parallax' %}
 
       <!-- Text Swipers, Layout Parallax -->
+
+      {% comment %} Fix J1 SwiperJS HTML processing #1
+      --------------------------------------------------------------------------
+      RELOCATED (not deleted). The Liquid var initialization AND both <style>
+      elements below were placed INSIDE <ul class="swiper-wrapper"> before. The
+      content model of a list (ul|ol|menu) allows <li> and script-supporting
+      elements (<script>, <template>) ONLY. Any <style> found as a direct child
+      of the wrapper makes the list structure invalid:
+
+        [Nu]         Element "style" not allowed as child of element "ul"
+                     in this context.
+        [Lighthouse] Lists do not contain only <li> elements and script
+                     supporting elements (<script> and <template>).
+
+      Both <style> elements depend on the (current) swiper ONLY, NOT on the
+      media_set being processed. They were nested in the media_set loop by
+      accident and are hoisted OUT of the wrapper (and out of the loop) here.
+      Original position: see marker "Fix J1 SwiperJS HTML processing #1
+      (styles relocated)" below.
+      -------------------------------------------------------------------------- {% endcomment %}
+
+      {% comment %} set default or configured background-image
+      Fix J1 SwiperJS HTML processing #1
+      -------------------------------------------------------------------------- {% endcomment %}
+      {% assign background-image = '/assets/image/quote/default.jpg' %}
+      {% if swiper.background-image and swiper.background-image != empty %}
+        {% assign background-image = swiper.background-image %}
+      {% endif %}
+
+      {% comment %} set default or configured quote-text color
+      Fix J1 SwiperJS HTML processing #1
+      -------------------------------------------------------------------------- {% endcomment %}
+      {% assign quote-text-color = 'rgba(255, 255, 255, .75)' %}
+      {% if swiper.quote-text-color and swiper.quote-text-color != empty %}
+        {% assign quote-text-color = swiper.quote-text-color %}
+      {% endif %}
+
+      {% comment %} Place 1-pixel grid on background-image if enabled
+      -------------------------------------------------------------------------- {% endcomment %}
+      {% if swiper.gridify %}
+      <!-- Fix J1 SwiperJS HTML processing #1: style hoisted out of the wrapper -->
+      <style>
+      .swiper-text-parallax:before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: url(/assets/image/pattern/image/gridtile.png) repeat;
+      }
+      </style>
+      {% endif %}
+
+      {% comment %} jadams. 2025-02-26: place background-image|quote-text color
+      -------------------------------------------------------------------------- {% endcomment %}
+      <!-- Fix J1 SwiperJS HTML processing #1: style hoisted out of the wrapper -->
+      <style>
+        .swiper-text-parallax {
+          width: 100%;
+          height: 100%;
+          padding: 75px 0 75px 0;
+          position: relative;
+          background: url({{background-image}}) 50% 0 repeat fixed;
+        }
+        .swiper-text-parallax .swiper-wrapper .swiper-slide p {
+          color: {{quote-text-color}};
+        }
+      </style>
+
       <div id="{{swiper.id}}">
         <!-- Swiper elements (El) -->
         <div class="swiper swiper-container {{swiper.container_classes}}">
 
           <!-- Swiper Wrapper (slides) -->
-          <div class="swiper-wrapper">
+          <ul class="swiper-wrapper">
           {% for media_set in swiper_media_sets %} {% if media_set.enabled %} {% if media_set.name == swiper.media_set %}
 
-            {% comment %} Place 1-pixel grid on background-image if enabled
+            {% comment %} Fix J1 SwiperJS HTML processing #1 (styles relocated)
+            --------------------------------------------------------------------
+            Original position of the Liquid var initialization and of both
+            <style> elements. Moved OUT of <ul class="swiper-wrapper"> and out
+            of the media_set loop, see the fix block above. The wrapper now
+            contains <li> elements only.
             -------------------------------------------------------------------- {% endcomment %}
-            {% if swiper.gridify %}
-            <style>              
-            .swiper-text-parallax:before {
-              content: "";
-              position: absolute;
-              top: 0;
-              left: 0;
-              width: 100%;
-              height: 100%;
-              background: url(/assets/image/pattern/image/gridtile.png) repeat;
-            }            
-            </style>
-            {% endif %}
-
-            {% comment %} set default or configured background-image
-            -------------------------------------------------------------------- {% endcomment %}
-            {% assign background-image = '/assets/image/quote/default.jpg' %}
-            {% if swiper.background-image and swiper.background-image != empty %}
-              {% assign background-image = swiper.background-image %}
-            {% endif %}
-
-            {% comment %} set default or configured quote-text color
-            -------------------------------------------------------------------- {% endcomment %}
-            {% assign quote-text-color = 'rgba(255, 255, 255, .75)' %}
-            {% if swiper.quote-text-color and swiper.quote-text-color != empty %}
-              {% assign quote-text-color = swiper.quote-text-color %}
-            {% endif %}
-
-            {% comment %} jadams. 2025-02-26: place background-image|quote-text color
-            -------------------------------------------------------------------- {% endcomment %}
-            <style>
-              .swiper-text-parallax {
-                width: 100%;
-                height: 100%;
-                padding: 75px 0 75px 0;
-                position: relative;
-                background: url({{background-image}}) 50% 0 repeat fixed;
-              }
-              .swiper-text-parallax .swiper-wrapper .swiper-slide p {
-                color: {{quote-text-color}};
-              }
-            </style>
 
             {% for slide in media_set.items %} {% if slide.enabled  %}
-            <div class="swiper-slide">
+            <li class="swiper-slide">
               <!-- p class="transparent-text" -->
               <p>
                 {{slide.text}}
               </p>
-            </div>
+            </li>
             {% endif %} {% endfor %}
           {% endif %} {% endif %} {% endfor %}
-          </div> <!-- END Swiper Wrapper (slides) -->
+          </ul> <!-- END Swiper Wrapper (slides) -->
 
         </div> <!-- END Swiper Container (elements) -->
       </div> <!-- END Swiper {{swiper.id}} -->
@@ -363,9 +314,9 @@ media_set.image_defaults: {{media_set.image_defaults | debug}}
 
           <!-- Swiper Wrapper (slides) -->
           {% if swiper.wrapper_styles %}
-          <div class="swiper-wrapper" style="{{wrapper_styles}}">
+          <ul class="swiper-wrapper" style="{{wrapper_styles}}">
           {% else %}
-          <div class="swiper-wrapper">
+          <ul class="swiper-wrapper">
           {% endif %}
 
             {% if swiper.lightbox.enabled %}
@@ -387,7 +338,7 @@ media_set.image_defaults: {{media_set.image_defaults | debug}}
             {% endif %}
 
             {% if swiper.lightbox.enabled %}
-            <div class="swiper-slide">
+            <li class="swiper-slide">
               {% if media_set.image_defaults.base_folder %} 
               <a href="{{media_set.image_defaults.base_folder}}/{{slide.image}}.{{media_extension}}"
                 {% if media_set.image_defaults.image_width == 'slide' %}
@@ -407,9 +358,9 @@ media_set.image_defaults: {{media_set.image_defaults | debug}}
                 {% endif %}
               </a>
               {% endif %}
-            </div>
+            </li>
             {% else %}
-            <div class="swiper-slide">
+            <li class="swiper-slide">
               {% if media_set.image_defaults.base_folder %} 
               <img src="{{media_set.image_defaults.base_folder}}/{{slide.image}}.{{media_extension}}" alt="{{image_alt_text}} {{slide.image}}">
               {% else %}
@@ -418,13 +369,13 @@ media_set.image_defaults: {{media_set.image_defaults | debug}}
               {% if swiper.captions.enabled %}
               <div class="{{swiper.captions.css_class}}">{{slide.caption_text}}</div>
               {% endif %}
-            </div>          
+            </li>          
             {% endif %}
 
             {% endif %} {% endfor %}
             {% endif %} {% endif %} {% endfor %}
 
-          </div> <!-- END Swiper Wrapper (slides) -->
+          </ul> <!-- END Swiper Wrapper (slides) -->
 
           {% if swiper.module_settings.navigation %}
           <!-- Navigation -->
@@ -464,7 +415,7 @@ media_set.image_defaults: {{media_set.image_defaults | debug}}
       <div id="{{swiper.id}}">
       {% endif %}
         <!-- Swiper elements (El) -->
-        <div class="swiper swiper-container thumbs-slider-top {{swiper.swiper_container_classes}}">
+        <div class="swiper swiper-container {{swiper.swiper_container_classes}}">
   
           {% assign wrapper_styles = '' %}
           {% if swiper.wrapper_styles %}
@@ -473,9 +424,9 @@ media_set.image_defaults: {{media_set.image_defaults | debug}}
   
           <!-- Swiper Wrapper (slides) -->
           {% if swiper.wrapper_styles %}
-          <div class="swiper-wrapper" style="{{wrapper_styles;}}">
+          <ul class="swiper-wrapper" style="{{wrapper_styles}}">
           {% else %}
-          <div class="swiper-wrapper">
+          <ul class="swiper-wrapper">
           {% endif %}
   
             {% if swiper.lightbox.enabled %}
@@ -497,7 +448,7 @@ media_set.image_defaults: {{media_set.image_defaults | debug}}
             {% endif %}
   
             {% if swiper.lightbox.enabled %}
-            <div class="swiper-slide">
+            <li class="swiper-slide">
               {% if media_set.image_defaults.base_folder %} 
               <a href="{{media_set.image_defaults.base_folder}}/{{slide.image}}.{{media_extension}}"
                 {% if media_set.image_defaults.image_width == 'slide' %}
@@ -517,9 +468,9 @@ media_set.image_defaults: {{media_set.image_defaults | debug}}
                 {% endif %}
               </a>
               {% endif %}
-            <div>
+            </li>
             {% else %}
-            <div class="swiper-slide">
+            <li class="swiper-slide">
               {% if media_set.image_defaults.base_folder %} 
               <img src="{{media_set.image_defaults.base_folder}}/{{slide.image}}.{{media_extension}}" alt="{{image_alt_text}} {{slide.image}}">
               {% else %}
@@ -528,13 +479,13 @@ media_set.image_defaults: {{media_set.image_defaults | debug}}
               {% if swiper.captions.enabled %}
               <div class="{{swiper.captions.css_class}}">{{slide.caption_text}}</div>
               {% endif %}
-            </div>          
+            </li>          
             {% endif %}
   
             {% endif %} {% endfor %}
             {% endif %} {% endif %} {% endfor %}
   
-          </div> <!-- END Swiper Wrapper (slides) -->
+          </ul> <!-- END Swiper Wrapper (slides) -->
   
           {% if swiper.module_settings.navigation %}
           <!-- Navigation -->
@@ -576,9 +527,9 @@ media_set.image_defaults: {{media_set.image_defaults | debug}}
   
           <!-- Swiper Wrapper (slides) -->
           {% if swiper.wrapper_styles %}
-          <div class="swiper-wrapper" style="{{wrapper_styles}}">
+          <ul class="swiper-wrapper" style="{{wrapper_styles}}">
           {% else %}
-          <div class="swiper-wrapper">
+          <ul class="swiper-wrapper">
           {% endif %}
   
             {% if swiper.lightbox.enabled %}
@@ -600,7 +551,7 @@ media_set.image_defaults: {{media_set.image_defaults | debug}}
             {% endif %}
   
             {% if swiper.lightbox.enabled %}
-            <div class="swiper-slide">
+            <li class="swiper-slide">
               {% if media_set.image_defaults.base_folder %} 
               <a href="{{media_set.image_defaults.base_folder}}/{{slide.image}}.{{media_extension}}"
                 {% if media_set.image_defaults.image_width == 'slide' %}
@@ -620,9 +571,9 @@ media_set.image_defaults: {{media_set.image_defaults | debug}}
                 {% endif %}
               </a>
               {% endif %}
-            </div>
+            </li>
             {% else %}
-            <div class="swiper-slide">
+            <li class="swiper-slide">
               {% if media_set.image_defaults.base_folder %} 
               <img src="{{media_set.image_defaults.base_folder}}/{{slide.image}}.{{media_extension}}" alt="{{image_alt_text}} {{slide.image}}">
               {% else %}
@@ -631,29 +582,18 @@ media_set.image_defaults: {{media_set.image_defaults | debug}}
               {% if swiper.captions.enabled %}
               <div class="{{swiper.captions.css_class}}">{{slide.caption_text}}</div>
               {% endif %}
-            </div>          
+            </li>          
             {% endif %}
   
             {% endif %} {% endfor %}
             {% endif %} {% endif %} {% endfor %}
   
-          </div> <!-- END Swiper Wrapper (slides) -->
+          </ul> <!-- END Swiper Wrapper (slides) -->
   
           {% if swiper.modules.navigation %}
           <!-- Navigation -->
-          <!-- Modify SwiperJS nav buttons #1 : prev -->
-          <div class="swiper-button-prev" role="button" tabindex="0" aria-label="Previous">
-            <svg aria-hidden="true" viewBox="0 0 60 60" width="60" height="60">
-              <path d="M29 43l-3 3-16-16 16-16 3 3-13 13 13 13z"></path>
-            </svg>
-          </div>
-
-          <!-- Modify SwiperJS nav buttons #1 : next -->
-          <div class="swiper-button-next" role="button" tabindex="0" aria-label="Next">
-            <svg aria-hidden="true" viewBox="0 0 60 60" width="60" height="60">
-              <path d="M29 43l-3 3-16-16 16-16 3 3-13 13 13 13z"></path>
-            </svg>
-          </div>
+          <div class="swiper-button-prev"></div>
+          <div class="swiper-button-next"></div>
           {% endif %}
   
           {% assign pagination_el       = swiper.module_settings.pagination.el | split: '-' %}
@@ -698,9 +638,9 @@ media_set.image_defaults: {{media_set.image_defaults | debug}}
   
           <!-- Swiper Wrapper (slides) -->
           {% if swiper.wrapper_styles %}
-          <div class="swiper-wrapper" style="{{wrapper_styles}}">
+          <ul class="swiper-wrapper" style="{{wrapper_styles}}">
           {% else %}
-          <div class="swiper-wrapper">
+          <ul class="swiper-wrapper">
           {% endif %}
   
             {% if swiper.lightbox.enabled %}
@@ -722,7 +662,7 @@ media_set.image_defaults: {{media_set.image_defaults | debug}}
             {% endif %}
   
             {% if swiper.lightbox.enabled %}
-            <div class="swiper-slide">
+            <li class="swiper-slide">
               {% if media_set.image_defaults.base_folder %} 
               <a href="{{media_set.image_defaults.base_folder}}/{{slide.image}}.{{media_extension}}"
                 {% if media_set.image_defaults.image_width == 'slide' %}
@@ -742,9 +682,9 @@ media_set.image_defaults: {{media_set.image_defaults | debug}}
                 {% endif %}
               </a>
               {% endif %}
-            </div>
+            </li>
             {% else %}
-            <div class="swiper-slide">
+            <li class="swiper-slide">
               {% if media_set.image_defaults.base_folder %} 
               <img src="{{media_set.image_defaults.base_folder}}/{{slide.image}}.{{media_extension}}" alt="{{image_alt_text}} {{slide.image}}">
               {% else %}
@@ -753,13 +693,13 @@ media_set.image_defaults: {{media_set.image_defaults | debug}}
               {% if swiper.captions.enabled %}
               <div class="{{swiper.captions.css_class}}">{{slide.caption_text}}</div>
               {% endif %}
-            </div>          
+            </li>          
             {% endif %}
   
             {% endif %} {% endfor %}
             {% endif %} {% endif %} {% endfor %}
   
-          </div> <!-- END Swiper Wrapper (slides) -->
+          </ul> <!-- END Swiper Wrapper (slides) -->
   
           {% if swiper.modules.navigation %}
           <!-- Navigation -->
@@ -808,9 +748,9 @@ media_set.image_defaults: {{media_set.image_defaults | debug}}
 
           <!-- Swiper Wrapper (slides) -->
           {% if swiper.wrapper_styles %}
-          <div class="swiper-wrapper" style="{{wrapper_styles}}">
+          <ul class="swiper-wrapper" style="{{wrapper_styles}}">
           {% else %}
-          <div class="swiper-wrapper">
+          <ul class="swiper-wrapper">
           {% endif %}
 
             {% if swiper.lightbox.enabled %}
@@ -832,7 +772,7 @@ media_set.image_defaults: {{media_set.image_defaults | debug}}
             {% endif %}
 
             {% if swiper.lightbox.enabled %}
-            <div class="swiper-slide">
+            <li class="swiper-slide">
               {% if media_set.image_defaults.base_folder %}
               <a href="{{media_set.image_defaults.base_folder}}/{{slide.image}}.{{media_extension}}"
                 {% if media_set.image_defaults.image_width == 'slide' %}
@@ -852,9 +792,9 @@ media_set.image_defaults: {{media_set.image_defaults | debug}}
                 {% endif %}
               </a>
               {% endif %}
-            </div>
+            </li>
             {% else %}
-            <div class="swiper-slide">
+            <li class="swiper-slide">
               {% if media_set.image_defaults.base_folder %}
               <img data-swiper-parallax-scale="1.1" src="{{media_set.image_defaults.base_folder}}/{{slide.image}}.{{media_extension}}" alt="{{image_alt_text}} {{slide.image}}">
               {% else %}
@@ -863,13 +803,13 @@ media_set.image_defaults: {{media_set.image_defaults | debug}}
               {% if swiper.captions.enabled %}
               <div data-swiper-parallax-scale="1.1" class="{{swiper.captions.css_class}}">{{slide.caption_text}}</div>
               {% endif %}
-            </div>
+            </li>
             {% endif %}
 
             {% endif %} {% endfor %}
             {% endif %} {% endif %} {% endfor %}
 
-          </div> <!-- END Swiper Wrapper (slides) -->
+          </ul> <!-- END Swiper Wrapper (slides) -->
 
           {% if swiper.modules.navigation %}
           <!-- Navigation -->
@@ -919,9 +859,9 @@ media_set.image_defaults: {{media_set.image_defaults | debug}}
   
           <!-- Swiper Wrapper (slides) -->
           {% if swiper.wrapper_styles %}
-          <div class="swiper-wrapper" style="{{wrapper_styles}}">
+          <ul class="swiper-wrapper" style="{{wrapper_styles}}">
           {% else %}
-          <div class="swiper-wrapper">
+          <ul class="swiper-wrapper">
           {% endif %}
   
             {% if swiper.lightbox.enabled %}
@@ -943,7 +883,7 @@ media_set.image_defaults: {{media_set.image_defaults | debug}}
             {% endif %}
   
             {% if swiper.lightbox.enabled %}
-            <div class="swiper-slide">
+            <li class="swiper-slide">
               {% if media_set.image_defaults.base_folder %} 
               <a href="{{media_set.image_defaults.base_folder}}/{{slide.image}}.{{media_extension}}"
                 {% if media_set.image_defaults.image_width == 'slide' %}
@@ -963,9 +903,9 @@ media_set.image_defaults: {{media_set.image_defaults | debug}}
                 {% endif %}
               </a>
               {% endif %}
-            </div>
+            </li>
             {% else %}
-            <div class="swiper-slide">
+            <li class="swiper-slide">
               {% if media_set.image_defaults.base_folder %} 
               <img src="{{media_set.image_defaults.base_folder}}/{{slide.image}}.{{media_extension}}" alt="{{image_alt_text}} {{slide.image}}">
               {% else %}
@@ -974,13 +914,13 @@ media_set.image_defaults: {{media_set.image_defaults | debug}}
               {% if swiper.captions.enabled %}
               <div class="{{swiper.captions.css_class}}">{{slide.caption_text}}</div>
               {% endif %}
-            </div>          
+            </li>          
             {% endif %}
   
             {% endif %} {% endfor %}
             {% endif %} {% endif %} {% endfor %}
   
-          </div> <!-- END Swiper Wrapper (slides) -->
+          </ul> <!-- END Swiper Wrapper (slides) -->
   
           {% if swiper.modules.navigation %}
           <!-- Navigation -->

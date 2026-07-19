@@ -409,43 +409,43 @@ settings:
         # CORE Options
         # ----------------------------------------------------------------------
         #
-        parameters:
-          children:                     a
-          bgOpacity:                    1
-          showHideOpacity:              true
-          loop:                         true
-          wheelToZoom:                  true
-          showHideAnimationType:        zoom
-          imageClickAction:             next
-          tapAction:                    next
-          padding:                      { top: 0, bottom: 0, left: 80, right: 80 }
+        # parameters:
+        #   children:                     a
+        #   bgOpacity:                    1
+        #   showHideOpacity:              true
+        #   loop:                         true
+        #   wheelToZoom:                  true
+        #   showHideAnimationType:        zoom
+        #   imageClickAction:             next
+        #   tapAction:                    next
+        #   padding:                      { top: 0, bottom: 0, left: 80, right: 80 }
 
         # ----------------------------------------------------------------------
         # CAPTION Options
         # ----------------------------------------------------------------------
         #
-        captions:
-          enabled:                      true
-          css_class:                    pswp-caption-content
+        # captions:
+        #   enabled:                      true
+        #   css_class:                    pswp-caption-content
 
         # ----------------------------------------------------------------------
         # USER INTERFACE Options
         # ----------------------------------------------------------------------
         #
-        ui_controls:
-          zoom:                         false
-          close:                        true
-          counter:                      true
-          arrowKeys:                    false
+        # ui_controls:
+        #   zoom:                         false
+        #   close:                        true
+        #   counter:                      true
+        #   arrowKeys:                    false
 
         # ----------------------------------------------------------------------
         # KEYBOARD Options
         # ----------------------------------------------------------------------
         #
-        kbd_controls:
-          escKey:                       true
+        # kbd_controls:
+        #   escKey:                       true
  
-    # --------------------------------------------------------------------------
+
     # IMAGE Swiper|Layout Thumbs (top)
     # --------------------------------------------------------------------------
     #
@@ -581,7 +581,7 @@ settings:
       lightbox:
         enabled:                        false
 
-    # --------------------------------------------------------------------------
+
     # IMAGE Swiper|Layout Panorama
     # --------------------------------------------------------------------------
     #
@@ -670,6 +670,180 @@ settings:
       # ------------------------------------------------------------------------
       #
       events:
+        enabled:                        false
+
+
+    # IMAGE Swiper|Layout Stacked (old)
+    # --------------------------------------------------------------------------
+    #
+    - swiper:
+
+      # ------------------------------------------------------------------------
+      # GENERAL Options
+      # ------------------------------------------------------------------------
+      # 
+      enabled:                          false
+      id:                               swiper_image_stacked
+      layout:                           image/stacked
+      media_set:                        game_posters
+      swiper_classes:                   stacked-slider
+      container_classes:                false
+      wrapper_styles:                   false
+
+      # ------------------------------------------------------------------------
+      # CAPTION Options
+      # ------------------------------------------------------------------------
+      #
+      captions:
+        enabled:                        false
+        css_class:                      swp-caption-content
+
+      # ------------------------------------------------------------------------
+      # CORE Options
+      # ------------------------------------------------------------------------
+      #
+      parameters:
+        grabCursor:                     true
+        loop:                           false
+        speed:                          600
+
+      # ------------------------------------------------------------------------
+      # MODULE Options
+      # ------------------------------------------------------------------------
+      #
+      module_settings:
+        creativeEffect:
+          enabled:                      true
+          limitProgress:                3
+          perspective:                  true
+          shadowPerProgress:            true
+          prev:
+            shadow:                     true
+            # set `translateX(-15%)` and translateZ(-200)` on PREVIOUS slides
+            translate:                  [ '-15%', 0, -200 ]
+          next:
+            # set `translateX to calcNextOffset on NEXT slides
+            translate:                  [ calcNextOffset(), 0, 0 ]
+        pagination:
+          clickable:                    true
+          dynamicBullets:               false
+          el:                           .swiper-pagination-inner
+          type:                         bullets
+        parallax:
+          enabled:                      true
+          parallax_data_elements:       [ data-swiper-parallax-scale="1.1" ]
+        stacked:
+          effect:                       creative
+          swiper_id:                    swiper_image_stacked
+          resistanceRatio:              0
+
+      # ------------------------------------------------------------------------
+      # EVENT Options
+      # ------------------------------------------------------------------------
+      #
+      events:
+        enabled:                        true
+        init: >
+                                        function (swiper) {
+                                          var slideHeight = 600;
+                                          swiper.slides.forEach(slide => {
+                                            slide.style.height = `${slideHeight}px`;
+                                          });
+                                        }
+        reachEnd: >
+                                        function (swiper) { onLastSlide(swiper) }
+
+      # ------------------------------------------------------------------------
+      # LIGHTBOX Options
+      #
+      lightbox:
+        enabled:                        false
+
+
+    # IMAGE Swiper|Layout Stacked (new)
+    # --------------------------------------------------------------------------
+    #
+    - swiper:
+
+      # ------------------------------------------------------------------------
+      # GENERAL Options
+      # ------------------------------------------------------------------------
+      # 
+      enabled:                          true
+      id:                               swiper_image_stacked
+      layout:                           image/stacked
+      media_set:                        game_posters
+      swiper_classes:                   stacked-slider
+      container_classes:                false
+      wrapper_styles:                   false
+
+      # ------------------------------------------------------------------------
+      # CAPTION Options
+      # ------------------------------------------------------------------------
+      #
+      captions:
+        enabled:                        false
+        css_class:                      swp-caption-content
+
+      # ------------------------------------------------------------------------
+      # CORE Options
+      # ------------------------------------------------------------------------
+      #
+      parameters:
+        grabCursor:                     true
+        loop:                           false
+        speed:                          600
+
+      # ------------------------------------------------------------------------
+      # MODULE Options
+      # ------------------------------------------------------------------------
+      #
+      module_settings:
+        creativeEffect:
+          enabled:                      true
+          limitProgress:                3
+          perspective:                  true
+          shadowPerProgress:            true
+          prev:
+            shadow:                     true
+            # set `translateX(-15%)` and translateZ(-200)` on PREVIOUS slides
+            translate:                  [ '-15%', 0, -200 ]
+          next:
+            # set `translateX to calcNextOffset on NEXT slides
+            translate:                  [ calcNextOffset(), 0, 0 ]
+        pagination:
+          clickable:                    true
+          dynamicBullets:               false
+          el:                           .swiper-pagination-inner
+          type:                         bullets
+        parallax:
+          enabled:                      true
+          parallax_data_elements:       [ data-swiper-parallax-scale="1.1" ]
+        stacked:
+          effect:                       creative
+          swiper_id:                    swiper_image_stacked
+          resistanceRatio:              0
+
+      # ------------------------------------------------------------------------
+      # EVENT Options
+      # ------------------------------------------------------------------------
+      #
+      events:
+        enabled:                        true
+        init: >
+                                        function (swiper) {
+                                          var slideHeight = 600;
+                                          swiper.slides.forEach(slide => {
+                                            slide.style.height = `${slideHeight}px`;
+                                          });
+                                        }
+        reachEnd: >
+                                        function (swiper) { onLastSlide(swiper) }
+
+      # ------------------------------------------------------------------------
+      # LIGHTBOX Options
+      #
+      lightbox:
         enabled:                        false
 
 # ------------------------------------------------------------------------------

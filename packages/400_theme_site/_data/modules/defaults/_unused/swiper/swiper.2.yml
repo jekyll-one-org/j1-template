@@ -75,6 +75,7 @@ defaults:
     contrast:                           1
     brightness:                         1
 
+
   # ----------------------------------------------------------------------------
   # SWIPER options
   # ----------------------------------------------------------------------------
@@ -101,22 +102,6 @@ defaults:
       slidesPerGroup:                     1
       spaceBetween:                       1
 
-    # ------------------------------------------------------------------------
-    # MODULE Options
-    # ------------------------------------------------------------------------
-    #
-    module_settings:
-      navigation:
-        enabled:                      false
-        nextEl:                       .swiper-button-next
-        prevEl:                       .swiper-button-prev
-
-      pagination:
-        enabled:                      false
-        clickable:                    true
-        nunbered:                     false
-        el:                           .swiper-pagination-outer
-
     # --------------------------------------------------------------------------
     # CAPTION options
     # --------------------------------------------------------------------------
@@ -125,19 +110,19 @@ defaults:
       enabled:                        true
       css_class:                      swp-caption-content
 
-    # ------------------------------------------------------------------------
-    # EVENT Options
-    # ------------------------------------------------------------------------
-    #
-    events:
-      enabled:                        false
-
     # --------------------------------------------------------------------------
     # LIGHTBOX options
     # --------------------------------------------------------------------------
     #
     lightbox:
       enabled:                            false
+
+      # ------------------------------------------------------------------------
+      # LIGHTBOX caption settings
+      #
+      captions:
+        enabled:                          false
+        css_class:                        pswp-caption-content
 
       # ------------------------------------------------------------------------
       # LIGHTBOX Core Parameters
@@ -152,13 +137,6 @@ defaults:
         imageClickAction:                 next
         tapAction:                        next
         padding:                          { top: 0, bottom: 0, left: 80, right: 80 }
-
-      # ------------------------------------------------------------------------
-      # LIGHTBOX caption settings
-      #
-      captions:
-        enabled:                          false
-        css_class:                        pswp-caption-content
 
       # ------------------------------------------------------------------------
       # LIGHTBOX User Interface controls
