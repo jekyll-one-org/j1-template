@@ -101,9 +101,9 @@ defaults:
       slidesPerGroup:                     1
       spaceBetween:                       1
 
-    # ------------------------------------------------------------------------
+    # --------------------------------------------------------------------------
     # MODULE Options
-    # ------------------------------------------------------------------------
+    # --------------------------------------------------------------------------
     #
     module_settings:
       navigation:
@@ -125,9 +125,9 @@ defaults:
       enabled:                        true
       css_class:                      swp-caption-content
 
-    # ------------------------------------------------------------------------
+    # --------------------------------------------------------------------------
     # EVENT Options
-    # ------------------------------------------------------------------------
+    # --------------------------------------------------------------------------
     #
     events:
       enabled:                        false
@@ -137,43 +137,46 @@ defaults:
     # --------------------------------------------------------------------------
     #
     lightbox:
-      enabled:                            false
+      enabled:                          false
 
       # ------------------------------------------------------------------------
-      # LIGHTBOX Core Parameters
+      # LIGHTBOX (Core) Parameters
       #
       parameters:
-        children:                         a
-        bgOpacity:                        1
-        showHideOpacity:                  true
-        loop:                             true
-        wheelToZoom:                      true
-        showHideAnimationType:            zoom
-        imageClickAction:                 next
-        tapAction:                        next
-        padding:                          { top: 0, bottom: 0, left: 80, right: 80 }
+        enabled:                        false
+        children:                       a
+        bgOpacity:                      1
+        showHideOpacity:                true
+        loop:                           true
+        wheelToZoom:                    true
+        showHideAnimationType:          zoom
+        imageClickAction:               next
+        tapAction:                      next
+        padding:                        { top: 0, bottom: 0, left: 80, right: 80 }
 
       # ------------------------------------------------------------------------
       # LIGHTBOX caption settings
       #
       captions:
-        enabled:                          false
-        css_class:                        pswp-caption-content
+        enabled:                        false
+        css_class:                      pswp-caption-content
 
       # ------------------------------------------------------------------------
       # LIGHTBOX User Interface controls
       #
       ui_controls:
-        zoom:                             false
-        close:                            true
-        counter:                          true
-        arrowKeys:                        false
+        enabled:                        false
+        zoom:                           false
+        close:                          true
+        counter:                        true
+        arrowKeys:                      false
 
       # ------------------------------------------------------------------------
       # LIGHTBOX Keyboard controls
       #
       kbd_controls:
-        escKey:                           true
+        enabled:                        false
+        escKey:                         true
 
 # ------------------------------------------------------------------------------
 # END config

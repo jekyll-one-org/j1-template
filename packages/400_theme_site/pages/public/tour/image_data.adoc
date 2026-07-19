@@ -225,12 +225,15 @@ You can also combine a slider with a *lightbox*. The result is a very
 compact image gallery: visitors browse the slides, and when they want
 a closer look, they click an image to enlarge it in the lightbox.
 
-.Image Slider + Lightbox
-swiper::swiper_image_base_captions[role="mt-4 mb-4"]
-
+[NOTE]
+====
 The J1 *lightbox* module also supports *image groups*. Once one image
 is open in the lightbox, visitors can step through the rest of the
 group with simple arrow buttons.
+====
+
+.Image Slider + Lightbox
+swiper::swiper_image_base_captions[role="mt-4 mb-4"]
 
 
 [role="mt-5"]

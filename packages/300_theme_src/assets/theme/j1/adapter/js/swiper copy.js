@@ -130,6 +130,7 @@ regenerate:                             true
 -------------------------------------------------------------------------------- {% endcomment %}
 {% assign swiper_defaults     = modules.defaults.swiper.defaults %}
 {% assign swiper_settings     = modules.swiper_control.settings %}
+{% assign swiper_media        = modules.swiper_media.settings %}
 
 {% comment %} Set config options (settings only)
 -------------------------------------------------------------------------------- {% endcomment %}
@@ -147,10 +148,13 @@ regenerate:                             true
   {% assign swiper_options    = swiper_defaults | merge: swiper_settings %}
   {% assign swipers           = swiper_settings.swipers %}
 
-# swipers : {{ swipers | debug }}
+  {% assign swiper_sorted     = swiper_options.swipers | sort: 'id' %}
+  {% assign media_sorted      = swiper_media.media_sets | sort: 'name' %}
+
+  swipers : {{ swipers | debug }}
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign swiper_options      = swiper_defaults | deep_merge: swiper_settings %}
-{% assign swipers             = swiper_options.swipers %}
+{% assign swiper_options      = swiper_defaults | merge: swiper_settings %}
+{% assign swipers             = swiper_settings.swipers %}
 
 {% comment %} Detect prod mode
 -------------------------------------------------------------------------------- {% endcomment %}
@@ -162,7 +166,7 @@ regenerate:                             true
 
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/adapter/js/swiper.js (4)
+ # ~/assets/theme/j1/adapter/js/swiper.js (3)
  # J1 Adapter for the swiper module
  #
  # Product/Info:
@@ -368,9 +372,15 @@ j1.adapter.swiper = ((j1, window) => {
           Original (deprecated, preserved for reference):
             {% for swiper in swipers %}{% if swiper.enabled %}
             {% endif %}{% endfor %}
+
+            {% if swiper_options.lightbox.enabled %}
+            {% assign swiper.lightbox = swiper_entry.lightbox | merge: swiper_options.lightbox %}
+            swiper.lightbox: {{ swiper.lightbox | debug }}
+            {% endif %}
           ---------------------------------------------------------------------- {% endcomment %}
           {% for swiper_entry in swipers %}
-          {% assign swiper = swiper_options | merge: swiper_entry %}
+          {% assign swiper = swiper_entry | merge: swiper_options %}
+
           {% if swiper.enabled %}
           logger.info('\n' + `initialize swiper on id: {{swiper.id}}`);
 
@@ -451,11 +461,14 @@ j1.adapter.swiper = ((j1, window) => {
               {% endif %}
 
               {% if swiper.lightbox.enabled %}
+              
+              var bratze = 'pisse-{{swiper.id}}';
 
-              {% comment %} Overload lightbox settings
-              ------------------------------------------------------------------ {% endcomment %}                
-              {% assign lightbox_settings = swiper.lightbox | merge: swiper_defaults.swiper.lightbox %}
-
+              {% comment %}
+              {% assign swiper.lightbox = swiper.lightbox | merge: swiper_options.lightbox %}
+              swiper.lightbox: {{ swiper.lightbox | debug }}
+              ------------------------------------------------------------------ {% endcomment %}   
+              
               // ---------------------------------------------------------------
               // Setup PhotoSwipe Lightbox
               // ---------------------------------------------------------------
@@ -464,28 +477,29 @@ j1.adapter.swiper = ((j1, window) => {
                 // global settings
                 gallery: '#{{swiper.id}}',
                 pswpModule: PhotoSwipe,
+
+                {% if swiper.lightbox.parameters %}
                 // parameters (lightbox)
-                {% if lightbox_settings.parameters %} {% for setting in lightbox_settings.parameters %}
-                {% if setting[0] == 'enabled' %} {% continue %} {% endif %}
+                {% for setting in swiper.lightbox.parameters %}
                 {% if setting[1] == 'a' or setting[1] == 'zoom' or setting[1] == 'next' %}
                 {{setting[0]}}: {{ setting[1] | replace: '=>', ':' | json }},
                 {% else %}
                 {{setting[0]}}: {{ setting[1] | replace: '=>', ':' }},
                 {% endif %}
-                {% endfor %} {% endif %}
+                {% endfor %}
+                {% endif %}
 
-                {% if lightbox_settings.ui_controls %}
+                {% if swiper.lightbox.ui_controls %}
                 // ui elements
-                {% for setting in lightbox_settings.ui_controls %}
-                {% if setting[0] == 'enabled' %} {% continue %} {% endif %}
+                {% for setting in swiper.lightbox.ui_controls %}
+
                 {{setting[0]}}: {{ setting[1] | replace: '=>', ':' }},
                 {% endfor %}
                 {% endif %}
 
-                {% if lightbox_settings.kbd_controls %}
+                {% if swiper.lightbox.kbd_controls %}
                 // kbd control
-                {% for setting in lightbox_settings.kbd_controls %}
-                {% if setting[0] == 'enabled' %} {% continue %} {% endif %}
+                {% for setting in swiper.lightbox.kbd_controls %}
                 {{setting[0]}}: {{ setting[1] | replace: '=>', ':' }},
                 {% endfor %}
                 {% endif %}
