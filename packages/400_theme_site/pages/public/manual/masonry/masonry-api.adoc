@@ -27,7 +27,7 @@ image:
 
 compress:                               true
 regenerate:                             true
-permalink:                              /pages/public/manual/module/gallery/masonry/
+permalink:                              /pages/public/manual/module/gallery/masonry_api/
 
 resources:                              [ lightbox3, masonry ]
 resource_options:

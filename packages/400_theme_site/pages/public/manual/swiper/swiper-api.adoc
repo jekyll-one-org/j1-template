@@ -27,7 +27,7 @@ image:
 
 compress:                               true
 regenerate:                             false
-permalink:                              /pages/public/manual/module/carousel/swiper/
+permalink:                              /pages/public/manual/module/swiper_api/
 
 resources:                              [
                                           gallery, lightbox3,

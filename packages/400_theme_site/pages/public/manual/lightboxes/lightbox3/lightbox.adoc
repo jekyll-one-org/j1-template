@@ -22,7 +22,7 @@ image:
   height:                               1280
 
 regenerate:                             false
-permalink:                              /pages/public/manual/module/lightboxes/lightbox/
+permalink:                              /pages/public/manual/module/lightboxes/lightbox_v3_api/
 
 resources:                              [ lightbox3 ]
 resource_options:

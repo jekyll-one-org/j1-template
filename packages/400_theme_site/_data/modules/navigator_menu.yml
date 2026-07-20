@@ -232,41 +232,45 @@
           href:                         /pages/public/manuals/amplitude/amplitude_api/
           icon:                         speaker
 
-        - title:                        Swiper
-          href:                         /pages/public/manual/module/carousel/swiper/
-          icon:                         view-carousel 
+        - title:                        Masonry
+          href:                         /pages/public/manual/module/gallery/masonry_api/
+          icon:                         view-dashboard-variant
 
-    #  - title:                         Galleries
-    #    href:                          /pages/public/manuals/modules/gallery/
+    #  - title:                         Justified Gallery
+    #    href:                          /pages/public/manuals/modules/justfied_gallery_api/
     #    icon:                          view-dashboard-variant
+
+        - title:                        Swiper
+          href:                         /pages/public/manual/module/swiper_api/
+          icon:                         view-carousel 
 
         - title:                        Lightboxes
           icon:                         alpha-l-box
           dropdown:
 
             - title:                    Lightbox v3
-              href:                     /pages/public/manual/module/lightboxes/lightbox/
+              href:                     /pages/public/manual/module/lightboxes/lightbox_v3_api/
               icon:                     flashlight
             - title:                    PhotoSwipe V5
-              href:                     /pages/public/manual/module/lightboxes/photoswipe/
+              href:                     /pages/public/manual/module/lightboxes/photoswipe_api/
               icon:                     flashlight
             - title:                    lightGallery V2
-              href:                     /pages/public/manual/module/lightboxes/lightgallery/
+              href:                     /pages/public/manual/module/lightboxes/lightgallery_api/
               icon:                     flashlight
 
 # ------------------------------------------------------------------------------
 # Menu TEST
 #
-- item:                                 Test
-  sublevel:
+# - item:                                 Test
+#   sublevel:
 
-    - title:                            Video player
-      href:                             /pages/public/tools/test/videoPlayer/
-      icon:                             video
+#     - title:                            Video player
+#       href:                             /pages/public/tools/test/videoPlayer/
+#       icon:                             video
 
-    - title:                            VideoJS Playlist Test Tool
-      href:                             /pages/public/tools/test/videojs-playlist/
-      icon:                             video
+#     - title:                            VideoJS Playlist Test Tool
+#       href:                             /pages/public/tools/test/videojs-playlist/
+#       icon:                             video
 
 # ------------------------------------------------------------------------------
 # Menu CLAUDE AI

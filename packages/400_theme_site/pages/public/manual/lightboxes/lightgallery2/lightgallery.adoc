@@ -31,7 +31,7 @@ image:
 attic:                                  false
 regenerate:                             false
 personalization:                        true
-permalink:                              /pages/public/manual/module/lightboxes/lightgallery/
+permalink:                              /pages/public/manual/module/lightboxes/lightgallery_api/
 
 resources:                              [
                                           lightbox3, lightgallery,

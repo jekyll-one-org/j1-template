@@ -28,7 +28,7 @@ image:
 attic:                                  false
 regenerate:                             false
 personalization:                        true
-permalink:                              /pages/public/manual/module/lightboxes/photoswipe/
+permalink:                              /pages/public/manual/module/lightboxes/photoswipe_api/
 
 resources:                              [ photoswipejs ]
 resource_options:
