@@ -66,9 +66,12 @@ settings:
       #
       module_settings:
         autoplay:
+          enabled:                      true
           delay:                        3500
           pauseOnMouseEnter:            true
           disableOnInteraction:         false
+        pagination:
+          enabled:                      false
 
       # ------------------------------------------------------------------------
       # EVENT Options
@@ -86,7 +89,6 @@ settings:
                                           // do something after initialization
                                           console.log ('\n' + 'Entered event: afterInit');
                                         }
-
 
     # --------------------------------------------------------------------------
     # TEXT Swiper|Layout Parallax
@@ -122,9 +124,12 @@ settings:
       #
       module_settings:
         autoplay:
+          enabled:                      true
           delay:                        3500
           pauseOnMouseEnter:            true
           disableOnInteraction:         false
+        pagination:
+          enabled:                      false
 
       # ------------------------------------------------------------------------
       # EVENT Options
@@ -169,7 +174,7 @@ settings:
       # CAPTION Options
       # ------------------------------------------------------------------------
       #
-      captions:                             
+      captions:
         enabled:                        false
         css_class:                      swp-caption-content
 
@@ -187,15 +192,14 @@ settings:
       #
       module_settings:
         navigation:
+          enabled:                      true
           nextEl:                       .swiper-button-next
           prevEl:                       .swiper-button-prev
-
         pagination:
-          enabled:                      false
-          nunbered:                     true
+          enabled:                      true
+          numbered:                     true
           el:                           .swiper-pagination-outer
           clickable:                    true
-        # renderBullet:                 function (index, className) { return `<span class="${className}"> ${++index} </span>`; }
 
       # ------------------------------------------------------------------------
       # EVENT Options
@@ -211,7 +215,6 @@ settings:
                                             slide.style.height = `${slideHeight}px`;
                                           });
                                         }
-
 
     # --------------------------------------------------------------------------
     # IMAGE Swiper|Layout Base, Captions
@@ -254,11 +257,12 @@ settings:
       #
       module_settings:
         navigation:
+          enabled:                      true
           nextEl:                       .swiper-button-next
           prevEl:                       .swiper-button-prev
         pagination:
           enabled:                      true
-          nunbered:                     true
+          numbered:                     true
           type:                         bullets
           el:                           .swiper-pagination-outer
           dynamicBullets:               false
@@ -278,7 +282,6 @@ settings:
                                               slide.style.height = `${slideHeight}px`;
                                           });
                                         }
-
 
     # --------------------------------------------------------------------------
     # IMAGE Swiper|Layout Base, Captions
@@ -321,6 +324,7 @@ settings:
       #
       module_settings:
         pagination:
+          enabled:                      true
           type:                         bullets
           el:                           .swiper-pagination-outer
           dynamicBullets:               false
@@ -375,7 +379,6 @@ settings:
         kbd_controls:
           enabled:                      true
  
-
     # --------------------------------------------------------------------------
     # IMAGE Swiper|Layout Thumbs (top)
     #
@@ -415,8 +418,9 @@ settings:
       module_settings:
         pagination:
           enabled:                      true
-          nunbered:                     true
+          numbered:                     true
         thumbs:
+          enabled:                      true
           swiper_id:                    thumb_slider_top
           speed:                        1000
           grabCursor:                   true
@@ -443,7 +447,6 @@ settings:
                                         function (swiper) {
                                         thumbSlider.slideTo(swiper.activeIndex);
                                         }
-
 
     # --------------------------------------------------------------------------
     # IMAGE Swiper|Layout Neighbor
@@ -483,7 +486,10 @@ settings:
       # ------------------------------------------------------------------------
       #
       module_settings:
+        pagination:
+          enabled:                      false      
         neighbor:
+          enabled:                      true
           centeredSlides:               true
           loop:                         true
           loopAdditionalSlides:         1
@@ -496,7 +502,6 @@ settings:
       #
       events:
         enabled:                        false
-
 
     # --------------------------------------------------------------------------
     # IMAGE Swiper|Layout Panorama
@@ -572,10 +577,12 @@ settings:
       #
       module_settings:
         panorama:
+          enabled:                      true
           on_click:                     next                                    # false | next
           depth:                        200
           rotate:                       30
         pagination:
+          enabled:                      false
           type:                         bullets
           el:                           .swiper-pagination-outer
           dynamicBullets:               false

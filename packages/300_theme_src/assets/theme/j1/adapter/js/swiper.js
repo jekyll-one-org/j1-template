@@ -510,8 +510,6 @@ j1.adapter.swiper = ((j1, window) => {
                 const { pswp } = {{swiper.id}}Lightbox;
                 {{swiper.id}}.slideTo(pswp.currIndex, 0, false);
                 logger.debug('\n' + `current slide index: ${pswp.currIndex}`);
-            //  logger.debug('\n' + 'Slide object', pswp.currSlide);
-            //  logger.debug('\n' + 'Slide object data', pswp.currSlide.data);
               });
 
               {{swiper.id}}Lightbox.on('afterInit', () => {
@@ -546,8 +544,7 @@ j1.adapter.swiper = ((j1, window) => {
                 logger.debug('\n' + 'pagination elements (outer) moved');
               }, {{init_swiper_delay}});
               {% endif %}
-              // ---------------------------------------------------------------
-
+    
               clearInterval (load_dependencies['dependencies_met_html_loaded_{{swiper.id}}']);
             } // END if xhrLoadState success
           }, 10); // END dependencies_met_html_loaded swiper.id              

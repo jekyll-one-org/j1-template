@@ -26,7 +26,7 @@ function LayoutThumbs(_ref) {
 
   // set (module) options
   // ---------------------------------------------------------------------------
-  if (params.pagination.enabled && params.pagination.nunbered) {
+  if (params.pagination && params.pagination.enabled && params.pagination.numbered) {
     renderBullet = (index, className) => { return `<span class="${className}"> ${++index} </span>`; };
   } else {
     renderBullet = false;
@@ -47,8 +47,8 @@ function LayoutThumbs(_ref) {
 
   paramsThumbs      = params.thumbs;
 
-  const thumbSpeed        = paramsThumbs.speed/2;
-  const mainSpeed         = paramsThumbs.speed;
+  const thumbSpeed  = paramsThumbs.speed/2;
+  const mainSpeed   = paramsThumbs.speed;
 
 
   // ---------------------------------------------------------------------------
@@ -92,7 +92,6 @@ function LayoutThumbs(_ref) {
     swiperThumbEl.classList.add('thumbs-slider--bottom');
   }
 
-
   // ---------------------------------------------------------------------------
   // slider initializer
   // ---------------------------------------------------------------------------
@@ -132,8 +131,6 @@ function LayoutThumbs(_ref) {
   //     },
   //   });    
   // }
-
-
 
   // ---------------------------------------------------------------------------
   // slider events
