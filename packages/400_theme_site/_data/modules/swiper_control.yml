@@ -210,7 +210,6 @@ settings:
         init: >
                                         function (swiper) {
                                           var slideHeight = 300;
-                                          
                                           siper.slides.forEach(slide => {
                                             slide.style.height = `${slideHeight}px`;
                                           });
@@ -445,7 +444,7 @@ settings:
 
         slideChangeTransitionStart: >    
                                         function (swiper) {
-                                        thumbSlider.slideTo(swiper.activeIndex);
+                                          thumbSlider.slideTo(swiper.activeIndex);
                                         }
 
     # --------------------------------------------------------------------------
@@ -487,7 +486,7 @@ settings:
       #
       module_settings:
         pagination:
-          enabled:                      false      
+          enabled:                      false
         neighbor:
           enabled:                      true
           centeredSlides:               true
@@ -537,8 +536,9 @@ settings:
         effect:                         panorama
         grabCursor:                     true
         loop:                           true
+      # slidesPerView:                  3
+      # slidesPerView:                  1.3
       # loopAdditionalSlides:           1
-      # slidesPerView:                  1.5
 
         breakpoints: {
                                         480: {
