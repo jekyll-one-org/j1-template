@@ -1,0 +1,385 @@
+[role="mt-5"]
+[[api-masonry-methods]]
+== Methods
+
+Methods are actions done by Masonry instances. With jQuery, methods follow
+the jQuery UI pattern: `.masonry( `methodName` `arguments `)`.
+
+[source,js]
+----
+$grid.masonry()
+  .append( elem )
+  .masonry( 'appended', elem )
+  // layout
+  .masonry();
+----
+
+// jQuery chaining is broken by methods that return values: (i.e.
+//<<getItemElements>>, <<getItem>>, <<on>>, and <<off>>).
+
+[NOTE]
+====
+*Vanilla JavaScript* methods look like `masonry.methodName( `arguments ` )`.
+Unlike jQuery methods, they *cannot be chained* together.
+====
+
+[source,js]
+----
+// vanilla JS
+var msnry = new Masonry( '.grid', {...});
+gridElement.appendChild( elem );
+msnry.appended( elem );
+msnry.layout();
+----
+
+[role="mt-4"]
+[[api-masonry-methods--layout]]
+=== layout
+
+Lays out all item elements. `layout` is useful when an item has
+changed size, and all items need to be laid out again.
+
+[source,js]
+----
+// jQuery
+$grid.masonry()
+// vanilla JS
+msnry.layout()
+----
+
+[source,js]
+----
+var $grid = $('.grid').masonry({
+  columnWidth: 80
+});
+// change size of item by toggling gigante class
+$grid.on( 'click', '.grid-item', function() {
+  $(this).toggleClass('gigante');
+  // trigger layout after item size changes
+  $grid.masonry('layout');
+});
+----
+
+[role="mt-4"]
+[[api-masonry-methods--layout-items]]
+=== layoutItems
+
+Lays out specified items.
+
+[source,js]
+----
+// jQuery
+$grid.masonry( 'layoutItems', items, isStill )
+// vanilla JS
+msnry.layoutItems( items, isStill )
+----
+
+* `items`   -- type _Array_ of _Masonry.Items_
+* `isStill` -- type _Boolean_ (Disable transitions)
+
+
+[role="mt-4"]
+[[api-masonry-methods--stamp]]
+=== stamp
+
+Stamps elements in the layout. Masonry will lay out item elements
+_around_ stamped elements.
+
+[source,js]
+----
+// jQuery
+$grid.masonry( 'stamp', elements )
+// vanilla JS
+msnry.stamp( elements )
+----
+
+* `elements` -- type  _Element_, _jQuery_ Object, _NodeList_, or _Array_ of Elements
+
+Set <<itemSelector>> so that stamps do not get used as layout items.
+
+[source,js]
+----
+var $grid = $('.grid').masonry({
+  // specify itemSelector so stamps do get laid out
+  itemSelector: '.grid-item',
+  columnWidth: 80
+});
+var $stamp = $grid.find('.stamp');
+var isStamped = false;
+
+$('.stamp-button').on( 'click', function() {
+  // stamp or unstamp element
+  if ( isStamped ) {
+    $grid.masonry( 'unstamp', $stamp );
+  } else {
+    $grid.masonry( 'stamp', $stamp );
+  }
+  // trigger layout
+  $grid.masonry('layout');
+  // set flag
+  isStamped = !isStamped;
+});
+----
+
+[role="mt-4"]
+[[api-masonry-methods--unstamp]]
+=== unstamp
+
+Un-stamps elements in the layout, so that Masonry will no longer layout
+item elements around them.
+
+[source,js]
+----
+// jQuery
+$grid.masonry( 'unstamp', elements )
+// vanilla JS
+msnry.unstamp( elements )
+----
+
+* `elements` -- type _Element_, _jQuery_ Object, _NodeList_, or _Array_ of Elements
+
+
+[role="mt-4"]
+[[api-masonry-methods--appemded]]
+=== appended
+
+Adds and lays out newly appended item elements to the end of the layout.
+
+[source,js]
+----
+// jQuery
+$grid.masonry( 'appended', elements )
+// vanilla JS
+msnry.appended( elements )
+----
+
+* `elements` -- type _Element_, _jQuery_ Object, _NodeList_, or _Array_ of Elements
+
+[source,js]
+----
+$('.append-button').on( 'click', function() {
+  // create new item elements
+  var $items = $('<div class="grid-item">...</div>');
+  // append items to grid
+  $grid.append( $items )
+    // add and lay out newly appended items
+    .masonry( 'appended', $items );
+});
+----
+
+[source,js]
+----
+// does not work
+$.get( 'page2', function( content ) {
+  // HTML string added, but items not added to Masonry
+  $grid.append( content ).masonry( 'appended', content );
+});
+
+// does work
+$.get( 'page2', function( content ) {
+  // wrap content in jQuery object
+  var $content = $( content );
+  // add jQuery object
+  $grid.append( $content ).masonry( 'appended', $content );
+});
+----
+
+[role="mt-4"]
+[[api-masonry-methods--prepemded]]
+=== prepended
+
+Adds and lays out newly prepended item elements at the beginning of
+layout.
+
+[source,js]
+----
+// jQuery
+$grid.masonry( 'prepended', elements )
+// vanilla JS
+msnry.prepended( elements )
+----
+
+* `elements` -- type _Element_, _jQuery_ Object, _NodeList_, or _Array_ of Elements
+
+[source,js]
+----
+$('.prepend-button').on( 'click', function() {
+  // create new item elements
+  var $items = $('<div class="grid-item">...</div>');
+  // prepend items to grid
+  $grid.prepend( $items )
+    // add and lay out newly prepended items
+    .masonry( 'prepended', $items );
+});
+----
+
+[role="mt-4"]
+[[api-masonry-methods--add-items]]
+=== addItems
+
+Adds item elements to the Masonry instance.
+
+[source,js]
+----
+// jQuery
+$grid.masonry( 'addItems', elements )
+// vanilla JS
+msnry.addItems( elements )
+----
+
+* `elements` -- type _Element_, _jQuery_ Object, _NodeList_, or _Array_ of Elements
+
+[CAUTION]
+====
+`addItems` does *not lay out* new items like `appended` or `prepended` does
+(see above).
+====
+
+[role="mt-4"]
+[[api-masonry-methods--remove]]
+=== remove
+
+Removes elements from the Masonry instance and DOM.
+
+[source,js]
+----
+// jQuery
+$grid.masonry( 'remove', elements )
+// vanilla JS
+msnry.remove( elements )
+----
+
+* `elements` -- type _Element_, _jQuery_ Object, _NodeList_, or _Array_ of Elements
+
+[source,js]
+----
+$grid.on( 'click', '.grid-item', function() {
+  // remove clicked element
+  $grid.masonry( 'remove', this )
+    // layout remaining item elements
+    .masonry('layout');
+});
+----
+
+[role="mt-4"]
+[[api-masonry-methods--reload-items]]
+=== reloadItems
+
+Recollects all item elements.
+
+[NOTE]
+====
+For frameworks like Angular and React, `reloadItems` may be useful to
+apply changes to the DOM to Masonry.
+====
+
+[source,js]
+----
+// jQuery
+$grid.masonry('reloadItems')
+// vanilla JS
+msnry.reloadItems()
+----
+
+[role="mt-4"]
+[[api-masonry-methods--destroy]]
+=== destroy
+
+Removes the Masonry functionality completely. `destroy` will return
+the element back to its pre-initialized state.
+
+[source,js]
+----
+// jQuery
+$grid.masonry('destroy')
+// vanilla JS
+msnry.destroy()
+----
+
+[source,js]
+----
+var masonryOptions = {
+  itemSelector: '.grid-item',
+  columnWidth: 80
+};
+// initialize Masonry
+var $grid = $('.grid').masonry( masonryOptions );
+var isActive = true;
+
+$('.toggle-button').on( 'click', function() {
+  if ( isActive ) {
+    $grid.masonry('destroy'); // destroy
+  } else {
+    $grid.masonry( masonryOptions ); // re-initialize
+  }
+  // set flag
+  isActive = !isActive;
+});
+----
+
+[role="mt-4"]
+[[api-masonry-methods--get-item-elements]]
+=== getItemElements
+
+Returns an array of item elements.
+
+[source,js]
+----
+// jQuery
+var elems = $grid.masonry('getItemElements')
+// vanilla JS
+var elems = msnry.getItemElements()
+----
+
+* `elems` -- type  _Array_ of _Elements_
+
+[role="mt-4"]
+[[api-masonry-methods--query-fn-data-masonry]]
+==== jQuery.fn.data('masonry')
+
+Get the Masonry instance from a jQuery object. Masonry instances are
+useful to access Masonry properties.
+
+[source,js]
+----
+var msnry = $('.grid').data('masonry')
+// access Masonry properties
+console.log( msnry.items.length + ' filtered items'  )
+----
+
+
+[role="mt-4"]
+[[api-masonry-methods--masonry-data]]
+=== Masonry.data
+
+Get the Masonry instance via its element. `Masonry.data()` is useful
+for getting the Masonry instance in JavaScript, after it has been
+initalized in HTML.
+
+[source,js]
+----
+var msnry = Masonry.data( element )
+----
+
+* `element` -- type _Element_ or Selector _String_
+* `msnry`   -- type _Masonry_
+
+[source,html]
+----
+<!-- init Masonry in HTML -->
+<div class="grid" data-masonry='{...}'>...</div>
+----
+
+[source,js]
+----
+// jQuery
+// pass in the element, $element[0], not the jQuery object
+var msnry = Masonry.data( $('.grid')[0] )
+
+// vanilla JS
+// using an element
+var grid = document.querySelector('.grid')
+var msnry = Masonry.data( grid )
+// using a selector string
+var msnry = Masonry.data('.grid')
+----

@@ -1,0 +1,143 @@
+[role="mt-5"]
+[[api-masonry-intro]]
+== Overview
+
+Masonry is a small JavaScript library that arranges items in a grid. It
+does not use fixed rows. Instead, it places each item into the shortest
+open column, the way a bricklayer fills the gaps in a wall. The result
+is a tidy grid with no large empty gaps, even when the items have
+different heights.
+
+The Masonry *API* is the set of *options*, *methods* and *events* you use
+from JavaScript to build and control a grid. In the J1 Template you
+normally do *not* call this API yourself. Instead, you write a few *YAML*
+settings and the J1 *Masonry adapter* turns them into the correct
+JavaScript for every grid on the page. Reading this manual is still
+useful, because the Masonry options you set in YAML use the same names as
+the API options described on the following pages.
+
+In J1, a grid is configured with three YAML files. They are merged
+together in the order shown below, and later files override earlier ones:
+
+`_data/modules/defaults/masonry.yml`::
+The built-in *default* settings that apply to every grid.
+
+`_data/modules/masonry_control.yml`::
+Your *own* settings, one entry per grid (the grid `id`, its `type`, the
+responsive columns, gutters, captions, lightbox, and so on).
+
+`_data/modules/masonry_media.yml`::
+The *content* of each grid (the list of images or videos). Content is
+matched to a grid by its `id`.
+
+Every grid has a `type` that decides what it shows:
+
+`image`::
+A grid of images, optionally opened in a lightbox when clicked.
+
+`video`::
+A grid of videos (YouTube or self-hosted HTML5), played with
+lightGallery.
+
+`post`::
+A grid built automatically from the blog posts of a chosen group.
+
+`collection`::
+A grid built automatically from the documents of a Jekyll collection.
+
+
+[role="mt-5"]
+[[api-masonry-intro--feartures]]
+=== Features
+
+The Masonry module for J1 provides the following key features:
+
+[cols="4a,8a", options="header", width="100%", role="table-striped rtable"]
+|===
+|Name |Description
+
+|`Cascading grid`
+|Each item is placed into the shortest column, filling vertical gaps for
+a balanced, brick-like layout.
+
+|`Responsive columns`
+|The number of columns adapts to the screen size using the Bootstrap
+breakpoints `xs`, `sm`, `md`, `lg` and `xl`.
+
+|`Captions`
+|Optional caption text placed below, above or centered on each item. A
+caption can be revealed when the item is hovered.
+
+|`Image filters`
+|Optional CSS filters such as `grayscale`, `contrast` and `brightness`
+applied to the images.
+
+|`Lightbox`
+|Optional lightbox on image and video grids, using PhotoSwipe (`ps`),
+lightGallery (`lg`) or Lightbox2 (`lb`).
+
+|`Content types`
+|A grid can be filled from images, videos, blog posts or a Jekyll
+collection.
+
+|===
+
+
+[role="mt-5"]
+[[api-masonry-intro--init]]
+== Initialization
+
+When the grid's HTML is on the page, Masonry is started like so. Because
+an image has no known height until it has loaded, run the
+link:methods.html#layout[`layout`] method again after each image loads:
+
+[source, js]
+----
+// init Masonry
+var $grid = $('.grid').masonry({
+  // options...
+});
+// layout Masonry after each image loads
+$grid.imagesLoaded().progress( function() {
+  $grid.masonry('layout');
+});
+----
+
+Or, initialise Masonry only after all images have loaded:
+
+[source, js]
+----
+var $grid = $('.grid').imagesLoaded( function() {
+  // init Masonry after all images have loaded
+  $grid.masonry({
+    // options...
+  });
+});
+----
+
+[role="mt-5"]
+[[api-masonry-intro--init-j1-template]]
+=== Initialisation in J1 Template
+
+In a J1 site you do not write the call above yourself. The J1 Masonry
+adapter builds it for you from your YAML configuration.
+
+The adapter:
+
+. waits until the page is loaded and the grid's HTML has been fetched and
+  inserted into the page. The HTML is loaded on demand by AJAX from a
+  generated data file (see the `xhr_data_path` setting),
+. waits a short, configurable moment (`initTimeout`, `1200` ms by
+  default) so the browser can finish rendering the freshly inserted
+  HTML,
+. reads the settings for each grid from the merged YAML configuration,
+. starts Masonry for every grid whose `enabled` key is `true`,
+. optionally attaches a lightbox on top of the grid when
+  `lightbox.enabled` is `true`. The kind of lightbox (PhotoSwipe,
+  lightGallery or Lightbox2) is chosen by `lightbox.type`.
+
+You can still reach a running grid from JavaScript. Get the Masonry
+instance with jQuery, using `$('#<your_grid_id>').data('masonry')`, or
+with `Masonry.data(document.querySelector('#<your_grid_id>'))`. You can
+then call any of the link:methods.html[methods] listed further down on
+this page.

@@ -1,0 +1,158 @@
+[role="mt-5"]
+[[api-masonry-layout]]
+== HTML Layout
+
+Masonry works on a *container* element that holds a number of *item*
+elements. You give the container a class (for example `.grid`) and give
+each item a class (for example `.grid-item`). Masonry then measures the
+items and arranges them into columns. All sizing and spacing of the
+items is done with your own CSS; Masonry only takes care of the
+positioning.
+
+[NOTE]
+====
+In the J1 Template you normally do not write this markup by hand. The
+grid HTML is generated for you from your YAML settings and uses
+Bootstrap rows and columns (`.row`, `.col-*`, `.card`) instead of the
+plain `.grid` / `.grid-item` classes shown below. The examples on this
+page describe the underlying Masonry library, which is helpful for
+understanding how the options work.
+====
+
+[role="mt-4"]
+[[api-masonry-layout--item-sizing]]
+=== Item sizing
+
+All sizing and styling of items is handled by your own CSS.
+
+[source, html]
+----
+<div class="grid">
+  <div class="grid-item"></div>
+  <div class="grid-item grid-item--width2"></div>
+  <div class="grid-item grid-item--height2"></div>
+  ...
+</div>
+----
+
+[source, css]
+----
+.grid-item {
+  float: left;
+  width: 80px;
+  height: 60px;
+  border: 2px solid hsla(0, 0%, 0%, 0.5);
+}
+
+.grid-item--width2 { width: 160px; }
+.grid-item--height2 { height: 140px; }
+----
+
+[role="mt-4"]
+[[api-masonry-layout-responsive]]
+=== Responsive layouts
+
+Item sizes can be set with percentages for responsive layouts. With the
+`masonry` layout mode, set percentage-width `columnWidth` with *Element sizing*
+(see next section below). Set *percentPosition*  to `true` so item positions
+are likewise set with percentages to reduce adjustment transitions on
+window resize.
+
+[source, html]
+----
+<div class="grid">
+  <!-- width of .grid-sizer used for columnWidth -->
+  <div class="grid-sizer"></div>
+  <div class="grid-item"></div>
+  <div class="grid-item grid-item--width2"></div>
+  ...
+</div>
+----
+
+[source, css]
+----
+/* fluid 5 columns */
+.grid-sizer,
+.grid-item { width: 20%; }
+/* 2 columns */
+.grid-item--width2 { width: 40%; }
+----
+
+[source, js]
+----
+$('.grid').masonry({
+  // set itemSelector so .grid-sizer is not used in layout
+  itemSelector: '.grid-item',
+  // use element for option
+  columnWidth: '.grid-sizer',
+  percentPosition: true
+})
+----
+
+
+[role="mt-4"]
+[[api-masonry-layout--element-sizing]]
+==== Element sizing
+
+Sizing options link:#columnwidth[`columnWidth`] and
+link:#gutter[`gutter`] can be set with an element. The size of the
+element is then used as the value of the option.
+
+[source, html]
+----
+<div class="grid">
+  <!-- .grid-sizer empty element, only used for element sizing -->
+  <div class="grid-sizer"></div>
+  <div class="grid-item"></div>
+  <div class="grid-item grid-item--width2"></div>
+  ...
+</div>
+----
+
+[source, css]
+----
+/* fluid 5 columns */
+.grid-sizer,
+.grid-item { width: 20%; }
+/* 2 columns wide */
+.grid-item--width2 { width: 40%; }
+----
+
+[source, js]
+----
+// use outer width of grid-sizer for columnWidth
+columnWidth: '.grid-sizer',
+// do not use .grid-sizer in layout
+itemSelector: '.grid-item',
+percentPosition: true
+----
+
+The option can be set to a Selector _String_ or an _Element_.
+
+[source, js]
+----
+// set to a selector string
+// first matching element within container element will be used
+columnWidth: '.grid-sizer'
+
+// set to an element
+columnWidth: $grid.find('.grid-sizer')[0]
+----
+
+[NOTE]
+====
+*Element sizing* options allow you to control the sizing of the Masonry
+layout within your CSS. This is useful for responsive layouts and media
+queries.
+====
+
+[source, css]
+----
+/* 3 columns by default */
+.grid-sizer { width: 33.333%; }
+
+@media screen and (min-width: 768px) {
+  /* 5 columns for larger screens */
+  .grid-sizer { width: 20%; }
+}
+----

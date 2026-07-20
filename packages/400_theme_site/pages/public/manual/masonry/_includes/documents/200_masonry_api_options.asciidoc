@@ -1,0 +1,449 @@
+[role="mt-5"]
+[[api-masonry-options]]
+== Options
+
+All options are optional, but columnWidth and itemSelector are recommended.
+
+[source, js]
+----
+// jQuery
+$('.grid').masonry({
+  columnWidth: 200,
+  itemSelector: '.grid-item'
+});
+----
+
+[source, js]
+----
+// vanilla JS
+var msnry = new Masonry( '.grid', {
+  columnWidth: 200,
+  itemSelector: '.grid-item'
+});
+----
+
+[source, html]
+----
+<!-- in HTML -->
+<div class="grid" data-masonry='{ "columnWidth": 200, "itemSelector": ".grid-item" }'>
+----
+
+// claude - Update Masonry manual #1
+// Added a short note connecting these library options to the J1 YAML
+// configuration, as promised in the Overview.
+[NOTE]
+====
+In the J1 Template you set these options in YAML, not in JavaScript. The
+names are the same. For example, `transitionDuration` in YAML becomes the
+`transitionDuration` option shown here. J1 ships sensible defaults in
+`_data/modules/defaults/masonry.yml`, and you can override them per grid
+in `_data/modules/masonry_control.yml`.
+====
+
+[role="mt-4"]
+[[api-masonry-options--init-selector]]
+=== itemSelector
+
+Specifies which child elements will be used as item elements in the
+layout. It is recommend always setting `itemSelector`. 
+
+[TIP]
+====
+The option `itemSelector` is useful to *exclude sizing elements* or other
+elements that are not part of the layout.
+====
+
+[source, js]
+----
+itemSelector: '.grid-item'
+----
+
+[source, html]
+----
+<div class="grid">
+  <!-- do not use banner in Masonry layout -->
+  <div class="static-banner">Static banner</div>
+  <div class="grid-item"></div>
+  <div class="grid-item"></div>
+  ...
+</div>
+----
+
+[role="mt-4"]
+[[api-masonry-options--column-width]]
+=== columnWidth
+
+Aligns items to a horizontal grid.
+
+[NOTE]
+====
+Recommend to set `columnWidth`. If `columnWidth` is not set, Masonry will
+use the outer width of the first item.
+====
+
+[source, js]
+----
+columnWidth: 80
+----
+
+Use <<Element sizing>> for responsive layouts with percentage widths.
+Set `columnWidth` to an _Element_ or Selector _String_ to use the outer
+width of the element for the size of the column.
+
+[source, html]
+----
+<div class="grid">
+  <!-- .grid-sizer empty element, only used for element sizing -->
+  <div class="grid-sizer"></div>
+  <div class="grid-item"></div>
+  <div class="grid-item grid-item--width2"></div>
+  ...
+</div>
+----
+
+[source, css]
+----
+/* fluid 5 columns */
+.grid-sizer,
+.grid-item { width: 20%; }
+/* 2 columns wide */
+.grid-item--width2 { width: 40%; }
+----
+
+[source, js]
+----
+// use outer width of grid-sizer for columnWidth
+columnWidth: '.grid-sizer',
+itemSelector: '.grid-item',
+percentPosition: true
+----
+
+[role="mt-4"]
+[[api-masonry-options--gutter]]
+=== gutter
+
+Adds horizontal space between item elements.
+
+[source, js]
+----
+gutter: 10
+----
+
+[source, css]
+----
+.grid-item {
+  margin-bottom: 10px;
+}
+----
+
+[NOTE]
+====
+To set vertical space between elements, use `margin` CSS.
+====
+
+Use <<Element sizing>> for responsive layouts with percentage widths.
+Set `gutter` to an _Element_ or Selector _String_ to use the outer width
+of the element.
+
+[source, html]
+----
+<div class="grid">
+  <div class="grid-sizer"></div>
+  <div class="gutter-sizer"></div>
+  <div class="grid-item"></div>
+  <div class="grid-item grid-item--width2"></div>
+  ...
+</div>
+----
+
+[source, css]
+----
+.grid-sizer,
+.grid-item { width: 22%; }
+
+.gutter-sizer { width: 4%; }
+
+.grid-item--width2 { width: 48%; }
+----
+
+[source, js]
+----
+columnWidth: '.grid-sizer',
+gutter: '.gutter-sizer',
+itemSelector: '.grid-item',
+percentPosition: true
+----
+
+[role="mt-4"]
+[[api-masonry-options--horizontal-order]]
+=== horizontalOrder
+
+Lays out items to (mostly) maintain horizontal left-to-right order.
+
+[source, js]
+----
+horizontalOrder: true
+----
+
+[source, js]
+----
+// default, items have no horizontal order
+// horizontalOrder: false
+----
+
+[role="mt-4"]
+[[api-masonry-options--percent-position]]
+=== percentPosition
+
+Sets item positions in percent values, rather than pixel values.
+`percentPosition: `[.literal]#`true`# works well with percent-width
+items, as items will not transition their position on resize.
+
+[source, js]
+----
+// set positions with percent values
+percentPosition: true,
+columnWidth: '.grid-sizer',
+itemSelector: '.grid-item'
+----
+
+[source, css]
+----
+/* fluid 5 columns */
+.grid-sizer,
+.grid-item { width: 20%; }
+----
+
+[role="mt-4"]
+[[api-masonry-options--stamp]]
+=== stamp
+
+Specifies which elements are _stamped_ within the layout. Masonry will
+layout items below stamped elements.
+
+The `stamp` option stamps elements only when the Masonry instance is
+first initialized. You can stamp additional elements afterwards with the
+link:methods.html#stamp[`stamp` method].
+
+[source, html]
+----
+<div class="grid">
+  <div class="stamp stamp1"></div>
+  <div class="stamp stamp2"></div>
+  <div class="grid-item"></div>
+  <div class="grid-item"></div>
+  ....
+</div>
+----
+
+[source, js]
+----
+// specify itemSelector so stamps do get laid out
+itemSelector: '.grid-item',
+// stamp elements
+stamp: '.stamp'
+----
+
+[source, css]
+----
+/* position stamp elements with CSS */
+.stamp {
+  position: absolute;
+  background: orange;
+  border: 4px dotted black;
+}
+.stamp1 {
+  left: 30%;
+  top: 10px;
+  width: 20%;
+  height: 100px;
+}
+.stamp2 {
+  right: 10%;
+  top: 20px;
+  width: 70%;
+  height: 30px;
+}
+----
+
+[role="mt-4"]
+[[api-masonry-options--fixed-width]]
+=== fitWidth
+
+Sets the width of the container to fit the available number of columns,
+based the size of container's parent element. When enabled, you can
+center the container with CSS.
+
+`fitWidth` was previously `isFitWidth` in Masonry v3. `isFitWidth`
+will still work in Masonry v4.
+
+`fitWidth: `true` does not work with <<Element sizing>> with percentage
+width. Either `columnWidth` needs to be set to a fixed size, like
+`columnWidth: 120`, or items need to have a fixed size in pixels, like
+`width: 120px`. Otherwise, the container and item widths will collapse
+on one another.
+
+[source, js]
+----
+fitWidth: true
+----
+
+[source, css]
+----
+/* center container with CSS */
+.grid {
+  margin: 0 auto;
+}
+----
+
+[role="mt-4"]
+[[api-masonry-options--origin-left]]
+=== originLeft
+
+Controls the horizontal flow of the layout. By default, item elements
+start positioning at the left, with [.comment]#`originLeft: true`#.
+Set `originLeft: `[.literal]#`false`# for right-to-left layouts.
+
+[NOTE]
+====
+Option `originLeft` was previously `isOriginLeft` in Masonry v3.
+`isOriginLeft` still work in Masonry v4.
+====
+
+[source, js]
+----
+originLeft: false
+----
+
+[role="mt-4"]
+[[api-masonry-options--origin-top]]
+=== originTop
+
+Controls the vertical flow of the layout. By default, item elements
+start positioning at the top, with [.comment]#`originTop: true`#. Set
+`originTop: `[.literal]#`false`# for bottom-up layouts. It’s like
+Tetris!
+
+[NOTE]
+====
+Option`originTop` was previously `isOriginTop` in Masonry v3.
+`isOriginTop` still work in Masonry v4.
+====
+
+[source, js]
+----
+originTop: false
+----
+
+[role="mt-4"]
+[[api-masonry-options--container-style]]
+=== containerStyle
+
+CSS styles that are applied to the container element.
+
+[source, js]
+----
+// default
+// containerStyle: { position: 'relative' }
+
+// disable any styles being set on container
+// useful if using absolute position on container
+containerStyle: null
+----
+
+[role="mt-4"]
+[[api-masonry-options--transition-duration]]
+=== transitionDuration
+
+Duration of the transition when items change position or appearance, set
+in a CSS time format. Default:
+[.comment]#`transitionDuration: '0.4s'`#
+
+[source, js]
+----
+// fast transitions
+transitionDuration: '0.2s'
+
+// slow transitions
+transitionDuration: '0.8s'
+
+// no transitions
+transitionDuration: 0
+----
+
+[role="mt-4"]
+[[api-masonry-options--stagger]]
+=== stagger
+
+Staggers item transitions, so items transition incrementally after one
+another. Set as a CSS time format, [.string]#`'0.03s'`#, or as a
+number in milliseconds, [.number]#`30`#.
+
+[source, js]
+----
+stagger: 30
+----
+
+Click item to toggle size
+
+[role="mt-4"]
+[[api-masonry-options--resize]]
+=== resize
+
+Adjusts sizes and positions when window is resized. Enabled by default
+[.comment]#`resize: true`#.
+
+[NOTE]
+====
+Option `resize` was previously `isResizeBound` in Masonry v3.
+`isResizeBound` still work in Masonry v4.
+====
+
+[source, js]
+----
+// disable window resize behavior
+resize: false
+----
+
+[source, css]
+----
+/* grid has fixed width */
+.grid {
+  width: 320px;
+}
+----
+
+
+[role="mt-4"]
+[[api-masonry-options--init-layout]]
+=== initLayout
+
+Enables layout on initialization. Enabled by default.
+
+[TIP]
+====
+Set `initLayout to `false` to *disable layout* on initialization,
+so you can use Masonry <<Methods>> or add <<Masonry events>> before
+the initial layout.
+====
+
+[source, js]
+----
+var $grid = $('.grid').masonry({
+  // disable initial layout
+  initLayout: false,
+  //...
+});
+// bind event
+$grid.masonry( 'on', 'layoutComplete', function() {
+  console.log('layout is complete');
+});
+// trigger initial layout
+$grid.masonry();
+----
+
+[NOTE]
+====
+`initLayout` was previously `isInitLayout` in Masonry v3. Deprecated
+`isInitLayout` still work in Masonry v4.
+====

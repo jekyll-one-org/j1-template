@@ -288,6 +288,9 @@ tag::urls[]
 :url-js-yaml--gh-repo:                            //github.com/nodeca/js-yaml/
 :url-js-json-minify--gh-repo:                     //github.com/fkei/JSON.minify/
 
+:url-masonry--home:                               //masonry.desandro.com/
+:url-masonry--gh-repo:                            //github.com/desandro/masonry
+
 :url-justified-gallery--home:                     //miromannino.github.io/Justified-Gallery/
 :url-justified-gallery--gh-repo:                  //github.com/miromannino/Justified-Gallery/
 

@@ -1,0 +1,103 @@
+---
+title:                                  Masonry V4
+title_extention:                        API
+tagline:                                Programming Interface
+
+date:                                   2026-06-20
+#last_modified:                         2026-01-01
+
+description: >
+                                        Masonry is a library that powers grid-styled
+                                        galleries in the J1 Template. It places images
+                                        in evenly aligned columns and efficiently fills
+                                        the vertical space, even when the images have
+                                        different heights.
+keywords: >
+                                        open source, free, template, jekyll, jekyllone, web,
+                                        mobile, sites, static, jamstack, bootstrap, touch,
+                                        image, gallery, masonry
+
+categories:                             [ Manual ]
+tags:                                   [ Module, Gallery, Masonry ]
+
+image:
+  path:                                 /assets/image/module/attic/1920x1280/simona-sergi.jpg
+  width:                                1920
+  height:                               1280
+
+compress:                               true
+regenerate:                             true
+permalink:                              /pages/public/manual/module/gallery/masonry/
+
+resources:                              [ lightbox3, masonry ]
+resource_options:
+  - toccer:
+      collapseDepth:                    3
+  - attic:
+      slides:
+        - url:                          /assets/image/module/attic/1920x1280/simona-sergi.jpg
+          alt:                          Photo by Simona Sergi on Unsplash
+          badge:
+            type:                       unsplash
+            author:                     Photo by Simona Sergi on Unsplash
+            href:                       //unsplash.com/de/@i_am_simoesse
+---
+
+// Page Initializer
+// =============================================================================
+// Enable the Liquid Preprocessor
+:page-liquid:
+
+// Attribute settings for page content control (e.g includes)
+//
+:includedir:                            _includes
+:tabledir:                              _includes/tables
+:documentdir:                           _includes/documents
+
+// Set (local) page attributes here
+// -----------------------------------------------------------------------------
+// :page--attr:                         <attr-value>
+:time-num--string:                      15-60
+:time-en--string:                       Minutes
+:time-en--description:                  to read
+:time-de--string:                       Minuten
+:time-de--description:                  Lesezeit
+
+//  Load Liquid procedures
+// -----------------------------------------------------------------------------
+{% capture load_attributes %}themes/{{site.template.name}}/procedures/global/attributes_loader.proc{%endcapture%}
+
+// Load page attributes
+// -----------------------------------------------------------------------------
+{% include {{load_attributes}} scope="global" %}
+
+
+// Page content
+// -----------------------------------------------------------------------------
+[role="dropcap"]
+The Masonry is a library that powers grid-styled galleries in the J1 Template.
+It places images in evenly aligned columns and efficiently fills the vertical
+space, even when the images have different heights.
+
+Masonry stacks images like bricks: it slots each image into the first place
+it fits, so the columns can have different heights but no big empty gaps.
+The result is a balanced layout that uses the available space well.
+
+[NOTE]
+====
+The Masonry API documentation pages are based on version *4.2.2* for the
+current J1 template version of 2026.x. The idea of providing this documentation
+is *not* to simply copy the original Masonry pages as duplicates. For better
+readability and usability, all pages are restructured and enhanced by code
+examples or improved description texts.
+====
+
+
+// Include sub-documents
+// -----------------------------------------------------------------------------
+
+include::{documentdir}/000_masonry_api_intro.asciidoc[]
+include::{documentdir}/100_masonry_api_layout.asciidoc[]
+include::{documentdir}/200_masonry_api_options.asciidoc[]
+include::{documentdir}/300_masonry_api_methods.asciidoc[]
+include::{documentdir}/400_masonry_api_events.asciidoc[]

@@ -358,28 +358,28 @@ rearrange.
 ====
 
 
-[role="mt-4"]
+[role="mt-5"]
 === Grid Gallery
 
-*Masonry* is a library that powers grid-styled galleries in the J1 Template.
-It places images in evenly aligned columns and efficiently fills the vertical
-space, even when the images have different heights.
+The link:{url-masonry--home}[Masonry, {browser-window--new}] module is a
+library that powers grid-styled galleries in the J1 Template. It places
+images in evenly aligned columns and efficiently fills the vertical space,
+even when the images have different heights.
 
 Masonry stacks images like *bricks*: it slots each image into the
 first place it fits, so the columns can have different heights but
 no big empty gaps. The result is a balanced layout that uses the
-available space well. For more about Masonry, visit the
-link:{url-j1-masonry-previewer}[Masonry Preview, {browser-window--new}] page.
+available space well.
 
 .Grid Image Gallery
 masonry::image_fixed_height_lb[role="mt-4 mb-5"]
 
 
-[role="mt-4"]
+[role="mt-5"]
 === Block Gallery
 
 The link:{url-justified-gallery--home}[JustifiedGallery, {browser-window--new}]
-plugin arranges images in *evenly aligned rows* as a block. Each row in
+module arranges images in *evenly aligned rows* as a block. Each row in
 such a block has the same height, but the images inside it can have different
 widths. This is the layout style you see on photo sites like *Flickr* or
 *Google Photos*.

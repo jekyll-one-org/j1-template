@@ -1,0 +1,196 @@
+[role="mt-5"]
+[[api-masonry-events]]
+== Event binding
+
+Masonry can tell you when things happen, for example when a layout has
+finished or when items have been removed. You react to these *events* by
+registering a function that Masonry calls at the right moment. Events
+can be bound with jQuery or with plain (vanilla) JavaScript, as shown
+below.
+
+[role="mt-4"]
+[[api-masonry-events--jquery-binding]]
+=== jQuery event binding
+
+Bind events with jQuery with standard jQuery event methods `.on()`,
+`.off()`, and `.one()`.
+
+[source,js]
+----
+// jQuery
+var $grid = $('.grid').masonry({...});
+
+function onLayout() {
+  console.log('layout done');
+}
+
+// bind event listener
+$grid.on( 'layoutComplete', onLayout );
+// un-bind event listener
+$grid.off( 'layoutComplete', onLayout );
+// bind event listener to be triggered just once. note ONE not ON
+$grid.one( 'layoutComplete', function() {
+  console.log('layout done, just this one time');
+});
+----
+
+jQuery event listeners have an `event` argument, whereas vanilla JS
+listeners do not.
+
+[source,js]
+----
+// jQuery, has event argument
+$grid.on( 'layoutComplete', function( event, items ) {
+  console.log( items.length );
+});
+
+// vanilla JS, no event argument
+msnry.on( 'layoutComplete', function( items ) {
+  console.log( items.length );
+});
+----
+
+[role="mt-4"]
+[[api-masonry-events--vanilla-js-binding]]
+=== Vanilla JS event binding
+
+Bind events with vanilla JS with `on()`, `.off()`, and `.once()` methods.
+
+[source,js]
+----
+// vanilla JS
+var msnry = new Masonry( '.grid', {...});
+
+function onLayout() {
+  console.log('layout done');
+}
+// bind event listener
+msnry.on( 'layoutComplete', onLayout );
+// un-bind event listener
+msnry.off( 'layoutComplete', onLayout );
+// bind event listener to be triggered just once
+msnry.once( 'layoutComplete', function() {
+  console.log('layout done, just this one time');
+});
+----
+
+[role="mt-5"]
+[[api-masonry-events-masonry]]
+== Masonry events
+
+Every Masonry instance offers three methods to manage event listeners:
+`on` to add a listener, `off` to remove one, and `once` to add a
+listener that runs only a single time. The event names you can listen
+for are `layoutComplete` and `removeComplete`, both described further
+below.
+
+[role="mt-4"]
+[[api-masonry-events-masonry--on]]
+=== on
+
+Adds a Masonry event listener.
+
+[source,js]
+----
+// jQuery
+var msnry = $grid.masonry( 'on', eventName, listener )
+// vanilla JS
+msnry.on( eventName, listener )
+----
+
+* `eventName` -- type _String_ (Name of a Masonry event)
+* `listener`  -- type _Function_
+
+[role="mt-4"]
+[[api-masonry-events-masonry--of]]
+=== off
+
+Removes a Masonry event listener.
+
+[source,js]
+----
+// jQuery
+var msnry = $grid.masonry( 'off', eventName, listener )
+// vanilla JS
+msnry.off( eventName, listener )
+----
+
+`eventName` [.argument__type]#_String_# [.argument__description]#Name
+of a link:events.html[Masonry event]#
+
+* `listener` -- type _Function_
+
+[role="mt-4"]
+[[api-masonry-events-masonry--once]]
+=== once
+
+Adds a Masonry event listener to be triggered just once.
+
+[source,js]
+----
+// jQuery
+var msnry = $grid.masonry( 'once', eventName, listener )
+// vanilla JS
+msnry.once( eventName, listener )
+----
+
+* `eventName` -- type _String_ (Name of a Masonry event)
+* `listener`  -- type _Function_
+
+[source,js]
+----
+$grid.masonry( 'once', 'layoutComplete', function() {
+  console.log('layout is complete, just once');
+})
+----
+
+[role="mt-4"]
+[[api-masonry-events-masonry--layout-complete]]
+=== layoutComplete
+
+Triggered after a layout and all positioning transitions have completed.
+
+[source,js]
+----
+// jQuery
+$grid.on( 'layoutComplete', function( event, laidOutItems ) {...} )
+// vanilla JS
+msnry.on( 'layoutComplete', function( laidOutItems ) {...} )
+----
+
+* `laidOutItems` -- items that were laid out
+
+[source,js]
+----
+$grid.on( 'layoutComplete',
+  function( event, laidOutItems ) {
+    console.log( 'Masonry layout completed on ' +
+      laidOutItems.length + ' items' );
+  }
+);
+----
+
+[role="mt-4"]
+[[api-masonry-events-masonry--remove-complete]]
+=== removeComplete
+
+Triggered after an item element has been removed.
+
+[source,js]
+----
+// jQuery
+$grid.on( 'removeComplete', function( event, removedItems ) {...} )
+// vanilla JS
+msnry.on( 'removeComplete', function( removedItems ) {...} )
+----
+
+`removedItems` -- Array of items that were removed.
+
+[source,js]
+----
+$grid.on( 'removeComplete',
+  function( event, removedItems ) {
+    notify( 'Removed ' + removedItems.length + ' items' );
+  }
+);
+----
