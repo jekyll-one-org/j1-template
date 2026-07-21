@@ -9,7 +9,7 @@ date:                                   2026-06-20
 description: >
                                         Masonry is a library that powers grid-styled
                                         galleries in the J1 Template. It places images
-                                        in evenly aligned columns and efficiently fills
+                                        in evenly align columns and efficiently fills
                                         the vertical space, even when the images have
                                         different heights.
 keywords: >
@@ -26,10 +26,10 @@ image:
   height:                               1280
 
 compress:                               true
-regenerate:                             true
-permalink:                              /pages/public/manual/module/gallery/masonry_api/
+regenerate:                             false
+permalink:                              /pages/public/manual/modules/gallery/masonry_api/
 
-resources:                              [ lightbox3, masonry ]
+resources:                              [ masonry, photoswipejs ]
 resource_options:
   - toccer:
       collapseDepth:                    3

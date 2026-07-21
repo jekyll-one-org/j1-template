@@ -1,0 +1,105 @@
+---
+title:                                  Justified Gallery V3
+title_extention:                        API
+tagline:                                Programming Interface
+
+date:                                   2026-06-21
+#last_modified:                         2026-01-01
+
+description: >
+                                        The JustifiedGallery module arranges images in
+                                        evenly aligned rows as a block. Each row in such
+                                        a block has the same height, but the images inside
+                                        it can have different widths. This is the layout
+                                        style you see on photo sites like Flickr or Google Photos.
+keywords: >
+                                        open source, free, template, jekyll, jekyllone, web,
+                                        mobile, sites, static, jamstack, bootstrap, touch,
+                                        image, gallery, justified gallery
+
+categories:                             [ Manual ]
+tags:                                   [ Module, Gallery, Justified Gallery ]
+
+image:
+  path:                                 /assets/image/module/attic/1920x1280/simona-sergi.jpg
+  width:                                1920
+  height:                               1280
+
+compress:                               true
+regenerate:                             true
+permalink:                              /pages/public/manual/modules/gallery/justfied_gallery_api/
+
+resources:                              [ lightgallery, gallery, photoswipejs ]
+resource_options:
+  - toccer:
+      collapseDepth:                    3
+  - attic:
+      slides:
+        - url:                          /assets/image/module/attic/1920x1280/simona-sergi.jpg
+          alt:                          Photo by Simona Sergi on Unsplash
+          badge:
+            type:                       unsplash
+            author:                     Photo by Simona Sergi on Unsplash
+            href:                       //unsplash.com/de/@i_am_simoesse
+---
+
+// Page Initializer
+// =============================================================================
+// Enable the Liquid Preprocessor
+:page-liquid:
+
+// Attribute settings for page content control (e.g includes)
+//
+:includedir:                            _includes
+:tabledir:                              _includes/tables
+:documentdir:                           _includes/documents
+
+// Set (local) page attributes here
+// -----------------------------------------------------------------------------
+// :page--attr:                         <attr-value>
+:time-num--string:                      15-60
+:time-en--string:                       Minutes
+:time-en--description:                  to read
+:time-de--string:                       Minuten
+:time-de--description:                  Lesezeit
+
+//  Load Liquid procedures
+// -----------------------------------------------------------------------------
+{% capture load_attributes %}themes/{{site.template.name}}/procedures/global/attributes_loader.proc{%endcapture%}
+
+// Load page attributes
+// -----------------------------------------------------------------------------
+{% include {{load_attributes}} scope="global" %}
+
+
+// Page content
+// -----------------------------------------------------------------------------
+[role="dropcap"]
+The Justified Gallery module arranges images in *evenly aligned rows* as a
+block. Each row in such a block has the same height, but the images inside
+it can have different widths. This is the layout style you see on photo
+sites like Flickr or Google Photos.
+
+The photos you take are usually a mix of *landscape* and *portrait*
+orientations. A simple grid would have to crop them or leave gaps.
+JustifiedGallery solves this by keeping each image in its original
+shape and adjusting the widths so every row fills the page neatly.
+
+[NOTE]
+====
+The Justified Gallery API documentation pages are based on version *3.8.x*
+for the current J1 template version of 2026.x. The idea of providing this
+documentation is *not* to simply copy the original Justified Gallery pages
+as duplicates. For better readability and usability, all pages are
+restructured and enhanced by code examples or improved description texts.
+====
+
+// Include sub-documents
+// -----------------------------------------------------------------------------
+
+include::{documentdir}/000_jg_api_intro.asciidoc[]
+include::{documentdir}/100_jg_api_getting_started.asciidoc[]
+include::{documentdir}/200_jg_api_properties.asciidoc[]
+include::{documentdir}/300_jg_api_commands.asciidoc[]
+include::{documentdir}/400_jg_api_events.asciidoc[]
+

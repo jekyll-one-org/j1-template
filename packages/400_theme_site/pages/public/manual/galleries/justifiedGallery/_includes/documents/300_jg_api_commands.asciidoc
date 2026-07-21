@@ -1,0 +1,63 @@
+////
+claude - Update Justified Gallery manual #1
+------------------------------------------------------------------------------
+Corrected this page:
+
+  * replaced the "lorem:sentences[5]" placeholder with a real introduction;
+  * REMOVED the NOTE about "core Swiper events" / "autoplayStart,
+    navigationNext, paginationRender ...". That text was copied from the
+    Swiper manual and has nothing to do with Justified Gallery, which is a
+    jQuery plugin, not Swiper;
+  * documented the third call form (calling justifiedGallery() again with an
+    options object updates the settings and re-lays-out the gallery), verified
+    in justifiedGallery.js ($.fn.justifiedGallery -> updateSettings + rewind);
+  * clarified how to reach a running instance in J1
+    ($('#id').data('jg.controller')).
+
+Methods verified in justifiedGallery.js:
+  'norewind'  -> $.fn.justifiedGallery, arg === 'norewind'
+  'destroy'   -> JustifiedGallery.prototype.destroy
+------------------------------------------------------------------------------
+////
+[role="mt-5"]
+[[api-jg-commands]]
+== Commands
+
+*Commands* let you control a gallery *after* it has been created. You call a
+command by passing its name (a string) to `justifiedGallery()` on the same
+element:
+
+[source, javascript]
+----
+$('#myGallery').justifiedGallery('norewind');
+----
+
+[NOTE]
+====
+In J1 the adapter creates the gallery for you, so you usually do not call
+commands. If you do need to, first get the element and then call the
+command on it, for example after adding new images to the page. You can reach a
+running instance with `$('#<your_gallery_id>').data('jg.controller')`.
+====
+
+[cols="4a,8a", options="header", width="100%", role="table-striped table-responsive"]
+|===
+|Command |Description
+
+|`(options object)`
+|Calling `justifiedGallery()` again with an options object (for example
+`{ rowHeight: 200 }`) *updates the settings* of an existing gallery and lays
+it out again with the new values.
+
+|`norewind`
+|Run Justified Gallery again, but only justify the *newest* images (the ones
+added since the last run). Because only the last images are looked at, any
+`filter`, `sort` or `randomize` you set only affects those new images. This
+is much faster, but be aware it does not touch the images that are already
+placed.
+
+|`destroy`
+|Remove the Justified Gallery layout from the element. The images go back to
+their normal, un-justified state and the plugin's data is cleared.
+
+|===

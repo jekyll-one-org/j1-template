@@ -232,17 +232,21 @@
           href:                         /pages/public/manuals/amplitude/amplitude_api/
           icon:                         speaker
 
-        - title:                        Masonry
-          href:                         /pages/public/manual/module/gallery/masonry_api/
-          icon:                         view-dashboard-variant
-
-    #  - title:                         Justified Gallery
-    #    href:                          /pages/public/manuals/modules/justfied_gallery_api/
-    #    icon:                          view-dashboard-variant
-
         - title:                        Swiper
           href:                         /pages/public/manual/module/swiper_api/
           icon:                         view-carousel 
+
+        - title:                        Galleries
+          icon:                         view-dashboard-variant
+          dropdown:
+
+            - title:                    Masonry
+              href:                     /pages/public/manual/modules/gallery/masonry_api/
+              icon:                     view-dashboard-variant
+
+            - title:                    Justified Gallery
+              href:                     /pages/public/manual/modules/gallery/justfied_gallery_api/
+              icon:                     view-dashboard-variant
 
         - title:                        Lightboxes
           icon:                         alpha-l-box

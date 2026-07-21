@@ -1,0 +1,60 @@
+////
+claude - Update Justified Gallery manual #1
+------------------------------------------------------------------------------
+Corrected this page:
+
+  * replaced the "lorem:sentences[5]" placeholder with a real introduction;
+  * REMOVED the NOTE about "core Swiper events" / "autoplayStart,
+    navigationNext, paginationRender ...". That was copied from the Swiper
+    manual and does not apply to Justified Gallery;
+  * added a J1 note explaining that the adapter itself listens for
+    `jg.complete` to attach the lightbox once the layout is ready
+    (verified in gallery.js: .on('jg.complete', ...) -> lightGallery(...)).
+
+Events verified in justifiedGallery.js (header comment of
+$.fn.justifiedGallery and the triggerEvent default):
+  jg.complete  -> when the whole gallery layout has been built
+  jg.resize    -> when the gallery has been resized
+  jg.rowflush  -> when a new row appears
+------------------------------------------------------------------------------
+////
+[role="mt-5"]
+[[api-jg-events]]
+== Events
+
+Events let your own code react to things that happen inside the gallery, such
+as the layout being finished. You listen for an event with jQuery's `.on()`
+on the gallery element:
+
+[source, javascript]
+----
+$('#myGallery')
+  .justifiedGallery({ rowHeight: 150 })
+  .on('jg.complete', function (e) {
+    // runs when the gallery layout is ready
+  });
+----
+
+[NOTE]
+====
+The J1 Gallery adapter uses the `jg.complete` event internally: once a
+gallery's layout is ready, the adapter attaches the configured lightbox
+(PhotoSwipe, Lightbox2 or lightGallery). So in a normal J1 site you do not
+need to handle these events yourself.
+====
+
+[cols="4a,8a", options="header", width="100%", role="table-striped table-responsive"]
+|===
+|Event |Description
+
+|`jg.complete`
+|Fired when the whole gallery layout has been built.
+
+|`jg.resize`
+|Fired when the gallery has been resized (for example after the browser window
+changed width).
+
+|`jg.rowflush`
+|Fired each time a new row is ready.
+
+|===

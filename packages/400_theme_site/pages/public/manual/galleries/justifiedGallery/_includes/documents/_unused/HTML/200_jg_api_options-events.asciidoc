@@ -1,0 +1,208 @@
+== Options
+
+[width="100%",cols="34%,33%,33%",options="header",]
+|===
+|option |default value |description
+
+|`rowHeight` |`120` |The preferred rows height in pixel.
+
+|`maxRowHeight` |`false` |This option could be a false or negative
+value to keep it disabled. Could be a number (e.g `200`) which
+specifies the maximum row height in pixel. Alternatively, a string which
+specifies a percentage (e.g. "200%" means that the row height can't
+exceed `2 * rowHeight`). *Note that with this option can crop the
+images if they need to be higher to be justified.*
+
+|`maxRowsCount` |`0` |This parameter limits the number of rows to
+show. Justified Gallery hides the unwanted rows, and if the page is
+resized more (or less) images are shown. *Note that this this option
+doesn't limit the number of rows by making images smaller.* A value 0
+means disabled.
+
+|`sizeRangeSuffixes` |`{ }` a|
+Describes the suffix for each size range. By default other thumbnails
+are not searched.
+
+To agree with the
+http://www.flickr.com/services/api/misc.urls.html[Flickr's suffixes] you
+should change it in the following way:
+
+`{'lt100':'_t',` +
+`'lt240':'_m',` +
+`'lt320':'_n',` +
+`'lt500':'',` +
+`'lt640':'_z',` +
+`'lt1024':'_b'}`
+
+The keys could be specified also as numbers (e.g.
+`{512:'_small', 1024:'_big'}` to specify the '_small' suffix for
+images that are less than 512px on the longest side, and '_big' for
+bigger ones).
+
+|`thumbnailPath` |`undefined` a|
+To configure a custom thumbnail selector rather than using
+`sizeRangeSuffixes`, to have more flexibility in some particular
+situations. The function will be called giving the following arguments:
+the current path of the image, the width and the height of the image to
+show (after it has been resized), and the image element which can be
+used to get further information.
+
+For example, to select the correct thumbnail changing only a suffix of
+the current filename (similarly to `sizeRangeSuffixes`)
+
+....
+$("#myGallery").justifiedGallery({
+  thumbnailPath: function (currentPath, width, height, image) {
+    if (Math.max(width, height) < 250) {
+      return currentPath.replace(/(.*)(_[a-z]+)(\..*)/, "$1_small$2");
+    } else { 
+      return currentPath.replace(/(.*)(_[a-z]+)(\..*)/, "$1_medium$2");
+    }
+  }
+});
+....
+
+Remember that if this option is defined, `sizeRangeSuffixes` is not
+considered.
+
+|`lastRow` |`'nojustify'` |Decide to justify the last row (using
+`'justify'`) or not (using `'nojustify'`), or to hide the row if it
+can't be justified (using `'hide'`). By default, using
+`'nojustify'`, the last row images are aligned to the left, but they
+can be also aligned to the center (using `'center'`) or to the right
+(using `'right'`).
+
+|`captions` |`true` |Decide if you want to show the captions that
+appears when your mouse is over the image.
+
+|`margins` |`1` |Decide the margins between the images
+
+|`border` |`-1` |Decide the border size of the gallery. With a
+negative value the border will be the same as the margins.
+
+|`waitThumbnailsLoad` |`true` |In presence of width and height
+attributes in thumbnails, the layout is immediately built, and the
+thumbnails will appear randomly while they are loaded.
+
+|`randomize` |`false` |Automatically randomize or not the order of
+photos.
+
+|`filter` |`false` a|
+Can be:
+
+* `false`: for a disabled filter.
+* a string: an entry is kept if `entry.is(filter string)` returns
+`true` (see jQuery's http://api.jquery.com/is/[`.is()`] function for
+further information).
+* a function: invoked with arguments (entry, index, array). Return
+`true` to keep the entry, `false` otherwise. see
+https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Array/filter[`Array.prototype.filter`]
+for further information.
+
+|`sort` |`false` a|
+Can be
+
+* `false` to do not sort.
+* a function to sort them using the function as comparator (see
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort[`Array.prototype.sort()`]).
+
+|`rtl` |`false` |Right to left mode.
+
+|`selector` |`'a, div:not(.spinner)'` |Used to determines which are
+the entries of the gallery. Note that, for performance reasons, the
+entries of the gallery are always direct children of the gallery.
+
+|`imgSelector` |`'> img, > a > img'` |Used to determines, given a
+gallery entry, how to retrieve the thumbnail.
+
+|`extension` |`/.[^.]+$/` |Specify the extension for the images with
+a regex. Is used to reconstruct the filename of the images, change it if
+you need. For example `/.jpg$/` is to detect only the ".jpg" extension
+and no more.
+
+|`refreshTime` |`250` |The waited time before checking the page
+size. If the page width has changed the gallery layout is rebuilt.
+
+|`refreshSensitivity` |`0` |Change in width allowed (in px) without
+re-building the gallery.
+
+|`rel` | |To rewrite all the links `rel` attribute with the
+specified value. For example can be 'gallery1', and is usually used to
+create gallery group for the lightbox (e.g. Colorbox).
+
+|`target` | |To rewrite all the links `target` attribute with the
+specified value. For example, if you don't use a lightbox, specifying
+`'_blank'`, all the images will be opened to another page.
+
+|`justifyThreshold` |0.75 |If _'available space' / 'row width' > 0.75_
+the last row is justified, even though the `lastRow` setting is
+`'nojustify'`.
+
+|`cssAnimation` |true |Use or not css animations. With CSS animations
+it's easier to change them by overriding the rules defined by Justified
+Gallery.
+
+|`imagesAnimationDuration` |500 |Image fadeIn duration (in
+milliseconds). This is ignored if CSS animations are used.
+
+|`captionSettings` |`{ animationDuration: 500,` +
+`  visibleOpacity: 0.7,` +
+`  nonVisibleOpacity: 0.0 }` |Caption settings. To configure the
+animation duration (in milliseconds), the caption opacity when the mouse
+is over (i.e. it should be visible), and the caption opacity when the
+mouse is not over (i.e. it should be not visible). This is ignored if
+CSS animations are used.
+
+|===
+
+== Methods
+
+lorem:sentences[5]
+
+[cols=",",options="header",]
+|===
+|Command |Description
+
+|`norewind` |Call again justified gallery, but only the newest images
+will be justified. This command could be used for example with the
+link:/Justified-Gallery/endless-scroll[infinite scroll]. Remember that
+with norewind only the last images will be analyzed, so this means that
+any pre-defined filter, sort, or shuffle actions will only be done on
+the last entries. That is a great advantage in terms of performances,
+but pay attention in case you want a different behaviour.
+
+|`destroy` |Destroy the justified gallery instance. The images
+justification will be cleared.
+
+|===
+
+=== Example
+
+[source, javascript]
+----
+$('#commandtest').justifiedGallery('norewind');
+----
+
+== Events
+
+[cols=",",options="header",]
+|===
+|Event |Description
+|`jg.complete` |When the algorithm finished to create the gallery
+layout.
+
+|`jg.resize` |When the algorithm finished to resize the gallery.
+
+|`jg.rowflush` |When the a new row is ready.
+|===
+
+=== Example
+
+[source, javascript]
+----
+$('#callbacktest').justifiedGallery().on('jg.complete', function (e) {
+    alert('on complete');
+});
+----
+
+ 

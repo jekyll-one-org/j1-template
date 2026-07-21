@@ -1,0 +1,150 @@
+////
+claude - Update Justified Gallery manual #1
+------------------------------------------------------------------------------
+Kept the original (correct) Justified Gallery explanations of rowHeight,
+lastRow, margins and sizeRangeSuffixes, but:
+
+  * added a short J1 note up front — in J1 you configure a gallery with YAML,
+    not with a hand-written <script>, so the reader knows where these options
+    actually go (gallery_control.yml -> gallery_options);
+  * fixed a typo in the first HTML example ("ppath/to" -> "path/to");
+  * added the equivalent J1 YAML for the second (rowHeight: 70 ...) example so
+    beginners can map the raw options to the keys they will really write;
+  * clarified that sizeRangeSuffixes is an advanced, optional feature that is
+    off by default.
+
+Facts checked against justifiedGallery.js (defaults) and gallery.js
+(the gutters -> margins mapping described in the note).
+------------------------------------------------------------------------------
+////
+[role="mt-5"]
+[[api-jg-getting-started]]
+== Getting Started
+
+This page shows how Justified Gallery works with plain HTML and a small
+`<script>`. It is useful for understanding the options, even though in a J1
+site you do not write this code by hand.
+
+[NOTE]
+====
+In J1 you configure a gallery through *YAML*, not through a `<script>` block.
+The options shown on this page (like `rowHeight`, `lastRow` and `margins`)
+are the same options you set under `gallery_options` in
+`_data/modules/gallery_control.yml`. The J1 Gallery adapter reads that YAML
+and calls `justifiedGallery()` for you. See the <<api-jg-intro--init-j1-template, Initialisation in J1 Template>>
+section above.
+====
+
+Here we have a `div`, with the id `basicExample`, that holds a list of links
+pointing to full-size images. Inside each link there is a thumbnail. When
+Justified Gallery runs, the thumbnails are resized so they fill the whole row
+(this filling is called _justification_).
+
+[source, html]
+----
+<div id="basicExample">
+    <a href="path/to/image1.jpg">
+        <img alt="caption for image 1" src="path/to/image1_thumbnail.jpg"/>
+    </a>
+    <a href="path/to/image2.jpg">
+        <img alt="caption for image 2" src="path/to/image2_thumbnail.jpg"/>
+    </a>
+    ...
+</div>
+----
+
+The most important option of the module is `rowHeight` (see
+<<api-jg-properties, Properties>>). Say you set a height of 160px -- the
+algorithm then tries to build *rows* about that tall:
+
+image::/assets/image/page/manuals/justified_gallery/rowHeight.png[role="mb-4", rowHeight]
+
+Justification may resize the images a little, so the real row height can end
+up slightly different from 160px. In other words, `rowHeight` is your
+*preferred* height (a lower bound). You can use the `maxRowHeight` option to
+put an upper limit on the row height; but remember that this option can
+*crop* images if they would have to be bigger to be justified.
+
+The algorithm builds one row after another until it reaches the last one.
+That last row may not have enough images to fill the whole width. With the
+`lastRow` option you decide what happens: leave a blank space, justify the
+images anyway, or hide the last row if there would be too much empty space.
+
+The next example uses *smaller* images (`rowHeight: 70`), *does not justify*
+the last row (`lastRow: 'nojustify'`), and uses a margin of 3px between images
+(`margins: 3`):
+
+[source, html]
+----
+<div id="example" class="justified-gallery">
+    <a href="path/to/image1.jpg">
+        <img alt="caption for image 1" src="path/to/image1_thumbnail.jpg"/>
+    </a>
+    <a href="path/to/image2.jpg" title="Just in a dream Place">
+        <img alt="caption for image 2" src="path/to/image2_thumbnail.jpg"/>
+    </a>
+    ...
+</div>
+
+<script>
+    $('#example').justifiedGallery({
+        rowHeight : 70,
+        lastRow : 'nojustify',
+        margins : 3
+    });
+</script>
+----
+
+In a J1 site you would write the *same* settings as YAML instead. Note that
+in J1 the spacing key is called `gutters` (the adapter maps it to the
+library's `margins` option for you):
+
+[source, yaml]
+----
+# _data/modules/gallery_control.yml
+- gallery:
+    enabled: true
+    id:      example
+    type:    image
+
+    gallery_options:
+      rowHeight: 70
+      gutters:   3        # J1 name for the library option "margins"
+      lastRow:   nojustify
+----
+
+[role="mt-5"]
+[[api-jg-getting-started--thumbnails]]
+=== Thumbnails
+
+If your server stores the same image in several sizes (for example a small
+thumbnail for phones and a bigger one for retina screens), the plugin can
+load the best available size automatically, so the images always look sharp.
+
+To switch this on you set `sizeRangeSuffixes`. For example, to match the
+link://flickr.com/services/api/misc.urls.html[Flickr suffixes, {browser-window--new}]
+you would use:
+
+[source, javascript]
+----
+sizeRangeSuffixes: {
+    100 : '_t', // used for images that are less than 100px on the longest side
+    240 : '_m', // used for images between 100px and 240px on the longest side
+    320 : '_n', // ...
+    500 : '',
+    640 : '_z',
+    1024 : '_b' // used for images that are more than 640px on the longest side
+}
+----
+
+The plugin then works out the path of a larger or smaller thumbnail just by
+changing the filename *suffix*. For example, from a thumbnail named
+`path/to/image1_t.jpg` it can load `path/to/image1_b.jpg`.
+
+By default this feature is *off* -- the plugin only uses the thumbnail you
+provide in the HTML. That default looks like this:
+
+[source, javascript]
+----
+sizeRangeSuffixes: { }
+----

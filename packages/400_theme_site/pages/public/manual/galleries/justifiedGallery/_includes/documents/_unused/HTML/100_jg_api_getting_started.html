@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width initial-scale=1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>Justified Gallery - Getting Started</title>
+    <meta name="description" content="Justified Gallery is a JavaScript library that allows you to create an high quality justified gallery of images. This is a common problem for people who create websites: you have a series of images to display, but you are not sure how to arrange them in an elegant way. Important websites such as 500px, Flickr, or Google display images in an excellent way, justifying them similarly to brick wall. Justified Gallery will give you the power to do that too. Justified Gallery is a professional and open source library that even 500px, one of the best photography social network, chose for displaying their images!
+">
+
+	<script src="/Justified-Gallery/libs/jquery/dist/jquery.min.js"></script>
+	<script src="/Justified-Gallery/libs/bootstrap/dist/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="/Justified-Gallery/libs/bootstrap/dist/css/bootstrap.min.css" type="text/css" media="screen" />
+	<link rel="stylesheet" href="/Justified-Gallery/libs/jquery-colorbox/example3/colorbox.css" type="text/css" media="screen" />
+	<script src="/Justified-Gallery/libs/jquery-colorbox/jquery.colorbox-min.js"></script>
+	<link rel='stylesheet' href="/Justified-Gallery/libs/swipebox/src/css/swipebox.min.css" media='screen' />
+	<script src="/Justified-Gallery/libs/swipebox/src/js/jquery.swipebox.min.js"></script>
+	<link rel="stylesheet" href="/Justified-Gallery/libs/justifiedGallery/dist/css/justifiedGallery.css" type="text/css" media="all" />
+	<script src="/Justified-Gallery/libs/justifiedGallery/dist/js/jquery.justifiedGallery.min.js"></script>
+	<link rel="stylesheet" href="/Justified-Gallery/css/font.css" />
+	<link rel="stylesheet" href="/Justified-Gallery/libs/font-awesome/css/font-awesome.min.css" />
+	<link rel="stylesheet" href="/Justified-Gallery/css/syntax.css" type="text/css" media="screen" />
+	<link rel="stylesheet" href="/Justified-Gallery/css/style.css" />
+	<link rel="icon" type="image/png" href="/Justified-Gallery/favico.png" />
+	<script>
+		colorboxConf = {
+			maxWidth : '80%',
+			maxHeight : '80%',
+			opacity : 0.8,
+			transition : 'elastic',
+			current : ''
+		};
+	</script>
+
+</head>
+
+
+  <body>
+
+    <header class="site-header">
+  <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#jg-navbar-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="/Justified-Gallery">
+          Justified Gallery
+        </a>
+      </div>
+      <div class="collapse navbar-collapse" id="jg-navbar-collapse">
+        <ul class="nav navbar-nav navbar-right">
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-book"></span>&nbsp;&nbsp;Documentation <span class="caret"></span></a>
+            <ul class="dropdown-menu" role="menu">
+              <li><a href="/Justified-Gallery/getting-started">Getting Started</a></li>
+              <li><a href="/Justified-Gallery/options-and-events">Options and Events</a></li>
+              <li><a href="/Justified-Gallery/endless-scroll">Infinite Scroll</a></li>
+              <li><a href="/Justified-Gallery/lightboxes">Lightboxes: Colorbox and Swipebox</a></li>
+              <li><a href="/Justified-Gallery/input-formats">Input Formats</a></li>
+              <li><a href="/Justified-Gallery/captions">Captions</a></li>
+              <li role="presentation" class="dropdown-header">Advanced topics</li>
+              <li><a href="/Justified-Gallery/performance-tips">Performance Tips</a></li>
+              <li><a href="/Justified-Gallery/errors-handling">Errors Handling</a></li>
+            </ul>
+          </li>
+          <li><a href="https://github.com/miromannino/Justified-Gallery" target="_blank"><span class="fa fa-github fa-lg"></span>&nbsp;&nbsp;Github Repo</a></li>
+          <li><a href="http://miromannino.com" target="_blank"><span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;Author's website</a></li>
+        </ul>
+      </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+  </nav>
+</header>
+
+
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-xs-offset-1 col-xs-10">
+          <h1 class="jg-h1-secondary">
+    Getting Started
+</h1>
+
+<hr/>
+
+<div>
+    <p>
+        Here we have a <code>div</code>, with the id <code>basicExample</code>, that has a list of links that point to
+        some images (original size images); inside of each link there is a thumbnail. Calling Justified
+        Gallery, the thumbnails are resized in order to fill all the spaces (i.e. <i>justification</i>).
+    </p>
+    <figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"basicExample"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"path/to/image1.jpg"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;img</span> <span class="na">alt=</span><span class="s">"caption for image 1"</span> <span class="na">src=</span><span class="s">"ppath/to/image1_thumbnail.jpg"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/a&gt;</span>
+    <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"path/to/image2.jpg"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;img</span> <span class="na">alt=</span><span class="s">"caption for image 2"</span> <span class="na">src=</span><span class="s">"path/to/image2_thumbnail.jpg"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/a&gt;</span>
+    ...
+<span class="nt">&lt;/div&gt;</span></code></pre></figure>
+    <figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">$</span><span class="p">(</span><span class="dl">"</span><span class="s2">#basicExample</span><span class="dl">"</span><span class="p">).</span><span class="nx">justifiedGallery</span><span class="p">();</span></code></pre></figure>
+
+    <div id="basicExample_demo">
+        
+        <a href="/Justified-Gallery/photos/24096687789_c37d45712f_b.jpg">
+            <img alt="Peace of mind" src="/Justified-Gallery/photos/24096687789_c37d45712f_m.jpg"/>
+        </a>
+        
+        <a href="/Justified-Gallery/photos/23753792354_bd75d8dabc_b.jpg">
+            <img alt="Abu Dhabi" src="/Justified-Gallery/photos/23753792354_bd75d8dabc_m.jpg"/>
+        </a>
+        
+        <a href="/Justified-Gallery/photos/16961685188_f130144d60_b.jpg">
+            <img alt="Never stop climbing" src="/Justified-Gallery/photos/16961685188_f130144d60_m.jpg"/>
+        </a>
+        
+        <a href="/Justified-Gallery/photos/24014174029_2cfa940264_b.jpg">
+            <img alt="Terme" src="/Justified-Gallery/photos/24014174029_2cfa940264_m.jpg"/>
+        </a>
+        
+        <a href="/Justified-Gallery/photos/13824674674_ca1e482394_b.jpg">
+            <img alt="Deep sea" src="/Justified-Gallery/photos/13824674674_ca1e482394_m.jpg"/>
+        </a>
+        
+        <a href="/Justified-Gallery/photos/13824322785_104dc0968c_b.jpg">
+            <img alt="Above the World" src="/Justified-Gallery/photos/13824322785_104dc0968c_m.jpg"/>
+        </a>
+        
+        <a href="/Justified-Gallery/photos/8842312290_f310d491f4_b.jpg">
+            <img alt="The Spring" src="/Justified-Gallery/photos/8842312290_f310d491f4_m.jpg"/>
+        </a>
+        
+        <a href="/Justified-Gallery/photos/8811828736_88392f614a_b.jpg">
+            <img alt="Cat firmness" src="/Justified-Gallery/photos/8811828736_88392f614a_m.jpg"/>
+        </a>
+        
+        <a href="/Justified-Gallery/photos/8400794773_932654a20e_b.jpg">
+            <img alt="Into the Sea" src="/Justified-Gallery/photos/8400794773_932654a20e_m.jpg"/>
+        </a>
+        
+        <a href="/Justified-Gallery/photos/8157236803_78aa1698b6_b.jpg">
+            <img alt="Bologna's T-Day" src="/Justified-Gallery/photos/8157236803_78aa1698b6_m.jpg"/>
+        </a>
+        
+        <a href="/Justified-Gallery/photos/7948632554_01f6ae6b6f_b.jpg">
+            <img alt="Just in a dream Place" src="/Justified-Gallery/photos/7948632554_01f6ae6b6f_m.jpg"/>
+        </a>
+        
+        <a href="/Justified-Gallery/photos/7822678460_ee98ff1f69_b.jpg">
+            <img alt="Erice" src="/Justified-Gallery/photos/7822678460_ee98ff1f69_m.jpg"/>
+        </a>
+        
+        <a href="/Justified-Gallery/photos/7002395006_29fdc85f7a_b.jpg">
+            <img alt="Freedom" src="/Justified-Gallery/photos/7002395006_29fdc85f7a_m.jpg"/>
+        </a>
+        
+        <a href="/Justified-Gallery/photos/7062575651_b23918b11a_b.jpg">
+            <img alt="Maybe spring" src="/Justified-Gallery/photos/7062575651_b23918b11a_m.jpg"/>
+        </a>
+        
+        <a href="/Justified-Gallery/photos/6841267340_855273fd7e_b.jpg">
+            <img alt="Love" src="/Justified-Gallery/photos/6841267340_855273fd7e_m.jpg"/>
+        </a>
+        
+        <a href="/Justified-Gallery/photos/6791628438_affaa19e10_b.jpg">
+            <img alt="These are the colors I love" src="/Justified-Gallery/photos/6791628438_affaa19e10_m.jpg"/>
+        </a>
+        
+        <a href="/Justified-Gallery/photos/6916180091_9c9559e463_b.jpg">
+            <img alt="The Hope" src="/Justified-Gallery/photos/6916180091_9c9559e463_m.jpg"/>
+        </a>
+        
+        <a href="/Justified-Gallery/photos/6880502467_d4b3c4b2a8_b.jpg">
+            <img alt="Florence streets. Florence people." src="/Justified-Gallery/photos/6880502467_d4b3c4b2a8_m.jpg"/>
+        </a>
+        
+        <a href="/Justified-Gallery/photos/6876412479_6268c6e2aa_b.jpg">
+            <img alt="I Love You" src="/Justified-Gallery/photos/6876412479_6268c6e2aa_m.jpg"/>
+        </a>
+        
+        <a href="/Justified-Gallery/photos/6840627709_92ed52fb41_b.jpg">
+            <img alt="The painter in Florence" src="/Justified-Gallery/photos/6840627709_92ed52fb41_m.jpg"/>
+        </a>
+        
+        <a href="/Justified-Gallery/photos/6812090617_5fd5bbdda0_b.jpg">
+            <img alt="Me and My Belover" src="/Justified-Gallery/photos/6812090617_5fd5bbdda0_m.jpg"/>
+        </a>
+        
+        <a href="/Justified-Gallery/photos/6806687375_07d2b7a1f9_b.jpg">
+            <img alt="Fiocco" src="/Justified-Gallery/photos/6806687375_07d2b7a1f9_m.jpg"/>
+        </a>
+        
+        <a href="/Justified-Gallery/photos/6798453217_72dea2d06e_b.jpg">
+            <img alt="My first clothespin" src="/Justified-Gallery/photos/6798453217_72dea2d06e_m.jpg"/>
+        </a>
+        
+    </div>
+    <script>
+        $('#basicExample_demo').justifiedGallery({
+            sizeRangeSuffixes: {
+                'lt100': '_t',
+                'lt240': '_m',
+                'lt320': '_n',
+                'lt500': '',
+                'lt640': '_z',
+                'lt1024': '_b'
+            }
+        }).on('jg.complete', function () {
+            $(this).find('a').colorbox(colorboxConf);
+        });
+    </script>
+
+    <h2 id="rowheight">Important Configurations</h2>
+    <p>
+        An important configuration of the plugin is the <a
+            href="/Justified-Gallery/options-and-events"><code>rowHeight</code></a>. Consider that you
+        have set an height of 160px; the algorithm tries to build rows with that height:
+    </p>
+
+    <figure class="text-center" style="margin: 10px 10px 20px 0;">
+        <img style="max-width: 100%" src="/Justified-Gallery/photos/important_configurations.png">
+    </figure>
+
+    <p>
+        However, the justification may resize the images, and, as a consequence, the row height may be a little bit
+        different than 160px. This means that the row height is intended as your preferred height (i.e. a lower bound).
+        You can always use the <a href="/Justified-Gallery/options-and-events"><code>maxRowHeight</code></a>
+        option to limit the height of the rows; but remember that this option will crop the images if the images
+        needed to be bigger to be justified.
+    </p>
+    <p>
+        This algorithm builds each row until it reaches the last. But, this last row may not have enough images to fill
+        the entire width. In this case you can decide (with the <a
+            href="/Justified-Gallery/options-and-events"><code>lastRow</code></a> option) to leave a blank
+        space, to justify the images, or to hide the last row if there is too much blank space.
+    </p>
+    <p>
+        The following is an example where we use smaller images (<a
+            href="/Justified-Gallery/options-and-events"><code>rowHeight : 70</code></a>). Furthermore, we
+        don't justify the last row (<a href="/Justified-Gallery/options-and-events"><code>lastRow :
+        'nojustify'</code></a>), and we are using a margin of 5px (<a
+            href="/Justified-Gallery/options-and-events"><code>margins : 5px</code></a>).
+    </p>
+    <figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"basicExample2"</span> <span class="na">class=</span><span class="s">"justified-gallery"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"path/to/image1.jpg"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;img</span> <span class="na">alt=</span><span class="s">"caption for image 1"</span> <span class="na">src=</span><span class="s">"path/to/image1_thumbnail.jpg"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/a&gt;</span>
+    <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"path/to/image2.jpg"</span> <span class="na">title=</span><span class="s">"Just in a dream Place"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;img</span> <span class="na">alt=</span><span class="s">"caption for image 2"</span> <span class="na">src=</span><span class="s">"path/to/image2_thumbnail.jpg"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/a&gt;</span>
+    ...
+<span class="nt">&lt;/div&gt;</span>
+
+$('#basicExample2').justifiedGallery({
+    rowHeight : 70,
+    lastRow : 'nojustify',
+    margins : 3
+});</code></pre></figure>
+
+    <div id="basicExample2_demo" class="justified-gallery">
+        
+        <a href="/Justified-Gallery/photos/24096687789_c37d45712f_b.jpg">
+            <img alt="Peace of mind" src="/Justified-Gallery/photos/24096687789_c37d45712f_m.jpg"/>
+        </a>
+        
+        <a href="/Justified-Gallery/photos/23753792354_bd75d8dabc_b.jpg">
+            <img alt="Abu Dhabi" src="/Justified-Gallery/photos/23753792354_bd75d8dabc_m.jpg"/>
+        </a>
+        
+        <a href="/Justified-Gallery/photos/16961685188_f130144d60_b.jpg">
+            <img alt="Never stop climbing" src="/Justified-Gallery/photos/16961685188_f130144d60_m.jpg"/>
+        </a>
+        
+        <a href="/Justified-Gallery/photos/24014174029_2cfa940264_b.jpg">
+            <img alt="Terme" src="/Justified-Gallery/photos/24014174029_2cfa940264_m.jpg"/>
+        </a>
+        
+        <a href="/Justified-Gallery/photos/13824674674_ca1e482394_b.jpg">
+            <img alt="Deep sea" src="/Justified-Gallery/photos/13824674674_ca1e482394_m.jpg"/>
+        </a>
+        
+        <a href="/Justified-Gallery/photos/13824322785_104dc0968c_b.jpg">
+            <img alt="Above the World" src="/Justified-Gallery/photos/13824322785_104dc0968c_m.jpg"/>
+        </a>
+        
+        <a href="/Justified-Gallery/photos/8842312290_f310d491f4_b.jpg">
+            <img alt="The Spring" src="/Justified-Gallery/photos/8842312290_f310d491f4_m.jpg"/>
+        </a>
+        
+        <a href="/Justified-Gallery/photos/8811828736_88392f614a_b.jpg">
+            <img alt="Cat firmness" src="/Justified-Gallery/photos/8811828736_88392f614a_m.jpg"/>
+        </a>
+        
+        <a href="/Justified-Gallery/photos/8400794773_932654a20e_b.jpg">
+            <img alt="Into the Sea" src="/Justified-Gallery/photos/8400794773_932654a20e_m.jpg"/>
+        </a>
+        
+        <a href="/Justified-Gallery/photos/8157236803_78aa1698b6_b.jpg">
+            <img alt="Bologna's T-Day" src="/Justified-Gallery/photos/8157236803_78aa1698b6_m.jpg"/>
+        </a>
+        
+        <a href="/Justified-Gallery/photos/7948632554_01f6ae6b6f_b.jpg">
+            <img alt="Just in a dream Place" src="/Justified-Gallery/photos/7948632554_01f6ae6b6f_m.jpg"/>
+        </a>
+        
+        <a href="/Justified-Gallery/photos/7822678460_ee98ff1f69_b.jpg">
+            <img alt="Erice" src="/Justified-Gallery/photos/7822678460_ee98ff1f69_m.jpg"/>
+        </a>
+        
+        <a href="/Justified-Gallery/photos/7002395006_29fdc85f7a_b.jpg">
+            <img alt="Freedom" src="/Justified-Gallery/photos/7002395006_29fdc85f7a_m.jpg"/>
+        </a>
+        
+        <a href="/Justified-Gallery/photos/7062575651_b23918b11a_b.jpg">
+            <img alt="Maybe spring" src="/Justified-Gallery/photos/7062575651_b23918b11a_m.jpg"/>
+        </a>
+        
+        <a href="/Justified-Gallery/photos/6841267340_855273fd7e_b.jpg">
+            <img alt="Love" src="/Justified-Gallery/photos/6841267340_855273fd7e_m.jpg"/>
+        </a>
+        
+        <a href="/Justified-Gallery/photos/6791628438_affaa19e10_b.jpg">
+            <img alt="These are the colors I love" src="/Justified-Gallery/photos/6791628438_affaa19e10_m.jpg"/>
+        </a>
+        
+        <a href="/Justified-Gallery/photos/6916180091_9c9559e463_b.jpg">
+            <img alt="The Hope" src="/Justified-Gallery/photos/6916180091_9c9559e463_m.jpg"/>
+        </a>
+        
+        <a href="/Justified-Gallery/photos/6880502467_d4b3c4b2a8_b.jpg">
+            <img alt="Florence streets. Florence people." src="/Justified-Gallery/photos/6880502467_d4b3c4b2a8_m.jpg"/>
+        </a>
+        
+        <a href="/Justified-Gallery/photos/6876412479_6268c6e2aa_b.jpg">
+            <img alt="I Love You" src="/Justified-Gallery/photos/6876412479_6268c6e2aa_m.jpg"/>
+        </a>
+        
+        <a href="/Justified-Gallery/photos/6840627709_92ed52fb41_b.jpg">
+            <img alt="The painter in Florence" src="/Justified-Gallery/photos/6840627709_92ed52fb41_m.jpg"/>
+        </a>
+        
+        <a href="/Justified-Gallery/photos/6812090617_5fd5bbdda0_b.jpg">
+            <img alt="Me and My Belover" src="/Justified-Gallery/photos/6812090617_5fd5bbdda0_m.jpg"/>
+        </a>
+        
+        <a href="/Justified-Gallery/photos/6806687375_07d2b7a1f9_b.jpg">
+            <img alt="Fiocco" src="/Justified-Gallery/photos/6806687375_07d2b7a1f9_m.jpg"/>
+        </a>
+        
+        <a href="/Justified-Gallery/photos/6798453217_72dea2d06e_b.jpg">
+            <img alt="My first clothespin" src="/Justified-Gallery/photos/6798453217_72dea2d06e_m.jpg"/>
+        </a>
+        
+    </div>
+    <script>
+        $('#basicExample2_demo').justifiedGallery({
+            rowHeight: 70,
+            lastRow: 'nojustify',
+            margins: 3,
+            sizeRangeSuffixes: {
+                lt100: '_t',
+                lt240: '_m',
+                lt320: '_n',
+                lt500: '',
+                lt640: '_z',
+                lt1024: '_b'
+            }
+        }).on('jg.complete', function () {
+            $(this).find('a').colorbox(colorboxConf);
+        });
+    </script>
+
+    <p style="margin-top: 15px;">
+        If in the server-side you have different sizes of the same images (e.g. a thumbnail for small devices, a bigger
+        thumbnail for retina displays, etc.),
+        the plugin can be set to automatically load the best available thumbnails: bigger or smaller thumbnails are
+        loaded to always have an high quality of
+        the images.
+
+        To do that you simply have to change the setting <code>sizeRangeSuffixes</code>. For example,
+        to agree with the <a href="http://www.flickr.com/services/api/misc.urls.html">Flickr's suffixes</a>, you have to
+        set
+        this setting in the following way:
+        <figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">sizeRangeSuffixes</span><span class="p">:</span> <span class="p">{</span>
+    <span class="mi">100</span> <span class="p">:</span> <span class="dl">'</span><span class="s1">_t</span><span class="dl">'</span><span class="p">,</span> <span class="c1">// used with images which are less than 100px on the longest side</span>
+    <span class="mi">240</span> <span class="p">:</span> <span class="dl">'</span><span class="s1">_m</span><span class="dl">'</span><span class="p">,</span> <span class="c1">// used with images which are between 100px and 240px on the longest side</span>
+    <span class="mi">320</span> <span class="p">:</span> <span class="dl">'</span><span class="s1">_n</span><span class="dl">'</span><span class="p">,</span> <span class="c1">// ...</span>
+    <span class="mi">500</span> <span class="p">:</span> <span class="dl">''</span><span class="p">,</span>
+    <span class="mi">640</span> <span class="p">:</span> <span class="dl">'</span><span class="s1">_z</span><span class="dl">'</span><span class="p">,</span>
+    <span class="mi">1024</span> <span class="p">:</span> <span class="dl">'</span><span class="s1">_b</span><span class="dl">'</span> <span class="c1">// used which images that are more than 640px on the longest side</span>
+<span class="p">}</span></code></pre></figure>
+        In this way the plugin derives other thumbnails' paths for the same image by only changing the filename suffix.
+        For example, with an entry with the thumbnail <code>path/to/image1_t.jpg</code>, the plugin could load the
+        thumbnail <code>path/to/image1_b.jpg</code>.
+    </p>
+    <p>
+        By default, the plugin is configured to only use the thumbnail provided in the HTML. 
+        This means that, by default, Justified Gallery has:
+
+        <figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">sizeRangeSuffixes</span><span class="p">:</span> <span class="p">{</span> <span class="p">}</span></code></pre></figure>
+    </p>
+
+    <p style="margin-top: 15px;">
+        <a href="/Justified-Gallery/options-and-events">Explore all the options</a> available for
+        Justified Gallery
+    </p>
+
+</div>
+        <p>&nbsp;</p>
+      </div>
+    </div>
+
+    <footer class="site-footer clearfix" style="margin-bottom: 15px;">
+	<div class="text-center">	
+		<div style="display: inline-block; margin-left:30px"><iframe src="http://ghbtns.com/github-btn.html?user=miromannino&repo=Justified-Gallery&type=watch&count=true" allowtransparency="true" frameborder="0" scrolling="0" width="100" height="20"></iframe></div>
+		<div style="display: inline-block; margin-left:30px"><iframe src="http://ghbtns.com/github-btn.html?user=miromannino&repo=Justified-Gallery&type=fork&count=true" allowtransparency="true" frameborder="0" scrolling="0" width="100" height="20"></iframe></div>
+	</div>
+	<br/>
+	<div class="text-center">
+		Designed and built by <a href="http://miromannino.com">Miro Mannino</a>. See the project in 
+		<a href="https://github.com/miromannino/Justified-Gallery">github</a>
+	</div>
+	<div class="text-center">
+		Code licensed under the 
+		<a href="https://github.com/miromannino/Justified-Gallery/blob/master/LICENSE">MIT License</a>
+	</div>
+</footer>
+
+
+  </body>
+
+</html>

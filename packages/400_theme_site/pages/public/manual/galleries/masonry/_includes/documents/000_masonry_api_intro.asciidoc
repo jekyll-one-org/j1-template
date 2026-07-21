@@ -8,6 +8,9 @@ open column, the way a bricklayer fills the gaps in a wall. The result
 is a tidy grid with no large empty gaps, even when the items have
 different heights.
 
+.Masonry Gallery
+masonry::image_fixed_height_lb[]
+
 The Masonry *API* is the set of *options*, *methods* and *events* you use
 from JavaScript to build and control a grid. In the J1 Template you
 normally do *not* call this API yourself. Instead, you write a few *YAML*

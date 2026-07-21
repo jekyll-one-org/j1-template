@@ -1,0 +1,239 @@
+////
+claude - Update Justified Gallery manual #1
+------------------------------------------------------------------------------
+Corrected and completed this page:
+
+  * replaced the "lorem:sentences[5]" placeholder with a real introduction;
+  * added a J1 note: in gallery_control.yml these options go under
+    gallery_options, and the spacing option is written as `gutters` (the
+    adapter maps gutters -> the library option `margins`, verified in
+    gallery.js);
+  * fixed default values that did NOT match the shipped library
+    (justifiedGallery.js, JustifiedGallery.prototype.defaults):
+      - justifyThreshold  0.75 -> 0.90
+      - refreshTime       250  -> 200
+      - selector          'a, div:not(.spinner)' -> 'a'
+      - imgSelector       '> img, > a > img' -> '> img, > a > img, > svg, > a > svg'
+  * fixed the broken row header for `selector` (a missing back-tick made the
+    whole row render wrong);
+  * simplified the wording of several descriptions for beginners and split
+    off the rarely-used options into an "Advanced options" table so the first
+    table stays short and approachable;
+  * added the `triggerEvent` option (present in the library, previously
+    undocumented).
+
+Note on rowHeight: the library default is 120, but the J1 module default in
+gallery.yml is 150 (gallery_options.rowHeight). Both are stated below.
+------------------------------------------------------------------------------
+////
+[role="mt-5"]
+[[api-jg-properties]]
+== Properties
+
+Properties (also called _options_) control how a gallery is built and how it
+behaves. You set them once, when the gallery is created. In J1 you write them
+as YAML under the `gallery_options` key of a gallery in
+`gallery_control.yml`; the adapter passes them on to Justified Gallery.
+
+[NOTE]
+====
+Two small J1 details to keep in mind:
+
+* In J1 the spacing between images is written as `gutters`, not `margins`.
+The adapter maps `gutters` to the library option `margins` for you.
+* The library default for `rowHeight` is `120`, but the J1 default (set in
+`gallery.yml`) is `150`. A gallery that does not set `rowHeight` gets `150`.
+====
+
+The table below lists the options you will use most often.
+
+[cols="3a,2a,7a", options="header", width="100%", role="table-striped table-responsive"]
+|===
+|Property |Default |Description
+
+|`rowHeight`
+|150
+|The preferred height of each row, in pixels. Justification may change the
+real height a little, so treat this as your target height rather than an exact
+value.
+
+|`maxRowHeight`
+|false
+|An upper limit for the row height. Use false (or a negative value) to turn
+it off. A number sets the limit in pixels (e.g. `200`). A percentage string
+sets it relative to `rowHeight` (e.g. `"200%"` means a row can be at most
+`2 * rowHeight`).
+
+[NOTE]
+====
+This option can *crop* images if they would need to be taller to be
+justified.
+====
+
+|`maxRowsCount`
+|0
+|Limits how many rows are shown. Extra rows are hidden; if the page is made
+wider or narrower, more or fewer images fit and the number shown changes.
+`0` means no limit. This option does *not* make images smaller to fit more
+rows.
+
+|`margins` (J1: `gutters`)
+|1
+|The space between images, in pixels.
+
+|`border`
+|-1
+|The size of the border around the whole gallery. A negative value uses the
+same size as `margins`; `0` disables the border; any other number sets it in
+pixels.
+
+|`lastRow`
+|nojustify
+|What to do with the last row when it cannot fill the width. Use `'justify'`
+to stretch it anyway, or `'hide'` to hide it. With `'nojustify'` the images
+keep their size and are aligned left; you can also use `'center'` or
+`'right'`.
+
+|`captions`
+|true
+|Show a caption over an image when the mouse is over it.
+
+|`randomize`
+|false
+|Show the photos in a random order.
+
+|`filter`
+|false
+|Show only some of the entries. Can be:
+
+* false: no filtering (show everything).
+* a string: an entry is kept if `entry.is(filter string)` is `true` (see
+link://api.jquery.com/is/[jQuery's .is(), {browser-window--new}]).
+* a function: called with `(entry, index, array)`; return `true` to keep the
+entry (see
+link://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Array/filter[Array.prototype.filter, {browser-window--new}]).
+
+|`sort`
+|false
+|Sort the photos before showing them. Use false for no sorting, or a
+comparator function (see
+link://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort[Array.prototype.sort(), {browser-window--new}]).
+
+|`rtl`
+|false
+|Right-to-left mode (lay the images out from right to left).
+
+|===
+
+
+[role="mt-5"]
+[[api-jg-properties--advanced]]
+=== Advanced settings
+
+These options are useful in special cases. Most galleries never need them.
+
+[cols="4a,4a,4a", options="header", width="100%", role="table-striped table-responsive"]
+//[cols="3a,3a,6a", options="header", width="100%", role="table-striped table-responsive"]
+|===
+|Property |Default |Description
+
+|`justifyThreshold`
+|0.90
+|Controls when the last row is justified even though `lastRow` is
+`nojustify`. If `row width` (available space) is greater than this value
+(between `0` and `1`), the row is justified anyway.
+
+|`cssAnimation`
+|true
+|Use CSS animations to fade the images in. With CSS animations it is easier to
+change the effect by overriding the CSS rules of Justified Gallery. When
+`true`, the two options below are ignored.
+
+|`imagesAnimationDuration`
+|500
+|How long the image fade-in takes, in milliseconds. Ignored when
+`cssAnimation` is `true`.
+
+|`captionSettings`
+|{ animationDuration: 500, visibleOpacity: 0.7, nonVisibleOpacity: 0.0 }
+|Fine control over captions: the fade duration (ms), the caption opacity when
+visible (mouse over), and the opacity when not visible. Ignored when
+`cssAnimation` is `true`.
+
+|`waitThumbnailsLoad`
+|true
+|Wait for the thumbnails to load before building the layout. If your
+thumbnails have `width` and `height` attributes you can set this to false
+to build the layout immediately; the images then appear one by one as they
+load.
+
+|`selector`
+|a
+|Which direct children of the gallery are treated as entries. For performance
+reasons, entries must be direct children of the gallery element.
+
+|`imgSelector`
+|
+'> img', +
+'> a > img', +
+'> svg', +
+'> a > svg' +
+|Given an entry, how to find its thumbnail image inside it.
+
+|`extension`
+|/\.[^.\\/]+$/
+|A regular expression that matches an image's file extension. It is used when
+rebuilding a filename (for example together with `sizeRangeSuffixes`). Change
+it only if you need to match a specific extension.
+
+|`refreshTime`
+|200
+|How often (in milliseconds) the plugin checks whether the page width has
+changed. If it has, the layout is rebuilt.
+
+|`refreshSensitivity`
+|0
+|How many pixels the width may change without rebuilding the gallery.
+
+|`rel`
+|null
+|Rewrites the `rel` attribute of every link to this value. Often used to group
+images for a lightbox.
+
+|`target`
+|null
+|Rewrites the `target` attribute of every link. For example, with `'_blank'`
+(and no lightbox) images open in a new tab.
+
+|`sizeRangeSuffixes`
+|{ }
+|Filename suffixes for different thumbnail sizes, so the plugin can pick the
+best size automatically. Off by default. See
+<<api-jg-getting-started--thumbnails, Loading different thumbnail sizes>>.
+
+|`thumbnailPath`
+|undefined
+|A function that returns the thumbnail path for a given size, for full control
+over which file is loaded. It receives the current path, the target width and
+height, and the image element. If this is set, `sizeRangeSuffixes` is ignored.
+
+[source, javascript]
+----
+$("#myGallery").justifiedGallery({
+  thumbnailPath: function (currentPath, width, height, image) {
+    if (Math.max(width, height) < 250) {
+      return currentPath.replace(/(.*)(_[a-z]+)(\..*)/, "$1_small$2");
+    } else {
+      return currentPath.replace(/(.*)(_[a-z]+)(\..*)/, "$1_medium$2");
+    }
+  }
+});
+----
+
+|`triggerEvent`
+|function
+|How the plugin fires its events (`jg.complete`, `jg.resize`, `jg.rowflush`).
+By default it calls `$.trigger` on the gallery element. You rarely need to
+change this.
+
+|===
