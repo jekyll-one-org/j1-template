@@ -29,10 +29,7 @@ compress:                               true
 regenerate:                             false
 permalink:                              /pages/public/manual/module/swiper_api/
 
-resources:                              [
-                                          gallery, lightbox3,
-                                          photoswipejs, swiperjs
-                                        ]
+resources:                              [ gallery, lightbox3, photoswipejs, swiperjs ]
 resource_options:
   - toccer:
       collapseDepth:                    2
