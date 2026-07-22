@@ -222,8 +222,8 @@ Specifies which elements are _stamped_ within the layout. Masonry will
 layout items below stamped elements.
 
 The `stamp` option stamps elements only when the Masonry instance is
-first initialized. You can stamp additional elements afterwards with the
-link:methods.html#stamp[`stamp` method].
+first initialized. You can stamp additional elements afterwards with
+the `stamp` method.
 
 [source, html]
 ----

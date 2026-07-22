@@ -248,7 +248,7 @@
               href:                     /pages/public/manual/module/lightboxes/lightbox/
               icon:                     flashlight
             - title:                    PhotoSwipe V5
-              href:                     /pages/public/manual/module/lightboxes/photoswipe/
+              href:                     /pages/public/manual/module/lightboxes/photoswipe_api/
               icon:                     flashlight
             - title:                    lightGallery V2
               href:                     /pages/public/manual/module/lightboxes/lightgallery/

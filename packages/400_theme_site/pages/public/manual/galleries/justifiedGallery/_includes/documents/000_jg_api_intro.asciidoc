@@ -147,7 +147,7 @@ $('#myGallery').justifiedGallery({
 ----
 
 You can also react to the moment the layout is finished by listening for the
-`jg.complete` event (see the link:events.html[Events] page):
+`jg.complete` event:
 
 [source, js]
 ----
@@ -182,5 +182,4 @@ The adapter:
 
 You can still reach a running gallery from JavaScript. Justified Gallery
 stores its controller on the gallery element, so you can get it with jQuery
-using `$('#<your_gallery_id>').data('jg.controller')`. From there you can use
-any of the link:methods.html[methods] listed further down.
+using `$('#<your_gallery_id>').data('jg.controller')`.

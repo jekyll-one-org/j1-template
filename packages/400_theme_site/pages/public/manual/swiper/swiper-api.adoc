@@ -85,7 +85,7 @@ used in mobile websites, mobile web apps, and mobile native/hybrid apps.
 
 In the J1 Template, Swiper is the *carousel engine* behind every slider on
 your page. It is used together with
-link:/pages/public/manual/module/lightboxes/photoswipe/[PhotoSwipe, {browser-window--new}]
+link:/pages/public/manual/module/lightboxes/photoswipe_api/[PhotoSwipe, {browser-window--new}]
 to provide an optional *lightbox*, so visitors can not only swipe through
 your slides but also open each slide in a large overlay view. You can use
 Swiper on its own, of course, if you do not need the lightbox feature.

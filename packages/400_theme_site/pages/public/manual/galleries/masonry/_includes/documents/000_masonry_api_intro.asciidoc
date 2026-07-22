@@ -92,7 +92,7 @@ collection.
 
 When the grid's HTML is on the page, Masonry is started like so. Because
 an image has no known height until it has loaded, run the
-link:methods.html#layout[`layout`] method again after each image loads:
+`layout` method again after each image loads:
 
 [source, js]
 ----
@@ -142,5 +142,4 @@ The adapter:
 You can still reach a running grid from JavaScript. Get the Masonry
 instance with jQuery, using `$('#<your_grid_id>').data('masonry')`, or
 with `Masonry.data(document.querySelector('#<your_grid_id>'))`. You can
-then call any of the link:methods.html[methods] listed further down on
-this page.
+then call any of <<Methods>> listed further down.

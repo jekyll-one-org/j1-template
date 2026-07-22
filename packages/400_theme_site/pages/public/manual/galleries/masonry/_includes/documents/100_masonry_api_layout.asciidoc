@@ -94,9 +94,8 @@ $('.grid').masonry({
 [[api-masonry-layout--element-sizing]]
 ==== Element sizing
 
-Sizing options link:#columnwidth[`columnWidth`] and
-link:#gutter[`gutter`] can be set with an element. The size of the
-element is then used as the value of the option.
+Sizing options `columnWidth` and `gutter` can be set with an element.
+The size of the element is then used as the value of the option.
 
 [source, html]
 ----

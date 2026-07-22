@@ -115,10 +115,8 @@ var msnry = $grid.masonry( 'off', eventName, listener )
 msnry.off( eventName, listener )
 ----
 
-`eventName` [.argument__type]#_String_# [.argument__description]#Name
-of a link:events.html[Masonry event]#
-
-* `listener` -- type _Function_
+* `eventName` -- type _String_ (Name of the Masonry event)
+* `listener`  -- type _Function_
 
 [role="mt-4"]
 [[api-masonry-events-masonry--once]]
