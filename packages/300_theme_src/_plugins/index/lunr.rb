@@ -3,7 +3,7 @@
 # Creates a index file (json) to be used by J1 Lunr
 #
 # Product/Info:
-# http://jekyll.one
+# https://jekyll.one
 #
 # Copyright (C) 2023-2026 Juergen Adams
 #

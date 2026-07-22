@@ -5,7 +5,7 @@
  # claude - change skipAd API to local files #1
  #
  # Product/Info:
- # http://jekyll.one
+ # https://jekyll.one
  #
  # Copyright (C) 2026 Juergen Adams
  #

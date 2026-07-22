@@ -5,7 +5,7 @@
  #
  # Product/Info:
  # https://github.com/mobiliza/videojs-vimeo
- # http://jekyll.one
+ # https://jekyll.one
  #
  # Copyright (c) 2020 Kevin Aguiar <kevin.aguiar@mobiliza.com.br>
  # Copyright (C) 2023-2026 Juergen Adams

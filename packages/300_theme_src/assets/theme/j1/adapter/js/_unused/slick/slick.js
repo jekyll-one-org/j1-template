@@ -10,7 +10,7 @@ regenerate:                             false
  # Liquid template to create the Template Adapter for J1 Slick
  #
  # Product/Info:
- # http://jekyll.one
+ # https://jekyll.one
  #
  # Copyright (C) 2023-2026 Juergen Adams
  #
@@ -64,7 +64,7 @@ regenerate:                             false
  # JS Adapter for J1 Slick
  #
  #  Product/Info:
- #  http://jekyll.one
+ #  https://jekyll.one
  #
  #  Copyright (C) 2023-2026 Juergen Adams
  #

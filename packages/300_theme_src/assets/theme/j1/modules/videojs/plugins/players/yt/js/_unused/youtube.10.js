@@ -5,7 +5,7 @@
  # Version 3.1.10 for J1 Template
  #
  # Product/Info:
- # http://jekyll.one
+ # https://jekyll.one
  #
  # Copyright (C) 2014-2015 Gary Katsevman, Benoit Tremblay
  # Copyright (C) 2023-2026 Juergen Adams

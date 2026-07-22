@@ -6,7 +6,7 @@
  # managed by the videojs-playlist plugin.
  #
  # Product/Info:
- # http://jekyll.one
+ # https://jekyll.one
  #
  # Copyright (C) 2026 Juergen Adams
  #

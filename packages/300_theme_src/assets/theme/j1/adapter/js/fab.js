@@ -57,12 +57,12 @@ regenerate:                             true
  # JS Adapter for J1 FABs (Floating Action Buttons)
  #
  # Product/Info:
- # http://jekyll.one
+ # https://jekyll.one
  #
  # Copyright (C) 2023-2026 Juergen Adams
  #
  # J1 Template is licensed under the MIT License.
- # For details, see http://jekyll.one
+ # For details, see https://jekyll.one
  # -----------------------------------------------------------------------------
  # TODO: check why 'found toc in page: disabled' detected (some times)
  #       if a toc IS configured

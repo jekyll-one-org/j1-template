@@ -4,7 +4,7 @@
  # Provides YouTube Playback Technology (Tech) for Video.js V8 and newer
  #
  # Product/Info:
- # http://jekyll.one
+ # https://jekyll.one
  #
  # Copyright (C) 2023-2025 Juergen Adams
  # Copyright (C) 2014-2015 Gary Katsevman, Benoit Tremblay

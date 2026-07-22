@@ -6,7 +6,7 @@
  #
  # Product/Info:
  # https://github.com/videojs/videojs-playlist
- # http://jekyll.one
+ # https://jekyll.one
  #
  # Copyright (C) 2017 Brightcove, Inc.
  # Copyright (C) 2026 Juergen Adams

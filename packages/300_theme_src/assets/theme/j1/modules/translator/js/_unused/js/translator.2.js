@@ -4,7 +4,7 @@
  # Provides JS Core functions|API for J1 Module Translator
  #
  #  Product/Info:
- #  http://jekyll.one
+ #  https://jekyll.one
  #
  #  Copyright (C) 2026 Juergen Adams
  #

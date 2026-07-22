@@ -6,7 +6,7 @@
  #
  # Product/Info:
  # https://github.com/mister-ben/videojs-auto-caption
- # http://jekyll.one
+ # https://jekyll.one
  #
  # Copyright (C) 2023 mister-ben
  # Copyright (C) 2023-2026 Juergen Adams

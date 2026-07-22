@@ -5,7 +5,7 @@
  # Version 1.0.3
  #
  #  Product/Info:
- #  http://jekyll.one
+ #  https://jekyll.one
  #
  #  Copyright (C) 2026 Juergen Adams
  #

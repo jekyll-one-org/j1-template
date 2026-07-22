@@ -5,7 +5,7 @@
  # See: https://github.com/edly-io/videojs-wistia
  #
  #  Product/Info:
- #  http://jekyll.one
+ #  https://jekyll.one
  #
  # Copyright (C) 2020-2021 Zia Fazal
  # Copyright (C) 2021 Edly by Arbisoft

@@ -6,7 +6,7 @@
  #
  # Product/Info:
  # https://github.com/ctd1500/videojs-hotkeys
- # http://jekyll.one
+ # https://jekyll.one
  #
  # Copyright (C) 2014 Chris Dougherty
  # Copyright (C) 2023-2026 Juergen Adams

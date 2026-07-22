@@ -6,7 +6,7 @@
  #
  # Product/Info:
  # https://github.com/theonlyducks/videojs-zoom/blob/main/README.md
- # http://jekyll.one
+ # https://jekyll.one
  #
  # Copyright (C) 2023-2026 The Only Ducks
  # Copyright (C) 2023-2026 Juergen Adams

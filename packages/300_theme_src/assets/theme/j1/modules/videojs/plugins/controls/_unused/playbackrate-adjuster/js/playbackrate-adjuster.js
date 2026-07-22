@@ -5,7 +5,7 @@
  # See: https://github.com/ctd1500/videojs-hotkeys
  #
  # Product/Info:
- # http://jekyll.one
+ # https://jekyll.one
  #
  # Copyright (C) Gary Katsevman <me@gkatsev.com>
  # Copyright (C) 2023-2026 Juergen Adams

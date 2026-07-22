@@ -11,7 +11,7 @@ regenerate: true
  #
  #  Product/Info:
  #  https://shaack.com
- #  http://jekyll.one
+ #  https://jekyll.one
  #
  #  Copyright (C) 2020 Stefan Haack
  #  Copyright (C) 2023-2026 Juergen Adams
@@ -41,7 +41,7 @@ regenerate: true
  # Provides JS Core for J1 Module BS Cookie Consent
  #
  #  Product/Info:
- #  http://jekyll.one
+ #  https://jekyll.one
  #
  #  Copyright (C) 2026 Juergen Adams
  #

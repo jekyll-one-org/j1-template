@@ -2,7 +2,7 @@
  *  jQuery OwlCarousel v1.3.3
  *
  *  Copyright (C) 2013-2016 Bartosz Wojciechowski
- *  http://jekyll.one/owlcarousel/
+ *  https://jekyll.one/owlcarousel/
  *
  *  Licensed under MIT
  *

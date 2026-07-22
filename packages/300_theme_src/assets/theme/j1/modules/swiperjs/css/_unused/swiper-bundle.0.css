@@ -7,7 +7,7 @@
  #
  # Product/Info:
  # https://swiperjs.com
- # http://jekyll.one
+ # https://jekyll.one
  #
  # Copyright (C) 2014-2025 Vladimir Kharlampidi
  # Copyright (C) 2023-2026 Juergen Adams

@@ -4,7 +4,7 @@
  # Provides JS Core and API for MSDropdown
  #
  # Product/Info:
- # http://jekyll.one
+ # https://jekyll.one
  # https://www.marghoobsuleman.com/
  #
  # Copyright (C) 2023-2026 Juergen Adams
