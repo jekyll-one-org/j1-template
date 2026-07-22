@@ -232,6 +232,13 @@ defaults:
       # ------------------------------------------------------------------------
       #
       youtube:
+
+        # privacy settings
+        #
+        privacy_enhanced:               true                                    # enable|disable privacy-enhanced host 'youtube-nocookie.com'
+
+        # core settings
+        #
         autoplay:                       true                                    # true|false, play video after load
         cc_load_policy:                 0                                       # 0|1, captions initially hidden
         controls:                       1                                       # 0|1, disable|enable (vjs) controlbar
@@ -255,6 +262,7 @@ defaults:
         #
         start:                          true                                    # set start (trim) of a video allowed
         end:                            true                                    # set end (trim) of a video allowed
+
 
     # --------------------------------------------------------------------------
     # PLUGIN options

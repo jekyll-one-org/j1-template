@@ -2,7 +2,7 @@
  # -----------------------------------------------------------------------------
  # ~/assets/theme/j1/modules/videoPlayer/js/videoPlayer.js
  # Provides JS Core for J1 Module videoPlayer
- # Version 3.1.61 for J1 Template
+ # Version 3.1.62 for J1 Template
  #
  # Product/Info:
  # https://jekyll.one
@@ -1316,7 +1316,15 @@
           // overload the stored/default poster for YouTube entries
           const isYt = (ytID) ? true : false;
           if (isYt) {
-            entry.poster = `https://img.youtube.com/vi/${ytID[1]}/${YOUTUBE_POSTER_QUALITY}.jpg`;
+            // claude - optimize J1 third-party cookies #1
+            // Original (deprecated, preserved for reference):
+            // entry.poster = `https://img.youtube.com/vi/${ytID[1]}/${YOUTUBE_POSTER_QUALITY}.jpg`;
+            // Poster images are now loaded from the cookieless image CDN
+            // i.ytimg.com. img.youtube.com serves the identical images, but
+            // as a *.youtube.com host every request carries (and can set)
+            // the youtube.com cookies, which Chrome/Lighthouse flags as
+            // third-party cookie usage.
+            entry.poster = `https://i.ytimg.com/vi/${ytID[1]}/${YOUTUBE_POSTER_QUALITY}.jpg`;
           } else {
             // For non-YouTube entries leave entry.poster as '' so the render
             // helpers can fall back to DEFAULT_POSTER at display time (they
@@ -4669,7 +4677,11 @@
         // playback.
         playlistManager.createEntry({
           videoId:   videoId,
-          poster:    `//img.youtube.com/vi/${videoId}/maxresdefault.jpg`,
+          // claude - optimize J1 third-party cookies #1
+          // Original (deprecated, preserved for reference):
+          // poster:    `//img.youtube.com/vi/${videoId}/maxresdefault.jpg`,
+          // Cookieless image CDN i.ytimg.com (see normalise helper above).
+          poster:    `//i.ytimg.com/vi/${videoId}/maxresdefault.jpg`,
           infoLink:  `https://youtu.be/${videoId}`,
           videoLink: `https://youtu.be/${videoId}`
         });
@@ -5574,7 +5586,11 @@
         author:       vd.author || '',
         infoLink:     vid ? `https://youtu.be/${vid}` : '',
         videoLink:    vid ? `https://youtu.be/${vid}` : '',
-        poster:       vid ? `//img.youtube.com/vi/${vid}/maxresdefault.jpg` : '',
+        // claude - optimize J1 third-party cookies #1
+        // Original (deprecated, preserved for reference):
+        // poster:       vid ? `//img.youtube.com/vi/${vid}/maxresdefault.jpg` : '',
+        // Cookieless image CDN i.ytimg.com (see normalise helper above).
+        poster:       vid ? `//i.ytimg.com/vi/${vid}/maxresdefault.jpg` : '',
         duration:     player.duration(),
         lastPosition: 0
       };
@@ -6133,6 +6149,7 @@
         if (key in ytCfg) ytPlayerVars[key] = ytCfg[key];
       });
 
+      const privacyEnhanced = ('privacy_enhanced' in ytCfg) ? true : false;
 
       // Hard-set the initial caption load policy to 0 ("do not show captions by
       // default") regardless of the players.youtube config value. This only
@@ -6149,6 +6166,21 @@
           src:  `//youtu.be/${videoId}`
         }],
         youtube: {
+          // claude - optimize J1 third-party cookies #1
+          // see: https://github.com/videojs/videojs-youtube
+          // see: https://github.com/videojs/videojs-youtube/issues/499
+          // Run the YouTube embed from the privacy-enhanced host
+          // www.youtube-nocookie.com. The videojs-youtube tech (youtube.js)
+          // maps the option `enablePrivacyEnhancedMode` to
+          // `playerConfig.host` when creating the underlying YT.Player.
+          // The classic host www.youtube.com sets several third-party
+          // cookies already on page load, which Chrome/Lighthouse flags in
+          // the "Best Practices" audit ("Uses third-party cookies").
+          // Default: enabled. Set the YAML key
+          // videoJS.players.youtube.enablePrivacyEnhancedMode: false
+          // (defaults <- control settings <- per-instance) to restore the
+          // classic www.youtube.com host.
+          enablePrivacyEnhancedMode: privacyEnhanced,
           playerVars: ytPlayerVars
         },
         controlBar: {

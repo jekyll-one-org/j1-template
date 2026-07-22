@@ -38,7 +38,7 @@ defaults:
 
     # --------------------------------------------------------------------------
     # ALBUM settings (no defaults)
-    # --------------------------------------------------------------------------
+    #
     album:
 
     # --------------------------------------------------------------------------
@@ -141,7 +141,7 @@ defaults:
 
   # ----------------------------------------------------------------------------
   # PLAYER defaults
-  # ----------------------------------------------------------------------------
+  #
   player:
 
     # --------------------------------------------------------------------------
@@ -261,36 +261,28 @@ defaults:
 
     # --------------------------------------------------------------------------
     # GENERAL settings
-    # --------------------------------------------------------------------------
     #
     type:                               compact                                 # default type   (mini|compact|large)
     source:                             audio                                   # default source (audio|video)
 
     # --------------------------------------------------------------------------
     # PLUGIN settings
-    # --------------------------------------------------------------------------
     #
     plugin_manager:
       enabled:                          false                                   # true|false, load plugins
       plugins:                          []                                      # [ ytp ], prepared as an array to support multiple plugins (NOT supported yet)
 
-  # waveforms:
-  #   enabled:                          false                                   # Amplitude plugin, currently NOT supported
-  #   sample_rate:                      0.25
-
-  # visualization:
-  #   enabled:                          false                                   # Amplitude plugin, currently NOT supported
-  #   name:                             [ bar ]                                 # prepared as an array to support multiple visualizations (NOT supported yet)
+    # visualization:
+    #   enabled:                        false                                   # Amplitude plugin, currently NOT supported
+    #   name:                           [ bar ]                                 # prepared as an array to support multiple visualizations (NOT supported yet)
 
     # --------------------------------------------------------------------------
     # TIME settings
-    # --------------------------------------------------------------------------
     #
     display_hours:                      false                                   # display hour in timestamps
 
     # --------------------------------------------------------------------------
     # PLAYER settings
-    # --------------------------------------------------------------------------
     #
     loop:                               false                                   # true|false, start playing on first item on end
 
@@ -333,6 +325,7 @@ defaults:
       fade_out_speed:                   fast                                    # transition speed fast|slow|slower
 
     yt_player:
+      privacy_enhanced:                 true                                    # enable|disable privacy-enhanced host 'youtube-nocookie.com'
       autoplay:                         0                                       # start playing using the AJS player START button
       height:                           0                                       # display player 'minimited'
       width:                            0                                       # display player 'minimized'

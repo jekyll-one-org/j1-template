@@ -2,10 +2,11 @@
  # -----------------------------------------------------------------------------
  # ~/assets/theme/j1/modules/videojs/js/plugins/players/yt/youtube.js
  # Provides YouTube Playback Technology (Tech) for Video.js V8 and newer
- # Version 3.1.10 for J1 Template
+ # Version 3.1.11 for J1 Template
  #
  # Product/Info:
- # http://jekyll.one
+ # https://jekyll.one
+ # https://github.com/videojs/videojs-youtube/
  #
  # Copyright (C) 2014-2015 Gary Katsevman, Benoit Tremblay
  # Copyright (C) 2023-2026 Juergen Adams
@@ -297,7 +298,7 @@
         }
       };
 
-      if (typeof this.options_.enablePrivacyEnhancedMode !== 'undefined' && this.options_.enablePrivacyEnhancedMode) {
+      if (typeof this.options_.privacy_enhanced !== 'undefined' && this.options_.privacy_enhanced) {
         playerConfig.host = 'https://www.youtube-nocookie.com';
       }
 
@@ -638,12 +639,19 @@
       // -----------------------------------------------------------------------
       var checkVideoPoster = false;
       if (checkVideoPoster && this.poster_ === '') {
-//      if (!this.options_.poster && checkVideoPoster) {
         if (this.url.videoId) {
           // Set the low resolution first
-//        this.poster_ = 'https://img.youtube.com/vi/' + this.url.videoId + '/0.jpg';
-//        this.poster_ = 'https://img.youtube.com/vi/' + this.url.videoId + '/sddefault.jpg';
-          this.poster_ = 'https://img.youtube.com/vi/' + this.url.videoId + '/mqdefault.jpg';
+          //  this.poster_ = 'https://img.youtube.com/vi/' + this.url.videoId + '/0.jpg';
+          //  this.poster_ = 'https://img.youtube.com/vi/' + this.url.videoId + '/sddefault.jpg';
+          // claude - optimize J1 third-party cookies #1
+          // Original (deprecated, preserved for reference):
+          // this.poster_ = 'https://img.youtube.com/vi/' + this.url.videoId + '/mqdefault.jpg';
+          // Poster images are now loaded from the cookieless image CDN
+          // i.ytimg.com. img.youtube.com serves the identical images, but as
+          // a *.youtube.com host every request carries (and can set) the
+          // youtube.com cookies, which Chrome/Lighthouse flags as
+          // third-party cookie usage ("Best Practices" audit).
+          this.poster_ = 'https://i.ytimg.com/vi/' + this.url.videoId + '/mqdefault.jpg';
           this.trigger('posterchange');
 
           // Check if their is a high res image
@@ -913,7 +921,11 @@
 
     // Tries to get the highest resolution thumbnail available for the video
     checkHighResPoster() {
-      var uri = 'https://img.youtube.com/vi/' + this.url.videoId + '/maxresdefault.jpg';
+      // claude - optimize J1 third-party cookies #1
+      // Original (deprecated, preserved for reference):
+      // var uri = 'https://img.youtube.com/vi/' + this.url.videoId + '/maxresdefault.jpg';
+      // Cookieless image CDN i.ytimg.com (see poster handling above).
+      var uri = 'https://i.ytimg.com/vi/' + this.url.videoId + '/maxresdefault.jpg';
 
       try {
         var image = new Image();
@@ -1068,6 +1080,14 @@
       isDev && logger.debug('\n' + 'initializing plugin: started');
       isDev && logger.debug('\n' + 'version of videoJS detected: ' + videojs.VERSION);
 
+      // claude - optimize J1 third-party cookies #1
+      // NOTE (no functional change): the IFrame Player API loader script is
+      // intentionally kept on www.youtube.com. It is a static JS resource
+      // that does not set cookies itself; the cookies flagged by
+      // Chrome/Lighthouse are set by the embed iframe document. The embed
+      // host is switched to www.youtube-nocookie.com via the tech option
+      // `privacy_enhanced` (see initYTPlayer above), which the J1
+      // videoPlayer core now enables by default.
       loadScript('//www.youtube.com/iframe_api', apiLoaded);
       injectCss();
 

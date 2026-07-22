@@ -6,7 +6,7 @@ regenerate:                             true
 
 {% comment %}
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/modules/amplitudejs/js/plugins/tech/ytp.js (40)
+ # ~/assets/theme/j1/modules/amplitudejs/js/tech/ytp.js (41)
  # AmplitudeJS V5 Tech for J1 Template (AI optimized)
  #
  # Product/Info:
@@ -61,7 +61,7 @@ regenerate:                             true
 
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/modules/amplitudejs/js/plugins/tech/ytp.js (39)
+ # ~/assets/theme/j1/modules/amplitudejs/js/plugins/tech/ytp.js (41)
  # AmplitudeJS V5 Plugin|Tech for J1 Template (AI optimized)
  #
  # Product/Info:
@@ -909,6 +909,18 @@ regenerate:                             true
           var ytpHeight   = ('{{player.yt_player.height}}'.length > 0)   ? '{{player.yt_player.height}}'    : '{{amplitude_default.player.yt_player.height}}';
           var ytpWidth    = ('{{player.yt_player.width}}'.length > 0)    ? '{{player.yt_player.width}}'     : '{{amplitude_default.player.yt_player.width}}';
 
+          // claude - optimize J1 third-party cookies #1
+          // Per-player privacy-enhanced mode for the (hidden) YT video
+          // iframe. Resolution order: per-player YAML key
+          // yt_player.privacy_enhanced <- default settings
+          // amplitude_default.player.yt_player.privacy_enhanced <- hard
+          // default 'true' (privacy-enhanced host) when the key is absent
+          // in both YAML layers. NOTE: Liquid renders missing keys as an
+          // empty string, hence the length checks.
+          // var ytpPrivacy  = ('{{player.yt_player.privacy_enhanced}}'.length > 0) ? '{{player.yt_player.privacy_enhanced}}' : (('{{amplitude_default.player.yt_player.privacy_enhanced}}'.length > 0) ? '{{amplitude_default.player.yt_player.privacy_enhanced}}' : 'true');
+          var ytpPrivacy          = {{amplitude_default.player.yt_player.privacy_enhanced}};
+          var privacyEnhancedHost = (ytpPrivacy) ? 'https://www.youtube-nocookie.com' : 'https://www.youtube.com';
+
           isDev && logger.info('\n' + 'AJS YouTube iFrame API: ready');
           isDev && logger.info('\n' + 'configure player on ID: #{{player.id}}');
 
@@ -920,6 +932,15 @@ regenerate:                             true
 
           var ytpVideoID = (ytPlayerErrorTest) ? 'invalidVideoID' : activeSongMetadata.url.split('=')[1];
           ytPlayer = new YT.Player('iframe_{{player.id}}', {
+            // claude - optimize J1 third-party cookies #1
+            // Serve the (hidden) YT video iframe from the privacy-enhanced
+            // host www.youtube-nocookie.com. The classic host
+            // www.youtube.com sets several third-party cookies already on
+            // page load, which Chrome/Lighthouse flags in the "Best
+            // Practices" audit ("Uses third-party cookies") and logs to the
+            // DevTools Issues panel. Configurable per player via the YAML
+            // key yt_player.privacy_enhanced (default: true).
+            host:               privacyEnhancedHost,
             height:             ytpHeight,
             width:              ytpWidth,
             videoId:            ytpVideoID,

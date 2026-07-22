@@ -162,68 +162,6 @@ settings:
           duration:                     "00:04:22"
 
     # --------------------------------------------------------------------------
-    #  Ludovico Einaudi
-    #
-    - playlist:
-
-      # ------------------------------------------------------------------------
-      # GENERAL settings
-      #
-      enabled:                          true
-
-      # ------------------------------------------------------------------------
-      # PLAYLIST Ludovico Einaudi
-      #
-      name:                             ludovico_einaudi_yt
-
-      # ------------------------------------------------------------------------
-      # ALBUM settings
-      #
-      album:                            &album_einaudi_yt
-
-        playlist:                       ludovico_einaudi_yt
-        name:                           YouTube
-        artist:                         Ludovico Einaudi
-        audio_base:                     //youtube.com
-        cover_image:                    /assets/audio/cover/default/placeholder-blue.jpg
-        audio_fade:                     true
-        audio_single:                   false
-        repeat:                         false
-        shuffle:                        false
-
-      # ------------------------------------------------------------------------
-      # TITLE settings (songs)
-      # Nuvole Bianche (Live at The Steve Jobs Theatre, 2019)
-      items:
-
-        # title 01
-        - item:
-          enabled:                      true
-          <<:                           *album_einaudi_yt
-          title:                        Nuvole Bianche (White Clauds)
-          audio:                        watch?v=VUCI-1vIbUo
-          rating:                       4
-          start:                        "00:00:40"                              # false | timestamp
-          end:                          false                                   # false | timestamp          
-          audio_info:                   //youtube.com/watch?v=VUCI-1vIbUo
-          cover_image:                  //img.youtube.com/vi/Htk5IuW5JHE/maxresdefault.jpg
-          duration:                     "00:06:26"
-
-        # title 02
-        # I Giorni (Live at The Royal Albert Hall): https://www.youtube.com/watch?v=Htk5IuW5JHE
-        - item:
-          enabled:                      true
-          <<:                           *album_einaudi_yt
-          title:                        I Giorni (The Days)
-          audio:                        watch?v=Htk5IuW5JHE
-          rating:                       4
-          start:                        "00:00:10"                              # false | timestamp
-          end:                          false                                   # false | timestamp          
-          audio_info:                   //youtube.com/watch?v=Htk5IuW5JHE
-          cover_image:                  //img.youtube.com/vi/Htk5IuW5JHE/maxresdefault.jpg
-          duration:                     "00:05:54"
-
-    # --------------------------------------------------------------------------
     # Olivia Dean
     # https://www.youtube.com/playlist?list=PL1dfVf_Yq5rGGTKx4Fi5PwX5TfPBXNP8p
     #

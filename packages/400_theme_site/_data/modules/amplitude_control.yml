@@ -124,41 +124,15 @@ settings:
       source:                           video
 
       # ------------------------------------------------------------------------
+      # PRIVACY settings
+      #
+      privacy_enhanced:                 true                                    # enable|disable privacy-enhanced host 'youtube-nocookie.com'
+
+      # ------------------------------------------------------------------------
       # PLAYLIST settings
       #      
       playlist:
         name:                           olivia_dean_yt
-
-      # ------------------------------------------------------------------------
-      # PLUGIN settings
-      #
-      plugin_manager:
-        enabled:                        true
-        plugins:                        [ ytp ]
-
-    # --------------------------------------------------------------------------
-    # LARGE player, Ludovico Einaudi
-    # --------------------------------------------------------------------------
-    #
-    - player:
-
-      # ------------------------------------------------------------------------
-      # GENERAL settings
-      #     
-      enabled:                          true
-
-      # ------------------------------------------------------------------------
-      # PLAYER settings
-      #
-      id:                               einaudi_yt_large
-      type:                             large
-      source:                           video
-
-      # ------------------------------------------------------------------------
-      # PLAYLIST settings
-      #
-      playlist:
-        name:                           ludovico_einaudi_yt
 
       # ------------------------------------------------------------------------
       # PLUGIN settings
