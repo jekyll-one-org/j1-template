@@ -1,0 +1,334 @@
+////
+Update Amplitude API manual #2
+--------------------------------------------------------------------------------
+MOVED sub-document. The section "Configuration (J1 Template)" (added by
+update series 1 of this manual) was moved unchanged from the
+master document amplitude-api.adoc into this sub-document, following the
+document structure of the SwiperJS API manual (swiper-api.adoc). The
+content below -- including the original #1 change comment -- is
+byte-identical to the moved master document portion.
+
+Update Amplitude API manual #1
+--------------------------------------------------------------------------------
+Added a complete NEW top-level section "Configuration" that documents the
+J1 side of the module. The previous manual only covered the (vendor)
+Amplitude API and jumped straight to the low-level HTML elements. Beginners
+had no place that explains:
+
+  * the three YAML configuration files and their merge order
+    (defaults/amplitude.yml -> amplitude_control.yml -> amplitude_media.yml),
+  * how to place a player on a page (amplitude:: block extension),
+  * the player settings (id, type, source, playlist, plugin_manager),
+  * how playlists, albums and titles (items) are configured,
+  * the YAML anchor/merge-key pattern (&album / <<: *album) used by
+    the media file.
+
+All keys, values and defaults below were verified against the shipped
+files amplitude.yml, amplitude_control.yml, amplitude_media.yml and
+the generated HTML portion amplitude.html.
+--------------------------------------------------------------------------------
+////
+
+[role="mt-5"]
+[[api-config]]
+== Configuration (J1 Template)
+
+You do *not* need to write any HTML or JavaScript to use an Amplitude
+player on a J1 page. The whole player is described in *YAML
+configuration files*, and the J1 build creates the HTML and the
+JavaScript for you. This section explains where the configuration
+lives and what the individual settings do.
+
+[role="mt-4"]
+[[api-config-files]]
+=== Configuration Files
+
+The module reads its configuration from *three* YAML files. Each file
+has its own job:
+
+[cols="4a,8a", options="header", width="100%", role="table-striped table-responsive"]
+|===
+|File |Purpose
+
+|`_data/modules/defaults/amplitude.yml`
+|*Default settings* for the module. This file belongs to the template.
+Do not change it -- everything in here can be overwritten by the next
+two files.
+
+|`_data/modules/amplitude_control.yml`
+|*Your players.* Here you define which players exist on your site: the
+unique `id` of every player, its `type` (mini, compact or large), the
+playlist it plays, and optional per-player settings.
+
+|`_data/modules/amplitude_media.yml`
+|*Your music.* Here you define the playlists: the album data (name,
+artist, cover image) and the individual titles (songs) with their audio
+files.
+
+|===
+
+The three files are merged into one configuration at build time. The
+merge order is always:
+
+....
+defaults  ->  amplitude_control.yml  ->  per-player settings
+(template)    (your players)             (one player entry)
+....
+
+A setting you write for a single player wins over the module defaults.
+If you do not set a value, the default from `defaults/amplitude.yml`
+is used. This way your configuration files stay short: you only write
+what is *different* from the defaults.
+
+[NOTE]
+====
+The HTML for all enabled players is generated into *one* data file
+(`assets/data/amplitude.html`) when the site is built. When a page with
+a player is opened, the J1 module loads the HTML portion for that
+player automatically in the background (using AJAX). You never have to
+copy or edit this generated HTML yourself.
+====
+
+[role="mt-4"]
+[[api-config-page]]
+=== Add a Player to a Page
+
+Two small steps put a player on a page:
+
+. Load the module by adding `amplitudejs` to the `resources` list in
+  the *front matter* of the page.
+. Place the player in the *content* using the AsciiDoc block extension
+  `amplitude::` followed by the player `id` from
+  `amplitude_control.yml`.
+
+[source, asciidoc]
+----
+---
+title:      My Music Page
+resources:  [ amplitudejs ]
+---
+
+Listen to the album here:
+
+amplitude::emancipator_compact[role="mb-4"]
+----
+
+The name after `amplitude::` must match the `id` of an *enabled*
+player in `amplitude_control.yml` -- in this example the player
+`emancipator_compact`.
+
+[role="mt-4"]
+[[api-config-players]]
+=== Player Settings (amplitude_control.yml)
+
+Every player is one entry in the `settings.players` list. A minimal
+player needs only four settings: `enabled`, `id`, `type` and the name
+of the playlist it should play.
+
+[source, yaml]
+----
+settings:
+  players:
+
+    - player:
+      enabled:                          true
+      id:                               emancipator_compact
+      type:                             compact
+      playlist:
+        name:                           emancipator
+----
+
+A player for *YouTube* titles needs two more settings: the audio
+`source` is set to `video`, and the plugin manager loads the J1
+YouTube plugin `ytp`:
+
+[source, yaml]
+----
+    - player:
+      enabled:                          true
+      id:                               olivia_dean_yt_large
+      type:                             large
+      source:                           video
+      privacy_enhanced:                 true
+      playlist:
+        name:                           olivia_dean_yt
+      plugin_manager:
+        enabled:                        true
+        plugins:                        [ ytp ]
+----
+
+[cols="3a,3a,6a", options="header", width="100%", role="table-striped table-responsive"]
+|===
+|Setting |Values (default) |Description
+
+|`enabled`
+|`true` \| `false` (`false`)
+|Turns the player on or off. A disabled player is not generated and
+cannot be placed on a page.
+
+|`id`
+|string (no default)
+|*Unique* name of the player. This id is used on the page
+(`amplitude::{id}[]`) and identifies the player instance internally.
+If you place several players on your site, every player needs its own
+id.
+
+|`type`
+|`mini` \| `compact` \| `large` (`compact`)
+|The player design. *Mini* shows only the basic controls, *compact*
+adds the cover image and a fold-out playlist, *large* shows cover,
+controls and playlist side by side.
+
+|`source`
+|`audio` \| `video` (`audio`)
+|Where the sound comes from. `audio` plays audio files (for example
+MP3) directly from your web server. `video` plays the audio track of
+YouTube videos and requires the `ytp` plugin (see below).
+
+|`privacy_enhanced`
+|`true` \| `false` (`true`)
+|Only used for YouTube players. When enabled, the hidden YouTube
+player is loaded from the privacy-enhanced host
+`youtube-nocookie.com` instead of `youtube.com`.
+
+|`playlist.name`
+|string (no default)
+|The name of the playlist this player plays. The name must match the
+`name` of a playlist in `amplitude_media.yml`.
+
+|`plugin_manager.enabled`
+|`true` \| `false` (`false`)
+|Loads additional plugins for this player. Currently used for the
+YouTube plugin `ytp`.
+
+|`plugin_manager.plugins`
+|array (`[]`)
+|The list of plugins to load. At the moment only `[ ytp ]` is
+supported.
+
+|===
+
+[role="mt-4"]
+[[api-config-media]]
+=== Playlists and Albums (amplitude_media.yml)
+
+The media file contains all playlists of your site under
+`settings.playlists`. Every playlist has three parts:
+
+* a few *general* settings (`enabled`, `name`),
+* the *album* data shared by all titles (artist, cover image, ...),
+* the list of *items* -- the individual titles (songs).
+
+[source, yaml]
+----
+settings:
+  playlists:
+
+    - playlist:
+      enabled:                          true
+      name:                             emancipator
+
+      album:                            &album_emancipator_music
+        playlist:                       emancipator
+        name:                           Emancipator Music
+        artist:                         Emancipator
+        audio_base:                     /assets/audio/album/emancipator
+        cover_image:                    /assets/audio/cover/default/placeholder-blue.jpg
+
+      items:
+
+        - item:
+          enabled:                      true
+          <<:                           *album_emancipator_music
+          title:                        First Snow
+          rating:                       2
+          start:                        false
+          end:                          false
+          audio:                        FirstSnow.mp3
+          cover_image:                  /assets/audio/cover/emancipator/soon-it-will-be-cold-enough.jpg
+          duration:                     "00:05:12"
+----
+
+[NOTE]
+====
+The two strange-looking lines `&album_emancipator_music` and
+`<<: *album_emancipator_music` are standard YAML shortcuts. The `&`
+line gives the album block a *label* (an anchor), and the `<<: *` line
+*copies* all album settings into a title. This way you write the album
+data only once, and every title automatically knows its album, artist
+and audio folder. A title can still overwrite single values -- for
+example its own `cover_image`.
+====
+
+*Album settings* (shared by all titles of the playlist):
+
+[cols="3a,9a", options="header", width="100%", role="table-striped table-responsive"]
+|===
+|Setting |Description
+
+|`playlist`
+|The name of the playlist the album belongs to. Use the same value as
+the playlist `name` above.
+
+|`name`
+|The name of the album. Shown in the player.
+
+|`artist`
+|The name of the artist. Shown in the player.
+
+|`audio_base`
+|The base folder (or URL) where the audio files are stored. The
+`audio` value of every title is added to this base. For YouTube
+playlists, set the base to `//youtube.com`.
+
+|`cover_image`
+|Path to the (default) album cover image. A title can overwrite this
+with its own image.
+
+|`audio_info`
+|Optional link with more information about the album or artist, for
+example the artist's website.
+
+|===
+
+*Item (title) settings*:
+
+[cols="3a,9a", options="header", width="100%", role="table-striped table-responsive"]
+|===
+|Setting |Description
+
+|`enabled`
+|Turns a single title on or off (`true` \| `false`). A disabled title
+is simply skipped -- handy for testing.
+
+|`title`
+|The name of the title. Shown in the playlist.
+
+|`audio`
+|The audio source of the title. For *native* audio this is the file
+name (added to `audio_base`), for example `FirstSnow.mp3`. For
+*YouTube* titles this is the watch path of the video, for example
+`watch?v=VI0NDsh2b8k`.
+
+|`rating`
+|Star rating of the title as a number, for example `3` for three
+stars. Shown in the playlist if ratings are enabled.
+
+|`start`, `end`
+|Play only a *part* of a title. Set a timestamp in the form
+`"HH:MM:SS"` for the start and/or the end position, or `false` to
+play the full title. Mainly used with YouTube titles, for example to
+skip an intro.
+
+|`audio_info`
+|Optional link with more information about the title, for example the
+YouTube playlist the video belongs to.
+
+|`cover_image`
+|Cover image for this title. Overwrites the album `cover_image`.
+
+|`duration`
+|The play time of the title in the form `"HH:MM:SS"`. Shown in the
+playlist.
+
+|===

@@ -1,0 +1,69 @@
+[role="mt-5"]
+[[amplitude-api--overview]]
+== Overview
+
+Amplitude turns plain HTML elements into a working audio player. The
+Amplitude *API* is everything you can use to build and control such a
+player:
+
+* *CSS classes* like `amplitude-play` or `amplitude-next` that turn an
+  element into a player control,
+* *data attributes* like `data-amplitude-song-index` that tell a control
+  which song or playlist it belongs to,
+* *methods* like `Amplitude.play()` that you can call from your own
+  JavaScript code, and
+* the *configuration object* passed to `Amplitude.init()` that describes
+  the songs and playlists.
+
+In the J1 Template you usually do *not* use this API directly. Instead,
+you write a few YAML settings and the J1 *amplitude adapter*
+(`~/assets/theme/j1/adapter/js/amplitude.js`) builds the HTML and the
+JavaScript configuration for you. Reading this manual is still useful,
+because all YAML keys and all generated player elements map to the API
+names described in the following sections.
+
+[role="mt-4"]
+[[amplitude-api--overview-players]]
+=== Built-in Players
+
+The J1 Template ships three ready-made player designs. You select the
+design per player with the YAML setting `type` (see section
+<<api-config>>).
+
+[cols="3a,9a", options="header", width="100%", role="table-striped rtable"]
+|===
+|Player |Description
+
+|`Mini`
+|The smallest design. Shows only the basic controls (play/pause,
+previous, next, progress). Use it when space is limited, for example in
+a sidebar.
+
+|`Compact`
+|The default design. Adds the cover image of the active song and a
+fold-out playlist to the basic controls.
+
+|`Large`
+|The biggest design. Shows the cover image, the controls, and the
+playlist side by side. This is the only design that supports the
+YouTube plugin `ytp`.
+
+|===
+
+[role="mt-4"]
+[[amplitude-api--overview-manual]]
+=== How this Manual is organized
+
+The manual is split into the following parts:
+
+* *Configuration (J1 Template)* -- the YAML files, the player settings,
+  and the playlists. This is the part you need for everyday use.
+* *HTML Elements* -- the CSS classes and data attributes Amplitude
+  understands. You need this part only if you design your own player.
+* *Metadata* -- the display elements that show information about the
+  active song (title, artist, cover image, time, ...).
+* *Methods* -- the JavaScript functions of the global `Amplitude`
+  object for advanced, scripted use.
+* *Notes on Implementation* -- migration notes from the Amplitude
+  project itself.
+* *Examples* -- live players you can try out directly on this page.

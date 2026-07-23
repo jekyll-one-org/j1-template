@@ -1,0 +1,207 @@
+// Update Amplitude API manual #2
+// Added an explicit section anchor for stable cross-references, as used
+// by the sub-documents of the SwiperJS API manual.
+[role="mt-5"]
+[[amplitude-api--examples]]
+== Examples
+
+////
+Update Amplitude API manual #2
+--------------------------------------------------------------------------------
+Fixed two typos in the section introduction ("suports" -> "supports",
+"build-in" -> "built-in"). Original paragraph (deprecated, preserved for
+reference):
+
+The J1 Template suports audio files, e.g. mp3, using *custom players*
+based on *Amplitude*. Three types of AmplitudeJS players are build-in for
+the J1 template system:
+--------------------------------------------------------------------------------
+////
+
+The J1 Template supports audio files, e.g. mp3, using *custom players*
+based on *Amplitude*. Three types of AmplitudeJS players are built-in for
+the J1 template system:
+
+* *Mini* Player
+* *Compact* Player (default)
+* *Large* Player
+
+[role="mt-4"]
+[NOTE]
+====
+
+////
+Update Amplitude API manual #2
+--------------------------------------------------------------------------------
+Fixed a grammar error ("player ... are" -> "players ... are") and
+simplified the wording of the NOTE. Original text (deprecated, preserved
+for reference):
+
+Amplitude player for the J1 Template are mobile-friendly. Instead of
+clicking on the appropriate elements, touch events are applied to all
+mobile devices. The color scheme used matches the look and feel of the
+template to preserve the page design.
+--------------------------------------------------------------------------------
+////
+
+Amplitude players for the J1 Template are mobile-friendly. On mobile
+devices, touch events are used instead of mouse clicks -- all controls
+work by tapping. The color scheme of the players matches the look and
+feel of the template to preserve the page design.
+====
+
+[role="mt-5"]
+=== Native player
+
+The examples below use only the *built-in HTML5 audio engine* of
+your browser. The audio file (e.g. an MP3) is loaded directly from the
+web server. No external service is involved. This is the simplest and
+most reliable way to add audio to a J1 page. Use a *native* player when
+you host the audio file yourself.
+
+[role="mt-4"]
+==== Mini player
+
+In the context of complex components on a web page, like an audio player,
+a mini player refers to a minimized version of full players. It typically
+offers basic playback controls, such as pause, play, and
+volume adjustment, while taking up less screen space.
+
+.Emancipator · From Dusk To Dawn
+amplitude::emancipator_mini[role="mb-4"]
+
+Mini players are beneficial when you want to listen to audio in the
+background without dedicating the entire screen to the player. They
+are commonly found on music streaming services, podcast platforms, and
+websites with embedded audio content.
+
+[role="mt-4"]
+==== Compact player
+
+The design of a *Compact player* is an efficient approach that involves
+condensing the player controls and display elements into a smaller area.
+It allows the audio player to fit neatly within the web page's layout without
+overwhelming or dominating the content around it.
+
+.Emancipator · From Dusk To Dawn
+amplitude::emancipator_compact[role="mb-4"]
+
+The player aims to balance functionality and space efficiency, ensuring users
+can easily access and control the audio playback without sacrificing too much
+screen space or placing  multiple players side-by-side.
+
+[role="mt-4"]
+==== Large player
+
+The *Large player* is the full-featured Amplitude player. It shows the
+album cover at full size, displays a scrollable playlist next to the
+controls, and offers every button (play, pause, previous, next,
+shuffle, repeat, skip, volume) directly on the page. Use it whenever
+the player is the *main content* of a page or section.
+
+.Emancipator · From Dusk To Dawn
+amplitude::emancipator_large[role="mb-4"]
+
+The large design provides the full functionality of an audio player to ensure
+users can easily control audio playback. The player behaves similarly to a
+compact player, but all controls are displayed in a single window; there is
+no need to open other widgets.
+
+
+[role="mt-5"]
+=== Player over YouTube
+
+The examples below show how to play the *audio* track of a *YouTube
+video* through an Amplitude player. The J1 Template provides a small
+plugin called *ytp* that extends the standard Amplitude API so it can
+read YouTube as if it were a normal audio file. Only the *audio* part
+is played -- the YouTube video itself is hidden.
+
+[role="mt-4 mb-5"]
+[NOTE]
+====
+The YouTube plugin is only available inside the J1 Template under the
+name *ytp*. At the moment it works *only* with the *Large* player.
+
+Behind the scenes, the plugin loads a hidden YouTube `<iframe>` player
+and forwards every button click (play, pause, next, ...) to it. From
+your point of view, the player looks and feels exactly like a normal
+audio player with a playlist -- you do not have to learn the YouTube
+API to use it.
+====
+
+////
+claude - Update Amplitude API manual #1
+--------------------------------------------------------------------------------
+Extended the ytp introduction by two facts verified in the sources:
+
+  * privacy: the hidden YT iframe is served from the privacy-enhanced
+    host youtube-nocookie.com when `privacy_enhanced` is enabled
+    (default: true), see ytp.js `privacyEnhancedHost`;
+  * partial playback: the `start` and `end` timestamps of a title
+    (amplitude_media.yml) are evaluated by the plugin, see ytp.js
+    `timestamp2seconds` conversion of `activeSong.start|end`.
+--------------------------------------------------------------------------------
+////
+
+Two details of the plugin are worth knowing:
+
+* *Privacy:* by default, the hidden YouTube player is loaded from the
+  privacy-enhanced host `youtube-nocookie.com`. This host does not
+  place tracking cookies before a video is played. You can control
+  this per player with the setting `privacy_enhanced` in
+  `amplitude_control.yml`.
+* *Partial playback:* for every YouTube title you can set the
+  timestamps `start` and `end` in `amplitude_media.yml` to play only
+  a part of the video -- for example to skip an intro or cut off an
+  outro.
+
+////
+claude - Update Amplitude API manual #1
+--------------------------------------------------------------------------------
+Replaced the stale YouTube example blocks. The manual referenced the
+players `bea_yt_large` and `diana_krall_yt_large`, but neither player
+exists in amplitude_control.yml, and no matching playlists exist in
+amplitude_media.yml -- the amplitude:: blocks could not render. The
+current configuration ships ONE YouTube player: `olivia_dean_yt_large`
+(type: large, source: video, plugin: ytp) playing the playlist
+`olivia_dean_yt` (album "The Art Of Loving" by Olivia Dean). The example
+now uses that player and shows the matching control configuration so
+readers can connect the page block with the YAML.
+--------------------------------------------------------------------------------
+////
+
+[role="mt-4"]
+==== Olivia Dean
+
+Olivia Dean is a British soul and pop singer from London. Her warm
+voice and honest songs about love and everyday life made her one of
+the most popular young British artists of the last years. The playlist
+below plays titles of her album *The Art Of Loving* directly from
+YouTube -- only the audio track is heard, the video stays hidden.
+
+.Olivia Dean · The Art Of Loving · YouTube
+amplitude::olivia_dean_yt_large[role="mb-4"]
+
+The player above is defined in `amplitude_control.yml` as follows:
+
+[source, yaml]
+----
+    - player:
+      enabled:                          true
+      id:                               olivia_dean_yt_large
+      type:                             large
+      source:                           video
+      privacy_enhanced:                 true
+      playlist:
+        name:                           olivia_dean_yt
+      plugin_manager:
+        enabled:                        true
+        plugins:                        [ ytp ]
+----
+
+The playlist `olivia_dean_yt` is defined in `amplitude_media.yml`. Note
+the YouTube-specific values: the album `audio_base` is `//youtube.com`,
+every title's `audio` value is the watch path of the video (for example
+`watch?v=VI0NDsh2b8k`), and the `start` and `end` timestamps limit the
+playback of each title.

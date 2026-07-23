@@ -1,0 +1,148 @@
+---
+title:                                  Amplitude
+# title_extention:                      Custom Audio Players
+# tagline:                              Custom Audio Players
+title_extention:                        API
+tagline:                                Programming Interface
+
+date:                                   2026-05-07
+#last_modified:                         2026-01-01
+
+description: >
+                                        Amplitude is a JavaScript library to control
+                                        the design of audio media elements on web pages.
+                                        The concept allows designers to fully control
+                                        the look and feel of audio players without deep
+                                        scripting knowledge.
+keywords: >
+                                        open source, free, template, jekyll, jekyllone, web,
+                                        sites, static, jamstack, bootstrap, html, html5, audio,
+                                        amplitude
+
+categories:                             [ Manual ]
+tags:                                   [ API, Amplitude ]
+
+image:
+  path:                                 /assets/image/module/attic/1920x1280/alexey-ruban.jpg
+  width:                                1920
+  height:                               1280
+
+regenerate:                             false
+personalization:                        true
+permalink:                              /pages/public/manuals/amplitude/amplitude_api/
+
+resources:                              [ amplitudejs ]
+resource_options:
+  - toccer:
+      collapseDepth:                    2
+  - attic:
+      slides:
+        - url:                          /assets/image/module/attic/1920x1280/alexey-ruban.jpg
+          alt:                          Photo by Alexey Ruban on Unsplash
+          badge:
+            type:                       unsplash
+            author:                     Alexey Ruban
+            href:                       //unsplash.com/de/@intelligenciya
+---
+
+// Page Initializer
+// =============================================================================
+// Enable the Liquid Preprocessor
+:page-liquid:
+
+// Attribute settings for page content control (e.g includes)
+//
+:includedir:                            _includes
+:tabledir:                              _includes/tables
+:documentdir:                           _includes/documents
+
+// Set (local) page attributes here
+// -----------------------------------------------------------------------------
+// :page--attr:                         <attr-value>
+:time-num--string:                      15-60
+:time-en--string:                       Minutes
+:time-en--description:                  to read
+:time-de--string:                       Minuten
+:time-de--description:                  Lesezeit
+
+//  Load Liquid procedures
+// -----------------------------------------------------------------------------
+{% capture load_attributes %}themes/{{site.template.name}}/procedures/global/attributes_loader.proc{%endcapture%}
+
+// Load page attributes
+// -----------------------------------------------------------------------------
+{% include {{load_attributes}} scope="global" %}
+
+// Page content
+// -----------------------------------------------------------------------------
+// See: https://521dimensions.com/open-source/Amplitude/docs
+// See: https://github.com/mediaelement/mediaelement-plugins
+// See: https://github.com/serversideup/Amplitude/
+
+[role="dropcap"]
+The HTML5 audio tag is an easy way to add music or other sounds to
+a web page. The downside is that the *browser* draws the player buttons
+(play, pause, volume, ...). Each browser draws them differently, and you
+can not change how they look. On a designed web page, the default audio
+player often looks out of place.
+
+Amplitude solves that problem. It hides the browser's built-in player
+and lets *you* build your own player out of plain HTML and CSS. You write
+normal HTML elements (a `<div>`, a `<span>`, a `<button>`, ...), give
+them special CSS classes like `amplitude-play`, and Amplitude wires
+everything up for you. No deep JavaScript knowledge is needed.
+
+The J1 Template ships three ready-made Amplitude players (Mini, Compact,
+Large) so you can drop a player into any page without writing any code at
+all. The template includes *AmplitudeJS version 5.3.2*. If you want to
+design your own player, the rest of this manual lists every CSS class and
+JavaScript method Amplitude supports.
+
+[role="mb-4"]
+mdi:clock-time-five-outline[24px, md-gray mr-2]
+*15-60 Minutes* to read
+
+[NOTE]
+====
+The Amplitude API documentation pages are based on *AmplitudeJS version
+5.3.2* as shipped with the current J1 template version 2026.x. The idea
+of providing this documentation is *not* to simply copy the original
+Amplitude pages as duplicates. For better readability and usability, all
+pages are restructured and enhanced by code examples or improved
+description texts.
+====
+
+// Include sub-documents
+// -----------------------------------------------------------------------------
+
+////
+Update Amplitude API manual #2
+--------------------------------------------------------------------------------
+RESTRUCTURED the manual following the document structure of the SwiperJS
+API manual (swiper-api.adoc) as reference: a slim master document (this
+file) that includes numbered sub-documents from {documentdir}
+(_includes/documents).
+
+The former inline sections were MOVED (content unchanged, except for the
+changes tagged "claude - Update Amplitude API manual #2" inside the
+sub-documents) as follows:
+
+  * NEW ................................ 000_amplitude_api_intro.asciidoc
+    (new "Overview" section, modeled on 000_swiper_api_intro.asciidoc)
+  * == Configuration (J1 Template) ..... 100_amplitude_configuration.asciidoc
+  * == HTML Elements ................... 110_amplitude_html_elements.asciidoc
+  * == Metadata ........................ 120_amplitude_metadata.asciidoc
+  * == Methods ......................... 130_amplitude_methods.asciidoc
+  * == Notes on Implementation ......... 140_amplitude_implementation_notes.asciidoc
+  * == Examples ........................ 150_amplitude_examples.asciidoc
+
+--------------------------------------------------------------------------------
+////
+
+include::{documentdir}/000_amplitude_api_intro.asciidoc[]
+include::{documentdir}/100_amplitude_configuration.asciidoc[]
+include::{documentdir}/110_amplitude_html_elements.asciidoc[]
+include::{documentdir}/120_amplitude_metadata.asciidoc[]
+include::{documentdir}/130_amplitude_methods.asciidoc[]
+include::{documentdir}/140_amplitude_implementation_notes.asciidoc[]
+include::{documentdir}/150_amplitude_examples.asciidoc[]
