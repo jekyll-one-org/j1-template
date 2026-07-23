@@ -67,6 +67,7 @@
       href:                             /pages/public/tour/site_search/
       icon:                             magnify
 
+
 # ------------------------------------------------------------------------------
 # Menu LEARN
 #
@@ -176,17 +177,100 @@
               icon:                     calculator-variant-outline
               target:                   _blank
 
+
 # ------------------------------------------------------------------------------
 # TopLevel item FEATURES
 #
 # - item:                                 Features
 #   href:                                 /#panel_home_intro
 
+
 # ------------------------------------------------------------------------------
 # TopLevel item BLOG
 #
 # - item:                                 Blog
 #   href:                                 /#home_news_panel
+
+
+# ------------------------------------------------------------------------------
+# Menu MANUAL
+#
+- item:                                 Manual
+  sublevel:
+
+  # - title:                            Where to go
+  #   href:                             /pages/public/manuals/where_to_go/
+  #   icon:                             foot-print
+
+    # --------------------------------------------------------------------------
+    # Integrations
+    #
+    - title:                            Integrations
+      icon:                             alpha-i-box
+      dropdown:
+
+        - title:                        YouTube iFrame API
+          href:                         /pages/public/manual/youtube/iframe_api/
+          icon:                         video
+
+        - title:                        VideoJS
+          icon:                         video
+          dropdown:
+
+          - title:                      Programming Interface
+            href:                       /pages/public/manual/integrations/videojs/api/
+            icon:                       video
+
+          - title:                      Plugins
+            href:                       /pages/public/manual/integrations/videojs/plugins/
+            icon:                       video
+
+
+    # --------------------------------------------------------------------------
+    # Modules
+    #
+    - title:                            Modules
+      icon:                             alpha-m-box
+      dropdown:
+
+        - title:                        J1 VideoPlayer
+          href:                         /pages/public/manuals/videoplayer/videoplayer_api/
+          icon:                         video
+
+        - title:                        Amplitude
+          href:                         /pages/public/manuals/amplitude/amplitude_api/
+          icon:                         speaker
+
+        - title:                        Swiper
+          href:                         /pages/public/manual/module/swiper_api/
+          icon:                         view-carousel 
+
+        - title:                        Galleries
+          icon:                         view-dashboard-variant
+          dropdown:
+
+            - title:                    Masonry
+              href:                     /pages/public/manual/modules/gallery/masonry_api/
+              icon:                     view-dashboard-variant
+
+            - title:                    Justified Gallery
+              href:                     /pages/public/manual/modules/gallery/justfied_gallery_api/
+              icon:                     view-dashboard-variant
+
+        - title:                        Lightboxes
+          icon:                         alpha-l-box
+          dropdown:
+
+            - title:                    Lightbox v3
+              href:                     /pages/public/manual/module/lightboxes/lightbox_v3_api/
+              icon:                     flashlight
+            - title:                    PhotoSwipe V5
+              href:                     /pages/public/manual/module/lightboxes/photoswipe_api/
+              icon:                     flashlight
+            - title:                    lightGallery V2
+              href:                     /pages/public/manual/module/lightboxes/lightgallery_api/
+              icon:                     flashlight
+
 
 # ------------------------------------------------------------------------------
 # Menu BLOG
@@ -207,66 +291,21 @@
       href:                             /pages/public/blog/navigator/archive/allview/
       icon:                             archive
 
-# ------------------------------------------------------------------------------
-# Menu MANUAL
-#
-- item:                                 Manual
-  sublevel:
-
-  # - title:                            Where to go
-  #   href:                             /pages/public/manuals/where_to_go/
-  #   icon:                             foot-print
-
-    # --------------------------------------------------------------------------
-    # Modules
-    #
-    - title:                            Modules
-      icon:                             alpha-m-box
-      dropdown:
-
-        - title:                        J1 VideoPlayer
-          href:                         /pages/public/manuals/videoplayer/videoplayer_api/
-          icon:                         video
-
-        - title:                        Amplitude
-          href:                         /pages/public/manuals/amplitude/amplitude_api/
-          icon:                         speaker
-
-        - title:                        Swiper
-          href:                         /pages/public/manual/module/carousel/swiper/
-          icon:                         view-carousel 
-
-    #  - title:                         Galleries
-    #    href:                          /pages/public/manuals/modules/gallery/
-    #    icon:                          view-dashboard-variant
-
-        - title:                        Lightboxes
-          icon:                         alpha-l-box
-          dropdown:
-
-            - title:                    Lightbox v3
-              href:                     /pages/public/manual/module/lightboxes/lightbox/
-              icon:                     flashlight
-            - title:                    PhotoSwipe V5
-              href:                     /pages/public/manual/module/lightboxes/photoswipe_api/
-              icon:                     flashlight
-            - title:                    lightGallery V2
-              href:                     /pages/public/manual/module/lightboxes/lightgallery/
-              icon:                     flashlight
 
 # ------------------------------------------------------------------------------
 # Menu TEST
 #
-- item:                                 Test
-  sublevel:
+# - item:                                 Test
+#   sublevel:
 
-    - title:                            Video player
-      href:                             /pages/public/tools/test/videoPlayer/
-      icon:                             video
+#     - title:                            Video player
+#       href:                             /pages/public/tools/test/videoPlayer/
+#       icon:                             video
 
-    - title:                            VideoJS Playlist Test Tool
-      href:                             /pages/public/tools/test/videojs-playlist/
-      icon:                             video
+#     - title:                            VideoJS Playlist Test Tool
+#       href:                             /pages/public/tools/test/videojs-playlist/
+#       icon:                             video
+
 
 # ------------------------------------------------------------------------------
 # Menu CLAUDE AI
@@ -289,6 +328,7 @@
     - title:                            Knowledge Base Help
       icon:                             information-variant
       href:                             /pages/public/tools/claudeAI/kbHelp/
+
 
 # ------------------------------------------------------------------------------
 # Menu ONLINE
@@ -457,6 +497,7 @@
           target:                       _blank
           icon:                         regex
 
+
 # ------------------------------------------------------------------------------
 # Menu Themes
 #
@@ -472,6 +513,7 @@
     - bootswatch_themes:                enabled
       title:                            Bootswatch
       icon:                             bootstrap
+
 
 # ------------------------------------------------------------------------------
 # Menu ABOUT
