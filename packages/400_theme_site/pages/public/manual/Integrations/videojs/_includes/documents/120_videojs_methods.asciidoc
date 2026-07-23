@@ -1,0 +1,1003 @@
+== Player Methods
+
+Available methods to manipulate an already existing player (instance).
+For the examples below, the instance (variable) used for the player
+is *vjsPlayer*.
+
+[role="mt-4"]
+[[methods-addRemoteTextTrack]]
+=== addRemoteTextTrack(options)
+
+Add a remote text track.
+
+[role="mt-4"]
+==== Parameters
+
+[cols=",,,", width="100%", options="header", role="rtable mt-4 mb-5"]
+|===
+|name |Type |Required |Description
+
+|options
+|Object
+|yes
+|Options for remote text track
+
+|===
+
+[role="mt-4"]
+[[methods-addTextTrack]]
+=== addTextTrack(kind, label, language)
+// //w3.org/html/wg/drafts/html/master/embedded-content-0.html#dom-media-addtexttrack
+
+Add a text track In addition to the W3C settings we allow adding
+additional info through options.
+
+[role="mt-4"]
+==== Parameters
+
+[cols=",,,", options="header", role="rtable mt-4 mb-5"]
+|===
+|name |Type |Required |Description
+
+|kind |String |yes |Captions, subtitles, chapters, descriptions, or metadata
+|label |String |no |Optional label
+|language |String |no |Optional language
+
+|===
+
+[role="mt-4"]
+[[methods-aspectRatio]]
+=== aspectRatio(ratio)
+
+Get/Set the aspect ratio.
+
+[role="mt-4"]
+==== Parameters
+
+[cols=",,,", options="header", role="rtable mt-4 mb-5"]
+|===
+|name |Type |Required |Description
+
+|ratio |String |no |Aspect ratio for player
+
+|===
+
+[role="mt-4"]
+[[methods-autoplay]]
+==== autoplay(value)
+
+Get or set the autoplay attribute.
+
+[role="mt-4"]
+==== Parameters
+
+[cols=",,,", options="header", role="rtable mt-4 mb-5"]
+|===
+|name |Type |Required |Description
+
+|value |Boolean |yes |Boolean to determine if video should autoplay
+
+|===
+
+
+[role="mt-4"]
+[[methods-buffered]]
+=== buffered()
+
+[[bufferedDescription]]
+Get a TimeRange object with the times of the video that have been
+downloaded If you just want the percent of the video that's been
+downloaded, use bufferedPercent.
+
+[source, js]
+----
+// Number of different ranges of time have been buffered. Usually 1.
+numberOfRanges = bufferedTimeRange.length,
+// Time in seconds when the first range starts. Usually 0.
+firstRangeStart = bufferedTimeRange.start(0),
+// Time in seconds when the first range ends
+firstRangeEnd = bufferedTimeRange.end(0),
+// Length in seconds of the first time range
+firstRangeLength = firstRangeEnd - firstRangeStart;
+----
+
+[role="mt-4"]
+[[methods-bufferedEnd]]
+==== bufferedEnd()
+
+Get the ending time of the last buffered time range This is used in the
+progress bar to encapsulate all time ranges.
+
+[role="mt-4"]
+[[methods-bufferedPercent]]
+=== bufferedPercent()
+
+[[bufferedPercentDescription]]
+Get the percent (as a decimal) of the video that's been downloaded
+
+[source, js]
+----
+var howMuchIsDownloaded = vjsPlayer.bufferedPercent();
+----
+
+0 means none, 1 means all. (This method isn't in the HTML5 spec, but
+it's very convenient)
+
+
+[role="mt-4"]
+[[methods-canPlayType]]
+==== canPlayType(type)
+
+Check whether the player can play a given mimetype
+
+[role="mt-4"]
+==== Parameters
+
+[cols=",,,", options="header", role="rtable mt-4 mb-5"]
+|===
+|name |Type |Required |Description
+
+|type |String |yes |The mimetype to check
+
+|===
+
+
+[role="mt-4"]
+[[methods-controls]]
+=== controls(bool)
+
+Get or set whether or not the controls are showing.
+
+[role="mt-4"]
+==== Parameters
+
+[cols=",,,", options="header", role="rtable mt-4 mb-5"]
+|===
+|name |Type |Required |Description
+
+|bool |Boolean |yes |Set controls to showing or not
+
+|===
+
+
+[role="mt-4"]
+[[methods-createEl]]
+=== createEl()
+
+Create the component's DOM element.
+
+
+[role="mt-4"]
+[[methods-currentSrc]]
+=== currentSrc()
+
+Returns the fully qualified URL of the current source value e.g.
+`//mysite.com/video.mp4` Can be used in conjuction with
+*currentType* to assist in rebuilding the current source object.
+
+
+[role="mt-4"]
+[[methods-currentTime]]
+=== currentTime(seconds)
+
+Get or set the current time (in seconds).
+
+[source, js]
+----
+// get
+var whereYouAt = vjsPlayer.currentTime();
+// set
+vjsPlayer.currentTime(120); // 2 minutes into the video
+----
+
+[role="mt-4"]
+==== Parameters
+
+[cols=",,,", options="header", role="rtable mt-4 mb-5"]
+|===
+|name |Type |Required |Description
+
+|seconds |Number\|String |yes |The time to seek to
+
+|===
+
+
+[role="mt-4"]
+[[methods-currentType]]
+=== currentType()
+
+Get the current source type e.g. video/mp4 This can allow you rebuild
+the current source object so that you could load the same source and
+tech later
+
+
+[role="mt-4"]
+[[methods-dimension]]
+=== dimension(dimension, value)
+
+Get/set dimension for player.
+
+[role="mt-4"]
+==== Parameters
+
+[cols=",,,", options="header", role="rtable mt-4 mb-5"]
+|===
+|name |Type |Required |Description
+
+|dimension |String |yes |Either width or height
+|value |Number |no |Value for dimension
+
+|===
+
+[role="mt-4"]
+[[methods-dispose]]
+=== dispose()
+
+Destroys the video player and does any necessary cleanup.
+
+[source, js]
+----
+vjsPlayer.dispose();
+----
+
+This is especially helpful if you are dynamically adding and removing
+videos to/from the DOM.
+
+
+[role="mt-4"]
+[[methods-duration]]
+=== duration(seconds)
+
+Get the length in time of the video in seconds.
+
+[source, js]
+----
+var lengthOfVideo = vjsPlayer.duration();
+----
+
+[NOTE] 
+====
+The video must have started loading before the duration can be
+known, and in the case of Flash, may not be known until the video starts
+playing.
+====
+
+[role="mt-4"]
+==== Parameters
+
+[cols=",,,", options="header", role="rtable mt-4 mb-5"]
+|===
+|name |Type |Required |Description
+
+|seconds |Number |yes |Duration when setting
+
+|===
+
+[role="mt-4"]
+[[methods-ended]]
+=== ended()
+
+Returns whether or not the player is in the "ended" state.
+
+
+[role="mt-4"]
+[[methods-enterFullWindow]]
+=== enterFullWindow()
+
+When fullscreen isn't supported we can stretch the video container to as
+wide as the browser will let us.
+
+
+[role="mt-4"]
+[[methods-error]]
+=== error(err)
+
+Set or get the current MediaError.
+
+[role="mt-4"]
+==== Parameters
+
+[cols=",,,", options="header", role="rtable mt-4 mb-5"]
+|===
+|name |Type |Required |Description
+
+|err |* |yes |A MediaError or a String/Number to be turned into a MediaError
+
+|===
+
+[role="mt-4"]
+[[methods-exitFullscreen]]
+=== exitFullscreen()
+
+Return the video to its normal size after having been in full screen mode.
+
+[source, js]
+----
+vjsPlayer.exitFullscreen();
+----
+
+[role="mt-4"]
+[[methods-exitFullWindow]]
+=== exitFullWindow()
+
+Exit full window.
+
+
+[role="mt-4"]
+[[methods-fluid]]
+=== fluid(bool)
+
+Add/remove the vjs-fluid class.
+
+[role="mt-4"]
+==== Parameters
+
+[cols=",,,", options="header", role="rtable mt-4 mb-5"]
+|===
+|name |Type |Required |Description
+
+|bool |Boolean |yes |Value of true adds the class, value of false removes the class
+
+|===
+
+
+[role="mt-4"]
+[[methods-fullWindowOnEscKey]]
+=== fullWindowOnEscKey(event)
+
+Check for call to either exit full window or full screen on ESC key.
+
+[role="mt-4"]
+==== Parameters
+
+[cols=",,,", options="header", role="rtable mt-4 mb-5"]
+|===
+|name |Type |Required |Description
+
+|event |String |yes |Event to check for key press
+
+|===
+
+
+[role="mt-4"]
+[[methods-getCache]]
+=== getCache()
+
+Get object for cached values.
+
+
+[[methods-getTagSettings]]
+=== static getTagSettings(tag)
+
+Gets tag settings.
+
+[role="mt-4"]
+==== Parameters
+
+[cols=",,,", options="header", role="rtable mt-4 mb-5"]
+|===
+|name |Type |Required |Description
+
+|tag |Element |yes |The player tag
+
+|===
+
+
+[role="mt-4"]
+[[methods-height]]
+=== height([value])
+
+Get/set player height.
+
+[role="mt-4"]
+==== Parameters
+
+[cols=",,,", options="header", role="rtable mt-4 mb-5"]
+|===
+|name |Type |Required |Description
+
+|value |Number |no |Value for height
+
+|===
+
+
+[role="mt-4"]
+[[methods-init]]
+=== init(tag, options, ready)
+
+Player's constructor function.
+
+[role="mt-4"]
+==== Parameters
+
+[cols=",,,", options="header", role="rtable mt-4 mb-5"]
+|===
+|name |Type |Required |Description
+
+|tag |Element |yes |The original video tag used for configuring options
+|options |Object |no |Player options
+|ready |function |no |Ready callback function
+
+|===
+
+
+[role="mt-4"]
+[[methods-isFullscreen]]
+=== isFullscreen(isFS)
+
+Checks if the player is in fullscreen mode.
+
+[source, js]
+----
+// get
+var fullscreenOrNot = vjsPlayer.isFullscreen();
+// set
+vjsPlayer.isFullscreen(true); // tell the player it's in fullscreen
+----
+
+[NOTE] 
+====
+As of the latest HTML5 spec, isFullscreen is no longer an official
+property and instead document.fullscreenElement is used. But
+isFullscreen is still a valuable property for internal player workings.
+====
+
+[role="mt-4"]
+==== Parameters
+
+[cols=",,,", options="header", role="rtable mt-4 mb-5"]
+|===
+|name |Type |Required |Description
+
+|isFS |Boolean |no |Update the player's fullscreen state
+
+|===
+
+
+[role="mt-4"]
+[[methods-language]]
+=== language(code)
+
+The player's language code NOTE: The language should be set in the
+player options if you want the the controls to be built with a specific
+language. Changing the lanugage later will not update controls text.
+
+[role="mt-4"]
+==== Parameters
+
+[cols=",,,", options="header", role="rtable mt-4 mb-5"]
+|===
+|name |Type |Required |Description
+
+|code |String |yes |The locale string
+
+|===
+
+
+[role="mt-4"]
+[[methods-languages]]
+=== languages()
+
+Get the player's language dictionary Merge every time, because a newly
+added plugin might call videojs.addLanguage() at any time Languages
+specified directly in the player options have precedence
+
+
+[role="mt-4"]
+[[methods-load]]
+=== load()
+
+Begin loading the src data.
+
+
+[role="mt-4"]
+[[methods-loop]]
+=== loop(value)
+
+Get or set the loop attribute on the video element.
+
+[role="mt-4"]
+==== Parameters
+
+[cols=",,,", options="header", role="rtable mt-4 mb-5"]
+|===
+|name |Type |Required |Description
+
+|value |Boolean |yes |Boolean to determine if video should loop
+
+|===
+
+
+[role="mt-4"]
+[[methods-muted]]
+=== muted([muted])
+
+Get the current muted state, or turn mute on or off.
+
+[source, js]
+----
+// get
+var isVolumeMuted = vjsPlayer.muted();
+// set
+vjsPlayer.muted(true); // mute the volume
+----
+
+[role="mt-4"]
+==== Parameters
+
+[cols=",,,", options="header", role="rtable mt-4 mb-5"]
+|===
+|name |Type |Required |Description
+
+|muted |Boolean |no |True to mute, false to unmute
+
+|===
+
+
+[role="mt-4"]
+[[methods-networkState]]
+=== networkState()
+
+Returns the current state of network activity for the element, from the
+codes in the list below.
+
+* NETWORK_EMPTY (numeric value 0) The element has not yet been
+  initialised. All attributes are in their initial states.
+* NETWORK_IDLE (numeric value 1) The element's resource selection
+  algorithm is active and has selected a resource, but it is not actually
+  using the network at this time.
+* NETWORK_LOADING (numeric value 2) The user agent is actively trying to
+  download data.
+* NETWORK_NO_SOURCE (numeric value 3) The element's resource selection
+  algorithm is active, but it has not yet found a resource to use.
+
+
+[role="mt-4"]
+[[methods-pause]]
+=== pause()
+
+Pause the video playback.
+
+[source, js]
+----
+vjsPlayer.pause();
+----
+
+
+[role="mt-4"]
+[[methods-paused]]
+=== paused()
+
+Checks if the player is paused.
+
+[source, js]
+----
+var isPaused = vjsPlayer.paused();
+var isPlaying = !vjsPlayer.paused();
+----
+
+
+[role="mt-4"]
+[[methods-play]]
+=== play()
+
+Start media playback.
+
+[source, js]
+----
+vjsPlayer.play();
+----
+
+
+[role="mt-4"]
+[[methods-playbackRate]]
+=== playbackRate(rate)
+
+Gets or sets the current playback rate. A playback rate of 1.0
+represents normal speed and 0.5 would indicate half-speed playback, for
+instance.
+
+[role="mt-4"]
+==== Parameters
+
+[cols=",,,", options="header", role="rtable mt-4 mb-5"]
+|===
+|name |Type |Required |Description
+
+|rate |Number |yes |New playback rate to set.
+
+|===
+
+
+[role="mt-4"]
+[[methods-poster]]
+=== poster(src)
+
+Get or set the poster image source url.
+
+[source, js]
+----
+// get
+var currentPoster = vjsPlayer.poster();
+// set
+vjsPlayer.poster('//example.com/myImage.jpg');
+----
+
+[role="mt-4"]
+==== Parameters
+
+[cols=",,,", options="header", role="rtable mt-4 mb-5"]
+|===
+|name |Type |Required |Description
+
+|src |String |no |Poster image source URL
+
+|===
+
+
+[role="mt-4"]
+[[methods-preload]]
+=== preload(value)
+
+Get or set the preload attribute.
+
+[role="mt-4"]
+==== Parameters
+
+[cols=",,,", options="header", role="rtable mt-4 mb-5"]
+|===
+|name |Type |Required |Description
+
+|value |Boolean |yes |Boolean to determine if preload should be used
+
+|===
+
+
+[role="mt-4"]
+[[methods-readyState]]
+=== readyState()
+
+Returns a value that expresses the current state of the element with
+respect to rendering the current playback position, from the codes in
+the list below.
+
+* HAVE_NOTHING (numeric value 0) No information regarding the media
+  resource is available.
+
+* HAVE_METADATA (numeric value 1) Enough of the resource has been
+  obtained that the duration of the resource is available.
+
+* HAVE_CURRENT_DATA (numeric value 2) Data for the immediate current
+  playback position is available.
+
+* HAVE_FUTURE_DATA (numeric value 3) Data for the immediate current
+  playback position is available, as well as enough data for the user
+  agent to advance the current playback position in the direction of
+playback.
+
+* HAVE_ENOUGH_DATA (numeric value 4) The user agent estimates that
+  enough data is available for playback to proceed uninterrupted.
+
+
+[role="mt-4"]
+[[methods-remainingTime]]
+=== remainingTime()
+
+Calculates how much time is left.
+
+[source, js]
+----
+var timeLeft = vjsPlayer.remainingTime();
+----
+
+Not a native video element function, but useful.
+
+
+[role="mt-4"]
+[[methods-remoteTextTrackEls]]
+=== remoteTextTrackEls()
+
+Get an array of remote html track elements.
+
+
+[role="mt-4"]
+[[methods-remoteTextTracks]]
+=== remoteTextTracks()
+
+Get an array of remote text tracks.
+
+
+[[methods-removeRemoteTextTrack]]
+=== removeRemoteTextTrack(track)
+
+Remove a remote text track.
+
+[role="mt-4"]
+==== Parameters
+
+[cols=",,,", options="header", role="rtable mt-4 mb-5"]
+|===
+|name |Type |Required |Description
+
+|track |Object |yes |Remote text track to remove
+
+|===
+
+
+[role="mt-4"]
+[[methods-reportUserActivity]]
+=== reportUserActivity(event)
+
+Report user activity.
+
+[role="mt-4"]
+==== Parameters
+
+[cols=",,,", options="header", role="rtable mt-4 mb-5"]
+|===
+|name |Type |Required |Description
+
+|event |Object |yes |Event object
+
+|===
+
+
+[role="mt-4"]
+[[methods-requestFullscreen]]
+=== requestFullscreen()
+
+Increase the size of the video to full screen.
+
+[source, js]
+----
+vjsPlayer.requestFullscreen();
+----
+
+In some browsers, full screen is not supported natively, so it enters
+"full window mode", where the video fills the browser window. In
+browsers and devices that support native full screen, sometimes the
+browser's default controls will be shown, and not the Video.js custom
+skin. This includes most mobile devices (iOS, Android) and older
+versions of Safari.
+
+
+[role="mt-4"]
+[[methods-reset]]
+=== reset()
+
+Reset the player. Loads the first tech in the techOrder, and calls
+*reset* on the tech`.
+
+
+[role="mt-4"]
+[[methods-scrubbing]]
+=== scrubbing(isScrubbing)
+
+Returns whether or not the user is "scrubbing". Scrubbing is when the
+user has clicked the progress bar handle and is dragging it along the
+progress bar.
+
+[role="mt-4"]
+==== Parameters
+
+[cols=",,,", options="header", role="rtable mt-4 mb-5"]
+|===
+|name |Type |Required |Description
+
+|isScrubbing |Boolean |yes |True/false the user is scrubbing
+
+|===
+
+
+[role="mt-4"]
+[[methods-seekable]]
+=== seekable()
+
+Returns the TimeRanges of the media that are currently available for
+seeking to.
+
+
+[role="mt-4"]
+[[methods-seeking]]
+=== seeking()
+
+Returns whether or not the player is in the "seeking" state.
+
+
+[role="mt-4"]
+[[methods-selectSource]]
+=== selectSource(sources)
+
+Select source based on tech-order or source-order Uses source-order
+selection if *options.sourceOrder* is truthy. Otherwise, defaults to
+tech-order selection.
+
+[role="mt-4"]
+==== Parameters
+
+[cols=",,,", options="header", role="rtable mt-4 mb-5"]
+|===
+|name |Type |Required |Description
+
+|sources |Array |yes |The sources for a media asset
+
+|===
+
+
+[role="mt-4"]
+[[methods-src]]
+=== src(source)
+
+The source function updates the video source There are three types of
+variables you can pass as the argument. *URL String*: A URL to the the
+video file. Use this method if you are sure the current playback
+technology (HTML5/Flash) can support the source you provide. Currently
+only MP4 files can be used in both HTML5 and Flash.
+
+[source, js]
+----
+vjsPlayer.src("//example.com/path/to/video.mp4");
+----
+
+_*Source Object (or element):_ * A javascript object containing
+information about the source file. Use this method if you want the
+player to determine if it can support the file using the type
+information.
+
+[source, js]
+----
+vjsPlayer.src({ type: "video/mp4", src: "//example.com/path/to/video.mp4" });
+----
+
+_*Array of Source Objects:_ * To provide multiple versions of the source
+so that it can be played using HTML5 across browsers you can use an
+array of source objects. Video.js will detect which version is supported
+and load that file.
+
+[source, js]
+----
+vjsPlayer.src([
+    { type: "video/mp4",  src: "//example.com/path/to/video.mp4" },
+    { type: "video/webm", src: "//example.com/path/to/video.webm" },
+    { type: "video/ogg",  src: "//example.com/path/to/video.ogv" }
+]);
+----
+
+[role="mt-4"]
+==== Parameters
+
+[cols=",,,", options="header", role="rtable mt-4 mb-5"]
+|===
+|name |Type |Required |Description
+
+|source |String\|Object\|Array |yes |The source URL, object, or array of sources
+
+|===
+
+
+[role="mt-4"]
+[[methods-supportsFullScreen]]
+=== supportsFullScreen()
+
+Check to see if fullscreen is supported.
+
+[role="mt-4"]
+[[methods-tech]]
+=== tech()
+
+Return a reference to the current tech. It will only return a reference
+to the tech if given an object with the *IWillNotUseThisInPlugins*
+property on it. This is try and prevent misuse of techs by plugins.
+
+[role="mt-4"]
+==== Parameters
+
+[cols=",,,", options="header", role="rtable mt-4 mb-5"]
+|===
+|name |Type |Required |Description
+
+|undefined |Object | |
+
+|===
+
+
+[role="mt-4"]
+[[methods-textTracks]]
+=== textTracks()
+// //w3.org/html/wg/drafts/html/master/embedded-content-0.html#dom-media-texttracks
+
+Get an array of associated text tracks. captions, subtitles, chapters,
+descriptions.
+
+[role="mt-4"]
+[[methods-toJSON]]
+=== toJSON()
+
+Converts track info to JSON.
+
+[role="mt-4"]
+[[methods-updateStyleEl_]]
+=== updateStyleEl_()
+
+Update styles of the player element (height, width and aspect ratio).
+
+
+[role="mt-4"]
+[[methods-userActive]]
+=== userActive(bool)
+
+Get/set if user is active.
+
+[role="mt-4"]
+==== Parameters
+
+[cols=",,,", options="header", role="rtable mt-4 mb-5"]
+|===
+|name |Type |Required |Description
+
+|bool |Boolean |yes |Value when setting
+
+|===
+
+
+[role="mt-4"]
+[[methods-videoHeight]]
+=== videoHeight()
+
+Get video height.
+
+
+[role="mt-4"]
+[[methods-videoWidth]]
+=== videoWidth()
+
+Get video width.
+
+
+[role="mt-4"]
+[[methods-volume]]
+=== volume(percentAsDecimal)
+
+Get or set the current volume of the media.
+
+[source, js]
+----
+// get
+var howLoudIsIt = vjsPlayer.volume();
+// set
+vjsPlayer.volume(0.5); // Set volume to half
+----
+
+0 is off (muted), 1.0 is all the way up, 0.5 is half way.
+
+[role="mt-4"]
+==== Parameters
+
+[cols=",,,", options="header", role="rtable mt-4 mb-5"]
+|===
+|name |Type |Required |Description
+
+|percentAsDecimal |Number |yes |The new volume as a decimal percent
+
+|===
+
+
+[role="mt-4"]
+[[methods-width]]
+=== width([value])
+
+Get/set player width.
+
+[role="mt-4"]
+==== Parameters
+
+[cols=",,,", options="header", role="rtable mt-4 mb-5"]
+|===
+|name |Type |Required |Description
+
+|value |Number |no |Value for width
+
+|===
+
+
+[role="mt-5"]

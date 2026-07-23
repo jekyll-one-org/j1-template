@@ -1,0 +1,800 @@
+[role="mt-5"]
+== Methods
+
+*Methods* are JavaScript functions you call on a *player object* to
+control the player - for example, `player.playVideo()` starts the
+playback of a video. You get the player object from the `YT.Player`
+constructor, or from the `target` property of an event.
+
+Call methods only *after* the player has fired the `onReady` event.
+Before that moment, the player is not fully loaded and method calls
+may fail or simply do nothing.
+
+[role="mt-4"]
+=== Queueing videos
+
+Queueing methods allow to *load* or *cue* a single video into the player
+at runtime - without creating a new player object.
+
+* *Cueing* a video (`cueVideoById`, `cueVideoByUrl`) loads the video's
+  thumbnail and prepares the player for playback. The player does *not*
+  request the video stream (FLV/MP4) until `playVideo()` is called or
+  the user initiates playback via the player controls. The final player
+  state is `video cued` (`5`).
+* *Loading* a video (`loadVideoById`, `loadVideoByUrl`) loads *and plays*
+  the video immediately. The final player state is `playing` (`1`).
+
+All queueing methods for videos support two calling conventions: an
+*argument syntax* with positional parameters and an *object syntax*
+that accepts a single object as parameter. The object syntax
+additionally supports the `endSeconds` property, which is not
+available in the argument syntax.
+
+[NOTE]
+====
+If a `startSeconds` or `endSeconds` value is specified and `seekTo()`
+is called afterwards, the `endSeconds` value no longer applies -
+the video plays to its natural end.
+====
+
+[role="mt-5"]
+==== cueVideoById
+
+.Argument syntax
+[source, js]
+----
+player.cueVideoById(videoId:String,
+                    startSeconds:Number)
+----
+
+.Object syntax
+[source, js]
+----
+player.cueVideoById({videoId:String,
+                     startSeconds:Number,
+                     endSeconds:Number})
+----
+
+This method loads the specified video's thumbnail and prepares the
+player to play the video. The player does not request the video stream
+until `playVideo()` is called or the user initiates playback.
+
+* The required `videoId` parameter specifies the *YouTube Video ID* of
+  the video to be cued. In the YouTube Data API, a video resource's
+  `id` property specifies the ID.
+* The optional `startSeconds` parameter accepts a float/integer and
+  specifies the time from which the video should start playing when
+  `playVideo()` is called. If a `startSeconds` value is specified and
+  `seekTo()` is called afterwards, the player plays from the time
+  specified in the `seekTo()` call. When the video is cued and ready
+  to play, the player broadcasts a `video cued` event (`5`).
+* The optional `endSeconds` parameter (*object syntax only*) accepts a
+  float/integer and specifies the time at which the video should stop
+  playing when `playVideo()` is called.
+
+[role="mt-4"]
+==== loadVideoById
+
+.Argument syntax
+[source, js]
+----
+player.loadVideoById(videoId:String,
+                     startSeconds:Number)
+----
+
+.Object syntax
+[source, js]
+----
+player.loadVideoById({videoId:String,
+                      startSeconds:Number,
+                      endSeconds:Number})
+----
+
+This method loads and *plays* the specified video.
+
+* The required `videoId` parameter specifies the *YouTube Video ID* of
+  the video to be loaded and played.
+* The optional `startSeconds` parameter accepts a float/integer. If
+  specified, the video starts from the closest keyframe to the
+  specified time.
+* The optional `endSeconds` parameter (*object syntax only*) accepts a
+  float/integer. If specified, the video stops playing at the
+  specified time.
+
+[role="mt-4"]
+==== cueVideoByUrl
+
+.Argument syntax
+[source, js]
+----
+player.cueVideoByUrl(mediaContentUrl:String,
+                     startSeconds:Number)
+----
+
+.Object syntax
+[source, js]
+----
+player.cueVideoByUrl({mediaContentUrl:String,
+                      startSeconds:Number,
+                      endSeconds:Number})
+----
+
+This method loads the specified video's thumbnail and prepares the
+player to play the video - identical in behavior to `cueVideoById`,
+but the video is identified by its *URL* instead of its Video ID.
+
+* The required `mediaContentUrl` parameter specifies a fully qualified
+  YouTube player URL in the format
+  `\http://www.youtube.com/v/VIDEO_ID?version=3`.
+* The optional `startSeconds` and `endSeconds` (*object syntax only*)
+  parameters behave as described for `cueVideoById`.
+
+[role="mt-4"]
+==== loadVideoByUrl
+
+.Argument syntax
+[source, js]
+----
+player.loadVideoByUrl(mediaContentUrl:String,
+                      startSeconds:Number)
+----
+
+.Object syntax
+[source, js]
+----
+player.loadVideoByUrl({mediaContentUrl:String,
+                       startSeconds:Number,
+                       endSeconds:Number})
+----
+
+This method loads and *plays* the specified video - identical in
+behavior to `loadVideoById`, but the video is identified by its *URL*
+instead of its Video ID.
+
+* The required `mediaContentUrl` parameter specifies a fully qualified
+  YouTube player URL in the format
+  `\http://www.youtube.com/v/VIDEO_ID?version=3`.
+* The optional `startSeconds` and `endSeconds` (*object syntax only*)
+  parameters behave as described for `loadVideoById`.
+
+[role="mt-4"]
+=== Queueing playlists
+
+The `cuePlaylist` and `loadPlaylist` methods allow to load and play a
+*playlist*. If the *object syntax* is used to call these methods, they
+can additionally queue (or load) a list of a user's uploaded videos.
+
+* *Cueing* a playlist (`cuePlaylist`) queues the playlist. When the
+  playlist is cued and ready to play, the player broadcasts a
+  `video cued` event (`5`).
+* *Loading* a playlist (`loadPlaylist`) loads the playlist and *plays*
+  it immediately.
+
+[role="mt-4"]
+==== cuePlaylist
+
+.Argument syntax
+[source, js]
+----
+player.cuePlaylist(playlist:String|Array,
+                   index:Number,
+                   startSeconds:Number)
+----
+
+.Object syntax
+[source, js]
+----
+player.cuePlaylist({listType:String,
+                    list:String,
+                    index:Number,
+                    startSeconds:Number})
+----
+
+Queues the specified playlist.
+
+Argument syntax parameters:
+
+* The required `playlist` parameter specifies either a *YouTube
+  Playlist ID* (string) or an *array of YouTube Video IDs*.
+* The optional `index` parameter specifies the index of the first
+  video in the playlist that will play. The parameter uses a
+  *zero-based* index, and the default value is `0`.
+* The optional `startSeconds` parameter accepts a float/integer and
+  specifies the time from which the first video in the playlist should
+  start playing when `playVideo()` is called.
+
+Object syntax properties:
+
+* The optional `listType` property specifies the type of results feed
+  that is being retrieved. Valid values are `playlist` and
+  `user_uploads`. The default value is `playlist`.
+* The required `list` property contains a key that identifies the list
+  of videos to be returned:
+** If the `listType` property value is `playlist`, the `list` property
+   specifies the *Playlist ID* or an *array of Video IDs*.
+** If the `listType` property value is `user_uploads`, the `list`
+   property identifies the *user* whose uploaded videos are returned.
+* The optional `index` and `startSeconds` properties behave as
+  described for the argument syntax.
+
+[NOTE]
+====
+In the YouTube Data API, playlist IDs are specified by the `id`
+property of a playlist resource. Note that playlist IDs used with the
+iFrame API keep their `PL` prefix.
+====
+
+[role="mt-5"]
+==== loadPlaylist
+
+.Argument syntax
+[source, js]
+----
+player.loadPlaylist(playlist:String|Array,
+                    index:Number,
+                    startSeconds:Number)
+----
+
+.Object syntax
+[source, js]
+----
+player.loadPlaylist({listType:String,
+                     list:String,
+                     index:Number,
+                     startSeconds:Number})
+----
+
+Loads the specified playlist and *plays* it. All parameters and
+properties behave as described for `cuePlaylist`.
+
+
+[role="mt-4"]
+=== playVideo
+
+Plays the currently cued/loaded video. The final player state after
+this method executes will be `playing` (1). +
+
+[NOTE]
+====
+A playback only counts toward a video's official view count if
+it is initiated via a native play button in the player.
+====
+
+[role="mt-5"]
+=== pauseVideo
+
+Pauses the currently playing video. The final player state after this
+method executes will be `paused` (`2`) unless the player is in
+the `ended` (`0`) state when the method is called, in which case
+the player state will not change.
+
+[role="mt-4"]
+=== stopVideo
+
+Stops and cancels loading of the current video. This method should
+be reserved for rare situations when you know that the user will not
+be watching additional video in the player. If your intent is to pause
+the video, you should just call the `pauseVideo` method.
+
+If you want to change the video that the player is playing, you can call
+one of the queueing methods without calling `stopVideo` first.
+
+[WARNING]
+====
+Unlike the `pauseVideo` method, which leaves the player in the `paused` (`2`)
+state, the `stopVideo` method could put the player into any not-playing
+state, including `ended` (`0`), `paused` (`2`), `video cued` (`5`) or
+`not started` (`-1`).
+====
+
+[role="mt-5"]
+=== seekTo(seconds:Number, allowSeekAhead:Boolean)
+
+Seeks to a specified time in the video. If the player is paused when
+the method is called, it will remain paused. If the method is
+called from another state (`playing`, `video cued`, etc.), the
+player will play the video.
+
+* The `seconds` parameter identifies the time to which the player
+should advance.
+
+The player will advance to the closest keyframe before that time
+unless the player has already downloaded the portion of the video to
+which the user is seeking.
+* The `allowSeekAhead` parameter determines whether the player will
+make a new request to the server if the `seconds` parameter
+specifies a time outside of the currently buffered video data.
+
+It is recommended that you set this parameter to `false` while the user
+drags the mouse along a video progress bar and then set it to `true`
+when the user releases the mouse. This approach lets a user scroll to
+different points of a video without requesting new video streams by
+scrolling past unbuffered points in the video. When the user releases
+the mouse button, the player advances to the desired point in the
+video and requests a new video stream if necessary.
+
+
+[role="mt-4"]
+=== Playback quality
+
+The getPlaybackQuality(), setPlaybackQuality(), and getAvailableQualityLevels()
+methods are *no longer supported* (October 24, 2019). In particular, calls to
+setPlaybackQuality() will be no-op functions, meaning they will *not* actually
+have any impact on the viewer's playback experience.
+
+[role="mt-4"]
+==== getPlaybackQuality()
+
+This function retrieves the actual video quality of the current video.
+Possible return values are highres, hd1080, hd720, large, medium and small.
+It will also return undefined if there is no current video.
+
+[role="mt-4"]
+==== setPlaybackQuality(suggestedQuality:String)
+
+This function sets the recommended video quality for the current video.
+It causes the video to reload at the current position with the new quality.
+If the playback quality changes, it only changes for the video that is
+currently playing. Calling this function does not guarantee that the playback
+quality will actually change.
+
+If the playback quality does change, however, the onPlaybackQualityChange()
+event will be fired and your code should respond to the event, not to the fact
+that the setPlaybackQuality() method was called.
+
+The suggestedQuality parameter value can be small, medium, large, hd720, hd1080,
+highres, or default. We recommend that you set the parameter value to default.
+This tells YouTube to choose the most appropriate playback quality based on
+the user, video, system, and other playback conditions.
+
+If you suggest a playback quality for a video, the suggested quality will
+only be enabled for that video. You should select a playback quality that
+matches the size of your video player.
+
+For example, if your page displays a video player that is 1280 x 720 pixels
+in size, a video with a quality of hd720 will look better than a video with
+a quality of hd1080.
+
+We recommend calling the getAvailableQualityLevels() method to determine
+which levels are available for a video.
+
+The list below shows the playback quality levels that relate to various
+standard player sizes. We recommend that you set the player height to one
+of the values listed below and size your player to use a
+16:9 aspect ratio.
+
+As mentioned above, if you select a standard player size, we recommend that you
+set the suggestedQuality parameter value to default so that YouTube can
+select the most appropriate playback quality.
+
+.Available Video quality levels
+[cols="2a,10a", width="100%", options="header", role="rtable mt-4 mb-5"]
+|===
+|Type |Description
+
+|`small`
+|The player height is 240 pixels and the dimensions are at least 320 x 240
+pixels for an aspect ratio of 4:3.
+
+|`medium`
+|The player height is 360 pixels and the dimensions are 640 x 360 pixels
+for an aspect ratio of 16:9 and 480 x 360 pixels for an aspect ratio of 4:3.
+
+|`large`
+|The player height is 480 pixels and the dimensions are 853 x 480 pixels
+for an aspect ratio of 16:9 and 640 x 480 pixels for an aspect ratio of 4:3.
+
+|'hd720'
+|The player height is 720 pixels and the dimensions are 1280 x 720 pixels
+for an aspect ratio of 16:9 and 960 x 720 pixels for an aspect ratio of 4:3.
+
+|`hd1080`
+|The player height is 1080 pixels and the dimensions are 1920 x 1080 pixels
+for a 16:9 aspect ratio and 1440 x 1080 pixels for a 4:3 aspect ratio.
+
+|`highres`
+|The player height is greater than 1080 pixels. This means that the player
+aspect ratio is greater than 1920 x 1080 pixels.
+
+|`default`
+|YouTube will choose the appropriate playback quality. This setting will reset
+the quality level to the default value, undoing any previous attempts to set
+the playback quality using the methods cueVideoById(), loadVideoById(), or
+setPlaybackQuality().
+
+|===
+
+If you call the method setPlaybackQuality() with a suggestedQuality level
+that is not available for the video, the quality will be set to the next
+lowest available level. For example, if you request the quality level large
+and it is not available, the playback quality will be set to medium if that
+level is available.
+
+Additionally, setting suggestedQuality to a value that is not recognized as
+a quality level is equivalent to setting suggestedQuality to *default*.
+
+[role="mt-4"]
+==== getAvailableQualityLevels()
+
+This function returns the quality formats in which the current video is
+available. You could use this function to determine whether the video is
+available in a higher quality than the one the user is currently using to play
+it.
+
+Your player could display a button or other element to allow the user to
+adjust the quality accordingly. The function returns several strings sorted
+in decreasing order of quality. Possible array element values are highres,
+hd1080, hd720, large, medium, and small.
+
+This function returns an empty array if there is no current video. Your client
+should not automatically switch to the highest or lowest video quality or to
+an unknown format name.
+
+YouTube could expand the list of quality levels to include formats that may
+not be appropriate for your player context. Likewise, YouTube could remove
+options, potentially compromising the quality provided to the user. If your
+client only switches to known available formats, client performance will not
+be affected by introducing new quality levels or by removing quality levels
+that are not appropriate for your player context.
+
+
+[role="mt-4"]
+=== Player volume
+
+The following methods read or change the sound volume of a player.
+Volume values are integers between `0` (silent) and `100` (maximum
+volume).
+
+[role="mt-4"]
+==== mute()
+
+Mutes the player.
+
+[role="mt-4"]
+==== unMute()
+
+Unmutes the player.
+
+[role="mt-4"]
+==== isMuted()
+
+Returns `true` if the player is muted, `false` if not.
+
+[role="mt-4"]
+==== setVolume(volume:Number)
+
+Sets the volume. Accepts an integer between `0` and `100`.
+
+[role="mt-4"]
+==== getVolume()
+
+Returns the player's current volume, an integer between `0` and `100`.
+
+[NOTE]
+====
+The method `getVolume()` will return the volume even if the player
+is muted.
+====
+
+[role="mt-5"]
+=== Player size
+
+The following method changes the size of the `<iframe>` element that
+contains a player on the page.
+
+==== setSize(width:Number, height:Number)
+
+Sets the size in pixels of the `<iframe>` that contains the player.
+
+[role="mt-4"]
+=== Playback rate
+
+The *playback rate* controls how fast a video plays. The normal speed
+is `1`. A value of `0.5` plays a video at half speed, a value of `2`
+at double speed. The following methods read and change the playback
+rate of the current video.
+
+[role="mt-4"]
+==== getPlaybackRate()
+
+This method retrieves the playback rate of the currently playing
+video. The default playback rate is `1`, which indicates that the
+video is playing at normal speed. Playback rates may include values
+like `0.25`, `0.5`, `1`, `1.5`, and `2`.
+
+[role="mt-4"]
+==== setPlaybackRate(suggestedRate:Number)
+
+This method sets the suggested playback rate for the current video.
+If the playback rate changes, it will only change for the video that
+is already cued or being played. If you set the playback rate for a
+cued video, that rate will still be in effect when the `playVideo`
+method is called or the user initiates playback directly through the
+player controls. In addition, calling methods to cue or load videos
+or playlists (`cueVideoById`, `loadVideoById`, etc.) will reset
+the playback rate to `1`.
+
+Calling this method does *not guarantee* that the playback rate will
+actually change. However, if the playback rate does change, the
+`onPlaybackRateChange` event will fire, and your code should respond
+to the event rather than the fact that it called the `setPlaybackRate` method.
+
+The `getAvailablePlaybackRates` method will return the possible playback
+rates for the currently playing video. However, if you set the `suggestedRate`
+parameter to a non-supported integer or float value, the player will round
+that value down to the nearest supported value in the direction of `1`.
+
+[role="mt-4"]
+==== getAvailablePlaybackRates()
+
+This method returns the set of playback rates (as an array) in which
+the current video is available. The default value is `1`, which indicates
+that the video is playing at normal speed.
+
+The method returns an array of numbers ordered from slowest to
+fastest playback speed. Even if the player does not support variable
+playback speeds, the array should always contain at least one value
+(`1`).
+
+[role="mt-4"]
+=== Playlists
+
+The following methods control how a playlist is played - for example,
+whether the list repeats endlessly, or plays its videos in random
+order.
+
+[role="mt-4"]
+==== setLoop(loopPlaylists:Boolean)
+
+This method indicates whether the video player should continuously
+play a playlist or if it should stop playing after the last video in
+the playlist ends. The default behavior is that playlists do not loop.
+
+This setting will persist even if you load or cue a different playlist,
+which means that if you load a playlist, call the `setLoop` method with
+a value of `true`, and then load a second playlist, the second playlist
+will also loop.
+
+The required `loopPlaylists` parameter identifies the looping *behavior*.
+
+* If the parameter value is `true`, then the video player will
+  continuously play playlists. After playing the last video in a
+  playlist, the video player will go back to the beginning of the
+  playlist and play it again.
+* If the parameter value is `false`, then playbacks will end after
+  the video player plays the last video in a playlist.
+
+[role="mt-4"]
+==== setShuffle(shufflePlaylist:Boolean)
+
+This method indicates whether a playlist's videos should be shuffled
+so that they play back in an order different from the one that the
+playlist creator designated. If you shuffle a playlist after it has
+already started playing, the list will be reordered while the video
+that is playing continues to play. The next video that plays will then
+be selected based on the reordered list.
+
+This setting will not persist if you load or cue a different playlist,
+which means that if you load a playlist, call the `setShuffle`
+method, and then load a second playlist, the second playlist will
+not be shuffled.
+
+The required `shufflePlaylist` parameter indicates whether YouTube
+should shuffle the playlist.
+
+* If the parameter value is `true`, then YouTube will shuffle the
+  playlist order. If you instruct the method to shuffle a playlist
+  that has already been shuffled, YouTube will shuffle the order again.
+* If the parameter value is `false`, then YouTube will change the
+  playlist order back to its original order.
+
+
+[role="mt-4"]
+=== Playing a video in a playlist
+
+The following methods *navigate* within the playlist that is currently
+loaded: jump to the next or previous video, or play a video at a
+specific position in the list.
+
+[role="mt-4"]
+==== nextVideo()
+
+This method loads and plays the *next* video in the playlist.
+
+* If `nextVideo()` is called while the *last* video in the playlist is
+  being watched, and the playlist is set to play continuously
+  (`setLoop(true)`), the player will load and play the *first* video
+  in the list.
+* If `nextVideo()` is called while the *last* video in the playlist is
+  being watched, and the playlist is *not* set to play continuously,
+  the playback will end.
+
+[role="mt-4"]
+==== previousVideo()
+
+This method loads and plays the *previous* video in the playlist.
+
+* If `previousVideo()` is called while the *first* video in the
+  playlist is being watched, and the playlist is set to play
+  continuously (`setLoop(true)`), the player will load and play the
+  *last* video in the list.
+* If `previousVideo()` is called while the *first* video in the
+  playlist is being watched, and the playlist is *not* set to play
+  continuously, the player will restart the first playlist video from
+  the beginning.
+
+[role="mt-4"]
+==== playVideoAt(index:Number)
+
+This method loads and plays the specified video in the playlist.
+
+* The required `index` parameter specifies the index of the video to
+  play. The parameter uses a *zero-based* index, so a value of `0`
+  identifies the first video in the list.
+* If the playlist has been *shuffled* (`setShuffle`), the `index`
+  refers to the position of the video in the *shuffled* list. A value
+  of `0` will play the first video in the shuffled order, which is
+  not necessarily the first video designated by the playlist creator.
+
+
+[role="mt-4"]
+=== Playback status
+
+The following methods report what the player is currently doing: how
+much of the video is buffered, whether the player is playing or
+paused, and the current playback position.
+
+[role="mt-4"]
+==== getVideoLoadedFraction
+
+Returns a (float) number between `0` and `1` that specifies the *percentage*
+of the video that the player shows as buffered. This method returns a
+more reliable number than the now-deprecated `getVideoBytesLoaded` and
+`getVideoBytesTotal` methods.
+
+[role="mt-4"]
+==== getPlayerState()
+
+Returns the state of the player. Possible values are:
+
+* `-1`, not started
+* `0`, ended
+* `1`, playing
+* `2`, paused
+* `3`, buffering
+* `5`, video cued
+
+[role="mt-4"]
+==== getCurrentTime()
+
+Returns the elapsed time in seconds since the video started playing.
+
+[role="mt-4"]
+==== getVideoStartBytes()
+
+*Deprecated as of October 31, 2012*. Returns the number of bytes the
+video file started loading from. (This method now always returns a
+value of `0`.) Example scenario: the user seeks ahead to a point
+that hasn't loaded yet, and the player makes a new request to play a
+segment of the video that hasn't loaded yet.
+
+[role="mt-4"]
+==== getVideoBytesLoaded()
+
+*Deprecated as of July 18, 2012*. Instead, use the`getVideoLoadedFraction`
+method to determine the percentage of the video that has buffered.
+
+This method returns a value between `0` and `1000` that
+approximates the amount of the video that has been loaded. You could
+calculate the fraction of the video that has been loaded by dividing
+the `getVideoBytesLoaded` value by the `getVideoBytesTotal` value.
+
+[role="mt-4"]
+==== getVideoBytesTotal()
+
+*Deprecated as of July 18, 2012*. Instead, use the `getVideoLoadedFraction`
+method to determine the percentage of the video that has buffered.
+
+Returns the size in bytes of the currently loaded/playing video or an
+approximation of the video's size.
+
+This method always returns a value of `1000`. You could calculate
+the fraction of the video that has been loaded by dividing the
+`getVideoBytesLoaded` value by the `getVideoBytesTotal` value.
+
+[role="mt-4"]
+=== Video information
+
+The following methods return information about the video that is
+currently loaded or playing - like its duration, its YouTube URL, and
+its embed code.
+
+[role="mt-4"]
+==== getDuration()
+
+Returns the duration in seconds of the currently playing video. Note
+that `getDuration()` method will return `0` until the video's metadata is
+loaded, which normally happens just after the video starts playing.
+
+If the currently playing video is a *live* event, the `getDuration()` method
+will return the elapsed time since the live video stream began. Specifically,
+this is the amount of time that the video has streamed without being reset
+or interrupted. In addition, this duration is commonly longer than the
+actual event time since streaming may begin before the event's start time.
+
+[role="mt-4"]
+==== getVideoUrl()
+
+Returns the YouTube.com URL for the currently loaded/playing video.
+
+[role="mt-4"]
+==== getVideoEmbedCode()
+
+Returns the embed code for the currently loaded/playing video.
+
+[role="mt-4"]
+=== Playlist information
+
+The following methods return information about the playlist that is
+currently loaded: the list of video IDs, and the position of the video
+that is currently playing.
+
+[role="mt-4"]
+==== getPlaylist()
+
+This method returns an array of the video IDs in the playlist as
+they are currently ordered. By default, this method will return
+video IDs in the order designated by the playlist owner. However, if
+you have called the `setShuffle` method to shuffle the playlist order,
+then the `getPlaylist()` method's return value will reflect the
+shuffled order.
+
+[role="mt-4"]
+==== getPlaylistIndex()
+
+This method returns the index of the playlist video that is
+currently playing.
+
+* If you have not shuffled the playlist, the return value will
+  identify the position where the playlist creator placed the video.
+  The return value uses a zero-based index, so a value of `0` identifies
+  the first video in the playlist.
+* If you have shuffled the playlist, the return value will identify
+  the video's order within the shuffled playlist.
+
+[role="mt-4"]
+=== Event listener
+
+Besides passing event handlers to the `YT.Player` constructor, you can
+add and remove event listeners at runtime using the following methods.
+
+[role="mt-4"]
+==== addEventListener(event:String, listener:String)
+
+Adds a listener method for the specified `event`. The <<Events>> section
+below identifies the different events that the player might fire. The listener
+is a string that specifies the method that will execute when the specified
+event fires.
+
+[role="mt-4"]
+==== removeEventListener(event:String, listener:String)
+
+Removes a listener method for the specified `event`. The `listener`
+is a string that identifies the method that will no longer execute
+when the specified event fires.
+
+[role="mt-4"]
+=== Accessing and modifying DOM nodes
+
+The following methods give you direct access to the `<iframe>` element
+of a player, or remove the element from the page completely.
+
+[role="mt-4"]
+==== getIframe()
+
+This method returns the DOM node for the embedded `<iframe>`.
+
+[role="mt-4"]
+==== destroy()
+
+Removes the `<iframe>` containing the player.

@@ -1,0 +1,136 @@
+---
+title:                                  Theme Features
+tagline:                                Modules, Extensions and Integrations
+
+date:                                   2021-01-01
+last_modified:                          2026-07-23
+
+description: >
+                                        Jekyll One Template (J1) is a free Jekyll Theme providing
+                                        a clean implementation for Jekyll to start new projects
+                                        for all businesses based on Bootstrap V5.
+                                        The template combines the best current software for the Web.
+                                        Jekyll One is open-source and free to use for private and
+                                        business purposes.
+
+keywords: >
+                                        open source, free, template, theme,
+                                        jekyll, jekyllone, web, site, static,
+                                        jamstack, bootstrap, netlify
+
+categories:                             [ Features ]
+tags:                                   [ Module, Extension, Integration ]
+
+robots:
+  index:                                true
+  follow:                               true
+
+image:
+  path:                                 /assets/image/module/attic/1920x1280/j1-launch.jpg
+  width:                                1920
+  height:                               1280
+
+regenerate:                             false
+permalink:                              /pages/public/manuals/integrations/google/analytics/
+
+resources:                              []
+resource_options:
+  - attic:
+      slides:
+        - url:                          /assets/image/module/attic/1920x1280/j1-launch.jpg
+          alt:                          Making is like wanting - but even better
+---
+
+// Page Initializer
+// =============================================================================
+// Enable the Liquid Preprocessor
+:page-liquid:
+
+// Set (local) page attributes here
+// -----------------------------------------------------------------------------
+// :page--attr:                         <attr-value>
+
+//  Load Liquid procedures
+// -----------------------------------------------------------------------------
+{% capture load_attributes %}themes/{{site.template.name}}/procedures/global/attributes_loader.proc{%endcapture%}
+
+// Load page attributes
+// -----------------------------------------------------------------------------
+{% include {{load_attributes}} scope="global" %}
+
+
+// Page content
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[role="dropcap"]
+Google Analytics (GAL) provides access to a massive amount of data related
+to how users find and interact with your site. For example, you can see how
+many people visited a specific page, how long they remained there, where your
+users live, how certain keywords perform, and so forth.
+
+*J1 is different: easy to use, no programming is needed.*
+
+
+// Include sub-documents (if any)
+// -----------------------------------------------------------------------------
+[role="mt-5"]
+== Google Analytics
+
+Google Analytics is integrated by pure configuration. Simply enable the
+provider and set your your access credentials to the configuration, and
+you're done.
+
+.Google Analytics configuration
+[source, yaml, role="noclip"]
+----
+# ------------------------------------------------------------------------------
+# ~/_data/modules/analytics.yml
+# User configuration settings for J1 Analytics module
+#
+# Product/Info:
+# https://jekyll.one
+#
+# Copyright (C) 2023-2026 Juergen Adams
+#
+# J1 Template is licensed under the MIT License.
+# See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE
+# ------------------------------------------------------------------------------
+
+# ------------------------------------------------------------------------------
+# Description
+#
+description:
+  title:                                J1 Analytics
+  scope:                                User settings
+  location:                             _data/modules/analytics.yml
+
+# ------------------------------------------------------------------------------
+# User configuration settings
+#
+settings:
+  enabled:                              false
+
+  # ----------------------------------------------------------------------------
+  # GENERAL options
+  # ----------------------------------------------------------------------------
+  #
+  skipAllHosts:                         localhost, 127.0.0.1
+  trackingID:                           <your-tracking-id>
+
+  # ----------------------------------------------------------------------------
+  # Provider settings
+  # ----------------------------------------------------------------------------
+  google:
+    anonymizeIP:                        false
+
+# ------------------------------------------------------------------------------
+# END config
+----
+
+[role="mb-8"]
+GAL is fully integrated with the GDPR-compatible Cookie Consent module.
+If your visitors do not agree on cooies for *Analysis*, Google Analytics gets
+automatically disabled and all cookies from Google are deleted from the
+user's system.
+
+
+

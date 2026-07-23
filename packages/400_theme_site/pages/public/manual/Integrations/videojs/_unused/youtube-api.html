@@ -1,0 +1,345 @@
+<article>
+  <div class="devsite-article-body clearfix">
+    <div itemscope="" itemtype="http://developers.google.com/ReferenceObject">
+      <meta itemprop="name" content="Player Parameters">
+
+      <h2 id="Overview">Overview</h2>
+      <p>This document explains how to embed a YouTube player in your application and also defines the parameters that are available in the YouTube embedded player.</p>
+      <p>By appending parameters to the IFrame URL, you can customize the playback experience in your application. For example, you can automatically play videos using the <code class="notranslate" dir="ltr"><a href="#autoplay">autoplay</a></code> parameter or cause a video to play repeatedly using the <code class="notranslate" dir="ltr"><a href="#loop">loop</a></code> parameter. You can also use the  <code class="notranslate" dir="ltr"><a href="#enablejsapi">enablejsapi</a></code> parameter to enable the player to be controlled via the <a href="/youtube/iframe_api_reference">IFrame Player API</a>.</p>
+      <p>This page currently defines all parameters supported in <span id="first_change_text">any YouTube embedded player</span>. Each parameter definition identifies the players that support the corresponding parameter.</p>
+      <p class="note"><strong>Note:</strong> Embedded players must have a viewport that is at least 200px by 200px. If the player displays controls, it must be large enough to fully display the controls without shrinking the viewport below the minimum size. We recommend 16:9 players be at least 480 pixels wide and 270 pixels tall.</p>
+
+      <h2 id="Embedding_a_Player">Embed a YouTube player</h2>
+      <p>You can use any of the following methods to embed a YouTube player in your application and specify player parameters. Note that the instructions below demonstrate how to embed a player that loads a single video. The following section explains how to configure your player to load a playlist or a user's uploaded videos.</p>
+
+      <h3 id="Manual_IFrame_Embeds">Embed a player using an iframe</h3>
+      <p>Define an <code class="notranslate" dir="ltr">&lt;iframe&gt;</code> tag in your application in which the <code class="notranslate" dir="ltr">src</code> URL specifies the content that the player will load as well as any other player parameters you want to set. The <code class="notranslate" dir="ltr">&lt;iframe&gt;</code> tag's <code class="notranslate" dir="ltr">height</code> and <code class="notranslate" dir="ltr">width</code> parameters specify the dimensions of the player.</p>
+      <p>If you create the <code class="notranslate" dir="ltr">&lt;iframe&gt;</code> element yourself (rather than using the IFrame Player API to create it), you can append player parameters directly to the end of the URL. The URL has the following format:</p>
+      <devsite-code no-copy="" data-copy-event-label="">
+        <pre class="notranslate" dir="ltr" is-upgraded="">https://www.youtube.com/embed/<strong>VIDEO_ID</strong></pre>
+      </devsite-code>
+      <p>The <code class="notranslate" dir="ltr">&lt;iframe&gt;</code> tag below would load a 640x360px player that would play the YouTube video <code class="notranslate" dir="ltr">M7lc1UVf-VE</code>. Since the URL sets the <code class="notranslate" dir="ltr">autoplay</code> parameter to <code class="notranslate" dir="ltr">1</code>, the video would play automatically once the player has loaded.</p>
+      <devsite-code no-copy="" data-copy-event-label="">
+        <pre class="notranslate" dir="ltr" is-upgraded="">&lt;iframe id="ytplayer" type="text/html" width="640" height="360"
+          src="https://www.youtube.com/embed/M7lc1UVf-VE?autoplay=1&amp;origin=http://example.com"
+          frameborder="0"&gt;&lt;/iframe&gt;
+        </pre>
+      </devsite-code>
+
+      <h3 id="IFrame_Player_API">Embed a player using the IFrame Player API</h3>
+      <p>Follow the <a href="/youtube/iframe_api_reference#Loading_a_Video_Player">IFrame Player API instructions</a> to insert a video player in your web page or application after the Player API's JavaScript code has loaded. The second parameter in the constructor for the video player is an object that specifies player options. Within that object, the <code class="notranslate" dir="ltr">playerVars</code> property identifies player parameters.</p>
+      <p>The HTML and JavaScript code below shows a simple example that inserts a YouTube player into the page element that has an <code class="notranslate" dir="ltr">id</code> value of <code class="notranslate" dir="ltr">ytplayer</code>. The <code class="notranslate" dir="ltr">onYouTubePlayerAPIReady()</code> function specified here is called automatically when the IFrame Player API code has loaded. This code does not define any player parameters and also does not define other event handlers.</p>
+      <devsite-code no-copy="" data-copy-event-label="">
+
+        <pre class="notranslate" dir="ltr" is-upgraded="">&lt;div id="ytplayer"&gt;&lt;/div&gt;
+
+          &lt;script&gt;
+            // Load the IFrame Player API code asynchronously.
+            var tag = document.createElement('script');
+            tag.src = "https://www.youtube.com/player_api";
+            var firstScriptTag = document.getElementsByTagName('script')[0];
+            firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+            // Replace the 'ytplayer' element with an &lt;iframe&gt; and
+            // YouTube player after the API code downloads.
+            var player;
+            function onYouTubePlayerAPIReady() {
+              player = new YT.Player('ytplayer', {
+                height: '360',
+                width: '640',
+                videoId: 'M7lc1UVf-VE'
+              });
+            }
+          &lt;/script&gt;
+        </pre>
+      </devsite-code>
+
+      <h2 id="Selecting_Content_to_Play">Select content to play</h2>
+      <p>You can configure your embedded player to load a video, a playlist, or a user's uploaded videos.</p>
+      <p>The following list explains these options:</p>
+      <ul>
+        <li>
+          <p><strong>Loading a video</strong></p>
+          <p>For an IFrame embed, the YouTube video ID for the video that you want to load is specified in the IFrame's <code class="notranslate" dir="ltr">src</code> URL.</p>
+          <devsite-code no-copy="" data-copy-event-label="">
+            <pre translate="no" dir="ltr" is-upgraded="">https://www.youtube.com/embed/<strong>VIDEO_ID</strong></pre>
+          </devsite-code>
+          <p>If you are using the YouTube Data API (v3), you can programmatically construct these URLs by retrieving video IDs from <a href="/youtube/v3/docs/search#resource">search results</a>, <a href="/youtube/v3/docs/playlistItems#resource">playlist item resources</a>, <a href="/youtube/v3/docs/videos#resource">video resources</a>, or other resources. After obtaining a video ID, replace the <code class="notranslate" dir="ltr">VIDEO_ID</code> text in the URLs above with that value to create the player URL.</p>
+        </li>
+        <li>
+          <p><strong>Loading a playlist</strong></p>
+          <p>Set the <code class="notranslate" dir="ltr"><a href="#listType">listType</a></code> player parameter to <code class="notranslate" dir="ltr">playlist</code>. In addition, set the <code class="notranslate" dir="ltr"><a href="#list">list</a></code> player parameter to the YouTube playlist ID that you want to load.</p>
+          <devsite-code no-copy="" data-copy-event-label="">
+            <pre class="notranslate" dir="ltr" is-upgraded="">https://www.youtube.com/embed?listType=playlist&amp;list=<strong>PLAYLIST_ID</strong></pre>
+          </devsite-code>
+          <p>Note that you need to prepend the playlist ID with the letters <code class="notranslate" dir="ltr">PL</code> as shown in the following example:</p>
+          <devsite-code no-copy="" data-copy-event-label="">
+            <pre class="notranslate" dir="ltr" is-upgraded="">https://www.youtube.com/embed?listType=playlist&amp;list=<strong>PLC77007E23FF423C6</strong></pre>
+          </devsite-code>
+          <p>If you are using the YouTube Data API (v3), you can programmatically construct these URLs by retrieving playlist IDs from <a href="/youtube/v3/docs/search#resource">search results</a>, <a href="/youtube/v3/docs/channels#contentDetails.relatedPlaylists">channel resources</a>, or <a href="/youtube/v3/docs/activities#resource">activity resources</a>. After obtaining a playlist ID, replace the <code class="notranslate" dir="ltr">PLAYLIST_ID</code> text in the URL above with that value.</p>
+        </li>
+        <li>
+          <p><strong>Loading a user's uploaded videos</strong></p>
+          <p>Set the <code class="notranslate" dir="ltr"><a href="#listType">listType</a></code> player parameter to <code class="notranslate" dir="ltr">user_uploads</code>. In addition, set the <code class="notranslate" dir="ltr"><a href="#list">list</a></code> player parameter to the YouTube username whose uploaded videos you want to load.</p>
+          <devsite-code no-copy="" data-copy-event-label="">
+            <pre class="notranslate" dir="ltr" is-upgraded="">https://www.youtube.com/embed?listType=user_uploads&amp;list=<strong>USERNAME</strong></pre>
+          </devsite-code>
+        </li>
+      </ul>
+
+      <h2 id="Parameters">Supported parameters</h2>
+      <p>All of the following parameters are optional.</p>
+      <div class="devsite-table-wrapper">
+        <table class="details responsive">
+          <thead>
+            <tr>
+              <th colspan="2">Parameters</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <h3 id="autoplay" data-text="autoplay" tabindex="-1"><code class="notranslate" itemprop="property" dir="ltr">autoplay</code></h3>
+              </td>
+              <td>
+                This parameter specifies whether the initial video will automatically start to play when the player loads. Supported values are <code class="notranslate" dir="ltr">0</code> or <code class="notranslate" dir="ltr">1</code>. The default value is <code class="notranslate" dir="ltr">0</code>.<br><br>
+                If you enable Autoplay, playback will occur without any user interaction with the player;
+                playback data collection and sharing will therefore occur upon page load.
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <h3 id="cc_lang_pref" data-text="cc_lang_pref" tabindex="-1"><code class="notranslate" itemprop="property" dir="ltr">cc_<wbr>lang_<wbr>pref</code></h3>
+              </td>
+              <td>
+                This parameter specifies the default language that the player will use to display captions. Set the parameter's value to an <a href="http://www.loc.gov/standards/iso639-2/php/code_list.php" target="_blank">ISO 639-1 two-letter language code</a>.<br><br>If you use this parameter and also set the <code class="notranslate" dir="ltr"><a href="#cc_load_policy">cc_<wbr>load_<wbr>policy</a></code> parameter to <code class="notranslate" dir="ltr">1</code>, then the player will show captions in the specified language when the player loads. If you do not also set the <code class="notranslate" dir="ltr"><a href="#cc_load_policy">cc_<wbr>load_<wbr>policy</a></code> parameter, then captions will not display by default, but will display in the specified language if the user opts to turn captions on.
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <h3 id="cc_load_policy" data-text="cc_load_policy" tabindex="-1"><code class="notranslate" itemprop="property" dir="ltr">cc_<wbr>load_<wbr>policy</code></h3>
+              </td>
+              <td>
+                Setting the parameter's value to <code class="notranslate" dir="ltr">1</code> causes closed captions to be shown by default, even if the user has turned captions off. The default behavior is based on user preference.
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <h3 id="color" data-text="color" tabindex="-1"><code class="notranslate" itemprop="property" dir="ltr">color</code></h3>
+              </td>
+              <td>
+                This parameter specifies the color that will be used in the player's video progress bar to highlight the amount of the video that the viewer has already seen. Valid parameter values are <code class="notranslate" dir="ltr">red</code> and <code class="notranslate" dir="ltr">white</code>, and, by default, the player uses the color red in the video progress bar. See the <a href="http://youtube-eng.blogspot.com/2011/08/coming-soon-dark-player-for-embeds_5.html">YouTube API blog</a> for more information about color options.
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <h3 id="controls" data-text="controls" tabindex="-1"><code class="notranslate" itemprop="property" dir="ltr">controls</code></h3>
+              </td>
+              <td>
+                This parameter indicates whether the video player controls are displayed:
+                <p></p>
+                <ul>
+                  <li><code class="notranslate" dir="ltr">controls=0</code> – Player controls do not display in the player.</li>
+                  <li><code class="notranslate" dir="ltr">controls=1</code> (default) – Player controls display in the player.</li>
+                </ul>
+                <p></p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <h3 id="disablekb" data-text="disablekb" tabindex="-1"><code class="notranslate" itemprop="property" dir="ltr">disablekb</code></h3>
+              </td>
+              <td>
+                Setting the parameter's value to <code class="notranslate" dir="ltr">1</code> causes the player to not respond to keyboard controls. The default value is <code class="notranslate" dir="ltr">0</code>, which means that keyboard controls are enabled. Currently supported keyboard controls are:
+                <p></p>
+                <ul>
+                  <li>Spacebar or [k]: Play / Pause</li>
+                  <li>Arrow Left: Jump back 5 seconds in the current video</li>
+                  <li>Arrow Right: Jump ahead 5 seconds in the current video</li>
+                  <li>Arrow Up: Volume up</li>
+                  <li>Arrow Down: Volume Down</li>
+                  <li>[f]: Toggle full-screen display</li>
+                  <li>[j]: Jump back 10 seconds in the current video</li>
+                  <li>[l]: Jump ahead 10 seconds in the current video</li>
+                  <li>[m]: Mute or unmute the video</li>
+                  <li>[0-9]: Jump to a point in the video. <code translate="no" dir="ltr">0</code> jumps to the beginning of the video, <code translate="no" dir="ltr">1</code> jumps to the point 10% into the video, <code translate="no" dir="ltr">2</code> jumps to the point 20% into the video, and so forth.</li>
+                </ul>
+                <p></p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <h3 id="enablejsapi" data-text="enablejsapi" tabindex="-1"><code class="notranslate" itemprop="property" dir="ltr">enablejsapi</code></h3>
+              </td>
+              <td>
+                Setting the parameter's value to <code class="notranslate" dir="ltr">1</code> enables the player to be controlled via <a href="/youtube/iframe_api_reference">IFrame</a> Player API calls. The default value is <code class="notranslate" dir="ltr">0</code>, which means that the player cannot be controlled using that API.<br><br>For more information on the IFrame API and how to use it, see the <a href="/youtube/iframe_api_reference">IFrame API documentation</a>.
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <h3 id="end" data-text="end" tabindex="-1"><code class="notranslate" itemprop="property" dir="ltr">end</code></h3>
+              </td>
+              <td>
+                This parameter specifies the time, measured in seconds from the start of the video, when the player should stop playing the video. The parameter value is a positive integer.<br><br>Note that the time is measured from the beginning of the video and not from either the value of the <code class="notranslate" dir="ltr">start</code> player parameter or the <code class="notranslate" dir="ltr">startSeconds</code> parameter, which is used in YouTube Player API functions for loading or queueing a video.
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <h3 id="fs" data-text="fs" tabindex="-1"><code class="notranslate" itemprop="property" dir="ltr">fs</code></h3>
+              </td>
+              <td>
+                Setting this parameter to <code class="notranslate" dir="ltr">0</code> prevents the fullscreen button from displaying in the player. The default value is <code class="notranslate" dir="ltr">1</code>, which causes the fullscreen button to display.
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <h3 id="hl" data-text="hl" tabindex="-1"><code class="notranslate" itemprop="property" dir="ltr">hl</code></h3>
+              </td>
+              <td>
+                Sets the player's interface language. The parameter value is an <a href="http://www.loc.gov/standards/iso639-2/php/code_list.php">ISO 639-1 two-letter language code</a> or a fully specified locale. For example, <code translate="no" dir="ltr">fr</code> and <code translate="no" dir="ltr">fr-ca</code> are both valid values. Other language input codes, such as IETF language tags (BCP 47) might also be handled properly.<br><br>The interface language is used for tooltips in the player and also affects the default caption track. Note that YouTube might select a different caption track language for a particular user based on the user's individual language preferences and the availability of caption tracks.
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <h3 id="iv_load_policy" data-text="iv_load_policy" tabindex="-1"><code class="notranslate" itemprop="property" dir="ltr">iv_<wbr>load_<wbr>policy</code></h3>
+              </td>
+              <td>
+                Setting the parameter's value to <code class="notranslate" dir="ltr">1</code> causes video annotations to be shown by default, whereas setting to <code class="notranslate" dir="ltr">3</code> causes video annotations to not be shown by default. The default value is <code class="notranslate" dir="ltr">1</code>.
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <h3 id="list" data-text="list" tabindex="-1"><code class="notranslate" itemprop="property" dir="ltr">list</code></h3>
+              </td>
+              <td>
+                The <code class="notranslate" dir="ltr">list</code> parameter, in conjunction with the <code class="notranslate" dir="ltr"><a href="#listType">listType</a></code> parameter, identifies the content that will load in the player.
+                <p></p>
+                <ul>
+                  <li>If the <code class="notranslate" dir="ltr"><a href="#listType">listType</a></code> parameter value is <code class="notranslate" dir="ltr">user_uploads</code>, then the <code class="notranslate" dir="ltr">list</code> parameter value identifies the YouTube channel whose uploaded videos will be loaded.</li>
+                  <li>
+                    If the <code class="notranslate" dir="ltr"><a href="#listType">listType</a></code> parameter value is <code class="notranslate" dir="ltr">playlist</code>, then the <code class="notranslate" dir="ltr">list</code> parameter value specifies a YouTube playlist ID. In the parameter value, you need to prepend the playlist ID with the letters <code class="notranslate" dir="ltr">PL</code> as shown in the example below.<br>
+                    <devsite-code no-copy="" data-copy-event-label="">
+                      <pre class="notranslate" dir="ltr" is-upgraded="">https://www.youtube.com/embed?<br>&nbsp;&nbsp;&nbsp;&nbsp;listType=playlist<br>&nbsp;&nbsp;&nbsp;&nbsp;&amp;list=PLC77007E23FF423C6</pre>
+                    </devsite-code>
+                  </li>
+                  <li>
+                    If the <code class="notranslate" dir="ltr"><a href="#listType">listType</a></code> parameter value is <code class="notranslate" dir="ltr">search</code>, then the <code class="notranslate" dir="ltr">list</code> parameter value specifies the search query.
+                    <span style="color: red">
+                      <b>Note:</b> This functionality is <a href="#release_notes_10_13_2020">deprecated</a> and will no longer be supported as of
+                      <nobr>15 November 2020</nobr>
+                      .
+                    </span>
+                  </li>
+                </ul>
+                <strong>Note:</strong> If you specify values for the <code class="notranslate" dir="ltr">list</code> and <code class="notranslate" dir="ltr">listType</code> parameters, the IFrame embed URL does not need to specify a video ID.<br><br>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <h3 id="listType" data-text="listType" tabindex="-1"><code class="notranslate" itemprop="property" dir="ltr">listType</code></h3>
+              </td>
+              <td>
+                The <code class="notranslate" dir="ltr">listType</code> parameter, in conjunction with the <code class="notranslate" dir="ltr"><a href="#list">list</a></code> parameter, identifies the content that will load in the player. Valid parameter values are <code class="notranslate" dir="ltr">playlist</code> and <code class="notranslate" dir="ltr">user_<wbr>uploads</code>.<br><br>If you specify values for the <code class="notranslate" dir="ltr"><a href="#list">list</a></code> and <code class="notranslate" dir="ltr">listType</code> parameters, the IFrame embed URL does not need to specify a video ID.
+                <br><br>
+                <span style="color: red">
+                  <b>Note:</b> A third parameter value, <code class="notranslate" dir="ltr">search</code>, has been <a href="#release_notes_10_13_2020">deprecated</a> and will no longer be supported as of
+                  <nobr>15 November 2020</nobr>
+                  .
+                </span>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <h3 id="loop" data-text="loop" tabindex="-1"><code class="notranslate" itemprop="property" dir="ltr">loop</code></h3>
+              </td>
+              <td>
+                In the case of a single video player, a setting of <code class="notranslate" dir="ltr">1</code>
+                causes the player to play the initial video again and again. In the case of a playlist
+                player (or custom player), the player plays the entire playlist and then starts again at the
+                first video.<br><br>
+                Supported values are <code class="notranslate" dir="ltr">0</code> and
+                <code class="notranslate" dir="ltr">1</code>, and the default value is
+                <code class="notranslate" dir="ltr">0</code>.<br><br><strong>Note:</strong> This parameter has limited
+                support in IFrame embeds. To loop a single video, set the
+                <code class="notranslate" dir="ltr">loop</code> parameter value to <code class="notranslate" dir="ltr">1</code>
+                and set the <code class="notranslate" dir="ltr"><a href="#playlist">playlist</a></code> parameter
+                value to the same video ID already specified in the Player API URL:<br>
+                <devsite-code no-copy="" data-copy-event-label="">
+                  <pre class="notranslate" dir="ltr" is-upgraded="">https://www.youtube.com/embed/<strong>VIDEO_ID</strong>?playlist=<strong>VIDEO_ID</strong>&amp;loop=1</pre>
+                </devsite-code>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <h3 id="modestbranding" data-text="modestbranding" tabindex="-1"><code class="notranslate" itemprop="property" dir="ltr">modestbranding</code></h3>
+              </td>
+              <td>
+                <span style="color: red"><b>Note:</b> This parameter is deprecated and has no effect. See the <a href="#release_notes_08_15_2023">deprecation announcement</a> for more information.</span>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <h3 id="origin" data-text="origin" tabindex="-1"><code class="notranslate" itemprop="property" dir="ltr">origin</code></h3>
+              </td>
+              <td>
+                This parameter provides an extra security measure for the IFrame API and is only supported for IFrame embeds. If you are using the IFrame API, which means you are setting the <code class="notranslate" dir="ltr"><a href="#enablejsapi">enablejsapi</a></code> parameter value to <code class="notranslate" dir="ltr">1</code>, you should always specify your domain as the <code class="notranslate" dir="ltr">origin</code> parameter value.
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <h3 id="playlist" data-text="playlist" tabindex="-1"><code class="notranslate" itemprop="property" dir="ltr">playlist</code></h3>
+              </td>
+              <td>
+                This parameter specifies a comma-separated list of video IDs to play. If you specify a value, the first video that plays will be the <code class="notranslate" dir="ltr">VIDEO_<wbr>ID</code> specified in the URL path, and the videos specified in the <code class="notranslate" dir="ltr">playlist</code> parameter will play thereafter.
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <h3 id="playsinline" data-text="playsinline" tabindex="-1"><code class="notranslate" itemprop="property" dir="ltr">playsinline</code></h3>
+              </td>
+              <td>
+                This parameter controls whether videos play inline or fullscreen on iOS. Valid values are:
+                <p></p>
+                <ul>
+                  <li><code class="notranslate" dir="ltr">0</code>: Results in fullscreen playback. This is currently the default value, though the default is subject to change.</li>
+                  <li><code class="notranslate" dir="ltr">1</code>: Results in inline playback for mobile browsers and for <code translate="no" dir="ltr">WebViews</code> created with the <code translate="no" dir="ltr"><a href="https://developer.apple.com/documentation/webkit/wkwebviewconfiguration/1614793-allowsinlinemediaplayback?language=objc">allowsInlineMediaPlayback</a></code> property set to <code translate="no" dir="ltr">YES</code>.</li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <h3 id="rel" data-text="rel" tabindex="-1"><code class="notranslate" itemprop="property" dir="ltr">rel</code></h3>
+              </td>
+              <td>
+                <span><b>Note:</b> This parameter is <a href="#release_notes_08_23_2018">changing</a> on or after September 25, 2018.</span><br><br>
+                Prior to the change, this parameter indicates whether the player should show related videos when playback of the initial video ends.
+                <ul>
+                  <li>If the parameter's value is set to <code class="notranslate" dir="ltr">1</code>, which is the default value, then the player does show related videos.</li>
+                  <li>If the parameter's value is set to <code class="notranslate" dir="ltr">0</code>, then the player does not show related videos.</li>
+                </ul>
+                After the change, you will not be able to disable related videos. Instead, if the <code translate="no" dir="ltr">rel</code> parameter is set to <code class="notranslate" dir="ltr">0</code>, related videos will come from the same channel as the video that was just played.
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <h3 id="start" data-text="start" tabindex="-1"><code class="notranslate" itemprop="property" dir="ltr">start</code></h3>
+              </td>
+              <td>
+                This parameter causes the player to begin playing the video at the given number of seconds from the start of the video. The parameter value is a positive integer. Note that similar to the <code class="notranslate" dir="ltr"><a href="/youtube/js_api_reference#seekTo">seekTo</a></code> function, the player will look for the closest keyframe to the time you specify. This means that sometimes the play head may seek to just before the requested time, usually no more than around two seconds.
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <h3 id="widget_referrer" data-text="widget_referrer" tabindex="-1"><code class="notranslate" itemprop="property" dir="ltr">widget_<wbr>referrer</code></h3>
+              </td>
+              <td>
+                This parameter identifies the URL where the player is embedded. This value is used in YouTube Analytics reporting when the YouTube player is embedded in a widget, and that widget is then embedded in a web page or application. In that scenario, the <code translate="no" dir="ltr"><a href="#origin">origin</a></code> parameter identifies the widget provider's domain, but YouTube Analytics should not identify the widget provider as the actual traffic source. Instead, YouTube Analytics uses the <code translate="no" dir="ltr">widget_<wbr>referrer</code> parameter value to identify the domain associated with the traffic source.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </div>
+</article>

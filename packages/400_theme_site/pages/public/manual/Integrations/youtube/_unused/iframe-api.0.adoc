@@ -1,0 +1,1673 @@
+---
+title:                                  iFrame API
+title_extention:                        Embed YouTube Players
+tagline:                                Embed YouTube Players
+
+date:                                   2020-11-04
+last_modified:                          2026-07-23
+
+description: >
+                                        The YouTube Embedded Player API describes how to
+                                        embed a YouTube player in an application and also
+                                        defines the parameters that are available in the
+                                        YouTube-embedded 
+keywords: >
+                                        open source, free, template, jekyll, jekyllone, web,
+                                        sites, static, jamstack, bootstrap,
+                                        html, html5, video, support, youtube, player
+
+categories:                             [ Manual ]
+tags:                                   [ API, YouTube ]
+
+image:
+  path:                                 /assets/image/module/attic/1920x1280/alexander-shatov.jpg
+  width:                                1920
+  height:                               1280
+
+tts:                                    true
+comments:                               false
+compress:                               false                                   # required for embeded JS scripts
+regenerate:                             false
+personalization:                        true
+permalink:                              /pages/public/manual/youtube/iframe_api/
+
+resources:                              [ videojs ]
+resource_options:
+  - toccer:
+      collapseDepth:                    2
+  - attic:
+      opacity:                          .7
+      slides:
+        - url:                          /assets/image/module/attic/1920x1280/alexander-shatov.jpg
+          alt:                          J1 YouTube iFrame API Poster
+---
+
+// Page Initializer
+// =============================================================================
+// Enable the Liquid Preprocessor
+:page-liquid:
+
+// Set (local) page attributes here
+// -----------------------------------------------------------------------------
+// :page--attr:                         <attr-value>
+:images-dir:                            {imagesdir}/pages/roundtrip/100_present_images
+
+//  Load Liquid procedures
+// -----------------------------------------------------------------------------
+{% capture load_attributes %}themes/{{site.template.name}}/procedures/global/attributes_loader.proc{%endcapture%}
+
+// Load page attributes
+// -----------------------------------------------------------------------------
+{% include {{load_attributes}} scope="global" %}
+// https://developers.google.com/youtube/iframe_api_reference?hl=en
+// https://developers.google.com/youtube/player_parameters?hl=en
+
+// Page content
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[role="dropcap"]
+The YouTube Embedded Player API explains how to embed a YouTube player in
+your application and also defines the parameters that are available in the
+YouTube embedded 
+
+The YouTube iFrame API is used the underlying Provider API for VideoJS players
+(over YouTube). VideoJS players are the default video player for all video
+sources supported by J1 Template.
+
+mdi:clock-time-five-outline[24px, md-gray mt-4 mb-5 mr-2]
+*30-60 Minutes* to read
+
+// Include sub-documents (if any)
+// -----------------------------------------------------------------------------^
+[role="mt-5"]
+== Overview
+
+By appending parameters to the IFrame URL, you can customize the
+playback experience in your application. For example, you can
+automatically play videos using the `autoplay` parameter or cause a
+video to play repeatedly using the `loop` parameter. You can also use
+the `enablejsapi` parameter to enable the player to be controlled via
+the
+link://developers.google.com/youtube/iframe_api_reference[IFrame Player API, {browser-window--new}].
+
+This page currently defines all parameters supported in any YouTube-**embedded**
+ Each parameter definition identifies the players that support the
+corresponding parameter.
+
+[NOTE]
+====
+Embedded players must have a viewport that is at least 200px by
+200px. If the player displays controls, it must be large enough to fully
+display the controls without shrinking the viewport below the minimum
+size. We recommend 16:9 players be at least 480 pixels wide and 270
+pixels tall.
+====
+
+
+[role="mt-5"]
+=== Embed a Player
+
+Define an `<iframe>` tag in your application in which the `src` URL
+specifies the content that the player will load as well as any other
+player parameters you want to set. The `<iframe>` tag's `height` and
+`width` parameters specify the dimensions of the 
+
+If you create the `<iframe>` element yourself (rather than using the
+IFrame Player API to create it), you can append player parameters
+directly to the end of the URL. The URL has the following format:
+
+....
+https://www.youtube.com/embed/<VIDEO_ID>
+....
+
+The `<iframe>` tag below would load a *640x360px* player that would play
+the  YouTube video *M7lc1UVf-VE*. Since the URL sets the `autoplay`
+parameter to `1`, the video would play automatically once the player has
+loaded.
+
+[source, html]
+----
+<iframe
+  id="ytplayer"
+  type="text/html"
+  width="640" height="360"
+  src="https://www.youtube.com/embed/M7lc1UVf-VE?autoplay=1&origin=http://example.com"
+  frameborder="0">
+</iframe>
+----
+
+Follow the
+link://developers.google.com/youtube/iframe_api_reference#Loading_a_Video_Player[IFrame Player API instructions, {browser-window--new}]
+to insert a video player in your web page or
+application after the Player API's Javascript code has loaded. The
+second parameter in the constructor for the video player is an object
+that specifies player options. Within that object, the `playerVars`
+property identifies player parameters.
+
+The HTML and Javascript code below shows a simple example that inserts a
+*YouTube player* into the page element that has an `id` value of
+`ytplayer`. The `onYouTubePlayerAPIReady()` method specified here is
+called automatically when the IFrame Player API code has loaded. This
+code does not define any player parameters and also does not define
+other event handlers.
+
+[source, html]
+----
+<div id="ytplayer"></div>
+
+<script>
+  // Load the IFrame Player API code asynchronously.
+  var tag = document.createElement('script');
+  tag.src = "https://www.youtube.com/player_api";
+  var firstScriptTag = document.getElementsByTagName('script')[0];
+  firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+  // Replace the 'ytplayer' element with an <iframe> and
+  // YouTube player after the API code downloads.
+  var player;
+  function onYouTubePlayerAPIReady() {
+    player = new YT.Player('ytplayer', {
+      height: '360',
+      width: '640',
+      videoId: 'M7lc1UVf-VE'
+    });
+  }
+</script>
+----
+
+
+[role="mt-5"]
+=== Select content to play
+
+You can configure your embedded player to load a video, a playlist, or a
+user's uploaded videos.
+
+The following list explains these options for loading a video. For an IFrame
+embed, the YouTube video ID for the video that you want to load is specified
+in the IFrame's `src` URL.
+
+....
+https://www.youtube.com/embed/<VIDEO_ID>
+....
+
+If you are using the YouTube Data API (v3), you can programmatically construct
+these URLs by retrieving video IDs from
+link://developers.google.com/youtube/v3/docs/search#resource[search results, {browser-window--new}],
+link://developers.google.com/youtube/v3/docs/playlistItems#resource[playlist item resources, {browser-window--new}],
+link://developers.google.com/youtube/v3/docs/videos#resource[video resources, {browser-window--new}],
+or other resources. After obtaining a video ID, replace the `VIDEO_ID` text in
+the URLs above with that value to create the player URL.
+
+For loading a playlist, set the `listType` player parameter to `playlist`.
+In addition, set the `list` player parameter to the YouTube playlist ID that
+you want to load.
+
+....
+https://www.youtube.com/embed?listType=playlist&list=PLAYLIST_ID
+....
+
+Note that you need to prepend the playlist ID with the letters `PL` as
+shown in the following example:
+
+....
+https://www.youtube.com/embed?listType=playlist&list=PLC77007E23FF423C6
+....
+
+If you are using the YouTube Data API (v3), you can programmatically
+construct these URLs by retrieving playlist IDs from
+link://developers.google.com/youtube/v3/docs/search#resource[search results, {browser-window--new}],
+link://developers.google.com/youtube/v3/docs/channels#contentDetails.relatedPlaylists[channel resources, {browser-window--new}],
+or link://developers.google.com/youtube/v3/docs/activities#resource[activity resources, {browser-window--new}].
+After obtaining a playlist ID, replace the `PLAYLIST_ID` text in the URL above
+with that value.
+
+For Loading a user's uploaded videos, set the `listType` player parameter
+to `user_uploads`. In addition, set the `list` player parameter to the
+YouTube username whose uploaded videos you want to load.
+
+// ....
+// https://www.youtube.com/embed?listType=user_uploads&list=USERNAME
+// ....
+
+[role="mt-5"]
+[[yt-iframe-api-player-settings]]
+== Settings
+
+lorem:sentences[5]
+
+[NOTE]
+====
+All of the following parameters are optional.
+====
+
+[role="mt-4"]
+[[yt-iframe-api-player-settings--autoplay]]
+=== autoplay
+
+This parameter specifies whether the initial video will automatically
+start to play when the player loads. Supported values are `0` or `1`.
+The default value is `0`.
+
+If you enable Autoplay, playback will occur without any user interaction
+with the player; playback data collection and sharing will therefore
+occur upon page load.
+
+[cols="3a,9a", width="100%", options="header", role="rtable mt-4 mb-5"]
+|===
+|Type |Default
+
+|`0`\|`1`
+|0
+
+|===
+
+[role="mt-4"]
+=== cc_lang_pref
+
+This parameter specifies the default language that the player will use
+to display captions. Set the parameter's value to an
+link://www.loc.gov/standards/iso639-2/php/code_list.php[ISO 639-1 two-letter language code, {browser-window--new}].
+
+If you use this parameter and also set the `cc_load_policy` parameter to
+`1`, then the player will show captions in the specified language when
+the player loads. If you do not also set the `cc_load_policy` parameter,
+then captions will not display by default, but will display in the
+specified language if the user opts to turn captions on.
+
+[cols="3a,9a", width="100%", options="header", role="rtable mt-4 mb-5"]
+|===
+|Type |Default
+
+|`string`
+|no defaults
+
+|===
+
+[role="mt-4"]
+=== cc_load_policy
+
+Setting the parameter's value to `1` causes closed captions to be shown
+by default, even if the user has turned captions off. The default
+behavior is based on user preference.
+
+[cols="3a,9a", width="100%", options="header", role="rtable mt-4 mb-5"]
+|===
+|Type |Default
+
+|`0`\|`1`
+|no defaults
+
+|===
+
+[role="mt-4"]
+=== color
+
+This parameter specifies the color that will be used in the player's
+video progress bar to highlight the amount of the video that the viewer
+has already seen. Valid parameter values are `red` and `white`, and, by
+default, the player uses the color red in the video progress bar.
+
+[cols="3a,9a", width="100%", options="header", role="rtable mt-4 mb-5"]
+|===
+|Type |Default
+
+|`red`\|`white`
+|red
+
+|===
+
+[role="mt-4"]
+=== controls
+
+This parameter indicates whether the video player controls are
+displayed:
+
+* `controls=0`, Player controls do not display in the 
+* `controls=1`, Player controls display in the player (default).
+
+[cols="3a,9a", width="100%", options="header", role="rtable mt-4 mb-5"]
+|===
+|Type |Default
+
+|`0`\|`1`
+|1
+
+|===
+
+[role="mt-4"]
+=== disablekb
+
+Setting the parameter's value to `1` causes the player to not respond to
+keyboard controls. The default value is `0`, which means that keyboard
+controls are enabled. Currently supported keyboard controls are:
+
+* Spacebar or [k]: Play / Pause
+* Arrow Left: Jump back 5 seconds in the current video
+* Arrow Right: Jump ahead 5 seconds in the current video
+* Arrow Up: Volume up
+* Arrow Down: Volume Down
+* [f]: Toggle full-screen display
+* [j]: Jump back 10 seconds in the current video
+* [l]: Jump ahead 10 seconds in the current video
+* [m]: Mute or unmute the video
+* [0-9]: Jump to a point in the video. `0` jumps to the beginning of the
+  video, `1` jumps to the point 10% into the video, `2` jumps to the point
+  20% into the video, and so forth.
+
+[cols="3a,9a", width="100%", options="header", role="rtable mt-4 mb-5"]
+|===
+|Type |Default
+
+|`0`\|`1`
+|0
+
+|===
+
+[role="mt-4"]
+=== enablejsapi
+
+Setting the parameter's value to `1` enables the player to be controlled
+via IFrame Player API calls. The default value is `0`, which means that the
+player cannot be controlled using that API.
+
+For more information on the IFrame API and how to use it, see the
+link://developers.google.com/youtube/iframe_api_reference[IFrame API documentation, {browser-window--new}].
+
+[cols="3a,9a", width="100%", options="header", role="rtable mt-4 mb-5"]
+|===
+|Type |Default
+
+|`0`\|`1`
+|0
+
+|===
+
+[role="mt-4"]
+=== end
+
+This parameter specifies the time, measured in seconds from the start of
+the video, when the player should stop playing the video. The parameter
+value is a positive integer.
+
+Note that the time is measured from the beginning of the video and not
+from either the value of the `start` player parameter or the
+`startSeconds` parameter, which is used in YouTube Player API methods
+for loading or queueing a video.
+
+[cols="3a,9a", width="100%", options="header", role="rtable mt-4 mb-5"]
+|===
+|Type |Default
+
+|`integer`
+|no defaults
+
+|===
+
+[role="mt-4"]
+=== fs
+
+Setting this parameter to `0` prevents the fullscreen button from
+displaying in the  The default value is `1`, which causes the
+fullscreen button to display.
+
+[cols="3a,9a", width="100%", options="header", role="rtable mt-4 mb-5"]
+|===
+|Type |Default
+
+|`0`\|`1`
+|1
+
+|===
+
+[role="mt-4"]
+=== hl
+
+Sets the player's interface language. The parameter value is an
+link://www.loc.gov/standards/iso639-2/php/code_list.php[ISO 639-1 two-letter language code, {browser-window--new}]
+or a fully specified locale. For example, `fr` and `fr-ca` are both valid
+values. Other language input codes, such as IETF language tags (BCP 47) might
+also be handled properly.
+
+The interface language is used for tooltips in the player and also
+affects the default caption track. Note that _YouTube_ might select a
+different caption track language for a particular user based on the
+user's individual language preferences and the availability of caption
+tracks.
+
+[cols="3a,9a", width="100%", options="header", role="rtable mt-4 mb-5"]
+|===
+|Type |Default
+
+|`string`
+|no defaults
+
+|===
+
+[role="mt-4"]
+=== iv_load_policy
+
+Setting the parameter's value to `1` causes video annotations to be
+shown by default, whereas setting to `3` causes video annotations to not
+be shown by default. The default value is `1`.
+
+[cols="3a,9a", width="100%", options="header", role="rtable mt-4 mb-5"]
+|===
+|Type |Default
+
+|`1`\|`3`
+|1
+
+|===
+
+[role="mt-4"]
+=== list
+
+The `list` parameter, in conjunction with the `listType` parameter,
+identifies the content that will load in the 
+
+* If the `listType` parameter value is `user_uploads`, then the `list`
+parameter value identifies the _YouTube_ channel whose uploaded videos
+will be loaded.
+* If the `listType` parameter value is `playlist`, then the `list`
+parameter value specifies a YouTube playlist ID. In the parameter value,
+you need to prepend the playlist ID with the letters `PL` as shown in
+the example below.
+
+....
+https://www.youtube.com/embed?listType=playlist &list=PLC77007E23FF423C6
+....
+
+* If the `listType` parameter value is `search`, then the `list`
+  parameter value specifies the search query.
+
+[NOTE]
+====
+This functionality is
+link://developers.google.com/youtube/player_parameters#release_notes_10_13_2020[deprecated, {browser-window--new}]
+and will no longer be supported as of 15 November 2020.
+
+If you specify values for the `list` and `listType` parameters,
+the IFrame embed URL does not need to specify a video ID.
+====
+
+[role="mt-4"]
+=== listType
+
+The `listType` parameter, in conjunction with the `list` parameter,
+identifies the content that will load in the  Valid parameter
+values are `playlist` and `user_uploads`.
+
+If you specify values for the `list` and `listType` parameters, the
+IFrame embed URL does not need to specify a video ID.
+
+[NOTE]
+====
+A third value, `search`, has been
+link://developers.google.com/youtube/player_parameters#release_notes_10_13_2020[deprecated, {browser-window--new}]
+and will no longer be supported as of 15 November 2020.
+====
+
+[cols="3a,9a", width="100%", options="header", role="rtable mt-4 mb-5"]
+|===
+|Type |Default
+
+|`user_uploads`\|`playlist`
+|no defaults
+
+|===
+
+[role="mt-4"]
+=== loop
+
+In the case of a single video player, a setting of `1` causes the player
+to play the initial video again and again. In the case of a playlist
+player (or custom player), the player plays the entire playlist and then
+starts again at the first video.
+
+Supported values are `0` and `1`, and the default value is `0`.
+
+[NOTE]
+====
+This parameter has limited support in IFrame embeds. To loop a
+single video, set the `loop` parameter value to `1` and set the
+`playlist` parameter value to the same video ID already specified in the
+Player API URL:
+====
+
+[source, notranslate]
+----
+https://www.youtube.com/embed/VIDEO_ID?playlist=VIDEO_ID&loop=1
+----
+
+[cols="3a,9a", width="100%", options="header", role="rtable mt-4 mb-5"]
+|===
+|Type |Default
+
+|`0`\|`1`
+|0
+
+|===
+
+[role="mt-4"]
+=== modestbranding
+
+This parameter allows you to use a YouTube player that does *not* display
+the *YouTube logo*. Set the parameter value to 1 to prevent the YouTube
+logo from being displayed in the control bar. However, a small YouTube text
+label will appear in the top right corner of a paused video when the user
+hovers over the 
+
+[WARNING]
+====
+*This parameter is deprecated* and has no effect. See the
+link://developers.google.com/youtube/player_parameters#release_notes_08_15_2023[deprecation announcement, {browser-window--new}]
+for more information.
+====
+
+[role="mt-4"]
+=== origin
+
+This parameter provides an extra security measure for the IFrame API and
+is only supported for IFrame embeds. If you are using the IFrame API,
+which means you are setting the `enablejsapi` parameter value to `1`,
+you should always specify your domain as the `origin` parameter value.
+
+To ensure secure communication between your website and the YouTube Player
+API, you need to specify the domain of your website as an origin parameter
+in the iframe embed URL.
+
+Determine the exact domain (including the protocol, http:// or https://)
+where your YouTube player will be embedded.
+For example: https://yourwebsite.com.
+
+Why is this important?
+
+* Security:
+  By specifying the origin parameter, you prevent unauthorized
+  access to your website's resources and protect user data.
+
+* API Functionality:
+  It ensures that the YouTube Player API can communicate with your
+  website's JavaScript code, enabling features like custom controls,
+  interactive elements, and more.
+
+[cols="3a,9a", width="100%", options="header", role="rtable mt-4 mb-5"]
+|===
+|Type |Default
+
+|`string`
+|no defaults
+
+|===
+
+[role="mt-4"]
+=== playlist
+
+This parameter specifies a comma-separated list of video IDs to play. If
+you specify a value, the first video that plays will be the `VIDEO_ID`
+specified in the URL path, and the videos specified in the `playlist`
+parameter will play thereafter.
+
+[cols="3a,9a", width="100%", options="header", role="rtable mt-4 mb-5"]
+|===
+|Type |Default
+
+|`array`
+|no defaults
+
+|===
+
+[role="mt-4"]
+=== playsinline
+
+This parameter controls whether videos play inline or fullscreen on iOS.
+Valid values are:
+
+* `0`, Results in fullscreen playback. This is currently the default
+  value, though the default is subject to change.
+* `1`, Results in inline playback for mobile browsers and for `WebViews`
+  created with the `allowsInlineMediaPlayback` property set to `YES`.
+
+
+[cols="3a,9a", width="100%", options="header", role="rtable mt-4 mb-5"]
+|===
+|Type |Default
+
+|`0`\|`1`
+|0
+
+|===
+
+[role="mt-4"]
+=== privacy_enhanced
+
+When `privacy_enhanced` is switched on, the embedded YouTube player is
+loaded from `www.youtube-nocookie.com` — instead of the standard site
+`www.youtube.com`. This activates what YouTube officially calls
+*Privacy-Enhanced Mode.*
+
+[cols="3a,9a", width="100%", options="header", role="rtable mt-4 mb-4"]
+|===
+|Type |Default
+
+|`Boolean`
+|no defaults
+
+|===
+
+Normally, the moment a page with an embedded YouTube video finishes loading,
+YouTube may already place cookies in your browser and start collecting
+information about you — even if you never click the play button. Just *seeing*
+the video thumbnail on the page is enough. YouTube (and its parent company
+Google) can use this to build a profile of your interests across the web.
+
+With Privacy-Enhanced Mode, that early tracking is held back. The rule becomes:
+YouTube does not store cookies or track the visitor until the visitor actually
+plays the video. Simply: visiting a page that contains the embedded player
+leaves no trace in the form of *tracking cookies*.
+
+[NOTE]
+====
+In Europe especially, privacy laws like the *GDPR* require websites to get
+a *visitor's consent* before setting tracking cookies. A normal YouTube embed
+can set cookies immediately, which creates a legal problem. The privacy-enhanced
+version avoids *setting cookies on page load*, which makes it much easier to
+embed YouTube videos in a legally cleaner way — often in combination with a
+cookie-consent banner.
+====
+
+[role="mt-5"]
+==== What it does *not* do
+
+It is not a magic invisibility cloak. Two honest limitations:
+
+. As soon as the visitor clicks play, the usual YouTube machinery
+  starts up and data *is* sent to YouTube — playback simply cannot
+  work without talking to YouTube's servers.
+. Even before playback, the browser still contacts a Google-owned
+  server to fetch the player and thumbnail, so Google technically
+  sees the visitor's IP address. It just doesn't set tracking cookies
+  at that point.
+
+[CAUTION]
+====
+Strictly speaking, the *official* YouTube iFrame Player API *does not*
+have a parameter literally named `privacy_enhanced`. In the raw API you
+get the same effect by setting the `host` option to `youtube-nocookie.com`
+when creating the player. The name `privacy_enhanced` (usually a simple
+true/false switch) is how many wrapper libraries and player plugins
+expose this feature in a friendlier way — behind the scenes, setting
+it to `true` just swaps the embed address to the "nocookie" domain
+described above.
+====
+
+[role="mt-5"]
+=== rel
+
+Prior to the change, this parameter indicates whether the player should
+show related videos when playback of the initial video ends.
+
+* If the parameter's value is set to `1`, which is the default value,
+  then the player does show related videos.
+* If the parameter's value is set to `0`, then the player does not show
+  related videos.
+
+After the change, you will not be able to disable related videos.
+Instead, if the `rel` parameter is set to `0`, related videos will come
+from the same channel as the video that was just played.
+
+[cols="3a,9a", width="100%", options="header", role="rtable mt-4 mb-5"]
+|===
+|Type |Default
+
+|`0`\|`1`
+|1
+
+|===
+
+[role="mt-4"]
+=== showinfo
+
+If you set the parameter value to 0, information such as the video title
+or the name of the uploader will not be displayed in the player *before*
+the video starts playing.
+
+[CAUTION]
+====
+If the player loads a playlist and you have explicitly set the parameter
+value to 1, the player will also display thumbnails for the videos in the
+respective playlist after loading. 
+
+This feature is only supported for the *AS3 player*, as this is the only
+player that can load a playlist.
+====
+
+[cols="3a,9a", width="100%", options="header", role="rtable mt-4 mb-5"]
+|===
+|Type |Default
+
+|`0`\|`1`
+|1
+
+|===
+
+[role="mt-4"]
+=== start
+
+This parameter causes the player to begin playing the video at the given
+number of seconds from the start of the video. The parameter value is a
+positive integer. Note that similar to the `seekTo` method, the player
+will look for the closest keyframe to the time you specify. This means
+that sometimes the play head may seek to just before the requested time,
+usually no more than around two seconds.
+
+[cols="3a,9a", width="100%", options="header", role="rtable mt-4 mb-5"]
+|===
+|Type |Default
+
+|`integer`
+|no defaults
+
+|===
+
+[role="mt-4"]
+=== widget_referrer
+
+This parameter identifies the URL where the player is embedded. This
+value is used in YouTube Analytics reporting when the YouTube player is
+embedded in a widget, and that widget is then embedded in a web page or
+application. In that scenario, the `origin` parameter identifies the
+widget provider's domain, but YouTube Analytics should not identify the
+widget provider as the actual traffic source. Instead, YouTube Analytics
+uses the `widget_referrer` parameter value to identify the domain
+associated with the traffic source.
+
+[cols="3a,9a", width="100%", options="header", role="rtable mt-4 mb-5"]
+|===
+|Type |Default
+
+|`string`
+|no defaults
+
+|===
+
+
+[role="mt-5"]
+== Methods
+
+lorem:sentences[5]
+
+[role="mt-4"]
+=== playVideo
+
+Plays the currently cued/loaded video. The final player state after
+this method executes will be `playing` (1). +
+
+[NOTE]
+====
+A playback only counts toward a video's official view count if
+it is initiated via a native play button in the 
+====
+
+[role="mt-4"]
+=== pauseVideo
+
+Pauses the currently playing video. The final player state after this
+method executes will be `paused` (`2`) unless the player is in
+the `ended` (`0`) state when the method is called, in which case
+the player state will not change.
+
+[role="mt-4"]
+=== stopVideo
+
+Stops and cancels loading of the current video. This method should
+be reserved for rare situations when you know that the user will not
+be watching additional video in the  If your intent is to pause
+the video, you should just call the `pauseVideo`method.
+
+If you want to change the video that the player is playing, you can call
+one of the queueing methods without calling `stopVideo` first.
+
+[WARNING]
+====
+Unlike the `pauseVideo` method, which leaves the player in the `paused` (`2`)
+state, the `stopVideo` method could put the player into any not-playing
+state, including `ended` (`0`), `paused` (`2`), `video cued` (`5`) or
+`not started` (`-1`).
+====
+
+[role="mt-4"]
+=== seekTo(seconds:Number, allowSeekAhead:Boolean)
+
+Seeks to a specified time in the video. If the player is paused when
+the method is called, it will remain paused. If the method is
+called from another state (`playing`, `video cued`, etc.), the
+player will play the video.
+
+* The `seconds` parameter identifies the time to which the player
+should advance.
+
+The player will advance to the closest keyframe before that time
+unless the player has already downloaded the portion of the video to
+which the user is seeking.
+* The `allowSeekAhead` parameter determines whether the player will
+make a new request to the server if the `seconds` parameter
+specifies a time outside of the currently buffered video data.
+
+It is recommendend that you set this parameter to `false` while the user
+drags the mouse along a video progress bar and then set it to `true`
+when the user releases the mouse. This approach lets a user scroll to
+different points of a video without requesting new video streams by
+scrolling past unbuffered points in the video. When the user releases
+the mouse button, the player advances to the desired point in the
+video and requests a new video stream if necessary.
+
+
+[role="mt-4"]
+=== Playback quality
+
+The getPlaybackQuality(), setPlaybackQuality(), and getAvailableQualityLevels()
+methods are *no longer supported* (October 24, 2019). In particular, calls to
+setPlaybackQuality() will be no-op functions, meaning they will *not* actually
+have any impact on the viewer's playback experience.
+
+[role="mt-4"]
+==== getPlaybackQuality()
+
+This function retrieves the actual video quality of the current video.
+Possible return values ​​are highres, hd1080, hd720, large, medium and small.
+It will also return undefined if there is no current video.
+
+[role="mt-4"]
+==== setPlaybackQuality(suggestedQuality:String)
+
+This function sets the recommended video quality for the current video.
+It causes the video to reload at the current position with the new quality.
+If the playback quality changes, it only changes for the video that is
+currently playing. Calling this function does not guarantee that the playback
+quality will actually change.
+
+If the playback quality does change, however, the onPlaybackQualityChange()
+event will be fired and your code should respond to the event, not to the fact
+that the setPlaybackQuality() method was called.
+
+The suggestedQuality parameter value can be small, medium, large, hd720, hd1080,
+highres, or default. We recommend that you set the parameter value to default.
+This tells YouTube to choose the most appropriate playback quality based on
+the user, video, system, and other playback conditions.
+
+If you suggest a playback quality for a video, the suggested quality will
+only be enabled for that video. You should select a playback quality that
+matches the size of your video 
+
+For example, if your page displays a video player that is 1280 x 720 pixels
+in size, a video with a quality of hd720 will look better than a video with
+a quality of hd1080.
+
+We recommend calling the getAvailableQualityLevels() method to determine
+which levels are available for a video.
+
+The list below shows the playback quality levels that relate to various
+standard player sizes. We recommend that you set the player height to one
+of the values ​​listed below and size your player to use a
+16:9 aspect ratio.
+
+As mentioned above, if you select a standard player size, we recommend that you
+set the suggestedQuality parameter value to default so that YouTube can
+select the most appropriate playback quality.
+
+.Available Video quality levels
+[cols="2a,10a", width="100%", options="header", role="rtable mt-4 mb-5"]
+|===
+|Type |Description
+
+|`small`
+|The player height is 240 pixels and the dimensions are at least 320 x 240
+pixels for an aspect ratio of 4:3.
+
+|`medium`
+|The player height is 360 pixels and the dimensions are 640 x 360 pixels
+for an aspect ratio of 16:9 and 480 x 360 pixels for an aspect ratio of 4:3.
+
+|`large`
+|The player height is 480 pixels and the dimensions are 853 x 480 pixels
+for an aspect ratio of 16:9 and 640 x 480 pixels for an aspect ratio of 4:3.
+
+|'hd720'
+|The player height is 720 pixels and the dimensions are 1280 x 720 pixels
+for an aspect ratio of 16:9 and 960 x 720 pixels for an aspect ratio of 4:3.
+
+|`hd1080`
+|The player height is 1080 pixels and the dimensions are 1920 x 1080 pixels
+for a 16:9 aspect ratio and 1440 x 1080 pixels for a 4:3 aspect ratio.
+
+|`highres`
+|The player height is greater than 1080 pixels. This means that the player
+aspect ratio is greater than 1920 x 1080 pixels.
+
+|`default`
+|YouTube will choose the appropriate playback quality. This setting will reset
+the quality level to the default value, undoing any previous attempts to set
+the playback quality using the methods cueVideoById(), loadVideoById(), or
+setPlaybackQuality().
+
+|===
+
+If you call the method setPlaybackQuality() with a suggestedQuality level
+that is not available for the video, the quality will be set to the next
+lowest available level. For example, if you request the quality level large
+and it is not available, the playback quality will be set to medium if that
+level is available.
+
+Additionally, setting suggestedQuality to a value that is not recognized as
+a quality level is equivalent to setting suggestedQuality to *default*.
+
+[role="mt-4"]
+==== getAvailableQualityLevels()
+
+This function returns the quality formats in which the current video is
+available. You could use this function to determine whether the video is
+available in a higher quality than the one the user is currently using to play
+it.
+
+Your player could display a button or other element to allow the user to
+adjust the quality accordingly. The function returns several strings sorted
+in decreasing order of quality. Possible array element values ​​are highres,
+hd1080, hd720, large, medium, and small.
+
+This function returns an empty array if there is no current video. Your client
+should not automatically switch to the highest or lowest video quality or to
+an unknown format name.
+
+YouTube could expand the list of quality levels to include formats that may
+not be appropriate for your player context. Likewise, YouTube could remove
+options, potentially compromising the quality provided to the user. If your
+client only switches to known available formats, client performance will not
+be affected by introducing new quality levels or by removing quality levels
+that are not appropriate for your player context.
+
+
+[role="mt-4"]
+=== Player volume
+
+lorem:sentences[5]
+
+[role="mt-4"]
+==== mute()
+
+Mutes the 
+
+[role="mt-4"]
+==== unMute()
+
+Unmutes the 
+
+[role="mt-4"]
+==== isMuted()
+
+Returns `true` if the player is muted, `false` if not.
+
+[role="mt-4"]
+==== setVolume(volume:Number)
+
+Sets the volume. Accepts an integer between `0` and `100`.
+
+[role="mt-4"]
+==== getVolume(volume:Number)
+
+Returns the player's current volume, an integer between `0` and `100`.
+
+[NOTE]
+====
+The method `getVolume()` will return the volume even if the player
+is muted.
+====
+
+[role="mt-4"]
+=== Player size
+
+lorem:sentences[5]
+
+==== setSize(width:Number, height:Number)
+
+Sets the size in pixels of the `<iframe>` that contains the 
+
+
+=== Playback rate
+
+lorem:sentences[5]
+
+[role="mt-4"]
+==== getPlaybackRate()
+
+This method retrieves the playback rate of the currently playing
+video. The default playback rate is `1`, which indicates that the
+video is playing at normal speed. Playback rates may include values
+like `0.25`, `0.5`, `1`, `1.5`, and `2`.
+
+[role="mt-4"]
+==== setPlaybackRate(suggestedRate:Number)
+
+This method sets the suggested playback rate for the current video.
+If the playback rate changes, it will only change for the video that
+is already cued or being played. If you set the playback rate for a
+cued video, that rate will still be in effect when the `playVideo`
+method is called or the user initiates playback directly through the
+player controls. In addition, calling methods to cue or load videos
+or playlists (`cueVideoById`, `loadVideoById`, etc.) will reset
+the playback rate to `1`.
+
+Calling this method does *not guarantee* that the playback rate will
+actually change. However, if the playback rate does change, the
+`onPlaybackRateChange` event will fire, and your code should respond
+to the event rather than the fact that it called the `setPlaybackRate` method.
+
+The `getAvailablePlaybackRates` method will return the possible playback
+rates for the currently playing video. However, if you set the `suggestedRate`
+parameter to a non-supported integer or float value, the player will round
+that value down to the nearest supported value in the direction of `1`.
+
+[role="mt-4"]
+==== getAvailablePlaybackRates()
+
+This method returns the set of playback rates (as an array) in which
+the current video is available. The default value is `1`, which indicates
+that the video is playing at normal speed.
+
+The method returns an array of numbers ordered from slowest to
+fastest playback speed. Even if the player does not support variable
+playback speeds, the array should always contain at least one value
+(`1`).
+
+[role="mt-4"]
+=== Playlists
+
+lorem:sentences[5]
+
+[role="mt-4"]
+==== setLoop(loopPlaylists:Boolean)
+
+This method indicates whether the video player should continuously
+play a playlist or if it should stop playing after the last video in
+the playlist ends. The default behavior is that playlists do not loop.
+
+This setting will persist even if you load or cue a different playlist,
+which means that if you load a playlist, call the `setLoop` method with
+a value of `true`, and then load a second playlist, the second playlist
+will also loop.
+
+The required `loopPlaylists` parameter identifies the looping *behavior*.
+
+* If the parameter value is `true`, then the video player will
+  continuously play playlists. After playing the last video in a
+  playlist, the video player will go back to the beginning of the
+  playlist and play it again.
+* If the parameter value is `false`, then playbacks will end after
+  the video player plays the last video in a playlist.
+
+[role="mt-4"]
+==== setShuffle(shufflePlaylist:Boolean)
+
+This method indicates whether a playlist's videos should be shuffled
+so that they play back in an order different from the one that the
+playlist creator designated. If you shuffle a playlist after it has
+already started playing, the list will be reordered while the video
+that is playing continues to play. The next video that plays will then
+be selected based on the reordered list.
+
+This setting will not persist if you load or cue a different playlist,
+which means that if you load a playlist, call the `setShuffle`
+method, and then load a second playlist, the second playlist will
+not be shuffled.
+
+The required `shufflePlaylist` parameter indicates whether YouTube
+should shuffle the playlist.
+
+* If the parameter value is `true`, then YouTube will shuffle the
+  playlist order. If you instruct the method to shuffle a playlist
+  that has already been shuffled, YouTube will shuffle the order again.
+* If the parameter value is `false`, then YouTube will change the
+  playlist order back to its original order.
+
+[role="mt-4"]
+=== Playback status
+
+lorem:sentences[5]
+
+[role="mt-4"]
+==== getVideoLoadedFraction
+
+Returns a (float) number between `0` and `1` that specifies the *percentage*
+of the video that the player shows as buffered. This method returns a
+more reliable number than the now-deprecated `getVideoBytesLoaded and
+`getVideoBytesTotal` methods.
+
+[role="mt-4"]
+==== etPlayerState()
+
+Returns the state of the  Possible values are:
+
+* `-1`, not started
+* `0`, ended
+* `1`, playing
+* `2`, paused
+* `3`, buffering
+* `5`, video cued
+
+[role="mt-4"]
+==== getCurrentTime()
+
+Returns the elapsed time in seconds since the video started playing.
+
+[role="mt-4"]
+==== getVideoStartBytes()
+
+*Deprecated as of October 31, 2012*. Returns the number of bytes the
+video file started loading from. (This method now always returns a
+value of `0`.) Example scenario: the user seeks ahead to a point
+that hasn't loaded yet, and the player makes a new request to play a
+segment of the video that hasn't loaded yet.
+
+[role="mt-4"]
+==== getVideoBytesLoaded()
+
+*Deprecated as of July 18, 2012*. Instead, use the`getVideoLoadedFraction`
+method to determine the percentage of the video that has buffered.
+
+This method returns a value between `0` and `1000` that
+approximates the amount of the video that has been loaded. You could
+calculate the fraction of the video that has been loaded by dividing
+the `getVideoBytesLoaded` value by the `getVideoBytesTotal` value.
+
+[role="mt-4"]
+==== getVideoBytesTotal()
+
+*Deprecated as of July 18, 2012*. Instead, use the `getVideoLoadedFraction`
+method to determine the percentage of the video that has buffered.
+
+Returns the size in bytes of the currently loaded/playing video or an
+approximation of the video's size.
+
+This method always returns a value of `1000`. You could calculate
+the fraction of the video that has been loaded by dividing the
+`getVideoBytesLoaded` value by the `getVideoBytesTotal` value.
+
+[role="mt-4"]
+=== Video information
+
+lorem:sentences[5]
+
+[role="mt-4"]
+==== getDuration()
+
+Returns the duration in seconds of the currently playing video. Note
+that `getDuration()` method will return `0` until the video's metadata is
+loaded, which normally happens just after the video starts playing.
+
+If the currently playing video is a *live* event, the `getDuration()` method
+will return the elapsed time since the live video stream began. Specifically,
+this is the amount of time that the video has streamed without being reset
+or interrupted. In addition, this duration is commonly longer than the
+actual event time since streaming may begin before the event's start time.
+
+[role="mt-4"]
+==== getVideoUrl()
+
+Returns the YouTube.com URL for the currently loaded/playing video.
+
+[role="mt-4"]
+==== getVideoEmbedCode()
+
+Returns the embed code for the currently loaded/playing video.
+
+[role="mt-4"]
+=== Playlist information
+
+lorem:sentences[5]
+
+[role="mt-4"]
+==== getPlaylist()
+
+This method returns an array of the video IDs in the playlist as
+they are currently ordered. By default, this method will return
+video IDs in the order designated by the playlist owner. However, if
+you have called the `setShuffle` method to shuffle the playlist order,
+then the `getPlaylist()` method's return value will reflect the
+shuffled order.
+
+[role="mt-4"]
+==== getPlaylistIndex()
+
+This method returns the index of the playlist video that is
+currently playing.
+
+* If you have not shuffled the playlist, the return value will
+  identify the position where the playlist creator placed the video.
+  The return value uses a zero-based index, so a value of `0` identifies
+  the first video in the playlist.
+* If you have shuffled the playlist, the return value will identify
+  the video's order within the shuffled playlist.
+
+[role="mt-4"]
+=== Event listener
+
+lorem:sentences[5]
+
+[role="mt-4"]
+==== addEventListener(event:String, listener:String)
+
+Adds a listener method for the specified `event`. The <<Events>> section
+below identifies the different events that the player might fire. The listener
+is a string that specifies the method that will execute when the specified
+event fires.
+
+[role="mt-4"]
+==== removeEventListener+(event:String, listener:String)
+
+Removes a listener method for the specified `event`. The `listener`
+is a string that identifies the method that will no longer execute
+when the specified event fires.
+
+[role="mt-4"]
+=== Accessing and modifying DOM nodes
+
+lorem:sentences[5]
+
+[role="mt-4"]
+==== getIframe()
+
+This method returns the DOM node for the embedded `<iframe>`.
+
+[role="mt-4"]
+==== destroy()
+
+Removes the `<iframe>` containing the 
+
+
+[role="mt-5"]
+== Events
+
+The API fires events to notify your application of changes to the
+embedded  As noted in the previous section, you can subscribe to
+events by adding an event listener when constructing the `YT.Player` object,
+and you can also use the `addEventListener` method.
+
+The API will pass an event object as the sole argument to each of those
+methods. The event object has the following properties:
+
+* The event's `target` identifies the video player that corresponds to
+  the event.
+* The event's `data` specifies a value relevant to the event. Note
+  that the `onReady` and `onAutoplayBlocked` events do not specify a
+  `data` property.
+
+[role="mt-4"]
+=== onReady
+
+This event fires whenever a player has finished loading and is ready
+to begin receiving API calls. Your application should implement this
+method if you want to automatically execute certain operations, such
+as playing the video or displaying information about the video, as
+soon as the player is ready.
+
+The example below shows a sample method for handling this event. The
+event object that the API passes to the method has a `target`
+property, which identifies the  The method retrieves the
+embed code for the currently loaded video, starts to play the video,
+and displays the embed code in the page element that has an `id`
+value of `embed-code`.
+ 
+[source, js]
+----
+function onPlayerReady(event) {
+  var embedCode = event.target.getVideoEmbedCode();
+  event.target.playVideo();
+  if (document.getElementById('embed-code')) {
+    document.getElementById('embed-code').innerHTML = embedCode;
+  }
+}
+----
+
+[role="mt-4"]
+=== onStateChange
+
+This event fires whenever the player's state changes. The `data`
+property of the event object that the API passes to your event
+listener method will specify an integer that corresponds to the new
+player state. Possible values are:
+
+* `-1`, not started
+* `0`, ended
+* `1`, playing
+* `2`, paused
+* `3`, buffering
+* `5`, video cued
+
+When the player first loads a video, it will broadcast an
+`unstarted` (`-1`) event. When a video is cued and ready to play,
+the player will broadcast a `video cued` (`5`) event. In your
+code, you can specify the integer values or you can use one of the
+following namespaced variables:
+
+* `YT.PlayerState.ENDED`
+* `YT.PlayerState.PLAYING`
+* `YT.PlayerState.PAUSED`
+* `YT.PlayerState.BUFFERING`
+* `YT.PlayerState.CUED`
+
+[role="mt-4"]
+=== onPlaybackQualityChange
+
+This event fires whenever the video playback quality changes. It might
+signal a change in the viewer's playback environment. See the
+https://support.google.com/youtube/answer/91449[YouTube Help Center]
+for more information about factors that affect playback conditions or
+that might cause the event to fire.
+
+The `data` property value of the event object that the API passes to
+the event listener method will be a string that identifies the new
+playback quality. Possible values are:
+
+* `small`
+* `medium`
+* `large`
+* `hd720`
+* `hd1080`
+* `highres`
+
+[role="mt-4"]
+=== onPlaybackRateChange
+
+This event fires whenever the video playback rate changes. For
+example, if you call the `setPlaybackRate(suggestedRate)` method,
+this event will fire if the playback rate actually changes. Your
+application should respond to the event and should not assume that the
+playback rate will automatically change when the `setPlaybackRate(suggestedRate)`
+method is called. Similarly, your code should not assume that the video
+playback rate will only change as a result of an explicit call to
+`setPlaybackRate`.
+
+The `data` property value of the event object that the API passes to
+the event listener method will be a number that identifies the new
+playback rate. The `getAvailablePlaybackRates` method returns a list of
+the valid playback rates for the currently cued or playing video.
+
+[role="mt-4"]
+=== onError
+
+This event fires if an error occurs in the  The API will pass
+an `event` object to the event listener method. That object's
+`data` property will specify an integer that identifies the type of
+error that occurred.
+  
+Possible values are:
+  
+* `2`, The request contains an invalid parameter value. For
+  example, this error occurs if you specify a video ID that does not
+  have 11 characters, or if the video ID contains invalid characters,
+  such as exclamation points or asterisks.
+* `5`, The requested content cannot be played in an HTML5 player or
+  another error related to the HTML5 player has occurred.
+* `100`, The video requested was not found. This error occurs when
+  a video has been removed (for any reason) or has been marked as
+  private.
+* `101`, The owner of the requested video does not allow it to be
+  played in embedded players.
+* `150`, This error is the same as `101`. It's just a `101`
+  error in disguise.
+
+[role="mt-4"]
+=== onApiChange
+
+This event is fired to indicate that the player has loaded (or
+unloaded) a module with exposed API methods. Your application can
+listen for this event and then poll the player to determine which
+options are exposed for the recently loaded module. Your application
+can then retrieve or update the existing settings for those options.
+
+The following command retrieves an array of module names for which you
+can set player options:
+
+[source, js]
+----
+getOptions();
+----
+
+Currently, the only module that you can set options for is the
+`captions` module, which handles closed captioning in the 
+Upon receiving an `onApiChange` event, your application can use the
+following command to determine which options can be set for the
+`captions` module:
+
+[source, js]
+----
+getOptions('captions');
+----
+
+By polling the player with this command, you can confirm that the
+options you want to access are, indeed, accessible. The following
+commands retrieve and update module options:
+
+[source, js]
+----
+// Retrieving an option:
+getOption(module, option);
+
+//Setting an option
+setOption(module, option, value);
+----
+
+The table below lists the options that the API supports:
+
+[width="100%",cols="34%,33%,33%",options="header",]
+|===
+|Module |Option |Description
+|captions
+|fontSize
+|This option adjusts the font size of the captions displayed in the  +
+
+Valid values are `-1`, `0`, `1`, `2`, and `3`. The default size is `0`,
+and the smallest size is `-1`. Setting this option to an integer below `-1`
+will cause the smallest caption size to display, while setting this option
+to an integer above `3` will cause the largest caption size to display.
+
+|captions
+|reload
+|This option reloads the closed caption data for the video that is playing.
+The value will be `null` if you retrieve the option's value. Set the value
+to `true` to reload the closed caption
+data.
+|===
+
+[role="mt-4"]
+=== onAutoplayBlocked
+
+This event fires any time the browser blocks autoplay or scripted
+video playback features, collectively referred to as "autoplay". This
+includes playback attempted with any of the following player APIs:
+
+* `autoplay` parameter
+* `loadPlaylist` method
+* `loadVideoById` method
+* `loadVideoByUrl` method
+* `playVideo` method
+
+Most browsers have policies that can block autoplay in desktop,
+mobile, and other environments if certain conditions are true.
+Instances where this policy may be triggered include unmuted playback
+without user interaction, or when a
+link://developer.mozilla.org/en-US/docs/Web/HTTP/Permissions_Policy[Permissions Policy, {browser-window--new}]
+to permit autoplay on a cross-origin iframe has not been set.
+
+For complete details, refer to browser-specific policies
+link://developer.apple.com/documentation/webkit/delivering_video_content_for_safari/#3030251[AppleSafari / Webkit, {browser-window--new}],
+link://developer.chrome.com/blog/autoplay/[Google Chrome, {browser-window--new}],
+link://support.mozilla.org/en-US/kb/block-autoplay[Mozilla Firefox, {browser-window--new}] and Mozilla's
+link://developer.mozilla.org/en-US/docs/Web/Media/Autoplay_guide[autoplay guide, {browser-window--new}].
+
+
+[role="mt-5"]
+[[yt-api-examples]]
+== Examples
+
+VideoJS provides a flexible and customizable platform for displaying and
+*controlling* video content on websites and web applications. The J1 Template
+system utilizes online videos from the YouTube platform. The player plugin
+*VideoJS YT Tech* is used to provide custom players, offering the default
+look and feel for all J1 video players.
+
+.VideoJS Player · YouTube Video over VideoJS YT Tech
+youtube::gUmE_TRdp0s[poster="//img.youtube.com/vi/gUmE_TRdp0s/maxresdefault.jpg" role="mb-4"]
+
+Find below examples how to use the YouTube iFrame API on webpages for *native*
+players. Based on the example, you can manually implement YouTube players
+on a page.
+
+[NOTE]
+====
+The J1 Template system automates the process using the iFrame API and
+transforms *native* players into *custom* players using VideoJS. This
+transformation enhances the user experience, as all players utilize the
+same look and feel, including the controls (progress bar or play and skip
+buttons). Using the VideoJS YT Tech plugin, disturbing commercial advertising
+gets suppressed, allowing users to watch videos uninterrupted.
+====
+
+
+[role="mt-5"]
+[[yt-iframe-api--example-1]]
+=== Example 1
+
+Use API with existing <iframe>. In this example, an `<iframe>` element on
+the page already defines the player with which the API will be used. Note
+that either the player's `src` URL must set the `enablejsapi` parameter
+to `1` or the `<iframe>` element's `enablejsapi` attribute must be
+set to `true`.
+
+The `onPlayerReady` method changes the color of the border around
+the player to orange when the player is ready. The
+`onPlayerStateChange+ method then changes the color of the border
+around the player based on the current player status. For example, the
+color is green when the player is playing, red when paused, blue when
+buffering, and so forth.
+
+This example uses the following code:
+
+[source, html]
+----
+<iframe id="iframe-example-01"
+  width="640" height="360"
+  src="//youtube.com/embed/M7lc1UVf-VE?enablejsapi=1"
+  frameborder="0"
+  style="border: solid 4px #37474F"
+></iframe>
+
+<script type="text/javascript">
+  var tag = document.createElement('script');
+  tag.id = 'iframe-demo';
+  tag.src = '//youtube.com/iframe_api';
+  var firstScriptTag = document.getElementsByTagName('script')[0];
+  firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+  var player;
+  function onYouTubeIframeAPIReady() {
+    player = new YT.Player('iframe-example-01', {
+        events: {
+          'onReady': onPlayerReady,
+          'onStateChange': onPlayerStateChange
+        }
+    });
+  }
+
+  function onPlayerReady(event) {
+    document.getElementById('iframe-example-01').style.borderColor = '#FF6D00';
+  }
+
+  function changeBorderColor(playerStatus) {
+    var color;
+    if (playerStatus == -1) {
+      color = "#37474F"; // unstarted = gray
+    } else if (playerStatus == 0) {
+      color = "#FFFF00"; // ended = yellow
+    } else if (playerStatus == 1) {
+      color = "#33691E"; // playing = green
+    } else if (playerStatus == 2) {
+      color = "#DD2C00"; // paused = red
+    } else if (playerStatus == 3) {
+      color = "#AA00FF"; // buffering = purple
+    } else if (playerStatus == 5) {
+      color = "#FF6DOO"; // video cued = orange
+    }
+    if (color) {
+      document.getElementById('iframe-example-01').style.borderColor = color;
+    }
+  }
+
+  function onPlayerStateChange(event) {
+    changeBorderColor(event.data);
+  }
+</script>
+----
+
+
+[role="mt-5"]
+[[yt-iframe-api--example-2]]
+=== Example 2
+
+Playback video (loud) at volume set to 100%. This example creates a video player
+of size 1280px by 720px. The event listener for the `onReady` event then calls
+the `setVolume` method to adjust the volume to the highest setting.
+
+This example uses the following code:
+
+[source, js]
+----
+function onYouTubeIframeAPIReady() {
+  var player_example_02;
+  player_example_02 = new YT.Player('player', {
+    width: 1280,
+    height: 720,
+    videoId: 'M7lc1UVf-VE',
+    events: {
+      'onReady': onPlayerReady,
+      'onStateChange': onPlayerStateChange,
+      'onError': onPlayerError
+    }
+  });
+}
+
+function onPlayerReady(event) {
+  event.target.setVolume(100);
+  event.target.playVideo();
+}
+----
+
+
+[role="mt-5"]
+[[yt-iframe-api--example-3]]
+=== Example 3
+
+This example sets player parameters to automatically play the video when
+it loads and hide the video player's controls. It also adds event
+listeners for several events that the API broadcasts.
+
+This example uses the following code:
+
+[role="mb-8"]
+[source, js]
+----
+function onYouTubeIframeAPIReady() {
+  var player_example_03;
+  player_example_03 = new YT.Player('player', {
+    videoId: 'M7lc1UVf-VE',
+    playerVars: {
+      'autoplay': 1,
+      'controls': 0
+      },
+    events: {
+      'onReady':        onPlayerReady,
+      'onStateChange':  onPlayerStateChange,
+      'onError':        onPlayerError
+    }
+  });
+}
+----

@@ -1,0 +1,153 @@
+[role="mt-5"]
+== Overview
+
+By appending parameters to the IFrame URL, you can customize the
+playback experience in your application. For example, you can
+automatically play videos using the `autoplay` parameter or cause a
+video to play repeatedly using the `loop` parameter. You can also use
+the `enablejsapi` parameter to enable the player to be controlled via
+the
+link://developers.google.com/youtube/iframe_api_reference[IFrame Player API, {browser-window--new}].
+
+This page currently defines all parameters supported in any YouTube-**embedded**
+player. Each parameter definition identifies the players that support the
+corresponding parameter.
+
+[NOTE]
+====
+Embedded players must have a viewport that is at least 200px by
+200px. If the player displays controls, it must be large enough to fully
+display the controls without shrinking the viewport below the minimum
+size. We recommend 16:9 players be at least 480 pixels wide and 270
+pixels tall.
+====
+
+
+[role="mt-5"]
+=== Embed a Player
+
+Define an `<iframe>` tag in your application in which the `src` URL
+specifies the content that the player will load as well as any other
+player parameters you want to set. The `<iframe>` tag's `height` and
+`width` parameters specify the dimensions of the player.
+
+If you create the `<iframe>` element yourself (rather than using the
+IFrame Player API to create it), you can append player parameters
+directly to the end of the URL. The URL has the following format:
+
+....
+https://www.youtube.com/embed/<VIDEO_ID>
+....
+
+The `<iframe>` tag below would load a *640x360px* player that would play
+the YouTube video *M7lc1UVf-VE*. Since the URL sets the `autoplay`
+parameter to `1`, the video would play automatically once the player has
+loaded.
+
+[source, html]
+----
+<iframe
+  id="ytplayer"
+  type="text/html"
+  width="640" height="360"
+  src="https://www.youtube.com/embed/M7lc1UVf-VE?autoplay=1&origin=http://example.com"
+  frameborder="0">
+</iframe>
+----
+
+Follow the
+link://developers.google.com/youtube/iframe_api_reference#Loading_a_Video_Player[IFrame Player API instructions, {browser-window--new}]
+to insert a video player in your web page or
+application after the Player API's Javascript code has loaded. The
+second parameter in the constructor for the video player is an object
+that specifies player options. Within that object, the `playerVars`
+property identifies player parameters.
+
+The HTML and Javascript code below shows a simple example that inserts a
+*YouTube player* into the page element that has an `id` value of
+`ytplayer`. The `onYouTubePlayerAPIReady()` method specified here is
+called automatically when the IFrame Player API code has loaded. This
+code does not define any player parameters and also does not define
+other event handlers.
+
+[source, html]
+----
+<div id="ytplayer"></div>
+
+<script>
+  // Load the IFrame Player API code asynchronously.
+  var tag = document.createElement('script');
+  tag.src = "https://www.youtube.com/player_api";
+  var firstScriptTag = document.getElementsByTagName('script')[0];
+  firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+  // Replace the 'ytplayer' element with an <iframe> and
+  // YouTube player after the API code downloads.
+  var player;
+  function onYouTubePlayerAPIReady() {
+    player = new YT.Player('ytplayer', {
+      height: '360',
+      width: '640',
+      videoId: 'M7lc1UVf-VE'
+    });
+  }
+</script>
+----
+
+
+[role="mt-5"]
+=== Select content to play
+
+You can configure your embedded player to load a video, a playlist, or a
+user's uploaded videos.
+
+The following list explains these options for loading a video. For an IFrame
+embed, the YouTube video ID for the video that you want to load is specified
+in the IFrame's `src` URL.
+
+....
+https://www.youtube.com/embed/<VIDEO_ID>
+....
+
+If you are using the YouTube Data API (v3), you can programmatically construct
+these URLs by retrieving video IDs from
+link://developers.google.com/youtube/v3/docs/search#resource[search results, {browser-window--new}],
+link://developers.google.com/youtube/v3/docs/playlistItems#resource[playlist item resources, {browser-window--new}],
+link://developers.google.com/youtube/v3/docs/videos#resource[video resources, {browser-window--new}],
+or other resources. After obtaining a video ID, replace the `VIDEO_ID` text in
+the URLs above with that value to create the player URL.
+
+For loading a playlist, set the `listType` player parameter to `playlist`.
+In addition, set the `list` player parameter to the YouTube playlist ID that
+you want to load.
+
+....
+https://www.youtube.com/embed?listType=playlist&list=PLAYLIST_ID
+....
+
+Note that you need to prepend the playlist ID with the letters `PL` as
+shown in the following example:
+
+....
+https://www.youtube.com/embed?listType=playlist&list=PLC77007E23FF423C6
+....
+
+If you are using the YouTube Data API (v3), you can programmatically
+construct these URLs by retrieving playlist IDs from
+link://developers.google.com/youtube/v3/docs/search#resource[search results, {browser-window--new}],
+link://developers.google.com/youtube/v3/docs/channels#contentDetails.relatedPlaylists[channel resources, {browser-window--new}],
+or link://developers.google.com/youtube/v3/docs/activities#resource[activity resources, {browser-window--new}].
+After obtaining a playlist ID, replace the `PLAYLIST_ID` text in the URL above
+with that value.
+
+// Original (deprecated, preserved for reference):
+// For Loading a user's uploaded videos, set the `listType` player parameter
+// claude - Update YouTube iFrame API manual #1
+For loading a user's uploaded videos, set the `listType` player parameter
+to `user_uploads`. In addition, set the `list` player parameter to the
+YouTube username whose uploaded videos you want to load.
+
+....
+https://www.youtube.com/embed?listType=user_uploads&list=USERNAME
+....
+

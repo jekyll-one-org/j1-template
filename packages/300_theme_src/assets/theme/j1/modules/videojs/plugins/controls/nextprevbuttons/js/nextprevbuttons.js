@@ -2,10 +2,11 @@
  # -----------------------------------------------------------------------------
  # ~/modules/videojs/js/plugins/controls/nextprevbuttons/js/nextprevbuttons.js
  # Provides the nextPrevButtons plugin for Video.js V8 and newer.
- # Adds previous-/next-item buttons to the control bar that drive a playlist
- # managed by the videojs-playlist plugin.
+ # Adds previous-/next (item) buttons to the control bar that drive a
+ # playlist managed by the videojs-playlist plugin.
  #
  # Product/Info:
+ # https://github.com/videojs/videojs-playlist
  # https://jekyll.one
  #
  # Copyright (C) 2026 Juergen Adams

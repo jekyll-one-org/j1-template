@@ -260,6 +260,11 @@ defaults:
     enabled:                            false
 
     # --------------------------------------------------------------------------
+    # PRIVACY settings
+    #
+    privacy_enhanced:                   true                                    # enable|disable privacy-enhanced host 'youtube-nocookie.com'
+
+    # --------------------------------------------------------------------------
     # GENERAL settings
     #
     type:                               compact                                 # default type   (mini|compact|large)

@@ -1,0 +1,754 @@
+---
+title:                                  VideoJS Plugins
+title_extention:                        Enhance VJS Player
+tagline:                                Enhance VJS Player
+
+date:                                   2024-11-10
+last_modified:                          2026-07-23
+
+description: >
+                                        The J1 Template provides a collection of plugins
+                                        to enhance VJS players, such as by providing useful
+                                        functions like additional buttons or advanced keyboard
+                                        support to control a player by defined keys (hotkeys).
+keywords: >
+                                        open source, free, template, jekyll, jekyllone, web,
+                                        sites, static, jamstack, bootstrap,
+                                        html, html5, video, support, videojs, plugin
+
+categories:                             [ Manual ]
+tags:                                   [ Plugin, VideoJS ]
+
+image:
+  path:                                 /assets/image/module/attic/1920x1280/j1-videojs.jpg
+  width:                                1920
+  height:                               1280
+
+tts:                                    true
+comments:                               false
+compress:                               false                                   # required for embeded JS scripts
+regenerate:                             false
+personalization:                        true
+permalink:                              /pages/public/manual/integrations/videojs/plugins/
+resources:                              [ videojs ]
+resource_options:
+  - toccer:
+      collapseDepth:                    2
+  - attic:
+      opacity:                          .3
+      slides:
+        - url:                          /assets/image/module/attic/1920x1280/j1-videojs.jpg
+          alt:                          VideoJS Poster
+---
+
+// Page Initializer
+// =============================================================================
+// Enable the Liquid Preprocessor
+:page-liquid:
+
+// Set (local) page attributes here
+// -----------------------------------------------------------------------------
+// :page--attr:                         <attr-value>
+// :images-dir:                         {imagesdir}/pages/roundtrip/100_present_images
+
+// Attributes for section control
+//
+:autocaption_plugin:                    true
+:hotkeys_plugin:                        true
+:skipbuttons_plugin:                    true
+:zoombuttons_plugin:                    true
+:nextprevbuttons_plugin:                true
+
+//  Load Liquid procedures
+// -----------------------------------------------------------------------------
+{% capture load_attributes %}themes/{{site.template.name}}/procedures/global/attributes_loader.proc{%endcapture%}
+
+// Load page attributes
+// -----------------------------------------------------------------------------
+{% include {{load_attributes}} scope="global" %}
+
+
+// Page content
+// -----------------------------------------------------------------------------
+[role="dropcap"]
+The J1 Template offers a collection of plugins to enhance VJS players,
+including features such as additional buttons and advanced keyboard support
+that allows for player control via predefined keys (hotkeys).
+
+// Include sub-documents (if any)
+// -----------------------------------------------------------------------------
+[role="mt-5"]
+== VideoJS Plugins
+
+VideoJS provides a flexible and customizable platform for displaying and
+Controlling MPEG-4 video content on websites and web applications.
+
+.Enhanced VideoJS Player · Plugins hotKeys, skipButtons and zoomButtons
+videojs::/assets/video//html5/peck_pocketed.mp4[poster="/assets/video/poster/html5/peck_pocketed.jpg", opts="" role="mb-5"]
+
+[role="mt-4"]
+=== Plugin settings
+
+Find below an excerpt of available configuration values for VideJS players.
+Check the YAML configuration at `_data\modules\defaults\gallery.yml` for all
+configuration settings.
+
+[source, yaml]
+----
+# --------------------------------------------------------------------------
+# VideoJS options
+#
+videojsOptions:
+  enabled:                          false
+
+  controlBar:
+    playbackRates:                  [0.25, 0.5, 1, 1.5, 2]
+    remainingTimeDisplay:           true
+    pictureInPictureToggle:         false
+
+    volumePanel:
+      inline:                       false
+
+    hotkeysPlugin:
+      enabled:                      true
+      options:
+        volumeStep:                 0.2
+
+    skipButtonsPlugin:
+      enabled:                      true
+      options:
+        forward:                    15
+        backward:                   15
+
+    nextPrevButtonsPlugin:
+      enabled:                      true
+      options:
+        previous:                   true
+        next:                       true
+
+    zoomPlugin:
+      enabled:                      true
+      options:
+        moveX:                      0
+        moveY:                      0
+        rotate:                     0
+        zoom:                       1
+----
+
+[role="mt-5"]
+== Available Plugins
+
+A set of handy plugins is available for VideoJS players to improve the
+user's experience of playing video on a webpage. Note that plugins cannot
+used for *all* video sources. For example, the Zoom plugin is only available
+for MP4 video but is not compatible with *online video* sources provided by
+YouTube for example.
+
+[TIP]
+====
+A plugin triggers the functionality of the underlying Video technology,
+respectively, the Provider API, to control and play a video of a specific
+type. Most *online video* providers do not support any *zooming* for videos,
+which results in the Zoom plugin not being available for online video sources.
+====
+
+ifeval::[{autocaption_plugin} == true]
+[role="mt-4"]
+=== autoCaption
+
+The `autoCaption` plugin automatically enables the caption or subtitle track
+to match the player's language best. The plugin name needs to be revised, as
+it has no relation to automatically generating captions. Language codes
+are considered case-insensitive. If one or more tracks have a `kind` of
+`captions` or `subtitles` with an exactly matching language code, the first
+will be selected.
+
+If there is no exact match, the first `captions` or `subtitles` track where
+the first part of the language code matches is selected, so `en-US` would
+match `en` or `en-gb`. If there is no match based on language, the first
+`captions` or `subtitles` track with `default` = `true` will be selected.
+
+The player language itself is either explicitly set as an option or is
+derived from the closest element with a `lang` attribute.
+See //docs.videojs.com/player#language[VideoJS Docs, {browser-window--new}]
+for more details.
+endif::[]
+
+
+ifeval::[{hotkeys_plugin} == true]
+[role="mt-4"]
+=== hotKeys
+
+The `hotkeys` plugin for Video.js enables keyboard *hotkeys* when the
+*player* has *focus*.
+
+.Hotkey Assignments
+[cols="4,8", options="header", width="100%", role="table-responsive-md mt-3 mb-4"]
+|===
+|Key |Description
+
+|`Space bar`
+|Toggles play and pause
+
+|`M` key
+|Toggles *mute* and *unmute*
+
+|`F` key
+|Toggles *fullscreen* off and on
+
+|`Left\|Right Arrow` keys
+|Seek the video back and forth the *seekstep* configured
+
+|`Up\|Down Arrow` keys
+|Increase and decrease the *volume*
+
+|`Number 1-9` keys
+|Keys from 1-9 *seek* the video to a *percentage* of:
+`1` is `10%` and `9` is `90%`
+
+|===
+
+[role="mt-4 mb-5"]
+[NOTE]
+====
+Clicking any of the control buttons, such as Play/Pause, Fullscreen, or Mute,
+will remove focus from the player, which appears to *break* the hotkeys.
+
+For accessibility reasons, people who do not use or are unfamiliar with the
+hotkeys can still properly use the `Tab` key to highlight the control buttons
+and press `Space` to toggle them.
+====
+
+*To restore focus*, click on the video or an empty part of the control bar
+at the bottom of the video player. *To override this behavior*, set the
+flag `alwaysCaptureHotkeys` to `true.` This setting will *fix* hotkeys.
+For accessibility, the `Tab` key may be used in combination with the
+`Enter`|`Return` key to navigate and activate control buttons.
+
+[role="mt-4"]
+==== Options
+
+The plugin hotKeys supports a set of customizable settings for more individual
+control over the plugin's behavior.
+
+.Plugin Options
+[cols="3,3,6", options="header", width="100%", role="table-responsive-md mt-3 mb-4"]
+|===
+|Option |Type\|Default |Description
+
+|`volumeStep`
+|decimal\|`0.1`
+|The percentage to increase or decrease the volume level when using the
+Up and Down *Arrow keys*.
+
+|`seekStep` (value)
+|integer\|`5`
+|The number of seconds to seek forward and backwards when using the
+Right and Left *Arrow keys*, or a function that generates an integer given
+the `KeyboardEvent`.
+
+|`seekStep` (function)
+|function
+|The number of seconds to seek forward and backwards when using a function
+that generates an *integer* given on the `KeyboardEvent`.
+
+|`enableMute`
+|boolean\|`true`
+|Enables the volume mute to be toggle by pressing the *M* key.
+
+|`enableVolumeScroll`
+|boolean\|`true`
+|Enables increasing or decreasing the volume by scrolling the mouse wheel
+over the volume *button* (in the control bar).
+
+|`enableHoverScroll`
+|boolean\|`false`
+|Only changes volume when the mouse is hovering over the volume control
+elements. This works in connection with `enableVolumeScroll`.
+
+|`enableFullscreen`
+|boolean\|`true`
+|Enables toggling the video fullscreen by pressing the *F* key.
+
+|`enableNumbers`
+|boolean\|`true`
+|Enables seeking the video by pressing the number keys.
+
+|`enableModifiersForNumbers`
+|boolean\|`true`
+|Enables the use of `Ctrl\|Alt\|Cmd` + `Number keys` for skipping
+around in the video. This is enabled by default due to backwardscompatibility.
+
+|`alwaysCaptureHotkeys`
+|boolean\|`false`
+|Forces the capture of hotkeys, even when control elements are focused.
+
+|`enableInactiveFocus`
+|boolean\|`true`
+|This reassigns focus to the player when the control bar fades out after
+a user has clicked a button on thecontrol bar.
+
+|`skipInitialFocus`
+|boolean\|`false`
+|This stops focusing the player on initial Play under unique autoplay
+situations.
++
+More information with https://github.com/ctd1500/videojs-hotkeys/issues/44[Issue #44]
+
+|`captureDocumentHotkeys`
+|boolean\|`false`
+|Capture document keydown events to also use hotkeys even if the player
+does not have focus. If you enable this option, *you must* configure
+`hotkeysFocusElementFilter`.
+
+|`hotkeysFocusElementFilter`
+|function\|`() => false`
+|Filter function to capture document hotkeys (if `captureDocumentHotkeys`
+is enabled) depending on the current focused element. For example, if you
+want to capture hotkeys when the player is *not* focused and avoid conflicts
+when the user is focusing a particular link:
+`hotkeysFocusElementFilter: e => e.tagName.toLowerCase() === 'body'`.
+
+|`enableJogStyle`
+|boolean\|`false`
+|Enables seeking the video in a broadcast-style jog by pressing the Up
+and Down Arrow keys.
+
+|===
+
+[role="mt-4 mb-4"]
+[NOTE]
+====
+The *Enter|Return* key may be used instead to activate the control
+elements (default: `false`).
+
+This feature may break accessibility, and cause unexpected behavior.
+====
+
+[role="mt-4 mb-4"]
+[WARNING]
+====
+`seekStep` will also need to be changed to get a proper broadcast-style jog.
+This feature and the changes for the seek step are explained a bit more in
+[PR #12](https://github.com/ctd1500/videojs-hotkeys/pull/12).
+Defaults to `false`.
+
+This isn't a feature for everyone, and enabling JogStyle will disable the
+volume hotkeys.
+====
+
+[role="mt-4"]
+==== Template Defaults
+
+To avoid repeating standard settings, a set of default values is set over
+the Template defaults.
+
+.Template Defaults (hotKeys)
+[cols="4,8", options="header", width="100%", role="table-responsive-md mt-3 mb-4"]
+|===
+|Option |Default
+
+|`enabled`
+|false
+
+|`seekStep`
+|15
+
+|`volumeStep`
+|0.1
+
+|`alwaysCaptureHotkeys`
+|true
+
+|`captureDocumentHotkeys`
+|false
+
+|`hotkeysFocusElementFilter`
+|function () { return false }
+
+|`enableFullscreen`
+|true
+
+|`enableHoverScroll`
+|true
+
+|`enableInactiveFocus`
+|false
+
+|`enableMute`
+|true
+
+|`enableNumbers`
+|false
+
+|`enableVolumeScroll`
+|true
+
+|`skipInitialFocus`
+|false
+
+|===
+endif::[]
+
+
+ifeval::[{skipbuttons_plugin} == true]
+[role="mt-5"]
+=== skipButtons
+
+The plugin `skipbuttons` adds *Seek Buttons* to the control bar. These
+buttons allow the user to skip forward or backward by a configured number
+of seconds.
+
+[role="mt-4"]
+==== Options
+
+The plugin skip buttons support a set of customizable settings for more
+individual control over the plugin's behavior.
+
+.Plugin Options
+[cols="2,2,8", options="header", width="100%", role="table-responsive-md mt-3 mb-4"]
+|===
+|Option |Type\|Default |Description
+
+|`forward`
+|integer\|10
+|If a number greater than 0, a seek forward button will be added which
+seeks that number of *seconds*.
+
+|`backward`
+|integer\|10
+|If a number greater than 0, a seek back button will be added which
+seeks that number of *seconds*.
+
+|`forwardIndex`
+|integer\1
+|Controls the *position* for the *forward button* to be inserted in the
+VJS player control bar.
+
+|`backwardIndex`
+|integer\1
+|Controls the *position* for the *backward button* to be inserted in the
+VJS player control bar.
+
+|===
+
+[role="mt-4"]
+==== Control button positions
+
+`forwardIndex` and `backwardIndex` control the *posiiton* of the button in the
+*controlbar*.
+
+[NOTE]
+====
+If both a backward and forward button are used, the *forward* button is
+inserted *always first*.
+====
+
+The play button for the VJS standard control bar is at index `0`. With the
+default index of `1` for both, the forward button is inserted after the
+play button; then, the back button is inserted after the play button and
+before the forward button.
+
+Setting `backwardIndex` to `0` and `forwardIndex` to `1` results in the
+buttons surrounding the play button by placing the backward button *before*
+the play button and the forward button *after*.
+
+[NOTE]
+====
+For the J1 template, a shorthand parameter `surroundPlayButton` is available
+to *automatically  surround* the play button with backward and forward buttons.
+====
+
+[role="mt-4"]
+==== Template Defaults
+
+To not repaet standard settings, a set of default values are set over Template
+defaults.
+
+.Template Defaults (skipButtons)
+[cols="4,8", options="header", width="100%", role="table-responsive-md mt-3 mb-4"]
+|===
+|Option |Default
+
+|`enabled`
+|false
+
+|`surroundPlayButton`
+|false
+
+|`backwardIndex`
+|1
+
+|`forwardIndex`
+|1
+
+|`forward`
+|10
+
+|`backward`
+|10
+
+|===
+endif::[]
+
+
+// Update VideoJS Plugins manual #1
+// New manual section for the nextPrevButtons plugin
+// -----------------------------------------------------------------------------
+ifeval::[{nextprevbuttons_plugin} == true]
+[role="mt-5"]
+=== nextPrevButtons
+
+The plugin `nextPrevButtons` adds two buttons to the player's control bar:
+a *Previous* button and a *Next* button. Both buttons are used to move
+through a *playlist*, a list of videos played by a single player. Clicking
+the *Next* button loads the next video of the list; clicking the *Previous*
+button goes back to the video played before.
+
+[NOTE]
+====
+The `nextPrevButtons` plugin works together with the *playlist* plugin
+(`videojs-playlist`) that manages the list of videos for a player. If a
+player has *no* playlist, the buttons stay *disabled* (grayed out) because
+there is nothing to move to.
+====
+
+Both buttons follow the current *position* in the playlist automatically:
+
+* If the *first* video of a playlist is played, the *Previous* button is
+disabled because there is no video before the first one.
+* If the *last* video is played, the *Next* button is disabled because
+there is no video after the last one.
+* If the playlist runs in *repeat* mode, the list starts over at the end.
+In that case, both buttons stay enabled all the time.
+
+A disabled button is shown *dimmed* (half transparent) and does not react
+on mouse clicks. The state of the buttons is updated automatically whenever
+a new video is loaded, or the playlist is changed or sorted. No additional
+configuration is needed for that behavior.
+
+[role="mt-4"]
+==== Options
+
+The plugin nextPrevButtons supports a small set of settings to control
+what buttons are created and where the buttons are placed in the
+control bar.
+
+.Plugin Options
+[cols="3,3,6", options="header", width="100%", role="table-responsive-md mt-3 mb-4"]
+|===
+|Option |Type\|Default |Description
+
+|`previous`
+|boolean\|`true`
+|Adds the *Previous* button to the control bar. Set this option to
+`false` if no button to go *back* in the playlist should be shown.
+
+|`next`
+|boolean\|`true`
+|Adds the *Next* button to the control bar. Set this option to `false`
+if no button to go *forward* in the playlist should be shown.
+
+|`previousIndex`
+|integer\|auto
+|Controls the *position* for the *Previous* button in the VJS player
+control bar. If not set, the position is calculated *automatically*;
+see section *Control button positions* for details.
+
+|`nextIndex`
+|integer\|auto
+|Controls the *position* for the *Next* button in the VJS player
+control bar. If not set, the position is calculated *automatically*;
+see section *Control button positions* for details.
+
+|===
+
+[role="mt-4"]
+==== Control button positions
+
+In most cases, no position needs to be configured because the plugin
+places the buttons *automatically* at a useful position:
+
+* The *Previous* button is placed directly *before* the *skip backward*
+button of the `skipButtons` plugin.
+* The *Next* button is placed directly *after* the *skip forward* button
+of the `skipButtons` plugin.
+
+That way, all buttons that move *backward* (previous item, skip back) are
+grouped on the *left* side of the play button area, and all buttons that
+move *forward* (skip forward, next item) are grouped on the *right* side.
+
+If the `skipButtons` plugin is *not* used, the *Previous* button is placed
+right after the play button, and the *Next* button is added at the *end*
+of the control bar.
+
+[NOTE]
+====
+The options `previousIndex` and `nextIndex` are for *special* cases only.
+If one of these options is set to a number, the automatic positioning is
+turned *off* for that button, and the button is inserted at the given
+index (position) in the control bar. The play button of the VJS standard
+control bar is at index `0`.
+====
+
+[role="mt-4"]
+==== Styling (CSS)
+
+The buttons are created using CSS classes that can be used for individual
+styling. Each button has the class `vjs-playlist-button` plus a class for
+its direction: `skip-previous` for the *Previous* button and `skip-next`
+for the *Next* button.
+
+A disabled button additionally carries the (VJS standard) class
+`vjs-disabled`. The stylesheet of the plugin dims a disabled button to
+an opacity of `50%` and changes the mouse pointer to the default arrow to
+signal that the button cannot be clicked.
+
+[role="mt-4"]
+==== Template Defaults
+
+To avoid repeating standard settings, a set of default values is set over
+the Template defaults.
+
+.Template Defaults (nextPrevButtons)
+[cols="4,8", options="header", width="100%", role="table-responsive-md mt-3 mb-4"]
+|===
+|Option |Default
+
+|`enabled`
+|false
+
+|`previous`
+|true
+
+|`next`
+|true
+
+|===
+endif::[]
+
+
+ifeval::[{zoombuttons_plugin} == true]
+[role="mt-5"]
+=== zoomButtons
+
+The plugin `zoomButtons` adds a (zoom) button to the player's control bar.
+By clicking the button, a menu opens to access all possible functions
+supported (enabled), such as zoom, flip, rotate, etc.
+
+[role="mt-4"]
+==== Methods
+
+The behavior of the Zoom plugin can be controlled at runtime by following
+methods.
+
+[role="mt-4"]
+===== zoom(value)
+
+Zoom function.
+
+- *value* type: `Number`
+
+[source, js]
+----
+const zoomPlugin = video.zoomPlugin();
+zoomPlugin.zoom(2);
+----
+
+[role="mt-4"]
+===== rotate(value)
+
+Rotate function.
+
+- *value* type: `Number` in degree
+
+[source, js]
+----
+const zoomPlugin = video.zoomPlugin();
+zoomPlugin.rotate(180);
+----
+
+[role="mt-4"]
+===== move(x, y)
+
+Move function.
+
+- *x* type: `Number`
+- *y* type: `Number`
+
+[source, js]
+----
+const zoomPlugin = video.zoomPlugin();
+zoomPlugin.move(0, 0);
+----
+
+[role="mt-4"]
+===== toggle()
+
+Open and close the zoom menu.
+
+[source, js]
+----
+const zoomPlugin = video.zoomPlugin();
+zoomPlugin.toggle();
+----
+
+[role="mt-4"]
+===== flip(signal)
+
+Flip video.
+
+  - *signal* type: `String` of `+` or `-` for flip the video.
+
+[source, js]
+----
+const zoomPlugin = video.zoomPlugin();
+zoomPlugin.flip("-");
+----
+
+[role="mt-4"]
+==== Options
+
+Example:
+[source, js]
+----
+const zoomPlugin = video.zoomPlugin({
+	showZoom: true,
+	showMove: true,
+	showRotate: true,
+	gestureHandler: false
+});
+----
+
+* `showZoom` show/hide +- zoom buttons. default `true`
+* `showMove` show/hide up, left, right, reset and down buttons. default `true`
+* `showRotate` show/hide rotate and flip buttons. default `true`
+* `gestureHandler` enable gesture zoom drag and drop, wheel. default `false`
+
+[role="mt-4"]
+==== Events
+
+For more control over zooming a video, the following events are available.
+
+[role="mt-4"]
+===== listen(event, callback)
+
+Listen events of the zoom plugin.
+
+- **event**
+	- type: `String`
+	- options:
+	  - `'change'` when click in buttons modal
+	  - `'click'` when modal is opened or closed
+- **callback**
+	- type: `Function`
+
+[role="mt-4 mb-8"]
+[source, js]
+----
+const zoomPlugin = video.zoomPlugin();
+zoomPlugin.listen('click', () => {
+    console.log('click');
+});
+----
+endif::[]

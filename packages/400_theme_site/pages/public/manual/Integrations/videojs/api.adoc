@@ -1,0 +1,115 @@
+---
+title:                                  VideoJS V8
+title_extention:                        API
+tagline:                                Programming Interface
+
+date:                                   2026-11-04
+last_modified:                          2026-07-23
+
+description: >
+                                        VideoJS is an Open Source JavaScript framework for building
+                                        HTML5 based video players on the web. It provides a customizable
+                                        and extensible platform for embedding and controlling video
+                                        playback within web applications. VideoJS is designed to work
+                                        with HTML5 video and allows developers to create responsive
+                                        and feature-rich video players with a wide range of
+                                        customization options.
+keywords: >
+                                        open source, free, template, jekyll, jekyllone, web,
+                                        sites, static, jamstack, bootstrap,
+                                        html, html5, video, support, flash player,
+                                        quicktime, silverlight, videojs, api
+
+categories:                             [ Manual ]
+tags:                                   [ API, VideoJS ]
+
+image:
+  path:                                 /assets/image/module/attic/1920x1280/j1-videojs.jpg
+  width:                                1920
+  height:                               1280
+
+tts:                                    true
+comments:                               false
+exclude_from_search:                    false
+regenerate:                             true
+personalization:                        true
+permalink:                              /pages/public/manual/integrations/videojs/api/
+
+resources:                              []
+resource_options:
+  - toccer:
+      collapseDepth:                    2
+  - attic:
+      opacity:                          .3
+      slides:
+        - url:                          /assets/image/module/attic/1920x1280/j1-videojs.jpg
+          alt:                          VideoJS Poster
+---
+
+// Page Initializer
+// =============================================================================
+// Enable the Liquid Preprocessor
+:page-liquid:
+
+// claude - Update  VideoJS API manual #1
+// Attribute settings for page content control (e.g includes)
+//
+:includedir:                            _includes
+:tabledir:                              _includes/tables
+:documentdir:                           _includes/documents
+
+// Set (local) page attributes here
+// -----------------------------------------------------------------------------
+// :page--attr:                         <attr-value>
+:images-dir:                            {imagesdir}/pages/roundtrip/100_present_images
+
+//  Load Liquid procedures
+// -----------------------------------------------------------------------------
+{% capture load_attributes %}themes/{{site.template.name}}/procedures/global/attributes_loader.proc{%endcapture%}
+
+// Load page attributes
+// -----------------------------------------------------------------------------
+{% include {{load_attributes}} scope="global" %}
+
+
+// Page content
+// https://videojs.com/guides/options/
+// Update  VideoJS API manual #1
+// -----------------------------------------------------------------------------
+[role="dropcap"]
+The J1 Template supports playing video on web pages using the new standard
+of HTML5 to show videos on webpages natively.
+
+HTML5 Video opens the doors to your way of presenting video content. All
+modern browsers support the tag `<video>` for playing videos. Browsers have
+a built-in multimedia framework already for decoding and displaying video
+content. No need to use proprietary software components anymore.
+
+In the J1 Template, VideoJS is the *player engine* behind all videos on
+your pages. The template ships the player library together with a set of
+*plugins* (hotkeys, skip buttons, zoom buttons), a custom *theme* named
+`Uno`, and a J1 *adapter* that configures everything from simple YAML
+settings -- so in many cases you can use the player without writing any
+JavaScript at all.
+
+mdi:clock-time-five-outline[24px, md-gray mt-4 mb-5 mr-2]
+*30-60 Minutes* to read
+
+[NOTE]
+====
+The VideoJS API documentation pages are based on Video.js version *v8.23.x*
+for the current J1 template version 2026.x. The idea of providing this
+documentation is *not* to simply copy the original VideoJS pages as
+duplicates. For better readability and usability, all pages are
+restructured and enhanced by code examples or improved description texts.
+====
+
+// Include sub-documents
+// -----------------------------------------------------------------------------
+
+include::{documentdir}/000_videojs_api_intro.asciidoc[]
+include::{documentdir}/100_videojs_options.asciidoc[]
+include::{documentdir}/110_videojs_components.asciidoc[]
+include::{documentdir}/120_videojs_methods.asciidoc[]
+include::{documentdir}/130_videojs_events.asciidoc[]
+include::{documentdir}/140_videojs_j1_module.asciidoc[]

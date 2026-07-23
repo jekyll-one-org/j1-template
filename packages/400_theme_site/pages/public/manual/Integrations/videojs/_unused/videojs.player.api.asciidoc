@@ -1,0 +1,1812 @@
+
+== Player
+
+[[classDescription]]
+An instance of the `+Player+` class is created when any of the Video.js
+setup methods are used to initialize a video.
+
+[source, js]
+----
+var myPlayer = videojs('example_video_1');
+----
+
+In the following example, the `+data-setup+` attribute tells the
+Video.js library to create a player instance when the library is ready.
+
+[source, html]
+----       
+----
+
+After an instance has been created it can be accessed globally using
+`+Video('example_video_1')+`.
+
+DEFINED IN:
+https://github.com/videojs/video.js/blob/master/src/js/player.js#L41[player.js
+line number: 41]
+
+EXTENDS: link:/docs/api/component[component.js]
+
+=== Constructor
+
+....
+Player( tag,[options],[ready] )
+....
+
+==== Parameters
+
+[cols=",,,",options="header",]
+|===
+|name |Type |Required |Description
+|tag |Element |yes |The original video tag used for configuring options
+|options |Object |no |Object of option names and values
+|ready |function |no |Ready callback function
+|===
+
+== Methods
+
+[[MethodsaddRemoteTextTrack]]
+=== addRemoteTextTrack( options )
+
+[[addRemoteTextTrackDescription]]
+Add a remote text track
+
+==== Parameters
+
+[cols=",,,",options="header",]
+|===
+|name |Type |Required |Description
+|options |Object |yes |Options for remote text track
+|===
+
+
+[[MethodsaddTextTrack]]
+[[addTextTrackHeader]]
+==== addTextTrack( kind, [label], [language] )
+
+[[addTextTrackDescription]]
+Add a text track In addition to the W3C settings we allow adding
+additional info through options.
+http://www.w3.org/html/wg/drafts/html/master/embedded-content-0.html#dom-media-addtexttrack
+
+===== Parameters
+
+[cols=",,,",options="header",]
+|===
+|name |Type |Required |Description
+|kind |String |yes |Captions, subtitles, chapters, descriptions, or
+metadata
+
+|label |String |no |Optional label
+
+|language |String |no |Optional language
+|===
+
+
+[[MethodsaspectRatio]]
+[[aspectRatioHeader]]
+==== aspectRatio( [ratio] )
+
+[[aspectRatioDescription]]
+Get/Set the aspect ratio
+
+===== Parameters
+
+[cols=",,,",options="header",]
+|===
+|name |Type |Required |Description
+|ratio |String |no |Aspect ratio for player
+|===
+
+
+[[Methodsautoplay]]
+[[autoplayHeader]]
+==== autoplay( value )
+
+[[autoplayDescription]]
+Get or set the autoplay attribute.
+
+===== Parameters
+
+[cols=",,,",options="header",]
+|===
+|name |Type |Required |Description
+|value |Boolean |yes |Boolean to determine if video should autoplay
+|===
+
+
+[[Methodsbuffered]]
+[[bufferedHeader]]
+==== buffered()
+
+[[bufferedDescription]]
+Get a TimeRange object with the times of the video that have been
+downloaded If you just want the percent of the video that's been
+downloaded, use bufferedPercent.
+
+[source, js]
+----
+    // Number of different ranges of time have been buffered. Usually 1.
+            numberOfRanges = bufferedTimeRange.length,
+            // Time in seconds when the first range starts. Usually 0.
+            firstRangeStart = bufferedTimeRange.start(0),
+            // Time in seconds when the first range ends
+            firstRangeEnd = bufferedTimeRange.end(0),
+            // Length in seconds of the first time range
+            firstRangeLength = firstRangeEnd - firstRangeStart;
+----
+
+
+[[MethodsbufferedEnd]]
+[[bufferedEndHeader]]
+==== bufferedEnd()
+
+[[bufferedEndDescription]]
+Get the ending time of the last buffered time range This is used in the
+progress bar to encapsulate all time ranges.
+
+
+[[MethodsbufferedPercent]]
+[[bufferedPercentHeader]]
+==== bufferedPercent()
+
+[[bufferedPercentDescription]]
+Get the percent (as a decimal) of the video that's been downloaded
+
+[source, js]
+----
+    var howMuchIsDownloaded = myPlayer.bufferedPercent();
+----
+
+0 means none, 1 means all. (This method isn't in the HTML5 spec, but
+it's very convenient)
+
+
+[[MethodscanPlayType]]
+[[canPlayTypeHeader]]
+==== canPlayType( type )
+
+[[canPlayTypeDescription]]
+Check whether the player can play a given mimetype
+
+===== Parameters
+
+[cols=",,,",options="header",]
+|===
+|name |Type |Required |Description
+|type |String |yes |The mimetype to check
+|===
+
+
+
+[[Methodscontrols]]
+[[controlsHeader]]
+==== controls( bool )
+
+[[controlsDescription]]
+Get or set whether or not the controls are showing.
+
+===== Parameters
+
+[cols=",,,",options="header",]
+|===
+|name |Type |Required |Description
+|bool |Boolean |yes |Set controls to showing or not
+|===
+
+
+[[MethodscreateEl]]
+[[createElHeader]]
+==== createEl()
+
+[[createElDescription]]
+Create the component's DOM element
+
+
+[[MethodscurrentSrc]]
+[[currentSrcHeader]]
+==== currentSrc()
+
+[[currentSrcDescription]]
+Returns the fully qualified URL of the current source value e.g.
+http://mysite.com/video.mp4 Can be used in conjuction with
+`+currentType+` to assist in rebuilding the current source object.
+
+
+[[MethodscurrentTime]]
+[[currentTimeHeader]]
+==== currentTime( seconds )
+
+[[currentTimeDescription]]
+Get or set the current time (in seconds)
+
+[source, js]
+----
+    // get
+            var whereYouAt = myPlayer.currentTime();
+            // set
+            myPlayer.currentTime(120); // 2 minutes into the video
+----
+
+===== Parameters
+
+[cols=",,,",options="header",]
+|===
+|name |Type |Required |Description
+|seconds |Number\|String |yes |The time to seek to
+|===
+
+
+[[MethodscurrentType]]
+[[currentTypeHeader]]
+==== currentType()
+
+[[currentTypeDescription]]
+Get the current source type e.g. video/mp4 This can allow you rebuild
+the current source object so that you could load the same source and
+tech later
+
+
+[[Methodsdimension]]
+[[dimensionHeader]]
+==== dimension( dimension, [value] )
+
+[[dimensionDescription]]
+Get/set dimension for player
+
+===== Parameters
+
+[cols=",,,",options="header",]
+|===
+|name |Type |Required |Description
+|dimension |String |yes |Either width or height
+|value |Number |no |Value for dimension
+|===
+
+
+[[Methodsdispose]]
+[[disposeHeader]]
+==== dispose()
+
+[[disposeDescription]]
+Destroys the video player and does any necessary cleanup
+
+[source, js]
+----
+    myPlayer.dispose();
+----
+
+This is especially helpful if you are dynamically adding and removing
+videos to/from the DOM.
+
+
+[[Methodsduration]]
+[[durationHeader]]
+==== duration( seconds )
+
+[[durationDescription]]
+Get the length in time of the video in seconds
+
+[source, js]
+----
+    var lengthOfVideo = myPlayer.duration();
+----
+
+*NOTE*: The video must have started loading before the duration can be
+known, and in the case of Flash, may not be known until the video starts
+playing.
+
+===== Parameters
+
+[cols=",,,",options="header",]
+|===
+|name |Type |Required |Description
+|seconds |Number |yes |Duration when setting
+|===
+
+
+[[Methodsended]]
+[[endedHeader]]
+==== ended()
+
+[[endedDescription]]
+Returns whether or not the player is in the "ended" state.
+
+_
+[[MethodsenterFullWindow]]
+[[enterFullWindowHeader]]
+==== enterFullWindow()
+
+[[enterFullWindowDescription]]
+When fullscreen isn't supported we can stretch the video container to as
+wide as the browser will let us.
+
+
+[[Methodserror]]
+[[errorHeader]]
+==== error( err )
+
+[[errorDescription]]
+Set or get the current MediaError
+
+===== Parameters
+
+[cols=",,,",options="header",]
+|===
+|name |Type |Required |Description
+|err |* |yes |A MediaError or a String/Number to be turned into a
+MediaError
+|===
+
+
+[[MethodsexitFullscreen]]
+[[exitFullscreenHeader]]
+==== exitFullscreen()
+
+[[exitFullscreenDescription]]
+Return the video to its normal size after having been in full screen
+mode
+
+[source, js]
+----
+    myPlayer.exitFullscreen();
+----
+
+
+[[MethodsexitFullWindow]]
+[[exitFullWindowHeader]]
+==== exitFullWindow()
+
+[[exitFullWindowDescription]]
+Exit full window
+
+
+[[Methodsfluid]]
+[[fluidHeader]]
+==== fluid( bool )
+
+[[fluidDescription]]
+Add/remove the vjs-fluid class
+
+===== Parameters
+
+[cols=",,,",options="header",]
+|===
+|name |Type |Required |Description
+|bool |Boolean |yes |Value of true adds the class, value of false
+removes the class
+|===
+
+
+[[MethodsfullWindowOnEscKey]]
+[[fullWindowOnEscKeyHeader]]
+==== fullWindowOnEscKey( event )
+
+[[fullWindowOnEscKeyDescription]]
+Check for call to either exit full window or full screen on ESC key
+
+===== Parameters
+
+[cols=",,,",options="header",]
+|===
+|name |Type |Required |Description
+|event |String |yes |Event to check for key press
+|===
+
+
+[[MethodsgetCache]]
+[[getCacheHeader]]
+==== getCache()
+
+[[getCacheDescription]]
+Get object for cached values.
+
+
+[[MethodsgetTagSettings]]
+[[getTagSettingsHeader]]
+==== static getTagSettings( tag )
+
+[[getTagSettingsDescription]]
+Gets tag settings
+
+===== Parameters
+
+[cols=",,,",options="header",]
+|===
+|name |Type |Required |Description
+|tag |Element |yes |The player tag
+|===
+
+
+[[Methodsheight]]
+[[heightHeader]]
+==== height( [value] )
+
+[[heightDescription]]
+Get/set player height
+
+===== Parameters
+
+[cols=",,,",options="header",]
+|===
+|name |Type |Required |Description
+|value |Number |no |Value for height
+|===
+
+
+[[Methodsinit]]
+[[initHeader]]
+==== init( tag, [options], [ready] )
+
+[[initDescription]]
+player's constructor function
+
+===== Parameters
+
+[cols=",,,",options="header",]
+|===
+|name |Type |Required |Description
+|tag |Element |yes |The original video tag used for configuring options
+|options |Object |no |Player options
+|ready |function |no |Ready callback function
+|===
+
+
+[[MethodsisFullscreen]]
+[[isFullscreenHeader]]
+==== isFullscreen( [isFS] )
+
+[[isFullscreenDescription]]
+Check if the player is in fullscreen mode
+
+[source, js]
+----
+    // get
+            var fullscreenOrNot = myPlayer.isFullscreen();
+            // set
+            myPlayer.isFullscreen(true); // tell the player it's in fullscreen
+----
+
+NOTE: As of the latest HTML5 spec, isFullscreen is no longer an official
+property and instead document.fullscreenElement is used. But
+isFullscreen is still a valuable property for internal player workings.
+
+===== Parameters
+
+[cols=",,,",options="header",]
+|===
+|name |Type |Required |Description
+|isFS |Boolean |no |Update the player's fullscreen state
+|===
+
+
+
+[[Methodslanguage]]
+[[languageHeader]]
+==== language( code )
+
+[[languageDescription]]
+The player's language code NOTE: The language should be set in the
+player options if you want the the controls to be built with a specific
+language. Changing the lanugage later will not update controls text.
+
+===== Parameters
+
+[cols=",,,",options="header",]
+|===
+|name |Type |Required |Description
+|code |String |yes |The locale string
+|===
+
+
+[[Methodslanguages]]
+[[languagesHeader]]
+==== languages()
+
+[[languagesDescription]]
+Get the player's language dictionary Merge every time, because a newly
+added plugin might call videojs.addLanguage() at any time Languages
+specified directly in the player options have precedence
+
+
+[[Methodsload]]
+[[loadHeader]]
+==== load()
+
+[[loadDescription]]
+Begin loading the src data.
+
+
+[[Methodsloop]]
+[[loopHeader]]
+==== loop( value )
+
+[[loopDescription]]
+Get or set the loop attribute on the video element.
+
+===== Parameters
+
+[cols=",,,",options="header",]
+|===
+|name |Type |Required |Description
+|value |Boolean |yes |Boolean to determine if video should loop
+|===
+
+
+[[Methodsmuted]]
+[[mutedHeader]]
+==== muted( [muted] )
+
+[[mutedDescription]]
+Get the current muted state, or turn mute on or off
+
+[source, js]
+----
+    // get
+            var isVolumeMuted = myPlayer.muted();
+            // set
+            myPlayer.muted(true); // mute the volume
+----
+
+===== Parameters
+
+[cols=",,,",options="header",]
+|===
+|name |Type |Required |Description
+|muted |Boolean |no |True to mute, false to unmute
+|===
+
+
+[[MethodsnetworkState]]
+[[networkStateHeader]]
+==== networkState()
+
+[[networkStateDescription]]
+Returns the current state of network activity for the element, from the
+codes in the list below.
+
+* NETWORK_EMPTY (numeric value 0) The element has not yet been
+initialised. All attributes are in their initial states.
+* NETWORK_IDLE (numeric value 1) The element's resource selection
+algorithm is active and has selected a resource, but it is not actually
+using the network at this time.
+* NETWORK_LOADING (numeric value 2) The user agent is actively trying to
+download data.
+* NETWORK_NO_SOURCE (numeric value 3) The element's resource selection
+algorithm is active, but it has not yet found a resource to use.
+
+
+[[Methodspause]]
+[[pauseHeader]]
+==== pause()
+
+[[pauseDescription]]
+Pause the video playback
+
+[source, js]
+----
+    myPlayer.pause();
+----
+
+
+[[Methodspaused]]
+[[pausedHeader]]
+==== paused()
+
+[[pausedDescription]]
+Check if the player is paused
+
+[source, js]
+----
+    var isPaused = myPlayer.paused();
+            var isPlaying = !myPlayer.paused();
+----
+
+
+[[Methodsplay]]
+[[playHeader]]
+==== play()
+
+[[playDescription]]
+start media playback
+
+[source, js]
+----
+    myPlayer.play();
+----
+
+
+[[MethodsplaybackRate]]
+[[playbackRateHeader]]
+==== playbackRate( rate )
+
+[[playbackRateDescription]]
+Gets or sets the current playback rate. A playback rate of 1.0
+represents normal speed and 0.5 would indicate half-speed playback, for
+instance.
+
+===== Parameters
+
+[cols=",,,",options="header",]
+|===
+|name |Type |Required |Description
+|rate |Number |yes |New playback rate to set.
+|===
+
+
+[[Methodsposter]]
+[[posterHeader]]
+==== poster( [src] )
+
+[[posterDescription]]
+Get or set the poster image source url
+
+====== EXAMPLE:
+
+[source, js]
+----
+    // get
+            var currentPoster = myPlayer.poster();
+            // set
+            myPlayer.poster('http://example.com/myImage.jpg');
+----
+
+===== Parameters
+
+[cols=",,,",options="header",]
+|===
+|name |Type |Required |Description
+|src |String |no |Poster image source URL
+|===
+
+
+[[Methodspreload]]
+[[preloadHeader]]
+==== preload( value )
+
+[[preloadDescription]]
+Get or set the preload attribute
+
+===== Parameters
+
+[cols=",,,",options="header",]
+|===
+|name |Type |Required |Description
+|value |Boolean |yes |Boolean to determine if preload should be used
+|===
+
+
+[[MethodsreadyState]]
+[[readyStateHeader]]
+==== readyState()
+
+[[readyStateDescription]]
+Returns a value that expresses the current state of the element with
+respect to rendering the current playback position, from the codes in
+the list below.
+
+* HAVE_NOTHING (numeric value 0) No information regarding the media
+resource is available.
+* HAVE_METADATA (numeric value 1) Enough of the resource has been
+obtained that the duration of the resource is available.
+* HAVE_CURRENT_DATA (numeric value 2) Data for the immediate current
+playback position is available.
+* HAVE_FUTURE_DATA (numeric value 3) Data for the immediate current
+playback position is available, as well as enough data for the user
+agent to advance the current playback position in the direction of
+playback.
+* HAVE_ENOUGH_DATA (numeric value 4) The user agent estimates that
+enough data is available for playback to proceed uninterrupted.
+
+
+[[MethodsremainingTime]]
+[[remainingTimeHeader]]
+==== remainingTime()
+
+[[remainingTimeDescription]]
+Calculates how much time is left.
+
+[source, js]
+----
+    var timeLeft = myPlayer.remainingTime();
+----
+
+Not a native video element function, but useful
+
+
+[[MethodsremoteTextTrackEls]]
+[[remoteTextTrackElsHeader]]
+==== remoteTextTrackEls()
+
+[[remoteTextTrackElsDescription]]
+Get an array of remote html track elements
+
+
+[[MethodsremoteTextTracks]]
+[[remoteTextTracksHeader]]
+==== remoteTextTracks()
+
+[[remoteTextTracksDescription]]
+Get an array of remote text tracks
+
+
+[[MethodsremoveRemoteTextTrack]]
+[[removeRemoteTextTrackHeader]]
+==== removeRemoteTextTrack( track )
+
+[[removeRemoteTextTrackDescription]]
+Remove a remote text track
+
+===== Parameters
+
+[cols=",,,",options="header",]
+|===
+|name |Type |Required |Description
+|track |Object |yes |Remote text track to remove
+|===
+
+
+[[MethodsreportUserActivity]]
+[[reportUserActivityHeader]]
+==== reportUserActivity( event )
+
+[[reportUserActivityDescription]]
+Report user activity
+
+===== Parameters
+
+[cols=",,,",options="header",]
+|===
+|name |Type |Required |Description
+|event |Object |yes |Event object
+|===
+
+
+[[MethodsrequestFullscreen]]
+[[requestFullscreenHeader]]
+==== requestFullscreen()
+
+[[requestFullscreenDescription]]
+Increase the size of the video to full screen
+
+[source, js]
+----
+    myPlayer.requestFullscreen();
+----
+
+In some browsers, full screen is not supported natively, so it enters
+"full window mode", where the video fills the browser window. In
+browsers and devices that support native full screen, sometimes the
+browser's default controls will be shown, and not the Video.js custom
+skin. This includes most mobile devices (iOS, Android) and older
+versions of Safari.
+
+
+[[Methodsreset]]
+[[resetHeader]]
+==== reset()
+
+[[resetDescription]]
+Reset the player. Loads the first tech in the techOrder, and calls
+`+reset+` on the tech`.
+
+
+[[Methodsscrubbing]]
+[[scrubbingHeader]]
+==== scrubbing( isScrubbing )
+
+[[scrubbingDescription]]
+Returns whether or not the user is "scrubbing". Scrubbing is when the
+user has clicked the progress bar handle and is dragging it along the
+progress bar.
+
+===== Parameters
+
+[cols=",,,",options="header",]
+|===
+|name |Type |Required |Description
+|isScrubbing |Boolean |yes |True/false the user is scrubbing
+|===
+
+
+[[Methodsseekable]]
+[[seekableHeader]]
+==== seekable()
+
+[[seekableDescription]]
+Returns the TimeRanges of the media that are currently available for
+seeking to.
+
+
+[[Methodsseeking]]
+[[seekingHeader]]
+==== seeking()
+
+[[seekingDescription]]
+Returns whether or not the player is in the "seeking" state.
+
+
+[[MethodsselectSource]]
+[[selectSourceHeader]]
+==== selectSource( sources )
+
+[[selectSourceDescription]]
+Select source based on tech-order or source-order Uses source-order
+selection if `+options.sourceOrder+` is truthy. Otherwise, defaults to
+tech-order selection
+
+===== Parameters
+
+[cols=",,,",options="header",]
+|===
+|name |Type |Required |Description
+|sources |Array |yes |The sources for a media asset
+|===
+
+
+[[Methodssrc]]
+[[srcHeader]]
+==== src( source )
+
+[[srcDescription]]
+The source function updates the video source There are three types of
+variables you can pass as the argument. *URL String*: A URL to the the
+video file. Use this method if you are sure the current playback
+technology (HTML5/Flash) can support the source you provide. Currently
+only MP4 files can be used in both HTML5 and Flash.
+
+[source, js]
+----
+    myPlayer.src("http://www.example.com/path/to/video.mp4");
+----
+
+_*Source Object (or element):_ * A javascript object containing
+information about the source file. Use this method if you want the
+player to determine if it can support the file using the type
+information.
+
+[source, js]
+----
+    myPlayer.src({ type: "video/mp4", src: "http://www.example.com/path/to/video.mp4" });
+----
+
+_*Array of Source Objects:_ * To provide multiple versions of the source
+so that it can be played using HTML5 across browsers you can use an
+array of source objects. Video.js will detect which version is supported
+and load that file.
+
+[source, js]
+----
+    myPlayer.src([
+            { type: "video/mp4", src: "http://www.example.com/path/to/video.mp4" },
+            { type: "video/webm", src: "http://www.example.com/path/to/video.webm" },
+            { type: "video/ogg", src: "http://www.example.com/path/to/video.ogv" }
+            ]);
+----
+
+===== Parameters
+
+[cols=",,,",options="header",]
+|===
+|name |Type |Required |Description
+|source |String\|Object\|Array |yes |The source URL, object, or array of
+sources
+|===
+
+
+[[MethodssupportsFullScreen]]
+[[supportsFullScreenHeader]]
+==== supportsFullScreen()
+
+[[supportsFullScreenDescription]]
+Check to see if fullscreen is supported
+
+
+[[Methodstech]]
+[[techHeader]]
+==== tech( )
+
+[[techDescription]]
+Return a reference to the current tech. It will only return a reference
+to the tech if given an object with the `+IWillNotUseThisInPlugins+`
+property on it. This is try and prevent misuse of techs by plugins.
+
+===== Parameters
+
+[cols=",,,",options="header",]
+|===
+|name |Type |Required |Description
+|undefined |Object | |
+|===
+
+
+[[MethodstextTracks]]
+[[textTracksHeader]]
+==== textTracks()
+
+[[textTracksDescription]]
+Get an array of associated text tracks. captions, subtitles, chapters,
+descriptions
+http://www.w3.org/html/wg/drafts/html/master/embedded-content-0.html#dom-media-texttracks
+
+
+[[MethodstoJSON]]
+[[toJSONHeader]]
+==== toJSON()
+
+[[toJSONDescription]]
+Converts track info to JSON
+
+
+[[MethodsupdateStyleEl_]]
+[[updateStyleEl_Header]]
+==== updateStyleEl_()
+
+[[updateStyleEl_Description]]
+Update styles of the player element (height, width and aspect ratio)
+
+
+[[MethodsuserActive]]
+[[userActiveHeader]]
+==== userActive( bool )
+
+[[userActiveDescription]]
+Get/set if user is active
+
+===== Parameters
+
+[cols=",,,",options="header",]
+|===
+|name |Type |Required |Description
+|bool |Boolean |yes |Value when setting
+|===
+
+
+[[MethodsvideoHeight]]
+[[videoHeightHeader]]
+==== videoHeight()
+
+[[videoHeightDescription]]
+Get video height
+
+
+[[MethodsvideoWidth]]
+[[videoWidthHeader]]
+==== videoWidth()
+
+[[videoWidthDescription]]
+Get video width
+
+
+[[Methodsvolume]]
+[[volumeHeader]]
+==== volume( percentAsDecimal )
+
+[[volumeDescription]]
+Get or set the current volume of the media
+
+[source, js]
+----
+    // get
+            var howLoudIsIt = myPlayer.volume();
+            // set
+            myPlayer.volume(0.5); // Set volume to half
+----
+
+0 is off (muted), 1.0 is all the way up, 0.5 is half way.
+
+===== Parameters
+
+[cols=",,,",options="header",]
+|===
+|name |Type |Required |Description
+|percentAsDecimal |Number |yes |The new volume as a decimal percent
+|===
+
+
+[[Methodswidth]]
+[[widthHeader]]
+==== width( [value] )
+
+[[widthDescription]]
+Get/set player width
+
+===== Parameters
+
+[cols=",,,",options="header",]
+|===
+|name |Type |Required |Description
+|value |Number |no |Value for width
+|===
+
+
+[[Methods$]]
+[[$Header]]
+==== $( selector, [context] )
+
+[[$Description]]
+Finds a single DOM element matching `+selector+` within the component's
+`+contentEl+` or another custom context.
+
+===== Parameters
+
+[cols=",,,",options="header",]
+|===
+|name |Type |Required |Description
+|selector |String |yes |A valid CSS selector, which will be passed to
+`+querySelector+`.
+
+|context |Element\|String |no |A DOM element within which to query. Can
+also be a selector string in which case the first matching element will
+be used as context. If missing (or no element matches selector), falls
+back to `+document+`.
+|===
+
+
+[[Methods$$]]
+[[$$Header]]
+==== $$( selector, [context] )
+
+[[$$Description]]
+Finds a all DOM elements matching `+selector+` within the component's
+`+contentEl+` or another custom context.
+
+===== Parameters
+
+[cols=",,,",options="header",]
+|===
+|name |Type |Required |Description
+|selector |String |yes |A valid CSS selector, which will be passed to
+`+querySelectorAll+`.
+
+|context |Element\|String |no |A DOM element within which to query. Can
+also be a selector string in which case the first matching element will
+be used as context. If missing (or no element matches selector), falls
+back to `+document+`.
+|===
+
+
+[[MethodsaddChild]]
+[[addChildHeader]]
+==== addChild( child, [options] )
+
+[[addChildDescription]]
+Adds a child component inside this component
+
+[source, js]
+----
+    myComponent.el();
+            // -> 
+            myComponent.children();
+            // [empty array]
+
+            var myButton = myComponent.addChild('MyButton');
+            // -> myButton
+            // -> myButton === myComponent.children()[0];
+----
+
+Pass in options for child constructors and options for children of the
+child
+
+[source, js]
+----
+    var myButton = myComponent.addChild('MyButton', {
+            text: 'Press Me',
+            buttonChildExample: {
+                buttonChildOption: true
+            }
+            });
+----
+
+===== Parameters
+
+[cols=",,,",options="header",]
+|===
+|name |Type |Required |Description
+|child |String\|Component |yes |The class name or instance of a child to
+add
+
+|options |Object |no |Options, including options to be passed to
+children of the child.
+|===
+
+
+[[MethodsaddClass]]
+[[addClassHeader]]
+==== addClass( classToAdd )
+
+[[addClassDescription]]
+Add a CSS class name to the component's element
+
+===== Parameters
+
+[cols=",,,",options="header",]
+|===
+|name |Type |Required |Description
+|classToAdd |String |yes |Classname to add
+|===
+
+
+[[MethodsbuildCSSClass]]
+[[buildCSSClassHeader]]
+==== buildCSSClass()
+
+[[buildCSSClassDescription]]
+Allows sub components to stack CSS class names
+
+
+[[Methodschildren]]
+[[childrenHeader]]
+==== children()
+
+[[childrenDescription]]
+Get an array of all child components
+
+[source, js]
+----
+    var kids = myComponent.children();
+----
+
+
+[[MethodsclearInterval]]
+[[clearIntervalHeader]]
+==== clearInterval( intervalId )
+
+[[clearIntervalDescription]]
+Clears an interval and removes the associated dispose listener
+
+===== Parameters
+
+[cols=",,,",options="header",]
+|===
+|name |Type |Required |Description
+|intervalId |Number |yes |The id of the interval to clear
+|===
+
+
+[[MethodsclearTimeout]]
+[[clearTimeoutHeader]]
+==== clearTimeout( timeoutId )
+
+[[clearTimeoutDescription]]
+Clears a timeout and removes the associated dispose listener
+
+===== Parameters
+
+[cols=",,,",options="header",]
+|===
+|name |Type |Required |Description
+|timeoutId |Number |yes |The id of the timeout to clear
+|===
+
+
+[[MethodscontentEl]]
+[[contentElHeader]]
+==== contentEl()
+
+[[contentElDescription]]
+Return the component's DOM element where children are inserted. Will
+either be the same as el() or a new element defined in createEl().
+
+
+[[Methodsdimensions]]
+[[dimensionsHeader]]
+==== dimensions( width, height )
+
+[[dimensionsDescription]]
+Set both width and height at the same time
+
+===== Parameters
+
+[cols=",,,",options="header",]
+|===
+|name |Type |Required |Description
+|width |Number\|String |yes |Width of player
+|height |Number\|String |yes |Height of player
+|===
+
+
+[[Methodsel]]
+[[elHeader]]
+==== el()
+
+[[elDescription]]
+Get the component's DOM element
+
+[source, js]
+----
+    var domEl = myComponent.el();
+----
+
+
+[[MethodsenableTouchActivity]]
+[[enableTouchActivityHeader]]
+==== enableTouchActivity()
+
+[[enableTouchActivityDescription]]
+Report user touch activity when touch events occur User activity is used
+to determine when controls should show/hide. It's relatively simple when
+it comes to mouse events, because any mouse event should show the
+controls. So we capture mouse events that bubble up to the player and
+report activity when that happens. With touch events it isn't as easy.
+We can't rely on touch events at the player level, because a tap
+(touchstart + touchend) on the video itself on mobile devices is meant
+to turn controls off (and on). User activity is checked asynchronously,
+so what could happen is a tap event on the video turns the controls off,
+then the touchend event bubbles up to the player, which if it reported
+user activity, would turn the controls right back on. (We also don't
+want to completely block touch events from bubbling up) Also a
+touchmove, touch+hold, and anything other than a tap is not supposed to
+turn the controls back on on a mobile device. Here we're setting the
+default component behavior to report user activity whenever touch events
+happen, and this can be turned off by components that want touch events
+to act differently.
+
+
+[[Methodsextend]]
+[[extendHeader]]
+==== static extend( props ) _(deprecated)_
+
+[[extendDescription]]
+Sets up the constructor using the supplied init method or uses the init
+of the parent object
+
+===== Parameters
+
+[cols=",,,",options="header",]
+|===
+|name |Type |Required |Description
+|props |Object |yes |An object of properties
+|===
+
+
+[[MethodsgetChild]]
+[[getChildHeader]]
+==== getChild()
+
+[[getChildDescription]]
+Returns a child component with the provided name
+
+
+[[MethodsgetChildById]]
+[[getChildByIdHeader]]
+==== getChildById()
+
+[[getChildByIdDescription]]
+Returns a child component with the provided ID
+
+
+[[MethodsgetComponent]]
+[[getComponentHeader]]
+==== static getComponent( name )
+
+[[getComponentDescription]]
+Gets a component by name
+
+===== Parameters
+
+[cols=",,,",options="header",]
+|===
+|name |Type |Required |Description
+|name |String |yes |Name of the component to get
+|===
+
+
+[[MethodshasClass]]
+[[hasClassHeader]]
+==== hasClass( classToCheck )
+
+[[hasClassDescription]]
+Check if a component's element has a CSS class name
+
+===== Parameters
+
+[cols=",,,",options="header",]
+|===
+|name |Type |Required |Description
+|classToCheck |String |yes |Classname to check
+|===
+
+
+[[Methodshide]]
+[[hideHeader]]
+==== hide()
+
+[[hideDescription]]
+Hide the component element if currently showing
+
+
+[[Methodsid]]
+[[idHeader]]
+==== id()
+
+[[idDescription]]
+Get the component's ID
+
+[source, js]
+----
+    var id = myComponent.id();
+----
+
+
+[[MethodsinitChildren]]
+[[initChildrenHeader]]
+==== initChildren()
+
+[[initChildrenDescription]]
+Add and initialize default child components from options
+
+[source, js]
+----
+    // when an instance of MyComponent is created, all children in options
+            // will be added to the instance by their name strings and options
+            MyComponent.prototype.options_ = {
+            children: [
+                'myChildComponent'
+            ],
+            myChildComponent: {
+                myChildOption: true
+            }
+            };
+
+            // Or when creating the component
+            var myComp = new MyComponent(player, {
+            children: [
+                'myChildComponent'
+            ],
+            myChildComponent: {
+                myChildOption: true
+            }
+            });
+----
+
+The children option can also be an array of child options objects (that
+also include a 'name' key). This can be used if you have two child
+components of the same type that need different options.
+
+[source, js]
+----
+    var myComp = new MyComponent(player, {
+            children: [
+                'button',
+                {
+                name: 'button',
+                someOtherOption: true
+                },
+                {
+                name: 'button',
+                someOtherOption: false
+                }
+            ]
+            });
+----
+
+
+[[Methodsname]]
+[[nameHeader]]
+==== name()
+
+[[nameDescription]]
+Get the component's name. The name is often used to reference the
+component.
+
+[source, js]
+----
+    var name = myComponent.name();
+----
+
+
+[[Methodsoff]]
+[[offHeader]]
+==== off( first, second, [third] )
+
+[[offDescription]]
+Remove an event listener from this component's element
+
+[source, js]
+----
+    myComponent.off('eventType', myFunc);
+----
+
+If myFunc is excluded, ALL listeners for the event type will be removed.
+If eventType is excluded, ALL listeners will be removed from the
+component. Alternatively you can use `+off+` to remove listeners that
+were added to other elements or components using
+`+myComponent.on(otherComponent...+`. In this case both the event type
+and listener function are REQUIRED.
+
+[source, js]
+----
+    myComponent.off(otherElement, 'eventType', myFunc);
+            myComponent.off(otherComponent, 'eventType', myFunc);
+----
+
+===== Parameters
+
+[cols=",,,",options="header",]
+|===
+|name |Type |Required |Description
+|first |String\|Component |yes |The event type or other component
+|second |function\|String |yes |The listener function or event type
+|third |function |no |The listener for other component
+|===
+
+
+[[Methodson]]
+[[onHeader]]
+==== on( first, second, third )
+
+[[onDescription]]
+Add an event listener to this component's element
+
+[source, js]
+----
+    var myFunc = function(){
+            var myComponent = this;
+            // Do something when the event is fired
+            };
+
+            myComponent.on('eventType', myFunc);
+----
+
+The context of myFunc will be myComponent unless previously bound.
+Alternatively, you can add a listener to another element or component.
+
+[source, js]
+----
+    myComponent.on(otherElement, 'eventName', myFunc);
+            myComponent.on(otherComponent, 'eventName', myFunc);
+----
+
+The benefit of using this over
+`+VjsEvents.on(otherElement, 'eventName', myFunc)+` and
+`+otherComponent.on('eventName', myFunc)+` is that this way the
+listeners will be automatically cleaned up when either component is
+disposed. It will also bind myComponent as the context of myFunc.
+*NOTE*: When using this on elements in the page other than window and
+document (both permanent), if you remove the element from the DOM you
+need to call `+myComponent.trigger(el, 'dispose')+` on it to clean up
+references to it and allow the browser to garbage collect it.
+
+===== Parameters
+
+[cols=",,,",options="header",]
+|===
+|name |Type |Required |Description
+|first |String\|Component |yes |The event type or other component
+|second |function\|String |yes |The event handler or event type
+|third |function |yes |The event handler
+|===
+
+
+[[Methodsone]]
+[[oneHeader]]
+==== one( first, second, [third] )
+
+[[oneDescription]]
+Add an event listener to be triggered only once and then removed
+
+[source, js]
+----
+    myComponent.one('eventName', myFunc);
+----
+
+Alternatively you can add a listener to another element or component
+that will be triggered only once.
+
+[source, js]
+----
+    myComponent.one(otherElement, 'eventName', myFunc);
+            myComponent.one(otherComponent, 'eventName', myFunc);
+----
+
+===== Parameters
+
+[cols=",,,",options="header",]
+|===
+|name |Type |Required |Description
+|first |String\|Component |yes |The event type or other component
+|second |function\|String |yes |The listener function or event type
+|third |function |no |The listener function for other component
+|===
+
+
+[[Methodsoptions]]
+[[optionsHeader]]
+==== options( obj )
+
+[[optionsDescription]]
+Deep merge of options objects Whenever a property is an object on both
+options objects the two properties will be merged using mergeOptions.
+
+[source, js]
+----
+    Parent.prototype.options_ = {
+            optionSet: {
+                'childOne': { 'foo': 'bar', 'asdf': 'fdsa' },
+                'childTwo': {},
+                'childThree': {}
+            }
+            }
+            newOptions = {
+            optionSet: {
+                'childOne': { 'foo': 'baz', 'abc': '123' }
+                'childTwo': null,
+                'childFour': {}
+            }
+            }
+
+            this.options(newOptions);
+----
+
+
+[source, js]
+----
+    {
+            optionSet: {
+                'childOne': { 'foo': 'baz', 'asdf': 'fdsa', 'abc': '123' },
+                'childTwo': null, // Disabled. Won't be initialized.
+                'childThree': {},
+                'childFour': {}
+            }
+            }
+----
+
+===== Parameters
+
+[cols=",,,",options="header",]
+|===
+|name |Type |Required |Description
+|obj |Object |yes |Object of new option values
+|===
+
+
+[[Methodsplayer]]
+[[playerHeader]]
+==== player()
+
+[[playerDescription]]
+Return the component's player
+
+
+[[Methodsready]]
+[[readyHeader]]
+==== ready( fn, sync )
+
+[[readyDescription]]
+Bind a listener to the component's ready state. Different from event
+listeners in that if the ready event has already happened it will
+trigger the function immediately.
+
+===== Parameters
+
+[cols=",,,",options="header",]
+|===
+|name |Type |Required |Description
+|fn |function |yes |Ready listener
+
+|sync |Boolean |yes |Exec the listener synchronously if component is
+ready
+|===
+
+
+[[MethodsregisterComponent]]
+[[registerComponentHeader]]
+==== static registerComponent( name, comp )
+
+[[registerComponentDescription]]
+Registers a component
+
+===== Parameters
+
+[cols=",,,",options="header",]
+|===
+|name |Type |Required |Description
+|name |String |yes |Name of the component to register
+|comp |Object |yes |The component to register
+|===
+
+
+[[MethodsremoveChild]]
+[[removeChildHeader]]
+==== removeChild( component )
+
+[[removeChildDescription]]
+Remove a child component from this component's list of children, and the
+child component's element from this component's element
+
+===== Parameters
+
+[cols=",,,",options="header",]
+|===
+|name |Type |Required |Description
+|component |Component |yes |Component to remove
+|===
+
+
+[[MethodsremoveClass]]
+[[removeClassHeader]]
+==== removeClass( classToRemove )
+
+[[removeClassDescription]]
+Remove a CSS class name from the component's element
+
+===== Parameters
+
+[cols=",,,",options="header",]
+|===
+|name |Type |Required |Description
+|classToRemove |String |yes |Classname to remove
+|===
+
+
+[[MethodssetInterval]]
+[[setIntervalHeader]]
+==== setInterval( fn, interval )
+
+[[setIntervalDescription]]
+Creates an interval and sets up disposal automatically.
+
+===== Parameters
+
+[cols=",,,",options="header",]
+|===
+|name |Type |Required |Description
+|fn |function |yes |The function to run every N seconds.
+
+|interval |Number |yes |Number of ms to delay before executing specified
+function.
+|===
+
+
+[[MethodssetTimeout]]
+[[setTimeoutHeader]]
+==== setTimeout( fn, timeout )
+
+[[setTimeoutDescription]]
+Creates timeout and sets up disposal automatically.
+
+===== Parameters
+
+[cols=",,,",options="header",]
+|===
+|name |Type |Required |Description
+|fn |function |yes |The function to run after the timeout.
+
+|timeout |Number |yes |Number of ms to delay before executing specified
+function.
+|===
+
+
+[[Methodsshow]]
+[[showHeader]]
+==== show()
+
+[[showDescription]]
+Show the component element if hidden
+
+
+[[MethodstoggleClass]]
+[[toggleClassHeader]]
+==== toggleClass( classToToggle, [predicate] )
+
+[[toggleClassDescription]]
+Add or remove a CSS class name from the component's element
+
+===== Parameters
+
+[cols=",,,",options="header",]
+|===
+|name |Type |Required |Description
+|classToToggle |String | |
+
+|predicate |Boolean\|function |no |Can be a function that returns a
+Boolean. If `+true+`, the class will be added; if `+false+`, the class
+will be removed. If not given, the class will be added if not present
+and vice versa.
+|===
+
+
+[[Methodstrigger]]
+[[triggerHeader]]
+==== trigger( event, [hash] )
+
+[[triggerDescription]]
+Trigger an event on an element
+
+[source, js]
+----
+    myComponent.trigger('eventName');
+            myComponent.trigger({'type':'eventName'});
+            myComponent.trigger('eventName', {data: 'some data'});
+            myComponent.trigger({'type':'eventName'}, {data: 'some data'});
+----
+
+===== Parameters
+
+[cols=",,,",options="header",]
+|===
+|name |Type |Required |Description
+|event |Event\|Object\|String |yes |A string (the type) or an event
+object with a type attribute
+
+|hash |Object |no |data hash to pass along with the event
+|===
+
+
+[[MethodstriggerReady]]
+[[triggerReadyHeader]]
+==== triggerReady()
+
+[[triggerReadyDescription]]
+Trigger the ready listeners
+
+
+=== Events
+
+[[Eventsended]]
+[[endedHeader]]
+==== ended
+
+[[endedDescription]]
+Fired when video playback ends
+
+
+[[Eventserror]]
+[[errorHeader]]
+==== error
+
+[[errorDescription]]
+Fired when an error occurs
+
+
+[[Eventsloadeddata]]
+[[loadeddataHeader]]
+==== loadeddata
+
+[[loadeddataDescription]]
+Fired when the player has downloaded data at the current playback
+position
+
+
+[[Eventsloadedmetadata]]
+[[loadedmetadataHeader]]
+==== loadedmetadata
+
+[[loadedmetadataDescription]]
+Fired when the player has initial duration and dimension information
+
+
+[[Eventstimeupdate]]
+[[timeupdateHeader]]
+==== timeupdate
+
+[[timeupdateDescription]]
+Fired when the current playback position has changed * During playback
+this is fired every 15-250 milliseconds, depending on the playback
+technology in use.
+
+
+[[Eventsuseractive]]
+[[useractiveHeader]]
+==== useractive
+
+[[useractiveDescription]]
+Fired when the user is active, e.g. moves the mouse over the player
+
+
+[[Eventsuserinactive]]
+[[userinactiveHeader]]
+==== userinactive
+
+[[userinactiveDescription]]
+Fired when the user is inactive, e.g. a short delay after the last mouse
+move or control interaction
+
+
+[[Eventsvolumechange]]
+[[volumechangeHeader]]
+==== volumechange
+
+[[volumechangeDescription]]
+Fired when the volume changes
+

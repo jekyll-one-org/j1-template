@@ -1,0 +1,568 @@
+[role="mt-5"]
+[[j1-videojs-module]]
+== J1 VideoJS Module
+
+The previous sections describe the *VideoJS library* as it is documented
+by the VideoJS project. This section describes how the library is
+*integrated* in the J1 Template: how the module is started, how it is
+configured with YAML, and how the player is styled.
+
+If you only want to place videos on your pages, this is the most
+important section for you. In J1 Template, everything is configured in
+YAML -- you do not need to write JavaScript.
+
+[role="mt-4"]
+[[j1-module-adapter]]
+=== The videojs adapter
+
+The adapter is a small piece of J1 JavaScript located at
+`~/assets/theme/j1/adapter/js/videojs.js`. It is loaded on every page
+and does the following work for you:
+
+. *Read* the YAML configuration of the module: the *default* settings
+  and your *user* settings.
+. *Merge* both configurations into one. Your user settings always
+  *overwrite* the default settings (see
+  <<j1-module-configuration>> for the two files involved).
+. *Wait* until the page is fully loaded and the J1 core has finished
+  its own initialization.
+. *Store* the merged configuration under `j1.modules.videojs.options`,
+  so all players created on the page can read the same settings.
+
+[NOTE]
+====
+The adapter waits at most *5 seconds* for the page to become ready. If
+the page never reaches the ready state (for example, caused by an error
+in another module), the adapter stops waiting and writes a *warning* to
+the browser console. This protects the browser from wasting CPU time
+on a page that cannot finish loading.
+====
+
+You normally never call the adapter yourself. It is started
+automatically by the J1 core at page load.
+
+[role="mt-4"]
+[[j1-module-configuration]]
+=== Module configuration (YAML)
+
+Two YAML files control the VideoJS module:
+
+[cols="5a,7a", options="header", width="100%", role="table-striped rtable"]
+|===
+|File |Purpose
+
+|`_data/modules/defaults/videojs.yml`
+|*Default* settings, shipped with the template. Do *not* change this
+file. It documents all available keys and their factory values.
+
+|`_data/modules/videojs.yml`
+|*User* settings. Place your own settings here. Every key you set in
+this file *overwrites* the same key from the defaults file.
+
+|===
+
+[CAUTION]
+====
+Keep the structure (the *nesting*) of the keys in your user file exactly
+as in the defaults file. A key placed at the wrong level is silently
+ignored.
+====
+
+[role="mt-4"]
+==== General settings
+
+[cols="3a,2a,2a,5a", options="header", width="100%", role="table-striped rtable"]
+|===
+|Key |Type |Default |Description
+
+|`enabled`
+|boolean
+|`false`
+|Master switch for the module. Set to `true` in your user file to use
+the VideoJS player on your site.
+
+|===
+
+[role="mt-4"]
+==== playbackRates
+
+Playback rates allow your visitors to watch a video *slower* or
+*faster* than normal speed. If enabled, a speed selector is added to
+the player control bar.
+
+[source, yaml]
+----
+settings:
+  playbackRates:
+    enabled:                            true
+----
+
+[cols="3a,2a,3a,4a", options="header", width="100%", role="table-striped rtable"]
+|===
+|Key |Type |Default |Description
+
+|`enabled`
+|boolean
+|`false`
+|Show the playback speed selector in the control bar.
+
+|`values`
+|array
+|`[0.25, 0.5, 1, 1.5, 2]`
+|The speeds offered by the selector. The value `1` is normal speed,
+`0.5` is half speed, `2` is double speed.
+
+|===
+
+[role="mt-4"]
+==== players.youtube
+
+Settings for the *YouTube* playback technology (tech). The first group
+of keys are the *player parameters* passed to the YouTube player. They
+follow the official
+link://developers.google.com/youtube/player_parameters[YouTube IFrame API, {browser-window--new}]
+and are intentionally preset so the YouTube player behaves like a
+native VideoJS player.
+
+[cols="4a,2a,2a,4a", options="header", width="100%", role="table-striped rtable"]
+|===
+|Key |Type |Default |Description
+
+|`autoplay`
+|number
+|`0`
+|Do not start playing automatically (`0` = off, `1` = on).
+
+|`cc_load_policy`
+|number
+|`0`
+|Captions (subtitles) are initially hidden.
+
+|`controls`
+|number
+|`0`
+|Hide the *YouTube* controls. The VideoJS control bar is used instead.
+
+|`disablekb`
+|number
+|`1`
+|Disable the YouTube keyboard control. Keyboard support is provided by
+the J1 *hotKeys* plugin instead.
+
+|`enablejsapi`
+|number
+|`1`
+|Allow VideoJS to control the YouTube player via JavaScript. Required,
+do not change.
+
+|`fs`
+|number
+|`0`
+|Hide the YouTube fullscreen button. Fullscreen is handled by VideoJS.
+
+|`iv_load_policy`
+|number
+|`3`
+|Video annotations are not shown.
+
+|`loop`
+|number
+|`0`
+|Do not restart the video automatically when it ends.
+
+|`modestbranding`
+|number
+|`1`
+|Reduce the YouTube branding (logo) in the player.
+
+|`rel`
+|number
+|`0`
+|Do not show related videos from other channels when playback ends.
+
+|`showinfo`
+|number
+|`0`
+|Do not show the video title and uploader before playback starts.
+
+|===
+
+The second group of keys are *video parameters* used by the J1 module:
+
+[cols="4a,2a,6a", options="header", width="100%", role="table-striped rtable"]
+|===
+|Key |Default |Description
+
+|`default_poster`
+|`/assets/image/icon/videojs/videojs-poster.png`
+|Fallback poster image, used if no poster can be loaded from YouTube.
+
+|`poster`
+|`maxresdefault.jpg`
+|Name of the poster image taken from YouTube. The default selects the
+poster at the *highest* resolution available.
+
+|`start`
+|`true`
+|Allow setting a *start* time for a video (play a section only).
+
+|`end`
+|`true`
+|Allow setting an *end* time for a video (play a section only).
+
+|===
+
+[role="mt-4"]
+[[j1-module-plugins]]
+==== plugins
+
+The J1 VideoJS module ships a set of ready-to-use *plugins*. All plugins
+are configured under the `plugins` key and are disabled by default. To
+use a plugin, set its `enabled` key to `true` in your user file.
+
+[role="mt-3"]
+===== autoCaption
+
+Automatically enables captions (subtitles) for a video if a caption
+track is available.
+
+[cols="3a,2a,2a,5a", options="header", width="100%", role="table-striped rtable"]
+|===
+|Key |Type |Default |Description
+
+|`enabled`
+|boolean
+|`false`
+|Turn automatic captions on or off.
+
+|===
+
+[role="mt-3"]
+===== hotKeys
+
+Adds *keyboard control* to the player: the space bar toggles play and
+pause, the arrow keys seek forward/backward and change the volume, and
+the key `F` toggles fullscreen mode.
+
+[source, yaml]
+----
+settings:
+  plugins:
+    hotKeys:
+      enabled:                          true
+      enableInactiveFocus:              false
+----
+
+[cols="4a,2a,2a,4a", options="header", width="100%", role="table-striped rtable"]
+|===
+|Key |Type |Default |Description
+
+|`enabled`
+|boolean
+|`false`
+|Turn keyboard control on or off.
+
+|`seekStep`
+|number
+|`15`
+|Number of *seconds* to jump forward or backward with the arrow keys.
+
+|`volumeStep`
+|number
+|`0.1`
+|Volume change per key press (`0.1` = 10 percent).
+
+|`alwaysCaptureHotkeys`
+|boolean
+|`true`
+|Force the capture of key presses even if control elements of the
+player are focused.
+
+|`captureDocumentHotkeys`
+|boolean
+|`false`
+|Capture document keydown events even if the player does not have the
+focus. If enabled, key presses are processed anywhere on the page.
+
+|`hotkeysFocusElementFilter`
+|function
+|`function () { return false }`
+|Filter function used together with `captureDocumentHotkeys` to decide
+which focused elements allow hotkey processing.
+
+|`enableFullscreen`
+|boolean
+|`true`
+|Allow the key `F` to toggle fullscreen mode.
+
+|`enableHoverScroll`
+|boolean
+|`true`
+|Change the volume by scrolling the mouse wheel while hovering the
+volume control.
+
+|`enableInactiveFocus`
+|boolean
+|`true`
+|Reassign the focus to the player when the control bar fades out.
+Set to `false` if *multiple* players are placed on the same page.
+
+|`enableJogStyle`
+|boolean
+|`false`
+|Use an alternative (jog) style for seeking with the arrow keys.
+
+|`enableMute`
+|boolean
+|`true`
+|Allow the key `M` to mute or unmute the player.
+
+|`enableModifiersForNumbers`
+|boolean
+|`true`
+|Allow number keys in combination with modifier keys.
+
+|`enableNumbers`
+|boolean
+|`false`
+|Allow the number keys `0-9` to jump to a position in the video
+(for example `5` jumps to 50 percent).
+
+|`enableVolumeScroll`
+|boolean
+|`true`
+|Change the volume by scrolling the mouse wheel over the player.
+
+|`skipInitialFocus`
+|boolean
+|`false`
+|Do not focus the player on the initial *play* action.
+
+|===
+
+[role="mt-3"]
+===== skipButtons
+
+Adds *skip buttons* to the control bar to jump a fixed number of
+seconds forward or backward.
+
+[source, yaml]
+----
+settings:
+  plugins:
+    skipButtons:
+      enabled:                          true
+      surroundPlayButton:               true
+----
+
+[cols="4a,2a,2a,4a", options="header", width="100%", role="table-striped rtable"]
+|===
+|Key |Type |Default |Description
+
+|`enabled`
+|boolean
+|`false`
+|Turn the skip buttons on or off.
+
+|`surroundPlayButton`
+|boolean
+|`false`
+|Place the skip buttons side-by-side (left and right) of the play
+button.
+
+|`forward`
+|number
+|`10`
+|Number of *seconds* to jump forward.
+
+|`backward`
+|number
+|`10`
+|Number of *seconds* to jump backward.
+
+|`forwardIndex`
+|number
+|`1`
+|Position (index) of the forward button in the control bar.
+
+|`backwardIndex`
+|number
+|`1`
+|Position (index) of the backward button in the control bar.
+
+|===
+
+[role="mt-3"]
+===== zoomButtons
+
+Adds *zoom buttons* to the player to zoom, move, and rotate the video
+image.
+
+[cols="3a,2a,2a,5a", options="header", width="100%", role="table-striped rtable"]
+|===
+|Key |Type |Default |Description
+
+|`enabled`
+|boolean
+|`false`
+|Turn the zoom buttons on or off.
+
+|`zoom`
+|number
+|`1`
+|Initial zoom factor (`1` = no zoom).
+
+|`moveX`
+|number
+|`0`
+|Initial horizontal move (offset) of the video image in pixels.
+
+|`moveY`
+|number
+|`0`
+|Initial vertical move (offset) of the video image in pixels.
+
+|`rotate`
+|number
+|`0`
+|Initial rotation of the video image in degrees.
+
+|===
+
+[role="mt-4"]
+==== Example user configuration
+
+The following example shows a typical user configuration file
+`_data/modules/videojs.yml`. The module is enabled, playback rates are
+offered, and all three control bar plugins are activated:
+
+[source, yaml]
+----
+settings:
+
+  # GENERAL options
+  # ----------------------------------------------------------------------------
+  enabled:                              true
+
+  # VideoJS settings
+  # ----------------------------------------------------------------------------
+  playbackRates:
+    enabled:                            true
+
+  # VideoJS Plugin settings
+  # ----------------------------------------------------------------------------
+  plugins:
+
+    hotKeys:
+      enabled:                          true
+      enableInactiveFocus:              false
+
+    skipButtons:
+      enabled:                          true
+      surroundPlayButton:               true
+
+    zoomButtons:
+      enabled:                          true
+----
+
+[role="mt-4"]
+[[j1-module-themes]]
+=== Player styles (CSS)
+
+The look of the player is defined by *two* stylesheets:
+
+[cols="4a,8a", options="header", width="100%", role="table-striped rtable"]
+|===
+|File |Purpose
+
+|`videojs.css`
+|The *base* stylesheet of the VideoJS library (v8.23.x). It defines the
+layout of all player components: the control bar, the buttons, the
+progress bar, menus, captions, and the icon font. This file is part of
+the library and should not be changed.
+
+|`uno.css`
+|The J1 *theme* stylesheet (`modules/videojs/css/theme/uno.css`). It is
+loaded *on top* of the base stylesheet and defines the visual design of
+the J1 player. Theme *Uno* is based on the VideoJS theme *Fantasy*
+(v1.0.2).
+
+|===
+
+[role="mt-4"]
+==== Theme Uno
+
+To use the theme, the CSS class `vjs-theme-uno` is added to the video
+element -- the J1 module does this for you. The theme changes the
+following parts of the player:
+
+Control bar::
+A solid, dark control bar with a fixed height of *55 pixels* placed at
+the bottom of the player. When a video is *paused* and the mouse is
+inactive, the control bar fades out automatically.
+
+Big play button::
+A large, round play button (SVG image) placed over the video window.
+On *small* screens (smartphones), a smaller variant of the button is
+used automatically.
+
+Progress bar::
+A custom progress bar placed in its own container *above* the control
+bar, together with the current-time and duration displays. The time
+divider and the remaining-time display of the standard control bar are
+hidden. On mouse-over, the progress bar grows slightly and shows a
+time tooltip at the mouse position.
+
+Volume control::
+The volume slider is shown *vertically* and opens above the volume
+button.
+
+Captions::
+Captions (subtitles) are shown with a transparent background and a
+subtle text shadow for better readability on bright videos.
+
+[role="mt-4"]
+==== Theme colors
+
+Theme Uno defines its colors as *CSS variables* on the class
+`.vjs-theme-uno`. To adapt the colors to your site, overwrite the
+variables in your own stylesheet -- there is no need to modify the
+theme file:
+
+[cols="6a,3a,3a", options="header", width="100%", role="table-striped rtable"]
+|===
+|Variable |Value |Used for
+
+|`--vjs-theme-uno--primary`
+|`#2196f3`
+|Primary color, e.g. the played part of the progress bar.
+
+|`--vjs-theme-uno--secondary`
+|`#fff`
+|Secondary color, e.g. borders of the play control.
+
+|`--vjs-theme-uno--blue-300`
+|`#64B5F6`
+|Light blue accent color.
+
+|`--vjs-theme-uno--blue-600`
+|`#1E88E5`
+|Medium blue accent color.
+
+|`--vjs-theme-uno--blue-800`
+|`#1565C0`
+|Dark blue accent color.
+
+|`--vjs-theme-uno--gray-900`
+|`#212121`
+|Dark gray, background color of the control bar.
+
+|===
+
+.Example: change the primary color
+[source, css]
+----
+.vjs-theme-uno {
+  --vjs-theme-uno--primary: #e91e63;    /* pink instead of blue */
+}
+----

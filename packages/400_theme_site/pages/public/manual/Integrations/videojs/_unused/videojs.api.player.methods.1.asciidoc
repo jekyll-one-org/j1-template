@@ -1,0 +1,726 @@
+
+== Player
+
+=== Inherited Methods from Component
+
+
+[[Methods$]]
+[[$Header]]
+==== $( selector, [context] )
+
+[[$Description]]
+Finds a single DOM element matching `+selector+` within the component's
+`+contentEl+` or another custom context.
+
+===== Parameters
+
+[cols=",,,",options="header",]
+|===
+|name |Type |Required |Description
+|selector |String |yes |A valid CSS selector, which will be passed to
+`+querySelector+`.
+
+|context |Element\|String |no |A DOM element within which to query. Can
+also be a selector string in which case the first matching element will
+be used as context. If missing (or no element matches selector), falls
+back to `+document+`.
+|===
+
+
+[[Methods$$]]
+[[$$Header]]
+==== $$( selector, [context] )
+
+[[$$Description]]
+Finds a all DOM elements matching `+selector+` within the component's
+`+contentEl+` or another custom context.
+
+===== Parameters
+
+[cols=",,,",options="header",]
+|===
+|name |Type |Required |Description
+|selector |String |yes |A valid CSS selector, which will be passed to
+`+querySelectorAll+`.
+
+|context |Element\|String |no |A DOM element within which to query. Can
+also be a selector string in which case the first matching element will
+be used as context. If missing (or no element matches selector), falls
+back to `+document+`.
+|===
+
+
+[[MethodsaddChild]]
+[[addChildHeader]]
+==== addChild( child, [options] )
+
+[[addChildDescription]]
+Adds a child component inside this component
+
+[source, js]
+----
+    myComponent.el();
+            // -> 
+            myComponent.children();
+            // [empty array]
+
+            var myButton = myComponent.addChild('MyButton');
+            // -> myButton
+            // -> myButton === myComponent.children()[0];
+----
+
+Pass in options for child constructors and options for children of the
+child
+
+[source, js]
+----
+    var myButton = myComponent.addChild('MyButton', {
+            text: 'Press Me',
+            buttonChildExample: {
+                buttonChildOption: true
+            }
+            });
+----
+
+===== Parameters
+
+[cols=",,,",options="header",]
+|===
+|name |Type |Required |Description
+|child |String\|Component |yes |The class name or instance of a child to
+add
+
+|options |Object |no |Options, including options to be passed to
+children of the child.
+|===
+
+
+[[MethodsaddClass]]
+[[addClassHeader]]
+==== addClass( classToAdd )
+
+[[addClassDescription]]
+Add a CSS class name to the component's element
+
+===== Parameters
+
+[cols=",,,",options="header",]
+|===
+|name |Type |Required |Description
+|classToAdd |String |yes |Classname to add
+|===
+
+
+[[MethodsbuildCSSClass]]
+[[buildCSSClassHeader]]
+==== buildCSSClass()
+
+[[buildCSSClassDescription]]
+Allows sub components to stack CSS class names
+
+
+[[Methodschildren]]
+[[childrenHeader]]
+==== children()
+
+[[childrenDescription]]
+Get an array of all child components
+
+[source, js]
+----
+    var kids = myComponent.children();
+----
+
+
+[[MethodsclearInterval]]
+[[clearIntervalHeader]]
+==== clearInterval( intervalId )
+
+[[clearIntervalDescription]]
+Clears an interval and removes the associated dispose listener
+
+===== Parameters
+
+[cols=",,,",options="header",]
+|===
+|name |Type |Required |Description
+|intervalId |Number |yes |The id of the interval to clear
+|===
+
+
+[[MethodsclearTimeout]]
+[[clearTimeoutHeader]]
+==== clearTimeout( timeoutId )
+
+[[clearTimeoutDescription]]
+Clears a timeout and removes the associated dispose listener
+
+===== Parameters
+
+[cols=",,,",options="header",]
+|===
+|name |Type |Required |Description
+|timeoutId |Number |yes |The id of the timeout to clear
+|===
+
+
+[[MethodscontentEl]]
+[[contentElHeader]]
+==== contentEl()
+
+[[contentElDescription]]
+Return the component's DOM element where children are inserted. Will
+either be the same as el() or a new element defined in createEl().
+
+
+[[Methodsdimensions]]
+[[dimensionsHeader]]
+==== dimensions( width, height )
+
+[[dimensionsDescription]]
+Set both width and height at the same time
+
+===== Parameters
+
+[cols=",,,",options="header",]
+|===
+|name |Type |Required |Description
+|width |Number\|String |yes |Width of player
+|height |Number\|String |yes |Height of player
+|===
+
+
+[[Methodsel]]
+[[elHeader]]
+==== el()
+
+[[elDescription]]
+Get the component's DOM element
+
+[source, js]
+----
+    var domEl = myComponent.el();
+----
+
+
+[[MethodsenableTouchActivity]]
+[[enableTouchActivityHeader]]
+==== enableTouchActivity()
+
+[[enableTouchActivityDescription]]
+Report user touch activity when touch events occur User activity is used
+to determine when controls should show/hide. It's relatively simple when
+it comes to mouse events, because any mouse event should show the
+controls. So we capture mouse events that bubble up to the player and
+report activity when that happens. With touch events it isn't as easy.
+We can't rely on touch events at the player level, because a tap
+(touchstart + touchend) on the video itself on mobile devices is meant
+to turn controls off (and on). User activity is checked asynchronously,
+so what could happen is a tap event on the video turns the controls off,
+then the touchend event bubbles up to the player, which if it reported
+user activity, would turn the controls right back on. (We also don't
+want to completely block touch events from bubbling up) Also a
+touchmove, touch+hold, and anything other than a tap is not supposed to
+turn the controls back on on a mobile device. Here we're setting the
+default component behavior to report user activity whenever touch events
+happen, and this can be turned off by components that want touch events
+to act differently.
+
+
+[[Methodsextend]]
+[[extendHeader]]
+==== static extend( props ) _(deprecated)_
+
+[[extendDescription]]
+Sets up the constructor using the supplied init method or uses the init
+of the parent object
+
+===== Parameters
+
+[cols=",,,",options="header",]
+|===
+|name |Type |Required |Description
+|props |Object |yes |An object of properties
+|===
+
+
+[[MethodsgetChild]]
+[[getChildHeader]]
+==== getChild()
+
+[[getChildDescription]]
+Returns a child component with the provided name
+
+
+[[MethodsgetChildById]]
+[[getChildByIdHeader]]
+==== getChildById()
+
+[[getChildByIdDescription]]
+Returns a child component with the provided ID
+
+
+[[MethodsgetComponent]]
+[[getComponentHeader]]
+==== static getComponent( name )
+
+[[getComponentDescription]]
+Gets a component by name
+
+===== Parameters
+
+[cols=",,,",options="header",]
+|===
+|name |Type |Required |Description
+|name |String |yes |Name of the component to get
+|===
+
+
+[[MethodshasClass]]
+[[hasClassHeader]]
+==== hasClass( classToCheck )
+
+[[hasClassDescription]]
+Check if a component's element has a CSS class name
+
+===== Parameters
+
+[cols=",,,",options="header",]
+|===
+|name |Type |Required |Description
+|classToCheck |String |yes |Classname to check
+|===
+
+
+[[Methodshide]]
+[[hideHeader]]
+==== hide()
+
+[[hideDescription]]
+Hide the component element if currently showing
+
+
+[[Methodsid]]
+[[idHeader]]
+==== id()
+
+[[idDescription]]
+Get the component's ID
+
+[source, js]
+----
+    var id = myComponent.id();
+----
+
+
+[[MethodsinitChildren]]
+[[initChildrenHeader]]
+==== initChildren()
+
+[[initChildrenDescription]]
+Add and initialize default child components from options
+
+[source, js]
+----
+    // when an instance of MyComponent is created, all children in options
+            // will be added to the instance by their name strings and options
+            MyComponent.prototype.options_ = {
+            children: [
+                'myChildComponent'
+            ],
+            myChildComponent: {
+                myChildOption: true
+            }
+            };
+
+            // Or when creating the component
+            var myComp = new MyComponent(player, {
+            children: [
+                'myChildComponent'
+            ],
+            myChildComponent: {
+                myChildOption: true
+            }
+            });
+----
+
+The children option can also be an array of child options objects (that
+also include a 'name' key). This can be used if you have two child
+components of the same type that need different options.
+
+[source, js]
+----
+    var myComp = new MyComponent(player, {
+            children: [
+                'button',
+                {
+                name: 'button',
+                someOtherOption: true
+                },
+                {
+                name: 'button',
+                someOtherOption: false
+                }
+            ]
+            });
+----
+
+
+[[Methodsname]]
+[[nameHeader]]
+==== name()
+
+[[nameDescription]]
+Get the component's name. The name is often used to reference the
+component.
+
+[source, js]
+----
+    var name = myComponent.name();
+----
+
+
+[[Methodsoff]]
+[[offHeader]]
+==== off( first, second, [third] )
+
+[[offDescription]]
+Remove an event listener from this component's element
+
+[source, js]
+----
+    myComponent.off('eventType', myFunc);
+----
+
+If myFunc is excluded, ALL listeners for the event type will be removed.
+If eventType is excluded, ALL listeners will be removed from the
+component. Alternatively you can use `+off+` to remove listeners that
+were added to other elements or components using
+`+myComponent.on(otherComponent...+`. In this case both the event type
+and listener function are REQUIRED.
+
+[source, js]
+----
+    myComponent.off(otherElement, 'eventType', myFunc);
+            myComponent.off(otherComponent, 'eventType', myFunc);
+----
+
+===== Parameters
+
+[cols=",,,",options="header",]
+|===
+|name |Type |Required |Description
+|first |String\|Component |yes |The event type or other component
+|second |function\|String |yes |The listener function or event type
+|third |function |no |The listener for other component
+|===
+
+
+[[Methodson]]
+[[onHeader]]
+==== on( first, second, third )
+
+[[onDescription]]
+Add an event listener to this component's element
+
+[source, js]
+----
+    var myFunc = function(){
+            var myComponent = this;
+            // Do something when the event is fired
+            };
+
+            myComponent.on('eventType', myFunc);
+----
+
+The context of myFunc will be myComponent unless previously bound.
+Alternatively, you can add a listener to another element or component.
+
+[source, js]
+----
+    myComponent.on(otherElement, 'eventName', myFunc);
+            myComponent.on(otherComponent, 'eventName', myFunc);
+----
+
+The benefit of using this over
+`+VjsEvents.on(otherElement, 'eventName', myFunc)+` and
+`+otherComponent.on('eventName', myFunc)+` is that this way the
+listeners will be automatically cleaned up when either component is
+disposed. It will also bind myComponent as the context of myFunc.
+*NOTE*: When using this on elements in the page other than window and
+document (both permanent), if you remove the element from the DOM you
+need to call `+myComponent.trigger(el, 'dispose')+` on it to clean up
+references to it and allow the browser to garbage collect it.
+
+===== Parameters
+
+[cols=",,,",options="header",]
+|===
+|name |Type |Required |Description
+|first |String\|Component |yes |The event type or other component
+|second |function\|String |yes |The event handler or event type
+|third |function |yes |The event handler
+|===
+
+
+[[Methodsone]]
+[[oneHeader]]
+==== one( first, second, [third] )
+
+[[oneDescription]]
+Add an event listener to be triggered only once and then removed
+
+[source, js]
+----
+    myComponent.one('eventName', myFunc);
+----
+
+Alternatively you can add a listener to another element or component
+that will be triggered only once.
+
+[source, js]
+----
+    myComponent.one(otherElement, 'eventName', myFunc);
+            myComponent.one(otherComponent, 'eventName', myFunc);
+----
+
+===== Parameters
+
+[cols=",,,",options="header",]
+|===
+|name |Type |Required |Description
+|first |String\|Component |yes |The event type or other component
+|second |function\|String |yes |The listener function or event type
+|third |function |no |The listener function for other component
+|===
+
+
+[[Methodsoptions]]
+[[optionsHeader]]
+==== options( obj )
+
+[[optionsDescription]]
+Deep merge of options objects Whenever a property is an object on both
+options objects the two properties will be merged using mergeOptions.
+
+[source, js]
+----
+    Parent.prototype.options_ = {
+            optionSet: {
+                'childOne': { 'foo': 'bar', 'asdf': 'fdsa' },
+                'childTwo': {},
+                'childThree': {}
+            }
+            }
+            newOptions = {
+            optionSet: {
+                'childOne': { 'foo': 'baz', 'abc': '123' }
+                'childTwo': null,
+                'childFour': {}
+            }
+            }
+
+            this.options(newOptions);
+----
+
+
+[source, js]
+----
+    {
+            optionSet: {
+                'childOne': { 'foo': 'baz', 'asdf': 'fdsa', 'abc': '123' },
+                'childTwo': null, // Disabled. Won't be initialized.
+                'childThree': {},
+                'childFour': {}
+            }
+            }
+----
+
+===== Parameters
+
+[cols=",,,",options="header",]
+|===
+|name |Type |Required |Description
+|obj |Object |yes |Object of new option values
+|===
+
+
+[[Methodsplayer]]
+[[playerHeader]]
+==== player()
+
+[[playerDescription]]
+Return the component's player
+
+
+[[Methodsready]]
+[[readyHeader]]
+==== ready( fn, sync )
+
+[[readyDescription]]
+Bind a listener to the component's ready state. Different from event
+listeners in that if the ready event has already happened it will
+trigger the function immediately.
+
+===== Parameters
+
+[cols=",,,",options="header",]
+|===
+|name |Type |Required |Description
+|fn |function |yes |Ready listener
+
+|sync |Boolean |yes |Exec the listener synchronously if component is
+ready
+|===
+
+
+[[MethodsregisterComponent]]
+[[registerComponentHeader]]
+==== static registerComponent( name, comp )
+
+[[registerComponentDescription]]
+Registers a component
+
+===== Parameters
+
+[cols=",,,",options="header",]
+|===
+|name |Type |Required |Description
+|name |String |yes |Name of the component to register
+|comp |Object |yes |The component to register
+|===
+
+
+[[MethodsremoveChild]]
+[[removeChildHeader]]
+==== removeChild( component )
+
+[[removeChildDescription]]
+Remove a child component from this component's list of children, and the
+child component's element from this component's element
+
+===== Parameters
+
+[cols=",,,",options="header",]
+|===
+|name |Type |Required |Description
+|component |Component |yes |Component to remove
+|===
+
+
+[[MethodsremoveClass]]
+[[removeClassHeader]]
+==== removeClass( classToRemove )
+
+[[removeClassDescription]]
+Remove a CSS class name from the component's element
+
+===== Parameters
+
+[cols=",,,",options="header",]
+|===
+|name |Type |Required |Description
+|classToRemove |String |yes |Classname to remove
+|===
+
+
+[[MethodssetInterval]]
+[[setIntervalHeader]]
+==== setInterval( fn, interval )
+
+[[setIntervalDescription]]
+Creates an interval and sets up disposal automatically.
+
+===== Parameters
+
+[cols=",,,",options="header",]
+|===
+|name |Type |Required |Description
+|fn |function |yes |The function to run every N seconds.
+
+|interval |Number |yes |Number of ms to delay before executing specified
+function.
+|===
+
+
+[[MethodssetTimeout]]
+[[setTimeoutHeader]]
+==== setTimeout( fn, timeout )
+
+[[setTimeoutDescription]]
+Creates timeout and sets up disposal automatically.
+
+===== Parameters
+
+[cols=",,,",options="header",]
+|===
+|name |Type |Required |Description
+|fn |function |yes |The function to run after the timeout.
+
+|timeout |Number |yes |Number of ms to delay before executing specified
+function.
+|===
+
+
+[[Methodsshow]]
+[[showHeader]]
+==== show()
+
+[[showDescription]]
+Show the component element if hidden
+
+
+[[MethodstoggleClass]]
+[[toggleClassHeader]]
+==== toggleClass( classToToggle, [predicate] )
+
+[[toggleClassDescription]]
+Add or remove a CSS class name from the component's element
+
+===== Parameters
+
+[cols=",,,",options="header",]
+|===
+|name |Type |Required |Description
+|classToToggle |String | |
+
+|predicate |Boolean\|function |no |Can be a function that returns a
+Boolean. If `+true+`, the class will be added; if `+false+`, the class
+will be removed. If not given, the class will be added if not present
+and vice versa.
+|===
+
+
+[[Methodstrigger]]
+[[triggerHeader]]
+==== trigger( event, [hash] )
+
+[[triggerDescription]]
+Trigger an event on an element
+
+[source, js]
+----
+    myComponent.trigger('eventName');
+            myComponent.trigger({'type':'eventName'});
+            myComponent.trigger('eventName', {data: 'some data'});
+            myComponent.trigger({'type':'eventName'}, {data: 'some data'});
+----
+
+===== Parameters
+
+[cols=",,,",options="header",]
+|===
+|name |Type |Required |Description
+|event |Event\|Object\|String |yes |A string (the type) or an event
+object with a type attribute
+
+|hash |Object |no |data hash to pass along with the event
+|===
+
+
+[[MethodstriggerReady]]
+[[triggerReadyHeader]]
+==== triggerReady()
+
+[[triggerReadyDescription]]
+Trigger the ready listeners

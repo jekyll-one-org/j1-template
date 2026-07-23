@@ -1,0 +1,231 @@
+<table style="margin-top: 0px; margin-bottom: 1rem;">
+   <thead>
+      <tr>
+         <th>Option</th>
+         <th>Default value</th>
+         <th>Description</th>
+      </tr>
+   </thead>
+   <tbody>
+      <tr>
+         <td><span><code><b>id</b></code> <em>or</em> <code><b>url</b></code></span></td>
+         <td>None</td>
+         <td><span>The ID or the URL of the video on Vimeo. You must supply one of these values to identify the video. When the video's <a href="https://vimeo.com/help/sso?redirect_to=https://help.vimeo.com/hc/en-us/articles/12426199699985-Overview-of-video-privacy-settings" format="primary" class="sc-jObWnj cEFScs">privacy setting</a> is <code>Unlisted</code>, you must use the URL, and the URL must include the <code><b>h</b></code> parameter. For more information, see our <a href="/player/sdk/basics#connecting-to-a-vimeo-player" format="primary" class="sc-jObWnj cEFScs">introductory guide</a>.</span></td>
+      </tr>
+      <tr>
+         <td><span><code><b>airplay</b></code></span></td>
+         <td><code>true</code></td>
+         <td><span>Whether AirPlay is enabled in the embeddable player.</span></td>
+      </tr>
+      <tr>
+         <td><span><code><b>audio_tracks</b></code></span></td>
+         <td><code>true</code></td>
+         <td>Whether multiple audio tracks can appear in the embeddable player. This option has no effect if your video doesn't have additional audio tracks uploaded to it.</td>
+      </tr>
+      <tr>
+         <td><span><code><b>autopause</b></code></span></td>
+         <td><code>true</code></td>
+         <td><span>Whether to pause the current video when another Vimeo video on the same page starts to play. Set this value to <code>false</code> to permit simultaneous playback of all the videos on the page. This option has no effect if you've disabled cookies in your browser, either through browser settings or with an extension or plugin.</span></td>
+      </tr>
+      <tr>
+         <td><code><b>autoplay</b></code></td>
+         <td><code>false</code></td>
+         <td>Whether to start playback of the video automatically. This feature might not work on all devices.</td>
+      </tr>
+      <tr>
+         <td><code><b>background</b></code></td>
+         <td><code>false</code></td>
+         <td>Whether the player is in background mode, which hides the playback controls, enables autoplay, and loops the video.</td>
+      </tr>
+      <tr>
+         <td><code><b>byline</b></code></td>
+         <td><code>true</code></td>
+         <td>Whether to display the video owner's name.</td>
+      </tr>
+      <tr>
+         <td><code><b>cc</b></code></td>
+         <td><code>true</code></td>
+         <td>Whether closed captions are enabled in the embeddable player. This option has no effect if your video doesn't have captions or subtitles.</td>
+      </tr>
+      <tr>
+         <td><code><b>chapter_id</b></code></td>
+         <td>None</td>
+         <td>The chapter by ID to start playback at.</td>
+      </tr>
+      <tr>
+         <td><code><b>chapters</b></code></td>
+         <td><code>true</code></td>
+         <td>Whether chapters are enabled in the embeddable player. This option has no effect if your video doesn't have chapters set.</td>
+      </tr>
+      <tr>
+         <td><code><b>chromecast</b></code></td>
+         <td><code>true</code></td>
+         <td>Whether the Chromecast button appears in the embeddable player.</td>
+      </tr>
+      <tr>
+         <td><code><b>color</b></code></td>
+         <td>None</td>
+         <td><span>The hexadecimal accent color value of the playback controls, which is normally <code>00ADEF</code>. The embed settings of the video might override this value. For more information about player colors, refer to the <code>colors</code> option.</span></td>
+      </tr>
+      <tr>
+         <td><code><b>colors</b></code></td>
+         <td>None</td>
+         <td><span>The hexadecimal color values of the player. The embed settings of the video might override these values. The order of the player colors is <code>[Primary, Accent, Text/Icon, Background]</code>, with corresponding default values of <code>["000000", "00ADEF", "FFFFFF", "000000"]</code>.</span></td>
+      </tr>
+      <tr>
+         <td><code><b>controls</b></code></td>
+         <td><code>true</code></td>
+         <td><span>Whether to display the player's interactive elements, including the play bar and sharing buttons. Set this option to <code>false</code> for a chromeless experience. To control playback when the play/pause button is hidden, set <code><b>autoplay</b></code> to <code>true</code>, use keyboard controls (which remain active), or implement our player SDK.</span></td>
+      </tr>
+      <tr>
+         <td><code><b>dnt</b></code></td>
+         <td><code>false</code></td>
+         <td><span>Whether to prevent the player from tracking session data, including cookies. Keep in mind that setting this argument to <code>true</code> also blocks <a href="https://vimeo.com/stats" format="primary" class="sc-jObWnj cEFScs">video stats</a>.</span></td>
+      </tr>
+      <tr>
+         <td><code><b>end_time</b></code></td>
+         <td>None</td>
+         <td><span>In Segmented Playback mode, the time in seconds where playback ends for the video. Setting this field enables Segmented Playback mode, where the video is presented as a segment of the original as defined by this field and the <code><b>start_time</b></code> field, with a duration in seconds equal to <code><b>end_time</b></code> minus <code><b>start_time</b></code>. If <code><b>start_time</b></code> is omitted, the start time defaults to <code>0</code>.</span></td>
+      </tr>
+      <tr>
+         <td><code><b>fullscreen</b></code></td>
+         <td><code>true</code></td>
+         <td><span>Whether to show the fullscreen button in the embeddable player.</span></td>
+      </tr>
+      <tr>
+         <td><code><b>height</b></code></td>
+         <td>None</td>
+         <td>The height of the video in pixels.</td>
+      </tr>
+      <tr>
+         <td><code><b>interactive_markers</b></code></td>
+         <td><code>true</code></td>
+         <td>Whether to display markers representing the timestamp where hotspots appear on an interactive video.</td>
+      </tr>
+      <tr>
+         <td><code><b>interactive_params</b></code></td>
+         <td>None</td>
+         <td><span>Key-value pairs representing dynamic parameters that are utilized on interactive videos with dynamic elements, such as <code>title=my-video,subtitle=interactive</code>.</span></td>
+      </tr>
+      <tr>
+         <td><code><b>keyboard</b></code></td>
+         <td><code>true</code></td>
+         <td>Whether to enable keyboard input to trigger player events. This setting doesn't affect tab control.</td>
+      </tr>
+      <tr>
+         <td><code><b>loop</b></code></td>
+         <td><code>false</code></td>
+         <td>Whether to restart the video automatically after reaching the end.</td>
+      </tr>
+      <tr>
+         <td><code><b>maxheight</b></code></td>
+         <td>None</td>
+         <td>The height of the video in pixels, where the video won't exceed its native height, no matter the value of this field.</td>
+      </tr>
+      <tr>
+         <td><code><b>maxwidth</b></code></td>
+         <td>None</td>
+         <td>The width of the video in pixels, where the video won't exceed its native width, no matter the value of this field.</td>
+      </tr>
+      <tr>
+         <td><code><b>muted</b></code></td>
+         <td><code>false</code></td>
+         <td><span>Whether the video is muted upon loading. The <code>true</code> value is required for the autoplay behavior in some browsers.</span></td>
+      </tr>
+      <tr>
+         <td><code><b>pip</b></code></td>
+         <td><code>true</code></td>
+         <td>Whether to include the picture-in-picture button among the player controls and enable the Picture-in-Picture API, where supported.</td>
+      </tr>
+      <tr>
+         <td><code><b>play_button_position</b></code></td>
+         <td><code>auto</code></td>
+         <td><span>The position of the play button within the embeddable player. Other possible values include <code>bottom</code> and <code>center</code>.</span></td>
+      </tr>
+      <tr>
+         <td><code><b>playsinline</b></code></td>
+         <td><code>true</code></td>
+         <td><span>Whether the video plays inline on supported mobile devices. To force the device to play the video in fullscreen mode instead, set this value to <code>false</code>.</span></td>
+      </tr>
+      <tr>
+         <td><code><b>portrait</b></code></td>
+         <td><code>true</code></td>
+         <td>Whether to display the video owner's portrait.</td>
+      </tr>
+      <tr>
+         <td><code><b>progress_bar</b></code></td>
+         <td><code>true</code></td>
+         <td>Whether to show the progress bar in the embeddable player.</td>
+      </tr>
+      <tr>
+         <td><code><b>quality</b></code></td>
+         <td><code>auto</code></td>
+         <td><span>The playback quality of the video. Use <code>auto</code> for the best possible quality given available bandwidth and other factors. You can also specify <code>360p</code>, <code>540p</code>, <code>720p</code>, <code>1080p</code>, <code>2k</code>, and <code>4k</code>.</span></td>
+      </tr>
+      <tr>
+         <td><code><b>quality_selector</b></code></td>
+         <td><code>true</code></td>
+         <td>Whether to show the quality selector in the embeddable player.</td>
+      </tr>
+      <tr>
+         <td><code><b>responsive</b></code></td>
+         <td><code>false</code></td>
+         <td><span>Whether to return a <em>responsive embed code</em>, or one that provides intelligent adjustments based on viewing conditions. We recommend this option for mobile-optimized sites.</span></td>
+      </tr>
+      <tr>
+         <td><code><b>speed</b></code></td>
+         <td><code>false</code></td>
+         <td>Whether to include playback speed among the player preferences.</td>
+      </tr>
+      <tr>
+         <td><code><b>start_time</b></code></td>
+         <td><code>0</code></td>
+         <td><span>In Segmented Playback mode, the time in seconds where playback starts for the video; see the <code><b>end_time</b></code> field for more information.</span></td>
+      </tr>
+      <tr>
+         <td><code><b>texttrack</b></code></td>
+         <td>None</td>
+         <td>
+            <span>
+               The text track to display with the video. Specify the text track by its language code (<code>en</code>), the language code and locale (<code>en-US</code>), or the language code and kind (<code>en.captions</code>). For this argument to work, the video must already have a text track of the given type; see our <a href="https://vimeo.com/help/sso?redirect_to=https://help.vimeo.com/hc/en-us/articles/12426156795409-Captions-and-subtitles" format="primary" class="sc-jObWnj cEFScs">Help Center</a> or <a href="/api/upload/texttracks" format="primary" class="sc-jObWnj cEFScs">Working with Text Track Uploads</a> for more information.
+               <div><br>To enable automatically generated closed captions instead, provide the value <code>en-x-autogen</code>. Please note that, at the present time, automatic captions are always in English.</div>
+            </span>
+         </td>
+      </tr>
+      <tr>
+         <td><code><b>title</b></code></td>
+         <td><code>true</code></td>
+         <td>Whether to display the video’s title.</td>
+      </tr>
+      <tr>
+         <td><code><b>transcript</b></code></td>
+         <td><code>true</code></td>
+         <td>Whether transcript controls can appear in the embeddable player.</td>
+      </tr>
+      <tr>
+         <td><code><b>transparent</b></code></td>
+         <td><code>true</code></td>
+         <td>Whether the responsive player and transparent background are enabled.</td>
+      </tr>
+      <tr>
+         <td><code><b>vimeo_logo</b></code></td>
+         <td><code>true</code></td>
+         <td>Whether to show the Vimeo logo in the embeddable player.</td>
+      </tr>
+      <tr>
+         <td><code><b>volume</b></code></td>
+         <td><code>true</code></td>
+         <td>Whether to show the volume selector in the embeddable player.</td>
+      </tr>
+      <tr>
+         <td><code><b>watch_full_video</b></code></td>
+         <td><code>true</code></td>
+         <td><span>Whether to show the Watch Full Video button when Segmented Playback mode is enabled; see <code><b>start_time</b></code> and <code><b>end_time</b></code> above for more information.</span></td>
+      </tr>
+      <tr>
+         <td><code><b>width</b></code></td>
+         <td>None</td>
+         <td>The width of the video in pixels.</td>
+      </tr>
+   </tbody>
+</table>

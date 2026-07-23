@@ -1,0 +1,71 @@
+== Player Events
+
+Available events for VideoJS players a listener can be bound to.
+
+
+[role="mt-4"]
+[[player-event-ended]]
+=== ended
+
+Fired when video playback ends.
+
+
+[role="mt-4"]
+[[player-event-error]]
+=== error
+
+Fired when an error occurs.
+
+
+[role="mt-4"]
+[[player-event-loadeddata]]
+=== loadeddata
+
+Fired when the player has downloaded data at the current playback
+position.
+
+
+[role="mt-4"]
+[[player-event-loadedmetadata]]
+=== loadedmetadata
+
+Fired when the player has initial duration and dimension information.
+
+
+[role="mt-4"]
+[[player-event-ready]]
+=== ready
+
+Fired when the player is *ready to use*.
+
+
+[role="mt-4"]
+[[player-event-timeupdate]]
+=== timeupdate
+
+Fired when the current playback position has changed during *playback*.
+This is fired every *15-250 milliseconds*, depending on the playback
+technology in use.
+
+
+[role="mt-4"]
+[[player-event-useractive]]
+=== useractive
+
+Fired when the user is active, e.g. moves the mouse over the player.
+
+
+[role="mt-4"]
+[[player-event-userinactive]]
+=== userinactive
+
+Fired when the user is inactive, e.g. a short delay after the last mouse
+move or control interaction.
+
+
+[role="mt-4"]
+[[player-event-volumechange]]
+=== volumechange
+
+Fired when the volume changes.
+

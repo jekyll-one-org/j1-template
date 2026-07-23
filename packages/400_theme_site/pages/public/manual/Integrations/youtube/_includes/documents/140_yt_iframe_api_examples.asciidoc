@@ -1,0 +1,169 @@
+[role="mt-5"]
+[[yt-api-examples]]
+== Examples
+
+VideoJS provides a flexible and customizable platform for displaying and
+*controlling* video content on websites and web applications. The J1 Template
+system utilizes online videos from the YouTube platform. The player plugin
+*VideoJS YT Tech* is used to provide custom players, offering the default
+look and feel for all J1 video players.
+
+.VideoJS Player · YouTube Video over VideoJS YT Tech
+youtube::gUmE_TRdp0s[poster="//img.youtube.com/vi/gUmE_TRdp0s/maxresdefault.jpg" role="mb-4"]
+
+Find below examples how to use the YouTube iFrame API on webpages for *native*
+players. Based on the example, you can manually implement YouTube players
+on a page.
+
+[NOTE]
+====
+The J1 Template system automates the process using the iFrame API and
+transforms *native* players into *custom* players using VideoJS. This
+transformation enhances the user experience, as all players utilize the
+same look and feel, including the controls (progress bar or play and skip
+buttons). Using the VideoJS YT Tech plugin, disturbing commercial advertising
+gets suppressed, allowing users to watch videos uninterrupted.
+====
+
+
+[role="mt-5"]
+[[yt-iframe-api--example-1]]
+=== Example 1
+
+Use API with existing <iframe>. In this example, an `<iframe>` element on
+the page already defines the player with which the API will be used. Note
+that either the player's `src` URL must set the `enablejsapi` parameter
+to `1` or the `<iframe>` element's `enablejsapi` attribute must be
+set to `true`.
+
+The `onPlayerReady` method changes the color of the border around
+the player to orange when the player is ready. The
+`onPlayerStateChange` method then changes the color of the border
+around the player based on the current player status. For example, the
+color is green when the player is playing, red when paused, blue when
+buffering, and so forth.
+
+This example uses the following code:
+
+[source, html]
+----
+<iframe id="iframe-example-01"
+  width="640" height="360"
+  src="//youtube.com/embed/M7lc1UVf-VE?enablejsapi=1"
+  frameborder="0"
+  style="border: solid 4px #37474F"
+></iframe>
+
+<script type="text/javascript">
+  var tag = document.createElement('script');
+  tag.id = 'iframe-demo';
+  tag.src = '//youtube.com/iframe_api';
+  var firstScriptTag = document.getElementsByTagName('script')[0];
+  firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+  var player;
+  function onYouTubeIframeAPIReady() {
+    player = new YT.Player('iframe-example-01', {
+        events: {
+          'onReady': onPlayerReady,
+          'onStateChange': onPlayerStateChange
+        }
+    });
+  }
+
+  function onPlayerReady(event) {
+    document.getElementById('iframe-example-01').style.borderColor = '#FF6D00';
+  }
+
+  function changeBorderColor(playerStatus) {
+    var color;
+    if (playerStatus == -1) {
+      color = "#37474F"; // unstarted = gray
+    } else if (playerStatus == 0) {
+      color = "#FFFF00"; // ended = yellow
+    } else if (playerStatus == 1) {
+      color = "#33691E"; // playing = green
+    } else if (playerStatus == 2) {
+      color = "#DD2C00"; // paused = red
+    } else if (playerStatus == 3) {
+      color = "#AA00FF"; // buffering = purple
+    } else if (playerStatus == 5) {
+      // Original (deprecated, preserved for reference):
+      //       color = "#FF6DOO"; // video cued = orange
+      // claude - Update YouTube iFrame API manual #1
+      color = "#FF6D00"; // video cued = orange
+    }
+    if (color) {
+      document.getElementById('iframe-example-01').style.borderColor = color;
+    }
+  }
+
+  function onPlayerStateChange(event) {
+    changeBorderColor(event.data);
+  }
+</script>
+----
+
+
+[role="mt-5"]
+[[yt-iframe-api--example-2]]
+=== Example 2
+
+Playback video (loud) at volume set to 100%. This example creates a video player
+of size 1280px by 720px. The event listener for the `onReady` event then calls
+the `setVolume` method to adjust the volume to the highest setting.
+
+This example uses the following code:
+
+[source, js]
+----
+function onYouTubeIframeAPIReady() {
+  var player_example_02;
+  player_example_02 = new YT.Player('player', {
+    width: 1280,
+    height: 720,
+    videoId: 'M7lc1UVf-VE',
+    events: {
+      'onReady': onPlayerReady,
+      'onStateChange': onPlayerStateChange,
+      'onError': onPlayerError
+    }
+  });
+}
+
+function onPlayerReady(event) {
+  event.target.setVolume(100);
+  event.target.playVideo();
+}
+----
+
+
+[role="mt-5"]
+[[yt-iframe-api--example-3]]
+=== Example 3
+
+This example sets player parameters to automatically play the video when
+it loads and hide the video player's controls. It also adds event
+listeners for several events that the API broadcasts.
+
+This example uses the following code:
+
+[role="mb-8"]
+[source, js]
+----
+function onYouTubeIframeAPIReady() {
+  var player_example_03;
+  player_example_03 = new YT.Player('player', {
+    videoId: 'M7lc1UVf-VE',
+    playerVars: {
+      'autoplay': 1,
+      'controls': 0
+      },
+    events: {
+      'onReady':        onPlayerReady,
+      'onStateChange':  onPlayerStateChange,
+      'onError':        onPlayerError
+    }
+  });
+}
+----

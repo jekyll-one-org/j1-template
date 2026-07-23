@@ -67,6 +67,7 @@
       href:                             /pages/public/tour/site_search/
       icon:                             magnify
 
+
 # ------------------------------------------------------------------------------
 # Menu LEARN
 #
@@ -176,11 +177,13 @@
               icon:                     calculator-variant-outline
               target:                   _blank
 
+
 # ------------------------------------------------------------------------------
 # TopLevel item FEATURES
 #
 # - item:                                 Features
 #   href:                                 /#panel_home_intro
+
 
 # ------------------------------------------------------------------------------
 # TopLevel item BLOG
@@ -188,24 +191,6 @@
 # - item:                                 Blog
 #   href:                                 /#home_news_panel
 
-# ------------------------------------------------------------------------------
-# Menu BLOG
-#
-- item:                                 Blog
-  sublevel:
-
-    - title:                            Navigator
-      href:                             /pages/public/blog/navigator/
-      icon:                             near-me
-    - title:                            Categories
-      href:                             /pages/public/blog/navigator/archive/categoryview/
-      icon:                             pin
-    - title:                            Date
-      href:                             /pages/public/blog/navigator/archive/dateview/
-      icon:                             calendar
-    - title:                            Archive
-      href:                             /pages/public/blog/navigator/archive/allview/
-      icon:                             archive
 
 # ------------------------------------------------------------------------------
 # Menu MANUAL
@@ -216,6 +201,30 @@
   # - title:                            Where to go
   #   href:                             /pages/public/manuals/where_to_go/
   #   icon:                             foot-print
+
+    # --------------------------------------------------------------------------
+    # Integrations
+    #
+    - title:                            Integrations
+      icon:                             alpha-i-box
+      dropdown:
+
+        - title:                        YouTube iFrame API
+          href:                         /pages/public/manual/youtube/iframe_api/
+          icon:                         video
+
+        - title:                        VideoJS
+          icon:                         video
+          dropdown:
+
+          - title:                      Programming Interface
+            href:                       /pages/public/manual/integrations/videojs/api/
+            icon:                       video
+
+          - title:                      Plugins
+            href:                       /pages/public/manual/integrations/videojs/plugins/
+            icon:                       video
+
 
     # --------------------------------------------------------------------------
     # Modules
@@ -262,6 +271,27 @@
               href:                     /pages/public/manual/module/lightboxes/lightgallery_api/
               icon:                     flashlight
 
+
+# ------------------------------------------------------------------------------
+# Menu BLOG
+#
+- item:                                 Blog
+  sublevel:
+
+    - title:                            Navigator
+      href:                             /pages/public/blog/navigator/
+      icon:                             near-me
+    - title:                            Categories
+      href:                             /pages/public/blog/navigator/archive/categoryview/
+      icon:                             pin
+    - title:                            Date
+      href:                             /pages/public/blog/navigator/archive/dateview/
+      icon:                             calendar
+    - title:                            Archive
+      href:                             /pages/public/blog/navigator/archive/allview/
+      icon:                             archive
+
+
 # ------------------------------------------------------------------------------
 # Menu TEST
 #
@@ -275,6 +305,7 @@
 #     - title:                            VideoJS Playlist Test Tool
 #       href:                             /pages/public/tools/test/videojs-playlist/
 #       icon:                             video
+
 
 # ------------------------------------------------------------------------------
 # Menu CLAUDE AI
@@ -297,6 +328,7 @@
     - title:                            Knowledge Base Help
       icon:                             information-variant
       href:                             /pages/public/tools/claudeAI/kbHelp/
+
 
 # ------------------------------------------------------------------------------
 # Menu ONLINE
@@ -465,6 +497,7 @@
           target:                       _blank
           icon:                         regex
 
+
 # ------------------------------------------------------------------------------
 # Menu Themes
 #
@@ -480,6 +513,7 @@
     - bootswatch_themes:                enabled
       title:                            Bootswatch
       icon:                             bootstrap
+
 
 # ------------------------------------------------------------------------------
 # Menu ABOUT

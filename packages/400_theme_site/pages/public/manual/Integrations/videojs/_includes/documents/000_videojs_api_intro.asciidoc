@@ -1,0 +1,110 @@
+[role="mt-5"]
+== Overview
+
+The VideoJS library is an Open Source JavaScript framework for building HTML5
+based video players on the web. It provides a customizable and extensible
+platform for embedding and controlling video playback within web applications.
+
+The VideoJS *API* is the set of *options*, *methods* and *events* you use
+from JavaScript to configure and control a player. In J1 Template you
+usually do *not* call this API directly. Instead, you write a few YAML
+settings and the J1 *videojs adapter*
+(`~/assets/theme/j1/adapter/js/videojs.js`) builds the JavaScript
+configuration for you. Reading this manual is still useful, because all
+YAML keys map one-to-one to the API names described below.
+
+Key features and benefits:
+
+Compatibility::
+The library is designed to work seamlessly across different web browsers,
+ensuring that a wide audience can view your videos.
+
+Skins::
+It is easy to customize the appearance of the video player by changing the
+player skin and applying CSS styles to match the look and feel of your website
+or application.
+
+Plugins::
+The API provides a robust plugin system that allows developers to extend its
+functionality. Many plugins contributed by the community are available to add
+features like captions, analytics, or advertising.
+
+Accessibility::
+The framework is built with accessibility in mind. VideoJS is making it
+possible to create video players compliant with web accessibility standards,
+such as providing support for screen readers and keyboard navigation.
+
+Responsiveness::
+The Player provided can be configured to automatically adapt to different
+screen sizes and orientations, making it suitable for mobile and desktop
+devices.
+
+HTML5 video::
+The framework leverages HTML5 video capabilities, allowing you to play
+videos without relying on external plugins like _Flash_.
+
+Streaming::
+The framework can be used to stream video content. This includes progressive
+download and adaptive streaming technologies like HTTP Live Streaming (HLS)
+and Dynamic Adaptive Streaming over HTTP (DASH).
+
+Community and Documentation::
+The API has an active and supportive community of developers. It also
+provides extensive documentation and examples to help developers get started
+and troubleshoot any issues.
+
+VideoJS is a powerful and versatile tool for integrating video playback
+into web applications and websites, offering a high degree of flexibility
+and customization. It has gained popularity due to its ease of use and robust
+feature set, making it a popular choice for developers looking to incorporate
+video content on the web.
+
+// See: //videojs.com/guides/options/
+The VideoJS system provides comprehensive documentation on its website,
+which includes detailed information on the available options and
+configurations.
+
+
+[role="mt-4"]
+[[api-overview-j1]]
+=== VideoJS in J1 Template
+
+The J1 Template integrates the VideoJS library as a *module*. The module
+consists of a few building blocks that work together. You do not need to
+know all details to use the player, but it helps to know what each part
+is for:
+
+[cols="3a,9a", options="header", width="100%", role="table-striped rtable"]
+|===
+|Part |Description
+
+|`Player library`
+|The VideoJS core (`video.js`) and its base stylesheet (`videojs.css`).
+This is the unchanged Open Source library, version *v8.23.x*.
+
+|`Adapter`
+|A small piece of J1 JavaScript
+(`~/assets/theme/j1/adapter/js/videojs.js`) that connects the library to
+the template. On page load, the adapter reads the YAML configuration,
+merges the *default* settings with your *user* settings, and stores the
+result for all players on the page. See section
+<<j1-module-adapter>> for details.
+
+|`Configuration (YAML)`
+|Two YAML files control the module: the *defaults* file
+(`_data/modules/defaults/videojs.yml`) shipped with the template, and
+the *user* file (`_data/modules/videojs.yml`) for your own settings.
+Your user settings always *win* over the defaults. See section
+<<j1-module-configuration>> for all available keys.
+
+|`Plugins`
+|Ready-to-use extensions for the player: *hotkeys* (keyboard control),
+*skip buttons* (jump forward/backward), and *zoom buttons* (zoom and
+move the video image). All plugins are enabled or disabled in YAML.
+
+|`Theme Uno`
+|A custom player skin (`uno.css`) developed for the J1 Template. The
+theme defines the look of the control bar, the big play button, and the
+progress bar. See section <<j1-module-themes>> for details.
+
+|===

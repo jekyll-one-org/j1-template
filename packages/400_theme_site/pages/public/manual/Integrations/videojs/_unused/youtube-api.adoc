@@ -1,0 +1,841 @@
+---
+title:                                  YouTube API
+title_extention:                        Interact with and control videos
+tagline:                                Interact with and control videos
+
+date:                                   2020-11-04
+#last_modified:                         2023-01-01
+
+description: >
+                                        YouTube offered an Application Programming Interface
+                                        that allowed developers to interact with and access various
+                                        features of the Dailymotion platform programmatically.
+keywords: >
+                                        open source, free, template, jekyll, jekyllone, web,
+                                        sites, static, jamstack, bootstrap,
+                                        html, html5, video, support,
+                                        youtube
+
+categories:                             [ Manual ]
+tags:                                   [ Module, Dailymotion ]
+
+image:
+  path:                                 /assets/image/icon/videojs/videojs-poster.png
+  width:                                1920
+  height:                               1280
+
+regenerate:                             false
+personalization:                        true
+permalink:                              /pages/public/manuals/videojs/youtube_api/
+
+resources:                              []
+resource_options:
+  - toccer:
+      collapseDepth:                    3
+  - attic:
+      slides:
+        - url:                          /assets/image/icon/videojs/videojs-poster.png
+          alt:                          VideoJS Poster
+---
+
+// Page Initializer
+// =============================================================================
+// Enable the Liquid Preprocessor
+:page-liquid:
+
+// Set (local) page attributes here
+// -----------------------------------------------------------------------------
+// :page--attr:                         <attr-value>
+:images-dir:                            {imagesdir}/pages/roundtrip/100_present_images
+
+//  Load Liquid procedures
+// -----------------------------------------------------------------------------
+{% capture load_attributes %}themes/{{site.template.name}}/procedures/global/attributes_loader.proc{%endcapture%}
+
+// Load page attributes
+// -----------------------------------------------------------------------------
+{% include {{load_attributes}} scope="global" %}
+// https://developers.google.com/youtube/iframe_api_reference
+// https://developers.google.com/youtube/player_parameters
+
+// Page content
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[role="dropcap"]
+Dailymotion offered an Application Programming Interface (API) that allowed
+developers to interact with and access various features of the Dailymotion
+platform programmatically.
+
+This API enabled developers to integrate Dailymotion's video content, user
+accounts, and other functionalities into their applications, websites, or
+services.
+
+mdi:clock-time-five-outline[24px, md-gray mt-4 mb-5 mr-2]
+*30-60 Minutes* to read
+
+// Include sub-documents (if any)
+// -----------------------------------------------------------------------------
+
+[role="mt-5"]
+== Youtube Player API
+
+++++
+<article class="devsite-article" has-bookmark="">
+  <div class="devsite-article-meta nocontent" role="navigation">
+    <ul class="devsite-breadcrumb-list" aria-label="Breadcrumb">
+      <li class="devsite-breadcrumb-item
+        ">
+        <a href="https://developers.google.com/" class="devsite-breadcrumb-link gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Breadcrumbs" data-value="1" track-type="globalNav" track-name="breadcrumb" track-metadata-position="1" track-metadata-eventdetail="">
+        Home
+        </a>
+      </li>
+      <li class="devsite-breadcrumb-item
+        ">
+        <div class="devsite-breadcrumb-guillemet material-icons" aria-hidden="true"></div>
+        <a href="https://developers.google.com/products" class="devsite-breadcrumb-link gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Breadcrumbs" data-value="2" track-type="globalNav" track-name="breadcrumb" track-metadata-position="2" track-metadata-eventdetail="">
+        Products
+        </a>
+      </li>
+      <li class="devsite-breadcrumb-item
+        ">
+        <div class="devsite-breadcrumb-guillemet material-icons" aria-hidden="true"></div>
+        <a href="https://developers.google.com/youtube" class="devsite-breadcrumb-link gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Breadcrumbs" data-value="3" track-type="globalNav" track-name="breadcrumb" track-metadata-position="3" track-metadata-eventdetail="YouTube">
+        YouTube
+        </a>
+      </li>
+      <li class="devsite-breadcrumb-item
+        ">
+        <div class="devsite-breadcrumb-guillemet material-icons" aria-hidden="true"></div>
+        <a href="https://developers.google.com/youtube/iframe_api_reference" class="devsite-breadcrumb-link gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Breadcrumbs" data-value="4" track-type="globalNav" track-name="breadcrumb" track-metadata-position="4" track-metadata-eventdetail="YouTube IFrame Player API">
+        IFrame Player API
+        </a>
+      </li>
+    </ul>
+    <devsite-thumb-rating position="header">
+      <div class="devsite-thumb-rating" role="form" aria-labelledby="devsite-thumb-label-header">
+        <div class="devsite-thumb-label" id="devsite-thumb-label-header">Was this helpful?</div>
+        <div class="devsite-thumbs">
+          <button class="devsite-thumb devsite-thumb-up" data-title="Helpful" aria-label="Helpful">
+            <svg class="devsite-thumb-icon" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M21,7h-6.31l0.95-4.57l0.03-0.32c0-0.41-0.17-0.79-0.44-1.06L14.17,0c0,0-7.09,6.85-7.17,7H2v13h16 c0.83,0,1.54-0.5,1.84-1.22l3.02-7.05C22.95,11.5,23,11.26,23,11V9C23,7.9,22.1,7,21,7z M7,18H4V9h3V18z M21,11l-3,7H9V8l4.34-4.34 L12,9h9V11z"></path>
+            </svg>
+          </button>
+          <button class="devsite-thumb devsite-thumb-down" data-title="Not helpful" aria-label="Not helpful">
+            <svg class="devsite-thumb-icon" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M3,17h6.31l-0.95,4.57l-0.03,0.32c0,0.41,0.17,0.79,0.44,1.06L9.83,24c0,0,7.09-6.85,7.17-7h5V4H6 C5.17,4,4.46,4.5,4.16,5.22l-3.02,7.05C1.05,12.5,1,12.74,1,13v2C1,16.1,1.9,17,3,17z M17,6h3v9h-3V6z M3,13l3-7h9v10l-4.34,4.34 L12,15H3V13z"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </devsite-thumb-rating>
+  </div>
+  <h1 class="devsite-page-title" tabindex="-1">YouTube Embedded Players and Player Parameters</h1>
+  <devsite-feature-tooltip ack-key="AckCollectionsBookmarkTooltipDismiss" analytics-category="Site-Wide Custom Events" analytics-action-show="Callout Profile displayed" analytics-action-close="Callout Profile dismissed" analytics-label="Create Collection Callout" class="devsite-page-bookmark-tooltip nocontent inline-block" dismiss-button="true" id="devsite-collections-dropdown" dismiss-button-text="Dismiss" close-button-text="Got it" ready="" current-step="0" style="--devsite-popout-offset-x: 32px;">
+    <devsite-bookmark class="show">
+      <devsite-dropdown-list ellipsis="" checkboxes="" fetchingitems="true" writable="" additemtext="New Collection" ready="" style="--devsite-popout-offset-x: 0px;"><span class="material-icons bookmark-icon" slot="toggle">bookmark_border</span></devsite-dropdown-list>
+    </devsite-bookmark>
+    <span slot="popout-heading">
+    Stay organized with collections
+    </span>
+    <span slot="popout-contents">
+    Save and categorize content based on your preferences.
+    </span>
+  </devsite-feature-tooltip>
+  <div class="devsite-page-title-meta"></div>
+  <devsite-toc class="devsite-nav devsite-toc-embedded" depth="2" devsite-toc-embedded="" expandable="" visible="">
+    <ul class="devsite-nav-list">
+      <li class="devsite-nav-item devsite-nav-heading devsite-toc-toggle"><span class="devsite-nav-title" role="heading" aria-level="2"><span class="devsite-nav-text">On this page</span></span><button type="button" title="Expand/collapse contents" class="devsite-nav-show-all button-transparent material-icons"></button></li>
+      <li class="devsite-nav-item" visible=""><a href="#Overview" class="devsite-nav-title gc-analytics-event" data-category="Site-Wide Custom Events" data-action="click" data-label="Embedded nav" data-value="0" track-type="navigation" track-name="embeddedNav" track-metadata-position="0" track-metadata-link-destination="#Overview"><span class="devsite-nav-text" tooltip="">Overview</span></a></li>
+      <li class="devsite-nav-item" visible="">
+        <a href="#Embedding_a_Player" class="devsite-nav-title gc-analytics-event" data-category="Site-Wide Custom Events" data-action="click" data-label="Embedded nav" data-value="1" track-type="navigation" track-name="embeddedNav" track-metadata-position="1" track-metadata-link-destination="#Embedding_a_Player"><span class="devsite-nav-text" tooltip="">Embed a YouTube player</span></a>
+        <ul class="devsite-nav-list">
+          <li class="devsite-nav-item" visible=""><a href="#Manual_IFrame_Embeds" class="devsite-nav-title gc-analytics-event" data-category="Site-Wide Custom Events" data-action="click" data-label="Embedded nav" data-value="1.0" track-type="navigation" track-name="embeddedNav" track-metadata-position="1.0" track-metadata-link-destination="#Manual_IFrame_Embeds"><span class="devsite-nav-text" tooltip="">Embed a player using an &lt;iframe&gt; tag</span></a></li>
+          <li class="devsite-nav-item" visible=""><a href="#IFrame_Player_API" class="devsite-nav-title gc-analytics-event" data-category="Site-Wide Custom Events" data-action="click" data-label="Embedded nav" data-value="1.1" track-type="navigation" track-name="embeddedNav" track-metadata-position="1.1" track-metadata-link-destination="#IFrame_Player_API"><span class="devsite-nav-text" tooltip="">Embed a player using the IFrame Player API</span></a></li>
+        </ul>
+      </li>
+      <li class="devsite-nav-item" visible=""><a href="#Selecting_Content_to_Play" class="devsite-nav-title gc-analytics-event" data-category="Site-Wide Custom Events" data-action="click" data-label="Embedded nav" data-value="2" track-type="navigation" track-name="embeddedNav" track-metadata-position="2" track-metadata-link-destination="#Selecting_Content_to_Play"><span class="devsite-nav-text" tooltip="">Select content to play</span></a></li>
+      <li class="devsite-nav-item" visible="">
+        <a href="#Parameters" class="devsite-nav-title gc-analytics-event" data-category="Site-Wide Custom Events" data-action="click" data-label="Embedded nav" data-value="3" track-type="navigation" track-name="embeddedNav" track-metadata-position="3" track-metadata-link-destination="#Parameters"><span class="devsite-nav-text" tooltip="">Supported parameters</span></a>
+        <ul class="devsite-nav-list">
+          <li class="devsite-nav-item" visible=""><a href="#autoplay" class="devsite-nav-title gc-analytics-event" data-category="Site-Wide Custom Events" data-action="click" data-label="Embedded nav" data-value="3.0" track-type="navigation" track-name="embeddedNav" track-metadata-position="3.0" track-metadata-link-destination="#autoplay"><span class="devsite-nav-text" tooltip="">autoplay</span></a></li>
+          <li class="devsite-nav-item" visible=""><a href="#cc_lang_pref" class="devsite-nav-title gc-analytics-event" data-category="Site-Wide Custom Events" data-action="click" data-label="Embedded nav" data-value="3.1" track-type="navigation" track-name="embeddedNav" track-metadata-position="3.1" track-metadata-link-destination="#cc_lang_pref"><span class="devsite-nav-text" tooltip="">cc_lang_pref</span></a></li>
+          <li class="devsite-nav-item"><a href="#cc_load_policy" class="devsite-nav-title gc-analytics-event" data-category="Site-Wide Custom Events" data-action="click" data-label="Embedded nav" data-value="3.2" track-type="navigation" track-name="embeddedNav" track-metadata-position="3.2" track-metadata-link-destination="#cc_load_policy"><span class="devsite-nav-text" tooltip="">cc_load_policy</span></a></li>
+          <li class="devsite-nav-item"><a href="#color" class="devsite-nav-title gc-analytics-event" data-category="Site-Wide Custom Events" data-action="click" data-label="Embedded nav" data-value="3.3" track-type="navigation" track-name="embeddedNav" track-metadata-position="3.3" track-metadata-link-destination="#color"><span class="devsite-nav-text" tooltip="">color</span></a></li>
+          <li class="devsite-nav-item"><a href="#controls" class="devsite-nav-title gc-analytics-event" data-category="Site-Wide Custom Events" data-action="click" data-label="Embedded nav" data-value="3.4" track-type="navigation" track-name="embeddedNav" track-metadata-position="3.4" track-metadata-link-destination="#controls"><span class="devsite-nav-text" tooltip="">controls</span></a></li>
+          <li class="devsite-nav-item"><a href="#disablekb" class="devsite-nav-title gc-analytics-event" data-category="Site-Wide Custom Events" data-action="click" data-label="Embedded nav" data-value="3.5" track-type="navigation" track-name="embeddedNav" track-metadata-position="3.5" track-metadata-link-destination="#disablekb"><span class="devsite-nav-text" tooltip="">disablekb</span></a></li>
+          <li class="devsite-nav-item"><a href="#enablejsapi" class="devsite-nav-title gc-analytics-event" data-category="Site-Wide Custom Events" data-action="click" data-label="Embedded nav" data-value="3.6" track-type="navigation" track-name="embeddedNav" track-metadata-position="3.6" track-metadata-link-destination="#enablejsapi"><span class="devsite-nav-text" tooltip="">enablejsapi</span></a></li>
+          <li class="devsite-nav-item"><a href="#end" class="devsite-nav-title gc-analytics-event" data-category="Site-Wide Custom Events" data-action="click" data-label="Embedded nav" data-value="3.7" track-type="navigation" track-name="embeddedNav" track-metadata-position="3.7" track-metadata-link-destination="#end"><span class="devsite-nav-text" tooltip="">end</span></a></li>
+          <li class="devsite-nav-item"><a href="#fs" class="devsite-nav-title gc-analytics-event" data-category="Site-Wide Custom Events" data-action="click" data-label="Embedded nav" data-value="3.8" track-type="navigation" track-name="embeddedNav" track-metadata-position="3.8" track-metadata-link-destination="#fs"><span class="devsite-nav-text" tooltip="">fs</span></a></li>
+          <li class="devsite-nav-item"><a href="#hl" class="devsite-nav-title gc-analytics-event" data-category="Site-Wide Custom Events" data-action="click" data-label="Embedded nav" data-value="3.9" track-type="navigation" track-name="embeddedNav" track-metadata-position="3.9" track-metadata-link-destination="#hl"><span class="devsite-nav-text" tooltip="">hl</span></a></li>
+          <li class="devsite-nav-item"><a href="#iv_load_policy" class="devsite-nav-title gc-analytics-event" data-category="Site-Wide Custom Events" data-action="click" data-label="Embedded nav" data-value="3.10" track-type="navigation" track-name="embeddedNav" track-metadata-position="3.10" track-metadata-link-destination="#iv_load_policy"><span class="devsite-nav-text" tooltip="">iv_load_policy</span></a></li>
+          <li class="devsite-nav-item"><a href="#list" class="devsite-nav-title gc-analytics-event" data-category="Site-Wide Custom Events" data-action="click" data-label="Embedded nav" data-value="3.11" track-type="navigation" track-name="embeddedNav" track-metadata-position="3.11" track-metadata-link-destination="#list"><span class="devsite-nav-text" tooltip="">list</span></a></li>
+          <li class="devsite-nav-item"><a href="#listType" class="devsite-nav-title gc-analytics-event" data-category="Site-Wide Custom Events" data-action="click" data-label="Embedded nav" data-value="3.12" track-type="navigation" track-name="embeddedNav" track-metadata-position="3.12" track-metadata-link-destination="#listType"><span class="devsite-nav-text" tooltip="">listType</span></a></li>
+          <li class="devsite-nav-item"><a href="#loop" class="devsite-nav-title gc-analytics-event" data-category="Site-Wide Custom Events" data-action="click" data-label="Embedded nav" data-value="3.13" track-type="navigation" track-name="embeddedNav" track-metadata-position="3.13" track-metadata-link-destination="#loop"><span class="devsite-nav-text" tooltip="">loop</span></a></li>
+          <li class="devsite-nav-item"><a href="#modestbranding" class="devsite-nav-title gc-analytics-event" data-category="Site-Wide Custom Events" data-action="click" data-label="Embedded nav" data-value="3.14" track-type="navigation" track-name="embeddedNav" track-metadata-position="3.14" track-metadata-link-destination="#modestbranding"><span class="devsite-nav-text" tooltip="">modestbranding</span></a></li>
+          <li class="devsite-nav-item"><a href="#origin" class="devsite-nav-title gc-analytics-event" data-category="Site-Wide Custom Events" data-action="click" data-label="Embedded nav" data-value="3.15" track-type="navigation" track-name="embeddedNav" track-metadata-position="3.15" track-metadata-link-destination="#origin"><span class="devsite-nav-text" tooltip="">origin</span></a></li>
+          <li class="devsite-nav-item"><a href="#playlist" class="devsite-nav-title gc-analytics-event" data-category="Site-Wide Custom Events" data-action="click" data-label="Embedded nav" data-value="3.16" track-type="navigation" track-name="embeddedNav" track-metadata-position="3.16" track-metadata-link-destination="#playlist"><span class="devsite-nav-text" tooltip="">playlist</span></a></li>
+          <li class="devsite-nav-item"><a href="#playsinline" class="devsite-nav-title gc-analytics-event" data-category="Site-Wide Custom Events" data-action="click" data-label="Embedded nav" data-value="3.17" track-type="navigation" track-name="embeddedNav" track-metadata-position="3.17" track-metadata-link-destination="#playsinline"><span class="devsite-nav-text" tooltip="">playsinline</span></a></li>
+          <li class="devsite-nav-item"><a href="#rel" class="devsite-nav-title gc-analytics-event" data-category="Site-Wide Custom Events" data-action="click" data-label="Embedded nav" data-value="3.18" track-type="navigation" track-name="embeddedNav" track-metadata-position="3.18" track-metadata-link-destination="#rel"><span class="devsite-nav-text" tooltip="">rel</span></a></li>
+          <li class="devsite-nav-item"><a href="#start" class="devsite-nav-title gc-analytics-event" data-category="Site-Wide Custom Events" data-action="click" data-label="Embedded nav" data-value="3.19" track-type="navigation" track-name="embeddedNav" track-metadata-position="3.19" track-metadata-link-destination="#start"><span class="devsite-nav-text" tooltip="">start</span></a></li>
+          <li class="devsite-nav-item"><a href="#widget_referrer" class="devsite-nav-title gc-analytics-event" data-category="Site-Wide Custom Events" data-action="click" data-label="Embedded nav" data-value="3.20" track-type="navigation" track-name="embeddedNav" track-metadata-position="3.20" track-metadata-link-destination="#widget_referrer"><span class="devsite-nav-text" tooltip="">widget_referrer</span></a></li>
+        </ul>
+      </li>
+      <li class="devsite-nav-item"><a href="#Revision_History" class="devsite-nav-title gc-analytics-event" data-category="Site-Wide Custom Events" data-action="click" data-label="Embedded nav" data-value="4" track-type="navigation" track-name="embeddedNav" track-metadata-position="4" track-metadata-link-destination="#Revision_History"><span class="devsite-nav-text" tooltip="">Revision history</span></a></li>
+      <li class="devsite-toc-toggle"><button type="button" class="button-flat devsite-nav-more-items material-icons" track-type="navigation" track-name="embeddedNavExpand" title="Expand/collapse contents"></button></li>
+    </ul>
+  </devsite-toc>
+  <devsite-recommendations-dropdown class="nocontent"></devsite-recommendations-dropdown>
+  <div class="devsite-article-body clearfix
+    ">
+    <div itemscope="" itemtype="http://developers.google.com/ReferenceObject">
+      <meta itemprop="name" content="Player Parameters">
+      <h2 id="Overview" data-text="Overview" tabindex="-1" role="presentation"><span class="devsite-heading" role="heading" aria-level="2">Overview</span><button type="button" class="devsite-heading-link button-flat material-icons" aria-label="Copy link to this section: Overview" data-title="Copy link to this section: Overview" data-id="Overview"></button></h2>
+      <p>This document explains how to embed a YouTube player in your application and also defines the parameters that are available in the YouTube embedded player.</p>
+      <p>By appending parameters to the IFrame URL, you can customize the playback experience in your application. For example, you can automatically play videos using the <code class="notranslate" dir="ltr"><a href="#autoplay">autoplay</a></code> parameter or cause a video to play repeatedly using the <code class="notranslate" dir="ltr"><a href="#loop">loop</a></code> parameter. You can also use the  <code class="notranslate" dir="ltr"><a href="#enablejsapi">enablejsapi</a></code> parameter to enable the player to be controlled via the <a href="/youtube/iframe_api_reference">IFrame Player API</a>.</p>
+      <p>This page currently defines all parameters supported in <span id="first_change_text">any YouTube embedded player</span>. Each parameter definition identifies the players that support the corresponding parameter.</p>
+      <p class="note"><strong>Note:</strong> Embedded players must have a viewport that is at least 200px by 200px. If the player displays controls, it must be large enough to fully display the controls without shrinking the viewport below the minimum size. We recommend 16:9 players be at least 480 pixels wide and 270 pixels tall.</p>
+      <h2 id="Embedding_a_Player" data-text="Embed a YouTube player" tabindex="-1" role="presentation"><span class="devsite-heading" role="heading" aria-level="2">Embed a YouTube player</span><button type="button" class="devsite-heading-link button-flat material-icons" aria-label="Copy link to this section: Embed a YouTube player" data-title="Copy link to this section: Embed a YouTube player" data-id="Embedding_a_Player"></button></h2>
+      <p>You can use any of the following methods to embed a YouTube player in your application and specify player parameters. Note that the instructions below demonstrate how to embed a player that loads a single video. The following section explains how to configure your player to load a playlist or a user's uploaded videos.</p>
+      <h3 id="Manual_IFrame_Embeds" data-text="Embed a player using an <iframe> tag" tabindex="-1" role="presentation"><span class="devsite-heading" role="heading" aria-level="3">Embed a player using an <code class="notranslate" dir="ltr">&lt;iframe&gt;</code> tag</span><button type="button" class="devsite-heading-link button-flat material-icons" aria-label="Copy link to this section: Embed a player using an <iframe> tag" data-title="Copy link to this section: Embed a player using an <iframe> tag" data-id="Manual_IFrame_Embeds"></button></h3>
+      <p>Define an <code class="notranslate" dir="ltr">&lt;iframe&gt;</code> tag in your application in which the <code class="notranslate" dir="ltr">src</code> URL specifies the content that the player will load as well as any other player parameters you want to set. The <code class="notranslate" dir="ltr">&lt;iframe&gt;</code> tag's <code class="notranslate" dir="ltr">height</code> and <code class="notranslate" dir="ltr">width</code> parameters specify the dimensions of the player.</p>
+      <p>If you create the <code class="notranslate" dir="ltr">&lt;iframe&gt;</code> element yourself (rather than using the IFrame Player API to create it), you can append player parameters directly to the end of the URL. The URL has the following format:</p>
+      <devsite-code no-copy="" data-copy-event-label="">
+        <div class="devsite-code-buttons-container" role="group" aria-label="Action buttons"><button type="button" class="gc-analytics-event material-icons devsite-icon-code-dark devsite-toggle-dark" data-category="Site-Wide Custom Events" data-label="Dark Code Toggle" track-type="exampleCode" track-name="darkCodeToggle" aria-label="Dark code theme" data-title="Dark code theme"></button><button type="button" class="gc-analytics-event material-icons devsite-icon-code-light devsite-toggle-light" data-category="Site-Wide Custom Events" data-label="Light Code Toggle" track-type="exampleCode" track-name="lightCodeToggle" aria-label="Light code theme" data-title="Light code theme"></button></div>
+        <pre class="notranslate" dir="ltr" is-upgraded="">https://www.youtube.com/embed/<strong>VIDEO_ID</strong></pre>
+      </devsite-code>
+      <p>The <code class="notranslate" dir="ltr">&lt;iframe&gt;</code> tag below would load a 640x360px player that would play the YouTube video <code class="notranslate" dir="ltr">M7lc1UVf-VE</code>. Since the URL sets the <code class="notranslate" dir="ltr">autoplay</code> parameter to <code class="notranslate" dir="ltr">1</code>, the video would play automatically once the player has loaded.</p>
+      <devsite-code no-copy="" data-copy-event-label="">
+        <div class="devsite-code-buttons-container" role="group" aria-label="Action buttons"><button type="button" class="gc-analytics-event material-icons devsite-icon-code-dark devsite-toggle-dark" data-category="Site-Wide Custom Events" data-label="Dark Code Toggle" track-type="exampleCode" track-name="darkCodeToggle" aria-label="Dark code theme" data-title="Dark code theme"></button><button type="button" class="gc-analytics-event material-icons devsite-icon-code-light devsite-toggle-light" data-category="Site-Wide Custom Events" data-label="Light Code Toggle" track-type="exampleCode" track-name="lightCodeToggle" aria-label="Light code theme" data-title="Light code theme"></button></div>
+        <pre class="notranslate" dir="ltr" is-upgraded="">&lt;iframe id="ytplayer" type="text/html" width="640" height="360"
+  src="https://www.youtube.com/embed/M7lc1UVf-VE?autoplay=1&amp;origin=http://example.com"
+  frameborder="0"&gt;&lt;/iframe&gt;
+</pre>
+      </devsite-code>
+      <h3 id="IFrame_Player_API" data-text="Embed a player using the IFrame Player API" tabindex="-1" role="presentation"><span class="devsite-heading" role="heading" aria-level="3">Embed a player using the IFrame Player API</span><button type="button" class="devsite-heading-link button-flat material-icons" aria-label="Copy link to this section: Embed a player using the IFrame Player API" data-title="Copy link to this section: Embed a player using the IFrame Player API" data-id="IFrame_Player_API"></button></h3>
+      <p>Follow the <a href="/youtube/iframe_api_reference#Loading_a_Video_Player">IFrame Player API instructions</a> to insert a video player in your web page or application after the Player API's JavaScript code has loaded. The second parameter in the constructor for the video player is an object that specifies player options. Within that object, the <code class="notranslate" dir="ltr">playerVars</code> property identifies player parameters.</p>
+      <p>The HTML and JavaScript code below shows a simple example that inserts a YouTube player into the page element that has an <code class="notranslate" dir="ltr">id</code> value of <code class="notranslate" dir="ltr">ytplayer</code>. The <code class="notranslate" dir="ltr">onYouTubePlayerAPIReady()</code> function specified here is called automatically when the IFrame Player API code has loaded. This code does not define any player parameters and also does not define other event handlers.</p>
+      <devsite-code no-copy="" data-copy-event-label="">
+        <div class="devsite-code-buttons-container" role="group" aria-label="Action buttons"><button type="button" class="gc-analytics-event material-icons devsite-icon-code-dark devsite-toggle-dark" data-category="Site-Wide Custom Events" data-label="Dark Code Toggle" track-type="exampleCode" track-name="darkCodeToggle" aria-label="Dark code theme" data-title="Dark code theme"></button><button type="button" class="gc-analytics-event material-icons devsite-icon-code-light devsite-toggle-light" data-category="Site-Wide Custom Events" data-label="Light Code Toggle" track-type="exampleCode" track-name="lightCodeToggle" aria-label="Light code theme" data-title="Light code theme"></button></div>
+        <pre class="notranslate" dir="ltr" is-upgraded="">&lt;div id="ytplayer"&gt;&lt;/div&gt;
+
+&lt;script&gt;
+  // Load the IFrame Player API code asynchronously.
+  var tag = document.createElement('script');
+  tag.src = "https://www.youtube.com/player_api";
+  var firstScriptTag = document.getElementsByTagName('script')[0];
+  firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+  // Replace the 'ytplayer' element with an &lt;iframe&gt; and
+  // YouTube player after the API code downloads.
+  var player;
+  function onYouTubePlayerAPIReady() {
+    player = new YT.Player('ytplayer', {
+      height: '360',
+      width: '640',
+      videoId: 'M7lc1UVf-VE'
+    });
+  }
+&lt;/script&gt;
+</pre>
+      </devsite-code>
+      <h2 id="Selecting_Content_to_Play" data-text="Select content to play" tabindex="-1" role="presentation"><span class="devsite-heading" role="heading" aria-level="2">Select content to play</span><button type="button" class="devsite-heading-link button-flat material-icons" aria-label="Copy link to this section: Select content to play" data-title="Copy link to this section: Select content to play" data-id="Selecting_Content_to_Play"></button></h2>
+      <p>You can configure your embedded player to load a video, a playlist, or a user's uploaded videos.</p>
+      <p>The following list explains these options:</p>
+      <ul>
+        <li>
+          <p><strong>Loading a video</strong></p>
+          <p>For an IFrame embed, the YouTube video ID for the video that you want to load is specified in the IFrame's <code class="notranslate" dir="ltr">src</code> URL.</p>
+          <devsite-code no-copy="" data-copy-event-label="">
+            <div class="devsite-code-buttons-container" role="group" aria-label="Action buttons"><button type="button" class="gc-analytics-event material-icons devsite-icon-code-dark devsite-toggle-dark" data-category="Site-Wide Custom Events" data-label="Dark Code Toggle" track-type="exampleCode" track-name="darkCodeToggle" aria-label="Dark code theme" data-title="Dark code theme"></button><button type="button" class="gc-analytics-event material-icons devsite-icon-code-light devsite-toggle-light" data-category="Site-Wide Custom Events" data-label="Light Code Toggle" track-type="exampleCode" track-name="lightCodeToggle" aria-label="Light code theme" data-title="Light code theme"></button></div>
+            <pre translate="no" dir="ltr" is-upgraded="">https://www.youtube.com/embed/<strong>VIDEO_ID</strong></pre>
+          </devsite-code>
+          <p>If you are using the YouTube Data API (v3), you can programmatically construct these URLs by retrieving video IDs from <a href="/youtube/v3/docs/search#resource">search results</a>, <a href="/youtube/v3/docs/playlistItems#resource">playlist item resources</a>, <a href="/youtube/v3/docs/videos#resource">video resources</a>, or other resources. After obtaining a video ID, replace the <code class="notranslate" dir="ltr">VIDEO_ID</code> text in the URLs above with that value to create the player URL.</p>
+        </li>
+        <li>
+          <p><strong>Loading a playlist</strong></p>
+          <p>Set the <code class="notranslate" dir="ltr"><a href="#listType">listType</a></code> player parameter to <code class="notranslate" dir="ltr">playlist</code>. In addition, set the <code class="notranslate" dir="ltr"><a href="#list">list</a></code> player parameter to the YouTube playlist ID that you want to load.</p>
+          <devsite-code no-copy="" data-copy-event-label="">
+            <div class="devsite-code-buttons-container" role="group" aria-label="Action buttons"><button type="button" class="gc-analytics-event material-icons devsite-icon-code-dark devsite-toggle-dark" data-category="Site-Wide Custom Events" data-label="Dark Code Toggle" track-type="exampleCode" track-name="darkCodeToggle" aria-label="Dark code theme" data-title="Dark code theme"></button><button type="button" class="gc-analytics-event material-icons devsite-icon-code-light devsite-toggle-light" data-category="Site-Wide Custom Events" data-label="Light Code Toggle" track-type="exampleCode" track-name="lightCodeToggle" aria-label="Light code theme" data-title="Light code theme"></button></div>
+            <pre class="notranslate" dir="ltr" is-upgraded="">https://www.youtube.com/embed?listType=playlist&amp;list=<strong>PLAYLIST_ID</strong></pre>
+          </devsite-code>
+          <p>Note that you need to prepend the playlist ID with the letters <code class="notranslate" dir="ltr">PL</code> as shown in the following example:</p>
+          <devsite-code no-copy="" data-copy-event-label="">
+            <div class="devsite-code-buttons-container" role="group" aria-label="Action buttons"><button type="button" class="gc-analytics-event material-icons devsite-icon-code-dark devsite-toggle-dark" data-category="Site-Wide Custom Events" data-label="Dark Code Toggle" track-type="exampleCode" track-name="darkCodeToggle" aria-label="Dark code theme" data-title="Dark code theme"></button><button type="button" class="gc-analytics-event material-icons devsite-icon-code-light devsite-toggle-light" data-category="Site-Wide Custom Events" data-label="Light Code Toggle" track-type="exampleCode" track-name="lightCodeToggle" aria-label="Light code theme" data-title="Light code theme"></button></div>
+            <pre class="notranslate" dir="ltr" is-upgraded="">https://www.youtube.com/embed?listType=playlist&amp;list=<strong>PLC77007E23FF423C6</strong></pre>
+          </devsite-code>
+          <p>If you are using the YouTube Data API (v3), you can programmatically construct these URLs by retrieving playlist IDs from <a href="/youtube/v3/docs/search#resource">search results</a>, <a href="/youtube/v3/docs/channels#contentDetails.relatedPlaylists">channel resources</a>, or <a href="/youtube/v3/docs/activities#resource">activity resources</a>. After obtaining a playlist ID, replace the <code class="notranslate" dir="ltr">PLAYLIST_ID</code> text in the URL above with that value.</p>
+        </li>
+        <li>
+          <p><strong>Loading a user's uploaded videos</strong></p>
+          <p>Set the <code class="notranslate" dir="ltr"><a href="#listType">listType</a></code> player parameter to <code class="notranslate" dir="ltr">user_uploads</code>. In addition, set the <code class="notranslate" dir="ltr"><a href="#list">list</a></code> player parameter to the YouTube username whose uploaded videos you want to load.</p>
+          <devsite-code no-copy="" data-copy-event-label="">
+            <div class="devsite-code-buttons-container" role="group" aria-label="Action buttons"><button type="button" class="gc-analytics-event material-icons devsite-icon-code-dark devsite-toggle-dark" data-category="Site-Wide Custom Events" data-label="Dark Code Toggle" track-type="exampleCode" track-name="darkCodeToggle" aria-label="Dark code theme" data-title="Dark code theme"></button><button type="button" class="gc-analytics-event material-icons devsite-icon-code-light devsite-toggle-light" data-category="Site-Wide Custom Events" data-label="Light Code Toggle" track-type="exampleCode" track-name="lightCodeToggle" aria-label="Light code theme" data-title="Light code theme"></button></div>
+            <pre class="notranslate" dir="ltr" is-upgraded="">https://www.youtube.com/embed?listType=user_uploads&amp;list=<strong>USERNAME</strong></pre>
+          </devsite-code>
+        </li>
+      </ul>
+      <h2 id="Parameters" data-text="Supported parameters" tabindex="-1" role="presentation"><span class="devsite-heading" role="heading" aria-level="2">Supported parameters</span><button type="button" class="devsite-heading-link button-flat material-icons" aria-label="Copy link to this section: Supported parameters" data-title="Copy link to this section: Supported parameters" data-id="Parameters"></button></h2>
+      <p>All of the following parameters are optional.</p>
+      <div class="devsite-table-wrapper">
+        <table class="details responsive">
+          <thead>
+            <tr>
+              <th colspan="2">Parameters</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <h3 id="autoplay" data-text="autoplay" tabindex="-1"><code class="notranslate" itemprop="property" dir="ltr">autoplay</code></h3>
+              </td>
+              <td>
+                This parameter specifies whether the initial video will automatically start to play when the player loads. Supported values are <code class="notranslate" dir="ltr">0</code> or <code class="notranslate" dir="ltr">1</code>. The default value is <code class="notranslate" dir="ltr">0</code>.<br><br>
+                If you enable Autoplay, playback will occur without any user interaction with the player;
+                playback data collection and sharing will therefore occur upon page load.
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <h3 id="cc_lang_pref" data-text="cc_lang_pref" tabindex="-1"><code class="notranslate" itemprop="property" dir="ltr">cc_<wbr>lang_<wbr>pref</code></h3>
+              </td>
+              <td>
+                This parameter specifies the default language that the player will use to display captions. Set the parameter's value to an <a href="http://www.loc.gov/standards/iso639-2/php/code_list.php" target="_blank">ISO 639-1 two-letter language code</a>.<br><br>If you use this parameter and also set the <code class="notranslate" dir="ltr"><a href="#cc_load_policy">cc_<wbr>load_<wbr>policy</a></code> parameter to <code class="notranslate" dir="ltr">1</code>, then the player will show captions in the specified language when the player loads. If you do not also set the <code class="notranslate" dir="ltr"><a href="#cc_load_policy">cc_<wbr>load_<wbr>policy</a></code> parameter, then captions will not display by default, but will display in the specified language if the user opts to turn captions on.
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <h3 id="cc_load_policy" data-text="cc_load_policy" tabindex="-1"><code class="notranslate" itemprop="property" dir="ltr">cc_<wbr>load_<wbr>policy</code></h3>
+              </td>
+              <td>
+                Setting the parameter's value to <code class="notranslate" dir="ltr">1</code> causes closed captions to be shown by default, even if the user has turned captions off. The default behavior is based on user preference.
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <h3 id="color" data-text="color" tabindex="-1"><code class="notranslate" itemprop="property" dir="ltr">color</code></h3>
+              </td>
+              <td>
+                This parameter specifies the color that will be used in the player's video progress bar to highlight the amount of the video that the viewer has already seen. Valid parameter values are <code class="notranslate" dir="ltr">red</code> and <code class="notranslate" dir="ltr">white</code>, and, by default, the player uses the color red in the video progress bar. See the <a href="http://youtube-eng.blogspot.com/2011/08/coming-soon-dark-player-for-embeds_5.html">YouTube API blog</a> for more information about color options.
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <h3 id="controls" data-text="controls" tabindex="-1"><code class="notranslate" itemprop="property" dir="ltr">controls</code></h3>
+              </td>
+              <td>
+                This parameter indicates whether the video player controls are displayed:
+                <p></p>
+                <ul>
+                  <li><code class="notranslate" dir="ltr">controls=0</code> – Player controls do not display in the player.</li>
+                  <li><code class="notranslate" dir="ltr">controls=1</code> (default) – Player controls display in the player.</li>
+                </ul>
+                <p></p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <h3 id="disablekb" data-text="disablekb" tabindex="-1"><code class="notranslate" itemprop="property" dir="ltr">disablekb</code></h3>
+              </td>
+              <td>
+                Setting the parameter's value to <code class="notranslate" dir="ltr">1</code> causes the player to not respond to keyboard controls. The default value is <code class="notranslate" dir="ltr">0</code>, which means that keyboard controls are enabled. Currently supported keyboard controls are:
+                <p></p>
+                <ul>
+                  <li>Spacebar or [k]: Play / Pause</li>
+                  <li>Arrow Left: Jump back 5 seconds in the current video</li>
+                  <li>Arrow Right: Jump ahead 5 seconds in the current video</li>
+                  <li>Arrow Up: Volume up</li>
+                  <li>Arrow Down: Volume Down</li>
+                  <li>[f]: Toggle full-screen display</li>
+                  <li>[j]: Jump back 10 seconds in the current video</li>
+                  <li>[l]: Jump ahead 10 seconds in the current video</li>
+                  <li>[m]: Mute or unmute the video</li>
+                  <li>[0-9]: Jump to a point in the video. <code translate="no" dir="ltr">0</code> jumps to the beginning of the video, <code translate="no" dir="ltr">1</code> jumps to the point 10% into the video, <code translate="no" dir="ltr">2</code> jumps to the point 20% into the video, and so forth.</li>
+                </ul>
+                <p></p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <h3 id="enablejsapi" data-text="enablejsapi" tabindex="-1"><code class="notranslate" itemprop="property" dir="ltr">enablejsapi</code></h3>
+              </td>
+              <td>
+                Setting the parameter's value to <code class="notranslate" dir="ltr">1</code> enables the player to be controlled via <a href="/youtube/iframe_api_reference">IFrame</a> Player API calls. The default value is <code class="notranslate" dir="ltr">0</code>, which means that the player cannot be controlled using that API.<br><br>For more information on the IFrame API and how to use it, see the <a href="/youtube/iframe_api_reference">IFrame API documentation</a>.
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <h3 id="end" data-text="end" tabindex="-1"><code class="notranslate" itemprop="property" dir="ltr">end</code></h3>
+              </td>
+              <td>
+                This parameter specifies the time, measured in seconds from the start of the video, when the player should stop playing the video. The parameter value is a positive integer.<br><br>Note that the time is measured from the beginning of the video and not from either the value of the <code class="notranslate" dir="ltr">start</code> player parameter or the <code class="notranslate" dir="ltr">startSeconds</code> parameter, which is used in YouTube Player API functions for loading or queueing a video.
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <h3 id="fs" data-text="fs" tabindex="-1"><code class="notranslate" itemprop="property" dir="ltr">fs</code></h3>
+              </td>
+              <td>
+                Setting this parameter to <code class="notranslate" dir="ltr">0</code> prevents the fullscreen button from displaying in the player. The default value is <code class="notranslate" dir="ltr">1</code>, which causes the fullscreen button to display.
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <h3 id="hl" data-text="hl" tabindex="-1"><code class="notranslate" itemprop="property" dir="ltr">hl</code></h3>
+              </td>
+              <td>
+                Sets the player's interface language. The parameter value is an <a href="http://www.loc.gov/standards/iso639-2/php/code_list.php">ISO 639-1 two-letter language code</a> or a fully specified locale. For example, <code translate="no" dir="ltr">fr</code> and <code translate="no" dir="ltr">fr-ca</code> are both valid values. Other language input codes, such as IETF language tags (BCP 47) might also be handled properly.<br><br>The interface language is used for tooltips in the player and also affects the default caption track. Note that YouTube might select a different caption track language for a particular user based on the user's individual language preferences and the availability of caption tracks.
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <h3 id="iv_load_policy" data-text="iv_load_policy" tabindex="-1"><code class="notranslate" itemprop="property" dir="ltr">iv_<wbr>load_<wbr>policy</code></h3>
+              </td>
+              <td>
+                Setting the parameter's value to <code class="notranslate" dir="ltr">1</code> causes video annotations to be shown by default, whereas setting to <code class="notranslate" dir="ltr">3</code> causes video annotations to not be shown by default. The default value is <code class="notranslate" dir="ltr">1</code>.
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <h3 id="list" data-text="list" tabindex="-1"><code class="notranslate" itemprop="property" dir="ltr">list</code></h3>
+              </td>
+              <td>
+                The <code class="notranslate" dir="ltr">list</code> parameter, in conjunction with the <code class="notranslate" dir="ltr"><a href="#listType">listType</a></code> parameter, identifies the content that will load in the player.
+                <p></p>
+                <ul>
+                  <li>If the <code class="notranslate" dir="ltr"><a href="#listType">listType</a></code> parameter value is <code class="notranslate" dir="ltr">user_uploads</code>, then the <code class="notranslate" dir="ltr">list</code> parameter value identifies the YouTube channel whose uploaded videos will be loaded.</li>
+                  <li>
+                    If the <code class="notranslate" dir="ltr"><a href="#listType">listType</a></code> parameter value is <code class="notranslate" dir="ltr">playlist</code>, then the <code class="notranslate" dir="ltr">list</code> parameter value specifies a YouTube playlist ID. In the parameter value, you need to prepend the playlist ID with the letters <code class="notranslate" dir="ltr">PL</code> as shown in the example below.<br>
+                    <devsite-code no-copy="" data-copy-event-label="">
+                      <div class="devsite-code-buttons-container" role="group" aria-label="Action buttons"><button type="button" class="gc-analytics-event material-icons devsite-icon-code-dark devsite-toggle-dark" data-category="Site-Wide Custom Events" data-label="Dark Code Toggle" track-type="exampleCode" track-name="darkCodeToggle" aria-label="Dark code theme" data-title="Dark code theme"></button><button type="button" class="gc-analytics-event material-icons devsite-icon-code-light devsite-toggle-light" data-category="Site-Wide Custom Events" data-label="Light Code Toggle" track-type="exampleCode" track-name="lightCodeToggle" aria-label="Light code theme" data-title="Light code theme"></button></div>
+                      <pre class="notranslate" dir="ltr" is-upgraded="">https://www.youtube.com/embed?<br>&nbsp;&nbsp;&nbsp;&nbsp;listType=playlist<br>&nbsp;&nbsp;&nbsp;&nbsp;&amp;list=PLC77007E23FF423C6</pre>
+                    </devsite-code>
+                  </li>
+                  <li>
+                    If the <code class="notranslate" dir="ltr"><a href="#listType">listType</a></code> parameter value is <code class="notranslate" dir="ltr">search</code>, then the <code class="notranslate" dir="ltr">list</code> parameter value specifies the search query.
+                    <span style="color: red">
+                      <b>Note:</b> This functionality is <a href="#release_notes_10_13_2020">deprecated</a> and will no longer be supported as of
+                      <nobr>15 November 2020</nobr>
+                      .
+                    </span>
+                  </li>
+                </ul>
+                <strong>Note:</strong> If you specify values for the <code class="notranslate" dir="ltr">list</code> and <code class="notranslate" dir="ltr">listType</code> parameters, the IFrame embed URL does not need to specify a video ID.<br><br>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <h3 id="listType" data-text="listType" tabindex="-1"><code class="notranslate" itemprop="property" dir="ltr">listType</code></h3>
+              </td>
+              <td>
+                The <code class="notranslate" dir="ltr">listType</code> parameter, in conjunction with the <code class="notranslate" dir="ltr"><a href="#list">list</a></code> parameter, identifies the content that will load in the player. Valid parameter values are <code class="notranslate" dir="ltr">playlist</code> and <code class="notranslate" dir="ltr">user_<wbr>uploads</code>.<br><br>If you specify values for the <code class="notranslate" dir="ltr"><a href="#list">list</a></code> and <code class="notranslate" dir="ltr">listType</code> parameters, the IFrame embed URL does not need to specify a video ID.
+                <br><br>
+                <span style="color: red">
+                  <b>Note:</b> A third parameter value, <code class="notranslate" dir="ltr">search</code>, has been <a href="#release_notes_10_13_2020">deprecated</a> and will no longer be supported as of
+                  <nobr>15 November 2020</nobr>
+                  .
+                </span>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <h3 id="loop" data-text="loop" tabindex="-1"><code class="notranslate" itemprop="property" dir="ltr">loop</code></h3>
+              </td>
+              <td>
+                In the case of a single video player, a setting of <code class="notranslate" dir="ltr">1</code>
+                causes the player to play the initial video again and again. In the case of a playlist
+                player (or custom player), the player plays the entire playlist and then starts again at the
+                first video.<br><br>
+                Supported values are <code class="notranslate" dir="ltr">0</code> and
+                <code class="notranslate" dir="ltr">1</code>, and the default value is
+                <code class="notranslate" dir="ltr">0</code>.<br><br><strong>Note:</strong> This parameter has limited
+                support in IFrame embeds. To loop a single video, set the
+                <code class="notranslate" dir="ltr">loop</code> parameter value to <code class="notranslate" dir="ltr">1</code>
+                and set the <code class="notranslate" dir="ltr"><a href="#playlist">playlist</a></code> parameter
+                value to the same video ID already specified in the Player API URL:<br>
+                <devsite-code no-copy="" data-copy-event-label="">
+                  <div class="devsite-code-buttons-container" role="group" aria-label="Action buttons"><button type="button" class="gc-analytics-event material-icons devsite-icon-code-dark devsite-toggle-dark" data-category="Site-Wide Custom Events" data-label="Dark Code Toggle" track-type="exampleCode" track-name="darkCodeToggle" aria-label="Dark code theme" data-title="Dark code theme"></button><button type="button" class="gc-analytics-event material-icons devsite-icon-code-light devsite-toggle-light" data-category="Site-Wide Custom Events" data-label="Light Code Toggle" track-type="exampleCode" track-name="lightCodeToggle" aria-label="Light code theme" data-title="Light code theme"></button></div>
+                  <pre class="notranslate" dir="ltr" is-upgraded="">https://www.youtube.com/embed/<strong>VIDEO_ID</strong>?playlist=<strong>VIDEO_ID</strong>&amp;loop=1</pre>
+                </devsite-code>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <h3 id="modestbranding" data-text="modestbranding" tabindex="-1"><code class="notranslate" itemprop="property" dir="ltr">modestbranding</code></h3>
+              </td>
+              <td>
+                <span style="color: red"><b>Note:</b> This parameter is deprecated and has no effect. See the <a href="#release_notes_08_15_2023">deprecation announcement</a> for more information.</span>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <h3 id="origin" data-text="origin" tabindex="-1"><code class="notranslate" itemprop="property" dir="ltr">origin</code></h3>
+              </td>
+              <td>
+                This parameter provides an extra security measure for the IFrame API and is only supported for IFrame embeds. If you are using the IFrame API, which means you are setting the <code class="notranslate" dir="ltr"><a href="#enablejsapi">enablejsapi</a></code> parameter value to <code class="notranslate" dir="ltr">1</code>, you should always specify your domain as the <code class="notranslate" dir="ltr">origin</code> parameter value.
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <h3 id="playlist" data-text="playlist" tabindex="-1"><code class="notranslate" itemprop="property" dir="ltr">playlist</code></h3>
+              </td>
+              <td>
+                This parameter specifies a comma-separated list of video IDs to play. If you specify a value, the first video that plays will be the <code class="notranslate" dir="ltr">VIDEO_<wbr>ID</code> specified in the URL path, and the videos specified in the <code class="notranslate" dir="ltr">playlist</code> parameter will play thereafter.
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <h3 id="playsinline" data-text="playsinline" tabindex="-1"><code class="notranslate" itemprop="property" dir="ltr">playsinline</code></h3>
+              </td>
+              <td>
+                This parameter controls whether videos play inline or fullscreen on iOS. Valid values are:
+                <p></p>
+                <ul>
+                  <li><code class="notranslate" dir="ltr">0</code>: Results in fullscreen playback. This is currently the default value, though the default is subject to change.</li>
+                  <li><code class="notranslate" dir="ltr">1</code>: Results in inline playback for mobile browsers and for <code translate="no" dir="ltr">WebViews</code> created with the <code translate="no" dir="ltr"><a href="https://developer.apple.com/documentation/webkit/wkwebviewconfiguration/1614793-allowsinlinemediaplayback?language=objc">allowsInlineMediaPlayback</a></code> property set to <code translate="no" dir="ltr">YES</code>.</li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <h3 id="rel" data-text="rel" tabindex="-1"><code class="notranslate" itemprop="property" dir="ltr">rel</code></h3>
+              </td>
+              <td>
+                <span><b>Note:</b> This parameter is <a href="#release_notes_08_23_2018">changing</a> on or after September 25, 2018.</span><br><br>
+                Prior to the change, this parameter indicates whether the player should show related videos when playback of the initial video ends.
+                <ul>
+                  <li>If the parameter's value is set to <code class="notranslate" dir="ltr">1</code>, which is the default value, then the player does show related videos.</li>
+                  <li>If the parameter's value is set to <code class="notranslate" dir="ltr">0</code>, then the player does not show related videos.</li>
+                </ul>
+                After the change, you will not be able to disable related videos. Instead, if the <code translate="no" dir="ltr">rel</code> parameter is set to <code class="notranslate" dir="ltr">0</code>, related videos will come from the same channel as the video that was just played.
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <h3 id="start" data-text="start" tabindex="-1"><code class="notranslate" itemprop="property" dir="ltr">start</code></h3>
+              </td>
+              <td>
+                This parameter causes the player to begin playing the video at the given number of seconds from the start of the video. The parameter value is a positive integer. Note that similar to the <code class="notranslate" dir="ltr"><a href="/youtube/js_api_reference#seekTo">seekTo</a></code> function, the player will look for the closest keyframe to the time you specify. This means that sometimes the play head may seek to just before the requested time, usually no more than around two seconds.
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <h3 id="widget_referrer" data-text="widget_referrer" tabindex="-1"><code class="notranslate" itemprop="property" dir="ltr">widget_<wbr>referrer</code></h3>
+              </td>
+              <td>
+                This parameter identifies the URL where the player is embedded. This value is used in YouTube Analytics reporting when the YouTube player is embedded in a widget, and that widget is then embedded in a web page or application. In that scenario, the <code translate="no" dir="ltr"><a href="#origin">origin</a></code> parameter identifies the widget provider's domain, but YouTube Analytics should not identify the widget provider as the actual traffic source. Instead, YouTube Analytics uses the <code translate="no" dir="ltr">widget_<wbr>referrer</code> parameter value to identify the domain associated with the traffic source.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <h2 id="Revision_History" data-text="Revision history" tabindex="-1" role="presentation"><span class="devsite-heading" role="heading" aria-level="2">Revision history</span><button type="button" class="devsite-heading-link button-flat material-icons" aria-label="Copy link to this section: Revision history" data-title="Copy link to this section: Revision history" data-id="Revision_History"></button></h2>
+      <div class="notranslate">
+        <a name="release_notes_08_15_2023"></a>
+        <h3 class="hide-from-toc" id="august-15,-2023" data-text="August 15, 2023" tabindex="-1" role="presentation"><span class="devsite-heading" role="heading" aria-level="3">August 15,<wbr> 2023</span><button type="button" class="devsite-heading-link button-flat material-icons" aria-label="Copy link to this section: August 15, 2023" data-title="Copy link to this section: August 15, 2023" data-id="august-15,-2023"></button></h3>
+        <p class="caution"><b>Note:</b> This is a deprecation announcement for the
+          <code class="notranslate" dir="ltr">modestbranding</code> parameter.
+        </p>
+        <p>The <code translate="no" dir="ltr"><a href="#modestbranding">modestbranding</a></code> parameter is deprecated and will
+          have no effect. To align with YouTube's branding requirements, the player now determines the
+          appropriate branding treatment based on a combination of factors, including player size, other API
+          parameters (e.g. <code translate="no" dir="ltr">controls</code>), and additional signals.
+        </p>
+        <a name="release_notes_04_27_2021"></a>
+        <h3 class="hide-from-toc" id="april-27,-2021" data-text="April 27, 2021" tabindex="-1">April 27,<wbr> 2021</h3>
+        <p>The <code translate="no" dir="ltr"><a href="#playsinline">playsinline</a></code> parameter definition has been updated
+          slightly to explain that the parameter pertains to both mobile browsers on iOS and iOS
+          WebViews.
+        </p>
+        <a name="release_notes_10_15_2020"></a>
+        <h3 class="hide-from-toc" id="october-15,-2020" data-text="October 15, 2020" tabindex="-1">October 15,<wbr> 2020</h3>
+        <p>The <code translate="no" dir="ltr"><a href="#autoplay">autoplay</a></code> parameter definition has been updated to
+          explain that if you enable Autoplay, playback will occur without any user interaction with the
+          player; playback data collection and sharing will therefore occur upon page load.
+        </p>
+        <a name="release_notes_10_13_2020"></a>
+        <h3 class="hide-from-toc" id="october-13,-2020" data-text="October 13, 2020" tabindex="-1">October 13,<wbr> 2020</h3>
+        <p class="caution"><b>Note:</b> This is a deprecation announcement for the embedded player
+          functionality that lets you configure the player to load search results. This announcement affects
+          the player's <code translate="no" dir="ltr"><a href="#list">list</a></code> and
+          <code translate="no" dir="ltr"><a href="#listType">listType</a></code> parameters.
+        </p>
+        <p>
+          This change will become effective on or after
+          <nobr>15 November 2020</nobr>
+          . After that time,
+          setting the <code translate="no" dir="ltr">listType</code> parameter value to <code translate="no" dir="ltr">search</code> will generate a
+          <code translate="no" dir="ltr">4xx</code> response code, such as <code translate="no" dir="ltr">404</code> (<code translate="no" dir="ltr">Not Found</code>) or
+          <code translate="no" dir="ltr">410</code> (<code translate="no" dir="ltr">Gone</code>).
+        </p>
+        <p>As an alternative, you can use the YouTube Data API's
+          <code translate="no" dir="ltr"><a href="/youtube/v3/docs/search/list">search.list</a></code> method to retrieve search
+          results and then load selected videos in the player.
+        </p>
+        <p>In addition to the change described above, the <code translate="no" dir="ltr">showinfo</code> parameter, which was
+          <a href="#release_notes_08_23_2018">deprecated</a> in 2018, has been removed from this document.
+          <a name="release_notes_08_23_2018"></a>
+        </p>
+        <h3 class="hide-from-toc" id="august-23,-2018" data-text="August 23, 2018" tabindex="-1">August 23,<wbr> 2018</h3>
+        <p class="caution"><b>Note:</b> This is a deprecation announcement for the <code class="notranslate" dir="ltr">showinfo</code> parameter. In addition, the behavior for the <code class="notranslate" dir="ltr">rel</code> parameter is changing. Titles, channel information, and related videos are an important part of YouTube’s core user experience, and these changes help to make the YouTube viewing experience consistent across different platforms.</p>
+        <ul>
+          <li>
+            The behavior for the <code translate="no" dir="ltr">rel</code> parameter is changing on or after September 25, 2018. The effect of the change is that you will not be able to disable related videos. However, you will have the option of specifying that the related videos shown in the player should be from the same channel as the video that was just played.<br><br>
+            To be more specific:
+            <ul>
+              <li>Prior to the change, if the parameter's value is set to <code class="notranslate" dir="ltr">0</code>, then the player does not show related videos.</li>
+              <li>After the change, if the <code translate="no" dir="ltr">rel</code> parameter is set to <code class="notranslate" dir="ltr">0</code>, the player will show related videos that are from the same channel as the video that was just played.</li>
+            </ul>
+          </li>
+          <li>The <code translate="no" dir="ltr">showinfo</code> parameter, which indicates whether the player should display information like the video title and uploader before the video starts playing, is also being deprecated. Following the change, the channel avatar and video title will always display before playback begins, when playback is paused, and when playback ends. The avatar being displayed is new behavior that will be consistent across all embedded players.</li>
+        </ul>
+        <p>These changes will become effective on or after September 25, 2018. After that time, the <code translate="no" dir="ltr">showinfo</code> parameter will be ignored. The behavior following the changes is consistent with the current default behavior for embedded players with the exception of the channel avatar changes mentioned above.</p>
+        <a name="release_notes_08_16_2018"></a>
+        <h3 class="hide-from-toc" id="august-16,-2018" data-text="August 16, 2018" tabindex="-1">August 16, 2018</h3>
+        <p>The <code class="notranslate" dir="ltr"><a href="#cc_lang_pref">cc_lang_pref</a></code> parameter can be used to specify the default language that the player will use to display captions. This parameter can be used in conjunction with the <code class="notranslate" dir="ltr"><a href="#cc_load_policy">cc_load_policy</a></code> parameter to automatically show captions in the specified language during playback.</p>
+        <a name="release_notes_09_15_2017"></a>
+        <h3 class="hide-from-toc" id="september-15,-2017" data-text="September 15, 2017" tabindex="-1">September 15, 2017</h3>
+        <p>The <code class="notranslate" dir="ltr"><a href="#controls">controls</a></code> parameter's definition has been updated to remove references to the deprecated Flash (AS3) player. The value <code translate="no" dir="ltr">2</code> has been deprecated as it was originally designed to provide a performance improvement for embeds that loaded a Flash player.</p>
+        <a name="release_notes_06_12_2017"></a>
+        <h3 class="hide-from-toc" id="june-12,-2017" data-text="June 12, 2017" tabindex="-1">June 12, 2017</h3>
+        <p>The new <code class="notranslate" dir="ltr"><a href="#widget_referrer">widget_referrer</a></code> parameter helps to enable more accurate YouTube Analytics reporting when the YouTube player is embedded in a widget, and that widget is then embedded in a web page or application.</p>
+        <a name="release_notes_11_01_2016"></a>
+        <h3 class="hide-from-toc" id="november-1,-2016" data-text="November 1, 2016" tabindex="-1">November 1, 2016</h3>
+        <p>This document has been updated to remove references to the deprecated Flash (AS3) player as well as to parameters only supported by that player. The YouTube Flash player was deprecated in January 2015.</p>
+        <a name="release_notes_10_20_2016"></a>
+        <h3 class="hide-from-toc" id="october-20,-2016" data-text="October 20, 2016" tabindex="-1">October 20, 2016</h3>
+        <p>This update contains the following changes:</p>
+        <ul>
+          <li>
+            <p>The <code translate="no" dir="ltr"><a href="#disablekb">disablekb</a></code> parameter definition has been corrected to note that the default value is <code translate="no" dir="ltr">0</code>, which means that keyboard controls are enabled. A value of <code translate="no" dir="ltr">1</code> indicates that keyboard controls should be disabled.</p>
+            <p>The list of keyboard controls that the player supports has also been updated to include the following:</p>
+            <ul>
+              <li>[f]: Toggle full-screen display</li>
+              <li>[j]: Jump back 10 seconds in the current video</li>
+              <li>[k]: Play / Pause</li>
+              <li>[l]: Jump ahead 10 seconds in the current video</li>
+              <li>[m]: Mute or unmute the video</li>
+              <li>[0-9]: Jump to a point in the video. <code translate="no" dir="ltr">0</code> jumps to the beginning of the video, <code translate="no" dir="ltr">1</code> jumps to the time 10% into the video, <code translate="no" dir="ltr">2</code> jumps to the point 20% into the video, and so forth.</li>
+            </ul>
+            <p>In addition, the effect of pressing the [arrow left] or [arrow right] keys has changed. These keys now jump 5 seconds back (arrow left) or ahead (arrow right) in the current video.</p>
+          </li>
+        </ul>
+        <a name="release_notes_08_11_2016"></a>
+        <h3 class="hide-from-toc" id="august-11,-2016" data-text="August 11, 2016" tabindex="-1">August 11, 2016</h3>
+        <p>This update contains the following changes:</p>
+        <ul>
+          <li>
+            <p>The newly published YouTube API Services Terms of Service ("the Updated Terms"), discussed in detail on the <a href="http://youtube-eng.blogspot.com/">YouTube Engineering and Developers Blog</a>, provides a rich set of updates to the current Terms of Service. In addition to the <a href="/youtube/terms/api-services-terms-of-service">Updated Terms</a>, which will go into effect as of February 10, 2017, this update includes several supporting documents to help explain the policies that developers must follow.</p>
+            <p>The full set of new documents is described in the <a href="/youtube/terms/revision-history">revision history for the Updated Terms</a>. In addition, future changes to the Updated Terms or to those supporting documents will also be explained in that revision history. You can subscribe to an RSS feed listing changes in that revision history from a link in that document.</p>
+          </li>
+        </ul>
+        <a name="release_notes_12_18_2015"></a>
+        <h3 class="hide-from-toc" id="december-18,-2015" data-text="December 18, 2015" tabindex="-1">December 18, 2015</h3>
+        <p>European Union (EU) laws require that certain disclosures must be given to and consents obtained from end users in the EU.  Therefore, for end users in the European Union, you must comply with the <a href="https://www.google.com/about/company/user-consent-policy.html">EU User Consent Policy</a>. We have added a notice of this requirement in our <a href="/youtube/terms#notices-to-users">YouTube API Terms of Service</a>.</p>
+        <a name="release_notes_08_19_2015"></a>
+        <h3 class="hide-from-toc" id="august-19,-2015" data-text="August 19, 2015" tabindex="-1">August 19, 2015</h3>
+        <ul>
+          <li>
+            <p>The <code translate="no" dir="ltr"><a href="#autohide">autohide</a></code> parameter has been deprecated for the HTML5 player. In HTML5 players, the video progress bar and player controls display or hide automatically. That behavior corresponds to an <code translate="no" dir="ltr">autohide</code> setting of <code translate="no" dir="ltr">1</code>.</p>
+          </li>
+          <li>
+            <p>The <code translate="no" dir="ltr">theme</code> parameter has been deprecated for the HTML5 player. HTML5 players now always use the dark theme.</p>
+          </li>
+        </ul>
+        <a name="release_notes_03_09_2015"></a>
+        <h3 class="hide-from-toc" id="march-9,-2015" data-text="March 9, 2015" tabindex="-1">March 9, 2015</h3>
+        <ul>
+          <li>
+            <p>The document has been updated to reflect the fact that YouTube <code translate="no" dir="ltr">&lt;object&gt;</code> embeds, the YouTube Flash Player API and the YouTube JavaScript Player API have all been <a href="http://youtube-eng.blogspot.com/2015/01/youtube-now-defaults-to-html5_27.html">deprecated</a> as of January 27, 2015. A deprecation warning appears in several sections of this document to help point readers to the <a href="/youtube/iframe_api_reference">IFrame Player API</a> as an alternative.</p>
+          </li>
+          <li>
+            <p>The definition of the <code translate="no" dir="ltr"><a href="#autohide">autohide</a></code> parameter has been updated to clarify the meaning of the parameter's values. The default behavior (<code translate="no" dir="ltr">autohide=2</code>) is that if the player has a 16:9 or 4:3 aspect ratio, the player's video progress bar and player controls display or hide automatically. Otherwise, those controls are visible throughout the video.</p>
+          </li>
+          <li>
+            <p>The definition of the <code translate="no" dir="ltr"><a href="#hl">hl</a></code> parameter has been updated to note that the parameter value could be an ISO 639-1 two-letter language code or a fully specified locale. For example, <code translate="no" dir="ltr">fr</code> and <code translate="no" dir="ltr">fr-ca</code> are both valid parameter values.</p>
+          </li>
+          <li>
+            <p>The definition of the <code translate="no" dir="ltr"><a href="#enablejsapi">enablejsapi</a></code> parameter has been reworded to clarify that the parameter enables a player to be controlled via API calls. The API could be either the <a href="/youtube/iframe_api_reference">IFrame Player API</a> or the <a href="/youtube/js_api_reference">JavaScript Player API</a>.</p>
+          </li>
+        </ul>
+        <a name="release_notes_10_14_2014"></a>
+        <h3 class="hide-from-toc" id="october-14,-2014" data-text="October 14, 2014" tabindex="-1">October 14, 2014</h3>
+        <ul>
+          <li>
+            <p>The HTML5 player now supports the <code translate="no" dir="ltr"><a href="#cc_load_policy">cc_load_policy</a></code>, <code translate="no" dir="ltr"><a href="#disablekb">disablekb</a></code>, <code translate="no" dir="ltr"><a href="#end">end</a></code>, <code translate="no" dir="ltr"><a href="#fs">fs</a></code>, <code translate="no" dir="ltr"><a href="#list">list</a></code>, and <code translate="no" dir="ltr"><a href="#listType">listType</a></code> parameters. The parameter descriptions have been updated accordingly.</p>
+          </li>
+        </ul>
+        <a name="release_notes_07_18_2014"></a>
+        <h3 class="hide-from-toc" id="july-18,-2014" data-text="July 18, 2014" tabindex="-1">July 18, 2014</h3>
+        <ul>
+          <li>
+            <p>The new <code class="notranslate" dir="ltr"><a href="#hl">hl</a></code> parameter can be used to set the player's interface language. The interface language is used for tooltips in the player and also affects the default caption track. The selected caption track may also depend on the availability of caption tracks and user's individual language preferences.</p>
+            <p>The parameter's value is an <a href="http://www.loc.gov/standards/iso639-2/php/code_list.php">ISO 639-1 two-letter language code</a>, though other language input codes, such as IETF language tags (BCP 47) may also be handled properly.</p>
+          </li>
+          <li>
+            <p>The definition of the <code class="notranslate" dir="ltr"><a href="#playsinline">playsinline</a></code> parameter, which only affects HTML5 players on iOS, has been modified slightly. The definition now notes that setting the parameter value to <code translate="no" dir="ltr">1</code> causes inline playback only for <code translate="no" dir="ltr">UIWebViews</code> created with the <code translate="no" dir="ltr">allowsInlineMediaPlayback</code> property set to <code translate="no" dir="ltr">TRUE</code>.</p>
+          </li>
+        </ul>
+        <a name="release_notes_01_28_2014"></a>
+        <h3 class="hide-from-toc" id="january-28,-2014" data-text="January 28, 2014" tabindex="-1">January 28, 2014</h3>
+        <ul>
+          <li>
+            <p>The <code class="notranslate" dir="ltr"><a href="#playsinline">playsinline</a></code> parameter controls whether videos play inline or fullscreen in an HTML5 player on iOS. Setting the value to <code class="notranslate" dir="ltr">1</code> causes inline playback.</p>
+          </li>
+          <li>
+            <p>The <a href="#Selecting_Content_to_Play">Selecting content to play</a> section has been updated to explain how to find YouTube video IDs and playlist IDs using the YouTube Data API (v3) rather than the older API version.</p>
+          </li>
+          <li>
+            <p>The <code class="notranslate" dir="ltr"><a href="#controls">controls</a></code> parameter's definition has been updated to reflect the fact that the parameter value only affects the time that the Flash player actually loads in IFrame embeds. In addition, for IFrame embeds, the parameter value also determines when the controls display in the player. If you set the parameter's value to <code class="notranslate" dir="ltr">2</code>, then the controls display and the Flash player loads after the user initiates the video playback.</p>
+          </li>
+        </ul>
+        <a name="release_notes_05_10_2013"></a>
+        <h3 class="hide-from-toc" id="may-10,-2013" data-text="May 10, 2013" tabindex="-1">May 10, 2013</h3>
+        <p>This update contains the following changes:</p>
+        <ul>
+          <li>
+            <p>YouTube no longer identifies experimental API features and services. Instead, we now provide a list of <a href="/youtube/youtube-api-list">YouTube APIs that are subject to the deprecation policy</a>.</p>
+          </li>
+        </ul>
+        <a name="release_notes_07_20_2012"></a>
+        <h3 class="hide-from-toc" id="july-20,-2012" data-text="July 20, 2012" tabindex="-1">July 20, 2012</h3>
+        <p>This update contains the following changes:</p>
+        <ul>
+          <li>
+            <p>The definition of the <code class="notranslate" dir="ltr"><a href="#controls">controls</a></code> parameter has been updated to reflect support for a parameter value of <code class="notranslate" dir="ltr">2</code> and to explain that, for AS3 players, the parameter value determines the time when the Flash player actually loads. If the <code class="notranslate" dir="ltr"><a href="#controls">controls</a></code> parameter is set to <code class="notranslate" dir="ltr">0</code> or <code class="notranslate" dir="ltr">1</code>, the Flash player loads immediately. If the parameter value is <code class="notranslate" dir="ltr">2</code>, the Flash player does not load until the video playback is initiated.</p>
+          </li>
+        </ul>
+        <a name="release_notes_06_05_2012"></a>
+        <h3 class="hide-from-toc" id="june-5,-2012" data-text="June 5, 2012" tabindex="-1">June 5, 2012</h3>
+        <p>This update contains the following changes:</p>
+        <ul>
+          <li>
+            <p>The HTML5 player now supports the <code class="notranslate" dir="ltr"><a href="#color">color</a></code>, <code class="notranslate" dir="ltr"><a href="#modestbranding">modestbranding</a></code>, and <code class="notranslate" dir="ltr"><a href="#rel">rel</a></code> parameters, and the definitions for these parameters have been updated accordingly.</p>
+          </li>
+          <li>
+            <p>The definition of the <code class="notranslate" dir="ltr"><a href="#showinfo">showinfo</a></code> parameter has been updated to explain how that if the player is loading a playlist, and you explicitly set the parameter value to <code class="notranslate" dir="ltr">1</code>, then, upon loading, the player will also display thumbnail images for the videos in the playlist. Note that this functionality is only supported for the AS3 player since that is the only player that can load a playlist.</p>
+          </li>
+        </ul>
+        <a name="release_notes_05_04_2012"></a>
+        <h3 class="hide-from-toc" id="may-4,-2012" data-text="May 4, 2012" tabindex="-1">May 4, 2012</h3>
+        <p>This update contains the following changes:</p>
+        <ul>
+          <li>
+            <p>The <code class="notranslate" dir="ltr"><a href="#showinfo">showinfo</a></code> parameter's definition has been updated to reflect the fact that the HTML5 player supports this parameter.</p>
+          </li>
+        </ul>
+        <a name="release_notes_05_03_2012"></a>
+        <h3 class="hide-from-toc" id="may-3,-2012" data-text="May 3, 2012" tabindex="-1">May 3, 2012</h3>
+        <p>This update contains the following changes:</p>
+        <ul>
+          <li>
+            <p>The new <code class="notranslate" dir="ltr"><a href="#end">end</a></code> parameter specifies the time, measured in seconds from the start of the video, when the player should stop playing a video. Note that the time when playback is stopped is measured from the beginning of the video and not from the value of either the <code class="notranslate" dir="ltr">start</code> player parameter or the <code class="notranslate" dir="ltr">startSeconds</code> parameter, which is used in YouTube Player API functions for loading or queueing a video.</p>
+          </li>
+        </ul>
+        <a name="release_notes_03_29_2012"></a>
+        <h3 class="hide-from-toc" id="march-29,-2012" data-text="March 29, 2012" tabindex="-1">March 29, 2012</h3>
+        <p>This update contains the following changes:</p>
+        <ul>
+          <li>
+            <p>The new <a href="#Embedding_a_Player">Embedding a YouTube player</a> section explains different ways to embed a YouTube player in your application. This section covers manual IFrame embeds, IFrame embeds that use the IFrame Player API, and AS3 and AS2 object embeds. This section incorporates information from the old <strong>Example usage</strong> section, which has been removed.</p>
+          </li>
+          <li>
+            <p>The new <a href="#Selecting_Content_to_Play">Selecting content to play</a> section explains how to configure the player to load a video, a playlist, search results for a specified query, or uploaded videos for a specified user.</p>
+          </li>
+          <li>
+            <p>The new <code class="notranslate" dir="ltr"><a href="#list">list</a></code> and <code class="notranslate" dir="ltr"><a href="#listType">listType</a></code> parameters let you specify the content that the player should load. You can specify a playlist, a search query, or a particular user's uploaded videos.</p>
+          </li>
+          <li>
+            <p>The definitions of the <code class="notranslate" dir="ltr"><a href="#fs">fs</a></code> and <code class="notranslate" dir="ltr"><a href="#rel">rel</a></code> parameters have been updated to more clearly explain the default parameter values for the AS3 player.</p>
+          </li>
+          <li>
+            <p>The <code class="notranslate" dir="ltr"><a href="#border">border</a></code>, <code class="notranslate" dir="ltr"><a href="#color1">color1</a></code>, <code class="notranslate" dir="ltr"><a href="#egm">egm</a></code>, <code class="notranslate" dir="ltr"><a href="#hd">hd</a></code>, and <code class="notranslate" dir="ltr"><a href="#showsearch">showsearch</a></code> parameters, which are all only supported for the deprecated AS2 Player API, have been moved to a new section named <a href="#Deprecated_Parameters">deprecated parameters only used in the AS2 Player API</a>.</p>
+          </li>
+          <li>
+            <p>The document no longer provides a way to filter the parameter list to only display parameters supported in either the AS3, AS2, or HTML5 player. Instead, each parameter definition has been updated to identify the players that support that parameter.</p>
+          </li>
+        </ul>
+        <a name="release_notes_08_11_2011"></a>
+        <h3 class="hide-from-toc" id="august-11,-2011" data-text="August 11, 2011" tabindex="-1">August 11, 2011</h3>
+        <p>This update contains the following changes:</p>
+        <ul>
+          <li>
+            <p>The new <code class="notranslate" dir="ltr"><a href="#theme">theme</a></code> and <code class="notranslate" dir="ltr"><a href="#color">color</a></code> parameters let you customize the appearance of the embedded player's player controls. See the <a href="http://apiblog.youtube.com/2011/08/coming-soon-dark-player-for-embeds.html">YouTube API blog</a> for more information.</p>
+          </li>
+        </ul>
+        <a name="release_notes_06_08_2011"></a>
+        <h3 class="hide-from-toc" id="june-8,-2011" data-text="June 8, 2011" tabindex="-1">June 8, 2011</h3>
+        <p>This update contains the following changes:</p>
+        <ul>
+          <li>
+            <p>The new <code class="notranslate" dir="ltr"><a href="#modestbranding">modestbranding</a></code> parameter lets you use a YouTube player that does not show a YouTube logo. As of this release, the parameter was only supported for the AS3 embedded player and for IFrame embeds that loaded the AS3 player. As of June 5, 2012, the HTML5 player also supported this parameter.</p>
+          </li>
+        </ul>
+        <a name="release_notes_02_14_2011"></a>
+        <h3 class="hide-from-toc" id="february-14,-2011" data-text="February 14, 2011" tabindex="-1">February 14, 2011</h3>
+        <p>This update contains the following changes:</p>
+        <ul>
+          <li>
+            <p>The documentation has been updated to note that the AS2 Player API has been deprecated. The deprecation of the AS2 Player API was actually <a href="http://apiblog.youtube.com/2009/10/actionscript-3-youtube-chromeless.html">announced</a> on October 14, 2009.</p>
+          </li>
+        </ul>
+        <a name="release_notes_02_03_2011"></a>
+        <h3 class="hide-from-toc" id="february-3,-2011" data-text="February 3, 2011" tabindex="-1">February 3, 2011</h3>
+        <p>This update contains the following changes:</p>
+        <ul>
+          <li>
+            <p>The documentation has been updated to identify parameters supported in the HTML5 (<a href="/youtube/iframe_api_reference">IFrame</a>) embedded player.</p>
+          </li>
+          <li>
+            <p>The document now displays all of the parameters supported in any of YouTube's embedded players (HTML5, AS3, AS2).</p>
+          </li>
+          <li>
+            <p>The following parameters are supported in the AS2 player but have been deprecated for the newer AS3 and HTML5 players: <code class="notranslate" dir="ltr"><a href="#border">border</a></code>, <code class="notranslate" dir="ltr"><a href="#color">color1</a></code>, <code class="notranslate" dir="ltr"><a href="#color">color2</a></code>, <code class="notranslate" dir="ltr"><a href="#egm">egm</a></code>, <code class="notranslate" dir="ltr"><a href="#hd">hd</a></code>, and <code class="notranslate" dir="ltr"><a href="#showsearch">showsearch</a></code>.</p>
+            <p>In addition, the <code class="notranslate" dir="ltr"><a href="#loop">loop</a></code> parameter has limited support in the AS3 player and in IFrame embeds, which could load either an AS3 or HTML player. Currently, the <code class="notranslate" dir="ltr"><a href="#loop">loop</a></code> parameter only works in the AS3 player when used in conjunction with the <code class="notranslate" dir="ltr"><a href="#playlist">playlist</a></code> parameter. To loop a single video, set the <code class="notranslate" dir="ltr"><a href="#loop">loop</a></code> parameter to <code class="notranslate" dir="ltr">1</code> and set the <code class="notranslate" dir="ltr"><a href="#playlist">playlist</a></code> parameter value to the same video ID already specified in the Player API URL:<br></p>
+            <devsite-code no-copy="" data-copy-event-label="">
+              <pre class="notranslate" dir="ltr" is-upgraded="">https://www.youtube.com/v/<strong>VIDEO_ID</strong>?version=3&amp;loop=1&amp;playlist=<strong>VIDEO_ID</strong></pre>
+            </devsite-code>
+            <p></p>
+            <p>Similarly, the <code class="notranslate" dir="ltr"><a href="#controls">controls</a></code> and <code class="notranslate" dir="ltr"><a href="#playlist">playlist</a></code> parameters are supported in the AS3 and HTML5 players but are not and will not be supported in the AS2 player.</p>
+            <p>As noted above, IFrame embeds can load either an AS3 or HTML5 player. Though some parameters are not supported in both players, an IFrame embed that loads the AS3 player will support all parameters that work with that player and ignore all other parameters. Similarly, an IFrame embed that loads the HTML5 player will support all parameters that work with that player while ignoring all other parameters.</p>
+          </li>
+          <li>
+            <p>The parameter list has been updated to include the <code class="notranslate" dir="ltr"><a href="#autohide">autohide</a></code> parameter, which indicates whether the player's video controls will automatically hide after a video begins playing.</p>
+          </li>
+          <li>
+            <p>The parameter list has been updated to include the <code class="notranslate" dir="ltr"><a href="#controls">controls</a></code> parameter, which indicates whether the player's video controls will display at all. (Player controls do display by default.)</p>
+          </li>
+          <li>
+            <p>The parameter list has been updated to include the <code class="notranslate" dir="ltr"><a href="#playlist">playlist</a></code> parameter, which specifies a comma-separated list of video IDs to play.</p>
+          </li>
+          <li>
+            <p>The definition of the <code class="notranslate" dir="ltr"><a href="#fs">fs</a></code> has been updated to note that the fullscreen option will not work if you load the YouTube player into another SWF.</p>
+          </li>
+          <li>
+            <p>The <a href="#AS3_Object_Embeds">example</a> at the end of the document has been updated to use the embedded AS3 player instead of the embedded AS2 player. The parameters used in the example have also been updated to only include parameters that the AS3 player supports.</p>
+            <p>In addition, the instructions for constructing the URLs that contain player parameters have been updated to reflect the URL formats used by the AS3 and AS2 embedded and chromeless players as well as by the HTML5 player.</p>
+          </li>
+        </ul>
+      </div>
+      <!-- end notranslate for revision history before initial l10n request -->
+    </div>
+  </div>
+  <devsite-recommendations display="in-page" hidden="" yield="">
+  </devsite-recommendations>
+  <devsite-thumb-rating position="footer">
+    <div class="devsite-thumb-rating" role="form" aria-labelledby="devsite-thumb-label-footer">
+      <div class="devsite-thumb-label" id="devsite-thumb-label-footer">Was this helpful?</div>
+      <div class="devsite-thumbs">
+        <button class="devsite-thumb devsite-thumb-up" data-title="Helpful" aria-label="Helpful">
+          <svg class="devsite-thumb-icon" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M21,7h-6.31l0.95-4.57l0.03-0.32c0-0.41-0.17-0.79-0.44-1.06L14.17,0c0,0-7.09,6.85-7.17,7H2v13h16 c0.83,0,1.54-0.5,1.84-1.22l3.02-7.05C22.95,11.5,23,11.26,23,11V9C23,7.9,22.1,7,21,7z M7,18H4V9h3V18z M21,11l-3,7H9V8l4.34-4.34 L12,9h9V11z"></path>
+          </svg>
+        </button>
+        <button class="devsite-thumb devsite-thumb-down" data-title="Not helpful" aria-label="Not helpful">
+          <svg class="devsite-thumb-icon" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M3,17h6.31l-0.95,4.57l-0.03,0.32c0,0.41,0.17,0.79,0.44,1.06L9.83,24c0,0,7.09-6.85,7.17-7h5V4H6 C5.17,4,4.46,4.5,4.16,5.22l-3.02,7.05C1.05,12.5,1,12.74,1,13v2C1,16.1,1.9,17,3,17z M17,6h3v9h-3V6z M3,13l3-7h9v10l-4.34,4.34 L12,15H3V13z"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </devsite-thumb-rating>
+</article>
+++++

@@ -1,0 +1,571 @@
+[role="mt-5"]
+[[yt-iframe-api-player-settings]]
+== Parameters
+
+Player *parameters* are simple *key/value pairs* that control how an
+embedded YouTube player looks and behaves. You can append them to the
+player URL (for example `?autoplay=1`), or - when using the iFrame
+Player API - pass them in the `playerVars` object of the `YT.Player`
+constructor.
+
+In J1 Template, you normally do *not* set these parameters yourself.
+The video player modules read your YAML configuration and pass the
+matching values to the API for you. Knowing the parameter names is
+still useful, because the YAML keys map directly to the API names
+described below.
+
+[NOTE]
+====
+All of the following parameters are optional.
+====
+
+[role="mt-4"]
+[[yt-iframe-api-player-settings--autoplay]]
+=== autoplay
+
+This parameter specifies whether the initial video will automatically
+start to play when the player loads. Supported values are `0` or `1`.
+The default value is `0`.
+
+If you enable Autoplay, playback will occur without any user interaction
+with the player; playback data collection and sharing will therefore
+occur upon page load.
+
+[cols="3a,9a", width="100%", options="header", role="rtable mt-4 mb-5"]
+|===
+|Type |Default
+
+|`0`\|`1`
+|0
+
+|===
+
+[role="mt-4"]
+=== cc_lang_pref
+
+This parameter specifies the default language that the player will use
+to display captions. Set the parameter's value to an
+link://www.loc.gov/standards/iso639-2/php/code_list.php[ISO 639-1 two-letter language code, {browser-window--new}].
+
+If you use this parameter and also set the `cc_load_policy` parameter to
+`1`, then the player will show captions in the specified language when
+the player loads. If you do not also set the `cc_load_policy` parameter,
+then captions will not display by default, but will display in the
+specified language if the user opts to turn captions on.
+
+[cols="3a,9a", width="100%", options="header", role="rtable mt-4 mb-5"]
+|===
+|Type |Default
+
+|`string`
+|no defaults
+
+|===
+
+[role="mt-4"]
+=== cc_load_policy
+
+Setting the parameter's value to `1` causes closed captions to be shown
+by default, even if the user has turned captions off. The default
+behavior is based on user preference.
+
+[cols="3a,9a", width="100%", options="header", role="rtable mt-4 mb-5"]
+|===
+|Type |Default
+
+|`0`\|`1`
+|no defaults
+
+|===
+
+[role="mt-4"]
+=== color
+
+This parameter specifies the color that will be used in the player's
+video progress bar to highlight the amount of the video that the viewer
+has already seen. Valid parameter values are `red` and `white`, and, by
+default, the player uses the color red in the video progress bar.
+
+[cols="3a,9a", width="100%", options="header", role="rtable mt-4 mb-5"]
+|===
+|Type |Default
+
+|`red`\|`white`
+|red
+
+|===
+
+[role="mt-4"]
+=== controls
+
+This parameter indicates whether the video player controls are
+displayed:
+
+* `controls=0`, Player controls do not display in the player.
+* `controls=1`, Player controls display in the player (default).
+
+[cols="3a,9a", width="100%", options="header", role="rtable mt-4 mb-5"]
+|===
+|Type |Default
+
+|`0`\|`1`
+|1
+
+|===
+
+[role="mt-4"]
+=== disablekb
+
+Setting the parameter's value to `1` causes the player to not respond to
+keyboard controls. The default value is `0`, which means that keyboard
+controls are enabled. Currently supported keyboard controls are:
+
+* Spacebar or [k]: Play / Pause
+* Arrow Left: Jump back 5 seconds in the current video
+* Arrow Right: Jump ahead 5 seconds in the current video
+* Arrow Up: Volume up
+* Arrow Down: Volume Down
+* [f]: Toggle full-screen display
+* [j]: Jump back 10 seconds in the current video
+* [l]: Jump ahead 10 seconds in the current video
+* [m]: Mute or unmute the video
+* [0-9]: Jump to a point in the video. `0` jumps to the beginning of the
+  video, `1` jumps to the point 10% into the video, `2` jumps to the point
+  20% into the video, and so forth.
+
+[cols="3a,9a", width="100%", options="header", role="rtable mt-4 mb-5"]
+|===
+|Type |Default
+
+|`0`\|`1`
+|0
+
+|===
+
+[role="mt-4"]
+=== enablejsapi
+
+Setting the parameter's value to `1` enables the player to be controlled
+via IFrame Player API calls. The default value is `0`, which means that the
+player cannot be controlled using that API.
+
+For more information on the IFrame API and how to use it, see the
+link://developers.google.com/youtube/iframe_api_reference[IFrame API documentation, {browser-window--new}].
+
+[cols="3a,9a", width="100%", options="header", role="rtable mt-4 mb-5"]
+|===
+|Type |Default
+
+|`0`\|`1`
+|0
+
+|===
+
+[role="mt-4"]
+=== end
+
+This parameter specifies the time, measured in seconds from the start of
+the video, when the player should stop playing the video. The parameter
+value is a positive integer.
+
+Note that the time is measured from the beginning of the video and not
+from either the value of the `start` player parameter or the
+`startSeconds` parameter, which is used in YouTube Player API methods
+for loading or queueing a video.
+
+[cols="3a,9a", width="100%", options="header", role="rtable mt-4 mb-5"]
+|===
+|Type |Default
+
+|`integer`
+|no defaults
+
+|===
+
+[role="mt-4"]
+=== fs
+
+Setting this parameter to `0` prevents the fullscreen button from
+displaying in the player. The default value is `1`, which causes the
+fullscreen button to display.
+
+[cols="3a,9a", width="100%", options="header", role="rtable mt-4 mb-5"]
+|===
+|Type |Default
+
+|`0`\|`1`
+|1
+
+|===
+
+[role="mt-4"]
+=== hl
+
+Sets the player's interface language. The parameter value is an
+link://www.loc.gov/standards/iso639-2/php/code_list.php[ISO 639-1 two-letter language code, {browser-window--new}]
+or a fully specified locale. For example, `fr` and `fr-ca` are both valid
+values. Other language input codes, such as IETF language tags (BCP 47) might
+also be handled properly.
+
+The interface language is used for tooltips in the player and also
+affects the default caption track. Note that _YouTube_ might select a
+different caption track language for a particular user based on the
+user's individual language preferences and the availability of caption
+tracks.
+
+[cols="3a,9a", width="100%", options="header", role="rtable mt-4 mb-5"]
+|===
+|Type |Default
+
+|`string`
+|no defaults
+
+|===
+
+[role="mt-4"]
+=== iv_load_policy
+
+Setting the parameter's value to `1` causes video annotations to be
+shown by default, whereas setting to `3` causes video annotations to not
+be shown by default. The default value is `1`.
+
+[cols="3a,9a", width="100%", options="header", role="rtable mt-4 mb-5"]
+|===
+|Type |Default
+
+|`1`\|`3`
+|1
+
+|===
+
+[role="mt-4"]
+=== list
+
+The `list` parameter, in conjunction with the `listType` parameter,
+identifies the content that will load in the player.
+
+* If the `listType` parameter value is `user_uploads`, then the `list`
+  parameter value identifies the _YouTube_ channel whose uploaded videos
+  will be loaded.
+* If the `listType` parameter value is `playlist`, then the `list`
+  parameter value specifies a YouTube playlist ID. In the parameter value,
+  you need to prepend the playlist ID with the letters `PL` as shown in
+  the example below.
+
+....
+https://www.youtube.com/embed?listType=playlist&list=PLC77007E23FF423C6
+....
+
+* If the `listType` parameter value is `search`, then the `list`
+  parameter value specifies the search query.
+
+[NOTE]
+====
+This functionality is
+link://developers.google.com/youtube/player_parameters#release_notes_10_13_2020[deprecated, {browser-window--new}]
+and will no longer be supported as of 15 November 2020.
+
+If you specify values for the `list` and `listType` parameters,
+the IFrame embed URL does not need to specify a video ID.
+====
+
+[role="mt-4"]
+=== listType
+
+The `listType` parameter, in conjunction with the `list` parameter,
+identifies the content that will load in the player. Valid parameter
+values are `playlist` and `user_uploads`.
+
+If you specify values for the `list` and `listType` parameters, the
+IFrame embed URL does not need to specify a video ID.
+
+[NOTE]
+====
+A third value, `search`, has been
+link://developers.google.com/youtube/player_parameters#release_notes_10_13_2020[deprecated, {browser-window--new}]
+and will no longer be supported as of 15 November 2020.
+====
+
+[cols="3a,9a", width="100%", options="header", role="rtable mt-4 mb-5"]
+|===
+|Type |Default
+
+|`user_uploads`\|`playlist`
+|no defaults
+
+|===
+
+[role="mt-4"]
+=== loop
+
+In the case of a single video player, a setting of `1` causes the player
+to play the initial video again and again. In the case of a playlist
+player (or custom player), the player plays the entire playlist and then
+starts again at the first video.
+
+Supported values are `0` and `1`, and the default value is `0`.
+
+[NOTE]
+====
+This parameter has limited support in IFrame embeds. To loop a
+single video, set the `loop` parameter value to `1` and set the
+`playlist` parameter value to the same video ID already specified in the
+Player API URL:
+====
+
+[source, notranslate]
+----
+https://www.youtube.com/embed/VIDEO_ID?playlist=VIDEO_ID&loop=1
+----
+
+[cols="3a,9a", width="100%", options="header", role="rtable mt-4 mb-5"]
+|===
+|Type |Default
+
+|`0`\|`1`
+|0
+
+|===
+
+[role="mt-4"]
+=== modestbranding
+
+This parameter allows you to use a YouTube player that does *not* display
+the *YouTube logo*. Set the parameter value to 1 to prevent the YouTube
+logo from being displayed in the control bar. However, a small YouTube text
+label will appear in the top right corner of a paused video when the user
+hovers over the player.
+
+[WARNING]
+====
+*This parameter is deprecated* and has no effect. See the
+link://developers.google.com/youtube/player_parameters#release_notes_08_15_2023[deprecation announcement, {browser-window--new}]
+for more information.
+====
+
+[role="mt-4"]
+=== origin
+
+This parameter provides an extra security measure for the IFrame API and
+is only supported for IFrame embeds. If you are using the IFrame API,
+which means you are setting the `enablejsapi` parameter value to `1`,
+you should always specify your domain as the `origin` parameter value.
+
+To ensure secure communication between your website and the YouTube Player
+API, you need to specify the domain of your website as an origin parameter
+in the iframe embed URL.
+
+Determine the exact domain (including the protocol, http:// or https://)
+where your YouTube player will be embedded.
+For example: https://yourwebsite.com.
+
+Why is this important?
+
+* Security:
+  By specifying the origin parameter, you prevent unauthorized
+  access to your website's resources and protect user data.
+
+* API Functionality:
+  It ensures that the YouTube Player API can communicate with your
+  website's JavaScript code, enabling features like custom controls,
+  interactive elements, and more.
+
+[cols="3a,9a", width="100%", options="header", role="rtable mt-4 mb-5"]
+|===
+|Type |Default
+
+|`string`
+|no defaults
+
+|===
+
+[role="mt-4"]
+=== playlist
+
+This parameter specifies a comma-separated list of video IDs to play. If
+you specify a value, the first video that plays will be the `VIDEO_ID`
+specified in the URL path, and the videos specified in the `playlist`
+parameter will play thereafter.
+
+[cols="3a,9a", width="100%", options="header", role="rtable mt-4 mb-5"]
+|===
+|Type |Default
+
+|`array`
+|no defaults
+
+|===
+
+[role="mt-4"]
+=== playsinline
+
+This parameter controls whether videos play inline or fullscreen on iOS.
+Valid values are:
+
+* `0`, Results in fullscreen playback. This is currently the default
+  value, though the default is subject to change.
+* `1`, Results in inline playback for mobile browsers and for `WebViews`
+  created with the `allowsInlineMediaPlayback` property set to `YES`.
+
+
+[cols="3a,9a", width="100%", options="header", role="rtable mt-4 mb-5"]
+|===
+|Type |Default
+
+|`0`\|`1`
+|0
+
+|===
+
+[role="mt-4"]
+=== privacy_enhanced
+
+When `privacy_enhanced` is switched on, the embedded YouTube player is
+loaded from `www.youtube-nocookie.com` — instead of the standard site
+`www.youtube.com`. This activates what YouTube officially calls
+*Privacy-Enhanced Mode.*
+
+[cols="3a,9a", width="100%", options="header", role="rtable mt-4 mb-4"]
+|===
+|Type |Default
+
+|`Boolean`
+|no defaults
+
+|===
+
+Normally, the moment a page with an embedded YouTube video finishes loading,
+YouTube may already place cookies in your browser and start collecting
+information about you — even if you never click the play button. Just *seeing*
+the video thumbnail on the page is enough. YouTube (and its parent company
+Google) can use this to build a profile of your interests across the web.
+
+With Privacy-Enhanced Mode, that early tracking is held back. The rule becomes:
+YouTube does not store cookies or track the visitor until the visitor actually
+plays the video. Simply: visiting a page that contains the embedded player
+leaves no trace in the form of *tracking cookies*.
+
+[NOTE]
+====
+In Europe especially, privacy laws like the *GDPR* require websites to get
+a *visitor's consent* before setting tracking cookies. A normal YouTube embed
+can set cookies immediately, which creates a legal problem. The privacy-enhanced
+version avoids *setting cookies on page load*, which makes it much easier to
+embed YouTube videos in a legally cleaner way — often in combination with a
+cookie-consent banner.
+====
+
+[role="mt-5"]
+==== What it does *not* do
+
+It is not a magic invisibility cloak. Two honest limitations:
+
+. As soon as the visitor clicks play, the usual YouTube machinery
+  starts up and data *is* sent to YouTube — playback simply cannot
+  work without talking to YouTube's servers.
+. Even before playback, the browser still contacts a Google-owned
+  server to fetch the player and thumbnail, so Google technically
+  sees the visitor's IP address. It just doesn't set tracking cookies
+  at that point.
+
+[CAUTION]
+====
+Strictly speaking, the *official* YouTube iFrame Player API *does not*
+have a parameter literally named `privacy_enhanced`. In the raw API you
+get the same effect by setting the `host` option to `youtube-nocookie.com`
+when creating the player. The name `privacy_enhanced` (usually a simple
+true/false switch) is how many wrapper libraries and player plugins
+expose this feature in a friendlier way — behind the scenes, setting
+it to `true` just swaps the embed address to the "nocookie" domain
+described above.
+====
+
+[role="mt-5"]
+=== rel
+
+Prior to the change, this parameter indicates whether the player should
+show related videos when playback of the initial video ends.
+
+* If the parameter's value is set to `1`, which is the default value,
+  then the player does show related videos.
+* If the parameter's value is set to `0`, then the player does not show
+  related videos.
+
+After the change, you will not be able to disable related videos.
+Instead, if the `rel` parameter is set to `0`, related videos will come
+from the same channel as the video that was just played.
+
+[cols="3a,9a", width="100%", options="header", role="rtable mt-4 mb-5"]
+|===
+|Type |Default
+
+|`0`\|`1`
+|1
+
+|===
+
+[role="mt-4"]
+=== showinfo
+
+If you set the parameter value to 0, information such as the video title
+or the name of the uploader will not be displayed in the player *before*
+the video starts playing.
+
+[CAUTION]
+====
+If the player loads a playlist and you have explicitly set the parameter
+value to 1, the player will also display thumbnails for the videos in the
+respective playlist after loading. 
+
+This feature is only supported for the *AS3 player*, as this is the only
+player that can load a playlist.
+====
+
+[cols="3a,9a", width="100%", options="header", role="rtable mt-4 mb-5"]
+|===
+|Type |Default
+
+|`0`\|`1`
+|1
+
+|===
+
+[role="mt-4"]
+=== start
+
+This parameter causes the player to begin playing the video at the given
+number of seconds from the start of the video. The parameter value is a
+positive integer. Note that similar to the `seekTo` method, the player
+will look for the closest keyframe to the time you specify. This means
+that sometimes the play head may seek to just before the requested time,
+usually no more than around two seconds.
+
+[cols="3a,9a", width="100%", options="header", role="rtable mt-4 mb-5"]
+|===
+|Type |Default
+
+|`integer`
+|no defaults
+
+|===
+
+[role="mt-4"]
+=== widget_referrer
+
+This parameter identifies the URL where the player is embedded. This
+value is used in YouTube Analytics reporting when the YouTube player is
+embedded in a widget, and that widget is then embedded in a web page or
+application. In that scenario, the `origin` parameter identifies the
+widget provider's domain, but YouTube Analytics should not identify the
+widget provider as the actual traffic source. Instead, YouTube Analytics
+uses the `widget_referrer` parameter value to identify the domain
+associated with the traffic source.
+
+[cols="3a,9a", width="100%", options="header", role="rtable mt-4 mb-5"]
+|===
+|Type |Default
+
+|`string`
+|no defaults
+
+|===

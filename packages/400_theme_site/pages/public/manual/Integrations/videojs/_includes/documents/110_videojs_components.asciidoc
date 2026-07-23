@@ -1,0 +1,251 @@
+== Component Options
+
+The VideoJS player is a component. Like all components, you can define
+what children it includes, what order they appear in, and what options
+are passed to them.
+
+This is meant to be a quick reference; so, for more detailed information
+on components in VideoJS, check out the
+link://videojs.com/guides/components[Components Guide, {browser-window--new}].
+
+[role="mt-4"]
+=== Component children
+
+If an *Array* -- which is the default -- this is used to determine which
+children (by component name) and in which order they are created on a
+player (or other component).
+
+[source, js]
+----
+// The following code creates a player with ONLY bigPlayButton and
+// controlBar child components.
+videojs('my-player', {
+  children: [
+    'bigPlayButton',
+    'controlBar'
+  ]
+});
+----
+
+The *children* options can also be passed as an *object*. In this case,
+it is used to provide *options* for any/all children, including
+disabling them with *false*.
+
+[source, js]
+----
+// This player's ONLY child will be the controlBar. Clearly, this is not the
+// ideal method for disabling a grandchild!
+videojs('my-player', {
+  children: {
+    controlBar: {
+      fullscreenToggle: false
+    }
+  }
+});
+----
+
+[cols="3a,9a", width="100%", options="header", role="rtable mt-4 mb-5"]
+|===
+|Type |Default
+
+|`array`\|`object`
+| *NO* default
+
+|===
+
+[role="mt-4"]
+[[componentName]]
+=== ${componentName}
+
+Components can be given custom options via the _lower-camel-case variant
+of the component name_ (e.g. *controlBar* for *ControlBar*). These can
+be nested in a representation of grandchild relationships. For example,
+to disable the fullscreen control:
+
+[source, js]
+----
+videojs('my-player', {
+  controlBar: {
+    fullscreenToggle: false
+  }
+});
+----
+
+[cols="3a,9a", width="100%", options="header", role="rtable mt-4 mb-5"]
+|===
+|Type |Default
+
+|`object`
+| *NO* default
+
+|===
+
+
+[role="mt-5"]
+== Tech Options
+
+In VideoJS, a *tech* is a key component responsible for handling media
+playback. The tech is an *abstraction layer* between the player and the
+underlying technology for playing a video. It allows the framework to support
+various video technologies -- for example HTML5 video, YouTube Video,
+Vimeo video, HLS, or DASH. Users of VideoJS do not need to worry about
+the specific implementation details of each technology.
+
+[NOTE]
+====
+The J1 Template system provides several *Tech* plugins to be used for
+playing videos from external platforms:
+
+* _YouTube_ Video platform
+* _Dailymotion_ Video platform
+* _Wistia_ Video platform
+* _Vimeo_ Video platform
+====
+
+A *tech* for the VideoJS framework typically consists of *JavaScript code*
+that provides a common API for controlling and interacting with the video
+element, regardless of the underlying technology.
+
+This abstraction layer simplifies the process of building and customizing
+video *players*, as developers can work with a consistent interface no matter
+what playback technology -- YouTube for example -- is being used.
+
+[role="mt-4"]
+[[techName]]
+=== ${techName}
+
+For VideoJS, playback technologies can be given as custom options as a part
+of the options passed to the *videojs* function or the video HTML element
+`video`. They should be passed under the *lower-case* variant of a tech name
+like *html5*.
+
+Example:
+
+[source, html, role="noclip"]
+----
+<video
+  id="videojs_id"
+  class="video-js vjs-theme-city"
+  controls
+  width="640" height="360"
+  poster="/assets/video/gallery/youtube_poster.jpg"
+  data-setup='{
+    "techOrder": [
+      "youtube", "html5"
+    ],
+    "sources": [{
+      "type": "video/youtube",
+      "src": "//youtube.com/watch?v=AeEYQ62t8hA"
+    }],
+    "controlBar": {
+      "pictureInPictureToggle": false,
+      "volumePanel": {
+        "inline": false
+      }
+    }
+  }'
+>
+</video>
+----
+
+[cols="3a,9a", width="100%", options="header", role="rtable mt-4 mb-5"]
+|===
+|Type |Default
+
+|`object`
+| *NO* default
+
+|===
+
+[role="mt-4"]
+=== html5
+
+Tech option for (native) HTML5 videos.
+
+[role="mt-4"]
+[[nativecontrolsfortouch-1]]
+==== nativeControlsForTouch
+
+The nativeControlsForTouch option is only supported by the *Html5* tech. This
+option can be set to *true* to force native controls for touch devices.
+
+[cols="3a,9a", width="100%", options="header", role="rtable mt-4 mb-5"]
+|===
+|Type |Default
+
+|`boolean`
+| *NO* default
+
+|===
+
+[role="mt-4"]
+==== nativeAudioTracks
+
+Option nativeAudioTracks cab be set to *false* to disable native audio track
+support. Most commonly used with
+link://github.com/videojs/videojs-contrib-hls[videojs-contrib-hls, {browser-window--new}].
+
+[cols="3a,9a", width="100%", options="header", role="rtable mt-4 mb-5"]
+|===
+|Type |Default
+
+|`boolean`
+| *NO* default
+
+|===
+
+[role="mt-4"]
+==== nativeTextTracks
+
+Set nativeTextTracks to *false* to force emulation of text tracks instead of
+native support. The *nativeCaptions* option also exists, but is simply
+an alias to *nativeTextTracks*.
+
+[cols="3a,9a", width="100%", options="header", role="rtable mt-4 mb-5"]
+|===
+|Type |Default
+
+|`boolean`
+| *NO* default
+
+|===
+
+[role="mt-4"]
+==== nativeVideoTracks
+
+If nativeVideoTracks is set to *false*, native video track support is
+*disabled*. Most commonly used with
+link://github.com/videojs/videojs-contrib-hls[videojs-contrib-hls, {browser-window--new}].
+
+[cols="3a,9a", width="100%", options="header", role="rtable mt-4 mb-5"]
+|===
+|Type |Default
+
+|`boolean`
+| *NO* default
+
+|===
+
+[role="mt-4"]
+==== preloadTextTracks
+
+Can be set to *false* to delay loading of non-active text tracks until
+use. This can cause a short delay when switching captions during which
+there may be missing captions.
+
+The default behavior is to preload all text tracks.
+
+[cols="3a,9a", width="100%", options="header", role="rtable mt-4 mb-5"]
+|===
+|Type |Default
+
+|`boolean`
+| *NO* default
+
+|===
+
+
+
+
+
+[role="mt-5"]

@@ -1,0 +1,91 @@
+---
+title:                                  iFrame API
+title_extention:                        Embed YouTube Players
+tagline:                                Embed YouTube Players
+
+date:                                   2020-11-04
+last_modified:                          2026-07-23
+
+description: >
+                                        The YouTube Embedded Player API describes how to
+                                        embed a YouTube player in an application and also
+                                        defines the parameters that are available in the
+                                        YouTube-embedded player.
+keywords: >
+                                        open source, free, template, jekyll, jekyllone, web,
+                                        sites, static, jamstack, bootstrap,
+                                        html, html5, video, support, youtube, player
+
+categories:                             [ Manual ]
+tags:                                   [ API, YouTube ]
+
+image:
+  path:                                 /assets/image/module/attic/1920x1280/alexander-shatov.jpg
+  width:                                1920
+  height:                               1280
+
+tts:                                    true
+comments:                               false
+compress:                               false                                   # required for embeded JS scripts
+regenerate:                             false
+personalization:                        true
+permalink:                              /pages/public/manual/youtube/iframe_api/
+
+resources:                              [ videojs ]
+resource_options:
+  - toccer:
+      collapseDepth:                    2
+  - attic:
+      opacity:                          .7
+      slides:
+        - url:                          /assets/image/module/attic/1920x1280/alexander-shatov.jpg
+          alt:                          J1 YouTube iFrame API Poster
+---
+
+// Page Initializer
+// =============================================================================
+// Enable the Liquid Preprocessor
+:page-liquid:
+
+// Set (local) page attributes here
+// -----------------------------------------------------------------------------
+// :page--attr:                         <attr-value>
+:images-dir:                            {imagesdir}/pages/roundtrip/100_present_images
+
+// Attribute settings for page content control (e.g includes)
+// claude - Update YouTube iFrame API manual #1
+:documentdir:                           _includes/documents
+
+//  Load Liquid procedures
+// -----------------------------------------------------------------------------
+{% capture load_attributes %}themes/{{site.template.name}}/procedures/global/attributes_loader.proc{%endcapture%}
+
+// Load page attributes
+// -----------------------------------------------------------------------------
+{% include {{load_attributes}} scope="global" %}
+
+
+// Page content
+// https://developers.google.com/youtube/iframe_api_reference?hl=en
+// https://developers.google.com/youtube/player_parameters?hl=en
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[role="dropcap"]
+The YouTube Embedded Player API explains how to embed a YouTube player in
+your application and also defines the parameters that are available in the
+YouTube embedded player.
+
+The YouTube iFrame API is used as the underlying Provider API for VideoJS players
+(over YouTube). VideoJS players are the default video player for all video
+sources supported by J1 Template.
+
+mdi:clock-time-five-outline[24px, md-gray mt-4 mb-5 mr-2]
+*30-60 Minutes* to read
+
+// Include sub-documents
+// -----------------------------------------------------------------------------
+
+include::{documentdir}/000_yt_iframe_api_intro.asciidoc[]
+include::{documentdir}/100_yt_iframe_api_parameters.asciidoc[]
+include::{documentdir}/120_yt_iframe_api_methods.asciidoc[]
+include::{documentdir}/130_yt_iframe_api_events.asciidoc[]
+include::{documentdir}/140_yt_iframe_api_examples.asciidoc[]

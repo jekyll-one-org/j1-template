@@ -1,0 +1,220 @@
+[role="mt-5"]
+== Events
+
+The API fires events to notify your application of changes to the
+embedded  As noted in the previous section, you can subscribe to
+events by adding an event listener when constructing the `YT.Player` object,
+and you can also use the `addEventListener` method.
+
+The API will pass an event object as the sole argument to each of those
+methods. The event object has the following properties:
+
+* The event's `target` identifies the video player that corresponds to
+  the event.
+* The event's `data` specifies a value relevant to the event. Note
+  that the `onReady` and `onAutoplayBlocked` events do not specify a
+  `data` property.
+
+[role="mt-4"]
+=== onReady
+
+This event fires whenever a player has finished loading and is ready
+to begin receiving API calls. Your application should implement this
+method if you want to automatically execute certain operations, such
+as playing the video or displaying information about the video, as
+soon as the player is ready.
+
+The example below shows a sample method for handling this event. The
+event object that the API passes to the method has a `target`
+property, which identifies the player. The method retrieves the
+embed code for the currently loaded video, starts to play the video,
+and displays the embed code in the page element that has an `id`
+value of `embed-code`.
+ 
+[source, js]
+----
+function onPlayerReady(event) {
+  var embedCode = event.target.getVideoEmbedCode();
+  event.target.playVideo();
+  if (document.getElementById('embed-code')) {
+    document.getElementById('embed-code').innerHTML = embedCode;
+  }
+}
+----
+
+[role="mt-4"]
+=== onStateChange
+
+This event fires whenever the player's state changes. The `data`
+property of the event object that the API passes to your event
+listener method will specify an integer that corresponds to the new
+player state. Possible values are:
+
+* `-1`, not started
+* `0`, ended
+* `1`, playing
+* `2`, paused
+* `3`, buffering
+* `5`, video cued
+
+When the player first loads a video, it will broadcast an
+`unstarted` (`-1`) event. When a video is cued and ready to play,
+the player will broadcast a `video cued` (`5`) event. In your
+code, you can specify the integer values or you can use one of the
+following namespaced variables:
+
+* `YT.PlayerState.ENDED`
+* `YT.PlayerState.PLAYING`
+* `YT.PlayerState.PAUSED`
+* `YT.PlayerState.BUFFERING`
+* `YT.PlayerState.CUED`
+
+[role="mt-4"]
+=== onPlaybackQualityChange
+
+This event fires whenever the video playback quality changes. It might
+signal a change in the viewer's playback environment. See the
+https://support.google.com/youtube/answer/91449[YouTube Help Center]
+for more information about factors that affect playback conditions or
+that might cause the event to fire.
+
+The `data` property value of the event object that the API passes to
+the event listener method will be a string that identifies the new
+playback quality. Possible values are:
+
+* `small`
+* `medium`
+* `large`
+* `hd720`
+* `hd1080`
+* `highres`
+
+[role="mt-4"]
+=== onPlaybackRateChange
+
+This event fires whenever the video playback rate changes. For
+example, if you call the `setPlaybackRate(suggestedRate)` method,
+this event will fire if the playback rate actually changes. Your
+application should respond to the event and should not assume that the
+playback rate will automatically change when the `setPlaybackRate(suggestedRate)`
+method is called. Similarly, your code should not assume that the video
+playback rate will only change as a result of an explicit call to
+`setPlaybackRate`.
+
+The `data` property value of the event object that the API passes to
+the event listener method will be a number that identifies the new
+playback rate. The `getAvailablePlaybackRates` method returns a list of
+the valid playback rates for the currently cued or playing video.
+
+[role="mt-4"]
+=== onError
+
+This event fires if an error occurs in the player. The API will pass
+an `event` object to the event listener method. That object's
+`data` property will specify an integer that identifies the type of
+error that occurred.
+  
+Possible values are:
+  
+* `2`, The request contains an invalid parameter value. For
+  example, this error occurs if you specify a video ID that does not
+  have 11 characters, or if the video ID contains invalid characters,
+  such as exclamation points or asterisks.
+* `5`, The requested content cannot be played in an HTML5 player or
+  another error related to the HTML5 player has occurred.
+* `100`, The video requested was not found. This error occurs when
+  a video has been removed (for any reason) or has been marked as
+  private.
+* `101`, The owner of the requested video does not allow it to be
+  played in embedded players.
+* `150`, This error is the same as `101`. It's just a `101`
+  error in disguise.
+
+[role="mt-4"]
+=== onApiChange
+
+This event is fired to indicate that the player has loaded (or
+unloaded) a module with exposed API methods. Your application can
+listen for this event and then poll the player to determine which
+options are exposed for the recently loaded module. Your application
+can then retrieve or update the existing settings for those options.
+
+The following command retrieves an array of module names for which you
+can set player options:
+
+[source, js]
+----
+getOptions();
+----
+
+Currently, the only module that you can set options for is the
+`captions` module, which handles closed captioning in the player.
+Upon receiving an `onApiChange` event, your application can use the
+following command to determine which options can be set for the
+`captions` module:
+
+[source, js]
+----
+getOptions('captions');
+----
+
+By polling the player with this command, you can confirm that the
+options you want to access are, indeed, accessible. The following
+commands retrieve and update module options:
+
+[source, js]
+----
+// Retrieving an option:
+getOption(module, option);
+
+//Setting an option
+setOption(module, option, value);
+----
+
+The table below lists the options that the API supports:
+
+[width="100%",cols="34%,33%,33%",options="header",]
+|===
+|Module |Option |Description
+|captions
+|fontSize
+|This option adjusts the font size of the captions displayed in the  +
+
+Valid values are `-1`, `0`, `1`, `2`, and `3`. The default size is `0`,
+and the smallest size is `-1`. Setting this option to an integer below `-1`
+will cause the smallest caption size to display, while setting this option
+to an integer above `3` will cause the largest caption size to display.
+
+|captions
+|reload
+|This option reloads the closed caption data for the video that is playing.
+The value will be `null` if you retrieve the option's value. Set the value
+to `true` to reload the closed caption
+data.
+|===
+
+[role="mt-4"]
+=== onAutoplayBlocked
+
+This event fires any time the browser blocks autoplay or scripted
+video playback features, collectively referred to as "autoplay". This
+includes playback attempted with any of the following player APIs:
+
+* `autoplay` parameter
+* `loadPlaylist` method
+* `loadVideoById` method
+* `loadVideoByUrl` method
+* `playVideo` method
+
+Most browsers have policies that can block autoplay in desktop,
+mobile, and other environments if certain conditions are true.
+Instances where this policy may be triggered include unmuted playback
+without user interaction, or when a
+link://developer.mozilla.org/en-US/docs/Web/HTTP/Permissions_Policy[Permissions Policy, {browser-window--new}]
+to permit autoplay on a cross-origin iframe has not been set.
+
+For complete details, refer to browser-specific policies:
+link://developer.apple.com/documentation/webkit/delivering_video_content_for_safari/#3030251[Apple Safari / Webkit, {browser-window--new}],
+link://developer.chrome.com/blog/autoplay/[Google Chrome, {browser-window--new}],
+link://support.mozilla.org/en-US/kb/block-autoplay[Mozilla Firefox, {browser-window--new}] and Mozilla's
+link://developer.mozilla.org/en-US/docs/Web/Media/Autoplay_guide[autoplay guide, {browser-window--new}].
