@@ -4,13 +4,13 @@ title_extention:                        Route through the manual pages of J1 Tem
 tagline:                                Fasten Your Way
 
 date:                                   2023-02-25
-#last_modified:                         2023-01-01
+last_modified:                          2026-05-25
 
 description: >
-                                        Get on that page first to route through the manual pages
-                                        of J1 Template. Certainly, there is no better place to learn
-                                        what J1 Theme can do and what manuals are available to experience
-                                        more.
+                                        Get on that page first to route through the manual
+                                        pages of J1 Template. Certainly, there is no better
+                                        place to learn what J1 Theme can do and what manuals
+                                        are available to do more.
 keywords: >
                                         Jekyll, Theme, JekyllOne, Info, Introduction, Site,
                                         Rocketstart, Development
@@ -28,9 +28,9 @@ comments:                               false
 exclude_from_search:                    false
 fab_menu_id:                            default
 regenerate:                             false
-permalink:                              /pages/public/manuals/where_to_go/
+permalink:                              /pages/public/manual/where_to_go/
 
-resources:                              [ comments ]
+resources:                              []
 resource_options:
   - attic:
       slides:

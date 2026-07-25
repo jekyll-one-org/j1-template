@@ -208,9 +208,9 @@
 - item:                                 Manual
   sublevel:
 
-  # - title:                            Where to go
-  #   href:                             /pages/public/manuals/where_to_go/
-  #   icon:                             foot-print
+    - title:                            Where to go
+      href:                             /pages/public/manual/where_to_go/
+      icon:                             foot-print
 
     # --------------------------------------------------------------------------
     # Modules

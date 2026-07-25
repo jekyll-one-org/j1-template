@@ -31,10 +31,10 @@ regenerate:                             false
 personalization:                        true
 permalink:                              /pages/public/manuals/videoplayer/videoplayer_api/
 
-resources:                             [ videoPlayer, videojs ]
+resources:                              [ videoPlayer, videojs ]
 resource_options:
   - toccer:
-      collapseDepth:                    3
+      collapseDepth:                    2
   - attic:
       opacity:                          .7
       padding_top:                      600

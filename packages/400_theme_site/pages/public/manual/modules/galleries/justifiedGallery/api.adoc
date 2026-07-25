@@ -32,7 +32,7 @@ permalink:                              /pages/public/manual/modules/gallery/jus
 resources:                              [ lightgallery, gallery, photoswipejs ]
 resource_options:
   - toccer:
-      collapseDepth:                    3
+      collapseDepth:                    2
   - attic:
       slides:
         - url:                          /assets/image/module/attic/1920x1280/simona-sergi.jpg
