@@ -2,12 +2,11 @@
  # -----------------------------------------------------------------------------
  # ~/js/tocbot/tocbot/import/build-html.js (1)
  # Building the DOM and updating DOM state for tocbot
- # Tocbot v4.36.4, fix #1
+ # Tocbot v4.36.8, fix #1
  #
  # Product/Info:
  # https://jekyll.one
  # https://tscanlin.github.io/tocbot
- # https://github.com/tscanlin/tocbot
  #
  # Copyright (C) 2016 Tim Scanlin
  # Copyright (C) 2023-2026 Juergen Adams

@@ -1,7 +1,7 @@
 /*
  # -----------------------------------------------------------------------------
  # ~/js/tocbot/tocbot.js
- # Tocbot v4.36.4
+ # Tocbot v4.36.8
  #
  # Tocbot creates a toble of contents based on HTML headings on a page,
  # this allows users to easily jump to different sections of the document.
@@ -12,7 +12,6 @@
  # Product/Info:
  # https://jekyll.one
  # https://tscanlin.github.io/tocbot
- # https://github.com/tscanlin/tocbot
  #
  # Copyright (C) 2023-2026 Juergen Adams
  # Copyright (C) 2016 Tim Scanlin

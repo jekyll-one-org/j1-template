@@ -159,6 +159,7 @@ defaults:
   #
   scrollToAnchor:                       true                                    # J1 scrollSmooth
   scrollToAnchorDelay:                  750                                     # delay (ms), delay scrolling to selected headline (in page)
+  
 
   # ----------------------------------------------------------------------------
   # MODULE options
@@ -176,6 +177,7 @@ defaults:
   scrollSmooth:                         false                                   # disabled, tocBot scrollSmooth
   scrollSmoothDuration:                 420                                     # tocBot scrollSmooth
   scrollSmoothOffset:                   0                                       # tocBot scrollSmooth
+  anchorScrollOffset:                   93                                      # workaround for positionieng on anchor in page
 
   disableTocScrollSync:                 true
   hasInnerContainers:                   false

@@ -1,12 +1,12 @@
 ---
-regenerate:                             false
+regenerate:                             true
 ---
 
 {%- capture cache -%}
 
 {% comment %}
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/adapter/js/toccer.js (2)
+ # ~/assets/theme/j1/adapter/js/toccer.js (3)
  # Liquid template to adapt Tocbot Core functions
  #
  # Product/Info:
@@ -74,7 +74,7 @@ regenerate:                             false
 
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/adapter/js/toccer.js (2)
+ # ~/assets/theme/j1/adapter/js/toccer.js (3)
  # JS Adapter for J1 Toccer
  #
  # Product/Info:
@@ -191,7 +191,9 @@ j1.adapter.toccer = (() => {
         var pageVisible    = (pageState == 'block') ? true: false;
         var j1CoreFinished = (j1.getState() == 'finished') ? true : false;
         var toccerEnabled  = (j1.stringToBoolean(toccerOptions.toc)) ? true : false;
+//      var atticFinished  = (j1.adapter.attic.getState() === 'finished') ? true: false;        
 
+//      if (toccerEnabled && j1CoreFinished && atticFinished && pageVisible) {
         if (toccerEnabled && j1CoreFinished && pageVisible) {
           startTimeModule = Date.now();
 
@@ -240,6 +242,31 @@ j1.adapter.toccer = (() => {
       var scrollOffsetCorrection  = scrollerOptions.smoothscroll.offsetCorrection;
       var scrollOffset            = j1.getScrollOffset(scrollOffsetCorrection) + scrollOffsetCorrection;
 
+      // Claude - Fix J1 Toccer headline issue #1
+      // Root cause of the "previous headline stays active" issue:
+      // j1.scrollToAnchor() lands the page with the selected heading
+      // 93px BELOW the viewport top (j1.js, static pages:
+      // `scrollOffsetCorrection = -93`, navbar compensation). Tocbot
+      // decides the active TOC entry purely by position in
+      // getTopHeader():
+      //   heading.offsetTop <= scrollTop + headingsOffset + 10
+      // With the hardcoded `headingsOffset: 1` the "finish line" sits at
+      // scrollTop + 11 while the target heading rests at scrollTop + 93,
+      // so tocbot treats the target as "not yet reached" and highlights
+      // headings[i - 1] - the last headline of the PREVIOUS section.
+      // The threshold must mirror the magnitude of the scroll offset
+      // actually used by j1.scrollToAnchor().
+      //
+      // NOTE (design decision, for review):
+      // The value 93 is intentionally kept as a literal in sync with the
+      // hardcoded `-93` in j1.scrollToAnchor() (j1.js). The computed
+      // `scrollOffset` above is NOT reused because j1.scrollToAnchor()
+      // does not use it either; both values may differ at runtime. A
+      // follow-up could move the offset into a shared scroller config
+      // key consumed by BOTH j1.scrollToAnchor() and this adapter.
+      //
+      var anchorScrollOffset = 93;
+
       _this.setState('running');
       logger.debug('state: ' + _this.getState());
 
@@ -268,8 +295,12 @@ j1.adapter.toccer = (() => {
             contentSelector:        options.contentSelector,
             collapseDepth:          options.collapseDepth,
             throttleTimeout:        options.throttleTimeout,
-            hasInnerContainers:     false,
-            includeHtml:            false,
+            disableTocScrollSync:   options.disableTocScrollSync,
+            hasInnerContainers:     options.hasInnerContainers,
+            includeHtml:            options.includeHtml,
+            scrollSmooth:           options.scrollSmooth,                       // tocbot scrollSmooth
+            scrollSmoothDuration:   options.scrollSmoothDuration,               // tocbot scrollSmooth
+            scrollSmoothOffset:     options.scrollSmoothOffset,                 // tocbot scrollSmooth
             linkClass:              'toc-link',
             extraLinkClasses:       '',
             activeLinkClass:        'is-active-link',
@@ -282,9 +313,17 @@ j1.adapter.toccer = (() => {
             positionFixedClass:     'is-position-fixed',
             fixedSidebarOffset:     'auto',
             scrollContainer:        null,
-            scrollSmooth:           false,                                      // options.scrollSmooth,
-            scrollSmoothDuration:   0,                                          // options.scrollSmoothDuration,
-            scrollSmoothOffset:     0,                                          // scrollOffset,
+            // Claude - Fix J1 Toccer headline issue #1
+            // Original (deprecated, preserved for reference):
+            // headingsOffset:         1,
+            // Align tocbot's active-headline threshold with the landing
+            // position produced by j1.scrollToAnchor() (see note above).
+            // This also fixes MANUAL scrolling: with offset 1, a heading
+            // hidden behind the fixed navbar was already counted as
+            // "reached" and its section marked active too early.
+            //
+            headingsOffset:         anchorScrollOffset,                         // Claude - Fix J1 Toccer headline issue #1
+            throttleTimeout:        options.throttleTimeout,            
             onClick:                (event) => {
                                       // jadams 2024-03-16: workaroud|browser's history
                                       var currentURL = event.currentTarget.href;
@@ -292,13 +331,48 @@ j1.adapter.toccer = (() => {
                                       history.pushState(null, null, currentURL);
 
                                       // jadams 2024-03-16: use smooth scrolling from J1
-                                      // NOTE: all scrolling functions from tocbot DISABLED
-                                      setTimeout(() => {
-                                        j1.scrollToAnchor(currentURL);
-                                      }, 1500);
-                                    },
-            headingsOffset:         1,
-            throttleTimeout:        options.throttleTimeout
+                                      // NOTE: scrolling (scrollSmooth) from tocbot DISABLED
+                                      if (options.scrollToAnchor) {
+                                        // Claude - Fix J1 Toccer headline issue #1
+                                        // Because tocbot's own scrollSmooth is DISABLED
+                                        // (`scrollSmooth: false`), tocbot's internal click
+                                        // listener never calls disableTocAnimation(). The
+                                        // highlighting therefore ran LIVE while
+                                        // j1.scrollToAnchor() animated the page and walked
+                                        // through intermediate sections. Freeze it for the
+                                        // duration of the J1 scroll, like tocbot does for
+                                        // its native smooth scroll.
+                                        // NOTE: tocbot's internal click listener re-enables
+                                        // highlighting on its own after scrollSmoothDuration;
+                                        // the final resync below therefore always runs LAST
+                                        // and settles the TOC at the real rest position.
+                                        //
+                                        if (window.tocbot && tocbot._buildHtml) {           // Claude - Fix J1 Toccer headline issue #1
+                                          tocbot._buildHtml.disableTocAnimation(event);     // Claude - Fix J1 Toccer headline issue #1
+                                        }                                                   // Claude - Fix J1 Toccer headline issue #1
+                                        setTimeout(() => {
+                                          j1.scrollToAnchor(currentURL);
+                                        }, options.scrollToAnchorDelay);
+                                        // Claude - Fix J1 Toccer headline issue #1
+                                        // Re-enable highlighting AFTER the J1 scroll has
+                                        // finished (delay + animation + safety margin) and
+                                        // force a final updateToc() run at the rest
+                                        // position. With the corrected `headingsOffset`
+                                        // this resync now selects the CLICKED headline.
+                                        //
+                                        var resyncDelay = options.scrollToAnchorDelay +     // Claude - Fix J1 Toccer headline issue #1
+                                                          options.scrollSmoothDuration +    // Claude - Fix J1 Toccer headline issue #1
+                                                          100;                              // Claude - Fix J1 Toccer headline issue #1
+                                        setTimeout(() => {                                  // Claude - Fix J1 Toccer headline issue #1
+                                          if (window.tocbot && tocbot._buildHtml) {         // Claude - Fix J1 Toccer headline issue #1
+                                            tocbot._buildHtml.enableTocAnimation();         // Claude - Fix J1 Toccer headline issue #1
+                                            if (tocbot._scrollListener) {                   // Claude - Fix J1 Toccer headline issue #1
+                                              tocbot._scrollListener();                     // Claude - Fix J1 Toccer headline issue #1
+                                            }                                               // Claude - Fix J1 Toccer headline issue #1
+                                          }                                                 // Claude - Fix J1 Toccer headline issue #1
+                                        }, resyncDelay);                                    // Claude - Fix J1 Toccer headline issue #1
+                                      }
+                                    }
           });
           /* eslint-enable */
 

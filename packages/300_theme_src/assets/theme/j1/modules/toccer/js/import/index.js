@@ -2,12 +2,11 @@
  # -----------------------------------------------------------------------------
  # ~/js/tocbot/tocbot/import/index.js
  # Cental JS index for tocbot
- # Tocbot v4.36.4
+ # Tocbot v4.36.8
  #
  # Product/Info:
  # https://jekyll.one
  # https://tscanlin.github.io/tocbot
- # https://github.com/tscanlin/tocbot
  #
  # Copyright (C) 2016 Tim Scanlin
  # Copyright (C) 2023-2026 Juergen Adams
@@ -28,7 +27,7 @@ import defaultOptions from './default-options.js';
 import buildHtml from './build-html.js';
 import parseContent from './parse-content.js';
 import updateTocScroll from './update-toc-scroll.js';
-import initSmoothScrolling from './scroll-smooth/index.js';
+import initSmoothScrolling from './scroll-smooth/scrollSmooth.js';
 
 // For testing purposes
 export let _options = {};
