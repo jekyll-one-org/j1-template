@@ -1,0 +1,125 @@
+---
+layout:                                 page
+
+title:                                  Gallery Previewer
+tagline:                                manage galleries your way
+description:                            Justified Gallery Previewer
+
+tags:                                   [ App, Gallery ]
+index:                                  [ Customizer, Previewer, Justified, Gallery ]
+categories:                             [ app ]
+
+permalink:                              /pages/public/mmenu/mmenu-all/
+regenerate:                             false
+
+toc:                                    false
+
+resources:                              [ mmenu ]
+#resource_options:
+#  - attic:
+#      padding_top:                      400
+#      padding_bottom:                   50
+#      opacity:                          0.5
+#      slides:
+#        - url:                          /assets/image/module/gallery/mega_cities/thomas-tucker-bw.jpg
+#          alt:                          Sunset over Taipei City - Taiwan
+#          badge:
+#            type:                       unsplash
+#            author:                     Thomas Tucker
+#            href:                       //unsplash.com/@tents_and_tread
+---
+
+++++
+<div id="my-page">
+    <div id="my-header">
+        <a href="#my-menu">Open the menu</a>
+        <nav id="my-menu">
+            <ul>
+                <li class="Selected"><a href="/">Home</a></li>
+                <li>
+                  <a href="#">Learn</a>
+                  <!-- jadams, 2017-11-24: (3) ul class="dropdown-menu dropdown-menu-left raised-z15" style="opacity: 1; display: block;" -->
+                  <ul>
+                    <li>
+                      <a href="#"><i class="mdi mdi-wallet-travel mdi-18px mr-2" style="color:#9E9E9E"></i> Roundtrip</a>
+                      <ul>
+                        <li ><a href="/pages/public/learn/roundtrip/present_images/"><i class="mdi mdi-image mdi-18px mr-2" style="color:#9E9E9E"></i> Present images</a></li>
+                        <li ><a href="/pages/public/learn/roundtrip/present_videos/"><i class="mdi mdi-video mdi-18px mr-2" style="color:#9E9E9E"></i> Present videos</a></li>
+                        <li ><a href="/pages/public/learn/roundtrip/typography/"><i class="mdi mdi-format-text mdi-18px mr-2" style="color:#9E9E9E"></i> Typography</a></li>
+                        <li ><a href="/pages/public/learn/roundtrip/mdi_icon_font/"><i class="mdi mdi-incognito mdi-18px mr-2" style="color:#9E9E9E"></i> Icon fonts</a></li>
+                        <li ><a href="/pages/public/learn/roundtrip/asciidoc_extensions/"><i class="mdi mdi-format-annotation-plus mdi-18px mr-2" style="color:#9E9E9E"></i> Asciidoc extensions</a></li>
+                        <li ><a href="/pages/public/learn/roundtrip/modals/"><i class="mdi mdi-image mdi-18px mr-2" style="color:#9E9E9E"></i> BS modal extensions</a></li>
+                        <li ><a href="/pages/public/learn/roundtrip/responsive_tables/"><i class="mdi mdi-table mdi-18px mr-2" style="color:#9E9E9E"></i> BS table extensions</a></li>
+                        <li ><a href="/pages/public/learn/roundtrip/themes/"><i class="mdi mdi-face mdi-18px mr-2" style="color:#9E9E9E"></i> BS themes</a></li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+                <li><span>About us</span>
+                    <ul>
+                        <li><a href="/about/history/">History</a></li>
+                        <li><a href="/about/team/">The team</a></li>
+                        <li><a href="/about/address/">Our address</a></li>
+                    </ul>
+                </li>
+                <li><a href="/contact/">Contact</a></li>
+            </ul>
+        </nav>
+    </div>
+    <div id="my-content">
+        <h1>The title</h1>
+        <p>Some content.</p>
+    </div>
+</div>
+++++
+
+++++
+<script>
+
+	// $(function() {
+	// 	$('nav#my-menu').mmenu();
+	// });
+
+  document.addEventListener(
+      "DOMContentLoaded", () => {
+          const menu = new MmenuLight(
+              document.querySelector( "#my-menu" ),
+              "(max-width: 2600px)"
+          );
+
+          const navigator = menu.navigation();
+          const drawer = menu.offcanvas();
+
+          document.querySelector( "a[href='#my-menu']" )
+              .addEventListener( "click", ( evnt ) => {
+                  evnt.preventDefault();
+                  drawer.open();
+              });
+      }
+  );
+
+</script>
+++++
+
+
+
+/////
+
+<script>
+  $(document).ready(function() {
+
+    const menu = new MmenuLight(
+        document.querySelector( "#my-menu" ),
+        "(max-width: 600px)"
+    );
+
+    $("a[href='#my-menu']")
+        .addEventListener( "click", ( evnt ) => {
+            evnt.preventDefault();
+            drawer.open();
+        });
+
+  });
+</script>
+
+/////

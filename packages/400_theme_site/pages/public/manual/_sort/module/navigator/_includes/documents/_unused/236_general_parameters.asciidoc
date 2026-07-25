@@ -1,0 +1,20 @@
+
+.General NavBar parameters
+[cols="2a,3a,2a,5a" options="header", width="100%", role="rtable mt-4"]
+|===
+|Parameter |Value |Default |Description
+
+|debug
+|boolean `true`, `false`
+|`false`
+|Enables\|Disables debug information (JS runtime events) written
+to console log
+
+|icon_family
+|`FontAwesome`\|`MDI`
+|`MDI`
+|Set the icon familiy from that an icon should be taken from. Be
+aware that the related *CSS file* for the *font icon set* needs to
+included as a `resource`.
+
+|===

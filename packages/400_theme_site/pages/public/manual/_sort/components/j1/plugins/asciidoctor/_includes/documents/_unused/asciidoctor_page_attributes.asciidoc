@@ -1,0 +1,23 @@
+== Page Attributes
+
+Any AsciiDoc attribute defined in the AsciiDoc *document header* whose name
+begins with `page-` gets promoted to a link:{uri-jekyll-page-variables}[page variables, {browser-window--new}].
+The part of the name after the `page-` prefix is *lowercased* and used as
+the variable name (e.g. page-layout becomes layout)* The value is processed
+as link:{yaml-user-guide}[YAML, {browser-window--new}] data (single-line form).
+
+IMPORTANT: The AsciiDoc document header stops after the first blank line.
+You may use include directives in the the document header, but make sure
+the included file does not contain a blank line.
+
+Since the attribute value is processed as YAML data, you can build nested
+data structure using the inline YAML syntax* For example, here's how you
+can assign a value to the `page.header.image` page variable:
+
+[source, asciidoc]
+----
+:page-header:     { image: logo.jpg }
+----
+
+TIP: Use either a hyphen or an underscore as a separator for page attributes
+with multiple words (e.g. `page-short-name`).

@@ -1,0 +1,25 @@
+
+.Additional Image and Video Header_defaults
+[cols="4a,3a,5a", options="header", width="100%", role="rtable mt-4"]
+|===
+|Parameter |Default |Description
+
+|caption
+|no default
+|The caption text placed on a image
+
+|caption_color
+|`rgba_lighten`
+|Color of the caption text
+
+|caption_href
+|no default
+|Link to the image source or copyright statement
+
+|spinner
+|`false`
+|To indicate images are being loaded for a header, a spinner can be placed on.
+Spinners are defined by the CSS file ~/framework/jquery/backstretch/css/backstretch.css.
+A spinner an be one of `pulsed` \| `rotor` \| `rotated-dots` \| `cycled-dots
+
+|===

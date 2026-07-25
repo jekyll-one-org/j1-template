@@ -1,0 +1,50 @@
+// ~/document_base_folder/_includes
+//  Asciidoc attribute includes:                 attributes.asciidoc
+// -----------------------------------------------------------------------------
+
+
+// URLs - Internal references and/or sources on the Internet
+// -----------------------------------------------------------------------------
+tag::urls[]
+:bootsnav_home:                                   //bootsnav.danurstrap.com/
+:bootsnav_github:                                 //github.com/adamnurdin01/bootsnav
+end::urls[]
+
+
+// FOOTNOTES, global asciidoc attributes (variables)
+// -----------------------------------------------------------------------------
+tag::footnotes[]
+:fn-wikipedia--open_data:                         footnote:[link://de.wikipedia.org/wiki/Open_Data[Wikipedia · OpenOata, window="_blank"]]
+end::footnotes[]
+
+
+// Tags - Asciidoc attributes used internally
+// -----------------------------------------------------------------------------
+tag::tags[]
+end::tags[]
+
+// Data - Data elements for Asciidoctor extensions
+// -----------------------------------------------------------------------------
+tag::data[]
+
+:image-navigator--main-navigation:                "assets/image/page/manuals/navigator/1280x600/main_navigation.jpg, Main Mavigation"
+:image-navigator--menubar-quicklinks:             "assets/image/page/manuals/navigator/1280x600/menubar_quicklinks.jpg, Menubar and Quicklinks"
+:image-navigator--menubar:                        "assets/image/page/manuals/navigator/1280x600/menubar.jpg, Menu bar"
+:image-navigator--topsearch:                      "assets/image/page/manuals/navigator/1280x600/topsearch.jpg, TopSearch"
+
+end::data[]
+
+// Images - Images from local include/images folder
+// -----------------------------------------------------------------------------
+tag::images[]
+end::images[]
+
+// PRODUCTS, local product information (e.g. release)
+// -----------------------------------------------------------------------------
+tag::products[]
+end::products[]
+
+// AUTHORS, local author information (e.g. article)
+// -----------------------------------------------------------------------------
+tag::authors[]
+end::authors[]

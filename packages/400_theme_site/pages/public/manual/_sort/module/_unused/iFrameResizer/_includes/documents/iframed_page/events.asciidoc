@@ -1,0 +1,28 @@
+[role="mt-4"]
+=== Events
+
+The following events can be included in the https://github.com/davidjbradshaw/iframe-resizer/blob/master/docs/iframed_page/options.md[options]
+object attached to the iframed page.
+
+[role="mt-4"]
+==== onMessage
+
+Receive message posted from the parent page with the
+`iframe.iFrameResizer.sendMessage()` method.
+
+....
+type: function (message)
+....
+
+[role="mt-4"]
+==== onReady
+
+This function is called once iFrame-Resizer has been initialized after
+receiving a call from the parent page. If you need to call any of the
+https://github.com/davidjbradshaw/iframe-resizer/blob/master/docs/iframed_page/methods.md[parentIFrame methods]
+during page load, then they should be called from this event
+handler.
+
+....
+type: function()
+....

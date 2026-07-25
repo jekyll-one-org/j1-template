@@ -1,0 +1,37 @@
+
+.Image and Video Transitions
+[cols="4a,8a",options="header", role="table-responsive mt-3"]
+|===
+|Transition | Description
+
+|`coverDown`
+|lorem:sentences[3]
+
+|`coverLeft`
+|
+
+|`coverRight`
+|
+
+|`coverUp`
+|
+
+|`fade`
+|
+
+|`fadeInOut`
+|
+
+|`pushDown`
+|
+
+|`pushLeft`
+|
+
+|`pushRight`
+|
+
+|`pushUp`
+|
+
+|===

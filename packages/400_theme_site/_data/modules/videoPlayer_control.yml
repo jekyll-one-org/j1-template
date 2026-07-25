@@ -38,6 +38,31 @@ settings:
       id:                               player_1
       description:                      VideoJS Multi-Player 1
 
+      # PLAYLIST settings
+      #
+      playlist:
+        preload:                        []
+
+        cards:
+          perRow:                       2
+
+      # VIDEOJS settings
+      #
+      videoJS:
+
+        playbackRates:
+          enabled:                      true
+          values:                       [ 0.5, 1, 2 ]
+
+        plugins:
+          enabled:                      true
+
+          hotKeys:
+            enabled:                    true
+
+          playlist:
+            enabled:                    true
+
     # --------------------------------------------------------------------------
     # Player 2
     #
@@ -199,6 +224,9 @@ settings:
 
         plugins:
           enabled:                      true
+
+          hotKeys:
+            enabled:                    true
 
           playlist:
             enabled:                    true

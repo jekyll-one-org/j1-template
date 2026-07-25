@@ -1,0 +1,77 @@
+---
+title:                                  J1 Resources
+title_extention:                        Manage Assets for J1 Template
+tagline:                                Manage Assets for J1 Template
+
+date:                                   2022-01-01
+#last_modified:                         2023-01-01
+
+description: >
+                                        For J1 Theme, all CSS and JS resources (assets) are stored under
+                                        ~/assets/theme/j1.
+
+categories:                             [ Manual ]
+tags:                                   [ Resources ]
+
+comments:                               false
+fab_menu_id:                            open_toc
+
+image:
+  path:                                 /assets/image/module/attic/jeshoots-1-1920x1280.jpg
+  width:                                1920
+  height:                               1280
+
+tts:                                    true
+comments:                               false
+regenerate:                             false
+permalink:                              /pages/public/manuals/components/j1/resources/
+
+resources:                              [ lightbox ]
+resource_options:
+  - attic:
+      slides:
+        - url:                          /assets/image/module/attic/jeshoots-1-1920x1280.jpg
+          alt:                          Photo by JESHOOTS.COM on Unsplash
+          badge:
+            type:                       unsplash
+            author:                     JESHOOTS.COM
+            href:                       //unsplash.com/@jeshoots
+---
+
+// Page Initializer
+// =============================================================================
+// Enable the Liquid Preprocessor
+:page-liquid:
+
+// Set (local) page attributes here
+// -----------------------------------------------------------------------------
+// :page--attr:                         <attr-value>
+
+//  Load Liquid procedures
+// -----------------------------------------------------------------------------
+{% capture load_attributes %}themes/{{site.template.name}}/procedures/global/attributes_loader.proc{%endcapture%}
+
+// Load page attributes
+// -----------------------------------------------------------------------------
+{% include {{load_attributes}} scope="all" %}
+
+
+// Page content
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[role="dropcap"]
+Voluptatem inventore quisquam quidem molestias omnis beatae harum id aut
+deleniti. Nisi cupiditate ut rem consequatur facere quia minus consequatur.
+Amet earum numquam iusto aut ad deleniti esse voluptatem architecto vitae
+delectus. Modi consequatur nisi ipsam et et reprehenderit eum. Expedita iste
+molestias qui molestiae.
+
+Voluptatem inventore quisquam quidem molestias omnis beatae harum id aut
+deleniti. Nisi cupiditate ut rem consequatur facere quia minus consequatur.
+Amet earum numquam iusto aut ad deleniti esse voluptatem architecto vitae.
+
+//CAUTION: This page is under construction. An updated version will be
+//available soon.
+
+// Include sub-documents (if any)
+// -----------------------------------------------------------------------------
+include::{documentdir}/managing_resources.asciidoc[]

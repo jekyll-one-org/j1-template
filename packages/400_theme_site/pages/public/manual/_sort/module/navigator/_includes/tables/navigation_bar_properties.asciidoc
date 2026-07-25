@@ -1,0 +1,61 @@
+
+.Navigation Bar properties
+[cols="4a,1a,2a,5a", options="header", width="100%", role="rtable mt-4"]
+|===
+|Parameter |Type |Default |Description
+
+|`background_color_collapsed`
+|string
+|`rgba_darken`
+|Color used for the NavBar if main menu is *collapsed*.
+
+|`background_color_full`
+|string
+|`rgba_darken`
+|Color used for the NavBar if main menu is *not* collapsed.
+
+|`background_color_scrolled`
+|string
+|`#20295B`
+|Color used for the NavBar if the page is `scrolled` down.
+
+|`bottom_line_color`
+|string
+|`md_grey_200`
+|Color used for .. bottom_line_color.
+
+|`bottom_line_height`
+|integer
+|`1`
+|bottom_line_height (px).
+
+|`brand_position`
+|string
+|`left`
+|Position of the brand image one of `left` \| `right`.
+
+|`color`
+|string
+|`light`
+|Sets the color for the top level menu items (including Quicklink icons)
+ond of `light` \| `dark`.
+
+|`fixed`
+|boolean
+|`true`
+|Enables \| Disables a fixed position of the top navigation bar. If a page is
+being scrolled down, the navigation bar leaves fixed at the most top position
+of the page.
+
+|`position`
+|string
+|`left`
+|Position of the menu bar on of `left` \| `right` \| `centered`.
+
+|`style`
+|string
+|`overlay`
+|Specifies how the NavBar integrated with the page header
+one of `overlay` \| `embedded`.
+
+|===

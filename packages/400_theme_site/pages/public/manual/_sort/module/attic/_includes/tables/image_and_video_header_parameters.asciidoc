@@ -1,0 +1,65 @@
+
+.Image and Video Header Parameters
+[cols="3a,2a,3a,4a", options="header", role="table-responsive mt-3"]
+|===
+|Name |Type |Default |Description
+
+|`alignX`
+|float or string
+|`0.5`
+|This parameter controls the horizontal alignment of the image.
+Can be one of `center`, `left`, `right` or any number between
+0.0 and 1.0.
+
+|`alignY`
+|float or string
+|`0.5`
+|This parameter controls the vertical alignment of the image.
+Can be one of `center`, `top`, `bottom` or any number between
+0.0 and 1.0.
+
+|`alt`
+|string
+|no default
+|The alternative text for this image (for screen readers).
+
+|`duration`
+|integer
+|`5000`
+|The amount of time in between slides, when using Backstretch as a slideshow,
+expressed as the number of milliseconds.
+
+|`scale`
+|string
+|`cover`
+|Controls the scaling mode. Can be one of
+[`cover` \| `fit` \| `fit-smaller` \| `fill`].
+
+|`transition`
+|string or array
+|`fade`
+|Type of transition to use, when using Backstretch as a *slideshow*.
+If *multiple* transitions are specified as an array, then a transition
+*value* is chosen randomly. Example: +
+
+`push_left\|push_right\|cover_up\| ...`
+
+Can be one of: +
+
+* `fade`      \| `fadeInOut`
+* `coverDown` \| `coverLeft` \| `coverRight` \| `coverUp`
+* `pushDown`  \| `pushLeft`  \| `pushRight`  \| `pushUp`
+
+|`transitionDuration`
+|integer or string
+|`0`
+|This is the duration at which the image will transition in. Integers in
+milliseconds are accepted, as well as standard jQuery speed strings like
+`slow`, `normal` or `fast`.
+
+|`url`
+|string (URL)
+|no default
+|The URL of the image or video.
+
+|===

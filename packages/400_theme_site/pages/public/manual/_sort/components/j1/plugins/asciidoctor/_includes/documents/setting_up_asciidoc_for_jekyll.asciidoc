@@ -1,0 +1,88 @@
+== Setting up Asciidoc
+
+The setup to use the Asciidoc Markup language for J1 Theme and _Jekyll_
+is already done. The global _Ruby_ Gemfile for a J1 project is requesting
+the required libraries (Ruby GEMs) with the group `jekyll_plugins`:
+
+[source, ruby]
+----
+# ------------------------------------------------------------------------------
+# Jekyll Plugins
+# If any (additional) Jekyll Plugins are used, they goes here
+#
+group :jekyll_plugins do
+  # Base Jekyll Plugins (required)
+  #
+  gem 'asciidoctor', '~> 2.0'
+  gem 'jekyll-asciidoc', '>= 3.0.0'
+  ...
+end
+----
+
+In the site-wide configuration file `_config.yml`, the required loads for
+Jekyll can be found in the plugin loader section:
+
+[source, yaml]
+----
+# ------------------------------------------------------------------------------
+# PLUGIN loader
+#
+plugins:
+ - asciidoctor
+ - jekyll-asciidoc
+ ...
+----
+
+To make the Asciidoc core engine _Asciidoctor_ usable for Jekyll, the
+following plugin configuration is used:
+
+[source, yaml]
+----
+# ------------------------------------------------------------------------------
+# Asciidoctor plugin configuration
+#
+asciidoc_attributes:                    &asciidoc_attributes
+ hardbreaks-option:
+ source-highlighter:                   rouge
+ icons:                                font
+ imagesdir:                            /assets/images
+ iconsdir:                             '{imagesdir}/icons/asciidoc'
+ experimental:                         false
+
+asciidoc:
+ processor:                            asciidoctor
+ require_front_matter_header:          true
+ ext:                                  adoc
+
+asciidoctor:
+ safe:                                 unsafe
+ template_dir:                         _templates
+ attributes:                           *asciidoc_attributes
+----
+
+
+=== Plugin `asciidoctor`
+
+The plugin link:{url-jekyll-plugin--asciidoctor}[Asciidoctor, {browser-window--new}]
+is the core engine to convert Asciidoc-based text data into HTML code. The
+engine is implicitely called by the integration library `jekyll-asciidoc`.
+To interprete and compile Asciidoc Markups, the plugin calls the *Converter*
+API of `jekyll-asciidoc`.
+
+NOTE: The core engine of Asciidoctor is completely *silent* from the
+prospective of _Jekyll_. All the integration work is handled by the plugin
+`jekyll-asciidoc`. Read the next section how Asciidoc integration is managed
+for _Jekyll_.
+
+
+=== Plugin `jekyll-asciidoc`
+
+The plugin link:{url-jekyll-plugin--jekyll-asciidoc}[Jekyll-Asciidoc, {browser-window--new}]
+is the integration library for _Jekyll_. All the managing of Asciidoc code is
+done by this integration library The plugin consists of three *extensions*
+to be used by _Jekyll_ to manage **Asciidoc**-based content sources:
+
+include::../tables/jekyll-asciidoc-api.asciidoc[]
+
+NOTE: The extensions are automatically registered if the Gem
+*jekyll-asciidoc* is loaded.

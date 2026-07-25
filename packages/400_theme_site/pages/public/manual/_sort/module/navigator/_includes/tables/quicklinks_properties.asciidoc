@@ -1,0 +1,32 @@
+
+.Quicklinks properties
+[cols="4a,1a,2a,5a", options="header", width="100%", role="rtable mt-4"]
+|===
+|Parameter |Type |Default |Description
+
+|`enabled`
+|boolean
+|`true`
+|Enables \| Disables the use of the QuickLink bar.
+
+|`top_search_icon`
+|string
+|`magnify`
+|Icon `search_icon` placed within the Quicklink bar to *open* the
+the *TopSearch bar*. See <<general-settings>> for more details.
+
+|`social_media_icon`
+|string
+|no defaults
+|Quick access to social media sites. The icon is placed within the
+Quicklink bar in the order configured from the left to the right.
+An icon is displayed, if the correspondend *url* is configured.
+Icons available: `facebook_icon` \| `twitter_icon` \| `google_plus_icon`
+
+|`social_media_url`
+|string
+|no defaults
+|Weblink (URL) the the related web site one of:
+`facebook_url` \| `twitter_url` \| `google_plus_url`
+
+|===

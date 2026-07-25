@@ -1,0 +1,142 @@
+// See: https://developer.mozilla.org/en-US/docs/Web/CSS/filter#filter_functions
+
+The filter property is specified as none or one or more of the functions
+listed below. If the parameter for any function is invalid, the function
+returns none. Except where noted, the functions that take a value expressed
+with a percent sign (as in 34%) also accept the value expressed as decimal
+(as in 0.34).
+
+=== blur()
+
+The blur() function applies a Gaussian blur to the input image. The value
+of radius defines the value of the standard deviation to the Gaussian
+function, or how many pixels on the screen blend into each other, so a
+larger value will create more blur. The initial value for interpolation is 0.
+The parameter is specified as a CSS length, but does not accept percentage
+values.
+
+.Example
+[source, yaml]
+----
+filters:
+  blur:             50
+----
+
+=== brightness()
+
+The brightness() function applies a linear multiplier to the input image,
+making it appear more or less bright. A value of 0% will create an image
+that is completely black. A value of 100% leaves the input unchanged. Other
+values are linear multipliers on the effect. Values of an amount over 100%
+are allowed, providing brighter results. The initial value for interpolation
+is 1.
+
+.Example
+[source, yaml]
+----
+filters:
+  brightness:       0.3
+----
+
+=== contrast()
+
+The contrast() function adjusts the contrast of the input image. A value
+of 0% will create an image that is completely gray. A value of 100% leaves
+the input unchanged. Values of an amount over 100% are allowed, providing
+results with more contrast. The initial value for interpolation is 1.
+
+.Example
+[source, yaml]
+----
+filters:
+  contrast:         0.5
+----
+
+=== grayscale()
+
+The grayscale() function converts the input image to grayscale. The value
+of amount defines the proportion of the conversion. A value of 100% is
+completely grayscale. A value of 0% leaves the input unchanged. Values
+between 0% and 100% are linear multipliers on the effect. The initial value
+for interpolation is 0.
+
+.Example
+[source, yaml]
+----
+filters:
+    grayscale:      0.5
+----
+
+=== hue-rotate()
+
+The hue-rotate() function applies a hue rotation on the input image. The value
+of angle defines the number of degrees around the color circle the input
+samples will be adjusted. A value of 0deg leaves the input unchanged. The initial value for interpolation is 0. Though there is no maximum value; the effect of values above 360deg wraps around.
+
+.Example
+[source, yaml]
+----
+filters:
+  hue-rotate:       90
+----
+
+=== invert()
+
+The invert() function inverts the samples in the input image. The value of
+amount defines the proportion of the conversion. A value of 100% is completely
+inverted. A value of 0% leaves the input unchanged. Values between 0% and 100%
+are linear multipliers on the effect. The initial value for interpolation is 0.
+
+.Example
+[source, yaml]
+----
+filters:
+  invert:           0.6
+----
+
+=== opacity()
+
+The opacity() function applies transparency to the samples in the input image.
+The value of amount defines the proportion of the conversion. A value of 0%
+is completely transparent. A value of 100% leaves the input unchanged. Values
+between 0% and 100% are linear multipliers on the effect. This is equivalent
+to multiplying the input image samples by amount. The initial value for
+interpolation is 1. This function is similar to the more established opacity
+property; the difference is that with filters, some browsers provide hardware
+acceleration for better performance.
+
+.Example
+[source, yaml]
+----
+filters:
+  opacity:          0.5
+----
+
+=== saturate()
+
+The saturate() function saturates the input image. The value of amount
+defines the proportion of the conversion. A value of 0% is completely
+un-saturated. A value of 100% leaves the input unchanged. Other values are
+linear multipliers on the effect. Values of amount over 100% are allowed,
+providing super-saturated results. The initial value for interpolation is 1.
+
+.Example
+[source, yaml]
+----
+filters:
+  saturate:         200%
+----
+
+=== sepia()
+
+The sepia() function converts the input image to sepia. The value of amount
+defines the proportion of the conversion. A value of 100% is completely sepia.
+A value of 0% leaves the input unchanged. Values between 0% and 100% are
+linear multipliers on the effect. The initial value for interpolation is 0.
+
+.Example
+[source, yaml]
+----
+filters:
+  sepia:            1
+----

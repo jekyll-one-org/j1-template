@@ -1,0 +1,64 @@
+== J1 Integration
+
+lorem:sentences[5]
+
+=== Module sources
+
+lorem:sentences[5]
+
+.Structure of the J1 OWL Carousel application tree (base components)
+----
+
+  ├───css
+  │   │   owl.carousel.css
+  │   │   owl.carousel.min.css
+  │   │   owl.transitions.css
+  │   │   owl.transitions.min.css
+  │   │
+  │   └───themes
+  │           j1_template.css
+  │           j1_samples.css
+  ├───images
+  │       ajax-loader.gif
+  │       grabbing.jpg
+  │       owl.video.play.jpg
+  └───js
+          owl.carousel.js
+          owl.carousel.min.js
+
+----
+
+=== Configuration
+
+lorem:sentences[5]
+
+=== Initialization
+
+lorem:sentences[5]
+=== Customization
+
+lorem:sentences[5]
+
+
+[[nav-variants]]
+== Available Navbar Variants
+
+[[fixed-transparent-embedded]]
+=== Fixed Embedded
+
+lorem:sentences[5]
+
+[source, html]
+----
+  <nav class="navbar navbar-default navbar-fixed white no-background bootsnav">
+----
+
+[[fixed-transparent-overlay]]
+=== Fixed Overlay
+
+lorem:sentences[5]
+
+[source, html]
+----  
+  <nav class="navbar navbar-default navbar-fixed white navbar-transparent bootsnav">
+----

@@ -1,0 +1,71 @@
+---
+title:                                  Collections
+tagline:                                Managing Jekyll Collections
+date:                                   2022-01-01
+#last_modified:                         2023-01-01
+description: >
+                                        J1 Template is a Bootstrap V5 website template for the static
+                                        site generator Jekyll.
+                                        User Guide for J1 Theme on managing collections. Collections are
+                                        Jekyll's most powerful and simultaneously least understood
+                                        feature of the generator. Collections add another possibility, or use-case,
+                                        outside of Jekyll's post- and page-publishing functionality.
+
+categories:                             [ Manual ]
+tags:                                   [ Jekyll, Collections ]
+
+comments:                               false
+fab_menu_id:                            open_toc
+
+image:
+  path:                                 /assets/image/module/attic/jeshoots-1-1920x1280.jpg
+  width:                                1920
+  height:                               1280
+
+permalink:                              /pages/public/manuals/components/j1/content/collections/
+regenerate:                             false
+
+resources:                              [ lightbox ]
+resource_options:
+  - attic:
+      padding_top:                      400
+      padding_bottom:                   50
+      opacity:                          0.5
+      slides:
+        - url:                          /assets/image/module/attic/jeshoots-1-1920x1280.jpg
+          alt:                          Photo by JESHOOTS.COM on Unsplash
+          badge:
+            type:                       unsplash
+            author:                     JESHOOTS.COM
+            href:                       //unsplash.com/@jeshoots
+---
+
+// Page Initializer
+// =============================================================================
+// Enable the Liquid Preprocessor
+:page-liquid:
+
+// Set (local) page attributes here
+// -----------------------------------------------------------------------------
+// :page--attr:                         <attr-value>
+
+//  Load Liquid procedures
+// -----------------------------------------------------------------------------
+{% capture load_attributes %}themes/{{site.template.name}}/procedures/global/attributes_loader.proc{%endcapture%}
+
+
+// Load page attributes
+// -----------------------------------------------------------------------------
+{% include {{load_attributes}} scope="all" %}
+
+// Page content
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+CAUTION: This page is under construction. An updated version will be
+available soon.
+
+
+// Include sub-documents (if any)
+// -----------------------------------------------------------------------------
+
+include::{documentdir}/manage_collections.asciidoc[]

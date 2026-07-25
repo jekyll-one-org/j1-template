@@ -51,17 +51,13 @@ resource_options:
 // Enable the Liquid Preprocessor
 :page-liquid:
 
-// claude - Update  VideoJS API manual #1
+// Set (local) page attributes here
 // Attribute settings for page content control (e.g includes)
 //
 :includedir:                            _includes
 :tabledir:                              _includes/tables
 :documentdir:                           _includes/documents
 
-// Set (local) page attributes here
-// -----------------------------------------------------------------------------
-// :page--attr:                         <attr-value>
-:images-dir:                            {imagesdir}/pages/roundtrip/100_present_images
 
 //  Load Liquid procedures
 // -----------------------------------------------------------------------------

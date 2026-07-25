@@ -5752,6 +5752,11 @@
     //   scrollToElement(videoTitleElement);
     // }
 
+    // Re-enable body scrolling
+    if ($('body').hasClass('stop-scrolling')) {
+      $('body').removeClass('stop-scrolling');
+    }
+
   }
 
   /**

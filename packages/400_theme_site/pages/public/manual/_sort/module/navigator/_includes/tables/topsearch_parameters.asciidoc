@@ -1,0 +1,61 @@
+
+.QuickSearch properties
+[cols="4a,1a,2a,5a", options="header", width="100%", role="rtable mt-4"]
+|===
+|Parameter |Type |Default |Description
+
+|`enabled`
+|boolean
+|`true`
+|Enables \| Disables the use of TopSearch.
+
+|`background_color`
+|string
+|`#FAFAFA`
+|Background color of the Search bar.
+
+|`placeholder`
+|string
+|`Your search expression`
+|Placeholder string displayed if search input is empty.
+
+|`icon_size`
+|string
+|`default`
+|Icon `search_icon` placed within the TopSearch input bar to access
+search functionality one of: +
+`default` \| `small` \| `large` \| `xlarge` \| `xxlarge`
+
+|`icon_color`
+|string
+|`#FFF`
+|Color used for `search_icon` and `close_icon` within the Search
+(input) bar.
+
+|`search_icon`
+|string
+|`magnify`
+|Icon `search_icon` placed within the Search input bar before the
+input line of the search. The name\| id depends on the icon font
+configured with the general settings (`icon_family`). No family
+name prefix (`fa` or `mdi`) is needed for `icon name`.
+
+|`close_icon`
+|string
+|`close`
+|Icon `close_icon` placed within the Search input bar to to close\|finish
+a search. The name\| id depends on the icon font configured with the
+general settings (`icon_family`). No family name prefix (`fa` or `mdi`)
+is needed for `icon name`.
+
+|`search_heading_lead`
+|string
+|`QuickSearch`
+|Lead title for search results.
+
+|`result_heading_lead`
+|string
+|`QuickSearch results:`
+|Subtitle (tagline) for search results (window).
+
+|===

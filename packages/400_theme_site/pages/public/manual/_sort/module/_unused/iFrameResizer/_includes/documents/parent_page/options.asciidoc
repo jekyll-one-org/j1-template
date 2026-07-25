@@ -1,0 +1,275 @@
+[role="mt-4"]
+=== Options
+
+The following options can be passed to iframe-resizer on the parent
+page.
+
+[role="mt-4"]
+==== log
+
+Setting the `log` option to true will make the scripts in both the host
+page and the iFrame output everything they do to the JavaScript console
+so you can see the communication between the two scripts.
+
+....
+default: false
+type:    boolean
+....
+
+[role="mt-4"]
+==== autoResize
+
+When enabled changes to the Window size or the DOM will cause the iFrame
+to resize to the new content size. Disable if using size method with
+custom dimensions.
+
+[NOTE]
+====
+When set to false the iFrame will still inititally size to the
+contained content, only additional resizing events are disabled.
+====
+
+....
+default: true
+type:    boolean
+....
+
+[role="mt-4"]
+==== bodyBackground
+
+Override the body background style in the iFrame.
+
+....
+default: null
+type:    string
+....
+
+[role="mt-4"]
+==== bodyMargin
+
+Override the default body margin style in the iFrame. A string can be
+any valid value for the CSS margin attribute, for example `8px 3em'. A
+number value is converted into px.
+
+....
+default: null
+type:    string || number
+....
+
+[role="mt-4"]
+==== bodyPadding
+
+Override the default body padding style in the iFrame. A string can be
+any valid value for the CSS margin attribute, for example `8px 3em'. A
+number value is converted into px.
+
+....
+default: null
+type:    string || number
+....
+
+[role="mt-4"]
+==== checkOrigin
+
+When set to true, only allow incoming messages from the domain listed in
+the `src` property of the iFrame tag. If your iFrame navigates between
+different domains, ports or protocols; then you will need to provide an
+array of URLs or disable this option.
+
+....
+default: true
+type:    boolean || array
+....
+
+[role="mt-4"]
+==== inPageLinks
+
+When enabled in page linking inside the iFrame and from the iFrame to
+the parent page will be enabled.
+
+....
+default: false
+type:    boolean
+....
+
+[role="mt-4"]
+==== heightCalculationMethod
+
+By default the height of the iFrame is calculated by converting the
+margin of the `body` to px and then adding the top and bottom figures to
+the offsetHeight of the `body` tag.
+
+In cases where CSS styles causes the content to flow outside the `body`
+you may need to change this setting to one of the following options.
+Each can give different values depending on how CSS is used in the page
+and each has varying side-effects. You will need to experiment to see
+which is best for any particular circumstance.
+
+* *bodyOffset* uses `document.body.offsetHeight`
+* *bodyScroll* uses `document.body.scrollHeight` *
+* *documentElementOffset* uses `document.documentElement.offsetHeight`
+* *documentElementScroll* uses `document.documentElement.scrollHeight` *
+* *max* takes the largest value of the main four options *
+* *min* takes the smallest value of the main four options *
+* *lowestElement* Loops though every element in the DOM and finds the
+lowest bottom point †
+* *taggedElement* Finds the bottom of the lowest element with a
+`data-iframe-height` attribute
+
+....
+default: 'bodyOffset'
+values:  'bodyOffset' | 'bodyScroll' | 'documentElementOffset' | 'documentElementScroll' |
+         'max' | 'min' | 'grow' | 'lowestElement' | 'taggedElement'
+....
+
+[NOTE]
+====
+
+If the default option doesn’t work then the best solutions is to use
+either** taggedElement, *or* lowestElement*.* Alternatively it is
+possible to add your own custom sizing method directly inside the
+iFrame, see the https://github.com/davidjbradshaw/iframe-resizer/blob/master/docs/iframed_page/options.md[iFrame Page Options]
+section for more details.
+
+The *lowestElement* option is the most reliable way of determining the
+page height. However, it does have a performance impact, as it requires
+checking the position of every element on the page. The *taggedElement*
+option provides much greater performance by limiting the number of
+elements that need their position checked.
+
+These methods may cause screen flicker in some browsers.
+====
+
+[role="mt-4"]
+==== maxHeight / maxWidth
+
+Set maximum height/width of iFrame.
+
+....
+default: infinity
+type:    integer
+....
+
+[role="mt-4"]
+==== minHeight / minWidth
+
+Set minimum height/width of iFrame.
+
+....
+default: 0
+type:    integer
+....
+
+[role="mt-4"]
+==== resizeFrom
+
+Listen for resize events from the parent page, or the iFrame. Select the
+`child' value if the iFrame can be resized independently of the browser
+window. Selecting this value can cause issues with some height
+calculation methods on mobile devices.
+
+....
+default: 'parent'
+values: 'parent', 'child'
+....
+
+[role="mt-4"]
+==== scrolling
+
+Enable or disable scroll bars for the iFrame.
+
+* *true* applies to `scrolling="yes"`
+* *false* applies to `scrolling="no"`
+
+....
+default: false
+type:    boolean
+....
+
+[role="mt-4"]
+==== sizeHeight
+
+Resize iFrame to content height.
+
+....
+default: true
+type:    boolean
+....
+
+[role="mt-4"]
+==== sizeWidth
+
+Resize iFrame to content width.
+
+....
+default: false
+type:    boolean
+....
+
+[role="mt-4"]
+==== tolerance
+
+Set the number of pixels the iFrame content size has to change by,
+before triggering a resize of the iFrame.
+
+....
+default: 0
+type:    integer
+....
+
+[role="mt-4"]
+==== warningTimeout
+
+Set the number of milliseconds after which a warning is logged if the
+iFrame has not responded. Set to `0` to supress warning messages of this
+type.
+
+....
+default: 5000
+type:    integer
+....
+
+[role="mt-4"]
+==== widthCalculationMethod
+
+By default the width of the page is worked out by taking the greater of
+the *documentElement* and *body* scrollWidth values.
+
+Some CSS techniques may require you to change this setting to one of the
+following options. Each can give different values depending on how CSS
+is used in the page and each has varying side-effects. You will need to
+experiment to see which is best for any particular circumstance.
+
+* *bodyOffset* uses `document.body.offsetWidth`
+* *bodyScroll* uses `document.body.scrollWidth` *
+* *documentElementOffset* uses `document.documentElement.offsetWidth`
+* *documentElementScroll* uses `document.documentElement.scrollWidth` *
+* *scroll* takes the largest value of the two scroll options *
+* *max* takes the largest value of the main four options *
+* *min* takes the smallest value of the main four options *
+* *rightMostElement* Loops though every element in the DOM and finds the
+right most point †
+* *taggedElement* Finds the left most element with a `data-iframe-width`
+attribute
+
+Alternatively it is possible to add your own custom sizing method
+directly inside the iFrame, see the
+https://github.com/davidjbradshaw/iframe-resizer/blob/master/docs/parent_page/options.md[iFrame Page Options]
+section for more details
+
+[NOTE]
+====
+The *rightMostElement* option is the most reliable way of determining
+the page width. However, it does have a performance impact as it
+requires calculating the position of every element on the page. The
+*taggedElement* option provides much greater performance by limiting the
+number of elements that need their position checked.
+
+These methods can cause screen flicker in some browsers.
+====
+
+....
+default: 'scroll'
+values:  'bodyOffset' | 'bodyScroll' | 'documentElementOffset' | 'documentElementScroll' |
+         'max' | 'min' | 'scroll' | 'rightMostElement' | 'taggedElement'
+....

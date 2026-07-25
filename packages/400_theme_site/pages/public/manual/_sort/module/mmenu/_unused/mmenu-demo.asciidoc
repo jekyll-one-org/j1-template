@@ -1,0 +1,99 @@
+---
+title:                                  Mobile Menu
+tagline:                                mmenu light demo
+description:                            Mobile Menu Demo
+
+tags:                                   [ App, Demo, Menu, Mobile ]
+index:                                  [ Mobile, Menu, Light ]
+categories:                             [ app ]
+
+toc:                                    true
+scrollbar:                              false
+
+permalink:                              /pages/public/mmenu/mmenu_demo/
+regenerate:                             false
+
+toc:                                    true
+scrollbar:                              false
+
+resources:                              []
+resource_options:
+  - attic:
+      padding_top:                      400
+      padding_bottom:                   50
+      opacity:                          0.5
+      slides:
+        - url:                          /assets/image/module/attic/admin-dashboard-bootstrap-1280x600.jpg
+          alt:                          Admin Dashboard
+---
+
+*Mmenu* (short for mobile menu) is a JavaScript plugin for creating app
+look-alike off-canvas menus. It turns a basic HTML menu structure
+(with `<nav>`, `<ul>`, `<li>` and `<a>` or `<span>` elements) into a
+fully functional off-canvas menu with sliding submenus.
+
+## Check the menu
+
+The mmenu.js plugin knows its way around a bit more complex HTML structures
+as well, so you probably don't need to change any markup if your migrating
+from another script or plugin.
+
+++++
+<div>
+  <a class="mt-3" href="#navigator_nav_mmenu">Open the (sidebar) menu</a>
+</div>
+
+<script>
+
+  $(function() {
+    var mmenu = false;
+
+    // -------------------------------------------------------------------------
+    // data loader
+    // -------------------------------------------------------------------------
+    $.when (
+      j1.xhrData (// mmenu
+        'j1.adapter.navigator', {
+        xhr_container_id: "navigator_nav_mmenu",
+        xhr_data_path:    "/assets/data/mmenu/index.html" },
+        'mm_loaded'))
+    .done (function (mmenu) {
+      var mmenu_loaded = setInterval (function () {
+        if (mmenu) {
+          const $menu = $('#navigator_nav_mmenu');
+          const _menu = document.querySelector( "#navigator_nav_mmenu" );
+          const _open_menu = document.querySelector( "a[href='#navigator_nav_mmenu']" );
+
+          const menu = new MmenuLight (
+            _menu,
+            "(max-width: 10000px)", {
+            // plugin options
+            node:             "null",
+            mediaQuery:       "all"
+          });
+
+          const navigator = menu.navigation ({
+            // navigator options
+            selected:         "Selected",
+            slidingSubmenus:  true,
+            title:            "Balla",
+            theme:            "dark"
+          });
+
+          const drawer = menu.offcanvas ({
+            // drawer options
+            position:         "left"
+          });
+
+          _open_menu.addEventListener( "click", function (e) {
+            e.preventDefault();
+            drawer.open();
+          });
+        } // END if mmenu
+        clearInterval(mmenu_loaded);
+      }); // END mmenu_loaded
+    }); // END done
+  }); // END document ready
+
+</script>
+++++

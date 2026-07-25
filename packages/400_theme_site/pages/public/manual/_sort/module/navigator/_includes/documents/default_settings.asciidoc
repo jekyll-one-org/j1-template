@@ -1,0 +1,16 @@
+
+.Default settings
+[source, yml]
+----
+# ------------------------------------------------------------------------------
+# Default settings
+#
+enabled:                              true
+
+icon_family:                          MDI
+icon_style:                           mdi
+icon_color:                           mdi-grey
+icon_size:                            mdi-sm
+
+nav_primary_color:                    "#2196F3"
+----

@@ -1,0 +1,13 @@
+
+.General NavBar parameters
+[cols="2a,3a,a2,5a", options="header", width="100%", role="rtable mt-4"]
+|===
+|Parameter |Value |Default |Description
+
+|debug
+|boolean
+|`false`
+|Enables \| Disables debug information (JS runtime events) written
+to console log.
+
+|===

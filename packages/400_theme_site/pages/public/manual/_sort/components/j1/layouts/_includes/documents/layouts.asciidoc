@@ -1,0 +1,252 @@
+== Layouts
+
+Jekyll applies a strategy of inheriting content along a line of inheritance
+to layouts. The unique content is created via the layout of the respective
+page type. For example, `page` for regular content pages or `post` for
+blog posts. Content shared across all pages is described using the `default`
+layout. As a very simple picture of processing pages with Jekyll can be the
+following (inheritance) succession are understood:
+
+.Inheritance of Layouts
+[source, no_template, role="noclip"]
+----
+  HTML-Code < Jekyll < layout-default < layout-page < Source code (Asciidoc)
+----
+
+The Jekyll builder engine first reads the source code of a webpage, the
+page `about_site` for example. The source of this page is connected with
+the layout `page`. This construction template processes only the specific
+parts of a page: the content portion. The layout `page` is associated with
+layout `default` to add all the general components, like CSS- and Javascript
+files, needed for a full webpage.
+
+The construction step via the `default` layout complements all general
+components of a website. It connects (inherits) the results from the (base)
+layout `page` with the results of processing from the (general) layout
+`default` to the final resulting HTML code.
+
+NOTE: Layouts describe which programs are called and in which order.
+These programs are associated with configuration data that describes
+the details of the work step in question. All Configuration data is in
+the project directory `_data`. In this **data** directory, you will find
+a folder `layouts` containing control files with the same name for all
+available layouts.
+
+.Base Layouts
+[cols="^2a,4a,6a, options="header", width="100%", role="rtable mt-3"]
+|===
+|Layout |Configuration |Description
+
+|`default`
+|`_data/layouts/default.yml`
+|All general components of a website are generated via the `default`
+layout. General components include all resources (assets) such as
+CSS and Javascript data responsible for the design and the dynamics of
+a website.
+
+|`home`
+|`_data/layouts/home.yml`
+|All individual components of the homepage (landing page index.html) are
+generated via the details specified in the layout `home`. +
+The content is adjustable individually via the front matter of
+the source code. The adjustable components include the (J1) modules used
+and HTML metadata such as e.g. `description` and `keywords`.
+
+|`page`
+|`_data/layouts/page.yml`
+|All individual components of a website of type page are generated via
+the `page` layout. +
+The content is adjustable individually via the front matter of
+the source code. The adjustable components include the (J1) modules used
+and HTML metadata such as e.g. `description` and `keywords`.
+
+|`post`
+|`_data/layouts/post.yml`
+|All individual components of a website of type post are generated via
+the `post` layout. +
+The content is adjustable individually via the front matter of
+the source code. The adjustable components include the (J1) modules used
+and HTML metadata such as e.g. `description` and `keywords`.
+
+|`raw`
+|`_data/layouts/raw.yml`
+|Layout used for content of type raw (rendered content). This layout can be
+used for all pages, the content is already *rendered* as *HTML*.
+
+|===
+
+== Page Model
+
+Jekyll's page model for generating HTML code from page sources is difficult
+to understand. But even here, it is not necessary to know all the details.
+However, you should be familiar with principles: The layouts.
+
+Layouts are construction templates for HTML pages, each describing a
+specific *step* of processing. The resulting HTML code is created by
+applying several layouts in a specific order: *inheritance*.
+
+Jekyll applies a strategy of inheriting content along a line of inheritance
+to layouts. The unique content is created via the layout of the respective
+page type. For example, `page` for regular content pages or `post` for
+blog posts. Content shared across all pages is described using the `default`
+layout. As a very simple picture of processing pages with Jekyll can be the
+following (Inheritance) succession are understood:
+
+.Inheritance
+[source, no_template, role="noclip"]
+----
+  HTML-Code < Jekyll < layout-default < layout-page < Source code (Asciidoc)
+----
+
+The Jekyll builder engine first reads the source code of a webpage, the
+page `about_site,` for example. The source of this  page is connected with
+the layout `page`. This construction template processes only the specific
+parts of a page: the content portion. The layout `page` is associated with
+layout `default` to add all the general components, like CSS- and Javascript
+files, needed for a full webpage.
+
+The construction step via the `default` layout complements all general
+components of a website. It connects (inherits) the results from the (base)
+layout `page` with the results of processing from the (general) layout `default`
+to the final resulting HTML code.
+
+NOTE: Layouts describe which programs are called and in which order.
+These programs are associated with configuration data that describes
+the details of the work step in question. All Configuration data is in
+the project directory `_data`. In this **data** directory, you will find
+a folder `layouts` containing control files with the same name for all
+available layouts.
+
+.Base layouts
+[cols="^2a,4a,6a, subs=+macros, options="header", width="100%", role="rtable mt-3"]
+|===
+|Layout |Configuration |Description
+
+|`default`
+|`_data/layouts/default.yml`
+|All general components of a website are generated via the `default`
+layout. General components include all resources (assets) such as
+CSS and Javascript data responsible for the design and the dynamics of
+a website.
+
+|`home`
+|`_data/layouts/home.yml`
+|All individual components of the homepage are generated via the details
+specified in the layout `home`.
+
+|`page` \| `post`
+|`_data/layouts/page.yml` \| `_data/layouts/post.yml`
+|All individual components of a website of type page are generated via
+the `page` layout. +
+All individual components of a website of type post are generated via
+the `post` layout. +
+The page components are adjustable individually via the front matter of
+the source code of posts and pages. The adjustable components include the
+(J1) modules used and HTML metadata such as `description` and `keywords`.
+
+|===
+
+IMPORTANT: The template system J1 uses many other layouts. To not completely
+go beyond the scope of this tutorial, these layouts will *not* be discussed.
+
+=== Lanes
+
+The Template System J1 uses HTML generators to create the layouts. The HTML
+Generators process certain sections of an HTML page. If you have a look
+at the general structure of an HTML page, the code sections are very simple:
+
+[source, html]
+----
+<!DOCTYPE html>         <1>
+<html>
+
+  <head>
+    invisible content   <3>
+  </head>
+  <body>
+    visible content     <4>
+  </body>
+
+<html> <2>
+----
+<1> Instruction to the web browser about what version of HTML the
+    page is written in (HTML5 and beyond).
+<2> Specifies the data container for the HTML code
+<3> Invisible content of a webpage. Specifies required resources like
+    CSS or JavaScript files to be loaded for a page
+<4> Visible content of a webpage
+
+J1 Theme divides the sections conum:3[] and conum:4[] into more
+specific parts:
+
+* Invisible content
+  ** Definition of meta data
+  ** Loading CSS files
+  ** Loading Javascript files
+  ** Definition of control data
+
+* Visible content
+  ** Page Header
+  ** Page Navigation
+  ** Page Content
+  ** Page Footer
+
+To make J1 Theme fully configurable and flexible as much, the specific
+parts of HTML pages are specified as so-called `lanes`. The lane structure is
+based on the sections of an HTML page, but devides the `<head>` and `<body>`
+section in more specific (logic) parts.
+
+Lanes in a layout are configured top-down and create a stack processed in
+the order they are configured. Have a look at the configuration of the layout
+`page` (`_data/layouts/page.yml`):
+
+[source, yaml]
+----
+# Layout configuration settings
+#
+lanes:
+
+  # ----------------------------------------------------------------------------
+  # MASTER header (attic)
+  # All pages are using a specific header to display a title and a
+  # tagline. Title and tagline are to be configured with the FRONTMATTER
+  # of a page for individual data (text).
+  #
+  # ----------------------------------------------------------------------------
+  #
+  - lane:                               <1>
+      enabled:                          true
+      region:                           body-header
+      type:                             sync
+      base:                             _includes/themes/j1
+      path:                             modules/attics
+      file:                             generator.html
+
+  # ----------------------------------------------------------------------------
+  # PAGE content
+  #
+  - lane:                               <2>
+      enabled:                          true
+      region:                           body-main
+      type:                             sync
+      base:                             _includes/themes/j1
+      path:                             layouts
+      file:                             content_generator_page.html
+
+  # ----------------------------------------------------------------------------
+  # PAGE fab
+  #
+  - lane:                               <3>
+      enabled:                          true
+      id:                               fab-container
+      region:                           body-main
+      type:                             async
+----
+<1> specifies a generator to create a header
+<2> specifies a generator to create the content portion
+<3> specifies a placeholder for the FAB button
+
+As mentioned earlier, the layout `page` is associated with layout `default`.
+This association means the default layout specifies lanes that contain
+generators to complete a page for all the HTML code that all webpages are
+using.

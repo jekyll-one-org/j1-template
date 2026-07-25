@@ -1,0 +1,279 @@
+== Library Features
+
+The _Bootsnav_ library is using _Bootstrap_ straight forward regarding
+menu bars and navigation. For more helpful information about how navigation
+is implemented by the _Bootstrap_ framework, please read the official documentation
+of Twitter's link:{getbs_components}#nav[Bootstrap framework, window="_blank"]
+for the `nav` class.
+
+_Bootsnav_ is written as a _jQuery plugin_. Therefore, besides the _Bootstrap
+Famework_, the _jQuery library_ is required. In order to get the best results
+with the latest versions of _Bootstrap  V3_ (version *3.3.7*), it's highly
+recommended to use _jQuery_ in version *1.12.4* (at least the *1.9.1* version).
+
+=== Initialization
+
+The initialization of _Bootsnav_ is done in a *3-step-sequence*:
+As first and second step the CSS and JS files get loaded,
+before the HTML code gets placed as the third and final step.
+
+==== CSS Loading
+
+In addition to the base CSS styles provided by `bootsnav.css`
+it's also possible to *overload* _Bootsnav_ and/or _Bootstrap_
+CSS definitions by loading CSS styles customized by the user
+in `style.css`, if desired.
+
+
+[IMPORTANT]
+====
+Of course, changing the Bootstrap CSS style definitions by using a customized
+`style.css` file is an valid option, but using a customized *Bootstrap CSS*
+file based on the _less_ sources provided by _Bootstrap_ might be a better
+choice. How to customize a _Bootstrap_ Theme, refer to  *j1_apps_theme_customizer*
+(link removed!) for more information.
+====
+
+[start=1]
+. Load CSS files (minified or non-minified) in the `<HEAD>` section:
+
+[source, html]
+----
+  <link rel="stylesheet" href="path_to_css/bootsnav.css" />
+  <link rel="stylesheet" href="path_to_css/style.css" />
+----
+
+[NOTE]
+====
+If no _custom_ CSS style is used, a customized file like `style.css`
+*must not* be used. _J1 Theme_ makes use of custom CSS styles (skin),
+but changes _Bootsnav_ styles only.
+====
+
+==== JS Loading
+
+For _Bootsnav_ a single Javascript library file `bootsnav.js` (or
+`bootsnav.min.js` for the _minified_ version) has to get loaded with the page.
+
+[start=2]
+. The Javascript portion (minified or non-minified) of _Bootsnav_ should
+be included in the `<HEAD>` section:
+
+[source, html]
+----
+  <script src="path_to_js/bootsnav.min.js"></script>
+----
+
+In order to _initialize_ the Javascript code on a configured _Bootsnav_
+navigation, the (original) _Bootsnav_ library `bootsnav.js` contains an
+`initializer` that is automatically fired on `document-ready` event by _jQuery_.
+That way, all _Bootsnav_ functionalities get provided for all elements which are
+configured to use with _Bootsnav_.
+
+.Callbacks provided by _Bootsnav_ Javascript library:
+[source, js]
+----
+  // Initialize
+  $(document).ready(function(){
+    bootsnav.initialize();
+  });
+
+  // Reset on resize
+  $(window).on("resize", function(){
+    bootsnav.hoverDropdown();
+    setTimeout(function(){
+      bootsnav.navbarSticky();
+    }, 500);
+
+    // Toggle Bars
+    $(".navbar-toggle").each(function(){
+      $(".fa", this).removeClass("fa-times");
+      $(".fa", this).addClass("fa-bars");
+      $(this).removeClass("fixed");
+    });
+    $(".navbar-collapse").removeClass("in");
+    $(".navbar-collapse").removeClass("on");
+    $(".navbar-collapse").removeClass("bounceIn");
+  });
+----
+
+[CAUTION]
+====
+_J1 Theme_ is using a *modified* version of _Bootsnav_! The
+`initializer` functions were moved to a separate JS module of _J1 Theme_.
+Keep in mind, it's *not* possible to use this version of _Bootsnav_ outside
+the _J1 Theme_ environment.
+====
+
+==== HTML Placement
+
+The HTML markup for _Bootsnav_ dropdown menus is very similar to the native
+_Bootstrap_ code. You only have to add the class `bootsnav` (and some
+`data attributes` for extended functionality) to the `nav` tag of the menu.
+
+[start=3]
+. The HTML code of a _Bootsnav_ menu should be positioned at the beginning
+of the `<BODY>` section of the page where the menu is used.
+
+.HTML Markup for a Dropdown Menu
+[source, html]
+----
+<nav class="navbar navbar-default bootsnav">
+  <div class="container">
+    <!-- Start Header Navigation -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle"
+              data-toggle="collapse"
+              data-target="#navbar-menu">
+        <i class="fa fa-bars"></i>
+      </button>
+      <a class="navbar-brand" href="#brand">
+        <img src="LOGO_ADDRESS" class="logo" alt="">
+      </a>
+    </div>
+    <!-- End Header Navigation -->
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="navbar-menu">
+      <ul class="nav navbar-nav navbar-left">
+        <li><a href="#">Home</a></li>
+        <li><a href="#">About Us</a></li>
+        <li><a href="#">Services</a></li>
+        <li><a href="#">Portfolio</a></li>
+        <li><a href="#">Contact Us</a></li>
+      </ul>
+    </div>
+    <!-- /.navbar-collapse -->
+  </div>
+</nav>
+----
+
+.HTML Markup for the Topsearch functionality
+[source, html]
+----
+  <div class="top-search">
+    <div class="container">
+      <div class="input-group">
+        <span class="input-group-addon">
+          <i class="mdi mdi-magnify mdi-48px" style="color:md_white"></i>
+        </span>
+        <input type="text" id="jss-input" class="form-control"
+               placeholder="QuickSearch">
+        <span class="input-group-addon close-search">
+          <i class="mdi mdi-close mdi-48px" style="color:md_white"></i>
+        </span>
+      </div>
+    </div>
+    <!-- search panel, hidden (display: none) -->
+    <div class="panel panel-search" id="jss-panel"
+         style="display: none">
+      <!-- default panel contents -->
+      <div class="panel-heading lead">Quick Search Results</div>
+      <div class="panel-body">
+        <p>Quick Search carries out a basic search for all documemts if this site.</p>
+      </div>
+      <!-- list group -->
+      <div class="list-group">
+        <ul id="jss-results"></ul>
+      </div>
+    </div>
+  </div>
+----
+
+.HTML Markup for a Sidebar
+[source, html]
+----
+  <div class="side">
+    <a href="#" class="close-side">
+      <i class="mdi mdi-close mdi-48px" style="color:md_white"></i>
+    </a>
+    <!-- SideBar widget container -->
+    <div class="widget">
+      <h4 class="heading">Site Info</h4>
+      <ul class="link">
+        <li><a href="/about">About</a></li>
+      </ul>
+      ...
+      <ul class="link">
+        <li><a href="mailto:contact@my.domain">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+----
+
+.HTML Markup for the Quicklinks
+[source, html]
+----
+  <div class="attr-nav">
+    <ul>
+      <li>
+        <a href="#">
+          <i class="mdi mdi-facebook mdi-24px" style="color:md_white"></i>
+        </a>
+      </li>
+      <li class="search">
+        <a href="#">
+          <i class="mdi mdi-magnify mdi-24px" style="color:md_white"></i>
+        </a>
+      </li>
+      <li class="side-menu">
+        <a href="#">
+          <i class="mdi mdi-menu mdi-24px" style="color:md_white"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
+----
+
+A lot more examples for several types and flavours of menus which are supported
+by _Bootsnav_ can be found on the link:{bootsnav_doc}[Bootsnav Documentation, window="_blank"]
+pages.
+
+[IMPORTANT]
+====
+Writing HTML code is *not* necessary to create a menu system for a website,
+if the _J1 Theme_ version of_Bootsnav_ is used.
+All menus will get generated *automatically* based on what is configured in
+the `YAML` configuration files. Configuration files _describe_ the menu's
+*actions* and *content*. See chapter <<j1-integration>> for all details about
+how to use _Bootsnav_ with _J1 Theme_.
+====
+
+=== Options
+
+No `options` available.
+
+=== Events
+
+No `events` available.
+
+=== Methods
+
+The _Bootsnav_ library provides *no* methods besides the `initializer`
+that is automatically fired on `document-ready` event by _jQuery_
+(original library versions).
+
+[cols="4a,2a,6a", options="header", width="100%", role="rtable mt-4"]
+|===
+| Method |Option |Description
+
+| initialize()
+| no options
+| Initializes all menus with the HTML tag `nav` that have a
+  `bootsnav` class configured
+
+|===
+
+==== Initialization
+
+The following code shows how _Bootsnav_ gets initialized in Bootstrap
+`nav` menus (class `bootsnav`).
+
+.Example of how to initialize _Bootsnav_ menus
+[source, html]
+----
+  <script type="text/javascript">
+    $(document).ready(function(){
+      bootsnav.initialize();
+    });
+  </script>
+----

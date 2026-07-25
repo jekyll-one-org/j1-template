@@ -1,0 +1,20 @@
+.Parameters
+[width="100%",cols="3,3,6",options="header", role="table-responsive mt-3"]
+|=======================================================================
+|Parameter |Default |Description
+
+|
+|
+|
+
+
+|=======================================================================
+
+|
+|
+|
+
+
+*Synopsis*: `PatternLayout(String pattern)`
+
+*Parameters*: `pattern`

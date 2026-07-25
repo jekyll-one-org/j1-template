@@ -1,0 +1,31 @@
+=== More on Blocks
+
+Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo
+ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis
+dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies
+nec, pellentesque eu, pretium quis, sem.
+
+Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet
+nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a,
+venenatis vitae, justo.
+
+
+|==========================================
+
+Trailing spaces                 | Kept | Kept |     |     | Kept | Kept | Kept | Kept
+Single newline =>               | _    | \n   | _   | _   | _    |  _   | \n   | \n
+Double newline =>               | \n   | \n\n | \n  | \n  | \n   |  \n  | \n\n | \n\n
+Final newline  =>               | \n   | \n   |     |     |      |  \n  |      | \n
+Final dbl nl's =>               |      |      |     |     |      | Kept |      | Kept
+In-line newlines                | No   | No   | \n  | No  | No   | No   | No   | No
+Single quote                    | '    | '    | '   | ''  | '    | '    | '    | '
+Double quote                    | "    | "    | \"  | "   | "    | "    | "    | "
+Backslash                       | \    | \    | \\  | \   | \    | \    | \    | \
+" #", ": "                      | Ok   | Ok   | Ok  | Ok  | Ok   | Ok   | Ok   | Ok
+Can start on same line as key   | No   | No   | Yes | Yes | No   | No   | No   | No
+
+|==========================================
+
+See: link:http://stackoverflow.com/questions/3790454/in-yaml-how-do-i-break-a-string-over-multiple-lines[How do i break a string over multiple lines]
+
+

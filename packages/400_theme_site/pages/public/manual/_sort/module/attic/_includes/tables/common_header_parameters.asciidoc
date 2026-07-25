@@ -1,0 +1,123 @@
+
+.Common Header Parameters
+[cols="3a,2a,3a,4a", options="header", width="100%", role="rtable mt-4"]
+|===
+|Parameter |Type |Default |Description
+
+|`no_translate`
+|boolean
+|`true`
+|Enables or disables the translator (module) on the `title` and `tagline`
+elements for translation. For default, the translation of all text elements
+in an attic is *disabled*.
+
+|`background_color_1`
+|Symbolic color \| RGB valuess
+|`md_indigo`
+|Start value (color) for the gradient used for the header box background.
+Alternatively, the color can be configured as (hexadecimal) RGB valuess of
+the form `#RRGGBB`
+
+|`background_color_2`
+|Symbolic color \| RGB valuess
+|`md_indigo`
+|End value (color) for the gradient used for the header box background.
+Alternatively, the color can be configured as (hexadecimal) RGB valuess of
+the form `#RRGGBB`
+
+|`margin_bottom`
+|integer
+|`50`
+|Determine the distance, measured in pixel (px) from bottom position of the
+the *header box* to the first position of the following content
+
+|`padding_bottom`
+|integer
+|`50`
+|Determines the distance, measured in pixel (px), from bottom position of the
+the *overlay container* to the bottom of the header box. In combination with
+`padding_top` the total size of the header box is  determined.
+
+|`padding_top`
+|integer
+|`200`
+|Determines the distance, measured in pixel (px), from top position of the
+page and the *overlay container* that contains the title and tagline. In
+combination with `padding_bottom` the total size of the header box is
+determined.
+
+|`raised_level`
+|integer
+|`15`
+|Uplifting of the header element. Valid values are out of `[ 0 .. 24]`.
+As higher the number as more the header is uplifted.
+
+|`tagline`
+|string
+|no default
+|The *tagline hash* contains all name\|value pairs to control how the page
+*tagline* is appears with the header
+
+|`tagline_align`
+|Position name (CSS)
+|`left`
+|Alignment of the tagline inside the overlay-container. Valid values are out of
+`left` \| `center` \| `right`
+
+|`tagline_animate`
+|string
+|`fadeInRight`
+|Type of animation for the tagline. Valid values are all values supported
+by AnimateCSS. See https://daneden.github.io/animate.css/[Animate.css home page]
+for details.
+
+|`tagline_color`
+|Symbolic color \| RGB values
+|`rgba_lighten_800`
+| The text color. Should be given as an *symbolic color name*. Alternatively, the
+color can be configured as (hexadecimal) RGB valuess of the form `#RRGGBB`
+
+|`tagline_size`
+|string
+|`larger`
+|Symbolic value for the text size. Valid values are out of  [`xxxsmall` .. `xxxlarge`]
+See size definitions with <<Text sizes>>
+
+|`text_emphasis`
+|string
+|`stronger`
+|Symbolic value for the text shadowing. Valid values are out of
+[`strong`, `stronger`, `strongest`]
+
+|`title`
+|string
+|no default
+|The *title hash* contains all name\|value pairs to control how the page
+*title* appears with the header
+
+|`title_align`
+|Position name (CSS)
+|`left`
+|Alignment of the title inside the overlay-container. Valid values are out of
+`left` \| `center` \| `right`
+
+|`title_animate`
+|string
+|`fadeInLeft`
+|Type of animation for the title. Valid values are all values supported
+by AnimateCSS. See https://daneden.github.io/animate.css/[Animate.css home page]
+for details.
+
+|`title_color`
+|Symbolic color \| RGB value
+|`rgba_lighten_800`
+|The text color. Should be given as an *symbolic color name*. Alternatively, the
+color can be configured as (hexadecimal) RGB values of the form `#RRGGBB`
+
+|`title_size`
+|string
+|`xxxlarge`
+|Symbolic value for the text size. Valid values are out of [`xxxsmall` .. `xxxlarge`]
+See size definitions with <<Text sizes>>
+
+|===

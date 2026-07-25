@@ -1,0 +1,65 @@
+== Jekyll Commandline
+
+
+[width="100%", cols="6,6", options="header", role="table-responsive mt-3"]
+|======================================================================
+|Setting |Options and Flags
+a|
+*Local Server Port*
+
+Listen on the given port.
+
+ a|
+`port: PORT`
+
+`--port PORT`
+
+a|
+*Local Server Hostname*
+
+Listen at the given hostname.
+
+ a|
+`host: HOSTNAME`
+
+`--host HOSTNAME`
+
+a|
+*Base URL*
+
+Serve the website from the given base URL
+
+ a|
+`baseurl: URL`
+
+`--baseurl URL`
+
+a|
+*Detach*
+
+Detach the server from the terminal
+
+ a|
+`detach: BOOL`
+
+`-B, --detach`
+
+a|
+*Skips the initial site build.*
+
+Skips the initial site build which occurs before the server is started.
+
+ |`--skip-initial-build`
+a|
+*X.509 (SSL) Private Key*
+
+SSL Private Key.
+
+ |`--ssl-key`
+a|
+*X.509 (SSL) Certificate*
+
+SSL Public certificate.
+
+ |`--ssl-cert`
+|======================================================================

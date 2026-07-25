@@ -1,0 +1,50 @@
+
+.Sidebar parameters
+[cols="2a,3a,2a,5a" options="header", width="100%", role="rtable mt-4"]
+|===
+|Parameter |Values |Default |Description
+
+|`enabled`
+|boolean +
+  `true`,`false`
+|`true`
+|Enables or disables the collapsible sidebar.
+
+|`display_theme`
+|boolean +
+  `true`,`false`
+|`true`
+|If enabled some information about the theme +
+  (version, author, etc) is provided.
+
+|`icon_size`
+|string
+|`xxlarge`
+|Define the size of the used icons.
+
+|`icon_color`
+|string
+|`"#FFF"`
+|Define the color of the used icons.
+
+|`close_icon`
+|string
+|`close`
+|Choose a closing icon out of font awesome icons.
+
+|`background_color`
+|string
+|`md_grey_800`
+|Configure the color of the sidebar's background.
+
+|`title`
+|string
+|`Site Info`
+|Set the name for each box in the sidebar.
+
+|`type`
+|string
+|`linkbox`
+|Define the type of the box that is being used.
+
+|===

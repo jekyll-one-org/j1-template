@@ -1,0 +1,20 @@
+
+.Quicklinks Bar settings
+[source, yml]
+----
+# ------------------------------------------------------------------------------
+# QuickLinks settings
+#
+quicklinks:
+  enabled:                    true
+  icon_size:                  large
+  icon_color:                 "#FFF"
+  top_search_icon:            magnify
+  sidebar_icon:               menu
+  facebook_icon:              facebook
+  facebook_url:               "#"
+  twitter_icon:               twitter
+  twitter_url:
+  google_plus_icon:           google-plus
+  google_plus_url:
+----

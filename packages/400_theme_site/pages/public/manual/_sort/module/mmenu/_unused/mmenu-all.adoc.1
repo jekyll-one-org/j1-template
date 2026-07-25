@@ -1,0 +1,88 @@
+---
+layout:                                 page
+
+title:                                  Mobile Menu
+tagline:                                j1 mobile menu
+description:                            Mobile Menu
+
+tags:                                   [ App, Gallery ]
+index:                                  [ Customizer, Previewer, Justified, Gallery ]
+categories:                             [ app ]
+
+permalink:                              /pages/public/mmenu/mmenu-all/
+regenerate:                             false
+
+toc:                                    false
+
+resources:                              [ mmenu ]
+#resource_options:
+#  - attic:
+#      padding_top:                      400
+#      padding_bottom:                   50
+#      opacity:                          0.5
+#      slides:
+#        - url:                          /assets/image/module/gallery/mega_cities/thomas-tucker-bw.jpg
+#          alt:                          Sunset over Taipei City - Taiwan
+#          badge:
+#            type:                       unsplash
+#            author:                     Thomas Tucker
+#            href:                       //unsplash.com/@tents_and_tread
+---
+
+++++
+<div id="my-page">
+
+    <div id="my-header">
+      <a href="#my-menu">Open the menu</a>
+      <nav id="my-menu"></nav>
+    </div>
+
+    <div id="my-content">
+        <h1>The title</h1>
+        <p>Some content.</p>
+    </div>
+</div>
+++++
+
+++++
+<script>
+
+	$(function() {
+      // -----------------------------------------------------------------------
+      // data loader
+      // -----------------------------------------------------------------------
+      var state;
+      $.when (
+        j1.xhrData (// mmenu
+          'j1.adapter.navigator', {
+          xhr_container_id: "my-menu",
+          xhr_data_path:    "/assets/data/mmenu/index.html" },
+          'mm_loaded'))
+      .done (function (mmenu) {
+        var mmenu_loaded = setInterval (function () {
+          if (mmenu) {
+            document.addEventListener(
+              "DOMContentLoaded", () => {
+                  const menu = new MmenuLight(
+                      document.querySelector( "#my-menu" ),
+                      "(max-width: 2600px)"
+                  );
+
+                  const navigator = menu.navigation();
+                  const drawer = menu.offcanvas();
+
+                  document.querySelector( "a[href='#my-menu']" )
+                  .addEventListener( "click", ( evnt ) => {
+                      evnt.preventDefault();
+                      drawer.open();
+                  });
+
+            }); // END addEventListener
+          } // END if mmenu
+          clearInterval(mmenu_loaded);
+	      }); // END mmenu_loaded
+      }); // END done
+    }); // END document ready
+
+</script>
+++++

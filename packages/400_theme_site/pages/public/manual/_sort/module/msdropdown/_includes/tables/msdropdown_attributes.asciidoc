@@ -1,0 +1,29 @@
+
+.MsDropdown Attributes
+[cols="4a,8a", options="header", width="100%", role="rtable mt-3"]
+|===
+|Name |Description
+
+|`autofocus`
+|As the name suggests, this attribute lets you choose that a form control
+should have autofocus when the page is loaded. Only one element can have
+autofocus.
+
+|`disabled`
+|If this property is enabled, you won't be able to interact with the
+element.
+
+|`form`
+|It returns the name of the <form> element to associate the <select>
+with. This is readonly property.
+
+|`name`
+|It returns the name of the <select> element.
+
+|`required`
+|A Boolean attribute indicating that an option with a non-empty string
+value must be selected. Here is a surprise; you can change the default
+message too. Just set the
+`data-error-message="Your custom message here"` in `<select>`.
+
+|===

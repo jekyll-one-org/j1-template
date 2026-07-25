@@ -1,0 +1,51 @@
+
+.Main Menu settings (excerpt)
+[source, yml]
+----
+# ------------------------------------------------------------------------------
+# Menu LEARN
+#
+- item:                                 Learn
+  sublevel:
+
+    - title:                            Where to go
+      href:                             /pages/public/learn/where_to_go/
+      icon:                             foot-print
+
+    # --------------------------------------------------------------------------
+    # Roundtrip
+    #
+    - title:                            Roundtrip
+      icon:                             briefcase-search-outline
+      dropdown:
+
+        - title:                        Present images
+          href:                         /pages/public/learn/roundtrip/present_images/
+          icon:                         image
+        - title:                        Present videos
+          href:                         /pages/public/learn/roundtrip/present_videos/
+          icon:                         video
+        - title:                        Typography
+          href:                         /pages/public/learn/roundtrip/typography/
+          icon:                         format-text
+        - title:                        Icon fonts
+          href:                         /pages/public/learn/roundtrip/mdi_icon_font/
+          icon:                         fan
+        - title:                        Asciidoc extensions
+          href:                         /pages/public/learn/roundtrip/asciidoc_extensions/
+          icon:                         format-annotation-plus
+        - title:                        BS modal extensions
+          href:                         /pages/public/learn/roundtrip/modals/
+          icon:                         image
+        - title:                        BS table extensions
+          href:                         /pages/public/learn/roundtrip/responsive_tables/
+          icon:                         table
+        - title:                        BS themes
+          href:                         /pages/public/learn/roundtrip/themes/
+          icon:                         theme-light-dark
+        - title:                        QuickSearch
+          href:                         /pages/public/learn/roundtrip/quicksearch/
+          icon:                         magnify
+
+
+----

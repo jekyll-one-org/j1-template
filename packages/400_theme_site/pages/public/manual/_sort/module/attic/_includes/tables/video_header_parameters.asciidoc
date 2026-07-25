@@ -1,0 +1,28 @@
+
+.Video Header Parameters
+[cols="3a,2a,3a,4a", options="header", width="100%", role="rtable mt-4"]
+|===
+|Name |Type |Default |Description
+
+|`isVideo`
+|Boolean
+|`false`
+|Pass source type *video* to the plugin, if cannot be recognized automatically
+
+|`loop`
+|Boolean
+|`false`
+|Enables\|Disables looping on videos. If `true`, `duration` is used to
+determine when to stop the video
+
+|`mute`
+|Boolean
+|`true`
+|Enables \| Disables sound on videos
+
+|`poster`
+|String
+|no default
+|Specifying the `poster` attribute on standard tags
+
+|===

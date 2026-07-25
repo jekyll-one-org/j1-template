@@ -1,0 +1,78 @@
+[role="mt-4"]
+== Configuration
+
+Find the block configuration followed by the placement setup for the
+layout `default`.
+
+.Block Configuration from `~/_data/blocks/footer.yml` (excerpt)
+[source, yaml, role="noclip"]
+----
+# ----------------------------------------------------------------------------
+# FOOTER properties
+#
+footers:
+
+  # --------------------------------------------------------------------------
+  # Footer UNO light
+  #
+  - name:                             Footer UNO light
+    footer:
+      enabled:                        true
+
+      id:                             footer-en
+      comment:                        Footer UNO EN-EN
+      theme:                          footer-light-theme
+      properties:                     mt-2
+      wave:
+        top:
+          enabled:                      true
+          height:                       5
+          style:                        wave-4
+          transform:                    false
+          color:                        "#212121"
+          background_color:             "#f5f5f5"
+
+      # ----------------------------------------------------------------------
+      # ISSUE settings
+      #
+      issue:
+        enabled:                      true
+        date:                         site.time
+        en:
+          date_format:                "%A, %-d %B %Y"
+          text:                       Last modified
+        de:
+          date_format:                "%A, %-d %B %Y"
+          text:                       Letzte Änderung
+       ...
+----
+
+.Placement from `~/_data/layouts/default.yml`
+[source, yaml, role="noclip"]
+----
+# ------------------------------------------------------------------------------
+# ~/_data/layouts/default.yml
+# Configuration data to specify the DEFAULT Layout of ALL content pages
+#
+# Product/Info:
+# https://jekyll.one
+#
+# Copyright (C) 2023 Juergen Adams
+#
+# J1 Theme is licensed under the MIT License.
+# See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
+# ------------------------------------------------------------------------------
+# Layout configuration settings
+#
+lanes:
+  # ----------------------------------------------------------------------------
+  # FOOTER container
+  # The page footer displayed on all pages
+  #
+  - lane:
+      enabled:                          true
+      id:                               j1_footer
+      region:                           body-footer
+      type:                             async
+      ...
+----

@@ -1,0 +1,103 @@
+[role="mt-5"]
+=== Events
+
+The following callback events can be passed to iframe-resizer on the
+parent page, as part of the https://github.com/davidjbradshaw/iframe-resizer/blob/master/docs/iframed_page/options.md[options] object.
+
+[role="mt-4"]
+==== onClose
+
+Called before iFrame is closed via `parentIFrame.close()` or
+`iframe.iFrameResizer.close()` methods. Returning `false` will prevent
+the iFrame from closing.
+
+[source, js]
+----
+onClose: (iframeID) => boolean
+----
+
+[role="mt-4"]
+==== onClosed
+
+Called after iFrame is closed via `parentIFrame.close()` or
+`iframe.iFrameResizer.close()` methods.
+
+[source, js]
+----
+onClosed: (iframeID) => undefined
+----
+
+[role="mt-4"]
+==== onInit
+
+Called after initial setup.
+
+[source, js]
+----
+onInit: (iframe) => undefined
+----
+
+
+[role="mt-4"]
+==== onMessage
+
+Receive message posted from iFrame with the `parentIFrame.sendMessage()`
+method.
+
+[source, js]
+----
+onMessage: ({iframe,message}) => undefined
+----
+
+[role="mt-4"]
+==== onMouseEnter
+
+Function called after the mouse enters the iframe. Passes `messageData`
+object containing the *iFrame*, *screenX*, *screenY* and the *type* of
+event that triggered the callback.
+
+[source, js]
+----
+onMouseEnter: ({iframe,height,width,type}) => undefined
+----
+
+[role="mt-4"]
+==== onMouseLeave
+
+Function called after the mouse leaves the iframe. Passes `messageData`
+object containing the *iFrame*, *screenX*, *screenY* and the *type* of
+event that triggered the callback.
+
+[source, js]
+----
+onMouseLeave: ({iframe,height,width,type}) => undefined
+----
+
+
+[role="mt-4"]
+==== onResized
+
+Function called after iFrame resized. Passes `messageData` object
+containing the *iFrame*, *height*, *width* and the *type* of event that
+triggered the iFrame to resize.
+
+[source, js]
+----
+onResized: ({iframe,height,width,type}) => undefined
+----
+
+[role="mt-4"]
+==== onScroll
+
+Called before the page is repositioned after a request from the iFrame,
+due to either an in page link, or a direct request from either
+https://github.com/davidjbradshaw/iframe-resizer/blob/master/docs/iframed_page/methods.md#scrolltoxy[parentIFrame.scrollTo()] or
+https://github.com/davidjbradshaw/iframe-resizer/blob/master/docs/iframed_page/methods.md#scrolltooffsetxy[parentIFrame.scrollToOffset()].
+If this function returns *false*, it will stop the library from
+repositioning the page, so that you can implement your own animated page
+scrolling instead.
+
+[source, js]
+----
+onScroll: ({x,y}) => [true|false]
+----

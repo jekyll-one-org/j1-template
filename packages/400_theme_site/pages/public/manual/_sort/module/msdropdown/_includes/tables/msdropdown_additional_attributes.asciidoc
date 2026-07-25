@@ -1,0 +1,19 @@
+
+.MsDropdown additional attributes
+[cols="4a,8a", options="header", width="100%", role="rtable mt-3"]
+|===
+|Name |Description
+
+|`data-image`
+|This attribute is used to display an image in an item.
+
+|`data-title`
+|If you need to display any text on hover of an item.
+
+|`data-description`
+|To display a description along with the text in the next line.
+
+|`data-image-css`
+|You may use this if you want to display an image using CSS.
+
+|===

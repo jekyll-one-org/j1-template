@@ -1,0 +1,17 @@
+=== Attributes
+
+Besides selectedIndex, options, name, size, multiple, etc attributes/properties,
+msDropdown reads below attributes too.
+
+include::../tables/msdropdown_attributes.asciidoc[]
+
+=== Data attributes
+
+lorem:sentences[5]
+
+include::../tables/msdropdown_data_attributes.asciidoc[]
+
+Besides value, text, selected, disabled, class, and style properties
+MsDropdown reads the below (additional) attributes too.
+
+include::../tables/msdropdown_additional_attributes.asciidoc[]

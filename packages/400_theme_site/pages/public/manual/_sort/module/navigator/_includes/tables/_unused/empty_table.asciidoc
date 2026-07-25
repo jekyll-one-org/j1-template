@@ -1,0 +1,12 @@
+
+.Title
+[cols="2a,3a,2a,5a", options="header", width="100%", role="rtable mt-4"]
+|===
+|Parameter |Value |Default |Description
+
+|enabled
+|boolean, `true`\|`false`
+|true
+|Enables\|Disables the use of J1 Bootsnav
+
+|===

@@ -1,0 +1,70 @@
+// ~/document_base_folder/000_includes
+//  Asciidoc attribute includes:                 attributes.asciidoc
+// -----------------------------------------------------------------------------
+
+// URLs - Internal references and/or sources on the Internet
+// -----------------------------------------------------------------------------
+tag::urls[]
+
+:url-j1--home:                                    //jekyll.one/
+
+:url-roundtrip--mdi-icons:                        /pages/public/learn/roundtrip/mdi_icon_font/#material-design-icons
+
+end::urls[]
+
+
+// FOOTNOTES, global asciidoc attributes (variables)
+// -----------------------------------------------------------------------------
+tag::footnotes[]
+end::footnotes[]
+
+
+// Tags - Asciidoc attributes used internally
+// -----------------------------------------------------------------------------
+tag::tags[]
+end::tags[]
+
+
+// Data - Data elements for Asciidoctor extensions
+// -----------------------------------------------------------------------------
+tag::data[]
+
+:data-images-blocks--teaser-banner:               "assets/image/page/manuals/components/1280x600/teaser_banner.jpg, Teaser Banner"
+:data-images-blocks--divider-banner:              "assets/image/page/manuals/components/1280x600/divider_banner.jpg, Divider Banner"
+:data-images-blocks--image-banner:                "assets/image/page/manuals/components/1280x600/image_banner.jpg, Image Banner"
+:data-images-blocks--parallax-banner:             "assets/image/page/manuals/components/1280x600/parallax_banner.jpg, Parallax Banner"
+
+:data-images-blocks--intro-panel:                 "assets/image/page/manuals/components/1280x600/intro_panel.jpg, Intro Panel"
+:data-images-blocks--service-panel:               "assets/image/page/manuals/components/1280x600/service_panel.jpg, Service Panel"
+:data-images-blocks--plan-panel:                  "assets/image/page/manuals/components/1280x600/plan_panel.jpg, Plan Panel"
+:data-images-blocks--news-panel:                  "assets/image/page/manuals/components/1280x600/news_panel.jpg, News Panel"
+
+:data-images-blocks--custom-panel:                "assets/image/page/manuals/components/1280x600/custom_panel.jpg, Custom Panel"
+
+:data-images-blocks--intro-panel-waves:           "assets/image/page/manuals/components/1280x600/intro_panel_waves.jpg, Intro Panel using Waves"
+
+:data-images-blocks--footer:                      "pages/manuals/components/1280x600/footer.jpg, Footer"
+
+end::data[]
+
+
+// Images - Images from local include/images folder
+// -----------------------------------------------------------------------------
+tag::images[]
+end::images[]
+
+
+// PRODUCTS, local product information (e.g. release)
+// -----------------------------------------------------------------------------
+tag::products[]
+:license:                                         e.g. Apache License, Version 2.0
+:revdate:                                         e.g. 2018
+:revnumber:                                       e.g. 1.2.3
+end::products[]
+
+
+// AUTHORS, local author information (e.g. article)
+// -----------------------------------------------------------------------------
+tag::authors[]
+:uri-author-xxx:                                  //xxx
+end::authors[]

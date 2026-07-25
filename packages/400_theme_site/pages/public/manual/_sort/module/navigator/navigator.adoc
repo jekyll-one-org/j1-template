@@ -1,0 +1,109 @@
+---
+title:                                  Navigator
+title_extention:                        Integrated Navigation Module for J1 Template
+tagline:                                User Guide For J1 Template
+
+date:                                   2022-08-14
+#last_modified:                         2023-01-01
+
+description: >
+                                        When it comes to the usability of a website the
+                                        focus of your vistors is on one important component:
+                                        The Navigation System. The Navigation used by J1 Template
+                                        is using a modified version of Bootsnav, a multi purpose
+                                        navigation builder based on the Bootstrap Framework.
+keywords: >
+                                        Jekyll, JekyllOne, Theme, User Guide, Module, Navigation,
+                                        Bootsnav, Navigator, Manual
+
+categories:                             [ Manual, Module ]
+tags:                                   [ Navigator, Navigation ]
+
+image:
+  path:                                 /assets/image/module/attic/1920x1280/look-up-look-down-photograpy.jpg
+  width:                                1920
+  height:                               1280
+
+tts:                                    true
+comments:                               false
+exclude_from_search:                    false
+regenerate:                             false
+permalink:                              /pages/public/manuals/modules/navigator/
+
+resources:                              [ lightbox ]
+resource_options:
+  - toccer:
+      collapseDepth:                    3
+  - attic:
+      slides:
+        - url:                          /assets/image/module/attic/1920x1280/look-up-look-down-photograpy.jpg
+          alt:                          Photo by Look Up Look Down Photography on Unsplash
+          badge:
+            type:                       unsplash
+            author:                     Look Up Look Down Photography
+            href:                       //unsplash.com/@greg_nunes
+---
+
+// Page Initializer
+// =============================================================================
+// Enable the Liquid Preprocessor
+:page-liquid:
+
+// Set (local) page attributes here
+// -----------------------------------------------------------------------------
+// :page--attr:                         <attr-value>
+
+//  Load Liquid procedures
+// -----------------------------------------------------------------------------
+{% capture load_attributes %}themes/{{site.template.name}}/procedures/global/attributes_loader.proc{%endcapture%}
+
+// Load page attributes
+// -----------------------------------------------------------------------------
+{% include {{load_attributes}} scope="all" %}
+
+
+// Page content
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+When it comes to the usability of a website the focus of your vistors is
+on one important component: The Navigation System of the site. The Navigation
+System used by J1 Theme (the Nagigator Module) is using a modified version
+of _Bootsnav_, a multi purpose navigation builder based on the _Bootstrap_
+Framework.
+
+_Bootsnav_ extends the native navigation features of _Bootstrap_ by more
+complex functionalities and additional features. J1 Theme integrates
+_Bootsnav_ into the world of _Jekyll_, and make all features available by
+*configuration*. No programming is needed.
+
+[NOTE]
+====
+Since J1 Theme has been moved to the most current version of _Bootstrap_
+(BS) *V5* The underlying Javascript and CSS components of _Bootsnav_ have
+been heavily *modified*. The original implementation of _Bootsnav_, created
+by *Adam M Nurdin* link:{url-bootsnav--github}[can be found here, {browser-window--new}],
+was based on the BS Framework of version *V3*.
+
+The basic concepts remain unchanged but a lot of changes were made to make
+the library usable for J1 Theme based on _Bootstrap_ V5.
+====
+
+_Bootstnav_ improves the _Bootstrap_ Framework in regard to ease-of-use
+and a powerful, simplified navigation. This is achieved by providing a
+Navigation Bar (the Navigator) which features a *MainMenu*, an area for
+*Quicklinks* and, as collapsible components, the *Topsearch* element.
+
+/////
+There are plenty of layout flavours to be chosen from for an individual
+arrangement of these elements. As of today 20+ variations are available to
+navigate a site using _Bootstrap_ with _Bootsnav_.
+/////
+
+No doubt, content counts. A well-structured navigation system leads to an
+excellent browsing experience for your visitors by offering easy access,
+fast orientation and quick overviews.
+
+
+// Include sub-documents (if any)
+// -----------------------------------------------------------------------------
+include::{documentdir}/module_configuration.asciidoc[]
+

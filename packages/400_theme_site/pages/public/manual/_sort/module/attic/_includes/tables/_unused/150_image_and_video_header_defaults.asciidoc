@@ -1,0 +1,84 @@
+
+.Image and Video Header defaults
+[cols="4,3,5", options="header", width="100%", role="rtable mt-4"]
+|===
+|Parameter |Default |Description
+
+|alignX
+|`0.5`
+|The horizontal-alignment for the image, can be
+`left` \| `center` \| `right` or any number between [ 0.0 .. 1.0]
+
+|alignY
+|`0.5`
+|The vertical-alignment for the image, can be on of `top` \| `center`
+\| `bottom` or any number between [ 0.0 .. 1.0]
+
+|alwaysTestWindowResolution
+|`false`
+|Test against the window width instead of the element width
+
+|animateFirst
+|`true`
+|If set to true, the first image will transition in like all the
+others (slideshows only)
+
+|bypassCss
+|`false`
+|Avoid to add any CSS styles to the IMG element
+
+|duration
+|`5000`
+|Time in between slides (if slideshow)
+
+|isVideo
+|`false`
+|Pass source type video to the plugin, if cannot be recognized automatically
+
+|loop
+|`false`
+|Enables \| Disables looping on videos. If true, duration is used to
+determine when to stop
+
+|mute
+|`false`
+|Enables \| Disables sound on videos
+
+|paused
+|`false`
+|Whether the images should slide after given duration
+
+|preload
+|`2`
+|Controls how many images preload at a time
+
+|preloadSize
+|`1`
+|Controls how many images are preloaded in parallel
+
+|scale
+|`cover`
+|Controls the scaling mode. Can be one of `cover` \| `fit` \| `fit-smaller` \| `fill`
+
+|resolutionRefreshRate
+|`2500`
+|Controls how long to wait before switching the resolution
+
+|resolutionChangeRatioThreshold
+|`0.1`
+|Controls how much a change should it be before switching resolution
+
+|start
+|`0`
+|Index of the first image to show
+
+|transition
+|`fade`
+|Type of transition between slides
+
+|transitionDuration
+|`normal`
+|Duration at which the image will transition in.Integers in milliseconds are
+accepted, as well as standard jQuery speed strings as `slow`, `normal` or `fast`
+
+|===

@@ -1,0 +1,40 @@
+
+.Additional Image Header Parameter
+[cols="3a,2a,3a,4a", options="header", width="100%", role="rtable mt-4"]
+|===
+|Name |Type |Default |Description
+
+|`circuit`
+|boolean
+|`false`
+|Enables\|Disables looping on image-based *slideshows*.
+
+|`filters`
+|array
+|no defaults
+|Add (multiple) CSS3 filters on the image content.
+See section <<Available CSS3 Filter Functions>> for details.
+
+|`badge:`
+|Array
+|no default
+|If set, *enables* the *placement* of a badge for e.g. websites Copyright
+and \| or Author information is requested or required.
+
+|`badge.type`
+|String
+|unsplash
+|A badge of type `unsplash` is placed.
+
+|`badge.author`
+|String
+|no default
+|The autors *name*.
+
+|`badge.href`
+|String (URL)
+|no default
+|A URL that points e.g. to the image source, or a website for Copyright
+and \| or Author information.
+
+|===

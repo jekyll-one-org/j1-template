@@ -1,0 +1,54 @@
+
+.MsDropdown Data attributes
+[cols="4a,8a", options="header", width="100%", role="rtable mt-3"]
+|===
+|Name |Description
+
+|`data-main-css`
+|This is the main CSS class. Default value is `ms-dd`
+
+|`data-show-icon`
+|If you are in need to hide the icon on the header. The default value
+is: `true`
+
+|`data-event`
+|To interact msDropdown with an event. The default value is: `click`
+
+|`data-child-width`
+|Sometimes you need a list of children bigger than the dropdown. This can
+help. The default value is: `null` or whatever is defined in the CSS.
+
+|`data-child-height`
+|By default, it shows all the options listed in the dropdown. If you
+need to show some rows you can use this attribute. The default value is:
+`null`
+
+|`data-enable-checkbox`
+|If you enable this; multiple will automatically set to true. It shows a
+checkbox with each list item. The default value is: `false`
+
+|`data-checkbox-name-suffix`
+|If the checkbox is enabled; there is an extra field will be posted
+with the form. Say <select> name is "tech" and checkbox is enabled,
+tech_mscheck[] will be posted as an array. The default value is:
+`{select_name}_mscheck`
+
+|`data-enable-auto-filter`
+|It lets you search by typing any key when msDropdown is open. Just like
+auto-suggest. The default value is: `true`
+
+|`data-visible-rows`
+|If you set this attribute, it calculates the max height of the items
+and sets the child height based on the number provided in value. You can
+also achieve this by using the data-child-height property, only that set
+in pixels. The default value is: `null`
+
+|`data-show-plus-item-counter`
+|If multiple is true and you select more than one item; it shows a text
++N. N denotes numbers here. The default value is: `true`
+
+|`data-error-message`
+|If `required` is enabled in <select> it shows a required message. Guess
+what? You can change that by setting this attribute. The default value
+is: `Please select an item from this list`
+|===

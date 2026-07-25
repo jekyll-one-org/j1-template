@@ -191,7 +191,9 @@ j1.adapter.toccer = (() => {
         var pageVisible    = (pageState == 'block') ? true: false;
         var j1CoreFinished = (j1.getState() == 'finished') ? true : false;
         var toccerEnabled  = (j1.stringToBoolean(toccerOptions.toc)) ? true : false;
+//      var atticFinished  = (j1.adapter.attic.getState() === 'finished') ? true: false;        
 
+//      if (toccerEnabled && j1CoreFinished && atticFinished && pageVisible) {
         if (toccerEnabled && j1CoreFinished && pageVisible) {
           startTimeModule = Date.now();
 
@@ -268,8 +270,12 @@ j1.adapter.toccer = (() => {
             contentSelector:        options.contentSelector,
             collapseDepth:          options.collapseDepth,
             throttleTimeout:        options.throttleTimeout,
-            hasInnerContainers:     false,
-            includeHtml:            false,
+            disableTocScrollSync:   options.disableTocScrollSync,
+            hasInnerContainers:     options.hasInnerContainers,
+            includeHtml:            options.includeHtml,
+            scrollSmooth:           options.scrollSmooth,                       // tocbot scrollSmooth
+            scrollSmoothDuration:   options.scrollSmoothDuration,               // tocbot scrollSmooth
+            scrollSmoothOffset:     options.scrollSmoothOffset,                 // tocbot scrollSmooth
             linkClass:              'toc-link',
             extraLinkClasses:       '',
             activeLinkClass:        'is-active-link',
@@ -282,9 +288,8 @@ j1.adapter.toccer = (() => {
             positionFixedClass:     'is-position-fixed',
             fixedSidebarOffset:     'auto',
             scrollContainer:        null,
-            scrollSmooth:           false,                                      // options.scrollSmooth,
-            scrollSmoothDuration:   0,                                          // options.scrollSmoothDuration,
-            scrollSmoothOffset:     0,                                          // scrollOffset,
+            headingsOffset:         1,
+            throttleTimeout:        options.throttleTimeout,            
             onClick:                (event) => {
                                       // jadams 2024-03-16: workaroud|browser's history
                                       var currentURL = event.currentTarget.href;
@@ -292,13 +297,13 @@ j1.adapter.toccer = (() => {
                                       history.pushState(null, null, currentURL);
 
                                       // jadams 2024-03-16: use smooth scrolling from J1
-                                      // NOTE: all scrolling functions from tocbot DISABLED
-                                      setTimeout(() => {
-                                        j1.scrollToAnchor(currentURL);
-                                      }, 1500);
-                                    },
-            headingsOffset:         1,
-            throttleTimeout:        options.throttleTimeout
+                                      // NOTE: scrolling (scrollSmooth) from tocbot DISABLED
+                                      if (options.scrollToAnchor) {
+                                        setTimeout(() => {
+                                          j1.scrollToAnchor(currentURL);
+                                        }, options.scrollToAnchorDelay);
+                                      }
+                                    }
           });
           /* eslint-enable */
 

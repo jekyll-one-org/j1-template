@@ -1,0 +1,49 @@
+
+.Main Menu properties
+[cols="4a,1a,2a,5a", options="header", width="100%", role="rtable mt-4"]
+
+|===
+|Parameter |Value |Default |Description
+
+|`item`
+|string
+|no default
+|The *top* level item (base menu level) in the Main Menu.
+
+|`sublevel`
+|string
+|no default
+|The *keyword* `sublevel` is used to build a dropdown menu that contains
+menu *items* (second menu level) or *nested* dropdown menus of a third
+or fourth menu level.
+
+|`dropdown`
+|string
+|no default
+|The *keyword* `dropdown` is used to build nested dropdown menus of a
+*third* or *fourth* level of the menu.
+
+|`title`
+|string
+|no default
+|The *title* string on an menu entry.
+
+|`icon`
+|string
+|no default
+|The *icon* used for an menu entry.
+
+|`href`
+|string
+|no default
+|The (string) *URL* is used to *reference* a page to be openend
+from the menu.
+
+|`target`
+|string
+|no default
+|The property `target` is used to instruct the browser to open the page
+referenced in a new window/tab. The only supported value for traget
+is: `blank`.
+
+|===

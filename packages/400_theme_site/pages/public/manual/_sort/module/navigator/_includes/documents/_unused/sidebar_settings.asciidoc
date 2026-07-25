@@ -1,0 +1,28 @@
+[source, yml]
+----
+# --------------------------------------------------------------------
+# Side bar settings
+#
+sidebar:
+  enabled:                    true
+  display_theme:              true
+  icon_size:                  xxlarge
+  icon_color:                 "#FFF"  
+  close_icon:                 close  
+  background_color:           md_grey_800
+
+  boxes:
+
+    - box:
+        title:                Site Info
+        type:                 linkbox
+        links:
+          Über:               /pages/about
+          Impressum:          /pages/impress_de
+          Nutzung:            /pages/terms_of_use_de
+          Datenschutz:        /pages/privacy-de
+          Lizensierung:       /pages/license_agreement_de
+          Contact:            mailto:contact@jekyll.one
+----
+
+

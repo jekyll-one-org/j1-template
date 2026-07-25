@@ -1,0 +1,25 @@
+
+.QuickSearch settings
+[source, yml]
+----
+# ------------------------------------------------------------------------------
+# QuickSearch
+#
+nav_quicksearch:
+  enabled:                            false
+
+  container_id:                       navigator_nav_topsearch
+  type:                               quicksearch
+
+  icon_family:                        MDI
+  icon_color:                         "#FFFFFF"
+  icon_size:                          mdi-2x
+  search_icon:                        magnify
+  close_icon:                         close
+  clear_icon:                         format-clear
+  input_color:                        rgba(0, 0, 0, 0.7)
+  background_color:                   "#FAFAFA"
+  placeholder:                        Your search expression
+  search_heading_lead:                ""
+  result_heading_lead:                ""
+----

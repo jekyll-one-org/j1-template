@@ -1,0 +1,534 @@
+---
+title:                                  Manuals
+tagline:                                master header (attic)
+date:                                   2022-02-20
+#last_modified:                         2023-01-01
+description: >
+                                        J1 Template is a Bootstrap V5 website template for the static
+                                        site generator Jekyll.
+                                        J1 Template ships with a master *header* module for all content pages
+                                        of a site. A master header, a so-called *attic*,  always gets placed at
+                                        the very top position of a page. All master header types provide a simple
+                                        yet powerful text overlay technique to present animated text taken from your
+                                        content pages (title and tagline) automatically.
+
+categories:                             [ Manual ]
+tags:                                   [ Modules, MasterHeader, Attic ]
+
+comments:                               false
+fab_menu_id:                            open_toc
+
+permalink:                              /pages/public/manuals/modules/attic/
+regenerate:                             false
+
+resources:                              [ lightbox ]
+resource_options:
+  - attic:
+
+#      padding_top:                      400
+#      padding_bottom:                   50
+#      opacity:                          0.8
+#      title_animate:                    animate__fadeInDown
+#      raised_level:                     3
+#      background_color_1:               "#1A237E"                               # indigo-900
+#      background_color_2:               "#3F51B5"                               # indigo-200
+
+      slides:
+        - url:                          /assets/image/module/attic/1920x1280/max-harlynking.jpg
+          alt:                          Photo by Max Harlynking on Unsplash
+          badge:
+            type:                       unsplash
+            author:                     Max Harlynking
+            href:                       //unsplash.com/@harlynkingm
+---
+
+// Page Initializer
+// =============================================================================
+// Enable the Liquid Preprocessor
+:page-liquid:
+
+// Set (local) page attributes here
+// -----------------------------------------------------------------------------
+// :page--attr:                         <attr-value>
+:url-jquery-backstretch--home:          http://www.jquery-backstretch.com/
+:ur-jquery-backstretch--github:         https://github.com/jquery-backstretch/jquery-backstretch
+
+//  Load Liquid procedures
+// -----------------------------------------------------------------------------
+{% capture load_attributes %}themes/{{site.template.name}}/procedures/global/attributes_loader.proc{%endcapture%}
+
+// Load page attributes
+// -----------------------------------------------------------------------------
+{% include {{load_attributes}} scope="all" %}
+
+
+// Page content
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+// Include sub-documents (if any)
+// -----------------------------------------------------------------------------
+
+J1 Template ships with a master *header* module for all content pages
+of a site. A master header, a so-called *attic*,  always gets placed at
+the very top position of a page. All master header types provide a simple
+yet powerful text overlay technique to present animated text taken from your
+content pages (title and tagline) automatically.
+
+The _jQuery_ plugin _jquery-backstretch_ is used as the core library for
+image- and video-based headers. The full documentation plus several examples
+can be found at {url-jquery-backstretch--home}[Backstretch Home Page, {browser-window--new}].
+The Git repository is available at {ur-jquery-backstretch--github}[Github, {browser-window--new}].
+
+== Header Types
+
+Headers are available as simple, text-based headers as well as headers
+displaying images -- supporting all common image formats like PNG (png),
+JPEG (jpg) and GIF (gif). Besides static images, video clips (online videos
+and HTML5 videos) are supported for image-based headers as well for more
+eye-catching experience.
+
+=== Text-based Header
+
+A simple, text-based header is quite useful for common content pages. This
+header type supports a colored background and animated text overlays for both
+the title and the tagline of a page.
+
+ifdef::backend-html5[]
+.Text Header Example
+lightbox::text-header-example[ 800, {data-text-header-example} ]
+endif::[]
+
+=== Image-based Header
+
+An image-based header is characterized by dynamically-resizable,
+slideshow-capable background images or videos. The image (or video) stretches
+the width full-size and will get resized automatically, if the size of the
+page changes. Image-based headers are fully responsive and get displayed in
+an excellent quality on any device like desktop computers, tablets or mobiles.
+
+ifdef::backend-html5[]
+.Image Header Example
+lightbox::image-header-example[ 800, {data-image-header-example} ]
+endif::[]
+
+
+== Header Configuration
+
+The header module of J1 Theme allows *multiple* headers for your Web.
+Generally, a header is related to a *layout* and can also be individualized
+on a *per page* basis.
+
+The module supports setting up as many different headers as layouts exist.
+Thus, the header on the home page (layout `home`) may be *different* from the
+header used for pages (layout `page`), posts (layout `post`) or collections
+(layout `collection`).
+
+While you can provide a *common* header for all content pages that belong to
+a certain *layout*, you can further *individualize* a header configuration on
+a *per page* basis for pages that that should have a unique header for.
+
+Configuration parameters are being processed in the following order:
+
+. Default values
+. Layout-specific values
+. Page-specific values
+
+=== General Configuration
+
+In J1 Theme the *header module* gets configured by the _YAML_ data file
+`_data/modules/j1_header.yml`. The data file consists of three sections:
+
+. Default header settings (text- and image-based headers)
+. Default image settings (image-based headers only)
+. Layout specific header settings (text- and image-based headers)
+
+.J1 Header Configuration File `j1_header.yml`
+[source, yaml, role="noclip"]
+----
+# ------------------------------------------------------------------------------
+# Default configuration settings
+#
+defaults:
+
+  # ----------------------------------------------------------------------------
+  # Global settings for (all) text- and image-based attics
+  #
+  debug:                                false
+  icon_family:                          MDI
+  icon_color:                           "#9E9E9E"
+  icon_size:                            default
+
+  raised_level:                         0
+  r_text:                               enabled
+  text_emphasis:                        stronger
+  padding_top:                          200
+  padding_bottom:                       50
+  margin_bottom:                        50
+
+  title_size:                           3em
+  title_color:                          rgba(255, 255, 255, 0.8)
+  title_animate:                        animate__bounceInDown
+  title_align:                          left
+
+  tagline_size:                         1.5em
+  tagline_color:                        rgba(255, 255, 255, 0.8)
+  tagline_animate:                      animate__fadeInRight
+  tagline_align:                        left
+
+  # Gradient effect (background color)
+  #
+  background_color_1:                   "#1A237E"
+  background_color_2:                   "#3F51B5"
+
+
+  action_enabled:                       false
+  action_url:                           "#void"
+  action_button:                        btn-default
+  action_icon:                          download
+  action_icon_family:                   MDI
+  action_text:                          Download Now
+
+  logo_enabled:                         false
+  logo_url:                             /assets/image/module/icons/j1/j1-512x512.jpg
+  logo_alt:                             Jekyll-One-Template
+  logo_height:                          196
+  logo_animate:                         animate__slideInDown
+----
+
+
+=== Layout-specific Configuration
+
+The configuration of layout-specific header is quite simple and can be found
+in the second section of the header config file. *Layout-specific* header
+are organized by the the `headers` array. This array consists of `header`
+key-value pairs (hashes) -- one per layout -- in which each header gets
+configured by a unique header `id` dedicated  for a `layout`.
+
+[NOTE]
+====
+Layout-specific headers use the *same* key-value pairs as specified by the
+*default section*. Technically, a layout-specific header configuration
+*overloads* all the parameters (by key) already specified by their defaults.
+====
+
+.Layout-specific Header Configuration
+[source, yaml, role="noclip"]
+----
+# ------------------------------------------------------------------------------
+# SETTINGS
+#
+settings:
+
+  # ----------------------------------------------------------------------------
+  # Layout specific properties
+  #
+  attics:
+
+    # --------------------------------------------------------------------------
+    # Home page (index.html)
+    #
+    - name:                             Home
+      attic:
+        enabled:                        true
+        id:                             attic_home
+        layout:                         home
+        padding_top:                    400
+        padding_bottom:                 50
+        opacity:                        0.5
+
+    # ----------------------------------------------------------------------------
+    # layouts posts|pages|blog_archive
+    #
+    - name:                             Pages and Posts
+      attic:
+        enabled:                        true
+        id:                             attic_page_post
+        layout:                         [ page, post, blog_archive ]
+        padding_top:                    400
+        padding_bottom:                 50
+        opacity:                        0.5
+
+    # ----------------------------------------------------------------------------
+    #  layouts collection|app
+    #
+    - name:                             Text pages
+      attic:
+        enabled:                        true
+        id:                             attic_text
+        layout:                         [ collection, app ]
+
+    # --------------------------------------------------------------------------
+    # layouts raw
+    #
+    - name:                             Raw pages
+      attic:
+        enabled:                        true
+        id:                             attic_raw
+        layout:                         [ raw ]
+        padding_top:                    400
+        padding_bottom:                 50
+        opacity:                        0.5
+----
+
+=== Page-specific Configuration
+
+The config data (key-value pairs) for a *page-specific* header configuration
+are to be set in the `front matter` of a page. In order to pass individual
+config data to a header, the element `master_header` in the `resource_options`
+array is used.
+
+ifdef::backend-html5[]
+.Image Header Example
+lightbox::image-header-example[ 800, {data-image-header-example} ]
+endif::[]
+
+Following is an example of how a page-specific config may look like. Here the
+image gets altered and an individual caption text is configured (photographer
+credits).
+
+.Page-specific Header Configuration
+[source, yaml, role="noclip"]
+----
+resource_options:
+  - attic:
+      padding_top:                      400
+      padding_bottom:                   50
+      opacity:                          0.5
+      slides:
+        - url:                          /assets/image/page/tour/images-1920x1280-bw.jpg
+          alt:                          Photo by Ricardo Gomez Angel on Unsplash
+          badge:
+            type:                       unsplash
+            author:                     Ricardo Gomez Angel
+            href:                       //unsplash.com/@ripato/portfolio
+----
+
+
+== Configuration Parameters
+
+A header always gets placed at the very top position of a page. Both header
+types -- text and image headers -- have some configuration parameters in
+common. See below for the general anatomy of a header.
+
+The common configuration parameters influence the following:
+
+* Size
+* Uplifting
+* Background color (Gradient)
+* Space between header and content
+* Placement, color and emphasis of title and tagline
+
+=== Anatomy of a Header
+
+Find all these configuration parameters visually displayed in the following
+screen shot below. It might be helpful for a better understanding of the common
+header parameters described in section <<Common Config Parameters>>.
+
+[NOTE]
+====
+The menu bar is placed as an *overlay* on top of the header. For details
+how to configure the *overlay style* of the menu-bar with a header, see the
+`NAV module` documentation.
+====
+
+ifdef::backend-html5[]
+.Anatomy of a Header
+lightbox::header-anatomy[ 800, {data-header-anatomy} ]
+endif::[]
+
+
+=== Common Config Parameters
+
+Common header parameters are used for *both* text-based headers *and*
+image-based headers. If *no* image configuration is given, the header is
+treated as a *text-based* header. Therefore, common header parameters can
+be regarded as *Text Header* parameters.
+
+In J1 Theme the *header module* parameters get configured in the YAML data
+file `_data/modules/j1_header.yml`. The default values areconfigured as
+follows:
+
+.Default Master Header (Attic) settings
+[source, yaml, role="noclip"]
+----
+# ------------------------------------------------------------------------------
+# Default configuration settings
+#
+defaults:
+
+  # ----------------------------------------------------------------------------
+  # Global settings for text- and image-based attics
+  #
+  debug:                                false
+  icon_family:                          MDI
+  icon_color:                           "#9E9E9E"
+  icon_size:                            default
+
+  raised_level:                         0
+  r_text:                               enabled
+  text_emphasis:                        stronger
+  padding_top:                          200
+  padding_bottom:                       50
+  margin_bottom:                        50
+
+  title_size:                           3em
+  title_color:                          rgba(255, 255, 255, 0.8)
+  title_animate:                        animate__bounceInDown
+  title_align:                          left
+
+  tagline_size:                         1.5em
+  tagline_color:                        rgba(255, 255, 255, 0.8)
+  tagline_animate:                      animate__fadeInRight
+  tagline_align:                        left
+
+  # Gradient effect (background color)
+  #
+  background_color_1:                   "#0D47A1"
+  background_color_2:                   "#0D47A1"
+
+  action_enabled:                       false
+  action_url:                           "#void"
+  action_button:                        btn-default
+  action_icon:                          download
+  action_icon_family:                   MDI
+  action_text:                          Download Now
+
+  logo_enabled:                         false
+  logo_url:                             /assets/image/module/icons/j1/j1-512x512.jpg
+  logo_alt:                             Jekyll-One-Template
+  logo_height:                          196
+  logo_animate:                         animate__slideInDown
+----
+
+[NOTE]
+====
+For many configuration parameters *symbolic* values are used like `large`,
+`larger` or `xlarge` for sizes or e.g `md_indigo` or `md_red_300` for colors.
+For best results regarding responsiveness, sizes should be configured as
+*symbolic* values. For a better reading (and standardisation) colors should
+be configured by using their _names_ taken from the template's color scheme.
+For example: the RGB value for `md_indigo` is `#3F51B5` -- one out of 16
+billion possible RGB values most people won't be able to remember by heart.
+====
+
+See the following table for common header parameters. Including a description
+what they are there for, what type they are and what values are possible for
+their configuration.
+
+.Common Header Configuration Parameters
+include::{tabledir}/common_header_parameters.asciidoc[]
+
+=== Image Header Parameters
+
+The header component of J1 Themes integrates the jQuery plugin _Backstretch_
+for image- or video headers. Hence, image and video parameter belong to the
+_Backstretch_ library.
+
+.Image Header Configuration Parameters
+include::{tabledir}/image_header_parameters.asciidoc[]
+
+==== Additional Image Header Parameters
+
+Images from *3rd party* sources are usually protected by copyright laws.
+Depending on the respective license you might be allowed to use them, if the
+author or photographer is attributed in a proper way. As for most _Creative
+Commons Licenses_ you need to mention the *name* of the author, the *title*
+of the work, if available and a *URL* that is associated with.
+
+You can achieve this simply by placing a *caption text* for a configurable URL
+on the image and your're done.
+
+ifdef::backend-html5[]
+.Image Header using a Badge (Unsplash)
+lightbox::image-header-badge[ 800, {data-image-header-badge} ]
+endif::[]
+
+.Additional Image Header Configuration Parameters
+include::{tabledir}/additional_image_header_parameters.asciidoc[Additional Image Header Configuration Parameters]
+
+=== Video Header Parameters
+
+For *video-based* headers some additional configuration parameters control the
+video processing; like sound or the duration the video is playing.
+
+.Video Header Configuration Parameters
+include::{tabledir}/video_header_parameters.asciidoc[]
+
+=== Image and Video Transitions
+
+If more than one image or video is given for a header, the header plays the
+configured items as a slide show.
+
+.Image and Video Transitions
+include::{tabledir}/image_and_video_transitions.asciidoc[]
+
+==== Multiple Transitions
+
+If multiple transitions are specified for the parameter `transition`, the
+transition is chosen *randomly*: this might be helpful for e.g. for
+demonstratiion purposes.
+
+.Multiple Transitions
+[source, yaml, role="noclip"]
+----
+- url:        /assets/video/headers/still/ocean.jpg
+  transition: "push_left|push_right|cover_up|cover_down|fade|fadeInOut"
+  ...
+----
+
+/////
+== Header Cheat Sheet
+
+For experienced users -- and quick access -- all configuration parameters
+for the header module are summarized in tables.
+
+=== Text Header Defaults
+
+Common (text) header defaults are shown visually at <<Anatomy of a Header>>.
+Check out this section to see all parameters for a better understanding. Find
+all common parameters and their defaults for the header listed below:
+
+.Common (Text) Header Defaults
+include::{tabledir}/common_header_parameters.asciidoc[]
+
+=== Image Header Defaults
+
+Find all parameter and their defaults for a image header listed
+below:
+
+.Image Header Defaults
+include::{tabledir}/150_image_and_video_header_defaults.asciidoc[]
+
+==== Additional Image Header Defaults
+
+Find all parameters and their defaults for an image header listed
+below:
+
+.Additional Image Header Defaults
+include::{tabledir}/151_additional_image_and_video_header_defaults.asciidoc[]
+
+=== Video Header Defaults
+
+Find all parameters and their defaults for a image header listed
+below:
+
+.Video Header Defaults
+include::{tabledir}/130_video_header_parameters.asciidoc[]
+
+=== Image Header Transitions
+
+Find all available transition types for a image header listed
+below:
+
+.Image Header Transitions
+include::{tabledir}/140_image_and_video_transitions.asciidoc[]
+
+=== Text Sizes
+
+Find all *symbolic* text *sizes* and their respective *CSS values*
+listed below:
+
+.Text sizes
+include::{tabledir}/000_text_sizes.asciidoc[]
+
+/////

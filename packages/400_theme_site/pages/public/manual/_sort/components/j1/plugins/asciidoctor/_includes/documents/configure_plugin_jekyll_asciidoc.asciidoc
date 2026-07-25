@@ -1,0 +1,306 @@
+== Configure plugin `jekyll-asciidoc`
+
+This section describes the configuration options for this plugin, which are
+*optional*. You should at least assign an empty Hash as a default (e.g. `{}`)
+to the `asciidoc` and `asciidoctor` keys in site config file `_config.yml`,
+respectively, if you don't plan on making any further customizations.
+
+[source, yaml]
+----
+asciidoc:         {}
+asciidoctor:      {}
+----
+
+Using these placeholder values prevents initialization from being performed more
+than once when using watch mode
+(see issue link:{url-jekyll-issues--4858}[jekyll#4858, {browser-window--new}]).
+
+By default, this plugin uses Asciidoctor to convert AsciiDoc files. Because
+Asciidoctor is currently the only option, the default setting is equivalent
+to the following configuration in site config file `_config.yml`:
+
+[source, yaml]
+----
+asciidoc:
+  processor:      asciidoctor
+----
+
+IMPORTANT: The `asciidoc` block should only appear _once_ inside site config
+file `_config.yml`. If you define any other options that are documented in
+this section, you should append them to the `asciidoc` block.
+
+To tell Jekyll which file extensions to match as AsciiDoc files, append the
+`ext` option to the `asciidoc` block of your site config file `_config.yml`:
+
+[source, yaml]
+----
+asciidoc:
+  ext:            asciidoc,adoc,ad
+----
+
+The extensions shown in the previous listing are the default values, so you
+don't need to specify this option if those defaults are sufficient.
+
+AsciiDoc attributes defined in the document header whose names begin with
+`page-` are promoted to page variables* The part of the name after the `page-`
+prefix is used as the key (e.g. page-layout becomes layout)* If you want to
+change this attribute prefix, append the `page_attribute_prefix` option to the
+`asciidoc` block of your site config file `_config.yml`:
+
+[source, yaml]
+----
+asciidoc:
+  page_attribute_prefix: jekyll
+----
+
+A hyphen is automatically added to the value of this configuration setting if
+the value is non-empty (e.g, jekyll-).
+
+Since version 2.0.0 of this plugin, all non-hidden AsciiDoc files are processed
+by default, even those without a front matter header* If you only want files
+containing a front matter header to be processed (as was the behavior prior
+to version 2.0.0), add the `require_front_matter_header` option
+to the `asciidoc` block of your site config file `_config.yml`:
+
+[source, yaml]
+----
+asciidoc:
+  require_front_matter_header: true
+----
+
+
+In addition to the built-in attributes in AsciiDoc, the following additional
+AsciiDoc attributes are automatically defined by this plugin and available
+to all Asciidoc-based pages:
+
+[source, config]
+----
+site-root=(absolute path of root directory)
+site-source=(absolute path of source directory)
+site-destination=(absolute path of output directory)
+site-baseurl=(value of the baseurl config option)
+site-url=(value of the url config option)
+env=site
+env-site
+site-gen=jekyll
+site-gen-jekyll
+builder=jekyll
+builder-jekyll
+jekyll-version=(value of the Jekyll::VERSION constant)
+idprefix
+idseparator=-
+linkattrs=@
+----
+
+The following attributes are defined per page:
+
+----
+outpath=(path of page relative to baseurl)
+----
+
+You can pass additional attributes to AsciiDoc, or override default attributes
+provided by the plugin, by using the `attributes` option of the `asciidoctor`
+block in your site config file `_config.yml`* The value of this option can either be an Array
+containing key-value pairs:
+
+[source, yaml]
+----
+asciidoctor:
+  attributes:
+    - idprefix=_
+    - source-highlighter=pygments
+    - pygments-css=style
+----
+
+or key-value pairs defined as a Hash:
+
+[source, yaml]
+----
+asciidoctor:
+  attributes:
+    idprefix: _
+    source-highlighter: pygments
+    pygments-css: style
+----
+
+When using the Hash syntax, you must use an empty string value to set a
+valueless attribute such as `sectanchors`:
+
+[source, yaml]
+----
+asciidoctor:
+  attributes:
+    sectanchors:  ''
+----
+
+You may use attribute references in the attribute value to reference any
+implicit or already defined attribute* For example, to set the `iconsdir`
+attribute based on the `imagesdir` attribute, use the following:
+
+[source, yaml]
+----
+asciidoctor:
+  attributes:
+    imagesdir:    /images
+    iconsdir:     '{imagesdir}/icons'
+----
+
+CAUTION: If the value begins with an attribute reference, and you're defining
+the attributes using the Hash structure, you must enclose the value in quotes.
+Beware that there are additional edge cases when the value must be enclosed
+in quotes.
+
+Since version 2.1.0 of this plugin, you can remove a previously defined
+attribute by prefixing the name with a minus sign (without any space
+between):
+
+[source, yaml]
+----
+asciidoctor:
+  attributes:
+    - idprefix:
+----
+
+In addition to `attributes`, you may define any other option key (e.g. `safe`)
+recognized by the link:{url-asciidoctor-docs--api-options}[Asciidoctor API].
+One of those is `base_dir`, which is covered in the next section.
+
+=== Specifying the Base Directory
+
+In Asciidoctor, the base directory (i.e., `base_dir` option) is used as the root
+when resolving relative include paths in top-level documents.
+
+By default, this plugin does not specify a base directory when invoking the
+Asciidoctor API* Asciidoctor will therefore use the current working directory
+(i.e., the project root) as the base directory.
+
+If your source directory is not the project root, and you want Asciidoctor to
+use the source directory as the base directory, set the value of the `base_dir`
+option to `:source`.
+
+[source, yaml]
+----
+asciidoctor:
+  base_dir:       ':source'
+  ...
+----
+
+If, instead, you want the base directory to track the directory of the document
+being processed, and you're using Jekyll 3 or better, you can set the value of
+the `base_dir` option to `:docdir`* This behavior matches how Asciidoctor works
+when running it outside of Jekyll* Since the base directory is also the jail,
+we also recommend setting the `safe` option to `unsafe` so that you can still
+resolve paths outside of this directory.
+
+[source, yaml]
+----
+asciidoctor:
+  base_dir:       ':docdir'
+  safe:           unsafe
+  ...
+----
+
+IMPORTANT: The `:docdir` setting is not available when using Jekyll 2.
+
+You can also set the `base_dir` option to any relative or absolute path.
+In that case, the same value will be used for all documents.
+
+=== Using Asciidoc attributes in Liquid
+
+Let's say you want to reuse your AsciiDoc attributes in a Liquid template.
+This section describes how to do it.
+
+Liquid can only access simple data structures, not complex ones like the one
+used to store site-wide AsciiDoc attributes* (Site-wide AsciiDoc attributes
+are stored deep within the Jekyll configuration data as a Hash with symbol
+keys)* This puts them out of the reach of Liquid templates by default.
+
+This plugin must store site-wide AsciiDoc attributes in this way due to how
+Jekyll is implemented and the lifecycle it exposes for plugins* That part can't
+be changed.
+
+The plugin is limited by Jekyll's design* However, YAML provides a mechanism
+that we can leverage to expose these attributes to our Liquid templates.
+
+First, you define your AsciiDoc attributes at the top level of your configuration
+file where Liquid is able to access them* If you also assign a YAML reference
+to this key, you can then pass that Hash to the attributes key in the asciidoctor
+block, thus allowing the configuration to be shared.
+
+[source, yaml]
+----
+asciidoc_attributes: &asciidoc_attributes
+  imagesdir=/images
+asciidoctor:
+  attributes: *asciidoc_attributes
+  ...
+----
+
+You can now reference one of the site-wide AsciiDoc attributes in the Liquid
+template as follows:
+
+----
+{% raw %}{{ site.asciidoc_attributes.imagesdir }}{% endraw %}
+----
+
+Keep in mind that the value of the attribute will be unmodified from the value
+defined in the configuration file.
+
+=== Enabling Hard Line Breaks globally
+
+Many Jekyll users are used to writing in GitHub-flavored Markdown (GFM), which
+preserves hard line breaks in paragraph content* Asciidoctor supports this
+feature for AsciiDoc files.
+
+(In fact, previous versions of this plugin enabled this behavior by default).
+If you want to enable this behavior for AsciiDoc files, add the `hardbreaks-option`
+attribute to the Asciidoctor attributes configuration in your site's
+site config file `_config.yml` file:
+
+[source, yaml]
+----
+asciidoctor:
+  attributes:
+    - hardbreaks-option
+----
+
+If you want to allow individual files to override this setting, then assign the value `@` to the attribute:
+
+[source, yaml]
+----
+asciidoctor:
+  attributes:
+    - hardbreaks-option=@
+----
+
+If you already have AsciiDoc attributes defined in the site config file `_config.yml`, the
+new attribute should be added as a sibling entry in the YAML collection.
+
+WARNING: Keep in mind, if you enable hard line breaks, you won't be able
+to use the https://asciidoctor.org/docs/asciidoc-recommended-practices/#one-sentence-per-line[one sentence-per-line writing technique, {window}].
+
+=== Running in Safe Mode
+
+If you want to use this plugin when running Jekyll in safe mode, you must
+add the *jekyll-asciidoc* gem to the whitelist in your site's
+site config file `_config.yml` file:
+
+[source, yaml]
+----
+whitelist:
+  - jekyll-asciidoc
+----
+
+Safe mode is enabled either through the `--safe` flag:
+
+[source, sh]
+----
+  jekyll build --safe
+----
+
+or the `safe` configuration option in your site's site config file `_config.yml` file:
+
+[source, yaml]
+----
+safe: true
+----

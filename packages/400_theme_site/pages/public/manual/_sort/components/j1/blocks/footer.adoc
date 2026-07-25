@@ -1,0 +1,78 @@
+---
+title:                                  Footer
+title_extention:                        Footer for J1 Template
+tagline:                                User Guide For J1 Template
+
+date:                                   2022-08-14
+#last_modified:                         2023-01-01
+
+description: >
+                                        A footer for J1 Theme is a block element displayed on each and
+                                        every page. The setup is similiar to block elements like banner
+                                        and panel, but the configuration of the placement is different.
+                                        To place a footer on all pages, the layout `default` is used.
+keywords: >
+                                        Jekyll, JekyllOne, Theme, User Guide, Placement, Block Element,
+                                        Footer, Manual
+
+categories:                             [ Manual ]
+tags:                                   [ Blocks, Footer ]
+
+image:
+  path:                                 /assets/image/module/attic/jeshoots-1-1920x1280.jpg
+  width:                                1920
+  height:                               1280
+
+tts:                                    true
+comments:                               false
+regenerate:                             false
+permalink:                              /pages/public/manuals/components/j1/blocks/footer/
+
+resources:                              [ lightbox ]
+resource_options:
+  - attic:
+      slides:
+        - url:                          /assets/image/module/attic/jeshoots-1-1920x1280.jpg
+          alt:                          Photo by JESHOOTS.COM on Unsplash
+          badge:
+            type:                       unsplash
+            author:                     JESHOOTS.COM
+            href:                       //unsplash.com/@jeshoots
+---
+
+// Page Initializer
+// =============================================================================
+// Enable the Liquid Preprocessor
+:page-liquid:
+
+// Set (local) page attributes here
+// -----------------------------------------------------------------------------
+// :page--attr:                         <attr-value>
+
+//  Load Liquid procedures
+// -----------------------------------------------------------------------------
+{% capture load_attributes %}themes/{{site.template.name}}/procedures/global/attributes_loader.proc{%endcapture%}
+
+// Load page attributes
+// -----------------------------------------------------------------------------
+{% include {{load_attributes}} scope="all" %}
+
+
+// Page content
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[role="dropcap"]
+A footer for J1 Theme is a block element displayed on each and every page.
+The setup of a footer is similiar to block elements like banner and panel,
+but the configuration of the placement is different. Note, to place a footer
+on all pages, the layout `default` is used.
+
+[role="mb-5"]
+.Footer Example
+lightbox::blocks--footer[ 1280, {data-images-blocks--footer} ]
+
+//CAUTION: This page is under construction. An updated version will be
+//available soon.
+
+// Include sub-documents (if any)
+// -----------------------------------------------------------------------------
+include::{documentdir}/footer.asciidoc[]

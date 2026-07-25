@@ -193,6 +193,16 @@
 
 
 # ------------------------------------------------------------------------------
+# Menu TOOLS
+#
+- item:                                 Tools
+  sublevel:
+
+    - title:                            J1 Video Player
+      href:                             /pages/public/tools/videoPlayer/
+      icon:                             video
+
+# ------------------------------------------------------------------------------
 # Menu MANUAL
 #
 - item:                                 Manual
@@ -203,35 +213,15 @@
   #   icon:                             foot-print
 
     # --------------------------------------------------------------------------
-    # Integrations
-    #
-    - title:                            Integrations
-      icon:                             alpha-i-box
-      dropdown:
-
-        - title:                        YouTube iFrame API
-          href:                         /pages/public/manual/youtube/iframe_api/
-          icon:                         video
-
-        - title:                        VideoJS
-          icon:                         video
-          dropdown:
-
-          - title:                      Programming Interface
-            href:                       /pages/public/manual/integrations/videojs/api/
-            icon:                       video
-
-          - title:                      Plugins
-            href:                       /pages/public/manual/integrations/videojs/plugins/
-            icon:                       video
-
-
-    # --------------------------------------------------------------------------
     # Modules
     #
     - title:                            Modules
       icon:                             alpha-m-box
       dropdown:
+
+        - title:                        Toccer
+          href:                         /pages/public/manual/module/toc/toccer_api/
+          icon:                         menu
 
         - title:                        J1 VideoPlayer
           href:                         /pages/public/manuals/videoplayer/videoplayer_api/
@@ -271,6 +261,28 @@
               href:                     /pages/public/manual/module/lightboxes/lightgallery_api/
               icon:                     flashlight
 
+    # --------------------------------------------------------------------------
+    # Integrations
+    #
+    - title:                            Integrations
+      icon:                             alpha-i-box
+      dropdown:
+
+        - title:                        YouTube iFrame API
+          href:                         /pages/public/manual/youtube/iframe_api/
+          icon:                         video
+
+        - title:                        VideoJS
+          icon:                         video
+          dropdown:
+
+          - title:                      Programming Interface
+            href:                       /pages/public/manual/integrations/videojs/api/
+            icon:                       video
+
+          - title:                      Plugins
+            href:                       /pages/public/manual/integrations/videojs/plugins/
+            icon:                       video
 
 # ------------------------------------------------------------------------------
 # Menu BLOG

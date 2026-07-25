@@ -1,0 +1,77 @@
+---
+title:                                  Jekyll Pages
+title_extention:                        Managing Article Contents for J1 Template
+tagline:                                Managing Article Contents
+
+date:                                   2022-01-01
+#last_modified:                         2023-01-01
+
+description: >
+                                        To create content using the Theme JekyllOne for Jekyll,
+                                        no deep HTML knowledge is required. The sources for all
+                                        website content pages are based on the well-known top-level
+                                        markup languages Asciidoc (Asciidoctor) or Markdown. Jekyll
+                                        processes the Markup source code fully automated and puts out
+                                        valid standalone HTML5 code.
+keywords: >
+                                        Jekyll, JekyllOne, Theme, User Guide, Content, Pages,
+                                        Manual
+
+categories:                             [ Manual ]
+tags:                                   [ Jekyll, Pages ]
+
+comments:                               false
+fab_menu_id:                            open_toc
+
+image:
+  path:                                 /assets/image/module/attic/jeshoots-1-1920x1280.jpg
+  width:                                1920
+  height:                               1280
+
+tts:                                    true
+comments:                               false
+regenerate:                             false
+permalink:                              /pages/public/manuals/components/j1/content/pages/
+
+resources:                              [ lightbox ]
+resource_options:
+  - attic:
+      slides:
+        - url:                          /assets/image/module/attic/jeshoots-1-1920x1280.jpg
+          alt:                          Photo by JESHOOTS.COM on Unsplash
+          badge:
+            type:                       unsplash
+            author:                     JESHOOTS.COM
+            href:                       //unsplash.com/@jeshoots
+---
+
+// Page Initializer
+// =============================================================================
+// Enable the Liquid Preprocessor
+:page-liquid:
+
+// Set (local) page attributes here
+// -----------------------------------------------------------------------------
+// :page--attr:                         <attr-value>
+
+//  Load Liquid procedures
+// -----------------------------------------------------------------------------
+{% capture load_attributes %}themes/{{site.template.name}}/procedures/global/attributes_loader.proc{%endcapture%}
+
+// Load page attributes
+// -----------------------------------------------------------------------------
+{% include {{load_attributes}} scope="all" %}
+
+
+// Page content
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[role="dropcap"]
+To create content using the Theme JekyllOne for Jekyll, no deep HTML
+knowledge is required. The sources for all website content pages are
+based on the well-known top-level markup languages Asciidoc (Asciidoctor)
+or Markdown. Jekyll processes the Markup source code fully automated
+and puts out valid standalone HTML5 code.
+
+// Include sub-documents (if any)
+// -----------------------------------------------------------------------------
+include::{documentdir}/manage_pages.asciidoc[]

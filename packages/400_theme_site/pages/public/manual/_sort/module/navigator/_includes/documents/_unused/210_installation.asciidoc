@@ -1,0 +1,109 @@
+== Module installation
+
+The *installation* of a _J1 Module_ is done in  *2-steps*: load the gem
+with the _Ruby_ installation (1) followed by a *registration* of the *module* (2)
+with the template system. 
+
+To use a _J1 Module_ with _J1 Theme_, first of all it needs to be downloaded
+to your _Ruby_ installation. This can be done *automatically* by configuring 
+the module using the `Gemfile` of _J1 Theme_ or *manually* using the _Ruby_
+`gem` command.
+
+=== Automated _gem_ load
+
+Using a _J1 Module_ with the template is quite simple: add the module's `gem`
+to the `Gemfile` of _J1 Theme_ and you are done. This is the *preferred*
+method for all *standard* modules available with the template system. 
+
+.`Gemfile` of J1 Theme
+----
+source "https://rubygems.org"
+# -----------------------------------------------
+gem 'activesupport', '>= 5.0.1'
+gem 'addressable', '>= 2.5.0'
+gem 'asciidoctor', '>= 1.5.5'
+...
+#
+# The template gem
+gem 'j1_template', '>= 0.0.1'
+#
+# followed by (all) standard module gem's
+gem 'j1m_nav', '>= 0.0.1'
+...
+----
+
+[TIP]
+====
+All *standard* modules for _J1 Theme_ are are prefixed by _j1m_. To get a
+list of all *already installed* modules run `gem list j1m --local`. To get a 
+list of all *available* (standard) _gem_ on _rubygems.org_ , run 
+`gem list j1m --remote`.
+====
+
+If *not* already done, or to *re-add* all the _gem_ bundled with the `Gemfile`,
+run the _bundler_ to initiate the _gem_ download:
+
+.Install all gem using `bundle` by issuing the command `install`
+[source, bash]
+----
+  bundle install
+  Fetching gem metadata from https://rubygems.org/.........
+  Fetching version metadata from https://rubygems.org/..
+  Fetching dependency metadata from https://rubygems.org/.
+  Resolving dependencies...
+  Using concurrent-ruby 1.0.5
+  ...
+  Using jekyll-watch 1.5.0
+  Using jekyll 3.4.2
+  Using j1_template 0.0.1
+  Using jekyll-asciidoc 2.0.1
+  Bundle complete! 46 Gemfile dependencies, 47 gems now installed.
+  Use `bundle show [gemname]` to see where a bundled gem is installed.  
+----
+
+[IMPORTANT]
+====
+All *standard* modules for _J1 Theme_ are gem-based and already configured
+with the `Gemfile` of _J1_Template_. For modules from *other sources*, it is 
+needed to install those _gem_ manually (or add them to the `Gemfile` of 
+_J1_Template_ for permanent use). 
+====
+
+=== Manual _gem_ load
+
+A _gem_ can be manually loaded with your _Ruby_ installation using the _Ruby_
+command `gem`:
+
+.Install a gem manually using Ruby command `gem`
+[source, bash]
+----
+  gem install j1m_nav --no-ri --no-rdoc
+  Fetching: j1m_nav-0.0.1.gem (100%)
+  Successfully installed j1m_nav-0.0.1
+  1 gem installed
+----
+
+=== Register a _J1 Module_
+
+To make a module *usable* for the template system _J1 Theme_, the module
+has to be *registered* first. Register a module means:
+
+. Copying all library files needed (from the _Ruy gem_ folder) to the site (asset path)
+. Install the module *adapter* with the template *core system*
+. Adding the configuration data to the site data path `&#x5F;data`
+
+.Register a gem using (J1 Theme) command `j1`
+[source, bash]
+----
+  bundle exec j1 module --register
+  Checking for un-registerd modules ...
+  Found: j1m-bootsnav (v0.0.1)
+  Successfully registered j1m-bootsnav
+  1 module registerd
+----
+
+[NOTE]
+====
+All *standard* modules for _J1 Theme_ are automatically *registered* if a 
+new site (scaffold) is created by the J1 Theme command: `j1 new path/to/site`.
+====
