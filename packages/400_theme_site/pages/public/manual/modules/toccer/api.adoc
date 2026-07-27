@@ -35,6 +35,7 @@ resource_options:
   - toccer:
       collapseDepth:                    2
   - attic:
+      opacity:                          .5
       slides:
         - url:                          /assets/image/module/attic/1920x1280/vladimir-kudinov.jpg
           alt:                          Photo by Vladimir Kudinov on Unsplash

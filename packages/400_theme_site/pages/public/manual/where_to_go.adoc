@@ -4,7 +4,7 @@ title_extention:                        Route through the manual pages of J1 Tem
 tagline:                                Fasten Your Way
 
 date:                                   2023-02-25
-last_modified:                          2026-05-25
+last_modified:                          2026-07-25
 
 description: >
                                         Get on that page first to route through the manual

@@ -52,8 +52,10 @@ settings:
 
         playbackRates:
           enabled:                      true
-          values:                       [ 0.5, 1, 2 ]
+          values:                       [ 0.25, 0.5, 1, 1.5, 2 ]
 
+        # PLUGIN settings
+        #
         plugins:
           enabled:                      true
 
@@ -87,55 +89,11 @@ settings:
       videoJS:
         autoStart:                      true
 
+
     # --------------------------------------------------------------------------
     # Player 3 – Tiny Desk Concerts
     #
     - player:
-
-      # GENERAL settings
-      #
-      enabled:                          true
-      id:                               player_tiny_desk_concerts
-      description:                      NPR Tiny Desk Concerts
-
-      # PLAYLIST settings
-      #
-      playlist:
-        preload:                        [ tinydesk-concerts.json ]
-        preload_attempts:               4
-
-        type:                           cards                                   # list | cards
-
-        cards:
-          perRow:                       3
-
-      # UI interface settings
-      #
-      ui_elements:
-        edit_playlist_button:           false
-
-        playlist_rate_button:           true
-        playlist_edit_button:           true
-        playlist_delete_button:         false
-
-        mergeSwitch:                    false
-
-      # VIDEOJS settings
-      #
-      videoJS:
-        autoStart:                      true
-
-        playbackRates:
-          enabled:                      true
-          values:                       [ 0.5, 1, 2 ]
-
-        plugins:
-          enabled:                      true
-
-          playlist:
-            enabled:                    true
-
-
 
       # GENERAL settings
       #

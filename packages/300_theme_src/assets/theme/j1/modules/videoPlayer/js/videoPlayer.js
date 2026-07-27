@@ -164,7 +164,8 @@
     /youtube\.com\/v\/([a-zA-Z0-9_-]{11})/
   ]);
 
-  const YOUTUBE_RE              = /(?:youtu\.be\/.*|youtube\.com\/.*)/;
+  // jadamas, 2026-07-27: Added YouTube site ytimg for detection
+  const YOUTUBE_RE              = /(?:youtu\.be\/.*|youtube\.com\/.*|ytimg\.com\/.*)/;
   const YOUTUBE_ID_RE           = /(?:youtu\.be\/.*|youtube\.com\/(?:embed\/|v\/|watch\?v=|shorts\/))([A-Za-z0-9_-]{11})/;
   const YOUTUBE_POSTER_QUALITY  = 'hqdefault';
 
@@ -1075,7 +1076,8 @@
       // the adapter's later (idempotent) setPlayerID() call. With no player id
       // (default instance) _pid() returns the bare key, so single-player behaviour
       // is unchanged. Mirrors the STORAGE_KEY/INDEX_KEY namespacing of #40.
-      this._displayMode                   = localStorage.getItem(_pid('playlistMode')) || 'list'; // jadams
+      // this._displayMode                   = localStorage.getItem(_pid('playlistMode')) || 'list'; // jadams
+      this._displayMode                   = localStorage.getItem(_pid('playlistMode')) || 'cards'; // jadams
       this._mergeMode                     = localStorage.getItem(_pid('mergeMode')) === 'true';
       this._loopEnabled                   = localStorage.getItem(_pid('playlistLoop')) === 'true';
       this._escapeHtmlEl                  = document.createElement('div');
@@ -1424,7 +1426,7 @@
           let value;
 
           if (typeof rule === 'function') {
-            // jadams, 2026-ß6-25: enable|disable vjs poster (plugins.playlist.poster)
+            // jadams, 2026-06-25: enable|disable vjs poster (plugins.playlist.poster)
             if (targetKey === 'poster' && poster && isYt) {
               value = null;
             } else {
@@ -6671,7 +6673,9 @@
     // called on handleImport()
     //
     handleFileSelected(event) {
-      const file = event.target.files[0];
+      const options = this._videoPlayerOptions;
+      const file    = event.target.files[0];
+
       if (!file) return;
 
       const reader = new FileReader();
@@ -6773,12 +6777,12 @@
             isDev && logger.warn('\n' + 'playlistManager: no playable first entry found after playlist file import');
           }
 
-          // document.getElementById(_pid('playlistSortSelect')); 
-          const videoTitleElement = document.getElementById(_pid('videoplayer_playlist_parent'));
-          // const videoTitleElement = document.getElementById('video_title');
-          if (videoTitleElement) {
-            scrollToElement(videoTitleElement);
-          }
+          // jadams, 2026-07-27: disable scrolling
+          // const videoTitleElement = document.getElementById(_pid('videoplayer_playlist_parent'));
+          // // const videoTitleElement = document.getElementById('video_title');
+          // if (videoTitleElement) {
+          //   scrollToElement(videoTitleElement);
+          // }
 
         } catch (err) {
           logger.error('\n' + `import from file failed: ${err}`);
@@ -6979,11 +6983,11 @@
         isDev && logger.warn('\n' + 'playlistManager: no playable first entry found after server playlist load');
       }
 
-      // const videoTitleElement = document.getElementById('video_title');
-      const videoTitleElement = document.getElementById(_pid('videoplayer_playlist_parent'));
-      if (videoTitleElement) {
-        scrollToElement(videoTitleElement);
-      }
+      // jadams, 2026-07-27: disable scrolling
+      // const videoTitleElement = document.getElementById(_pid('videoplayer_playlist_parent'));
+      // if (videoTitleElement) {
+      //   scrollToElement(videoTitleElement);
+      // }
 
     }
   } // END playlistIOHandler
