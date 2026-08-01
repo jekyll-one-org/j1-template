@@ -1,6 +1,6 @@
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/modules/navigator/navigator.js (2)
+ # ~/assets/theme/j1/modules/navigator/navigator.js (3)
  # Provides all JavaScript core functions for J1 Navigator
  #
  # Product/Info:

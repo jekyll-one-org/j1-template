@@ -1,6 +1,6 @@
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/modules/navigator/navigator.js (2)
+ # ~/assets/theme/j1/modules/navigator/navigator.js
  # Provides all JavaScript core functions for J1 Navigator
  #
  # Product/Info:
@@ -18,6 +18,7 @@
  # -----------------------------------------------------------------------------
 */
 
+'use strict';
 // -----------------------------------------------------------------------------
 // ESLint shimming
 // -----------------------------------------------------------------------------
@@ -26,16 +27,15 @@
 /* eslint no-undef: "off"                                                     */
 // -----------------------------------------------------------------------------
 
-'use strict';
 // -----------------------------------------------------------------------------
-// Fix J1 Navigator issue #1
+// TODO: Height of dropdowns are to be limited in general
+
+// -----------------------------------------------------------------------------
 // Navigator core registered as 'j1.api.navigator'
 // -----------------------------------------------------------------------------
-//
-window.j1     = window.j1     || {};
-window.j1.api = window.j1.api || {};
 
-window.j1.api.navigator = (function navigator(options) {
+(function navigator(options) {
+// module.exports = function navigator ( options ) {
 
   // ---------------------------------------------------------------------------
   // global vars
@@ -57,210 +57,6 @@ window.j1.api.navigator = (function navigator(options) {
   }, options );
 
   // ---------------------------------------------------------------------------
-  // Fix J1 Navigator issue #3
-  // Private state and helpers for the "active" menu item management
-  //
-  // Background:
-  // Fix #2 registered a DELEGATED click handler on 'nav.navbar.navigator' that
-  // marks the clicked li.dropdown-item as "active". Two gaps were flagged for
-  // review by that fix and are closed here:
-  //
-  //   (1) The "active" class did NOT survive navigation. Each dropdown item
-  //       loads a new page, so the class set on click is gone on page load.
-  //       Closed by restoreActiveMenuItem(), matching the href of all menu
-  //       items against window.location.pathname on load.
-  //
-  //   (2) The MOBILE menu (mmenu-light) was NOT covered. Verified against
-  //       ~/assets/theme/j1/modules/mmenu_light/js/mmenu.js: the plugin
-  //       method offcanvas() MOVES the menu node out of its original
-  //       container into the off-canvas drawer (div.mm-ocd__content, a direct
-  //       child of <body>) whenever the media query matches, and moves it
-  //       back when it does not. The mobile menu is therefore NEVER inside
-  //       'nav.navbar.navigator', and a handler scoped to that element can
-  //       not see it. Closed by scoping the handler to the DOCUMENT and
-  //       filtering on the href of the clicked item instead of on a fixed
-  //       container.
-  //
-  // NOTE: Items are matched by their normalized link path. Desktop and mobile
-  // render the SAME menu, so BOTH copies of the current page's item are marked
-  // active. This is intentional: whichever menu the user opens shows the
-  // correct state.
-  // ---------------------------------------------------------------------------
-  //
-  var activeItemUserSet       = false;
-  var activeItemObserver      = null;
-  var activeItemRestoreTimer  = null;
-  var activeItemInitialized   = false;
-
-  // ---------------------------------------------------------------------------
-  // Fix J1 Navigator issue #3
-  // Normalize a URL path for comparison
-  //
-  // Removes the query string and the fragment, collapses duplicate slashes,
-  // drops a trailing 'index.html|index.htm' and drops a trailing slash. The
-  // root path '/' is kept as is.
-  // ---------------------------------------------------------------------------
-  function j1NavNormalizePath (path) {
-    var normalized = path || '';
-
-    try {
-      normalized = decodeURI(normalized);
-    } catch (e) {
-      // keep the raw (not decodable) value
-    }
-
-    normalized = normalized.split('#')[0];
-    normalized = normalized.split('?')[0];
-    normalized = normalized.replace(/\/{2,}/g, '/');
-    normalized = normalized.replace(/\/index\.html?$/i, '/');
-
-    if (normalized.length > 1) {
-      normalized = normalized.replace(/\/+$/, '');
-    }
-    if (normalized === '') {
-      normalized = '/';
-    }
-
-    return normalized;
-  }
-
-  // ---------------------------------------------------------------------------
-  // Fix J1 Navigator issue #3
-  // Resolve the normalized path of an anchor element
-  //
-  // Returns 'null' for all links that do NOT navigate to a page of this site:
-  // empty links, in-page links ('#', '#anchor'), pseudo protocols
-  // (javascript:, mailto:, tel:, data:) and cross-origin links. The DOM
-  // property 'pathname' is used, so RELATIVE links and a Jekyll 'baseurl'
-  // are resolved by the browser against the document base.
-  // ---------------------------------------------------------------------------
-  function j1NavAnchorPath (anchorElement) {
-    var href;
-
-    if (!anchorElement || !anchorElement.getAttribute) {
-      return null;
-    }
-
-    href = anchorElement.getAttribute('href');
-    if (!href) {
-      return null;
-    }
-
-    href = href.replace(/^\s+|\s+$/g, '');
-    if (href === '' || href.charAt(0) === '#') {
-      return null;
-    }
-    if (/^(javascript|mailto|tel|data|blob):/i.test(href)) {
-      return null;
-    }
-    if (anchorElement.protocol && !/^https?:$/i.test(anchorElement.protocol)) {
-      return null;
-    }
-    if (anchorElement.host && anchorElement.host !== window.location.host) {
-      return null;
-    }
-
-    return j1NavNormalizePath(anchorElement.pathname || '');
-  }
-
-  // ---------------------------------------------------------------------------
-  // Fix J1 Navigator issue #3
-  // Collect all menu items of the given scope that link to a page
-  //
-  // The class 'dropdown-item' is carried by the LI element in J1 menus, but
-  // Bootstrap places it on the A element. Both variants are supported: the
-  // element carrying the class is the element the class 'active' is set on,
-  // the (first) contained A element supplies the link.
-  //
-  // Items WITHOUT a navigable link (e.g. the theme switcher that uses
-  // href="#") are skipped entirely, so they are neither marked nor cleared.
-  // ---------------------------------------------------------------------------
-  function j1NavCollectItems (scopeSelector) {
-    var $scope  = $(scopeSelector || 'body');
-    var items   = [];
-
-    $scope.find('.dropdown-item').each(function () {
-      var $item   = $(this);
-      var $anchor = $item.is('a[href]') ? $item : $item.find('a[href]').first();
-      var path;
-
-      if (!$anchor.length) {
-        return;
-      }
-
-      path = j1NavAnchorPath($anchor.get(0));
-      if (!path) {
-        return;
-      }
-
-      items.push({ element: this, path: path });
-    });
-
-    return items;
-  }
-
-  // ---------------------------------------------------------------------------
-  // Fix J1 Navigator issue #3
-  // Find the menu path that matches the current page best
-  //
-  // An EXACT match always wins. If no item matches exactly and the prefix
-  // fallback is enabled, the LONGEST item path the current page lies below is
-  // used, so that e.g. a post '/pages/public/blog/articles/my-post' still
-  // highlights the menu item '/pages/public/blog'. The match is taken on a
-  // path SEGMENT boundary only, so '/blog' never matches '/blogroll'.
-  // ---------------------------------------------------------------------------
-  function j1NavBestMatch (items, currentPath, prefixFallback) {
-    var bestPath   = null;
-    var bestLength = -1;
-    var index;
-    var path;
-
-    for (index = 0; index < items.length; index++) {
-      if (items[index].path === currentPath) {
-        return items[index].path;
-      }
-    }
-
-    if (!prefixFallback) {
-      return null;
-    }
-
-    for (index = 0; index < items.length; index++) {
-      path = items[index].path;
-      if (path.length > 1
-        && currentPath.indexOf(path + '/') === 0
-        && path.length > bestLength) {
-        bestPath   = path;
-        bestLength = path.length;
-      }
-    }
-
-    return bestPath;
-  }
-
-  // ---------------------------------------------------------------------------
-  // Fix J1 Navigator issue #3
-  // Set the class 'active' on all items of the given path, remove it from all
-  // other collected items. Only items collected by j1NavCollectItems() are
-  // touched.
-  // ---------------------------------------------------------------------------
-  function j1NavApplyActive (items, path) {
-    var index;
-    var count = 0;
-
-    for (index = 0; index < items.length; index++) {
-      if (items[index].path === path) {
-        $(items[index].element).addClass('active');
-        count = count + 1;
-      } else {
-        $(items[index].element).removeClass('active');
-      }
-    }
-
-    return count;
-  }
-
-  // ---------------------------------------------------------------------------
   // main
   // ---------------------------------------------------------------------------
   return {
@@ -280,8 +76,7 @@ window.j1.api.navigator = (function navigator(options) {
 
       this.manageDropdownMenu(defaultOptions, menuOptions);
       this.navbarSticky();
-      this.eventHandler(defaultOptions);
-      this.initActiveMenuItems();
+      this.eventHandler(defaultOptions); // jadams, 2021-07-03: initialize events early
 
       logger.debug('\n' + 'initializing module: finished');
 
@@ -310,6 +105,44 @@ window.j1.api.navigator = (function navigator(options) {
 
       logger.debug('\n' + 'initializing eventHandler: started');
 
+      // jadams: unused code (for now).: manages HTML5 server side events
+      // for incoming messages from Git Server send e.g. on a 'pull request'
+      // NOTE: used for ControlCenter (cc) functionality only !!!
+      // -----------------------------------------------------------------------
+      // const seeMe           = 'https://smee.io/wlNIFNiJN0GClm2';
+      // const middleware      = 'localhost:5000/state';
+      // const web_server_dev  = 'http://localhost:41000/status';
+      // const utility_server  = 'http://localhost:41001/git?request=pull';
+      // var sender            = seeMe;
+      // var payload;
+
+      // if (j1.checkUserAgent('IE') || j1.checkUserAgent('Edge')) {
+      //   logger.warn('HTML5 server side events (SSE) not supported for: ' + userAgent);
+      //   logger.warn('Middleware messages disabled');
+      // } else {
+      //   const middleware_status = new EventSource(sender);
+      //
+      //   // -----------------------------------------------------------------------
+      //   // middleware event handler ( SSE currently NOT used)
+      //   // -----------------------------------------------------------------------
+      //   middleware_status.onmessage = (event) => {
+      //     const payload = JSON.parse(event.data);
+      //
+      //     logger.debug('middleware: event received');
+      //
+      //     json_data = JSON.stringify(payload, undefined, 2);
+      //     logText   = 'payload: ' + json_data;
+      //     logger.debug(logText);
+      //
+      //     message.type    = 'command';
+      //     message.action  = 'status';
+      //     message.text    = payload;
+      //     j1.sendMessage( 'j1.api.navigator', 'j1.adapter.navigator', message );
+      //
+      //     return true;
+      //   }; // END event onMessage
+      // }
+
       // bind click event to all plain '#' links to prevent default action
       // 'scroll-to-top'
       // See:
@@ -329,6 +162,41 @@ window.j1.api.navigator = (function navigator(options) {
         }
       });
 
+      // -----------------------------------------------------------------------
+      // In-page smooth scroll
+      // -----------------------------------------------------------------------
+
+      // bind click event to all headlines generated by AsciiDoctor
+      // for smooth-scroll (in-page)
+      // jadams,2022-06-10: unused code - smooth scrolling managed by
+      // (page height) observer
+      // -----------------------------------------------------------------------
+      // $('.sect1, .sect2 .sect3, .sect4, .sect5, .sect6').on('click', function (e) {
+      //   img_link     = (e.target.localName == 'img') ? true : false;
+      //   page_link    = document.querySelector('[id="' + decodeURI(anchor_id).split('#').join('') + '"]') ? true : false;
+      //   anchor_id    = e.target.hash ? e.target.hash : false;
+      //   classname    = e.target.className ? e.target.className : '';
+      //   nav_link     = typeof classname == 'string' ? classname.includes('nav-link') : false;                          // skip BS nav links
+      //   scrollOffset = j1.getScrollOffset();
+      //   anchorTop    = $(anchor_id).offset().top ? true : false;
+      //
+      //   if (anchor_id && anchor_id.includes('void')) anchor_id = false;
+      //
+      //   // skip scrolling if a click on an image detected
+      //   if (img_link) {
+      //     return true;
+      //   }
+      //
+      //   if (anchor_id && !nav_link || page_link) {
+      //     logger.debug('\n' + 'click event on headline detected: ' + anchor_id);
+      //
+      //     $('html, body').animate({
+      //       scrollTop:  + scrollOffset
+      //     }, scrollDuration);
+      //     e.preventDefault ? e.preventDefault() : e.returnValue = false;
+      //   }
+      // });
+
       // bind click event to all HTML elements of class '.badge' (Bootstrap)
       // for smooth-scroll (in-page) to a '<div>' element
       // -----------------------------------------------------------------------
@@ -339,7 +207,7 @@ window.j1.api.navigator = (function navigator(options) {
         if (anchor_id) {
           logger.debug('\n' + 'click event on badge detected: ' + anchor_id);
           $('html, body').animate({
-            scrollTop: $(anchor_id).offset().top - scrollOffset
+            scrollTop: $(anchor_id).offset().top - scrollOffset                   // NOTE: diffeent scrollOffset
           }, scrollDuration);
           event.stopPropagation();
         }
@@ -360,6 +228,13 @@ window.j1.api.navigator = (function navigator(options) {
         }
       });
 
+      // jadams: test code for jQuery plugin 'regex'
+      // -----------------------------------------------------------------------
+      // $('a:contains("?#")').click(function(e) {
+      //   e.preventDefault ? e.preventDefault() : e.returnValue = false;
+      //   logger.info('bound click event to "?#*", suppress default action');
+      // });
+
       // -----------------------------------------------------------------------
       // Navbar Sticky
       // -----------------------------------------------------------------------
@@ -377,12 +252,12 @@ window.j1.api.navigator = (function navigator(options) {
         var index       = $('nav.brand-center');
         var $postsList  = index.find('ul.navbar-nav');
 
-        // create array of all posts in lists
+        //Create array of all posts in lists
         index.find('ul.navbar-nav > li').each(function(){
           postsArr.push($(this).html());
         });
 
-        // split the array at this point. The original array is altered.
+        // Split the array at this point. The original array is altered.
         var firstList   = postsArr.splice(0, Math.round(postsArr.length / 2));
         var secondList  = postsArr;
         var ListHTML    = '';
@@ -394,22 +269,22 @@ window.j1.api.navigator = (function navigator(options) {
           }
         };
 
-        // generate HTML for first list
+        // Generate HTML for first list
         createHTML(firstList);
         $postsList.html(ListHTML);
         index.find('ul.nav').first().addClass('navbar-left');
 
-        // generate HTML for second list
+        // Generate HTML for second list
         createHTML(secondList);
-        // create new list after original one
+        //Create new list after original one
         $postsList.after('<ul class="nav navbar-nav"></ul>').next().html(ListHTML);
         index.find('ul.nav').last().addClass('navbar-right');
 
-        // wrap navigation menu
+        // Wrap navigation menu
         index.find('ul.nav.navbar-left').wrap('<div class=\'col_half left\'></div>');
         index.find('ul.nav.navbar-right').wrap('<div class=\'col_half right\'></div>');
 
-        // selection Class
+        // Selection Class
         index.find('ul.navbar-nav > li').each(function() {
           var dropDown = $('ul.dropdown-menu', this),
             megaMenu = $('ul.megamenu-content', this);
@@ -429,7 +304,7 @@ window.j1.api.navigator = (function navigator(options) {
       // Navbar Full
       // -----------------------------------------------------------------------
       if( $getNav.hasClass('navbar-full')) {
-        // add Class to body
+        // Add Class to body
         $('nav.navbar.navigator').find('ul.nav').wrap('<div class=\'wrap-full-menu\'></div>');
         $('.wrap-full-menu').wrap('<div class=\'nav-full\'></div>');
         $('ul.nav.navbar-nav').prepend('<li class=\'close-full-menu\'><a href=\'#\'><i class=\'mdi mdi-close\'></i></a></li>');
@@ -531,6 +406,16 @@ window.j1.api.navigator = (function navigator(options) {
         } // END Speak2Me
 
         // ---------------------------------------------------------------------
+        // NBI Notebooks dialog
+        //
+        // if ($('li.nbi-notebooks')) {
+        //   logger.debug('register SHOW event for J1 NBI');
+        //   $('li.nbi-notebooks > a', this).on('click', function(e) {
+        //     j1.adapter.nbinteract.showDialog();
+        //   });
+        // } // END NBI Notebooks
+
+        // ---------------------------------------------------------------------
         // CookieConsent dialog
         //
         if ($('li.cookie-consent')) {
@@ -578,6 +463,13 @@ window.j1.api.navigator = (function navigator(options) {
       var gridBreakpoint_md = 768;                                              // bs-breakpoint-md
       var gridBreakpoint_sm = 576;                                              // bs-breakpoint-sm
 
+      // BS4 @media MIN breakpoints
+      // -----------------------------------------------------------------------
+      // NOTE: a media query is always a range
+      // var gridBreakpoint_lg = 991;
+      // var gridBreakpoint_md = 767;
+      // var gridBreakpoint_sm = 575;
+
       // @media ranges
       // -----------------------------------------------------------------------
       var small_range         = {min: '0em',      max: '40em'};                 /* 0, 640px */
@@ -607,17 +499,18 @@ window.j1.api.navigator = (function navigator(options) {
       // MIN media breakpoint
       if ( $getWindow <= breakPoint ) {
 
-        // collapse Navbar (Desktop Navigation)
+        // Collapse Navbar (Desktop Navigation)
         $(menuSelector).addClass('navbar-collapse');
         $(menuSelector).removeClass('show');
 
-        // show QuicklinksBar
+        // Show QuicklinksBar
         $(quicklinksSelector).addClass('show');
 
       // -----------------------------------------------------------------------
       // Desktop Navigation does NOT work on physical devices like iPad|Pro
       // Config DISABLED
       //
+//    } else if ( $getWindow > breakPoint || $getWindow <= 1024 && $windowOrientation == 'portrait'  ) {
       } else if ( $getWindow > breakPoint ) {
       // -----------------------------------------------------------------------
       // Desktop
@@ -659,10 +552,13 @@ window.j1.api.navigator = (function navigator(options) {
         $(menuSelector).removeClass('navbar-collapse');
         $(menuSelector).addClass('show');
 
-        // open Desktop Menu|s on hover
+        // Open Desktop Menu|s on hover
         $('nav.navbar.navigator ul.nav').each(function() {
 
           $('a.dropdown-toggle', this).off('click');
+          // $('a.dropdown-toggle', this).on('click', function (e) {
+          //   // e.stopPropagation(); // don't bubble up the event
+          // });
 
           $('.megamenu-fw', this).each(function() {
             $('.title', this).off('click');
@@ -680,7 +576,7 @@ window.j1.api.navigator = (function navigator(options) {
             $menu.removeClass('open');
             $dropDown.addClass('open');
 
-            // create a timeout object to delay the dropdown menus to open
+            // Create a timeout object to delay the dropdown menus to open
             timeoutHandle = window.setTimeout(function () {
               if ($dropDown.hasClass('open')) {
                 $menu.stop().fadeIn().addClass($getIn);
@@ -695,7 +591,7 @@ window.j1.api.navigator = (function navigator(options) {
             $menu     = $('.dropdown-menu', this).eq(0);
             $dropDown = $(this);
 
-            // clear the timeout object for dropdown menus 'open'
+            // Clear the timeout object for dropdown menus 'open'
             window.clearTimeout(timeoutHandle);
 
             $menu.removeClass($getIn);
@@ -729,6 +625,8 @@ window.j1.api.navigator = (function navigator(options) {
             $(getId).removeClass($getOut);
             $(getId).addClass('in');
             $(getId).addClass($getIn);
+            // e.stopPropagation(); // don't bubble up the event
+            // return false;
           });
 
           $('li.close-full-menu').on('click', function(e) {
@@ -738,6 +636,8 @@ window.j1.api.navigator = (function navigator(options) {
               $(getId).removeClass('in');
               $(getId).removeClass($getIn);
             }, 500);
+            //e.stopPropagation(); // don't bubble up the event
+            // return false;
           });
         });
       }
@@ -751,7 +651,7 @@ window.j1.api.navigator = (function navigator(options) {
         navSticky = $getNav.hasClass('navbar-sticky');
 
       if (navSticky) {
-        // set height navigation
+        // Set Height Navigation
         var $getHeight = $getNav.height();
         $('.wrap-sticky').height($getHeight);
 
@@ -769,152 +669,6 @@ window.j1.api.navigator = (function navigator(options) {
     }, // end navbarSticky
 
     // -------------------------------------------------------------------------
-    // Fix J1 Navigator issue #3
-    // Configuration for the "active" menu item management
-    //
-    // activeItemScopeSelector:
-    //   The DOM scope scanned for menu items. The default 'body' covers the
-    //   desktop navbar AND the mobile menu, INCLUDING the state where the
-    //   mmenu-light plugin has moved the menu node into its off-canvas drawer
-    //   (div.mm-ocd, a direct child of <body>). Narrow it down (e.g. to
-    //   'nav.navbar.navigator, .mm-ocd') only if other Bootstrap dropdowns on
-    //   the page must be excluded.
-    //
-    // activeItemPrefixFallback:
-    //   If 'true' (default) and no menu item matches the current page
-    //   exactly, the menu item of the closest PARENT path is marked active.
-    //   Set to 'false' for exact matches only.
-    // -------------------------------------------------------------------------
-    activeItemScopeSelector:  'body',
-    activeItemPrefixFallback: true,
-
-    // -------------------------------------------------------------------------
-    // Fix J1 Navigator issue #3
-    // Restore the "active" menu item for the CURRENT page
-    //
-    // Closes review item (1) of fix #2: the class 'active' set on click does
-    // not survive the page load triggered by that very click. This method
-    // re-derives the state from window.location.pathname instead.
-    //
-    // Returns 'true' if a matching item was found and marked.
-    // -------------------------------------------------------------------------
-    restoreActiveMenuItem: function (scopeSelector) {
-      var currentPath = j1NavNormalizePath(window.location.pathname);
-      var scope       = scopeSelector || this.activeItemScopeSelector;
-      var items       = j1NavCollectItems(scope);
-      var matchedPath;
-      var marked;
-
-      if (!items.length) {
-        return false;
-      }
-
-      matchedPath = j1NavBestMatch(
-        items, currentPath, this.activeItemPrefixFallback
-      );
-
-      if (!matchedPath) {
-        return false;
-      }
-
-      marked = j1NavApplyActive(items, matchedPath);
-
-      if (logger) {
-        logger.debug('\n' + 'active menu item restored: ' + matchedPath
-          + ' (' + marked + ' item|s marked)');
-      }
-
-      return true;
-    }, // END restoreActiveMenuItem
-
-    // -------------------------------------------------------------------------
-    // Fix J1 Navigator issue #3
-    // Initialize the "active" menu item management
-    //
-    // Registers ONE delegated click handler on the DOCUMENT (closing review
-    // item (2) of fix #2: the mobile mmenu-light menu is moved OUT of
-    // 'nav.navbar.navigator' into the off-canvas drawer, so a handler bound
-    // to the NAV element can never see it), runs an initial restore and
-    // watches the DOM for menus that arrive later by AJAX (j1.loadHTML) or
-    // that are moved around by the mmenu-light media query toggler.
-    //
-    // NOTE: The handler is IDEMPOTENT with respect to the handler installed
-    // by fix #2 on 'nav.navbar.navigator'. Both compute the same final state
-    // for a desktop click, so fix #2 can stay in place unchanged.
-    // -------------------------------------------------------------------------
-    initActiveMenuItems: function () {
-      var _self       = this;
-      var observeTime = 30000;
-
-      if (activeItemInitialized) {
-        return true;
-      }
-      activeItemInitialized = true;
-
-      // delegated click handler, valid for desktop AND mobile menus
-      $(document).off('click.j1navActiveItem');
-      $(document).on('click.j1navActiveItem', '.dropdown-item', function () {
-        var $item   = $(this);
-        var $anchor = $item.is('a[href]')
-                        ? $item
-                        : $item.find('a[href]').first();
-        var path;
-
-        if (!$anchor.length) {
-          return;
-        }
-
-        // ignore items that do NOT navigate to a page of this site
-        // (e.g. the theme switcher items using href="#")
-        path = j1NavAnchorPath($anchor.get(0));
-        if (!path) {
-          return;
-        }
-
-        // mark the clicked item AND its twin in the other (desktop|mobile)
-        // rendering of the same menu, clear all other items
-        j1NavApplyActive(
-          j1NavCollectItems(_self.activeItemScopeSelector), path
-        );
-
-        activeItemUserSet = true;
-      });
-
-      // initial restore for the menus already present
-      _self.restoreActiveMenuItem();
-
-      // re-run the restore for menus loaded (AJAX) or moved (mmenu) later
-      if (window.MutationObserver && document.body) {
-        activeItemObserver = new MutationObserver(function () {
-          if (activeItemUserSet) {
-            return;
-          }
-          window.clearTimeout(activeItemRestoreTimer);
-          activeItemRestoreTimer = window.setTimeout(function () {
-            _self.restoreActiveMenuItem();
-          }, 50);
-        });
-
-        // NOTE: only 'childList' is observed. Setting the class 'active' is
-        // an ATTRIBUTE mutation and can NOT re-trigger the observer.
-        activeItemObserver.observe(document.body, {
-          childList: true,
-          subtree:   true
-        });
-
-        // stop watching after all menus had a fair chance to load
-        window.setTimeout(function () {
-          if (activeItemObserver) {
-            activeItemObserver.disconnect();
-            activeItemObserver = null;
-          }
-        }, observeTime);
-      }
-
-      return true;
-    }, // END initActiveMenuItems
-
-    // -------------------------------------------------------------------------
     // updateSidebar
     // Note:
     // -------------------------------------------------------------------------
@@ -927,9 +681,9 @@ window.j1.api.navigator = (function navigator(options) {
       logText      = 'user state data: ' + json_message;
       logger.debug(logText);
 
-      // replace macro placeholders to values
+      // Replace Macro placeholders to values
       j1.resolveMacros(user_data);
-      // replace macro values only
+      // Replace Macro values only
       j1.updateMacros(user_data);
 
       return true;
@@ -938,4 +692,5 @@ window.j1.api.navigator = (function navigator(options) {
 
   }; // end return (object)
 
-}(window.j1.api.navigator || {}));
+}(window.j1.api.navigator));
+//}( jQuery );
