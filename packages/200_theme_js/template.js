@@ -28,8 +28,8 @@
 window.Cookies               = require('js-cookie');
 window.yaml                  = require('js-yaml');
 window.log4javascript        = require('log4javascript');
-window.liteURL               = require('lite-url');
 window.platform              = require('platform');
+window.liteURL               = require('lite-url');
 
 window.j1.adapter            = require('./js/adapter/adapter.js');
 window.j1.modules            = {};                                              // placeholder object for all J1 Modules
@@ -39,8 +39,10 @@ window.j1.api.anime          = require('./js/api/anime/anime.js');              
 window.j1.api.asciidoctor    = require('./js/api/asciidoctor/asciidoctor.js');
 window.j1.api.consoleFilters = require('./js/api/console_filter/consoleFilters.js');
 window.j1.api.errorFilters   = require('./js/api/error_filter/errorFilters.js');
-window.j1.api.navigator      = require('./js/api/navigator/navigator.js');
 window.j1.api.scrollSmooth   = require('./js/api/scroll-smooth/scroll-smooth.js');
+
+// moved to /assets/theme/j1/modules
+// window.j1.api.navigator   = require('./js/api/navigator/navigator.js');
 
 // Modules *implicetly* forced exposed for run-time to the global namespace (window)
 // -----------------------------------------------------------------------------

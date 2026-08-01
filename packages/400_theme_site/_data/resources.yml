@@ -561,7 +561,7 @@ resources:
       data:
         css:                            []
         files:                          [ adapter/js/navigator.js ]
-        js:                             []
+        js:                             [ modules/navigator/js/navigator ]
         init_function:                  [ j1.adapter.navigator.init ]
 
   # ----------------------------------------------------------------------------

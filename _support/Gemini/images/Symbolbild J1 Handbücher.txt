@@ -1,0 +1,13 @@
+Prompt
+  https://gemini.google.com/app/558d3ecff841a061
+--------------------------------------------------------------------------------
+
+Erstelle eine fotorealistische JPG-Datei als Symbolbild aller Handbücher für
+das J1 Template System basierend auf dem angehängten Bild chris-curry.jpg
+Der Text auf dem Buchdeckel „THE MORSE CODE“ soll durch "THE J1 TEMPLATE"
+ersetzt werden.
+
+Verwende als Farbschema die Materialdesign-Farbe Helles Blau.
+Verwende für die Ausgabe ein HD-Format von 1920 x 1280 Pixeln.
+
+

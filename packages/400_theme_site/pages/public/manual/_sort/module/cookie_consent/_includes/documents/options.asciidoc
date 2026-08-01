@@ -1,3 +1,0 @@
-== Options
-
-include::../tables/module_options.asciidoc[]

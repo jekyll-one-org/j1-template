@@ -1,0 +1,13 @@
+Prompt
+  https://gemini.google.com/app/0e1ea21dbe9a1a80
+--------------------------------------------------------------------------------
+
+Erstelle eine fotorealistische JPG-Datei als Symbolbild aller Cheatsheets für
+das J1 Template System basierend auf dem angehängten Bild "michael-schiffer.jpg".
+
+Der Text auf dem Buchdeckel auf dem angehängten Bild "j1-user-guide.jpg" soll
+auf das Blatt des Bildes "michael-schiffer.jpg" als Symboltext plaziert werden.
+
+Verwende als Farbschema die Materialdesign-Farbe Helles Blau.
+Verwende für die Ausgabe ein HD-Format von 1920 x 1280 Pixeln.
+

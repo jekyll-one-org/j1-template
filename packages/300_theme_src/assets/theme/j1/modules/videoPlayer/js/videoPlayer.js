@@ -164,7 +164,7 @@
     /youtube\.com\/v\/([a-zA-Z0-9_-]{11})/
   ]);
 
-  // jadamas, 2026-07-27: Added YouTube site ytimg for detection
+  // jadams, 2026-07-27: Added YouTube site ytimg for detection
   const YOUTUBE_RE              = /(?:youtu\.be\/.*|youtube\.com\/.*|ytimg\.com\/.*)/;
   const YOUTUBE_ID_RE           = /(?:youtu\.be\/.*|youtube\.com\/(?:embed\/|v\/|watch\?v=|shorts\/))([A-Za-z0-9_-]{11})/;
   const YOUTUBE_POSTER_QUALITY  = 'hqdefault';

@@ -160,7 +160,7 @@ defaults:
     dropdown_border_top:                0                                       # px
     dropdown_border_radius:             2                                       # px
     dropdown_background_color_hover:    var(--md-gray-300)
-    dropdown_background_color_active:   var(--md-gray-500)
+    dropdown_background_color_active:   var(--bs-yellow)
 
   # ----------------------------------------------------------------------------
   # NavQuicklinks
