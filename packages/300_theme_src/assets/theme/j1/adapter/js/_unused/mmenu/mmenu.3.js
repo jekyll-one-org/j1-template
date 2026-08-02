@@ -6,7 +6,7 @@ regenerate:                             true
 
 {% comment %}
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/adapter/js/mmenu.js (4)
+ # ~/assets/theme/j1/adapter/js/mmenu.js (3)
  # Liquid template to adapt Mmenu-Light Core functions
  #
  # Product/Info:
@@ -77,7 +77,7 @@ regenerate:                             true
 
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/adapter/js/mmenu.js (4)
+ # ~/assets/theme/j1/adapter/js/mmenu.js (3)
  # JS Adapter for J1 MobileMenu (MMenu Light)
  #
  # Product/Info:
@@ -223,86 +223,8 @@ j1.adapter.mmenu = ((j1, window) => {
   var activeItemUsePluginSelectedClass  = false;
 
   // ---------------------------------------------------------------------------
-  // Claude - Fix MMenu #3
-  // Private state for the SELECTED class handed over to the plugin
-  //
-  // Background:
-  // The initializer passes the configured class as the option 'selected' (see
-  // mmenuInitializer), the plugin reads it as 'selectedClass' (see ~/modules/
-  // mmenu/js/mmenu-light.js, method navigation, which destructures
-  // 'options.selectedClass'). The names do NOT match, so the configured value
-  // never reaches the plugin and its OWN default 'Selected' is used for EVERY
-  // menu, whatever the YAML configuration says.
-  //
-  // The option is passed under its CORRECT name below. The original line
-  // holding the (wrong) name is kept unchanged: an option the plugin does not
-  // know is ignored, and 'initActiveMenuItems' still reads the same key.
-  //
-  // DESIGN DECISION (for review): The class is read ONCE, at construction
-  // time of the navigator, to detect the panel to OPEN (see ~/modules/mmenu/
-  // js/modules/sliding-panels-navigation.js, method _setSelectedl). As long
-  // as the option never arrived, NO item ever carried the class in use
-  // ('Selected'), so the MAIN panel was opened, always. Handing the
-  // configured class over makes the plugin open the panel holding the item
-  // carrying THAT class, if the menu HTML delivers such an item. Should the
-  // menu keep opening on the MAIN panel in ANY case, set
-  // 'navigatorPassSelectedClass' to 'false': the plugin default is handed
-  // over then and the behavior of before the fix is restored.
-  //
-  // NOTE: The fallback below is the default of the plugin, NOT a J1 value. It
-  // is used whenever NO class is configured, so an empty|missing YAML value
-  // can NOT produce the selector '.' (see _setSelectedl, which prefixes the
-  // class with a dot).
-  // ---------------------------------------------------------------------------
-  //
-  var navigatorSelectedClassFallback    = 'Selected';
-  var navigatorPassSelectedClass        = true;
-
-  // ---------------------------------------------------------------------------
   // helper functions
   // ---------------------------------------------------------------------------
-
-  // ---------------------------------------------------------------------------
-  // Claude - Fix MMenu #3
-  // mmenuSelectedClass()
-  // Detect the class for selected items to be handed over to the plugin
-  //
-  // The key 'selectedClass' is checked FIRST, so a configuration using the
-  // name of the plugin works as expected. The key 'selected' in use so far is
-  // checked afterwards and keeps ALL existing configurations working.
-  //
-  // A leading dot is dropped: the plugin builds its selector by prefixing the
-  // class with a dot, a value given as '.active' would end up as '..active'
-  // and match NO item at all.
-  //
-  // Returns the class name to be used, NEVER an empty string.
-  // ---------------------------------------------------------------------------
-  function mmenuSelectedClass (mmOptions) {
-    var configured = '';
-
-    if (!navigatorPassSelectedClass) {
-      return navigatorSelectedClassFallback;
-    }
-
-    if (mmOptions && mmOptions.mmenu_navigator) {
-      configured = mmOptions.mmenu_navigator.selectedClass
-                || mmOptions.mmenu_navigator.selected
-                || '';
-    }
-
-    if (typeof configured !== 'string') {
-      return navigatorSelectedClassFallback;
-    }
-
-    configured = configured.replace(/^\s+|\s+$/g, '');
-    configured = configured.replace(/^\./, '');
-
-    if (configured === '') {
-      return navigatorSelectedClassFallback;
-    }
-
-    return configured;
-  } // END mmenuSelectedClass
 
   // ---------------------------------------------------------------------------
   // Fix MMenu #1
@@ -858,7 +780,6 @@ j1.adapter.mmenu = ((j1, window) => {
             const navigator_{{menu_id}} = mmenu_{{menu_id}}.navigation ({
               // navigator options
               selected:         mmOptions.mmenu_navigator.selected,
-              selectedClass:    mmenuSelectedClass(mmOptions),
               slidingSubmenus:  mmOptions.mmenu_navigator.slidingSubmenus,
               title:            mmOptions.mmenu_navigator.title,
               theme:            mmOptions.mmenu_navigator.theme
@@ -1094,16 +1015,6 @@ j1.adapter.mmenu = ((j1, window) => {
         && navMenuOptions.mmenu_navigator.selected) {
         activeSelectedClass = navMenuOptions.mmenu_navigator.selected;
       }
-
-      // -----------------------------------------------------------------------
-      // Claude - Fix MMenu #3
-      // Take over the SAME class the plugin is given (see mmenuInitializer).
-      // Placed AFTER the assignment above, so the value used by the adapter
-      // and the value used by the plugin can NOT drift apart: the helper
-      // prefers the key 'selectedClass', accepts the key 'selected' as a
-      // fallback and returns the plugin default if NOTHING is configured.
-      // -----------------------------------------------------------------------
-      activeSelectedClass = mmenuSelectedClass(navMenuOptions);
 
       // delegated click handler, CAPTURE phase
       document.removeEventListener('click', mmenuActiveClickHandler, true);

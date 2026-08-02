@@ -32,7 +32,9 @@ for all proposed fixes.
 Claude
 --------------------------------------------------------------------------------
 
-Now the change inside `mmenuApplyActive()` and the new parent helper:Both candidates from the previous session are fixed, tagged `Claude - Fix MMenu #2`, additive-only.
+Now the change inside `mmenuApplyActive()` and the new parent
+helper:Both candidates from the previous session are fixed,
+tagged `Claude - Fix MMenu #2`, additive-only.
 
 **Files touched**
 
@@ -43,21 +45,50 @@ Now the change inside `mmenuApplyActive()` and the new parent helper:Both candid
 
 **Candidate 1 — contrast on the active item (`mmenu.css`)**
 
-`.mm-item.active` keeps its yellow background; new rules give the label a dark color. Applied to `> a`, `> span` and `a.mm-item.active`, deliberately *not* to the LI itself — a parent item contains its submenu, so a color on the LI would be inherited by every child item. The chevron (`.mm-spn li:before`, drawn with `currentColor`) is colored explicitly instead.
+`.mm-item.active` keeps its yellow background; new rules give the label a
+dark color. Applied to `> a`, `> span` and `a.mm-item.active`, deliberately
+*not* to the LI itself — a parent item contains its submenu, so a color on
+the LI would be inherited by every child item.
+The chevron (`.mm-spn li:before`, drawn with `currentColor`) is colored
+explicitly instead.
 
-A second problem surfaced while checking the cascade: `.mm-spn li:hover` sets `#424242`, which beats `.mm-item.active` on specificity — hovering the active item replaced the yellow with dark grey, so a dark label would have been unreadable. Added rules keep both background and label on hover.
+A second problem surfaced while checking the cascade: `.mm-spn li:hover`
+sets `#424242`, which beats `.mm-item.active` on specificity — hovering
+the active item replaced the yellow with dark grey, so a dark label would
+have been unreadable. Added rules keep both background and label on hover.
 
 **Candidate 2 — parent highlighting (`mmenu.js` + `mmenu.css`)**
 
-New `mmenuApplyActiveParents()` walks up from every marked item via `closest('.mm-item')` and sets `active-parent` on all ancestor levels. Called from inside `mmenuApplyActive()` so click and restore stay in sync. Ancestors are re-scanned from the scope each time, because parent items carry no navigable link and are therefore never collected (and never cleared) by `mmenuCollectItems()`. `active` and `active-parent` are guaranteed disjoint.
+New `mmenuApplyActiveParents()` walks up from every marked item via
+`closest('.mm-item')` and sets `active-parent` on all ancestor levels.
+Called from inside `mmenuApplyActive()` so click and restore stay in sync.
+Ancestors are re-scanned from the scope each time, because parent items
+carry no navigable link and are therefore never collected (and never cleared)
+by `mmenuCollectItems()`. `active` and `active-parent` are guaranteed disjoint.
 
-**Design decision for your review:** the plugin's `selectedClass` hook is wired up (`activeSelectedClass`, read from `mmenu_navigator.selected`, plugin default `Selected`) but switched **off** — `activeItemUsePluginSelectedClass = false`. `_setSelectedl()` reads that class once at construction time and uses it to *open* the panel the item sits in. Enabling it would change menu behavior (drawer opens on a submenu instead of the main panel), not just styling, so I left it as a flag rather than deciding it.
+**Design decision for your review:**
+The plugin's `selectedClass` hook is wired up (`activeSelectedClass`, read
+from `mmenu_navigator.selected`, plugin default `Selected`) but switched
+**off** — `activeItemUsePluginSelectedClass = false`. `_setSelectedl()`
+reads that class once at construction time and uses it to *open* the panel
+the item sits in. Enabling it would change menu behavior (drawer opens on
+a submenu instead of the main panel), not just styling, so I left it as a
+flag rather than deciding it.
 
 
 ## Out-of-scope candidates (not touched)
 
-1. **Option name mismatch.** `mmenuInitializer` passes `selected:` to `mmenu.navigation()`, but the plugin destructures `options.selectedClass` — the YAML value never reaches it and the default `'Selected'` is always used. Candidate for a future fix in the adapter.
+1. **Option name mismatch**
+   `mmenuInitializer` passes `selected:` to `mmenu.navigation()`, but
+   the plugin destructures `options.selectedClass` — the YAML value never
+   reaches it and the default `'Selected'` is always used. Candidate for
+   a future fix in the adapter.
 
-2. **Malformed CSS comment.** `mmenu.css`, `@media (min-width: 992px)`: a `/* … /* … */ … */` nesting leaves a stray `} */`. Real browsers recover; strict parsers report an error. A deletion would be required, so untouched.
+2. **Malformed CSS comment.**
+   `mmenu.css`, `@media (min-width: 992px)`: a `/* … /* … */ … */` nesting
+   leaves a stray `} */`. Real browsers recover; strict parsers report an
+   error. A deletion would be required, so untouched.
 
-3. **`active-parent` and `font-weight: 500`** may shift label width slightly; drop that declaration if you prefer color-only marking.
+3. **`active-parent` and `font-weight: 500`**
+   May shift label width slightly; drop that declaration if you
+   prefer color-only marking.

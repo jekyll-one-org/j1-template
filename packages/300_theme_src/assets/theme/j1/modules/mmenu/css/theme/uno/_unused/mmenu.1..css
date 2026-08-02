@@ -238,37 +238,6 @@ a.mm-item.active-parent:hover,
   border-right-color: #ffc700;
 }
 
-/* Claude - Fix MMenu #3
-   Parent of the active item, color-only marking
-   -----------------------------------------------------------------------------
-   The rule marking the label of the parent item (previous series) above sets
-   'font-weight: 500' in ADDITION to the color. A heavier weight makes the
-   glyphs of the label WIDER, so a label switches its width whenever the class
-   'active-parent' is set or dropped, what moves the text on EVERY page load
-   placing the active item somewhere else in the menu.
-
-   The color alone marks the item already: #ffc700 on the background #332800
-   set by the rule giving the parent item its subtle background, while
-   ALL other labels stay at #9e9e9e (see '.mm-spn a'). The weight is therefore
-   reset below and the marking is done by the color only.
-
-   NOTE: The rule is placed AFTER the rule it resets and uses the SAME
-   selectors, so it wins by ORDER, NOT by specificity. It MUST stay below.
-
-   NOTE: 'inherit' is used, NOT 'normal'. The weight of the LI is taken over
-   that way, whatever the theme sets for the menu, so the label matches its
-   NOT marked siblings exactly.
-
-   NOTE: To get the heavier label back, comment the rule below out. The
-   original declaration stays in place and takes effect again.
-   -----------------------------------------------------------------------------
-*/
-a.mm-item.active-parent,
-.mm-item.active-parent > a,
-.mm-item.active-parent > span {
-  font-weight: inherit;
-}
-
 /* Media breakpoints
    ----------------------------------------------------------------------------- */
 
@@ -304,40 +273,15 @@ NOTE: For unknown reason, style "mm-ocd--left" is NOT applied correctly
       like "mm-ocd--right" what cause the wrong background-color
       As a workaround, the background-color is added to the media
       queries as well (but MUST be removed if fixed!!!)
---------------------------------------------------------------------------------
-*/
+-------------------------------------------------------------------------------- */
 
 /* Desktop
    Large devices (desktops, 992px and up)
 */
-
-/* Claude - Fix MMenu #3
-   Malformed comment, @media (min-width: 992px)
-   ---------------------------------------------------------------------------
-   CSS comments do NOT nest. The block below opens a comment on the line
-   holding '.mm-ocd {' and opens a SECOND one inside it, on the line holding
-   'top: 100px;'. The first closer ends the comment ALREADY, so the line
-   below it is read as CSS again: its brace CLOSES the media query and the
-   closer left over starts a selector.
-
-   Parsed as written, the result is:
-
-     1. '@media (min-width: 992px)' ends up with an EMPTY body, the black
-        background for the desktop drawer is NOT set.
-     2. The rule '.mm-ocd__content' that follows gets the closer left over
-        prepended to its selector. The selector is invalid, the rule is
-        dropped.
-     3. The brace left over swallows the WHOLE mobile block that follows,
-        including 'top: 48px' (the drawer offset to the NAV bar) and the
-        black background for the mobile drawer. NONE of them is applied.
-
-   The comment is RE-OPENED below instead. It is closed by the closer that
-   is left over today, which consumes the brace left over as well. No line
-   is removed, the block parses as it was meant to and all three rules
-   above are applied again.
-   ---------------------------------------------------------------------------
-*/
 @media only screen and (min-width: 992px) {
+  /* .mm-ocd {
+    top: 100px; /* drawer top offset to NAV bar */
+  } */
   .mm-ocd__content {
       background-color: #000; /* black */
   }
