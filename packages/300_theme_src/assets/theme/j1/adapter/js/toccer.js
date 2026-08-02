@@ -229,7 +229,7 @@ j1.adapter.toccer = (() => {
       dependenciesTimeout = setTimeout(function () {
         if (dependencies_met_toccer) {
           clearInterval(dependencies_met_toccer);
-          logger.warn('toccer init aborted: page-ready conditions not met within 5s');
+          logger.info('toccer init aborted: page-ready conditions not met within 5s');
         }
       }, 5000);
     }, // END init
