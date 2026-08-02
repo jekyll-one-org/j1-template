@@ -4,15 +4,15 @@ Prompt
 
 ```
 js: $ npm run clean && npm run lint
-js: > js@2026.1.1 clean
+js: > js@2026.1.2 clean
 js: > run-p -s clean:*
-js: > js@2026.1.1 lint
+js: > js@2026.1.2 lint
 js: > run-p -s lint:*
 js: $ npm run build-js
-js: > js@2026.1.1 build-js
+js: > js@2026.1.2 build-js
 js: > cross-var webpack --mode production --config $npm_package_wp_build
 js: $ npm run uglify-js && npm run deploy
-js: > js@2026.1.1 uglify-js
+js: > js@2026.1.2 uglify-js
 js: > terser dist/template.nomin.js -o dist/template.min.js -m --source-map
 js: ERROR: ENOENT: no such file or directory, open 'dist/template.nomin.js'
 js:     at Object.openSync (node:fs:603:3)
@@ -27,21 +27,21 @@ lerna ERR! yarn run rebuild exited 1 in 'js'
 lerna ERR! yarn run rebuild stdout:
 $ npm run clean && npm run lint
 
-> js@2026.1.1 clean
+> js@2026.1.2 clean
 > run-p -s clean:*
 
 
-> js@2026.1.1 lint
+> js@2026.1.2 lint
 > run-p -s lint:*
 
 $ npm run build-js
 
-> js@2026.1.1 build-js
+> js@2026.1.2 build-js
 > cross-var webpack --mode production --config $npm_package_wp_build
 
 $ npm run uglify-js && npm run deploy
 
-> js@2026.1.1 uglify-js
+> js@2026.1.2 uglify-js
 > terser dist/template.nomin.js -o dist/template.min.js -m --source-map
 
 info Visit https://yarnpkg.com/en/docs/cli/run for documentation about this command.
