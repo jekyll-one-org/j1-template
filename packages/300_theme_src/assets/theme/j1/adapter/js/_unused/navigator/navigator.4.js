@@ -749,15 +749,7 @@ j1.adapter.navigator = ((j1, window) => {
       style += '</style>';
       $('head').append(style);
 
-      // jadams, 2026-08-02: nav|parent dropdown style (color: blue-200)
-      style  = '<style>';
-      style += '  .active-parent  {';
-      style += '    background-color: #90CAF9';
-      style += '  }';
-      style += '</style>';
-      $('head').append(style);
-
-      // jadams, 2026-08-02: nav|item dropdown style (color: blue-200)
+      // jadams, 2026-08-02: nav|dropdown styles (color: blue-200)
       style  = '<style>';
       style += '  .dropdown-item.active  {';
       style += '    background-color: #90CAF9' + ' !important;';

@@ -1,6 +1,6 @@
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/modules/navigator/js/navigator.js (4)
+ # ~/assets/theme/j1/modules/navigator/navigator.js (4)
  # Provides all JavaScript core functions for J1 Navigator
  #
  # Product/Info:
@@ -93,7 +93,7 @@ window.j1.api.navigator = (function navigator(options) {
   var activeItemInitialized   = false;
 
   // ---------------------------------------------------------------------------
-  // Fix J1 Navigator issue #4
+  // Claude - Fix J1 Navigator issue #4
   // Private defaults for the "active parent" (ancestor) menu item management
   //
   // Background:
@@ -140,7 +140,7 @@ window.j1.api.navigator = (function navigator(options) {
   var activeParentScopeSelector = 'body';
 
   // ---------------------------------------------------------------------------
-  // Fix J1 Navigator issue #5
+  // Claude - Fix J1 Navigator issue #5
   // Private defaults for the fixes of series #5
   //
   // Background:
@@ -203,13 +203,13 @@ window.j1.api.navigator = (function navigator(options) {
   //   damaged|detached DOM fragments).
   // ---------------------------------------------------------------------------
   //
-  var activeItemPlainSelector     = 'li.nav-item';
-  var activeItemClearOnNoMatch    = true;
-  var activeParentStructural      = true;
-  var activeParentMarkerAttribute = 'data-j1-active-parent';
-  var activeParentRootSelector    = 'body, nav, ul.navbar-nav, ul.nav.navigator, .mm-ocd, .mm-ocd__content, .mm-panels';
-  var activeParentMaxDepth        = 25;
-  var activeParentStyleId         = 'j1NavActiveParentStyle';
+  var activeItemPlainSelector     = 'li.nav-item';                                // Claude - Fix J1 Navigator issue #5
+  var activeItemClearOnNoMatch    = true;                                         // Claude - Fix J1 Navigator issue #5
+  var activeParentStructural      = true;                                         // Claude - Fix J1 Navigator issue #5
+  var activeParentMarkerAttribute = 'data-j1-active-parent';                       // Claude - Fix J1 Navigator issue #5
+  var activeParentRootSelector    = 'body, nav, ul.navbar-nav, ul.nav.navigator, .mm-ocd, .mm-ocd__content, .mm-panels'; // Claude - Fix J1 Navigator issue #5
+  var activeParentMaxDepth        = 25;                                           // Claude - Fix J1 Navigator issue #5
+  var activeParentStyleId         = 'j1NavActiveParentStyle';                      // Claude - Fix J1 Navigator issue #5
 
   // ---------------------------------------------------------------------------
   // Fix J1 Navigator issue #3
@@ -315,11 +315,11 @@ window.j1.api.navigator = (function navigator(options) {
       items.push({ element: this, path: path });
     });
 
-    // Fix J1 Navigator issue #5
+    // Claude - Fix J1 Navigator issue #5
     // Second pass: collect the PLAIN top-level items as well (candidate (1)
     // reported for fix #4). Items already collected by the pass above are
     // skipped by identity, so no item can end up in the list twice.
-    j1NavCollectPlainItems($scope, items);
+    j1NavCollectPlainItems($scope, items);                                        // Claude - Fix J1 Navigator issue #5
 
     return items;
   }
@@ -422,18 +422,25 @@ window.j1.api.navigator = (function navigator(options) {
       scope: (api && typeof api.activeParentScopeSelector === 'string'
                     && api.activeParentScopeSelector !== '')
                  ? api.activeParentScopeSelector
-                 : activeParentScopeSelector,
+      // Original (deprecated, preserved for reference):
+      //           : activeParentScopeSelector
+                 : activeParentScopeSelector,                                     // Claude - Fix J1 Navigator issue #5
 
-      structural: (api && typeof api.activeParentStructural === 'boolean')
-                 ? api.activeParentStructural
-                 : activeParentStructural,
+      // Claude - Fix J1 Navigator issue #5
+      // Structural (walk-up) parent detection. Kill switch, see the private
+      // defaults above.
+      structural: (api && typeof api.activeParentStructural === 'boolean')        // Claude - Fix J1 Navigator issue #5
+                 ? api.activeParentStructural                                     // Claude - Fix J1 Navigator issue #5
+                 : activeParentStructural,                                        // Claude - Fix J1 Navigator issue #5
 
-      marker: activeParentMarkerAttribute
+      // Claude - Fix J1 Navigator issue #5
+      // Data attribute used to find|clear the marks set by this module
+      marker: activeParentMarkerAttribute                                         // Claude - Fix J1 Navigator issue #5
     };
   }
 
   // ---------------------------------------------------------------------------
-  // Fix J1 Navigator issue #5
+  // Claude - Fix J1 Navigator issue #5
   // Read the effective configuration for the "active" (leaf) item management
   //
   // Same pattern as j1NavParentConfig() of fix #4: the public properties of
@@ -462,7 +469,7 @@ window.j1.api.navigator = (function navigator(options) {
   }
 
   // ---------------------------------------------------------------------------
-  // Fix J1 Navigator issue #5
+  // Claude - Fix J1 Navigator issue #5
   // Check if a DOM element is already part of the collected menu items
   //
   // The check is made on the ELEMENT IDENTITY, NOT on classes, so an element
@@ -482,7 +489,7 @@ window.j1.api.navigator = (function navigator(options) {
   }
 
   // ---------------------------------------------------------------------------
-  // Fix J1 Navigator issue #5
+  // Claude - Fix J1 Navigator issue #5
   // Return all collected menu items as a jQuery set
   //
   // Used to protect the LEAF items from the parent handling by IDENTITY
@@ -500,7 +507,7 @@ window.j1.api.navigator = (function navigator(options) {
   }
 
   // ---------------------------------------------------------------------------
-  // Fix J1 Navigator issue #5
+  // Claude - Fix J1 Navigator issue #5
   // Collect the PLAIN (top-level) menu items of the given scope
   //
   // Closes candidate (1) reported for fix #4: a top-level item WITHOUT a
@@ -578,7 +585,7 @@ window.j1.api.navigator = (function navigator(options) {
   }
 
   // ---------------------------------------------------------------------------
-  // Fix J1 Navigator issue #5
+  // Claude - Fix J1 Navigator issue #5
   // Build the delegated click selector for the "active" item management
   //
   // Extends the selector '.dropdown-item' used by fix #3 by the plain
@@ -622,13 +629,28 @@ window.j1.api.navigator = (function navigator(options) {
     var count  = 0;
     var index;
     var $parents;
-    var $leaves;
+    var $leaves;                                                                  // Claude - Fix J1 Navigator issue #5
 
     if (!config.enabled) {
       return 0;
     }
 
-    $leaves = j1NavItemElements(items);
+    // Claude - Fix J1 Navigator issue #5
+    // The LEAF items are protected by their IDENTITY from here on, NOT by
+    // the class 'dropdown-item'. A dropdown opener of level 2|3 carries that
+    // class ITSELF, so the rule of fix #4 excluded exactly the parents that
+    // should be marked.
+    $leaves = j1NavItemElements(items);                                           // Claude - Fix J1 Navigator issue #5
+
+    // Original (deprecated, preserved for reference):
+    // // clear ALL stale parent marks of the scope first
+    // $(config.scope)
+    //   .find(activeParentSelector)
+    //   .not('.dropdown-item')
+    //   .removeClass(config.className);
+    //
+    // clear ALL stale parent marks of the scope first
+    j1NavClearActiveParents(config, $leaves);                                     // Claude - Fix J1 Navigator issue #5
 
     // mark the ancestors of every leaf item of the current page. Desktop and
     // mobile render the SAME menu, so more than one leaf can match.
@@ -637,15 +659,29 @@ window.j1.api.navigator = (function navigator(options) {
         continue;
       }
 
-      $parents = j1NavCollectItemParents(
-        items[index].element, config, $leaves
-      );
+      // Original (deprecated, preserved for reference):
+      // $parents = $(items[index].element)
+      //              .parents(activeParentSelector)
+      //              .not('.dropdown-item');
+      //
+      // $parents.addClass(config.className);
+      // count = count + $parents.length;
+      $parents = j1NavCollectItemParents(                                         // Claude - Fix J1 Navigator issue #5
+        items[index].element, config, $leaves                                     // Claude - Fix J1 Navigator issue #5
+      );                                                                          // Claude - Fix J1 Navigator issue #5
 
-      $parents
-        .addClass(config.className)
-        .attr(config.marker, 'true');
+      // Claude - Fix J1 Navigator issue #5
+      // The marker attribute is set in ADDITION to the class. It makes the
+      // marks of THIS module findable for the next run, no matter which
+      // class name is configured, and can be used for CSS rules that can not
+      // collide with other 'active' states of the page:
+      //
+      //   nav.navbar.navigator li[data-j1-active-parent] > a { ... }
+      $parents                                                                    // Claude - Fix J1 Navigator issue #5
+        .addClass(config.className)                                               // Claude - Fix J1 Navigator issue #5
+        .attr(config.marker, 'true');                                             // Claude - Fix J1 Navigator issue #5
 
-      count = count + $parents.length;
+      count = count + $parents.length;                                            // Claude - Fix J1 Navigator issue #5
     }
 
     if (logger) {
@@ -657,7 +693,7 @@ window.j1.api.navigator = (function navigator(options) {
   }
 
   // ---------------------------------------------------------------------------
-  // Fix J1 Navigator issue #5
+  // Claude - Fix J1 Navigator issue #5
   // Collect ALL parent (ancestor) elements of one menu item
   //
   // This is the fix for the main issue reported for fix #4: no parent item
@@ -726,7 +762,7 @@ window.j1.api.navigator = (function navigator(options) {
   }
 
   // ---------------------------------------------------------------------------
-  // Fix J1 Navigator issue #5
+  // Claude - Fix J1 Navigator issue #5
   // Clear all parent marks of the configured scope
   //
   // Two sources are cleared:
@@ -759,7 +795,7 @@ window.j1.api.navigator = (function navigator(options) {
   }
 
   // ---------------------------------------------------------------------------
-  // Fix J1 Navigator issue #5
+  // Claude - Fix J1 Navigator issue #5
   // Inject a MINIMAL default style for the marked parent items
   //
   // The default class 'active-parent' of fix #4 is a NEW class: setting it
@@ -1359,7 +1395,7 @@ window.j1.api.navigator = (function navigator(options) {
     activeParentScopeSelector: 'body',
 
     // -------------------------------------------------------------------------
-    // Fix J1 Navigator issue #5
+    // Claude - Fix J1 Navigator issue #5
     // Configuration for the fixes of series #5
     //
     // activeItemPlainSelector:
@@ -1412,10 +1448,20 @@ window.j1.api.navigator = (function navigator(options) {
       var matchedPath;
       var marked;
 
+      // Original (deprecated, preserved for reference):
+      // if (!items.length) {
+      //   return false;
+      // }
+      //
+      // Claude - Fix J1 Navigator issue #5
+      // Closes candidate (2) reported for fix #4: returning early left ALL
+      // existing marks in place. Harmless on a full page load, but wrong if
+      // the menu is re-rendered in place (AJAX). The marks are cleared now,
+      // so the state always reflects the CURRENT page.
       if (!items.length) {
-        if (j1NavItemConfig().clearOnNoMatch) {
-          j1NavClearActiveParents(j1NavParentConfig(), null);
-        }
+        if (j1NavItemConfig().clearOnNoMatch) {                                   // Claude - Fix J1 Navigator issue #5
+          j1NavClearActiveParents(j1NavParentConfig(), null);                     // Claude - Fix J1 Navigator issue #5
+        }                                                                         // Claude - Fix J1 Navigator issue #5
         return false;
       }
 
@@ -1423,10 +1469,19 @@ window.j1.api.navigator = (function navigator(options) {
         items, currentPath, this.activeItemPrefixFallback
       );
 
+      // Original (deprecated, preserved for reference):
+      // if (!matchedPath) {
+      //   return false;
+      // }
+      //
+      // Claude - Fix J1 Navigator issue #5
+      // Same as above: no match means NO item of this menu belongs to the
+      // current page. Passing 'null' as the path clears the class 'active'
+      // from all collected items AND all parent marks of the scope.
       if (!matchedPath) {
-        if (j1NavItemConfig().clearOnNoMatch) {
-          j1NavApplyActive(items, null);
-        }
+        if (j1NavItemConfig().clearOnNoMatch) {                                   // Claude - Fix J1 Navigator issue #5
+          j1NavApplyActive(items, null);                                          // Claude - Fix J1 Navigator issue #5
+        }                                                                         // Claude - Fix J1 Navigator issue #5
         return false;
       }
 
@@ -1458,33 +1513,44 @@ window.j1.api.navigator = (function navigator(options) {
     initActiveMenuItems: function () {
       var _self       = this;
       var observeTime = 30000;
-      var clickSelector;
+      var clickSelector;                                                          // Claude - Fix J1 Navigator issue #5
 
       if (activeItemInitialized) {
         return true;
       }
       activeItemInitialized = true;
 
-      if (_self.activeParentInjectStyle) {
-        j1NavInjectActiveParentStyle();
-      }
+      // Claude - Fix J1 Navigator issue #5
+      // Optional default styling for the marked parent items (switched off
+      // by default, see 'activeParentInjectStyle' above).
+      if (_self.activeParentInjectStyle) {                                        // Claude - Fix J1 Navigator issue #5
+        j1NavInjectActiveParentStyle();                                           // Claude - Fix J1 Navigator issue #5
+      }                                                                           // Claude - Fix J1 Navigator issue #5
 
-      clickSelector = j1NavItemClickSelector();
+      // Claude - Fix J1 Navigator issue #5
+      // The click selector covers the plain top-level items now as well
+      // (candidate (1) reported for fix #4).
+      clickSelector = j1NavItemClickSelector();                                   // Claude - Fix J1 Navigator issue #5
 
       // delegated click handler, valid for desktop AND mobile menus
       $(document).off('click.j1navActiveItem');
-
-      $(document).on('click.j1navActiveItem', clickSelector, function () {
+      // Original (deprecated, preserved for reference):
+      // $(document).on('click.j1navActiveItem', '.dropdown-item', function () {
+      $(document).on('click.j1navActiveItem', clickSelector, function () {        // Claude - Fix J1 Navigator issue #5
         var $item   = $(this);
         var $anchor = $item.is('a[href]')
                         ? $item
                         : $item.find('a[href]').first();
         var path;
 
-        if (!$item.is('.dropdown-item')
-          && $item.find('ul.dropdown-menu, ul.megamenu-content, .dropdown-item').length) {
-          return;
-        }
+        // Claude - Fix J1 Navigator issue #5
+        // Ignore dropdown OPENERS. A click on a leaf item BUBBLES up to the
+        // top-level LI that contains it; without this guard the opener would
+        // be treated as the clicked item.
+        if (!$item.is('.dropdown-item')                                           // Claude - Fix J1 Navigator issue #5
+          && $item.find('ul.dropdown-menu, ul.megamenu-content, .dropdown-item').length) { // Claude - Fix J1 Navigator issue #5
+          return;                                                                 // Claude - Fix J1 Navigator issue #5
+        }                                                                         // Claude - Fix J1 Navigator issue #5
 
         if (!$anchor.length) {
           return;
@@ -1541,7 +1607,7 @@ window.j1.api.navigator = (function navigator(options) {
     }, // END initActiveMenuItems
 
     // -------------------------------------------------------------------------
-    // Fix J1 Navigator issue #5
+    // Claude - Fix J1 Navigator issue #5
     // Inject a minimal default style for the marked parent items
     //
     // The class set by fix #4 needs a CSS rule to become VISIBLE. Call this
@@ -1559,7 +1625,7 @@ window.j1.api.navigator = (function navigator(options) {
     }, // END injectActiveParentStyle
 
     // -------------------------------------------------------------------------
-    // Fix J1 Navigator issue #5
+    // Claude - Fix J1 Navigator issue #5
     // Report the state of the "active" item|parent management
     //
     // Diagnostic helper. Run it in the browser console to see WHAT the module

@@ -132,8 +132,9 @@
   color: #fafafa;
 }
 
+/* color: blue-200 */
 .mm-item.active {
-  background-color: #ffc700;
+  background-color: #90CAF9; 
 }
 
 .mm-spn a {
@@ -158,7 +159,7 @@ a.toc-link:hover {
    Active|active parent menu item (Mobile Menu)
    -----------------------------------------------------------------------------
    The item of the current page carries the class 'active' and gets the
-   background color #ffc700 (see '.mm-item.active' above), while the base
+   background color #90CAF9 (see '.mm-item.active' above), while the base
    style '.mm-spn a' keeps the label at #9e9e9e: grey on yellow, hard to
    read. The rules below set a DARK label color for the active item and keep
    that color readable on hover ('.mm-spn li:hover' sets #424242 as
@@ -199,7 +200,7 @@ a.mm-item.active:hover,
 /* Fix MMenu #2: active item, keep the background on hover
    (overwrites '.mm-spn li:hover', background-color: #424242) */
 .mm-item.active:hover {
-  background-color: #ffc700;
+  background-color: #90CAF9;
 }
 
 /* Fix MMenu #2: active item, chevron in the label color */
@@ -209,7 +210,7 @@ a.mm-item.active:hover,
 }
 
 /* Fix MMenu #2: parent of the active item, subtle background
-   NOTE: #332800 is #ffc700 at 20% opacity on the black menu background. A
+   NOTE: #332800 is #90CAF9 at 20% opacity on the black menu background. A
    solid color is used (NOT rgba) because '.mm-spn a' inherits the background
    of its LI, what would paint a transparent color TWICE.
 */
@@ -221,7 +222,7 @@ a.mm-item.active:hover,
 a.mm-item.active-parent,
 .mm-item.active-parent > a,
 .mm-item.active-parent > span {
-  color: #ffc700 !important;
+  color: #90CAF9 !important;
   font-weight: 500;
 }
 
@@ -229,13 +230,13 @@ a.mm-item.active-parent,
 a.mm-item.active-parent:hover,
 .mm-item.active-parent > a:hover,
 .mm-item.active-parent > span:hover {
-  color: #ffc700 !important;
+  color: #90CAF9 !important;
 }
 
 /* Fix MMenu #2: parent of the active item, chevron in the label color */
 .mm-item.active-parent:before {
-  border-top-color: #ffc700;
-  border-right-color: #ffc700;
+  border-top-color: #90CAF9;
+  border-right-color: #90CAF9;
 }
 
 /* Claude - Fix MMenu #3
@@ -247,7 +248,7 @@ a.mm-item.active-parent:hover,
    'active-parent' is set or dropped, what moves the text on EVERY page load
    placing the active item somewhere else in the menu.
 
-   The color alone marks the item already: #ffc700 on the background #332800
+   The color alone marks the item already: #90CAF9 on the background #332800
    set by the rule giving the parent item its subtle background, while
    ALL other labels stay at #9e9e9e (see '.mm-spn a'). The weight is therefore
    reset below and the marking is done by the color only.
