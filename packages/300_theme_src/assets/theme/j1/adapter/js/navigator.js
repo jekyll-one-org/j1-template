@@ -675,14 +675,6 @@ j1.adapter.navigator = ((j1, window) => {
       style += '</style>';
       $('head').append(style);
 
-      // extended modal styles
-      // style  = '<style>';
-      // style += '  .modal-dialog.modal-notify.modal-primary .modal-header {';
-      // style += '    background-color: ' + bg_scrolled + ' !important;';
-      // style += '  }';
-      // style += '</style>';
-      // $('head').append(style);
-
       // nav|pills styles
       style  = '<style>';
       style += '  .nav-pills .nav-link.active, .nav-pills .show > .nav-link  {';
@@ -753,6 +745,14 @@ j1.adapter.navigator = ((j1, window) => {
       style  = '<style>';
       style += '  li.dropdown.nav-item > a:hover {';
       style += '    color: ' + navMenuOptions.menu_item_color_hover + ' !important;';
+      style += '  }';
+      style += '</style>';
+      $('head').append(style);
+
+      // jadams, 2026-08-02: nav|dropdown styles
+      style  = '<style>';
+      style += '  .dropdown-item.active  {';
+      style += '    background-color: var(--bs-yellow)';
       style += '  }';
       style += '</style>';
       $('head').append(style);

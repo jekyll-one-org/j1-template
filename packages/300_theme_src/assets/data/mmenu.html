@@ -129,7 +129,7 @@ exclude_from_search:                    true
       {% when 'sublevel_menu' %}
         <!-- [INFO   ] [~/assets/data/mmenu.html              ] [found menu-type: sub-menue] -->
         <!-- [INFO   ] [~/assets/data/mmenu.html              ] [submenu level 1 detected] -->
-        <li>
+        <li class="mm-item">
           {% if menu.icon == null %}
             <span>{{menu.item}}</span>
           {% else %}
@@ -156,7 +156,7 @@ exclude_from_search:                    true
 
             {% if level_1.dropdown %}
               <!-- [INFO   ] [~/assets/data/mmenu.html              ] [submenu level 2 (dropdown) detected] -->
-              <li>
+              <li class="mm-item">
                 {% if level_1.icon == null %}
                   <span>{{level_1.title}}</span>
                 {% else %}
@@ -182,7 +182,7 @@ exclude_from_search:                    true
                     {% endif %}
                     {% if level_2.dropdown %}
                       <!-- [INFO   ] [~/assets/data/mmenu.html              ] [submenu level 3 detected (last level supported)] -->
-                      <li>
+                      <li class="mm-item">
                         {% if level_2.icon == null %}
                           <span>{{level_2.title}}</span>
                         {% else %}
@@ -346,7 +346,7 @@ exclude_from_search:                    true
             {% when 'theme_select' %}
             {% if themes_options.enabled %}
               <!-- [INFO   ] [~/assets/data/mmenu.html              ] [found menu-type: theme_select] -->
-              <li>
+              <li class="mm-item">
                 <span id="themes_mmenu" style="display: block">{{menu.item}}</span>
                 {% if nav_menu_animation %}
                 <ul>
@@ -358,7 +358,7 @@ exclude_from_search:                    true
                   {% for item in menu.theme_select %}
                     <!-- check for locally loaded J1 Themes -->
                     {% if item.local_themes and item.local_themes == 'enabled' %}
-                      <li>
+                      <li class="mm-item">
                         <span><i class="{{icon_family}} {{icon_family}}-{{item.icon}} {{icon_size}} {{icon_color}} mr-2"></i> {{item.title}}</span>
                         <ul id="local_themes_mmenu"></ul>
                       </li>
@@ -366,21 +366,21 @@ exclude_from_search:                    true
                     {% endif %} <!-- end J1 theme selector -->
                     <!-- check for remotely loaded (BootSwatch) Themes -->
                     {% if item.bootswatch_themes and item.bootswatch_themes == 'enabled' %}
-                      <li>
+                      <li class="mm-item">
                         <span><i class="{{icon_family}} {{icon_family}}-{{item.icon}} {{icon_size}} {{icon_color}} mr-2"></i> {{item.title}}</span>
                         <ul id="remote_themes_mmenu"></ul>
                       </li>
                       {% assign item_found = 'true' %}
                     {% endif %} <!-- end BootSwatch theme selector -->
                     {% if item.preview and item.preview == 'enabled' %}
-                      <li>
+                      <li class="mm-item">
                         <a class="link-no-decoration" href="{{theme_preview}}" ><i class="{{icon_family}} {{icon_family}}-{{item.icon}} {{icon_size}} {{icon_color}} mr-2"></i> {{item.title}}</a>
                       </li>
                       {% assign item_found = 'true' %}
                       {% endif %} <!-- end theme preview -->
                        <!-- fallback if no valid config found -->
                       {% if item_found == 'false' %}
-                      <li>
+                      <li class="mm-item">
                         {% if item.title %}
                           <span>Invalid: {{item.title}}</span>
                         {% else %}

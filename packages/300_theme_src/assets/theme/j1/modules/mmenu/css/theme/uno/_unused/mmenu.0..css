@@ -133,7 +133,7 @@
 }
 
 .mm-item.active {
-  color: #ffc700;
+  background-color: #ffc700;
 }
 
 .mm-spn a {

@@ -6,7 +6,7 @@ regenerate:                             true
 
 {% comment %}
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/adapter/js/mmenu.js (3)
+ # ~/assets/theme/j1/adapter/js/mmenu.js (2)
  # Liquid template to adapt Mmenu-Light Core functions
  #
  # Product/Info:
@@ -77,7 +77,7 @@ regenerate:                             true
 
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/adapter/js/mmenu.js (3)
+ # ~/assets/theme/j1/adapter/js/mmenu.js (2)
  # JS Adapter for J1 MobileMenu (MMenu Light)
  #
  # Product/Info:
@@ -179,48 +179,6 @@ j1.adapter.mmenu = ((j1, window) => {
   var activeItemInitialized     = false;
   var activeItemObserver        = null;
   var activeItemRestoreTimer    = null;
-
-  // ---------------------------------------------------------------------------
-  // Fix MMenu #2
-  // Private state for the "active parent" menu item management (Mobile Menu)
-  //
-  // Background:
-  // The previous fix (series #1) marks the item of the CURRENT page with the
-  // class 'active'.
-  // An item placed in a SUBMENU is NOT visible while the parent panel is
-  // displayed: the sliding panels of the plugin show ONE panel at a time.
-  // Without a mark on the PARENT item, the panel showing the parent gives NO
-  // hint WHERE the current page is located.
-  //
-  // All items being an ANCESTOR of an active item are therefore marked with
-  // the class 'active-parent' (see mmenuApplyActiveParents). Only elements
-  // carrying the class 'mm-item' are marked, so items of other menus (e.g.
-  // the J1 Navigator using the class 'dropdown-item') are NOT touched.
-  //
-  // NOTE: The classes 'active' and 'active-parent' are DISJOINT. An item can
-  // never carry both: an ancestor is, by definition, placed ABOVE the active
-  // item.
-  //
-  // NOTE: The plugin has its OWN mechanism for a selected item, configured by
-  // 'mmenu_navigator.selected' (see mmenuInitializer). That class is read
-  // ONCE, at construction time of the navigator (see ~/modules/mmenu/js/
-  // modules/sliding-panels-navigation.js, method _setSelectedl), to OPEN the
-  // panel the selected item is placed in. The restore of this adapter runs
-  // AFTER the navigator was constructed (the menu HTML is loaded by AJAX), so
-  // setting that class later has NO effect on the panel opened. Marking the
-  // active item with the plugin class as well is therefore OPT-IN and set to
-  // 'false' by default.
-  //
-  // DESIGN DECISION (for review): Setting
-  // 'activeItemUsePluginSelectedClass' to 'true' makes the plugin open the
-  // panel holding the item of the CURRENT page instead of the MAIN panel
-  // whenever the navigator is (re-)constructed. That is a change of the menu
-  // BEHAVIOR, NOT of its styling, and is left switched off here.
-  // ---------------------------------------------------------------------------
-  //
-  var activeParentClass                 = 'active-parent';
-  var activeSelectedClass               = 'Selected';
-  var activeItemUsePluginSelectedClass  = false;
 
   // ---------------------------------------------------------------------------
   // helper functions
@@ -426,101 +384,17 @@ j1.adapter.mmenu = ((j1, window) => {
     var index;
     var count = 0;
 
-    // Fix MMenu #2: items marked, used to mark their ancestors
-    var activeElements = [];
-
     for (index = 0; index < items.length; index++) {
       if (items[index].path === path) {
         $(items[index].element).addClass('active');
         count = count + 1;
-        activeElements.push(items[index].element);
       } else {
         $(items[index].element).removeClass('active');
       }
     }
 
-    // Fix MMenu #2
-    // mark the PARENTS of the items marked. Placed here (NOT at the call
-    // sites) to keep the state of 'active' and 'active-parent' in sync for
-    // ALL callers (click handler AND restore).
-    mmenuApplyActiveParents(activeElements);
-
     return count;
   } // END mmenuApplyActive
-
-  // ---------------------------------------------------------------------------
-  // Fix MMenu #2
-  // mmenuApplyActiveParents()
-  // Mark all items being an ANCESTOR of an active item
-  //
-  // The class 'active-parent' is removed from ALL items of the scope first,
-  // so a state set for a FORMER page can NOT survive. All items being an
-  // ancestor of one of the given active items are marked afterwards.
-  //
-  // Items of a submenu are nested as: LI.mm-item > UL > LI.mm-item. Walking
-  // up by 'closest' therefore collects the ancestor items of ALL levels, not
-  // only the level directly above.
-  //
-  // NOTE: Parent items are usually NOT collected by mmenuCollectItems() (they
-  // carry NO navigable link), so they are never cleared by mmenuApplyActive().
-  // The scope is re-scanned here for that reason.
-  //
-  // NOTE: If enabled (activeItemUsePluginSelectedClass, 'false' by default),
-  // the class configured for the plugin ('mmenu_navigator.selected') is set
-  // on the ACTIVE items as well, NOT on their ancestors: the plugin picks the
-  // LAST item found carrying that class to detect the panel to open.
-  //
-  // Returns the number of items marked as being a parent.
-  // ---------------------------------------------------------------------------
-  //
-  function mmenuApplyActiveParents (activeElements) {
-    var $items = $(activeItemScope).find(activeItemSelector);
-    var count  = 0;
-    var index;
-    var parent;
-
-    // drop the state of a FORMER page (ALL items of the scope)
-    $items.removeClass(activeParentClass);
-    if (activeItemUsePluginSelectedClass && activeSelectedClass) {
-      $items.removeClass(activeSelectedClass);
-    }
-
-    if (!activeElements || !activeElements.length) {
-      return count;
-    }
-
-    for (index = 0; index < activeElements.length; index++) {
-
-      // plugin hook (opt-in), set on the ACTIVE item only
-      if (activeItemUsePluginSelectedClass && activeSelectedClass) {
-        $(activeElements[index]).addClass(activeSelectedClass);
-      }
-
-      // walk UP the item tree, starting ABOVE the active item
-      parent = activeElements[index].parentElement;
-      parent = (parent && typeof parent.closest === 'function')
-        ? parent.closest(activeItemSelector)
-        : null;
-
-      while (parent) {
-        // an ACTIVE item is never marked as being a parent as well
-        if (!$(parent).hasClass('active')) {
-          $(parent).addClass(activeParentClass);
-          count = count + 1;
-        }
-
-        parent = parent.parentElement
-          ? parent.parentElement.closest(activeItemSelector)
-          : null;
-      }
-    }
-
-    if (logger) {
-      logger.debug('active mmenu parent item|s marked: ' + count);
-    }
-
-    return count;
-  } // END mmenuApplyActiveParents
 
   // ---------------------------------------------------------------------------
   // Fix MMenu #1
@@ -1000,21 +874,6 @@ j1.adapter.mmenu = ((j1, window) => {
         return true;
       }
       activeItemInitialized = true;
-
-      // -----------------------------------------------------------------------
-      // Fix MMenu #2
-      // Take over the class configured for the plugin (see mmenuInitializer,
-      // option 'selected' of mmOptions.mmenu_navigator). The plugin default
-      // 'Selected' is kept if NO value is configured.
-      //
-      // NOTE: The class is used ONLY if activeItemUsePluginSelectedClass is
-      // enabled (see the note at the top of this module).
-      // -----------------------------------------------------------------------
-      if (navMenuOptions
-        && navMenuOptions.mmenu_navigator
-        && navMenuOptions.mmenu_navigator.selected) {
-        activeSelectedClass = navMenuOptions.mmenu_navigator.selected;
-      }
 
       // delegated click handler, CAPTURE phase
       document.removeEventListener('click', mmenuActiveClickHandler, true);

@@ -375,14 +375,10 @@
       icon:                             wrench
       column:
 
-        - title:                        FreeFormatter
-          href:                         //freeformatter.com/
+        - title:                        AppDevTools
+          href:                         //appdevtools.com/
           target:                       _blank
           icon:                         cached
-      # - title:                        AppDevTools
-      #   href:                         //appdevtools.com/
-      #   target:                       _blank
-      #   icon:                         cached
         - title:                        Minify CSS Online
           href:                         //minify-css.com/
           target:                       _blank
@@ -391,6 +387,7 @@
           href:                         //minify-js.com/
           target:                       _blank
           icon:                         cached
+
         - title:                        W3C Validator
           href:                         //validator.w3.org/
           target:                       _blank
@@ -403,6 +400,7 @@
           href:                         //cssportal.com/css-to-scss/
           target:                       _blank
           icon:                         language-css3
+
         - title:                        CSS Matic Tools
           href:                         //www.cssmatic.com
           target:                       _blank
