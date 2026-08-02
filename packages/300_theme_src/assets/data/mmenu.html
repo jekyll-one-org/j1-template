@@ -141,15 +141,15 @@ exclude_from_search:                    true
             {% if level_1.dropdown == null %}
               {% if level_1.icon == null %}
                 {% if level_1.target == null %}
-                  <li><a class="link-no-decoration" href="{{level_1.href}}{{ext}}">{{level_1.title}}</a></li>
+                  <li class="mm-item"><a class="link-no-decoration" href="{{level_1.href}}{{ext}}">{{level_1.title}}</a></li>
                 {% else %}
-                  <li><a class="link-no-decoration" href="{{level_1.href}}{{ext}}" target="{{level_1.target}}">{{level_1.title}}</a></li>
+                  <li class="mm-item"><a class="link-no-decoration" href="{{level_1.href}}{{ext}}" target="{{level_1.target}}">{{level_1.title}}</a></li>
                 {% endif %}
               {% else %}
                 {% if level_1.target == null %}
-                  <li><a class="link-no-decoration" href="{{level_1.href}}{{ext}}"><i class="{{icon_style}} {{icon_family}}-{{level_1.icon}} {{icon_size}} {{icon_color}} mr-2"></i> {{level_1.title}}</a></li>
+                  <li class="mm-item"><a class="link-no-decoration" href="{{level_1.href}}{{ext}}"><i class="{{icon_style}} {{icon_family}}-{{level_1.icon}} {{icon_size}} {{icon_color}} mr-2"></i> {{level_1.title}}</a></li>
                 {% else %}
-                  <li><a class="link-no-decoration" href="{{level_1.href}}{{ext}}" target="{{level_1.target}}"><i class="{{icon_style}} {{icon_family}}-{{level_1.icon}} {{icon_size}} {{icon_color}} mr-2"></i> {{level_1.title}}</a></li>
+                  <li class="mm-item"><a class="link-no-decoration" href="{{level_1.href}}{{ext}}" target="{{level_1.target}}"><i class="{{icon_style}} {{icon_family}}-{{level_1.icon}} {{icon_size}} {{icon_color}} mr-2"></i> {{level_1.title}}</a></li>
                 {% endif %}
               {% endif %}
             {% endif %}
@@ -168,15 +168,15 @@ exclude_from_search:                    true
                     {% if level_2.dropdown == null %}
                       {% if level_2.icon == null %}
                         {% if level_2.target == null %}
-                          <li><a class="link-no-decoration" href="{{level_2.href}}{{ext}}">{{level_2.title}}</a></li>
+                          <li class="mm-item"><a class="link-no-decoration" href="{{level_2.href}}{{ext}}">{{level_2.title}}</a></li>
                         {% else %}
-                          <li><a class="link-no-decoration" href="{{level_2.href}}{{ext}}" target="{{level_2.target}}">{{level_2.title}}</a></li>
+                          <li class="mm-item"><a class="link-no-decoration" href="{{level_2.href}}{{ext}}" target="{{level_2.target}}">{{level_2.title}}</a></li>
                         {% endif %}
                       {% else %}
                         {% if level_2.target == null %}
-                          <li><a class="link-no-decoration" href="{{level_2.href}}{{ext}}"><i class="{{icon_style}} {{icon_family}}-{{level_2.icon}} {{icon_size}} {{icon_color}} mr-2"></i> {{level_2.title}}</a></li>
+                          <li class="mm-item"><a class="link-no-decoration" href="{{level_2.href}}{{ext}}"><i class="{{icon_style}} {{icon_family}}-{{level_2.icon}} {{icon_size}} {{icon_color}} mr-2"></i> {{level_2.title}}</a></li>
                         {% else %}
-                          <li><a class="link-no-decoration" href="{{level_2.href}}{{ext}}" target="{{level_2.target}}"><i class="{{icon_style}} {{icon_family}}-{{level_2.icon}} {{icon_size}} {{icon_color}} mr-2"></i> {{level_2.title}}</a></li>
+                          <li class="mm-item"><a class="link-no-decoration" href="{{level_2.href}}{{ext}}" target="{{level_2.target}}"><i class="{{icon_style}} {{icon_family}}-{{level_2.icon}} {{icon_size}} {{icon_color}} mr-2"></i> {{level_2.title}}</a></li>
                         {% endif %}
                       {% endif %}
                     {% endif %}
@@ -193,15 +193,15 @@ exclude_from_search:                    true
                         {% for level_3 in level_2.dropdown %}
                           {% if level_2.icon == null %}
                             {% if level_3.target == null %}
-                              <li><a class="link-no-decoration" href="{{level_3.href}}{{ext}}">{{level_3.title}}</a></li>
+                              <li class="mm-item"><a class="link-no-decoration" href="{{level_3.href}}{{ext}}">{{level_3.title}}</a></li>
                             {% else %}
-                              <li><a class="link-no-decoration" href="{{level_3.href}}{{ext}}" target="{{level_3.target}}">{{level_3.title}}</a></li>
+                              <li class="mm-item"><a class="link-no-decoration" href="{{level_3.href}}{{ext}}" target="{{level_3.target}}">{{level_3.title}}</a></li>
                             {% endif %}
                           {% else %}
                             {% if level_3.target == null %}
-                              <li><a class="link-no-decoration" href="{{level_3.href}}{{ext}}"><i class="{{icon_style}} {{icon_family}}-{{level_3.icon}} {{icon_size}} {{icon_color}} mr-2"></i> {{level_3.title}}</a></li>
+                              <li class="mm-item"><a class="link-no-decoration" href="{{level_3.href}}{{ext}}"><i class="{{icon_style}} {{icon_family}}-{{level_3.icon}} {{icon_size}} {{icon_color}} mr-2"></i> {{level_3.title}}</a></li>
                             {% else %}
-                              <li><a class="link-no-decoration" href="{{level_3.href}}{{ext}}" target="{{level_3.target}}"><i class="{{icon_style}} {{icon_family}}-{{level_3.icon}} {{icon_size}} {{icon_color}} mr-2"></i> {{level_3.title}}</a></li>
+                              <li class="mm-item"><a class="link-no-decoration" href="{{level_3.href}}{{ext}}" target="{{level_3.target}}"><i class="{{icon_style}} {{icon_family}}-{{level_3.icon}} {{icon_size}} {{icon_color}} mr-2"></i> {{level_3.title}}</a></li>
                             {% endif %}
                           {% endif %}
                           {% if level_3.divider %} <li class="divider"></li> {% endif %}
@@ -275,16 +275,16 @@ exclude_from_search:                    true
           {% if menu.icon == null %}
             <!-- [INFO   ] [~/assets/data/mmenu.html              ] [no icon for menu-item found -->
             {% if menu.target == null %}
-              <li> <a class="link-no-decoration" href="{{menu.href}}{{ext}}">{{menu.item}}</a> </li>
+              <li class="mm-item"> <a class="link-no-decoration" href="{{menu.href}}{{ext}}">{{menu.item}}</a> </li>
             {% else %}
-              <li> <a class="link-no-decoration" href="{{menu.href}}{{ext}}" target="{{menu.target}}">{{menu.item}}</a> </li>
+              <li class="mm-item"> <a class="link-no-decoration" href="{{menu.href}}{{ext}}" target="{{menu.target}}">{{menu.item}}</a> </li>
             {% endif %}
           {% elsif menu.icon %}
             <!-- [INFO   ] [~/assets/data/mmenu.html              ] [no icon for menu-item found -->
             {% if menu.target == null %}
-              <li> <a class="link-no-decoration" href="{{menu.href}}{{ext}}"><i class="{{icon_style}} {{icon_family}}-{{menu.icon}} {{icon_size}}"></i> {{menu.item}}</a> </li>
+              <li class="mm-item"> <a class="link-no-decoration" href="{{menu.href}}{{ext}}"><i class="{{icon_style}} {{icon_family}}-{{menu.icon}} {{icon_size}}"></i> {{menu.item}}</a> </li>
             {% else %}
-              <li> <a class="link-no-decoration" href="{{menu.href}}{{ext}}" target="{{menu.target}}"><i class="{{icon_style}} {{icon_family}}-{{menu.icon}} {{icon_size}}"></i> {{menu.item}}</a> </li>
+              <li class="mm-item"> <a class="link-no-decoration" href="{{menu.href}}{{ext}}" target="{{menu.target}}"><i class="{{icon_style}} {{icon_family}}-{{menu.icon}} {{icon_size}}"></i> {{menu.item}}</a> </li>
             {% endif %}
           {% else %}
             <!-- [FATAL ] [nav_menu.menu-top-level-only       ] [processing menu item failed] -->
