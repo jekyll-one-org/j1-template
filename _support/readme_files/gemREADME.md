@@ -36,7 +36,7 @@ to your **PATH** environment variable.
 ### Install a Gem in specific version
 
 ``` sh
-  gem install j1-template -v2026.1.0 --user-install --no-document
+  gem install j1-template -v2026.1.1 --user-install --no-document
 ```
 
 You can also use version comparators like >= or ~>
@@ -48,7 +48,7 @@ You can also use version comparators like >= or ~>
 ### Install a Gem from different source
 
 ``` sh
-  gem install j1-template -v2026.1.0 --source 'https://gem.fury.io/jekyll-one-org/' --user-install --no-document
+  gem install j1-template -v2026.1.1 --source 'https://gem.fury.io/jekyll-one-org/' --user-install --no-document
 ```
 
 
