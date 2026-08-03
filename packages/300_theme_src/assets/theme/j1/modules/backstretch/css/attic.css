@@ -160,6 +160,19 @@
   text-shadow: 0 4px 0 rgba(0,0,0,.2) !important;
 }
 
+
+/* AI badge
+   ----------------------------------------------------------------------------- */
+
+.attic__badge_ai_icon-size {
+  width: 1.5rem;
+  height: 1.5rem;
+  position: relative;
+  vertical-align: middle;
+  top: -2px;
+  fill: white;
+}
+
 /* Unsplash badge
    ----------------------------------------------------------------------------- */
 

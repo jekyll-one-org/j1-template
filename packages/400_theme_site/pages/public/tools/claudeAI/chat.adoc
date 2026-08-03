@@ -35,11 +35,15 @@ permalink:                              /pages/public/tools/claudeAI/chat/
 resources:                              [ claudeAI, pdf, renderMD ]
 resource_options:
   - attic:
-      opacity:                          .6
+      opacity:                          .7
       padding_top:                      600
       slides:
         - url:                          /assets/image/module/attic/1920x1280/j1-launch.jpg
-          alt:                          skipad-promo-image
+          alt:                          AI Generated
+          badge:
+            type:                       ai
+            author:                     AI Generated
+            href:                       //digital-strategy.ec.europa.eu/en/policies/eu-icons-labelling-ai-generated-content
 ---
 
 // Page Initializer

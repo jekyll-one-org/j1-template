@@ -47,6 +47,10 @@ resource_options:
           tagline:                      Playback Video and Playlists
           isVideo:                      true
           mute:                         true
+          badge:
+            type:                       ai
+            author:                     AI Generated
+            href:                       //digital-strategy.ec.europa.eu/en/policies/eu-icons-labelling-ai-generated-content          
 ---
 
 // Page Initializer
