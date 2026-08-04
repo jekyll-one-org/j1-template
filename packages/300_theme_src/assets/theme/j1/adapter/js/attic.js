@@ -372,7 +372,7 @@ j1.adapter.attic = ((j1, window) => {
               }
 
               if (typeof instance.images[index].badge != 'undefined') {
-                var bType       = instance.images[index].badge.type;
+                var bType       = instance.images[index].badge.type || "unsplash";
                 var bAuthor     = instance.images[index].badge.author;
                 var bAuthorInfo = instance.images[index].badge.author_info || 'Image';
                 var bLink       = instance.images[index].badge.href;
