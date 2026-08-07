@@ -30,7 +30,7 @@ regenerate:                             false
 personalization:                        true
 permalink:                              /pages/public/tour/audio_data/
 
-resources:                              [ amplitudejs ]
+resources:                              [ amplitude, amplitudejs ]
 resource_options:
   - toccer:
       collapseDepth:                    4

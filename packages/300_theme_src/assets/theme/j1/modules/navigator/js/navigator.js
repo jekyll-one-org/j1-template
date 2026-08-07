@@ -1509,34 +1509,39 @@ window.j1.api.navigator = (function navigator(options) {
       // initial restore for the menus already present
       _self.restoreActiveMenuItem();
 
+      // jadams, 2026-08-06: disabled
+      // restoreActiveMenuItem called too frequently w/o clear reason.
+      // Possibly aside-effekt of Fix MMenu #3
+      // -----------------------------------------------------------------------
       // re-run the restore for menus loaded (AJAX) or moved (mmenu) later
-      if (window.MutationObserver && document.body) {
-        activeItemObserver = new MutationObserver(function () {
-          if (activeItemUserSet) {
-            return;
-          }
-          window.clearTimeout(activeItemRestoreTimer);
-          activeItemRestoreTimer = window.setTimeout(function () {
-            _self.restoreActiveMenuItem();
-          }, 50);
-        });
+      // if (window.MutationObserver && document.body) {
+      //   activeItemObserver = new MutationObserver(function () {
+      //     if (activeItemUserSet) {
+      //       return;
+      //     }
+      //     window.clearTimeout(activeItemRestoreTimer);
+      //     activeItemRestoreTimer = window.setTimeout(function () {
+      //       _self.restoreActiveMenuItem();
+      //     }, 50);
+      //   });
 
-        // NOTE: only 'childList' is observed. Setting the class 'active' is
-        // an ATTRIBUTE mutation and can NOT re-trigger the observer.
-        activeItemObserver.observe(document.body, {
-          childList: true,
-          subtree:   true
-        });
+      //   // NOTE: only 'childList' is observed. Setting the class 'active' is
+      //   // an ATTRIBUTE mutation and can NOT re-trigger the observer.
+      //   activeItemObserver.observe(document.body, {
+      //     childList: true,
+      //     subtree:   true
+      //   });
 
-        // stop watching after all menus had a fair chance to load
-        window.setTimeout(function () {
-          if (activeItemObserver) {
-            activeItemObserver.disconnect();
-            activeItemObserver = null;
-          }
-        }, observeTime);
-      }
-
+      //   // stop watching after all menus had a fair chance to load
+      //   window.setTimeout(function () {
+      //     if (activeItemObserver) {
+      //       activeItemObserver.disconnect();
+      //       activeItemObserver = null;
+      //     }
+      //   }, observeTime);
+      // }
+      // -----------------------------------------------------------------------
+      
       return true;
     }, // END initActiveMenuItems
 

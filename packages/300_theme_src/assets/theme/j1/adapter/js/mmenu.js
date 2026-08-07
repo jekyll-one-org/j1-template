@@ -1112,34 +1112,39 @@ j1.adapter.mmenu = ((j1, window) => {
       // initial restore for the menus already present
       _this.restoreActiveMenuItem();
 
+      // jadams, 2026-08-06: disabled
+      // restoreActiveMenuItem called too frequently w/o clear reason.
+      // Possibly aside-effekt of Fix MMenu #3
+      // -----------------------------------------------------------------------
       // re-run the restore for menus loaded (AJAX) or moved (drawer) later
-      if (window.MutationObserver && document.body) {
-        activeItemObserver = new MutationObserver(() => {
-          // do NOT overrule a state set by the user
-          if (activeItemUserSet) {
-            return;
-          }
-          window.clearTimeout(activeItemRestoreTimer);
-          activeItemRestoreTimer = window.setTimeout(() => {
-            _this.restoreActiveMenuItem();
-          }, 50);
-        });
+      // if (window.MutationObserver && document.body) {
+      //   activeItemObserver = new MutationObserver(() => {
+      //     // do NOT overrule a state set by the user
+      //     if (activeItemUserSet) {
+      //       return;
+      //     }
+      //     window.clearTimeout(activeItemRestoreTimer);
+      //     activeItemRestoreTimer = window.setTimeout(() => {
+      //       _this.restoreActiveMenuItem();
+      //     }, 50);
+      //   });
 
-        // NOTE: only 'childList' is observed. Setting the class 'active' is
-        // an ATTRIBUTE mutation and can NOT re-trigger the observer.
-        activeItemObserver.observe(document.body, {
-          childList: true,
-          subtree:   true
-        });
+      //   // NOTE: only 'childList' is observed. Setting the class 'active' is
+      //   // an ATTRIBUTE mutation and can NOT re-trigger the observer.
+      //   activeItemObserver.observe(document.body, {
+      //     childList: true,
+      //     subtree:   true
+      //   });
 
-        // stop watching after all menus had a fair chance to load
-        window.setTimeout(() => {
-          if (activeItemObserver) {
-            activeItemObserver.disconnect();
-            activeItemObserver = null;
-          }
-        }, observeTime);
-      }
+      //   // stop watching after all menus had a fair chance to load
+      //   window.setTimeout(() => {
+      //     if (activeItemObserver) {
+      //       activeItemObserver.disconnect();
+      //       activeItemObserver = null;
+      //     }
+      //   }, observeTime);
+      // }
+      // -----------------------------------------------------------------------
 
       if (logger) {
         logger.debug('active mmenu item management initialized');

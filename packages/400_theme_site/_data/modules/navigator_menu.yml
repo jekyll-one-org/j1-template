@@ -198,8 +198,12 @@
 - item:                                 Tools
   sublevel:
 
+    - title:                            J1 Audio Player
+      href:                             /pages/public/tools/player/audioPlayer/
+      icon:                             speaker
+
     - title:                            J1 Video Player
-      href:                             /pages/public/tools/videoPlayer/
+      href:                             /pages/public/tools/player/videoPlayer/
       icon:                             video
 
 

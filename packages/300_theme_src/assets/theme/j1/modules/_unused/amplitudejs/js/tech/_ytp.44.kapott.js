@@ -44,7 +44,7 @@ regenerate:                             true
 -------------------------------------------------------------------------------- {% endcomment %}
 {% assign amplitude_default   = modules.defaults.amplitude.defaults %}
 
-{% comment %} Fix Amplitude plugin #1
+{% comment %} Claude - Fix Amplitude plugin #1
 --------------------------------------------------------------------------------
  The plugin is NO LONGER bound to the PLAYER settings (amplitude_control) and
  the PLAYLIST settings (amplitude_media) of the amplitude module at BUILD time.
@@ -173,7 +173,13 @@ regenerate:                             true
   var ytPlayerErrorTest               = false;
   var ytPlayerReady                   = false;
   var ytApiReady                      = false;
-  var logger                          = log4javascript.getLogger('j1.adapter.amplitude.tech');
+  // Claude - Fix Amplitude plugin #2
+  // The LOGGER name follows the calling module, so log output can be
+  // assigned to the module that loaded the plugin.
+  //
+  // Original (deprecated, preserved for reference):
+  // var logger                          = log4javascript.getLogger('j1.adapter.amplitude.tech');
+  var logger                          = log4javascript.getLogger('j1.adapter.' + ytpHostAdapter() + '.tech');  // Claude - Fix Amplitude plugin #2
 
   var dependency;
   var playerCounter                   = 0;
@@ -189,7 +195,7 @@ regenerate:                             true
   var playersUILoaded                 = { state: false };
   var apiInitialized                  = { state: false };
 
-  // Fix Amplitude plugin #1
+  // Claude - Fix Amplitude plugin #1
   // The PLAYER and PLAYLIST settings are NO LONGER rendered into the plugin
   // at build time. They are handed over at RUNTIME as an options hash by the
   // module that loads the plugin (amplitude, audioPlayer, ...).
@@ -214,19 +220,12 @@ regenerate:                             true
   // only: options.defaults (passed in by the calling module) always wins.
   var ytpModuleDefaults               = $.extend({}, {{amplitude_default  | replace: 'nil', 'null' | replace: '=>', ':' }});
 
-  // Fix Amplitude plugin #1
+  // Claude - Fix Amplitude plugin #1
   // RUNTIME options hash (see resolvePluginOptions below)
   var ytpOptions                      = resolvePluginOptions();
   var amplitudeDefaults               = ytpOptions.defaults;
   var ytpPlayerSettings               = ytpOptions.players;
   var ytpPlaylistSettings             = ytpOptions.playlists;
-
-  // Claude - Fix Amplitude plugin #2
-  // REBIND the logger to the ADAPTER NAMESPACE of the CALLING module. The
-  // initial binding above ('j1.adapter.amplitude.tech') is created BEFORE
-  // the plugin options are resolved and is kept as the BOOTSTRAP logger for
-  // the messages issued by resolvePluginOptions itself.
-  logger                              = log4javascript.getLogger('j1.adapter.' + ytpHostAdapter() + '.tech');
 
   var playerExistsInPage              = false;
   var ytpContainer                    = null;
@@ -236,7 +235,7 @@ regenerate:                             true
   var ytPlayerCurrentTime             = 0;
   var singleAudio                     = false;
 
-  // Fix Amplitude plugin #1
+  // Claude - Fix Amplitude plugin #1
   // The GLOBAL player settings below are read from the DEFAULTS of the
   // calling module (options.defaults) instead of being hard-wired to the
   // amplitude defaults at build time. The build-time value of the amplitude
@@ -278,7 +277,7 @@ regenerate:                             true
 
   var progress;
 
-  // Fix Amplitude plugin #1
+  // Claude - Fix Amplitude plugin #1
   // Publish the plugin API (and the RESOLVED options) for the calling module.
   // The calling module hands the options over BEFORE the plugin script is
   // injected into the page (see resolvePluginOptions for details).
@@ -288,9 +287,11 @@ regenerate:                             true
   j1.plugins.ytp.options      = ytpOptions;
   j1.plugins.ytp.getOptions   = function() { return ytpOptions; };
   j1.plugins.ytp.getPlayers   = function() { return ytpVideoPlayers(); };
+  // Claude - Fix Amplitude plugin #2
+  j1.plugins.ytp.getHostAdapter = function() { return ytpHostAdapter(); };
 
   // ---------------------------------------------------------------------------
-  // Plugin options (Fix Amplitude plugin #1)
+  // Plugin options (Claude - Fix Amplitude plugin #1)
   // ===========================================================================
 
   // ---------------------------------------------------------------------------
@@ -340,21 +341,12 @@ regenerate:                             true
   function resolvePluginOptions() {
     var handoff, legacy, options;
 
-    // Claude - Fix Amplitude plugin #2
-    // NEW key 'adapter': names the ADAPTER NAMESPACE of the CALLING module.
-    // The plugin stores ALL runtime data in j1.adapter.<adapter>.data and
-    // calls the helper methods of j1.adapter.<adapter> (seconds2timestamp,
-    // timestamp2seconds). Fallback is 'amplitude' to keep the behaviour of
-    // the plugin UNCHANGED when the calling module does not pass the key.
     options = {
       module:     'unknown',
+      adapter:    'amplitude',                                            // Claude - Fix Amplitude plugin #2
       defaults:   ytpModuleDefaults,
       players:    [],
-      // Claude - Fix Amplitude plugin #2
-      // Original (deprecated, preserved for reference):
-      // playlists:  {}
-      playlists:  {},
-      adapter:    'amplitude'
+      playlists:  {}
     };
 
     // 1. documented handoff
@@ -369,29 +361,24 @@ regenerate:                             true
 
     if (handoff) {
       options.module    = handoff.module    || options.module;
-      options.defaults  = ytpIsPlainObject(handoff.defaults)  ? handoff.defaults  : options.defaults;
-      options.players   = ytpNormalizePlayers(handoff.players);
-      options.playlists = ytpIsPlainObject(handoff.playlists) ? handoff.playlists : options.playlists;
-
       // Claude - Fix Amplitude plugin #2
-      // Resolve the ADAPTER NAMESPACE of the calling module from the handoff.
-      // Only a NON-EMPTY string is accepted; anything else keeps the fallback
-      // 'amplitude' (see the base options above).
+      // name of the ADAPTER namespace of the calling module
       options.adapter   = (typeof handoff.adapter === 'string' && handoff.adapter.length > 0)
                         ? handoff.adapter
                         : options.adapter;
+      options.defaults  = ytpIsPlainObject(handoff.defaults)  ? handoff.defaults  : options.defaults;
+      options.players   = ytpNormalizePlayers(handoff.players);
+      options.playlists = ytpIsPlainObject(handoff.playlists) ? handoff.playlists : options.playlists;
 
       logger && logger.info('\n' + `plugin options passed by module: ${options.module}`);
       return options;
     }
 
     if (legacy) {
-      // Claude - Fix Amplitude plugin #2
-      // The LEGACY handoff (j1.modules.amplitudejs) is by definition published
-      // by the amplitude|audioPlayer adapter WITHOUT an adapter key. The base
-      // fallback 'amplitude' is kept UNCHANGED here on purpose: the legacy
-      // path always stored its runtime data in j1.adapter.amplitude.data.
       options.module    = 'legacy';
+      // Claude - Fix Amplitude plugin #2
+      // the LEGACY handoff is published by the amplitude adapter only
+      options.adapter   = 'amplitude';
       options.defaults  = ytpIsPlainObject(legacy.defaults)  ? legacy.defaults  : options.defaults;
       options.players   = ytpNormalizePlayers(legacy.players);
       options.playlists = ytpIsPlainObject(legacy.playlists) ? legacy.playlists : options.playlists;
@@ -403,55 +390,6 @@ regenerate:                             true
     logger && logger.error('\n' + 'plugin options NOT found, no player settings available');
     return options;
   } // END resolvePluginOptions
-
-  // ---------------------------------------------------------------------------
-  // Claude - Fix Amplitude plugin #2
-  // Host adapter accessors
-  //
-  // Until now, the plugin had STRONG (hardcoded) dependencies on the RUNTIME
-  // data of the module amplitudejs: every access went to the literal
-  // namespace j1.adapter.amplitude. The plugin now resolves the adapter
-  // namespace of the module it was LOADED BY (via the plugin manager
-  // 'pluginManager' -> publishPluginOptions -> options.adapter) and stores
-  // ALL runtime data there instead:
-  //
-  //   ytpHostAdapter()  name of the host ADAPTER NAMESPACE (string).
-  //                     Resolution: ytpOptions.adapter, fallback 'amplitude'.
-  //   ytpHost()         the host ADAPTER OBJECT j1.adapter.<name>. Replaces
-  //                     literal j1.adapter.amplitude for METHOD calls
-  //                     (seconds2timestamp, timestamp2seconds).
-  //   ytpHostData()     the RUNTIME DATA object j1.adapter.<name>.data.
-  //                     Replaces literal j1.adapter.amplitude.data (and its
-  //                     bracket form j1.adapter.amplitude['data']).
-  //
-  // NOTE (design decision, flagged): ytpHost() CREATES the adapter namespace
-  // (and ytpHostData() the data hash) if absent instead of throwing. This
-  // makes the plugin robust against load-order races, at the price of
-  // masking a missing host adapter. If a hard failure is preferred, replace
-  // the creation with a logger.error and a throw.
-  // ---------------------------------------------------------------------------
-  function ytpHostAdapter() {
-    return (ytpOptions && typeof ytpOptions.adapter === 'string' && ytpOptions.adapter.length > 0)
-         ? ytpOptions.adapter
-         : 'amplitude';
-  } // END ytpHostAdapter
-
-  function ytpHost() {
-    var name = ytpHostAdapter();
-
-    window.j1        = window.j1        || {};
-    j1.adapter       = j1.adapter       || {};
-    j1.adapter[name] = j1.adapter[name] || {};
-
-    return j1.adapter[name];
-  } // END ytpHost
-
-  function ytpHostData() {
-    var host  = ytpHost();
-
-    host.data = host.data || {};
-    return host.data;
-  } // END ytpHostData
 
   // ---------------------------------------------------------------------------
   // ytpNormalizePlayers(players)
@@ -559,6 +497,113 @@ regenerate:                             true
 
     return players;
   } // END ytpVideoPlayers
+
+
+  // ---------------------------------------------------------------------------
+  // Host adapter accessors (Claude - Fix Amplitude plugin #2)
+  // ===========================================================================
+  //
+  // The plugin used to write its runtime data to the HARD-WIRED namespace
+  // j1.adapter.amplitude.data and called the helper methods of the amplitude
+  // adapter directly. That made the plugin unusable for any other module,
+  // even after the SETTINGS were decoupled by the first fix series of this
+  // plugin: the audioPlayer module creates j1.adapter.audioPlayer, so the
+  // plugin failed on the FIRST data access.
+  //
+  // The namespace is now PARAMETERISED. The calling module passes its own
+  // adapter name in the options hash:
+  //
+  //   j1.plugins.ytp.options = {
+  //     module:    'audioPlayer',
+  //     adapter:   'audioPlayer',   // -> j1.adapter.audioPlayer
+  //     defaults:  audioPlayerDefaults,
+  //     players:   audioPlayerControl.players,
+  //     playlists: audioPlayerMedia
+  //   };
+  //
+  // If the key is NOT passed (e.g. by the legacy handoff), the plugin falls
+  // back to 'amplitude', so the behaviour of the amplitude module is
+  // unchanged.
+  // ---------------------------------------------------------------------------
+
+  // ---------------------------------------------------------------------------
+  // ytpHostAdapter()
+  //
+  // Returns the NAME of the adapter (J1 module) the plugin is running for.
+  //
+  // Resolution order:
+  //   1. ytpOptions.adapter               (resolved options hash)
+  //   2. j1.plugins.ytp.options.adapter   (RAW handoff; needed for all call
+  //                                        sites that run BEFORE the module
+  //                                        variables are initialized, e.g.
+  //                                        the logger)
+  //   3. 'amplitude'                      (last resort, legacy behaviour)
+  //
+  // NOTE: The literal 'amplitude' is used as the fallback ON PURPOSE. A
+  // module-level constant would be in the Temporal Dead Zone when this
+  // function is called while the module variables are still being created.
+  // ---------------------------------------------------------------------------
+  function ytpHostAdapter() {
+    var name = null;
+    var raw;
+
+    // 1. resolved options hash (available after resolvePluginOptions ran)
+    if (ytpOptions && typeof ytpOptions.adapter === 'string' && ytpOptions.adapter.length > 0) {
+      name = ytpOptions.adapter;
+    }
+
+    // 2. RAW handoff published by the calling module
+    if (!name) {
+      raw = (window.j1 && j1.plugins && j1.plugins.ytp && j1.plugins.ytp.options)
+          ? j1.plugins.ytp.options
+          : null;
+      if (raw && typeof raw.adapter === 'string' && raw.adapter.length > 0) {
+        name = raw.adapter;
+      }
+    }
+
+    // 3. last resort
+    return name || 'amplitude';
+  } // END ytpHostAdapter
+
+  // ---------------------------------------------------------------------------
+  // ytpHost()
+  //
+  // Returns the ADAPTER OBJECT of the calling module (j1.adapter.<name>).
+  // The namespace is created if it does not exist yet.
+  //
+  // NOTE: Creating the namespace is a (minor) behaviour change: a missing
+  // adapter object used to raise a TypeError on the first access. The plugin
+  // is loaded BY the adapter, so the object exists in all regular setups.
+  // ---------------------------------------------------------------------------
+  function ytpHost() {
+    var adapter = ytpHostAdapter();
+
+    window.j1           = window.j1  || {};
+    j1.adapter          = j1.adapter || {};
+    j1.adapter[adapter] = j1.adapter[adapter] || {};
+
+    return j1.adapter[adapter];
+  } // END ytpHost
+
+  // ---------------------------------------------------------------------------
+  // ytpHostData()
+  //
+  // Returns the DATA store of the calling module (j1.adapter.<name>.data).
+  // This is the replacement for all former j1.adapter.amplitude.data reads
+  // AND writes: the returned object is a REFERENCE, so assignments like
+  //
+  //   ytpHostData().ytpGlobals['ytApiReady'] = ytApiReady;
+  //
+  // write to the adapter data store exactly as before.
+  // ---------------------------------------------------------------------------
+  function ytpHostData() {
+    var host = ytpHost();
+
+    host.data = host.data || {};
+
+    return host.data;
+  } // END ytpHostData
 
   // ---------------------------------------------------------------------------
   // Base YT functions
@@ -729,14 +774,15 @@ regenerate:                             true
     isDev && logger.debug('\n' + `PLAY audio on YT Player at playlist|trackID: ${activePlaylist}|${trackID}`);
 
     // save YT player GLOBAL data for later use (e.g. events)
-    // Claude - Fix Amplitude plugin #2
     // Original (deprecated, preserved for reference):
     // j1.adapter.amplitude.data.activePlayer              = 'ytp';
+    ytpHostData().activePlayer                          = 'ytp';  // Claude - Fix Amplitude plugin #2
+    // Original (deprecated, preserved for reference):
     // j1.adapter.amplitude.data.ytpGlobals['activeIndex'] = songIndex;
+    ytpHostData().ytpGlobals['activeIndex'] = songIndex;  // Claude - Fix Amplitude plugin #2
+    // Original (deprecated, preserved for reference):
     // j1.adapter.amplitude.data.ytpGlobals['videoID']     = videoID;
-    ytpHostData().activePlayer              = 'ytp';
-    ytpHostData().ytpGlobals['activeIndex'] = songIndex;
-    ytpHostData().ytpGlobals['videoID']     = videoID;
+    ytpHostData().ytpGlobals['videoID']                 = videoID;  // Claude - Fix Amplitude plugin #2
 
     // save YT player data for later use (e.g. events)
     // -------------------------------------------------------------------------
@@ -765,12 +811,12 @@ regenerate:                             true
     // j1.adapter.amplitude.data so they survive across calls without
     // leaking to the global scope.
     //
-    // Claude - Fix Amplitude plugin #2
     // Original (deprecated, preserved for reference):
     // var intervals = j1.adapter.amplitude.data.ytpIntervals
-    // || (j1.adapter.amplitude.data.ytpIntervals = {});
-    var intervals = ytpHostData().ytpIntervals
-                  || (ytpHostData().ytpIntervals = {});
+    var intervals = ytpHostData().ytpIntervals  // Claude - Fix Amplitude plugin #2
+                  // Original (deprecated, preserved for reference):
+                  // || (j1.adapter.amplitude.data.ytpIntervals = {});
+                  || (ytpHostData().ytpIntervals = {});  // Claude - Fix Amplitude plugin #2
 
     if (intervals.currentTime) { clearInterval(intervals.currentTime); }
     if (intervals.progressBar) { clearInterval(intervals.progressBar); }
@@ -790,10 +836,9 @@ regenerate:                             true
     // -------------------------------------------------------------------------
     var songStartSec = activeSong.startSec;
     if (songStartSec) {
-      // Claude - Fix Amplitude plugin #2
       // Original (deprecated, preserved for reference):
       // var tsStartSec      = j1.adapter.amplitude.seconds2timestamp(songStartSec);
-      var tsStartSec      = ytpHost().seconds2timestamp(songStartSec);
+      var tsStartSec      = ytpHost().seconds2timestamp(songStartSec);  // Claude - Fix Amplitude plugin #2
       var songCurrentTime = ytPlayer.getCurrentTime();
 
       if (songCurrentTime < songStartSec) {
@@ -806,10 +851,9 @@ regenerate:                             true
     // -------------------------------------------------------------------------
     var songEndSec = activeSong.endSec;
     if (songEndSec) {
-      // Claude - Fix Amplitude plugin #2
       // Original (deprecated, preserved for reference):
       // var tsEndSec = j1.adapter.amplitude.seconds2timestamp(songEndSec);
-      var tsEndSec = ytpHost().seconds2timestamp(songEndSec);
+      var tsEndSec = ytpHost().seconds2timestamp(songEndSec);  // Claude - Fix Amplitude plugin #2
 
       var checkOnVideoEnd = setInterval(function() {
         var songCurrentTime = ytPlayer.getCurrentTime();
@@ -884,10 +928,9 @@ regenerate:                             true
   function processOnStateChangeEnded(event, playerID, playlist, songIndex) {
     var videoID         = event.target.options.videoId;
     var trackID         = songIndex + 1;
-    // Claude - Fix Amplitude plugin #2
     // Original (deprecated, preserved for reference):
     // var songs           = j1.adapter.amplitude.data.ytPlayers[playerID].songs;
-    var songs           = ytpHostData().ytPlayers[playerID].songs;
+    var songs           = ytpHostData().ytPlayers[playerID].songs;  // Claude - Fix Amplitude plugin #2
     var songMetaData    = songs[songIndex];
     var playlistRepeat  = songMetaData.repeat === 'true';
  
@@ -899,8 +942,8 @@ regenerate:                             true
       // ytPlayerCurrentTime = ytPlayer.getCurrentTime();
 
       // save YT player data for later use (e.g. events)
-      // -----------------------------------------------------------------------
-      j1.modules.amplitudejs.data.ytp.previousIndex = songIndex;
+      // ---------------------------------------------------------------------
+      j1.modules.amplitudejs.data.ytp.previousIndex = songIndex;  
 
       logger.debug('\n' + `LOAD first VIDEO on processOnStateChangeEnded at trackID|playlist: ${trackID}|${playlist}`);
       loadVideo(playlist, songIndex);
@@ -915,8 +958,8 @@ regenerate:                             true
       // ytPlayerCurrentTime = ytPlayer.getCurrentTime();
 
       // save YT player data for later use (e.g. events)
-      // -----------------------------------------------------------------------
-      j1.modules.amplitudejs.data.ytp.previousIndex = songIndex;
+      // ---------------------------------------------------------------------
+      j1.modules.amplitudejs.data.ytp.previousIndex = songIndex;        
 
       // load next video
       isDev && logger.debug('\n' + `LOAD next VIDEO on processOnStateChangeEnded at trackID|playlist: ${trackID}|${playlist}`);
@@ -1157,12 +1200,12 @@ regenerate:                             true
       ytpVideoID    = songURL.split('=')[1];
 
       // save YT player data for later use (e.g. events)
-      // Claude - Fix Amplitude plugin #2
       // Original (deprecated, preserved for reference):
       // j1.adapter.amplitude.data.ytPlayers[playerID].activeIndex = songIndex;
+      ytpHostData().ytPlayers[playerID].activeIndex = songIndex;  // Claude - Fix Amplitude plugin #2
+      // Original (deprecated, preserved for reference):
       // j1.adapter.amplitude.data.ytPlayers[playerID].videoID     = ytpVideoID;
-      ytpHostData().ytPlayers[playerID].activeIndex = songIndex;
-      ytpHostData().ytPlayers[playerID].videoID     = ytpVideoID;
+      ytpHostData().ytPlayers[playerID].videoID                 = ytpVideoID;  // Claude - Fix Amplitude plugin #2
 
       // save YT player data for later use (e.g. events)
       // -----------------------------------------------------------------------
@@ -1216,16 +1259,16 @@ regenerate:                             true
   function initUiEventsForAJS() {
 
     var dependencies_ytp_ready = setInterval (() => {
-      // Claude - Fix Amplitude plugin #2
       // Original (deprecated, preserved for reference):
       // var ytApiReady    = (j1.adapter.amplitude.data.ytpGlobals['ytApiReady']    !== undefined) ? j1.adapter.amplitude.data.ytpGlobals['ytApiReady']    : false;
+      var ytApiReady    = (ytpHostData().ytpGlobals['ytApiReady']    !== undefined) ? ytpHostData().ytpGlobals['ytApiReady']    : false;  // Claude - Fix Amplitude plugin #2
+      // Original (deprecated, preserved for reference):
       // var ytPlayerReady = (j1.adapter.amplitude.data.ytpGlobals['ytPlayerReady'] !== undefined) ? j1.adapter.amplitude.data.ytpGlobals['ytPlayerReady'] : false;
-      var ytApiReady    = (ytpHostData().ytpGlobals['ytApiReady']    !== undefined) ? ytpHostData().ytpGlobals['ytApiReady']    : false;
-      var ytPlayerReady = (ytpHostData().ytpGlobals['ytPlayerReady'] !== undefined) ? ytpHostData().ytpGlobals['ytPlayerReady'] : false;
+      var ytPlayerReady = (ytpHostData().ytpGlobals['ytPlayerReady'] !== undefined) ? ytpHostData().ytpGlobals['ytPlayerReady'] : false;  // Claude - Fix Amplitude plugin #2
 
       if (ytApiReady && ytPlayerReady) {
 
-        // Fix Amplitude plugin #1
+        // Claude - Fix Amplitude plugin #1
         // The players are NO LONGER unrolled at BUILD time from the control
         // settings of the amplitude module. They are taken at RUNTIME from
         // the options hash passed in by the calling module.
@@ -1271,7 +1314,7 @@ regenerate:                             true
   function onYouTubeIframeAPIReady() {
     ytApiReady = true;
 
-    // Fix Amplitude plugin #1
+    // Claude - Fix Amplitude plugin #1
     // The players are NO LONGER unrolled at BUILD time from the (merged)
     // amplitude config files. They are taken at RUNTIME from the options
     // hash passed in by the calling module (see resolvePluginOptions), and
@@ -1298,7 +1341,7 @@ regenerate:                             true
             var player = $.extend({}, {{player | replace: 'nil', 'null' | replace: '=>', ':' }}, {{amplitude_defaults | replace: 'nil', 'null' | replace: '=>', ':' }});
 
             // load players of type 'video' configured in current page
-            // -----------------------------------------------------------------
+            // ---------------------------------------------------------------------
             playerExistsInPage = $('#' + '{{xhr_container_id}}')[0] !== undefined;
             if (playerExistsInPage) { 
               var playerSettings     = $.extend({}, {{player | replace: 'nil', 'null' | replace: '=>', ':' }});
@@ -1379,19 +1422,13 @@ regenerate:                             true
               };
 
               // store player properties for later use 
-              // Claude - Fix Amplitude plugin #2
-              // Original (deprecated, preserved for reference):
-              // addNestedProperty(j1.adapter.amplitude.data.ytPlayers, '{{player.id}}', playerProperties);
-              addNestedProperty(ytpHostData().ytPlayers, '{{player.id}}', playerProperties);
+              addNestedProperty(j1.adapter.amplitude.data.ytPlayers, '{{player.id}}', playerProperties);
 
               // save YT player GLOBAL data for later use (e.g. events)
-              // Claude - Fix Amplitude plugin #2
-              // Original (deprecated, preserved for reference):
-              // j1.adapter.amplitude.data.ytpGlobals['ytApiReady'] = ytApiReady;
-              ytpHostData().ytpGlobals['ytApiReady'] = ytApiReady;
+              j1.adapter.amplitude.data.ytpGlobals['ytApiReady'] = ytApiReady;
 
               // save amplitudejs data for later use (e.g. events)
-              // ---------------------------------------------------------------
+              // -------------------------------------------------------------------
               j1.modules.amplitudejs.data.ytp.apiReady = ytApiReady;
 
               // reset current player
@@ -1400,7 +1437,7 @@ regenerate:                             true
             } // END if playerExistsInPage()
 
             // AJS YouTube Player errors fired by the YT API
-            // -----------------------------------------------------------------
+            // ---------------------------------------------------------------------
             function {{player.id}}OnPlayerErrors(event) {
               var eventData, ytPlayer, videoID;
 
@@ -1411,19 +1448,16 @@ regenerate:                             true
               logger.error('\n' + `YT API Error '${YT_PLAYER_ERROR_NAMES[eventData]}' for VideoID: '${videoID}'`);
 
               // save YT player GLOBAL data for later use (e.g. events)
-              // Claude - Fix Amplitude plugin #2
-              // Original (deprecated, preserved for reference):
-              // j1.adapter.amplitude.data.ytpGlobals['ytApiError'] = eventData;
-              ytpHostData().ytpGlobals['ytApiError'] = eventData;
+              j1.adapter.amplitude.data.ytpGlobals['ytApiError'] = eventData;
 
               // save amplitudejs data for later use (e.g. events)
-              // ---------------------------------------------------------------
+              // -------------------------------------------------------------------
               j1.modules.amplitudejs.data.ytp.apiError = eventData;
 
             }
 
             // AJS YouTube Player initialization fired by the YT API
-            // -----------------------------------------------------------------
+            // ---------------------------------------------------------------------
             function {{player.id}}OnPlayerReady(event) {
 
               // J1 Amplitude optimizations #2
@@ -1447,15 +1481,12 @@ regenerate:                             true
               ytPlayer.setVolume(playerVolumePreset);
 
               // enable|disable scrolling on playlist
-              // ---------------------------------------------------------------
+              // -------------------------------------------------------------------
               if (document.getElementById('large_player_right') !== null) {
 
                 // show|hide scrollbar in playlist
-                // -------------------------------------------------------------
-                // Claude - Fix Amplitude plugin #2
-                // Original (deprecated, preserved for reference):
-                // playListName          = j1.adapter.amplitude.data.ytPlayers.{{player.id}}.playerSettings.playlist.name;
-                playListName          = ytpHostData().ytPlayers.{{player.id}}.playerSettings.playlist.name;
+                // -----------------------------------------------------------------
+                playListName          = j1.adapter.amplitude.data.ytPlayers.{{player.id}}.playerSettings.playlist.name;
                 songsInPlaylist       = Amplitude.getSongsInPlaylist(playListName);
                 titleListLargePlayer  = document.getElementById('large_player_title_list_' + playListName);
 
@@ -1469,15 +1500,11 @@ regenerate:                             true
               isDev && logger.info('\n' + 'yt player on ID {{player.id}}: ready');
 
               // save YT player GLOBAL data for later use (e.g. events)
-              // Claude - Fix Amplitude plugin #2
-              // Original (deprecated, preserved for reference):
-              // j1.adapter.amplitude.data.ytpGlobals['ytPlayerReady'] = ytPlayerReady;
-              // j1.adapter.amplitude.data.ytpGlobals['ytApiError']    = 0;          
-              ytpHostData().ytpGlobals['ytPlayerReady'] = ytPlayerReady;
-              ytpHostData().ytpGlobals['ytApiError']    = 0;          
+              j1.adapter.amplitude.data.ytpGlobals['ytPlayerReady'] = ytPlayerReady;
+              j1.adapter.amplitude.data.ytpGlobals['ytApiError']    = 0;          
 
               // save amplitudejs data for later use (e.g. events)
-              // ---------------------------------------------------------------
+              // -------------------------------------------------------------------
               j1.modules.amplitudejs.data.ytp.apiError                          = 0;
               j1.modules.amplitudejs.data.ytp.players.{{player.id}}             = {};
               j1.modules.amplitudejs.data.ytp.players.{{player.id}}.playerReady = ytPlayerReady;
@@ -1496,7 +1523,7 @@ regenerate:                             true
               seconds = ytpGetDurationSeconds(ytPlayer);
 
               // set duration time values for current video
-              // ---------------------------------------------------------------
+              // -------------------------------------------------------------------
 
               // J1 Amplitude optimizations #1
               if (player.display_hours) {
@@ -1513,7 +1540,7 @@ regenerate:                             true
               durationSeconds[0].innerHTML = seconds;
 
               // final message
-              // ---------------------------------------------------------------
+              // -------------------------------------------------------------------
               endTimeModule = Date.now();
 
               isDev && logger.info('\n' + 'Initialize plugin|tech (ytp) : finished');
@@ -1525,7 +1552,7 @@ regenerate:                             true
               }
 
               // update activeVideoElement data structure for the ACTIVE video
-              // ---------------------------------------------------------------
+              // -------------------------------------------------------------------
               setInterval(function() {
                 checkActiveVideoElementYTP();
               }, checkActiveVideoInterval);
@@ -1535,19 +1562,19 @@ regenerate:                             true
 
             } // END onPlayerReady()
 
-            // -----------------------------------------------------------------
+            // ---------------------------------------------------------------------
             // OnPlayerStateChange
             //
             // process all YT Player specific state changes
-            // -----------------------------------------------------------------
+            // ---------------------------------------------------------------------
             // NOTE:
             // The YT API fires a lot of INTERMEDIATE states. MOST of them gets
             // ignored (do nothing). For state PLAYING, important initial values
             // are being set; e.g. start|stop positions for a video (when)
             // configured.
-            // -----------------------------------------------------------------
+            // ---------------------------------------------------------------------
             // AJS YouTube Player state changes fired by the YT API
-            // -----------------------------------------------------------------
+            // ---------------------------------------------------------------------
             function {{player.id}}OnPlayerStateChange(event) {
 
               // J1 Amplitude optimizations #2
@@ -1561,36 +1588,23 @@ regenerate:                             true
               ytVideoID     = ytPlayer.options.videoId;
               playlist      = '{{player.playlist.name}}';
               playerID      = '{{player.id}}';
-              // Claude - Fix Amplitude plugin #2
-              // Original (deprecated, preserved for reference):
-              // songs         = j1.adapter.amplitude.data.ytPlayers.{{player.id}}.songs;
-              songs         = ytpHostData().ytPlayers.{{player.id}}.songs;
+              songs         = j1.adapter.amplitude.data.ytPlayers.{{player.id}}.songs;
               songIndex     = ytpSongIndex; // getSongIndex(songs, ytVideoID);
               trackID       = songIndex + 1;
               // songMetaData  = songs[songIndex];
 
               // save YT player GLOBAL data for later use (e.g. events)
-              // Claude - Fix Amplitude plugin #2
-              // Original (deprecated, preserved for reference):
-              // j1.adapter.amplitude.data.activePlayer                 = 'ytp';
-              // j1.adapter.amplitude.data.ytpGlobals['activePlayer']   = ytPlayer;
-              // j1.adapter.amplitude.data.ytpGlobals['activeIndex']    = songIndex;
-              // j1.adapter.amplitude.data.ytpGlobals['activePlaylist'] = playlist;   
-              ytpHostData().activePlayer                 = 'ytp';
-              ytpHostData().ytpGlobals['activePlayer']   = ytPlayer;
-              ytpHostData().ytpGlobals['activeIndex']    = songIndex;
-              ytpHostData().ytpGlobals['activePlaylist'] = playlist;   
+              j1.adapter.amplitude.data.activePlayer                 = 'ytp';
+              j1.adapter.amplitude.data.ytpGlobals['activePlayer']   = ytPlayer;
+              j1.adapter.amplitude.data.ytpGlobals['activeIndex']    = songIndex;
+              j1.adapter.amplitude.data.ytpGlobals['activePlaylist'] = playlist;   
 
               // save YT player data for later use (e.g. events)
-              // Claude - Fix Amplitude plugin #2
-              // Original (deprecated, preserved for reference):
-              // j1.adapter.amplitude.data.ytPlayers.{{player.id}}.player      = ytPlayer;
-              // j1.adapter.amplitude.data.ytPlayers.{{player.id}}.activeIndex = songIndex;
-              ytpHostData().ytPlayers.{{player.id}}.player      = ytPlayer;
-              ytpHostData().ytPlayers.{{player.id}}.activeIndex = songIndex;
+              j1.adapter.amplitude.data.ytPlayers.{{player.id}}.player      = ytPlayer;
+              j1.adapter.amplitude.data.ytPlayers.{{player.id}}.activeIndex = songIndex;
 
               // save amplitudejs data for later use (e.g. events)
-              // ---------------------------------------------------------------
+              // -------------------------------------------------------------------
               j1.modules.amplitudejs.data.activePlayer = 'ytp';
               j1.modules.amplitudejs.data.activeIndex = songIndex;
               j1.modules.amplitudejs.data.activePlaylist = playlist;          
@@ -1601,13 +1615,13 @@ regenerate:                             true
               j1.modules.amplitudejs.data.ytp.players.{{player.id}}.activeIndex = songIndex;
 
               // reset time container|progressbar for the ACTIVE song (video)
-              // ---------------------------------------------------------------
+              // -------------------------------------------------------------------          
               resetCurrentTimeContainerYTP(ytPlayer, playlist);
               updateDurationTimeContainerYTP(ytPlayer, playlist);
               resetProgressBarYTP();
 
               // process all state changes fired by YT API
-              // ---------------------------------------------------------------
+              // ------------------------------------------------------------------- 
               switch(event.data) {
                 case YT_PLAYER_STATE.UNSTARTED:
                   doNothingOnStateChange(YT_PLAYER_STATE.UNSTARTED);
@@ -1638,6 +1652,8 @@ regenerate:                             true
 
     {% endcomment %}
 
+    
+
     var videoPlayers = ytpVideoPlayers();
 
     for (var i = 0; i < videoPlayers.length; i++) {
@@ -1649,7 +1665,7 @@ regenerate:                             true
   // ---------------------------------------------------------------------------
   // configureYtPlayer(playerConfig)
   //
-  // Fix Amplitude plugin #1
+  // Claude - Fix Amplitude plugin #1
   // Creates and configures ONE (hidden) YT iframe player for the given player
   // settings. This function contains the body of the former BUILD-time loop
   // over the players of the amplitude module. All values that were rendered
@@ -1657,6 +1673,10 @@ regenerate:                             true
   // read at RUNTIME from the player entry of the options hash, overloading
   // the DEFAULT settings of the calling module.
   //
+  // The per-player event handlers -- formerly generated with UNIQUE function
+  // names ({{ '{{' }}player.id{{ '}}' }}OnPlayerReady, ...) -- are created as
+  // CLOSURES over the player settings, so multiple players in a page stay
+  // isolated from each other.
   // ---------------------------------------------------------------------------
   function configureYtPlayer(playerConfig) {
     var playerId          = playerConfig.id;
@@ -1744,16 +1764,14 @@ regenerate:                             true
       };
 
       // store player properties for later use
-      // Claude - Fix Amplitude plugin #2
       // Original (deprecated, preserved for reference):
       // addNestedProperty(j1.adapter.amplitude.data.ytPlayers, playerId, playerProperties);
-      addNestedProperty(ytpHostData().ytPlayers, playerId, playerProperties);
+      addNestedProperty(ytpHostData().ytPlayers, playerId, playerProperties);  // Claude - Fix Amplitude plugin #2
 
       // save YT player GLOBAL data for later use (e.g. events)
-      // Claude - Fix Amplitude plugin #2
       // Original (deprecated, preserved for reference):
       // j1.adapter.amplitude.data.ytpGlobals['ytApiReady'] = ytApiReady;
-      ytpHostData().ytpGlobals['ytApiReady'] = ytApiReady;
+      ytpHostData().ytpGlobals['ytApiReady'] = ytApiReady;  // Claude - Fix Amplitude plugin #2
 
       // save amplitudejs data for later use (e.g. events)
       // -----------------------------------------------------------------------
@@ -1776,10 +1794,9 @@ regenerate:                             true
       logger.error('\n' + `YT API Error '${YT_PLAYER_ERROR_NAMES[eventData]}' for VideoID: '${videoID}'`);
 
       // save YT player GLOBAL data for later use (e.g. events)
-      // Claude - Fix Amplitude plugin #2
       // Original (deprecated, preserved for reference):
       // j1.adapter.amplitude.data.ytpGlobals['ytApiError'] = eventData;
-      ytpHostData().ytpGlobals['ytApiError'] = eventData;
+      ytpHostData().ytpGlobals['ytApiError'] = eventData;  // Claude - Fix Amplitude plugin #2
 
       // save amplitudejs data for later use (e.g. events)
       // -----------------------------------------------------------------------
@@ -1791,9 +1808,12 @@ regenerate:                             true
     // -------------------------------------------------------------------------
     function onPlayerReady(event) {
 
-      // Fix Amplitude plugin #1
+      // Claude - Fix Amplitude plugin #1
       // The EFFECTIVE player settings (module defaults overloaded by the
       // player entry) are taken from the closure variable playerEffective.
+      //
+      // Original (deprecated, preserved for reference):
+      // var player = $.extend({}, {{ '{{' }}player{{ '}}' }}, {{ '{{' }}amplitude_defaults{{ '}}' }});
       //
       var player = playerEffective;
 
@@ -1819,10 +1839,9 @@ regenerate:                             true
 
         // show|hide scrollbar in playlist
         // ---------------------------------------------------------------------
-        // Claude - Fix Amplitude plugin #2
         // Original (deprecated, preserved for reference):
         // playListName          = j1.adapter.amplitude.data.ytPlayers[playerId].playerSettings.playlist.name;
-        playListName          = ytpHostData().ytPlayers[playerId].playerSettings.playlist.name;
+        playListName          = ytpHostData().ytPlayers[playerId].playerSettings.playlist.name;  // Claude - Fix Amplitude plugin #2
         songsInPlaylist       = Amplitude.getSongsInPlaylist(playListName);
         titleListLargePlayer  = document.getElementById('large_player_title_list_' + playListName);
 
@@ -1836,12 +1855,12 @@ regenerate:                             true
       isDev && logger.info('\n' + `yt player on ID ${playerId}: ready`);
 
       // save YT player GLOBAL data for later use (e.g. events)
-      // Claude - Fix Amplitude plugin #2
       // Original (deprecated, preserved for reference):
       // j1.adapter.amplitude.data.ytpGlobals['ytPlayerReady'] = ytPlayerReady;
+      ytpHostData().ytpGlobals['ytPlayerReady'] = ytPlayerReady;  // Claude - Fix Amplitude plugin #2
+      // Original (deprecated, preserved for reference):
       // j1.adapter.amplitude.data.ytpGlobals['ytApiError']    = 0;
-      ytpHostData().ytpGlobals['ytPlayerReady'] = ytPlayerReady;
-      ytpHostData().ytpGlobals['ytApiError']    = 0;
+      ytpHostData().ytpGlobals['ytApiError']                = 0;  // Claude - Fix Amplitude plugin #2
 
       // save amplitudejs data for later use (e.g. events)
       // -----------------------------------------------------------------------
@@ -1920,33 +1939,34 @@ regenerate:                             true
       ytVideoID     = ytPlayer.options.videoId;
       playlist      = ytpGetValue(playerConfig, 'playlist.name', '');
       playerID      = playerId;
-      // Claude - Fix Amplitude plugin #2
       // Original (deprecated, preserved for reference):
       // songs         = j1.adapter.amplitude.data.ytPlayers[playerId].songs;
-      songs         = ytpHostData().ytPlayers[playerId].songs;
+      songs         = ytpHostData().ytPlayers[playerId].songs;  // Claude - Fix Amplitude plugin #2
       songIndex     = ytpSongIndex; // getSongIndex(songs, ytVideoID);
       trackID       = songIndex + 1;
       // songMetaData  = songs[songIndex];
 
       // save YT player GLOBAL data for later use (e.g. events)
-      // Claude - Fix Amplitude plugin #2
       // Original (deprecated, preserved for reference):
       // j1.adapter.amplitude.data.activePlayer                 = 'ytp';
+      ytpHostData().activePlayer                             = 'ytp';  // Claude - Fix Amplitude plugin #2
+      // Original (deprecated, preserved for reference):
       // j1.adapter.amplitude.data.ytpGlobals['activePlayer']   = ytPlayer;
+      ytpHostData().ytpGlobals['activePlayer']               = ytPlayer;  // Claude - Fix Amplitude plugin #2
+      // Original (deprecated, preserved for reference):
       // j1.adapter.amplitude.data.ytpGlobals['activeIndex']    = songIndex;
+      ytpHostData().ytpGlobals['activeIndex']                = songIndex;  // Claude - Fix Amplitude plugin #2
+      // Original (deprecated, preserved for reference):
       // j1.adapter.amplitude.data.ytpGlobals['activePlaylist'] = playlist;
-      ytpHostData().activePlayer                 = 'ytp';
-      ytpHostData().ytpGlobals['activePlayer']   = ytPlayer;
-      ytpHostData().ytpGlobals['activeIndex']    = songIndex;
-      ytpHostData().ytpGlobals['activePlaylist'] = playlist;
+      ytpHostData().ytpGlobals['activePlaylist'] = playlist;  // Claude - Fix Amplitude plugin #2
 
       // save YT player data for later use (e.g. events)
-      // Claude - Fix Amplitude plugin #2
       // Original (deprecated, preserved for reference):
       // j1.adapter.amplitude.data.ytPlayers[playerId].player      = ytPlayer;
+      ytpHostData().ytPlayers[playerId].player                  = ytPlayer;  // Claude - Fix Amplitude plugin #2
+      // Original (deprecated, preserved for reference):
       // j1.adapter.amplitude.data.ytPlayers[playerId].activeIndex = songIndex;
-      ytpHostData().ytPlayers[playerId].player      = ytPlayer;
-      ytpHostData().ytPlayers[playerId].activeIndex = songIndex;
+      ytpHostData().ytPlayers[playerId].activeIndex = songIndex;  // Claude - Fix Amplitude plugin #2
 
       // save amplitudejs data for later use (e.g. events)
       // -----------------------------------------------------------------------
@@ -2006,7 +2026,7 @@ regenerate:                             true
   initYtAPI();
 
   // save YT player data for later use (e.g. events)
-  // ---------------------------------------------------------------------------
+  // ---------------------------------------------------------------------
   var url = '//youtube.com/iframe_api'
   if (document.querySelectorAll(`script[src="${url}"]`).length > 0) {
     j1.modules.amplitudejs.data.ytp.plugin = 'loaded';
@@ -2134,22 +2154,19 @@ regenerate:                             true
 
     // stop active YT players running in parallel
     // -------------------------------------------------------------------------
-    // Claude - Fix Amplitude plugin #2
     // Original (deprecated, preserved for reference):
     // const ytPlayers = Object.keys(j1.adapter.amplitude.data.ytPlayers);
-    const ytPlayers = Object.keys(ytpHostData().ytPlayers);
+    const ytPlayers = Object.keys(ytpHostData().ytPlayers);  // Claude - Fix Amplitude plugin #2
     for (let i=0; i<ytPlayers.length; i++) {
       const ytPlayerID        = ytPlayers[i];
-      // Claude - Fix Amplitude plugin #2
       // Original (deprecated, preserved for reference):
       // const playerProperties  = j1.adapter.amplitude.data.ytPlayers[ytPlayerID];
-      const playerProperties  = ytpHostData().ytPlayers[ytPlayerID];
+      const playerProperties  = ytpHostData().ytPlayers[ytPlayerID];  // Claude - Fix Amplitude plugin #2
 
       if (ytPlayerID !== exceptPlayer) {
-        // Claude - Fix Amplitude plugin #2
         // Original (deprecated, preserved for reference):
         // var player        = j1.adapter.amplitude['data']['ytPlayers'][ytPlayerID]['player'];
-        var player        = ytpHostData()['ytPlayers'][ytPlayerID]['player'];
+        var player        = ytpHostData()['ytPlayers'][ytPlayerID]['player'];  // Claude - Fix Amplitude plugin #2
         // J1 Amplitude optimizations #1
         // CLARITY: With the YT_PLAYER_STATE_NAMES table now containing a
         // proper "-1" key (see Fix #1), the magic-number workaround
@@ -2187,11 +2204,10 @@ regenerate:                             true
       } // END if ytPlayerID
 
       // save AT player data for later use (e.g. events)
-      // -----------------------------------------------------------------------
-      // Claude - Fix Amplitude plugin #2
+      // ---------------------------------------------------------------------
       // Original (deprecated, preserved for reference):
       // j1.adapter.amplitude.data.ytpGlobals.activeIndex = 0;
-      ytpHostData().ytpGlobals.activeIndex = 0;
+      ytpHostData().ytpGlobals.activeIndex = 0;  // Claude - Fix Amplitude plugin #2
 
     } // END stop active YT players
   } // END ytpStopParallelActivePlayers
@@ -2289,14 +2305,15 @@ regenerate:                             true
       activeVideoElement.playerType       = (classString.includes('large') ? 'large' : 'compact');
       activeVideoElement.playerID         = activeVideoElements[0].dataset.amplitudePlayer;
 
-      // Claude - Fix Amplitude plugin #2
       // Original (deprecated, preserved for reference):
       // if (j1.adapter.amplitude.data.ytPlayers[activeVideoElement.playerID] !== undefined) {
-      // activeVideoElement.player         = j1.adapter.amplitude.data.ytPlayers[activeVideoElement.playerID].player;
-      // activeVideoElement.songs          = j1.adapter.amplitude.data.ytPlayers[activeVideoElement.playerID].songs;
-      if (ytpHostData().ytPlayers[activeVideoElement.playerID] !== undefined) {
-        activeVideoElement.player         = ytpHostData().ytPlayers[activeVideoElement.playerID].player;
-        activeVideoElement.songs          = ytpHostData().ytPlayers[activeVideoElement.playerID].songs;
+      if (ytpHostData().ytPlayers[activeVideoElement.playerID] !== undefined) {  // Claude - Fix Amplitude plugin #2
+        // Original (deprecated, preserved for reference):
+        // activeVideoElement.player         = j1.adapter.amplitude.data.ytPlayers[activeVideoElement.playerID].player;
+        activeVideoElement.player         = ytpHostData().ytPlayers[activeVideoElement.playerID].player;  // Claude - Fix Amplitude plugin #2
+        // Original (deprecated, preserved for reference):
+        // activeVideoElement.songs          = j1.adapter.amplitude.data.ytPlayers[activeVideoElement.playerID].songs;
+        activeVideoElement.songs          = ytpHostData().ytPlayers[activeVideoElement.playerID].songs;  // Claude - Fix Amplitude plugin #2
 
         var activeSong                    = activeVideoElement.songs[activeVideoElement.index];
 
@@ -2306,17 +2323,15 @@ regenerate:                             true
         activeVideoElement.currentTime    = parseFloat(activeVideoElement.player.getCurrentTime());
         activeVideoElement.cover_art_url  = activeSong.cover_art_url;
         activeVideoElement.duration       = activeSong.duration;
-        // Claude - Fix Amplitude plugin #2
         // Original (deprecated, preserved for reference):
         // activeVideoElement.endSec         = j1.adapter.amplitude.timestamp2seconds(activeSong.end);
-        activeVideoElement.endSec         = ytpHost().timestamp2seconds(activeSong.end);
+        activeVideoElement.endSec         = ytpHost().timestamp2seconds(activeSong.end);  // Claude - Fix Amplitude plugin #2
         activeVideoElement.endTS          = activeSong.end;
         activeVideoElement.name           = activeSong.name;
         activeVideoElement.rating         = activeSong.rating;
-        // Claude - Fix Amplitude plugin #2
         // Original (deprecated, preserved for reference):
         // activeVideoElement.startSec       = j1.adapter.amplitude.timestamp2seconds(activeSong.start);
-        activeVideoElement.startSec       = ytpHost().timestamp2seconds(activeSong.start);
+        activeVideoElement.startSec       = ytpHost().timestamp2seconds(activeSong.start);  // Claude - Fix Amplitude plugin #2
         activeVideoElement.startTS        = activeSong.start;
         activeVideoElement.url            = activeSong.url;
 
@@ -2372,10 +2387,9 @@ regenerate:                             true
         playerID      = progressBars[i].getAttribute("data-amplitude-player");
         classArray    = [].slice.call(progressBars[i].classList, 0);
         classString   = classArray.toString();
-        // Claude - Fix Amplitude plugin #2
         // Original (deprecated, preserved for reference):
         // activePlayer  = j1.adapter.amplitude.data.ytPlayers[playerID].player;
-        activePlayer  = ytpHostData().ytPlayers[playerID].player;
+        activePlayer  = ytpHostData().ytPlayers[playerID].player;  // Claude - Fix Amplitude plugin #2
         activeClass   = 'large-player-progress-' + playlist;
 
         if (activePlayer === undefined) {
@@ -2652,12 +2666,12 @@ regenerate:                             true
   function ytpGetActiveIndex(playerID) {
     var activeIndex = -1;
 
-    // Claude - Fix Amplitude plugin #2
     // Original (deprecated, preserved for reference):
     // if (j1.adapter.amplitude.data.ytPlayers[playerID].activeIndex !== undefined) {
-    // activeIndex = parseInt(j1.adapter.amplitude.data.ytPlayers[playerID].activeIndex);
-    if (ytpHostData().ytPlayers[playerID].activeIndex !== undefined) {
-        activeIndex = parseInt(ytpHostData().ytPlayers[playerID].activeIndex);
+    if (ytpHostData().ytPlayers[playerID].activeIndex !== undefined) {  // Claude - Fix Amplitude plugin #2
+        // Original (deprecated, preserved for reference):
+        // activeIndex = parseInt(j1.adapter.amplitude.data.ytPlayers[playerID].activeIndex);
+        activeIndex = parseInt(ytpHostData().ytPlayers[playerID].activeIndex);  // Claude - Fix Amplitude plugin #2
     }
 
     return activeIndex;
@@ -2671,12 +2685,12 @@ regenerate:                             true
     var success = false;
     var index   = parseInt(idx);
 
-    // Claude - Fix Amplitude plugin #2
     // Original (deprecated, preserved for reference):
     // if (j1.adapter.amplitude.data.ytPlayers[playerID].activeIndex !== undefined) {
-    // j1.adapter.amplitude.data.ytPlayers[playerID].activeIndex = index;
-    if (ytpHostData().ytPlayers[playerID].activeIndex !== undefined) {
-        ytpHostData().ytPlayers[playerID].activeIndex = index;
+    if (ytpHostData().ytPlayers[playerID].activeIndex !== undefined) {  // Claude - Fix Amplitude plugin #2
+        // Original (deprecated, preserved for reference):
+        // j1.adapter.amplitude.data.ytPlayers[playerID].activeIndex = index;
+        ytpHostData().ytPlayers[playerID].activeIndex = index;  // Claude - Fix Amplitude plugin #2
         success = true;
     }
 
@@ -2953,10 +2967,9 @@ regenerate:                             true
     const activeElement         = scrollableList.querySelector('.amplitude-active-song-container');
     var activeElementOffsetTop  = activeElement.offsetTop;
     var songIndex               = parseInt(activeElement.getAttribute("data-amplitude-song-index"));
-    // Claude - Fix Amplitude plugin #2
     // Original (deprecated, preserved for reference):
     // var activeElementOffsetTop  = songIndex * j1.adapter.amplitude.data.playerSongElementHeigth;
-    var activeElementOffsetTop  = songIndex * ytpHostData().playerSongElementHeigth;
+    var activeElementOffsetTop  = songIndex * ytpHostData().playerSongElementHeigth;  // Claude - Fix Amplitude plugin #2
 
     if (scrollableList && activeElement) {
       scrollableList.scrollTop = activeElementOffsetTop;
@@ -2969,25 +2982,26 @@ regenerate:                             true
   // ---------------------------------------------------------------------------  
   function mimikYTPlayerUiEventsForAJS(ytPlayerID) {
 
-    // Claude - Fix Amplitude plugin #2
     // Original (deprecated, preserved for reference):
     // if (j1.adapter.amplitude['data']['ytPlayers'][ytPlayerID] !== undefined) {
-    // var playerDefaults = j1.adapter.amplitude['data']['ytPlayers'][ytPlayerID].playerDefaults;
-    // var playerSettings = j1.adapter.amplitude['data']['ytPlayers'][ytPlayerID].playerSettings;
-    if (ytpHostData()['ytPlayers'][ytPlayerID] !== undefined) {
-      var playerDefaults = ytpHostData()['ytPlayers'][ytPlayerID].playerDefaults;
-      var playerSettings = ytpHostData()['ytPlayers'][ytPlayerID].playerSettings;
+    if (ytpHostData()['ytPlayers'][ytPlayerID] !== undefined) {  // Claude - Fix Amplitude plugin #2
+      // Original (deprecated, preserved for reference):
+      // var playerDefaults = j1.adapter.amplitude['data']['ytPlayers'][ytPlayerID].playerDefaults;
+      var playerDefaults = ytpHostData()['ytPlayers'][ytPlayerID].playerDefaults;  // Claude - Fix Amplitude plugin #2
+      // Original (deprecated, preserved for reference):
+      // var playerSettings = j1.adapter.amplitude['data']['ytPlayers'][ytPlayerID].playerSettings;
+      var playerSettings = ytpHostData()['ytPlayers'][ytPlayerID].playerSettings;  // Claude - Fix Amplitude plugin #2
       var playerButton   = `large-player-play-pause-${ytPlayerID}`;
 
       // -----------------------------------------------------------------------
       // Large AJS players
       // -----------------------------------------------------------------------
-      // Claude - Fix Amplitude plugin #2
       // Original (deprecated, preserved for reference):
-      // if (j1.adapter.amplitude['data']['ytPlayers'][ytPlayerID].playerSettings.type === 'large') { 
-      // var playlist             = j1.adapter.amplitude['data']['ytPlayers'][ytPlayerID].playerSettings.playlist.name;
-      if (ytpHostData()['ytPlayers'][ytPlayerID].playerSettings.type === 'large') { 
-        var playlist             = ytpHostData()['ytPlayers'][ytPlayerID].playerSettings.playlist.name;
+      // if (j1.adapter.amplitude['data']['ytPlayers'][ytPlayerID].playerSettings.type === 'large') {
+      if (ytpHostData()['ytPlayers'][ytPlayerID].playerSettings.type === 'large') {  // Claude - Fix Amplitude plugin #2
+        // Original (deprecated, preserved for reference):
+        // var playlist             = j1.adapter.amplitude['data']['ytPlayers'][ytPlayerID].playerSettings.playlist.name;
+        var playlist             = ytpHostData()['ytPlayers'][ytPlayerID].playerSettings.playlist.name;  // Claude - Fix Amplitude plugin #2
         var playerScrollList     = document.getElementById('large_player_title_list_' + playlist);
 
         if (playerScrollControl) {
@@ -3011,10 +3025,9 @@ regenerate:                             true
           //    `playerScrollList` is null (no playlist DOM on the page),
           //    which would throw at .addEventListener. Added a null guard.
           //
-          // Claude - Fix Amplitude plugin #2
           // Original (deprecated, preserved for reference):
           // var songElementHeight     = j1.adapter.amplitude.data.playerSongElementHeigth || 0;
-          var songElementHeight     = ytpHostData().playerSongElementHeigth || 0;
+          var songElementHeight     = ytpHostData().playerSongElementHeigth || 0;  // Claude - Fix Amplitude plugin #2
           var listItemHeight        = songElementHeight / 2;
           var itemsPerBlock         = 1;
           var isScrollingResetDelay = 150;
@@ -3079,37 +3092,35 @@ regenerate:                             true
                 }
               } // END if activeSong
 
-              // Claude - Fix Amplitude plugin #2
               // Original (deprecated, preserved for reference):
               // if (j1.adapter.amplitude.data.ytpGlobals.ytApiError > 0) {
-              if (ytpHostData().ytpGlobals.ytApiError > 0) {
+              if (ytpHostData().ytpGlobals.ytApiError > 0) {  // Claude - Fix Amplitude plugin #2
                 // do nothing on API errors
                 var trackID = songIndex + 1;
-                // Claude - Fix Amplitude plugin #2
                 // Original (deprecated, preserved for reference):
                 // logger.error('\n' + `DISABLED player for playlist|trackID: ${playlist}|${trackID} on API error '${YT_PLAYER_ERROR_NAMES[j1.adapter.amplitude.data.ytpGlobals.ytApiError]}'`);
-                logger.error('\n' + `DISABLED player for playlist|trackID: ${playlist}|${trackID} on API error '${YT_PLAYER_ERROR_NAMES[ytpHostData().ytpGlobals.ytApiError]}'`);
+                logger.error('\n' + `DISABLED player for playlist|trackID: ${playlist}|${trackID} on API error '${YT_PLAYER_ERROR_NAMES[ytpHostData().ytpGlobals.ytApiError]}'`);  // Claude - Fix Amplitude plugin #2
 
                 return;
               }
 
-              // Claude - Fix Amplitude plugin #2
               // Original (deprecated, preserved for reference):
               // playerData    = j1.adapter.amplitude.data.ytPlayers[playerID];
-              playerData    = ytpHostData().ytPlayers[playerID];
+              playerData    = ytpHostData().ytPlayers[playerID];  // Claude - Fix Amplitude plugin #2
               ytPlayer      = playerData.player;
               songIndex     = playerData.activeIndex;
               songs         = playerData.songs;           
 
               // save player GLOBAL data for later use (e.g. events)
-              // Claude - Fix Amplitude plugin #2
               // Original (deprecated, preserved for reference):
               // j1.adapter.amplitude.data.activePlayer                 = 'ytp';
+              ytpHostData().activePlayer                             = 'ytp';  // Claude - Fix Amplitude plugin #2
+              // Original (deprecated, preserved for reference):
               // j1.adapter.amplitude.data.ytpGlobals['activeIndex']    = songIndex;
+              ytpHostData().ytpGlobals['activeIndex']                = songIndex;  // Claude - Fix Amplitude plugin #2
+              // Original (deprecated, preserved for reference):
               // j1.adapter.amplitude.data.ytpGlobals['activePlaylist'] = playlist;
-              ytpHostData().activePlayer                 = 'ytp';
-              ytpHostData().ytpGlobals['activeIndex']    = songIndex;
-              ytpHostData().ytpGlobals['activePlaylist'] = playlist;
+              ytpHostData().ytpGlobals['activePlaylist'] = playlist;  // Claude - Fix Amplitude plugin #2
 
               // toggle YT play|pause video
               // ---------------------------------------------------------------
@@ -3130,15 +3141,13 @@ regenerate:                             true
 
                 // wait for API error state
                 setTimeout(() => {
-                  // Claude - Fix Amplitude plugin #2
                   // Original (deprecated, preserved for reference):
                   // if (j1.adapter.amplitude.data.ytpGlobals.ytApiError > 0) {
-                  if (ytpHostData().ytpGlobals.ytApiError > 0) {
+                  if (ytpHostData().ytpGlobals.ytApiError > 0) {  // Claude - Fix Amplitude plugin #2
                     var trackID = songIndex + 1;
-                    // Claude - Fix Amplitude plugin #2
                     // Original (deprecated, preserved for reference):
                     // logger.error('\n' + `DISABLED player for playlist|trackID: ${playlist}|${trackID} on API error '${YT_PLAYER_ERROR_NAMES[j1.adapter.amplitude.data.ytpGlobals.ytApiError]}'`);
-                    logger.error('\n' + `DISABLED player for playlist|trackID: ${playlist}|${trackID} on API error '${YT_PLAYER_ERROR_NAMES[ytpHostData().ytpGlobals.ytApiError]}'`);
+                    logger.error('\n' + `DISABLED player for playlist|trackID: ${playlist}|${trackID} on API error '${YT_PLAYER_ERROR_NAMES[ytpHostData().ytpGlobals.ytApiError]}'`);  // Claude - Fix Amplitude plugin #2
 
                     // do nothing on API errors
                     return;
@@ -3225,10 +3234,9 @@ regenerate:                             true
               var currentVideoTime, playerState, skipOffset, ytPlayer;
 
               skipOffset        = parseInt(playerForwardBackwardSkipSeconds);
-              // Claude - Fix Amplitude plugin #2
               // Original (deprecated, preserved for reference):
               // ytPlayer          = j1.adapter.amplitude['data']['ytPlayers'][ytPlayerID].player;
-              ytPlayer          = ytpHostData()['ytPlayers'][ytPlayerID].player;
+              ytPlayer          = ytpHostData()['ytPlayers'][ytPlayerID].player;  // Claude - Fix Amplitude plugin #2
               playerState       = ytPlayer.getPlayerState();
               currentVideoTime  = ytPlayer.getCurrentTime();
 
@@ -3258,10 +3266,9 @@ regenerate:                             true
               var currentVideoTime, playerState, skipOffset, ytPlayer;
 
               skipOffset        = parseInt(playerForwardBackwardSkipSeconds);
-              // Claude - Fix Amplitude plugin #2
               // Original (deprecated, preserved for reference):
               // ytPlayer          = j1.adapter.amplitude['data']['ytPlayers'][ytPlayerID].player;
-              ytPlayer          = ytpHostData()['ytPlayers'][ytPlayerID].player;
+              ytPlayer          = ytpHostData()['ytPlayers'][ytPlayerID].player;  // Claude - Fix Amplitude plugin #2
               playerState       = ytPlayer.getPlayerState();
               currentVideoTime  = ytPlayer.getCurrentTime();
 
@@ -3292,23 +3299,21 @@ regenerate:                             true
               songIndex = ytpSongIndex;
               playlist  = this.getAttribute("data-amplitude-playlist");
               playerID  = this.getAttribute("data-amplitude-player");
-              // Claude - Fix Amplitude plugin #2
               // Original (deprecated, preserved for reference):
               // songs     = j1.adapter.amplitude.data.ytPlayers[playerID].songs;
+              songs     = ytpHostData().ytPlayers[playerID].songs;  // Claude - Fix Amplitude plugin #2
+              // Original (deprecated, preserved for reference):
               // ytPlayer  = j1.adapter.amplitude.data.ytPlayers[playerID].player;
-              songs     = ytpHostData().ytPlayers[playerID].songs;
-              ytPlayer  = ytpHostData().ytPlayers[playerID].player;
+              ytPlayer  = ytpHostData().ytPlayers[playerID].player;  // Claude - Fix Amplitude plugin #2
 
-              // Claude - Fix Amplitude plugin #2
               // Original (deprecated, preserved for reference):
               // if (j1.adapter.amplitude.data.ytpGlobals.ytApiError > 0) {
-              if (ytpHostData().ytpGlobals.ytApiError > 0) {
+              if (ytpHostData().ytpGlobals.ytApiError > 0) {  // Claude - Fix Amplitude plugin #2
                 // do nothing on API errors
                 var trackID = songIndex + 1;
-                // Claude - Fix Amplitude plugin #2
                 // Original (deprecated, preserved for reference):
                 // logger.error('\n' + `DISABLED player for playlist|trackID: ${playlist}|${trackID} on API error '${YT_PLAYER_ERROR_NAMES[j1.adapter.amplitude.data.ytpGlobals.ytApiError]}'`);
-                logger.error('\n' + `DISABLED player for playlist|trackID: ${playlist}|${trackID} on API error '${YT_PLAYER_ERROR_NAMES[ytpHostData().ytpGlobals.ytApiError]}'`);
+                logger.error('\n' + `DISABLED player for playlist|trackID: ${playlist}|${trackID} on API error '${YT_PLAYER_ERROR_NAMES[ytpHostData().ytpGlobals.ytApiError]}'`);  // Claude - Fix Amplitude plugin #2
 
                 return;
               }
@@ -3337,22 +3342,23 @@ regenerate:                             true
               // ---------------------------------------------------------------
 
               // save YT player GLOBAL data for later use (e.g. events)
-              // Claude - Fix Amplitude plugin #2
               // Original (deprecated, preserved for reference):
               // j1.adapter.amplitude.data.activePlayer                 = 'ytp';
+              ytpHostData().activePlayer                             = 'ytp';  // Claude - Fix Amplitude plugin #2
+              // Original (deprecated, preserved for reference):
               // j1.adapter.amplitude.data.ytpGlobals['activeIndex']    = songIndex;
+              ytpHostData().ytpGlobals['activeIndex']                = songIndex;  // Claude - Fix Amplitude plugin #2
+              // Original (deprecated, preserved for reference):
               // j1.adapter.amplitude.data.ytpGlobals['activePlaylist'] = playlist;
-              ytpHostData().activePlayer                 = 'ytp';
-              ytpHostData().ytpGlobals['activeIndex']    = songIndex;
-              ytpHostData().ytpGlobals['activePlaylist'] = playlist;
+              ytpHostData().ytpGlobals['activePlaylist'] = playlist;  // Claude - Fix Amplitude plugin #2
 
               // save YT player data for later use (e.g. events)
-              // Claude - Fix Amplitude plugin #2
               // Original (deprecated, preserved for reference):
               // j1.adapter.amplitude.data.ytPlayers[playerID].activeIndex = songIndex;
+              ytpHostData().ytPlayers[playerID].activeIndex = songIndex;  // Claude - Fix Amplitude plugin #2
+              // Original (deprecated, preserved for reference):
               // j1.adapter.amplitude.data.ytPlayers[playerID].videoID     = ytpVideoID;
-              ytpHostData().ytPlayers[playerID].activeIndex = songIndex;
-              ytpHostData().ytPlayers[playerID].videoID     = ytpVideoID;
+              ytpHostData().ytPlayers[playerID].videoID                 = ytpVideoID;  // Claude - Fix Amplitude plugin #2
 
               // save amplitudejs data for later use (e.g. events)
               // ---------------------------------------------------------------
@@ -3436,23 +3442,21 @@ regenerate:                             true
             songIndex = ytpSongIndex;
             playlist  = this.getAttribute("data-amplitude-playlist");
             playerID  = this.getAttribute("data-amplitude-player");
-            // Claude - Fix Amplitude plugin #2
             // Original (deprecated, preserved for reference):
             // songs     = j1.adapter.amplitude.data.ytPlayers[playerID].songs;
+            songs     = ytpHostData().ytPlayers[playerID].songs;  // Claude - Fix Amplitude plugin #2
+            // Original (deprecated, preserved for reference):
             // ytPlayer  = j1.adapter.amplitude.data.ytPlayers[playerID].player;
-            songs     = ytpHostData().ytPlayers[playerID].songs;
-            ytPlayer  = ytpHostData().ytPlayers[playerID].player;
+            ytPlayer  = ytpHostData().ytPlayers[playerID].player;  // Claude - Fix Amplitude plugin #2
 
-            // Claude - Fix Amplitude plugin #2
             // Original (deprecated, preserved for reference):
             // if (j1.adapter.amplitude.data.ytpGlobals.ytApiError > 0) {
-            if (ytpHostData().ytpGlobals.ytApiError > 0) {
+            if (ytpHostData().ytpGlobals.ytApiError > 0) {  // Claude - Fix Amplitude plugin #2
               // do nothing on API errors
               var trackID = songIndex + 1;
-              // Claude - Fix Amplitude plugin #2
               // Original (deprecated, preserved for reference):
               // logger.error('\n' + `DISABLED player for playlist|trackID: ${playlist}|${trackID} on API error '${YT_PLAYER_ERROR_NAMES[j1.adapter.amplitude.data.ytpGlobals.ytApiError]}'`);
-              logger.error('\n' + `DISABLED player for playlist|trackID: ${playlist}|${trackID} on API error '${YT_PLAYER_ERROR_NAMES[ytpHostData().ytpGlobals.ytApiError]}'`);
+              logger.error('\n' + `DISABLED player for playlist|trackID: ${playlist}|${trackID} on API error '${YT_PLAYER_ERROR_NAMES[ytpHostData().ytpGlobals.ytApiError]}'`);  // Claude - Fix Amplitude plugin #2
 
               return;
             }
@@ -3478,14 +3482,15 @@ regenerate:                             true
             ytpVideoID    = songURL.split('=')[1];
 
             // save YT player GLOBAL data for later use (e.g. events)
-            // Claude - Fix Amplitude plugin #2
             // Original (deprecated, preserved for reference):
             // j1.adapter.amplitude.data.activePlayer                 = 'ytp';
+            ytpHostData().activePlayer                             = 'ytp';  // Claude - Fix Amplitude plugin #2
+            // Original (deprecated, preserved for reference):
             // j1.adapter.amplitude.data.ytpGlobals['activeIndex']    = songIndex;
+            ytpHostData().ytpGlobals['activeIndex']                = songIndex;  // Claude - Fix Amplitude plugin #2
+            // Original (deprecated, preserved for reference):
             // j1.adapter.amplitude.data.ytpGlobals['activePlaylist'] = playlist;
-            ytpHostData().activePlayer                 = 'ytp';
-            ytpHostData().ytpGlobals['activeIndex']    = songIndex;
-            ytpHostData().ytpGlobals['activePlaylist'] = playlist;
+            ytpHostData().ytpGlobals['activePlaylist'] = playlist;  // Claude - Fix Amplitude plugin #2
 
             // save amplitudejs data for later use (e.g. events)
             // -----------------------------------------------------------------
@@ -3508,14 +3513,15 @@ regenerate:                             true
             // -----------------------------------------------------------------
 
             // save YT player data for later use (e.g. events)
-            // Claude - Fix Amplitude plugin #2
             // Original (deprecated, preserved for reference):
             // j1.adapter.amplitude.data.activePlayer                    = 'ytp';
+            ytpHostData().activePlayer                                = 'ytp';  // Claude - Fix Amplitude plugin #2
+            // Original (deprecated, preserved for reference):
             // j1.adapter.amplitude.data.ytPlayers[playerID].activeIndex = songIndex;
-            // j1.adapter.amplitude.data.ytPlayers[playerID].videoID     = ytpVideoID; 
-            ytpHostData().activePlayer                    = 'ytp';
-            ytpHostData().ytPlayers[playerID].activeIndex = songIndex;
-            ytpHostData().ytPlayers[playerID].videoID     = ytpVideoID; 
+            ytpHostData().ytPlayers[playerID].activeIndex = songIndex;  // Claude - Fix Amplitude plugin #2
+            // Original (deprecated, preserved for reference):
+            // j1.adapter.amplitude.data.ytPlayers[playerID].videoID     = ytpVideoID;
+            ytpHostData().ytPlayers[playerID].videoID                 = ytpVideoID;  // Claude - Fix Amplitude plugin #2
 
             trackID = songIndex + 1;
             isDev && logger.debug('\n' + `SWITCH video for PlayePreviousButton at trackID|VideoID: ${trackID}|${ytpVideoID}`);
@@ -3597,25 +3603,22 @@ regenerate:                             true
           playerID            = this.getAttribute("data-amplitude-player");
           songIndex           = parseInt(this.getAttribute("data-amplitude-song-index"));
           trackID             = songIndex + 1;
-          // Claude - Fix Amplitude plugin #2
           // Original (deprecated, preserved for reference):
           // activeSongIndex     = j1.adapter.amplitude.data.ytPlayers[playerID].activeIndex;
-          activeSongIndex     = ytpHostData().ytPlayers[playerID].activeIndex;
+          activeSongIndex     = ytpHostData().ytPlayers[playerID].activeIndex;  // Claude - Fix Amplitude plugin #2
           isSongIndexChanged  = activeSongIndex !== songIndex;
 
           // set (current) song meta data
           // -------------------------------------------------------------------
-          // Claude - Fix Amplitude plugin #2
           // Original (deprecated, preserved for reference):
           // songs               = j1.adapter.amplitude.data.ytPlayers[playerID].songs;
-          songs               = ytpHostData().ytPlayers[playerID].songs;
+          songs               = ytpHostData().ytPlayers[playerID].songs;  // Claude - Fix Amplitude plugin #2
           songMetaData        = songs[songIndex];
           songURL             = songMetaData.url;
           ytpVideoID          = (ytPlayerErrorTest) ? 'invalidVideoID' : songURL.split('=')[1];
-          // Claude - Fix Amplitude plugin #2
           // Original (deprecated, preserved for reference):
           // ytPlayer            = j1.adapter.amplitude.data.ytPlayers[playerID].player;
-          ytPlayer            = ytpHostData().ytPlayers[playerID].player;
+          ytPlayer            = ytpHostData().ytPlayers[playerID].player;  // Claude - Fix Amplitude plugin #2
           playerState         = ytPlayer.getPlayerState();
           ytPlayerState       = YT_PLAYER_STATE_NAMES[playerState] || 'unstarted';
 
@@ -3629,15 +3632,13 @@ regenerate:                             true
 
             // wait for API error state
             setTimeout(() => {
-              // Claude - Fix Amplitude plugin #2
               // Original (deprecated, preserved for reference):
               // if (j1.adapter.amplitude.data.ytpGlobals.ytApiError > 0) {
-              if (ytpHostData().ytpGlobals.ytApiError > 0) {
+              if (ytpHostData().ytpGlobals.ytApiError > 0) {  // Claude - Fix Amplitude plugin #2
                 var trackID = songIndex + 1;
-                // Claude - Fix Amplitude plugin #2
                 // Original (deprecated, preserved for reference):
                 // logger.error('\n' + `DISABLED player for playlist|trackID: ${playlist}|${trackID} on API error '${YT_PLAYER_ERROR_NAMES[j1.adapter.amplitude.data.ytpGlobals.ytApiError]}'`);
-                logger.error('\n' + `DISABLED player for playlist|trackID: ${playlist}|${trackID} on API error '${YT_PLAYER_ERROR_NAMES[ytpHostData().ytpGlobals.ytApiError]}'`);
+                logger.error('\n' + `DISABLED player for playlist|trackID: ${playlist}|${trackID} on API error '${YT_PLAYER_ERROR_NAMES[ytpHostData().ytpGlobals.ytApiError]}'`);  // Claude - Fix Amplitude plugin #2
 
                 // do nothing on API errors
                 return;
@@ -3679,12 +3680,12 @@ regenerate:                             true
               // `songs` and `ytPlayer` from the same source, so the
               // conditional is dead code. Reduced to a single assignment.
               //
-              // Claude - Fix Amplitude plugin #2
               // Original (deprecated, preserved for reference):
               // songs     = j1.adapter.amplitude.data.ytPlayers[playerID].songs;
+              songs     = ytpHostData().ytPlayers[playerID].songs;  // Claude - Fix Amplitude plugin #2
+              // Original (deprecated, preserved for reference):
               // ytPlayer  = j1.adapter.amplitude.data.ytPlayers[playerID].player;
-              songs     = ytpHostData().ytPlayers[playerID].songs;
-              ytPlayer  = ytpHostData().ytPlayers[playerID].player;
+              ytPlayer  = ytpHostData().ytPlayers[playerID].player;  // Claude - Fix Amplitude plugin #2
 
               ytPlayerCurrentTime = ytPlayer.getCurrentTime();
 
@@ -3704,22 +3705,23 @@ regenerate:                             true
               j1.modules.amplitudejs.data.ytp.songIndex = songIndex;
 
               // save YT player GLOBAL data for later use (e.g. events)
-              // Claude - Fix Amplitude plugin #2
               // Original (deprecated, preserved for reference):
               // j1.adapter.amplitude.data.activePlayer                 = 'ytp';
+              ytpHostData().activePlayer                             = 'ytp';  // Claude - Fix Amplitude plugin #2
+              // Original (deprecated, preserved for reference):
               // j1.adapter.amplitude.data.ytpGlobals['activeIndex']    = songIndex;
-              // j1.adapter.amplitude.data.ytpGlobals['activePlaylist'] = playlist;            
-              ytpHostData().activePlayer                 = 'ytp';
-              ytpHostData().ytpGlobals['activeIndex']    = songIndex;
-              ytpHostData().ytpGlobals['activePlaylist'] = playlist;            
+              ytpHostData().ytpGlobals['activeIndex']                = songIndex;  // Claude - Fix Amplitude plugin #2
+              // Original (deprecated, preserved for reference):
+              // j1.adapter.amplitude.data.ytpGlobals['activePlaylist'] = playlist;
+              ytpHostData().ytpGlobals['activePlaylist'] = playlist;  // Claude - Fix Amplitude plugin #2
 
               // save YT player data for later use (e.g. events)
-              // Claude - Fix Amplitude plugin #2
               // Original (deprecated, preserved for reference):
               // j1.adapter.amplitude.data.ytPlayers[playerID].activeIndex = songIndex;
+              ytpHostData().ytPlayers[playerID].activeIndex = songIndex;  // Claude - Fix Amplitude plugin #2
+              // Original (deprecated, preserved for reference):
               // j1.adapter.amplitude.data.ytPlayers[playerID].videoID     = ytpVideoID;
-              ytpHostData().ytPlayers[playerID].activeIndex = songIndex;
-              ytpHostData().ytPlayers[playerID].videoID     = ytpVideoID;
+              ytpHostData().ytPlayers[playerID].videoID                 = ytpVideoID;  // Claude - Fix Amplitude plugin #2
 
               // save amplitudejs data for later use (e.g. events)
               // -----------------------------------------------------------------
@@ -3759,12 +3761,12 @@ regenerate:                             true
               }
 
               // save YT player data for later use (e.g. events)
-              // Claude - Fix Amplitude plugin #2
               // Original (deprecated, preserved for reference):
               // j1.adapter.amplitude.data.ytPlayers[playerID].activeIndex = songIndex;
-              // j1.adapter.amplitude.data.ytPlayers[playerID].videoID     = ytpVideoID;   
-              ytpHostData().ytPlayers[playerID].activeIndex = songIndex;
-              ytpHostData().ytPlayers[playerID].videoID     = ytpVideoID;   
+              ytpHostData().ytPlayers[playerID].activeIndex = songIndex;  // Claude - Fix Amplitude plugin #2
+              // Original (deprecated, preserved for reference):
+              // j1.adapter.amplitude.data.ytPlayers[playerID].videoID     = ytpVideoID;
+              ytpHostData().ytPlayers[playerID].videoID                 = ytpVideoID;  // Claude - Fix Amplitude plugin #2
 
               return;
             } // END if playerState === PLAYING
@@ -3775,12 +3777,12 @@ regenerate:                             true
               ytpSeekTo(ytPlayer, ytPlayerCurrentTime, true);
 
               activeSong  = getActiveSong();
-              // Claude - Fix Amplitude plugin #2
               // Original (deprecated, preserved for reference):
               // songs       = j1.adapter.amplitude.data.ytPlayers[playerID].songs;
+              songs       = ytpHostData().ytPlayers[playerID].songs;  // Claude - Fix Amplitude plugin #2
+              // Original (deprecated, preserved for reference):
               // ytPlayer    = j1.adapter.amplitude.data.ytPlayers[playerID].player;
-              songs       = ytpHostData().ytPlayers[playerID].songs;
-              ytPlayer    = ytpHostData().ytPlayers[playerID].player;
+              ytPlayer    = ytpHostData().ytPlayers[playerID].player;  // Claude - Fix Amplitude plugin #2
 
               var trackID = songIndex + 1;
               isDev && logger.debug('\n' + `PLAY video for PlayerSongContainer on playlist|trackID: ${playlist}|${trackID} at: ${ytPlayerCurrentTime}`);
@@ -3810,15 +3812,13 @@ regenerate:                             true
 
               // wait for API error state
               setTimeout(() => {
-                // Claude - Fix Amplitude plugin #2
                 // Original (deprecated, preserved for reference):
                 // if (j1.adapter.amplitude.data.ytpGlobals.ytApiError > 0) {
-                if (ytpHostData().ytpGlobals.ytApiError > 0) {
+                if (ytpHostData().ytpGlobals.ytApiError > 0) {  // Claude - Fix Amplitude plugin #2
                   var trackID = songIndex + 1;
-                  // Claude - Fix Amplitude plugin #2
                   // Original (deprecated, preserved for reference):
                   // logger.error('\n' + `DISABLED player for playlist|trackID: ${playlist}|${trackID} on API error '${YT_PLAYER_ERROR_NAMES[j1.adapter.amplitude.data.ytpGlobals.ytApiError]}'`);
-                  logger.error('\n' + `DISABLED player for playlist|trackID: ${playlist}|${trackID} on API error '${YT_PLAYER_ERROR_NAMES[ytpHostData().ytpGlobals.ytApiError]}'`);
+                  logger.error('\n' + `DISABLED player for playlist|trackID: ${playlist}|${trackID} on API error '${YT_PLAYER_ERROR_NAMES[ytpHostData().ytpGlobals.ytApiError]}'`);  // Claude - Fix Amplitude plugin #2
 
                   // do nothing on API errors
                   return;
@@ -3830,22 +3830,23 @@ regenerate:                             true
                 j1.modules.amplitudejs.data.ytp.songIndex = songIndex;
 
                 // save YT player GLOBAL data for later use (e.g. events)
-                // Claude - Fix Amplitude plugin #2
                 // Original (deprecated, preserved for reference):
                 // j1.adapter.amplitude.data.activePlayer = 'ytp';
+                ytpHostData().activePlayer = 'ytp';  // Claude - Fix Amplitude plugin #2
+                // Original (deprecated, preserved for reference):
                 // j1.adapter.amplitude.data.ytpGlobals['activeIndex'] = songIndex;
-                // j1.adapter.amplitude.data.ytpGlobals['activePlaylist'] = playlist;            
-                ytpHostData().activePlayer = 'ytp';
-                ytpHostData().ytpGlobals['activeIndex'] = songIndex;
-                ytpHostData().ytpGlobals['activePlaylist'] = playlist;            
+                ytpHostData().ytpGlobals['activeIndex'] = songIndex;  // Claude - Fix Amplitude plugin #2
+                // Original (deprecated, preserved for reference):
+                // j1.adapter.amplitude.data.ytpGlobals['activePlaylist'] = playlist;
+                ytpHostData().ytpGlobals['activePlaylist'] = playlist;  // Claude - Fix Amplitude plugin #2
 
                 // save YT player data for later use (e.g. events)
-                // Claude - Fix Amplitude plugin #2
                 // Original (deprecated, preserved for reference):
                 // j1.adapter.amplitude.data.ytPlayers[playerID].activeIndex = songIndex;
+                ytpHostData().ytPlayers[playerID].activeIndex = songIndex;  // Claude - Fix Amplitude plugin #2
+                // Original (deprecated, preserved for reference):
                 // j1.adapter.amplitude.data.ytPlayers[playerID].videoID     = ytpVideoID;
-                ytpHostData().ytPlayers[playerID].activeIndex = songIndex;
-                ytpHostData().ytPlayers[playerID].videoID     = ytpVideoID;
+                ytpHostData().ytPlayers[playerID].videoID                 = ytpVideoID;  // Claude - Fix Amplitude plugin #2
 
                 // save amplitudejs data for later use (e.g. events)
                 // -------------------------------------------------------------
@@ -3918,10 +3919,9 @@ regenerate:                             true
           var progressBar = progressBars[i];
           if (classString.includes(progressClass)) {
             // save YT player data for later use (e.g. events)
-            // Claude - Fix Amplitude plugin #2
             // Original (deprecated, preserved for reference):
             // j1.adapter.amplitude.data.ytPlayers[playerID].progressBar = progressBar;
-            ytpHostData().ytPlayers[playerID].progressBar = progressBar;
+            ytpHostData().ytPlayers[playerID].progressBar = progressBar;  // Claude - Fix Amplitude plugin #2
 
             progressBars[i].addEventListener('click', function(event) {
               var activeSong, playlist, ytPlayer,
@@ -3979,22 +3979,19 @@ regenerate:                             true
 
           // save YT player data for later use (e.g. events)
           if (volumeSlider.dataset.amplitudeSource === 'youtube') {
-            // Claude - Fix Amplitude plugin #2
             // Original (deprecated, preserved for reference):
             // j1.adapter.amplitude.data.ytPlayers[playerID].volumeSlider = volumeSlider;
-            ytpHostData().ytPlayers[playerID].volumeSlider = volumeSlider;
+            ytpHostData().ytPlayers[playerID].volumeSlider = volumeSlider;  // Claude - Fix Amplitude plugin #2
           }
 
           volumeSliders[i].addEventListener('click', function(event) {
-            // Claude - Fix Amplitude plugin #2
             // Original (deprecated, preserved for reference):
             // var activePlayerType  = j1.adapter.amplitude.data.activePlayer;
-            var activePlayerType  = ytpHostData().activePlayer;
+            var activePlayerType  = ytpHostData().activePlayer;  // Claude - Fix Amplitude plugin #2
 
-            // Claude - Fix Amplitude plugin #2
             // Original (deprecated, preserved for reference):
             // if (j1.adapter.amplitude.data.activePlayer === 'atp') {
-            if (ytpHostData().activePlayer === 'atp') {
+            if (ytpHostData().activePlayer === 'atp') {  // Claude - Fix Amplitude plugin #2
               // do nothing (managed by amplitude)
             } else {
               var activeSong = getActiveSong();
@@ -4004,10 +4001,9 @@ regenerate:                             true
               }
 
               // var ytPlayer = activeSong.player; 
-              // Claude - Fix Amplitude plugin #2
               // Original (deprecated, preserved for reference):
               // var ytPlayer    = j1.adapter.amplitude.data.ytPlayers[activeSong.playerID].player;
-              var ytPlayer    = ytpHostData().ytPlayers[activeSong.playerID].player;
+              var ytPlayer    = ytpHostData().ytPlayers[activeSong.playerID].player;  // Claude - Fix Amplitude plugin #2
               var playerState = ytPlayer.getPlayerState();
 
               if ((playerState === YT_PLAYER_STATE.PLAYING || playerState === YT_PLAYER_STATE.PAUSED) && ytPlayer !== undefined) {
@@ -4036,10 +4032,9 @@ regenerate:                             true
       if (volumeMutes[i].dataset.amplitudeSource === 'audio') {
         // do nothing (managed by adapter)
       } else {
-        // Claude - Fix Amplitude plugin #2
         // Original (deprecated, preserved for reference):
         // var activePlayer = j1.adapter.amplitude.data.activePlayer;
-        var activePlayer = ytpHostData().activePlayer;
+        var activePlayer = ytpHostData().activePlayer;  // Claude - Fix Amplitude plugin #2
 
         if (volumeMutes[i]) {
           var volumMute = volumeMutes[i];
@@ -4055,16 +4050,14 @@ regenerate:                             true
             } 
   
             var ytPlayer            = activeSong.player;
-            // Claude - Fix Amplitude plugin #2
             // Original (deprecated, preserved for reference):
             // var volumeSlider        = j1.adapter.amplitude.data.ytPlayers[playerID].volumeSlider;
-            var volumeSlider        = ytpHostData().ytPlayers[playerID].volumeSlider;
+            var volumeSlider        = ytpHostData().ytPlayers[playerID].volumeSlider;  // Claude - Fix Amplitude plugin #2
             var currenVolume        = ytPlayer.getVolume();
 //          var playerVolumePreset  = parseInt(j1.adapter.amplitude.data.ytPlayers[playerID].playerSettings.volume_slider.preset_value);
-            // Claude - Fix Amplitude plugin #2
             // Original (deprecated, preserved for reference):
             // var playerVolumePreset  = parseInt(j1.adapter.amplitude.data.ytPlayers[playerID].playerDefaults.volume_slider.preset_value);
-            var playerVolumePreset  = parseInt(ytpHostData().ytPlayers[playerID].playerDefaults.volume_slider.preset_value);
+            var playerVolumePreset  = parseInt(ytpHostData().ytPlayers[playerID].playerDefaults.volume_slider.preset_value);  // Claude - Fix Amplitude plugin #2
             var playerState         = ytPlayer.getPlayerState();
             var ytPlayerState       = YT_PLAYER_STATE_NAMES[playerState] || 'unstarted';
 

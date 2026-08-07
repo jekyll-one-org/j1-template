@@ -1,6 +1,6 @@
 # ------------------------------------------------------------------------------
-# ~/_data/modules/amplitude_media.yml (0)
-# User (media) configuration settings for the module AmplitudeJS
+# ~/_data/modules/audioplayer_media.yml (0)
+# User (media) configuration settings for the module J1 audioPlayer
 #
 # Product/Info:
 # https://jekyll.one
@@ -15,9 +15,9 @@
 # Description
 #
 description:
-  title:                                AmplitudeJS
+  title:                                audioPlayer
   scope:                                User media settings
-  location:                             _data/modules/amplitude_media.yml
+  location:                             _data/modules/audioplayer_media.yml
 
 # ------------------------------------------------------------------------------
 # User settings
