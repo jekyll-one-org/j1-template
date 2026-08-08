@@ -1492,7 +1492,7 @@ regenerate:                             true
               // empty string, hence the length checks.
               // var ytpPrivacy  = ('{{player.yt_player.privacy_enhanced}}'.length > 0) ? '{{player.yt_player.privacy_enhanced}}' : (('{{amplitude_default.player.yt_player.privacy_enhanced}}'.length > 0) ? '{{amplitude_default.player.yt_player.privacy_enhanced}}' : 'true');
               var ytpPrivacy          = {{amplitude_default.player.yt_player.privacy_enhanced}};
-              var privacyEnhancedHost = (ytpPrivacy) ? 'https://www.youtube-nocookie.com' : 'https://www.youtube.com';
+              var privacyEnhancedHost = (ytpPrivacy) ? 'https://www.youtube-nocookie.com' : 'https://youtube.com';
 
               isDev && logger.info('\n' + 'AJS YouTube iFrame API: ready');
               isDev && logger.info('\n' + 'configure player on ID: #{{player.id}}');
@@ -1508,7 +1508,7 @@ regenerate:                             true
                 // claude - optimize J1 third-party cookies #1
                 // Serve the (hidden) YT video iframe from the privacy-enhanced
                 // host www.youtube-nocookie.com. The classic host
-                // www.youtube.com sets several third-party cookies already on
+                // youtube.com sets several third-party cookies already on
                 // page load, which Chrome/Lighthouse flags in the "Best Practices" 
                 // audit ("Uses third-party cookies") and logs to the DevTools
                 // Issues panel. Configurable per player via the YAML key
@@ -1878,7 +1878,7 @@ regenerate:                             true
       // <module>.player.yt_player.privacy_enhanced <- hard default 'true'
       // (privacy-enhanced host) when the key is absent in both layers.
       var ytpPrivacy          = ytpGetValue(playerConfig, 'yt_player.privacy_enhanced', ytpDefault('player.yt_player.privacy_enhanced', true));
-      var privacyEnhancedHost = (ytpPrivacy) ? 'https://www.youtube-nocookie.com' : 'https://www.youtube.com';
+      var privacyEnhancedHost = (ytpPrivacy) ? 'https://www.youtube-nocookie.com' : 'https://youtube.com';
 
       isDev && logger.info('\n' + 'AJS YouTube iFrame API: ready');
       isDev && logger.info('\n' + `configure player on ID: #${playerId}`);
@@ -1894,7 +1894,7 @@ regenerate:                             true
         // claude - optimize J1 third-party cookies #1
         // Serve the (hidden) YT video iframe from the privacy-enhanced
         // host www.youtube-nocookie.com. The classic host
-        // www.youtube.com sets several third-party cookies already on
+        // youtube.com sets several third-party cookies already on
         // page load, which Chrome/Lighthouse flags in the "Best Practices"
         // audit ("Uses third-party cookies") and logs to the DevTools
         // Issues panel. Configurable per player via the YAML key
@@ -2218,7 +2218,7 @@ regenerate:                             true
   // Fix AudioPlayer #4
   // The EXACT src match '//youtube.com/iframe_api' only detects the script
   // tag injected by THIS plugin. It never matches the tag injected by the
-  // VideoJS YouTube tech ('//www.youtube.com/iframe_api'), and after the
+  // VideoJS YouTube tech ('//youtube.com/iframe_api'), and after the
   // fix in initYtAPI, NO tag is injected at all when the API was already
   // loaded by another module. The detection is made host-agnostic
   // (substring match on 'iframe_api') and additionally accepts a present

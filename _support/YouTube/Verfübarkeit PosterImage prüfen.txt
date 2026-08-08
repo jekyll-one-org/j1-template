@@ -124,6 +124,6 @@ Citations
 [6]     https://codepen.io/kallil-belmonte/pen/KKKRoyx
 [7]     https://www.reddit.com/r/reactjs/comments/l2yz8h/how_to_check_if_image_exists/
 [8]     https://javascript.plainenglish.io/how-to-check-if-image-exists-on-the-server-using-javascript-564535efff51
-[9]     https://www.youtube.com/watch?v=w9BcWulmDkI
+[9]     https://youtube.com/watch?v=w9BcWulmDkI
 [10]    https://stackoverflow.com/questions/7462449
 

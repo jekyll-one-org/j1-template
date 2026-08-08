@@ -467,7 +467,7 @@ tag::urls[]
 :url-yarn--home:                                  //yarnpkg.com/
 :url-yarn--gh-repo:
 
-:url-youtube--home:                               //www.youtube.com/
+:url-youtube--home:                               //youtube.com/
 
 :url-ruby--​windows-download-v2-7-4:               //github.com/oneclick/rubyinstaller2/releases/download/RubyInstaller-2.7.4-1/rubyinstaller-devkit-2.7.4-1-x64.exe
 :url-nodejs--​windows-download-remommended:        //nodejs.org/dist/v12.22.0/node-v12.22.0-x64.msi

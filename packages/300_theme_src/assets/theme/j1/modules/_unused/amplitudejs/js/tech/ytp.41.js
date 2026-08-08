@@ -933,12 +933,12 @@ regenerate:                             true
             // claude - optimize J1 third-party cookies #1
             // Serve the (hidden) YT video iframe from the privacy-enhanced
             // host www.youtube-nocookie.com. The classic host
-            // www.youtube.com sets several third-party cookies already on
+            // youtube.com sets several third-party cookies already on
             // page load, which Chrome/Lighthouse flags in the "Best
             // Practices" audit ("Uses third-party cookies") and logs to the
             // DevTools Issues panel. Configurable per player via the YAML
             // key yt_player.privacy_enhanced (default: true).
-            host:               (ytpPrivacy === 'true') ? 'https://www.youtube-nocookie.com' : 'https://www.youtube.com',
+            host:               (ytpPrivacy === 'true') ? 'https://www.youtube-nocookie.com' : 'https://youtube.com',
             height:             ytpHeight,
             width:              ytpWidth,
             videoId:            ytpVideoID,

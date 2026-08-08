@@ -392,7 +392,7 @@
             var isYouTubeNoCookieURL = isYouTubeNoCookie(src);
             var youtubeURL = isYouTubeNoCookieURL
                 ? '//www.youtube-nocookie.com/'
-                : '//www.youtube.com/';
+                : '//youtube.com/';
 
             // var video = `
             //   <video

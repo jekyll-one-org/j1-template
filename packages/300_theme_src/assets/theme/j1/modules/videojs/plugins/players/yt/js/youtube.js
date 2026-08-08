@@ -1082,7 +1082,7 @@
 
       // claude - optimize J1 third-party cookies #1
       // NOTE (no functional change): the IFrame Player API loader script is
-      // intentionally kept on www.youtube.com. It is a static JS resource
+      // intentionally kept on youtube.com. It is a static JS resource
       // that does not set cookies itself; the cookies flagged by
       // Chrome/Lighthouse are set by the embed iframe document. The embed
       // host is switched to www.youtube-nocookie.com via the tech option

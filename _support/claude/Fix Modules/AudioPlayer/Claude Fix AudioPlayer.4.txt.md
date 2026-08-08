@@ -53,7 +53,7 @@ The difference is the `videojs` resource — and the one-shot nature of the YT i
 **Why `audioPlayer.adoc` stalls on reload**
 
 The page loads `resources: [ amplitude, audioPlayer, videojs ]`. The VideoJS
-YouTube tech (`youtube.js`) loads `//www.youtube.com/iframe_api` on its own
+YouTube tech (`youtube.js`) loads `//youtube.com/iframe_api` on its own
 as soon as the J1 core finishes — and it never uses the global callback.
 It works via its own `tag.onload` handler plus `YT.ready()`. The plugin
 `ytp.js`, however, relies **exclusively** on `window.onYouTubeIframeAPIReady`,
@@ -104,7 +104,7 @@ changed.
 4. **`plugin = 'loaded'` detection**
    Made host-agnostic (`src*="iframe_api"` or a present `YT.ready`).
    The exact-match `//youtube.com/iframe_api` never matched the
-   tech's `//www.youtube.com/iframe_api` tag, and after edit 3 no tag
+   tech's `//youtube.com/iframe_api` tag, and after edit 3 no tag
    is injected at all in the shared case. The two replaced lines are
    preserved as deprecated comments.
 

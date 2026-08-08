@@ -6180,13 +6180,13 @@
           // www.youtube-nocookie.com. The videojs-youtube tech (youtube.js)
           // maps the option `enablePrivacyEnhancedMode` to
           // `playerConfig.host` when creating the underlying YT.Player.
-          // The classic host www.youtube.com sets several third-party
+          // The classic host youtube.com sets several third-party
           // cookies already on page load, which Chrome/Lighthouse flags in
           // the "Best Practices" audit ("Uses third-party cookies").
           // Default: enabled. Set the YAML key
           // videoJS.players.youtube.enablePrivacyEnhancedMode: false
           // (defaults <- control settings <- per-instance) to restore the
-          // classic www.youtube.com host.
+          // classic youtube.com host.
           enablePrivacyEnhancedMode: privacyEnhanced,
           playerVars: ytPlayerVars
         },

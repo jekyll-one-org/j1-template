@@ -81,12 +81,12 @@ ifeval::[{ytp-api--description} == true]
 [role="mt-4"]
 == YouTube Audio
 
-// https://www.youtube.com/watch?v=7_WWz2DSnT8
+// https://youtube.com/watch?v=7_WWz2DSnT8
 //
-// https://www.youtube.com/watch?v=WxcWO9O4DSM, 19:58, Tchaikovsky - Romeo and Juliet: Fantasy Overture
-// https://www.youtube.com/watch?v=zAmDwCz2BOs
-// https://www.youtube.com/watch?v=ryxAe4B_3Pg
-// https://www.youtube.com/watch?v=wI1Rr29OCJM
+// https://youtube.com/watch?v=WxcWO9O4DSM, 19:58, Tchaikovsky - Romeo and Juliet: Fantasy Overture
+// https://youtube.com/watch?v=zAmDwCz2BOs
+// https://youtube.com/watch?v=ryxAe4B_3Pg
+// https://youtube.com/watch?v=wI1Rr29OCJM
 
 You can embed any YouTube video on your web pages, and visitors can play
 and pause the audio with a simple click. This technique can also be used
@@ -110,7 +110,7 @@ VIDEO_ID with the actual ID of your YouTube video.
 [source, html]
 ----
 <div data-video="VIDEO_ID" data-autoplay="0" data-loop="1" id="youtube-audio"></div>
-<script src="https://www.youtube.com/iframe_api"></script>
+<script src="https://youtube.com/iframe_api"></script>
 <script src="https://cdn.rawgit.com/labnol/files/master/yt.js"></script>
 ----
 

@@ -23,7 +23,7 @@ HTML
 <iframe
     width="560"
     height="315"
-    src="https://www.youtube.com/embed/VIDEO_ID?origin=https://yourwebsite.com"
+    src="https://youtube.com/embed/VIDEO_ID?origin=https://yourwebsite.com"
     title="YouTube video player"
     frameborder="0"
     allow="accelerometer;

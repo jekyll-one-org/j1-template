@@ -133,7 +133,7 @@ is empty[2][3][4][6][7].
 [12] https://flexiple.com/javascript/check-if-object-is-empty
 [13] https://www.zipy.ai/blog/how-do-i-test-for-an-empty-javascript-object
 [14] https://expertbeacon.com/how-to-check-if-an-object-is-empty-in-javascript-an-in-depth-guide/
-[15] https://www.youtube.com/watch?v=PQHk_ZgohjI
+[15] https://youtube.com/watch?v=PQHk_ZgohjI
 [16] https://transcoding.org/javascript/check-if-object-is-empty/
 [17] https://www.dhiwise.com/post/react-check-if-object-is-empty-a-simple-guide-for-developers
 [18] https://bonsaiilabs.com/check-empty-object/

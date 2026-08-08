@@ -393,7 +393,7 @@
             var videoId                 = 'lg-youtube' + index;
             var youTubeParams           = getYouTubeParams(videoInfo, this.settings.youTubePlayerParams);
             var isYouTubeNoCookieURL    = isYouTubeNoCookie(src);
-            var youtubeURL              = isYouTubeNoCookieURL ? '//www.youtube-nocookie.com/' : '//www.youtube.com/';
+            var youtubeURL              = isYouTubeNoCookieURL ? '//www.youtube-nocookie.com/' : '//youtube.com/';
             var ytVideoID               = videoInfo.youtube[1];
 
             var video_iframe = `

@@ -913,7 +913,7 @@ j1.adapter.videoPlayer = ((j1, window) => {
           _this[editHandlerFlag] = true;
           logger.debug('\n' + 'initPlayerUiEvents: editPlaylistHandler [' + playerId + '] — OK');
         } else {
-          logger.warn('\n' + 'initPlayerUiEvents: editPlaylistHandler skipped — edit_playlist_' + playerId + ' button not found');
+          logger.debug('\n' + 'initPlayerUiEvents: editPlaylistHandler skipped — edit_playlist_' + playerId + ' button not found');
         }
       } // END if !editHandlerFlag
 

@@ -28,7 +28,7 @@ in Webseiten.
 ```html
 <iframe
     width="560" height="315"
-    src="https://www.youtube.com/embed/dZX6Q-Bj_xg"
+    src="https://youtube.com/embed/dZX6Q-Bj_xg"
     frameborder="0"
     allowfullscreen>
 </iframe>
@@ -136,7 +136,7 @@ Im Folgenden findest du typische Katzen-Video-Beispiele der Plattformen Dailymot
 **YouTube (Marktführer, Beispiel: BBC Beauty of Nature)**
 - Beispiel für ein typisches Katzenvideo:  
   Video: "Die besten Katzenvideos im Web"  
-  Player-Link: `https://www.youtube.com/watch?v=Q_6DPJY7UpU`  
+  Player-Link: `https://youtube.com/watch?v=Q_6DPJY7UpU`  
   Video-ID: `Q_6DPJY7UpU`  
   Beschreibung: Zusammenschnitt lustiger und typischer Katzenvideos, wie sie auf YouTube millionenfach zu finden sind[6].
 
@@ -173,7 +173,7 @@ Im Folgenden findest du typische Katzen-Video-Beispiele der Plattformen Dailymot
 
 | Plattform    | Beispiel-Video (Titel)                                  | Player-Link / Video-ID                         | Typischer Einsatz / Besonderheit         |
 |--------------|--------------------------------------------------------|------------------------------------------------|------------------------------------------|
-| YouTube      | Die besten Katzenvideos im Web                         | https://www.youtube.com/watch?v=Q_6DPJY7UpU    | Viral, massentauglich, große Reichweite  |
+| YouTube      | Die besten Katzenvideos im Web                         | https://youtube.com/watch?v=Q_6DPJY7UpU    | Viral, massentauglich, große Reichweite  |
 | Dailymotion  | Verkleidet als riesige Katze, erschreckt Besitzer      | https://www.dailymotion.com/video/x8oz6w2      | Unterhaltung, virale Clips               |
 | Dailymotion  | Zoo veröffentlicht süßes Video mit 'tödlichsten Katzen'| https://www.dailymotion.com/video/x8ozi68      | Tierdokus, Unterhaltung                  |
 | Vimeo        | (Beispiel-Kanal: Cats)                                 | https://vimeo.com/channels/cats                | Kreativ, hochwertig, oft künstlerisch    |
@@ -193,7 +193,7 @@ Solltest du konkrete Vimeo- oder Wistia-Video-IDs benötigen, empfiehlt sich die
 [3]  https://www.dailymotion.com/video/x8oz6w2
 [4]  https://blog.raidboxes.io/hosting-performance/video-hosting/
 [5]  https://wave.video/de/blog/12-best-video-hosting-sites/
-[6]  https://www.youtube.com/watch?v=Q_6DPJY7UpU
+[6]  https://youtube.com/watch?v=Q_6DPJY7UpU
 [7]  https://target-video.com/video-hosting-sites/
 [8]  https://www.dailymotion.com/video/x8ozi68
 [9]  media.video_platforms

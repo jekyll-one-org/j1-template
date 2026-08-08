@@ -749,7 +749,7 @@ settings:
           duration:                     "00:06:26"
 
         # title 02
-        # I Giorni (Live at The Royal Albert Hall): https://www.youtube.com/watch?v=Htk5IuW5JHE
+        # I Giorni (Live at The Royal Albert Hall): https://youtube.com/watch?v=Htk5IuW5JHE
         - item:
           enabled:                      true
           <<:                           *album_einaudi_yt

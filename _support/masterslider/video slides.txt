@@ -20,7 +20,7 @@ be a direct child element of the slide.
 	<div id="masterslider" class="master-slider">
 		<div class="ms-slide">
 			<a
-        href="https://www.youtube.com/watch?v=4dRR_0GzJgU"
+        href="https://youtube.com/watch?v=4dRR_0GzJgU"
         class="ms-slide-video">
       </a>
 		</div>
@@ -85,7 +85,7 @@ data-autplay="true" attribute to the video element.
             </video>
 		</div>
 		<div class="ms-slide">
-			<a href="https://www.youtube.com/watch?v=4dRR_0GzJgU" class="ms-slide-video" data-autoplay="true"></a>
+			<a href="https://youtube.com/watch?v=4dRR_0GzJgU" class="ms-slide-video" data-autoplay="true"></a>
 		</div>
 		<!-- .... -->
 	</div>

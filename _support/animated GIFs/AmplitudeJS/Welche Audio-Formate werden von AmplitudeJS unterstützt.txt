@@ -22,7 +22,7 @@ Citations:
 [1] https://github.com/serversideup/amplitudejs
 [2] https://521dimensions.com/open-source/amplitudejs
 [3] https://www.magix.com/at/musik-bearbeiten/audioformate/
-[4] https://www.youtube.com/watch?v=kWHj2WqOm3g
+[4] https://youtube.com/watch?v=kWHj2WqOm3g
 [5] https://stackoverflow.com/questions/49640248/amplitudejs-audio-player-and-json
 [6] https://521dimensions.com/open-source/amplitudejs/docs/initialization/
 [7] https://discourse.webflow.com/t/amplitude-html-audio-player-integration/211008

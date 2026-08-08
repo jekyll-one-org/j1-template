@@ -23,7 +23,7 @@ Use branch `vjs4` if you still using old VideoJS `v4.x`.
     controls
     autoplay
     width="640" height="264"
-    data-setup='{ "techOrder": ["youtube"], "sources": [{ "type": "video/youtube", "src": "https://www.youtube.com/watch?v=xjS6SftYQaQ"}] }'
+    data-setup='{ "techOrder": ["youtube"], "sources": [{ "type": "video/youtube", "src": "https://youtube.com/watch?v=xjS6SftYQaQ"}] }'
   >
   </video>
 
@@ -40,9 +40,9 @@ Including the script Youtube.min.js will add the YouTube as a tech. You just hav
 
 It supports:
 - youtube.com as well as youtu.be
-- Regular URLs: http://www.youtube.com/watch?v=xjS6SftYQaQ
-- Embeded URLs: http://www.youtube.com/embed/xjS6SftYQaQ
-- Playlist URLs: http://www.youtube.com/playlist?list=PLA60DCEB33156E51F OR http://www.youtube.com/watch?v=xjS6SftYQaQ&list=SPA60DCEB33156E51F
+- Regular URLs: http://youtube.com/watch?v=xjS6SftYQaQ
+- Embeded URLs: http://youtube.com/embed/xjS6SftYQaQ
+- Playlist URLs: http://youtube.com/playlist?list=PLA60DCEB33156E51F OR http://youtube.com/watch?v=xjS6SftYQaQ&list=SPA60DCEB33156E51F
 
 ## Options
 It supports every regular Video.js options. Additionally, you can change any [YouTube parameter](https://developers.google.com/youtube/player_parameters?hl=en#Parameters). Here is an example of setting the `iv_load_policy` parameter to `1`.
@@ -54,7 +54,7 @@ It supports every regular Video.js options. Additionally, you can change any [Yo
   controls
   autoplay
   width="640" height="264"
-  data-setup='{ "techOrder": ["youtube"], "sources": [{ "type": "video/youtube", "src": "https://www.youtube.com/watch?v=xjS6SftYQaQ"}], "youtube": { "iv_load_policy": 1 } }'
+  data-setup='{ "techOrder": ["youtube"], "sources": [{ "type": "video/youtube", "src": "https://youtube.com/watch?v=xjS6SftYQaQ"}], "youtube": { "iv_load_policy": 1 } }'
 >
 </video>
 ```
@@ -69,7 +69,7 @@ Because `controls` is already a Video.js option, to use the YouTube controls, yo
   controls
   autoplay
   width="640" height="264"
-  data-setup='{ "techOrder": ["youtube"], "sources": [{ "type": "video/youtube", "src": "https://www.youtube.com/watch?v=xjS6SftYQaQ"}], "youtube": { "ytControls": 2 } }'
+  data-setup='{ "techOrder": ["youtube"], "sources": [{ "type": "video/youtube", "src": "https://youtube.com/watch?v=xjS6SftYQaQ"}], "youtube": { "ytControls": 2 } }'
 >
 </video>
 ```
@@ -84,7 +84,7 @@ If you need to set any additional options on the YouTube player, you may do so w
   controls
   autoplay
   width="640" height="264"
-  data-setup='{ "techOrder": ["youtube"], "sources": [{ "type": "video/youtube", "src": "https://www.youtube.com/watch?v=xjS6SftYQaQ"}], "youtube": { "customVars": { "wmode": "transparent" } } }'
+  data-setup='{ "techOrder": ["youtube"], "sources": [{ "type": "video/youtube", "src": "https://youtube.com/watch?v=xjS6SftYQaQ"}], "youtube": { "customVars": { "wmode": "transparent" } } }'
 >
 </video>
 ```

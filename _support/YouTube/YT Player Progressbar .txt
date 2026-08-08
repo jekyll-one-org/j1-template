@@ -29,7 +29,7 @@ Aktiviere die JavaScript API, um den Player programmatisch steuern zu können.
 
 HTML
 <iframe id="player" type="text/html" width="640" height="360"
-    src="https://www.youtube.com/embed/YOUR_VIDEO_ID?enablejsapi=1">
+    src="https://youtube.com/embed/YOUR_VIDEO_ID?enablejsapi=1">
 </iframe>
 Verwende den Code mit Vorsicht.
 
@@ -50,7 +50,7 @@ Verwende JavaScript, um den YouTube-Player zu initialisieren und eine Referenz d
 
 JavaScript
 var tag = document.createElement('script');
-tag.src = "https://www.youtube.com/iframe_api";   
+tag.src = "https://youtube.com/iframe_api";   
 
 var firstScriptTag = document.getElementsByTagName('script')[0];
 firstScriptTag.parentNode.insertBefore(tag,   
@@ -109,7 +109,7 @@ HTML
 <body>
     <div id="player"></div>
     <div id="progress-bar"></div>
-    <script src="https://www.youtube.com/iframe_api"></script>
+    <script src="https://youtube.com/iframe_api"></script>
     <script>
         // JavaScript-Code wie oben beschrieben
     </script>

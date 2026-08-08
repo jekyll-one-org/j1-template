@@ -24,7 +24,7 @@ Now the AmplitudeJS YouTube tech (ytp.js):Now the full validation pipeline.
 
 ## Why Lighthouse flags this
 
-The classic YouTube embed host `www.youtube.com` sets a batch of cookies
+The classic YouTube embed host `youtube.com` sets a batch of cookies
 (`VISITOR_INFO1_LIVE`, `YSC`, `__Secure-*`, etc.) the moment the iframe
 document loads — before any user interaction.
 
@@ -45,7 +45,7 @@ Yes, largely — YouTube provides the **privacy-enhanced host**
 JS control surface; the difference is that the embed sets no tracking cookies
 on load (state moves to interaction time / other storage).
 
-The `iframe_api` loader script itself can stay on `www.youtube.com` — it's
+The `iframe_api` loader script itself can stay on `youtube.com` — it's
 a static JS resource and not the cookie setter. One honest caveat: this is
 Google's mechanism, so "zero storage forever" isn't guaranteed (it may still
 use localStorage, and cookies can appear after the user starts playback),
@@ -70,7 +70,7 @@ identical images, no youtube.com cookies attached.
 **youtube.js** (tech, 3 tags): both poster URLs
 (`mqdefault` initial + `maxresdefault` probe) switched to `i.ytimg.com`.
 Plus a comment-only note at `loadScript()` documenting why the API loader
-intentionally stays on `www.youtube.com`.
+intentionally stays on `youtube.com`.
 
 **ytp.js** (AmplitudeJS tech, 2 tags)
 The hidden video iframe's `YT.Player` config now gets `host:`, driven by

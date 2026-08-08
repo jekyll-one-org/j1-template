@@ -819,7 +819,7 @@
 
   if (typeof document !== 'undefined'){
 //  loadScript('/assets/theme/j1/modules/videojs/js/plugins/yt/api/youtube.min.js', apiLoaded);
-    loadScript('//www.youtube.com/iframe_api', apiLoaded);
+    loadScript('//youtube.com/iframe_api', apiLoaded);
     injectCss();
   }
 

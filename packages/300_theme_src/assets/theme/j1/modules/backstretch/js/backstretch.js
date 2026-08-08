@@ -1327,7 +1327,7 @@
       VideoWrapper.loadYoutubeAPI();
 
       that.ytId = options.url.match(YOUTUBE_REGEXP)[2];
-      var src = 'https://www.youtube.com/embed/' + that.ytId +
+      var src = 'https://youtube.com/embed/' + that.ytId +
         '?rel=0&autoplay=0&showinfo=0&controls=0&modestbranding=1' +
         '&cc_load_policy=0&disablekb=1&iv_load_policy=3&loop=0' +
         '&enablejsapi=1&origin=' + encodeURIComponent(window.location.origin);
@@ -1632,7 +1632,7 @@
       return;
     }
     if (!$('script[src*=www\\.youtube\\.com\\/iframe_api]').length) {
-      $('<script src="https://www.youtube.com/iframe_api">').appendTo('body');
+      $('<script src="https://youtube.com/iframe_api">').appendTo('body');
     }
     var ytAPILoadInt = setInterval(function () {
       if (window['YT'] && window['YT'].loaded) {

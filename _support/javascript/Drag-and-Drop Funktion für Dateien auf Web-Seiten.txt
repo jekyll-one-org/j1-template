@@ -68,7 +68,7 @@ Weitere Informationen und Ressourcen:
 HTML5 Drag-and-Drop API: https://developer.mozilla.org/en-US/docs/Web/API/HTML_Drag_and_Drop_API
 Javascript DnD Library: https://github.com/topics/drag-and-drop
 Drag-and-Drop mit HTML und Javascript: https://javascript-snippets.autify.com/snippets/mouse/drag_and_drop_by_drag_event/
-Drag and Drop für Dateien: https://www.youtube.com/watch?v=TIvCca31KJc
+Drag and Drop für Dateien: https://youtube.com/watch?v=TIvCca31KJc
 
 
 Beachten Sie:

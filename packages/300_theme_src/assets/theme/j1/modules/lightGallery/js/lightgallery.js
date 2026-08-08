@@ -820,7 +820,7 @@
          * @desc Check the given src is video
          * @param {String} src
          * @return {Object} video type
-         * Ex:{ youtube  :  ["//www.youtube.com/watch?v=c0asJgSyxcY", "c0asJgSyxcY"] }
+         * Ex:{ youtube  :  ["//youtube.com/watch?v=c0asJgSyxcY", "c0asJgSyxcY"] }
          *
          * @todo - this information can be moved to dynamicEl to avoid frequent calls
          */

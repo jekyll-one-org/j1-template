@@ -878,7 +878,7 @@
       isDev && logger.debug('\n' + 'initializing plugin: started');
       isDev && logger.debug('\n' + 'version of videoJS detected: ' + videojs.VERSION);
 
-      loadScript('//www.youtube.com/iframe_api', apiLoaded);
+      loadScript('//youtube.com/iframe_api', apiLoaded);
       injectCss();
 
       clearInterval(dependencies_met_page_ready);

@@ -1684,7 +1684,7 @@
    *
    * Proposed spec: https://webtiming.github.io/timingobject/
    * V3 Spec: https://timingsrc.readthedocs.io/en/latest/
-   * Demuxed talk: https://www.youtube.com/watch?v=cZSjDaGDmX8
+   * Demuxed talk: https://youtube.com/watch?v=cZSjDaGDmX8
    *
    * This class makes it easy to connect Vimeo.Player to a provided TimingObject via Vimeo.Player.setTimingSrc(myTimingObject, options) and the synchronization will be handled automatically.
    *

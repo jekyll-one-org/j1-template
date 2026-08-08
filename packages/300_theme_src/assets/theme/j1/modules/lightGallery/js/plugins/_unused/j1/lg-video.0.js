@@ -323,7 +323,7 @@
                 var isYouTubeNoCookieURL = isYouTubeNoCookie(src);
                 var youtubeURL = isYouTubeNoCookieURL
                     ? '//www.youtube-nocookie.com/'
-                    : '//www.youtube.com/';
+                    : '//youtube.com/';
                 video = "<iframe allow=\"autoplay\" id=" + videoId + " class=\"lg-video-object lg-youtube " + addClass + "\" " + videoTitle + " src=\"" + youtubeURL + "embed/" + (videoInfo.youtube[1] + youTubeParams) + "\" " + commonIframeProps + "></iframe>";
             }
             else if (videoInfo.vimeo) {

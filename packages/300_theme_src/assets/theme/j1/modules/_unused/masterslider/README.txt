@@ -20,7 +20,7 @@ smoothly on desktop and devices.
 
 >[Demos](http://avt.li/mswftem "Live demos of Master Slider free version") | [Features](http://avt.li/mswfea "All features") | [Documentation](http://avt.li/mswfdoc "Master Slider documentation") | [All Video tutorials](http://avt.li/msfvids "Watch all video tutorials") | [Support](http://wordpress.org/support/plugin/master-slider "Free support")
 
-[youtube https://www.youtube.com/watch?v=nyjpGEHwOn8]
+[youtube https://youtube.com/watch?v=nyjpGEHwOn8]
 
 
 == Overview

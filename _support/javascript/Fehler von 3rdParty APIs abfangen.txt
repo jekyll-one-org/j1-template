@@ -5,7 +5,7 @@ spielen.
 Kann man die Fehler der 3rdParty APIs abfangen, sodass sie nicht in der
 Browser-Konsole auftauchen. Bitte gebe ein Beispiel für die YouTube iFrame
 API sowie Fehler die über Skripte ausgelöst werden die von der Plattform
-über die Adresse "https://www.youtube.com"  ausgelöst werden.
+über die Adresse "https://youtube.com"  ausgelöst werden.
 
 Perplexity
 --------------------------------------------------------------------------------
@@ -39,12 +39,12 @@ const player = new YT.Player('player', {
 ---
 
 ### 2. **Globale Fehlerabfangung für Skripte**
-Für Fehler, die beim Laden des YouTube-Skripts (`https://www.youtube.com/iframe_api`) auftreten:
+Für Fehler, die beim Laden des YouTube-Skripts (`https://youtube.com/iframe_api`) auftreten:
 
 ```javascript
 // Globaler Fehler-Handler
 window.onerror = (message, source, lineno, colno, error) => {
-  if (source.includes('https://www.youtube.com')) {
+  if (source.includes('https://youtube.com')) {
     console.log('Fehler von YouTube-Skript unterdrückt:', message);
     return true; // Verhindert die Standard-Konsolenausgabe
   }
@@ -94,7 +94,7 @@ Citations:
 [6] https://web.dev/articles/storage-for-the-web
 [7] https://www.astera.com/de/type/blog/api-errors/
 [8] https://developers.google.com/youtube/v3/docs/core_errors
-[9] https://www.youtube.com/watch?v=D4yxwUplWvc
+[9] https://youtube.com/watch?v=D4yxwUplWvc
 [10] https://welikesocialmedia.de/video-einbetten/
 [11] https://stackoverflow.com/questions/65918197/how-to-prevent-playback-error-youtube-iframe-api
 [12] https://web.dev/articles/optimizing-content-efficiency-loading-third-party-javascript
@@ -102,10 +102,10 @@ Citations:
 [14] https://developer.mozilla.org/de/docs/Web/Privacy/Third-party_cookies
 [15] https://support.cleverreach.com/hc/de/articles/360013419139-Fehlermeldung-Es-ist-ein-unbekannter-Fehler-aufgetreten-bei-unseren-Plugins
 [16] https://stackoverflow.com/questions/60293830/api-design-how-to-handle-third-partys-apis-errors
-[17] https://www.youtube.com/watch?v=tbjHMKtjEaU
+[17] https://youtube.com/watch?v=tbjHMKtjEaU
 [18] https://gist.github.com/cferdinandi/9044694
 [19] https://www.camp-firefox.de/forum/thema/59246-youtube-javascript-fehlermeldungen/
-[20] https://www.youtube.com/watch?v=KnZppPj3UFU
+[20] https://youtube.com/watch?v=KnZppPj3UFU
 
 ---
 Antwort von Perplexity: pplx.ai/share

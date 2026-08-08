@@ -38,7 +38,7 @@ Damit nimmt der Swiper die komplette Seitenbreite ein, unabhängig von
 Bootstrap-Containern in der restlichen Seite[1].
 
 Citations:
-[1] https://www.youtube.com/watch?v=ZQmeHTB-DQ8
+[1] https://youtube.com/watch?v=ZQmeHTB-DQ8
 
 ---
 Antwort von Perplexity: pplx.ai/share
