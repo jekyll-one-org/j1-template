@@ -23,7 +23,7 @@ image:
 regenerate:                             false
 permalink:                              /pages/public/tools/player/audioPlayer/
 
-resources:                              [ amplitude, amplitudejs, audioPlayer, videojs ]
+resources:                              [ amplitude, audioPlayer, videojs ]
 resource_options:
   - attic:
       opacity:                          .7
@@ -145,7 +145,7 @@ that enables this feature.
 
 [role="mt-4"]
 .Olivia Dean · The Art Of Loving (2026)
-audioPlayer::olivia_dean_yt_large[]
+audioPlayer::olivia_dean_2026_yt_large[]
 
 
 // Include sub-documents (if any)

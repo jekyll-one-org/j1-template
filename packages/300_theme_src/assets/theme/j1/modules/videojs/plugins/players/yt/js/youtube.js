@@ -1088,7 +1088,7 @@
       // host is switched to www.youtube-nocookie.com via the tech option
       // `privacy_enhanced` (see initYTPlayer above), which the J1
       // videoPlayer core now enables by default.
-      loadScript('//www.youtube.com/iframe_api', apiLoaded);
+      loadScript('//youtube.com/iframe_api', apiLoaded);
       injectCss();
 
       clearInterval(dependencies_met_page_ready);
