@@ -23,7 +23,7 @@ image:
 regenerate:                             false
 permalink:                              /pages/public/tools/player/audioPlayer/
 
-resources:                              [ amplitude, audioPlayer, videojs ]
+resources:                              [ amplitude, audioPlayer ]
 resource_options:
   - attic:
       opacity:                          .7
