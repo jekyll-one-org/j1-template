@@ -32,7 +32,7 @@ permalink:                              /pages/public/tour/video_data/
 
 resources:                              [
                                           gallery, lightgallery, masonry,
-                                          videoPlayer, videojs
+                                          multiPlayer, videojs
                                         ]
 resource_options:
   - toccer:
@@ -181,9 +181,9 @@ youtube::brEXrQBIj68[poster="//img.youtube.com/vi/brEXrQBIj68/mqdefault.jpg" rol
 
 [role="mt-5"]
 [[j1-video]]
-== J1 VideoPlayer
+== J1 Multi Player
 
-VideoPlayer is a playlist-friendly player built using VideoJS. It lets every
+MultiPlayer is a playlist-friendly player built using VideoJS. It lets every
 video use the same attractive, customizable player and adds a full playlist
 feature. Viewers can search, sort, play, rate videos, and pick up right where
 they left off.
@@ -219,7 +219,7 @@ Her international career started in 2026 with the album "The Art of Loving."
 
 [role="mt-4"]
 .The Art Of Loving (2026)
-videoPlayer::player_olivia_dean[role="mb-4"]
+multiplayer::player_olivia_dean[role="mb-4"]
 
 [TIP]
 ====

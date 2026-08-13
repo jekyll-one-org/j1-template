@@ -1,0 +1,1656 @@
+/*
+ # -----------------------------------------------------------------------------
+ # ~/assets/theme/j1/modules/videoPlayer/css/videoPlayer.css
+ # Provides styles for J1 Module VideoPlayer
+ # Version 3.1.64 for J1 Template
+ #
+ # Product/Info:
+ # https://jekyll.one
+ #
+ # Copyright (C) 2026 Juergen Adams
+ #
+ # J1 Template is licensed under the MIT License.
+ # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE
+ # -----------------------------------------------------------------------------
+*/
+
+/*
+#wrapper-inner {
+  width: 1280px;
+  height: 1260px;
+  transform-origin: top left;
+}
+*/
+
+/* -----------------------------------------------------------------------------
+   CSS Custom Properties
+  ------------------------------------------------------------------------------ */
+
+:root {
+  --border-color:     #d2d2d7;
+  --card-background:  #ffffff;
+  --input-background: #E1F5FE;
+  --secondary-color:  #86868b;
+  --shadow-color:     rgba(0,0,0,.1);
+  --text-color:       #1d1d1f;
+  --ajs-theme-uno--dark-silver: #141920;
+  --ajs-theme-uno--white: #FFFFFF;
+  --item-active-border-color: #0d6efd;
+
+  /* claude - Modify J1 VideoPlayer expiry date #1
+     Traffic-light colours for the Expiry Date field of the edit dialog.
+     --expiry-warning-*   applies from 4 weeks before the expiry date
+     --expiry-critical-*  applies from 2 weeks before AND once the date is
+                          reached (access ended, playback disabled)
+     The *-color values only exist to keep the text legible on top of the
+     saturated backgrounds; change all four here to re-theme the feature. */
+  --expiry-warning-background:  yellow;
+  --expiry-warning-color:       #1d1d1f;
+  --expiry-critical-background: red;
+  --expiry-critical-color:      #ffffff;
+}
+
+/* -----------------------------------------------------------------------------
+   Global Overrides
+  ------------------------------------------------------------------------------ */
+
+code, pre {
+  background-color: rgba(0, 0, 0, 0.1);
+  border-top: none;
+  color: #212121;
+  font-weight: 500;
+  padding: 0.125em 0.275em 0.125em 0.275em;
+  word-break: break-word !important;
+}
+
+
+/* claude - Unique J1 VideoPlayer #3
+   Replace the absolute-positioned button layout with a flexbox 3-slot
+   header.  The old approach used position:absolute on both buttons and
+   relied on a bare #edit_playlist ID override (Modify #6) that no longer
+   resolves now that every element id carries the _{{player.id}} suffix.
+   The new layout:
+     - .video-player-header      → flex row, space-between, vertically centred
+     - .video-player-header-slot → neutral flex child (left / right)
+     - .video-player-header-title → grows to fill the centre, text-centred
+   .video-player-header-arrows stays as the button-reset class but is no
+   longer absolutely positioned; it just sizes and styles the icon button.
+   No bare ID selectors are used; all rules are class-based and therefore
+   work correctly for every player instance on the page. */
+
+.video-player-header {
+  align-items:      center;
+  background-color: var(--ajs-theme-uno--dark-silver);
+  color:            var(--ajs-theme-uno--white);
+  display:          flex;
+  font-family:      "Lato", sans-serif;
+  font-weight:      600;
+  justify-content:  space-between;
+  padding:          10px 15px;
+}
+
+/* Left and right button slots — each the same fixed width so the centre
+   title always remains geometrically centred regardless of button presence */
+.video-player-header-slot {
+  align-items:  center;
+  display:      flex;
+  flex-shrink:  0;
+  width:        36px;
+}
+
+.video-player-header-slot--right {
+  justify-content: flex-end;
+}
+
+/* Centre title span — grows to fill remaining space */
+.video-player-header-title {
+  flex:       1;
+  text-align: center;
+}
+
+/* Button reset — no absolute positioning; let flexbox place the button */
+.video-player-header-arrows {
+  background:  none;
+  border:      none;
+  cursor:      pointer;
+  display:     flex;
+  line-height: 0;
+  margin:      0;
+  padding:     0;
+}
+
+.video-player-header-arrows:focus-visible {
+  border-radius:  2px;
+  outline:        2px solid var(--ajs-theme-uno--white);
+  outline-offset: 3px;
+}
+
+.video-player-header-arrows img {
+  display: block;
+}
+
+
+/* -----------------------------------------------------------------------------
+   Icon Overrides
+  ------------------------------------------------------------------------------ */
+
+.fa-file-clipboard:before,
+.fa-paste:before {
+  content: "\f0ea";
+}
+
+/* -----------------------------------------------------------------------------
+   Input / URL Bar
+  ------------------------------------------------------------------------------ */
+
+.input-section {
+  border: 2px dashed var(--md-gray-400) !important;
+  padding: 28px;
+}
+
+.input-wrapper {
+  background: transparent;
+  box-sizing: border-box;
+  border-radius: 0px;
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 1.5rem;
+  width: 100%;
+}
+
+/* flex-basis: place buttons: force full width to push buttons to next line */
+.input-container {
+  align-items: center;
+  display: flex;
+  flex: 1 1 0%;
+  flex-basis: 100%;
+  justify-content: center;
+  position: relative;
+  width: 100%;
+}
+
+/* align content to the left */
+/* claude - Unique J1 VideoPlayer #4: #serverPlaylistSelect → .server-playlist-select
+   (element id is now player-scoped; the <select> carries class="server-playlist-select") */
+.input-container:has(.server-playlist-select) {
+  justify-content: flex-start !important;
+}
+
+input {
+  background-color: var(--card-background);
+  border: none;
+  border-radius: 8px;
+  color: var(--text-color);
+  flex: 1;
+  font-size: 1rem;
+  padding: .8rem 1rem;
+  transition: all .3s ease;
+  width: 100%;
+}
+
+/* input elements
+   -----------------------------------------------------------------------------
+   Cross-browser autofill background overrides.
+   Uses a keyframe animation to trigger JS-based detection via
+   animationstart and forces the desired background on autofilled
+   inputs and selects in Chrome, Firefox and Safari.
+  ------------------------------------------------------------------------------ */
+
+@keyframes onAutoFillStart {
+  from { /* empty - used only as a detection signal */ }
+  to   { /* empty - used only as a detection signal */ }
+}
+
+@keyframes onAutoFillCancel {
+  from { /* empty - used only as a detection signal */ }
+  to   { /* empty - used only as a detection signal */ }
+}
+
+input:-webkit-autofill,
+select:-webkit-autofill {
+  animation-name: onAutoFillStart;
+  -webkit-box-shadow: 0 0 0 1000px var(--input-background) inset !important;
+  -webkit-text-fill-color: var(--text-color) !important;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+input:not(:-webkit-autofill),
+select:not(:-webkit-autofill) {
+  animation-name: onAutoFillCancel;
+}
+
+input:autofill,
+select:autofill {
+  animation-name: onAutoFillStart;
+  background-color: var(--input-background) !important;
+  color: var(--text-color) !important;
+}
+
+/* input elements #3
+   -----------------------------------------------------------------------------
+   Explicit background overrides for ALL input/select elements so the
+   browser's user-agent autofill background (Chrome's
+   :-internal-autofill-selected, Firefox's :-moz-autofill, etc.) is
+   suppressed.  #videoUrlInput already had "background: none !important";
+   the same treatment is now applied to #serverPlaylistSelect and
+   #playlistSearchInput.
+  ------------------------------------------------------------------------------ */
+
+/* claude - Unique J1 VideoPlayer #4: bare #serverPlaylistSelect and #playlistSearchInput
+   replaced with [id^=...] attribute-prefix selectors that match all player-scoped
+   variants (serverPlaylistSelect_<id> and playlistSearchInput_<id>).              */
+[id^="serverPlaylistSelect_"],
+[id^="playlistSearchInput_"] {
+  background: none !important;
+}
+
+/* input elements #4
+   -----------------------------------------------------------------------------
+   Value-aware background styling for <input> and <select> elements.
+   The JS companion (inputValueBackgroundHandler) toggles
+   data-value-filled on elements that hold a non-empty value and
+   applies inline background-color accordingly.  The default
+   (empty / no value) background is --card-background; the filled
+   state uses --input-background.
+   These rules provide the base defaults; the JS overrides them with
+   inline styles so the behaviour is identical across all browsers.
+  ------------------------------------------------------------------------------ */
+
+input[type="text"],
+input[type="search"],
+input[type="url"],
+input[type="email"],
+input[type="tel"],
+input[type="number"],
+input:not([type]),
+select {
+  background-color: var(--card-background) !important;
+}
+
+input[data-value-filled="true"],
+select[data-value-filled="true"] {
+  background-color: var(--input-background) !important;
+  color: var(--text-color) !important;
+}
+
+/* -----------------------------------------------------------------------------
+   Input Elements: Specific Fields
+  ------------------------------------------------------------------------------ */
+
+/* claude - Unique J1 VideoPlayer #4: #videoUrlInput → [id^="videoUrlInput_"]
+   (element id is now player-scoped: videoUrlInput_<playerID>)                  */
+[id^="videoUrlInput_"] {
+  background: none !important;
+  border: 1px solid var(--border-color);
+  border-radius: 0px;
+  padding: .8rem 1rem .8rem 6.5rem;
+  transition: border-color .2s, box-shadow .2s;
+}
+
+/* optimize css 2: removed redundant "background: none"
+   (already set with !important in the combined
+    [id^="serverPlaylistSelect_"], [id^="playlistSearchInput_"] rule above) */
+/* claude - Unique J1 VideoPlayer #4: #serverPlaylistSelect → .server-playlist-select
+   (element id is now player-scoped; the <select> carries class="server-playlist-select") */
+.server-playlist-select {
+  border: 1px solid var(--border-color);
+  box-shadow: none;
+  color: var(--text-color);
+  flex: 1 1 100%;
+  font-size: 1.01rem;
+  padding: 0.8rem 1rem 0.8rem 6.5rem;
+  transition: border-color .2s, box-shadow .2s;
+  width: 100%;
+}
+
+/* center the load button below the server playlist select */
+/* claude - Unique J1 VideoPlayer #4: the old "#serverPlaylistSelect ~ #serverPlaylistLoadButton"
+   sibling rule is replaced.  In the new HTML the load button (.select-btn-inside) precedes
+   the select in DOM order, so the general-sibling combinator never fired.  The import button
+   (.import-playlist-btn) lives in a separate parent div.  Both are now targeted by class so
+   all player instances are covered without relying on the defunct ~ relationship.           */
+.select-btn-inside,
+.import-playlist-btn {
+  flex-basis: auto;
+  /* margin-left: 0; */
+  margin-top: .75rem;
+}
+
+/* optimize css 2: removed redundant "background: none"
+   (already set with !important in the combined
+    [id^="serverPlaylistSelect_"], [id^="playlistSearchInput_"] rule above) */
+/* claude - Unique J1 VideoPlayer #4: #playlistSearchInput → [id^="playlistSearchInput_"]
+   (element id is now player-scoped: playlistSearchInput_<playerID>)              */
+[id^="playlistSearchInput_"] {
+  font-size: .8rem;
+  border: 1px solid var(--border-color);
+  border-radius: 0px;
+  padding: .8rem 1rem .8rem 3.5rem;
+  transition: border-color .2s, box-shadow .2s;
+  width: 100%;
+}
+
+/* claude - Unique J1 VideoPlayer #4: #playlistSearchInput::placeholder
+   → [id^="playlistSearchInput_"]::placeholder                                  */
+[id^="playlistSearchInput_"]::placeholder {
+  color: var(--secondary-color);
+  opacity: 0.7;
+}
+
+/* optimize css 2: removed unused #videoUrl rule
+   (the HTML only uses #videoUrlInput; #videoUrl was orphaned)         */
+
+/* -----------------------------------------------------------------------------
+   Input Buttons: Paste / Select
+  ------------------------------------------------------------------------------ */
+
+.paste-btn-inside {
+  align-items: center;
+  background: #2196F3;
+  border: none;
+  border-radius: 0px;
+  color: #fff;
+  display: flex;
+  font-size: .85rem;
+  font-weight: 500;
+  gap: .4rem;
+  height: auto;
+  justify-content: center;
+  left: .5rem;
+  min-width: auto;
+  padding: .5rem .6rem;
+  position: absolute;
+  top: 34%;
+  transform: translateY(-50%);
+  transition: all .3s ease;
+  white-space: nowrap;
+  width: auto;
+  z-index: 1;
+}
+
+.paste-btn-inside:hover {
+  background-color: var(--bs-primary);
+  box-shadow: 0 2px 8px var(--shadow-color);
+  color: var(--md-gray-900) !important;
+}
+
+.select-btn-inside {
+  align-items: center;
+  background: #2196F3;
+  border: none;
+  border-radius: 0px;
+  color: #fff;
+  display: flex;
+  font-size: 0.85rem;
+  font-weight: 500;
+  gap: 0.4rem;
+  height: auto;
+  justify-content: center;
+  left: 2.25rem;
+  min-width: auto;
+  padding: 0.5rem 0.6rem;
+  position: absolute;
+  top: 38%;
+  transform: translateY(-50%);
+  transition: all 0.3s ease;
+  white-space: nowrap;
+  width: auto;
+  z-index: 1;
+}
+
+.select-btn-inside:hover {
+  background-color: var(--bs-primary);
+  box-shadow: 0 2px 8px var(--shadow-color);
+  color: var(--md-gray-900) !important;
+}
+
+.search-icon-inside {
+  align-items: center;
+  color: var(--secondary-color);
+  display: flex;
+  font-size: 1rem;
+  left: .85rem;
+  pointer-events: none;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+/* -----------------------------------------------------------------------------
+   Input Clear Buttons
+  ------------------------------------------------------------------------------ */
+
+/* optimize css 2: merged identical clear-button properties
+   into a shared rule; only 'top' differs per element                   */
+/* claude - Unique J1 VideoPlayer #4: #playlistInputClear / #playlistSelectClear
+   → [id^="playlistInputClear_"] / [id^="playlistSelectClear_"]
+   (element ids are now player-scoped: playlistInputClear_<id> / playlistSelectClear_<id>) */
+[id^="playlistInputClear_"],
+[id^="playlistSelectClear_"] {
+  align-items: center;
+  background: transparent;
+  border-color: initial;
+  border-image: initial;
+  border-style: none;
+  border-width: initial;
+  color: var(--secondary-color);
+  cursor: pointer;
+  display: none;
+  font-size: 1rem;
+  justify-content: center;
+  padding: 0.5rem;
+  position: absolute;
+  top: 32% !important;
+  right: .5rem;
+  transform: translateY(-50%);
+  transition: color 0.2s;
+}
+
+[id^="playlistInputClear_"] {
+  top: 33%;
+}
+
+[id^="playlistSelectClear_"] {
+  top: 14%;
+}
+
+/* claude - Unique J1 VideoPlayer #4: #playlistSearchClear → [id^="playlistSearchClear_"]
+   (element id is now player-scoped: playlistSearchClear_<playerID>)              */
+[id^="playlistSearchClear_"] {
+  align-items: center;
+  background: transparent;
+  border: none;
+  color: var(--secondary-color);
+  cursor: pointer;
+  display: none;
+  font-size: 1rem;
+  justify-content: center;
+  padding: .5rem;
+  position: absolute;
+  right: 7.5rem;
+  top: 33%;
+  transform: translateY(-50%);
+  transition: color .2s ease;
+}
+
+[id^="playlistSearchClear_"]:hover {
+  color: var(--text-color);
+}
+
+/* claude - Unique J1 VideoPlayer #4: #playlistSearchResultCount
+   → [id^="playlistSearchResultCount_"]
+   (element id is now player-scoped: playlistSearchResultCount_<playerID>)        */
+[id^="playlistSearchResultCount_"] {
+  align-self: center;
+  color: var(--secondary-color);
+  display: none;
+  font-size: .85rem;
+  margin-left: 1rem;
+  white-space: nowrap;
+}
+
+/* -----------------------------------------------------------------------------
+   Action Buttons: Watch / Export / Import / Delete
+  ------------------------------------------------------------------------------ */
+
+/* optimize css 2: extracted shared action-button properties
+   into a single base rule; per-button rules now carry only their
+   unique background, color and margin overrides                        */
+.watch-adfree-btn,
+.export-playlist-btn,
+.import-playlist-btn,
+.delete-playlist-btn {
+  border: none;
+  border-radius: 0px;
+  box-shadow: 0 2px 8px var(--shadow-color);
+  flex-shrink: 0;
+  font-size: 1.08rem;
+  font-weight: 600;
+  letter-spacing: .01em;
+  padding: .85rem 2.2rem;
+  min-width: 220px;
+  transition: background .2s, box-shadow .2s, transform .1s;
+}
+
+.watch-adfree-btn:focus,
+.watch-adfree-btn:hover,
+.export-playlist-btn:focus,
+.export-playlist-btn:hover,
+.import-playlist-btn:focus,
+.import-playlist-btn:hover,
+.delete-playlist-btn:focus,
+.delete-playlist-btn:hover {
+  box-shadow: 0 4px 16px var(--shadow-color);
+  outline: none;
+  transform: translateY(-2px) scale(1.03);
+}
+
+/* center buttons below input with top margin instead of left */
+.watch-adfree-btn {
+  background: linear-gradient(90deg, var(--md-green-500), var(--md-green-700));
+  color: #fff;
+  margin-bottom: 0;
+  margin-left: .375rem;
+  margin-right: .375rem;
+  margin-top: .75rem;
+}
+
+.watch-adfree-btn:focus,
+.watch-adfree-btn:hover {
+  background: linear-gradient(90deg, var(--md-green-700), var(--md-green-500));
+  color: #000;
+}
+
+.export-playlist-btn {
+  background: linear-gradient(90deg, var(--md-green-500), var(--md-green-700));
+  color: #000;
+  margin-bottom: .5rem;
+  margin-left: .75rem;
+}
+
+.export-playlist-btn:focus,
+.export-playlist-btn:hover {
+  background: linear-gradient(90deg, var(--md-green-700), var(--md-green-500));
+}
+
+.import-playlist-btn {
+  background: linear-gradient(90deg, var(--md-yellow-500), var(--md-yellow-700));
+  color: #000;
+  margin-bottom: .5rem;
+  margin-left: .75rem;
+}
+
+.import-playlist-btn:focus,
+.import-playlist-btn:hover {
+  background: linear-gradient(90deg, var(--md-yellow-700), var(--md-yellow-500));
+}
+
+.delete-playlist-btn {
+  background: linear-gradient(90deg, var(--md-red-500), var(--md-red-700));
+  color: #000;
+  margin-bottom: .5rem;
+  margin-left: .75rem;
+}
+
+.delete-playlist-btn:focus,
+.delete-playlist-btn:hover {
+  background: linear-gradient(90deg, var(--md-red-700), var(--md-red-500));
+}
+
+/* -----------------------------------------------------------------------------
+   Video Player
+  ------------------------------------------------------------------------------ */
+
+.video-section {
+  margin: 2rem 0;
+  width: 100%;
+}
+
+.video-container {
+  aspect-ratio: 16/9;
+  background-color: var(--card-background);
+  box-shadow: 0 4px 6px var(--shadow-color);
+  max-width: 100vw;
+  /* overflow: hidden; */
+  position: relative;
+  width: 100%;
+}
+
+/* emulate CSS style text-overflow ellipsis */
+.video-title {
+  -webkit-box-orient: vertical;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  line-clamp: 1;
+  overflow: hidden;
+}
+
+.empty-player-overlay {
+  align-items: center;
+  background: var(--bs-gray-100);
+  /* border: 2px dashed var(--bs-gray-400) !important; */
+  bottom: 0;
+  box-shadow: 0 4px 6px var(--shadow-color);
+  display: flex;
+  flex: 1 1 0%;
+  justify-content: center;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  transition: 0.3s;
+  z-index: 5;
+}
+
+.empty-player-content {
+  max-width: 108%;
+}
+
+/* promo image/size: scale down to 368x92 on small devices (< 576px) */
+@media (max-width: 575.98px) {
+  .empty-player-content img {
+  height: 92px;
+  width: 368px;
+}
+}
+
+/* -----------------------------------------------------------------------------
+   Shared Card Base
+  ------------------------------------------------------------------------------ */
+
+.card-base {
+  background: var(--card-background);
+  border: 1px solid var(--border-color);
+  transition: transform .3s ease, background-color .3s ease;
+}
+
+/* claude - Modify J1 VideoPlayer #22
+   Active-item indicator. The playlist card/row whose video is currently in
+   the 'playing' state is flipped to data-item-active="true" by videoPlayer.js
+   (setActiveItem / inline render). Give it a thin 2px blue border so the
+   now-playing entry stands out from the 1px neutral border of inactive
+   entries. The class+attribute selector (specificity 0,2,0) overrides the
+   base 1px border on .card-base / .playlist-card / .playlist-row (0,1,0)
+   without needing !important. border-color is animated via the existing
+   transition on those base rules.
+*/
+.playlist-card[data-item-active="true"],
+.playlist-row[data-item-active="true"] {
+  border: 2px solid var(--item-active-border-color);
+}
+
+/* -----------------------------------------------------------------------------
+   Playlist Lists
+  ------------------------------------------------------------------------------ */
+
+/*
+.playlist {
+  gap: .25rem;
+  padding-top: .5rem;
+}
+*/
+
+.playlist.list-mode {
+  display: flex !important;
+  flex-direction: column;
+  grid-template-columns: none !important;
+}
+
+/* claude - Modify J1 VideoPlayer #51
+   Card-mode column count is data-driven.
+
+   The number of cards shown per row comes from the module configuration
+   (videoPlayer.yml -> playlist.cards.perRow, overridable per player in
+   videoPlayer_control.yml). videoPlayer.js (_applyCardsPerRow) resolves the
+   effective value for each player instance and writes it onto that player's
+   top-level container div#videoplayer_playlist_parent_<player.id> as inline
+   declarations:
+
+     <div id="videoplayer_playlist_parent_player_1"
+          class="playlist card-mode"
+          style="--playlist-cards-per-row: 4; grid-template-columns: repeat(4, 1fr);">
+
+   The custom property is read by the repeat() below; the inline longhand is
+   written in addition so a cached, pre-#51 copy of this stylesheet still
+   yields the configured column count. Both are element-attached (inline), so
+   they override this rule but NOT the `!important` declarations in
+   `.playlist.list-mode` and in the ≤991.98px media query further down — list
+   mode and small screens keep their forced layout.
+
+   The fallback value 2 in var(..., 2) reproduces the previous hard-wired
+   behaviour whenever perRow is absent or the container carries no inline style
+   (e.g. before the first render).
+
+   Original (deprecated, preserved for reference):
+     .playlist.card-mode {
+       display: grid;
+       grid-template-columns: repeat(2, 1fr);
+     }
+*/
+.playlist.card-mode {
+  display: grid;
+  grid-template-columns: repeat(var(--playlist-cards-per-row, 2), 1fr);
+}
+
+.playlist_screen {
+  padding-right: 0.5rem;
+  padding-left: 0.5rem;
+  max-height: 685px;
+  overflow-y: scroll;
+}
+
+/* media breakpoint cards perRow */
+/* Medium devices (tablets, less than 992px) */
+@media (max-width: 991.98px) {
+  /* claude - Modify J1 VideoPlayer #51
+     Keep `!important` here. It is what makes this responsive override outrank
+     the inline `grid-template-columns` that _applyCardsPerRow() writes onto
+     div#videoplayer_playlist_parent_<player.id>. Without it a configured
+     perRow of 3 or 4 would squeeze that many cards into a phone/tablet width.
+     Overriding the longhand (rather than the --playlist-cards-per-row custom
+     property) covers both write paths of #51 in one declaration. */
+  .playlist.card-mode {
+  grid-template-columns: repeat(1, 1fr) !important;
+}
+
+  /* claude - Unique J1 VideoPlayer #4: #playlistModeSwitch is dynamically created by
+     playlistModeSwitchHandler in videoPlayer.js using a bare (non-player-scoped) id.
+     The selector is intentionally kept as a plain ID until the JS is also updated. */
+  #playlistModeSwitch {
+  display: none !important;
+}
+}
+
+/* -----------------------------------------------------------------------------
+   Shared Thumbnail & Text Truncation
+  ------------------------------------------------------------------------------ */
+
+.playlist-thumb-wrapper,
+.playlist-row .playlist-thumb-wrapper {
+  aspect-ratio: 16/9;
+  background: #000;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+}
+
+.playlist-thumb,
+.playlist-row .playlist-thumb {
+  display: block;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition: transform .3s ease;
+  width: 100%;
+}
+
+.playlist-title,
+.playlist-author,
+.playlist-author-row,
+.playlist-row .playlist-title .playlist-url {
+  -webkit-box-orient: vertical;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  line-clamp: 1;
+  overflow: hidden;
+}
+
+.playlist-play-overlay {
+  align-items: center;
+  backdrop-filter: blur(10px);
+  background: rgba(0,0,0,.549);
+  border: 1px solid #ffffff23;
+  border-radius: 50%;
+  box-shadow: 0 10px 30px rgba(0,0,0,.2);
+  color: #fff;
+  cursor: pointer;
+  display: flex;
+  font-size: 20px;
+  height: 60px;
+  justify-content: center;
+  left: 50%;
+  opacity: 0;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  transition: opacity .3s ease;
+  width: 60px;
+}
+
+.playlist-thumb-wrapper:hover {
+  transform: none;
+}
+
+.playlist-thumb-wrapper:hover .playlist-play-overlay {
+  opacity: 1;
+}
+
+/* -----------------------------------------------------------------------------
+   Playlist Badges & Duration
+  ------------------------------------------------------------------------------ */
+
+.featured-badge,
+.playlist-duration,
+.playlist-badge-overlay {
+  backdrop-filter: blur(5px);
+  bottom: 8px;
+  color: #fff;
+  font-family: Segoe UI, Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.2;
+  position: absolute;
+  z-index: 2;
+}
+
+.playlist-duration,
+.playlist-badge-overlay {
+  background: rgba(0,0,0,.8);
+  border-radius: 3px;
+  font-size: 12px;
+  font-weight: 500;
+  padding: 2px 6px;
+  right: 8px;
+}
+
+/* duration info, position duration badge top-left */
+.playlist-duration {
+  bottom: auto;
+  left: 8px;
+  right: auto;
+  top: 8px;
+}
+
+/* rating info, position rating badge top-right */
+.playlist-rating {
+  backdrop-filter: blur(5px);
+  border-radius: 3px;
+  color: #f5c518;
+  font-size: 11px;
+  letter-spacing: 1px;
+  line-height: 1.2;
+  position: absolute;
+  right: 8px;
+  top: 8px;
+  z-index: 2;
+}
+
+/* -----------------------------------------------------------------------------
+   Playlist Card (Grid View)
+  ------------------------------------------------------------------------------ */
+
+.playlist-card {
+  background: var(--card-background);
+  border: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  height: auto;
+  margin-bottom: .75rem;
+  overflow: hidden;
+  transition: all .3s ease;
+}
+
+.playlist-info {
+  display: flex;
+  flex-direction: column;
+  height: auto;
+  justify-content: space-between;
+  padding: 12px;
+}
+
+.playlist-title {
+  color: var(--text-primary);
+  font-size: 1.0rem;
+  font-weight: 600;
+  line-height: 1.2;
+  margin-bottom: 12px;
+}
+
+.playlist-author {
+  color: var(--secondary-color);
+  font-size: .85rem;
+  line-height: 1.3;
+  margin-bottom: 4px;
+  word-break: break-word;
+}
+
+.playlist-time-info {
+  color: var(--secondary-color);
+  font-size: .85rem;
+  line-height: 1.3;
+  margin-bottom: 2px;
+  word-break: break-word;
+}
+
+.playlist-card-actions {
+  border-top: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  justify-content: space-evenly;
+  margin-top: 12px;
+  padding-top: 8px;
+}
+
+.playlist-btn {
+  align-items: center;
+  background: var(--bg-secondary);
+  border: none;
+  border-radius: 8px;
+  box-shadow: none;
+  color: var(--secondary-color);
+  cursor: pointer;
+  display: inline-flex;
+  font-size: 1rem;
+  height: 32px;
+  justify-content: center;
+  margin: 0 2px;
+  outline: none;
+  transition: all .3s ease;
+  width: 32px;
+}
+
+.playlist-btn:hover {
+  background: var(--bs-primary);
+  border-color: var(--bs-primary);
+  box-shadow: 0 4px 8px rgba(0,0,0,.1);
+  color: #fff;
+  outline: none;
+  transform: translateY(-2px);
+}
+
+.playlist-btn.rate.rated {
+  color: #f59e0b;
+}
+
+.playlist-btn.rate.rated:hover {
+  color: #fff;
+}
+
+/* claude - Modify J1 VideoPlayer for export #1
+   MEDIA EXPORT: the per-item download button (button.playlist-btn.download)
+   rendered inside div.playlist-row-content (list view) and
+   div.playlist-card-actions (card view).
+
+   The button inherits the complete geometry of .playlist-btn above; only the
+   resting accent colour and the transfer states are declared here.
+   .busy / [disabled] are set by playlistManager.downloadEntry() for the
+   duration of a transfer so a second click cannot start the same download
+   twice.                                                                     */
+.playlist-btn.download {
+  color: var(--md-blue-500, #4caf50);
+}
+
+.playlist-btn.download:hover {
+  color: #fff;
+}
+
+.playlist-btn.busy,
+.playlist-btn[disabled] {
+  cursor: progress;
+  pointer-events: none;
+  transform: none;
+}
+
+.playlist-btn.busy > i {
+  animation: playlist-export-pulse 1s ease-in-out infinite;
+}
+
+/* claude - Modify J1 VideoPlayer for export #1
+   Shared transfer-in-progress animation of both export controls. A pulse
+   (not a spin) — the download glyph is directional and reads as broken when
+   rotated.                                                                   */
+@keyframes playlist-export-pulse {
+  0%   { opacity: 1;   }
+  50%  { opacity: .35; }
+  100% { opacity: 1;   }
+}
+
+/* -----------------------------------------------------------------------------
+   Playlist Row (List / Playlist View)
+  ------------------------------------------------------------------------------ */
+
+.playlist-row {
+  align-items: center;
+  background: var(--card-background);
+  border: 1px solid var(--border-color);
+  cursor: default;
+  display: flex;
+  gap: 16px;
+  overflow: hidden;
+  position: relative;
+  transition: all .3s ease;
+}
+
+.playlist-row-content {
+  align-items: center;
+  display: flex;
+  flex: 1;
+  gap: 16px;
+  min-width: 0;
+}
+
+.playlist-row .playlist-thumb-wrapper {
+  flex-shrink: 0;
+  height: 90px;
+  min-width: 160px;
+  width: 160px;
+}
+
+.playlist-row .playlist-thumb-wrapper:hover .playlist-thumb {
+  transform: scale(1.05);
+}
+
+/* optimize css 2: reduced to override-only — all other
+   properties cascade from the base .playlist-play-overlay rule         */
+.playlist-row .playlist-play-overlay {
+  z-index: 2;
+}
+
+.playlist-row .playlist-title {
+  color: var(--text-primary);
+  font-size: .95rem;
+  font-weight: 600;
+  line-height: 1.4;
+  margin-bottom: 0;
+  margin-top: 8px;
+}
+
+.playlist-row .playlist-url {
+  color: var(--text-primary);
+  font-size: .85rem;
+  line-height: 1.3;
+  margin-bottom: 0;
+  margin-top: 0;
+}
+
+.playlist-row .playlist-author {
+  color: var(--text-primary);
+  font-size: .85rem;
+  line-height: 1.3;
+  margin-bottom: 0;
+  margin-top: 0;
+}
+
+.playlist-row .playlist-duration,
+.playlist-row .playlist-badge-overlay {
+  font-size: 11px;
+  padding: 2px 5px;
+}
+
+.playlist-info-row {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.playlist-author-row {
+  font-size: .85rem;
+}
+
+.playlist-author-row,
+.playlist-duration-row {
+  color: var(--secondary-color);
+  line-height: 1.3;
+}
+
+.playlist-playlist-actions {
+  align-items: center;
+  display: flex;
+  flex-shrink: 0;
+  gap: 8px;
+  justify-content: flex-end;
+}
+
+/* optimize css 2: merged identical .drag-handle and
+   .playlist-row-action-delete into a single rule                       */
+.drag-handle,
+.playlist-row-action-delete {
+  align-items: center;
+  color: var(--secondary-color);
+  cursor: grab;
+  display: flex;
+  flex-shrink: 0;
+  height: 32px;
+  justify-content: center;
+  transition: color .2s ease;
+  width: 32px;
+}
+
+/* -----------------------------------------------------------------------------
+   Playlist Manager
+  ------------------------------------------------------------------------------ */
+
+.playlist-block-title {
+  align-items: center;
+  display: flex;
+  font-size: 1.125rem;
+  font-weight: 500;
+  line-height: 1.25;
+  margin-bottom: 0.5rem;
+  text-align: left;
+  text-rendering: optimizeLegibility;
+}
+
+/* claude - Modify J1 VideoPlayer for export #1
+   MEDIA EXPORT: the playlist-level export button
+   (button.playlist-download-all-btn, id playlistDownloadAllButton_<playerId>)
+   created by playlistDownloadAllHandler inside div.playlist-block-title.
+
+   Styled after .playlist-sort-select — the other dynamically created control
+   of that bar — so the title bar keeps one visual language. Deliberately NO
+   'margin-left: auto': the sort select owns that rule and must stay flush
+   right; this button is inserted before it and groups with the mode/merge
+   switches on the left.                                                      */
+.playlist-download-all-btn {
+  align-items: center;
+  background: var(--card-background);
+  border: 1px solid var(--border-color);
+  border-radius: 0px;
+  color: var(--secondary-color);
+  cursor: pointer;
+  display: inline-flex;
+  font-size: .8rem;
+  gap: .35rem;
+  margin-left: 1rem;
+  padding: .25rem .5rem;
+  transition: border-color .2s, box-shadow .2s, color .2s;
+  white-space: nowrap;
+}
+
+.playlist-download-all-btn:hover,
+.playlist-download-all-btn:focus {
+  border-color: var(--bs-primary, #2196F3);
+  box-shadow: 0 0 0 2px rgba(33, 150, 243, 0.15);
+  color: var(--text-color);
+  outline: none;
+}
+
+.playlist-download-all-btn.busy,
+.playlist-download-all-btn[disabled] {
+  cursor: progress;
+  pointer-events: none;
+}
+
+.playlist-download-all-btn.busy > i {
+  animation: playlist-export-pulse 1s ease-in-out infinite;
+}
+
+/* claude - Modify J1 VideoPlayer for export #2
+   -----------------------------------------------------------------------------
+   EXPORT PROGRESS NOTIFICATIONS (toasts)
+
+   Styles for the toast stack raised by the media export (see the EXPORT
+   PROGRESS NOTIFICATIONS section in videoPlayer.js). Geometry, transition and
+   the three accent colours are taken from the Toast styles of claudeAI.css so
+   both modules look identical on a page that hosts them together.
+
+   Two selector rules make the coexistence safe:
+
+   1. The CONTAINER is addressed as '#videoplayer_toast_container' — an id
+      selector, so these rules win over the plain '.toast-container' rule of
+      claudeAI.css no matter which stylesheet the page loads last. They apply
+      ONLY to the container this module creates; when the page already carries
+      claudeAI's '#toastContainer', that element is reused as-is and keeps its
+      own positioning (the player adds no rule for it).
+   2. Every TOAST additionally carries the class '.videoplayer-toast', so the
+      player's toasts are styled even on a page that loads no claudeAI.css at
+      all — the module stays self-contained.
+
+   The container is created on the fly and appended to <body>; it is a pure
+   overlay (position: fixed) and never participates in the player layout.
+   'pointer-events: none' on the stack keeps the overlay from swallowing clicks
+   on the playlist underneath — the toasts are purely informational and carry
+   no controls.
+   ----------------------------------------------------------------------------- */
+#videoplayer_toast_container.toast-container {
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+  max-width: min(24rem, calc(100vw - 2rem));
+  pointer-events: none;
+  position: fixed;
+  right: 1rem;
+  top: 5rem;
+  z-index: 9999;
+}
+
+.videoplayer-toast {
+  align-items: center;
+  background: var(--card-background, #ffffff);
+  border: 1px solid var(--border-color, #d2d2d7);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, .12);
+  color: var(--text-color, #1d1d1f);
+  display: flex;
+  font-size: .85rem;
+  gap: .6rem;
+  line-height: 1.35;
+  padding: .75rem .75rem;
+  pointer-events: auto;
+  transform: translateX(120%);
+  transition: transform .3s ease;
+}
+
+.videoplayer-toast.show {
+  transform: translateX(0);
+}
+
+/* Accent colours per message type — same three cases as claudeAI.css
+   (.toast.success / .toast.error / .toast.info).                             */
+.videoplayer-toast.success {
+  border-left: 4px solid var(--md-green-500, #4caf50);
+}
+
+.videoplayer-toast.error {
+  border-left: 4px solid var(--md-red-500, #f44336);
+}
+
+.videoplayer-toast.info {
+  border-left: 4px solid var(--md-blue-500, #2196f3);
+}
+
+/* The icon keeps the accent colour of its toast type, the text stays neutral
+   so long file names remain readable.                                        */
+.videoplayer-toast-icon {
+  flex-shrink: 0;
+  font-size: 1rem;
+}
+
+.videoplayer-toast.success .videoplayer-toast-icon {
+  color: var(--md-green-500, #4caf50);
+}
+
+.videoplayer-toast.error .videoplayer-toast-icon {
+  color: var(--md-red-500, #f44336);
+}
+
+.videoplayer-toast.info .videoplayer-toast-icon {
+  color: var(--md-blue-500, #2196f3);
+}
+
+/* overflow-wrap: playlist titles can be one long unbroken string; without it
+   a single title would widen the toast beyond the viewport.                  */
+.videoplayer-toast-text {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+/* claude - Modify J1 VideoPlayer for export #2
+   On small screens the stack spans the full width below the top bar instead of
+   floating as a narrow column at the right edge.                             */
+@media (max-width: 576px) {
+  #videoplayer_toast_container.toast-container {
+    left: .75rem;
+    max-width: none;
+    right: .75rem;
+    top: 4.5rem;
+  }
+}
+
+/* claude - Modify J1 VideoPlayer for export #2
+   Respect a reduced-motion preference: the toast still appears and disappears,
+   it just does not slide in.                                                 */
+@media (prefers-reduced-motion: reduce) {
+  .videoplayer-toast {
+    transform: none;
+    transition: none;
+  }
+
+  .videoplayer-toast.show {
+    transform: none;
+  }
+}
+
+.playlist-sort-select {
+  appearance: auto;
+  background: var(--card-background);
+  border: 1px solid var(--border-color);
+  border-radius: 0px;
+  color: var(--secondary-color);
+  cursor: pointer;
+  font-size: .8rem;
+  margin-left: auto;
+  padding: .25rem .5rem;
+  transition: border-color .2s, box-shadow .2s;
+}
+
+.playlist-sort-select:focus {
+  border-color: var(--bs-primary, #2196F3);
+  box-shadow: 0 0 0 2px rgba(33, 150, 243, 0.15);
+  outline: none;
+}
+
+.playlist-sort-select:hover {
+  border-color: var(--bs-primary, #2196F3);
+}
+
+.playlist-sort-select option[hidden] {
+  display: none;
+}
+
+.playlist-filters {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.playlist-filters input, .playlist-filters select {
+  background: var(--card-background);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  color: var(--text-color);
+  padding: 0.5rem;
+}
+
+.playlist-info-link {
+  border-bottom: none;
+  margin-left: 0.5rem;
+}
+
+/* claude - Unique J1 VideoPlayer #4: #playlistModeSwitch is dynamically created by
+   playlistModeSwitchHandler in videoPlayer.js using a bare (non-player-scoped) id.
+   The selector is intentionally kept as a plain ID until the JS is also updated.  */
+#playlistModeSwitch {
+  margin-left: 1rem;
+}
+
+/* -----------------------------------------------------------------------------
+   Playlist Search Input
+  ------------------------------------------------------------------------------ */
+
+/* claude - Unique J1 VideoPlayer #4: #playlistSearchWrapper rules removed.
+   No element with id="playlistSearchWrapper" (or any player-scoped variant)
+   exists in videoPlayer.html or is created by videoPlayer.js.
+   The playlist search input (.input-container inside #playlist_screen_<id>)
+   is already covered by the generic .input-container rules above.               */
+
+/* -----------------------------------------------------------------------------
+   Rating Modal & Stars
+  ------------------------------------------------------------------------------ */
+
+.rating-stars {
+  display: inline-flex;
+  gap: .5rem;
+  user-select: none;
+}
+
+.rating-star {
+  color: var(--border-color);
+  cursor: pointer;
+  font-size: 2rem;
+  transition: color .2s ease, transform .15s ease;
+}
+
+.rating-star:hover,
+.rating-star.hover {
+  color: #facc15;
+  transform: scale(1.15);
+}
+
+.rating-star.active {
+  color: #f59e0b;
+}
+
+.rating-star.active.hover {
+  color: #facc15;
+}
+
+.rating-modal-btn {
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: .95rem;
+  font-weight: 500;
+  padding: .6rem 1.5rem;
+  transition: all .2s ease;
+}
+
+.rating-modal-btn-primary {
+  background: linear-gradient(90deg, var(--md-green-500), var(--md-green-700));
+  color: #fff;
+}
+
+.rating-modal-btn-primary:hover {
+  background: linear-gradient(90deg, var(--md-green-700), var(--md-green-500));
+  box-shadow: 0 2px 8px var(--shadow-color);
+  color: #000;
+}
+
+.rating-modal-btn-secondary {
+  background: var(--card-background);
+  border: 1px solid var(--border-color);
+  color: var(--text-color);
+}
+
+.rating-modal-btn-secondary:hover {
+  background: var(--bs-gray-100, #f3f3f3);
+  box-shadow: 0 2px 8px var(--shadow-color);
+}
+
+.rating-modal-btn-warning {
+  background: linear-gradient(90deg, var(--md-red-500, #f44336), var(--md-red-700, #d32f2f));
+  color: #fff;
+}
+
+.rating-modal-btn-warning:hover {
+  background: linear-gradient(90deg, var(--md-red-700, #d32f2f), var(--md-red-500, #f44336));
+  box-shadow: 0 2px 8px var(--shadow-color);
+  color: #000;
+}
+
+/* -----------------------------------------------------------------------------
+   Bootstrap (BS) Modals: Rating
+  ------------------------------------------------------------------------------ */
+
+#ratingVideoTitle {
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.3;
+  margin-bottom: 0.25rem;
+}
+
+#ratingVideoAuthor {
+  color: var(--secondary-color);
+  font-size: 0.85rem;
+  margin-bottom: 0;
+}
+
+.rating-dialog {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.rating-dialog-label {
+  color: var(--secondary-color);
+  font-size: 0.85rem;
+  margin-top: 0.5rem;
+  min-height: 1.2em;
+}
+
+.rating-modal-footer {
+  display: flex;
+  gap: 0.75rem;
+  justify-content: flex-end;
+  border-top: 1px solid #e0e0e0 !important;
+}
+
+/* -----------------------------------------------------------------------------
+   Bootstrap (BS) Modals: Edit
+  ------------------------------------------------------------------------------ */
+
+#editVideoTitle {
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.3;
+  margin-bottom: 0.25rem;
+}
+
+#editVideoAuthor {
+  color: var(--secondary-color);
+  font-size: 0.85rem;
+  margin-bottom: 0;
+}
+
+.edit-dialog {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.edit-field-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.edit-field-label {
+  color: var(--secondary-color);
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.edit-field-input {
+  background: var(--card-background);
+  border: 1px solid var(--border-color);
+  border-radius: 0px;
+  color: var(--text-color);
+  font-size: 0.85rem !important;
+  padding: 0.5rem 0.75rem;
+  transition: border-color 0.2s ease;
+  width: 100%;
+}
+
+.edit-field-input:focus {
+  border-color: var(--bs-primary, #2196F3);
+  box-shadow: 0 0 0 2px rgba(33, 150, 243, 0.15);
+  outline: none;
+}
+
+.edit-field-input::placeholder {
+  color: var(--secondary-color);
+  opacity: 0.6;
+}
+
+/* claude - Modify J1 VideoPlayer expiry date #1
+   -----------------------------------------------------------------------------
+   Expiry Date field (edit dialog)
+
+   The JS companion (_updateExpiryFieldState) publishes the resolved state on
+   the input as data-expiry-state and ALSO writes the matching background as an
+   inline !important style. The inline write is what actually paints the field
+   (an inline !important declaration outranks a stylesheet !important one, and
+   inputValueBackgroundHandler uses inline styles for every input on the page);
+   the rules below supply the border/weight treatment that carries the same
+   signal, plus a safe fallback should the inline write ever be skipped.
+
+     unlimited  empty value, access not time-limited  -> neutral (default)
+     ok         more than 4 weeks left                -> neutral (default)
+     warning    4 weeks or less left                  -> yellow
+     critical   2 weeks or less left                  -> red
+     expired    date reached, playback disabled       -> red, emphasised
+  ------------------------------------------------------------------------------ */
+
+.edit-field-input[data-expiry-state="warning"] {
+  background-color: var(--expiry-warning-background) !important;
+  border-color: var(--expiry-warning-background);
+  color: var(--expiry-warning-color) !important;
+}
+
+.edit-field-input[data-expiry-state="critical"],
+.edit-field-input[data-expiry-state="expired"] {
+  background-color: var(--expiry-critical-background) !important;
+  border-color: var(--expiry-critical-background);
+  color: var(--expiry-critical-color) !important;
+}
+
+.edit-field-input[data-expiry-state="expired"] {
+  font-weight: 600;
+}
+
+.edit-field-hint {
+  color: var(--secondary-color);
+  display: block;
+  font-size: 0.75rem;
+  line-height: 1.3;
+  margin-top: 0.15rem;
+}
+
+.edit-field-hint[data-expiry-state="warning"] {
+  color: #8a6d00;
+}
+
+.edit-field-hint[data-expiry-state="critical"],
+.edit-field-hint[data-expiry-state="expired"] {
+  color: var(--expiry-critical-background);
+}
+
+.edit-field-hint[data-expiry-state="expired"] {
+  font-weight: 600;
+}
+
+/* claude - Modify J1 VideoPlayer expiry date #2
+   -----------------------------------------------------------------------------
+   Expiry Notice modal (blocked playback)
+
+   The JS companion (_showExpiryNotice -> _createExpiryModal) generates a
+   dialog that copies the class contract of the J1 side/danger notice
+   (.modal.right > .modal-dialog.modal-side.modal-bottom-right.modal-notify
+   .modal-danger). On a theme that ships those classes the dialog is painted by
+   the theme and the rules below add nothing but the small content details
+   (icon / badge / hint colouring).
+
+   Every rule is scoped to #videoPlayerExpiryModal - the id this module creates
+   - so nothing here can reach the theme's own modals, the edit dialog or the
+   rating dialog. The FALLBACK block further down only takes effect when the
+   theme does NOT position .modal-side itself; it re-creates the
+   bottom-right side placement so the notice is never rendered as an unstyled
+   full-width dialog.
+
+   Colours are the ones fix #1 already introduced (--expiry-critical-*), so
+   the field colouring in the edit dialog and this notice always agree.
+  ------------------------------------------------------------------------------ */
+
+#videoPlayerExpiryModal .videoplayer-expiry-modal-icon {
+  color: var(--expiry-critical-background);
+}
+
+#videoPlayerExpiryModal .videoplayer-expiry-modal-text {
+  margin-bottom: 0.35rem;
+}
+
+#videoPlayerExpiryModal .videoplayer-expiry-modal-title {
+  font-weight: 600;
+  margin-bottom: 0.2rem;
+  overflow-wrap: anywhere;
+}
+
+#videoPlayerExpiryModal .videoplayer-expiry-modal-hint {
+  color: var(--expiry-critical-background);
+  font-size: 0.8rem;
+  margin-bottom: 0.5rem;
+}
+
+#videoPlayerExpiryModal .videoplayer-expiry-modal-badge {
+  background-color: var(--expiry-critical-background);
+  color: var(--expiry-critical-color);
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 0.35em 0.65em;
+}
+
+#videoPlayerExpiryModal h2.notoc {
+  margin: 0;
+}
+
+/* claude - Modify J1 VideoPlayer expiry date #2
+   Fallback placement. Applied ONLY when the host theme does not implement
+   .modal-side / .modal-bottom-right itself: a theme that does will position
+   .modal-dialog with its own, later or more specific rule and simply wins.
+   Kept deliberately minimal - placement and width only, no colours - so a
+   themed page never sees a visual conflict. */
+@media (min-width: 576px) {
+  #videoPlayerExpiryModal .modal-dialog.modal-side.modal-bottom-right {
+    bottom: 10px;
+    margin: 0;
+    max-width: 400px;
+    position: fixed;
+    right: 10px;
+    width: 90%;
+  }
+}
+
+/* -----------------------------------------------------------------------------
+   Footer / Branding
+  ------------------------------------------------------------------------------ */
+
+.powered-by {
+  background-color: var(--bs-primary);
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+  margin-bottom: 3rem !important;
+  padding: 4px 8px;
+}

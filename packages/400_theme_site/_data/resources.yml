@@ -1654,14 +1654,14 @@ resources:
         init_function:                  [ j1.adapter.audioPlayer.init ]
 
   # ----------------------------------------------------------------------------
-  # VideoPlayer
+  # MultiPlayer
   #
-  - name:                               J1 VideoPlayer
+  - name:                               J1 multiPlayer
     resource:
       enabled:                          true
 
-      id:                               videoPlayer
-      comment:                          Module videoPlayer
+      id:                               multiPlayer
+      comment:                          Module multiPlayer
       region:                           head
       layout:                           [ page ]
       required:                         ondemand
@@ -1670,13 +1670,13 @@ resources:
       pass_init_data:                   false
 
       data:
-        css:                            [ modules/videoPlayer/css/videoPlayer ]
-        js:                             [ modules/videoPlayer/js/videoPlayer ]
+        css:                            [ modules/multiPlayer/css/player ]
+        js:                             [ modules/multiPlayer/js/player ]
         files:                          [
-                                          adapter/js/videoPlayer.js,
-                                          modules/videoPlayer/js/playlistCards.mjs
+                                          adapter/js/multiPlayer.js,
+                                          modules/multiPlayer/js/playlistCards.mjs
                                         ]
-        init_function:                  [ j1.adapter.videoPlayer.init ]
+        init_function:                  [ j1.adapter.multiPlayer.init ]
 
   # ----------------------------------------------------------------------------
   # Speak2Me

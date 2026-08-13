@@ -7,7 +7,7 @@ regenerate:                             true
 {% comment %}
  # -----------------------------------------------------------------------------
  # ~/assets/theme/j1/modules/amplitudejs/js/tech/ytp.js (46)
- # AmplitudeJS V5 Tech for J1 Template (AI optimized)
+ # AmplitudeJS V5 Tech for J1 Template
  #
  # Product/Info:
  # https://jekyll.one
@@ -85,7 +85,7 @@ regenerate:                             true
 /*
  # -----------------------------------------------------------------------------
  # ~/assets/theme/j1/modules/amplitudejs/js/plugins/tech/ytp.js (46)
- # AmplitudeJS V5 Plugin|Tech for J1 Template (AI optimized)
+ # AmplitudeJS V5 Plugin|Tech for J1 Template
  #
  # Product/Info:
  # https://jekyll.one
@@ -219,7 +219,6 @@ regenerate:                             true
     var amplitudeOptions                = $.extend(true, {}, amplitudeDefaults, amplitudePlayers, amplitudePlaylists);
   {% endcomment %}
 
-
   // MODULE DEFAULTS as rendered at build time. Used as LAST-RESORT fallback
   // only: options.defaults (passed in by the calling module) always wins.
   var ytpModuleDefaults               = $.extend({}, {{amplitude_default  | replace: 'nil', 'null' | replace: '=>', ':' }});
@@ -346,6 +345,7 @@ regenerate:                             true
   //                                              backwards compatibility)
   //   3. build-time module defaults, NO players (last resort; logs an error
   //      because no player can be created without player settings)
+  //
   // ---------------------------------------------------------------------------
   function resolvePluginOptions() {
     var handoff, legacy, options;

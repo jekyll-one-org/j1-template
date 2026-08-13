@@ -1,0 +1,124 @@
+/*
+ # -----------------------------------------------------------------------------
+ # ~/assets/theme/j1/modules/multiPlayer/js/playlistCards.min.mjs
+ # Drop-in Lit web component for J1 Module multiPlayer
+ # Version 3.1.64
+ #
+ # Product/Info:
+ # https://jekyll.one
+ #
+ # Copyright (C) 2026 Juergen Adams
+ #
+ # J1 Template is licensed under the MIT License.
+ # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE
+ # -----------------------------------------------------------------------------
+*/
+
+import{LitElement,html,nothing}from"https://cdn.jsdelivr.net/npm/lit@3/+esm";
+import{repeat}from"https://cdn.jsdelivr.net/npm/lit@3/directives/repeat.js/+esm";
+import{classMap}from"https://cdn.jsdelivr.net/npm/lit@3/directives/class-map.js/+esm";
+
+const DEFAULT_POSTER="/assets/image/icon/videojs/videojs-poster.png",YOUTUBE_POSTER_QUALITY="hqdefault",YOUTUBE_ID_RE=/(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|shorts\/))([A-Za-z0-9_-]{11})/,CARDS_PER_ROW_CSS_VAR="--playlist-cards-per-row",CARDS_PER_ROW_MIN=1,CARDS_PER_ROW_MAX=6,DOWNLOADABLE_EXTENSIONS=Object.freeze(["mp3","mp4"]);export class PlaylistCards extends LitElement{createRenderRoot(){return this}static properties={entries:{attribute:!1},activeVideoId:{attribute:!1},cardsPerRow:{attribute:!1},showRateButton:{attribute:!1},showEditButton:{attribute:!1},showDeleteButton:{attribute:!1},showDownloadButton:{attribute:!1}};constructor(){super(),this.entries=[],this.activeVideoId=null,this.cardsPerRow=null,this.showRateButton=!0,this.showEditButton=!0,this.showDeleteButton=!0,this.showDownloadButton=!0,this._uiFlagsObserver=null}connectedCallback(){super.connectedCallback(),this.style.display="contents",this._applyCardsPerRow(),this._applyUiElementFlags(),this._observeUiElementFlags()}disconnectedCallback(){super.disconnectedCallback(),this._uiFlagsObserver&&(this._uiFlagsObserver.disconnect(),this._uiFlagsObserver=null)}_observeUiElementFlags(){const t=this.closest('[id^="videoplayer_playlist_parent_"]');t&&"undefined"!=typeof MutationObserver&&(this._uiFlagsObserver&&this._uiFlagsObserver.disconnect(),this._uiFlagsObserver=new MutationObserver(()=>this._applyUiElementFlags()),this._uiFlagsObserver.observe(t,{attributes:!0,attributeFilter:["data-playlist-rate-button","data-playlist-edit-button","data-playlist-delete-button","data-playlist-download-button"]}))}_applyUiElementFlags(){const t=this.closest('[id^="videoplayer_playlist_parent_"]');if(!t||!t.dataset)return;const e=t.dataset;void 0!==e.playlistRateButton&&(this.showRateButton="false"!==e.playlistRateButton),void 0!==e.playlistEditButton&&(this.showEditButton="false"!==e.playlistEditButton),void 0!==e.playlistDeleteButton&&(this.showDeleteButton="false"!==e.playlistDeleteButton),void 0!==e.playlistDownloadButton&&(this.showDownloadButton="false"!==e.playlistDownloadButton)}updated(t){super.updated(t),t.has("cardsPerRow")&&this._applyCardsPerRow()}_applyCardsPerRow(){const t=this.parentElement;if(!t||null===this.cardsPerRow||void 0===this.cardsPerRow)return;const e=parseInt(this.cardsPerRow,10);if(!Number.isFinite(e)||e<1)return t.style.removeProperty(CARDS_PER_ROW_CSS_VAR),void t.style.removeProperty("grid-template-columns");const i=Math.min(e,6);t.style.setProperty(CARDS_PER_ROW_CSS_VAR,String(i)),t.style.gridTemplateColumns=`repeat(${i}, 1fr)`}_formatDuration(t){if(!t||t<=0)return"";const e=Math.floor(t/3600),i=Math.floor(t%3600/60),s=Math.floor(t%60);return e>0?`${e}:${String(i).padStart(2,"0")}:${String(s).padStart(2,"0")}`:`${i}:${String(s).padStart(2,"0")}`}_getTimeAgo(t){const e=Date.now()-t.getTime(),i=Math.floor(e/6e4),s=Math.floor(e/36e5),a=Math.floor(e/864e5),o=Math.floor(a/7),l=Math.floor(a/30);return i<1?"Just now":i<60?`${i} minute${i>1?"s":""} ago`:s<24?`${s} hour${s>1?"s":""} ago`:a<7?`${a} day${a>1?"s":""} ago`:o<5?`${o} week${o>1?"s":""} ago`:`${l} month${l>1?"s":""} ago`}_resolvedPoster(t){if(t.poster&&t.poster!==DEFAULT_POSTER)return t.poster;let e=null;if(t.videoId&&/^[A-Za-z0-9_-]{11}$/.test(t.videoId)&&(e=t.videoId),!e){const i=(t.url||t.source||"").match(YOUTUBE_ID_RE);i&&(e=i[1])}return e?`https://img.youtube.com/vi/${e}/hqdefault.jpg`:DEFAULT_POSTER}_isValidUrl(t){if(!t||"string"!=typeof t)return!1;try{const e=new URL(t);return"http:"===e.protocol||"https:"===e.protocol}catch(t){return!1}}_onPlayClick(t,e){t.stopPropagation(),this.dispatchEvent(new CustomEvent("playlist-play",{bubbles:!0,composed:!1,detail:{videoId:e}}))}_onDeleteClick(t,e){t.stopPropagation(),this.dispatchEvent(new CustomEvent("playlist-delete",{bubbles:!0,composed:!1,detail:{videoId:e}}))}_isDownloadable(t){if(!t||"object"!=typeof t)return!1;if(t.type&&"video/youtube"===String(t.type).toLowerCase())return!1;const e=String(t.src||t.videoLink||"").trim();if(!e)return!1;const i=e.toLowerCase();if(-1!==i.indexOf("youtu.be")||-1!==i.indexOf("youtube.com"))return!1;const s=e.split("#")[0].split("?")[0].split(".").pop().toLowerCase();return-1!==DOWNLOADABLE_EXTENSIONS.indexOf(s)}_onDownloadClick(t,e){t.stopPropagation(),t.preventDefault(),this.dispatchEvent(new CustomEvent("playlist-download",{bubbles:!0,composed:!1,detail:{videoId:e}}))}_cardTemplate(t){const e=this._formatDuration(t.duration),i=t.author&&t.author.trim().length>0,s=this._getTimeAgo(new Date(t.watchDate)),a=Number(t.rating)||0,o=a>0,l=this._isValidUrl(t.infoLink),r={"playlist-btn":!0,rate:!0,rated:o},n=!!this.activeVideoId&&t.videoId===this.activeVideoId,d=!1!==this.showRateButton,h=!1!==this.showEditButton,p=!1!==this.showDeleteButton,c=d||h||p,u=!1!==this.showDownloadButton&&this._isDownloadable(t),y=c||u;return html`
+      <!-- claude - Modify J1 VideoPlayer #24
+           data-item-active reflects the now-playing state on the CARD view.
+           Previously the card template emitted no data-item-active attribute,
+           so the active-item marker that #21/#22/#23 wired for the list/row
+           view had no hook here — the indicator did not match the playing
+           video when the playlist was shown via the toggle_playlist button.
+           Bound to the activeVideoId reactive property; setting that property
+           (module renderCards / adapter toggle-open sync) re-renders the marker. -->
+      <div class="playlist-card card-base"
+           data-item-active="${n?"true":"false"}"
+           data-video-id=${t.videoId}>
+
+        <div class="playlist-thumb-wrapper">
+          <!-- Extend J1 VideoPlayer #4
+               Use _resolvedPoster() so that YouTube entries loaded from an
+               existing playlist (where v.poster may be absent or stale) always
+               show hqdefault.jpg. The previous v.poster || DEFAULT_POSTER
+               only worked for newly-added entries; loaded entries showed the
+               generic fallback icon. -->
+          <img class="playlist-thumb"
+               src=${this._resolvedPoster(t)}
+               alt="playlist-thumb">
+          <!-- Fix J1 VideoPlayer #3: @click was missing — overlay did nothing -->
+          <div class="playlist-play-overlay"
+               @click=${e=>this._onPlayClick(e,t.videoId)}>
+            <i class="fas fa-play"></i>
+          </div>
+          ${e?html`<div class="playlist-duration">${e}</div>`:nothing}
+          ${o?html`
+                <div class="playlist-rating">
+                  ${Array.from({length:a},()=>html`<i class="fas fa-star"></i>`)}
+                </div>`:nothing}
+        </div>
+
+        <div class="playlist-info">
+          <div class="playlist-title">
+            ${t.title}
+            ${l?html`
+                  <a class="playlist-info-link"
+                     href=${t.infoLink}
+                     target="_blank"
+                     rel="noopener noreferrer"
+                     title="More info">
+                    <i class="fas fa-info-circle"></i>
+                  </a>`:nothing}
+          </div>
+
+          ${i?html`<div class="playlist-author">${t.author}</div>`:nothing}
+
+          <div class="playlist-time-info">${s}</div>
+
+          ${y?html`
+          <!-- claude - Modify J1 VideoPlayer #52
+               Each card action button is rendered ONLY when its per-player
+               ui_elements flag resolves to true (playlist_rate_button |
+               playlist_edit_button | playlist_delete_button). The wrapper
+               div is skipped entirely when all three are disabled. Hiding a
+               button also removes its click target, so the module-side event
+               delegation (initRateHandler / initEditHandler / delete) is
+               implicitly disabled per player without further changes. -->
+          <div class="playlist-card-actions">
+            <!-- claude - Modify J1 VideoPlayer for export #1
+                 Media export of the underlying plain .mp3/.mp4 file. Rendered
+                 first so its position matches the module's own renderCards()
+                 string template. -->
+            ${u?html`
+            <button class="playlist-btn download"
+                    title="Download this item to your download folder"
+                    aria-label="Download this item"
+                    @click=${e=>this._onDownloadClick(e,t.videoId)}>
+              <i class="fas fa-download"></i>
+            </button>
+            `:nothing}
+            ${d?html`
+            <!-- bs modal: opened programmatically by initRateHandler -->
+            <button class=${classMap(r)}
+                    title=${"Set rating"+(o?` (${a}/5)`:"")}
+                    aria-label="Set rating">
+              <i class="fas fa-star"></i>
+            </button>
+            `:nothing}
+            ${h?html`
+            <button class="playlist-btn edit"
+                    title="Edit item"
+                    aria-label="Edit item">
+              <i class="fas fa-edit"></i>
+            </button>
+            `:nothing}
+            ${p?html`
+            <!-- Fix J1 VideoPlayer #3: @click was missing — delete button did nothing -->
+            <button class="playlist-btn delete"
+                    title="Delete from playlist"
+                    aria-label="Delete from playlist"
+                    @click=${e=>this._onDeleteClick(e,t.videoId)}>
+              <i class="fas fa-trash"></i>
+            </button>
+            `:nothing}
+          </div>
+          `:nothing}
+        </div>
+      </div>
+    `}render(){const t=Array.isArray(this.entries)?this.entries:[];return html`${repeat(t,t=>t.videoId,t=>this._cardTemplate(t))}`}}customElements.define("playlist-cards",PlaylistCards);
+
