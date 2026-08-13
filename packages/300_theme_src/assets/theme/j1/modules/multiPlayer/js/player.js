@@ -115,6 +115,8 @@
   let _sharedInputValueBackgroundHandlerInit = false;
   let _sharedNavbarSmoothScrollHandlerInit   = false;
 
+  let isMP3 = false;
+
   // Registry of live player instances, keyed by instance id ('' = default /
   // legacy single-player instance).
   // VideoPlayer MultiInstance #2
@@ -1985,8 +1987,9 @@
 
     // 3) Extension check against the ONE table. Query string and fragment are
     //    stripped first so '.../clip.mp3?token=x#t=30' still resolves to mp3.
-    const path = url.split('#')[0].split('?')[0];
-    const ext  = path.split('.').pop().toLowerCase();
+    const path  = url.split('#')[0].split('?')[0];
+    const ext   = path.split('.').pop().toLowerCase();
+    isMP3 = (ext === 'mp3') ? true : false;
 
     if (!Object.prototype.hasOwnProperty.call(DOWNLOAD_MIME_BY_EXTENSION, ext)) {
       return null;
@@ -8701,7 +8704,7 @@
             }
           }
 
-          if (piZoomButtons.enabled && !isYouTube) {
+          if (piZoomButtons.enabled && !isYouTube  && !isMP3) {
             // piZoomButtons
             vjsPlayer.zoomButtons({
               moveX:  piZoomButtons.moveX,
