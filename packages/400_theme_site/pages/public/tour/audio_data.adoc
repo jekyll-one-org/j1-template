@@ -105,7 +105,7 @@ audio::/assets/audio/sound-effects/ambient-piano.mp3[role="mt-4 mb-5"]
 
 
 [role="mt-5"]
-== Amplitude player
+== Amplitude players
 
 The J1 Template supports *native audio* files (such as MP3) and uses
 custom players built with *Amplitude*. The default look matches the
@@ -118,16 +118,11 @@ Three sizes of Amplitude players are built in:
 * *Compact* player -- the default size
 * *Large* player -- the biggest size, with all controls visible
 
-[role="mt-4"]
-[NOTE]
-====
-The Amplitude players in the J1 Template work well on mobile devices.
-On phones and tablets, *touch* gestures replace mouse clicks, so the
-players feel natural to use.
-====
+The J1 Amplitude players work well on mobile devices. On phones and tablets,
+*touch* gestures replace mouse clicks, so the players feel natural to use.
 
-[role="mt-5"]
-=== Native player
+[role="mt-4"]
+=== Native players
 
 Native players are the built-in Amplitude players for the J1 Template.
 They do not require plugins to play audio files, such as MP3, and serve
