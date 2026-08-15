@@ -125,8 +125,7 @@ defaults:
   # The default stays EMPTY on purpose: an existing site keeps its current
   # playback behaviour until a fade is asked for explicitly.
   #
-  audioFadeIn:                          ''
-
+  audioFadeIn:                          default
 
   # ----------------------------------------------------------------------------
   # MODULE options

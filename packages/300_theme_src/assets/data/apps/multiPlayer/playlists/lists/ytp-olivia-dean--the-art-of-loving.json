@@ -4,7 +4,7 @@
     "category": "Music",
     "creator": "videoPlayer",
     "description": "Olivia Dean is an English neo-soul and pop singer from London. She became known in 2019 for her own songs. In 2023, she released her first album called \"Messy\". Her international career began in 2026 with the album \"The Art of Loving\".",
-    "duration": 224,
+    "duration": 223,
     "infoLink": "https://youtube.com/playlist?list=PL1dfVf_Yq5rGGTKx4Fi5PwX5TfPBXNP8p",
     "issueDate": "2025-01-01",
     "episode": 1,
@@ -21,7 +21,7 @@
     "type": "video",
     "videoLink": "https://youtu.be/VI0NDsh2b8k",
     "videoId": "VI0NDsh2b8k",
-    "watchDate": "2026-08-15T14:40:08.610Z",
+    "watchDate": "2026-08-15T16:52:19.945Z",
     "src": "",
     "expiryDate": "",
     "startAt": "",
@@ -33,7 +33,7 @@
     "category": "Music",
     "creator": "videoPlayer",
     "description": "Olivia Dean is an English neo-soul and pop singer from London. She became known in 2019 for her own songs. In 2023, she released her first album called \"Messy\". Her international career began in 2026 with the album \"The Art of Loving\".",
-    "duration": 223,
+    "duration": 222,
     "infoLink": "https://youtube.com/playlist?list=PL1dfVf_Yq5rGGTKx4Fi5PwX5TfPBXNP8p",
     "issueDate": "2025-01-01",
     "episode": 2,
@@ -50,12 +50,12 @@
     "type": "video",
     "videoLink": "https://youtu.be/JN_Vyg_wURY",
     "videoId": "JN_Vyg_wURY",
-    "watchDate": "2026-08-15T14:40:11.654Z",
+    "watchDate": "2026-08-15T16:52:56.419Z",
     "src": "",
     "expiryDate": "",
     "startAt": "",
     "endAt": "00:03:28",
-    "audioFadeIn": "slowest"
+    "audioFadeIn": "default"
   },
   {
     "author": "Olivia Dean",
@@ -108,12 +108,12 @@
     "type": "video",
     "videoLink": "https://youtu.be/3sur4BmjQt8",
     "videoId": "3sur4BmjQt8",
-    "watchDate": "2026-08-15T14:36:15.323Z",
+    "watchDate": "2026-08-15T16:50:34.919Z",
     "src": "",
     "expiryDate": "",
     "startAt": "00:00:12",
     "endAt": "00:02:58",
-    "audioFadeIn": "slower"
+    "audioFadeIn": "slowest"
   },
   {
     "author": "Olivia Dean",
@@ -145,11 +145,11 @@
     "audioFadeIn": "default"
   },
   {
-    "author": "Olivia Dean",
+    "author": "OliviaDeanVEVO",
     "category": "Music",
     "creator": "videoPlayer",
     "description": "Olivia Dean is an English neo-soul and pop singer from London. She became known in 2019 for her own songs. In 2023, she released her first album called \"Messy\". Her international career began in 2026 with the album \"The Art of Loving\".",
-    "duration": 202,
+    "duration": 201,
     "infoLink": "https://youtube.com/playlist?list=PL1dfVf_Yq5rGGTKx4Fi5PwX5TfPBXNP8p",
     "issueDate": "2025-01-01",
     "episode": 6,
@@ -166,7 +166,7 @@
     "type": "video",
     "videoLink": "https://youtu.be/oIv_Y2RPQ_A",
     "videoId": "oIv_Y2RPQ_A",
-    "watchDate": "2026-01-01",
+    "watchDate": "2026-08-15T16:50:47.079Z",
     "src": "",
     "expiryDate": "",
     "startAt": "",
@@ -286,7 +286,8 @@
     "src": "",
     "expiryDate": "",
     "startAt": "",
-    "endAt": "00:03:29"
+    "endAt": "00:03:29",
+    "audioFadeIn": "default"
   },
   {
     "author": "Olivia Dean",
