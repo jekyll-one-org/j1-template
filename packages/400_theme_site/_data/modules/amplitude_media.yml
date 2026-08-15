@@ -20,6 +20,35 @@ description:
   location:                             _data/modules/amplitude_media.yml
 
 # ------------------------------------------------------------------------------
+# Claude - Modify Amplitude comfig #1
+#
+# MEDIA REFERENCES (key 'audio')
+#
+# The URL of a title is assembled from the album key 'audio_base' and the
+# item key 'audio'. For LOCAL media files, the reference is the file name:
+#
+#   audio_base:   /assets/audio/album/emancipator
+#   audio:        02_valhalla.mp3
+#
+# For YouTube titles, the reference is the video ID. BOTH formats below are
+# supported, the SIMPLE format is recommended:
+#
+#   audio_base:   //youtube.com
+#   audio:        HPWmY4am2oQ                 # SIMPLE format (recommended)
+#   audio:        watch?v=HPWmY4am2oQ         # LEGACY format (still valid)
+#
+# A YouTube video ID consists of EXACTLY 11 characters out of the alphabet
+# [A-Za-z0-9_-]. Note that an ID may START with a hyphen (e.g. -CQBzanq7dY);
+# a lost leading hyphen makes the YouTube API answer with error 101|150,
+# 'video not allowed'.
+#
+# An ABSOLUTE reference is taken as-is (the audio base is NOT prepended):
+#
+#   audio:        //youtube.com/watch?v=HPWmY4am2oQ
+#
+# ------------------------------------------------------------------------------
+
+# ------------------------------------------------------------------------------
 # User settings
 #
 settings:
@@ -201,11 +230,13 @@ settings:
       items:
 
         # title 01
+        # Claude - Modify Amplitude comfig #1
         - item:
           enabled:                      true
           <<:                           *album_dusk_to_dawn_yt
           title:                        Valhalla
-          audio:                        watch?v=HPWmY4am2oQ
+          audio:                        watch?v=HPWmY4am2oQ  # deprecated format
+#         audio:                        HPWmY4am2oQ          # new format  
           rating:                       3
           start:                        ""
           end:                          ""
@@ -217,7 +248,7 @@ settings:
           enabled:                      true
           <<:                           *album_dusk_to_dawn_yt
           title:                        Merlion
-          audio:                        watch?v=frW-hytn9Gw
+          audio:                        frW-hytn9Gw
           rating:                       3
           start:                        ""
           end:                          ""
@@ -229,7 +260,7 @@ settings:
           enabled:                      true
           <<:                           *album_dusk_to_dawn_yt
           title:                        Outlaw
-          audio:                        watch?v=lw9FPq1d_-g
+          audio:                        lw9FPq1d_-g
           rating:                       3
           start:                        ""
           end:                          ""
@@ -241,7 +272,7 @@ settings:
           enabled:                      true
           <<:                           *album_dusk_to_dawn_yt
           title:                        Dusk to Dawn
-          audio:                        watch?v=-CQBzanq7dY
+          audio:                        -CQBzanq7dY
           rating:                       3
           start:                        ""
           end:                          ""
@@ -253,7 +284,7 @@ settings:
           enabled:                      true
           <<:                           *album_dusk_to_dawn_yt
           title:                        The Way
-          audio:                        watch?v=t2RshUUwGK8
+          audio:                        t2RshUUwGK8
           rating:                       3
           start:                        ""
           end:                          ""
@@ -265,7 +296,7 @@ settings:
           enabled:                      true
           <<:                           *album_dusk_to_dawn_yt
           title:                        Afterglow
-          audio:                        watch?v=2arhQ8tcbS8
+          audio:                        2arhQ8tcbS8
           rating:                       3
           start:                        ""
           end:                          ""
@@ -277,7 +308,7 @@ settings:
           enabled:                      true
           <<:                           *album_dusk_to_dawn_yt
           title:                        Eve II
-          audio:                        watch?v=9yROGU01Lhw
+          audio:                        9yROGU01Lhw
           rating:                       3
           start:                        ""
           end:                          ""
@@ -289,7 +320,7 @@ settings:
           enabled:                      true
           <<:                           *album_dusk_to_dawn_yt
           title:                        Natural Cause
-          audio:                        watch?v=pKoILO-9UW8
+          audio:                        pKoILO-9UW8
           rating:                       3
           start:                        ""
           end:                          ""
@@ -301,7 +332,7 @@ settings:
           enabled:                      true
           <<:                           *album_dusk_to_dawn_yt
           title:                        Galapagos
-          audio:                        watch?v=X3F1-kXg83U
+          audio:                        X3F1-kXg83U
           rating:                       3
           start:                        ""
           end:                          ""
@@ -349,7 +380,7 @@ settings:
           enabled:                      true
           <<:                           *album_olivia_dean_yt
           title:                        Nice To Each Other
-          audio:                        watch?v=VI0NDsh2b8k
+          audio:                        VI0NDsh2b8k
           rating:                       3
           start:                        "00:00:01"                              # false | timestamp
           end:                          "00:03:30"                              # false | timestamp
@@ -362,7 +393,7 @@ settings:
           enabled:                      true
           <<:                           *album_olivia_dean_yt
           title:                        Lady Lady
-          audio:                        watch?v=JN_Vyg_wURY
+          audio:                        JN_Vyg_wURY
           rating:                       3
           start:                        "00:00:01"
           end:                          "00:03:29"
@@ -375,7 +406,7 @@ settings:
           enabled:                      true
           <<:                           *album_olivia_dean_yt
           title:                        Close Up
-          audio:                        watch?v=YFSEc_cANhw
+          audio:                        YFSEc_cANhw
           rating:                       3
           start:                        "00:00:01"
           end:                          "00:03:10"
@@ -388,7 +419,7 @@ settings:
           enabled:                      true
           <<:                           *album_olivia_dean_yt
           title:                        So Easy (To Fall In Love)
-          audio:                        watch?v=3sur4BmjQt8
+          audio:                        3sur4BmjQt8
           rating:                       3
           start:                        "00:00:10"
           end:                          "00:02:58"
@@ -401,7 +432,7 @@ settings:
           enabled:                      true
           <<:                           *album_olivia_dean_yt
           title:                        Let Alone The One You Love
-          audio:                        watch?v=uxIjDwmc3uU
+          audio:                        uxIjDwmc3uU
           rating:                       3
           start:                        "00:00:1"
           end:                          "00:03:30"
@@ -414,7 +445,7 @@ settings:
           enabled:                      true
           <<:                           *album_olivia_dean_yt
           title:                        Man I Need
-          audio:                        watch?v=oIv_Y2RPQ_A
+          audio:                        oIv_Y2RPQ_A
           rating:                       3
           start:                        "00:00:02"
           end:                          "00:03:06"
@@ -427,7 +458,7 @@ settings:
           enabled:                      true
           <<:                           *album_olivia_dean_yt
           title:                        Something Inbetween
-          audio:                        watch?v=DXt6EGHFkWc
+          audio:                        DXt6EGHFkWc
           rating:                       3
           start:                        "00:00:03"
           end:                          "00:03:30"
@@ -440,7 +471,7 @@ settings:
           enabled:                      true
           <<:                           *album_olivia_dean_yt
           title:                        Loud
-          audio:                        watch?v=paKBrvjuemo
+          audio:                        paKBrvjuemo
           rating:                       3
           start:                        "00:00:01"
           end:                          "00:03:01"
@@ -453,7 +484,7 @@ settings:
           enabled:                      true
           <<:                           *album_olivia_dean_yt
           title:                        Baby Steps
-          audio:                        watch?v=6kLEQi0u5rA
+          audio:                        6kLEQi0u5rA
           rating:                       3
           start:                        "00:00:02"
           end:                          "00:03:14"
@@ -466,7 +497,7 @@ settings:
           enabled:                      true
           <<:                           *album_olivia_dean_yt
           title:                        A Couple Minutes
-          audio:                        watch?v=lrS1LC2cu-U
+          audio:                        lrS1LC2cu-U
           rating:                       3
           start:                        false
           end:                          false
@@ -479,7 +510,7 @@ settings:
           enabled:                      true
           <<:                           *album_olivia_dean_yt
           title:                        I've Seen It
-          audio:                        watch?v=_hgu16lRfbQ
+          audio:                        _hgu16lRfbQ
           rating:                       3
           start:                        "00:00:01"
           end:                          "00:02:04"
@@ -492,7 +523,7 @@ settings:
           enabled:                      true
           <<:                           *album_olivia_dean_yt
           title:                        Man I Need (Live)
-          audio:                        watch?v=JUGCQK8dUhc
+          audio:                        JUGCQK8dUhc
           rating:                       3
           start:                        "00:00:01"
           end:                          "00:02:03"

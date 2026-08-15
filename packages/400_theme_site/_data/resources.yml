@@ -1401,38 +1401,12 @@ resources:
         js:                             [ modules/slimSelect/js/select ]
         init_function:                  [ j1.adapter.slimSelect.init ]
 
-  # # ----------------------------------------------------------------------------
-  # # AmplitudeJS
-  # #
-  # - name:                               J1 AmplitudeJS
-  #   resource:
-  #     enabled:                          true
-
-  #     id:                               amplitudejs
-  #     comment:                          Module AmplitudeJS
-  #     region:                           head
-  #     layout:                           [ home, page, post ]
-  #     required:                         ondemand
-  #     script_load:                      defer
-  #     pass_init_data:                   false
-
-  #     data:
-  #       css:                            [
-  #                                         modules/amplitudejs/css/theme/uno/dark/amplitude,
-  #                                         modules/amplitudejs/css/theme/uno/dark/player/mini,                                          
-  #                                         modules/amplitudejs/css/theme/uno/dark/player/compact,
-  #                                         modules/amplitudejs/css/theme/uno/dark/player/large
-  #                                       ]
-  #       files:                          [ adapter/js/amplitude.js ]
-  #       js:                             [ modules/amplitudejs/js/amplitude ]
-  #       init_function:                  [ j1.adapter.amplitude.init ]
-
   # ----------------------------------------------------------------------------
   # Amplitude (Library only)
   #
   - name:                               Amplitude
     resource:
-      enabled:                          true
+      enabled:                          false
 
       id:                               amplitude
       comment:                          Module Amplitude
@@ -1454,7 +1428,7 @@ resources:
         init_function:                  []
 
   # ----------------------------------------------------------------------------
-  # AmplitudeJS (Amplitude player)
+  # AmplitudeJS (full/module)
   #
   - name:                               J1 AmplitudeJS
     resource:
@@ -1469,9 +1443,14 @@ resources:
       pass_init_data:                   false
 
       data:
-        css:                            []
+        css:                            [
+                                          modules/amplitudejs/css/theme/uno/dark/amplitude,
+                                          modules/amplitudejs/css/theme/uno/dark/player/mini,                                          
+                                          modules/amplitudejs/css/theme/uno/dark/player/compact,
+                                          modules/amplitudejs/css/theme/uno/dark/player/large
+                                        ]
         files:                          [ adapter/js/amplitude.js ]
-        js:                             []
+        js:                             [ modules/amplitudejs/js/amplitude ]
         init_function:                  [ j1.adapter.amplitude.init ]
 
   # ----------------------------------------------------------------------------
@@ -1635,23 +1614,23 @@ resources:
   # ----------------------------------------------------------------------------
   # AudioPlayer
   #
-  - name:                               J1 AudioPlayer
-    resource:
-      enabled:                          true
+  # - name:                               J1 AudioPlayer
+  #   resource:
+  #     enabled:                          false
 
-      id:                               audioPlayer
-      comment:                          Module audioPlayer
-      region:                           head
-      layout:                           [ home, page, post ]
-      required:                         ondemand
-      script_load:                      defer
-      pass_init_data:                   false
+  #     id:                               audioPlayer
+  #     comment:                          Module audioPlayer
+  #     region:                           head
+  #     layout:                           [ home, page, post ]
+  #     required:                         ondemand
+  #     script_load:                      defer
+  #     pass_init_data:                   false
 
-      data:
-        css:                            []
-        files:                          [ adapter/js/audioPlayer.js ]
-        js:                             []
-        init_function:                  [ j1.adapter.audioPlayer.init ]
+  #     data:
+  #       css:                            []
+  #       files:                          [ adapter/js/audioPlayer.js ]
+  #       js:                             []
+  #       init_function:                  [ j1.adapter.audioPlayer.init ]
 
   # ----------------------------------------------------------------------------
   # MultiPlayer

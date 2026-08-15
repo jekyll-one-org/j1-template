@@ -27,7 +27,7 @@ regenerate:                             true
 personalization:                        true
 permalink:                              /pages/public/tour/audio_data/
 
-resources:                              [ amplitude, amplitudejs, multiPlayer, videojs ]
+resources:                              [ amplitudejs, multiPlayer, videojs ]
 resource_options:
   - toccer:
       collapseDepth:                    4

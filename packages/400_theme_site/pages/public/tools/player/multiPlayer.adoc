@@ -157,6 +157,7 @@ The edit panel is where content is managed. It offers:
 Below the header is the video itself. Before anything is loaded, a friendly
 placeholder (the VideoJS logo) is shown in its place.
 
+// [role="mb-5"]
 You can place as many players on a page as you like. Every player has its
 own *id* (a short name such as `player_1`), its own playlist, and its own
 settings. Nothing leaks from one player to another: a video you add to
@@ -164,20 +165,23 @@ settings. Nothing leaks from one player to another: a video you add to
 *instance* of the module, created through a factory function -- exactly the
 same idea Video.js uses.
 
-
-[role="mt-4"]
-=== Video Player
-
-lorem:sentences[5]
-
-.Video Player
-multiplayer::video_player[role="mb-5"]
+.Player 1
+multiplayer::player_1[role="mb-5"]
 
 
-[role="mt-4"]
-=== Audio Player
+// [role="mt-4"]
+// === Video Player
 
-lorem:sentences[5]
+// lorem:sentences[5]
 
-.Audio Player
-multiplayer::audio_player[role="mb-5"]
+// .Video Player
+// multiplayer::video_player[role="mb-5"]
+
+
+// [role="mt-4"]
+// === Audio Player
+
+// lorem:sentences[5]
+
+// .Audio Player
+// multiplayer::audio_player[role="mb-5"]

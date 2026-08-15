@@ -32,10 +32,9 @@ regenerate:                             false
 permalink:                              /pages/public/features/theme_features/
 
 resources:                              [
-                                          amplitude, amplitudejs, lightbox3,
-                                          lightgallery, masonry, multiPlayer,
-                                          gallery, photoswipejs, swiperjs,
-                                          videojs
+                                          amplitudejs, lightbox3, lightgallery,
+                                          masonry, multiPlayer, gallery,
+                                          photoswipejs, swiperjs, videojs
                                         ]
 resource_options:
   - attic:
