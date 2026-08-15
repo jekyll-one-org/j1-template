@@ -6,7 +6,7 @@ regenerate:                             true
 
 {% comment %}
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/adapter/js/multiPlayer.js (30)
+ # ~/assets/theme/j1/adapter/js/multiPlayer.js (31)
  # J1 Adapter for the module multiPlayer
  #
  # Product/Info:
@@ -304,7 +304,7 @@ regenerate:                             true
 
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/adapter/js/multiPlayer.js (30)
+ # ~/assets/theme/j1/adapter/js/multiPlayer.js (31)
  # J1 Adapter for the module multiPlayer
  #
  # Product/Info:
@@ -1083,6 +1083,28 @@ j1.adapter.multiPlayer = ((j1, window) => {
                 // videoPlayer.loadAndPlay(videoId);
                 vp.loadAndPlay(videoId);
               }
+
+              // Fix J1 multiPlayer #7
+              // vp.loadAndPlay does NOT exist on the module's instance API
+              // (player.js exports playlistManager, the handler classes,
+              // closePlaylist/closeEditPlaylist — no loadAndPlay), so the
+              // branch above has always been a silent no-op. In CARD view
+              // this listener is the ONLY live play path: PlaylistCards
+              // _onPlayClick() calls e.stopPropagation() on the native click
+              // (so the module's own initPlayHandler delegation never fires)
+              // and dispatches the 'playlist-play' CustomEvent handled here.
+              // Route the event to the module's canonical selection entry
+              // point playlistManager.playEntry() — the same method the LIST
+              // view reaches via initPlayHandler — so card clicks start the
+              // selected video (expiry gate, _startedFromPlaylist and
+              // embedRunVideo all included). Guarded as an else-fallback:
+              // should a loadAndPlay export ever be added, it keeps
+              // precedence and no double-start can occur.
+              //
+              else if (videoId && vp.playlistManager &&
+                       typeof vp.playlistManager.playEntry === 'function') {
+                vp.playlistManager.playEntry(videoId);
+              }
             });
             logger.debug('\n' + 'initHandlers: initPlayHandler (event listener) [' + playerId + '] — OK');
           } else {
@@ -1177,7 +1199,7 @@ j1.adapter.multiPlayer = ((j1, window) => {
         logger.info('\n' + 'initHandlers: playlistMergeSwitchHandler skipped (playlist disabled)');
       }
 
-      // claude - Fix multiPlayer new select audio only #1
+      // Fix multiPlayer new select audio only #1
       // 5a. audioOnlySwitchHandler — YouTube audio-only toggle
       //
       // INTENTIONALLY NOT constructed here. The module builds this switch
@@ -1199,7 +1221,7 @@ j1.adapter.multiPlayer = ((j1, window) => {
       // an explicit construction point; in that case the module-side lazy
       // guard (_audioOnlySwitchInitialized) must be set beforehand.
 
-      // claude - Fix multiPlayer new select audio only #2
+      // Fix multiPlayer new select audio only #2
       // ADDENDUM (documentation only, NO adapter code change): the module
       // changed the audio-only DISPLAY strategy. Fix #1 used the Video.js
       // creation option audioOnlyMode, which collapses the player to the
@@ -1214,7 +1236,7 @@ j1.adapter.multiPlayer = ((j1, window) => {
       // by this adapter are UNCHANGED — the fix is module-internal
       // (createVideoJsPlayer + audioOnlySwitchHandler live-apply).
 
-      // claude - Fix multiPlayer new select audio only 4
+      // Fix multiPlayer new select audio only 4
       // ADDENDUM (documentation only, NO adapter code change): a THIRD config
       // key joins the audio-only chain — set_audio_only. It states the
       // audio-only mode DECLARATIVELY for players that show no switch:

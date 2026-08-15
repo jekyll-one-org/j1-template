@@ -97,6 +97,37 @@ defaults:
   startAt:                              "00:00:00"
   endAt:                                ""
 
+  # claude - Modify multiPlayer for new audioFadeIn param #1
+  # AUDIO FADE-IN (module default, all players, all source kinds)
+  #
+  # Ramps the audio UP to the player volume when a media item starts, instead
+  # of starting at full volume. The implementation mirrors the AmplitudeJS
+  # module's ytp plugin (ytp.js, function ytpFadeInAudio): the player starts
+  # muted and the volume is raised in a number of iteration steps. The number
+  # of steps controls how long and how smooth the transition is.
+  #
+  #   ''         no fade-in (the shipped default - behaviour as before)
+  #   off        same as '' - written out for readability
+  #   default    150 iteration steps (shortest fade)
+  #   slow       250 iteration steps
+  #   slower     350 iteration steps
+  #   slowest    500 iteration steps (longest fade)
+  #
+  # Precedence, first value that says anything wins:
+  #
+  #   1. the per-media value edited in the player's Edit Media Settings dialog
+  #      (field "Audio Fade In") or shipped in a preloaded playlist JSON; the
+  #      dialog can state 'off' for ONE media, overruling a configured fade
+  #   2. this YAML chain: defaults <- user settings (multiPlayer.yml) <-
+  #      per-player entries (multiPlayer_control.yml)
+  #   3. no fade
+  #
+  # The default stays EMPTY on purpose: an existing site keeps its current
+  # playback behaviour until a fade is asked for explicitly.
+  #
+  audioFadeIn:                          ''
+
+
   # ----------------------------------------------------------------------------
   # MODULE options
   # ============================================================================

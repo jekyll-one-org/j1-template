@@ -2,7 +2,7 @@
  # -----------------------------------------------------------------------------
  # ~/assets/theme/j1/modules/multiPlayer/js/player.js
  # Provides JS Core for J1 Module multiPlayer
- # Version 3.1.73 for J1 Template
+ # Version 3.1.75 for J1 Template
  #
  # Product/Info:
  # https://jekyll.one
@@ -108,7 +108,7 @@
   // multiPlayer MultiInstance #2
   // Module version, exposed as videoPlayer.VERSION (video.js parity:
   // videojs.VERSION). Keep in sync with the file header above.
-  const VERSION = '3.1.73';
+  const VERSION = '3.1.75';
 
   // Page-global one-shot guards for the two page-scoped handlers (see the
   // tagged notes inside those functions).
@@ -1689,7 +1689,7 @@
   // by default and only writes the #1 log warning. Set this to true to notify
   // on that path as well; nothing else has to be touched.
   //
-  // Claude - Modify J1 multiPlayer expiry date #2
+  // Modify J1 multiPlayer expiry date #2
   // DESIGN DECISION RESOLVED: the notice is now raised on the load-and-pause
   // (preload) path as well. The reported failure case IS exactly this path -
   // playlistSortHandler.init() -> autoLoadFirstEntryOnReload() ->
@@ -2371,6 +2371,562 @@
     const ss    = String(total % 60).padStart(2, '0');
 
     return `${hh}:${mm}:${ss}`;
+  }
+
+  // Modify multiPlayer for new audioFadeIn param #1
+  // ---------------------------------------------------------------------------
+  // AUDIO FADE-IN (all source kinds: YouTube AND native mp3/mp4)
+  //
+  // New per-media / per-player option `audioFadeIn`. When set, the audio of a
+  // media item does not start at the player's volume but is RAMPED UP to it,
+  // exactly the way the Amplitude module's ytp plugin does it in
+  // ytpFadeInAudio(params) (ytp.js):
+  //
+  //     const iterationSteps = { 'default': 150, 'slow': 250,
+  //                              'slower':  350, 'slowest': 500 };
+  //     ...
+  //     ytPlayer.setVolume(0);                       // start muted
+  //     setInterval(() => {                          // 1ms cycle
+  //       ytPlayer.setVolume(targetVolume * (currentStep / steps));
+  //       currentStep++;
+  //       (currentStep > steps) && clearInterval(...);
+  //     }, cycle);
+  //
+  // The step table below is a VERBATIM copy of the ytp table, so the four
+  // speed names mean the same thing in both modules: the number of iteration
+  // steps controls how long and how smooth the fade-in transition is (more
+  // steps = longer, smoother fade).
+  //
+  // Configuration (three-layer inheritance, same as every other key):
+  //
+  //   1. the per-media value edited in the Edit Media Settings dialog (field
+  //      "Audio Fade In") or shipped in a preloaded playlist JSON. Two values
+  //      are distinguished here on purpose:
+  //        ''     unset  - no per-media opinion, the YAML chain applies
+  //        'off'  explicit per-media opt-out, WINS over the YAML chain
+  //   2. the YAML chain resolved by _resolveVideoPlayerEffectiveOptions():
+  //      defaults <- user settings (multiPlayer.yml) <- per-player control
+  //      settings (multiPlayer_control.yml), key `audioFadeIn`
+  //   3. no fade at all (the pre-feature behaviour)
+  //
+  // Tech handling: the ramp is written through the Video.js facade
+  // (player.volume(), 0..1) so the control bar's volume panel follows the
+  // fade, AND - when the raw YT.Player is reachable - mirrored to it with
+  // setVolume(0..100), the exact call ytp.js uses. The videojs-youtube tech
+  // proxies volume to the same raw call, so the second write is a harmless
+  // no-op in the normal case and a safety net when the facade write is
+  // dropped while the tech is being rebuilt.
+  // ---------------------------------------------------------------------------
+
+  // Modify multiPlayer for new audioFadeIn param #1
+  // Iteration steps per speed - verbatim ytp.js parity (see note above).
+  const AUDIO_FADE_IN_STEPS = Object.freeze({
+    'default':  150,
+    'slow':     250,
+    'slower':   350,
+    'slowest':  500
+  });
+
+  // Modify multiPlayer for new audioFadeIn param #1
+  // ytp.js parity: `const cycle = 1` - the interval delay of the ramp. Browsers
+  // clamp nested timeouts to ~4ms, so the real fade duration is roughly
+  // steps * 4ms (default ~0.6s ... slowest ~2s), the same as in ytp.
+  const AUDIO_FADE_IN_CYCLE_MS = 1;
+
+  // Modify multiPlayer for new audioFadeIn param #1
+  // The two "no fade" representations, kept apart by _normalizeAudioFadeInField
+  // (storage) and collapsed by _normalizeAudioFadeIn (runtime).
+  const AUDIO_FADE_IN_UNSET = '';
+  const AUDIO_FADE_IN_OFF   = 'off';
+
+  // Modify multiPlayer for new audioFadeIn param #1
+  // Failsafe timeout of the pre-arm (see _applyAudioFadeIn): if a media that
+  // was silenced on 'play' never reaches 'playing' - and fires no pause, error
+  // or ended either - the captured volume is written back after this delay, so
+  // a stalled item can never leave the player permanently muted.
+  const AUDIO_FADE_IN_ARM_TIMEOUT_MS = 3000;
+
+  /**
+   * Modify multiPlayer for new audioFadeIn param #1
+   * _buildAudioFadeInOptionHTML - <option> list of the Edit Media Settings
+   * select, built FROM the iteration-step table so the dialog can never drift
+   * away from the speeds the runtime actually knows (same idea as
+   * _buildGenreOptionHTML/GENRE_OPTIONS_HTML for the tags select).
+   *
+   * @returns {string} option markup
+   */
+  function _buildAudioFadeInOptionHTML() {
+    const labels = {
+      'default':  'default (shortest fade)',
+      'slow':     'slow',
+      'slower':   'slower',
+      'slowest':  'slowest (longest fade)'
+    };
+
+    let html = ''
+      + `<option value="${AUDIO_FADE_IN_UNSET}">Player setting (no media override)</option>`
+      + `<option value="${AUDIO_FADE_IN_OFF}">No fade-in (start at full volume)</option>`;
+
+    Object.keys(AUDIO_FADE_IN_STEPS).forEach((key) => {
+      const label = labels[key] || key;
+      html += `<option value="${key}">${label} - ${AUDIO_FADE_IN_STEPS[key]} steps</option>`;
+    });
+
+    return html;
+  }
+
+  // Modify multiPlayer for new audioFadeIn param #1
+  const AUDIO_FADE_IN_OPTIONS_HTML = _buildAudioFadeInOptionHTML();
+
+  /**
+   * Modify multiPlayer for new audioFadeIn param #1
+   * _normalizeAudioFadeInField - STORAGE-side normalizer for the playlist
+   * record and the edit dialog.
+   *
+   * Keeps the distinction the precedence rules need:
+   *   ''      unset          - the YAML chain applies
+   *   'off'   explicit off   - wins over the YAML chain
+   *   speed   one of the keys of AUDIO_FADE_IN_STEPS
+   *
+   * Anything unknown degrades to '' (unset), never to a wrong speed.
+   *
+   * @param  {string|boolean|null|undefined} value
+   * @returns {string} '', 'off' or a speed key
+   */
+  function _normalizeAudioFadeInField(value) {
+    if (value === null || value === undefined) return AUDIO_FADE_IN_UNSET;
+    if (value === true)  return 'default';
+    if (value === false) return AUDIO_FADE_IN_OFF;
+
+    const key = String(value).trim().toLowerCase();
+    if (key === '') return AUDIO_FADE_IN_UNSET;
+
+    if (key === 'off' || key === 'none' || key === 'no' || key === 'false') {
+      return AUDIO_FADE_IN_OFF;
+    }
+    if (key === 'on' || key === 'yes' || key === 'true') {
+      return 'default';
+    }
+    if (Object.prototype.hasOwnProperty.call(AUDIO_FADE_IN_STEPS, key)) {
+      return key;
+    }
+
+    isDev && logger.warn('\n' + `audioFadeIn: unknown speed "${value}" - ignored (known speeds: ${Object.keys(AUDIO_FADE_IN_STEPS).join(', ')})`);
+    return AUDIO_FADE_IN_UNSET;
+  }
+
+  /**
+   * Modify multiPlayer for new audioFadeIn param #1
+   * _normalizeAudioFadeIn - RUNTIME normalizer: yields the speed key to fade
+   * with, or '' when there is no fade. The explicit 'off' of the storage layer
+   * collapses to '' here - at playback time both mean "play at full volume".
+   *
+   * @param  {string|boolean|null|undefined} value
+   * @returns {string} a key of AUDIO_FADE_IN_STEPS, or ''
+   */
+  function _normalizeAudioFadeIn(value) {
+    const field = _normalizeAudioFadeInField(value);
+    return (field === AUDIO_FADE_IN_OFF) ? AUDIO_FADE_IN_UNSET : field;
+  }
+
+  /**
+   * Modify multiPlayer for new audioFadeIn param #1
+   * _resolveAudioFadeIn - effective fade-in speed for ONE playlist entry.
+   *
+   * Precedence (first value that says ANYTHING wins), the same shape as
+   * _resolveStartEndAt():
+   *   1. the persisted playlist record (entry.audioFadeIn) - a non-empty
+   *      value, INCLUDING the explicit 'off', is the answer
+   *   2. the YAML chain (defaults <- user settings <- per-player control):
+   *      opts.audioFadeIn via _resolveVideoPlayerEffectiveOptions()
+   *   3. '' - no fade (pre-feature behaviour)
+   *
+   * Read defensively: callable before the adapter has assigned options
+   * (degrades to the entry value or ''), mirroring _resolveStartEndAt() and
+   * _resolveAudioOnlyActive().
+   *
+   * @param  {string} videoId
+   * @param  {Object} playlistManagerRef - THIS instance's playlistManager
+   * @returns {string} a key of AUDIO_FADE_IN_STEPS, or '' for "no fade"
+   */
+  function _resolveAudioFadeIn(videoId, playlistManagerRef) {
+    let entry = null;
+    try {
+      if (playlistManagerRef && typeof playlistManagerRef.getEntry === 'function') {
+        entry = playlistManagerRef.getEntry(videoId);
+      }
+    } catch (e) {
+      isDev && logger.warn('\n' + `audioFadeIn: playlist entry lookup skipped: ${e}`);
+    }
+
+    const entryValue = (entry && entry.audioFadeIn !== undefined && entry.audioFadeIn !== null)
+      ? String(entry.audioFadeIn).trim()
+      : '';
+
+    if (entryValue !== '') {
+      return _normalizeAudioFadeIn(entryValue);
+    }
+
+    const opts       = _resolveVideoPlayerEffectiveOptions();
+    const optsValue  = (opts && opts.audioFadeIn !== undefined && opts.audioFadeIn !== null)
+      ? String(opts.audioFadeIn).trim()
+      : '';
+
+    if (optsValue !== '') {
+      return _normalizeAudioFadeIn(optsValue);
+    }
+
+    return AUDIO_FADE_IN_UNSET;
+  }
+
+  /**
+   * Modify multiPlayer for new audioFadeIn param #1
+   * _resolveActiveAudioFadeInVideoId - id of the item the player CURRENTLY
+   * holds. Same resolution order as the (closure-local) helper of
+   * _applyStartEndAtPlayback(): raw YT.Player metadata -> the module's
+   * playlist tracker -> per-tech data -> the creation-time id. Declared at
+   * module level here because the fade-in installer is a sibling of, not a
+   * part of, the playback-window installer.
+   *
+   * Needed for the same reason: the videojs-playlist plugin swaps sources
+   * INSIDE one player, so the creation-time videoId is stale from item 2 on.
+   *
+   * @param  {Object} vjsPlayer
+   * @param  {string} fallbackVideoId
+   * @returns {string}
+   */
+  function _resolveActiveAudioFadeInVideoId(vjsPlayer, fallbackVideoId) {
+    try {
+      const ytPlayer = _resolveYouTubeRawPlayer(vjsPlayer);
+      if (ytPlayer && typeof ytPlayer.getVideoData === 'function') {
+        const ytData = ytPlayer.getVideoData();
+        if (ytData && ytData.video_id) return ytData.video_id;
+      }
+    } catch (e) {
+      isDev && logger.debug('\n' + `audioFadeIn: raw YT video id read skipped: ${e}`);
+    }
+
+    if (_playlistActiveVideoId) return _playlistActiveVideoId;
+
+    try {
+      if (vjsPlayer && vjsPlayer.ytVideoData && vjsPlayer.ytVideoData.video_id) {
+        return vjsPlayer.ytVideoData.video_id;
+      }
+      if (vjsPlayer && vjsPlayer.videoData && vjsPlayer.videoData.videoId) {
+        return vjsPlayer.videoData.videoId;
+      }
+    } catch (e) {
+      isDev && logger.debug('\n' + `audioFadeIn: per-tech video id read skipped: ${e}`);
+    }
+
+    return fallbackVideoId;
+  }
+
+  /**
+   * Modify multiPlayer for new audioFadeIn param #1
+   * _applyAudioFadeIn - runtime enforcement of the audio fade-in.
+   *
+   * Installed ONCE per created player (both techs) from onReady(), right
+   * beside _applyStartEndAtPlayback(), and driven by player events only:
+   *
+   *   'play'        PRE-ARM. Captures the current volume and silences the
+   *                 player BEFORE the media is audible, so the fade has no
+   *                 loud onset. Guarded by exactly the same rules as the fade
+   *                 itself, and protected by a failsafe timer
+   *                 (AUDIO_FADE_IN_ARM_TIMEOUT_MS) that writes the captured
+   *                 volume back if 'playing' never arrives.
+   *
+   *   'playing'     START the ramp: steps writes of
+   *                 targetVolume * (currentStep / steps) on a 1ms cycle
+   *                 (ytp.js parity), the last write landing exactly on the
+   *                 captured target so rounding can never leave the player
+   *                 slightly quieter than before.
+   *
+   *   'pause'       CANCEL + restore. A pause during the ramp (user, endAt
+   *   'error'       stop, media error) must never leave the volume down.
+   *
+   *   'ended'       CANCEL + restore AND re-arm the per-item latch, so a
+   *                 replay of the same item fades in again.
+   *
+   *   'loadstart'   CANCEL + restore AND re-arm the latch: the plugin loaded
+   *   'playlistitem' another item into this SAME player.
+   *
+   *   'dispose'     CANCEL without restore (the player is going away).
+   *
+   * ONE fade per loaded item: the latch _fadedForVideoId keeps a
+   * resume-from-pause at full volume - the fade belongs to the START of a
+   * media, not to every unpause. The window is re-resolved lazily at each
+   * trigger point, so a per-entry edit saved in the modal takes effect on the
+   * very next play without re-embedding the video.
+   *
+   * Multi-instance safe: every piece of state lives in this closure, so two
+   * players on one page fade independently.
+   *
+   * @param {Object} player   - the videojs player instance
+   * @param {string} videoId  - the creation-time id (fallback only)
+   * @param {Object} playlistManagerRef - THIS instance's playlistManager
+   */
+  function _applyAudioFadeIn(player, videoId, playlistManagerRef) {
+    if (!player || typeof player.on !== 'function') return;
+
+    let _fadeInterval      = null;    // running ramp
+    let _fadeTargetVolume  = null;    // volume the ramp climbs to (0..1)
+    let _armedTargetVolume = null;    // volume captured by the 'play' pre-arm
+    let _armedTimer        = null;    // failsafe of the pre-arm
+    let _fadedForVideoId   = null;    // per-item latch
+    let _expectedActiveId  = videoId || null;
+
+    // The plugin announces the item it is switching to; the same authoritative
+    // source the playback-window guard (#4) uses to detect a source swap that
+    // has not settled yet.
+    player.on('playlistitem', (event, item) => {
+      const nextId = (item && item.videoId) ? item.videoId : null;
+      if (nextId) _expectedActiveId = nextId;
+    });
+
+    const _isDisposed = () => {
+      try {
+        return (typeof player.isDisposed === 'function') ? !!player.isDisposed() : false;
+      } catch (e) {
+        return true;
+      }
+    };
+
+    // Read the current volume as 0..1: Video.js facade first, raw YT.Player
+    // (0..100) as fallback. null when neither answers.
+    const _readVolume = () => {
+      try {
+        if (typeof player.volume === 'function') {
+          const v = player.volume();
+          if (typeof v === 'number' && isFinite(v)) {
+            return Math.max(0, Math.min(1, v));
+          }
+        }
+      } catch (e) {
+        isDev && logger.debug('\n' + `audioFadeIn: facade volume read skipped: ${e}`);
+      }
+
+      try {
+        const ytPlayer = _resolveYouTubeRawPlayer(player);
+        if (ytPlayer && typeof ytPlayer.getVolume === 'function') {
+          const raw = ytPlayer.getVolume();
+          if (typeof raw === 'number' && isFinite(raw)) {
+            return Math.max(0, Math.min(1, raw / 100));
+          }
+        }
+      } catch (e) {
+        isDev && logger.debug('\n' + `audioFadeIn: raw YT volume read skipped: ${e}`);
+      }
+
+      return null;
+    };
+
+    // Write a volume 0..1 through both paths (see the tech note above).
+    const _writeVolume = (value) => {
+      const v = Math.max(0, Math.min(1, value));
+
+      try {
+        if (typeof player.volume === 'function') player.volume(v);
+      } catch (e) {
+        isDev && logger.debug('\n' + `audioFadeIn: facade volume write skipped: ${e}`);
+      }
+
+      try {
+        const ytPlayer = _resolveYouTubeRawPlayer(player);
+        // ytp.js parity: ytPlayer.setVolume(percent)
+        if (ytPlayer && typeof ytPlayer.setVolume === 'function') {
+          ytPlayer.setVolume(Math.round(v * 100));
+        }
+      } catch (e) {
+        isDev && logger.debug('\n' + `audioFadeIn: raw YT volume write skipped: ${e}`);
+      }
+    };
+
+    const _clearArmTimer = () => {
+      if (_armedTimer) {
+        clearTimeout(_armedTimer);
+        _armedTimer = null;
+      }
+    };
+
+    /**
+     * Stop everything the fade is doing and (optionally) put the volume back
+     * where it was before the pre-arm/ramp touched it.
+     *
+     * @param {string}  reason  - dev log text
+     * @param {boolean} restore - write the captured volume back
+     */
+    const _cancelFade = (reason, restore) => {
+      const captured = (_fadeTargetVolume !== null) ? _fadeTargetVolume : _armedTargetVolume;
+
+      if (_fadeInterval) {
+        clearInterval(_fadeInterval);
+        _fadeInterval = null;
+      }
+      _clearArmTimer();
+
+      _fadeTargetVolume  = null;
+      _armedTargetVolume = null;
+
+      if (captured === null) return;
+
+      if (restore && !_isDisposed()) {
+        _writeVolume(captured);
+        isDev && logger.debug('\n' + `audioFadeIn: fade cancelled (${reason}) - volume restored to ${Math.round(captured * 100)}%`);
+      } else {
+        isDev && logger.debug('\n' + `audioFadeIn: fade cancelled (${reason})`);
+      }
+    };
+
+    /**
+     * Common gate of pre-arm and ramp.
+     *
+     * @param  {string} activeId
+     * @returns {string} the speed to fade with, or '' when nothing should happen
+     */
+    const _resolveFadeSpeedNow = (activeId) => {
+      // mid-swap: the tech still reports the PREVIOUS item, so both the latch
+      // and the resolved configuration would belong to the wrong media
+      if (_expectedActiveId !== null && activeId !== _expectedActiveId) return AUDIO_FADE_IN_UNSET;
+
+      // one fade per loaded item (a resume from pause keeps full volume)
+      if (_fadedForVideoId === activeId) return AUDIO_FADE_IN_UNSET;
+
+      const speed = _resolveAudioFadeIn(activeId, playlistManagerRef);
+      if (!speed || !AUDIO_FADE_IN_STEPS[speed]) return AUDIO_FADE_IN_UNSET;
+
+      // muted player: a ramp would be inaudible and would only fight the
+      // user's own setting once unmuted
+      try {
+        if (typeof player.muted === 'function' && player.muted()) {
+          isDev && logger.debug('\n' + `audioFadeIn: fade skipped for videoId ${activeId} - player is muted`);
+          return AUDIO_FADE_IN_UNSET;
+        }
+      } catch (e) {
+        isDev && logger.debug('\n' + `audioFadeIn: muted state read skipped: ${e}`);
+      }
+
+      return speed;
+    };
+
+    // PRE-ARM on 'play': silence the player before the first sample is audible
+    const onPlayAudioFadeIn = () => {
+      try {
+        if (_isDisposed())            return;
+        if (_fadeInterval)            return;   // ramp already running
+        if (_armedTargetVolume !== null) return; // already armed
+
+        const activeId = _resolveActiveAudioFadeInVideoId(player, videoId);
+        const speed    = _resolveFadeSpeedNow(activeId);
+        if (!speed) return;
+
+        const target = _readVolume();
+        if (target === null || !(target > 0)) return;   // nothing to fade to
+
+        _armedTargetVolume = target;
+        _writeVolume(0);
+
+        _clearArmTimer();
+        _armedTimer = setTimeout(() => {
+          _armedTimer = null;
+          if (_armedTargetVolume !== null && !_fadeInterval) {
+            const captured = _armedTargetVolume;
+            _armedTargetVolume = null;
+            if (!_isDisposed()) _writeVolume(captured);
+            isDev && logger.warn('\n' + `audioFadeIn: 'playing' never arrived after pre-arm - volume restored to ${Math.round(captured * 100)}%`);
+          }
+        }, AUDIO_FADE_IN_ARM_TIMEOUT_MS);
+
+        isDev && logger.debug('\n' + `audioFadeIn: pre-armed for videoId ${activeId} at target ${Math.round(target * 100)}% (speed: ${speed})`);
+      } catch (e) {
+        isDev && logger.warn('\n' + `audioFadeIn: pre-arm skipped: ${e}`);
+      }
+    };
+
+    // START the ramp on 'playing' (ytp.js parity, see the note above)
+    const onPlayingAudioFadeIn = () => {
+      try {
+        if (_isDisposed()) return;
+        if (_fadeInterval) return;
+
+        const activeId = _resolveActiveAudioFadeInVideoId(player, videoId);
+        const speed    = _resolveFadeSpeedNow(activeId);
+
+        if (!speed) {
+          // The pre-arm silenced a media the gate now rejects (e.g. the swap
+          // settled on another item): never leave it muted.
+          if (_armedTargetVolume !== null) _cancelFade('gate closed after pre-arm', true);
+          return;
+        }
+
+        const steps  = AUDIO_FADE_IN_STEPS[speed];
+        const target = (_armedTargetVolume !== null) ? _armedTargetVolume : _readVolume();
+
+        _clearArmTimer();
+        _armedTargetVolume = null;
+
+        if (target === null || !(target > 0)) return;
+
+        _fadedForVideoId  = activeId;
+        _fadeTargetVolume = target;
+
+        let currentStep = 1;
+
+        // ytp.js parity: start muted, then climb in `steps` iterations
+        _writeVolume(0);
+
+        _fadeInterval = setInterval(() => {
+          try {
+            if (_isDisposed()) {
+              clearInterval(_fadeInterval);
+              _fadeInterval     = null;
+              _fadeTargetVolume = null;
+              return;
+            }
+
+            const newVolume = target * (currentStep / steps);
+            _writeVolume(newVolume);
+            currentStep++;
+
+            if (currentStep > steps) {
+              clearInterval(_fadeInterval);
+              _fadeInterval = null;
+              // land EXACTLY on the captured target (no rounding drift)
+              _writeVolume(target);
+              _fadeTargetVolume = null;
+              isDev && logger.debug('\n' + `audioFadeIn: fade-in completed for videoId ${activeId} at ${Math.round(target * 100)}%`);
+            }
+          } catch (e) {
+            clearInterval(_fadeInterval);
+            _fadeInterval = null;
+            if (_fadeTargetVolume !== null && !_isDisposed()) _writeVolume(_fadeTargetVolume);
+            _fadeTargetVolume = null;
+            isDev && logger.warn('\n' + `audioFadeIn: fade-in aborted: ${e}`);
+          }
+        }, AUDIO_FADE_IN_CYCLE_MS);
+
+        isDev && logger.info('\n' + `audioFadeIn: fade-in started for videoId ${activeId} (speed: ${speed}, steps: ${steps}, target: ${Math.round(target * 100)}%)`);
+      } catch (e) {
+        isDev && logger.warn('\n' + `audioFadeIn: fade-in start skipped: ${e}`);
+      }
+    };
+
+    // re-arm the per-item latch: a new source, or a replay of this one
+    const _rearmAudioFadeIn = (reason) => {
+      _cancelFade(reason, true);
+      _fadedForVideoId = null;
+    };
+
+    player.on('play',         onPlayAudioFadeIn);
+    player.on('playing',      onPlayingAudioFadeIn);
+    player.on('pause',        () => _cancelFade('pause', true));
+    player.on('error',        () => _cancelFade('media error', true));
+    player.on('ended',        () => _rearmAudioFadeIn('media ended'));
+    player.on('loadstart',    () => _rearmAudioFadeIn('source loaded'));
+    player.on('playlistitem', () => _rearmAudioFadeIn('playlist item changed'));
+    player.on('dispose',      () => _cancelFade('player disposed', false));
+
+    isDev && logger.debug('\n' + `audioFadeIn: handlers installed for videoId ${videoId}`);
   }
 
   // Fix J1 multiPlayer #6
@@ -4330,6 +4886,11 @@
         // JSON files may ship these fields directly.
         startAt:      entry.startAt       || '',
         endAt:        entry.endAt         || '',
+        // Modify multiPlayer for new audioFadeIn param #1
+        // Optional per-media audio fade-in ('' = unset, 'off' = explicit
+        // opt-out, otherwise a speed key). Preloaded playlist JSON files may
+        // ship this field directly.
+        audioFadeIn:  _normalizeAudioFadeInField(entry.audioFadeIn),
         episode:      entry.episode       || 0,
         lastPosition: entry.lastPosition  || 0,
         poster:       entry.poster        || '',
@@ -4407,6 +4968,11 @@
         // JSON files may ship these fields directly.
         startAt:      entry.startAt       || '',
         endAt:        entry.endAt         || '',
+        // Modify multiPlayer for new audioFadeIn param #1
+        // Optional per-media audio fade-in ('' = unset, 'off' = explicit
+        // opt-out, otherwise a speed key). Preloaded playlist JSON files may
+        // ship this field directly.
+        audioFadeIn:  _normalizeAudioFadeInField(entry.audioFadeIn),
         episode:      entry.episode       || 0,
         lastPosition: entry.lastPosition  || 0,
         poster:       entry.poster        || '',
@@ -4697,6 +5263,9 @@
       // shape the edit modal's <input type="time" step="1"> produces.
       if ('startAt'     in fields) entry.startAt      = _secondsToTimeInputValue(_parseTimeToSeconds(fields.startAt));
       if ('endAt'       in fields) entry.endAt        = _secondsToTimeInputValue(_parseTimeToSeconds(fields.endAt));
+      // Modify multiPlayer for new audioFadeIn param #1
+      // Stored as '', 'off' or a speed key of AUDIO_FADE_IN_STEPS.
+      if ('audioFadeIn' in fields) entry.audioFadeIn  = _normalizeAudioFadeInField(fields.audioFadeIn);
       if ('series'      in fields) entry.series       = fields.series;
       if ('tags'        in fields) entry.tags         = fields.tags;
       if ('type'        in fields) entry.type         = fields.type;
@@ -6016,7 +6585,7 @@
         // unchanged: the block is decided by #1, this call only reports it.
         _showExpiryNotice(expiryEntry, videoId, { source: 'playEntry' });
 
-        // Claude - Modify J1 multiPlayer expiry date #2
+        // Modify J1 multiPlayer expiry date #2
         // The direct jQuery call below is DEFECTIVE and must stay disabled;
         // the dialog is raised by _showExpiryNotice() above instead. It is
         // the source of the reported runtime error
@@ -6079,7 +6648,7 @@
         // playback attempt.
         _showExpiryNotice(entry, videoId, { source: 'playlistManager.embedRunVideo', mode: mode });
 
-        // Claude - Modify J1 multiPlayer expiry date #2
+        // Modify J1 multiPlayer expiry date #2
         // DEFECTIVE, must stay disabled - same two faults as documented at
         // the playEntry gate (non-interpolated "${...}" in a normal string
         // -> jQuery selector throw, and Bootstrap-4 jQuery API on a
@@ -6626,6 +7195,28 @@
                     <small class="edit-field-hint">Playback ends at this position (empty: to the natural end)</small>
                   </div>
 
+                  <!-- Modify multiPlayer for new audioFadeIn param #1
+                       Optional AUDIO FADE-IN for THIS media entry (all source
+                       kinds: YouTube and native mp3/mp4). The options are built
+                       from the iteration-step table AUDIO_FADE_IN_STEPS, the
+                       verbatim ytp.js table of the AmplitudeJS module, so the
+                       speed names mean the same in both modules: more steps =
+                       longer, smoother fade.
+
+                         (empty)  no media override - the YAML chain applies
+                                  (defaults <- multiPlayer.yml <- per-player
+                                  entries in multiPlayer_control.yml)
+                         off      explicit opt-out for THIS media, wins over
+                                  the YAML chain
+                         speed    fade with that many iteration steps -->
+                  <div class="edit-field-group">
+                    <label class="edit-field-label" for="editFieldAudioFadeIn">Audio Fade In</label>
+                    <select id="editFieldAudioFadeIn" class="edit-field-input" form="playlist">
+                      ${AUDIO_FADE_IN_OPTIONS_HTML}
+                    </select>
+                    <small class="edit-field-hint">Audio is ramped up to the player volume when playback starts</small>
+                  </div>
+
                   <!-- Modify multiPlayer expiry date #1
                        Optional access expiry for time-limited sources. An EMPTY
                        value means unlimited (the default). The background of the
@@ -6699,6 +7290,9 @@
         // Fix multiPlayer for new startAt/endAt params #1
         document.getElementById('editFieldStartAt').value       = '';
         document.getElementById('editFieldEndAt').value         = '';
+        // Modify multiPlayer for new audioFadeIn param #1
+        // '' = no media override; the YAML chain applies again.
+        document.getElementById('editFieldAudioFadeIn').value    = AUDIO_FADE_IN_UNSET;
         document.getElementById('editFieldExpiryDate').value    = EXPIRY_UNLIMITED;
         document.getElementById('editFieldSeries').value        = '';
         document.getElementById('editFieldTags').value          = '';
@@ -6752,6 +7346,8 @@
             // Fix multiPlayer for new startAt/endAt params #1
             startAt:      document.getElementById('editFieldStartAt').value.trim(),
             endAt:        document.getElementById('editFieldEndAt').value.trim(),
+            // Modify multiPlayer for new audioFadeIn param #1
+            audioFadeIn:  document.getElementById('editFieldAudioFadeIn').value.trim(),
             series:       parseInt(document.getElementById('editFieldSeries').value, 10) || 0,
             tags:         tags,
             type:         document.getElementById('editFieldType').value.trim() || 'video'
@@ -6870,6 +7466,12 @@
       // unset ('') renders the input empty.
       document.getElementById('editFieldStartAt').value       = _secondsToTimeInputValue(_parseTimeToSeconds(entry.startAt));
       document.getElementById('editFieldEndAt').value         = _secondsToTimeInputValue(_parseTimeToSeconds(entry.endAt));
+      // Modify multiPlayer for new audioFadeIn param #1
+      // Round-trip through the storage normalizer so a legacy/hand-written
+      // value ('slow ', 'SLOWEST', true, false, an unknown word) always maps
+      // onto an option the select actually offers; unset renders as the first
+      // option ("Player setting").
+      document.getElementById('editFieldAudioFadeIn').value    = _normalizeAudioFadeInField(entry.audioFadeIn);
       document.getElementById('editFieldSeries').value        = entry.series      ? '1' : '';
 
       const entryTags = Array.isArray(entry.tags) ? entry.tags : [];
@@ -7797,10 +8399,24 @@
       // 'playlistitem' that the #23 listener self-corrects on the currentItem()
       // jump, so the active-item marker lands on the right entry.
       try {
-        player.playlist(playlist);
-        if (syncedIndex >= 0 && syncedIndex < playlist.length) {
-          player.playlist.currentItem(syncedIndex);
-        }
+        // Fix J1 multiPlayer #7
+        // Same defect class as the onReady setup feed: the two-step re-feed
+        // (playlist() auto-loading item 0, then currentItem(syncedIndex)
+        // re-loading the active item) put a burst of TWO source swaps — two
+        // cueVideoById() commands on the YouTube tech — into the live player,
+        // exposing the same IFrame command race mid-playback. The one-step
+        // form playlist(playlist, syncedIndex) selects the active item
+        // directly, so at most ONE source swap occurs. Bonus: when the active
+        // video keeps the SAME index in the new order, the plugin's
+        // currentItem(syncedIndex) is a no-op (core.js: `currentIndex_ !== e`)
+        // and the reload — and the playback hiccup the #31 notes accept — is
+        // skipped entirely.
+        // Original (deprecated, preserved for reference):
+        // player.playlist(playlist);
+        // if (syncedIndex >= 0 && syncedIndex < playlist.length) {
+        //   player.playlist.currentItem(syncedIndex);
+        // }
+        player.playlist(playlist, syncedIndex);
       } catch (e) {
         isDev && logger.warn('\n' + `playlist re-sync: re-feed failed: ${e}`);
         return;
@@ -8775,6 +9391,15 @@
         // instance's closure-local playlistManager (MultiInstance #1 rule).
         _applyStartEndAtPlayback(player, videoId, playlistManager);
 
+        // Modify multiPlayer for new audioFadeIn param #1
+        // Install the audio fade-in for BOTH techs (YouTube and native), in
+        // the same place and for the same reasons as the playback window
+        // above: one installation per created player, driven by player events,
+        // using THIS instance's closure-local playlistManager (MultiInstance
+        // #1 rule). A no-op for every media whose resolved audioFadeIn is
+        // empty, i.e. byte-identical behaviour for existing configurations.
+        _applyAudioFadeIn(player, videoId, playlistManager);
+
         // Modify multiPlayer #49
         // ROOT CAUSE of "per-player videoJS settings never applied": this
         // assignment unconditionally overwrote the instance-level
@@ -8865,7 +9490,56 @@
             //
             _playlistSetupInProgress = true;
 
-            vjsPlayer.playlist(playlist);
+            // Fix J1 multiPlayer #7
+            // ROOT CAUSE of "with a stored playlist, selecting any item other
+            // than the first plays the FIRST item (while the poster shows the
+            // SELECTED one)".
+            //
+            // The two-step feed below — playlist(playlist) auto-loading item 0,
+            // then currentItem(syncedIndex) re-loading the selected item — puts
+            // TWO back-to-back player.src() swaps into the freshly created
+            // player. On the YouTube tech every swap becomes a cueVideoById()
+            // command against the SAME just-readied YT.Player (youtube.js:
+            // setSrc -> cueVideoById_), so the IFrame receives a burst of cue
+            // commands while it is still settling on its construction video.
+            // The IFrame API processes these commands ASYNCHRONOUSLY and does
+            // not guarantee last-command-wins under such a burst — the
+            // intermediate item-0 cue can land LAST inside the iframe, which is
+            // exactly the reported picture: every SYNCHRONOUS last-write-wins
+            // surface is correct (player.poster(), the #23 active-item marker,
+            // the #37 header title — all set by the final currentItem() call
+            // and therefore showing the SELECTED entry), while the video that
+            // actually plays is the FIRST playlist item.
+            //
+            // Why only with a localStorage entry: without stored entries the
+            // converted `playlist` is EMPTY, so neither the item-0 auto-load
+            // nor the currentItem() jump performs any source swap — the player
+            // simply keeps its creation source (the selected video) and plays
+            // correctly. The whole race exists ONLY when a stored playlist is
+            // fed to the plugin.
+            //
+            // Fix: eliminate the intermediate item-0 load entirely. The
+            // videojs-playlist plugin natively supports selecting the initial
+            // item in the SAME call — playlist(list, index) (core.js:
+            // `-1 !== r && o.currentItem(r)`), so the selected item is loaded
+            // DIRECTLY and exactly ONE source selection happens, making the
+            // outcome order-independent. For YouTube sources the tech then
+            // issues ZERO redundant cue commands: the single setSrc() carries
+            // the id the player was created with, youtube.js finds
+            // activeVideoId === url.videoId and leaves the already-cued
+            // construction video untouched. (This also retires, for the setup
+            // path, the aborted-play() fallout the #32 guard documents.)
+            //
+            // The feed is therefore MOVED below: it now happens as ONE call —
+            // vjsPlayer.playlist(playlist, currentIndex) — after the
+            // 'playlistitem' listener (#23) is attached (the initial
+            // 'playlistitem' of the selected item fires synchronously inside
+            // the feed and must be captured) and after the synced index has
+            // been resolved (#20). The plugin's autoadvance arming moves after
+            // the feed as well, because vjsPlayer.playlist.autoadvance only
+            // exists once the plugin has been initialised by its first call.
+            // Original (deprecated, preserved for reference):
+            // vjsPlayer.playlist(playlist);
 
             // Modify multiPlayer #23
             // Mirror plugin-driven item changes onto the active-item indicator.
@@ -8920,9 +9594,16 @@
               }
             });
 
-            if (piPlaylist.autoadvance) {
-              vjsPlayer.playlist.autoadvance(piPlaylist.autoadvance_delay);
-            }
+            // Fix J1 multiPlayer #7
+            // Moved below the one-step feed: before the plugin's first
+            // invocation, vjsPlayer.playlist is still the registered plugin
+            // initializer and carries NO autoadvance member — arming here
+            // would throw. The block is re-issued verbatim right after
+            // vjsPlayer.playlist(playlist, currentIndex) below.
+            // Original (deprecated, preserved for reference):
+            // if (piPlaylist.autoadvance) {
+            //   vjsPlayer.playlist.autoadvance(piPlaylist.autoadvance_delay);
+            // }
 
             // Modify multiPlayer #20
             // Sync the (converted) playlist index to the active vjsVideoId.
@@ -8963,10 +9644,18 @@
                 `playlist sync: vjsVideoId '${vjsVideoId}' not found in converted playlist ` +
                 `(rawIndex: ${rawIndex}); keeping current item`);
 
-              const fallbackIndex = vjsPlayer.playlist.currentItem();
-              syncedIndex = (typeof fallbackIndex === 'number' && fallbackIndex >= 0)
-                ? fallbackIndex
-                : 0;
+              // Fix J1 multiPlayer #7
+              // This fallback now runs BEFORE the plugin's first invocation
+              // (the feed moved below), so vjsPlayer.playlist.currentItem does
+              // not exist yet. The plugin has no current item at this point
+              // anyway — a freshly fed plugin always answered 0 here — so the
+              // fallback resolves to 0 directly, behaviour-identically.
+              // Original (deprecated, preserved for reference):
+              // const fallbackIndex = vjsPlayer.playlist.currentItem();
+              // syncedIndex = (typeof fallbackIndex === 'number' && fallbackIndex >= 0)
+              //   ? fallbackIndex
+              //   : 0;
+              syncedIndex = 0;
             }
 
             // Modify multiPlayer #20
@@ -8978,8 +9667,37 @@
             // playlist can never produce an out-of-range index.
             // Modify multiPlayer #20
             // Load the video specified by vjsVideoId from the synced playlist.
-            if (playlist.length > 0 && currentIndex >= 0 && currentIndex < playlist.length) {
-              vjsPlayer.playlist.currentItem(currentIndex);
+            // Fix J1 multiPlayer #7
+            // ONE-STEP feed+select (see the note at the disabled immediate
+            // feed above). The list and the initial item are handed to the
+            // plugin in a SINGLE call, so exactly one source selection is
+            // performed and the intermediate item-0 load never happens:
+            //
+            //   - non-empty list: playlist(playlist, currentIndex) loads the
+            //     selected item directly (core.js: `-1 !== r &&
+            //     o.currentItem(r)`), inside the same #19 range guard as the
+            //     original jump.
+            //   - empty list: index -1 tells the plugin to load NOTHING
+            //     (core.js skips the currentItem() call for -1) — matching the
+            //     original behaviour where playlist([]) auto-loaded nothing
+            //     and the guarded jump was skipped. The plugin function is
+            //     still initialised, so all later vjsPlayer.playlist.* users
+            //     (autoadvance, _pluginWillAutoadvance, _resyncPluginPlaylist)
+            //     keep working as before.
+            // Original (deprecated, preserved for reference):
+            // if (playlist.length > 0 && currentIndex >= 0 && currentIndex < playlist.length) {
+            //   vjsPlayer.playlist.currentItem(currentIndex);
+            // }
+            const _initialFeedIndex = (playlist.length > 0 && currentIndex >= 0 && currentIndex < playlist.length)
+              ? currentIndex
+              : -1;
+            vjsPlayer.playlist(playlist, _initialFeedIndex);
+
+            // Fix J1 multiPlayer #7
+            // Autoadvance arming, moved here from above (the plugin function
+            // now exists). Re-issued verbatim from the disabled original.
+            if (piPlaylist.autoadvance) {
+              vjsPlayer.playlist.autoadvance(piPlaylist.autoadvance_delay);
             }
 
             // Modify multiPlayer #32
@@ -8993,6 +9711,12 @@
             // loadstart autoplay may run normally without colliding with a
             // pending currentItem() src().
             //
+            // Fix J1 multiPlayer #7
+            // With the one-step feed above there IS no intermediate item-0
+            // load anymore: the single selected source produces the one and
+            // only 'loadedmetadata', on which this listener settles — the #32
+            // semantics ("resolves on the final, selected source") are
+            // unchanged, just without the aborted intermediate load.
             const _onPlaylistSetupSettled = () => {           
               vjsPlayer.off('loadedmetadata', _onPlaylistSetupSettled);
 
@@ -11720,7 +12444,7 @@
       // The method is once-only-guarded, no-ops on an empty list, and skips
       // gracefully if the adapter is not ready yet (see autoLoadFirstEntryOnReload).
       //
-      // Claude - Modify J1 multiPlayer expiry date #2
+      // Modify J1 multiPlayer expiry date #2
       // Hardened: the auto-load is a GUEST inside this init - it merely rides
       // along because this handler already touches the stored playlist. In
       // the reported failure a defective jQuery selector inside the expiry
