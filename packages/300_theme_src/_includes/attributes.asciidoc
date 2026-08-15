@@ -588,7 +588,7 @@ tag::data[]
 :data-images--mobile-navigation:                  "assets/image/page/features/mobile-navigation-600x800.jpg, Mobile Web Navigation"
 :data-images--master-header:                      "assets/image/page/features/master-header-1280x600.jpg, Master Header (image-based)"
 :data-images--fab:                                "assets/image/page/features/fab-1280x500.jpg, FAB (Menu)"
-:data-images--tts:                                "assets/image/page/features/tts-1280x500.jpg, TTS Control"
+:data-images--tts:                                "assets/image/page/features/tts-1280x500.jpg, Screen Reader Control"
 :data-images--full-text-search:                   "assets/image/page/features/full-text-search-1280x800.jpg, Full-text search"
 :data-images--cookie-consent:                     "assets/image/page/features/cookie-consent-1280x800.jpg, Cookie Consent"
 :data-images--translator:                         "assets/image/page/features/translator-1280x800.jpg, Google Translator"

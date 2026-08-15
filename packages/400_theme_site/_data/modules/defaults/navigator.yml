@@ -225,7 +225,7 @@ defaults:
     translate_action:                   translate
     translate_label:                    Google Translate
 
-    speak2me_icon:                      speaker
+    speak2me_icon:                      read
     speak2me_action:                    speak
     speak2me_label:                     Speak2Me
 
