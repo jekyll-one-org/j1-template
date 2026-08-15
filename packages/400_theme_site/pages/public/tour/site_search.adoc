@@ -309,7 +309,7 @@ can put it anywhere in a search word.
 For example, the query below matches every page that contains a word
 beginning with *jek*:
 
-[source, text, role="noclip"]
+[source, text]
 ----
 jek*
 ----
@@ -354,7 +354,7 @@ document:
 
 [source, text]
 ----
-+title:jek* +coll*
++title:jek* +Template
 ----
 
 Below is a list of the fields you can search in.
@@ -371,7 +371,7 @@ Below is a list of the fields you can search in.
 Example: site_search
 [source, text]
 ----
-title:site_search
+title:Search
 ----
 
 |`tagline`
@@ -464,11 +464,11 @@ results and which words *must not*:
   absent".
 
 The query below matches pages that *must* contain the word *jekyll*
-*and* must *not* contain the word *collection*:
+*and* must *not* contain the word *Generators*:
 
 [source, text]
 ----
-+jekyll -collection
++jekyll -Generators
 ----
 
 To get the equivalent of a logical *AND* (every word must be present),
@@ -476,7 +476,7 @@ prefix every word with a plus sign:
 
 [source, text]
 ----
-+jekyll +collection
++jekyll +Generators
 ----
 
 

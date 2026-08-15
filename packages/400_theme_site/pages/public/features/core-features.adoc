@@ -70,7 +70,7 @@ resource_options:
 
 
 // Page content
-// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// -----------------------------------------------------------------------------
 [role="dropcap"]
 The tools you use matter. Modern, well-built tools are the engine behind
 every great website. Jekyll One uses the latest versions of the most

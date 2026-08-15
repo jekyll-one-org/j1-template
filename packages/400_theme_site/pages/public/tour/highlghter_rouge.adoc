@@ -157,6 +157,7 @@ To preview *all* themes supported by *J1 Template*, click the button
 [role="mt-4"]
 === Liquid code
 
+{% raw %}
 [source, liquid, role="noclip"]
 ----
 Hello {{ 'now' | date: "%Y %h" }}
@@ -166,6 +167,8 @@ Hello {{ 'now' | date: "%Y %h" }}
   {{ i }}
 {% endfor %}
 ----
+{% endraw %}
+
 
 [role="mt-4"]
 === Javascript code

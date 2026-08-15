@@ -32,9 +32,10 @@ regenerate:                             false
 permalink:                              /pages/public/features/theme_features/
 
 resources:                              [
-                                          amplitudejs, lightbox3, lightgallery,
-                                          masonry, gallery, photoswipejs,
-                                          swiperjs, videojs, vimeo-player
+                                          amplitude, amplitudejs, lightbox3,
+                                          lightgallery, masonry, multiPlayer,
+                                          gallery, photoswipejs, swiperjs,
+                                          videojs
                                         ]
 resource_options:
   - attic:
@@ -70,7 +71,7 @@ resource_options:
 
 
 // Page content
-// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// -----------------------------------------------------------------------------
 [role="dropcap"]
 There are many themes for Jekyll, and they cover most common types of
 websites. The downside is that most of them ask you to write code and
@@ -90,11 +91,15 @@ can put modern web pages together in just a few minutes. The main idea
 behind J1 is to give everyone a complete toolset, so you do not have to
 start with web development or web design from scratch.
 
+mdib mdib-read
+
 mdi:mouse-move-down[24px, md-blue ml-3 mr-2]
 <<Infinite scroll>> +
 mdi:speaker[24px, md-blue ml-3 mr-2]
 <<Audio Player>> +
-mdi:speaker[24px, md-blue ml-3 mr-2]
+mdi:video[24px, md-blue ml-3 mr-2]
+<<Video Player>> +
+mdi:read[24px, md-blue ml-3 mr-2]
 <<Screen reader>> +
 mdi:mouse-move-down[24px, md-blue ml-3 mr-2]
 <<Animate on Scroll>> +
@@ -140,6 +145,19 @@ audio tracks one at a time.
 
 .Emancipator · From Dusk To Dawn (Trip-Hop)
 amplitude::emancipator_large[role="mb-4"]
+
+
+[role="mt-4"]
+=== Video Player
+
+J1 MultiPlayer is a playlist-friendly player built using VideoJS. It lets
+every video use the same attractive, customizable player and adds a full
+playlist feature. Viewers can search, sort, play, rate videos, and pick up
+right where they left off.
+
+[role="mt-4"]
+.The Art Of Loving (2026)
+multiplayer::player_olivia_dean_video[role="mb-4"]
 
 
 [role="mt-5"]

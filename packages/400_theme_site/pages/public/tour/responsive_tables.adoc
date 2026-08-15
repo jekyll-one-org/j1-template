@@ -1,7 +1,7 @@
 ---
 title:                                  Responsive Tables
-title_extention:                        Tables on every screen size
-tagline:                                Present tables at its best
+title_extention:                        Data tables on every screen size
+tagline:                                Present data tables at its best
 
 date:                                   2026-05-07
 last_modified:                          2026-08-14

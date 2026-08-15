@@ -142,8 +142,6 @@ The J1 Template supports two kinds of video sources:
 An *embedded video player* shows the video right inside the page,
 without sending visitors to another site. This makes a smoother
 experience for your audience and keeps them on your website.
-
-[role="mb-4"]
 The video tag `<video>` is built into every modern browser. You do not
 have to load any *external player* to make it work.
 
@@ -233,14 +231,7 @@ Her international career started in 2026 with the album "The Art of Loving."
 
 [role="mt-4"]
 .The Art Of Loving (2026)
-multiplayer::player_olivia_dean[role="mb-4"]
-
-[TIP]
-====
-If you want a plain audio version of the album *The Art of Loving*, you can
-play all the audio on the page: 
-link:/pages/public/tour/audio_data/#olivia-dean[Audio Players].
-====
+multiplayer::player_olivia_dean_video[role="mb-4"]
 
 
 [role="mt-5"]
