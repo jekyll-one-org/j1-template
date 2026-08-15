@@ -25,14 +25,58 @@ Create a fixed version and use the comment
 Claude
 --------------------------------------------------------------------------------
 
-Now let me run the pre-edit audit (tag census, file identity) per the project convention:Baseline confirmed: `#5` ×6, `#6` ×7, `#7` free. Now the precise edit sites:Now applying the fixes. Edit 1 — disable the intermediate item-0 feed:Edit 2 — move the autoadvance arming (it needs the plugin to exist first):Edit 3 — the `syncedIndex < 0` fallback can no longer read `currentItem()` pre-feed:Edit 4 — the one-step feed replaces the currentItem jump, with autoadvance re-armed after:Edit 5 — keep the #32 settle documentation truthful:Edit 6 — same two-step pattern in `_resyncPluginPlaylist()` (mid-playback re-feed):Edit 7 — the adapter's `playlist-play` listener (multiPlayer.js): it forwards to `vp.loadAndPlay`, which does not exist in player.js, so playlist-card clicks are a silent no-op in cards mode:Now the validation pipeline — syntax, tag census, zero-deletion proof:# Root cause: "first item plays, correct poster shows"
+Now let me run the pre-edit audit (tag census, file identity) per the project
+convention:Baseline confirmed: `#5` ×6, `#6` ×7, `#7` free.
+Now the precise edit sites:Now applying the fixes.
 
-**Why localStorage decides it.** Without stored entries, the converted playlist is empty, so the plugin performs no source swap at all — the player simply keeps its creation source (the selected video) and plays correctly. With a stored playlist, the onReady setup does a **two-step feed**: `vjsPlayer.playlist(playlist)` auto-loads **item 0**, then `currentItem(syncedIndex)` re-loads the **selected** item. That puts two back-to-back `player.src()` swaps into a freshly created player. On the YouTube tech each swap becomes a `cueVideoById()` against the same just-readied `YT.Player` (youtube.js `setSrc → cueVideoById_`) — a burst of cue commands while the iframe is still settling on its construction video. The IFrame API processes these asynchronously and doesn't guarantee last-command-wins under such a burst, so the intermediate **item-0 cue can land last inside the iframe**. Every *synchronous* last-write-wins surface (poster, the #23 active-item marker, the #37 header title) is set by the final `currentItem()` call and correctly shows the **selected** entry — exactly the reported picture.
+Edit 1 — disable the intermediate item-0 feed.
+
+Edit 2 — move the autoadvance arming (it needs the plugin to exist first)
+
+Edit 3 — the `syncedIndex < 0` fallback can no longer read `currentItem()` pre-feed.
+
+Edit 4 — the one-step feed replaces the currentItem jump, with autoadvance re-armed after:
+
+Edit 5 — keep the #32 settle documentation truthful:
+
+Edit 6 — same two-step pattern in `_resyncPluginPlaylist()` (mid-playback re-feed):
+
+Edit 7 — the adapter's `playlist-play` listener (multiPlayer.js): it forwards
+to `vp.loadAndPlay`, which does not exist in player.js, so playlist-card
+clicks are a silent no-op in cards mode: Now the validation pipeline
+syntax, tag census, zero-deletion proof:
+
+
+# Root cause: "first item plays, correct poster shows"
+
+**Why localStorage decides it**
+Without stored entries, the converted playlist is empty, so the plugin
+performs no source swap at all — the player simply keeps its creation
+source (the selected video) and plays correctly.
+
+With a stored playlist, the onReady setup does a **two-step feed**:
+`vjsPlayer.playlist(playlist)` auto-loads **item 0**, then `currentItem(syncedIndex)`
+re-loads the **selected** item.
+
+That puts two back-to-back `player.src()` swaps into a freshly created player.
+On the YouTube tech each swap becomes a `cueVideoById()` against the same
+just-readied `YT.Player` (youtube.js `setSrc → cueVideoById_`) — a burst of
+cue commands while the iframe is still settling on its construction video.
+
+The IFrame API processes these asynchronously and doesn't guarantee
+last-command-wins under such a burst, so the intermediate **item-0 cue**
+can land last inside the iframe.
+
+Every *synchronous* last-write-wins surface (poster, the #23 active-item marker,
+the #3/7 header title) is set by the final `currentItem()` call and correctly
+shows the **selected** entry — exactly the reported picture.
+
 
 # The fix — "Claude - Fix J1 multiPlayer #7"
 
 The videojs-playlist plugin natively supports feed+select in **one call**:
 `playlist(list, index)` (core.js: `-1 !== r && o.currentItem(r)`). 
+
 With exactly one source selection, the outcome is order-independent — and
 for YouTube the tech then issues **zero** redundant cues, since
 `activeVideoId === url.videoId` already holds for the creation source.
@@ -102,6 +146,7 @@ The NEW one-step feed issues **zero** cue commands — the single `setSrc`
 carries the id the player was created with, so youtube.js's
 `activeVideoId === url.videoId` gate leaves the already-cued video untouched,
 making the outcome race-immune by construction.
+
 The simulation also confirms the `'playlistitem'` event for the selected item
 is captured exactly once (the #2/3 listener now sits before the feed), and
 the empty-list case (`playlist([], -1)`, the no-localStorage path) performs
@@ -109,3 +154,4 @@ no swap while still installing the plugin so `autoadvance` and
 `_resyncPluginPlaylist` stay callable.
 
 Both files are ready above. Header revision bumps are left to you as usual.
+
