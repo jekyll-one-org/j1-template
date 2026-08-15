@@ -99,10 +99,12 @@
   background-color: var(--ajs-theme-uno--dark-silver);
 }
 
+/* jadams: prevent x-overflow (depends on audio-duration formatn) */
 .large-player-title-list {
   display: block;
   max-height: 540px;
   overflow-y: scroll;
+  overflow-x: hidden;
 }
 
 .large-player-control-container {
@@ -254,10 +256,12 @@
   color: var(--ajs-theme-uno--gray-300);
 }
 
+/*jadams: margin-right depends on audio-duration format: 00:00:00 | 00:00 */
 .audio-rating {
   float: right;
   margin-top: 24px;
-  margin-right: -66px;
+  /* margin-right: -66px; */
+  margin-right: -42px;  /* format: 00:00 */
 }
 
 .song-name {

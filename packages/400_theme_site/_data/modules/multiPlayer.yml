@@ -29,7 +29,7 @@ settings:
   #
   enabled:                              true
 
-  # claude - Fix multiPlayer new select audio only #1
+  # Fix multiPlayer new select audio only #1
   # AUDIO ONLY playback (all players)
   #
   # Applies to YOUTUBE entries only; native .mp3/.mp4 sources are never
@@ -46,11 +46,39 @@ settings:
   #
   audio_only:                           false
 
+  # claude - Fix multiPlayer new select audio only 4
+  # FIXED AUDIO ONLY playback for players WITHOUT the title-bar switch
+  #
+  # Companion of 'audio_only' above. Where 'audio_only' SEEDS the switch (and
+  # is overruled by the first user toggle), 'set_audio_only' STATES the mode
+  # for players that show no switch at all, so a viewer who cannot toggle is
+  # never governed by a stale toggle left in localStorage.
+  #
+  # The key is read ONLY when the switch is not shown or is unavailable:
+  #
+  #   - ui_elements.audioOnlySwitch is false (the documented case), or
+  #   - the player is disabled, or the playlist is disabled, or the rendered
+  #     markup carries no playlist title bar the switch could be built into
+  #
+  # While the control is reachable it owns the state and this key is ignored
+  # completely — the switch precedence (localStorage <- audio_only <- false)
+  # then applies unchanged.
+  #
+  #   true      YouTube entries always play audio only
+  #   false     YouTube entries always play with video
+  #   (absent)  no opinion — behaviour identical to before this fix
+  #
+  # Same three-layer inheritance as every other key: defaults <- user
+  # settings <- per-player entries in multiPlayer_control.yml.
+  #
+  set_audio_only:                       false
+
   # Per-media value edited in the player's Edit Media Settings dialog
   # (fields "Start At"/"End At") or shipped in a preloaded playlist JSON,
   # then the YAML chain: defaults <- user settings <- per-player entries
   #
   # startAt:                            ""
+  # endAt:                              ""
 
   # PLAYLIST settings
   #
@@ -60,7 +88,7 @@ settings:
     cards:
       perRow:                           2
 
-  # claude - Modify J1 VideoPlayerfor export #1
+  # Modify J1 VideoPlayerfor export #1
   # UI interface settings (all players)
   #
   # MEDIA EXPORT switches. Both default to TRUE when the keys are absent, so
@@ -83,7 +111,7 @@ settings:
     playlist_download_button:           true
     playlist_download_all_button:       true
 
-    # claude - Fix multiPlayer new select audio only #1
+    # Fix multiPlayer new select audio only #1
     # AUDIO ONLY switch visibility (all players). Defaults to TRUE when the
     # key is absent, so existing configurations need no change. The control
     # is additionally SELF-HIDING: it only ever appears when the playlist

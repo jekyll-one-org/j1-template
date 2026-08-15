@@ -106,6 +106,43 @@ settings:
         name:                           emancipator
 
     # --------------------------------------------------------------------------
+    # LARGE player, Emancipator - Dusk to Dawn
+    # --------------------------------------------------------------------------
+    #
+    - player:
+
+      # ------------------------------------------------------------------------
+      # GENERAL settings
+      #    
+      enabled:                          true
+
+      # ------------------------------------------------------------------------
+      # PLAYER settings
+      #
+      id:                               emancipator_yt_large
+      type:                             large
+      source:                           video
+
+      # ------------------------------------------------------------------------
+      # PRIVACY settings
+      #
+      privacy_enhanced:                 true                                    # enable|disable privacy-enhanced host 'youtube-nocookie.com'
+
+      # ------------------------------------------------------------------------
+      # PLAYLIST settings
+      #      
+      playlist:
+        name:                           dusk_to_dawn_yt
+
+      # ------------------------------------------------------------------------
+      # PLUGIN settings
+      #
+      plugin_manager:
+        enabled:                        true
+        plugins:                        [ ytp ]
+
+
+    # --------------------------------------------------------------------------
     # LARGE player, Olivia Dean
     # --------------------------------------------------------------------------
     #

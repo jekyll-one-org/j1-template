@@ -6,7 +6,7 @@ regenerate:                             true
 
 {% comment %}
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/adapter/js/multiPlayer.js (29)
+ # ~/assets/theme/j1/adapter/js/multiPlayer.js (30)
  # J1 Adapter for the module multiPlayer
  #
  # Product/Info:
@@ -304,7 +304,7 @@ regenerate:                             true
 
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/adapter/js/multiPlayer.js (29)
+ # ~/assets/theme/j1/adapter/js/multiPlayer.js (30)
  # J1 Adapter for the module multiPlayer
  #
  # Product/Info:
@@ -1213,6 +1213,34 @@ j1.adapter.multiPlayer = ((j1, window) => {
       // All gates, ids, localStorage keys and the option chain handed over
       // by this adapter are UNCHANGED — the fix is module-internal
       // (createVideoJsPlayer + audioOnlySwitchHandler live-apply).
+
+      // claude - Fix multiPlayer new select audio only 4
+      // ADDENDUM (documentation only, NO adapter code change): a THIRD config
+      // key joins the audio-only chain — set_audio_only. It states the
+      // audio-only mode DECLARATIVELY for players that show no switch:
+      //
+      //   settings.audio_only            — seeds the initial switch state
+      //                                    (localStorage user toggle wins)
+      //   settings.set_audio_only        — the FIXED state used when the
+      //                                    switch is not shown or is
+      //                                    unavailable; ignored while the
+      //                                    control is reachable, and ignored
+      //                                    entirely when the key is absent
+      //   ui_elements.audioOnlySwitch    — suppresses the control when set
+      //                                    to false (absent-key default TRUE)
+      //
+      // No adapter code is required because set_audio_only is a plain scalar
+      // on the SAME three layers the existing keys use — defaults <- user
+      // settings <- per-player control — and getInstanceOptions() builds that
+      // chain with _deepMerge() over the WHOLE YAML payload, not over a key
+      // whitelist. The key therefore arrives on the per-instance options this
+      // adapter already hands to the module through setAdapterOptions()
+      // (step 1) and is read there by _resolveSetAudioOnly().
+      //
+      // Declare it in all three files (mirroring audio_only):
+      //   _data/modules/defaults/multiPlayer.yml  settings.set_audio_only
+      //   _data/modules/multiPlayer.yml           settings.set_audio_only
+      //   _data/modules/multiPlayer_control.yml   players[].set_audio_only
 
       // 6. playlistLoopSwitchHandler — loop-mode toggle
       //

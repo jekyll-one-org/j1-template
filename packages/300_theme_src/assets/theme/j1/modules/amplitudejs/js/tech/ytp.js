@@ -6,7 +6,7 @@ regenerate:                             true
 
 {% comment %}
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/modules/amplitudejs/js/tech/ytp.js (46)
+ # ~/assets/theme/j1/modules/amplitudejs/js/tech/ytp.js (48)
  # AmplitudeJS V5 Tech for J1 Template
  #
  # Product/Info:
@@ -84,7 +84,7 @@ regenerate:                             true
 
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/modules/amplitudejs/js/plugins/tech/ytp.js (46)
+ # ~/assets/theme/j1/modules/amplitudejs/js/plugins/tech/ytp.js (48)
  # AmplitudeJS V5 Plugin|Tech for J1 Template
  #
  # Product/Info:
@@ -576,6 +576,187 @@ regenerate:                             true
       !Array.isArray(value)
     );
   } // END ytpIsPlainObject
+
+  // ---------------------------------------------------------------------------
+  // Fix Amplitude plugin #5
+  // ytpVideoIdFromURL(songURL, context)
+  //
+  // ROBUST YouTube video-ID extraction.
+  //
+  // ROOT CAUSE (seen for playlist dusk_to_dawn_yt, trackID 4): the plugin
+  // derived the video ID with the naive expression
+  //
+  //   ytpVideoID = songURL.split('=')[1];
+  //
+  // which returns the text between the FIRST '=' and the NEXT '=' -- whatever
+  // that text happens to be. It therefore
+  //
+  //   - returns 'eotOxW5QU8Y&list' for '...watch?v=eotOxW5QU8Y&list=OLAK...'
+  //     (ANY additional query parameter breaks the ID),
+  //   - returns undefined for short links '//youtu.be/<id>' and for embed
+  //     links '//youtube.com/embed/<id>' (no '=' contained at all),
+  //   - and silently accepts MALFORMED IDs coming from the media config,
+  //     e.g. the 10-character 'CQBzanq7dY' where the true ID is
+  //     '-CQBzanq7dY' (the leading hyphen got lost in amplitude_media.yml).
+  //     The YT IFrame API answers such an ID with error 101|150,
+  //     'video not allowed'.
+  //
+  // The helper matches the known YouTube URL forms against the exact
+  // 11-character ID alphabet [A-Za-z0-9_-], falls back to the LEGACY split
+  // for unknown URL forms (so nothing that worked before can break) and logs
+  // a precise error naming the offending URL if the result does not look
+  // like a valid video ID. The J1 MultiPlayer module uses the very same
+  // detection logic (YOUTUBE_PATTERNS in player.js) -- which is why the
+  // MultiPlayer never runs into this issue.
+  // ---------------------------------------------------------------------------
+  //
+  const YTP_VIDEO_ID_RE       = /^[A-Za-z0-9_-]{11}$/;
+  const YTP_VIDEO_ID_PATTERNS = [
+    /[?&]v=([A-Za-z0-9_-]{11})(?![A-Za-z0-9_-])/,
+    /youtu\.be\/([A-Za-z0-9_-]{11})(?![A-Za-z0-9_-])/,
+    /\/embed\/([A-Za-z0-9_-]{11})(?![A-Za-z0-9_-])/,
+    /\/shorts\/([A-Za-z0-9_-]{11})(?![A-Za-z0-9_-])/,
+    /\/v\/([A-Za-z0-9_-]{11})(?![A-Za-z0-9_-])/,
+    /^([A-Za-z0-9_-]{11})$/
+  ];
+
+  function ytpVideoIdFromURL(songURL, context) {
+    var url, i, match, legacyID, source;
+
+    source  = (context === undefined || context === null || context === '') ? 'unknown source' : context;
+    url     = (songURL === undefined || songURL === null) ? '' : String(songURL).trim();
+
+    if (url.length === 0) {
+      logger.error('\n' + `video ID NOT detectable, EMPTY media url (${source})`);
+      return '';
+    }
+
+    for (i = 0; i < YTP_VIDEO_ID_PATTERNS.length; i++) {
+      match = url.match(YTP_VIDEO_ID_PATTERNS[i]);
+      if (match) {
+        return match[1];
+      }
+    }
+
+    // LEGACY fallback: keep the previous behaviour for UNKNOWN url forms
+    legacyID = url.split('=')[1];
+
+    if (legacyID === undefined || !YTP_VIDEO_ID_RE.test(legacyID)) {
+      logger.error('\n' + `MALFORMED YouTube video ID '${legacyID}' detected for media url: ${url} (${source})`);
+      logger.error('\n' + 'CHECK media configuration: a YouTube video ID consists of EXACTLY 11 characters [A-Za-z0-9_-]');
+    }
+
+    return (legacyID === undefined) ? '' : legacyID;
+  } // END ytpVideoIdFromURL
+
+  // ---------------------------------------------------------------------------
+  // Fix Amplitude plugin #5
+  // ytpApiErrorSet|ytpApiErrorGet|ytpApiErrorClear|ytpApiErrorGate
+  //
+  // PER-PLAYER, SELF-CLEARING YT API error state.
+  //
+  // ROOT CAUSE of the "player is broken from then on" behaviour: the API
+  // error code was kept in ONE GLOBAL slot
+  //
+  //   j1.adapter.<host>.data.ytpGlobals.ytApiError
+  //
+  // that was written by EVERY player of the page and cleared in EXACTLY ONE
+  // place -- onPlayerReady(), which fires ONCE per player when the iframe is
+  // created. A single failing video therefore LATCHED the flag for the whole
+  // page lifetime: all following play|next|previous|song-click actions ran
+  // into the guard, logged 'playing playlist|trackID failed' and returned
+  // without doing anything -- for the failing player AND for every OTHER YT
+  // player in the same page (e.g. olivia_dean_yt_large).
+  //
+  // The state is now stored PER PLAYER (ytPlayers[<id>].apiError) and read
+  // through ytpApiErrorGate(), which logs the failure ONCE and then CLEARS
+  // it, so the NEXT user action starts from a clean state. The former global
+  // slots (ytpGlobals.ytApiError, <module>.data.ytp.apiError) are still
+  // written as MIRRORS to keep the published data API compatible.
+  // ---------------------------------------------------------------------------
+  function ytpApiErrorSet(playerID, code, videoID) {
+    var players = ytpHostData().ytPlayers || {};
+
+    ytpHostData().ytpGlobals = ytpHostData().ytpGlobals || {};
+
+    if (playerID && players[playerID] !== undefined) {
+      players[playerID].apiError        = code;
+      players[playerID].apiErrorVideoID = (videoID === undefined) ? '' : videoID;
+    }
+
+    // mirrors (kept for backwards compatibility of the published data API)
+    ytpHostData().ytpGlobals['ytApiError']         = code;
+    ytpHostData().ytpGlobals['ytApiErrorPlayerID'] = (playerID === undefined) ? '' : playerID;
+
+    ytpHostModuleYtp().apiError = code;
+    if (playerID && ytpHostModuleYtp().players[playerID] !== undefined) {
+      ytpHostModuleYtp().players[playerID].apiError = code;
+    }
+  } // END ytpApiErrorSet
+
+  function ytpApiErrorGet(playerID) {
+    var players = ytpHostData().ytPlayers || {};
+
+    if (playerID && players[playerID] !== undefined && typeof players[playerID].apiError === 'number') {
+      return players[playerID].apiError;
+    }
+
+    // an error of ANOTHER player must NEVER disable this player
+    return 0;
+  } // END ytpApiErrorGet
+
+  function ytpApiErrorVideoID(playerID) {
+    var players = ytpHostData().ytPlayers || {};
+
+    if (playerID && players[playerID] !== undefined && players[playerID].apiErrorVideoID) {
+      return players[playerID].apiErrorVideoID;
+    }
+    return '';
+  } // END ytpApiErrorVideoID
+
+  function ytpApiErrorClear(playerID) {
+    var players = ytpHostData().ytPlayers || {};
+    var globals, owner;
+
+    ytpHostData().ytpGlobals = ytpHostData().ytpGlobals || {};
+    globals = ytpHostData().ytpGlobals;
+    owner   = globals['ytApiErrorPlayerID'];
+
+    if (playerID && players[playerID] !== undefined) {
+      players[playerID].apiError        = 0;
+      players[playerID].apiErrorVideoID = '';
+    }
+
+    // clear the MIRRORS only if they belong to the player cleared here
+    if (!playerID || owner === undefined || owner === '' || owner === playerID) {
+      globals['ytApiError']         = 0;
+      globals['ytApiErrorPlayerID'] = '';
+      ytpHostModuleYtp().apiError   = 0;
+    }
+
+    if (playerID && ytpHostModuleYtp().players[playerID] !== undefined) {
+      ytpHostModuleYtp().players[playerID].apiError = 0;
+    }
+  } // END ytpApiErrorClear
+
+  function ytpApiErrorGate(playerID, playlist, songIndex) {
+    var code, trackID, videoID;
+
+    code = ytpApiErrorGet(playerID);
+
+    if (code > 0) {
+      trackID = songIndex + 1;
+      videoID = ytpApiErrorVideoID(playerID);
+
+      logger.error('\n' + `playing playlist|trackID failed: ${playlist}|${trackID} on API error '${YT_PLAYER_ERROR_NAMES[code]}'` + ((videoID) ? ` for VideoID: '${videoID}'` : ''));
+      logger.warn('\n' + `player ${playerID} stays OPERATIONAL, API error state cleared`);
+
+      // UN-LATCH: the NEXT user action starts from a clean state
+      ytpApiErrorClear(playerID);
+    }
+
+    return code;
+  } // END ytpApiErrorGate
 
   // ---------------------------------------------------------------------------
   // ytpGetValue(obj, path, fallback)
@@ -1299,30 +1480,26 @@ regenerate:                             true
     if (songIndex <= songs.length - 1) {
       songMetaData  = songs[songIndex];
       songURL       = songMetaData.url;
-      ytpVideoID    = songURL.split('=')[1];
+      ytpVideoID    = ytpVideoIdFromURL(songURL, 'loadVideo');
 
-      // save YT player data for later use (e.g. events)
-      // Fix Amplitude plugin #2
-      // Original (deprecated, preserved for reference):
-      // j1.adapter.amplitude.data.ytPlayers[playerID].activeIndex = songIndex;
-      // j1.adapter.amplitude.data.ytPlayers[playerID].videoID     = ytpVideoID;
       ytpHostData().ytPlayers[playerID].activeIndex = songIndex;
       ytpHostData().ytPlayers[playerID].videoID     = ytpVideoID;
 
       // save YT player data for later use (e.g. events)
       // -----------------------------------------------------------------------
-      // Fix AudioPlayer #3
-      // Original (deprecated, preserved for reference):
-      // j1.modules.amplitudejs.data.ytp.previousSongIndex = songIndex;
-      // j1.modules.amplitudejs.data.ytp.players[playerID].activeIndex = songIndex;
-      // j1.modules.amplitudejs.data.ytp.players[playerID].previousIndex = songIndex - 1;
-      // j1.modules.amplitudejs.data.ytp.players[playerID].videoID = ytpVideoID;
+
       ytpHostModuleYtp().previousSongIndex = songIndex;
       ytpHostModuleYtp().players[playerID].activeIndex = songIndex;
       ytpHostModuleYtp().players[playerID].previousIndex = songIndex - 1;
       ytpHostModuleYtp().players[playerID].videoID = ytpVideoID;
 
       isDev && logger.debug('\n' + `SWITCH video on loadNextVideo at trackID|VideoID: ${trackID}|${ytpVideoID}`);
+
+      // Fix Amplitude plugin #5
+      // A NEW video gets a CLEAN error state: a failure of the PREVIOUS
+      // track must not block the track loaded here.
+      //
+      ytpApiErrorClear(playerID);
       ytPlayer.loadVideoById(ytpVideoID);
      
       // delay after switch video
@@ -1482,7 +1659,7 @@ regenerate:                             true
               var ytpHeight   = ('{{player.yt_player.height}}'.length > 0)   ? '{{player.yt_player.height}}'    : '{{amplitude_default.player.yt_player.height}}';
               var ytpWidth    = ('{{player.yt_player.width}}'.length > 0)    ? '{{player.yt_player.width}}'     : '{{amplitude_default.player.yt_player.width}}';
 
-              // claude - optimize J1 third-party cookies #1
+              // Optimize J1 third-party cookies #1
               // Per-player privacy-enhanced mode for the (hidden) YT video
               // iframe. Resolution order: per-player YAML key
               // yt_player.privacy_enhanced <- default settings
@@ -1505,7 +1682,7 @@ regenerate:                             true
 
               var ytpVideoID = (ytPlayerErrorTest) ? 'invalidVideoID' : activeSongMetadata.url.split('=')[1];
               ytPlayer = new YT.Player('iframe_{{player.id}}', {
-                // claude - optimize J1 third-party cookies #1
+                // Optimize J1 third-party cookies #1
                 // Serve the (hidden) YT video iframe from the privacy-enhanced
                 // host www.youtube-nocookie.com. The classic host
                 // youtube.com sets several third-party cookies already on
@@ -1871,7 +2048,7 @@ regenerate:                             true
       var ytpHeight   = String(ytpGetValue(playerConfig, 'yt_player.height',   ytpDefault('player.yt_player.height', 0)));
       var ytpWidth    = String(ytpGetValue(playerConfig, 'yt_player.width',    ytpDefault('player.yt_player.width', 0)));
 
-      // claude - optimize J1 third-party cookies #1
+      // Optimize J1 third-party cookies #1
       // Per-player privacy-enhanced mode for the (hidden) YT video
       // iframe. Resolution order: per-player YAML key
       // yt_player.privacy_enhanced <- default settings
@@ -1889,9 +2066,9 @@ regenerate:                             true
       ytpContainer.innerHTML      = '<div id="iframe_' + playerId + '"></div>';
       ytpContainer.style.cssText  = 'display:none';
 
-      var ytpVideoID = (ytPlayerErrorTest) ? 'invalidVideoID' : activeSongMetadata.url.split('=')[1];
+      var ytpVideoID = (ytPlayerErrorTest) ? 'invalidVideoID' : ytpVideoIdFromURL(activeSongMetadata.url, 'configureYtPlayer|' + playerId);
       ytPlayer = new YT.Player('iframe_' + playerId, {
-        // claude - optimize J1 third-party cookies #1
+        // Optimize J1 third-party cookies #1
         // Serve the (hidden) YT video iframe from the privacy-enhanced
         // host www.youtube-nocookie.com. The classic host
         // youtube.com sets several third-party cookies already on
@@ -1961,22 +2138,26 @@ regenerate:                             true
 
       eventData = event.data;
       ytPlayer  = event.target;
-      videoID   = ytPlayer.options.videoId;
+
+      // Fix Amplitude plugin #5
+      // ytPlayer.options.videoId is the video the iframe was CREATED with. It
+      // is NOT updated by loadVideoById(), so every error of a LATER track was
+      // reported for the FIRST video of the playlist. getVideoData().video_id
+      // returns the video the player is CURRENTLY loading|playing.
+      // Original (deprecated, preserved for reference):
+      // videoID   = ytPlayer.options.videoId;
+      videoID   = (typeof ytPlayer.getVideoData === 'function' && ytPlayer.getVideoData() && ytPlayer.getVideoData().video_id)
+                ? ytPlayer.getVideoData().video_id
+                : ytPlayer.options.videoId;
 
       logger.error('\n' + `YT API Error '${YT_PLAYER_ERROR_NAMES[eventData]}' for VideoID: '${videoID}'`);
 
-      // save YT player GLOBAL data for later use (e.g. events)
-      // Fix Amplitude plugin #2
-      // Original (deprecated, preserved for reference):
-      // j1.adapter.amplitude.data.ytpGlobals['ytApiError'] = eventData;
-      ytpHostData().ytpGlobals['ytApiError'] = eventData;
-
-      // save amplitudejs data for later use (e.g. events)
-      // -----------------------------------------------------------------------
-      // Fix AudioPlayer #3
-      // Original (deprecated, preserved for reference):
-      // j1.modules.amplitudejs.data.ytp.apiError = eventData;
-      ytpHostModuleYtp().apiError = eventData;
+      // Fix Amplitude plugin #5
+      // The error is stored PER PLAYER (and mirrored to the former global
+      // slots) so it can NEVER disable another player of the same page and is
+      // cleared again by ytpApiErrorGate() on the next user action.
+      //
+      ytpApiErrorSet(playerId, eventData, videoID);
 
     }
 
@@ -2035,6 +2216,11 @@ regenerate:                             true
       // j1.adapter.amplitude.data.ytpGlobals['ytApiError']    = 0;
       ytpHostData().ytpGlobals['ytPlayerReady'] = ytPlayerReady;
       ytpHostData().ytpGlobals['ytApiError']    = 0;
+
+      // Fix Amplitude plugin #5
+      // Reset the PER-PLAYER error slot as well (the global slot above is a
+      // mirror only from now on).
+      ytpApiErrorClear(playerId);
 
       // save amplitudejs data for later use (e.g. events)
       // -----------------------------------------------------------------------
@@ -2189,6 +2375,10 @@ regenerate:                             true
           doNothingOnStateChange(YT_PLAYER_STATE.PAUSED);
           break;
         case YT_PLAYER_STATE.PLAYING:
+          // Fix Amplitude plugin #5
+          // The video PLAYS: any error state left from an earlier track is
+          // obsolete and must not survive into the next user action.
+          ytpApiErrorClear(playerID);
           processOnStateChangePlaying(event, playlist, songIndex);
           break;
         case YT_PLAYER_STATE.ENDED:
@@ -2545,8 +2735,12 @@ regenerate:                             true
         activeVideoElement.startTS        = activeSong.start;
         activeVideoElement.url            = activeSong.url;
 
+        // Fix Amplitude plugin #5
+        // Original (deprecated, preserved for reference):
+        // var videoArray                    = activeSong.url.split('=');
+        // activeVideoElement.videoID        = videoArray[1];
         var videoArray                    = activeSong.url.split('=');
-        activeVideoElement.videoID        = videoArray[1];
+        activeVideoElement.videoID        = ytpVideoIdFromURL(activeSong.url, 'setActiveSong');
       }
     }
   }
@@ -3307,14 +3501,23 @@ regenerate:                             true
               // Fix Amplitude plugin #2
               // Original (deprecated, preserved for reference):
               // if (j1.adapter.amplitude.data.ytpGlobals.ytApiError > 0) {
-              if (ytpHostData().ytpGlobals.ytApiError > 0) {
+              // Fix Amplitude plugin #5
+              // Original (deprecated, preserved for reference):
+              // if (ytpHostData().ytpGlobals.ytApiError > 0) {
+              if (ytpApiErrorGate(playerID, playlist, songIndex) > 0) {
                 // do nothing on API errors
-                var trackID = songIndex + 1;
+                const trackID = songIndex + 1;
                 // Fix Amplitude plugin #2
                 // Original (deprecated, preserved for reference):
                 // logger.error('\n' + `DISABLED player for playlist|trackID: ${playlist}|${trackID} on API error '${YT_PLAYER_ERROR_NAMES[j1.adapter.amplitude.data.ytpGlobals.ytApiError]}'`);
-                logger.error('\n' + `DISABLED player for playlist|trackID: ${playlist}|${trackID} on API error '${YT_PLAYER_ERROR_NAMES[ytpHostData().ytpGlobals.ytApiError]}'`);
 
+                // jadams
+                // Fix Amplitude plugin #5
+                // Message and un-latch are handled by ytpApiErrorGate() now
+                // Original (deprecated, preserved for reference):
+                // logger.error('\n' + `playing playlist|trackID failed: ${playlist}|${trackID} on API error '${YT_PLAYER_ERROR_NAMES[ytpHostData().ytpGlobals.ytApiError]}'`);
+
+                // do nothing on API errors
                 return;
               }
 
@@ -3358,12 +3561,20 @@ regenerate:                             true
                   // Fix Amplitude plugin #2
                   // Original (deprecated, preserved for reference):
                   // if (j1.adapter.amplitude.data.ytpGlobals.ytApiError > 0) {
-                  if (ytpHostData().ytpGlobals.ytApiError > 0) {
+                  // Fix Amplitude plugin #5
+                  // Original (deprecated, preserved for reference):
+                  // if (ytpHostData().ytpGlobals.ytApiError > 0) {
+                  if (ytpApiErrorGate(playerID, playlist, songIndex) > 0) {
                     var trackID = songIndex + 1;
                     // Fix Amplitude plugin #2
                     // Original (deprecated, preserved for reference):
                     // logger.error('\n' + `DISABLED player for playlist|trackID: ${playlist}|${trackID} on API error '${YT_PLAYER_ERROR_NAMES[j1.adapter.amplitude.data.ytpGlobals.ytApiError]}'`);
-                    logger.error('\n' + `DISABLED player for playlist|trackID: ${playlist}|${trackID} on API error '${YT_PLAYER_ERROR_NAMES[ytpHostData().ytpGlobals.ytApiError]}'`);
+
+                    // jadams
+                    // Fix Amplitude plugin #5
+                    // Message and un-latch are handled by ytpApiErrorGate() now
+                    // Original (deprecated, preserved for reference):
+                    // logger.error('\n' + `playing playlist|trackID failed: ${playlist}|${trackID} on API error '${YT_PLAYER_ERROR_NAMES[ytpHostData().ytpGlobals.ytApiError]}'`);
 
                     // do nothing on API errors
                     return;
@@ -3527,14 +3738,24 @@ regenerate:                             true
               // Fix Amplitude plugin #2
               // Original (deprecated, preserved for reference):
               // if (j1.adapter.amplitude.data.ytpGlobals.ytApiError > 0) {
-              if (ytpHostData().ytpGlobals.ytApiError > 0) {
+              // Fix Amplitude plugin #5
+              // Original (deprecated, preserved for reference):
+              // if (ytpHostData().ytpGlobals.ytApiError > 0) {
+              if (ytpApiErrorGate(playerID, playlist, songIndex) > 0) {
                 // do nothing on API errors
                 var trackID = songIndex + 1;
                 // Fix Amplitude plugin #2
                 // Original (deprecated, preserved for reference):
                 // logger.error('\n' + `DISABLED player for playlist|trackID: ${playlist}|${trackID} on API error '${YT_PLAYER_ERROR_NAMES[j1.adapter.amplitude.data.ytpGlobals.ytApiError]}'`);
-                logger.error('\n' + `DISABLED player for playlist|trackID: ${playlist}|${trackID} on API error '${YT_PLAYER_ERROR_NAMES[ytpHostData().ytpGlobals.ytApiError]}'`);
+                // logger.error('\n' + `DISABLED player for playlist|trackID: ${playlist}|${trackID} on API error '${YT_PLAYER_ERROR_NAMES[ytpHostData().ytpGlobals.ytApiError]}'`);
 
+                // jadams
+                // Fix Amplitude plugin #5
+                // Message and un-latch are handled by ytpApiErrorGate() now
+                // Original (deprecated, preserved for reference):
+                // logger.error('\n' + `playing playlist|trackID failed: ${playlist}|${trackID} on API error '${YT_PLAYER_ERROR_NAMES[ytpHostData().ytpGlobals.ytApiError]}'`);
+
+                // do nothing on API errors
                 return;
               }
 
@@ -3556,7 +3777,10 @@ regenerate:                             true
               // set song (video)^meta data
               songMetaData  = songs[songIndex];
               songURL       = songMetaData.url;
-              ytpVideoID    = songURL.split('=')[1];
+              // Fix Amplitude plugin #5
+              // Original (deprecated, preserved for reference):
+              // ytpVideoID    = songURL.split('=')[1];
+              ytpVideoID    = ytpVideoIdFromURL(songURL, 'largePlayerNextButton|' + playerID);
 
               // load next video
               // ---------------------------------------------------------------
@@ -3594,6 +3818,9 @@ regenerate:                             true
 
               trackID = songIndex + 1;
               isDev && logger.debug('\n' + `SWITCH video for PlayerNextButton at trackID|VideoID: ${trackID}|${ytpVideoID}`);
+              // Fix Amplitude plugin #5
+              // A NEW video gets a CLEAN error state (see loadVideo()).
+              ytpApiErrorClear(playerID);
               ytPlayer.loadVideoById(ytpVideoID);
 
               // delay after switch video
@@ -3677,14 +3904,24 @@ regenerate:                             true
             // Fix Amplitude plugin #2
             // Original (deprecated, preserved for reference):
             // if (j1.adapter.amplitude.data.ytpGlobals.ytApiError > 0) {
-            if (ytpHostData().ytpGlobals.ytApiError > 0) {
+            // Fix Amplitude plugin #5
+            // Original (deprecated, preserved for reference):
+            // if (ytpHostData().ytpGlobals.ytApiError > 0) {
+            if (ytpApiErrorGate(playerID, playlist, songIndex) > 0) {
               // do nothing on API errors
               var trackID = songIndex + 1;
               // Fix Amplitude plugin #2
               // Original (deprecated, preserved for reference):
               // logger.error('\n' + `DISABLED player for playlist|trackID: ${playlist}|${trackID} on API error '${YT_PLAYER_ERROR_NAMES[j1.adapter.amplitude.data.ytpGlobals.ytApiError]}'`);
-              logger.error('\n' + `DISABLED player for playlist|trackID: ${playlist}|${trackID} on API error '${YT_PLAYER_ERROR_NAMES[ytpHostData().ytpGlobals.ytApiError]}'`);
+              // logger.error('\n' + `DISABLED player for playlist|trackID: ${playlist}|${trackID} on API error '${YT_PLAYER_ERROR_NAMES[ytpHostData().ytpGlobals.ytApiError]}'`);
 
+              // jadams
+              // Fix Amplitude plugin #5
+              // Message and un-latch are handled by ytpApiErrorGate() now
+              // Original (deprecated, preserved for reference):
+              // logger.error('\n' + `playing playlist|trackID failed: ${playlist}|${trackID} on API error '${YT_PLAYER_ERROR_NAMES[ytpHostData().ytpGlobals.ytApiError]}'`);
+            
+              // do nothing on API errors
               return;
             }
 
@@ -3706,7 +3943,10 @@ regenerate:                             true
             // set song (video)^meta data
             songMetaData  = songs[songIndex];
             songURL       = songMetaData.url;
-            ytpVideoID    = songURL.split('=')[1];
+            // Fix Amplitude plugin #5
+            // Original (deprecated, preserved for reference):
+            // ytpVideoID    = songURL.split('=')[1];
+            ytpVideoID    = ytpVideoIdFromURL(songURL, 'largePlayerPreviousButton|' + playerID);
 
             // save YT player GLOBAL data for later use (e.g. events)
             // Fix Amplitude plugin #2
@@ -3759,6 +3999,9 @@ regenerate:                             true
 
             trackID = songIndex + 1;
             isDev && logger.debug('\n' + `SWITCH video for PlayePreviousButton at trackID|VideoID: ${trackID}|${ytpVideoID}`);
+            // Fix Amplitude plugin #5
+            // A NEW video gets a CLEAN error state (see loadVideo()).
+            ytpApiErrorClear(playerID);
             ytPlayer.loadVideoById(ytpVideoID);
 
             // delay after switch video
@@ -3851,7 +4094,10 @@ regenerate:                             true
           songs               = ytpHostData().ytPlayers[playerID].songs;
           songMetaData        = songs[songIndex];
           songURL             = songMetaData.url;
-          ytpVideoID          = (ytPlayerErrorTest) ? 'invalidVideoID' : songURL.split('=')[1];
+          // Fix Amplitude plugin #5
+          // Original (deprecated, preserved for reference):
+          // ytpVideoID          = (ytPlayerErrorTest) ? 'invalidVideoID' : songURL.split('=')[1];
+          ytpVideoID          = (ytPlayerErrorTest) ? 'invalidVideoID' : ytpVideoIdFromURL(songURL, 'largePlayerSongContainer|' + playerID);
           // Fix Amplitude plugin #2
           // Original (deprecated, preserved for reference):
           // ytPlayer            = j1.adapter.amplitude.data.ytPlayers[playerID].player;
@@ -3872,12 +4118,21 @@ regenerate:                             true
               // Fix Amplitude plugin #2
               // Original (deprecated, preserved for reference):
               // if (j1.adapter.amplitude.data.ytpGlobals.ytApiError > 0) {
-              if (ytpHostData().ytpGlobals.ytApiError > 0) {
+              // Fix Amplitude plugin #5
+              // Original (deprecated, preserved for reference):
+              // if (ytpHostData().ytpGlobals.ytApiError > 0) {
+              if (ytpApiErrorGate(playerID, playlist, songIndex) > 0) {
                 var trackID = songIndex + 1;
                 // Fix Amplitude plugin #2
                 // Original (deprecated, preserved for reference):
                 // logger.error('\n' + `DISABLED player for playlist|trackID: ${playlist}|${trackID} on API error '${YT_PLAYER_ERROR_NAMES[j1.adapter.amplitude.data.ytpGlobals.ytApiError]}'`);
-                logger.error('\n' + `DISABLED player for playlist|trackID: ${playlist}|${trackID} on API error '${YT_PLAYER_ERROR_NAMES[ytpHostData().ytpGlobals.ytApiError]}'`);
+                // logger.error('\n' + `DISABLED player for playlist|trackID: ${playlist}|${trackID} on API error '${YT_PLAYER_ERROR_NAMES[ytpHostData().ytpGlobals.ytApiError]}'`);
+
+                // jadams
+                // Fix Amplitude plugin #5
+                // Message and un-latch are handled by ytpApiErrorGate() now
+                // Original (deprecated, preserved for reference):
+                // logger.error('\n' + `playing playlist|trackID failed: ${playlist}|${trackID} on API error '${YT_PLAYER_ERROR_NAMES[ytpHostData().ytpGlobals.ytApiError]}'`);
 
                 // do nothing on API errors
                 return;
@@ -4066,12 +4321,21 @@ regenerate:                             true
                 // Fix Amplitude plugin #2
                 // Original (deprecated, preserved for reference):
                 // if (j1.adapter.amplitude.data.ytpGlobals.ytApiError > 0) {
-                if (ytpHostData().ytpGlobals.ytApiError > 0) {
+                // Fix Amplitude plugin #5
+                // Original (deprecated, preserved for reference):
+                // if (ytpHostData().ytpGlobals.ytApiError > 0) {
+                if (ytpApiErrorGate(playerID, playlist, songIndex) > 0) {
                   var trackID = songIndex + 1;
                   // Fix Amplitude plugin #2
                   // Original (deprecated, preserved for reference):
                   // logger.error('\n' + `DISABLED player for playlist|trackID: ${playlist}|${trackID} on API error '${YT_PLAYER_ERROR_NAMES[j1.adapter.amplitude.data.ytpGlobals.ytApiError]}'`);
-                  logger.error('\n' + `DISABLED player for playlist|trackID: ${playlist}|${trackID} on API error '${YT_PLAYER_ERROR_NAMES[ytpHostData().ytpGlobals.ytApiError]}'`);
+                  // logger.error('\n' + `DISABLED player for playlist|trackID: ${playlist}|${trackID} on API error '${YT_PLAYER_ERROR_NAMES[ytpHostData().ytpGlobals.ytApiError]}'`);
+
+                  // jadams
+                  // Fix Amplitude plugin #5
+                  // Message and un-latch are handled by ytpApiErrorGate() now
+                  // Original (deprecated, preserved for reference):
+                  // logger.error('\n' + `playing playlist|trackID failed: ${playlist}|${trackID} on API error '${YT_PLAYER_ERROR_NAMES[ytpHostData().ytpGlobals.ytApiError]}'`);
 
                   // do nothing on API errors
                   return;

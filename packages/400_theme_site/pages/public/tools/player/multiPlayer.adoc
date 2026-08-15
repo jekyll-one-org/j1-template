@@ -106,6 +106,39 @@ When opened, the playlist panel shows:
 Which of these appear depends on the matching options in the `playlist:`
 block described above.
 
+// claude - Fix multiPlayer new select audio only 4
+[role="mt-4"]
+=== Audio Only
+
+YouTube videos can be played as *audio only*. The video is not shown -- the
+player displays the poster picture instead -- and only the smallest amount of
+video data is loaded. The sound plays as usual. Native audio (`mp3`) and
+native video (`mp4`) files are never affected by this setting.
+
+The playlist panel carries a small *Audio* switch next to the list / cards
+switch. It appears only when the playlist holds at least one YouTube video, and
+the viewer's choice is remembered for that player.
+
+Two settings control the feature:
+
+`ui_elements.audioOnlySwitch`::
+  Shows or hides the *Audio* switch. Default: shown.
+
+`audio_only`::
+  The state the switch starts with. As soon as the viewer flips the switch,
+  their choice is used instead.
+
+`set_audio_only`::
+  The state used when *no switch is shown* -- for example when
+  `ui_elements.audioOnlySwitch` is set to `false`. Set it to `true` for a
+  player that should always play audio only, and to `false` for a player that
+  should always play the video. While the switch is shown, this setting is
+  ignored: the viewer decides. If you leave the setting out, nothing changes.
+
+All three settings can be written for all players at once (in
+`multiPlayer.yml`) or for one player only (in `multiPlayer_control.yml`), where
+the per-player value wins.
+
 [role="mt-4"]
 === The Edit Panel
 
@@ -131,22 +164,20 @@ settings. Nothing leaks from one player to another: a video you add to
 *instance* of the module, created through a factory function -- exactly the
 same idea Video.js uses.
 
-.VideoJS Multi-Player
-multiplayer::player_1[role="mb-5"]
+
+[role="mt-4"]
+=== Video Player
+
+lorem:sentences[5]
+
+.Video Player
+multiplayer::video_player[role="mb-5"]
 
 
-// [role="mt-4"]
-// == Carpool Karaoke
+[role="mt-4"]
+=== Audio Player
 
-// Carpool Karaoke was one of the most successful and widely distributed viral
-// video formats in modern television history. It originally started as a
-// recurring segment on the American late-night show The Late Late Show with
-// James Corden on CBS. 
+lorem:sentences[5]
 
-// Host James Corden drives around town (usually in Los Angeles or London) with
-// world-famous musicians and celebrities, conducting personal interviews and
-// singing along to the car radio with their greatest hits.
-
-// .Carpool Karaoke
-// multiplayer::player_2[role="mb-5"]
-
+.Audio Player
+multiplayer::audio_player[role="mb-5"]

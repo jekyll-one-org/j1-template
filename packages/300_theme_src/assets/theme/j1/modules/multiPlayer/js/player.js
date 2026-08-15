@@ -2,7 +2,7 @@
  # -----------------------------------------------------------------------------
  # ~/assets/theme/j1/modules/multiPlayer/js/player.js
  # Provides JS Core for J1 Module multiPlayer
- # Version 3.1.71 for J1 Template
+ # Version 3.1.73 for J1 Template
  #
  # Product/Info:
  # https://jekyll.one
@@ -31,7 +31,7 @@
 }(this, function () {
   "use strict";
 
-  // VideoPlayer MultiInstance #1
+  // multiPlayer MultiInstance #1
   // ===========================================================================
   // Multi-instance module architecture
   //
@@ -70,7 +70,7 @@
   // the singleton version reviewable line-by-line; JavaScript is unaffected.
   // ===========================================================================
 
-  // VideoPlayer MultiInstance #2
+  // multiPlayer MultiInstance #2
   // ===========================================================================
   // Architecture revision — video.js-aligned multi-instance module
   //
@@ -85,11 +85,11 @@
   // #2 restructures the MODULE SURFACE to the same structures/strategy as
   // the videoJS module (video.js):
   //
-  //   video.js                          VideoPlayer (this module)
+  //   video.js                          multiPlayer (this module)
   //   --------------------------------  ----------------------------------
   //   videojs(id, options)   (factory)  videoPlayer(id, options)  (factory)
-  //   class Player                      class VideoPlayer
-  //   Player.players         (registry) VideoPlayer.players       (registry)
+  //   class Player                      class multiPlayer
+  //   Player.players         (registry) multiPlayer.players       (registry)
   //   videojs.getPlayer(id)             videoPlayer.getPlayer(id)
   //   videojs.getPlayers()              videoPlayer.getPlayers()
   //   player.id()/player.options()      vp.id() / vp.options()
@@ -100,15 +100,15 @@
   // ambient default instance any more — exactly as in video.js, every
   // consumer addresses a concrete player id. createVideoPlayerInstance()
   // below is retained unchanged as the per-player member builder, invoked
-  // exclusively by the VideoPlayer class constructor (the way a video.js
+  // exclusively by the multiPlayer class constructor (the way a video.js
   // Player constructor builds and attaches its child components). See the
   // module API section at the end of the file.
   // ===========================================================================
 
-  // VideoPlayer MultiInstance #2
+  // multiPlayer MultiInstance #2
   // Module version, exposed as videoPlayer.VERSION (video.js parity:
   // videojs.VERSION). Keep in sync with the file header above.
-  const VERSION = '3.1.71';
+  const VERSION = '3.1.73';
 
   // Page-global one-shot guards for the two page-scoped handlers (see the
   // tagged notes inside those functions).
@@ -119,8 +119,8 @@
 
   // Registry of live player instances, keyed by instance id ('' = default /
   // legacy single-player instance).
-  // VideoPlayer MultiInstance #2
-  // DEPRECATED, unreferenced: superseded by the static VideoPlayer.players
+  // multiPlayer MultiInstance #2
+  // DEPRECATED, unreferenced: superseded by the static multiPlayer.players
   // registry (video.js: Player.players) in the module API section at the end
   // of the file. Declaration preserved in line with the additive convention.
   const _instances = new Map();
@@ -138,10 +138,10 @@
   //                              playlistManager.setPlayerID() and to the
   //                              _{{player.id}} suffix used by videoPlayer.html
   //
-  // VideoPlayer MultiInstance #2
+  // multiPlayer MultiInstance #2
   // Invocation change: this builder is no longer reached through the #1
   // registry functions (createInstance/getInstance — retired below). It is
-  // invoked EXCLUSIVELY by the VideoPlayer class constructor, which attaches
+  // invoked EXCLUSIVELY by the multiPlayer class constructor, which attaches
   // the returned members to the class instance — the same way a video.js
   // Player constructor builds and attaches its child components. The body of
   // this function (all state, PlaylistManager, handler classes, fixes #1–#45)
@@ -186,7 +186,7 @@
   // Default poster image used when a playlist entry has no poster URL.
   const DEFAULT_POSTER = '/assets/image/icon/videojs/videojs-poster.png';
 
-  // VideoPlayer optimizations #2 (e)
+  // multiPlayer optimizations #2 (e)
   // Performance: this timezone map was an object literal allocated INSIDE
   // _normalizeIssueDate() on every single call. _normalizeIssueDate() runs
   // once per entry with an issueDate on every load(), and load() itself runs
@@ -204,7 +204,7 @@
     'IST': '+0530', 'JST': '+0900', 'AEST': '+1000'
   });
 
-  // Modify VideoPlayer expiry date #1
+  // Modify multiPlayer expiry date #1
   // ---------------------------------------------------------------------------
   // Expiry date (time-limited media sources)
   //
@@ -249,7 +249,7 @@
     EXPIRED:   'expired'
   });
 
-  // Modify VideoPlayer expiry date #1
+  // Modify multiPlayer expiry date #1
   // Returns the whole number of days left until `expiryDate`, or null when the
   // value is empty (unlimited) or cannot be parsed. Both operands are reduced
   // to LOCAL midnight before the difference is taken, so the value is a stable
@@ -286,7 +286,7 @@
     return Math.round((target.getTime() - today.getTime()) / EXPIRY_MS_PER_DAY);
   }
 
-  // Modify VideoPlayer expiry date #1
+  // Modify multiPlayer expiry date #1
   // Maps an expiry date onto one of the EXPIRY_STATE values. An empty/invalid
   // value yields 'unlimited' - the safe default that keeps every legacy entry
   // playable and uncoloured.
@@ -305,7 +305,7 @@
     return EXPIRY_STATE.OK;
   }
 
-  // Modify VideoPlayer expiry date #1
+  // Modify multiPlayer expiry date #1
   // True when the given playlist entry carries an expiry date that has been
   // reached. Defensive by design: anything that is not a clearly expired,
   // parsable date returns false, so a malformed record can never lock a video
@@ -319,7 +319,7 @@
     return _expiryState(entry.expiryDate || EXPIRY_UNLIMITED) === EXPIRY_STATE.EXPIRED;
   }
 
-  // Modify VideoPlayer expiry date #1
+  // Modify multiPlayer expiry date #1
   // Short human-readable summary of the expiry state, used for the hint line
   // under the modal input and for the log warning raised on blocked playback.
   //
@@ -339,7 +339,7 @@
     return `Access period ends in ${daysLeft} day(s)`;
   }
 
-  // Modify VideoPlayer #33
+  // Modify multiPlayer #33
   // ---------------------------------------------------------------------------
   // Native-video poster auto-generation
   //
@@ -377,14 +377,14 @@
     generate_timeout:   8000
   });
 
-  // Modify VideoPlayer #33
+  // Modify multiPlayer #33
   // Resolves the effective native-poster config by overlaying any values found
   // under videoPlayerOptions.videoJS.poster onto NATIVE_POSTER_DEFAULTS. Reads
   // defensively (module-level videoPlayerOptions first, then the adapter
   // namespace) so it is safe to call before the adapter has assigned options.
   //
   function _resolveNativePosterConfig() {
-    // Modify VideoPlayer #49
+    // Modify multiPlayer #49
     // Resolve through the central per-instance resolver so a per-player
     // videoJS.poster configuration (factory options) takes precedence over the
     // page-global adapter options. Resolution order and defensiveness are
@@ -399,7 +399,7 @@
     return settings;
   }
 
-  // Modify VideoPlayer #33
+  // Modify multiPlayer #33
   // True when the URL/path points at a native (browser-decodable) video file
   // rather than a YouTube watch URL/id.  Reuses VIDEO_URL_PATTERNS so exactly
   // the same extensions accepted elsewhere in the module are accepted here.
@@ -408,7 +408,7 @@
     return VIDEO_URL_PATTERNS.some((re) => re.test(src));
   }
 
-  // Modify VideoPlayer #33
+  // Modify multiPlayer #33
   // ---------------------------------------------------------------------------
   // generateNativePoster
   //
@@ -552,7 +552,7 @@
     });
   }
 
-  // Modify VideoPlayer #19
+  // Modify multiPlayer #19
   // ---------------------------------------------------------------------------
   // _buildPlaylistItemSources
   //
@@ -617,7 +617,7 @@
     return [{ type: type, src: nativeSrc }];
   }
 
-  // Modify VideoPlayer #19
+  // Modify multiPlayer #19
   // ---------------------------------------------------------------------------
   // mapVideoPlayerPlaylist
   //
@@ -743,7 +743,7 @@
   let videoPlayerOptions          = null;
   let adapterOptions              = null;
 
-  // Modify VideoPlayer #49
+  // Modify multiPlayer #49
   // ---------------------------------------------------------------------------
   // _resolveVideoPlayerEffectiveOptions()
   //
@@ -778,7 +778,7 @@
   //   3. videoPlayerOptions  — the last module-level snapshot, if any.
   //
   // CONTRACT (adapter side, "inheritance chain"): the object the adapter hands
-  // to videoPlayer(id, options) at the "Modify VideoPlayer #48" site MUST be
+  // to videoPlayer(id, options) at the "Modify multiPlayer #48" site MUST be
   // the complete three-layer deep merge INCLUDING the per-player videoJS
   // subtree from videoPlayer_control.yml — not only ui_elements/playlist keys.
   // The module deliberately does NOT re-merge here; merging YAML layers is the
@@ -802,7 +802,7 @@
       : null;
   }
 
-  // claude - Fix multiPlayer load failed #1
+  // Fix multiPlayer load failed #1
   // ---------------------------------------------------------------------------
   // _adapterCloseEditPlaylist(button, playerID)
   //
@@ -857,7 +857,7 @@
   let pipConfigEnabled            = false;
   let _playlistActiveVideoId      = null;
 
-  // Modify VideoPlayer #32
+  // Modify multiPlayer #32
   // Guards the brief window during which the videojs-playlist plugin performs
   // its initial source selection inside onReady(): playlist(list) auto-loads
   // item 0 (player.src()), then currentItem(syncedIndex) re-loads the selected
@@ -872,7 +872,7 @@
   // module-level flags so it is initialised before any factory code runs (TDZ).
   let _playlistSetupInProgress    = false;
 
-  // VideoPlayer MultiInstance #1
+  // multiPlayer MultiInstance #1
   // Instance-scoped logger name so multi-player log output is attributable
   // per player (e.g. 'multiPlayer.core.player_1'). The bare MODULE_NAME is
   // kept for the default ('') instance so existing single-player log output
@@ -891,7 +891,7 @@
   let _editPlaylistHandlerInit    = false;
   let _togglePlaylistHandlerInit  = false;
 
-  // Modify VideoPlayer #41
+  // Modify multiPlayer #41
   // Guards the page-load "auto-load first playlist entry in paused state"
   // behaviour (autoLoadFirstEntryOnReload()) so it fires at most once per
   // page load even if the triggering handler init runs more than once or
@@ -900,7 +900,7 @@
   // (TDZ pitfall — see #32).
   let _autoLoadFirstOnReloadDone  = false;
 
-  // Modify VideoPlayer #43
+  // Modify multiPlayer #43
   // Per-player keying of the auto-load-on-reload once-only guard.
   //
   // The #41 flag above (_autoLoadFirstOnReloadDone) is a SINGLETON: a single
@@ -930,7 +930,7 @@
   // _playerID stores the current player id set by the adapter
   // (via playlistManager.setPlayerID), and _pid() converts a bare element
   // name to its scoped form for all getElementById / querySelector calls.
-  // VideoPlayer MultiInstance #1
+  // multiPlayer MultiInstance #1
   // _playerID is now a PER-INSTANCE closure variable (one per
   // createVideoPlayerInstance() call), seeded from the instanceID argument so
   // that _pid() resolves the suffixed element ids correctly from the very
@@ -950,7 +950,7 @@
     return _playerID ? `${bare}_${_playerID}` : bare;
   }
 
-  // Modify VideoPlayer #51
+  // Modify multiPlayer #51
   // ---------------------------------------------------------------------------
   // Playlist CARD-MODE grid columns (playlist.cards.perRow)
   //
@@ -1077,7 +1077,7 @@
     containerEl.style.removeProperty('grid-template-columns');
   }
 
-  // Modify VideoPlayer #53
+  // Modify multiPlayer #53
   // ---------------------------------------------------------------------------
   // Playlist ACTION BUTTONS on|off (ui_elements.playlist_*_button)
   //
@@ -1184,7 +1184,7 @@
     return flags;
   }
 
-  // Modify VideoPlayer for export #1
+  // Modify multiPlayer for export #1
   // ---------------------------------------------------------------------------
   // MEDIA EXPORT (download of plain audio/video files)
   //
@@ -1226,7 +1226,7 @@
   //     restriction, not a module limitation.
   // ---------------------------------------------------------------------------
 
-  // Modify VideoPlayer for export #1
+  // Modify multiPlayer for export #1
   // The SINGLE source of truth for "is this a plain media file we export?".
   // Keys are lower-case file extensions (without dot), values the MIME type
   // used for the generated Blob on the cross-origin path.
@@ -1236,18 +1236,18 @@
     mp4: 'video/mp4'
   });
 
-  // Modify VideoPlayer for export #1
+  // Modify multiPlayer for export #1
   // Pause between two consecutive downloads of a "download all" run. Browsers
   // throttle (or silently drop) multiple downloads fired within the same tick;
   // a short gap keeps every file of a batch.
   const DOWNLOAD_SEQUENCE_DELAY_MS = 700;
 
-  // Modify VideoPlayer for export #1
+  // Modify multiPlayer for export #1
   // Upper bound for the generated file name STEM (without extension). Keeps
   // long playlist titles inside the path limits of all common file systems.
   const DOWNLOAD_FILENAME_MAX_LENGTH = 120;
 
-  // Modify VideoPlayer for export #2
+  // Modify multiPlayer for export #2
   // ---------------------------------------------------------------------------
   // EXPORT PROGRESS NOTIFICATIONS (toasts)
   //
@@ -1295,32 +1295,32 @@
   // the stack with one toast per file.
   // ---------------------------------------------------------------------------
 
-  // Modify VideoPlayer for export #2
+  // Modify multiPlayer for export #2
   // Id of the container this module creates when the page has none.
   const TOAST_CONTAINER_ID        = 'videoplayer_toast_container';
 
-  // Modify VideoPlayer for export #2
+  // Modify multiPlayer for export #2
   // Id of the container authored by claudeAI.js. Reused when present so both
   // modules share ONE toast stack (see deviation 1 above).
   const TOAST_SHARED_CONTAINER_ID = 'toastContainer';
 
-  // Modify VideoPlayer for export #2
+  // Modify multiPlayer for export #2
   // Default lifetime of a toast — the claudeAI.js default (3500 ms).
   const TOAST_DEFAULT_DURATION_MS = 3500;
 
-  // Modify VideoPlayer for export #2
+  // Modify multiPlayer for export #2
   // Delay between removing the 'show' class and dropping the element from the
   // DOM. Must cover the slide-out transition (claudeAI.js uses 750 ms).
   const TOAST_REMOVE_DELAY_MS     = 750;
 
-  // Modify VideoPlayer for export #2
+  // Modify multiPlayer for export #2
   // Hard safety timeout of a PROGRESS toast. A progress toast has no lifetime
   // of its own — it lives until resolve()/dismiss() is called. Should an
   // unexpected exception ever escape an export run before it resolves, this
   // timeout still clears the toast instead of leaving it on screen forever.
   const TOAST_PROGRESS_TIMEOUT_MS = 15 * 60 * 1000;
 
-  // Modify VideoPlayer for export #2
+  // Modify multiPlayer for export #2
   // Outcome of the LAST _downloadMediaSource() call. _downloadMediaSource()
   // returns a plain boolean (contract kept unchanged for every existing
   // caller), which cannot distinguish "failed" from "cross-origin blocked,
@@ -1335,7 +1335,7 @@
   let _lastDownloadOutcome = null;
 
   /**
-   * Modify VideoPlayer for export #2
+   * Modify multiPlayer for export #2
    * _escapeToastText - HTML-escapes a toast message. Same technique as
    * PlaylistManager._escapeHtml(): assign as textContent, read back as
    * innerHTML.
@@ -1350,7 +1350,7 @@
   }
 
   /**
-   * Modify VideoPlayer for export #2
+   * Modify multiPlayer for export #2
    * _getToastContainer - resolves (and on first use creates) the toast stack.
    *
    * Resolution order:
@@ -1386,7 +1386,7 @@
   }
 
   /**
-   * Modify VideoPlayer for export #2
+   * Modify multiPlayer for export #2
    * _toastIconClass - Font Awesome counterpart of the claudeAI.js mdi mapping
    * (check-circle / alert-circle / information).
    *
@@ -1400,7 +1400,7 @@
   }
 
   /**
-   * Modify VideoPlayer for export #2
+   * Modify multiPlayer for export #2
    * _toastType - normalises any caller input to one of the three known types
    * so an unknown value can never produce an unstyled toast.
    *
@@ -1412,7 +1412,7 @@
   }
 
   /**
-   * Modify VideoPlayer for export #2
+   * Modify multiPlayer for export #2
    * _removeToastElement - slide-out and removal, idempotent (a toast can be
    * dismissed by its lifetime timer and by an explicit dismiss() call in the
    * same tick without being removed twice).
@@ -1437,7 +1437,7 @@
   }
 
   /**
-   * Modify VideoPlayer for export #2
+   * Modify multiPlayer for export #2
    * _showToast - shows one toast notification. Signature and behaviour of
    * claudeAI.js Toast.show().
    *
@@ -1476,7 +1476,7 @@
   }
 
   /**
-   * Modify VideoPlayer for export #2
+   * Modify multiPlayer for export #2
    * _showProgressToast - shows a toast that stays on screen until it is
    * resolved, and returns the handle to drive it.
    *
@@ -1575,7 +1575,7 @@
     };
   }
 
-  // Modify VideoPlayer for export #2
+  // Modify multiPlayer for export #2
   // Public notification surface of this instance, exported on the instance API
   // as `videoPlayerToast` (see the return block at the end of
   // createVideoPlayerInstance). An adapter can use the very same toasts for
@@ -1590,7 +1590,7 @@
     progress: _showProgressToast
   });
 
-  // claude - Modify J1 VideoPlayer expiry date #2
+  // Modify J1 multiPlayer expiry date #2
   // ===========================================================================
   // EXPIRY NOTICE MODAL (user-visible counterpart of the #1 log warning)
   //
@@ -1651,12 +1651,12 @@
   // playback into a thrown exception.
   // ===========================================================================
 
-  // claude - Modify J1 VideoPlayer expiry date #2
+  // Modify J1 multiPlayer expiry date #2
   // Id of the dialog this module creates. Deliberately NOT 'sideModalDanger'
   // (see deviation 1 above).
   const EXPIRY_MODAL_ID          = 'videoPlayerExpiryModal';
 
-  // claude - Modify J1 VideoPlayer expiry date #2
+  // Modify J1 multiPlayer expiry date #2
   // Ids of the parts rewritten on every show(). Kept as constants so the
   // markup template and the populate step can never drift apart.
   const EXPIRY_MODAL_LABEL_ID    = 'videoPlayerExpiryModalLabel';
@@ -1666,11 +1666,11 @@
   const EXPIRY_MODAL_BADGE_ID    = 'videoPlayerExpiryModalBadge';
   const EXPIRY_MODAL_CLOSE_ID    = 'videoPlayerExpiryModalClose';
 
-  // claude - Modify J1 VideoPlayer expiry date #2
+  // Modify J1 multiPlayer expiry date #2
   // Heading of the dialog. Single point of change for a re-wording.
   const EXPIRY_MODAL_HEADING     = 'Access Period Expired';
 
-  // claude - Modify J1 VideoPlayer expiry date #2
+  // Modify J1 multiPlayer expiry date #2
   // Repeat suppression. One user action can cross more than one expiry gate
   // (playEntry -> the PlaylistManager embedRunVideo wrapper -> the global
   // embedRunVideo last line of defence), and a viewer who keeps clicking a
@@ -1680,7 +1680,7 @@
   // blocked attempt.
   const EXPIRY_MODAL_REPEAT_MS   = 2000;
 
-  // claude - Modify J1 VideoPlayer expiry date #2
+  // Modify J1 multiPlayer expiry date #2
   // DESIGN DECISION (flagged for review): notify only on INTERACTIVE blocks.
   // embedRunVideo(videoId, 'pause') is the load-and-pause path used by the
   // reload auto-load (autoLoadFirstEntryOnReload) and by the IO handlers after
@@ -1689,7 +1689,7 @@
   // by default and only writes the #1 log warning. Set this to true to notify
   // on that path as well; nothing else has to be touched.
   //
-  // Claude - Modify J1 VideoPlayer expiry date #2
+  // Claude - Modify J1 multiPlayer expiry date #2
   // DESIGN DECISION RESOLVED: the notice is now raised on the load-and-pause
   // (preload) path as well. The reported failure case IS exactly this path -
   // playlistSortHandler.init() -> autoLoadFirstEntryOnReload() ->
@@ -1702,13 +1702,13 @@
   // const EXPIRY_MODAL_ON_PRELOAD  = false;
   const EXPIRY_MODAL_ON_PRELOAD  = true;
 
-  // claude - Modify J1 VideoPlayer expiry date #2
+  // Modify J1 multiPlayer expiry date #2
   // Lifetime of the TOAST used when Bootstrap's modal API is unavailable.
   // Longer than the export toasts (3500 ms): this message reports a refusal
   // the viewer has to read and act on, not a progress tick.
   const EXPIRY_MODAL_TOAST_MS    = 9000;
 
-  // claude - Modify J1 VideoPlayer expiry date #2
+  // Modify J1 multiPlayer expiry date #2
   // Repeat-suppression state. Module-level `let` (not `const`) because both
   // values are rewritten on every accepted notice. Declared ABOVE their first
   // call site on purpose - a `let` read from a function that runs before this
@@ -1717,7 +1717,7 @@
   let _expiryModalLastShownAt    = 0;
 
   /**
-   * claude - Modify J1 VideoPlayer expiry date #2
+   * Modify J1 multiPlayer expiry date #2
    * _isBootstrapModalAvailable - true when the Bootstrap JS bundle exposes the
    * modal component. The player never loads Bootstrap itself; it is provided
    * by the J1 theme, so its presence is checked rather than assumed.
@@ -1731,7 +1731,7 @@
   }
 
   /**
-   * claude - Modify J1 VideoPlayer expiry date #2
+   * Modify J1 multiPlayer expiry date #2
    * _expiryModalVideoLabel - the most human-readable name available for an
    * entry, used as the dialog subtitle.
    *
@@ -1757,7 +1757,7 @@
   }
 
   /**
-   * claude - Modify J1 VideoPlayer expiry date #2
+   * Modify J1 multiPlayer expiry date #2
    * _createExpiryModal - builds the dialog ONCE and appends it to <body>.
    *
    * Mirrors _createRatingModal()/_createEditModal(): guard on the id, build a
@@ -1823,7 +1823,7 @@
   }
 
   /**
-   * claude - Modify J1 VideoPlayer expiry date #2
+   * Modify J1 multiPlayer expiry date #2
    * _populateExpiryModal - writes the per-entry strings into the dialog.
    *
    * Every write goes through textContent, NOT innerHTML: a playlist title is
@@ -1859,7 +1859,7 @@
   }
 
   /**
-   * claude - Modify J1 VideoPlayer expiry date #2
+   * Modify J1 multiPlayer expiry date #2
    * _showExpiryNotice - the single entry point every expiry gate calls right
    * after the #1 log warning.
    *
@@ -1942,7 +1942,7 @@
     }
   }
 
-  // claude - Modify J1 VideoPlayer expiry date #2
+  // Modify J1 multiPlayer expiry date #2
   // Public expiry-notice surface of this instance, exported on the instance
   // API as `videoPlayerExpiryNotice` (see the return block at the end of
   // createVideoPlayerInstance). An adapter that blocks an expired source on
@@ -1959,7 +1959,7 @@
   });
 
   /**
-   * Modify VideoPlayer for export #1
+   * Modify multiPlayer for export #1
    * _getEntryDownloadSource - resolves the plain-media download source of a
    * playlist entry.
    *
@@ -1999,7 +1999,7 @@
   }
 
   /**
-   * Modify VideoPlayer for export #1
+   * Modify multiPlayer for export #1
    * _isDownloadableEntry - boolean convenience wrapper around
    * _getEntryDownloadSource(). Safe as an Array#filter/#some callback (the
    * extra index/array arguments are ignored).
@@ -2011,7 +2011,7 @@
     return _getEntryDownloadSource(entry) !== null;
   }
 
-  // claude - Fix multiPlayer new select audio only #1
+  // Fix multiPlayer new select audio only #1
   // ---------------------------------------------------------------------------
   // AUDIO ONLY playback for YouTube entries
   //
@@ -2054,7 +2054,7 @@
   // YouTube-only playlists — the exact inverse rule).
   // ---------------------------------------------------------------------------
 
-  // claude - Fix multiPlayer new select audio only #2
+  // Fix multiPlayer new select audio only #2
   // ---------------------------------------------------------------------------
   // ADDENDUM: display strategy changed from audioOnlyMode to audioPosterMode
   //
@@ -2094,7 +2094,7 @@
   // ---------------------------------------------------------------------------
 
   /**
-   * claude - Fix multiPlayer new select audio only #1
+   * Fix multiPlayer new select audio only #1
    * _isYouTubeEntry - true when a playlist record resolves to a YouTube
    * source. Classification mirrors _getEntryDownloadSource() rules 1|2
    * (entry.type first, then a host test on src/videoLink), so the two
@@ -2115,8 +2115,149 @@
     return (url.indexOf('youtu.be') !== -1 || url.indexOf('youtube.com') !== -1);
   }
 
+  // Fix multiPlayer new select audio only 4
+  // ---------------------------------------------------------------------------
+  // FIXED audio-only state for players WITHOUT the title-bar switch
+  //
+  // Fix #1 introduced the per-player title-bar switch #audioOnlySwitch_<id>
+  // and the YAML key `audio_only`, which SEEDS the initial switch state; a
+  // user toggle persisted under _pid('audioOnly') wins over that seed from
+  // the first click on. The control can be suppressed per player with
+  // ui_elements.audioOnlySwitch: false — and then the seed/toggle pair is a
+  // dead end: `audio_only` still seeds a state the viewer can no longer see
+  // or change, and a STALE localStorage value left over from a time the
+  // switch WAS shown keeps winning over the configuration for good.
+  //
+  // Fix 4 adds the companion key `set_audio_only` (defaults <- user settings
+  // <- per-player control settings, exactly like `audio_only`) which states
+  // the audio-only mode of a player DECLARATIVELY, for the case where no
+  // switch exists to state it interactively:
+  //
+  //   set_audio_only: true   — YouTube entries always play audio only
+  //   set_audio_only: false  — YouTube entries always play with video
+  //   (key absent)           — no opinion; Fix #1 behaviour unchanged
+  //
+  // GATE (requirement): the key is consulted ONLY when the switch is not
+  // shown or is unavailable — see _isAudioOnlySwitchAvailable() for the four
+  // cases that qualify. As long as the viewer can reach the control, the
+  // control owns the state and `set_audio_only` is ignored entirely; the
+  // precedence of Fix #1 (localStorage -> audio_only -> false) then applies
+  // unchanged.
+  //
+  // BACKWARD COMPATIBILITY: an ABSENT key resolves to null ("no opinion") and
+  // falls through to the original chain, so a configuration that does not
+  // declare `set_audio_only` behaves byte-for-byte as before Fix 4 — the same
+  // absent-key rule the ui_elements switches of the export fixes follow.
+  //
+  // SINGLE DECISION POINT: every playback decision of the feature already
+  // resolves through _resolveAudioOnlyActive() (createVideoJsPlayer and the
+  // 'playing' quality one-shot); playlistManager._audioOnly is UI mirror
+  // state only. The new gate therefore needs exactly ONE hook — the head of
+  // that resolver — plus a mirror sync for the checkbox-less case, so no
+  // playback path can disagree with the configuration.
+  // ---------------------------------------------------------------------------
+
   /**
-   * claude - Fix multiPlayer new select audio only #1
+   * Fix multiPlayer new select audio only 4
+   * _isAudioOnlySwitchAvailable - can the viewer reach the title-bar switch
+   * #audioOnlySwitch_<id> of THIS player?
+   *
+   * Answers "shown or reachable", NOT "currently visible": the switch is
+   * self-hiding on a view that holds no YouTube entry (see
+   * _updateAudioOnlySwitchVisibility), and a running search can hide it for a
+   * moment. Treating that transient state as "unavailable" would let
+   * `set_audio_only` override a deliberate user toggle mid-session, so the
+   * display attribute is deliberately NOT tested — on a playlist without
+   * YouTube entries the audio-only state has no effect anyway.
+   *
+   * Unavailable (first match wins):
+   *   1. no effective options at all, or the module is disabled for this
+   *      player (opts.enabled === false) — nothing is rendered
+   *   2. ui_elements.audioOnlySwitch === false — suppressed by configuration;
+   *      the case the requirement names explicitly
+   *   3. playlist.enabled === false — no playlist panel, hence no
+   *      '.playlist-block-title' bar the switch could ever be built into
+   *   4. neither the switch element NOR its host title bar exists in the DOM
+   *      — the markup this player was rendered with carries no playlist
+   *      block, so the lazy build of renderCurrent() can never succeed
+   *
+   * Read defensively (callable before the adapter has assigned options),
+   * mirroring _resolveAudioOnlyActive()/_resolveUiElementFlags().
+   *
+   * @returns {boolean} true when the control is shown or can still appear
+   */
+  function _isAudioOnlySwitchAvailable() {
+    const opts = _resolveVideoPlayerEffectiveOptions();
+
+    // 1. no options / module disabled for this player
+    if (opts === null || opts.enabled === false) {
+      return false;
+    }
+
+    // 2. suppressed by configuration (absent key defaults to TRUE, same rule
+    //    as audioOnlySwitchHandler.init() and _updateAudioOnlySwitchVisibility)
+    const ui = (typeof opts.ui_elements === 'object' && opts.ui_elements)
+      ? opts.ui_elements
+      : {};
+    if (ui.audioOnlySwitch === false) {
+      return false;
+    }
+
+    // 3. no playlist -> no title bar -> no switch
+    if (opts.playlist && opts.playlist.enabled === false) {
+      return false;
+    }
+
+    // 4. DOM reachability: the built switch, or the title bar it is built
+    //    into (same player-scoped resolution as audioOnlySwitchHandler.
+    //    cacheElements(), with the document-wide fallback of the default
+    //    instance).
+    if (document.getElementById(_pid('audioOnlySwitch'))) {
+      return true;
+    }
+
+    const _aoScope = document.getElementById(_pid('playlist_screen')) || document.getElementById(_pid('playlistBlock'));
+    const _aoBar   = _aoScope
+      ? _aoScope.querySelector('.playlist-block-title')
+      : document.querySelector('.playlist-block-title');
+
+    return !!_aoBar;
+  }
+
+  /**
+   * Fix multiPlayer new select audio only 4
+   * _resolveSetAudioOnly - the configured FIXED audio-only state of this
+   * player, read from the YAML chain (defaults <- user settings <- per-player
+   * control settings) resolved by _resolveVideoPlayerEffectiveOptions().
+   *
+   * Tri-state on purpose:
+   *   true  / 'true'   -> true
+   *   false / 'false'  -> false
+   *   anything else    -> null  ("key absent / not configured")
+   *
+   * The string forms are accepted because a YAML author may quote the value
+   * ("true"), which the Liquid -> JSON hand-over of the adapter carries
+   * through as a string; a null return keeps such a player on the Fix #1
+   * chain instead of silently reading a quoted 'false' as truthy.
+   *
+   * @returns {boolean|null}
+   */
+  function _resolveSetAudioOnly() {
+    const opts = _resolveVideoPlayerEffectiveOptions();
+    if (opts === null || typeof opts !== 'object') {
+      return null;
+    }
+
+    const value = opts.set_audio_only;
+
+    if (value === true  || value === 'true')  return true;
+    if (value === false || value === 'false') return false;
+
+    return null;
+  }
+
+  /**
+   * Fix multiPlayer new select audio only #1
    * _resolveAudioOnlyActive - effective audio-only state for THIS player.
    *
    * Precedence (first match wins):
@@ -2128,9 +2269,30 @@
    * (degrades to the localStorage value or false), mirroring
    * _resolveUiElementFlags().
    *
+   * Fix multiPlayer new select audio only 4
+   * Precedence EXTENDED by one leading rule (see the feature note above):
+   *   0. when the title-bar switch is not shown or unavailable AND the YAML
+   *      chain declares set_audio_only, that value is the answer — a viewer
+   *      who cannot toggle must not be governed by a stale toggle
+   * Rules 1..3 below are unchanged and apply whenever rule 0 does not match,
+   * which includes every configuration that does not declare the new key.
+   *
    * @returns {boolean}
    */
   function _resolveAudioOnlyActive() {
+    // Fix multiPlayer new select audio only 4
+    // Rule 0 — fixed state for a player without a reachable switch. Ordered
+    // BEFORE the localStorage read on purpose: the persisted toggle is the
+    // switch's own state, so it must not outlive the switch. Skipped (null)
+    // whenever the key is absent, which keeps the original chain intact.
+    if (!_isAudioOnlySwitchAvailable()) {
+      const _fixedAudioOnly = _resolveSetAudioOnly();
+      if (_fixedAudioOnly !== null) {
+        isDev && logger.debug('\n' + `audioOnly: switch unavailable — set_audio_only applies (${_fixedAudioOnly})`);
+        return _fixedAudioOnly;
+      }
+    }
+
     const stored = localStorage.getItem(_pid('audioOnly'));
     if (stored !== null) {
       return (stored === 'true');
@@ -2141,7 +2303,7 @@
   }
 
   /**
-   * claude - Fix multiPlayer for new startAt/endAt params #1
+   * Fix multiPlayer for new startAt/endAt params #1
    * _parseTimeToSeconds - tolerant time parser for the startAt/endAt values.
    *
    * Accepts every shape the feature can meet:
@@ -2187,7 +2349,7 @@
   }
 
   /**
-   * claude - Fix multiPlayer for new startAt/endAt params #1
+   * Fix multiPlayer for new startAt/endAt params #1
    * _secondsToTimeInputValue - inverse of _parseTimeToSeconds for the modal.
    *
    * Formats an offset in seconds as the 'HH:MM:SS' string an
@@ -2211,7 +2373,7 @@
     return `${hh}:${mm}:${ss}`;
   }
 
-  // claude - Fix J1 multiPlayer #6
+  // Fix J1 multiPlayer #6
   // The "endAt beyond media duration" diagnostic below (#3) fires from
   // _resolveStartEndAt(), which is BY DESIGN re-resolved lazily on every
   // trigger point (each endAt watchdog tick, each startAt one-shot). The
@@ -2225,7 +2387,7 @@
   const _playbackWindowDurationWarnedIds = new Set();
 
   /**
-   * claude - Fix multiPlayer for new startAt/endAt params #1
+   * Fix multiPlayer for new startAt/endAt params #1
    * _resolveStartEndAt - effective playback window for ONE playlist entry.
    *
    * Precedence (first non-empty wins), matching the module's established
@@ -2255,7 +2417,7 @@
         entry = playlistManagerRef.getEntry(videoId);
       }
     } catch (e) {
-      // claude - Fix J1 multiPlayer #3
+      // Fix J1 multiPlayer #3
       // "startEndAt" was never an API, config key or data field - a grep shows
       // all of its occurrences were the prefix of these log strings, i.e. a
       // made-up label for "the startAt/endAt window". Nothing read it, so it
@@ -2276,14 +2438,14 @@
     if (endAt === null) endAt = _parseTimeToSeconds(opts && opts.endAt);
 
     if (startAt !== null && endAt !== null && endAt <= startAt) {
-      // claude - Fix J1 multiPlayer #3
+      // Fix J1 multiPlayer #3
       // Original (deprecated, preserved for reference):
       // isDev && logger.warn('\n' + `startEndAt: endAt (${endAt}s) <= startAt (${startAt}s) for videoId ${videoId} - endAt ignored`);
       isDev && logger.warn('\n' + `playbackWindow: endAt (${endAt}s) <= startAt (${startAt}s) for videoId ${videoId} - endAt ignored`);
       endAt = null;
     }
 
-    // claude - Fix J1 multiPlayer #3
+    // Fix J1 multiPlayer #3
     // Diagnostic for a data problem that is indistinguishable from the bug
     // this fix series repairs: an endAt BEYOND the media length can never be
     // reached, so the video plays to its natural end and the feature looks
@@ -2292,7 +2454,7 @@
     // duration is 196s. Warn instead of silently doing nothing; the window is
     // left untouched, because duration may still be 0/unknown at this point
     // (it is filled in later on 'durationchange') and must not gate playback.
-    // claude - Fix J1 multiPlayer #6
+    // Fix J1 multiPlayer #6
     // Original (deprecated, preserved for reference):
     // if (endAt !== null && entry && isFinite(entry.duration) && entry.duration > 0 && endAt >= entry.duration) {
     //   isDev && logger.warn('\n' + `playbackWindow: endAt (${endAt}s) is at or beyond the media duration (${entry.duration}s) for videoId ${videoId} - it can never be reached, check the playlist entry`);
@@ -2311,7 +2473,7 @@
   }
 
   /**
-   * claude - Fix multiPlayer for new startAt/endAt params #1
+   * Fix multiPlayer for new startAt/endAt params #1
    * _applyStartEndAtPlayback - runtime enforcement of the playback window.
    *
    * Installed once per created player (both techs, YouTube and native) from
@@ -2343,7 +2505,7 @@
   function _applyStartEndAtPlayback(player, videoId, playlistManagerRef) {
     if (!player || typeof player.on !== 'function') return;
 
-    // claude - Fix J1 multiPlayer #3
+    // Fix J1 multiPlayer #3
     // ROOT CAUSE 1 of "endAt works for YouTube videos only once":
     // this function is called EXACTLY ONCE per created player (from onReady)
     // and closes over `videoId` - the id the player was CREATED with. The
@@ -2400,7 +2562,7 @@
       return fallbackVideoId;
     };
 
-    // claude - Fix J1 multiPlayer #3
+    // Fix J1 multiPlayer #3
     // ROOT CAUSE 4 of "the video should stop and not even start anything":
     // the #2 implementation ended the window with
     //   player.pause(); player.trigger('ended');
@@ -2439,7 +2601,7 @@
         return;
       }
 
-      // claude - Fix J1 multiPlayer #5
+      // Fix J1 multiPlayer #5
       // ROOT CAUSE of "the plugin's autoadvance does not advance anymore":
       // the #3 "stop means stop" rule above recognises exactly ONE request
       // for continuous playback - the module's own loop toggle. But the
@@ -2488,7 +2650,7 @@
         isDev && logger.info('\n' + `playbackWindow: ${techLabel}video id ${activeId} reached endAt ${endAtSec}s - plugin autoadvance takes over`);
         return;
       }
-      // END claude - Fix J1 multiPlayer #5
+      // END Fix J1 multiPlayer #5
 
       // Loop mode is OFF: hard stop. Nothing is triggered, nothing advances.
       // Reset the stored position so the NEXT play replays the whole window
@@ -2505,7 +2667,7 @@
       isDev && logger.info('\n' + `playbackWindow: ${techLabel}video id ${activeId} stopped at configured endAt ${endAtSec}s`);
     };
 
-    // claude - Fix J1 multiPlayer #3
+    // Fix J1 multiPlayer #3
     // ROOT CAUSE 3 of "only once": _endAtFired below is a single boolean per
     // PLAYER, and its only re-arm rule is `pos < endAt - 1.5`. Because the
     // watchdog pauses the player exactly AT endAt, the position never drops
@@ -2529,7 +2691,7 @@
     player.on('loadstart', () => _rearmEndAt('loadstart'));
     player.on('playlistitem', () => _rearmEndAt('playlistitem'));
 
-    // claude - Fix J1 multiPlayer #4
+    // Fix J1 multiPlayer #4
     // ROOT CAUSE of "endAt is lost for the item the playlist plugin loads on
     // autoadvance": a race in the SWAP WINDOW that #3 itself opened.
     //
@@ -2568,7 +2730,7 @@
     // YouTube tech — the guard is a no-op for mp3/mp4 sources.
     let _expectedActiveVideoId = videoId || null;
 
-    // claude - Fix J1 multiPlayer #4
+    // Fix J1 multiPlayer #4
     // Video.js passes the trigger hash as the handler's 2nd argument; the
     // item object carries the J1 `videoId` copied through by
     // mapVideoPlayerPlaylist (see the #23 wiring in onReady).
@@ -2580,7 +2742,7 @@
       }
     });
 
-    // claude - Fix J1 multiPlayer #4
+    // Fix J1 multiPlayer #4
     // TRUE while the id the tech ACTUALLY reports differs from the id the
     // player is EXPECTED to hold — i.e. while a plugin-driven source swap
     // has not settled yet. Watchdogs and startAt handlers must not act on
@@ -2598,23 +2760,23 @@
 
       setTimeout(() => {
         try {
-          // claude - Fix multiPlayer for new startAt/endAt params #2
+          // Fix multiPlayer for new startAt/endAt params #2
           // YouTube sources are enforced ytp-style on the RAW YT.Player by
           // the #2 handlers installed below (per-'playing' seekTo, ytp.js
           // parity). Hand over to avoid a duplicate seek to the same target
           // through the Video.js facade; native techs (resolver yields
           // null) fall through unchanged into the original #1 logic.
           if (_resolveYouTubeRawPlayer(player)) return;
-          // END claude - Fix multiPlayer for new startAt/endAt params #2
+          // END Fix multiPlayer for new startAt/endAt params #2
 
-          // claude - Fix J1 multiPlayer #3
+          // Fix J1 multiPlayer #3
           // Resolve the CURRENTLY loaded item (root cause 1) instead of the
           // creation-time id, and log under the honest `playbackWindow` name.
           // Original (deprecated, preserved for reference):
           // const win = _resolveStartEndAt(videoId, playlistManagerRef);
           const activeId = _resolveActivePlaybackVideoId(player, videoId);
 
-          // claude - Fix J1 multiPlayer #4
+          // Fix J1 multiPlayer #4
           // Mid-swap: the tech still reports the PREVIOUS item (see the
           // _expectedActiveVideoId note). Seeking now would act on the wrong
           // video. This handler is a ONE-SHOT that already removed itself, so
@@ -2636,13 +2798,13 @@
 
           if (beforeWindow || afterWindow) {
             player.currentTime(win.startAt);
-            // claude - Fix J1 multiPlayer #3
+            // Fix J1 multiPlayer #3
             // Original (deprecated, preserved for reference):
             // isDev && logger.info('\n' + `startEndAt: video id ${videoId} started at configured startAt ${win.startAt}s`);
             isDev && logger.info('\n' + `playbackWindow: video id ${activeId} started at configured startAt ${win.startAt}s`);
           }
         } catch (e) {
-          // claude - Fix J1 multiPlayer #3
+          // Fix J1 multiPlayer #3
           // Original (deprecated, preserved for reference):
           // isDev && logger.warn('\n' + `startEndAt: startAt seek skipped: ${e}`);
           isDev && logger.warn('\n' + `playbackWindow: startAt seek skipped: ${e}`);
@@ -2651,7 +2813,7 @@
     };
     player.on('playing', onFirstPlayingStartAt);
 
-    // claude - Fix J1 multiPlayer #3
+    // Fix J1 multiPlayer #3
     // The #1 startAt handler is a ONE-SHOT (it removes itself on the first
     // 'playing'). That is correct per item, but the plugin loads every later
     // item into this SAME player, so from item 2 on no startAt was applied at
@@ -2669,7 +2831,7 @@
 
     player.on('timeupdate', () => {
       try {
-        // claude - Fix multiPlayer for new startAt/endAt params #2
+        // Fix multiPlayer for new startAt/endAt params #2
         // YouTube sources are enforced ytp-style by the 500ms raw-player
         // polling interval installed below (ytp.js checkOnVideoEnd parity);
         // the synthetic 'timeupdate' relay of the videojs-youtube tech is
@@ -2678,16 +2840,16 @@
         // case; native techs (resolver yields null) fall through unchanged
         // into the original #1 logic.
         if (_resolveYouTubeRawPlayer(player)) return;
-        // END claude - Fix multiPlayer for new startAt/endAt params #2
+        // END Fix multiPlayer for new startAt/endAt params #2
 
-        // claude - Fix J1 multiPlayer #3
+        // Fix J1 multiPlayer #3
         // Root cause 1: resolve the CURRENTLY loaded item, not the id the
         // player was created with.
         // Original (deprecated, preserved for reference):
         // const win = _resolveStartEndAt(videoId, playlistManagerRef);
         const activeId = _resolveActivePlaybackVideoId(player, videoId);
 
-        // claude - Fix J1 multiPlayer #4
+        // Fix J1 multiPlayer #4
         // Mid-swap: the tech still reports the PREVIOUS item — its position
         // is parked at that item's endAt, so acting here would re-fire the
         // stop for a video that already stopped (see the
@@ -2699,7 +2861,7 @@
 
         const pos = (typeof player.currentTime === 'function') ? (player.currentTime() || 0) : 0;
 
-        // claude - Fix J1 multiPlayer #3
+        // Fix J1 multiPlayer #3
         // Root cause 3: the latch is now keyed by video id, so it re-arms by
         // itself as soon as another item is loaded into this player. The
         // hysteresis rule is kept for a seek back inside the SAME item.
@@ -2715,7 +2877,7 @@
           _rearmEndAt('seek back into window');
         }
 
-        // claude - Fix J1 multiPlayer #3
+        // Fix J1 multiPlayer #3
         // Root cause 4: endAt now STOPS instead of triggering a synthetic
         // 'ended' that made the plugin autoadvance / loop mode start the next
         // video. _stopAtEndAt() keeps the loop-mode advance for the case the
@@ -2735,14 +2897,14 @@
           _stopAtEndAt(player, activeId, win.endAt, '');
         }
       } catch (e) {
-        // claude - Fix J1 multiPlayer #3
+        // Fix J1 multiPlayer #3
         // Original (deprecated, preserved for reference):
         // isDev && logger.warn('\n' + `startEndAt: endAt watchdog skipped: ${e}`);
         isDev && logger.warn('\n' + `playbackWindow: endAt watchdog skipped: ${e}`);
       }
     });
 
-    // claude - Fix multiPlayer for new startAt/endAt params #2
+    // Fix multiPlayer for new startAt/endAt params #2
     // YouTube enforcement, mirrored from the Amplitude module's ytp plugin
     // (ytp.js). For YouTube sources the #1 handlers above proved unreliable:
     // they act through the Video.js facade (player.currentTime() /
@@ -2785,7 +2947,7 @@
           const ytPlayer = _resolveYouTubeRawPlayer(player);
           if (!ytPlayer) return;
 
-          // claude - Fix J1 multiPlayer #3
+          // Fix J1 multiPlayer #3
           // Root cause 1: resolve the CURRENTLY loaded item. On a plugin-
           // driven source swap this player keeps running, so the creation-
           // time id resolved item 1's window for every following item.
@@ -2793,7 +2955,7 @@
           // const win = _resolveStartEndAt(videoId, playlistManagerRef);
           const activeId = _resolveActivePlaybackVideoId(player, videoId);
 
-          // claude - Fix J1 multiPlayer #4
+          // Fix J1 multiPlayer #4
           // Mid-swap: the raw YT.Player still reports the PREVIOUS item (see
           // the _expectedActiveVideoId note). Seeking it would rewind the
           // wrong video. Unlike the native #1 handler this one is attached
@@ -2804,7 +2966,7 @@
 
           const win = _resolveStartEndAt(activeId, playlistManagerRef);
 
-          // claude - Fix J1 multiPlayer #3
+          // Fix J1 multiPlayer #3
           // Replay of a window that already stopped: the player is parked AT
           // endAt with the latch set, so pressing play would run straight past
           // endAt (the hysteresis rule can never see a position below it).
@@ -2833,13 +2995,13 @@
           if (beforeWindow || afterWindow) {
             // ytp.js parity: ytpSeekTo(player, startSec, true)
             ytPlayer.seekTo(win.startAt, true);
-            // claude - Fix J1 multiPlayer #3
+            // Fix J1 multiPlayer #3
             // Original (deprecated, preserved for reference):
             // isDev && logger.info('\n' + `startEndAt: YT video id ${videoId} started at configured startAt ${win.startAt}s (ytp parity)`);
             isDev && logger.info('\n' + `playbackWindow: YT video id ${activeId} started at configured startAt ${win.startAt}s (ytp parity)`);
           }
         } catch (e) {
-          // claude - Fix J1 multiPlayer #3
+          // Fix J1 multiPlayer #3
           // Original (deprecated, preserved for reference):
           // isDev && logger.warn('\n' + `startEndAt: YT startAt seek skipped: ${e}`);
           isDev && logger.warn('\n' + `playbackWindow: YT startAt seek skipped: ${e}`);
@@ -2865,7 +3027,7 @@
             return;
           }
 
-          // claude - Fix J1 multiPlayer #3
+          // Fix J1 multiPlayer #3
           // ROOT CAUSE 2 of "endAt works for YouTube videos only once", and
           // the one that is genuinely YouTube-specific: the raw YT.Player was
           // resolved ONCE, above, and captured in this interval closure -
@@ -2887,7 +3049,7 @@
 
           const activeId = _resolveActivePlaybackVideoId(player, videoId);
 
-          // claude - Fix J1 multiPlayer #4
+          // Fix J1 multiPlayer #4
           // Mid-swap: the raw YT.Player still reports the PREVIOUS item,
           // parked exactly at that item's endAt, while 'loadstart'/
           // 'playlistitem' have already re-armed the latch. THIS is the tick
@@ -2901,12 +3063,12 @@
           const win = _resolveStartEndAt(activeId, playlistManagerRef);
           if (win.endAt === null) return;
 
-          // claude - Fix J1 multiPlayer #3
+          // Fix J1 multiPlayer #3
           // Original (deprecated, preserved for reference):
           // const pos = ytPlayer.getCurrentTime() || 0;
           const pos = ytLive.getCurrentTime() || 0;
 
-          // claude - Fix J1 multiPlayer #3
+          // Fix J1 multiPlayer #3
           // Root cause 3: latch keyed by video id (see the declaration note),
           // so it re-arms on an item change; the #1 hysteresis rule is kept
           // for a seek back inside the SAME item.
@@ -2922,7 +3084,7 @@
             _rearmEndAt('seek back into window');
           }
 
-          // claude - Fix J1 multiPlayer #3
+          // Fix J1 multiPlayer #3
           // Root cause 4: stop means stop. See the _stopAtEndAt() note.
           // Original (deprecated, preserved for reference):
           // if (!_endAtFired && pos >= win.endAt) {
@@ -2937,7 +3099,7 @@
             _stopAtEndAt(player, activeId, win.endAt, 'YT ');
           }
         } catch (e) {
-          // claude - Fix J1 multiPlayer #3
+          // Fix J1 multiPlayer #3
           // Original (deprecated, preserved for reference):
           // isDev && logger.warn('\n' + `startEndAt: YT endAt watchdog skipped: ${e}`);
           isDev && logger.warn('\n' + `playbackWindow: YT endAt watchdog skipped: ${e}`);
@@ -2952,11 +3114,11 @@
         _ytpEndAtInterval = null;
       }
     });
-    // END claude - Fix multiPlayer for new startAt/endAt params #2
+    // END Fix multiPlayer for new startAt/endAt params #2
   }
 
   /**
-   * claude - Fix multiPlayer for new startAt/endAt params #2
+   * Fix multiPlayer for new startAt/endAt params #2
    * _resolveYouTubeRawPlayer - guarded probe for the raw YT.Player of a
    * created VideoJS player, mirroring the access path already established
    * by _applyYouTubeAudioOnlyQuality() (audio only #1): the videojs-youtube
@@ -2981,7 +3143,7 @@
         return tech.ytPlayer;
       }
     } catch (e) {
-      // claude - Fix J1 multiPlayer #3
+      // Fix J1 multiPlayer #3
       // Original (deprecated, preserved for reference):
       // isDev && logger.warn('\n' + `startEndAt: YT raw player probe skipped: ${e}`);
       isDev && logger.warn('\n' + `playbackWindow: YT raw player probe skipped: ${e}`);
@@ -2990,7 +3152,7 @@
   }
 
   /**
-   * claude - Fix J1 multiPlayer #5
+   * Fix J1 multiPlayer #5
    * _pluginWillAutoadvance - TRUE when the videojs-playlist plugin's
    * autoadvance is armed on THIS player AND has an item to advance to, i.e.
    * when a (real or synthetic) 'ended' on the player will be answered by the
@@ -3038,7 +3200,7 @@
   }
 
   /**
-   * claude - Fix multiPlayer new select audio only #1
+   * Fix multiPlayer new select audio only #1
    * _applyYouTubeAudioOnlyQuality - hard-enforce the minimum video quality
    * on the underlying YT.Player, mirroring the ytp plugin of the Amplitude
    * module (ytp.js: ytPlayer.setPlaybackQuality('small') on player ready).
@@ -3064,7 +3226,7 @@
   }
 
   /**
-   * claude - Fix multiPlayer new select audio only #2
+   * Fix multiPlayer new select audio only #2
    * _resolveYouTubeAudioOnlyPoster - poster URL shown on the player surface
    * while a YouTube source plays in AUDIO ONLY (audioPosterMode). The
    * PosterImage component of Video.js hides itself when the player has no
@@ -3120,7 +3282,7 @@
   }
 
   /**
-   * claude - Fix multiPlayer new select audio only #2
+   * Fix multiPlayer new select audio only #2
    * _ensureAudioOnlyPosterStyles - one-time DEFENSIVE stylesheet for the
    * poster persistence of audioPosterMode.
    *
@@ -3149,7 +3311,7 @@
     const styleEl = document.createElement('style');
     styleEl.id    = STYLE_ID;
     styleEl.textContent = [
-      '/* claude - Fix multiPlayer new select audio only #2 */',
+      '/* Fix multiPlayer new select audio only #2 */',
       '/* Poster persistence for AUDIO ONLY playback (audioPosterMode):    */',
       '/* keep the poster visible on the player surface during playback.   */',
       '.video-js.vjs-audio-poster-mode .vjs-poster { display: block; }',
@@ -3162,7 +3324,7 @@
   }
 
   /**
-   * Modify VideoPlayer for export #1
+   * Modify multiPlayer for export #1
    * _buildDownloadFileName - human readable, file-system safe download name.
    *
    * Preference order: entry.title -> file name of the source URL ->
@@ -3203,7 +3365,7 @@
   }
 
   /**
-   * Modify VideoPlayer for export #1
+   * Modify multiPlayer for export #1
    * _isSameOriginUrl - true when the (possibly relative or protocol-relative)
    * URL resolves to the origin of the hosting page. Only for same-origin URLs
    * is the anchor `download` attribute honoured by the browser.
@@ -3221,7 +3383,7 @@
   }
 
   /**
-   * Modify VideoPlayer for export #1
+   * Modify multiPlayer for export #1
    * _triggerAnchorDownload - the click-a-hidden-anchor primitive, identical in
    * shape to the one used by exportToFile()/backupToFile().
    *
@@ -3248,7 +3410,7 @@
   }
 
   /**
-   * Modify VideoPlayer for export #1
+   * Modify multiPlayer for export #1
    * _downloadMediaSource - writes one plain media file to the local download
    * folder. See the same-origin/cross-origin note in the section header.
    *
@@ -3260,7 +3422,7 @@
    * @returns {Promise<boolean>} true when the download was handed to the browser
    */
   async function _downloadMediaSource(url, filename) {
-    // Modify VideoPlayer for export #2
+    // Modify multiPlayer for export #2
     // Reset the outcome marker at every entry so a caller can never read the
     // classification of a PREVIOUS transfer (see _lastDownloadOutcome).
     _lastDownloadOutcome = null;
@@ -3269,12 +3431,12 @@
     if (_isSameOriginUrl(url)) {
       try {
         _triggerAnchorDownload(url, filename, false);
-        // Modify VideoPlayer for export #2
+        // Modify multiPlayer for export #2
         _lastDownloadOutcome = 'same-origin';
         isDev && logger.info('\n' + `media export: downloading (same-origin) "${filename}"`);
         return true;
       } catch (err) {
-        // Modify VideoPlayer for export #2
+        // Modify multiPlayer for export #2
         _lastDownloadOutcome = 'failed';
         logger.error('\n' + `media export: download failed for "${filename}": ${err}`);
         return false;
@@ -3293,7 +3455,7 @@
       const objectUrl = URL.createObjectURL(blob);
 
       _triggerAnchorDownload(objectUrl, filename, true);
-      // Modify VideoPlayer for export #2
+      // Modify multiPlayer for export #2
       _lastDownloadOutcome = 'cross-origin';
       isDev && logger.info('\n' + `media export: downloading (cross-origin, ${blob.size} bytes) "${filename}"`);
       return true;
@@ -3302,12 +3464,12 @@
 
       try {
         window.open(url, '_blank', 'noopener');
-        // Modify VideoPlayer for export #2
+        // Modify multiPlayer for export #2
         // The bytes could NOT be transferred, but the user has a way to save
         // the file by hand — reported as an informational toast, not an error.
         _lastDownloadOutcome = 'manual-tab';
       } catch (_e) {
-        // Modify VideoPlayer for export #2
+        // Modify multiPlayer for export #2
         _lastDownloadOutcome = 'failed';
         logger.error('\n' + `media export: fallback tab could not be opened for "${filename}"`);
       }
@@ -3316,7 +3478,7 @@
   }
 
   /**
-   * Modify VideoPlayer for export #1
+   * Modify multiPlayer for export #1
    * _resolveUiElementDownloadFlags - effective visibility of the two NEW
    * export controls for this instance.
    *
@@ -3347,7 +3509,7 @@
   }
 
   /**
-   * Modify VideoPlayer for export #1
+   * Modify multiPlayer for export #1
    * _applyUiElementDownloadFlags - resolves the export-button flags and
    * publishes them as data attributes on the player-scoped playlist container
    * (#videoplayer_playlist_parent_<id>):
@@ -3408,7 +3570,7 @@
       this.STORAGE_KEY                    = 'playlist';
       this.INDEX_KEY                      = 'index';
 
-      // Modify VideoPlayer #40
+      // Modify multiPlayer #40
       // Per-player localStorage namespacing (issue #40).
       // The two keys above are the *bare* base keys. On a multi-player page
       // every PlaylistManager instance previously shared the bare 'playlist'
@@ -3434,7 +3596,7 @@
       this._playHandlerInitialized        = false;
       this._deleteHandlerInitialized      = false;
 
-      // Modify VideoPlayer for export #1
+      // Modify multiPlayer for export #1
       // Guard flags of the MEDIA EXPORT additions:
       //   _downloadHandlerInitialized     - delegated click handler for the
       //                                     per-item button.playlist-btn.download
@@ -3452,7 +3614,28 @@
       this._searchResults                 = null;
       this._searchIndex                   = null;
       this._currentSort                   = 'watchDate';
-      // VideoPlayer MultiInstance #6
+
+      // Fix multiPlayer set default sort criteria #1
+      // One-shot latch of the CONTENT-DERIVED default sort criterion.
+      //
+      // The line above seeds _currentSort with the historic hard-coded
+      // 'watchDate' default. That default is wrong for a SERIES playlist:
+      // every entry of a series export typically carries the SAME watchDate
+      // (see the shipped sample playlists), so sorting by date degenerates to
+      // "whatever order the JSON happened to arrive in" and the episodes are
+      // shown unordered. Such a playlist must default to 'episode' instead.
+      //
+      // The criterion cannot be derived HERE: at constructor time the storage
+      // key is still the BARE base key ('playlist'); setPlayerID() re-derives
+      // the per-player key only later (#40), so this.load() would read the
+      // wrong (or an empty) list. The derivation is therefore deferred to the
+      // first non-empty _applySortOrder() pass — the single chokepoint every
+      // render, plugin-feed and auto-load path already goes through — and this
+      // flag makes it happen exactly ONCE per session so a later explicit user
+      // choice (sort <select>) is never overruled by a re-derivation.
+      this._defaultSortResolved           = false;
+
+      // multiPlayer MultiInstance #6
       // Player-scope the three UI-preference localStorage reads. These bare keys
       // are origin-global, so on a multi-player page BOTH players' constructors
       // read the SAME 'playlistMode'/'mergeMode'/'playlistLoop' value on (re)load
@@ -3469,7 +3652,8 @@
       this._displayMode                   = localStorage.getItem(_pid('playlistMode')) || 'cards'; // jadams
       this._mergeMode                     = localStorage.getItem(_pid('mergeMode')) === 'true';
       this._loopEnabled                   = localStorage.getItem(_pid('playlistLoop')) === 'true';
-      // claude - Fix multiPlayer new select audio only #1
+
+      // Fix multiPlayer new select audio only #1
       // Runtime mirror of the audio-only state, seeded from the per-player
       // localStorage key (same _pid() namespacing as the three reads above).
       // A missing key reads as false here; the YAML seed (opts.audio_only)
@@ -3479,7 +3663,8 @@
       // the full precedence (localStorage -> YAML -> false) on every call,
       // so this field is UI state only (checkbox sync), never a config gate.
       this._audioOnly                     = localStorage.getItem(_pid('audioOnly')) === 'true';
-      // claude - Fix multiPlayer new select audio only #1
+
+      // Fix multiPlayer new select audio only #1
       // Lazy one-shot guard for the title-bar audio-only switch, following
       // the _downloadAllHandlerInitialized pattern (export #1): the switch is
       // built by renderCurrent() on the first render that finds the title
@@ -3488,7 +3673,7 @@
       this._escapeHtmlEl                  = document.createElement('div');
       this._loopSwitchInitialized         = false;
 
-      // Modify VideoPlayer #21
+      // Modify multiPlayer #21
       // Tracks the videoId of the entry that is currently in the 'playing'
       // state. The matching card/list element gets data-item-active="true";
       // null means no entry is active. Re-applied after every render so the
@@ -3509,7 +3694,7 @@
     setPlayerID(id) {
       _playerID = id || '';
 
-      // Modify VideoPlayer #40
+      // Modify multiPlayer #40
       // Re-derive the per-instance localStorage keys from the bare base keys
       // each time the owning player id changes. With a player id present the
       // keys become player-scoped (e.g. 'playlist_player_1' / 'index_player_1')
@@ -3636,7 +3821,7 @@
       btn.style.display = valid ? 'inline-flex' : 'none';
     }
 
-    // Modify VideoPlayer expiry date #1
+    // Modify multiPlayer expiry date #1
     // -------------------------------------------------------------------------
     // _updateExpiryFieldState
     //
@@ -3716,7 +3901,7 @@
 
       if (/^\d{4}-\d{2}-\d{2}$/.test(trimmed)) return trimmed;
 
-      // VideoPlayer optimizations #2 (e)
+      // multiPlayer optimizations #2 (e)
       // The map is now the module-level frozen constant ISSUE_DATE_TZ_MAP
       // (see the constants block) instead of a literal re-allocated on every
       // call.
@@ -3832,7 +4017,7 @@
           entry.issueDate = this._normalizeIssueDate(entry.issueDate);
         }
 
-        // Modify VideoPlayer expiry date #1
+        // Modify multiPlayer expiry date #1
         // Back-fill the optional expiry date on legacy records so every caller
         // can read entry.expiryDate without a null check. The default is
         // EXPIRY_UNLIMITED ('') - an entry never becomes time-limited just
@@ -3848,7 +4033,7 @@
           entry.expiryDate = this._normalizeIssueDate(entry.expiryDate);
         }
 
-        // claude - Fix multiPlayer for new startAt/endAt params #1
+        // Fix multiPlayer for new startAt/endAt params #1
         // Back-fill the optional playback window on legacy records so every
         // caller can read entry.startAt / entry.endAt without a null check.
         // The default is '' (feature off) - an entry never gains a playback
@@ -3884,7 +4069,7 @@
       }
     }
 
-    // Modify VideoPlayer #19
+    // Modify multiPlayer #19
     // -------------------------------------------------------------------------
     // convertVideoPlayerPlaylist
     //
@@ -3904,7 +4089,7 @@
     convertVideoPlayerPlaylist(rawPlaylist, poster) {
       if (!Array.isArray(rawPlaylist)) return [];
 
-      // VideoPlayer optimizations #2 (a)
+      // multiPlayer optimizations #2 (a)
       // Correctness: `ytID` was declared OUTSIDE the forEach and was only
       // re-assigned when an entry actually HAD a poster. Every entry WITHOUT
       // a poster therefore inherited the PREVIOUS entry's YouTube
@@ -3922,7 +4107,7 @@
         const ytID = entry.poster ? entry.poster.match(YOUTUBE_RE) : null;
 
         // overload the stored/default poster for YouTube entries
-        // VideoPlayer optimizations #2 (a)
+        // multiPlayer optimizations #2 (a)
         // (unchanged logic; `ytID` is now guaranteed per-entry, see above)
         const isYt = (ytID) ? true : false;   
         const item = {};
@@ -3932,7 +4117,7 @@
           const rule = mapVideoPlayerPlaylist[targetKey];
           let value;
 
-          // claude - Fix J1 multiPlayer #1
+          // Fix J1 multiPlayer #1
           // -----------------------------------------------------------------
           // ROOT CAUSE of "skipped entry without a playable source" for EVERY
           // entry (converted 0/N).
@@ -3977,7 +4162,7 @@
             value = entry[rule];
           }
 
-          // claude - Fix J1 multiPlayer #1
+          // Fix J1 multiPlayer #1
           // overload the stored/default poster for YouTube entries
           //
           // Gate kept verbatim (`poster` = plugins.playlist.poster option,
@@ -4014,7 +4199,7 @@
       this._invalidateSearchIndex();
     }
 
-    // Modify VideoPlayer #45
+    // Modify multiPlayer #45
     // -------------------------------------------------------------------------
     // _loadFromKey(storageKey) / _saveToKey(storageKey, playlistArray)
     //
@@ -4026,7 +4211,7 @@
     // PlaylistManager is a SINGLETON (one instance for the whole page, 
     // created once by the UMD factory: `const playlistManager = new PlaylistManager()`).
     //
-    // VideoPlayer MultiInstance #1
+    // multiPlayer MultiInstance #1
     //
     // NOTE: the SINGLETON statement above is HISTORICAL. Since the
     // multi-instance conversion, createVideoPlayerInstance() runs the whole
@@ -4069,7 +4254,7 @@
       }
     }
 
-    // Modify VideoPlayer #45
+    // Modify multiPlayer #45
     _saveToKey(storageKey, playlistArray) {
       localStorage.setItem(storageKey, JSON.stringify(playlistArray));
       this._searchIndex = null;
@@ -4106,7 +4291,7 @@
      * @param {string}  [entry.watchDate]     - ISO date of watching
      */
 
-    // Modify VideoPlayer #34
+    // Modify multiPlayer #34
     // DEPRECATED. addEntry() performed "late" creation: it was invoked from
     // doPostOnPlaying() only once the player reached the 'playing' state, so a
     // playlist record never existed until the video actually started playing.
@@ -4140,7 +4325,7 @@
         infoLink:     entry.infoLink      || '',
         issueDate:    this._normalizeIssueDate(entry.issueDate || ''),
         expiryDate:   this._normalizeIssueDate(entry.expiryDate || EXPIRY_UNLIMITED),
-        // claude - Fix multiPlayer for new startAt/endAt params #1
+        // Fix multiPlayer for new startAt/endAt params #1
         // Optional per-media playback window ('' = unset). Preloaded playlist
         // JSON files may ship these fields directly.
         startAt:      entry.startAt       || '',
@@ -4168,7 +4353,7 @@
       this.renderCurrent();
     }
 
-    // Modify VideoPlayer #34
+    // Modify multiPlayer #34
     // createEntry - EARLY, isolated playlist creation.
     //
     // Creates the playlist record as soon as the video is *created* (its source
@@ -4217,7 +4402,7 @@
         infoLink:     entry.infoLink      || '',
         issueDate:    this._normalizeIssueDate(entry.issueDate || ''),
         expiryDate:   this._normalizeIssueDate(entry.expiryDate || EXPIRY_UNLIMITED),
-        // claude - Fix multiPlayer for new startAt/endAt params #1
+        // Fix multiPlayer for new startAt/endAt params #1
         // Optional per-media playback window ('' = unset). Preloaded playlist
         // JSON files may ship these fields directly.
         startAt:      entry.startAt       || '',
@@ -4246,7 +4431,7 @@
       return record;
     }
 
-    // Modify VideoPlayer #34
+    // Modify multiPlayer #34
     // enrichEntry - back-fill metadata that only becomes available AFTER the
     // record was created: title/author resolved by the tech, the real poster,
     // the measured duration, canonical links. It is the "separated" counterpart
@@ -4335,7 +4520,7 @@
       this.renderCurrent();
     }
 
-    // Modify VideoPlayer #33
+    // Modify multiPlayer #33
     // updateEntryPoster - store a poster (a Base64 data-URL produced by
     // generateNativePoster(), or any URL) on the playlist entry identified by
     // videoId and persist it to localStorage. By default it only writes when
@@ -4363,7 +4548,7 @@
       return true;
     }
 
-    // Modify VideoPlayer #33
+    // Modify multiPlayer #33
     // generatePosterForEntry - resolve the native src of a single playlist
     // entry and, when it still has no poster, capture one off-screen via
     // generateNativePoster() and store it through updateEntryPoster(). YouTube
@@ -4391,7 +4576,7 @@
       });
     }
 
-    // Modify VideoPlayer #33
+    // Modify multiPlayer #33
     // generateMissingNativePosters - scan the stored playlist for native-video
     // entries that still lack a real poster and generate one for each. Runs
     // SEQUENTIALLY (one decode at a time) so importing a large playlist does
@@ -4507,7 +4692,7 @@
       if ('videoLink'   in fields) entry.videoLink    = fields.videoLink;
       if ('issueDate'   in fields) entry.issueDate    = this._normalizeIssueDate(fields.issueDate);
       if ('expiryDate'  in fields) entry.expiryDate   = this._normalizeIssueDate(fields.expiryDate || EXPIRY_UNLIMITED);
-      // claude - Fix multiPlayer for new startAt/endAt params #1
+      // Fix multiPlayer for new startAt/endAt params #1
       // Stored as normalized 'HH:MM:SS' strings ('' = unset), the exact value
       // shape the edit modal's <input type="time" step="1"> produces.
       if ('startAt'     in fields) entry.startAt      = _secondsToTimeInputValue(_parseTimeToSeconds(fields.startAt));
@@ -4531,7 +4716,7 @@
       return (entry && entry.lastPosition > 0) ? entry.lastPosition : 0;
     }
 
-    // Modify VideoPlayer #35
+    // Modify multiPlayer #35
     // getEntry
     // Returns the full playlist entry record for a given videoId, or null when
     // none exists. Added so callers (e.g. the header-title updater in
@@ -4571,7 +4756,7 @@
       this.save(updated);
       isDev && logger.info('\n' + `playlist entry deleted for videoId: ${videoId}`);
 
-      // Modify VideoPlayer #22
+      // Modify multiPlayer #22
       // Guard: if the deleted entry is the one currently marked active, drop
       // the tracked active videoId. Otherwise _activeVideoId keeps pointing at
       // a videoId that no longer has a matching element. That is harmless for
@@ -4597,7 +4782,7 @@
 
       isDev && logger.info('\n' + `cleared ${playlist.length} items from localStorage key: ${this.STORAGE_KEY}`);
 
-      // Modify VideoPlayer #22
+      // Modify multiPlayer #22
       // Same guard as deleteEntry(), for the bulk case: clearing the playlist
       // removes every entry (including any active one), so the tracked active
       // videoId must be dropped to avoid a stale value re-activating a future
@@ -4713,7 +4898,7 @@
       }
     }
 
-    // Modify VideoPlayer #39
+    // Modify multiPlayer #39
     // -------------------------------------------------------------------------
     // preloadPlaylists(preloadList, baseUrl, playerId)
     //
@@ -4758,7 +4943,7 @@
       const base = String(baseUrl || PLAYLIST_URL_BASE).replace(/\/+$/, '');
       let totalAdded = 0;
 
-      // Modify VideoPlayer #45
+      // Modify multiPlayer #45
       // Pin the destination localStorage key ONCE, derived from the owning
       // playerId passed by the adapter, using the same rule setPlayerID() uses
       // (bare base key when no id). Every merge below writes to THIS key via the
@@ -4798,6 +4983,18 @@
         isDev && logger.warn('\n' + `playlistManager: preload search-index rebuild failed: ${e}`);
       }
 
+      // Fix multiPlayer set default sort criteria #1
+      // The preloaded content decides the DEFAULT display order: a series
+      // playlist (series > 0 / episode > 0, e.g. the shipped album exports)
+      // opens sorted by episode, every other playlist by date (newest).
+      //
+      // Applied here, BEFORE the render below, because preload is async: it
+      // may finish long after playlistSortHandler.init() has already settled
+      // on a criterion for the then still empty (or previous) playlist. An
+      // explicit user choice from an earlier session (localStorage
+      // _pid('searchMode')) is respected and wins — hence `true`.
+      this.applyDefaultSortCriterion(null, true);
+
       // Reflect the preloaded playlist in the UI (panel content + toggle button).
       this.renderCurrent();
 
@@ -4812,7 +5009,7 @@
       return totalAdded;
     }
 
-    // Modify VideoPlayer #39
+    // Modify multiPlayer #39
     // _resolvePreloadUrl(fileName, base)
     // Join a configured preload file name to the base URL. Absolute inputs
     // (http(s):// or a leading '/') are returned unchanged; otherwise the file
@@ -4824,13 +5021,13 @@
       return `${base}/${fileName.replace(/^\/+/, '')}`;
     }
 
-    // Modify VideoPlayer #39
+    // Modify multiPlayer #39
     // _preloadMergeFromUrl(url)
     // Fetch a single playlist file and MERGE its entries (by videoId) into the
     // current localStorage playlist. Accepts both the plain-array and the
     // { playlist: [...] } shapes (same as importFromUrlAsync()). Returns the
     // number of newly added entries (0 when nothing new, or on error).
-    // Modify VideoPlayer #45
+    // Modify multiPlayer #45
     // Original signature (deprecated, preserved for reference):
     //   async _preloadMergeFromUrl(url) {
     // A second, optional `storageKey` argument pins the localStorage key for
@@ -4838,7 +5035,7 @@
     // any other caller keeps the previous behaviour; preloadPlaylists() always
     // passes the per-player key it derived up front (issue #45).
     async _preloadMergeFromUrl(url, storageKey) {
-      // Modify VideoPlayer #45
+      // Modify multiPlayer #45
       const _key = storageKey || this.STORAGE_KEY;
       const res = await fetch(url);
       if (!res.ok) {
@@ -4987,7 +5184,7 @@
       return true;
     }
 
-    // Modify VideoPlayer for export #1
+    // Modify multiPlayer for export #1
     // Media export (download of the plain audio/video FILES)
     // -------------------------------------------------------------------------
     // exportToFile()/backupToFile() above write the playlist META DATA as
@@ -5004,7 +5201,7 @@
     // -------------------------------------------------------------------------
 
     /**
-     * Modify VideoPlayer for export #1
+     * Modify multiPlayer for export #1
      * _getDownloadableEntries - the entries of the ACTIVE view (search result
      * when a search is active, otherwise the stored playlist) that carry a
      * plain, downloadable media file.
@@ -5018,7 +5215,7 @@
     }
 
     /**
-     * Modify VideoPlayer for export #1
+     * Modify multiPlayer for export #1
      * downloadEntry - exports the media file of ONE playlist entry.
      *
      * The lookup runs against the FULL stored playlist (not the filtered
@@ -5039,7 +5236,7 @@
       const entry    = playlist.find(item => item.videoId === videoId);
 
       if (!entry) {
-        // Modify VideoPlayer for export #2
+        // Modify multiPlayer for export #2
         // The click reached a row whose record is gone (deleted or replaced
         // between render and click) — report it instead of failing silently.
         _showToast('Export failed: the playlist entry no longer exists.', 'error', 5000);
@@ -5049,7 +5246,7 @@
 
       const source = _getEntryDownloadSource(entry);
       if (!source) {
-        // Modify VideoPlayer for export #2
+        // Modify multiPlayer for export #2
         // Reachable only through an adapter call (the button is never rendered
         // for a non-downloadable entry), so the message names the reason.
         _showToast(`"${entry.title || videoId}" cannot be exported: it is a streaming or YouTube item, not a media file.`, 'error', 5000);
@@ -5059,7 +5256,7 @@
 
       const filename = _buildDownloadFileName(entry, source);
 
-      // Modify VideoPlayer for export #2
+      // Modify multiPlayer for export #2
       // One progress toast per item, updated in place to the final result
       // below. The label prefers the playlist title and falls back to the
       // generated file name so the toast always names something the user
@@ -5083,7 +5280,7 @@
         btnEl.setAttribute('aria-busy', 'false');
       }
 
-      // Modify VideoPlayer for export #2
+      // Modify multiPlayer for export #2
       // Three outcomes, three messages (see _lastDownloadOutcome):
       //   success            -> 'success' toast naming the exported item
       //   CORS fallback tab  -> 'info' toast; the transfer did NOT happen but
@@ -5102,7 +5299,7 @@
     }
 
     /**
-     * Modify VideoPlayer for export #1
+     * Modify multiPlayer for export #1
      * downloadAllEntries - exports the media files of ALL downloadable items
      * of the ACTIVE playlist (a running search narrows the set to the visible
      * result, exactly like the rendered view).
@@ -5118,7 +5315,7 @@
      */
     async downloadAllEntries() {
       if (this._downloadInProgress) {
-        // Modify VideoPlayer for export #2
+        // Modify multiPlayer for export #2
         // The button is disabled while a batch runs, so this is reachable only
         // through a second adapter call — tell the user why nothing happened
         // instead of dropping the request silently.
@@ -5130,7 +5327,7 @@
       const targets = this._getDownloadableEntries();
 
       if (targets.length === 0) {
-        // Modify VideoPlayer for export #2
+        // Modify multiPlayer for export #2
         _showToast('No media files to export in the active playlist.', 'error');
         isDev && logger.warn('\n' + 'playlistManager: downloadAllEntries — the active playlist holds no plain media files to export');
         return { total: 0, succeeded: 0, failed: 0 };
@@ -5149,7 +5346,7 @@
 
       isDev && logger.info('\n' + `playlistManager: exporting ${targets.length} media files of the active playlist`);
 
-      // Modify VideoPlayer for export #2
+      // Modify multiPlayer for export #2
       // ONE progress toast for the whole batch, updated per file and turned
       // into the summary when the run ends. A toast per file would push the
       // stack off screen on a large playlist and the important message — the
@@ -5159,7 +5356,7 @@
       let succeeded = 0;
       let failed    = 0;
 
-      // Modify VideoPlayer for export #2
+      // Modify multiPlayer for export #2
       // Counts the items that could not be transferred but were opened in a
       // new tab for a manual save. Reported separately in the summary because
       // the user has to act on exactly those.
@@ -5173,7 +5370,7 @@
           button.title = `Exporting media files (${i + 1}/${targets.length}) ...`;
         }
 
-        // Modify VideoPlayer for export #2
+        // Modify multiPlayer for export #2
         // Progress tick: same counter the button tooltip carries, plus the
         // title of the file currently on the wire.
         batchToast.update(`Exporting media file ${i + 1} of ${targets.length}${entry && entry.title ? `: "${entry.title}"` : ''} ...`);
@@ -5188,7 +5385,7 @@
         const ok = await _downloadMediaSource(source.url, _buildDownloadFileName(entry, source));
         ok ? succeeded++ : failed++;
 
-        // Modify VideoPlayer for export #2
+        // Modify multiPlayer for export #2
         if (!ok && _lastDownloadOutcome === 'manual-tab') {
           manualTabs++;
         }
@@ -5207,7 +5404,7 @@
 
       this._downloadInProgress = false;
 
-      // Modify VideoPlayer for export #2
+      // Modify multiPlayer for export #2
       // Summary in the SAME toast the progress ran in. Three cases:
       //   all done          -> 'success'
       //   nothing done      -> 'error'
@@ -5246,7 +5443,7 @@
       // 'videoplayer_playlist_parent' to match the actual page element.
       const historyEl = document.getElementById(_pid('videoplayer_playlist_parent'));
       if (historyEl) {
-        // Modify VideoPlayer #53
+        // Modify multiPlayer #53
         // Publish the per-player action-button flags on THIS player's
         // container in BOTH display modes (see _applyUiElementFlags). Done
         // here — in addition to renderCards()/renderPlaylist() — for the
@@ -5256,7 +5453,7 @@
         // <playlist-cards> drop-in ever connects.
         _applyUiElementFlags(historyEl);
 
-        // Modify VideoPlayer for export #1
+        // Modify multiPlayer for export #1
         // Publish the export-button flags with the #53 flags, for the same
         // reason: the render methods bail out early on an empty playlist,
         // renderCurrent() always owns the container, so the attributes are in
@@ -5265,12 +5462,12 @@
 
         if (this._displayMode === 'list') {
           historyEl.className = 'playlist list-mode';
-          // Modify VideoPlayer #51
+          // Modify multiPlayer #51
           // Drop the card-grid geometry when leaving card mode.
           _clearCardsPerRow(historyEl);
         } else {
           historyEl.className = 'playlist card-mode';
-          // Modify VideoPlayer #51
+          // Modify multiPlayer #51
           // Apply playlist.cards.perRow to THIS player's grid container. Done
           // here (and not only in renderCards()) because renderCards() bails out
           // early on an empty playlist, while renderCurrent() always owns the
@@ -5315,7 +5512,7 @@
         this.initDeleteHandler();
       }
 
-      // VideoPlayer optimizations #2 (d)
+      // multiPlayer optimizations #2 (d)
       // Performance: each of the five UI helpers below independently resolved
       // its data via `this._searchResults || this.load() || []`, so a single
       // renderCurrent() pass JSON-parsed and re-normalised the ENTIRE playlist
@@ -5333,8 +5530,8 @@
       this._updateTogglePlaylistButton(viewData);
 
       if (loopConfigEnabled && !this._loopSwitchInitialized) {
-        const _scope   = document.getElementById(_pid('playlist_screen')) || document.getElementById(_pid('playlistBlock')); // VideoPlayer MultiInstance #4
-        const titleBar = _scope ? _scope.querySelector('.playlist-block-title') : document.querySelector('.playlist-block-title'); // VideoPlayer MultiInstance #4
+        const _scope   = document.getElementById(_pid('playlist_screen')) || document.getElementById(_pid('playlistBlock')); // multiPlayer MultiInstance #4
+        const titleBar = _scope ? _scope.querySelector('.playlist-block-title') : document.querySelector('.playlist-block-title'); // multiPlayer MultiInstance #4
 
         if (titleBar) {
           this._loopSwitchInitialized = true;
@@ -5345,7 +5542,7 @@
 
       this._updateLoopSwitchVisibility(viewData);
 
-      // Modify VideoPlayer for export #1
+      // Modify multiPlayer for export #1
       // Lazy build of the title-bar export button, modelled on the loop-switch
       // block above: the '.playlist-block-title' bar is populated dynamically
       // (mode switch, merge switch, sort select), so the button is created on
@@ -5366,7 +5563,7 @@
 
       this._updateDownloadAllButtonVisibility(viewData);
 
-      // claude - Fix multiPlayer new select audio only #1
+      // Fix multiPlayer new select audio only #1
       // Lazy build of the title-bar audio-only switch, modelled on the
       // download-all block above: the '.playlist-block-title' bar is
       // populated dynamically, so the switch is created on the first render
@@ -5389,6 +5586,15 @@
       }
 
       this._updateAudioOnlySwitchVisibility(viewData);
+
+      // Fix multiPlayer new select audio only 4
+      // Re-assert the UI mirror for players whose switch is suppressed or
+      // unreachable, so this._audioOnly always agrees with the state
+      // _resolveAudioOnlyActive() hands to the playback paths. A no-op for
+      // every player that HAS the switch (the checkbox owns the mirror
+      // there), and placed AFTER the visibility update so the availability
+      // test sees the final DOM of this render.
+      this._syncAudioOnlyMirror();
     }
 
     // ID corrected from 'playlistHistory' (non-existent) to
@@ -5418,14 +5624,14 @@
 
       playlistContainer.className = 'playlist list-mode';
 
-      // Modify VideoPlayer #51
+      // Modify multiPlayer #51
       // renderPlaylist() re-asserts the mode class on every render; re-assert
       // the (absence of) card-grid geometry with it. Assigning className does
       // NOT touch the style attribute, so the inline declarations written by
       // _applyCardsPerRow() would otherwise survive the switch to list mode.
       _clearCardsPerRow(playlistContainer);
 
-      // Modify VideoPlayer #53
+      // Modify multiPlayer #53
       // The LIST/ROW view honors the very same three ui_elements flags as the
       // card view — the follow-up that #52 flagged against the core module.
       // Resolve once per render, publish on the container, and gate each
@@ -5434,7 +5640,7 @@
       const uiFlags     = _applyUiElementFlags(playlistContainer);
       const showActions = uiFlags.rate || uiFlags.edit || uiFlags.delete;
 
-      // Modify VideoPlayer for export #1
+      // Modify multiPlayer for export #1
       // Resolve and publish the export-button flags alongside the #53 flags.
       // The per-item export button is additionally gated PER ENTRY on
       // _isDownloadableEntry() below, so it never appears for a YouTube or
@@ -5443,7 +5649,7 @@
 
       isDev && logger.info('\n' + `render playlist`);
 
-      // VideoPlayer optimizations #2 (c)
+      // multiPlayer optimizations #2 (c)
       // Performance: the method parsed the full playlist out of localStorage
       // TWICE per render — once for the empty pre-check above and again here.
       // load() JSON-parses and re-normalises every entry, so the second parse
@@ -5463,15 +5669,15 @@
         const hasInfoLink   = this._isValidUrl(item.infoLink);
         const thumbSrc      = item.poster || DEFAULT_POSTER;
 
-        // Modify VideoPlayer for export #1
+        // Modify multiPlayer for export #1
         // Per-entry gate of the export button: the configuration flag must be
         // on AND the entry must resolve to a plain .mp3/.mp4 file.
         const canDownload   = dlFlags.download && _isDownloadableEntry(item);
 
-        // Modify VideoPlayer #21
+        // Modify multiPlayer #21
         // data-item-active is rendered from the live active videoId so a
         // re-render while a video is playing keeps the correct row marked.
-        // VideoPlayer optimizations #2 (g)
+        // multiPlayer optimizations #2 (g)
         // Clarity: the rate-button icon ternary evaluated to 'fa-star' in
         // BOTH branches (no-op); the rated/unrated distinction is carried by
         // the button's ' rated' class. Replaced with the plain class string.
@@ -5514,7 +5720,7 @@
 
       }).join('');
 
-      // Modify VideoPlayer #53
+      // Modify multiPlayer #53
       // Original (deprecated, preserved for reference) — the action block
       // above was rendered unconditionally before #53:
       //
@@ -5524,7 +5730,7 @@
       //       <button class="playlist-btn delete" ...>...</button>
       //     </div>
 
-      // Modify VideoPlayer for export #1
+      // Modify multiPlayer for export #1
       // Original (deprecated, preserved for reference) — the wrapper gate of
       // the action block before this fix; the export button widens it so a
       // downloadable item still gets its actions bar when rate/edit/delete are
@@ -5541,7 +5747,7 @@
         this.initEditHandler();
       }
 
-      // Modify VideoPlayer for export #1
+      // Modify multiPlayer for export #1
       if (!this._downloadHandlerInitialized) {
         this.initDownloadHandler();
       }
@@ -5562,13 +5768,13 @@
 
       playlistContainer.className = 'playlist card-mode';
 
-      // Modify VideoPlayer #51
+      // Modify multiPlayer #51
       // Re-assert the configured column count on every card render (sort,
       // search, delete, rate, ...) so a re-render can never fall back to the
       // stylesheet's hard-wired 2 columns.
       _applyCardsPerRow(playlistContainer);
 
-      // Modify VideoPlayer #53
+      // Modify multiPlayer #53
       // Resolve the per-player action-button flags ONCE per render and
       // publish them on the container (contract for playlistCards.mjs).
       // The template below gates each button on these flags; showActions
@@ -5577,12 +5783,12 @@
       const uiFlags     = _applyUiElementFlags(playlistContainer);
       const showActions = uiFlags.rate || uiFlags.edit || uiFlags.delete;
 
-      // Modify VideoPlayer for export #1
+      // Modify multiPlayer for export #1
       // Same export-flag resolution as renderPlaylist() so the CARD view
       // offers the per-item export button under the identical rules.
       const dlFlags = _applyUiElementDownloadFlags(playlistContainer);
 
-      // VideoPlayer optimizations #2 (c)
+      // multiPlayer optimizations #2 (c)
       // Performance: same duplicate-parse pattern as renderPlaylist() — the
       // playlist was JSON-parsed from localStorage twice per render (empty
       // pre-check + display source). Reuse the pre-check result.
@@ -5599,13 +5805,13 @@
         const hasInfoLink  = this._isValidUrl(v.infoLink);
         const thumbSrc     = v.poster || DEFAULT_POSTER;
 
-        // Modify VideoPlayer for export #1
+        // Modify multiPlayer for export #1
         const canDownload  = dlFlags.download && _isDownloadableEntry(v);
 
-        // Modify VideoPlayer #21
+        // Modify multiPlayer #21
         // data-item-active is rendered from the live active videoId so a
         // re-render while a video is playing keeps the correct card marked.
-        // VideoPlayer optimizations #2 (g)
+        // multiPlayer optimizations #2 (g)
         // Clarity: same no-op 'fa-star'/'fa-star' ternary as renderPlaylist().
         return `
           <div class="playlist-card card-base" data-item-active="${(this._activeVideoId && v.videoId === this._activeVideoId) ? 'true' : 'false'}" data-video-id="${v.videoId}">
@@ -5643,7 +5849,7 @@
         `;
       }).join('');
 
-      // Modify VideoPlayer #53
+      // Modify multiPlayer #53
       // Original (deprecated, preserved for reference) — the action block
       // above was rendered unconditionally before #53:
       //
@@ -5653,7 +5859,7 @@
       //       <button class="playlist-btn delete" ...>...</button>
       //     </div>
 
-      // Modify VideoPlayer for export #1
+      // Modify multiPlayer for export #1
       // Original (deprecated, preserved for reference) — the wrapper gate of
       // the card action block before this fix:
       //
@@ -5668,13 +5874,13 @@
         this.initEditHandler();
       }
 
-      // Modify VideoPlayer for export #1
+      // Modify multiPlayer for export #1
       if (!this._downloadHandlerInitialized) {
         this.initDownloadHandler();
       }
     }
 
-    // Modify VideoPlayer #21
+    // Modify multiPlayer #21
     // Active-item state management
     // -------------------------------------------------------------------------
     // The playlist is rendered (as cards or list rows) under
@@ -5689,19 +5895,19 @@
     //                            (called by the render methods after they
     //                            rebuild innerHTML with all marks reset).
 
-    // Modify VideoPlayer #21
+    // Modify multiPlayer #21
     setActiveItem(videoId) {
       this._activeVideoId = videoId || null;
       this._applyActiveItem();
     }
 
-    // Modify VideoPlayer #21
+    // Modify multiPlayer #21
     clearActiveItem() {
       this._activeVideoId = null;
       this._applyActiveItem();
     }
 
-    // Modify VideoPlayer #21
+    // Modify multiPlayer #21
     _applyActiveItem() {
       const playlistContainer = document.getElementById(_pid('videoplayer_playlist_parent'));
       if (!playlistContainer) return;
@@ -5721,11 +5927,11 @@
 
     initDeleteHandler() {
 
-      // Fix VideoPlayer #2: corrected ID
+      // Fix multiPlayer #2: corrected ID
       const playlistContainer = document.getElementById(_pid('videoplayer_playlist_parent'));
       if (!playlistContainer) return;
 
-      // Fix VideoPlayer #5
+      // Fix multiPlayer #5
       // Guard flag set here to prevent duplicate listener registration.
       this._deleteHandlerInitialized = true;
 
@@ -5744,7 +5950,7 @@
       isDev && logger.info('\n' + 'playlistManager: delete handler initialized');
     }
 
-    // Modify VideoPlayer for export #1
+    // Modify multiPlayer for export #1
     // initDownloadHandler - delegated click handler for the per-item export
     // button (button.playlist-btn.download), rendered by BOTH views:
     // div.playlist-row-content (list) and div.playlist-card-actions (cards).
@@ -5790,7 +5996,7 @@
         return;
       }
 
-      // Modify VideoPlayer expiry date #1
+      // Modify multiPlayer expiry date #1
       // Expiry gate (user-triggered play). When the entry carries an expiry
       // date that has been reached, playback is refused here and a WARNING is
       // logged. The warning is NOT wrapped in `isDev &&` on purpose: a blocked
@@ -5802,7 +6008,7 @@
         logger.warn('\n' + `playlistmanager: playback DISABLED for videoId: ${videoId} - ` +
                            `access period expired on ${expiryEntry.expiryDate} (${_expiryHintText(expiryEntry.expiryDate)})`);
 
-        // claude - Modify J1 VideoPlayer expiry date #2
+        // Modify J1 multiPlayer expiry date #2
         // User-visible counterpart of the warning above. This is the most
         // INTERACTIVE of the three gates - the viewer just clicked a playlist
         // row - so the notice is raised unconditionally here (no mode is
@@ -5810,7 +6016,7 @@
         // unchanged: the block is decided by #1, this call only reports it.
         _showExpiryNotice(expiryEntry, videoId, { source: 'playEntry' });
 
-        // Claude - Modify J1 VideoPlayer expiry date #2
+        // Claude - Modify J1 multiPlayer expiry date #2
         // The direct jQuery call below is DEFECTIVE and must stay disabled;
         // the dialog is raised by _showExpiryNotice() above instead. It is
         // the source of the reported runtime error
@@ -5836,7 +6042,7 @@
       }
 
       isDev && logger.info('\n' + `playlistmanager: playing entry for videoId: ${videoId}`);
-      _startedFromPlaylist = true; // Modify VideoPlayer #3
+      _startedFromPlaylist = true; // Modify multiPlayer #3
       this.embedRunVideo(videoId);
     }
 
@@ -5855,7 +6061,7 @@
       const entry    = playlist.find(item => item.videoId === videoId);
       const videoSrc = (entry && entry.src) ? entry.src : videoId;
 
-      // Modify VideoPlayer expiry date #1
+      // Modify multiPlayer expiry date #1
       // Expiry gate (common funnel). Covers every caller that reaches the
       // player through this wrapper - playEntry(), the reload auto-load of the
       // first entry (autoLoadFirstEntryOnReload, mode 'pause') and the IO
@@ -5864,7 +6070,7 @@
       if (isEntryExpired) {      
         logger.warn('\n' + `playlistManager: embed DISABLED for videoId: ${videoId} - ` +
                            `access period expired on ${entry.expiryDate} (${_expiryHintText(entry.expiryDate)})`);
-        // claude - Modify J1 VideoPlayer expiry date #2
+        // Modify J1 multiPlayer expiry date #2
         // Common funnel: this gate is crossed by user-triggered playback AND
         // by the non-interactive load-and-pause path (mode 'pause', used by
         // autoLoadFirstEntryOnReload and the IO handlers). `mode` is therefore
@@ -5873,7 +6079,7 @@
         // playback attempt.
         _showExpiryNotice(entry, videoId, { source: 'playlistManager.embedRunVideo', mode: mode });
 
-        // Claude - Modify J1 VideoPlayer expiry date #2
+        // Claude - Modify J1 multiPlayer expiry date #2
         // DEFECTIVE, must stay disabled - same two faults as documented at
         // the playEntry gate (non-interpolated "${...}" in a normal string
         // -> jQuery selector throw, and Bootstrap-4 jQuery API on a
@@ -5893,7 +6099,7 @@
       embedRunVideo(videoSrc, mode);
     }
 
-    // Modify VideoPlayer #41
+    // Modify multiPlayer #41
     // autoLoadFirstEntryOnReload()
     //
     // Page-load counterpart to the load-and-pause behaviour the
@@ -5931,7 +6137,7 @@
     // call remains retriable (e.g. an adapter call after async setup
     // completes).
     //
-    // Modify VideoPlayer #43
+    // Modify multiPlayer #43
     // The once-only guard described above is now keyed per player
     // (_autoLoadFirstOnReloadDoneByPid[_playerID]) rather than a single shared
     // boolean, so on a multi-player page each player auto-loads its own stored
@@ -5961,9 +6167,9 @@
     // @return {boolean} true if a first entry was auto-loaded, false otherwise.
     //
     autoLoadFirstEntryOnReload() {
-      // Modify VideoPlayer #41
+      // Modify multiPlayer #41
       // Once-only guard: never auto-load more than once per page load.
-      // Modify VideoPlayer #43
+      // Modify multiPlayer #43
       // Now keyed by the current player scope (_playerID) instead of a
       // single shared boolean, so each player on a multi-player page
       // is guarded independently and one player's completed auto-load
@@ -5975,13 +6181,13 @@
         return false;
       }
 
-      // Modify VideoPlayer #41
+      // Modify multiPlayer #41
       // Defensive readiness check. embedRunVideo() reads
       // j1.adapter.videoPlayer.videoPlayerOptions (and relies on videojs).
       // If the adapter has not finished wiring yet, skip WITHOUT consuming
       // the once-only flag so a later (adapter-driven) call can still succeed.
       //
-      // Modify VideoPlayer #49
+      // Modify multiPlayer #49
       // Readiness is now resolved through _resolveVideoPlayerEffectiveOptions()
       // so a player configured EXCLUSIVELY per-instance (factory options, no
       // page-global j1.adapter.videoPlayer.videoPlayerOptions assignment) is
@@ -5993,7 +6199,7 @@
         return false;
       }
 
-      // Modify VideoPlayer #41
+      // Modify multiPlayer #41
       // Resolve the display-first entry from the ALREADY-stored playlist (no
       // fetch/merge). _applySortOrder() sorts in place on a fresh load() copy.
       const currentList = this.load() || [];
@@ -6007,7 +6213,7 @@
         return false;
       }
 
-      // Modify VideoPlayer #41
+      // Modify multiPlayer #41
       // Mirror of the IO-handler container guard (#26/#33): if a previous
       // session teardown left the player slot without its empty-player overlay,
       // restore the pristine container markup before embedding. On a normal
@@ -6026,10 +6232,10 @@
         isDev && logger.warn('\n' + `playlistManager: reload container restore skipped: ${e}`);
       }
 
-      // Modify VideoPlayer #41
+      // Modify multiPlayer #41
       // Consume the once-only guard now (success path) and load the first entry
       // in the paused state, exactly as handleLoadFromServer()/handleFileSelected().
-      // Modify VideoPlayer #43
+      // Modify multiPlayer #43
       // Mark the once-only guard consumed for THIS player only (keyed by
       // _playerID) so sibling players on the same page can still auto-load their
       // own stored first entry. Mirrors the per-player read guard above.
@@ -6040,7 +6246,7 @@
       return true;
     }
 
-    // Modify VideoPlayer #54
+    // Modify multiPlayer #54
     // -------------------------------------------------------------------------
     // autoLoadFirstDone()
     //
@@ -6090,11 +6296,11 @@
 
     initPlayHandler() {
 
-      // Fix VideoPlayer #2: corrected ID
+      // Fix multiPlayer #2: corrected ID
       const playlistContainer = document.getElementById(_pid('videoplayer_playlist_parent'));
       if (!playlistContainer) return;
 
-      // Fix VideoPlayer #5
+      // Fix multiPlayer #5
       // Guard flag set here so renderCurrent() can protect against duplicate
       // listener registration (same pattern used by initRateHandler, etc.).
       this._playHandlerInitialized = true;
@@ -6267,7 +6473,7 @@
     initRateHandler() {
       if (this._rateHandlerInitialized) return;
 
-      // Fix VideoPlayer #2: corrected ID
+      // Fix multiPlayer #2: corrected ID
       const playlistContainer = document.getElementById(_pid('videoplayer_playlist_parent'));
       if (!playlistContainer) return;
 
@@ -6400,7 +6606,7 @@
                     <input id="editFieldIssueDate" type="date" class="edit-field-input" placeholder="e.g. 2026-01-01" />
                   </div>
 
-                  <!-- claude - Fix multiPlayer for new startAt/endAt params #1
+                  <!-- Fix multiPlayer for new startAt/endAt params #1
                        Optional playback window for THIS media entry (all
                        source kinds: YouTube and native mp3/mp4). An EMPTY
                        value means unset (the default): playback then starts
@@ -6420,7 +6626,7 @@
                     <small class="edit-field-hint">Playback ends at this position (empty: to the natural end)</small>
                   </div>
 
-                  <!-- Modify VideoPlayer expiry date #1
+                  <!-- Modify multiPlayer expiry date #1
                        Optional access expiry for time-limited sources. An EMPTY
                        value means unlimited (the default). The background of the
                        input is driven by _updateExpiryFieldState() through the
@@ -6490,7 +6696,7 @@
         document.getElementById('editFieldInfoLink').value      = '';
         document.getElementById('editFieldVideoLink').value     = '';
         document.getElementById('editFieldIssueDate').value     = '';
-        // claude - Fix multiPlayer for new startAt/endAt params #1
+        // Fix multiPlayer for new startAt/endAt params #1
         document.getElementById('editFieldStartAt').value       = '';
         document.getElementById('editFieldEndAt').value         = '';
         document.getElementById('editFieldExpiryDate').value    = EXPIRY_UNLIMITED;
@@ -6501,7 +6707,7 @@
 
         this._updateInfoLinkButton();
         this._updateVideoLinkButton();
-        // Modify VideoPlayer expiry date #1
+        // Modify multiPlayer expiry date #1
         this._updateExpiryFieldState();
       });
 
@@ -6543,7 +6749,7 @@
             videoLink:    document.getElementById('editFieldVideoLink').value.trim(),
             issueDate:    document.getElementById('editFieldIssueDate').value.trim(),
             expiryDate:   document.getElementById('editFieldExpiryDate').value.trim(),
-            // claude - Fix multiPlayer for new startAt/endAt params #1
+            // Fix multiPlayer for new startAt/endAt params #1
             startAt:      document.getElementById('editFieldStartAt').value.trim(),
             endAt:        document.getElementById('editFieldEndAt').value.trim(),
             series:       parseInt(document.getElementById('editFieldSeries').value, 10) || 0,
@@ -6588,7 +6794,7 @@
         });
       }
 
-      // Modify VideoPlayer expiry date #1
+      // Modify multiPlayer expiry date #1
       // Live colour/hint feedback while the user edits the expiry date, plus
       // the "reset to unlimited" shortcut next to the input. Both 'input' and
       // 'change' are observed because a native date picker commits its value
@@ -6653,11 +6859,11 @@
       document.getElementById('editFieldInfoLink').value      = entry.infoLink    || '';
       document.getElementById('editFieldVideoLink').value     = entry.videoLink   || entry.src || '';
       document.getElementById('editFieldIssueDate').value     = entry.issueDate   || '';
-      // Modify VideoPlayer expiry date #1
+      // Modify multiPlayer expiry date #1
       // Missing/unset expiry resolves to EXPIRY_UNLIMITED ('') - the input then
       // renders empty, which IS the "unlimited" representation.
       document.getElementById('editFieldExpiryDate').value    = entry.expiryDate  || EXPIRY_UNLIMITED;
-      // claude - Fix multiPlayer for new startAt/endAt params #1
+      // Fix multiPlayer for new startAt/endAt params #1
       // Round-trip through the parser so stored values in ANY accepted shape
       // (HH:MM:SS string, MM:SS shorthand, plain seconds from a preloaded
       // playlist JSON) render as the HH:MM:SS value a time input requires;
@@ -6673,7 +6879,7 @@
 
       this._updateInfoLinkButton();
       this._updateVideoLinkButton();
-      // Modify VideoPlayer expiry date #1
+      // Modify multiPlayer expiry date #1
       // Colour the expiry field for the entry just loaded, before the dialog
       // becomes visible - no flash of the neutral background.
       this._updateExpiryFieldState();
@@ -6690,7 +6896,7 @@
     initEditHandler() {
       if (this._editHandlerInitialized) return;
 
-      // Fix VideoPlayer #2: corrected ID;
+      // Fix multiPlayer #2: corrected ID;
       const playlistContainer = document.getElementById(_pid('videoplayer_playlist_parent'))
       if (!playlistContainer) return;
 
@@ -6714,7 +6920,7 @@
     initInfoLinkHandler() {
       if (this._infoLinkHandlerInitialized) return;
 
-      // Fix VideoPlayer #2: corrected ID;
+      // Fix multiPlayer #2: corrected ID;
       const playlistContainer = document.getElementById(_pid('videoplayer_playlist_parent'))
       if (!playlistContainer) return;
 
@@ -6732,7 +6938,7 @@
     initVideoLinkHandler() {
       if (this._videoLinkHandlerInitialized) return;
 
-      // Fix VideoPlayer #2: corrected ID;
+      // Fix multiPlayer #2: corrected ID;
       const playlistContainer = document.getElementById(_pid('videoplayer_playlist_parent'))
       if (!playlistContainer) return;
 
@@ -6784,7 +6990,7 @@
       const self = this;
 
       this._searchIndex = lunr(function () {
-        // VideoPlayer optimizations #2 (b)
+        // multiPlayer optimizations #2 (b)
         // Correctness: the document objects passed to add() below have always
         // carried a `description` property, but the field was never DECLARED
         // via this.field() — and lunr silently ignores undeclared fields at
@@ -6863,7 +7069,7 @@
       return results;
     }
 
-    // VideoPlayer optimizations #2 (h)
+    // multiPlayer optimizations #2 (h)
     // Performance helper for the date criteria of _applySortOrder(): the
     // original comparators constructed TWO `new Date(...)` objects on EVERY
     // comparison, i.e. ~2·n·log(n) Date parses per sort (a 200-entry list
@@ -6888,8 +7094,178 @@
       return data;
     }
 
+    // Fix multiPlayer set default sort criteria #1
+    // _isSeriesPlaylist(data) - true when the given set is a SERIES playlist.
+    //
+    // A set qualifies as soon as ONE entry carries BOTH flags set:
+    //
+    //   series  > 0   the entry belongs to a series
+    //   episode > 0   the entry has a position inside that series
+    //
+    // Both are required on purpose. 'episode' sorting orders by the episode
+    // number, so a set that flags a series but leaves every episode at 0
+    // (or vice versa) would sort into a single equal-keys bucket, i.e. no
+    // visible order at all — for such a set the date default is the better
+    // answer and the test correctly reports false.
+    //
+    // NOTE: this is deliberately STRICTER than the pre-existing
+    // `hasSeries || hasEpisode` test of the two playlist LOAD paths
+    // (handleFileSelected() / handleLoadFromServer()). Those keep their
+    // original OR semantics untouched — this fix only adds the branch they
+    // never had (see there) — so no established behaviour changes.
+    //
+    // @param  {Array<Object>} data  playlist entries
+    // @return {boolean}
+    //
+    _isSeriesPlaylist(data) {
+      if (!Array.isArray(data) || data.length === 0) return false;
+      return data.some(e => e && Number(e.series) > 0 && Number(e.episode) > 0);
+    }
+
+    // Fix multiPlayer set default sort criteria #1
+    // _deriveDefaultSortCriterion(data) - the DEFAULT display order of a set.
+    //
+    //   'episode'    series playlist  (series > 0 and episode > 0)
+    //   'watchDate'  everything else  (Date, newest first — the historic default)
+    //
+    // Both values are canonical options of the sort <select> and both are
+    // handled by _applySortOrder(), so the result can be used as-is anywhere a
+    // criterion is expected.
+    //
+    // @param  {Array<Object>} data  playlist entries
+    // @return {string}              sort criterion
+    //
+    _deriveDefaultSortCriterion(data) {
+      return this._isSeriesPlaylist(data) ? 'episode' : 'watchDate';
+    }
+
+    // Fix multiPlayer set default sort criteria #1
+    // _ensureDefaultSortCriterion(data) - silent, once-only default resolution.
+    //
+    // Called from the top of _applySortOrder() (below), the one place EVERY
+    // ordering consumer passes through: renderPlaylist(), renderCards(),
+    // autoLoadFirstEntryOnReload(), _resyncPluginPlaylist(), embedRunVideo()
+    // and the two load paths. Hooking it there makes the content-derived
+    // default independent of handler INIT ORDER — it also applies when the
+    // playlist arrives late (async preloadPlaylists()) or when no title bar
+    // exists at all, in which case playlistSortHandler.init() returns early
+    // and never gets to set a criterion.
+    //
+    // Precedence (identical to the switch/localStorage precedence used by the
+    // other playlist preferences):
+    //
+    //   1. an explicit user choice  - localStorage _pid('searchMode'), written
+    //                                 by the sort <select> change listener
+    //   2. the derived default      - 'episode' | 'watchDate'
+    //
+    // Deliberately SILENT: it only updates _currentSort (and mirrors the value
+    // into an already-built <select>) and never calls sortPlaylist() /
+    // renderCurrent(), because its caller _applySortOrder() runs INSIDE the
+    // render pipeline — a render from here would re-enter it. The criterion is
+    // picked up by the very same _applySortOrder() pass, one statement later.
+    //
+    // Once-only via _defaultSortResolved, and the flag is set only for a
+    // NON-EMPTY set, so an early render of the still empty playlist keeps the
+    // resolution retriable for the first real data.
+    //
+    // @param {Array<Object>} data  playlist entries of the current pass
+    //
+    _ensureDefaultSortCriterion(data) {
+      if (this._defaultSortResolved) return;
+      if (!Array.isArray(data) || data.length === 0) return;
+
+      this._defaultSortResolved = true;
+
+      let storedSortMode = null;
+      try {
+        storedSortMode = localStorage.getItem(_pid('searchMode'));
+      } catch (e) {
+        storedSortMode = null;
+      }
+
+      if (storedSortMode) {
+        isDev && logger.debug('\n' + `playlistManager: default sort criterion skipped — user choice "${storedSortMode}" in effect`);
+        return;
+      }
+
+      const criterion = this._deriveDefaultSortCriterion(data);
+      if (criterion === this._currentSort) return;
+
+      this._currentSort = criterion;
+
+      // Keep an already-built control in sync. When the <select> does not
+      // exist yet, playlistSortHandler.init() adopts _currentSort as its own
+      // fallback, so the value reaches the control either way.
+      const sortSelect = document.getElementById(_pid('playlistSortSelect'));
+      if (sortSelect) sortSelect.value = criterion;
+
+      isDev && logger.info('\n' + `playlistManager: default sort criterion derived from playlist content: "${criterion}"`);
+    }
+
+    // Fix multiPlayer set default sort criteria #1
+    // applyDefaultSortCriterion(data, respectUserChoice) - RE-apply the default.
+    //
+    // The loud counterpart of _ensureDefaultSortCriterion(): used whenever the
+    // playlist CONTENT is replaced or extended (import, server load, preload),
+    // where the previously resolved default may no longer match the new set —
+    // e.g. a series playlist ('episode') followed by a plain one, which kept
+    // sorting by episode until now.
+    //
+    // Unlike the silent resolver it re-arms the once-only latch, mirrors the
+    // criterion into the <select> and routes the change through
+    // sortPlaylist(), so the panel AND the videojs-playlist plugin order
+    // (#31 resync) follow immediately. It is safe to call outside a render
+    // because no render is in progress on those paths.
+    //
+    // @param  {Array<Object>} [data]              entries; falls back to load()
+    // @param  {boolean}       [respectUserChoice] true = an explicit sort
+    //                                             choice in localStorage wins
+    // @return {string}                            the criterion in effect
+    //
+    applyDefaultSortCriterion(data, respectUserChoice) {
+      const view = (Array.isArray(data) && data.length > 0) ? data : (this.load() || []);
+      if (view.length === 0) return this._currentSort || 'watchDate';
+
+      this._defaultSortResolved = true;
+
+      if (respectUserChoice) {
+        let storedSortMode = null;
+        try {
+          storedSortMode = localStorage.getItem(_pid('searchMode'));
+        } catch (e) {
+          storedSortMode = null;
+        }
+        if (storedSortMode) {
+          isDev && logger.debug('\n' + `playlistManager: default sort criterion skipped — user choice "${storedSortMode}" in effect`);
+          return storedSortMode;
+        }
+      }
+
+      const criterion  = this._deriveDefaultSortCriterion(view);
+      const sortSelect = document.getElementById(_pid('playlistSortSelect'));
+      if (sortSelect) sortSelect.value = criterion;
+
+      if (criterion !== this._currentSort) {
+        this.sortPlaylist(criterion);
+        isDev && logger.info('\n' + `playlistManager: default sort criterion set to "${criterion}" for the loaded playlist`);
+      } else {
+        this._currentSort = criterion;
+      }
+
+      return criterion;
+    }
+
     _applySortOrder(data) {
       if (!data || data.length === 0) return data;
+
+      // Fix multiPlayer set default sort criteria #1
+      // Resolve the content-derived default BEFORE the criterion is read
+      // below, so the very first ordering pass of a series playlist already
+      // uses 'episode' instead of the constructor's 'watchDate' seed.
+      // No-op after the first non-empty pass and whenever an explicit user
+      // choice is stored (see the method note).
+      //
+      this._ensureDefaultSortCriterion(data);
 
       const criterion = this._currentSort || 'watchDate';
 
@@ -6968,7 +7344,7 @@
     // the edit session.  The block is lifted automatically as soon as the
     // editor is closed (data-edit-open attribute becomes "false" or absent).
     //
-    // VideoPlayer optimizations #2 (d)
+    // multiPlayer optimizations #2 (d)
     // Optional `data` parameter: when renderCurrent() passes its already-
     // resolved view snapshot, the extra localStorage parse is skipped. All
     // pre-existing no-argument call sites keep the original behaviour via
@@ -7013,7 +7389,7 @@
     }
 
     _updateSortSelectVisibility(data) {
-      // VideoPlayer MultiInstance #4
+      // multiPlayer MultiInstance #4
       // This per-render visibility helper must resolve the SAME player-scoped id
       // the sort handler now creates (_pid('playlistSortSelect')). Left bare, it
       // would no longer find the (now suffixed) control for any player and the
@@ -7044,7 +7420,7 @@
       mergeModeSwitch.style.display = data.length > 0 ? '' : 'none';
     }
 
-    // claude - Fix multiPlayer new select audio only #1
+    // Fix multiPlayer new select audio only #1
     // _updateAudioOnlySwitchVisibility - show/hide the title-bar audio-only
     // switch, following the _update*Visibility pattern of this class.
     //
@@ -7077,7 +7453,35 @@
       audioOnlySwitch.style.display = hasYouTube ? '' : 'none';
     }
 
-    // Modify VideoPlayer for export #1
+    // Fix multiPlayer new select audio only 4
+    // _syncAudioOnlyMirror - keep the UI mirror this._audioOnly aligned with
+    // the EFFECTIVE state when no checkbox owns it.
+    //
+    // With the switch present, audioOnlySwitchHandler.init() seeds the mirror
+    // and its 'change' listener maintains it. With the switch suppressed or
+    // unreachable, that handler never runs (it returns early on the
+    // ui_elements gate) and the mirror keeps the raw constructor seed
+    // (localStorage 'audioOnly_<id>' === 'true'), which can contradict the
+    // configured set_audio_only. Playback never reads the mirror — every
+    // decision goes through _resolveAudioOnlyActive() — but a contradicting
+    // field is a trap for any future consumer and for log analysis, so the
+    // value is re-asserted from the resolver on every render.
+    //
+    // Deliberately a no-op while the switch is available: writing the mirror
+    // there would fight the checkbox handler for ownership.
+    _syncAudioOnlyMirror() {
+      if (_isAudioOnlySwitchAvailable()) {
+        return;
+      }
+
+      const effective = _resolveAudioOnlyActive();
+      if (this._audioOnly !== effective) {
+        this._audioOnly = effective;
+        isDev && logger.debug('\n' + `playlistManager: audio-only mirror synced from configuration (${effective})`);
+      }
+    }
+
+    // Modify multiPlayer for export #1
     // _updateDownloadAllButtonVisibility - show/hide the title-bar export
     // button, following the _update*Visibility pattern of this class.
     //
@@ -7116,7 +7520,7 @@
         loopSwitch.style.display = 'none';
         if (this._loopEnabled) {
           this._loopEnabled = false;
-          // VideoPlayer MultiInstance #6
+          // multiPlayer MultiInstance #6
           // Player-scope this UI-preference write so it clears only
           // THIS player's persisted loop flag (see the constructor-read note).
           // _pid('playlistLoop') matches the key read back in the constructor
@@ -7139,12 +7543,12 @@
 
         if (this._loopEnabled) {
           this._loopEnabled = false;
-          // VideoPlayer MultiInstance #6
+          // multiPlayer MultiInstance #6
           // Player-scope this UI-preference write (see the constructor-read note).
           localStorage.setItem(_pid('playlistLoop'), 'false');
           isDev && logger.debug('\n' + '_updateLoopSwitchVisibility: loop mode disabled (not all items are series)');
         }
-        // VideoPlayer MultiInstance #4
+        // multiPlayer MultiInstance #4
         const checkbox = document.getElementById(_pid('loopMode'));
         if (checkbox) {
           checkbox.checked = false;
@@ -7191,8 +7595,27 @@
       const current    = selectEl.value;
       const currentOpt = selectEl.querySelector(`option[value="${current}"]`);
       if (currentOpt && currentOpt.hidden) {
-        selectEl.value = 'watchDate';
-        this.sortPlaylist('watchDate');
+        // Fix multiPlayer set default sort criteria #1
+        // The active criterion lost its data (e.g. 'rating' on a playlist
+        // without ratings) and the option was just hidden above. The fallback
+        // was hard-coded to 'watchDate', which dropped a SERIES playlist into
+        // the meaningless equal-dates order. It now falls back to the same
+        // content-derived default the rest of this fix uses.
+        //
+        // No recursion risk: the 'episode' option is shown whenever an entry
+        // carries a series flag (fieldTests above) — which is exactly when
+        // _deriveDefaultSortCriterion() can return 'episode' — and the
+        // 'watchDate' option has no field test and is never hidden. So the
+        // re-render triggered by sortPlaylist() finds a VISIBLE current
+        // option and does not re-enter this branch.
+        //
+        // Original (deprecated, preserved for reference):
+        // selectEl.value = 'watchDate';
+        // this.sortPlaylist('watchDate');
+        //
+        const fallbackCriterion = this._deriveDefaultSortCriterion(data);
+        selectEl.value = fallbackCriterion;
+        this.sortPlaylist(fallbackCriterion);
       }
     }
 
@@ -7200,7 +7623,7 @@
       this._currentSort = criterion || 'watchDate';
       isDev && logger.debug('\n' + `playlistManager: sort criterion set to "${this._currentSort}"`);
       this.renderCurrent();
-      // Modify VideoPlayer #31
+      // Modify multiPlayer #31
       // Re-sync the videojs-playlist plugin order on a sort change.
       //
       // Problem (follow-on candidate left open by #30): #30 only re-feeds the
@@ -7221,7 +7644,7 @@
       this._resyncPluginPlaylist();
     }
 
-    // Modify VideoPlayer #31
+    // Modify multiPlayer #31
     // Re-feed the live videojs-playlist plugin with the current display order.
     //
     // Mirrors the #30 source-build pipeline (displaySource -> _applySortOrder()
@@ -7244,19 +7667,19 @@
     // inside the freshly converted list, AND the order actually changed — so a
     // sort selection that yields an identical sequence never disturbs playback.
     _resyncPluginPlaylist() {
-      // Modify VideoPlayer #31
+      // Modify multiPlayer #31
       // Guard: a live, non-disposed player with the playlist plugin loaded.
       if (!player) return;
       if (typeof player.isDisposed === 'function' && player.isDisposed()) return;
       if (typeof player.playlist !== 'function') return;
 
-      // Modify VideoPlayer #31
+      // Modify multiPlayer #31
       // Guard: the playlist plugin must be enabled in config (same source #30
       // reads). Read defensively straight from the adapter options so this does
       // not depend on the module-level videoPlayerOptions having been assigned.
       let piPlaylist = null;
       try {
-        // Modify VideoPlayer #49
+        // Modify multiPlayer #49
         // Per-instance options (factory) take precedence over the page-global
         // adapter options, so a per-player plugins.playlist.enabled override
         // (videoPlayer_control.yml) governs THIS player's resync guard.
@@ -7270,7 +7693,7 @@
       }
       if (!piPlaylist || !piPlaylist.enabled) return;
 
-      // Modify VideoPlayer #31
+      // Modify multiPlayer #31
       // Resolve the video that is playing RIGHT NOW, BEFORE the list is touched.
       // Re-feeding fires 'playlistitem' (the #23 listener) and would otherwise
       // clobber _playlistActiveVideoId, so the active id is captured up front.
@@ -7281,7 +7704,7 @@
       //
       let activeVideoId = _playlistActiveVideoId || null;
 
-      // Modify VideoPlayer #31
+      // Modify multiPlayer #31
       // Snapshot the plugin's current (pre-reorder) list + index. Used both for
       // the activeVideoId fallback and for the order-changed comparison below.
       let currentList = null;
@@ -7309,7 +7732,7 @@
         }
       }
 
-      // Modify VideoPlayer #31
+      // Modify multiPlayer #31
       // Build the new plugin source from the SAME display source the panel uses
       // and sort it with the SAME _applySortOrder() before conversion (#30
       // pipeline). _applySortOrder() sorts in place and returns the array, so a
@@ -7319,11 +7742,11 @@
       const rawPlaylist   = this._applySortOrder(displaySource.slice());
       const playlist      = this.convertVideoPlayerPlaylist(rawPlaylist, piPlaylist.poster);
 
-      // Modify VideoPlayer #31
+      // Modify multiPlayer #31
       // Guard: ordering only matters with at least two playable items.
       if (!Array.isArray(playlist) || playlist.length < 2) return;
 
-      // Modify VideoPlayer #31
+      // Modify multiPlayer #31
       // Resolve the active video inside the freshly converted list (videoId
       // match, the #20 index space). convertVideoPlayerPlaylist() silently
       // drops entries without playable sources, so a raw index cannot be
@@ -7337,7 +7760,7 @@
         return;
       }
 
-      // Modify VideoPlayer #31
+      // Modify multiPlayer #31
       // Guard: skip the re-feed entirely when the order did not actually change
       // (e.g. the chosen sort criterion yields the same sequence). Comparing the
       // videoId sequence of the live plugin list against the new converted list
@@ -7355,7 +7778,7 @@
         }
       }
 
-      // Modify VideoPlayer #31
+      // Modify multiPlayer #31
       // Capture playback state so the reload (below) is transparent to the user.
       let resumeTime = 0;
       let wasPaused  = true;
@@ -7367,7 +7790,7 @@
         wasPaused  = true;
       }
 
-      // Modify VideoPlayer #31
+      // Modify multiPlayer #31
       // Re-feed the live plugin and re-point its current item at the active
       // video (same two-step pattern as #30: playlist(list) then currentItem()).
       // The intermediate playlist() load of item 0 fires a transient
@@ -7383,7 +7806,7 @@
         return;
       }
 
-      // Modify VideoPlayer #31
+      // Modify multiPlayer #31
       // Restore playback after the source reload triggered by the re-feed.
       // 'loadedmetadata' fires regardless of play state (covers both a playing
       // and a paused video), and the 250ms-deferred seek mirrors the resume
@@ -7424,7 +7847,7 @@
 
   const playlistManager = new PlaylistManager();
 
-  // VideoPlayer MultiInstance #1
+  // multiPlayer MultiInstance #1
   // Seed the owning player id at instance-creation time. This runs BEFORE the
   // initial load()/_manageHiddenMode() check below and BEFORE the
   // initEditPlaylistHandler()/initTogglePlaylistHandler() registrations, so
@@ -7660,7 +8083,7 @@
 
   // ---------------------------------------------------------------------------
   // embedRunVideo
-  // Extend VideoPlayer #1
+  // Extend multiPlayer #1
   // Extended to support both YouTube video IDs and native file URLs.
   // When the input matches YOUTUBE_PATTERNS the player is created with
   // YouTube tech (techOrder: ['youtube', 'html5'], type: 'video/youtube').
@@ -7674,7 +8097,7 @@
   // its extension so existing playlist-management logic is unaffected.
   // ---------------------------------------------------------------------------
 
-  // VideoPlayer permanently turn off YouTube captions #1
+  // multiPlayer permanently turn off YouTube captions #1
   // ---------------------------------------------------------------------------
   // Permanently disable YouTube closed captions / subtitles via the IFrame API.
   //
@@ -7731,11 +8154,11 @@
       });                                                                   
     };                                                                      
 
-    // VideoPlayer permanently turn off YouTube captions #1
+    // multiPlayer permanently turn off YouTube captions #1
     // Best-effort immediate pass (no-op if the module has not loaded yet)
     unloadCaptionModules();
 
-    // VideoPlayer permanently turn off YouTube captions #1
+    // multiPlayer permanently turn off YouTube captions #1
     // Persistent hook: onApiChange fires whenever a module (incl. captions) is
     // loaded/unloaded. Re-apply on every fire so captions never re-appear, even
     // across new videos loaded into the same player by the playlist plugin 
@@ -7749,7 +8172,7 @@
     }
   };                                                                        
 
-  // VideoPlayer fix videoID #1
+  // multiPlayer fix videoID #1
   // sanitizeVideoId - normalize a derived videoId so it is safe for playlist
   // keying, localStorage keys and [data-video-id] selectors. Native filenames
   // can carry characters outside the id space - most commonly an embedded dot
@@ -7788,7 +8211,7 @@
     // reset lastState so state change events fire correctly for the new player
     lastState = null;
 
-    // Modify VideoPlayer #23
+    // Modify multiPlayer #23
     // A new player is being built. Forget the playlist-plugin active id from any
     // prior embed so doPostOnPlaying() cannot fall back onto a stale value
     // before the fresh player's 'playlistitem'/videoData resolution repopulates
@@ -7799,7 +8222,7 @@
     // target mode for the vjs player
     playerMode = (mode === undefined) ? null : mode;
 
-    // Extend VideoPlayer #1
+    // Extend multiPlayer #1
     // Detect whether the input is a YouTube video ID / URL so the right
     // tech and playlist-key derivation are used below.
     const youtubeMatch = (() => {
@@ -7812,7 +8235,7 @@
 
     const isYouTube = !!youtubeMatch;
 
-    // VideoPlayer fix videoID #1
+    // multiPlayer fix videoID #1
     // const -> let so the derived id can be repaired in place by the sanitize
     // step below. All downstream references - including the pass into
     // createVideoJsPlayer(videoId, ...) further down, from which previousPlayerId
@@ -7823,7 +8246,7 @@
           ? videoSrc.split('?')[0].split('/').pop().replace(/\.[^.]+$/, '') || videoSrc
           : '');
 
-    // VideoPlayer fix videoID #1
+    // multiPlayer fix videoID #1
     // Repair (not reject) ids carrying characters invalid for keying. The prior
     // reject guard (kept as a deprecated comment below) rejected any dotted id
     // via `return`, so a native file such as
@@ -7839,7 +8262,7 @@
         videoId = sanitizedVideoId;
       }
 
-      // Modify VideoPlayer expiry date #1
+      // Modify multiPlayer expiry date #1
       // Expiry gate (last line of defence). The PlaylistManager wrappers above
       // already refuse expired entries, but embedRunVideo() is also reached
       // directly from the URL input wrapper, the "play next" chain and any
@@ -7852,7 +8275,7 @@
       if (isEntryExpired) {
         logger.warn('\n' + `embedRunVideo: playback DISABLED for videoId: ${videoId} - ` +
                            `access period expired on ${expiryEntry.expiryDate} (${_expiryHintText(expiryEntry.expiryDate)})`);
-        // claude - Modify J1 VideoPlayer expiry date #2
+        // Modify J1 multiPlayer expiry date #2
         // Last line of defence: reached by the URL input wrapper, the
         // "play next" chain and any external/adapter caller - paths that never
         // pass through the PlaylistManager wrappers and would otherwise fail
@@ -7865,7 +8288,7 @@
       }
     }
 
-    // Modify VideoPlayer #34
+    // Modify multiPlayer #34
     // EARLY, isolated playlist creation.
     //
     // Historically the playlist record was created "late", inside
@@ -7938,14 +8361,14 @@
           //
           if (vjsStateEventNameMap[state] === 'loadstart') {
             var piNextPrevButtons = (vjsPlayer.activePlugins_.nextPrevButtons) ? true : false;
-            // Modify VideoPlayer #49
+            // Modify multiPlayer #49
             // Per-instance options (factory) take precedence over the
             // page-global adapter options, so a per-player
             // plugins.nextPrevButtons.autoplay override governs THIS player.
             //
             var piPlaylistOptions = _resolveVideoPlayerEffectiveOptions();
 
-            // Modify VideoPlayer #32
+            // Modify multiPlayer #32
             // Skip the loadstart autoplay while the playlist plugin is still
             // swapping sources during its initial setup. Calling play() here
             // would be aborted by the immediately-following currentItem()
@@ -7956,7 +8379,7 @@
             // first playback once the selected source has settled.
             //
             if (piNextPrevButtons && piPlaylistOptions.videoJS.plugins.nextPrevButtons.autoplay && !_playlistSetupInProgress) {
-              // Modify VideoPlayer #32
+              // Modify multiPlayer #32
               // Always attach a .catch(): even outside the setup window a
               // benign interruption (e.g. rapid user navigation, a pause()
               // racing the play()) must never surface as an unhandled promise
@@ -7978,7 +8401,7 @@
           // persist the current playback position when the video is
           // paused or has ended so the user can resume later.
           if (vjsStateEventNameMap[state] === 'paused' || vjsStateEventNameMap[state] === 'ended') {
-            // Modify VideoPlayer #21
+            // Modify multiPlayer #21
             // The video is no longer playing, so clear the active marker on
             // the playlist card/row. In loop mode the next video's 'playing'
             // event re-marks the following entry via setActiveItem().
@@ -8003,7 +8426,7 @@
 
               // loop mode
               if (vjsStateEventNameMap[state] === 'ended' && loopConfigEnabled && playlistManager._loopEnabled) {
-                // claude - Fix J1 multiPlayer #5
+                // Fix J1 multiPlayer #5
                 // The double reaction the #3/#4 notes flagged as a #5
                 // candidate: with loop mode ON *and* the plugin's autoadvance
                 // armed, ONE 'ended' (natural or synthetic from
@@ -8034,7 +8457,7 @@
                 if (_pluginWillAutoadvance(player)) {
                   isDev && logger.debug('\n' + `loop mode: plugin autoadvance owns this 'ended' - in-player advance, module rebuild skipped`);
                 } else {
-                // END claude - Fix J1 multiPlayer #5 (original module advance below, unchanged)
+                // END Fix J1 multiPlayer #5 (original module advance below, unchanged)
                 const nextId = playlistManager.getNextVideoId(currentVideoId);
                 if (nextId) {
                   isDev && logger.debug('\n' + `loop mode: advancing from videoId ${currentVideoId} to next videoId ${nextId}`);
@@ -8049,7 +8472,7 @@
                 } else {
                   isDev && logger.debug('\n' + `loop mode: reached last playlist item, stopping loop`);
                 }
-                // claude - Fix J1 multiPlayer #5
+                // Fix J1 multiPlayer #5
                 // closes the plugin-priority guard opened above
                 }
               }
@@ -8141,7 +8564,7 @@
 
             const durationEl   = durationDisplay.contentEl();
             const durationText = durationEl ? durationEl.textContent : '';
-            // VideoPlayer MultiInstance #1
+            // multiPlayer MultiInstance #1
             // Self-reference through the module global (videoPlayer.playlistManager)
             // would resolve to the DEFAULT instance's manager under the multi-instance
             // architecture — i.e. the WRONG player on a multi-player page. Use this
@@ -8149,7 +8572,7 @@
             const seconds      = playlistManager._parseDuration(durationText);
 
             if (seconds > 0) {
-              // claude - Fix J1 multiPlayer #6
+              // Fix J1 multiPlayer #6
               // Original (deprecated, preserved for reference):
               // const currentVideoId = player.ytVideoData && player.ytVideoData.video_id
               //   ? player.ytVideoData.video_id
@@ -8180,7 +8603,7 @@
                 || (player.ytVideoData && player.ytVideoData.video_id
                   ? player.ytVideoData.video_id
                   : videoId);
-              // VideoPlayer MultiInstance #1
+              // multiPlayer MultiInstance #1
               // Self-reference through the module global (videoPlayer.playlistManager)
               // would resolve to the DEFAULT instance's manager under the multi-instance
               // architecture — i.e. the WRONG player on a multi-player page. Use this
@@ -8192,7 +8615,7 @@
           });
 
           // resume from saved position if available (YouTube)
-          // VideoPlayer MultiInstance #1
+          // multiPlayer MultiInstance #1
           // Self-reference through the module global (videoPlayer.playlistManager)
           // would resolve to the DEFAULT instance's manager under the multi-instance
           // architecture — i.e. the WRONG player on a multi-player page. Use this
@@ -8222,7 +8645,7 @@
 
             isDev && logger.debug('\n' + `video data resolved - title: ${title}`);
 
-            // VideoPlayer fix videoID #2
+            // multiPlayer fix videoID #2
             // ROOT CAUSE OF THE DOUBLE-ADD (native videos only):
             // The #1 fix sanitized the derived videoId ONLY at the two INPUT-side
             // derivation sites - embedRunVideo() and inputWrapperHandler
@@ -8301,7 +8724,7 @@
 
             const durationEl   = durationDisplay.contentEl();
             const durationText = durationEl ? durationEl.textContent : '';
-            // VideoPlayer MultiInstance #1
+            // multiPlayer MultiInstance #1
             // Self-reference through the module global (videoPlayer.playlistManager)
             // would resolve to the DEFAULT instance's manager under the multi-instance
             // architecture — i.e. the WRONG player on a multi-player page. Use this
@@ -8312,7 +8735,7 @@
               const currentVideoId = player.videoData && player.videoData.videoId
                 ? player.videoData.videoId
                 : videoId;
-              // VideoPlayer MultiInstance #1
+              // multiPlayer MultiInstance #1
               // Self-reference through the module global (videoPlayer.playlistManager)
               // would resolve to the DEFAULT instance's manager under the multi-instance
               // architecture — i.e. the WRONG player on a multi-player page. Use this
@@ -8324,7 +8747,7 @@
           });
 
           // resume from saved position if available (native)
-          // VideoPlayer MultiInstance #1
+          // multiPlayer MultiInstance #1
           // Self-reference through the module global (videoPlayer.playlistManager)
           // would resolve to the DEFAULT instance's manager under the multi-instance
           // architecture — i.e. the WRONG player on a multi-player page. Use this
@@ -8344,7 +8767,7 @@
           }
         } // END if isYouTube / else
 
-        // claude - Fix multiPlayer for new startAt/endAt params #1
+        // Fix multiPlayer for new startAt/endAt params #1
         // Install the playback-window enforcement for BOTH techs (YouTube and
         // native) in one place, AFTER the tech-specific resume handlers above:
         // the startAt one-shot defers past their 250ms resume seek, and the
@@ -8352,7 +8775,7 @@
         // instance's closure-local playlistManager (MultiInstance #1 rule).
         _applyStartEndAtPlayback(player, videoId, playlistManager);
 
-        // Modify VideoPlayer #49
+        // Modify multiPlayer #49
         // ROOT CAUSE of "per-player videoJS settings never applied": this
         // assignment unconditionally overwrote the instance-level
         // videoPlayerOptions with the PAGE-GLOBAL adapter options, immediately
@@ -8392,7 +8815,7 @@
           // manage playlists (piPlaylist) plugin (first)
           if (piPlaylist.enabled) {
 
-            // Modify VideoPlayer #19
+            // Modify multiPlayer #19
             // Convert the raw playlistManager record set (localStorage shape)
             // into the item shape required by the videojs-playlist plugin
             // (core.js). The raw load() entries have no `sources` array, so
@@ -8400,7 +8823,7 @@
             // player.src() fail. The mapping/derivation is centralised in
             // mapVideoPlayerPlaylist + convertVideoPlayerPlaylist().
             //
-            // Modify VideoPlayer #30
+            // Modify multiPlayer #30
             // Feed the videojs-playlist plugin a playlist whose order matches
             // exactly what the user sees in the playlist panel.
             //
@@ -8427,13 +8850,13 @@
             // array, so reordering the source before conversion does not affect
             // which item is loaded — only the navigation sequence around it.
             //
-            // Modify VideoPlayer #30
+            // Modify multiPlayer #30
             const displaySource = playlistManager._searchResults || playlistManager.load() || [];
-            // Modify VideoPlayer #30
+            // Modify multiPlayer #30
             const rawPlaylist   = playlistManager._applySortOrder(displaySource.slice());
             const playlist      = playlistManager.convertVideoPlayerPlaylist(rawPlaylist, piPlaylist.poster);
 
-            // Modify VideoPlayer #32
+            // Modify multiPlayer #32
             // Enter the playlist-setup window. The next source swaps —
             // playlist(playlist) auto-loading item 0 and the currentItem()
             // jump below loading the selected item — are internal and must not
@@ -8444,7 +8867,7 @@
 
             vjsPlayer.playlist(playlist);
 
-            // Modify VideoPlayer #23
+            // Modify multiPlayer #23
             // Mirror plugin-driven item changes onto the active-item indicator.
             //
             // core.js (playItem) fires 'playlistitem' every time the plugin
@@ -8468,7 +8891,7 @@
                 isDev && logger.debug('\n' + `playlistitem: active item follows plugin to videoId: ${switchedId}`);
                 playlistManager.setActiveItem(switchedId);
 
-                // Modify VideoPlayer #37
+                // Modify multiPlayer #37
                 // Keep the centre header span (.video-player-header-title) in
                 // sync the moment the videojs-playlist plugin switches item, so
                 // a skip-backward / skip-forward / prev / next control-bar click
@@ -8501,7 +8924,7 @@
               vjsPlayer.playlist.autoadvance(piPlaylist.autoadvance_delay);
             }
 
-            // Modify VideoPlayer #20
+            // Modify multiPlayer #20
             // Sync the (converted) playlist index to the active vjsVideoId.
             //
             // vjsPlayer.playlist() is loaded with the *converted* `playlist`,
@@ -8525,7 +8948,7 @@
               (entry) => entry && entry.videoId === vjsVideoId
             );
 
-            // Modify VideoPlayer #20
+            // Modify multiPlayer #20
             // Map the rawPlaylist hit onto its position in the converted
             // playlist (videoId match). Falls back to the existing
             // currentItem() (or 0) when the active video is absent from / was
@@ -8546,20 +8969,20 @@
                 : 0;
             }
 
-            // Modify VideoPlayer #20
+            // Modify multiPlayer #20
             // currentIndex (for loading the video) is the synced index.
             let currentIndex = syncedIndex;
 
-            // Modify VideoPlayer #19
+            // Modify multiPlayer #19
             // Guard the currentItem() jump so a short or empty converted
             // playlist can never produce an out-of-range index.
-            // Modify VideoPlayer #20
+            // Modify multiPlayer #20
             // Load the video specified by vjsVideoId from the synced playlist.
             if (playlist.length > 0 && currentIndex >= 0 && currentIndex < playlist.length) {
               vjsPlayer.playlist.currentItem(currentIndex);
             }
 
-            // Modify VideoPlayer #32
+            // Modify multiPlayer #32
             // Leave the playlist-setup window once the SELECTED source has
             // produced metadata (mirrors the proven #31 'loadedmetadata'
             // settle pattern). The intermediate item-0 load triggered by
@@ -8578,7 +9001,7 @@
             };
             vjsPlayer.on('loadedmetadata', _onPlaylistSetupSettled);
 
-            // Modify VideoPlayer #32
+            // Modify multiPlayer #32
             // Safety net: if 'loadedmetadata' never arrives (a source error, a
             // disabled tech, or an empty playlist) clear the guard after a
             // bounded delay so the loadstart autoplay is not disabled
@@ -8645,7 +9068,7 @@
           if (piNextPrevButtons.enabled) {
             vjsPlayer.nextPrevButtons();
 
-            // Modify VideoPlayer #25
+            // Modify multiPlayer #25
             // Hide the playlist panel when the user starts the previous/next
             // video from the playlist plugin's navigation buttons
             // (class="vjs-playlist-button skip-next/skip-forward").
@@ -8677,25 +9100,25 @@
             //
             const _npbControlBarEl = (vjsPlayer.controlBar && typeof vjsPlayer.controlBar.el === 'function')
               ? vjsPlayer.controlBar.el() 
-              : null; // Modify VideoPlayer #25
+              : null; // Modify multiPlayer #25
 
-            // Modify VideoPlayer #25
+            // Modify multiPlayer #25
             if (_npbControlBarEl) {
               _npbControlBarEl.addEventListener('click', (ev) => {
                 const navBtn = (ev.target && typeof ev.target.closest === 'function')
                   ? ev.target.closest('.vjs-playlist-button')
-                  : null; // Modify VideoPlayer #25
+                  : null; // Modify multiPlayer #25
 
                 if (!navBtn) return;
 
-                // Modify VideoPlayer #25
+                // Modify multiPlayer #25
                 const isDisabled = navBtn.classList.contains('vjs-disabled')
                   || navBtn.getAttribute('aria-disabled') === 'true'
                   || navBtn.disabled === true;
 
                 if (isDisabled) return;
 
-                // Modify VideoPlayer #25
+                // Modify multiPlayer #25
                 if (videoPlayerOptions.playlist.close_on_play) {
                   closePlaylist();
                   isDev && logger.debug('\n' + 'nextPrevButtons: playlist panel hidden after prev/next navigation');
@@ -8803,7 +9226,7 @@
     // Native:  player.videoData  (set by nativePlayer plugin via 'videoDataResolved').
     const isYouTubePlayer = !!(player && player.ytVideoData);
 
-    // Modify VideoPlayer #21
+    // Modify multiPlayer #21
     // The player just entered the 'playing' state. Resolve the videoId for
     // the active tech (YouTube vs native) and mark its playlist card/row as
     // active. Done before addEntry()/updateWatchDate() below, which trigger
@@ -8811,7 +9234,7 @@
     // correct data-item-active value, and setActiveItem() also updates any
     // already-rendered element directly.
     //
-    // Modify VideoPlayer #23
+    // Modify multiPlayer #23
     // Prefer the id recorded by the 'playlistitem' listener. When the source
     // change was driven by the videojs-playlist plugin (previous/next buttons,
     // autoadvance), the per-tech metadata below is stale — it still describes
@@ -8828,7 +9251,7 @@
     }
 
     if (isYouTubePlayer) {
-      // claude - Fix J1 multiPlayer #6
+      // Fix J1 multiPlayer #6
       // ROOT CAUSE of "playlist-duration flips to a wrong value (and the
       // beyond-duration warnings start) the moment endAt is reached":
       //
@@ -8907,7 +9330,7 @@
       } catch (_e) {
         isDev && logger.debug('\n' + `playbackWindow: live YT metadata refresh skipped: ${_e}`);
       }
-      // END claude - Fix J1 multiPlayer #6 (refresh block)
+      // END Fix J1 multiPlayer #6 (refresh block)
 
       document.dispatchEvent(new CustomEvent('videoPlayingStarted', {
         detail: { videoId: player.ytVideoData?.video_id || '' },
@@ -8960,7 +9383,7 @@
         // poster:       vid ? `//img.youtube.com/vi/${vid}/maxresdefault.jpg` : '',
         // Cookieless image CDN i.ytimg.com (see normalise helper above).
         poster:       vid ? `//i.ytimg.com/vi/${vid}/maxresdefault.jpg` : '',
-        // claude - Fix J1 multiPlayer #6
+        // Fix J1 multiPlayer #6
         // Original (deprecated, preserved for reference):
         // duration:     player.duration(),
         // Pair the duration with the id from the SAME live raw YT player
@@ -8972,7 +9395,7 @@
         lastPosition: 0
       };
 
-      // Modify VideoPlayer #34
+      // Modify multiPlayer #34
       // Creation now happens early in embedRunVideo(). createEntry() here is a
       // defensive no-op when the record already exists (it is idempotent) and
       // only creates one in the rare case the early creation was skipped (e.g.
@@ -8984,7 +9407,7 @@
       playlistManager.createEntry(media);
       playlistManager.enrichEntry(vid, media);
 
-      // Modify VideoPlayer #35
+      // Modify multiPlayer #35
       // Reflect the now-loaded video's title in the centre header span
       // (.video-player-header-title). Read the canonical entry.title back from
       // the playlist (just created / enriched above); fall back to the locally
@@ -8997,7 +9420,7 @@
         playlistManager.updateEntryAuthor(vid, vd.author);
       }
 
-      // claude - Fix J1 multiPlayer #6
+      // Fix J1 multiPlayer #6
       // Original (deprecated, preserved for reference):
       // const durationYT = player.duration();
       // Same live-source pairing as the media object above: `vid` was just
@@ -9044,7 +9467,7 @@
         lastPosition: 0
       };
 
-      // Modify VideoPlayer #34
+      // Modify multiPlayer #34
       // Creation now happens early in embedRunVideo(). createEntry() here is a
       // defensive no-op when the record already exists (idempotent); enrichEntry()
       // back-fills the title/author/duration resolved during playback onto the
@@ -9054,7 +9477,7 @@
       playlistManager.createEntry(media);
       playlistManager.enrichEntry(vid, media);
 
-      // Modify VideoPlayer #35
+      // Modify multiPlayer #35
       // Reflect the now-loaded native video's title in the centre header span
       // (.video-player-header-title). Read entry.title back from the playlist,
       // falling back to the resolved media.title and then the videoId.
@@ -9074,7 +9497,7 @@
         playlistManager.updateWatchDate(vid);
       }
 
-      // Modify VideoPlayer #33
+      // Modify multiPlayer #33
       // The native entry just added above may have arrived without a poster
       // (the media object's poster came through empty). Capture a still frame
       // from the file off-screen and store it so the playlist list/card views
@@ -9088,7 +9511,7 @@
       }
     }
 
-    // Modify VideoPlayer #37
+    // Modify multiPlayer #37
     // Authoritative header-title resync for plugin-driven source swaps.
     //
     // The per-tech branches above set the centre header span
@@ -9169,7 +9592,7 @@
    *   /assets/theme/j1/modules/multiPlayer/icons/player/dark/playlist-hide.svg
    * The "show" variant is selected here because the panel is being closed.
    */
-  // Modify VideoPlayer #35
+  // Modify multiPlayer #35
   // _updateHeaderTitle
   //
   // Sets the centre header span (.video-player-header-title) to the supplied
@@ -9205,7 +9628,7 @@
     const wrapper = document.getElementById(_pid('video_player_container'));
     if (!wrapper) return;
 
-    // Modify VideoPlayer #35
+    // Modify multiPlayer #35
     // The centre header <span> (.video-player-header-title) no longer doubles
     // as the playlist toggle label; it now shows the title of the currently
     // loaded video (set by _updateHeaderTitle() from doPostOnPlaying()).
@@ -9269,7 +9692,7 @@
   //
   function initEditPlaylistHandler() {
 
-    // Modify VideoPlayer #29
+    // Modify multiPlayer #29
     // ------------------------------------------------------------------------
     // DEPRECATED — handler ownership moved to the adapter.
     //
@@ -9517,7 +9940,7 @@
       // YouTube tech configuration: all player parameters are now read from
       // videoPlayerOptions.videoJS.players.youtube (videoPlayer.yml) instead
       // of being hardcoded.
-      // Modify VideoPlayer #49
+      // Modify multiPlayer #49
       // Per-instance options (factory) take precedence over the page-global
       // adapter options, so per-player videoJS.players.youtube settings
       // govern THIS player's YouTube tech configuration.
@@ -9585,7 +10008,7 @@
 
       isDev && logger.info('\n' + `createVideoJsPlayer: YouTube playerVars from players.youtube: ${JSON.stringify(ytPlayerVars)}`);
 
-      // claude - Fix multiPlayer new select audio only #1
+      // Fix multiPlayer new select audio only #1
       // AUDIO ONLY (YouTube sources only, ytp parity — see the feature note
       // at _isYouTubeEntry). When the effective state is active:
       //
@@ -9605,7 +10028,7 @@
       // videoConfig.youtube.playerVars above, so the late write is carried
       // into the player creation. The native (else) branch is untouched:
       // audio-only never applies to native .mp4/.mp3 sources.
-      // claude - Fix multiPlayer new select audio only #2
+      // Fix multiPlayer new select audio only #2
       // Display strategy CHANGED (see the ADDENDUM at the feature note):
       // audioOnlyMode collapsed the player to the control-bar height, so
       // #video_container showed the control bar and no content at all.
@@ -9616,9 +10039,16 @@
       // poster is resolved here (entry.poster <- players.youtube thumbnail <-
       // default_poster <- DEFAULT_POSTER). The quality clamp (vq = 'small' +
       // the 'playing' one-shot below) is unchanged ytp parity.
+      // Fix multiPlayer new select audio only 4
+      // UNCHANGED call site — the resolver itself gained the leading rule
+      // "switch not shown/unavailable -> set_audio_only wins" (see the
+      // feature note at _isAudioOnlySwitchAvailable). A player configured
+      // with ui_elements.audioOnlySwitch: false and set_audio_only: true
+      // therefore reaches the audioPosterMode branch below on every YouTube
+      // load without any UI ever being built.
       const audioOnlyActive = _resolveAudioOnlyActive();
       if (audioOnlyActive) {
-        // claude - Fix multiPlayer new select audio only #2
+        // Fix multiPlayer new select audio only #2
         // Original (deprecated, preserved for reference):
         // videoConfig.audioOnlyMode = true;
         videoConfig.audioPosterMode = true;
@@ -9628,7 +10058,7 @@
         // Defensive poster-persistence CSS (no-op with the full core CSS).
         _ensureAudioOnlyPosterStyles();
 
-        // claude - Fix multiPlayer new select audio only #2
+        // Fix multiPlayer new select audio only #2
         // Original (deprecated, preserved for reference):
         // isDev && logger.info('\n' + 'createVideoJsPlayer: AUDIO ONLY active — video hidden, quality small (ytp parity)');
         isDev && logger.info('\n' + `createVideoJsPlayer: AUDIO ONLY active — poster shown (${videoConfig.poster}), video hidden, quality small (ytp parity)`);
@@ -9639,7 +10069,7 @@
       // from videoPlayerOptions.videoJS.players.native (videoPlayer.yml)
       // instead of being hardcoded.  Static defaults are used as fallback
       // values when videoPlayerOptions is not yet available.
-      // Modify VideoPlayer #49
+      // Modify multiPlayer #49
       // Per-instance options (factory) take precedence over the page-global
       // adapter options, so per-player videoJS.players.native settings
       // govern THIS player's HTML5 tech configuration.
@@ -9753,7 +10183,7 @@
           }
         }
 
-        // claude - Fix multiPlayer new select audio only #1
+        // Fix multiPlayer new select audio only #1
         // Hard-enforce the minimum video quality on the underlying YT.Player
         // once playback has actually started (ytp parity — ytp.js calls
         // setPlaybackQuality('small') in its onPlayerReady; here 'playing'
@@ -9762,7 +10192,7 @@
         // asynchronously after the IFrame API is ready). one() keeps it a
         // single shot per created player; the audioOnlyMode/vq creation
         // options above already govern the initial state.
-        // claude - Fix multiPlayer new select audio only #2
+        // Fix multiPlayer new select audio only #2
         // The creation option is now audioPosterMode (+ videoConfig.poster);
         // this quality one-shot is UNCHANGED — it clamps the video data of
         // the hidden playback exactly as before (ytp parity).
@@ -9913,7 +10343,7 @@
         // force closinb the playlisz_edit_screen when a playlist is loaded
         const button  = _pid('edit_playlist');
         const playerID = button.replace("edit_playlist_", "");
-        // claude - Fix multiPlayer load failed #1
+        // Fix multiPlayer load failed #1
         // Adapter namespace renamed videoPlayer -> multiPlayer; route the call
         // through the guarded resolver so a missing adapter namespace can no
         // longer crash the load path (see _adapterCloseEditPlaylist).
@@ -9930,7 +10360,7 @@
       // extractVideoSrc returns the raw URL/path for native video files.
       const videoSrc = this.extractVideoSrc(url);
 
-      // VideoPlayer fix videoID #1
+      // multiPlayer fix videoID #1
       // Apply the same sanitize embedRunVideo() uses so this duplicate-check id
       // matches previousPlayerId (set from embedRunVideo's cleaned id). Without
       // it, a native id containing an invalid char (e.g. a dot) would be compared
@@ -9954,7 +10384,7 @@
         // force closinb the playlisz_edit_screen when a playlist is loaded
         const button  = _pid('edit_playlist');
         const playerID = button.replace("edit_playlist_", "");
-        // claude - Fix multiPlayer load failed #1
+        // Fix multiPlayer load failed #1
         // Adapter namespace renamed videoPlayer -> multiPlayer; route the call
         // through the guarded resolver so a missing adapter namespace can no
         // longer crash the load path (see _adapterCloseEditPlaylist).
@@ -10175,7 +10605,7 @@
           const hasEpisode = loaded.some(entry => entry.episode > 0);
 
           if (hasSeries || hasEpisode) {
-            // VideoPlayer MultiInstance #4
+            // multiPlayer MultiInstance #4
             // Match the player-scoped sort <select> id so the imported playlist's
             // auto-sort reflects in THIS player's own control.
             //
@@ -10185,6 +10615,27 @@
             }
             playlistManager.sortPlaylist('episode');
             isDev && logger.info('\n' + 'playlistManager: series/episode entries detected - auto-sorted by episode');
+            // Fix multiPlayer set default sort criteria #1
+            // Keep the once-only latch of the derived default in sync: the
+            // criterion for THIS content has just been decided explicitly, so
+            // a later silent resolution must not second-guess it.
+            //
+            playlistManager._defaultSortResolved = true;
+          }
+
+          // Fix multiPlayer set default sort criteria #1
+          // Counterpart of the branch above, which only ever switches TO
+          // 'episode' and never back: importing a plain playlist while
+          // 'episode' was still active (from a previously loaded series
+          // playlist) left the new content sorted by an episode number none
+          // of its entries has. The imported content now always decides the
+          // display order — here: 'watchDate' (Date, newest first).
+          //
+          // The load is an explicit user action on new content, so a stored
+          // sort choice does NOT win over it — hence `false`.
+          //
+          if (!hasSeries && !hasEpisode) {
+            playlistManager.applyDefaultSortCriterion(loaded, false);
           }
 
           if (!playlistManager._searchIndex && !playlistManager._loadSearchIndex()) {
@@ -10202,7 +10653,7 @@
           // force closinb the playlisz_edit_screen when a playlist is loaded
           const button  = _pid('edit_playlist');
           const playerID = button.replace("edit_playlist_", "");
-          // claude - Fix multiPlayer load failed #1
+          // Fix multiPlayer load failed #1
           // Adapter namespace renamed videoPlayer -> multiPlayer; route the call
           // through the guarded resolver so a missing adapter namespace can no
           // longer crash the load path (see _adapterCloseEditPlaylist).
@@ -10215,7 +10666,7 @@
 
           playlistManager.renderCurrent();
 
-          // Modify VideoPlayer #33
+          // Modify multiPlayer #33
           // Backfill posters for imported native-video entries that arrived
           // without one. Runs asynchronously after the initial render so the
           // list appears immediately (with DEFAULT_POSTER placeholders) and the
@@ -10223,8 +10674,8 @@
           playlistManager.generateMissingNativePosters()
             .catch((e) => { isDev && logger.warn('\n' + `poster backfill (file import) failed: ${e}`); });
 
-          // Modify VideoPlayer #27
-          // Mirror of "Modify VideoPlayer #26" (handleLoadFromServer): when a
+          // Modify multiPlayer #27
+          // Mirror of "Modify multiPlayer #26" (handleLoadFromServer): when a
           // playlist file is imported here, load the first video of the
           // (display-ordered) list into the player and start it in the 'paused'
           // state. The display order is reproduced by applying the active sort
@@ -10391,7 +10842,7 @@
       const hasEpisode = loaded.some(entry => entry.episode > 0);
 
       if (hasSeries || hasEpisode) {
-        // VideoPlayer MultiInstance #4
+        // multiPlayer MultiInstance #4
         // Match the player-scoped sort <select> id (server-playlist load path).
         //
         const sortSelect = document.getElementById(_pid('playlistSortSelect'));
@@ -10400,6 +10851,19 @@
         }
         playlistManager.sortPlaylist('episode');
         isDev && logger.debug('\n' + 'playlistManager: series/episode entries detected - auto-sorted by episode');
+        // Fix multiPlayer set default sort criteria #1
+        // Keep the once-only latch of the derived default in sync (see the
+        // file-import path for the rationale).
+        playlistManager._defaultSortResolved = true;
+      }
+
+      // Fix multiPlayer set default sort criteria #1
+      // Counterpart of the branch above (server-playlist load path): a plain
+      // playlist loaded after a series playlist now falls back to the date
+      // default instead of keeping the stale 'episode' criterion.
+      //
+      if (!hasSeries && !hasEpisode) {
+        playlistManager.applyDefaultSortCriterion(loaded, false);
       }
 
       if (!playlistManager._searchIndex && !playlistManager._loadSearchIndex()) {
@@ -10419,7 +10883,7 @@
       // force closinb the playlisz_edit_screen when a playlist is loaded
       const button  = _pid('edit_playlist');
       const playerID = button.replace("edit_playlist_", "");
-      // claude - Fix multiPlayer load failed #1
+      // Fix multiPlayer load failed #1
       // Adapter namespace renamed videoPlayer -> multiPlayer; route the call
       // through the guarded resolver so a missing adapter namespace can no
       // longer crash the load path (see _adapterCloseEditPlaylist).
@@ -10430,7 +10894,7 @@
       // update the playListButton (to be enabled when a playlist is loaded)
       playlistManager._updateTogglePlaylistButton();
 
-      // Modify VideoPlayer #33
+      // Modify multiPlayer #33
       // Backfill posters for server-loaded native-video entries that arrived
       // without one (mirror of the handleFileSelected() backfill). Runs
       // asynchronously so the list appears immediately and the real thumbnails
@@ -10438,7 +10902,7 @@
       playlistManager.generateMissingNativePosters()
         .catch((e) => { isDev && logger.warn('\n' + `poster backfill (server load) failed: ${e}`); });
 
-      // Modify VideoPlayer #26
+      // Modify multiPlayer #26
       // When a playlist is loaded from the server, load the first video of the
       // (display-ordered) list into the player and start it in the 'paused'
       // state. The display order is reproduced by applying the active sort
@@ -10589,7 +11053,7 @@
     }
 
     cacheElements() {
-      // VideoPlayer MultiInstance #4
+      // multiPlayer MultiInstance #4
       // Resolve the title bar within THIS player's own #playlist_screen panel
       // (falling back to #playlistBlock) instead of the first
       // '.playlist-block-title' in the whole document. On a multi-player page the
@@ -10614,7 +11078,7 @@
         return;
       }
 
-      // VideoPlayer MultiInstance #4
+      // multiPlayer MultiInstance #4
       // Player-scope the switch id so each player creates and owns its own
       // control. With the bare id, once player 1 had created #playlistModeSwitch
       // the lookup here found it for every later player, took the "reuse existing
@@ -10628,7 +11092,7 @@
         listModeSwitch.id         = _pid('playlistModeSwitch');
         listModeSwitch.className  = 'switch not-spoken';
 
-        // VideoPlayer MultiInstance #4
+        // multiPlayer MultiInstance #4
         // Player-scope the checkbox id too (it is read back below via
         // getElementById(_pid('playlistMode'))). The label wraps the input,
         // so the label/for association is preserved without a `for` attribute.
@@ -10663,7 +11127,7 @@
       checkbox.checked = (playlistManager._displayMode === 'cards');
 
       checkbox.addEventListener('change', (e) => {
-        // VideoPlayer MultiInstance #6
+        // multiPlayer MultiInstance #6
         // Player-scope both mode writes so a toggle persists only THIS player's
         // preference. _pid('playlistMode') matches the constructor read and the
         // checkbox id created in init() (fix #4), keeping key and DOM in lockstep.
@@ -10703,7 +11167,7 @@
     }
 
     cacheElements() {
-      // VideoPlayer MultiInstance #4
+      // multiPlayer MultiInstance #4
       // Same per-player title-bar scoping as playlistModeSwitchHandler
       // See the note there. Without it the merge switch was built into
       // (or reused from) player's title bar and never appeared for
@@ -10767,7 +11231,7 @@
 
       checkbox.checked = playlistManager._mergeMode;
       checkbox.addEventListener('change', (e) => {
-        // VideoPlayer MultiInstance #6
+        // multiPlayer MultiInstance #6
         // Player-scope both merge writes so a toggle persists only THIS player's
         // preference. _pid('mergeMode') matches the constructor read and the
         // checkbox id created in init() (fix #4), keeping key and DOM in lockstep.
@@ -10876,7 +11340,7 @@
       checkbox.checked = playlistManager._loopEnabled;
 
       checkbox.addEventListener('change', (e) => {
-        // VideoPlayer MultiInstance #6
+        // multiPlayer MultiInstance #6
         // Player-scope both loop writes so a toggle persists only THIS
         // player's preference. _pid('playlistLoop') matches the constructor
         // read and the loop checkbox id created in init() (fix #4), key
@@ -10911,7 +11375,7 @@
 
   } // END playlistLoopSwitchHandler
 
-  // claude - Fix multiPlayer new select audio only #1
+  // Fix multiPlayer new select audio only #1
   // ---------------------------------------------------------------------------
   // audioOnlySwitchHandler
   //
@@ -10960,6 +11424,14 @@
       const ui = (typeof opts.ui_elements === 'object' && opts.ui_elements)
         ? opts.ui_elements
         : {};
+      // Fix multiPlayer new select audio only 4
+      // This early return is exactly the state the new key covers: no switch
+      // is built, so nothing can seed or persist a state interactively. From
+      // here on the audio-only mode of this player is stated declaratively by
+      // set_audio_only (YAML chain), which _resolveAudioOnlyActive() applies
+      // ahead of the localStorage/audio_only chain — see the feature note at
+      // _isAudioOnlySwitchAvailable(). No code change is required here; the
+      // return stays as it was.
       if (ui.audioOnlySwitch === false) {
         isDev && logger.debug('\n' + 'audioOnlySwitchHandler: disabled by ui_elements.audioOnlySwitch, skipping init');
         return;
@@ -10977,7 +11449,7 @@
         audioOnlySwitch           = document.createElement('div');
         audioOnlySwitch.id        = _pid('audioOnlySwitch');
         audioOnlySwitch.className = 'switch not-spoken';
-        // claude - Fix multiPlayer new select audio only #2
+        // Fix multiPlayer new select audio only #2
         // Original (deprecated, preserved for reference):
         // audioOnlySwitch.title     = 'Play YouTube entries as audio only (video hidden, minimum video data loaded)';
         audioOnlySwitch.title     = 'Play YouTube entries as audio only (poster shown instead of the video, minimum video data loaded)';
@@ -11041,7 +11513,7 @@
         // never touched, the new state simply governs the NEXT YouTube load
         // (createVideoJsPlayer). player.audioOnlyMode(bool) is the runtime
         // twin of the videoConfig.audioOnlyMode creation option (video.js).
-        // claude - Fix multiPlayer new select audio only #2
+        // Fix multiPlayer new select audio only #2
         // Runtime twin CHANGED with the creation option (see the ADDENDUM at
         // the feature note): player.audioPosterMode(bool) hides/shows the
         // YouTube iframe while the poster persists on the full player
@@ -11051,16 +11523,16 @@
         // live ENABLE the configured poster is resolved and set first.
         // audioPosterMode() returns a Promise when setting; a defensive
         // .catch() keeps a benign mode-switch race out of the console
-        // (unhandled-rejection rule of Modify VideoPlayer #32).
+        // (unhandled-rejection rule of Modify multiPlayer #32).
         try {
           if (player
-              // claude - Fix multiPlayer new select audio only #2
+              // Fix multiPlayer new select audio only #2
               // Original (deprecated, preserved for reference):
               // && typeof player.audioOnlyMode === 'function'
               && typeof player.audioPosterMode === 'function'
               && typeof player.currentType  === 'function'
               && player.currentType() === 'video/youtube') {
-            // claude - Fix multiPlayer new select audio only #2
+            // Fix multiPlayer new select audio only #2
             // Original (deprecated, preserved for reference):
             // player.audioOnlyMode(enabled);
             if (enabled) {
@@ -11087,7 +11559,7 @@
             // on its own with the next buffer; forcing a quality would fight
             // the IFrame API's adaptive selection. The next regular load
             // starts with default quality anyway.
-            // claude - Fix multiPlayer new select audio only #2
+            // Fix multiPlayer new select audio only #2
             // NOTE (design decision, follows the jadams note above): the
             // poster set on a live ENABLE is intentionally NOT cleared on a
             // live DISABLE — vjs-has-started hides it as soon as the video
@@ -11157,7 +11629,7 @@
         { value: 'type',         label: 'Type' }
       ];
 
-      // VideoPlayer MultiInstance #4
+      // multiPlayer MultiInstance #4
       // Player-scope the sort <select> id so each player builds and owns its own
       // control in its own title bar (see playlistModeSwitchHandler note).
       let select = document.getElementById(_pid('playlistSortSelect'));
@@ -11182,7 +11654,7 @@
         titleBar.appendChild(select);
       }
 
-      // VideoPlayer MultiInstance #6
+      // multiPlayer MultiInstance #6
       // Player-scope the sort-mode read. The bare 'searchMode' key is
       // origin-global, so on a multi-player page both sort <select>s
       // restored the same criterion on (re)load. _pid('searchMode')
@@ -11192,7 +11664,39 @@
       // scope is added.)
       //
       const storedSortMode = localStorage.getItem(_pid('searchMode'));
-      const sortCriterion  = storedSortMode || playlistManager._currentSort || 'watchDate';
+
+      // Fix multiPlayer set default sort criteria #1
+      // Replace the hard-coded terminal 'watchDate' of the fallback chain with
+      // the CONTENT-DERIVED default of the stored playlist, so a series
+      // playlist (series > 0 / episode > 0) opens sorted by episode on a page
+      // (re)load instead of by a date every entry of a series export shares.
+      //
+      // Precedence is unchanged where it matters: an explicit user choice
+      // (storedSortMode) still wins over everything. The derived value is
+      // never falsy, so it takes the place _currentSort/'watchDate' held —
+      // and it AGREES with _currentSort whenever the silent resolver
+      // (_ensureDefaultSortCriterion) has already run on the same content,
+      // e.g. after an async preload. The original chain is kept as the tail
+      // for the empty-playlist case, where the derived value is 'watchDate'
+      // exactly as before.
+      //
+      // Original (deprecated, preserved for reference):
+      // const sortCriterion  = storedSortMode || playlistManager._currentSort || 'watchDate';
+      //
+      const storedPlaylist  = playlistManager.load() || [];
+      const defaultSortMode = playlistManager._deriveDefaultSortCriterion(storedPlaylist);
+      const sortCriterion   = storedSortMode || defaultSortMode || playlistManager._currentSort || 'watchDate';
+
+      // Fix multiPlayer set default sort criteria #1
+      // The criterion for this content is decided here, so the once-only
+      // silent resolution must not revisit it on the first render below.
+      // Latched for a NON-EMPTY playlist only: with an empty store nothing was
+      // derived yet, and the resolution has to stay armed for content that
+      // arrives later (async preload, first addEntry()).
+      //
+      if (storedPlaylist.length > 0) {
+        playlistManager._defaultSortResolved = true;
+      }
 
       playlistManager._currentSort = sortCriterion;
       select.value = sortCriterion;
@@ -11206,7 +11710,7 @@
         playlistManager.renderCurrent();
       }
 
-      // Modify VideoPlayer #41
+      // Modify multiPlayer #41
       // When a playlist is already present in localStorage on (re)load, restore
       // the same "first entry loaded in paused state" behaviour the IO handlers
       // apply after a user-triggered load (#26/#27). This runs here because
@@ -11216,7 +11720,7 @@
       // The method is once-only-guarded, no-ops on an empty list, and skips
       // gracefully if the adapter is not ready yet (see autoLoadFirstEntryOnReload).
       //
-      // Claude - Modify J1 VideoPlayer expiry date #2
+      // Claude - Modify J1 multiPlayer expiry date #2
       // Hardened: the auto-load is a GUEST inside this init - it merely rides
       // along because this handler already touches the stored playlist. In
       // the reported failure a defective jQuery selector inside the expiry
@@ -11237,7 +11741,7 @@
       }
 
       select.addEventListener('change', (e) => {
-        localStorage.setItem(_pid('searchMode'), e.target.value); // VideoPlayer MultiInstance #6
+        localStorage.setItem(_pid('searchMode'), e.target.value); // multiPlayer MultiInstance #6
         playlistManager.sortPlaylist(e.target.value);
       });
 
@@ -11270,7 +11774,7 @@
 
   } // END playlistSortHandler
 
-  // Modify VideoPlayer for export #1
+  // Modify multiPlayer for export #1
   // ---------------------------------------------------------------------------
   // playlistDownloadAllHandler
   //
@@ -11369,7 +11873,7 @@
   // ---------------------------------------------------------------------------
   function inputValueBackgroundHandler() {
 
-    // VideoPlayer MultiInstance #1
+    // multiPlayer MultiInstance #1
     // Page-global one-shot guard. This handler wires DOCUMENT-level listeners
     // (input / change / animationstart / visibilitychange) plus a 500 ms
     // interval that syncs EVERY matching input on the page — it is
@@ -11415,7 +11919,7 @@
     }
 
     function syncBackground(el) {
-      // Modify VideoPlayer expiry date #1
+      // Modify multiPlayer expiry date #1
       // Ownership hand-off for the Expiry Date field. This handler writes the
       // background as an INLINE !important style every 500 ms, which would
       // overwrite the yellow/red expiry colouring within half a second. When
@@ -11442,7 +11946,7 @@
       }
     }
 
-    // VideoPlayer optimizations #2 (f)
+    // multiPlayer optimizations #2 (f)
     // Performance: syncAll() is driven by a PERMANENT setInterval(…, 500)
     // below (needed to catch browser autofill and programmatic value changes
     // that fire no input/change event). That means a full-document
@@ -11454,12 +11958,12 @@
     // that happened while hidden is reflected without waiting for the next
     // tick. Foreground behaviour is completely unchanged.
     function syncAll() {
-      // VideoPlayer optimizations #2 (f)
+      // multiPlayer optimizations #2 (f)
       if (document.hidden) return;
       document.querySelectorAll(SELECTOR).forEach(syncBackground);
     }
 
-    // VideoPlayer optimizations #2 (f)
+    // multiPlayer optimizations #2 (f)
     // Immediate catch-up pass when the tab returns to the foreground.
     document.addEventListener('visibilitychange', () => {
       if (!document.hidden) syncAll();
@@ -11494,7 +11998,7 @@
   // ---------------------------------------------------------------------------
   // function navbarSmoothScrollHandler() {
 
-  //   // VideoPlayer MultiInstance #1
+  //   // multiPlayer MultiInstance #1
   //   // Page-global one-shot guard (shared module scope — see the matching note
   //   // in inputValueBackgroundHandler). The nav menu is page chrome, not a
   //   // per-player element, so its click handlers must be registered exactly
@@ -11518,7 +12022,7 @@
   //     return;
   //   }
 
-  //   // VideoPlayer MultiInstance #1
+  //   // multiPlayer MultiInstance #1
   //   // All existence checks passed — mark the page-global registration done
   //   // before wiring the handlers (see guard at the top of this function).
   //   _sharedNavbarSmoothScrollHandlerInit = true;
@@ -11550,7 +12054,7 @@
   // Wires the #toggle_playlist button so that clicking it shows or hides the
   // #playlist_screen panel.  Prior to this fix the toggle handler lived
   // exclusively in the adapter, which used bare (un-suffixed) element IDs.
-  // After the "Unique VideoPlayer" changes every element id is suffixed
+  // After the "Unique multiPlayer" changes every element id is suffixed
   // with _{{player.id}}, so the adapter's bare-id lookups silently failed.
   //
   // This module-level handler replaces the adapter's toggle click handler for
@@ -11585,7 +12089,7 @@
 
     _togglePlaylistHandlerInit = true;
 
-    // Modify VideoPlayer #35
+    // Modify multiPlayer #35
     // The centre header span is now a "now playing" title that is filled on
     // play by _updateHeaderTitle(). If the rendered template still seeded that
     // span with the legacy toggle label, clear the stale text so it isn't
@@ -11617,7 +12121,7 @@
         btn.setAttribute('aria-label',    'Hide playlist');
         btn.setAttribute('aria-expanded', 'true');
 
-        // Modify VideoPlayer #35
+        // Modify multiPlayer #35
         // The centre header span (.video-player-header-title) is now a
         // "now playing" title, not the toggle label, so the legacy
         // "Hide Playlist" span write is disabled. The button's title /
@@ -11699,7 +12203,7 @@
       editScreen.style.display = 'none';
     }
 
-    // Modify VideoPlayer #29
+    // Modify multiPlayer #29
     // Under the overlay model the edit screen is positioned OVER
     // #video_container as a sibling and never replaces its contents, so the
     // snapshot-restore step below is no longer required and would, if it ran,
@@ -11730,22 +12234,22 @@
   // ---------------------------------------------------------------------------
   // Instance API
   //
-  // VideoPlayer MultiInstance #1
+  // multiPlayer MultiInstance #1
   // This object is no longer the module-global export: it is the PER-INSTANCE
   // API returned by createVideoPlayerInstance() for exactly one player. The
   // module export (see the registry section at the end of the file) hands out
   // one of these per player id via createInstance()/getInstance() and mirrors
   // the default instance's members for backward compatibility.
   //
-  // VideoPlayer MultiInstance #2
-  // Update: these members are now attached DIRECTLY to the owning VideoPlayer
-  // class instance (Object.assign in the VideoPlayer constructor, see the
+  // multiPlayer MultiInstance #2
+  // Update: these members are now attached DIRECTLY to the owning multiPlayer
+  // class instance (Object.assign in the multiPlayer constructor, see the
   // module API section at the end of the file). The default-instance mirror
   // described above has been retired — every consumer addresses a concrete
   // player id via the videoPlayer(id, options) factory, as in video.js.
   // ---------------------------------------------------------------------------
   return {
-    // VideoPlayer MultiInstance #1
+    // multiPlayer MultiInstance #1
     // per-instance identification
     instanceID:                   instanceID,
     getPlayerID:                  function () { return _playerID; },
@@ -11756,21 +12260,21 @@
     playlistModeSwitchHandler:    playlistModeSwitchHandler,
     playlistMergeSwitchHandler:   playlistMergeSwitchHandler,
     playlistLoopSwitchHandler:    playlistLoopSwitchHandler,
-    // claude - Fix multiPlayer new select audio only #1
+    // Fix multiPlayer new select audio only #1
     // Title-bar switch for AUDIO ONLY playback of YouTube entries. Built
     // lazily by renderCurrent() (no adapter change required); exported so an
     // adapter can construct it at a more precise point, same pattern as the
     // sibling switch handlers.
     audioOnlySwitchHandler:       audioOnlySwitchHandler,
     playlistSortHandler:          playlistSortHandler,
-    // Modify VideoPlayer for export #1
+    // Modify multiPlayer for export #1
     playlistDownloadAllHandler:   playlistDownloadAllHandler,
-    // Modify VideoPlayer for export #2
+    // Modify multiPlayer for export #2
     // Notification surface of the export layer: { show, progress }. Exported
     // so an adapter can raise its own toasts in the very same stack (see the
     // videoPlayerToast definition in the MEDIA EXPORT section).
     videoPlayerToast:             videoPlayerToast,
-    // claude - Modify J1 VideoPlayer expiry date #2
+    // Modify J1 multiPlayer expiry date #2
     // Expiry-notice surface: { show, isExpired, state, hintText }. Exported so
     // an adapter that refuses an expired source on its own can raise the very
     // same danger dialog instead of failing silently (see the EXPIRY NOTICE
@@ -11786,7 +12290,7 @@
 
   } // END createVideoPlayerInstance
 
-  // VideoPlayer MultiInstance #2
+  // multiPlayer MultiInstance #2
   // ===========================================================================
   // Original #1 module (registry) API (deprecated, preserved for reference):
   // the closure-registry functions (createInstance/getInstance/hasInstance/
@@ -11796,7 +12300,7 @@
   // instance. Replaced by the video.js-aligned class/factory/registry section
   // below. Every original line follows, commented out and unchanged.
   // ===========================================================================
-  //   // VideoPlayer MultiInstance #1
+  //   // multiPlayer MultiInstance #1
   //   // ======================================================================
   //   // Module (registry) API — this is what the UMD wrapper exports as
   //   // `videoPlayer` (browser global) / module.exports / AMD.
@@ -11927,7 +12431,7 @@
   //
   //   return moduleAPI;
 
-  // VideoPlayer MultiInstance #2
+  // multiPlayer MultiInstance #2
   // ===========================================================================
   // Module API — video.js-aligned multi-instance architecture
   //
@@ -11935,25 +12439,25 @@
   // global) / module.exports / AMD. The export is now the CALLABLE
   // create-or-get factory videoPlayer(id, options) — the exact structure of
   // the global videojs(id, options) function of the videoJS module — backed
-  // by the VideoPlayer class (video.js: Player) and its static instance
-  // registry VideoPlayer.players (video.js: Player.players).
+  // by the multiPlayer class (video.js: Player) and its static instance
+  // registry multiPlayer.players (video.js: Player.players).
   // ===========================================================================
 
   // ---------------------------------------------------------------------------
-  // VideoPlayer MultiInstance #2
-  // class VideoPlayer — the per-player instance class (video.js: class Player)
+  // multiPlayer MultiInstance #2
+  // class multiPlayer — the per-player instance class (video.js: class Player)
   //
   // The constructor builds the complete per-player implementation by running
   // createVideoPlayerInstance(id) — all state, the PlaylistManager and every
   // handler class live in the members it returns — and attaches those members
   // to the class instance, the same way a video.js Player constructor creates
   // and attaches its child components. The instance then registers itself in
-  // the static VideoPlayer.players registry.
+  // the static multiPlayer.players registry.
   //
-  // Do NOT call `new VideoPlayer()` from adapter code — use the videoPlayer()
+  // Do NOT call `new multiPlayer()` from adapter code — use the videoPlayer()
   // factory below (create-or-get), exactly like the global videojs() factory.
   // ---------------------------------------------------------------------------
-  class VideoPlayer {
+  class multiPlayer {
 
     constructor(playerId = '', options = null) {
       const id = String(playerId || '');
@@ -11961,10 +12465,10 @@
       // duplicate protection: the factory normally prevents this; guard the
       // direct-constructor path as well (video.js errors on re-initialising
       // an element that already owns a player)
-      if (VideoPlayer.players[id]) {
+      if (multiPlayer.players[id]) {
         throw new Error(
           `videoPlayer: instance "${id}" already exists — ` +
-          'use the videoPlayer(id) factory (create-or-get) instead of new VideoPlayer()'
+          'use the videoPlayer(id) factory (create-or-get) instead of new multiPlayer()'
         );
       }
 
@@ -11988,7 +12492,7 @@
 
       // register AFTER a fully successful build so a constructor exception
       // can never leave a half-built instance in the registry
-      VideoPlayer.players[id] = this;
+      multiPlayer.players[id] = this;
     }
 
     // video.js parity accessors
@@ -12007,24 +12511,24 @@
     // future numbered fix.
     // -------------------------------------------------------------------------
     dispose() {
-      delete VideoPlayer.players[this.id_];
+      delete multiPlayer.players[this.id_];
     }
 
-  } // END class VideoPlayer
+  } // END class multiPlayer
 
-  // VideoPlayer MultiInstance #2
+  // multiPlayer MultiInstance #2
   // Static instance registry, keyed by player id (video.js: Player.players).
   // Object.create(null) avoids prototype-key collisions for ids like
   // 'toString' (same rationale as _autoLoadFirstOnReloadDoneByPid, see #43).
-  VideoPlayer.players = Object.create(null);
+  multiPlayer.players = Object.create(null);
 
   // ---------------------------------------------------------------------------
-  // VideoPlayer MultiInstance #2
+  // multiPlayer MultiInstance #2
   // videoPlayer() — the module factory and the module export
   //
   // Mirrors the global videojs(id, options) function: returns the already
   // registered instance for `playerId` when one exists (create-or-get),
-  // otherwise creates, registers and returns a new VideoPlayer. Options
+  // otherwise creates, registers and returns a new multiPlayer. Options
   // passed for an ALREADY EXISTING instance are ignored, as in video.js.
   //
   // Adapter usage (see adapter/js/videoPlayer.js, MultiInstance #2):
@@ -12036,30 +12540,30 @@
   // ---------------------------------------------------------------------------
   function videoPlayer(playerId = '', options = null) {
     const id       = String(playerId || '');
-    const existing = VideoPlayer.players[id];
+    const existing = multiPlayer.players[id];
 
     if (existing) {
       return existing;
     }
-    return new VideoPlayer(id, options);
+    return new multiPlayer(id, options);
   }
 
-  // VideoPlayer MultiInstance #2
+  // multiPlayer MultiInstance #2
   // video.js-parity module surface
   videoPlayer.VERSION     = VERSION;                    // videojs.VERSION
-  videoPlayer.VideoPlayer = VideoPlayer;                // instance class export
-  videoPlayer.players     = VideoPlayer.players;        // live registry reference
+  videoPlayer.multiPlayer = multiPlayer;                // instance class export
+  videoPlayer.players     = multiPlayer.players;        // live registry reference
 
   videoPlayer.getPlayer = function (playerId = '') {
-    return VideoPlayer.players[String(playerId || '')] || null;
+    return multiPlayer.players[String(playerId || '')] || null;
   };
 
   videoPlayer.getPlayers = function () {
-    return VideoPlayer.players;
+    return multiPlayer.players;
   };
 
   // ---------------------------------------------------------------------------
-  // VideoPlayer MultiInstance #2
+  // multiPlayer MultiInstance #2
   // Deprecated #1 registry API — thin compatibility aliases
   //
   // Kept so any remaining #1-style caller keeps working against the ONE new
@@ -12086,7 +12590,7 @@
 
   // deprecated -> Object.keys(players)
   videoPlayer.listInstances = function () {
-    return Object.keys(VideoPlayer.players);
+    return Object.keys(multiPlayer.players);
   };
 
   // deprecated -> vp.dispose()
@@ -12097,7 +12601,7 @@
     return true;
   };
 
-  // VideoPlayer MultiInstance #2
+  // multiPlayer MultiInstance #2
   // The callable factory is the module export (video.js: the global videojs
   // function). Replaces the former `return moduleAPI;` preserved above.
   //

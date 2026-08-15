@@ -32,7 +32,7 @@
 //   incremental updates (rate change, delete one entry) touch only the
 //   affected card's DOM, not the whole grid.
 //
-// * claude - Modify J1 VideoPlayer #52
+// * Modify J1 VideoPlayer #52
 //   Per-player on|off control for the three card action buttons
 //   (button.playlist-btn.rate|edit|delete) via the YAML keys
 //   ui_elements.playlist_rate_button|playlist_edit_button|
@@ -42,7 +42,7 @@
 //   showDeleteButton (see _applyUiElementFlags) and renders the buttons
 //   conditionally in _cardTemplate.
 //
-// * claude - Modify J1 VideoPlayer #53
+// * Modify J1 VideoPlayer #53
 //   #52 read the published flags exactly ONCE, from connectedCallback(). The
 //   publisher (videoPlayer.js _applyUiElementFlags, added by #53 — the "step
 //   0" that #52 assumed was never implemented) runs at RENDER time, i.e.
@@ -78,7 +78,7 @@ const YOUTUBE_POSTER_QUALITY = 'hqdefault';
 // youtube video-id patterns — same regex used in the videoPlayer module.
 const YOUTUBE_ID_RE = /(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|shorts\/))([A-Za-z0-9_-]{11})/;
 
-// claude - Modify J1 VideoPlayer #51
+// Modify J1 VideoPlayer #51
 // Card-grid column count. Mirrors the constants in videoPlayer.js so this
 // component can drive the grid on its own when an adapter renders the cards
 // through <playlist-cards> instead of through playlistManager.renderCards().
@@ -87,7 +87,7 @@ const CARDS_PER_ROW_CSS_VAR = '--playlist-cards-per-row';
 const CARDS_PER_ROW_MIN     = 1;
 const CARDS_PER_ROW_MAX     = 6;
 
-// claude - Modify J1 VideoPlayer for export #1
+// Modify J1 VideoPlayer for export #1
 // File extensions the media export accepts — the component-side mirror of
 // DOWNLOAD_MIME_BY_EXTENSION in videoPlayer.js (see _isDownloadable). Only
 // plain audio/video containers, never streaming manifests. Keep both lists in
@@ -111,7 +111,7 @@ export class PlaylistCards extends LitElement {
     // attribute: false because this is a complex value, not a string.
     entries: { attribute: false },
 
-    // claude - Modify J1 VideoPlayer #24
+    // Modify J1 VideoPlayer #24
     // activeVideoId — the videoId of the item that is currently playing
     // (started from the playlist). Bound to data-item-active on each card so
     // the now-playing card is highlighted. attribute:false because it is set
@@ -120,7 +120,7 @@ export class PlaylistCards extends LitElement {
     // data-item-active marker on exactly the affected cards.
     activeVideoId: { attribute: false },
 
-    // claude - Modify J1 VideoPlayer #51
+    // Modify J1 VideoPlayer #51
     // cardsPerRow — number of cards per grid row (playlist.cards.perRow).
     // OPTIONAL. Leave it null (the default) whenever the cards are hosted
     // inside #videoplayer_playlist_parent_<id> and videoPlayer.js already
@@ -130,7 +130,7 @@ export class PlaylistCards extends LitElement {
     // component to own the grid geometry.
     cardsPerRow: { attribute: false },
 
-    // claude - Modify J1 VideoPlayer #52
+    // Modify J1 VideoPlayer #52
     // showRateButton | showEditButton | showDeleteButton — per-player on|off
     // switches for the three card action buttons (button.playlist-btn.rate|
     // edit|delete), driven by the YAML keys ui_elements.playlist_rate_button|
@@ -147,7 +147,7 @@ export class PlaylistCards extends LitElement {
     showEditButton:   { attribute: false },
     showDeleteButton: { attribute: false },
 
-    // claude - Modify J1 VideoPlayer for export #1
+    // Modify J1 VideoPlayer for export #1
     // showDownloadButton - per-player on|off switch for the NEW media export
     // button (button.playlist-btn.download), driven by the YAML key
     // ui_elements.playlist_download_button through the same three-layer chain
@@ -165,20 +165,20 @@ export class PlaylistCards extends LitElement {
     super();
     /** @type {Array<Object>} */
     this.entries = [];
-    // claude - Modify J1 VideoPlayer #24
+    // Modify J1 VideoPlayer #24
     this.activeVideoId = null;
-    // claude - Modify J1 VideoPlayer #51
+    // Modify J1 VideoPlayer #51
     // null => "not managed by this component" (see the property note above).
     this.cardsPerRow = null;
-    // claude - Modify J1 VideoPlayer #52
+    // Modify J1 VideoPlayer #52
     // Card action buttons default to VISIBLE (pre-#52 behavior).
     this.showRateButton   = true;
     this.showEditButton   = true;
     this.showDeleteButton = true;
-    // claude - Modify J1 VideoPlayer for export #1
+    // Modify J1 VideoPlayer for export #1
     // Media export button defaults to VISIBLE, like the three #52 buttons.
     this.showDownloadButton = true;
-    // claude - Modify J1 VideoPlayer #53
+    // Modify J1 VideoPlayer #53
     // MutationObserver handle for the container's ui_elements data
     // attributes (see _observeUiElementFlags). Held so disconnectedCallback
     // can release it.
@@ -192,17 +192,17 @@ export class PlaylistCards extends LitElement {
     // as direct children rather than as descendants of this host.
     this.style.display = 'contents';
 
-    // claude - Modify J1 VideoPlayer #51
+    // Modify J1 VideoPlayer #51
     // parentElement is available from connectedCallback onwards.
     this._applyCardsPerRow();
 
-    // claude - Modify J1 VideoPlayer #52
+    // Modify J1 VideoPlayer #52
     // The ancestor chain (closest) is available from connectedCallback
     // onwards; resolve the per-player card action-button flags now, BEFORE
     // Lit's first render of this connection cycle.
     this._applyUiElementFlags();
 
-    // claude - Modify J1 VideoPlayer #53
+    // Modify J1 VideoPlayer #53
     // The connect-time read above only covers flags published BEFORE this
     // component connected. The publisher (videoPlayer.js
     // _applyUiElementFlags, #53) runs on every render — usually AFTER
@@ -212,7 +212,7 @@ export class PlaylistCards extends LitElement {
     this._observeUiElementFlags();
   }
 
-  // claude - Modify J1 VideoPlayer #53
+  // Modify J1 VideoPlayer #53
   // Release the container observer when the host leaves the document; a
   // later re-parent/re-connect re-arms it via connectedCallback.
   disconnectedCallback() {
@@ -224,7 +224,7 @@ export class PlaylistCards extends LitElement {
     }
   }
 
-  // ---- claude - Modify J1 VideoPlayer #53 -----------------------------------
+  // ---- Modify J1 VideoPlayer #53 -----------------------------------
   // _observeUiElementFlags()
   //
   // Arms a MutationObserver on div#videoplayer_playlist_parent_<playerId>
@@ -254,13 +254,13 @@ export class PlaylistCards extends LitElement {
         'data-playlist-rate-button',
         'data-playlist-edit-button',
         'data-playlist-delete-button',
-        // claude - Modify J1 VideoPlayer for export #1
+        // Modify J1 VideoPlayer for export #1
         'data-playlist-download-button',
       ],
     });
   }
 
-  // ---- claude - Modify J1 VideoPlayer #52 -----------------------------------
+  // ---- Modify J1 VideoPlayer #52 -----------------------------------
   // _applyUiElementFlags()
   //
   // Reads the per-player card action-button flags published by the adapter
@@ -291,11 +291,11 @@ export class PlaylistCards extends LitElement {
     if (ds.playlistRateButton   !== undefined) this.showRateButton   = (ds.playlistRateButton   !== 'false');
     if (ds.playlistEditButton   !== undefined) this.showEditButton   = (ds.playlistEditButton   !== 'false');
     if (ds.playlistDeleteButton !== undefined) this.showDeleteButton = (ds.playlistDeleteButton !== 'false');
-    // claude - Modify J1 VideoPlayer for export #1
+    // Modify J1 VideoPlayer for export #1
     if (ds.playlistDownloadButton !== undefined) this.showDownloadButton = (ds.playlistDownloadButton !== 'false');
   }
 
-  // claude - Modify J1 VideoPlayer #51
+  // Modify J1 VideoPlayer #51
   // Re-apply whenever the property changes (Lit reactive update cycle).
   updated(changedProperties) {
     super.updated(changedProperties);
@@ -304,7 +304,7 @@ export class PlaylistCards extends LitElement {
     }
   }
 
-  // ---- claude - Modify J1 VideoPlayer #51 -----------------------------------
+  // ---- Modify J1 VideoPlayer #51 -----------------------------------
   // _applyCardsPerRow()
   //
   // Writes the column count onto the GRID CONTAINER, which is this host's
@@ -459,7 +459,7 @@ export class PlaylistCards extends LitElement {
     }));
   }
 
-  // ---- claude - Modify J1 VideoPlayer for export #1 --------------------------
+  // ---- Modify J1 VideoPlayer for export #1 --------------------------
   // _isDownloadable(v)
   //
   // Mirrors _getEntryDownloadSource() of videoPlayer.js so the component stays
@@ -486,7 +486,7 @@ export class PlaylistCards extends LitElement {
     return DOWNLOADABLE_EXTENSIONS.indexOf(ext) !== -1;
   }
 
-  // ---- claude - Modify J1 VideoPlayer for export #1 --------------------------
+  // ---- Modify J1 VideoPlayer for export #1 --------------------------
   // _onDownloadClick
   //
   // Follows the decoupling contract of this component exactly as
@@ -532,14 +532,14 @@ export class PlaylistCards extends LitElement {
 
     // Text interpolations like ${v.title} and ${v.author} are auto-escaped
     // by Lit — _escapeHtml is no longer needed.
-    // claude - Modify J1 VideoPlayer #24
+    // Modify J1 VideoPlayer #24
     // isActive — true when this card's videoId is the one currently playing.
     // Mirrors the inline expression used by the module's row template
     // (renderPlaylist, #21) so card-mode and list-mode share the same marker
     // semantics.
     const isActive = !!this.activeVideoId && v.videoId === this.activeVideoId;
 
-    // claude - Modify J1 VideoPlayer #52
+    // Modify J1 VideoPlayer #52
     // Per-player visibility of the card action buttons (see the property
     // notes / _applyUiElementFlags). Only an explicit false hides a button.
     // showActions gates the .playlist-card-actions wrapper itself so a card
@@ -549,7 +549,7 @@ export class PlaylistCards extends LitElement {
     const showDelete  = this.showDeleteButton !== false;
     const showActions = showRate || showEdit || showDelete;
 
-    // claude - Modify J1 VideoPlayer for export #1
+    // Modify J1 VideoPlayer for export #1
     // The export button needs BOTH the per-player flag and a plain media file
     // behind the entry. showActionsWithDownload widens the #52 wrapper gate so
     // a downloadable card still renders its actions bar when rate/edit/delete
@@ -557,14 +557,14 @@ export class PlaylistCards extends LitElement {
     const showDownload            = (this.showDownloadButton !== false) && this._isDownloadable(v);
     const showActionsWithDownload = showActions || showDownload;
 
-    // claude - Modify J1 VideoPlayer for export #1
+    // Modify J1 VideoPlayer for export #1
     // Original (deprecated, preserved for reference) — the wrapper gate of the
     // card action block before this fix:
     //
     //     ${showActions ? html`
     //     <div class="playlist-card-actions">
 
-    // claude - Modify J1 VideoPlayer #52
+    // Modify J1 VideoPlayer #52
     // Original (deprecated, preserved for reference) — the action block was
     // rendered unconditionally inside the template below:
     //
@@ -590,7 +590,7 @@ export class PlaylistCards extends LitElement {
     //       </div>
 
     return html`
-      <!-- claude - Modify J1 VideoPlayer #24
+      <!-- Modify J1 VideoPlayer #24
            data-item-active reflects the now-playing state on the CARD view.
            Previously the card template emitted no data-item-active attribute,
            so the active-item marker that #21/#22/#23 wired for the list/row
@@ -651,7 +651,7 @@ export class PlaylistCards extends LitElement {
           <div class="playlist-time-info">${timeAgo}</div>
 
           ${showActionsWithDownload ? html`
-          <!-- claude - Modify J1 VideoPlayer #52
+          <!-- Modify J1 VideoPlayer #52
                Each card action button is rendered ONLY when its per-player
                ui_elements flag resolves to true (playlist_rate_button |
                playlist_edit_button | playlist_delete_button). The wrapper
@@ -660,7 +660,7 @@ export class PlaylistCards extends LitElement {
                delegation (initRateHandler / initEditHandler / delete) is
                implicitly disabled per player without further changes. -->
           <div class="playlist-card-actions">
-            <!-- claude - Modify J1 VideoPlayer for export #1
+            <!-- Modify J1 VideoPlayer for export #1
                  Media export of the underlying plain .mp3/.mp4 file. Rendered
                  first so its position matches the module's own renderCards()
                  string template. -->

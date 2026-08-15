@@ -1,18 +1,18 @@
 ---
 title:                                  Video
-title_extention:                        Video players
+title_extention:                        Availabe players
 tagline:                                Playback Video and Playlists
 
 date:                                   2026-05-07
-#last_modified:                         2026-01-01
+last_modified:                          2026-08-14
 
 description: >
-                                        J1 Template provides playing video on web pages
-                                        by HTML5 Video and supports custom players created
-                                        by VidoeJS to playback video individually.
+                                        J1 Template provides playing video on web
+                                        pages by HTML5 Video and supports custom players
+                                        created by VidoeJS to playback video individually.
 keywords: >
-                                        open source, free, template, jekyll, jekyllone, web,
-                                        sites, static, jamstack, bootstrap,
+                                        open source, free, template, jekyll, jekyllone,
+                                        web, sites, static, jamstack, bootstrap,
                                         html, html5, video, support, flash player,
                                         quicktime, silverlight, videojs,
                                         vimeo, dailymotion, wistia, youtube
@@ -84,7 +84,7 @@ resource_options:
 
 
 // Page content
-// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// -----------------------------------------------------------------------------
 [role="dropcap"]
 The J1 Template plays *video* on web pages using *HTML5 video* -- the
 modern web standard. Every up-to-date browser already knows how to play
@@ -110,7 +110,21 @@ own website and from online sources like YouTube.
 [role="mt-5"]
 == Standalone Players
 
-lorem:sentences[5]
+A *standalone player* plays one single video. There is no playlist and no
+title list beside it -- the player simply shows the video you placed on
+the page. This is the right choice for a short clip inside an article, a
+product demo, or a welcome video on a landing page.
+
+The J1 Template offers two standalone players:
+
+* the *HTML Player* -- the player that is already built into every
+  modern browser, and
+* the *VideoJS Player* -- a player with a look you can change, that also
+  plays videos from YouTube.
+
+Both players are placed with a single line of AsciiDoc markup. If you
+need a *list* of videos instead of just one, have a look at the section
+<<J1 Multi Player>> further below.
 
 [role="mt-4"]
 [[video-html]]

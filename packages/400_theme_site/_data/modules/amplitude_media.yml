@@ -30,7 +30,7 @@ settings:
   playlists:
 
     # --------------------------------------------------------------------------
-    # Emancipator - Royalty Free Music
+    # Emancipator - Dusk to Dawn
     #
     - playlist:
 
@@ -47,13 +47,13 @@ settings:
       # ------------------------------------------------------------------------
       # ALBUM settings
       # ------------------------------------------------------------------------
-      album:                            &album_emancipator_music
+      album:                            &album_dusk_to_dawn
 
         playlist:                       emancipator
-        name:                           Emancipator Music
+        name:                           Dusk to Dawn
         artist:                         Emancipator
         audio_base:                     /assets/audio/album/emancipator
-        cover_image:                    /assets/audio/cover/default/placeholder-blue.jpg
+        cover_image:                    /assets/audio/cover/emancipator/dusk_to_dawn.jpg
         audio_info:                     //emancipatormusic.com/
         audio_fade_in:                  true
         audio_fade_out:                 true
@@ -68,98 +68,245 @@ settings:
         # title 01
         - item:
           enabled:                      true
-          <<:                           *album_emancipator_music
-          title:                        First Snow
-          rating:                       2
-          start:                        false                                   # false | "00:01:00"
-          end:                          false                                   # false | "00:01:10"
-          audio:                        FirstSnow.mp3
-          cover_image:                  /assets/audio/cover/emancipator/soon-it-will-be-cold-enough.jpg
-          duration:                     "00:05:12"
+          <<:                           *album_dusk_to_dawn
+          title:                        Valhalla
+          rating:                       3
+          start:                        false
+          end:                          false
+          audio:                        02_valhalla.mp3
+          duration:                     "05:07"
 
         # title 02
         - item:
           enabled:                      true
-          <<:                           *album_emancipator_music
-          title:                        From Dusk To Dawn
+          <<:                           *album_dusk_to_dawn
+          title:                        Merlion
           rating:                       3
-          start:                        false                                   # false | "00:00:30"
-          end:                          false                                   # false | "00:00:40"
-          audio:                        DuskToDawn.mp3
-          cover_image:                  /assets/audio/cover/emancipator/from-dusk-to-dawn.jpg
-          duration:                     "00:05:25"
+          start:                        false
+          end:                          false
+          audio:                        03_merlion.mp3
+          duration:                     "04:04"
 
         # title 03
         - item:
           enabled:                      true
-          <<:                           *album_emancipator_music
-          title:                        Anthem
+          <<:                           *album_dusk_to_dawn
+          title:                        Outlaw
           rating:                       3
           start:                        false
           end:                          false
-          audio:                        Anthem.mp3
-          cover_image:                  /assets/audio/cover/emancipator/anthem.jpg
-          duration:                     "00:05:40"
+          audio:                        04_outlaw.mp3
+          duration:                     "03:38"
 
         # title 04
         - item:
           enabled:                      true
-          <<:                           *album_emancipator_music
-          title:                        Safe In The Steep Cliffs
+          <<:                           *album_dusk_to_dawn
+          title:                        Dusk to Dawn
           rating:                       3
           start:                        false
-          end:                          false
-          audio:                        SafeInTheSteepCliffs.mp3
-          cover_image:                  /assets/audio/cover/emancipator/safe-in-the-steep-cliffs.jpg
-          duration:                     "00:04:35"
+          end:                          false 
+          audio:                        05_dusk_to_dawn.mp3
+          duration:                     "05:25"
 
         # title 05
         - item:
           enabled:                      true
-          <<:                           *album_emancipator_music
-          title:                        Time For Space
+          <<:                           *album_dusk_to_dawn
+          title:                        The Way
           rating:                       3
           start:                        false
-          end:                          false 
-          audio:                        TimeForSpace.mp3
-          cover_image:                  /assets/audio/cover/emancipator/tine-for-space.jpg
-          duration:                     "00:07:13"
+          end:                          false
+          audio:                        06_the_way.mp3
+          duration:                     "04:50"
 
         # title 06
         - item:
           enabled:                      true
-          <<:                           *album_emancipator_music
-          title:                        Sea To Sky
+          <<:                           *album_dusk_to_dawn
+          title:                        Afterglow
           rating:                       3
           start:                        false
           end:                          false
-          audio:                        SeaToSky.mp3
-          cover_image:                  /assets/audio/cover/emancipator/sea-to-sky.jpg
-          duration:                     "00:04:24"
+          audio:                        07_afterglow.mp3
+          duration:                     "05:31"
 
         # title 07
         - item:
           enabled:                      true
-          <<:                           *album_emancipator_music
-          title:                        Alligator
+          <<:                           *album_dusk_to_dawn
+          title:                        Eve II
           rating:                       3
           start:                        false
           end:                          false
-          audio:                        alligator.mp3
-          cover_image:                  /assets/audio/cover/emancipator/alligator.jpg
-          duration:                     "00:03:13"
+          audio:                        08_eve2.mp3
+          duration:                     "03:12"
 
         # title 08
         - item:
           enabled:                      true
-          <<:                           *album_emancipator_music
-          title:                        Dab City
+          <<:                           *album_dusk_to_dawn
+          title:                        Natural Cause
           rating:                       3
           start:                        false
           end:                          false
-          audio:                        DabCity.mp3
-          cover_image:                  /assets/audio/cover/emancipator/dab-city.jpg
-          duration:                     "00:04:22"
+          audio:                        09_natural_cause.mp3
+          duration:                     "05:15"
+
+        # title 09
+        - item:
+          enabled:                      true
+          <<:                           *album_dusk_to_dawn
+          title:                        Galapagos
+          rating:                       3
+          start:                        false
+          end:                          false
+          audio:                        10 _galapagos.mp3
+          duration:                     "01:57"
+
+    # --------------------------------------------------------------------------
+    # Emancipator - Dusk to Dawn
+    # https://youtube.com/watch?v=eotOxW5QU8Y&list=OLAK5uy_m0ZUHQpr0w3WHDZFOdTn1lPaJmMVoUg2E
+    #
+    - playlist:
+
+      # ------------------------------------------------------------------------
+      # GENERAL settings
+      #
+      enabled:                          true
+
+      # ------------------------------------------------------------------------
+      # PLAYLIST settings
+      #
+      name:                             dusk_to_dawn_yt
+
+      # ------------------------------------------------------------------------
+      # ALBUM settings
+      #
+      album:                            &album_dusk_to_dawn_yt
+
+        playlist:                       dusk_to_dawn_yt
+        name:                           Dusk to Dawn
+        artist:                         Emancipator
+        audio_base:                     //youtube.com
+        cover_image:                    //img.youtube.com/vi/t2RshUUwGK8/maxresdefault.jpg
+        audio_fade:                     false
+        audio_single:                   false
+        repeat:                         false
+        shuffle:                        false
+
+      # ------------------------------------------------------------------------
+      # TITLE settings (songs)
+      #
+      items:
+
+        # title 01
+        - item:
+          enabled:                      true
+          <<:                           *album_dusk_to_dawn_yt
+          title:                        Valhalla
+          audio:                        watch?v=HPWmY4am2oQ
+          rating:                       3
+          start:                        ""
+          end:                          ""
+          audio_info:                   //youtube.com/watch?v=eotOxW5QU8Y&list=OLAK5uy_m0ZUHQpr0w3WHDZFOdTn1lPaJmMVoUg2E
+          duration:                     "05:08"
+
+        # title 02
+        - item:
+          enabled:                      true
+          <<:                           *album_dusk_to_dawn_yt
+          title:                        Merlion
+          audio:                        watch?v=frW-hytn9Gw
+          rating:                       3
+          start:                        ""
+          end:                          ""
+          audio_info:                   //youtube.com/watch?v=eotOxW5QU8Y&list=OLAK5uy_m0ZUHQpr0w3WHDZFOdTn1lPaJmMVoUg2E
+          duration:                     "04:04"
+
+        # title 03
+        - item:
+          enabled:                      true
+          <<:                           *album_dusk_to_dawn_yt
+          title:                        Outlaw
+          audio:                        watch?v=lw9FPq1d_-g
+          rating:                       3
+          start:                        ""
+          end:                          ""
+          audio_info:                   //youtube.com/watch?v=eotOxW5QU8Y&list=OLAK5uy_m0ZUHQpr0w3WHDZFOdTn1lPaJmMVoUg2E
+          duration:                     "03:38"
+
+        # title 04
+        - item:
+          enabled:                      true
+          <<:                           *album_dusk_to_dawn_yt
+          title:                        Dusk to Dawn
+          audio:                        watch?v=-CQBzanq7dY
+          rating:                       3
+          start:                        ""
+          end:                          ""
+          audio_info:                   //youtube.com/watch?v=eotOxW5QU8Y&list=OLAK5uy_m0ZUHQpr0w3WHDZFOdTn1lPaJmMVoUg2E
+          duration:                     "05:24"
+
+        # title 05
+        - item:
+          enabled:                      true
+          <<:                           *album_dusk_to_dawn_yt
+          title:                        The Way
+          audio:                        watch?v=t2RshUUwGK8
+          rating:                       3
+          start:                        ""
+          end:                          ""
+          audio_info:                   //youtube.com/watch?v=eotOxW5QU8Y&list=OLAK5uy_m0ZUHQpr0w3WHDZFOdTn1lPaJmMVoUg2E
+          duration:                     "04:50"
+
+        # title 06
+        - item:
+          enabled:                      true
+          <<:                           *album_dusk_to_dawn_yt
+          title:                        Afterglow
+          audio:                        watch?v=2arhQ8tcbS8
+          rating:                       3
+          start:                        ""
+          end:                          ""
+          audio_info:                   //youtube.com/watch?v=eotOxW5QU8Y&list=OLAK5uy_m0ZUHQpr0w3WHDZFOdTn1lPaJmMVoUg2E
+          duration:                     "05:31"
+
+        # title 07
+        - item:
+          enabled:                      true
+          <<:                           *album_dusk_to_dawn_yt
+          title:                        Eve II
+          audio:                        watch?v=9yROGU01Lhw
+          rating:                       3
+          start:                        ""
+          end:                          ""
+          audio_info:                   //youtube.com/watch?v=eotOxW5QU8Y&list=OLAK5uy_m0ZUHQpr0w3WHDZFOdTn1lPaJmMVoUg2E
+          duration:                     "03:12"
+
+        # title 08
+        - item:
+          enabled:                      true
+          <<:                           *album_dusk_to_dawn_yt
+          title:                        Natural Cause
+          audio:                        watch?v=pKoILO-9UW8
+          rating:                       3
+          start:                        ""
+          end:                          ""
+          audio_info:                   //youtube.com/watch?v=eotOxW5QU8Y&list=OLAK5uy_m0ZUHQpr0w3WHDZFOdTn1lPaJmMVoUg2E
+          duration:                     "05:15"
+
+        # title 09
+        - item:
+          enabled:                      true
+          <<:                           *album_dusk_to_dawn_yt
+          title:                        Galapagos
+          audio:                        watch?v=X3F1-kXg83U
+          rating:                       3
+          start:                        ""
+          end:                          ""
+          audio_info:                   //youtube.com/watch?v=eotOxW5QU8Y&list=OLAK5uy_m0ZUHQpr0w3WHDZFOdTn1lPaJmMVoUg2E
+          duration:                     "01:57"
 
     # --------------------------------------------------------------------------
     # Olivia Dean
@@ -207,8 +354,8 @@ settings:
           start:                        "00:00:01"                              # false | timestamp
           end:                          "00:03:30"                              # false | timestamp
           audio_info:                   //youtube.com/playlist?list=PL1dfVf_Yq5rGGTKx4Fi5PwX5TfPBXNP8p
-          cover_image:                  //img.youtube.com/vi/NM4e606yFJg/maxresdefault.jpg
-          duration:                     "00:03:30"
+          cover_image:                  //img.youtube.com/vi/VI0NDsh2b8k/maxresdefault.jpg
+          duration:                     "00:03:44"
 
         # title 02
         - item:
@@ -220,8 +367,8 @@ settings:
           start:                        "00:00:01"
           end:                          "00:03:29"
           audio_info:                   //youtube.com/playlist?list=PL1dfVf_Yq5rGGTKx4Fi5PwX5TfPBXNP8p
-          cover_image:                  //img.youtube.com/vi/NM4e606yFJg/maxresdefault.jpg
-          duration:                     "00:03:29"
+          cover_image:                  //img.youtube.com/vi/JN_Vyg_wURY/maxresdefault.jpg
+          duration:                     "00:03:42"
 
         # title 03
         - item:
@@ -233,8 +380,8 @@ settings:
           start:                        "00:00:01"
           end:                          "00:03:10"
           audio_info:                   //youtube.com/playlist?list=PL1dfVf_Yq5rGGTKx4Fi5PwX5TfPBXNP8p
-          cover_image:                  //img.youtube.com/vi/NM4e606yFJg/maxresdefault.jpg
-          duration:                     "00:03:10"
+          cover_image:                  //img.youtube.com/vi/YFSEc_cANhw/maxresdefault.jpg
+          duration:                     "00:03:15"
 
         # title 04
         - item:
@@ -246,8 +393,8 @@ settings:
           start:                        "00:00:10"
           end:                          "00:02:58"
           audio_info:                   //youtube.com/playlist?list=PL1dfVf_Yq5rGGTKx4Fi5PwX5TfPBXNP8p
-          cover_image:                  //img.youtube.com/vi/NM4e606yFJg/maxresdefault.jpg
-          duration:                     "00:02:48"
+          cover_image:                  //img.youtube.com/vi/3sur4BmjQt8/maxresdefault.jpg
+          duration:                     "00:03:16"
 
         # title 05
         - item:
@@ -259,8 +406,8 @@ settings:
           start:                        "00:00:1"
           end:                          "00:03:30"
           audio_info:                   //youtube.com/playlist?list=PL1dfVf_Yq5rGGTKx4Fi5PwX5TfPBXNP8p
-          cover_image:                  //img.youtube.com/vi/NM4e606yFJg/maxresdefault.jpg
-          duration:                     "00:03:30"
+          cover_image:                  //img.youtube.com/vi/uxIjDwmc3uU/maxresdefault.jpg
+          duration:                     "00:03:05"
 
         # title 06
         - item:
@@ -272,8 +419,8 @@ settings:
           start:                        "00:00:02"
           end:                          "00:03:06"
           audio_info:                   //youtube.com/playlist?list=PL1dfVf_Yq5rGGTKx4Fi5PwX5TfPBXNP8p
-          cover_image:                  //img.youtube.com/vi/NM4e606yFJg/maxresdefault.jpg
-          duration:                     "00:03:04"
+          cover_image:                  //img.youtube.com/vi/oIv_Y2RPQ_A/maxresdefault.jpg
+          duration:                     "00:03:21"
 
         # title 07
         - item:
@@ -285,8 +432,8 @@ settings:
           start:                        "00:00:03"
           end:                          "00:03:30"
           audio_info:                   //youtube.com/playlist?list=PL1dfVf_Yq5rGGTKx4Fi5PwX5TfPBXNP8p
-          cover_image:                  //img.youtube.com/vi/NM4e606yFJg/maxresdefault.jpg
-          duration:                     "00:03:27"
+          cover_image:                  //img.youtube.com/vi/DXt6EGHFkWc/maxresdefault.jpg
+          duration:                     "00:02:31"
 
         # title 08
         - item:
@@ -298,8 +445,8 @@ settings:
           start:                        "00:00:01"
           end:                          "00:03:01"
           audio_info:                   //youtube.com/playlist?list=PL1dfVf_Yq5rGGTKx4Fi5PwX5TfPBXNP8p
-          cover_image:                  //img.youtube.com/vi/NM4e606yFJg/maxresdefault.jpg
-          duration:                     "00:03:00"
+          cover_image:                  //img.youtube.com/vi/paKBrvjuemo/maxresdefault.jpg
+          duration:                     "00:03:04"
 
         # title 09
         - item:
@@ -311,8 +458,8 @@ settings:
           start:                        "00:00:02"
           end:                          "00:03:14"
           audio_info:                   //youtube.com/playlist?list=PL1dfVf_Yq5rGGTKx4Fi5PwX5TfPBXNP8p
-          cover_image:                  //img.youtube.com/vi/NM4e606yFJg/maxresdefault.jpg
-          duration:                     "00:03:12"
+          cover_image:                  //img.youtube.com/vi/6kLEQi0u5rA/maxresdefault.jpg
+          duration:                     "00:03:17"
 
         # title 10
         - item:
@@ -324,7 +471,7 @@ settings:
           start:                        false
           end:                          false
           audio_info:                   //youtube.com/playlist?list=PL1dfVf_Yq5rGGTKx4Fi5PwX5TfPBXNP8p
-          cover_image:                  //img.youtube.com/vi/NM4e606yFJg/maxresdefault.jpg
+          cover_image:                  //img.youtube.com/vi/lrS1LC2cu-U/maxresdefault.jpg
           duration:                     "00:03:32"
 
         # title 11
@@ -337,8 +484,8 @@ settings:
           start:                        "00:00:01"
           end:                          "00:02:04"
           audio_info:                   //youtube.com/playlist?list=PL1dfVf_Yq5rGGTKx4Fi5PwX5TfPBXNP8p
-          cover_image:                  //img.youtube.com/vi/NM4e606yFJg/maxresdefault.jpg
-          duration:                     "00:02:00"
+          cover_image:                  //img.youtube.com/vi/_hgu16lRfbQ/maxresdefault.jpg
+          duration:                     "00:02:06"
 
         # title 12
         - item:
@@ -350,8 +497,8 @@ settings:
           start:                        "00:00:01"
           end:                          "00:02:03"
           audio_info:                   //youtu.be/JUGCQK8dUhc
-          cover_image:                  //img.youtube.com/vi/NM4e606yFJg/maxresdefault.jpg
-          duration:                     "00:02:00"
+          cover_image:                  //img.youtube.com/vi/JUGCQK8dUhc/maxresdefault.jpg
+          duration:                     "00:02:05"
 
 # ------------------------------------------------------------------------------
 # END config

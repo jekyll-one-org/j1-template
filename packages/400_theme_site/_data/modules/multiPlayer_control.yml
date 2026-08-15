@@ -38,12 +38,20 @@ settings:
       id:                               player_1
       description:                      VideoJS Multi-Player 1
 
-      # claude - Fix multiPlayer new select audio only #1
+      # Fix multiPlayer new select audio only #1
       # AUDIO ONLY playback (YouTube entries only, see multiPlayer.yml for
       # the full note). Seeds the initial state of the title-bar switch of
       # THIS player; a persisted user toggle wins.
       #
       audio_only:                       false
+      # claude - Fix multiPlayer new select audio only 4
+      # FIXED AUDIO ONLY playback for a player WITHOUT the title-bar switch
+      # (see multiPlayer.yml for the full note). INACTIVE for this player:
+      # the switch is shown, so the control owns the state and this key is
+      # ignored. Declared to keep the value correct should the switch ever be
+      # suppressed via ui_elements.audioOnlySwitch: false.
+      #
+      set_audio_only:                   false
 
       # Per-media value edited in the player's Edit Media Settings dialog
       # (fields "Start At"/"End At") or shipped in a preloaded playlist JSON,
@@ -51,7 +59,7 @@ settings:
       #
       # startAt:                        ""
 
-      # claude - Modify J1 VideoPlayerfor export #1
+      # Modify J1 VideoPlayerfor export #1
       # UI interface settings
       #
       # MEDIA EXPORT switches (see videoPlayer.yml for the full note). Only
@@ -62,7 +70,7 @@ settings:
         playlist_download_button:       true
         playlist_download_all_button:   true
 
-        # claude - Fix multiPlayer new select audio only #1
+        # Fix multiPlayer new select audio only #1
         audioOnlySwitch:                true
 
       # PLAYLIST settings
@@ -103,10 +111,18 @@ settings:
       id:                               player_2
       description:                      VideoJS Multi-Player 2
 
-      # claude - Fix multiPlayer new select audio only #1
+      # Fix multiPlayer new select audio only #1
       audio_only:                       false
+      # claude - Fix multiPlayer new select audio only 4
+      # FIXED AUDIO ONLY playback for a player WITHOUT the title-bar switch
+      # (see multiPlayer.yml for the full note). INACTIVE for this player:
+      # the switch is shown, so the control owns the state and this key is
+      # ignored. Declared to keep the value correct should the switch ever be
+      # suppressed via ui_elements.audioOnlySwitch: false.
+      #
+      set_audio_only:                   false
 
-      # claude - Fix multiPlayer for new startAt/endAt params #1
+      # Fix multiPlayer for new startAt/endAt params #1
       # PLAYBACK WINDOW (all source kinds, see multiPlayer.yml for the full
       # note). Overloads the global startAt/endAt for THIS player; a
       # per-media value from the Edit Media Settings dialog wins.
@@ -114,12 +130,12 @@ settings:
       startAt:                          ''
       endAt:                            ''
 
-      # claude - Modify J1 VideoPlayerfor export #1
+      # Modify J1 VideoPlayerfor export #1
       ui_elements:
         playlist_download_button:       true
         playlist_download_all_button:   true
 
-        # claude - Fix multiPlayer new select audio only #1
+        # Fix multiPlayer new select audio only #1
         audioOnlySwitch:                true
 
       # PLAYLIST settings
@@ -158,14 +174,22 @@ settings:
         cards:
           perRow:                       3
 
-      # claude - Fix multiPlayer new select audio only #1
+      # Fix multiPlayer new select audio only #1
       # AUDIO ONLY playback (YouTube entries only, see multiPlayer.yml for
       # the full note). Seeds the initial state of the title-bar switch of
       # THIS player; a persisted user toggle wins.
       #
       audio_only:                       false
+      # claude - Fix multiPlayer new select audio only 4
+      # FIXED AUDIO ONLY playback for a player WITHOUT the title-bar switch
+      # (see multiPlayer.yml for the full note). INACTIVE for this player:
+      # the switch is shown, so the control owns the state and this key is
+      # ignored. Declared to keep the value correct should the switch ever be
+      # suppressed via ui_elements.audioOnlySwitch: false.
+      #
+      set_audio_only:                   false
 
-      # claude - Fix multiPlayer for new startAt/endAt params #1
+      # Fix multiPlayer for new startAt/endAt params #1
       # PLAYBACK WINDOW (all source kinds, see multiPlayer.yml for the full
       # note). Overloads the global startAt/endAt for THIS player; a
       # per-media value from the Edit Media Settings dialog wins.
@@ -182,11 +206,11 @@ settings:
         playlist_edit_button:           true
         playlist_delete_button:         false
 
-        # claude - Modify J1 VideoPlayerfor export #1
+        # Modify J1 VideoPlayerfor export #1
         playlist_download_button:       true
         playlist_download_all_button:   true
 
-        # claude - Fix multiPlayer new select audio only #1
+        # Fix multiPlayer new select audio only #1
         audioOnlySwitch:                true
 
         mergeSwitch:                    false
@@ -207,20 +231,20 @@ settings:
             enabled:                    true
 
     # --------------------------------------------------------------------------
-    # Player 4 – Olivia Dean
+    # Player 5 – Emancipator (Audio)
     #
     - player:
 
       # GENERAL settings
       #
       enabled:                          true
-      id:                               player_olivia_dean
-      description:                      Olivia Dean - The Art Of Loving
+      id:                               emancipator_audio
+      description:                      Emancipator - Dusk To Dawn
 
       # PLAYLIST settings
       #
       playlist:
-        preload:                        [ olivia-dean.json ]
+        preload:                        [ ytp-emancipator--dusk-to-dawn.json ]
         preload_attempts:               4
 
         type:                           cards                                   # list | cards
@@ -228,14 +252,178 @@ settings:
         cards:
           perRow:                       3
 
-      # claude - Fix multiPlayer new select audio only #1
+      # Fix multiPlayer new select audio only #1
+      # AUDIO ONLY playback (YouTube entries only, see multiPlayer.yml for
+      # the full note). Seeds the initial state of the title-bar switch of
+      # THIS player; a persisted user toggle wins.
+      #
+      audio_only:                       true
+
+      # claude - Fix multiPlayer new select audio only 4
+      # FIXED AUDIO ONLY playback for a player WITHOUT the title-bar switch
+      # (see multiPlayer.yml for the full note). INACTIVE for this player:
+      # the switch is shown, so the control owns the state and this key is
+      # ignored. Declared to keep the value correct should the switch ever be
+      # suppressed via ui_elements.audioOnlySwitch: false.
+      #
+      set_audio_only:                   true
+
+      # Fix multiPlayer for new startAt/endAt params #1
+      # PLAYBACK WINDOW (all source kinds, see multiPlayer.yml for the full
+      # note). Overloads the global startAt/endAt for THIS player; a
+      # per-media value from the Edit Media Settings dialog wins.
+      #
+      # startAt:                        ""
+      # endAt:                          ""
+
+      # UI interface settings
+      #
+      ui_elements:
+        edit_playlist_button:           false
+        playlist_rate_button:           true
+        playlist_edit_button:           true
+        playlist_delete_button:         false
+        playlist_download_button:       true
+        playlist_download_all_button:   true
+
+        audioOnlySwitch:                false
+        mergeSwitch:                    false
+
+      # VIDEOJS settings
+      #
+      videoJS:
+        autoStart:                      true
+
+        playbackRates:
+          enabled:                      true
+          values:                       [ 0.5, 1, 2 ]
+
+        plugins:
+          enabled:                      true
+
+          hotKeys:
+            enabled:                    true
+
+          playlist:
+            enabled:                    true
+
+
+    # --------------------------------------------------------------------------
+    # Player 5a – Olivia Dean (Audio)
+    #
+    - player:
+
+      # GENERAL settings
+      #
+      enabled:                          true
+      id:                               olivia_dean_audio
+      description:                      Olivia Dean - The Art Of Loving
+
+      # PLAYLIST settings
+      #
+      playlist:
+        preload:                        [ ytp-olivia-dean--the-art-of-loving.json ]
+        preload_attempts:               4
+
+        type:                           cards                                   # list | cards
+
+        cards:
+          perRow:                       4
+
+      # Fix multiPlayer new select audio only #1
+      # AUDIO ONLY playback (YouTube entries only, see multiPlayer.yml for
+      # the full note). Seeds the initial state of the title-bar switch of
+      # THIS player; a persisted user toggle wins.
+      #
+      audio_only:                       true
+
+      # claude - Fix multiPlayer new select audio only 4
+      # FIXED AUDIO ONLY playback for a player WITHOUT the title-bar switch
+      # (see multiPlayer.yml for the full note). INACTIVE for this player:
+      # the switch is shown, so the control owns the state and this key is
+      # ignored. Declared to keep the value correct should the switch ever be
+      # suppressed via ui_elements.audioOnlySwitch: false.
+      #
+      set_audio_only:                   true
+
+      # Fix multiPlayer for new startAt/endAt params #1
+      # PLAYBACK WINDOW (all source kinds, see multiPlayer.yml for the full
+      # note). Overloads the global startAt/endAt for THIS player; a
+      # per-media value from the Edit Media Settings dialog wins.
+      #
+      # startAt:                        ""
+      # endAt:                          ""
+
+      # UI interface settings
+      #
+      ui_elements:
+        edit_playlist_button:           false
+        playlist_rate_button:           true
+        playlist_edit_button:           true
+        playlist_delete_button:         false
+        playlist_download_button:       true
+        playlist_download_all_button:   true
+
+        audioOnlySwitch:                false
+        mergeSwitch:                    false
+
+      # VIDEOJS settings
+      #
+      videoJS:
+        autoStart:                      true
+
+        playbackRates:
+          enabled:                      true
+          values:                       [ 0.5, 1, 2 ]
+
+        plugins:
+          enabled:                      true
+
+          hotKeys:
+            enabled:                    true
+
+          playlist:
+            enabled:                    true
+
+    # --------------------------------------------------------------------------
+    # Player 6 – Olivia Dean (Video)
+    #
+    - player:
+
+      # GENERAL settings
+      #
+      enabled:                          true
+      id:                               player_olivia_dean_video
+      description:                      Olivia Dean - The Art Of Loving
+
+      # PLAYLIST settings
+      #
+      playlist:
+        preload:                        [ ytp-olivia-dean--the-art-of-loving.json ]
+        preload_attempts:               4
+
+        type:                           cards                                   # list | cards
+
+        cards:
+          perRow:                       3
+
+      # Fix multiPlayer new select audio only #1
       # AUDIO ONLY playback (YouTube entries only, see multiPlayer.yml for
       # the full note). Seeds the initial state of the title-bar switch of
       # THIS player; a persisted user toggle wins.
       #
       audio_only:                       false
 
-      # claude - Fix multiPlayer for new startAt/endAt params #1
+      # claude - Fix multiPlayer new select audio only 4
+      # FIXED AUDIO ONLY playback for a player WITHOUT the title-bar switch
+      # (see multiPlayer.yml for the full note). INACTIVE for this player:
+      # the switch is shown, so the control owns the state and this key is
+      # ignored. Declared to keep the value correct should the switch ever be
+      # suppressed via ui_elements.audioOnlySwitch: false.
+      #
+      set_audio_only:                   false
+
+      # Fix multiPlayer for new startAt/endAt params #1
       # PLAYBACK WINDOW (all source kinds, see multiPlayer.yml for the full
       # note). Overloads the global startAt/endAt for THIS player; a
       # per-media value from the Edit Media Settings dialog wins.
@@ -247,18 +435,171 @@ settings:
       #
       ui_elements:
         edit_playlist_button:           false
+        playlist_rate_button:           true
+        playlist_edit_button:           true
+        playlist_delete_button:         false
+        playlist_download_button:       true
+        playlist_download_all_button:   true
+
+        audioOnlySwitch:                true
+        mergeSwitch:                    false
+
+      # VIDEOJS settings
+      #
+      videoJS:
+        autoStart:                      true
+
+        playbackRates:
+          enabled:                      true
+          values:                       [ 0.5, 1, 2 ]
+
+        plugins:
+          enabled:                      true
+
+          hotKeys:
+            enabled:                    true
+
+          playlist:
+            enabled:                    true
+
+    # --------------------------------------------------------------------------
+    # Player 7 – Video Player
+    #
+    - player:
+
+      # GENERAL settings
+      #
+      enabled:                          true
+      id:                               video_player
+      description:                      video player
+
+      # PLAYLIST settings
+      #
+      playlist:
+        preload:                        [ ytp-olivia-dean--the-art-of-loving.json ]
+        preload_attempts:               4
+
+        type:                           list                                   # list | cards
+
+        cards:
+          perRow:                       3
+
+      # Fix multiPlayer new select audio only #1
+      # AUDIO ONLY playback (YouTube entries only, see multiPlayer.yml for
+      # the full note). Seeds the initial state of the title-bar switch of
+      # THIS player; a persisted user toggle wins.
+      #
+      audio_only:                       true
+      # claude - Fix multiPlayer new select audio only 4
+      # FIXED AUDIO ONLY playback for a player WITHOUT the title-bar switch
+      # (see multiPlayer.yml for the full note). INACTIVE for this player:
+      # the switch is shown, so the control owns the state and this key is
+      # ignored. Declared to keep the value correct should the switch ever be
+      # suppressed via ui_elements.audioOnlySwitch: false.
+      #
+      set_audio_only:                   true
+
+      # Fix multiPlayer for new startAt/endAt params #1
+      # PLAYBACK WINDOW (all source kinds, see multiPlayer.yml for the full
+      # note). Overloads the global startAt/endAt for THIS player; a
+      # per-media value from the Edit Media Settings dialog wins.
+      #
+      startAt:                          ''
+      endAt:                            ''
+
+      # UI interface settings
+      #
+      ui_elements:
+        edit_playlist_button:           true
+        playlist_rate_button:           true
+        playlist_edit_button:           true
+        playlist_delete_button:         false
+        playlist_download_button:       true
+        playlist_download_all_button:   true
+
+        audioOnlySwitch:                false
+        mergeSwitch:                    false
+
+      # VIDEOJS settings
+      #
+      videoJS:
+        autoStart:                      true
+
+        playbackRates:
+          enabled:                      true
+          values:                       [ 0.5, 1, 2 ]
+
+        plugins:
+          enabled:                      true
+
+          hotKeys:
+            enabled:                    true
+
+          playlist:
+            enabled:                    true
+
+    # --------------------------------------------------------------------------
+    # Player 8 – Audio Player
+    #
+    - player:
+
+      # GENERAL settings
+      #
+      enabled:                          true
+      id:                               audio_player
+      description:                      audio player
+
+      # PLAYLIST settings
+      #
+      playlist:
+        preload:                        []
+        preload_attempts:               4
+
+        type:                           cards                                   # list | cards
+
+        cards:
+          perRow:                       3
+
+      # Fix multiPlayer new select audio only #1
+      # AUDIO ONLY playback (YouTube entries only, see multiPlayer.yml for
+      # the full note). Seeds the initial state of the title-bar switch of
+      # THIS player; a persisted user toggle wins.
+      #
+      #   settings.audio_only            — seeds the initial switch state
+      #                                    (localStorage user toggle wins)
+      #   ui_elements.audioOnlySwitch    — suppresses the control when set
+      #                                    to false (absent-key default: true)      
+      #
+      audio_only:                       true
+      # claude - Fix multiPlayer new select audio only 4
+      # FIXED AUDIO ONLY playback for a player WITHOUT the title-bar switch
+      # (see multiPlayer.yml for the full note). INACTIVE for this player:
+      # the switch is shown, so the control owns the state and this key is
+      # ignored. Declared to keep the value correct should the switch ever be
+      # suppressed via ui_elements.audioOnlySwitch: false.
+      #
+      set_audio_only:                   true
+
+      # Fix multiPlayer for new startAt/endAt params #1
+      # PLAYBACK WINDOW (all source kinds, see multiPlayer.yml for the full
+      # note). Overloads the global startAt/endAt for THIS player; a
+      # per-media value from the Edit Media Settings dialog wins.
+      #
+      # startAt:                        ""
+      # endAt:                          ""
+
+      # UI interface settings
+      #
+      ui_elements:
+        edit_playlist_button:           true
 
         playlist_rate_button:           true
         playlist_edit_button:           true
         playlist_delete_button:         false
-
-        # claude - Modify J1 VideoPlayerfor export #1
         playlist_download_button:       true
         playlist_download_all_button:   true
 
-        # claude - Fix multiPlayer new select audio only #1
-        audioOnlySwitch:                true
-
+        audioOnlySwitch:                false
         mergeSwitch:                    false
 
       # VIDEOJS settings
