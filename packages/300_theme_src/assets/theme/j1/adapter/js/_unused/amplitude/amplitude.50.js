@@ -22,7 +22,7 @@ regenerate:                             true
  # -----------------------------------------------------------------------------
 {% endcomment %}
 
-{% comment %} Fix Amplitude YAML data processing #1
+{% comment %}
  # -----------------------------------------------------------------------------
  # PER-PLAYER CONFIG INHERITANCE CHAIN (adapter)
  #
@@ -47,7 +47,7 @@ regenerate:                             true
  # referenced but NO LONGER ASSIGNED (leftover of the v44 file naming), so
  # j1.modules.amplitudejs.players was always empty.
  #
- # Changes (all tagged "Fix Amplitude YAML data processing #1"):
+ # Changes:
  #
  #   • Liquid: amplitude_options — global chain built with deep_merge
  #     (defaults <- control/user). amplitude_media is NOT merged (its only
@@ -80,7 +80,7 @@ regenerate:                             true
  #     empty nor 'true'), so per-player false could not overload.
  # ----------------------------------------------------------------------------- {% endcomment %}
 
-{% comment %} Fix Amplitude YAML data processing #2
+{% comment %}
  # -----------------------------------------------------------------------------
  # INIT-TIME CRASH OF FIX #1 (module self-reference _this not yet bound)
  #
@@ -123,7 +123,7 @@ regenerate:                             true
  #   page (document ready handler), so the reference is always valid at
  #   init() runtime.
  #
- # Changes (all tagged "Fix Amplitude YAML data processing #2"):
+ # Changes:
  #
  #   • JS: init() — _this is bound to j1.adapter.amplitude as the FIRST
  #     statement of init(), i.e. before ANY use of the module reference.
@@ -215,7 +215,7 @@ regenerate:                             true
 {% comment %} Set config options
 -------------------------------------------------------------------------------- {% endcomment %}
 
-{% comment %} Fix Amplitude YAML data processing #1
+{% comment %}
 --------------------------------------------------------------------------------
  Global options: DEEP merge of the chain defaults <- control (user settings).
  The media file is NO LONGER merged in: its only payload is the playlists
@@ -223,13 +223,10 @@ regenerate:                             true
  merge filter replaced the top-level 'player' and 'playlist' subtrees as a
  whole, so ANY key set on a higher layer silently dropped ALL sibling
  default keys of that subtree.
-
- Original (deprecated, preserved for reference):
-  {% assign amplitude_options = amplitude_default | merge: amplitude_control | merge: amplitude_media %} 
 -------------------------------------------------------------------------------- {% endcomment %}
 {% assign amplitude_options   = amplitude_default | merge: amplitude_control %}
 
-{% comment %} Fix Amplitude YAML data processing #1
+{% comment %}
 --------------------------------------------------------------------------------
  Global EFFECTIVE subtrees (chain: defaults <- user settings). Source for
  the page-global runtime variables of the adapter. The user layer is the
@@ -353,7 +350,6 @@ j1.adapter.amplitude = ((j1, window) => {
     6:                "changed",
   };
 
-
   var ytpPluginInstalled                = false;
   
   var playersUILoaded                   = { state: false };
@@ -362,55 +358,22 @@ j1.adapter.amplitude = ((j1, window) => {
   var load_dependencies                 = {};
   var playersProcessed                  = [];
   var playersHtmlLoaded                 = false;
+  var amplitudeInstanceOptions          = {};
   var processingPlayersFinished         = false;
   var isFadingIn                        = false;
   var isFadingOut                       = false;
 
+  var ytPlayer;
+  var ytpPlaybackRate
+  var amplitudeOptions;
   var amplitudePlayerState;
   var amplitudeDefaults;
   var amplitudePlayers;
-
-  // Fix Amplitude YAML data processing #1
-  // global merged options (chain: defaults <- user settings) and the
-  // per-instance options cache, keyed by playerId. Each cache entry is the
-  // deep merge of the inheritance chain:
-  //   player settings -> overload user settings -> overload default settings
-  // Populated lazily by getInstanceOptions().
-  var amplitudeOptions;
-  var amplitudeInstanceOptions = {};
-
-  var ytPlayer;
-  var ytpPlaybackRate
 
   var xhrLoadState;
   var dependency;
   var pluginManagerEnabled;
   var playerExistsInPage;
-
-
-  // var playerCounter                     = 0;
-  // var load_dependencies                 = {};
-  // var playersProcessed                  = [];
-  // var audioPlayerInstanceOptions        = {};
-
-  // var playersUILoaded                   = { state: false };
-  // var apiInitialized                    = { state: false };
-  // var playersHtmlLoaded                 = false;
-  // var processingPlayersFinished         = false;
-  // var ytpPluginInstalled                = false;
-  // var isFadingIn                        = false;
-  // var isFadingOut                       = false;
-
-  // var audioPlayerState;
-  // var audioPlayerDefaults;
-  // var audioPlayers;
-  // var ytPlayer;
-  // var ytpPlaybackRate
-
-  // var xhrLoadState;
-  // var dependency;
-  // var pluginManagerEnabled;
-  // var playerExistsInPage;
 
   // AmplitudeJS DEFAULT settings
   // ---------------------------------------------------------------------------
@@ -438,7 +401,6 @@ j1.adapter.amplitude = ((j1, window) => {
   //
   var playlistAudioInfo                 = {{amplitude_default.playlist.audio_info}};
 
-  // Fix Amplitude YAML data processing #1
   // Re-assign the page-global runtime settings from the global EFFECTIVE
   // chain (defaults <- user settings). The defaults-only block above is
   // kept unchanged (preserved) and is superseded here; per-player values
@@ -463,7 +425,6 @@ j1.adapter.amplitude = ((j1, window) => {
   playerAutoScrollSongElement       = {{amplitude_player_global.player_auto_scroll_song_element}};
 
   playlistAudioInfo                 = {{amplitude_playlist_global.audio_info}};
-  // END Fix Amplitude YAML data processing #1
 
   // UNUSED settings
   //
@@ -536,7 +497,6 @@ j1.adapter.amplitude = ((j1, window) => {
     return base + '/' + ref;
   } // END amplitudeMediaURL
 
-  // Fix Amplitude YAML data processing #2
   // _self()
   // Resolves the module object independent of the init() state. The module
   // keeps its self-reference in the module-scoped var _this that is bound
@@ -559,8 +519,7 @@ j1.adapter.amplitude = ((j1, window) => {
     init: (options) => {
 
       // -----------------------------------------------------------------------
-      // Fix Amplitude YAML data processing #2
-      // bind the module self-reference (EARLY)
+      // Bind the module self-reference (EARLY)
       // -----------------------------------------------------------------------
       // The module reference _this MUST be bound before ANY use of it. The
       // global options chain of fix #1 (see 'global variable settings' below)
@@ -574,17 +533,10 @@ j1.adapter.amplitude = ((j1, window) => {
       _this = j1.adapter.amplitude;
 
       // -----------------------------------------------------------------------
-      // set console log filters (early)
+      // set console/error log filters (early)
       // -----------------------------------------------------------------------
-      // consoleFilterSettings = {
-      //   debug: false,
-      // };
-      // j1.api.consoleFilters.filter(consoleFilterSettings);  
+      // 
       j1.api.consoleFilters.filter();
-
-      // -----------------------------------------------------------------------
-      // set error log filters (JS early)
-      // -----------------------------------------------------------------------
       // j1.api.errorFilters.filter();
 
       // -----------------------------------------------------------------------
@@ -600,7 +552,6 @@ j1.adapter.amplitude = ((j1, window) => {
       amplitudeDefaults = $.extend({}, {{amplitude_default  | replace: 'nil', 'null' | replace: '=>', ':' }});
       amplitudePlayers  = $.extend({}, {{amplitude_control  | replace: 'nil', 'null' | replace: '=>', ':' }});
 
-      // Fix Amplitude YAML data processing #1
       // Build the GLOBAL (module-level) options with the _deepMerge helper
       // (chain: defaults <- user settings). The user layer are the GLOBAL
       // keys of amplitude_control.yml (settings w/o the per-player array
@@ -663,10 +614,6 @@ j1.adapter.amplitude = ((j1, window) => {
 
       // control|logging settings
       //
-      // Fix Amplitude YAML data processing #2
-      // KEPT (superseded): _this is bound at the TOP of init() now, this
-      // line is a harmless re-assignment of the same reference. The former
-      // code path is left intact on purpose.
       _this  = j1.adapter.amplitude;
       logger = log4javascript.getLogger('j1.adapter.amplitude');
 
@@ -839,12 +786,7 @@ j1.adapter.amplitude = ((j1, window) => {
 
       {% comment %}
       --------------------------------------------------------------------------
-      Fix Amplitude YAML data processing #1
       iterate the RAW per-player entries of the control file
-      Original (deprecated, preserved for reference):
-      {% for player in amplitude_options.players %} {% if player.enabled %}
-      {% endif %} {% endfor %}
-
       amplitude_control.players:  {{ amplitude_control.players | debug }} 
       --------------------------------------------------------------------------
       {% endcomment %}
@@ -1449,16 +1391,14 @@ j1.adapter.amplitude = ((j1, window) => {
 
           isDev &&  logger.info('\n' + 'initialize player specific UI events: started');
           
-          {% comment %} Fix Amplitude YAML data processing #1
+          {% comment %}
+          ----------------------------------------------------------------------
           iterate the RAW per-player entries of the control file and build
           the per-player EFFECTIVE settings (inheritance chain, later
           overloads earlier):
             1. amplitude_default.player   defaults
             2. amplitude_control.player   user (optional global section)
             3. player                     player (settings.players[] entry)
-          Original (deprecated, preserved for reference):
-          {% for player in amplitude_options.players %} {% if player.enabled %}
-          {% endif %} {% endfor %}
           ---------------------------------------------------------------------- {% endcomment %}
           {% for player in amplitude_control.players %} {% if player.enabled %}
             {% assign player_effective = amplitude_default.player %}
@@ -1483,19 +1423,11 @@ j1.adapter.amplitude = ((j1, window) => {
               // check the player HTML portion is loaded and player exists (in page)
               if (xhrDataLoaded && playerExistsInPage) {
                 var playerID      = '{{player.id}}';
-                // Fix Amplitude YAML data processing #1
-                // playerType resolved from the EFFECTIVE chain (a raw
-                // player key ignores the default and user layers and
-                // rendered EMPTY when 'type' was omitted per player).
-                // Original (deprecated, preserved for reference):
-                // var playerType    = '{{player.type}}';
-                //
                 var playerType    = '{{player_effective.type}}';
                 var playlist      = '{{player.playlist}}';
                 var playlistName  = '{{player.playlist.name}}';
                 var playlistTitle = '{{player.playlist.title}}';
 
-                // Fix Amplitude YAML data processing #1
                 // per-instance scroller minimum (chain: defaults <- user
                 // <- player); falls back to the page-global value if the
                 // rendered setting is not a number.
@@ -1582,11 +1514,6 @@ j1.adapter.amplitude = ((j1, window) => {
                       // show|hide scrollbar in playlist (compact player)
                       // -------------------------------------------------------                   
                       const songsInPlaylist = Amplitude.getSongsInPlaylist(playlistName);
-                      // Fix Amplitude YAML data processing #1
-                      // per-instance value (chain: defaults <- user <- player)
-                      // Original (deprecated, preserved for reference):
-                      // if (songsInPlaylist.length <= playerScrollerSongElementMin) {
-                      //
                       if (songsInPlaylist.length <= playerScrollerSongElementMinInstance) {
                         const titleListCompactPlayer = document.getElementById('compact_player_title_list_' + playlistName);
                         if (titleListCompactPlayer !== null) {
@@ -2103,11 +2030,6 @@ j1.adapter.amplitude = ((j1, window) => {
                         // show|hide scrollbar in playlist
                         // -----------------------------------------------------
                         const songsInPlaylist = Amplitude.getSongsInPlaylist(playlistName);
-                        // Fix Amplitude YAML data processing #1
-                        // per-instance value (chain: defaults <- user <- player)
-                        // Original (deprecated, preserved for reference):
-                        // if (songsInPlaylist.length <= playerScrollerSongElementMin) {
-                        //
                         if (songsInPlaylist.length <= playerScrollerSongElementMinInstance) {
                           const titleListLargePlayer = document.getElementById('large_player_title_list_' + playlistName);
                           if (titleListLargePlayer !== null) {
@@ -2241,7 +2163,7 @@ j1.adapter.amplitude = ((j1, window) => {
                 }, 10); // END dependencies_met_api_initialized
 
                 playerExistsInPage   = (document.getElementById('{{player.id}}_audio') !== null) ? true : false;
-                // Fix Amplitude YAML data processing #1
+
                 // plugin manager resolved from the EFFECTIVE chain
                 // (defaults <- user <- player). The former expression fell
                 // back to the DEFAULT when a player set
@@ -2251,13 +2173,7 @@ j1.adapter.amplitude = ((j1, window) => {
                 // Original (deprecated, preserved for reference):
                 // pluginManagerEnabled = ('{{player.plugin_manager.enabled}}'.length > 0 && '{{player.plugin_manager.enabled}}' === 'true') ? true : playerDefaultPluginManager;
                 //
-                pluginManagerEnabled = ('{{player_effective.plugin_manager.enabled}}' === 'true') ? true : false;
-
-                // Fix Amplitude YAML data processing #1
-                // plugin list resolved from the EFFECTIVE chain
-                // Original (deprecated, preserved for reference):
-                // _this.pluginManager('{{player.plugin_manager.plugins}}');
-                //                
+                pluginManagerEnabled = ('{{player_effective.plugin_manager.enabled}}' === 'true') ? true : false;            
                 if (playerExistsInPage && pluginManagerEnabled && !ytpPluginInstalled) {
                   _this.pluginManager('{{player_effective.plugin_manager.plugins}}');
                 }
@@ -2355,7 +2271,6 @@ j1.adapter.amplitude = ((j1, window) => {
         var tech;
         var techScript;
 
-        // Fix Amplitude plugin #2
         // Hand the PLAYER and PLAYLIST settings of THIS module over to the
         // plugin as an options hash (mirror of the handoff implemented in
         // the audioPlayer adapter). The plugin does NOT read the YAML config
@@ -2382,20 +2297,18 @@ j1.adapter.amplitude = ((j1, window) => {
 
         // make sure the plugin installed only ONCE
         ytpPluginInstalled = true;
-        // Fix Amplitude plugin #3
+
         // Copy-paste artifact (from the audioPlayer adapter): the
         // amplitude adapter wrote the ytpInstalled flag to the FOREIGN
         // adapter namespace j1.adapter.audioPlayer. The flag belongs to
         // the OWN namespace j1.adapter.amplitude (see the atpGlobals
         // initialization in the init cycle of THIS adapter).
-        // Original (deprecated, preserved for reference):
-        // j1.adapter.audioPlayer.data.atpGlobals.ytpInstalled = true;
+        //
         j1.adapter.amplitude.data.atpGlobals.ytpInstalled = true;
       }      
     }, // END pluginManager
 
     // -------------------------------------------------------------------------
-    // Fix Amplitude plugin #2
     // publishPluginOptions(plugin)
     //
     // Publishes the RUNTIME options hash for a J1 plugin (currently: ytp).
@@ -2433,17 +2346,12 @@ j1.adapter.amplitude = ((j1, window) => {
       j1.plugins[plugin] = j1.plugins[plugin] || {};
 
       j1.plugins[plugin].options = {
-        module:     'amplitude',
-        adapter:    'amplitude',
-        // Fix Amplitude plugin #3
-        // NEW key 'moduleNamespace': names the MODULE RUNTIME NAMESPACE
-        // j1.modules.<name> of THIS module. The plugin mirrors its module
-        // runtime data (data.ytp) there instead of the (until now)
-        // hardcoded namespace j1.modules.amplitudejs.
-        moduleNamespace: 'amplitudejs',
-        defaults:   amplitudeDefaults,
-        players:    (amplitudePlayers && amplitudePlayers.players) ? amplitudePlayers.players : [],
-        playlists:  $.extend({}, {{amplitude_media | replace: 'nil', 'null' | replace: '=>', ':' }})
+        module:           'amplitude',
+        adapter:          'amplitude',
+        moduleNamespace:  'amplitudejs',
+        defaults:         amplitudeDefaults,
+        players:          (amplitudePlayers && amplitudePlayers.players) ? amplitudePlayers.players : [],
+        playlists:        $.extend({}, {{amplitude_media | replace: 'nil', 'null' | replace: '=>', ':' }})
       };
 
       isDev && logger.debug('\n' + `published options for plugin: ${plugin}`);
@@ -2894,7 +2802,6 @@ j1.adapter.amplitude = ((j1, window) => {
     }, // END deepMerge
 
     // -------------------------------------------------------------------------
-    // Fix Amplitude YAML data processing #1
     // getInstanceOptions(playerId)
     // Returns the EFFECTIVE options for ONE player instance, built from the
     // config inheritance chain (later overloads earlier):
@@ -2918,7 +2825,6 @@ j1.adapter.amplitude = ((j1, window) => {
     // j1.modules.amplitudejs.instanceOptions) so the module and plugins
     // (ytp) can read the per-instance options directly.
     // -------------------------------------------------------------------------
-    //
     getInstanceOptions: (playerId) => {
       // fast path: already resolved for this instance
       if (amplitudeInstanceOptions[playerId]) {
@@ -2933,11 +2839,7 @@ j1.adapter.amplitude = ((j1, window) => {
           if (key !== 'players') { userSettings[key] = amplitudePlayers[key]; }
         });
       } catch (e) {
-        {% comment %} Fix Amplitude YAML data processing #2
-        Original (deprecated, preserved for reference):
-        logger.error('\n' + 'getInstanceOptions: user settings lookup failed [' + playerId + ']: ' + e);
-        {% endcomment %}
-        logger && logger.error('\n' + 'getInstanceOptions: user settings lookup failed [' + playerId + ']: ' + e);
+        isDev && logger.error('\n' + 'getInstanceOptions: user settings lookup failed [' + playerId + ']: ' + e);
       }
 
       // resolve the player entry from the RAW control settings
@@ -2953,19 +2855,11 @@ j1.adapter.amplitude = ((j1, window) => {
           }
         }
       } catch (e) {
-        {% comment %} Fix Amplitude YAML data processing #2
-        Original (deprecated, preserved for reference):
-        logger.error('\n' + 'getInstanceOptions: control lookup failed [' + playerId + ']: ' + e);
-        {% endcomment %}
-        logger && logger.error('\n' + 'getInstanceOptions: control lookup failed [' + playerId + ']: ' + e);
+        isDev && logger.error('\n' + 'getInstanceOptions: control lookup failed [' + playerId + ']: ' + e);
       }
 
       if (playerEntry === null) {
-        {% comment %} Fix Amplitude YAML data processing #2
-        Original (deprecated, preserved for reference):
-        logger.warn('\n' + 'getInstanceOptions: no control entry found [' + playerId + '] — instance falls back to defaults <- user settings');
-        {% endcomment %}
-        logger && logger.warn('\n' + 'getInstanceOptions: no control entry found [' + playerId + '] — instance falls back to defaults <- user settings');
+        isDev && logger.warn('\n' + 'getInstanceOptions: no control entry found [' + playerId + '] — instance falls back to defaults <- user settings');
       }
 
       // build the per-instance chain
@@ -2985,19 +2879,9 @@ j1.adapter.amplitude = ((j1, window) => {
 
       // cache + expose
       amplitudeInstanceOptions[playerId]   = instanceOptions;
-      {% comment %} Fix Amplitude YAML data processing #2
-      Original (deprecated, preserved for reference):
-      _this['amplitudeInstanceOptions']    = amplitudeInstanceOptions;
-      {% endcomment %}
       _self()['amplitudeInstanceOptions']  = amplitudeInstanceOptions;
 
-      {% comment %} Fix Amplitude YAML data processing #2
-      logger guarded: logger is assigned in init() as well and is 'undefined'
-      for calls placed before|without init().
-      Original (deprecated, preserved for reference):
-      logger.debug('\n' + 'getInstanceOptions: per-instance options resolved [' + playerId + ']');
-      {% endcomment %}
-      logger && logger.debug('\n' + 'getInstanceOptions: per-instance options resolved [' + playerId + ']');
+      isDev && logger.debug('\n' + 'getInstanceOptions: per-instance options resolved [' + playerId + ']');
       return instanceOptions;
     }, // END getInstanceOptions
 

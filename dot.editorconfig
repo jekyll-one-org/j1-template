@@ -1,16 +1,23 @@
 root = true
 
-[*]
 # Allgemeine Einstellungen für alle Dateitypen
+[*]
 indent_style = space
 indent_size = 2
 charset = utf-8
 trim_trailing_whitespace = true
 insert_final_newline = true
 end_of_line = lf
+compactFolders = false
 
-[*.js]
 # Spezifische Einstellungen für deine Template-Dateien
 # Hier kannst du festlegen, dass VS Code diese Dateien
 # nicht als JavaScript parsen soll.
+[*.js]
 type = text
+
+# Deaktiviert Regeln, die durch Liquid-Syntax ausgelöst werden könnten
+# (Die genauen Regeln können je nach ESLint-Konfiguration variieren)
+eslint_no-unused-vars = ignore
+eslint_no-undef = ignore
+

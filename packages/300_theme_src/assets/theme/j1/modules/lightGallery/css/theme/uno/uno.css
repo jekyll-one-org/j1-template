@@ -77,7 +77,10 @@
  * Limit the image (overlay) size  to NOT overlap
  * the prev/next buttons (lg-prev/lg-next), the
  * toolbar at the top, and the captions container
- * at the bottom. */
+ * at the bottom.
+ * DISABLED
+ */
+ /*
 .lg-outer .lg-object {
   display: inline-block;
   vertical-align: middle;
@@ -87,6 +90,7 @@
   height: auto;
   position: relative;
 }
+*/
 
 /* custom image overlay (picture wrap)
    ----------------------------------------------------------------------------- */

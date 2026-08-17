@@ -1,6 +1,6 @@
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/modules/amplitudejs/js/amplitudejs.js
+ # ~/assets/theme/j1/modules/amplitudejs/js/amplitude.js
  # AmplitudeJS v5.3.2
  #
  # Product/Info:

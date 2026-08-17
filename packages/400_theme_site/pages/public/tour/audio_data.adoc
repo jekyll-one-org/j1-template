@@ -1,10 +1,10 @@
 ---
 title:                                  Audio
-title_extention:                        Availabe players
-tagline:                                Playback Audio Files
+title_extention:                        Availabe player
+tagline:                                Playback playlists
 
 date:                                   2026-05-07
-last_modified:                          2026-08-14
+last_modified:                          2026-08-16
 
 description: >
                                         J1 Template provides playing audio on web pages
@@ -27,7 +27,10 @@ regenerate:                             true
 personalization:                        true
 permalink:                              /pages/public/tour/audio_data/
 
-resources:                              [ amplitudejs, multiPlayer, videojs ]
+resources:                              [
+                                          amplitudePlayer, amplitudejs,
+                                          multiPlayer, videojs
+                                        ]
 resource_options:
   - toccer:
       collapseDepth:                    4
@@ -257,3 +260,4 @@ can show videos from many different sources, all with the same look and
 feel -- a much better experience for your visitors.
 
 Curious? Have a look at the following page: link:{url-tour--video_data}[Video Player].
+

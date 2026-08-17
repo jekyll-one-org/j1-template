@@ -84,6 +84,63 @@ picture > img {
   transition: visibility 1s, opacity 1s;
 }
 
+/* Fix multiPlayer piZoomButtons
+   Auto HIDE the zoom panel together with the controlbar.
+
+   The zoom panel (.vjs-zoom-buttons__container) is a direct child of the
+   player, not of the controlbar, so it does not ride along when the bar
+   fades out. The two selectors below mirror the bar rules that stand
+   directly above and in the Video.js core stylesheet:
+
+     videojs.css  .vjs-has-started.vjs-user-inactive.vjs-playing .vjs-control-bar
+     uno.css      .vjs-has-started.vjs-user-inactive.vjs-paused  .vjs-control-bar
+
+   Note the second one. Hiding the bar while the video is PAUSED and the
+   user is idle is a rule of THIS theme, it does not exist in Video.js. The
+   panel therefore has to be told about it here, which is the reason the
+   mirror lives in the theme stylesheet and not in the vendored plugin: the
+   rules that have to stay in sync are then written next to each other and a
+   later change to the timing above is made in one place for both elements.
+
+   Specificity: four classes (0,4,0) against the three of
+   ".video-js .vjs-zoom-buttons__container.open" (0,3,0), so an OPEN panel is
+   faded out as well and no !important is needed. "visibility: hidden" only
+   takes effect at the END of the transition, so the panel fades first and is
+   removed from the hit test afterwards, exactly like the bar.
+*/
+.vjs-has-started.vjs-user-inactive.vjs-playing .vjs-zoom-buttons__container,
+.vjs-has-started.vjs-user-inactive.vjs-paused .vjs-zoom-buttons__container {
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+  transition: visibility 1s, opacity 1s;
+}
+
+/* Fix multiPlayer piZoomButtons
+   Audio sources keep their controlbar on screen while the user is idle. The
+   core stylesheet grants that exception for the PLAYING state only
+
+     .vjs-audio.vjs-has-started.vjs-user-inactive.vjs-playing .vjs-control-bar
+     .vjs-audio-only-mode.vjs-has-started.vjs-user-inactive.vjs-playing .vjs-control-bar
+
+   so the exception granted here is cut to the same shape: on pause the theme
+   rule above still hides bar and panel together. Since J1 MultiPlayer serves
+   native mp3 next to mp4 and YouTube, a playlist item can put a player into
+   this mode at any time.
+
+   The ".open" in the selector matters. Without it the rule would also hit a
+   CLOSED panel and force it on screen, because it outweighs the base rule
+   ".video-js .vjs-zoom-buttons__container { visibility: hidden }". With it,
+   only a panel the viewer has opened is kept, and six classes (0,6,0) are
+   enough to beat the fade-out rule above.
+*/
+.vjs-audio.vjs-has-started.vjs-user-inactive.vjs-playing .vjs-zoom-buttons__container.open,
+.vjs-audio-only-mode.vjs-has-started.vjs-user-inactive.vjs-playing .vjs-zoom-buttons__container.open {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
 /* manage time (display) divider, remaining-time */
 .vjs-theme-uno .vjs-time-divider,
 .vjs-theme-uno .vjs-remaining-time { 
@@ -156,6 +213,12 @@ picture > img {
   width: 0.3em;
   height: 5em !important;
   margin: 1.35em auto;
+}
+
+ /* jadams: */
+.vjs-slider-vertical .vjs-volume-level {
+  width: 0.3em;
+  margin-bottom: -15px;
 }
 
 .vjs-theme-uno .vjs-volume-panel:hover .vjs-volume-control.vjs-volume-horizontal {

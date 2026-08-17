@@ -3,7 +3,7 @@ title:                                  Theme Features
 tagline:                                Modules, Extensions and Integrations
 
 date:                                   2026-05-07
-# last_modified:                        2026-01-01
+last_modified:                          2026-08-16
 
 description: >
                                         Jekyll One Template (J1) is a free Jekyll theme that gives
@@ -32,9 +32,10 @@ regenerate:                             false
 permalink:                              /pages/public/features/theme_features/
 
 resources:                              [
-                                          amplitudejs, lightbox3, lightgallery,
-                                          masonry, multiPlayer, gallery,
-                                          photoswipejs, swiperjs, videojs
+                                          amplitudePlayer, amplitudejs,
+                                          multiPlayer, videojs,                                          
+                                          lightbox3, lightgallery, masonry,
+                                          gallery, photoswipejs, swiperjs
                                         ]
 resource_options:
   - attic:

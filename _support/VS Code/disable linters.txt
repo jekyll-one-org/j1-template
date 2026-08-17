@@ -1,0 +1,44 @@
+Prompt
+    https://claude.ai/chat/62672d53-04d5-4b84-aae9-f600d2e36aee
+--------------------------------------------------------------------------------
+
+Disable JavaScript linters in the VS Code Editor completely.
+
+
+Claude
+--------------------------------------------------------------------------------
+
+Two layers are involved: VS Code's built‑in JS/TS language service, and
+any linter extensions (ESLint, JSHint, StandardJS).
+
+Both need to be switched off.
+
+Open the settings file — `Ctrl+Shift+P` → Peferences
+Open User Settings (JSON)** for all projects, or create `.vscode/settings.json`
+in the repo root to limit it to J1 only — and add:
+
+```json
+{
+  "javascript.validate.enable": false,
+  "typescript.validate.enable": false,
+  "js/ts.implicitProjectConfig.checkJs": false,
+  "html.validate.scripts": false,
+  "eslint.enable": false,
+  "jshint.enable": false,
+  "standard.enable": false
+}
+```
+
+Then reload the window (`Ctrl+Shift+P` → **Developer: Reload Window**).
+
+A few notes:
+
+- `javascript.validate.enable` only takes effect at User or Workspace level — it is ignored inside a `"[javascript]"` language block.
+- The `eslint.enable` / `jshint.enable` / `standard.enable` keys are harmless if those extensions aren't installed. If you'd rather not keep dead keys around, disable the extensions per‑workspace instead: Extensions view → gear icon → **Disable (Workspace)**.
+- If squiggles persist, something else is producing them — check the **Problems** panel's source column, or run **Developer: Show Running Extensions** to see what's active.
+
+Given that the J1 source files carry Liquid tags inside the JavaScript,
+the workspace-scoped variant is probably what you want: the parser errors
+are an artifact of the template layer, not real syntax problems, but you'd
+still get real linting in unrelated projects.
+

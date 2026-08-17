@@ -1,0 +1,53 @@
+Prompt
+  https://claude.ai/chat/28d5424d-b374-483c-85cf-37ad4a9f9710
+--------------------------------------------------------------------------------
+
+In the VS Code Editor, some folders in the project are folded up by default.
+Why is that?
+
+
+Claude
+--------------------------------------------------------------------------------
+
+That's most likely VS Code's **compact folders** feature in the Explorer.
+When a folder chain contains only a single child folder at each level,
+VS Code squashes them into one row — so instead of
+
+```
+_includes
+  themes
+    j1
+      modules
+```
+
+you see `_includes › themes › j1 › modules` as a single entry. Jekyll projects
+hit this constantly because of deep single-child paths like
+
+  `_includes/themes/j1/...` or `assets/themes/j1/modules/...`
+
+To turn it off: Settings → search `explorer.compactFolders` → uncheck.
+
+Or in `settings.json`:
+
+```json
+"explorer.compactFolders": false
+```
+
+Two other things that can look similar:
+
+- **Collapsed state** is remembered per **workspace.**
+  VS Code persists which folders you had open; a folder you
+  collapsed weeks ago stays collapsed. The "Collapse Folders in Explorer"
+  button in the Explorer title bar resets everything to collapsed.
+
+- **`files.exclude`**
+  hides entries entirely rather than folding them — worth checking
+  if folders seem *missing* rather than just collapsed.
+
+If you actually meant folding inside the editor (the chevrons in the gutter),
+that's a different mechanism — controlled by `editor.foldingStrategy` and
+`editor.showFoldingControls`, with `#region` markers or indentation
+deciding the fold points.
+
+
+

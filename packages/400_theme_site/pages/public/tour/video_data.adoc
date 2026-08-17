@@ -1,10 +1,10 @@
 ---
 title:                                  Video
-title_extention:                        Availabe players
-tagline:                                Playback Video and Playlists
+title_extention:                        Availabe player
+tagline:                                Playback playlists
 
 date:                                   2026-05-07
-last_modified:                          2026-08-14
+last_modified:                          2026-08-16
 
 description: >
                                         J1 Template provides playing video on web
@@ -43,8 +43,8 @@ resource_options:
       slides:      
         - url:                          /assets/video/headers/present_videos/modern-dance.mp4
           alt:                          AI generated video
-          title:                        Video Players
-          tagline:                      Playback Video and Playlists
+          title:                        Video
+          tagline:                      Playback playlists
           isVideo:                      true
           mute:                         true
           badge:

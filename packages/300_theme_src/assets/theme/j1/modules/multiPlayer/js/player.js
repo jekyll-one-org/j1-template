@@ -2,7 +2,7 @@
  # -----------------------------------------------------------------------------
  # ~/assets/theme/j1/modules/multiPlayer/js/player.js
  # Provides JS Core for J1 Module multiPlayer
- # Version 3.1.76 for J1 Template
+ # Version 3.1.78 for J1 Template
  #
  # Product/Info:
  # https://jekyll.one
@@ -108,7 +108,7 @@
   // multiPlayer MultiInstance #2
   // Module version, exposed as videoPlayer.VERSION (video.js parity:
   // videojs.VERSION). Keep in sync with the file header above.
-  const VERSION = '3.1.76';
+  const VERSION = '3.1.78';
 
   // Page-global one-shot guards for the two page-scoped handlers (see the
   // tagged notes inside those functions).
@@ -116,6 +116,7 @@
   let _sharedNavbarSmoothScrollHandlerInit   = false;
 
   let isMP3 = false;
+  let isMP4 = false;
 
   // Registry of live player instances, keyed by instance id ('' = default /
   // legacy single-player instance).
@@ -1990,6 +1991,7 @@
     const path  = url.split('#')[0].split('?')[0];
     const ext   = path.split('.').pop().toLowerCase();
     isMP3 = (ext === 'mp3') ? true : false;
+    isMP4 = (ext === 'mp4') ? true : false;
 
     if (!Object.prototype.hasOwnProperty.call(DOWNLOAD_MIME_BY_EXTENSION, ext)) {
       return null;
@@ -9460,10 +9462,16 @@
           const stateName = vjsStateEventNameMap[state] || (state < 0 ? 'loadstart' : String(state));
           isDev && logger.debug('\n' + `changed player to state: ${stateName}`);
 
-          // jadams, 2026-06-20: autoplay nextPrevButtons (playlist plugin)
-          //
           if (vjsStateEventNameMap[state] === 'loadstart') {
-            var piNextPrevButtons = (vjsPlayer.activePlugins_.nextPrevButtons) ? true : false;
+            // Fix multiPlayer plugin option guards #1
+            // `activePlugins_` is created by Video.js only when the FIRST
+            // plugin is activated on a player. A player configured without
+            // any plugin at all — plugins.enabled false, or a per-player
+            // control entry carrying no plugin subtree — never gets the
+            // member, and reading `.nextPrevButtons` from it threw on every
+            // loadstart, i.e. on every source change of that player.
+            //
+            var piNextPrevButtons = (vjsPlayer.activePlugins_ && vjsPlayer.activePlugins_.nextPrevButtons) ? true : false;
             // Modify multiPlayer #49
             // Per-instance options (factory) take precedence over the
             // page-global adapter options, so a per-player
@@ -9481,7 +9489,24 @@
             // before; the deferred autoplay branch in onReady() starts the
             // first playback once the selected source has settled.
             //
-            if (piNextPrevButtons && piPlaylistOptions.videoJS.plugins.nextPrevButtons.autoplay && !_playlistSetupInProgress) {
+            // Fix multiPlayer plugin option guards #1
+            // The option walk below descended three levels without a check.
+            // The short-circuit of `piNextPrevButtons` did NOT protect it:
+            // that flag reports whether the plugin is ACTIVE on the player,
+            // while the walk reads the CONFIGURATION — and the plugin can be
+            // active on a player whose per-player control entry replaced the
+            // videoJS subtree with one that spells out no nextPrevButtons
+            // block. `_resolveVideoPlayerEffectiveOptions()` may also hand
+            // back an object without a videoJS subtree if the resolver finds
+            // nothing usable.
+            //
+            // Original (deprecated, preserved for reference):
+            // if (piNextPrevButtons && piPlaylistOptions.videoJS.plugins.nextPrevButtons.autoplay && !_playlistSetupInProgress) {
+            const npbOptions = (piPlaylistOptions && piPlaylistOptions.videoJS && piPlaylistOptions.videoJS.plugins)
+              ? (piPlaylistOptions.videoJS.plugins.nextPrevButtons || {})
+              : {};
+
+            if (piNextPrevButtons && npbOptions.autoplay && !_playlistSetupInProgress) {
               // Modify multiPlayer #32
               // Always attach a .catch(): even outside the setup window a
               // benign interruption (e.g. rapid user navigation, a pause()
@@ -9910,14 +9935,41 @@
 
           isDev && logger.info('\n' + 'vjs player started');
 
-          const vjsPlaybackRates  = videoPlayerOptions.videoJS.playbackRates.values;
+          // Fix multiPlayer plugin option guards #1
+          // SAME DEFECT CLASS as the piZoomButtons guard added in the third
+          // fix of the "arrange piZoomButtons" series, found while auditing
+          // that fix: every option block below was dereferenced without ever
+          // asking whether it exists.
+          //
+          // The subtrees are OPTIONAL. They arrive through the usual chain
+          // (defaults <- user settings <- per-player entries in
+          // multiPlayer_control.yml), and a per-player entry REPLACES the
+          // videoJS subtree it carries rather than adding to it. A control
+          // file that spells out, say, only `plugins: { playlist: ... }` for
+          // one player therefore leaves skipButtons, nextPrevButtons and the
+          // rest undefined — and the very next line threw
+          //
+          //     TypeError: Cannot read properties of undefined (reading 'enabled')
+          //
+          // inside the player setup, i.e. that player stayed dead over a
+          // merely absent option block, exactly as observed for zoomButtons.
+          // `playbackRates` has the same exposure two places further down.
+          //
+          // The blocks are resolved ONCE here and default to an empty object,
+          // so every `.enabled` read further down is safe without touching
+          // the individual call sites. An absent block now means "plugin off",
+          // which is what a missing configuration has always meant.
+          //
+          const piPlugins         = (videoPlayerOptions.videoJS && videoPlayerOptions.videoJS.plugins) ? videoPlayerOptions.videoJS.plugins : {};
+          const piPlaybackRates   = (videoPlayerOptions.videoJS && videoPlayerOptions.videoJS.playbackRates) ? videoPlayerOptions.videoJS.playbackRates : {};
+          const vjsPlaybackRates  = piPlaybackRates.values;
 
-          const piAutoCaption     = videoPlayerOptions.videoJS.plugins.autoCaption;
-          const piPlaylist        = videoPlayerOptions.videoJS.plugins.playlist;
-          const piHotKeys         = videoPlayerOptions.videoJS.plugins.hotKeys;
-          const piSkipButtons     = videoPlayerOptions.videoJS.plugins.skipButtons;
-          const piNextPrevButtons = videoPlayerOptions.videoJS.plugins.nextPrevButtons;          
-          const piZoomButtons     = videoPlayerOptions.videoJS.plugins.zoomButtons;
+          const piAutoCaption     = piPlugins.autoCaption     || {};
+          const piPlaylist        = piPlugins.playlist        || {};
+          const piHotKeys         = piPlugins.hotKeys         || {};
+          const piSkipButtons     = piPlugins.skipButtons     || {};
+          const piNextPrevButtons = piPlugins.nextPrevButtons || {};
+          const piZoomButtons     = piPlugins.zoomButtons     || {};
 
           isDev && logger.debug('\n' + 'customize vjs player (controls)');
 
@@ -10252,7 +10304,16 @@
           }
 
           // add|skip playbackRates
-          if (videoPlayerOptions.videoJS.playbackRates.enabled) {
+          // Fix multiPlayer plugin option guards #1
+          // Read from the block resolved above instead of walking into
+          // videoJS.playbackRates again, which threw when the subtree was
+          // absent. `values` may still be undefined; the plugin is only
+          // called when `enabled` says so, and a configuration that switches
+          // playbackRates on always ships the list with it (the defaults do).
+          //
+          // Original (deprecated, preserved for reference):
+          // if (videoPlayerOptions.videoJS.playbackRates.enabled) {
+          if (piPlaybackRates.enabled) {
             vjsPlayer.playbackRates(vjsPlaybackRates);
           }
 
@@ -10338,15 +10399,91 @@
             }
           }
 
-          if (piZoomButtons.enabled && !isYouTube  && !isMP3) {
+          // Fix multiPlayer piZoomButtons
+          // The zoom plugin knows three switches that decide which button
+          // rows the zoom panel shows: showZoom (the +/- row), showMove (the
+          // move cross including the reset button in its centre) and
+          // showRotate (the rotate/flip row). They were never handed over, so
+          // the panel could not be arranged from the configuration at all.
+          //
+          // With the option plumbing inside zoom.js repaired (same fix tag),
+          // the three keys are passed on here. They are read straight from
+          // the resolved plugin configuration, which follows the usual
+          // inheritance chain: defaults <- user settings <- per-player
+          // control. videojs.yml does not declare them today, so they arrive
+          // as `undefined`; the plugin drops empty members before merging and
+          // keeps its own defaults (all three rows shown). Existing pages
+          // therefore look exactly as before, and a page that adds e.g.
+          //
+          //     zoomButtons:
+          //       showRotate:  false
+          //
+          // to its configuration now really loses the rotate/flip row.
+          //
+          // NOTE for the configuration: the reset button ("go back to the
+          // original picture") sits in the middle of the move cross. Turning
+          // showMove off removes the reset button together with the arrows.
+          //
+          // Original (deprecated, preserved for reference):
+          // if (piZoomButtons.enabled && isMP4) {
+          //   // piZoomButtons
+          //   vjsPlayer.zoomButtons({
+          //     moveX:  piZoomButtons.moveX,
+          //     moveY:  piZoomButtons.moveY,
+          //     rotate: piZoomButtons.rotate,
+          //     zoom:   piZoomButtons.zoom
+          //   }); 
+          // }
+          // Fix multiPlayer piZoomButtons3
+          // Two additions to the block below.
+          //
+          // GUARD. `piZoomButtons` is read straight from
+          // videoPlayerOptions.videoJS.plugins.zoomButtons a few hundred lines
+          // above. A configuration that does not carry a zoomButtons subtree
+          // at all — the plugin block is optional, and a per-player entry in
+          // multiPlayer_control.yml may replace it — leaves the variable
+          // `undefined`, and reading `.enabled` from it threw a TypeError
+          // right here. That happened inside the player setup, so the whole
+          // player stayed dead because of a merely absent option block.
+          // The second half of the guard covers the mirror image: the option
+          // says the plugin is on, but zoom.js was not bundled into the page,
+          // in which case vjsPlayer.zoomButtons is not a function.
+          //
+          // gestureHandler. The plugin knows a fourth switch besides the three
+          // row switches added in #2: it decides whether the picture can be
+          // panned and zoomed with the pointer and the mouse wheel. It was
+          // never handed over, so it could not be configured. It is passed on
+          // here now; the plugin defaults it to false (see zoom.js), which is
+          // also the value declared in the module defaults.
+          //
+          // Original (deprecated, preserved for reference):
+          // if (piZoomButtons.enabled && isMP4) {                          // Fix multiPlayer piZoomButtons2
+          //   // piZoomButtons
+          //   vjsPlayer.zoomButtons({                                      // Fix multiPlayer piZoomButtons2
+          //     moveX:      piZoomButtons.moveX,                           // Fix multiPlayer piZoomButtons2
+          //     moveY:      piZoomButtons.moveY,                           // Fix multiPlayer piZoomButtons2
+          //     rotate:     piZoomButtons.rotate,                          // Fix multiPlayer piZoomButtons2
+          //     zoom:       piZoomButtons.zoom,                            // Fix multiPlayer piZoomButtons2
+          //     showZoom:   piZoomButtons.showZoom,                        // Fix multiPlayer piZoomButtons2
+          //     showMove:   piZoomButtons.showMove,                        // Fix multiPlayer piZoomButtons2
+          //     showRotate: piZoomButtons.showRotate                       // Fix multiPlayer piZoomButtons2
+          //   });                                                          // Fix multiPlayer piZoomButtons2
+          // }                                                              // Fix multiPlayer piZoomButtons2
+          if (piZoomButtons && piZoomButtons.enabled && isMP4 && typeof vjsPlayer.zoomButtons === 'function') {   // Fix multiPlayer piZoomButtons3
             // piZoomButtons
-            vjsPlayer.zoomButtons({
-              moveX:  piZoomButtons.moveX,
-              moveY:  piZoomButtons.moveY,
-              rotate: piZoomButtons.rotate,
-              zoom:   piZoomButtons.zoom
-            }); 
-          }
+            vjsPlayer.zoomButtons({                                      // Fix multiPlayer piZoomButtons3
+              moveX:          piZoomButtons.moveX,                       // Fix multiPlayer piZoomButtons3
+              moveY:          piZoomButtons.moveY,                       // Fix multiPlayer piZoomButtons3
+              rotate:         piZoomButtons.rotate,                      // Fix multiPlayer piZoomButtons3
+              zoom:           piZoomButtons.zoom,                        // Fix multiPlayer piZoomButtons3
+              showZoom:       piZoomButtons.showZoom,                    // Fix multiPlayer piZoomButtons3
+              showMove:       piZoomButtons.showMove,                    // Fix multiPlayer piZoomButtons3
+              showRotate:     piZoomButtons.showRotate,                  // Fix multiPlayer piZoomButtons3
+              gestureHandler: piZoomButtons.gestureHandler               // Fix multiPlayer piZoomButtons3
+            });                                                          // Fix multiPlayer piZoomButtons3
+          } else if (piZoomButtons && piZoomButtons.enabled && isMP4) {  // Fix multiPlayer piZoomButtons3
+            isDev && logger.warn('\n' + 'zoomButtons enabled, but the zoom plugin is not loaded');   // Fix multiPlayer piZoomButtons3
+          }                                                              // Fix multiPlayer piZoomButtons3
 
           // For YouTube, hide the VJS control bar when configured.
           // players.youtube.controls === 0 means the YouTube IFrame API hides

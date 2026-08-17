@@ -145,9 +145,14 @@ Hier sind einige der gängigsten Methoden:
 
 **1. Verwendung von EditorConfig:**
 
-Die `.editorconfig`-Datei ist eine einfache Möglichkeit, Editor-Verhaltensweisen für dein Projekt zu definieren. Du kannst darin festlegen, welche Dateitypen VS Code wie behandeln soll.
+Die `.editorconfig`-Datei ist eine einfache Möglichkeit,
+Editor-Verhaltensweisen für dein Projekt zu definieren.
+Du kannst darin festlegen, welche Dateitypen VS Code wie
+behandeln soll.
 
-* **Erstelle eine `.editorconfig`-Datei** im Root-Verzeichnis deines Projekts (falls sie noch nicht existiert).
+* **Erstelle eine `.editorconfig`-Datei** im Root-Verzeichnis
+deines Projekts (falls sie noch nicht existiert).
+
 * **Füge folgende Zeilen hinzu:**
 
     ```ini
@@ -200,7 +205,9 @@ Viele Template-Engines haben eigene VS Code Extensions, die eine spezielle Synta
 **Welche Methode ist die beste für dich?**
 
 * **`.editorconfig`:** Ideal, wenn du die Editor-Einstellungen projektweit festlegen möchtest und sicherstellen willst, dass alle Entwickler im Team die gleichen Grundeinstellungen verwenden.
-* **`settings.json`:** Gut, wenn du die Einstellungen nur für deinen lokalen VS Code anpassen möchtest oder spezifischere Zuordnungen benötigst.
+* **`settings.json`:**
+  Gut, wenn du die Einstellungen nur für deinen lokalen VS Code anpassen
+  möchtest oder spezifischere Zuordnungen benötigst.
 * **Spezifische Extensions:** Die eleganteste Lösung, da sie oft eine maßgeschneiderte Unterstützung für die Template-Syntax bieten und den JavaScript-Anteil intelligent handhaben können.
 
 Ich würde dir empfehlen, zuerst nach einer spezifischen VS Code Extension für deine Template-Engine zu suchen. Wenn es keine passende Extension gibt oder du eine einfachere Lösung bevorzugst, ist die Konfiguration über `.editorconfig` oder `settings.json` eine gute Alternative.

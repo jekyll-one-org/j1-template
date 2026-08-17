@@ -1,6 +1,6 @@
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/modules/videojs/css/plugins/controls/css/zoom.css
+ # ~/assets/theme/j1/modules/videojs/css/plugins/controls/css/zoom.css (2)
  # Provides CSS Styles for the VideoJS (V8) plugin Zoom, Version 1.2.0
  # See: https://github.com/theonlyducks/videojs-zoom
  #
@@ -45,6 +45,22 @@
     font-feature-settings: "liga";
 }
 
+/* Fix multiPlayer piZoomButtons
+   Center the icon glyph inside the (22x22px) button box. Without an explicit
+   glyph box, the ligature is drawn from the content-box edge of the button,
+   so any button padding shifts the glyph to the right. Rows built from
+   buttons only (cross--middle) are shifted more than rows that use spacer
+   spans (cross--top, cross--bottom).
+*/
+.video-js .vjs-zoom-buttons__button .vjs-zoom-icons {
+    width: 22px;
+    height: 22px;
+    line-height: 22px;
+    text-align: center;
+    display: block;
+    overflow: visible;
+}
+
 .video-js .vjs-zoom-buttons {
     font-family: "VideoJS", sans-serif;
     font-weight: 400;
@@ -57,6 +73,21 @@
     content: "\f128";
 }
 
+/* Fix multiPlayer piZoomButtons
+   Documentation only, no rule is changed here.
+
+   The `transition: visibility .2s, opacity .2s` below is the curve of the
+   panel's OWN open/close animation, the one the magnifier button drives
+   through the `.open` class. It is deliberately NOT the curve of the control
+   bar, whose fade Video.js declares at .1s (shown) and 1s (faded).
+
+   While the panel is kept in lockstep with the control bar, zoom.js borrows
+   the bar's curve as an inline style and removes it again as soon as that
+   fade has finished, so the .2s here stay in charge of open and close. Both
+   directions of the sync are handled in the plugin, and this value can be
+   re-timed freely without affecting the bar sync.
+   See _revealWithBarCurve() in zoom.js.
+*/
 .video-js .vjs-zoom-buttons__container {
     left: 0px;
     bottom: 76px;
@@ -68,30 +99,85 @@
     transition: visibility .2s, opacity .2s;
 }
 
+/* Fix multiPlayer piZoomButtons */
 .video-js .vjs-zoom-buttons__container.open {
     display: flex;
     opacity: 1;
     visibility: visible;
     flex-direction: column;
+    align-items: center;
+    row-gap: 6px;
 }
 
+/* Fix multiPlayer piZoomButtons
+   Row layout of the button panel. The rows were plain block containers
+   holding inline-block cells, so the horizontal geometry of a row depended
+   on the cells it contains (button vs. spacer span) and on the collapsed
+   white space of the markup. Result: the middle row of the move cross
+   (cross--middle) was not centered against cross--top and cross--bottom.
+   Making every row a centered flex row with fixed 22px cells and one common
+   gap gives all rows the identical geometry.
+*/
+.video-js .vjs-zoom-buttons__container--row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    column-gap: 6px;
+}
+
+/* Fix multiPlayer piZoomButtons
+   The move cross. All three rows carry three cells of the same size, so the
+   center cell of cross--middle (the reset button) is placed exactly below
+   the arrow of cross--top and exactly above the arrow of cross--bottom.
+
+        cross--top
+            |
+   --- cross--middle ---
+            |
+       cross--bottom
+
+*/
+.video-js .vjs-zoom-buttons__container--row.cross--top,
+.video-js .vjs-zoom-buttons__container--row.cross--middle,
+.video-js .vjs-zoom-buttons__container--row.cross--bottom {
+    justify-content: center;
+    column-gap: 6px;
+}
+
+/* Fix multiPlayer piZoomButtons */
 .video-js .vjs-zoom-buttons__space {
     width: 22px;
     height: 22px;
     display: inline-block;
+    box-sizing: border-box;
+    flex: 0 0 22px;
+    padding: 0;
+    margin: 0;
 }
 
+/* Fix multiPlayer piZoomButtons */
 .video-js .vjs-zoom-buttons__button {
     cursor: pointer;
     border: none;
     width: 22px;
     height: 22px;
     border-radius: 100%;
+    box-sizing: border-box;
+    flex: 0 0 22px;
+    padding: 0;
+    margin: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 22px;
 }
 
+/* Fix multiPlayer piZoomButtons
+   The padding resets on :hover are no longer needed. The button padding is
+   now zero in ALL states, so the glyph does not jump on hover any more.
+*/
 .video-js .vjs-zoom-buttons__button:hover {
-  padding-left: 0px;
-  padding-top: 0px;
     color: rgba(43, 51, 63, .7);
     background-color: white;
 }

@@ -17,7 +17,7 @@ regenerate:                             true
  # J1 Template is licensed under the MIT License.
  # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE
  # -----------------------------------------------------------------------------
- # Fix J1 VideoPlayer #1
+ # 
  # Adapter created from scratch for the native-video videoPlayer module.
  # Follows the same pattern as j1.adapter.claudeAI / j1.adapter.mmenu:
  #
@@ -29,7 +29,7 @@ regenerate:                             true
  #      instantiates every handler class exported by the module.
  #
  # -----------------------------------------------------------------------------
- # Unique J1 VideoPlayer #1
+ # 
  # Every getElementById() / DOM lookup in initPlayerUiEvents(),
  # closePlaylist(), and closeEditPlaylist() now receives the scoped player
  # id so all handlers operate on the correct player instance when multiple
@@ -56,8 +56,8 @@ regenerate:                             true
  #   • Per-player Liquid loop — passes '{{player_id}}' as the second
  #     argument to both initHandlers() and initPlayerUiEvents() calls.
  # -----------------------------------------------------------------------------
- # Modify J1 VideoPlayer #47
- # Follow-on to Modify J1 VideoPlayer #46 (HTML data file): the header buttons
+ # 
+ # Follow-on to Change #46 (HTML data file): the header buttons
  # <button id="toggle_playlist_<playerId>"> and <button id="edit_playlist_
  # <playerId>"> are now emitted CONDITIONALLY per instance, driven by the
  # ui_elements.{show_playlist_button,edit_playlist_button} YAML flags.
@@ -88,7 +88,6 @@ regenerate:                             true
  # -----------------------------------------------------------------------------
  #
  # -----------------------------------------------------------------------------
- # Modify J1 VideoPlayer #48
  # PER-INSTANCE CONFIG INHERITANCE CHAIN
  #
  #   player settings -> overload user settings -> overload default settings
@@ -107,7 +106,7 @@ regenerate:                             true
  # playlist.cards.perRow, ui_elements.*, toolbox.*, ...) were applied for the
  # HTML portion only (#46/#47) but never reached the module (factory API).
  #
- # Changes (all tagged "Modify J1 VideoPlayer #48"):
+ # Changes (all tagged "Change #48"):
  #
  #   • _deepMerge(target, ...sources) — new helper. Recursive merge for plain
  #     objects; ARRAYS and scalars REPLACE (no index-wise array merging as
@@ -141,8 +140,7 @@ regenerate:                             true
  # -----------------------------------------------------------------------------
  #
  # -----------------------------------------------------------------------------
- # Modify J1 VideoPlayer #50
- # ADAPTER-SIDE COUNTERPART OF CORE-MODULE #49 (per-instance options resolver)
+ # ADAPTER-SIDE COUNTERPART OF CORE-MODULE (per-instance options resolver)
  #
  # AUDIT RESULT (the #49 adapter contract is ALREADY satisfied by #48):
  #
@@ -159,8 +157,7 @@ regenerate:                             true
  #   • The init loop forwards each player's OWN playlist.preload list,
  #     playlist_url_base and playerId to preloadPlaylists() (#39/#45 item).
  #
- # REMAINING GAP CLOSED BY THIS FIX (all tagged
- # "Modify J1 VideoPlayer #50"):
+ # REMAINING GAP CLOSED;
  #
  #   • _loadFirstAfterPreload() — the bounded async retry re-scoped the
  #     playlistManager via setPlayerID(playerId) before every attempt but did
@@ -177,7 +174,6 @@ regenerate:                             true
  # -----------------------------------------------------------------------------
  #
  # -----------------------------------------------------------------------------
- # Modify J1 VideoPlayer #52
  # PER-PLAYER ON|OFF CONTROL FOR THE PLAYLIST-CARD ACTION BUTTONS
  #
  # Follow-on to #46 (header buttons toggle_playlist_* / edit_playlist_*):
@@ -189,10 +185,13 @@ regenerate:                             true
  #   ui_elements.playlist_edit_button    -> button.playlist-btn.edit
  #   ui_elements.playlist_delete_button  -> button.playlist-btn.delete
  #
- # The keys follow the three-layer inheritance chain established by #46/#48:
- #   module defaults (videoPlayer.yml: all true)
+ # The keys follow the three-layer inheritance chain  module defaults
+ # (videoPlayer.yml: all true):
+ #
+ #   module defaults
  #     <- user settings (videoPlayer.yml, settings section)
  #       <- per-player entry (multiplayer_control.yml, players[].ui_elements)
+ #
  # and arrive in initHandlers() fully resolved via getInstanceOptions() (#48);
  # no additional merge logic is required on the adapter side.
  #
@@ -202,7 +201,7 @@ regenerate:                             true
  # div#videoplayer_playlist_parent_<playerId>, however, exists as soon as the
  # per-player HTML portion is XHR-loaded — BEFORE the module factory call.
  #
- # Changes (all tagged "Modify J1 VideoPlayer #52"):
+ # Changes:
  #
  #   • initHandlers(options, playerId) — new step 0 (placed BEFORE the module
  #     factory call videoPlayer(playerId, options), which may synchronously
@@ -234,7 +233,6 @@ regenerate:                             true
  # -----------------------------------------------------------------------------
  #
  # -----------------------------------------------------------------------------
- # J1 VideoPlayer MultiInstance #3
  # Revision bump (20) -> (21): brings the video.js-aligned MULTI-INSTANCE
  # adapter (created at rev 14 alongside core-module MultiInstance #1/#2) up to
  # the CURRENT rev-20 data collection / settings / functionality.
@@ -248,7 +246,7 @@ regenerate:                             true
  # re-applies the ONE thing rev 20 still lacks: the multi-instance factory
  # wiring against the rev-55 core module.
  #
- # Change (all tagged "J1 VideoPlayer MultiInstance #3"):
+ # Change:
  #   initHandlers(options, playerId) now obtains this player's instance via
  #   the module factory  var vp = videoPlayer(playerId, options)  (create-or-
  #   get, keyed by playerId) and routes EVERY handler through vp.* instead of
@@ -281,7 +279,7 @@ regenerate:                             true
 {% assign multiplayer_settings    = modules.multiPlayer.settings %}
 {% assign multiplayer_control     = modules.multiPlayer_control.settings %}
 
-{% comment %} Modify J1 VideoPlayer #48
+{% comment %} Change #48
 --------------------------------------------------------------------------------
  Set config options (merge chain: defaults <- user settings).
  The control file is NO LONGER merged into the global options: its only
@@ -339,7 +337,7 @@ j1.adapter.multiPlayer = ((j1, window) => {
   var multiPlayerOptions;
   var multiPlayers;
 
-  // Modify J1 VideoPlayer #48
+  // Change #48
   // per-instance options cache, keyed by playerId. Each entry is the deep
   // merge of the inheritance chain:
   //    player settings -> overload user settings -> overload default settings
@@ -397,17 +395,14 @@ j1.adapter.multiPlayer = ((j1, window) => {
       multiPlayerSettings = $.extend({}, {{multiplayer_settings | replace: 'nil', 'null' | replace: '=>', ':' }});
       multiPlayers        = $.extend({}, {{multiplayer_control  | replace: 'nil', 'null' | replace: '=>', ':' }});
 
-      // Modify J1 VideoPlayer #48
+      // Change #48
       // Build the GLOBAL (module-level) options with the same _deepMerge
       // helper used for the per-instance chain so both levels share one
       // merge semantic (plain objects merged recursively, ARRAYS REPLACED).
       // $.extend(true, ...) merges arrays index-wise, which corrupts
       // list-valued settings (e.g. playbackRates.values, sourceOrder) when
       // a higher layer supplies a SHORTER array.
-      // Original (deprecated, preserved for reference):
-      // multiPlayerOptions  = $.extend(true, {}, multiPlayerDefaults, multiPlayerSettings);
       //
-      // </playerId>multiPlayerOptions  = _this._deepMerge({}, multiPlayerDefaults, multiPlayerSettings);
       multiPlayerOptions  = $.extend(true, {}, multiPlayerDefaults, multiPlayerSettings);
 
       // update environment setting
@@ -418,7 +413,7 @@ j1.adapter.multiPlayer = ((j1, window) => {
       //
       _this['multiPlayerOptions'] = multiPlayerOptions;
 
-      // Modify J1 VideoPlayer #48
+      // Change #48
       // Reset + expose the PER-INSTANCE options map so the module can read
       // the effective per-player chain via
       // j1.adapter.multiPlayer.multiPlayerInstanceOptions[playerId].
@@ -450,7 +445,7 @@ j1.adapter.multiPlayer = ((j1, window) => {
           ---------------------------------------------------------------------- {% endcomment %}
           {% for video_player in players %}
 
-            {% comment %} Modify J1 VideoPlayer #48
+            {% comment %} Change #48
             --------------------------------------------------------------------
             create accumulated player data
             player:  {{ player | debug }}
@@ -472,12 +467,10 @@ j1.adapter.multiPlayer = ((j1, window) => {
               {% assign player_id = player.id %}
               logger.debug('\n' + 'found video player on id: ' + '{{player_id}}');
 
-              // Unique J1 VideoPlayer #1
               // create dynamic loader variable to setup the player on id {{player_id}}
               dependency = 'dependencies_met_html_loaded_{{player_id}}';
               load_dependencies[dependency] = '';
 
-              // Unique J1 VideoPlayer #7
               // initialize the player if HTML portion successfully loaded AND
               // the videoPlayer module is already defined.
               //
@@ -495,12 +488,12 @@ j1.adapter.multiPlayer = ((j1, window) => {
                 xhrLoadState = j1.xhrDOMState['#{{player_id}}_parent'];
                 if (xhrLoadState === 'success' && typeof videoPlayer !== 'undefined') {
                   // Initialize UI handlers and PLAYER events
-                  // Unique J1 VideoPlayer #1
+                  // 
                   // Pass the scoped player id so every DOM lookup inside
                   // initHandlers / initPlayerUiEvents targets the correct
                   // player instance.
                   //
-                  // Modify J1 VideoPlayer #48
+                  // Change #48
                   // initHandlers() now receives the PER-INSTANCE options
                   // (chain: defaults <- user settings <- player settings)
                   // instead of the global multiPlayerOptions, so the module
@@ -594,7 +587,6 @@ j1.adapter.multiPlayer = ((j1, window) => {
     }, // END loadPlayerHTML
 
     // -------------------------------------------------------------------------
-    // Unique J1 VideoPlayer #1
     // initPlayerUiEvents(playerId)
     // playerId is now a required parameter.  Every getElementById() call is
     // scoped by appending '_' + playerId to match the uniquified ids emitted
@@ -603,10 +595,10 @@ j1.adapter.multiPlayer = ((j1, window) => {
     // -------------------------------------------------------------------------
     initPlayerUiEvents: (playerId) => {
 
-      // Modify J1 VideoPlayer #1
+      // Change #1
       // toggle playlist (video_player_container acts as a true toggle)
       //
-      // Modify J1 VideoPlayer #5
+      // Change #5
       // The toggle element is now <button id="toggle_playlist_<playerId>">.
       // querySelector('span') still resolves the sibling <span> inside the
       // parent .video-player-header div; querySelector('img') resolves the
@@ -614,20 +606,18 @@ j1.adapter.multiPlayer = ((j1, window) => {
       // aria-label) are now updated on the button itself in both OPEN and
       // CLOSE branches; alt is updated on the child <img>.
       //
-      // Unique J1 VideoPlayer #1
       // All element lookups use the scoped id suffix '_' + playerId.
       // -------------------------------------------------------
       var togglePlaylistBtn  = document.getElementById('toggle_playlist_' + playerId);
       var togglePlaylistSpan = togglePlaylistBtn  ? togglePlaylistBtn.closest('.video-player-header').querySelector('span') : null;
       var togglePlaylistImg  = togglePlaylistBtn  ? togglePlaylistBtn.querySelector('img') : null;
 
-      // Modify J1 VideoPlayer #4
+      // Change #4
       // shared helper: close the playlist and reset the toggle button label/icon.
       // Delegates to the public adapter method j1.adapter.multiPlayer.closePlaylist()
       // so that the module (e.g. doPostOnPlaying) can call it for full toggle-reset
       // without duplicating the DOM logic.
       //
-      // Unique J1 VideoPlayer #1
       // playerId forwarded so closePlaylist() targets the right player.
       //
       function _closePlaylist(playerID) {
@@ -638,7 +628,7 @@ j1.adapter.multiPlayer = ((j1, window) => {
         // initialise toggle state
         togglePlaylistBtn.dataset.playlistOpen = 'false';
 
-        // Modify J1 VideoPlayer #36
+        // Change #36
         // The header <span> (.video-player-header-title) is now the live
         // title display for the currently loaded video. The module pushes
         // entry.title into it on the 'playing' state (see Modify J1
@@ -650,7 +640,6 @@ j1.adapter.multiPlayer = ((j1, window) => {
         if (togglePlaylistSpan !== null) { togglePlaylistSpan.textContent = ''; }
 
         togglePlaylistBtn.addEventListener('click', function(event) {
-          // Unique J1 VideoPlayer #1
           var editBtn = document.getElementById('edit_playlist_' + playerId);
 
           var playlistScreen = document.getElementById('playlist_screen_' + playerId);
@@ -659,19 +648,20 @@ j1.adapter.multiPlayer = ((j1, window) => {
           var isOpen = (togglePlaylistBtn.dataset.playlistOpen === 'true');
           if (!isOpen) {
             // ----- OPEN ------------------------------------------------------
-            // Modify J1 VideoPlayer #47
+            // Change #47
             // The edit_playlist button is rendered conditionally per instance
             // since #46 (ui_elements.edit_playlist_button). When absent,
             // editBtn is null and the unguarded setAttribute() below threw
             // 'Cannot read properties of null' on the first toggle. Guard the
             // whole mutual-exclusion block — with no edit button there is
             // nothing to gate.
+            //
             if (editBtn !== null) {
-            editBtn.setAttribute('disabled', '');
-            editBtn.setAttribute('aria-disabled', 'true');
-            editBtn.style.opacity = '0.4';
-            editBtn.style.cursor  = 'not-allowed';
-            editBtn.title         = 'Hide current playlist first';
+              editBtn.setAttribute('disabled', '');
+              editBtn.setAttribute('aria-disabled', 'true');
+              editBtn.style.opacity = '0.4';
+              editBtn.style.cursor  = 'not-allowed';
+              editBtn.title         = 'Hide current playlist first';
             } // END if editBtn
 
             playlistScreen.classList.remove('slide-out-top');
@@ -682,32 +672,31 @@ j1.adapter.multiPlayer = ((j1, window) => {
             togglePlaylistBtn.dataset.playlistOpen = 'true';
             togglePlaylistBtn.title = 'Hide playlist';
             togglePlaylistBtn.setAttribute('aria-label', 'Hide playlist');
-            // Modify J1 VideoPlayer #36
+
+            // Change #36
             // DISABLED: the header <span> is now the live video-title display
             // (.video-player-header-title, fed by the module per #35). Writing
             // 'Hide Playlist' here would clobber the currently shown title on
             // every toggle. The accessible label still lives on the <button>
             // (title + aria-label above) and the icon swap below, so dropping
             // the span text is purely cosmetic-label removal, not a11y loss.
-            // Original line kept for reference:
-            // if (togglePlaylistSpan !== null) { togglePlaylistSpan.textContent = 'Hide Playlist'; }
+            //
             if (togglePlaylistImg  !== null) {
               togglePlaylistImg.src = '/assets/theme/j1/modules/multiPlayer/icons/player/dark/playlist-hide.svg';
               togglePlaylistImg.alt = 'Hide playlist';
             }
           } else {
             // ----- CLOSE -----------------------------------------------------
-            // Modify J1 VideoPlayer #47
+            // Change #47
             // Same guard as the OPEN branch: editBtn is null when the
             // per-instance edit_playlist button is disabled (#46).
             if (editBtn !== null) {
-            editBtn.removeAttribute('disabled');
-            editBtn.setAttribute('aria-disabled', 'false');
-            editBtn.style.removeProperty('opacity');
-            editBtn.style.removeProperty('cursor');
+              editBtn.removeAttribute('disabled');
+              editBtn.setAttribute('aria-disabled', 'false');
+              editBtn.style.removeProperty('opacity');
+              editBtn.style.removeProperty('cursor');
             } // END if editBtn
 
-            // Unique J1 VideoPlayer #5
             // Pass playerId so closePlaylist() looks up the correct
             // scoped element (playlist_screen_<playerId>) instead of
             // the unsuffixed id which does not exist in the DOM.
@@ -716,7 +705,7 @@ j1.adapter.multiPlayer = ((j1, window) => {
 
         }); // END EventListener
 
-        // Modify J1 VideoPlayer #38
+        // Change #38
         // Make the header title <span> (.video-player-header-title) a second
         // trigger for opening/closing the playlist screen, so a click on the
         // live video title behaves EXACTLY like a click on the
@@ -737,13 +726,14 @@ j1.adapter.multiPlayer = ((j1, window) => {
         // No init-once guard is needed here: initPlayerUiEvents() runs exactly
         // once per player (the load-dependency interval clears immediately after
         // the call), mirroring the unguarded toggle-button listener above.
+        //
         var headerTitleSpan = togglePlaylistBtn.closest('.video-player-header')
                                 ? togglePlaylistBtn.closest('.video-player-header').querySelector('.video-player-header-title')
                                 : null;
-        if (headerTitleSpan === null) { headerTitleSpan = togglePlaylistSpan; } // Modify J1 VideoPlayer #38
+        if (headerTitleSpan === null) { headerTitleSpan = togglePlaylistSpan; } // Change #38
 
         if (headerTitleSpan !== null) {
-          // Modify J1 VideoPlayer #38
+          // Change #38
           // Affordance: present the title as interactive and avoid text-selection
           // flicker on repeated toggles. Applied inline so the behaviour ships
           // with the handler and needs no companion CSS rule.
@@ -751,7 +741,7 @@ j1.adapter.multiPlayer = ((j1, window) => {
           headerTitleSpan.style.userSelect = 'none';
 
           headerTitleSpan.addEventListener('click', function(event) {
-            // Modify J1 VideoPlayer #38
+            // Change #38
             // Re-dispatch to the canonical toggle handler (single source of truth).
             togglePlaylistBtn.click();
           }); // END EventListener (header title toggle)
@@ -760,21 +750,18 @@ j1.adapter.multiPlayer = ((j1, window) => {
       } // END if togglePlaylistBtn
 
       // hide playlist (secondary close button inside the playlist screen)
-      // Unique J1 VideoPlayer #1: scoped id lookup
       // -------------------------------------------------------
       var hidePlaylist = document.getElementById('hide_playlist_video_player_' + playerId);
       if (hidePlaylist !== null) {
         hidePlaylist.addEventListener('click', function(event) {
-          // Modify J1 VideoPlayer #1
-          // delegate to the shared helper so the toggle button stays in sync
-          //
-          // Unique J1 VideoPlayer #5
+          // Change #1
+          // delegate to the shared helper so the toggle button stays in sync #5
           // Pass playerId so closePlaylist() targets the correct player instance.
           _closePlaylist(playerId);
         }); // END addEventListener
       } // END if hidePlaylist
 
-      // Modify J1 VideoPlayer #7
+      // Change #7
       // edit playlist button — toggles #playlist_edit_screen_<playerId>.
       // Mirrors the toggle_playlist pattern exactly:
       //
@@ -786,7 +773,6 @@ j1.adapter.multiPlayer = ((j1, window) => {
       //     closeEditPlaylist() adapter method so the module can call it from
       //     any future call-site without duplicating DOM logic
       //
-      // Unique J1 VideoPlayer #1
       // Guard flag is now keyed per playerId to prevent duplicate listener
       // registration across multiple players.
       // -------------------------------------------------------
@@ -796,7 +782,6 @@ j1.adapter.multiPlayer = ((j1, window) => {
         if (editPlaylistBtn !== null) {
 
           // shared helper: close the edit screen and reset the button state.
-          // Unique J1 VideoPlayer #1: playerId forwarded.
           //
           function _closeEditPlaylist() {
             _this.closeEditPlaylist(editPlaylistBtn, playerId);
@@ -806,37 +791,38 @@ j1.adapter.multiPlayer = ((j1, window) => {
           editPlaylistBtn.dataset.editOpen = 'false';
 
           editPlaylistBtn.addEventListener('click', function(event) {
-            // Unique J1 VideoPlayer #1
             var editScreen = document.getElementById('playlist_edit_screen_' + playerId);
+
             if (editScreen === null) return;
 
             var isOpen = (editPlaylistBtn.dataset.editOpen === 'true');
 
             if (!isOpen) {
               // ----- OPEN ----------------------------------------------------
-              // Modify J1 VideoPlayer #47
+              // Change #47
               // Mirror guard for the opposite direction: this handler block
               // sits OUTSIDE the 'if (togglePlaylistBtn !== null)' scope, so
               // togglePlaylistBtn is null when the per-instance
               // show_playlist_button is disabled (#46). Guard the
               // mutual-exclusion gating of the toggle button.
+              //
               if (togglePlaylistBtn !== null) {
-              togglePlaylistBtn.setAttribute('disabled', '');
-              togglePlaylistBtn.setAttribute('aria-disabled', 'true');
-              togglePlaylistBtn.style.opacity = '0.4';
-              togglePlaylistBtn.style.cursor  = 'not-allowed';
-              togglePlaylistBtn.title         = 'Hide current playlist first';
+                togglePlaylistBtn.setAttribute('disabled', '');
+                togglePlaylistBtn.setAttribute('aria-disabled', 'true');
+                togglePlaylistBtn.style.opacity = '0.4';
+                togglePlaylistBtn.style.cursor  = 'not-allowed';
+                togglePlaylistBtn.title         = 'Hide current playlist first';
               } // END if togglePlaylistBtn
 
               // close the playlist panel first (mutually exclusive)
               //
-              // Unique J1 VideoPlayer #5
               // Pass playerId so closePlaylist() targets the correct
               // scoped element (playlist_screen_<playerId>) instead of
               // the unsuffixed id which does not exist in the DOM.
+              //
               _closePlaylist(playerId);
 
-              // Modify J1 VideoPlayer #29
+              // Change #29
               // Overlay the edit screen ON TOP OF the video container box
               // (mirrors the amplitude compact-player list view behaviour).
               //
@@ -847,8 +833,10 @@ j1.adapter.multiPlayer = ((j1, window) => {
               // container using the container's live box geometry, while the
               // player keeps running underneath, fully covered by the opaque
               // overlay. A resize handler keeps the overlay aligned while open.
+              //
               var _vpEditVideoContainer = document.getElementById('video_container_' + playerId);
               var _vpEditPlayerWrapper  = document.getElementById(playerId);
+
               if (_vpEditVideoContainer !== null && _vpEditPlayerWrapper !== null) {
                 // Guarantee a positioning context on the player wrapper so the
                 // absolutely positioned edit screen anchors to it. The HTML
@@ -895,14 +883,15 @@ j1.adapter.multiPlayer = ((j1, window) => {
 
             } else {
               // ----- CLOSE ---------------------------------------------------
-              // Modify J1 VideoPlayer #47
+              // Change #47
               // Same guard as the OPEN branch above: togglePlaylistBtn is
               // null when show_playlist_button is disabled per instance (#46).
+              //
               if (togglePlaylistBtn !== null) {
-              togglePlaylistBtn.removeAttribute('disabled');
-              togglePlaylistBtn.setAttribute('aria-disabled', 'false');
-              togglePlaylistBtn.style.removeProperty('opacity');
-              togglePlaylistBtn.style.removeProperty('cursor');
+                togglePlaylistBtn.removeAttribute('disabled');
+                togglePlaylistBtn.setAttribute('aria-disabled', 'false');
+                togglePlaylistBtn.style.removeProperty('opacity');
+                togglePlaylistBtn.style.removeProperty('cursor');
               } // END if togglePlaylistBtn
 
               _closeEditPlaylist();
@@ -920,13 +909,11 @@ j1.adapter.multiPlayer = ((j1, window) => {
     },
 
     // -------------------------------------------------------------------------
-    // Fix J1 VideoPlayer #1
     // initHandlers(options, playerId)
     // Initialize all playlist and UI handler classes exported by the
     // videoPlayer module.  Called from within dependencies_met_page_ready
     // once the J1 core and the page are both ready.
     //
-    // Unique J1 VideoPlayer #1
     // playerId (new second parameter) is used to scope every getElementById
     // call so handlers operate on the correct player when multiple players
     // are present on the same page.
@@ -959,7 +946,7 @@ j1.adapter.multiPlayer = ((j1, window) => {
         return;
       }
 
-      // Modify J1 VideoPlayer #52
+      // Change #52
       // 0. Publish the per-player card action-button flags (ui_elements.
       //    playlist_rate_button|playlist_edit_button|playlist_delete_button,
       //    resolved through the #48 three-layer chain in `options`) as data
@@ -984,11 +971,6 @@ j1.adapter.multiPlayer = ((j1, window) => {
           cardFlagsParent.dataset.playlistEditButton   = (uiElements.playlist_edit_button   !== false) ? 'true' : 'false';
           cardFlagsParent.dataset.playlistDeleteButton = (uiElements.playlist_delete_button !== false) ? 'true' : 'false';
 
-          // logger.debug('\n' + 'initHandlers: card action-button flags [' + playerId + ']:\n - rate: '
-          //   + cardFlagsParent.dataset.playlistRateButton   + '\n - edit: '
-          //   + cardFlagsParent.dataset.playlistEditButton   + '\n - delete: '
-          //   + cardFlagsParent.dataset.playlistDeleteButton);
-
           logger.debug('\n' + 'initHandlers: card action-button flags [' + playerId + '] — rate: '
             + cardFlagsParent.dataset.playlistRateButton   + ', edit: '
             + cardFlagsParent.dataset.playlistEditButton   + ', delete: '
@@ -1000,7 +982,6 @@ j1.adapter.multiPlayer = ((j1, window) => {
         logger.error('\n' + 'initHandlers: card action-button flags failed: ' + e);
       }
 
-      // J1 VideoPlayer MultiInstance #3
       // The videoPlayer module is no longer a singleton object exposing
       // playlistManager / the handler classes directly. It is now a video.js-
       // style callable factory  videoPlayer(id, options)  (see the module's
@@ -1010,7 +991,9 @@ j1.adapter.multiPlayer = ((j1, window) => {
       // (videoPlayer.*). options are handed to the factory so the constructor
       // applies setAdapterOptions() on creation; the explicit setAdapterOptions()
       // call below stays valid (idempotent).
+      //
       var vp;
+
       try {
         vp = videoPlayer(playerId, options);
       } catch (e) {
@@ -1027,15 +1010,8 @@ j1.adapter.multiPlayer = ((j1, window) => {
       //    consistent, adapter-sourced values.
       //
       try {
-        // J1 VideoPlayer MultiInstance #3
-        // Original (deprecated, preserved for reference):
-        // videoPlayer.playlistManager.setAdapterOptions(options);
         vp.playlistManager.setAdapterOptions(options);
-        // fixed Unique J1 VideoPlayer #2, z.B. 'player_1'
-        // Original (deprecated, preserved for reference):
-        // videoPlayer.playlistManager.setPlayerID(playerId);
         vp.playlistManager.setPlayerID(playerId);
-
         logger.debug('\n' + 'initHandlers: setAdapterOptions — OK');
       } catch (e) {
         logger.error('\n' + 'initHandlers: setAdapterOptions failed: ' + e);
@@ -1045,9 +1021,6 @@ j1.adapter.multiPlayer = ((j1, window) => {
       //
       if (options.playlist.enabled) {
         try {
-          // J1 VideoPlayer MultiInstance #3
-          // Original (deprecated, preserved for reference):
-          // new videoPlayer.playlistIOHandler(options);
           new vp.playlistIOHandler(options);
           logger.debug('\n' + 'initHandlers: playlistIOHandler — OK');
         } catch (e) {
@@ -1057,16 +1030,13 @@ j1.adapter.multiPlayer = ((j1, window) => {
         logger.info('\n' + 'initHandlers: playlistIOHandler skipped (playlist disabled)');
       }
 
-      // Fix J1 VideoPlayer #2
       // ID corrected from 'playlistHistory' (non-existent) to
       // 'videoplayer_playlist_parent' to match the actual page element.
       //
-      // Fix J1 VideoPlayer #4
       // 2a. initPlayHandler — listen for the 'playlist-play' CustomEvent bubbled
       //     from PlaylistCards._onPlayClick() and forward it to the module's
       //     play logic.
       //
-      // Unique J1 VideoPlayer #1
       // Element id is now 'videoplayer_playlist_parent_' + playerId.
       //
       if (options.playlist.enabled) {
@@ -1075,16 +1045,10 @@ j1.adapter.multiPlayer = ((j1, window) => {
           if (playlistParent) {
             playlistParent.addEventListener('playlist-play', (e) => {
               const videoId = e.detail && e.detail.videoId;
-              // J1 VideoPlayer MultiInstance #3
-              // Original (deprecated, preserved for reference):
-              // if (videoId && typeof videoPlayer.loadAndPlay === 'function') {
               if (videoId && typeof vp.loadAndPlay === 'function') {
-                // Original (deprecated, preserved for reference):
-                // videoPlayer.loadAndPlay(videoId);
                 vp.loadAndPlay(videoId);
               }
 
-              // Fix J1 multiPlayer #7
               // vp.loadAndPlay does NOT exist on the module's instance API
               // (player.js exports playlistManager, the handler classes,
               // closePlaylist/closeEditPlaylist — no loadAndPlay), so the
@@ -1117,12 +1081,10 @@ j1.adapter.multiPlayer = ((j1, window) => {
         logger.info('\n' + 'initHandlers: initPlayHandler skipped (playlist disabled)');
       }
 
-      // Fix J1 VideoPlayer #4
       // 2b. initDeleteHandler — listen for the 'playlist-delete' CustomEvent
       //     bubbled from PlaylistCards._onDeleteClick() and forward it to the
       //     module's delete logic.
       //
-      // Unique J1 VideoPlayer #1
       // Element id is now 'videoplayer_playlist_parent_' + playerId.
       //
       if (options.playlist.enabled) {
@@ -1131,12 +1093,7 @@ j1.adapter.multiPlayer = ((j1, window) => {
           if (playlistParent) {
             playlistParent.addEventListener('playlist-delete', (e) => {
               const videoId = e.detail && e.detail.videoId;
-              // J1 VideoPlayer MultiInstance #3
-              // Original (deprecated, preserved for reference):
-              // if (videoId && typeof videoPlayer.deleteEntry === 'function') {
               if (videoId && typeof vp.deleteEntry === 'function') {
-                // Original (deprecated, preserved for reference):
-                // videoPlayer.deleteEntry(videoId);
                 vp.deleteEntry(videoId);
               }
             });
@@ -1155,9 +1112,6 @@ j1.adapter.multiPlayer = ((j1, window) => {
       //
       if (options.playlist.enabled && options.ui_elements.search) {
         try {
-          // J1 VideoPlayer MultiInstance #3
-          // Original (deprecated, preserved for reference):
-          // new videoPlayer.playlistSearchHandler();
           new vp.playlistSearchHandler();
           logger.debug('\n' + 'initHandlers: playlistSearchHandler — OK');
         } catch (e) {
@@ -1171,9 +1125,6 @@ j1.adapter.multiPlayer = ((j1, window) => {
       //
       if (options.playlist.enabled && options.ui_elements.modeSwitch) {
         try {
-          // J1 VideoPlayer MultiInstance #3
-          // Original (deprecated, preserved for reference):
-          // new videoPlayer.playlistModeSwitchHandler(options);
           new vp.playlistModeSwitchHandler(options);
           logger.debug('\n' + 'initHandlers: playlistModeSwitchHandler — OK');
         } catch (e) {
@@ -1187,9 +1138,6 @@ j1.adapter.multiPlayer = ((j1, window) => {
       //
       if (options.playlist.enabled && options.ui_elements.mergeSwitch) {
         try {
-          // J1 VideoPlayer MultiInstance #3
-          // Original (deprecated, preserved for reference):
-          // new videoPlayer.playlistMergeSwitchHandler(options);
           new vp.playlistMergeSwitchHandler(options);
           logger.debug('\n' + 'initHandlers: playlistMergeSwitchHandler — OK');
         } catch (e) {
@@ -1199,7 +1147,6 @@ j1.adapter.multiPlayer = ((j1, window) => {
         logger.info('\n' + 'initHandlers: playlistMergeSwitchHandler skipped (playlist disabled)');
       }
 
-      // Fix multiPlayer new select audio only #1
       // 5a. audioOnlySwitchHandler — YouTube audio-only toggle
       //
       // INTENTIONALLY NOT constructed here. The module builds this switch
@@ -1268,9 +1215,6 @@ j1.adapter.multiPlayer = ((j1, window) => {
       //
       if (options.playlist.enabled && options.ui_elements.loop) {
         try {
-          // J1 VideoPlayer MultiInstance #3
-          // Original (deprecated, preserved for reference):
-          // new videoPlayer.playlistLoopSwitchHandler(options);
           new vp.playlistLoopSwitchHandler(options);
           logger.debug('\n' + 'initHandlers: playlistLoopSwitchHandler — OK');
         } catch (e) {
@@ -1284,9 +1228,6 @@ j1.adapter.multiPlayer = ((j1, window) => {
       //
       if (options.playlist.enabled && options.ui_elements.sort) {
         try {
-          // J1 VideoPlayer MultiInstance #3
-          // Original (deprecated, preserved for reference):
-          // new videoPlayer.playlistSortHandler();
           new vp.playlistSortHandler();
           logger.debug('\n' + 'initHandlers: playlistSortHandler — OK');
         } catch (e) {
@@ -1299,9 +1240,6 @@ j1.adapter.multiPlayer = ((j1, window) => {
       // 8. inputWrapperHandler — URL input field, paste button, load-video button
       //
       try {
-        // J1 VideoPlayer MultiInstance #3
-        // Original (deprecated, preserved for reference):
-        // new videoPlayer.inputWrapperHandler();
         new vp.inputWrapperHandler();
         logger.debug('\n' + 'initHandlers: inputWrapperHandler — OK');
       } catch (e) {
@@ -1311,34 +1249,15 @@ j1.adapter.multiPlayer = ((j1, window) => {
       // 9. inputValueBackgroundHandler — visual fill-state sync on all inputs
       //
       try {
-        // J1 VideoPlayer MultiInstance #3
-        // Original (deprecated, preserved for reference):
-        // videoPlayer.inputValueBackgroundHandler();
         vp.inputValueBackgroundHandler();
         logger.debug('\n' + 'initHandlers: inputValueBackgroundHandler — OK');
       } catch (e) {
         logger.error('\n' + 'initHandlers: inputValueBackgroundHandler failed: ' + e);
       }
 
-      // 10. navbarSmoothScrollHandler — smooth-scroll for same-page nav links
-      //
-      // if (options.smoothScroll && options.smoothScroll.enabled) {
-      //   try {
-      //     // J1 VideoPlayer MultiInstance #3
-      //     // Original (deprecated, preserved for reference):
-      //     // videoPlayer.navbarSmoothScrollHandler();
-      //     vp.navbarSmoothScrollHandler();
-      //     logger.debug('\n' + 'initHandlers: navbarSmoothScrollHandler — OK');
-      //   } catch (e) {
-      //     logger.error('\n' + 'initHandlers: navbarSmoothScrollHandler failed: ' + e);
-      //   }
-      // } else {
-      //   logger.info('\n' + 'initHandlers: navbarSmoothScrollHandler skipped (smoothScroll disabled)');
-      // }
-
       logger.info('\n' + 'initializing playlist handlers [' + playerId + ']: finished');
 
-      // Modify J1 VideoPlayer #39
+      // Change #39
       // 10. preloadPlaylists — load the per-player `playlist.preload` files
       //     (configured in multiplayer_control.yml) into this instance's
       //     localStorage on page load. The preload list is resolved from the
@@ -1351,13 +1270,8 @@ j1.adapter.multiPlayer = ((j1, window) => {
         try {
           var preloadList = _this._resolvePreloadList(playerId);
           if (preloadList && preloadList.length &&
-              // J1 VideoPlayer MultiInstance #3
-              // Original (deprecated, preserved for reference):
-              // typeof videoPlayer.playlistManager.preloadPlaylists === 'function') {
               typeof vp.playlistManager.preloadPlaylists === 'function') {
             var preloadBase = (options && options.playlist_url_base) ? options.playlist_url_base : null;
-            // Original (deprecated, preserved for reference):
-            // videoPlayer.playlistManager.preloadPlaylists(preloadList, preloadBase, playerId);
             vp.playlistManager.preloadPlaylists(preloadList, preloadBase, playerId);
             logger.debug('\n' + 'initHandlers: preloadPlaylists dispatched [' + playerId + '] (' + preloadList.length + ' file(s))');
           } else {
@@ -1370,7 +1284,7 @@ j1.adapter.multiPlayer = ((j1, window) => {
         logger.info('\n' + 'initHandlers: preloadPlaylists skipped (playlist disabled)');
       }
 
-      // Modify J1 VideoPlayer #42
+      // Change #42
       // 12. autoLoadFirstEntryOnReload — explicit adapter-side trigger for the
       //     "first stored-playlist entry loaded in the paused state on (re)load"
       //     behaviour introduced in the core module as #41.
@@ -1414,13 +1328,11 @@ j1.adapter.multiPlayer = ((j1, window) => {
       //
       if (options.playlist.enabled) {
         try {
-          // J1 VideoPlayer MultiInstance #3
           if (vp.playlistManager && typeof vp.playlistManager.autoLoadFirstEntryOnReload === 'function') {
             var autoLoaded = vp.playlistManager.autoLoadFirstEntryOnReload();
-            // Modify J1 VideoPlayer #42
             logger.debug('\n' + 'initHandlers: autoLoadFirstEntryOnReload [' + playerId + '] — ' + (autoLoaded ? 'loaded first stored entry (paused)' : 'no-op (none stored / already done / not ready)'));
 
-            // J1 VideoPlayer MultiInstance #7
+            // Change #42
             // FRESH-VISIT PRELOAD LOAD
             // When a playlist is PRELOADED for this player, the first entry must
             // be loaded (paused) even on a FRESH first visit — not only on a
@@ -1462,12 +1374,12 @@ j1.adapter.multiPlayer = ((j1, window) => {
             //     before every attempt (see _loadFirstAfterPreload) because
             //     other players' initHandlers() may re-scope it in between.
             //
-            // J1 VideoPlayer MultiInstance #7
             // 11. loadFirstAfterPreload — fresh-visit path:
             // load the first entry (paused) once the async #39 preload has merged
             try {
               var preloadConfigured = _this._resolvePreloadList(playerId);
-              // Modify J1 VideoPlayer #54
+
+              // Change #54
               // ROOT CAUSE of "loadFirstAfterPreload does not detect a
               // successful preload": autoLoaded === false does NOT imply
               // "fresh visit, store empty". autoLoadFirstEntryOnReload()
@@ -1495,16 +1407,11 @@ j1.adapter.multiPlayer = ((j1, window) => {
               var alreadyDone = (typeof vp.playlistManager.autoLoadFirstDone === 'function')
                 ? vp.playlistManager.autoLoadFirstDone()
                 : false;
-              // Modify J1 VideoPlayer #54
-              // Original (deprecated, preserved for reference):
-              // if (!autoLoaded && preloadConfigured && preloadConfigured.length) {
-              if (!autoLoaded && !alreadyDone && preloadConfigured && preloadConfigured.length) {
+
+                if (!autoLoaded && !alreadyDone && preloadConfigured && preloadConfigured.length) {
                 logger.debug('\n' + 'initHandlers: fresh visit with preload [' + playerId + '] — scheduling loadFirstAfterPreload');
                 _this._loadFirstAfterPreload(vp, playerId, options.playlist.preload_attempts);
               } else {
-                // Modify J1 VideoPlayer #54
-                // Original (deprecated, preserved for reference):
-                // logger.debug('\n' + 'initHandlers: loadFirstAfterPreload not needed [' + playerId + '] (' + (autoLoaded ? 'reload path — already loaded' : 'no preload configured') + ')');
                 logger.debug('\n' + 'initHandlers: loadFirstAfterPreload not needed [' + playerId + '] (' + ((autoLoaded || alreadyDone) ? 'reload path — already loaded' : 'no preload configured') + ')');
               }
             } catch (e) {
@@ -1525,7 +1432,6 @@ j1.adapter.multiPlayer = ((j1, window) => {
     }, // END initHandlers
 
     // -------------------------------------------------------------------------
-    // Modify J1 VideoPlayer #48
     // _deepMerge(target, ...sources)
     // Deep merge helper implementing the layer semantics of the config
     // inheritance chain:
@@ -1564,7 +1470,6 @@ j1.adapter.multiPlayer = ((j1, window) => {
     }, // END _deepMerge
 
     // -------------------------------------------------------------------------
-    // Modify J1 VideoPlayer #48
     // getInstanceOptions(playerId)
     // Returns the EFFECTIVE options for ONE player instance, built from the
     // config inheritance chain (later overloads earlier):
@@ -1630,7 +1535,6 @@ j1.adapter.multiPlayer = ((j1, window) => {
     }, // END getInstanceOptions
 
     // -------------------------------------------------------------------------
-    // Modify J1 VideoPlayer #39
     // _resolvePreloadList(playerId)
     // Returns the `playlist.preload` array configured for the given player id in
     // the user control settings (multiplayer_control.yml), or an empty array
@@ -1656,7 +1560,6 @@ j1.adapter.multiPlayer = ((j1, window) => {
     }, // END _resolvePreloadList
 
     // -------------------------------------------------------------------------
-    // J1 VideoPlayer MultiInstance #7
     // _loadFirstAfterPreload(vp, playerId)
     // Deferred, per-player "load the first playlist entry (paused)" trigger for
     // the FRESH-VISIT case, where the #39 preloadPlaylists fetch+merge has not
@@ -1676,7 +1579,7 @@ j1.adapter.multiPlayer = ((j1, window) => {
     //     playlistManager is a module-level singleton, and other players'
     //     initHandlers()/retries may re-scope it between our async ticks.
     //
-    //   • Modify J1 VideoPlayer #50: setAdapterOptions(
+    //   • Change #50: setAdapterOptions(
     //     getInstanceOptions(playerId)) is likewise re-applied before EVERY
     //     attempt, for the same interleaving reason — the core-module #49
     //     resolver prefers adapterOptions, so the paused first-entry load
@@ -1698,7 +1601,7 @@ j1.adapter.multiPlayer = ((j1, window) => {
           return;
         }
 
-        // Modify J1 VideoPlayer #54
+        // Change #54
         // FLAGGED, out of scope (candidate for a future numbered fix, no
         // behaviour changed here): `var attempts = 0;` below re-declares the
         // `attempts` PARAMETER. The assignment on this next line still reads
@@ -1725,7 +1628,7 @@ j1.adapter.multiPlayer = ((j1, window) => {
               vp.playlistManager.setPlayerID(playerId);
             }
 
-            // Modify J1 VideoPlayer #50
+            // Change #50
             // Re-assert THIS instance's per-player options alongside the
             // setPlayerID() re-scope. Between async ticks another player's
             // initHandlers() calls setAdapterOptions(<its own options>); when
@@ -1749,7 +1652,7 @@ j1.adapter.multiPlayer = ((j1, window) => {
               logger.debug('\n' + '_loadFirstAfterPreload: first entry loaded (paused) after preload [' + playerId + '] (attempt ' + attempts + ')');
               return;
             }
-            // Modify J1 VideoPlayer #54
+            // Change #54
             // `loaded === false` is AMBIGUOUS: besides the retriable "store
             // not ready yet" case this retry was built for, the core module
             // also returns false when the per-player once-only guard
@@ -1788,7 +1691,6 @@ j1.adapter.multiPlayer = ((j1, window) => {
     }, // END _loadFirstAfterPreload
 
     // -------------------------------------------------------------------------
-    // Modify J1 VideoPlayer #4
     // closePlaylist(toggleBtn, toggleSpan, toggleImg, playerId)
     // Public adapter method that closes the playlist panel and fully resets the
     // toggle button (label + icon + data-state) to its "Show Playlist" state.
@@ -1801,19 +1703,17 @@ j1.adapter.multiPlayer = ((j1, window) => {
     // the elements up from the DOM itself (safe for calls originating outside
     // initPlayerUiEvents where the closure variables are not in scope).
     //
-    // Modify J1 VideoPlayer #5
+    // Change #5
     // The toggle element is now a <button id="toggle_playlist_<playerId>"> that
     // wraps a child <img> (icon) and the outer <span> sibling (label text).
     // Accessibility attributes (title, aria-label) are updated on the button
     // itself; alt is updated on the child <img>.
     //
-    // Unique J1 VideoPlayer #1
     // playerId (new optional fourth parameter) is appended to every
     // getElementById fallback so the correct player instance is targeted
     // when called from outside initPlayerUiEvents (e.g. from the module).
     // -------------------------------------------------------------------------
     closePlaylist: (toggleBtn, toggleSpan, toggleImg, playerId) => {
-      // Unique J1 VideoPlayer #1
       var pid            = playerId || '';
       var idSuffix       = pid ? '_' + pid : '';
       var playlistScreen = document.getElementById('playlist_screen' + idSuffix);
@@ -1833,11 +1733,10 @@ j1.adapter.multiPlayer = ((j1, window) => {
       // Reset toggle button to "Show Playlist" state
       if (btn !== null) {
         btn.dataset.playlistOpen = 'false';
-        // Modify J1 VideoPlayer #5
         // Update accessibility attributes on the <button> element itself.
         btn.title = 'Show playlist';
         btn.setAttribute('aria-label', 'Show playlist');
-        // Modify J1 VideoPlayer #36
+        // Change #36
         // DISABLED: the header <span> is now the live video-title display
         // (.video-player-header-title, fed by the module per #35). Writing
         // 'Show Playlist' here on close would clobber the currently shown
@@ -1856,7 +1755,7 @@ j1.adapter.multiPlayer = ((j1, window) => {
         $('body').removeClass('stop-scrolling');
       }
 
-      // Modify J1 VideoPlayer #12
+      // Change #12
       // Re-enable the edit_playlist button now that the playlist panel
       // is closed. The button was disabled when the playlist was opened
       // (see OPEN branch in the toggle_playlist click listener) to make the
@@ -1877,7 +1776,6 @@ j1.adapter.multiPlayer = ((j1, window) => {
     }, // END closePlaylist
 
     // -------------------------------------------------------------------------
-    // Modify J1 VideoPlayer #7
     // closeEditPlaylist(btn, playerId)
     // Public adapter method that closes the playlist-edit panel and fully
     // resets the edit_playlist button (icon + data-state + accessibility
@@ -1903,11 +1801,12 @@ j1.adapter.multiPlayer = ((j1, window) => {
       var editScreen = document.getElementById('playlist_edit_screen' + idSuffix);
       if (editScreen === null) return;
 
-      // Modify J1 VideoPlayer #29
+      // Change #29
       // Tear down the overlay positioning applied on OPEN: detach the resize
       // handler and strip the inline geometry styles so the edit screen
       // returns to its original (hidden, sibling) layout state. Safe to run
       // even if the overlay path never executed (idempotent).
+      //
       if (editScreen._vpEditResizeHandler) {
         window.removeEventListener('resize', editScreen._vpEditResizeHandler);
         editScreen._vpEditResizeHandler = null;

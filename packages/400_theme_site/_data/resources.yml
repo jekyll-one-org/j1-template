@@ -1,6 +1,6 @@
 # ------------------------------------------------------------------------------
 # ~/_data/resources/resources.yml
-# Configuration data to specify ALL the resources used by a site|layout
+# Configuration data to specify ALL the resources used by a site
 #
 # Product/Info:
 # https://jekyll.one
@@ -1404,12 +1404,12 @@ resources:
   # ----------------------------------------------------------------------------
   # Amplitude (Library only)
   #
-  - name:                               Amplitude
+  - name:                               AmplitudeJS
     resource:
-      enabled:                          false
+      enabled:                          true
 
-      id:                               amplitude
-      comment:                          Module Amplitude
+      id:                               amplitudejs
+      comment:                          Module AmplitudeJS
       region:                           head
       layout:                           [ all ]
       required:                         ondemand
@@ -1418,24 +1418,24 @@ resources:
 
       data:
         css:                            [
-                                          modules/amplitudejs/css/theme/uno/dark/amplitude,
-                                          modules/amplitudejs/css/theme/uno/dark/player/mini,                                          
-                                          modules/amplitudejs/css/theme/uno/dark/player/compact,
-                                          modules/amplitudejs/css/theme/uno/dark/player/large
+                                          modules/amplitudeJS/css/theme/uno/dark/amplitude,
+                                          modules/amplitudeJS/css/theme/uno/dark/player/mini,                                          
+                                          modules/amplitudeJS/css/theme/uno/dark/player/compact,
+                                          modules/amplitudeJS/css/theme/uno/dark/player/large
                                         ]
         files:                          []
-        js:                             [ modules/amplitudejs/js/amplitude ]
+        js:                             [ modules/amplitudeJS/js/amplitude ]
         init_function:                  []
 
   # ----------------------------------------------------------------------------
-  # AmplitudeJS (full/module)
+  # amplitudePlayer
   #
-  - name:                               J1 AmplitudeJS
+  - name:                               J1 amplitudePlayer
     resource:
       enabled:                          true
 
       id:                               amplitudejs
-      comment:                          Module AmplitudeJS
+      comment:                          Module amplitudePlayer
       region:                           head
       layout:                           [ home, page, post ]
       required:                         ondemand
@@ -1443,14 +1443,9 @@ resources:
       pass_init_data:                   false
 
       data:
-        css:                            [
-                                          modules/amplitudejs/css/theme/uno/dark/amplitude,
-                                          modules/amplitudejs/css/theme/uno/dark/player/mini,                                          
-                                          modules/amplitudejs/css/theme/uno/dark/player/compact,
-                                          modules/amplitudejs/css/theme/uno/dark/player/large
-                                        ]
-        files:                          [ adapter/js/amplitude.js ]
-        js:                             [ modules/amplitudejs/js/amplitude ]
+        css:                            []
+        files:                          [ adapter/js/amplitudePlayer.js ]
+        js:                             []
         init_function:                  [ j1.adapter.amplitude.init ]
 
   # ----------------------------------------------------------------------------
