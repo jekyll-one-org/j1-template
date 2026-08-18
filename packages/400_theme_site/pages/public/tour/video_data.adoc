@@ -1,14 +1,14 @@
 ---
 title:                                  Video
 title_extention:                        Availabe player
-tagline:                                Playback playlists
+tagline:                                Availabe player
 
 date:                                   2026-05-07
 last_modified:                          2026-08-16
 
 description: >
                                         J1 Template provides playing video on web
-                                        pages by HTML5 Video and supports custom players
+                                        pages by HTML5 Video and supports custom player
                                         created by VidoeJS to playback video individually.
 keywords: >
                                         open source, free, template, jekyll, jekyllone,
@@ -42,9 +42,9 @@ resource_options:
       padding_top:                      600
       slides:      
         - url:                          /assets/video/headers/present_videos/modern-dance.mp4
-          alt:                          AI generated video
+          alt:                          AI Generated
           title:                        Video
-          tagline:                      Playback playlists
+          tagline:                      Availabe player
           isVideo:                      true
           mute:                         true
           badge:
@@ -108,14 +108,14 @@ own website and from online sources like YouTube.
 // See: https://docs.asciidoctor.org/asciidoc/latest/macros/audio-and-video/
 // -----------------------------------------------------------------------------
 [role="mt-5"]
-== Standalone Players
+== Standalone Player
 
 A *standalone player* plays one single video. There is no playlist and no
 title list beside it -- the player simply shows the video you placed on
 the page. This is the right choice for a short clip inside an article, a
 product demo, or a welcome video on a landing page.
 
-The J1 Template offers two standalone players:
+The J1 Template offers two standalone player:
 
 * the *HTML Player* -- the player that is already built into every
   modern browser, and

@@ -1,0 +1,589 @@
+/*
+ # -----------------------------------------------------------------------------
+ # ~/assets/theme/j1/modules/amplitudejs/css/theme/uno/dark/player/large.css (1)
+ # AmplitudeJS v5.3.2 Large Player for J1 Template
+ #
+ # Product/Info:
+ # https://jekyll.one
+ #
+ # Copyright (C) 2023-2026 Juergen Adams
+ #
+ # J1 Template is licensed under the MIT License.
+ # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE
+ # -----------------------------------------------------------------------------
+ #
+ # SUMMARY OF FIXES (claude - optimize J1 Amplitude CSS #1):
+ #   1. BUG: `::-moz-slider-thumb` is not a real Firefox pseudo-element. Two
+ #      media queries had this typo, so the volume slider thumb size never
+ #      changed in Firefox. Replaced with `::-moz-range-thumb`.
+ #   2. Six near-identical 24x24 control-icon rules merged into one base rule
+ #      plus per-button margin overrides. ~120 lines -> ~30 lines.
+ #   3. All `:hover { opacity: 0.5 }` rules merged into one multi-selector rule.
+ #   4. All `:focus:not(:focus-visible) { outline: none }` rules merged.
+ #   5. The three list-controls icons (previous, play-pause, next) had repeated
+ #      float/cursor/size declarations — extracted shared base rule.
+ #   6. Border-* shorthand cleanups (e.g. `border-top: solid 1px` series ->
+ #      `border: 1px solid` + per-side overrides where needed).
+ # -----------------------------------------------------------------------------
+*/
+
+/* 1. Base
+# ------------------------------------------------------------------------------ */
+.large-player {
+  -webkit-font-smoothing: antialiased;
+}
+
+/* 2. Components
+# ------------------------------------------------------------------------------ */
+.large-player-container {
+  display: flex;
+  max-width: fit-content;
+  background: var(--ajs-theme-uno--white);
+}
+
+.large-player-controls-container {
+  text-align: center;
+}
+
+/* claude - optimize J1 Amplitude CSS #1
+   Six controls (shuffle, previous, skip-backward, play-pause-NO [60x60],
+   skip-forward, next, repeat) — five of which are 24x24 with identical
+   inline-block + cursor + vertical-align — collapsed into one base rule.
+   Per-button margins kept distinct below. */
+.amplitude-shuffle,
+.large-player-previous,
+.large-player-skip-backward,
+.large-player-skip-forward,
+.large-player-next,
+.amplitude-repeat {
+  display: inline-block;
+  user-select: none;
+  cursor: pointer;
+  width: 24px;
+  height: 24px;
+  vertical-align: middle;
+}
+
+/* Per-button margins (the only thing that actually differs) */
+.amplitude-shuffle             { margin-right: 25px; }
+.large-player-previous         { margin-right: 20px; }
+.large-player-skip-backward    { margin-right: 20px; }
+.large-player-skip-forward     { margin-left: 20px; }
+.large-player-next             { margin-right: 25px; margin-left: 20px; }
+
+.large-player-play-pause {
+  display: inline-block;
+  user-select: none;
+  width: 60px;
+  height: 60px;
+  cursor: pointer;
+  vertical-align: middle;
+}
+
+.large-player-play-pause.amplitude-paused {
+  background: url("/assets/theme/j1/modules/amplitudePlayer/icons/player/dark/play.svg") no-repeat;
+}
+
+.large-player-play-pause.amplitude-playing {
+  background: url("/assets/theme/j1/modules/amplitudePlayer/icons/player/dark/pause.svg") no-repeat;
+}
+
+/* claude - optimize J1 Amplitude CSS #1
+   All control buttons: hover -> opacity 0.5. Original had 7 separate :hover
+   blocks. Merged into one multi-selector rule. */
+.amplitude-shuffle:hover,
+.large-player-previous:hover,
+.large-player-skip-backward:hover,
+.large-player-play-pause:hover,
+.large-player-skip-forward:hover,
+.large-player-next:hover,
+.amplitude-repeat:hover {
+  opacity: 0.5;
+}
+
+/* claude - optimize J1 Amplitude CSS #1
+   All control buttons share the same focus-visible outline reset. Six
+   identical :focus:not(:focus-visible) rules merged into one. */
+.large-player-previous:focus:not(:focus-visible),
+.large-player-skip-backward:focus:not(:focus-visible),
+.large-player-play-pause:focus:not(:focus-visible),
+.large-player-skip-forward:focus:not(:focus-visible),
+.large-player-next:focus:not(:focus-visible),
+.amplitude-repeat:focus:not(:focus-visible) {
+  outline: none;
+}
+
+.large-player-playlist-header {
+  cursor: pointer;
+  top: 0;
+  position: sticky;
+  padding: 15px;
+  font-family: "Lato", sans-serif;
+  font-weight: 600;
+  text-align: center;
+  color: var(--ajs-theme-uno--white);
+  background-color: var(--ajs-theme-uno--dark-silver);
+}
+
+.large-player-title-list {
+  display: block;
+  max-height: 540px;
+  overflow-y: scroll;
+}
+
+.large-player-control-container {
+  margin-top: 25px;
+  margin-bottom: 25px;
+}
+
+.large-player-volume-container {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.meta-container.large-player {
+  height: 120px;
+}
+
+.playlist-screen-meta-container {
+  width: calc(100% - 80px);
+  float: left;
+}
+
+.playlist-screen-controls {
+  cursor: default;
+  height: 100px;
+  padding: 15px;
+  max-width: -webkit-fill-available;
+  max-width: -moz-available;
+  font-family: "Lato", sans-serif;
+  color: var(--ajs-theme-uno--white);
+  background-color: var(--ajs-theme-uno--black);
+}
+
+/* claude - optimize J1 Amplitude CSS #1
+   Border shorthand cleanup: `border: solid 1px` is technically valid but
+   unusual. Switched to canonical `border: 1px solid` ordering. */
+.large-player-left {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  width: 50vw;
+  max-width: fit-content;
+  border: 1px solid var(--ajs-theme-uno--medium-silver);
+  background-color: var(--ajs-theme-uno--darker-silver) !important;
+}
+
+.large-player-left-top img {
+  width: 500px;
+  height: 500px;
+  object-fit: cover;
+}
+
+.large-player-left-middle {
+  margin-top: 10px;
+  margin-bottom: 20px;
+  margin-left: 18px;
+}
+
+.large-player-left-bottom {
+  background-color: var(--ajs-theme-uno--black);
+}
+
+/* claude - optimize J1 Amplitude CSS #1
+   Original used three separate `border-top: solid 1px;` `border-right: ...`
+   `border-bottom: ...` rules with a single `border-color`. Combined into
+   shorthand on each side. */
+.large-player-right {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  flex-grow: 1;
+  width: 50vw;
+  border-top: 1px solid var(--ajs-theme-uno--medium-silver);
+  border-right: 1px solid var(--ajs-theme-uno--medium-silver);
+  border-bottom: 1px solid var(--ajs-theme-uno--medium-silver);
+  background-color: var(--ajs-theme-uno--darker-silver) !important;
+}
+
+.amplitude-song-container img.now-playing {
+  display: none;
+}
+
+.amplitude-active-song-container {
+  background-color: var(--ajs-theme-uno--medium-silver) !important;
+}
+
+.amplitude-active-song-container img.now-playing {
+  display: block;
+  margin-top: 5px;
+  margin-right: 8px;
+  margin-left: 4px;
+  height: 16px;
+  width: 16px;
+}
+
+.amplitude-song {
+  cursor: pointer;
+  padding: 12px;
+  background-color: var(--ajs-theme-uno--darker-silver);
+}
+
+/* claude - optimize J1 Amplitude CSS #1
+   Standardised pseudo-element: `:after` (CSS2) -> `::after` (CSS3). */
+.amplitude-song::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.audio-meta-data {
+  float: left;
+  width: calc(100% - 145px);
+}
+
+.audio-artist {
+  opacity: .5;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 18px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: var(--ajs-theme-uno--gray-300);
+}
+
+.audio-artist.large-player-item-header {
+  font-size: 18px;
+  font-family: "Lato", sans-serif;
+  font-weight: 600;
+  color: var(--ajs-theme-uno--white);
+  opacity: 1;
+}
+
+.audio-title {
+  display: block;
+  width: calc(100% - 25px);
+  font-family: "Lato", sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 24px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: var(--ajs-theme-uno--blue);
+}
+
+.song-number-now-playing {
+  float: left;
+  width: 40px;
+  height: 20px;
+  margin-top: 8px;
+  margin-right: 12px;
+}
+
+.audio-duration {
+  float: right;
+  font-family: "Lato", sans-serif;
+  font-size: 16px;
+  color: var(--ajs-theme-uno--gray-300);
+}
+
+.audio-rating {
+  float: right;
+  margin-top: 24px;
+  margin-right: -66px;
+}
+
+.song-name {
+  line-height: 24px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-family: "Lato", sans-serif;
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--ajs-theme-uno--white);
+}
+
+.screen-controls-large-player .playlist-screen-meta-container .song-artist-album {
+  opacity: 0.5;
+  font-family: "Lato", sans-serif;
+  font-size: 16px;
+  line-height: 18px;
+  color: var(--ajs-theme-uno--white);
+}
+
+.screen-controls-large-player .playlist-screen-meta-container .audio-rating {
+  display: flex;
+  float: right;
+  margin-top: 0;
+  margin-right: -94px;
+}
+
+.screen-controls-large-player .playlist-screen-meta-container .amplitude-audio-info {
+  float: right;
+  margin-top: -10px;
+  margin-right: -126px;
+}
+
+div.playlist-screen-controls div.list-controls {
+  float: right;
+  width: 90px;
+  margin-top: 45px;
+  margin-right: -12px;
+}
+
+/* claude - optimize J1 Amplitude CSS #1
+   The two list-controls icon buttons (previous, next) shared float/cursor/
+   size/margin-top declarations. Extracted shared base, kept icon-specific
+   margins and background-image distinct. */
+div.playlist-screen-controls div.list-controls div.list-previous,
+div.playlist-screen-controls div.list-controls div.list-next {
+  float: left;
+  cursor: pointer;
+  width: 15px;
+  height: 17px;
+  margin-top: 4px;
+  background-repeat: no-repeat;
+}
+
+div.playlist-screen-controls div.list-controls div.list-previous {
+  margin-right: 15px;
+  background-image: url("/assets/theme/j1/modules/amplitudePlayer/icons/player/dark/small/previous.svg");
+}
+
+div.playlist-screen-controls div.list-controls div.list-next {
+  margin-left: 15px;
+  background-image: url("/assets/theme/j1/modules/amplitudePlayer/icons/player/dark/small/next.svg");
+}
+
+div.playlist-screen-controls div.list-controls div.list-play-pause {
+  float: left;
+  cursor: pointer;
+  width: 17px;
+  height: 24px;
+}
+
+div.playlist-screen-controls div.list-controls div.list-play-pause.amplitude-paused {
+  background: url("/assets/theme/j1/modules/amplitudePlayer/icons/player/dark/small/play.svg") no-repeat;
+}
+
+div.playlist-screen-controls div.list-controls div.list-play-pause.amplitude-playing {
+  background: url("/assets/theme/j1/modules/amplitudePlayer/icons/player/dark/small/pause.svg") no-repeat;
+}
+
+/* claude - optimize J1 Amplitude CSS #1
+   Three list-controls :hover rules merged. */
+div.playlist-screen-controls div.list-controls div.list-previous:hover,
+div.playlist-screen-controls div.list-controls div.list-play-pause:hover,
+div.playlist-screen-controls div.list-controls div.list-next:hover {
+  opacity: 0.5;
+}
+
+div.large-player-volume-container input[type=range].amplitude-volume-slider {
+  /* claude - optimize J1 Amplitude CSS #1
+     Added -webkit-appearance + -moz-appearance alongside `appearance` for
+     consistent cross-browser reset. */
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  float: left;
+  height: 1px;
+  margin-top: -4px;
+  margin-left: 6px;
+  width: calc(100% - 86px);
+  background: transparent;
+}
+
+
+/* 3. Layout
+# ------------------------------------------------------------------------------
+Bootstrap (BS) grid breakpoints
+  SN:     576px           Mobile
+  MD:     768px           Small Desktop|Tablet
+  LG:     992px           Desktop
+  XL:     1200px          Large Desktop
+  XXL:    1400px          X Large Desktop
+
+  -webkit-*               Chrome, Safari, Edge
+  -moz-*                  Firefox
+*/
+
+/* BS LG (Desktop|Tablet)
+# --------------------------------------------------------- */
+@media (orientation: portrait) and (max-width: 992px) {
+  .audio-title {
+    font-size: 16px;
+    line-height: 18px;
+  }
+
+  .song-name {
+    line-height: 18px;
+    font-size: 16px;
+  }
+
+  .audio-artist.large-player-item-header {
+    font-size: 14px;
+  }
+
+  .meta-container .audio-artist-album {
+    font-size: 14px;
+  }
+
+  .large-player-left {
+    width: 35vw;
+  }
+
+  .large-player-left-top img {
+    width: 45vw;
+    object-fit: cover;
+  }
+
+  .playlist-screen-controls {
+    display: none;
+  }
+
+  /* claude - optimize J1 Amplitude CSS #1
+     BUG FIX: original used `::-moz-slider-thumb` which is NOT a real Firefox
+     pseudo-element. Renamed to `::-moz-range-thumb`. Also merged the webkit
+     and moz rules since they had identical declarations. */
+  input[type="range"].amplitude-volume-slider::-webkit-slider-thumb,
+  input[type="range"].amplitude-volume-slider::-moz-range-thumb {
+    background-color: var(--ajs-theme-uno--blue-500);
+    width: 25px;
+    height: 25px;
+  }
+}
+
+/* BS MD (Tablet)
+# --------------------------------------------------------- */
+@media (orientation: portrait) and (max-width: 768px) {
+  .large-player-left {
+    width: 35vw;
+  }
+
+  .playlist-screen-controls {
+    display: none;
+  }
+
+  .large-player-left-top img {
+    width: 45vw;
+    object-fit: cover;
+  }
+}
+
+/* BS MD (Tablet, landscape)
+# --------------------------------------------------------- */
+@media (orientation: landscape) and (max-width: 768px) {
+  .large-player-left {
+    width: 35vw;
+  }
+
+  .large-player-left-top img {
+    width: 95vw;
+    object-fit: cover;
+  }
+
+  .playlist-screen-controls {
+    display: none;
+  }
+}
+
+/* BS SM (Mobile)
+# --------------------------------------------------------- */
+
+@media screen and (max-width: 576px) {
+  /* claude - optimize J1 Amplitude CSS #1
+     Original had two identical `div.mini-player.volume-container ...
+     ::-webkit-slider-thumb { margin-top: -5px; }` rule blocks back-to-back
+     (an obvious copy-paste of the same selector). Kept one. */
+  div.mini-player.volume-container input[type="range"].amplitude-volume-slider::-webkit-slider-thumb {
+    margin-top: -5px;
+  }
+
+  .large-player {
+    max-width: -webkit-fill-available;
+    max-width: -moz-available;
+  }
+
+  .large-player-container {
+    position: relative;
+    flex-direction: column;
+    max-height: fit-content;
+    max-width: fit-content;
+  }
+
+  .large-player-control-container {
+    margin-top: 25px;
+    margin-bottom: 25px;
+  }
+
+  .playlist-screen-controls.large-player {
+    display: none;
+  }
+
+  .large-player-title-list {
+    border-bottom: 1px solid var(--ajs-theme-uno--medium-silver);
+  }
+
+  .large-player-left {
+    width: auto;
+    max-width: unset;
+    border: 1px solid var(--ajs-theme-uno--medium-silver);
+  }
+
+  .large-player-left-top img {
+    width: 93vw;
+    object-fit: cover;
+  }
+
+  /* claude - optimize J1 Amplitude CSS #1
+     Border shorthand cleanup as on .large-player-right above. */
+  .large-player-right {
+    width: auto;
+    min-width: unset;
+    border: 1px solid var(--ajs-theme-uno--medium-silver);
+    border-top: 0;
+  }
+
+  div.large-player-volume-container .large-player-amplitude-mute {
+    margin-left: 4px;
+  }
+
+  div.large-player-volume-container input[type=range].amplitude-volume-slider {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    width: calc(100% - 106px);
+  }
+
+  /* claude - optimize J1 Amplitude CSS #1
+     BUG FIX: `::-moz-slider-thumb` -> `::-moz-range-thumb`. Merged the
+     webkit and moz rules since they had identical declarations. */
+  div.large-player-volume-container input[type="range"].amplitude-volume-slider::-webkit-slider-thumb,
+  div.large-player-volume-container input[type="range"].amplitude-volume-slider::-moz-range-thumb {
+    width: 30px;
+    height: 30px;
+    border-radius: 30px;
+    margin-top: -15px;
+    margin-left: 6px;
+    background-color: var(--ajs-theme-uno--blue-500);
+  }
+}
+
+
+/* 4. Pages
+# ------------------------------------------------------------------------------ */
+
+/* 5. Themes
+# ------------------------------------------------------------------------------ */
+
+/* 6. Utils
+# ------------------------------------------------------------------------------ */
+
+/* 7. Vendors
+# ------------------------------------------------------------------------------ */
+
+/* 8. Animations
+# ------------------------------------------------------------------------------ */

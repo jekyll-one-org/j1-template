@@ -286,7 +286,7 @@ amplitude_defaults: {{amplitude_defaults | debug}}
           <!-- NOTE: slider VALUE is set by Adapter|Amplitude API -->
           <div class="mini-player volume-container">
             {% if volume_slider %}
-            <img src="/assets/theme/j1/modules/amplitudejs/icons/player/dark/volume.svg" alt="Volume Icon">
+            <img src="/assets/theme/j1/modules/amplitudePlayer/icons/player/dark/volume.svg" alt="Volume Icon">
             <input
               id="volume_slider_{{player_id}}"
               class="mini-player amplitude-volume-slider"
@@ -320,7 +320,7 @@ amplitude_defaults: {{amplitude_defaults | debug}}
           <div id="playlist_screen_{{player_id}}" class="compact-player-playlist slide-in-top">
 
             <div id="hide_playlist_{{player_id}}" class="compact-player-header hide-playlist">
-              <img class="compact-player-header-arrows" src="/assets/theme/j1/modules/amplitudejs/icons/player/dark/up.svg" alt="Up Arrow">
+              <img class="compact-player-header-arrows" src="/assets/theme/j1/modules/amplitudePlayer/icons/player/dark/up.svg" alt="Up Arrow">
               Hide Playlist
             </div> <!-- END playlist-screen header (toggle playlist) -->
 
@@ -353,7 +353,7 @@ amplitude_defaults: {{amplitude_defaults | debug}}
                 <span class="song-number-now-playing">
                   <span class="title-number">
                     {{forloop.index}}
-                    <img class="now-playing" src="/assets/theme/j1/modules/amplitudejs/icons/player/dark/now-playing.svg" alt="now-playing">
+                    <img class="now-playing" src="/assets/theme/j1/modules/amplitudePlayer/icons/player/dark/now-playing.svg" alt="now-playing">
                   </span>
                 </span>
 
@@ -368,11 +368,11 @@ amplitude_defaults: {{amplitude_defaults | debug}}
 
                 <a href="{{item.audio_info}}" class="audio-info-link" target="_blank">
                   {% if player_audio_info %}
-                  <img class="audio-info-blue" src="/assets/theme/j1/modules/amplitudejs/icons/player/dark/audio-info-blue.svg"   alt="audio-info" style="display: block">
-                  <img class="audio-info-white" src="/assets/theme/j1/modules/amplitudejs/icons/player/dark/audio-info-white.svg" alt="audio-info" style="display: none">
+                  <img class="audio-info-blue" src="/assets/theme/j1/modules/amplitudePlayer/icons/player/dark/audio-info-blue.svg"   alt="audio-info" style="display: block">
+                  <img class="audio-info-white" src="/assets/theme/j1/modules/amplitudePlayer/icons/player/dark/audio-info-white.svg" alt="audio-info" style="display: none">
                   {% else %}
-                  <img class="audio-info-blue" src="/assets/theme/j1/modules/amplitudejs/icons/player/dark/audio-info-blue.svg"   alt="audio-info" style="display: none">
-                  <img class="audio-info-white" src="/assets/theme/j1/modules/amplitudejs/icons/player/dark/audio-info-white.svg" alt="audio-info" style="display: none">
+                  <img class="audio-info-blue" src="/assets/theme/j1/modules/amplitudePlayer/icons/player/dark/audio-info-blue.svg"   alt="audio-info" style="display: none">
+                  <img class="audio-info-white" src="/assets/theme/j1/modules/amplitudePlayer/icons/player/dark/audio-info-white.svg" alt="audio-info" style="display: none">
                   {% endif %}
                 </a>
 
@@ -401,7 +401,7 @@ amplitude_defaults: {{amplitude_defaults | debug}}
                   data-amplitude-song-info="album">
                 </span>
             </span>
-              <img class="compact-player-header-arrows" src="/assets/theme/j1/modules/amplitudejs/icons/player/dark/down.svg" alt="Down Arrow">
+              <img class="compact-player-header-arrows" src="/assets/theme/j1/modules/amplitudePlayer/icons/player/dark/down.svg" alt="Down Arrow">
             </div> <!-- END compact player header (toggle playlist) -->
 
             <div class="player-top">
@@ -849,7 +849,7 @@ amplitude_defaults: {{amplitude_defaults | debug}}
                     data-amplitude-source="{{source_media_attribute}}"
                     data-amplitude-playlist="{{player_playlist}}">
                     <span class="title-number">{{forloop.index}}
-                      <img class="now-playing" src="/assets/theme/j1/modules/amplitudejs/icons/player/dark/now-playing.svg" alt="now-playing">
+                      <img class="now-playing" src="/assets/theme/j1/modules/amplitudePlayer/icons/player/dark/now-playing.svg" alt="now-playing">
                     </span>
                   </div>
 
@@ -866,11 +866,11 @@ amplitude_defaults: {{amplitude_defaults | debug}}
 
                   <a href="{{item.audio_info}}" class="audio-info-link" target="_blank">
                     {% if player_audio_info %}
-                    <img class="audio-info-blue" src="/assets/theme/j1/modules/amplitudejs/icons/player/dark/audio-info-blue.svg"   alt="audio-info" style="display: block">
-                    <img class="audio-info-white" src="/assets/theme/j1/modules/amplitudejs/icons/player/dark/audio-info-white.svg" alt="audio-info" style="display: none">
+                    <img class="audio-info-blue" src="/assets/theme/j1/modules/amplitudePlayer/icons/player/dark/audio-info-blue.svg"   alt="audio-info" style="display: block">
+                    <img class="audio-info-white" src="/assets/theme/j1/modules/amplitudePlayer/icons/player/dark/audio-info-white.svg" alt="audio-info" style="display: none">
                     {% else %}
-                    <img class="audio-info-blue" src="/assets/theme/j1/modules/amplitudejs/icons/player/dark/audio-info-blue.svg"   alt="audio-info" style="display: none">
-                    <img class="audio-info-white" src="/assets/theme/j1/modules/amplitudejs/icons/player/dark/audio-info-white.svg" alt="audio-info" style="display: none">
+                    <img class="audio-info-blue" src="/assets/theme/j1/modules/amplitudePlayer/icons/player/dark/audio-info-blue.svg"   alt="audio-info" style="display: none">
+                    <img class="audio-info-white" src="/assets/theme/j1/modules/amplitudePlayer/icons/player/dark/audio-info-white.svg" alt="audio-info" style="display: none">
                     {% endif %}
                   </a>
 

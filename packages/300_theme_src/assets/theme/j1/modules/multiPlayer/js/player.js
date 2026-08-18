@@ -1374,7 +1374,7 @@
     if (!container) {
       container           = document.createElement('div');
       container.id        = TOAST_CONTAINER_ID;
-      container.className = 'toast-container videoplayer-toast-container';
+      container.className = 'toast-container videoplayer-toast-container mt-4';
       container.setAttribute('aria-live', 'polite');
       container.setAttribute('aria-atomic', 'false');
 
@@ -1458,11 +1458,27 @@
     // 'toast' + type keep the claudeAI.js class contract (a page that already
     // styles .toast styles these too); 'videoplayer-toast' is the module's own
     // hook in videoPlayer.css so the player stays self-contained.
+    //
     el.className = `toast videoplayer-toast ${kind}`;
     el.setAttribute('role', kind === 'error' ? 'alert' : 'status');
 
-    el.innerHTML = `<i class="fas ${_toastIconClass(kind)} videoplayer-toast-icon"></i>`
-                 + `<span class="videoplayer-toast-text">${_escapeToastText(message)}</span>`;
+    // el.innerHTML = `<i class="fas ${_toastIconClass(kind)} videoplayer-toast-icon mr-2"></i>`
+    //              + `<span class="videoplayer-toast-text">${_escapeToastText(message)}</span>`;
+
+    el.innerHTML = `
+      <table class="mb-0">
+        <tbody>
+          <tr>
+            <td class="icon">
+              <i class="fas ${_toastIconClass(kind)} videoplayer-toast-icon"></i>
+            </td>
+            <td class="content">
+              <p class="mb-0">${_escapeToastText(message)}</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>    
+    `;
 
     container.appendChild(el);
     requestAnimationFrame(() => el.classList.add('show'));

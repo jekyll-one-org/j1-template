@@ -1,0 +1,522 @@
+/*
+ # -----------------------------------------------------------------------------
+ # ~/assets/theme/j1/modules/amplitudejs/css/theme/uno/dark/player/compact.css (1)
+ # AmplitudeJS v5.3.2 Compact Player for J1 Template
+ #
+ # Product/Info:
+ # https://jekyll.one
+ #
+ # Copyright (C) 2023-2026 Juergen Adams
+ #
+ # J1 Template is licensed under the MIT License.
+ # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE
+ # -----------------------------------------------------------------------------
+ #
+ # SUMMARY OF FIXES (claude - optimize J1 Amplitude CSS #1):
+ #   1. BUG: `::-moz-slider-thumb` is not a real Firefox pseudo-element. The
+ #      mobile media query never applied the bigger thumb in Firefox. Replaced
+ #      with the correct `::-moz-range-thumb`.
+ #   2. Six near-identical 24x24 control-icon rules merged into one base rule
+ #      plus per-button margin overrides. Behaviour identical, ~80 lines saved.
+ #   3. All `:hover { opacity: 0.5 }` rules merged. Normalised `.5` -> `0.5`.
+ #   4. Mixed `:after` (CSS2) and `::after` (CSS3) standardised on `::after`.
+ #   5. `padding: 10px 10px 10px 10px` -> `padding: 10px`.
+ #   6. Two clearfix rules consolidated into one multi-selector rule.
+ # -----------------------------------------------------------------------------
+*/
+
+/* 1. Base
+# ------------------------------------------------------------------------------ */
+.compact-player {
+  width: 500px;
+  height: auto;
+  border: solid 1px;
+  border-color: var(--ajs-theme-uno--medium-silver);
+}
+
+.compact-player-container {
+  position: relative;
+  max-width: max-content;
+  overflow-y: clip;
+}
+
+.compact-player-middle {
+  /* claude - optimize J1 Amplitude CSS #1
+     Padding shorthand: 10px 10px 10px 10px -> 10px. */
+  padding: 10px;
+  background-color: var(--ajs-theme-uno--blue-gray-900);
+}
+
+.player-bottom {
+  background-color: var(--ajs-theme-uno--black);
+}
+
+
+/* 2. Components
+# ------------------------------------------------------------------------------ */
+
+/* Player TOP
+# --------------------------------------------------------- */
+.player-top {
+  position: relative;
+}
+
+.player-top img[data-amplitude-song-info="cover_art_url"] {
+  width: 498px;    /* size of cover image (rendered) - 1px borders left|right */
+  height: auto;
+  object-fit: cover;
+}
+
+.compact-player-header {
+  position: relative;
+  padding: 15px;
+  cursor: pointer;
+  text-align: center;
+  font-family: "Lato", sans-serif;
+  font-weight: 600;
+  color: var(--ajs-theme-uno--white);
+  background-color: var(--ajs-theme-uno--dark-silver);
+}
+
+.compact-player-header-arrows {
+  position: absolute;
+  top: 23px;
+  left: 15px;
+}
+
+/* Player MIDDLE
+# --------------------------------------------------------- */
+
+/* claude - optimize J1 Amplitude CSS #1
+   Six controls (shuffle, previous, skip-backward, skip-forward, next, repeat)
+   all shared the same 24x24 inline-block + cursor + vertical-align declarations.
+   Merged into a single base rule. Per-button margins kept distinct below.
+   Original file: ~120 lines of repetition. Now: ~30 lines. */
+.compact-player-shuffle,
+.compact-player-previous,
+.compact-player-skip-backward,
+.compact-player-skip-forward,
+.compact-player-next,
+.compact-player-repeat {
+  display: inline-block;
+  user-select: none;
+  cursor: pointer;
+  width: 24px;
+  height: 24px;
+  vertical-align: middle;
+}
+
+/* Per-button margins (the only thing that actually differs between them) */
+.compact-player-previous       { margin-right: 20px; margin-left: 20px; }
+.compact-player-skip-backward  { margin-right: 20px; }
+.compact-player-skip-forward   { margin-left: 20px; }
+.compact-player-next           { margin-right: 25px; margin-left: 20px; }
+.compact-player-repeat         { margin-right: 25px; }
+
+.compact-player-play-pause {
+  display: inline-block;
+  user-select: none;
+  width: 60px;
+  height: 60px;
+  cursor: pointer;
+  vertical-align: middle;
+}
+
+.compact-player-play-pause:focus:not(:focus-visible) {
+  outline: none;
+}
+
+.compact-player-play-pause.amplitude-paused {
+  background: url("/assets/theme/j1/modules/amplitudePlayer/icons/player/dark/play.svg") no-repeat;
+}
+
+.compact-player-play-pause.amplitude-playing {
+  background: url("/assets/theme/j1/modules/amplitudePlayer/icons/player/dark/pause.svg") no-repeat;
+}
+
+/* claude - optimize J1 Amplitude CSS #1
+   All control buttons hovered to opacity 0.5. Original file had 7 separate
+   :hover blocks (some `0.5`, some `.5` — normalised). Merged into one. */
+.compact-player-shuffle:hover,
+.compact-player-previous:hover,
+.compact-player-skip-backward:hover,
+.compact-player-play-pause:hover,
+.compact-player-skip-forward:hover,
+.compact-player-next:hover,
+.compact-player-repeat:hover {
+  opacity: 0.5;
+}
+
+.compact-player-control-container {
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.compact-player-controls-container {
+  text-align: center;
+}
+
+/* claude - optimize J1 Amplitude CSS #1
+   Three clearfix rules (.compact-player-control-container:after,
+   .compact-player-controls-container::after, .volume-container:after) merged.
+   Standardised the pseudo-element on the modern `::after` (CSS3) syntax. */
+.compact-player-control-container::after,
+.compact-player-controls-container::after,
+.volume-container::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.volume-container img {
+  display: block;
+  float: left;
+}
+
+.compact-player-amplitude-mute {
+  margin-left: 22px;
+}
+
+/* Player BOTTOM
+# --------------------------------------------------------- */
+.player-bottom {
+  background-color: var(--ajs-theme-uno--black);
+}
+
+
+/* 3. Layout
+# ------------------------------------------------------------------------------
+Bootstrap (BS) grid breakpoints
+  SN:     576px           Mobile
+  MD:     768px           Small Desktop|Tablet
+  LG:     992px           Desktop
+  XL:     1200px          Large Desktop
+  XXL:    1400px          X Large Desktop
+
+  -webkit-*               Chrome, Safari, Edge
+  -moz-*                  Firefox
+*/
+
+/* BS SM (Mobile)
+# --------------------------------------------------------- */
+@media screen and (max-width: 576px) {
+
+  .compact-player-title-list .song-meta-container .song-name {
+    font-size: 16px !important;
+  }
+
+  .compact-player-title-list .song-meta-container .song-artist-album {
+    font-size: 14px !important;
+  }
+
+  .compact-player {
+    max-width: -webkit-fill-available;
+    max-width: -moz-available;
+  }
+
+  .player-top img[data-amplitude-song-info="cover_art_url"] {
+    max-width: -webkit-fill-available;
+    max-width: -moz-available;
+  }
+
+  .compact-player-playlist {
+    width: calc(100% - 1px);
+  }
+
+  .compact-player-volume-container input[type=range].amplitude-volume-slider {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+  }
+
+  /* claude - optimize J1 Amplitude CSS #1
+     BUG FIX: original used `::-moz-slider-thumb` which is NOT a real Firefox
+     pseudo-element — Firefox uses `::-moz-range-thumb`. As written, the
+     enlarged 30px touch target was webkit-only; Firefox mobile users got the
+     tiny 16px thumb. Fixed pseudo-element name. */
+  .compact-player-volume-container input[type=range].amplitude-volume-slider::-webkit-slider-thumb,
+  .compact-player-volume-container input[type=range].amplitude-volume-slider::-moz-range-thumb {
+    width: 30px;
+    height: 30px;
+    border-radius: 30px;
+    margin-top: -15px;
+  }
+}
+
+
+/* 4. Pages
+# ------------------------------------------------------------------------------ */
+
+/* playlist
+# --------------------------------------------------------- */
+
+.meta-container.compact-player {
+  height: 120px;
+  border: 0;
+}
+
+.playlist-screen-meta-container {
+  float: left;
+  width: calc(100% - 123px);
+}
+
+.compact-player-volume-container {
+  margin-top: 20px;
+}
+
+.compact-player-volume-container input[type=range].amplitude-volume-slider {
+  /* claude - optimize J1 Amplitude CSS #1
+     Added -webkit-appearance + -moz-appearance alongside `appearance` so the
+     reset takes effect in every engine, not just spec-compliant ones. */
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  float: left;
+  height: 1px;
+  margin-top: -4px;
+  margin-left: 10px;
+  width: calc(100% - 118px);
+  background: transparent;
+}
+
+.compact-player-list-controls {
+  width: 128px !important;
+  margin-top: 50px !important;
+  margin-right: -32px !important;
+}
+
+.compact-player-title-list .song {
+  padding: 15px;
+  cursor: pointer;
+  line-height: 20px;
+  background-color: var(--ajs-theme-uno--darker-silver);
+}
+
+.compact-player-title-list .song-number-now-playing {
+  float: left;
+  width: 5px;
+  height: 20px;
+  margin-top: 14px;
+  margin-right: 20px;
+}
+
+.compact-player-title-list .song-number-now-playing .number {
+  opacity: 0.5;
+  font-family: "Lato", sans-serif;
+  font-size: 14px;
+  color: var(--ajs-theme-uno--white);
+}
+
+.compact-player-title-list .song-number-now-playing img.now-playing {
+  display: none;
+}
+
+.compact-player-title-list .song-meta-container .song-name {
+  display: block;
+  width: calc(100% - 40px);
+  margin-left: 38px;
+  font-family: "Lato", sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: var(--ajs-theme-uno--blue);
+}
+
+.compact-player-title-list .song-meta-container .audio-rating {
+  display: flex;
+  float: right;
+  margin-top: -38px;
+  margin-right: -3px;
+}
+
+.compact-player-title-list .song-meta-container .song-artist-album {
+  display: block;
+  margin-left: 38px;
+  font-family: "Lato", sans-serif;
+  font-size: 16px;
+  color: var(--ajs-theme-uno--gray-300);
+}
+
+.compact-player-title-list .song-meta-container .audio-duration {
+  float: right;
+  margin-top: -18px;
+  font-family: "Lato", sans-serif;
+  font-size: 16px;
+  color: var(--ajs-theme-uno--gray-300);
+}
+
+/* .playlist-screen-meta-container */
+.amplitude-audio-info-compact-player .audio-rating {
+  display: flex;
+  float: right;
+  margin-top: 10px;
+  margin-right: -100px;
+}
+
+.screen-controls-compact-player .playlist-screen-meta-container .amplitude-audio-info {
+  float: right;
+  margin-top: -10px;
+  margin-right: -130px;
+}
+
+.screen-controls-compact-player .playlist-screen-meta-container .audio-rating {
+  display: flex;
+  float: right;
+  margin-top: 0;
+  margin-right: -94px;
+}
+
+.compact-player-title-list .song.amplitude-active-song-container {
+  background-color: var(--ajs-theme-uno--medium-silver) !important;
+}
+
+.compact-player-title-list .song.amplitude-active-song-container .song-number-now-playing img.now-playing {
+  display: inline-block;
+  height: 16px;
+  width: 16px;
+  margin-top: 2px;
+  margin-left: 4px;
+}
+
+.compact-player-title-list .song.amplitude-active-song-container .song-number-now-playing .number {
+  display: none;
+}
+
+.compact-player-playlist {
+  display: none;
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  width: calc(100% + 1px);
+  background-color: var(--ajs-theme-uno--black);
+}
+
+.playlist-screen-controls .playlist-screen-meta-container {
+  float: left;
+  width: calc(100% - 123px);
+}
+
+.playlist-screen-controls .playlist-screen-meta-container .song-name {
+  display: block;
+  font-family: "Lato", sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 24px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  color: var(--ajs-theme-uno--white);
+}
+
+.playlist-screen-controls .playlist-screen-meta-container .song-artist-album {
+  opacity: 0.5;
+  font-family: "Lato", sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 18px;
+  color: var(--ajs-theme-uno--white);
+}
+
+.playlist-screen-controls .list-controls {
+  float: right;
+  margin-top: 48px;
+}
+
+/* claude - optimize J1 Amplitude CSS #1
+   The three list-controls mini-buttons (previous, play-pause, next) shared
+   the same float/cursor/size/margin-top declarations. Merged the shared
+   parts and kept only the icon-specific bits and per-button margins distinct. */
+.playlist-screen-controls .list-controls .list-previous,
+.playlist-screen-controls .list-controls .list-next {
+  float: left;
+  cursor: pointer;
+  width: 15px;
+  height: 17px;
+  margin-top: 4px;
+  background-repeat: no-repeat;
+}
+
+.playlist-screen-controls .list-controls .list-previous {
+  margin-right: 15px;
+  background-image: url("/assets/theme/j1/modules/amplitudePlayer/icons/player/dark/small/previous.svg");
+}
+
+.playlist-screen-controls .list-controls .list-next {
+  margin-left: 15px;
+  background-image: url("/assets/theme/j1/modules/amplitudePlayer/icons/player/dark/small/next.svg");
+}
+
+.playlist-screen-controls .list-controls .amplitude-play-pause {
+  float: left;
+  cursor: pointer;
+  width: 17px;
+  height: 24px;
+}
+
+.playlist-screen-controls .list-controls .amplitude-play-pause.amplitude-playing {
+  background-repeat: no-repeat;
+  background-image: url("/assets/theme/j1/modules/amplitudePlayer/icons/player/dark/small/pause.svg");
+}
+
+.playlist-screen-controls .list-controls .amplitude-play-pause.amplitude-paused {
+  background-repeat: no-repeat;
+  background-image: url("/assets/theme/j1/modules/amplitudePlayer/icons/player/dark/small/play.svg");
+}
+
+/* claude - optimize J1 Amplitude CSS #1
+   Three list-controls :hover rules merged into one. */
+.playlist-screen-controls .list-controls .list-previous:hover,
+.playlist-screen-controls .list-controls .amplitude-play-pause:hover,
+.playlist-screen-controls .list-controls .list-next:hover {
+  opacity: 0.5;
+}
+
+
+/* 5. Themes
+# ------------------------------------------------------------------------------ */
+
+/* 6. Utils
+# ------------------------------------------------------------------------------ */
+
+/* 7. Vendors
+# ------------------------------------------------------------------------------ */
+
+/* 8. Animations
+# ------------------------------------------------------------------------------ */
+
+/* claude - optimize J1 Amplitude CSS #1
+   Combined the prefixed and unprefixed @keyframes blocks for slide-in-top
+   and slide-out-top. Modern browsers all support unprefixed; the -webkit-
+   variant is kept for older Safari but defined alongside its standard twin. */
+.slide-in-top {
+  -webkit-animation: slide-in-top 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  animation: slide-in-top 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
+@-webkit-keyframes slide-in-top {
+  0%   { -webkit-transform: translateY(-10px); transform: translateY(-10px); opacity: 0; }
+  100% { -webkit-transform: translateY(0);     transform: translateY(0);     opacity: 1; }
+}
+
+@keyframes slide-in-top {
+  0%   { -webkit-transform: translateY(-10px); transform: translateY(-10px); opacity: 0; }
+  100% { -webkit-transform: translateY(0);     transform: translateY(0);     opacity: 1; }
+}
+
+.slide-out-top {
+  -webkit-animation: slide-out-top 0.5s cubic-bezier(0.55, 0.085, 0.68, 0.53) both;
+  animation: slide-out-top 0.5s cubic-bezier(0.55, 0.085, 0.68, 0.53) both;
+}
+
+@-webkit-keyframes slide-out-top {
+  0%   { -webkit-transform: translateY(0);     transform: translateY(0);     opacity: 1; }
+  100% { -webkit-transform: translateY(-10px); transform: translateY(-10px); opacity: 0; }
+}
+
+@keyframes slide-out-top {
+  0%   { -webkit-transform: translateY(0);     transform: translateY(0);     opacity: 1; }
+  100% { -webkit-transform: translateY(-10px); transform: translateY(-10px); opacity: 0; }
+}

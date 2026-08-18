@@ -6,7 +6,7 @@ regenerate:                             true
 
 {% comment %}
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/modules/amplitudejs/js/tech/ytp.js (49)
+ # ~/assets/theme/j1/modules/amplitudejs/js/tech/ytp.js (50)
  # AmplitudeJS V5 Tech for J1 Template
  #
  # Product/Info:
@@ -42,37 +42,21 @@ regenerate:                             true
 
 {% comment %} Set config data
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign amplitude_default   = modules.defaults.amplitude.defaults %}
+{% assign amplitude_default   = modules.defaults.amplitudePlayer.defaults %}
 
-{% comment %} Fix Amplitude plugin #1
+{% comment %} Claude - Fix Amplitude plugin #5
 --------------------------------------------------------------------------------
- The plugin is NO LONGER bound to the PLAYER settings (amplitude_control) and
- the PLAYLIST settings (amplitude_media) of the amplitude module at BUILD time.
- Both are passed in at RUNTIME by the calling module as an options hash; see
- the JS function resolvePluginOptions() below. This makes the plugin reusable
- for other modules (e.g. audioPlayer) that provide their OWN player and
- playlist settings.
+ The amplitude module was renamed to amplitudePlayer. The build-time MODULE
+ DEFAULTS of the plugin are now read from the renamed data file
+   _data/modules/defaults/amplitudePlayer.yml
+ via modules.defaults.amplitudePlayer.defaults instead of
+ modules.defaults.amplitude.defaults.
 
- The dependency on the MODULE DEFAULTS (amplitude_default) is kept, but is
- used as a LAST-RESORT fallback only: if the calling module passes its own
- defaults in the options hash, those defaults win.
-
- The deprecated statements are preserved VERBATIM in the 'if false' block
- below. A comment block cannot be used as the wrapper here because the
- preserved text CONTAINS a comment block itself, and NESTED comment blocks
- are not supported by all Liquid versions.
+ These defaults are used as a LAST-RESORT fallback only: the runtime defaults
+ handed over by the calling module (options.defaults) still win. The variable
+ amplitude_default feeds ytpModuleDefaults and every ytpDefault(..., <build>)
+ fallback further down, so re-pointing this single assign updates all of them.
 -------------------------------------------------------------------------------- {% endcomment %}
-
-{% if false %}
-{% comment %} Original (deprecated, preserved for reference)
--------------------------------------------------------------------------------- {% endcomment %}
-{% comment %} Set config options
-{% assign amplitude_control   = modules.amplitude_control.settings %}
-{% assign amplitude_media     = modules.amplitude_media.settings %}
-{% assign amplitude_options   = amplitude_default | deep_merge: amplitude_control, amplitude_media %}
-{% assign amplitude_options   = amplitude_default | merge: amplitude_control | merge: amplitude_media %}
--------------------------------------------------------------------------------- {% endcomment %}
-{% endif %}
 
 {% comment %} Detect prod mode
 -------------------------------------------------------------------------------- {% endcomment %}
@@ -84,7 +68,7 @@ regenerate:                             true
 
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/modules/amplitudejs/js/plugins/tech/ytp.js (49)
+ # ~/assets/theme/j1/modules/amplitudejs/js/plugins/tech/ytp.js (50)
  # AmplitudeJS V5 Plugin|Tech for J1 Template
  #
  # Product/Info:
@@ -183,7 +167,16 @@ regenerate:                             true
   // tech). The guard makes sure the players are configured exactly ONCE,
   // no matter which path fires (first) or whether both fire.
   var ytpApiReadyProcessed            = false;
-  var logger                          = log4javascript.getLogger('j1.adapter.amplitude.tech');
+
+  // Claude - Fix Amplitude plugin #5
+  // The amplitude adapter was renamed to amplitudePlayer. This is the
+  // BOOTSTRAP logger used by resolvePluginOptions() itself (it runs BEFORE
+  // the logger is rebound to the resolved host adapter at 'REBIND the logger'
+  // below). Renamed 'j1.adapter.amplitude.tech' -> 'j1.adapter.amplitudePlayer.tech'
+  // so the bootstrap default matches the renamed default adapter.
+  // Original (deprecated, preserved for reference):
+  // var logger                          = log4javascript.getLogger('j1.adapter.amplitude.tech');
+  var logger                          = log4javascript.getLogger('j1.adapter.amplitudePlayer.tech');
 
   var dependency;
   var playerCounter                   = 0;
@@ -373,7 +366,21 @@ regenerate:                             true
       // not pass the key.
       // Original (deprecated, preserved for reference):
       // adapter:    'amplitude'
-      adapter:    'amplitude',
+
+      // Claude - Fix Amplitude plugin #5
+      // The amplitude adapter was renamed to amplitudePlayer. This is the
+      // LAST-RESORT fallback for the ADAPTER NAMESPACE, used only when the
+      // calling module does NOT pass an 'adapter' key in the handoff
+      // (j1.plugins.ytp.options.adapter). Changed 'amplitude' -> 'amplitudePlayer'
+      // so the plugin binds its runtime data to j1.adapter.amplitudePlayer.data
+      // by default. Must stay in sync with the ytpHostAdapter() fallback below.
+      // NOTE: moduleNamespace stays 'amplitudejs' on purpose -- the MODULE
+      // runtime namespace j1.modules.amplitudejs was NOT renamed (the adapter
+      // still writes j1.modules.amplitudejs.data.ytp.*).
+      // Original (deprecated, preserved for reference):
+      // adapter:    'amplitude',
+      //
+      adapter:    'amplitudePlayer',
       moduleNamespace: 'amplitudejs'
     };
 
@@ -463,10 +470,174 @@ regenerate:                             true
   // masking a missing host adapter. If a hard failure is preferred, replace
   // the creation with a logger.error and a throw.
   // ---------------------------------------------------------------------------
+
+  // ---------------------------------------------------------------------------
+  // Claude - Fix Amplitude plugin #6
+  // HOST ADAPTER VERIFICATION (root cause of the reported TypeErrors)
+  //
+  // ROOT CAUSE: The calling module was renamed 'amplitude' -> 'amplitudePlayer'
+  // and creates its runtime data in
+  //
+  //   j1.adapter.amplitudePlayer.data.ytPlayers = {}
+  //
+  // but it still hands the OLD namespace name over to the plugin:
+  //
+  //   j1.plugins.ytp.options = { ..., adapter: 'amplitude', ... }
+  //   (see publishPluginOptions in amplitudePlayer.js)
+  //
+  // ytpHostAdapter() trusted that string BLINDLY, so ytpHost() CREATED the
+  // (never used) namespace j1.adapter.amplitude = {} on the fly. That
+  // namespace has NO data hash, hence NO ytPlayers hash -- which is exactly
+  // what the two reported errors report:
+  //
+  //   addNestedProperty(ytpHostData().ytPlayers, playerId, ...)
+  //     -> Cannot set properties of undefined (setting 'emancipator_yt_large')
+  //   ytpHostData().ytPlayers[playerId].playerSettings...  (onPlayerReady)
+  //     -> Cannot read properties of undefined (reading 'emancipator_yt_large')
+  //
+  // The very same mismatch would ALSO have broken ytpHost().seconds2timestamp()
+  // and ytpHost().timestamp2seconds() (methods of the host adapter object),
+  // because the created namespace is an EMPTY object.
+  //
+  // The plugin now VERIFIES the handed-over adapter name against the
+  // namespaces that really exist in j1.adapter and falls back to a DETECTED
+  // namespace if the requested one is not present. The detection prefers a
+  // namespace that already carries the YT player hash (data.ytPlayers), then
+  // any namespace that carries a data hash at all.
+  //
+  // NOTE: This makes the PLUGIN self-healing. The defect itself lives in the
+  // CALLING module and should be fixed there as well:
+  //   amplitudePlayer.js, publishPluginOptions: adapter: 'amplitude'
+  //                                          -> adapter: 'amplitudePlayer'
+  // ---------------------------------------------------------------------------
+  
+  // Claude - Fix Amplitude plugin #6
+  // Candidate namespaces probed if the REQUESTED namespace does not exist.
+  // Order = preference order. Declared as var (NOT let/const) on purpose:
+  // ytpHostAdapter() is called during module load (logger rebind) BEFORE
+  // this line is reached, and var declarations are hoisted (see TDZ).
+  //
+  var YTP_ADAPTER_CANDIDATES        = ['amplitudePlayer', 'amplitude', 'audioPlayer'];
+
+  // Claude - Fix Amplitude plugin #6
+  // STICKY result of the verification. Set ONLY once a namespace was found
+  // that really exists (incl. its data hash), so a load-order race can NOT
+  // latch a wrong name permanently.
+  //
+  var ytpResolvedAdapter            = '';
+  var ytpAdapterMismatchLogged      = false;
+
+  // ---------------------------------------------------------------------------
+  // Claude - Fix Amplitude plugin #6
+  // ytpAdapterNamespaceUsable(name)
+  //
+  // TRUE if j1.adapter[name] exists AND carries a data hash (i.e. the adapter
+  // has run its initializer). An EMPTY namespace created by ytpHost() itself
+  // is NOT usable.
+  // ---------------------------------------------------------------------------
+  function ytpAdapterNamespaceUsable(name) {
+    return !!(
+      name &&
+      window.j1 &&
+      j1.adapter &&
+      ytpIsPlainObject(j1.adapter[name]) &&
+      ytpIsPlainObject(j1.adapter[name].data)
+    );
+  } // END ytpAdapterNamespaceUsable
+
+  // ---------------------------------------------------------------------------
+  // Claude - Fix Amplitude plugin #6
+  // ytpDetectHostAdapter(requested)
+  //
+  // Returns the name of an EXISTING host adapter namespace or '' if none of
+  // the candidates is (yet) available.
+  // ---------------------------------------------------------------------------
+  function ytpDetectHostAdapter(requested) {
+    var candidates, i, name;
+
+    candidates = [requested].concat(YTP_ADAPTER_CANDIDATES);
+
+    // 1st pass: a namespace that ALREADY carries the YT player hash
+    for (i = 0; i < candidates.length; i++) {
+      name = candidates[i];
+      if (ytpAdapterNamespaceUsable(name) && ytpIsPlainObject(j1.adapter[name].data.ytPlayers)) {
+        return name;
+      }
+    }
+
+    // 2nd pass: any namespace that carries a data hash
+    for (i = 0; i < candidates.length; i++) {
+      name = candidates[i];
+      if (ytpAdapterNamespaceUsable(name)) {
+        return name;
+      }
+    }
+
+    return '';
+  } // END ytpDetectHostAdapter
+
   function ytpHostAdapter() {
-    return (ytpOptions && typeof ytpOptions.adapter === 'string' && ytpOptions.adapter.length > 0)
-         ? ytpOptions.adapter
-         : 'amplitude';
+
+    // Claude - Fix Amplitude plugin #6
+    // VERIFIED resolution (see the block above). The requested name still
+    // WINS whenever it names a namespace that really exists, so a correctly
+    // configured host module behaves EXACTLY as before.
+    //
+    var requested, detected;
+
+    // requested = (ytpOptions && typeof ytpOptions.adapter === 'string' && ytpOptions.adapter.length > 0)
+    //           ? ytpOptions.adapter
+    //           : 'amplitudePlayer';
+
+    requested = (ytpOptions && typeof ytpOptions.adapter === 'string' && ytpOptions.adapter.length > 0)
+              ? 'amplitudePlayer'
+              : ytpOptions.adapter;
+
+    // already verified once
+    if (ytpResolvedAdapter) {
+      return ytpResolvedAdapter;
+    }
+
+    // requested namespace exists (normal case)
+    if (ytpAdapterNamespaceUsable(requested)) {
+      ytpResolvedAdapter = requested;
+      return ytpResolvedAdapter;
+    }
+
+    // requested namespace does NOT exist: detect the real one
+    detected = ytpDetectHostAdapter(requested);
+
+    if (detected) {
+      if (!ytpAdapterMismatchLogged) {
+        ytpAdapterMismatchLogged = true;
+        logger && logger.warn('\n' + `host adapter namespace 'j1.adapter.${requested}' NOT found, using detected namespace: 'j1.adapter.${detected}'`);
+        logger && logger.warn('\n' + `CHECK publishPluginOptions of the calling module: key 'adapter' should be set to '${detected}'`);
+      }
+      ytpResolvedAdapter = detected;
+      return ytpResolvedAdapter;
+    }
+
+    // NO namespace available (yet). Return the requested name WITHOUT making
+    // the result sticky, so a later call can still find the real namespace.
+    return requested;
+
+    // Claude - Fix Amplitude plugin #6
+    // The Fix #5 resolution below is SUPERSEDED by the verified resolution
+    // above (it is the 'requested' branch of it) and preserved verbatim as a
+    // comment. Fix #5 (deprecated, preserved for reference):
+    //
+    // Claude - Fix Amplitude plugin #5
+    // The amplitude adapter was renamed to amplitudePlayer. Fallback changed
+    // 'amplitude' -> 'amplitudePlayer' to match the base options fallback in
+    // resolvePluginOptions(). Applies only when the calling module does NOT
+    // pass an 'adapter' key; the resolved ytpOptions.adapter still wins.
+    // Original (deprecated, preserved for reference):
+    // return (ytpOptions && typeof ytpOptions.adapter === 'string' && ytpOptions.adapter.length > 0)
+    //      ? ytpOptions.adapter
+    //      : 'amplitude';
+    // return (ytpOptions && typeof ytpOptions.adapter === 'string' && ytpOptions.adapter.length > 0)
+    //      ? ytpOptions.adapter
+    //      : 'amplitudePlayer';
   } // END ytpHostAdapter
 
   function ytpHost() {
@@ -483,6 +654,32 @@ regenerate:                             true
     var host  = ytpHost();
 
     host.data = host.data || {};
+
+    // Claude - Fix Amplitude plugin #6
+    // GUARANTEE the two runtime hashes the plugin dereferences UNGUARDED all
+    // over the file:
+    //
+    //   data.ytPlayers   ytpHostData().ytPlayers[<id>].<key>   (~60 call sites)
+    //   data.ytpGlobals  ytpHostData().ytpGlobals['<key>']     (~20 call sites)
+    //
+    // The host adapter normally creates both in its initializer. Creating
+    // them here as well makes the plugin immune against a load-order race
+    // (plugin configures its players BEFORE the adapter initializer ran) and
+    // against a host module that simply does not create them -- the second
+    // failure mode behind the reported TypeErrors. Both are created with the
+    // ||-idiom, so an EXISTING hash of the host adapter is NEVER replaced.
+    //
+    // NOTE: The sibling accessor ytpHostModuleYtp() (Fix AudioPlayer no. 3) uses
+    // the very same pattern for data.ytp.players -- which is why the module
+    // data path never ran into this error.
+    //
+    // Original (deprecated, preserved for reference):
+    // host.data = host.data || {};
+    // return host.data;
+    //
+    host.data.ytPlayers  = host.data.ytPlayers  || {};
+    host.data.ytpGlobals = host.data.ytpGlobals || {};
+
     return host.data;
   } // END ytpHostData
 
@@ -1276,6 +1473,25 @@ regenerate:                             true
   // Example: addNestedProperty(j1.adapter.amplitude.data, 'playlist.profile.name', 'Max Mustermann')
   // ---------------------------------------------------------------------------  
   function addNestedProperty(obj, path, value) {
+
+    // Claude - Fix Amplitude plugin #6
+    // FAILSAFE: the function wrote into its target object WITHOUT checking
+    // that a target object was handed over at all. A missing target (see the
+    // host adapter mismatch fixed above) therefore raised
+    //
+    //   TypeError: Cannot set properties of undefined (setting '<playerID>')
+    //
+    // deep inside the forEach callback -- an error that names the PLAYER but
+    // NOT the real cause. The guard turns the crash into a precise log entry
+    // and leaves the caller intact. Returns true|false so a caller CAN check
+    // the result (no existing caller does, behaviour stays unchanged).
+    //
+    if (!ytpIsPlainObject(obj)) {
+      logger && logger.error('\n' + `addNestedProperty FAILED for path '${path}': NO target object handed over`);
+      logger && logger.error('\n' + 'CHECK the host adapter namespace of the calling module (see ytpHostAdapter)');
+      return false;
+    }
+
     let current = obj;
     const properties = path.split('.');
 
@@ -1283,12 +1499,24 @@ regenerate:                             true
       if (index === properties.length - 1) {
         current[property] = value;
       } else {
-        if (!current[property]) {
+        // Claude - Fix Amplitude plugin #6
+        // A NON-OBJECT value on an intermediate node (e.g. a string) passed
+        // the original truthy test and made the NEXT iteration write into a
+        // primitive. Intermediate nodes are re-created if they are not an
+        // object now.
+        // Original (deprecated, preserved for reference):
+        // if (!current[property]) {
+        //   current[property] = {};
+        // }
+        //
+        if (!ytpIsPlainObject(current[property])) {
           current[property] = {};
         }
         current = current[property];
       }
     });
+
+    return true;
   }
 
   // ---------------------------------------------------------------------------

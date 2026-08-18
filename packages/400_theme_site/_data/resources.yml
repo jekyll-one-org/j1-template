@@ -1417,12 +1417,7 @@ resources:
       pass_init_data:                   false
 
       data:
-        css:                            [
-                                          modules/amplitudeJS/css/theme/uno/dark/amplitude,
-                                          modules/amplitudeJS/css/theme/uno/dark/player/mini,                                          
-                                          modules/amplitudeJS/css/theme/uno/dark/player/compact,
-                                          modules/amplitudeJS/css/theme/uno/dark/player/large
-                                        ]
+        css:                            []
         files:                          []
         js:                             [ modules/amplitudeJS/js/amplitude ]
         init_function:                  []
@@ -1434,7 +1429,7 @@ resources:
     resource:
       enabled:                          true
 
-      id:                               amplitudejs
+      id:                               amplitudePlayer
       comment:                          Module amplitudePlayer
       region:                           head
       layout:                           [ home, page, post ]
@@ -1443,10 +1438,15 @@ resources:
       pass_init_data:                   false
 
       data:
-        css:                            []
+        css:                            [
+                                          modules/amplitudePlayer/css/theme/uno/dark/amplitude,
+                                          modules/amplitudePlayer/css/theme/uno/dark/player/mini,                                          
+                                          modules/amplitudePlayer/css/theme/uno/dark/player/compact,
+                                          modules/amplitudePlayer/css/theme/uno/dark/player/large
+                                        ]
         files:                          [ adapter/js/amplitudePlayer.js ]
-        js:                             []
-        init_function:                  [ j1.adapter.amplitude.init ]
+        js:                             [ modules/amplitudePlayer/js/player ]
+        init_function:                  [ j1.adapter.amplitudePlayer.init ]
 
   # ----------------------------------------------------------------------------
   # SwiperJS

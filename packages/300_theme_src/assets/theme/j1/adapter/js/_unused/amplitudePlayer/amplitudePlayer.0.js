@@ -18,7 +18,7 @@ regenerate:                             true
  # -----------------------------------------------------------------------------
  # Test data:
  #  {{ liquid_var | debug }}
- #  amplitude_options:  {{ amplitude_options | debug }}
+ #  amplitude_player_options:  {{ amplitude_player_options | debug }}
  # -----------------------------------------------------------------------------
 {% endcomment %}
 
@@ -33,13 +33,13 @@ regenerate:                             true
  # missing keys fall through):
  #
  #   1. _data/modules/defaults/amplitude.yml  (defaults ...........)  base
- #   2. _data/modules/amplitude_control.yml   (settings, w/o players)  user
+ #   2. _data/modules/amplitudePlayer_control.yml   (settings, w/o players)  user
  #                                            optional GLOBAL sections
  #                                            settings.player|settings.playlist
- #   3. _data/modules/amplitude_control.yml   (settings.players[] ..)  player
+ #   3. _data/modules/amplitudePlayer_control.yml   (settings.players[] ..)  player
  #
  # Before this fix, the adapter read ALL runtime settings from the DEFAULTS
- # layer only (amplitude_default.player.*) per-player keys were read
+ # layer only (amplitude_player_default.player.*) per-player keys were read
  # RAW (player.*) without any fallthrough to the user or default layer,
  # and the global options were built with the SHALLOW merge filter (any key
  # set on a higher layer dropped ALL sibling default keys of its subtree).
@@ -49,15 +49,15 @@ regenerate:                             true
  #
  # Changes:
  #
- #   • Liquid: amplitude_options — global chain built with deep_merge
- #     (defaults <- control/user). amplitude_media is NOT merged (its only
+ #   • Liquid: amplitude_player_options — global chain built with deep_merge
+ #     (defaults <- control/user). amplitude_player_media is NOT merged (its only
  #     payload is the playlists array, read separately where needed).
  #   • Liquid: amplitude_player_global|amplitude_playlist_global — global
  #     effective subtrees (defaults.player <- control.player, resp.
  #     defaults.playlist <- control.playlist); the page-global runtime vars
  #     (playerRepeat, playerScrollerSongElementMin, ...) are re-assigned
  #     from these chains (former defaults-only block kept, superseded).
- #   • Liquid: player loops iterate amplitude_control.players (RAW control
+ #   • Liquid: player loops iterate amplitudePlayer_control.players (RAW control
  #     entries); the initPlayerUiEvents loop builds the per-player
  #     player_effective chain and reads type, plugin_manager and
  #     player_scroller_song_element_min from it.
@@ -146,7 +146,7 @@ regenerate:                             true
  # -----------------------------------------------------------------------------
  # SIMPLIFIED YOUTUBE MEDIA REFERENCE (bare video ID)
  #
- # The media config (_data/modules/amplitude_media.yml) referenced a YouTube
+ # The media config (_data/modules/amplitude_player_media.yml) referenced a YouTube
  # title by a PARTIAL URL:
  #
  #   audio_base:   //youtube.com
@@ -197,23 +197,23 @@ regenerate:                             true
 
 {% comment %} Set global settings
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign environment         = site.environment %}
-{% assign asset_path          = "/assets/theme/j1" %}
+{% assign environment               = site.environment %}
+{% assign asset_path                = "/assets/theme/j1" %}
 
 {% comment %} Process YML config data
 ================================================================================ {% endcomment %}
 
 {% comment %} Set config files
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign template_config     = site.data.j1_config %}
-{% assign blocks              = site.data.blocks %}
-{% assign modules             = site.data.modules %}
+{% assign template_config           = site.data.j1_config %}
+{% assign blocks                    = site.data.blocks %}
+{% assign modules                   = site.data.modules %}
 
 {% comment %} Set config data
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign amplitude_default   = modules.defaults.amplitudePlayer.defaults %}
-{% assign amplitude_control   = modules.amplitudePlayer_control.settings %}
-{% assign amplitude_media     = modules.amplitudePlayer_media.settings %}
+{% assign amplitude_player_default  = modules.defaults.amplitudePlayer.defaults %}
+{% assign amplitude_player_control  = modules.amplitudePlayer_control.settings %}
+{% assign amplitude_player_media    = modules.amplitudePlayer_media.settings %}
 
 {% comment %} Set config options
 -------------------------------------------------------------------------------- {% endcomment %}
@@ -222,29 +222,29 @@ regenerate:                             true
 --------------------------------------------------------------------------------
  Global options: DEEP merge of the chain defaults <- control (user settings).
  The media file is NO LONGER merged in: its only payload is the playlists
- array, read separately from amplitude_media.playlists. The former SHALLOW
- merge filter replaced the top-level 'player' and 'playlist' subtrees as a
- whole, so ANY key set on a higher layer silently dropped ALL sibling
+ array, read separately from amplitude_player_media.playlists. The former
+ SHALLOW merge filter replaced the top-level 'player' and 'playlist' subtrees
+ as a whole, so ANY key set on a higher layer silently dropped ALL sibling
  default keys of that subtree.
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign amplitude_options   = amplitude_default | merge: amplitude_control %}
+{% assign amplitude_player_options = amplitude_player_default | merge: amplitude_player_control %}
 
 {% comment %}
 --------------------------------------------------------------------------------
  Global EFFECTIVE subtrees (chain: defaults <- user settings). Source for
  the page-global runtime variables of the adapter. The user layer is the
- optional GLOBAL 'player' | 'playlist' section of amplitude_control.yml
+ optional GLOBAL 'player' | 'playlist' section of amplitude_player_control.yml
  (applies to ALL players of a page); per-player overloads are resolved at
  the loop sites (player_effective) and by getInstanceOptions().
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign amplitude_player_global     = amplitude_default.player %}
-{% if amplitude_control.player %}
-  {% assign amplitude_player_global   = amplitude_player_global | merge: amplitude_control.player %}
+{% assign amplitude_player_global     = amplitude_player_default.player %}
+{% if amplitude_player_control.player %}
+  {% assign amplitude_player_global   = amplitude_player_global | merge: amplitude_player_control.player %}
 {% endif %}
 
-{% assign amplitude_playlist_global   = amplitude_default.playlist %}
-{% if amplitude_control.playlist %}
-  {% assign amplitude_playlist_global = amplitude_playlist_global | merge: amplitude_control.playlist %}
+{% assign amplitude_playlist_global   = amplitude_player_default.playlist %}
+{% if amplitude_player_control.playlist %}
+  {% assign amplitude_playlist_global = amplitude_playlist_global | merge: amplitude_player_control.playlist %}
 {% endif %}
 
 {% comment %} Detect prod mode
@@ -383,26 +383,26 @@ j1.adapter.amplitude = ((j1, window) => {
 
   // PLAYER settings
   //
-  var playerDefaultPluginManager        = {{amplitude_default.player.plugin_manager.enabled}};
-  var playerDefaultType                 = '{{amplitude_default.player.type}}';
-  var playerDefaultVolume               = {{amplitude_default.player.volume_slider.preset_value}};
-  var playerRepeat                      = {{amplitude_default.player.player_repeat}};
-  var playerShuffle                     = {{amplitude_default.player.player_shuffle}};
-  var playerPlayNextTitle               = {{amplitude_default.player.play_next_title}};
-  var playerPauseNextTitle              = {{amplitude_default.player.pause_next_title}};
-  var playerDelayNextTitle              = {{amplitude_default.player.delay_next_title}};
-  var playerForwardBackwardSkipSeconds  = {{amplitude_default.player.forward_backward_skip_seconds}};
-  var playerHoverPageScrollDisabled     = {{amplitude_default.player.player_hover_page_scroll_disabled}};
+  var playerDefaultPluginManager        = {{amplitude_player_default.player.plugin_manager.enabled}};
+  var playerDefaultType                 = '{{amplitude_player_default.player.type}}';
+  var playerDefaultVolume               = {{amplitude_player_default.player.volume_slider.preset_value}};
+  var playerRepeat                      = {{amplitude_player_default.player.player_repeat}};
+  var playerShuffle                     = {{amplitude_player_default.player.player_shuffle}};
+  var playerPlayNextTitle               = {{amplitude_player_default.player.play_next_title}};
+  var playerPauseNextTitle              = {{amplitude_player_default.player.pause_next_title}};
+  var playerDelayNextTitle              = {{amplitude_player_default.player.delay_next_title}};
+  var playerForwardBackwardSkipSeconds  = {{amplitude_player_default.player.forward_backward_skip_seconds}};
+  var playerHoverPageScrollDisabled     = {{amplitude_player_default.player.player_hover_page_scroll_disabled}};
 
-  var playerSongElementHeigthMobile     = {{amplitude_default.player.player_song_element_heigth_mobile}};  
-  var playerSongElementHeigthDesktop    = {{amplitude_default.player.player_song_element_heigt_desktop}};
-  var playerScrollerSongElementMin      = {{amplitude_default.player.player_scroller_song_element_min}};
-  var playerScrollControl               = {{amplitude_default.player.player_scroll_control}};
-  var playerAutoScrollSongElement       = {{amplitude_default.player.player_auto_scroll_song_element}};
+  var playerSongElementHeigthMobile     = {{amplitude_player_default.player.player_song_element_heigth_mobile}};  
+  var playerSongElementHeigthDesktop    = {{amplitude_player_default.player.player_song_element_heigt_desktop}};
+  var playerScrollerSongElementMin      = {{amplitude_player_default.player.player_scroller_song_element_min}};
+  var playerScrollControl               = {{amplitude_player_default.player.player_scroll_control}};
+  var playerAutoScrollSongElement       = {{amplitude_player_default.player.player_auto_scroll_song_element}};
 
   // PLAYLIST settings
   //
-  var playlistAudioInfo                 = {{amplitude_default.playlist.audio_info}};
+  var playlistAudioInfo                 = {{amplitude_player_default.playlist.audio_info}};
 
   // CONTROL settings
   //
@@ -414,31 +414,24 @@ j1.adapter.amplitude = ((j1, window) => {
   // are resolved at the loop sites (player_effective) and by
   // getInstanceOptions().
   //
-  playerDefaultPluginManager        = {{amplitude_player_global.plugin_manager.enabled}};
-  playerDefaultType                 = '{{amplitude_player_global.type}}';
-  playerDefaultVolume               = {{amplitude_player_global.volume_slider.preset_value}};
-  playerRepeat                      = {{amplitude_player_global.player_repeat}};
-  playerShuffle                     = {{amplitude_player_global.player_shuffle}};
-  playerPlayNextTitle               = {{amplitude_player_global.play_next_title}};
-  playerPauseNextTitle              = {{amplitude_player_global.pause_next_title}};
-  playerDelayNextTitle              = {{amplitude_player_global.delay_next_title}};
-  playerForwardBackwardSkipSeconds  = {{amplitude_player_global.forward_backward_skip_seconds}};
-  playerHoverPageScrollDisabled     = {{amplitude_player_global.player_hover_page_scroll_disabled}};
+  playerDefaultPluginManager            = {{amplitude_player_global.plugin_manager.enabled}};
+  playerDefaultType                     = '{{amplitude_player_global.type}}';
+  playerDefaultVolume                   = {{amplitude_player_global.volume_slider.preset_value}};
+  playerRepeat                          = {{amplitude_player_global.player_repeat}};
+  playerShuffle                         = {{amplitude_player_global.player_shuffle}};
+  playerPlayNextTitle                   = {{amplitude_player_global.play_next_title}};
+  playerPauseNextTitle                  = {{amplitude_player_global.pause_next_title}};
+  playerDelayNextTitle                  = {{amplitude_player_global.delay_next_title}};
+  playerForwardBackwardSkipSeconds      = {{amplitude_player_global.forward_backward_skip_seconds}};
+  playerHoverPageScrollDisabled         = {{amplitude_player_global.player_hover_page_scroll_disabled}};
 
-  playerSongElementHeigthMobile     = {{amplitude_player_global.player_song_element_heigth_mobile}};
-  playerSongElementHeigthDesktop    = {{amplitude_player_global.player_song_element_heigt_desktop}};
-  playerScrollerSongElementMin      = {{amplitude_player_global.player_scroller_song_element_min}};
-  playerScrollControl               = {{amplitude_player_global.player_scroll_control}};
-  playerAutoScrollSongElement       = {{amplitude_player_global.player_auto_scroll_song_element}};
+  playerSongElementHeigthMobile         = {{amplitude_player_global.player_song_element_heigth_mobile}};
+  playerSongElementHeigthDesktop        = {{amplitude_player_global.player_song_element_heigt_desktop}};
+  playerScrollerSongElementMin          = {{amplitude_player_global.player_scroller_song_element_min}};
+  playerScrollControl                   = {{amplitude_player_global.player_scroll_control}};
+  playerAutoScrollSongElement           = {{amplitude_player_global.player_auto_scroll_song_element}};
 
-  playlistAudioInfo                 = {{amplitude_playlist_global.audio_info}};
-
-  // UNUSED settings
-  //
-  // var playerWaveformsEnabled     = {{amplitude_default.player.waveforms.enabled}};
-  // var playerWaveformsSampleRate  = {{amplitude_default.player.waveforms.sample_rate}};
-  // var playerVisualizationEnabled = {{amplitude_default.player.visualization.enabled}};
-  // var playerVisualizationName    = '{{amplitude_default.player.visualization.name}}';
+  playlistAudioInfo                     = {{amplitude_playlist_global.audio_info}};
 
   // ---------------------------------------------------------------------------
   // helper functions
@@ -460,7 +453,7 @@ j1.adapter.amplitude = ((j1, window) => {
   //   3. NEW bare video ID  '<ID>'             -> <base>/watch?v=<ID>
   //   4. ABSOLUTE reference '//host/path'      -> //host/path (base ignored)
   //
-  // Format 3 is expanded ONLY if the reference matches the EXACT YouTube ID
+  // Format 3. is expanded ONLY if the reference matches the EXACT YouTube ID
   // alphabet (11 characters out of [A-Za-z0-9_-], no dot, no slash) AND the
   // audio base names a YouTube host or is empty. Any local media file has a
   // file extension and therefore contains a dot, so it can never be taken
@@ -557,12 +550,12 @@ j1.adapter.amplitude = ((j1, window) => {
 
       // global variable settings
       //
-      amplitudeDefaults = $.extend({}, {{amplitude_default  | replace: 'nil', 'null' | replace: '=>', ':' }});
-      amplitudePlayers  = $.extend({}, {{amplitude_control  | replace: 'nil', 'null' | replace: '=>', ':' }});
+      amplitudeDefaults = $.extend({}, {{amplitude_player_default  | replace: 'nil', 'null' | replace: '=>', ':' }});
+      amplitudePlayers  = $.extend({}, {{amplitude_player_control  | replace: 'nil', 'null' | replace: '=>', ':' }});
 
       // Build the GLOBAL (module-level) options with the _deepMerge helper
       // (chain: defaults <- user settings). The user layer are the GLOBAL
-      // keys of amplitude_control.yml (settings w/o the per-player array
+      // keys of amplitudePlayer_control.yml (settings w/o the per-player array
       // 'players'). Reset + expose the PER-INSTANCE options cache so the
       // module and plugins (ytp) can read the effective per-player chain
       // via j1.adapter.amplitude.amplitudeInstanceOptions[playerId] resp.
@@ -632,9 +625,9 @@ j1.adapter.amplitude = ((j1, window) => {
         var pageState      = $('#content').css("display");
         var pageVisible    = (pageState === 'block') ? true : false;
         var j1CoreFinished = (j1.getState() === 'finished') ? true : false;
-        var atticFinished  = (j1.adapter.attic.getState() == 'finished') ? true : false;
+//      var atticFinished  = (j1.adapter.attic.getState() == 'finished') ? true : false;
 
-        if (j1CoreFinished && pageVisible && atticFinished) {
+        if (j1CoreFinished && pageVisible) {
           startTimeModule = Date.now();
 
           _this.setState('started');
@@ -716,10 +709,12 @@ j1.adapter.amplitude = ((j1, window) => {
 
       isDev && logger.info('\n' + 'creating global playlist (API): started');
 
-      // -----------------------------------------------------------------------
-      // initialize amplitude songs
-      // -----------------------------------------------------------------------
-      {% for playlist in amplitude_media.playlists %} {% if playlist.enabled %}
+      {% comment %}
+      --------------------------------------------------------------------------
+      initialize amplitude songs
+      playlists: {{ amplitude_player_media.playlists | debug }}
+      -------------------------------------------------------------------------- {% endcomment %} 
+      {% for playlist in amplitude_player_media.playlists %} {% if playlist.enabled %}
         var song_items = $.extend({}, {{playlist.items | replace: 'nil', 'null' | replace: '=>', ':' }});
 
         for (var i = 0; i < Object.keys(song_items).length; i++) {
@@ -794,12 +789,12 @@ j1.adapter.amplitude = ((j1, window) => {
       {% comment %}
       --------------------------------------------------------------------------
       iterate the RAW per-player entries of the control file
-      amplitude_control.players:  {{ amplitude_control.players | debug }} 
+      amplitude_player_control.players:  {{ amplitude_player_control.players | debug }} 
       --------------------------------------------------------------------------
       {% endcomment %}
 
-      {% for player in amplitude_control.players %} {% if player.enabled %}
-        {% assign xhr_data_path = amplitude_options.xhr_data_path %}
+      {% for player in amplitude_player_control.players %} {% if player.enabled %}
+        {% assign xhr_data_path = amplitude_player_options.xhr_data_path %}
         {% capture xhr_container_id %}{{player.id}}_audio{% endcapture %}
 
         // load players only that are configured in current page
@@ -867,12 +862,12 @@ j1.adapter.amplitude = ((j1, window) => {
       {% comment %} collect playlists
       --------------------------------------------------------------------------  {% endcomment %}
       {% assign playlists_enabled = 0 %}
-      {% for list in amplitude_media.playlists %} {% if list.enabled %}
+      {% for list in amplitude_player_media.playlists %} {% if list.enabled %}
         {% assign playlists_enabled = playlists_enabled | plus: 1 %}
       {% endif %} {% endfor %}
 
       {% assign playlists_processed = 0 %}
-      {% for list in amplitude_media.playlists %} {% if list.enabled %}
+      {% for list in amplitude_player_media.playlists %} {% if list.enabled %}
         {% assign playlist_items = list.items %}
         {% assign playlist_name  = list.name %}
         {% assign playlist_title = list.title %}
@@ -1400,17 +1395,17 @@ j1.adapter.amplitude = ((j1, window) => {
           iterate the RAW per-player entries of the control file and build
           the per-player EFFECTIVE settings (inheritance chain, later
           overloads earlier):
-            1. amplitude_default.player   defaults
-            2. amplitude_control.player   user (optional global section)
+            1. amplitude_player_default.player   defaults
+            2. amplitude_player_control.player   user (optional global section)
             3. player                     player (settings.players[] entry)
           ---------------------------------------------------------------------- {% endcomment %}
-          {% for player in amplitude_control.players %} {% if player.enabled %}
-            {% assign player_effective = amplitude_default.player %}
-            {% if amplitude_control.player %}
-              {% assign player_effective = player_effective | deep_merge: amplitude_control.player %}
+          {% for player in amplitude_player_control.players %} {% if player.enabled %}
+            {% assign player_effective = amplitude_player_default.player %}
+            {% if amplitude_player_control.player %}
+              {% assign player_effective = player_effective | deep_merge: amplitude_player_control.player %}
             {% endif %}
             {% assign player_effective = player_effective | deep_merge: player %}
-            {% assign xhr_data_path = amplitude_options.xhr_data_path %}
+            {% assign xhr_data_path = amplitude_player_options.xhr_data_path %}
             {% capture xhr_container_id %}{{player.id}}_audio{% endcapture %}
 
             // dynamic loader variable to setup the player on ID {{player.id}}
@@ -2136,10 +2131,10 @@ j1.adapter.amplitude = ((j1, window) => {
   
                         // if player has NO slider presets, use amplitude defaults
                         //
-                        volumeSlider.min    = (isNaN(volumeMin))   ? parseInt('{{amplitude_default.player.volume_slider.min_value}}')    : volumeMin;
-                        volumeSlider.max    = (isNaN(volumeMax))   ? parseInt('{{amplitude_default.player.volume_slider.max_value}}')    : volumeMax;
-                        volumeSlider.value  = (isNaN(volumeValue)) ? parseInt('{{amplitude_default.player.volume_slider.preset_value}}') : volumeValue;
-                        volumeSlider.step   = (isNaN(volumeStep))  ? parseInt('{{amplitude_default.player.volume_slider.slider_step}}')  : volumeStep; 
+                        volumeSlider.min    = (isNaN(volumeMin))   ? parseInt('{{amplitude_player_default.player.volume_slider.min_value}}')    : volumeMin;
+                        volumeSlider.max    = (isNaN(volumeMax))   ? parseInt('{{amplitude_player_default.player.volume_slider.max_value}}')    : volumeMax;
+                        volumeSlider.value  = (isNaN(volumeValue)) ? parseInt('{{amplitude_player_default.player.volume_slider.preset_value}}') : volumeValue;
+                        volumeSlider.step   = (isNaN(volumeStep))  ? parseInt('{{amplitude_player_default.player.volume_slider.slider_step}}')  : volumeStep; 
                       } // END volumeSlider exists
 
                     } // END large player UI events
@@ -2334,9 +2329,9 @@ j1.adapter.amplitude = ((j1, window) => {
     //              plugin stores its runtime data in j1.adapter.<adapter>.data
     //              and calls the helper methods of j1.adapter.<adapter>
     //              (seconds2timestamp, timestamp2seconds).
-    //   defaults:  DEFAULT settings  (_data/modules/defaults/amplitude.yml)
-    //   players:   PLAYER settings   (_data/modules/amplitude_control.yml)
-    //   playlists: PLAYLIST settings (_data/modules/amplitude_media.yml)
+    //   defaults:  DEFAULT settings  (_data/modules/defaults/amplitudePlayer.yml)
+    //   players:   PLAYER settings   (_data/modules/amplitudePlayer_control.yml)
+    //   playlists: PLAYLIST settings (_data/modules/amplitude_player_media.yml)
     //
     // NOTE: The plugin still resolves the LEGACY handoff
     // j1.modules.amplitudejs.{defaults,players,playlists} if no options hash
@@ -2366,7 +2361,7 @@ j1.adapter.amplitude = ((j1, window) => {
         moduleNamespace:  'amplitudejs',
         defaults:         amplitudeDefaults,
         players:          (amplitudePlayers && amplitudePlayers.players) ? amplitudePlayers.players : [],
-        playlists:        $.extend({}, {{amplitude_media | replace: 'nil', 'null' | replace: '=>', ':' }})
+        playlists:        $.extend({}, {{amplitude_player_media | replace: 'nil', 'null' | replace: '=>', ':' }})
       };
 
       isDev && logger.debug('\n' + `published options for plugin: ${plugin}`);
@@ -2824,9 +2819,9 @@ j1.adapter.amplitude = ((j1, window) => {
     // config inheritance chain (later overloads earlier):
     //
     //   1. amplitudeDefaults      — _data/modules/defaults/amplitude.yml
-    //   2. user settings          — _data/modules/amplitude_control.yml
+    //   2. user settings          — _data/modules/amplitude_player_control.yml
     //                               (GLOBAL keys of settings, w/o 'players')
-    //   3. player entry           — _data/modules/amplitude_control.yml
+    //   3. player entry           — _data/modules/amplitude_player_control.yml
     //                               (settings.players[], matched by id)
     //
     // All default keys are available on the result; keys present in the

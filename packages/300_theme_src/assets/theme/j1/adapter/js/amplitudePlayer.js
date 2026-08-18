@@ -6,7 +6,7 @@ regenerate:                             true
 
 {% comment %}
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/adapter/js/amplitudePlayer.js (0)
+ # ~/assets/theme/j1/adapter/js/amplitudePlayer.js (1)
  # J1 Adapter for the module Amplitude player
  #
  # Product/Info:
@@ -33,10 +33,10 @@ regenerate:                             true
  # missing keys fall through):
  #
  #   1. _data/modules/defaults/amplitude.yml  (defaults ...........)  base
- #   2. _data/modules/amplitude_player_control.yml   (settings, w/o players)  user
+ #   2. _data/modules/amplitudePlayer_control.yml   (settings, w/o players)  user
  #                                            optional GLOBAL sections
  #                                            settings.player|settings.playlist
- #   3. _data/modules/amplitude_player_control.yml   (settings.players[] ..)  player
+ #   3. _data/modules/amplitudePlayer_control.yml   (settings.players[] ..)  player
  #
  # Before this fix, the adapter read ALL runtime settings from the DEFAULTS
  # layer only (amplitude_player_default.player.*) per-player keys were read
@@ -57,7 +57,7 @@ regenerate:                             true
  #     defaults.playlist <- control.playlist); the page-global runtime vars
  #     (playerRepeat, playerScrollerSongElementMin, ...) are re-assigned
  #     from these chains (former defaults-only block kept, superseded).
- #   • Liquid: player loops iterate amplitude_player_control.players (RAW control
+ #   • Liquid: player loops iterate amplitudePlayer_control.players (RAW control
  #     entries); the initPlayerUiEvents loop builds the per-player
  #     player_effective chain and reads type, plugin_manager and
  #     player_scroller_song_element_min from it.
@@ -67,12 +67,12 @@ regenerate:                             true
  #   • JS: getInstanceOptions(playerId) — public method returning the
  #     cached EFFECTIVE options object for one player instance (defaults
  #     <- user settings <- player entry, entry keys applied at PLAYER
- #     scope). Exposed as j1.adapter.amplitude.amplitudeInstanceOptions and
+ #     scope). Exposed as j1.adapter.amplitudePlayer.amplitudeInstanceOptions and
  #     j1.modules.amplitudejs.instanceOptions for module|plugin (ytp) use.
  #   • JS: init() — amplitudePlayers now reads the CONTROL settings
  #     (formerly the unassigned amplitude_player); the global merged
  #     options (defaults <- user) are exposed as
- #     j1.adapter.amplitude.amplitudeOptions and
+ #     j1.adapter.amplitudePlayer.amplitudeOptions and
  #     j1.modules.amplitudejs.options.
  #   • JS: pluginManagerEnabled — resolved from the per-player effective
  #     chain. The former expression fell back to the DEFAULT when a player
@@ -98,7 +98,7 @@ regenerate:                             true
  #   The reference is bound INSIDE init() in the section
  #
  #     // control|logging settings
- #     _this  = j1.adapter.amplitude;
+ #     _this  = j1.adapter.amplitudePlayer;
  #
  #   which is located WELL BELOW the global options block. Fix #1 inserted
  #   the new global merge chain
@@ -119,20 +119,20 @@ regenerate:                             true
  #
  #   NOTE: init() is defined as an ARROW function ('init: (options) => {}'),
  #   so 'this' is NOT bound to the module object and cannot be used as a
- #   substitute. The module object is available as j1.adapter.amplitude:
+ #   substitute. The module object is available as j1.adapter.amplitudePlayer:
  #   the module IIFE has returned long before init() is called from the
  #   page (document ready handler), so the reference is always valid at
  #   init() runtime.
  #
  # Changes:
  #
- #   • JS: init() — _this is bound to j1.adapter.amplitude as the FIRST
+ #   • JS: init() — _this is bound to j1.adapter.amplitudePlayer as the FIRST
  #     statement of init(), i.e. before ANY use of the module reference.
  #     The original (late) binding in the 'control|logging settings'
  #     section is KEPT unchanged (now a harmless re-assignment) so the
  #     former code path stays intact.
  #   • JS: _self() — new module-scope helper resolving the module object
- #     independent of the init() state: (_this || j1.adapter.amplitude).
+ #     independent of the init() state: (_this || j1.adapter.amplitudePlayer).
  #     Used at the _deepMerge()|getInstanceOptions() call sites so that a
  #     call from the module or a plugin (ytp) can NEVER fail again by an
  #     unbound _this, even if called before|without init().
@@ -181,7 +181,7 @@ regenerate:                             true
  # ytpVideoIdFromURL() in ytp.js (introduced by the Amplitude plugin fix
  # no. 5), extended by this fix for the bare-ID URL forms.
  #
- # Changes (all tagged "Modify Amplitude comfig #1"):
+ # Changes:
  #
  #   - JS: amplitudeMediaURL(audioBase, audioRef) - new helper building the
  #     song URL from a media config entry (see rules above).
@@ -212,8 +212,8 @@ regenerate:                             true
 {% comment %} Set config data
 -------------------------------------------------------------------------------- {% endcomment %}
 {% assign amplitude_player_default  = modules.defaults.amplitudePlayer.defaults %}
-{% assign amplitude_player_control  = modules.amplitude_player_control.settings %}
-{% assign amplitude_player_media    = modules.amplitude_player_media.settings %}
+{% assign amplitude_player_control  = modules.amplitudePlayer_control.settings %}
+{% assign amplitude_player_media    = modules.amplitudePlayer_media.settings %}
 
 {% comment %} Set config options
 -------------------------------------------------------------------------------- {% endcomment %}
@@ -257,7 +257,7 @@ regenerate:                             true
 
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/adapter/js/amplitudePlayer.js (0)
+ # ~/assets/theme/j1/adapter/js/amplitudePlayer.js (1)
  # J1 Adapter for the module amplitudePlayer
  #
  # Product/Info:
@@ -267,9 +267,6 @@ regenerate:                             true
  #
  # J1 Template is licensed under the MIT License.
  # For details, see: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE
- #
- # -----------------------------------------------------------------------------
- #  J1 Amplitude optimizations #1
  #
  # -----------------------------------------------------------------------------
  # Adapter generated: {{site.time}}
@@ -283,7 +280,7 @@ regenerate:                             true
 // -----------------------------------------------------------------------------
 "use strict";
 
-j1.adapter.amplitude = ((j1, window) => {
+j1.adapter.amplitudePlayer = ((j1, window) => {
 
   const isDev = '{{environment}}' === "development" || '{{environment}}' === "dev";
 
@@ -353,8 +350,9 @@ j1.adapter.amplitude = ((j1, window) => {
     6:                "changed",
   };
 
+  var techSrc                           = '/assets/theme/j1/modules/amplitudeJS';
   var ytpPluginInstalled                = false;
-  
+
   var playersUILoaded                   = { state: false };
   var apiInitialized                    = { state: false };
   var playerCounter                     = 0;
@@ -441,7 +439,7 @@ j1.adapter.amplitude = ((j1, window) => {
   }
 
   // ---------------------------------------------------------------------------
-  // Modify Amplitude comfig #1
+  // Modify Amplitude comfig
   // amplitudeMediaURL(audioBase, audioRef)
   //
   // Builds the URL of a song (property 'url') from the media config keys
@@ -502,11 +500,11 @@ j1.adapter.amplitude = ((j1, window) => {
   // INSIDE init() only. Any method called before|outside init() (e.g. by a
   // plugin like ytp) would fail on _this being 'undefined'. Because init()
   // and all module methods are ARROW functions, 'this' is NOT bound to the
-  // module object and cannot be used here. j1.adapter.amplitude is assigned
+  // module object and cannot be used here. j1.adapter.amplitudePlayer is assigned
   // when the module IIFE returned, so the fallback is valid at ANY runtime
   // call (it is evaluated lazily, NOT at module load time).
   //
-  var _self = () => (_this || j1.adapter.amplitude);
+  var _self = () => (_this || j1.adapter.amplitudePlayer);
 
   // ---------------------------------------------------------------------------
   // main
@@ -526,12 +524,14 @@ j1.adapter.amplitude = ((j1, window) => {
       // calls _this._deepMerge() while the ORIGINAL binding of _this is done
       // FAR BELOW (section 'control|logging settings'), leaving _this
       // 'undefined' at that point on a fresh page load:
+      //
       //   TypeError: Cannot read properties of undefined (reading '_deepMerge')
+      //
       // NOTE: init() is an ARROW function, 'this' is NOT bound to the module
-      // object. j1.adapter.amplitude is assigned when the module IIFE returned
+      // object. j1.adapter.amplitudePlayer is assigned when the module IIFE returned
       // and is therefore always valid at init() runtime.
       //
-      _this = j1.adapter.amplitude;
+      _this = j1.adapter.amplitudePlayer;
 
       // -----------------------------------------------------------------------
       // set console/error log filters (early)
@@ -544,7 +544,7 @@ j1.adapter.amplitude = ((j1, window) => {
       // default module settings
       // -----------------------------------------------------------------------
       var settings = $.extend({
-        module_name:  'j1.adapter.amplitude',
+        module_name:  'j1.adapter.amplitudePlayer',
         generated:    '{{site.time}}'
       }, options);
 
@@ -555,11 +555,11 @@ j1.adapter.amplitude = ((j1, window) => {
 
       // Build the GLOBAL (module-level) options with the _deepMerge helper
       // (chain: defaults <- user settings). The user layer are the GLOBAL
-      // keys of amplitude_player_control.yml (settings w/o the per-player array
+      // keys of amplitudePlayer_control.yml (settings w/o the per-player array
       // 'players'). Reset + expose the PER-INSTANCE options cache so the
       // module and plugins (ytp) can read the effective per-player chain
-      // via j1.adapter.amplitude.amplitudeInstanceOptions[playerId] resp.
-      // j1.adapter.amplitude.getInstanceOptions(playerId).
+      // via j1.adapter.amplitudePlayer.amplitudeInstanceOptions[playerId] resp.
+      // j1.adapter.amplitudePlayer.getInstanceOptions(playerId).
       //
       var amplitudeUserSettings = {};
       Object.keys(amplitudePlayers || {}).forEach(function (key) {
@@ -598,25 +598,25 @@ j1.adapter.amplitude = ((j1, window) => {
       j1.modules.amplitudejs.data.ytp.players               = {};
       j1.modules.amplitudejs.data.ytp.plugin                = false;
 
-      // save amplitudejs data for later use (e.g. events)
+      // save amplitudePlayer data for later use (e.g. events)
       //
-      j1.adapter.amplitude.data                             = {};
-      j1.adapter.amplitude.data.atpGlobals                  = {};
-      j1.adapter.amplitude.data.ytpGlobals                  = {};      
-      j1.adapter.amplitude.data.ytPlayers                   = {};
+      j1.adapter.amplitudePlayer.data                       = {};
+      j1.adapter.amplitudePlayer.data.atpGlobals            = {};
+      j1.adapter.amplitudePlayer.data.ytpGlobals            = {};      
+      j1.adapter.amplitudePlayer.data.ytPlayers             = {};
 
-      // initial amplitudejs data
+      // initial amplitudePlayer data
       //
-      j1.adapter.amplitude.data.playerSongElementHeigth     = playerSongElementHeigthDesktop;
-      j1.adapter.amplitude.data.activePlayer                = 'not_set';
-      j1.adapter.amplitude.data.atpGlobals.activePlayerType = 'not_set';
-      j1.adapter.amplitude.data.atpGlobals.ytpInstalled     = false;
-      j1.adapter.amplitude.data.ytpGlobals.activePlayerType = 'not_set';
+      j1.adapter.amplitudePlayer.data.playerSongElementHeigth     = playerSongElementHeigthDesktop;
+      j1.adapter.amplitudePlayer.data.activePlayer                = 'not_set';
+      j1.adapter.amplitudePlayer.data.atpGlobals.activePlayerType = 'not_set';
+      j1.adapter.amplitudePlayer.data.atpGlobals.ytpInstalled     = false;
+      j1.adapter.amplitudePlayer.data.ytpGlobals.activePlayerType = 'not_set';
 
       // control|logging settings
       //
-      _this  = j1.adapter.amplitude;
-      logger = log4javascript.getLogger('j1.adapter.amplitude');
+      _this  = j1.adapter.amplitudePlayer;
+      logger = log4javascript.getLogger('j1.adapter.amplitudePlayer');
 
       // -----------------------------------------------------------------------
       // module initializer
@@ -625,9 +625,9 @@ j1.adapter.amplitude = ((j1, window) => {
         var pageState      = $('#content').css("display");
         var pageVisible    = (pageState === 'block') ? true : false;
         var j1CoreFinished = (j1.getState() === 'finished') ? true : false;
-        var atticFinished  = (j1.adapter.attic.getState() == 'finished') ? true : false;
+//      var atticFinished  = (j1.adapter.attic.getState() == 'finished') ? true : false;
 
-        if (j1CoreFinished && pageVisible && atticFinished) {
+        if (j1CoreFinished && pageVisible) {
           startTimeModule = Date.now();
 
           _this.setState('started');
@@ -683,9 +683,9 @@ j1.adapter.amplitude = ((j1, window) => {
             var viewPortSize = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
             //do something, window hasn't changed size in 500ms
             if (viewPortSize > 578) {
-              j1.adapter.amplitude.data.playerSongElementHeigth = playerSongElementHeigthDesktop;
+              j1.adapter.amplitudePlayer.data.playerSongElementHeigth = playerSongElementHeigthDesktop;
             } else {
-              j1.adapter.amplitude.data.playerSongElementHeigth = playerSongElementHeigthMobile;
+              j1.adapter.amplitudePlayer.data.playerSongElementHeigth = playerSongElementHeigthMobile;
             }
           });
 
@@ -706,12 +706,13 @@ j1.adapter.amplitude = ((j1, window) => {
     // Create global playlist|songs (API)
     // -------------------------------------------------------------------------
     songLoader: (songs) => {
-
       isDev && logger.info('\n' + 'creating global playlist (API): started');
 
-      // -----------------------------------------------------------------------
-      // initialize amplitude songs
-      // -----------------------------------------------------------------------
+      {% comment %}
+      --------------------------------------------------------------------------
+      initialize amplitude songs
+      playlists: {{ amplitude_player_media.playlists | debug }}
+      -------------------------------------------------------------------------- {% endcomment %} 
       {% for playlist in amplitude_player_media.playlists %} {% if playlist.enabled %}
         var song_items = $.extend({}, {{playlist.items | replace: 'nil', 'null' | replace: '=>', ':' }});
 
@@ -807,7 +808,7 @@ j1.adapter.amplitude = ((j1, window) => {
             xhr_data_path:    '{{xhr_data_path}}',
             xhr_data_element: '{{player.id}}'
             },
-            'j1.adapter.amplitude',
+            'j1.adapter.amplitudePlayer',
             'data_loaded'
           );
 
@@ -854,7 +855,6 @@ j1.adapter.amplitude = ((j1, window) => {
     // initApi
     // -------------------------------------------------------------------------
     initApi: (songlist) => {
-
       isDev && logger.info('\n' + 'initialze API: started');
 
       {% comment %} collect playlists
@@ -875,7 +875,7 @@ j1.adapter.amplitude = ((j1, window) => {
         ------------------------------------------------------------------------ {% endcomment %}
         {% for item in playlist_items %} {% if item.enabled %}
 
-          {% comment %} Modify Amplitude comfig #1
+          {% comment %} Modify Amplitude comfig
           ----------------------------------------------------------------------
            Build the song URL from the media config keys 'audio_base' and
            'audio'. Same rules as the JS helper amplitudeMediaURL(), written
@@ -968,7 +968,6 @@ j1.adapter.amplitude = ((j1, window) => {
       // See:  https://521dimensions.com/open-source/amplitudejs/docs
       // NOTE: slider VALUE (volume) is set by DEFAULT settings (player)
       Amplitude.init({
-
         bindings: {
           33:  'play_pause',
           37:  'prev',
@@ -1066,8 +1065,6 @@ j1.adapter.amplitude = ((j1, window) => {
 
         continue_next:    playerPlayNextTitle,
         volume:           playerDefaultVolume
-        // volume_decrement: playerVolumeSliderStep,
-        // volume_increment: playerVolumeSliderStep
 
       }); // END Amplitude init
 
@@ -1090,6 +1087,7 @@ j1.adapter.amplitude = ((j1, window) => {
         // number of iteration steps to INCREASE the players volume on fade-in
         // NOTE: number of steps controls how long and smooth the fade-in 
         // transition will be
+        //
         const iterationSteps = {
           'default':  150,
           'slow':     250,
@@ -1147,6 +1145,7 @@ j1.adapter.amplitude = ((j1, window) => {
         // number of iteration steps to INCREASE the players volume on fade-in
         // NOTE: number of steps controls how long and smooth the fade-in 
         // transition will be
+        //
         const iterationSteps = {
           'default':  150,
           'slow':     250,
@@ -1247,14 +1246,14 @@ j1.adapter.amplitude = ((j1, window) => {
         isDev && logger.debug('\n' + `PLAY audio on AT Player at playlist|trackID: ${playlist}|${trackID}`);
 
         // save player GLOBAL data for later use (e.g. events)
-        j1.adapter.amplitude.data.activePlayer  = 'atp';
+        j1.adapter.amplitudePlayer.data.activePlayer  = 'atp';
 
         // set song (manually) active at index in playlist
         _this.setSongActive(playlist, songIndex);
 
         // stop active YT players
         // ---------------------------------------------------------------------
-        _this.atpStopParallelActivePlayers(j1.adapter.amplitude.data.ytPlayers);
+        _this.atpStopParallelActivePlayers(j1.adapter.amplitudePlayer.data.ytPlayers);
 
         // update song rating in playlist-screen|meta-container
         // ---------------------------------------------------------------------
@@ -1274,8 +1273,8 @@ j1.adapter.amplitude = ((j1, window) => {
 
         // save YT player data for later use (e.g. events)
         // ---------------------------------------------------------------------
-        j1.adapter.amplitude.data.activePlayer = 'atp';
-        j1.adapter.amplitude.data.atpGlobals.activePlayerType = 'large';
+        j1.adapter.amplitudePlayer.data.activePlayer = 'atp';
+        j1.adapter.amplitudePlayer.data.atpGlobals.activePlayerType = 'large';
 
       }; // END processOnStateChangePlaying
 
@@ -1472,8 +1471,8 @@ j1.adapter.amplitude = ((j1, window) => {
                               var ytpPlayer;
 
                               // save YT player data for later use (e.g. events)
-                              j1.adapter.amplitude.data.activePlayer = 'atp';
-                              j1.adapter.amplitude.data.atpGlobals.activePlayerType = 'mini';
+                              j1.adapter.amplitudePlayer.data.activePlayer = 'atp';
+                              j1.adapter.amplitudePlayer.data.atpGlobals.activePlayerType = 'mini';
 
                             }); // addEventListener END
                           } // END if miniPlayerPlayPauseButton
@@ -1603,7 +1602,7 @@ j1.adapter.amplitude = ((j1, window) => {
                               var atpPlayerID     = this.id;
                               var atpPlayerActive = atpPlayerID.split('_');
     
-                              j1.adapter.amplitude.data.atpGlobals.activePlayerType = 'compact';
+                              j1.adapter.amplitudePlayer.data.atpGlobals.activePlayerType = 'compact';
 
                             }); // END EventListener 'click'
                           } // END if ID
@@ -1625,7 +1624,7 @@ j1.adapter.amplitude = ((j1, window) => {
                               var atpPlayerID     = this.id;
                               var atpPlayerActive = atpPlayerID.split('_');
     
-                              j1.adapter.amplitude.data.atpGlobals.activePlayerType = 'compact';
+                              j1.adapter.amplitudePlayer.data.atpGlobals.activePlayerType = 'compact';
 
                             }); // END EventListener 'click'
                           } // END if ID
@@ -1651,12 +1650,12 @@ j1.adapter.amplitude = ((j1, window) => {
                               var playerState;
 
                               // stop active YT players
-                              const ytPlayers = Object.keys(j1.adapter.amplitude.data.ytPlayers);
+                              const ytPlayers = Object.keys(j1.adapter.amplitudePlayer.data.ytPlayers);
                               for (let i=0; i<ytPlayers.length; i++) {
                                 const playerID = ytPlayers[i];
-                                const playerProperties = j1.adapter.amplitude.data.ytPlayers[playerID];
+                                const playerProperties = j1.adapter.amplitudePlayer.data.ytPlayers[playerID];
                                 isDev && logger.debug('\n' + `process player id: ${playerID}`);
-                                ytpPlayer       = j1.adapter.amplitude.data.ytPlayers[playerID].player;
+                                ytpPlayer       = j1.adapter.amplitudePlayer.data.ytPlayers[playerID].player;
                                 playerState     = ytpPlayer.getPlayerState();
                                 ytpPlayerState  = YT_PLAYER_STATE_NAMES[playerState];
 
@@ -1667,8 +1666,8 @@ j1.adapter.amplitude = ((j1, window) => {
                               }
 
                               // save YT player data for later use (e.g. events)
-                              j1.adapter.amplitude.data.activePlayer = 'atp';
-                              j1.adapter.amplitude.data.atpGlobals.activePlayerType = 'compact';
+                              j1.adapter.amplitudePlayer.data.activePlayer = 'atp';
+                              j1.adapter.amplitudePlayer.data.atpGlobals.activePlayerType = 'compact';
 
                               });
                           }
@@ -1799,12 +1798,12 @@ j1.adapter.amplitude = ((j1, window) => {
 
                               // stop active YT players
                               // -----------------------------------------------
-                              const ytPlayers = Object.keys(j1.adapter.amplitude.data.ytPlayers);
+                              const ytPlayers = Object.keys(j1.adapter.amplitudePlayer.data.ytPlayers);
                               for (let i=0; i<ytPlayers.length; i++) {
                                 const playerID = ytPlayers[i];
-                                const playerProperties = j1.adapter.amplitude.data.ytPlayers[playerID];
+                                const playerProperties = j1.adapter.amplitudePlayer.data.ytPlayers[playerID];
                                 isDev && logger.debug('\n' + 'process player id: ' + playerID);
-                                ytpPlayer       = j1.adapter.amplitude.data.ytPlayers[playerID].player;
+                                ytpPlayer       = j1.adapter.amplitudePlayer.data.ytPlayers[playerID].player;
                                 playerState     = ytpPlayer.getPlayerState();
                                 ytpPlayerState  = YT_PLAYER_STATE_NAMES[playerState];
 
@@ -1816,8 +1815,8 @@ j1.adapter.amplitude = ((j1, window) => {
 
                               // save YT player data for later use (e.g. events)
                               // -----------------------------------------------
-                              j1.adapter.amplitude.data.activePlayer = 'atp';
-                              j1.adapter.amplitude.data.atpGlobals.activePlayerType = atpPlayerActive[3];
+                              j1.adapter.amplitudePlayer.data.activePlayer = 'atp';
+                              j1.adapter.amplitudePlayer.data.atpGlobals.activePlayerType = atpPlayerActive[3];
 
                             }); // END add EventListener
                           } // END if currentPlaylist
@@ -1938,17 +1937,17 @@ j1.adapter.amplitude = ((j1, window) => {
 
                               // scroll song active at index in player
                               if (playerAutoScrollSongElement) {
-                                j1.adapter.amplitude.atPlayerScrollToActiveElement(Amplitude.getActiveSongMetadata());
+                                j1.adapter.amplitudePlayer.atPlayerScrollToActiveElement(Amplitude.getActiveSongMetadata());
                               }                              
 
                               // scroll song active at index in player
                               if (playerAutoScrollSongElement) {
-                                j1.adapter.amplitude.atPlayerScrollToActiveElement(Amplitude.getActiveSongMetadata());
+                                j1.adapter.amplitudePlayer.atPlayerScrollToActiveElement(Amplitude.getActiveSongMetadata());
                               }  
 
                               // save YT player data for later use (e.g. events)
-                              j1.adapter.amplitude.data.activePlayer = 'atp';
-                              j1.adapter.amplitude.data.atpGlobals.activePlayerType = atpPlayerActive[0];
+                              j1.adapter.amplitudePlayer.data.activePlayer = 'atp';
+                              j1.adapter.amplitudePlayer.data.atpGlobals.activePlayerType = atpPlayerActive[0];
 
                             }); // END addEventListener
                           } // END if largePreviousButtons
@@ -2141,8 +2140,8 @@ j1.adapter.amplitude = ((j1, window) => {
                     {% comment %} END process UI events for all LARGE Players
                     ------------------------------------------------------------ {% endcomment %}
 
-                    // ---------------------------------------------------------
                     // START configured player features
+                    // ---------------------------------------------------------                    
 
                     isDev && logger.debug('\n' + `set play next title: ${playerPlayNextTitle}`);
                     isDev && logger.debug('\n' + `set delay between titles: ${playerDelayNextTitle}ms`);
@@ -2281,7 +2280,7 @@ j1.adapter.amplitude = ((j1, window) => {
         // plugin as an options hash (mirror of the handoff implemented in
         // the amplitudePlayer adapter). The plugin does NOT read the YAML config
         // files of the amplitude module anymore, and it does NOT assume the
-        // adapter namespace j1.adapter.amplitude anymore either: the key
+        // adapter namespace j1.adapter.amplitudePlayer anymore either: the key
         // 'adapter' tells the plugin where to store its runtime data.
         //
         // IMPORTANT: the options MUST be published BEFORE the plugin script
@@ -2292,7 +2291,7 @@ j1.adapter.amplitude = ((j1, window) => {
 
         tech        = document.createElement('script');
         tech.id     = 'tech_' + plugin;
-        tech.src    = '/assets/theme/j1/modules/amplitudejs/js/tech/' + plugin + '.js';
+        tech.src    = techSrc + '/js/tech/' + plugin + '.js';
         techScript  = document.getElementsByTagName('script')[0];
 
         techScript.parentNode.insertBefore(tech, techScript);
@@ -2308,10 +2307,10 @@ j1.adapter.amplitude = ((j1, window) => {
         // Copy-paste artifact (from the amplitudePlayer adapter): the
         // amplitude adapter wrote the ytpInstalled flag to the FOREIGN
         // adapter namespace j1.adapter.amplitudePlayer. The flag belongs to
-        // the OWN namespace j1.adapter.amplitude (see the atpGlobals
+        // the OWN namespace j1.adapter.amplitudePlayer (see the atpGlobals
         // initialization in the init cycle of THIS adapter).
         //
-        j1.adapter.amplitude.data.atpGlobals.ytpInstalled = true;
+        j1.adapter.amplitudePlayer.data.atpGlobals.ytpInstalled = true;
       }      
     }, // END pluginManager
 
@@ -2327,8 +2326,8 @@ j1.adapter.amplitude = ((j1, window) => {
     //              plugin stores its runtime data in j1.adapter.<adapter>.data
     //              and calls the helper methods of j1.adapter.<adapter>
     //              (seconds2timestamp, timestamp2seconds).
-    //   defaults:  DEFAULT settings  (_data/modules/defaults/amplitude.yml)
-    //   players:   PLAYER settings   (_data/modules/amplitude_player_control.yml)
+    //   defaults:  DEFAULT settings  (_data/modules/defaults/amplitudePlayer.yml)
+    //   players:   PLAYER settings   (_data/modules/amplitudePlayer_control.yml)
     //   playlists: PLAYLIST settings (_data/modules/amplitude_player_media.yml)
     //
     // NOTE: The plugin still resolves the LEGACY handoff
@@ -2394,7 +2393,7 @@ j1.adapter.amplitude = ((j1, window) => {
       // LARGE players
       // -----------------------------------------------------------------------
       if (songIndex > 0 && numSongs >= songElementMin) {
-        activeElementOffsetTop    = songIndex * j1.adapter.amplitude.data.playerSongElementHeigth;
+        activeElementOffsetTop    = songIndex * j1.adapter.amplitudePlayer.data.playerSongElementHeigth;
         scrollableList.scrollTop  = activeElementOffsetTop;        
       } else {
         // do nothing if songIndex is 0 or less than songElementMin
@@ -2831,7 +2830,7 @@ j1.adapter.amplitude = ((j1, window) => {
     // global chain (defaults <- user settings).
     //
     // Results are cached per playerId and exposed on the adapter object as
-    // j1.adapter.amplitude.amplitudeInstanceOptions[playerId] (mirrored on
+    // j1.adapter.amplitudePlayer.amplitudeInstanceOptions[playerId] (mirrored on
     // j1.modules.amplitudejs.instanceOptions) so the module and plugins
     // (ytp) can read the per-instance options directly.
     // -------------------------------------------------------------------------
