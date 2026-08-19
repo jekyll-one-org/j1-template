@@ -1,0 +1,908 @@
+---
+title:                                  Swiper Tester
+title_extention:                        Swiper Integration
+tagline:                                Swiper Integration
+
+date:                                   2025-01-07
+#last_modified:                         2025-01-01
+
+description: >
+
+keywords: >
+                                        open source, free, template, jekyll, jekyllone, web,
+                                        sites, static, jamstack, bootstrap,
+                                        html, html5, video, support, flash player,
+                                        quicktime, silverlight
+
+categories:                             [ Tester ]
+tags:                                   [ Swiper ]
+
+image:
+  path:                                 /assets/image/module/attic/markus-spiske-1920x1280.jpg
+  width:                                1920
+  height:                               1280
+
+compress:                               false
+regenerate:                             false
+personalization:                        true
+permalink:                              /pages/public/tools/tester/swiper/
+
+resources:                              [ photoswipe, swiper, videojs ]
+resource_options:
+  - toccer:
+      collapseDepth:                    3
+  - attic:
+      slides:
+        - url:                          /assets/image/module/attic/markus-spiske-1920x1280.jpg
+          alt:                          Swiper Tester
+---
+
+// Page Initializer
+// =============================================================================
+// Enable the Liquid Preprocessor
+:page-liquid:
+
+// Attribute settings for section control
+//
+:swiper--features:                      false
+
+// Set (local) page attributes here
+// -----------------------------------------------------------------------------
+// :page--attr:                         <attr-value>
+
+//  Load Liquid procedures
+// -----------------------------------------------------------------------------
+{% capture load_attributes %}themes/{{site.template.name}}/procedures/global/attributes_loader.proc{%endcapture%}
+
+// Load page attributes
+// -----------------------------------------------------------------------------
+{% include {{load_attributes}} scope="global" %}
+
+
+// Page content
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[role="dropcap"]
+Swiper, the free and most modern mobile touch slider with hardware accelerated
+transitions and amazing native behavior. It is intended to be used in mobile
+websites, mobile web apps, and mobile native/hybrid apps.
+
+// Include sub-documents (if any)
+// -----------------------------------------------------------------------------
+lorem:sentences[5]
+
+[NOTE]
+====
+Swiper is not compatible with all platforms, it is a modern touch slider
+which is focused only on modern apps/platforms to bring the best experience
+and simplicity.
+====
+
+[role="mt-4"]
+== Text Slider
+
+A slider is typically used for displaying images. Still, the implementation
+for the J1 Template supports a lot more sources to be displayed as a slide
+show — simple text for example.
+
+[role="mt-4"]
+=== Base Text Carousel
+
+Important statements or topics can be placed on top of an article or a
+paragraph to give them better visibility. You can present facts to know
+animated for the readers attention.
+
+.Base Text Swiper
+swiper::swiper_text_base[role="mt-4 mb-4"]
+
+
+[role="mt-4"]
+== Base Image Sliders
+
+Sliders (or carousels) are mainly used for picture data to animate images
+as a group. Find below examples of using a simple (base) slider for your
+image data.
+
+[role="mt-4"]
+=== Lightbox enabled
+
+A simple image show is useful, for example, as an animated (or not animated)
+banner presenting exciting things about your site or the products offered.
+
+.Mixed image sizes
+swiper::swiper_image_base_captions[role="mt-4 mb-4"]
+
+
+[role="mt-4"]
+=== Captions + Lightbox enabled
+
+Carousels are used for an exceptionally compact form of image galleries.
+This example shows some pictures having individual caption text and supports
+a lightbox to enlarge images full size.
+
+.Same image sizes
+swiper::swiper_image_base_lightbox[role="mt-4 mb-4"]
+
+
+[role="mt-4"]
+[[image_thumbs_silder_bottom]]
+==== Thumbs Slider (bottom)
+
+To give the users a more *visual* control over a slideshow, Swiper sliders can
+provide UI elements by placing mini-images or short text elements (thumbs)
+side-by-side (on the left|right), or at bottom|toop of a slideshow. Find below
+examples how to control such sliders by a thumbs slave silder.
+
+++++
+<!-- Master Slider  (top) -->
+<div class="carousel-title"> <i class="mdib mdib-view-carousel mdib-24px mr-2"></i> Thumbs Silder · Bottom</div>
+<div id="master_slider_1" class="swiper swiper-container">
+
+  <!-- Slides container -->
+  <ul class="swiper-wrapper">
+    <li class="swiper-slide">
+      <img src="/assets/image/module/masterslider/slider_4/ms-free-animals-1.jpg">      
+    </li>
+    <li class="swiper-slide">
+      <img src="/assets/image/module/masterslider/slider_4/ms-free-animals-2.jpg">
+    </li>
+    <li class="swiper-slide">
+      <img src="/assets/image/module/masterslider/slider_4/ms-free-animals-3.jpg">
+    </li>
+    <li class="swiper-slide">
+      <img src="/assets/image/module/masterslider/slider_4/ms-free-animals-4.jpg">
+    </li>
+    <li class="swiper-slide">
+      <img src="/assets/image/module/masterslider/slider_4/ms-free-animals-5.jpg">
+    </li>
+    <li class="swiper-slide">
+      <img src="/assets/image/module/masterslider/slider_4/ms-free-animals-6.jpg">
+    </li>
+  </ul> <!-- END swiper-wrapper -->
+
+</div> <!-- END swiper-container -->
+
+<!-- Thumbs Slider (bottom) -->
+<div id="thumbs_slider_1" class="swiper swiper-container thumbs-slider--bottom mt-1 mb-5">
+
+  <!-- Slides container -->
+  <ul class="swiper-wrapper">
+    <li class="swiper-slide">
+      <img src="/assets/image/module/masterslider/slider_4/ms-free-animals-1.jpg">
+    </li>
+    <li class="swiper-slide">
+      <img src="/assets/image/module/masterslider/slider_4/ms-free-animals-2.jpg">
+    </li>
+    <li class="swiper-slide">
+      <img src="/assets/image/module/masterslider/slider_4/ms-free-animals-3.jpg">
+    </li>
+    <li class="swiper-slide">
+      <img src="/assets/image/module/masterslider/slider_4/ms-free-animals-4.jpg">
+    </li>
+    <li class="swiper-slide">
+      <img src="/assets/image/module/masterslider/slider_4/ms-free-animals-5.jpg">
+    </li>
+    <li class="swiper-slide">
+      <img src="/assets/image/module/masterslider/slider_4/ms-free-animals-6.jpg">
+    </li>
+  </ul> <!-- END swiper-wrapper -->
+
+</div> <!-- END swiper-container -->
+
+<!-- Initialize Image Thumbs Slider (bottom) -->
+<script>
+$(function() {
+  // ---------------------------------------------------------------------------
+  // slider initializer
+  // ---------------------------------------------------------------------------
+  var dependencies_met_page_ready = setInterval (() => {
+    var atticFinished = (j1.adapter.attic.getState() == 'finished') ? true : false;
+
+    if (atticFinished) {
+
+      const thumbsSlider1 = new Swiper("#thumbs_slider_1", {
+        autoHeight: true,
+        direction: 'horizontal',
+        spaceBetween: 5,
+        slidesPerView: 3,
+        grabCursor: true,
+        freeMode: false,
+        watchSlidesProgress: true,
+        on: {
+          transitionStart: (swiper) => {
+            masterSlider1.slideTo(swiper.activeIndex);
+          }
+        },
+      });
+
+      const masterSlider1 = new Swiper("#master_slider_1", {
+        direction: 'horizontal',
+        thumbs: {
+          swiper: thumbsSlider1,
+        },
+        on: {
+          slideChangeTransitionStart: (swiper) => {
+            thumbsSlider1.slideTo(swiper.activeIndex);
+          }
+        },
+      });
+
+      clearInterval(dependencies_met_page_ready);
+    } // END pageVisible
+  }, 10); // END dependencies_met_page_ready
+});    
+</script>
+++++
+
+[role="mt-4"]
+[[image_thumbs_silder_right]]
+=== Thumbs Slider (right) + Captions
+
+A more *compact* version using image thumbs can defined by placing the thumb
+images (slave slider) on the right of the  master slider side-by-side. The will
+reduce the size of the (master) slider, but all elements of the combined sliders
+are in a *single row*.
+
+++++
+<div class="carousel-title"> <i class="mdib mdib-view-carousel mdib-24px mr-2"></i> Thumbs Silder · Right + Captions</div>
+<div class="container g-0 mb-5">
+    <div class="row gx-1">
+
+      <!-- BS Multi Slider (left) -->
+      <div class="col-md-9">
+        <div id="master_slider_2" class="swiper swiper-container swiper--multi gallery-slider">
+            <!-- Slides container -->
+            <ul class="swiper-wrapper">
+              <li class="swiper-slide">
+                <img src="/assets/image/module/masterslider/slider_4/ms-free-animals-1.jpg">
+                <div class="swp-caption-content">Image 1</div>
+              </li>
+              <li class="swiper-slide">
+                <img src="/assets/image/module/masterslider/slider_4/ms-free-animals-2.jpg">
+                <div class="swp-caption-content">Image 2</div>
+              </li>
+              <li class="swiper-slide">
+                <img src="/assets/image/module/masterslider/slider_4/ms-free-animals-3.jpg">
+                <div class="swp-caption-content">Image 3</div>
+              </li>
+              <li class="swiper-slide">
+                <img src="/assets/image/module/masterslider/slider_4/ms-free-animals-4.jpg">
+                <div class="swp-caption-content">Image 4</div>
+              </li>
+              <li class="swiper-slide">
+                <img src="/assets/image/module/masterslider/slider_4/ms-free-animals-5.jpg">
+                <div class="swp-caption-content">Image 5</div>
+              </li>
+              <li class="swiper-slide">
+                <img src="/assets/image/module/masterslider/slider_4/ms-free-animals-6.jpg">
+                <div class="swp-caption-content">Image 6</div>
+              </li>
+            </ul> <!-- END swiper-wrapper -->
+        </div> <!-- END swiper-container -->
+      </div> <!-- END col-md-9"  -->
+
+      <!-- Thumbs Slider (right) -->
+      <div class="col-md-3">
+        <div id="thumbs_slider_2" class="swiper swiper-container swiper--multi thumbs-slider--right">
+          <!-- Slides container -->
+          <ul class="swiper-wrapper">
+            <li class="swiper-slide">
+              <img src="/assets/image/module/masterslider/slider_4/ms-free-animals-1.jpg">
+              <div class="swp-caption-content">Image 1</div>
+            </li>
+            <li class="swiper-slide">
+              <img src="/assets/image/module/masterslider/slider_4/ms-free-animals-2.jpg">
+              <div class="swp-caption-content">Image 2</div>
+            </li>
+            <li class="swiper-slide">
+              <img src="/assets/image/module/masterslider/slider_4/ms-free-animals-3.jpg">
+              <div class="swp-caption-content">Image 3</div>
+            </li>
+            <li class="swiper-slide">
+              <img src="/assets/image/module/masterslider/slider_4/ms-free-animals-4.jpg">
+              <div class="swp-caption-content">Image 4</div>
+            </li>
+            <li class="swiper-slide">
+              <img src="/assets/image/module/masterslider/slider_4/ms-free-animals-5.jpg">
+              <div class="swp-caption-content">Image 5</div>
+            </li>
+            <li class="swiper-slide">
+              <img src="/assets/image/module/masterslider/slider_4/ms-free-animals-6.jpg">
+              <div class="swp-caption-content">Image 6</div>
+            </li>
+          </ul> <!-- END swiper-wrapper -->
+        </div> <!-- END swiper-container -->
+      </div> <!-- END col-md-3"  -->
+
+    </div> <!-- END BS row -->
+</div> <!-- END BS container -->
+
+<!-- Initialize BS Multi Swiper -->
+<script>
+$(function() {
+  // ---------------------------------------------------------------------------
+  // slider initializer
+  // ---------------------------------------------------------------------------
+  var dependencies_met_page_ready = setInterval (() => {
+    var atticFinished = (j1.adapter.attic.getState() == 'finished') ? true : false;
+
+    if (atticFinished) {
+
+      // Initialize Thumb Swiper instance (right)
+      var thumbsSwiper2 = new Swiper('#thumbs_slider_2', {
+        direction: 'vertical',
+        spaceBetween: 5,
+        slidesPerView: 3,
+        grabCursor: true,
+        // centeredSlides: true,
+        // centeredSlidesBounds: true,
+        // watchOverflow: true,
+        // watchSlidesVisibility: true,
+        // watchSlidesProgress: true,
+        on: {
+          transitionStart: (swiper) => {
+            masterSwiper2.slideTo(swiper.activeIndex);
+          }
+        }
+      });
+
+      // Initialize Master Swiper instance (left)
+      var masterSwiper2 = new Swiper('#master_slider_2', {        
+        direction: 'horizontal',
+        grabCursor: true,
+        // watchOverflow: true,
+        // watchSlidesVisibility: true,
+        // watchSlidesProgress: true,
+        // preventInteractionOnTransition: true,
+        effect: 'fade',
+          fadeEffect: {
+          crossFade: true
+        },
+        thumbs: {
+          swiper: thumbsSwiper2
+        },
+        on: {
+          slideChangeTransitionStart: (swiper) => {
+            thumbsSwiper2.slideTo(swiper.activeIndex);
+          },
+          click: (swiper, event) => {
+            console.log('Clicked on the slider, index: ', swiper.activeIndex);
+          }
+        }
+      });
+
+      clearInterval(dependencies_met_page_ready);
+    } // END pageVisible
+  }, 10); // END dependencies_met_page_ready
+});    
+</script>
+++++
+
+
+[role="mt-5"]
+== Sliders using Transition Effects
+
+Transition effects are visual effects used when switching between the
+different slides of a slider. They can make the transition between slides
+more interesting and dynamic.
+
+[role="mt-4"]
+=== Neighbor Effect
+
+A slideshow typically presents a larger number of slides, which requires a
+sort of navigation. The Effect *neighbor* accompanies the *active* slide by
+their *neighbors* on the left and right as *previews*. The neighbor on the
+left acts like a *previous button* and scrolls the slides *backward*. The
+neighbor on the *right* acts like a *next button* and scrolls the slides
+*forward*.
+
+[TIP]
+====
+The Effect transforms a slider into a quite *compact* presentation that does
+*not* require any (additional) *navigation* elements.
+====
+
+++++
+<div class="carousel-title mt-4"> <i class="mdib mdib-view-carousel mdib-24px mr-2"></i> Extended Slider · Neighbor effect </div>
+
+<!-- Triple slider -->
+<div class="triple-slider mb-5">
+  <!-- Main center swiper -->
+  <!-- Duplicate swipers will be created automatically -->
+  <div class="swiper">
+
+    <ul class="swiper-wrapper">
+      <li class="swiper-slide">
+        <img class="bg-image" src="/assets/image/module/swiper/neighbor_slider/guardians-of-the-galaxy.jpg" alt="">
+      </li>
+      <li class="swiper-slide">
+        <img class="bg-image" src="/assets/image/module/swiper/neighbor_slider/justice-league.jpg" alt="">
+      </li>
+      <li class="swiper-slide">
+        <img class="bg-image" src="/assets/image/module/swiper/neighbor_slider/spider-man.jpg" alt="">
+      </li>
+      <li class="swiper-slide">
+        <img class="bg-image" src="/assets/image/module/swiper/neighbor_slider/suicide-squad.jpg" alt="">
+      </li>
+      <li class="swiper-slide">
+        <img class="bg-image" src="/assets/image/module/swiper/neighbor_slider/thor-ragnarok.jpg" alt="">
+      </li>
+    </ul>
+
+  </div>
+</div>
+
+<!-- Initialize Swiper Layout partialview -->
+<script>
+
+$(function() {
+
+  function createTripleSlider(el) {
+
+    // main swiper el
+    //
+    const swiperEl = el.querySelector('.swiper');
+
+    // create prev (duplicate) swiper
+    //
+    const swiperPrevEl = swiperEl.cloneNode(true);
+    swiperPrevEl.classList.add('triple-slider-prev');
+    el.insertBefore(swiperPrevEl, swiperEl);
+    const swiperPrevSlides = swiperPrevEl.querySelectorAll('.swiper-slide');
+    const swiperPrevLastSlideEl = swiperPrevSlides[swiperPrevSlides.length - 1];
+    swiperPrevEl
+      .querySelector('.swiper-wrapper')
+      .insertBefore(swiperPrevLastSlideEl, swiperPrevSlides[0]);
+
+    // create next (duplicate) swiper
+    //
+    const swiperNextEl = swiperEl.cloneNode(true);
+    swiperNextEl.classList.add('triple-slider-next');
+    el.appendChild(swiperNextEl);
+    const swiperNextSlides = swiperNextEl.querySelectorAll('.swiper-slide');
+    const swiperNextFirstSlideEl = swiperNextSlides[0];
+    swiperNextEl
+      .querySelector('.swiper-wrapper')
+      .appendChild(swiperNextFirstSlideEl);
+
+    // Add "main" class
+    //
+    swiperEl.classList.add('triple-slider-main');
+
+    // common params for all swipers
+    //
+    const commonParams = {
+      speed: 600,
+      loop: true,
+      parallax: true,
+    };
+
+    var tripleMainSwiper;
+
+    // init prev swiper
+    //
+    const triplePrevSwiper = new Swiper(swiperPrevEl, {
+      ...commonParams,
+      allowTouchMove: false,
+      on: {
+        click() {
+          tripleMainSwiper.slidePrev();
+        },
+      },
+    });
+
+    // init next swiper
+    //
+    const tripleNextSwiper = new Swiper(swiperNextEl, {
+      ...commonParams,
+      allowTouchMove: false,
+      on: {
+        click() {
+          tripleMainSwiper.slideNext();
+        },
+      },
+    });
+
+    // init main swiper
+    //
+    tripleMainSwiper = new Swiper(swiperEl, {
+      ...commonParams,
+      grabCursor: true,
+      controller: {
+        control: [triplePrevSwiper, tripleNextSwiper],
+      },
+      on: {
+        destroy() {
+          // destroy side swipers on main swiper destroy
+          triplePrevSwiper.destroy();
+          tripleNextSwiper.destroy();
+        },
+      },
+    });
+
+    return tripleMainSwiper;
+  }
+
+  // ---------------------------------------------------------------------------
+  // slider initializer
+  // ---------------------------------------------------------------------------
+  var dependencies_met_page_ready = setInterval (() => {
+    var atticFinished = (j1.adapter.attic.getState() == 'finished') ? true : false;
+
+    if (atticFinished) {
+      const sliderEl = document.querySelector('.triple-slider');
+
+      createTripleSlider(sliderEl);
+
+       clearInterval(dependencies_met_page_ready);
+    } // END pageVisible
+  }, 10); // END dependencies_met_page_ready
+});
+
+</script>
+
+<style>
+
+.triple-slider {
+  /* padding: 32px 0; */
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  /* perspective: 1200px; */
+}
+
+.triple-slider .swiper {
+  width: 90%;
+  max-width: 640px;
+  height: 320px;
+  /* border-radius: 8px; */
+}
+
+/*
+.triple-slider .bg-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+*/
+
+.triple-slider .triple-slider-main {
+  position: relative;
+  z-index: 10;
+  box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.5); /* effect option */
+}
+
+.triple-slider .triple-slider-prev,
+.triple-slider .triple-slider-next {
+  top: 50%;
+  opacity: 0.75;  /* effect option */
+  position: absolute;
+  user-select: none;
+  -webkit-user-select: none; /* Safari */
+  cursor: pointer;
+  filter: grayscale(1); /* effect option */
+  transform: translateY(-50%) scale(1) rotateY(0deg); /* effect option (scale) */
+}
+
+/* jadams, 2025-02-02: set slider SIZE by >>tranform property<< */
+/* jadams, 2025-02-02: added CSS filter */
+
+.triple-slider .triple-slider-prev {
+  right: 50%;
+  /* transform: translateY(-50%) scale(0.75) rotateY(10deg); */
+  /* transform: translateY(-50%) scale(1) rotateY(0deg); effect option (scale) */
+  /* filter: grayscale(1) contrast(1) brightness(1); */
+}
+
+.triple-slider .triple-slider-next {
+  left: 50%;
+  /* transform: translateY(-50%) scale(0.75) rotateY(-10deg); */
+  /* transform: translateY(-50%) scale(1) rotateY(10deg); */
+  /* filter: grayscale(1) contrast(1) brightness(1); */
+}
+
+</style>
+++++
+
+[role="mt-4"]
+=== Pamorama Effect
+
+The panorama view presents the available slides of a slider as a
+group. The group is displayed in a virtual, circular viewing angle. This
+effect is great for slides connected in terms of content to give the user
+a panoramic view impression.
+
+.Extended Slider · Panorama effect
+swiper::swiper_image_panorama[role="mt-4 mb-4"]
+
+
+[role="mt-5"]
+== Sliders using Layouts
+
+lorem:sentences[5]
+
+[role="mt-4"]
+[[slider_collection]]
+=== Layout Collection
+
+lorem:sentences[5]
+
+[role="mt-4"]
+[[slider_post]]
+=== Layout Posts
+
+lorem:sentences[5]
+
+
+
+[role="mt-4"]
+[[slider-videojs]]
+== Video Sliders
+
+If only a *small* number of video sources should presented, the concept of
+controller based slders using Thumb Elements provide a quite *space-saving*
+way to do so.
+
+The J1 template system uses VideoJS to enable *mixed* video sliders. VideoJS
+for J1 supports VJS plugins for local Video like MP4 files or platforms like
+YouTube, Vimeo, or Dailymotion to play video *sources* from *different*
+providers.
+
+++++
+<div class="carousel-title"> <i class="mdib mdib-view-carousel mdib-24px mr-2"></i> Video Slider · Mixed Sources + Captions</div>
+<!-- Master Slider (top) -->
+<div id="master_slider_3" class="swiper swiper-container master-slider">
+  <div class="swiper-wrapper">
+    <div class="swiper-slide swiper-no-swiping" data-slide-type="image">
+      <img src="/assets/image/module/masterslider/slider_4/ms-free-animals-1.jpg" aria-label="Animals-1">
+      <div class="swp-caption-content">Image 1</div>
+    </div>    
+
+    <!-- div class="swiper-slide swiper-no-swiping" data-slide-type="video">
+      <video
+        id="peck_pocketed_video"
+        class="video-js vjs-theme-uno"
+        controls
+        width="640" height="360"
+        poster="/assets/video/poster/html5/peck_pocketed.jpg"
+        alt="title"
+        aria-label="title"
+        data-setup='{
+          "fluid" : true,
+          "sources": [{
+            "type": "video/mp4",
+            "src": "/assets/video//html5/peck_pocketed.mp4"
+          }],
+          "controlBar": {
+            "pictureInPictureToggle": false,
+            "skipButtons": {
+              "backward": 15,
+              "forward": 15
+            },
+            "volumePanel": {
+              "inline": false
+            }
+          }
+        }'
+      > </video>
+    </div -->
+
+    <div class="swiper-slide swiper-no-swiping" data-slide-type="video">
+      <video
+        id="peck_pocketed_video"
+        class="video-js vjs-theme-uno"
+        controls
+        width="640" height="360"
+        poster="//img.youtube.com/vi/1J2qz6B-PFY/maxresdefault.jpg"
+        data-setup='{
+          "fluid" : true,
+          "rel": 0,
+          "techOrder": [
+            "youtube", "html5"
+          ],
+          "sources": [{
+            "type": "video/youtube",
+            "src": "//youtube.com/watch?v=1J2qz6B-PFY"
+          }],
+          "controlBar": {
+            "pictureInPictureToggle": false,
+            "volumePanel": {
+              "inline": false
+            }
+          }
+        }'
+      >
+      </video>
+      <div class="swp-caption-content">Roni Sagi & Rhythm · AGT 2024 (YouTube)</div>
+    </div>
+
+    <div class="swiper-slide swiper-no-swiping" data-slide-type="image">
+      <img src="/assets/image/module/masterslider/slider_4/ms-free-animals-2.jpg" aria-label="Animals-2">
+      <div class="swp-caption-content">Image 2</div>
+    </div>
+    <div class="swiper-slide swiper-no-swiping" data-slide-type="image">
+      <img src="/assets/image/module/masterslider/slider_4/ms-free-animals-3.jpg" aria-label="Animals-3">
+      <div class="swp-caption-content">Image 3</div>
+    </div>
+  </div> <!-- END swiper-wrapper -->
+
+</div> <!-- END swiper-container -->
+
+<!-- Thumbs Slider (bottom) -->
+<div id="thumbs_slider_3" class="swiper swiper-container thumbs-slider thumbs-slider--bottom mt-1 mb-4">
+
+  <div class="swiper-wrapper">
+		<div class="swiper-slide">
+		  <img src="/assets/image/module/masterslider/slider_4/ms-free-animals-1.jpg" aria-label="Animals-1">
+      <div class="swp-caption-content">Image 1</div>
+		</div>
+		<div class="swiper-slide">
+		  <!-- img src="/assets/video/poster/html5/peck_pocketed.jpg" aria-label="peck_pocketed" -->
+		  <img src="//img.youtube.com/vi/1J2qz6B-PFY/maxresdefault.jpg">
+      <div class="swp-caption-content">Roni Sagi & Rhythm · AGT 2024 (YouTube)</div>
+		</div>
+		<div class="swiper-slide">
+		  <img src="/assets/image/module/masterslider/slider_4/ms-free-animals-2.jpg" aria-label="Animals-2">
+      <div class="swp-caption-content">Image 2</div>
+		</div>      
+		<div class="swiper-slide">
+		  <img src="/assets/image/module/masterslider/slider_4/ms-free-animals-3.jpg" aria-label="Animals-3">
+		</div>
+	</div> <!-- END swiper-wrapper -->
+
+</div> <!-- END swiper-container -->
+
+<script>
+$(function() {
+
+  // ---------------------------------------------------------------------------
+  // slider initializer
+  // ---------------------------------------------------------------------------
+  var dependencies_met_page_ready = setInterval (() => {
+    var atticFinished = (j1.adapter.attic.getState() == 'finished') ? true : false;
+
+    if (atticFinished) {
+
+      const VIDEO_PLAYING_STATE = {
+        "PLAYING":  "PLAYING",
+        "PAUSE":    "PAUSE",
+        "ENDED":    "ENDED"
+      }; 
+
+      var vjsPlayer;
+      var vjsOptions;
+      var piSkipButtons;
+
+      var vjsPlayerType   = 'native';
+      var videoPlayStatus = VIDEO_PLAYING_STATE.PAUSE;
+
+      piSkipButtons = {
+        enabled:            true,
+        backward:           30,
+        forward:            30,
+        backwardIndex:      0,
+        forwardIndex:       0,
+        surroundPlayButton: true
+      };
+
+      // Thumbs Slider (slave|bottom)
+      // -----------------------------------------------------------------------
+      const thumbsSlider3 = new Swiper("#thumbs_slider_3", {
+        direction: 'horizontal',
+        spaceBetween: 5,
+        slidesPerView: 3,
+        grabCursor: true,
+        watchSlidesProgress: true,
+        on: {
+          transitionStart: (swiper) => {
+            masterSlider3.slideTo(swiper.activeIndex);
+          }
+        }
+      });
+
+      // Initialize Master Slider
+      // -----------------------------------------------------------------------
+      // See: https://stackoverflow.com/questions/45468980/how-to-fix-event-conflicts-between-swiper-and-video-js
+      var masterSlider3 = new Swiper('#master_slider_3', {
+        autoHeight:       true,  // adapt height of the currently active slide.
+        direction:        'horizontal',
+        thumbs: {
+          swiper: thumbsSlider3,
+        },
+        on: {
+          afterInit: (swiper) => {
+            // do something
+          },
+          slideChangeTransitionStart: (swiper) => {
+            thumbsSlider3.slideTo(swiper.activeIndex);
+          },          
+          slideChangeTransitionEnd: (swiper) => {
+            var currentSlide      = $(swiper.slides[swiper.activeIndex]);
+            var currentSlideType  = currentSlide.data('slide-type');
+            // in case user click next before video ended
+            if (videoPlayStatus === VIDEO_PLAYING_STATE.PLAYING) {
+              vjsPlayer.pause();
+            }
+
+            switch (currentSlideType) {
+              case 'image':
+                //runNext();
+                break;
+              case 'video':
+                // vjsPlayer.currentTime(0);
+                // vjsPlayer.play();
+                videoPlayStatus = VIDEO_PLAYING_STATE.PLAYING;
+                break;
+              default:
+                throw new Error('invalid slide type');
+            }
+          }
+        }
+      });
+
+      // vjsPlayer.on('ended', function() {
+      //     next();
+      // });
+
+      // global function
+      // function prev() {
+      //   swiper.slidePrev();
+      // }
+
+      // function next() {
+      //   swiper.slideNext();
+      // }
+
+      // function runNext() {  
+      //   timeout = setTimeout(function () {
+      //     next()
+      //   }, waiting)
+      // }
+
+      // Initialize VideoJS player/s
+      // -----------------------------------------------------------------------
+      vjsOptions = {
+        plugins: {
+          skipButtons: {
+            backward:       30,
+            forward:        30,
+            backwardIndex:  0,
+            forwardIndex:   1
+          }
+        }
+      };
+      vjsPlayer = videojs('peck_pocketed_video', {});
+
+      // Add VJS plugins
+      // -----------------------------------------------------------------------
+      if (piSkipButtons.enabled) {
+        var backwardIndex = piSkipButtons.backwardIndex;
+        var forwardIndex  = piSkipButtons.forwardIndex;
+
+        // property 'surroundPlayButton' takes precendence
+        //
+        if (piSkipButtons.surroundPlayButton) {
+          var backwardIndex = 0;
+          var forwardIndex  = 1;
+        }
+
+        // plugin initialized with custom options
+        // See: https://videojs.com/guides/options/
+        vjsPlayer.skipButtons({
+          backwardIndex:  backwardIndex,
+          forwardIndex:   forwardIndex,
+          backward:       piSkipButtons.backward,
+          forward:        piSkipButtons.forward,
+        });
+      }
+
+      clearInterval(dependencies_met_page_ready);
+    } // END pageVisible
+  }, 10); // END dependencies_met_page_ready
+
+});
+</script>
+++++
+
+
+/////
+/////
