@@ -1,6 +1,6 @@
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/modules/amplitudejs/js/amplitudejs.js
+ # ~/assets/theme/j1/modules/amplitudeJS/js/amplitudejs.js
  # AmplitudeJS v5.3.2 Visualization Template (FX)
  #
  # Product/Info:

@@ -1,6 +1,6 @@
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/modules/amplitudejs/js/visualizations/michael-bromley.js
+ # ~/assets/theme/j1/modules/amplitudeJS/js/visualizations/michael-bromley.js
  # AmplitudeJS v5.3.2 Visualization (FX)
  #
  # Product/Info:
