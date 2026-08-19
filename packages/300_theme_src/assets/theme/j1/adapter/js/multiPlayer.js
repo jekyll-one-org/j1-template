@@ -6,8 +6,9 @@ regenerate:                             true
 
 {% comment %}
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/adapter/js/multiPlayer.js (31)
- # J1 Adapter for the module multiPlayer
+ # ~/assets/theme/j1/adapter/js/multiPlayer.js
+ # J1 Adapter for the module multiPlayer (31)
+ # Version 3.1.78 for J1 Template
  #
  # Product/Info:
  # https://jekyll.one
@@ -302,8 +303,9 @@ regenerate:                             true
 
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/adapter/js/multiPlayer.js (31)
- # J1 Adapter for the module multiPlayer
+ # ~/assets/theme/j1/adapter/js/multiPlayer.js
+ # J1 Adapter for the module multiPlayer  (31)
+ # Version 3.1.78 for J1 Template
  #
  # Product/Info:
  # https://jekyll.one
@@ -631,8 +633,8 @@ j1.adapter.multiPlayer = ((j1, window) => {
         // Change #36
         // The header <span> (.video-player-header-title) is now the live
         // title display for the currently loaded video. The module pushes
-        // entry.title into it on the 'playing' state (see Modify J1
-        // VideoPlayer #35); it is no longer a static "Show Playlist" toggle
+        // entry.title into it on the 'playing' state (see Modify #35); it
+        // is no longer a static "Show Playlist" toggle
         // label. A video that is loaded but never played pushes no title, so
         // seed the span with an empty string here at setup time instead of
         // leaving the markup default in place. Subsequent label writes by the
@@ -1152,7 +1154,7 @@ j1.adapter.multiPlayer = ((j1, window) => {
       // INTENTIONALLY NOT constructed here. The module builds this switch
       // lazily inside playlistManager.renderCurrent() (first render that
       // finds the '.playlist-block-title' bar), exactly like the title-bar
-      // export button of 'Modify VideoPlayer for export #1' — so no adapter
+      // export button — so no adapter
       // instantiation is required and a second construction here would
       // attach a duplicate change listener. All gates are evaluated by the
       // handler itself from the per-instance option chain this adapter
