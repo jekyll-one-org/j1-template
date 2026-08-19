@@ -6,7 +6,7 @@ regenerate:                             true
 
 {% comment %}
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/adapter/js/amplitudePlayer.js (3)
+ # ~/assets/theme/j1/adapter/js/amplitudePlayer.js (2)
  # J1 Adapter for the module Amplitude player
  #
  # Product/Info:
@@ -260,7 +260,7 @@ regenerate:                             true
 
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/adapter/js/amplitudePlayer.js (3)
+ # ~/assets/theme/j1/adapter/js/amplitudePlayer.js (2)
  # J1 Adapter for the module amplitudePlayer
  #
  # Product/Info:
@@ -283,7 +283,7 @@ regenerate:                             true
 // -----------------------------------------------------------------------------
 "use strict";
 
-// code optimization
+// Claude - J1 amplitudePlayer optimizations #1
 // =============================================================================
 // ADAPTER / MODULE SPLIT
 //
@@ -358,7 +358,7 @@ j1.adapter.amplitudePlayer = ((j1, window) => {
   var endTimeModule;
   var timeSeconds;
 
-  // code optimization
+  // Claude - J1 amplitudePlayer optimizations #1
   // ---------------------------------------------------------------------------
   // The AmplitudeJS GLOBAL constants moved to the module:
   //
@@ -391,7 +391,7 @@ j1.adapter.amplitudePlayer = ((j1, window) => {
   var dependency;
   var playerExistsInPage;
 
-  // code optimization
+  // Claude - J1 amplitudePlayer optimizations #1
   // the module factory instance of the shared engine (see player.js). The
   // adapter keeps ONE reference; per-player instances are created in
   // initPlayerUiEvents() through audioPlayer(playerId, cfg).
@@ -450,22 +450,6 @@ j1.adapter.amplitudePlayer = ((j1, window) => {
   playerScrollControl                   = {{amplitude_player_global.player_scroll_control}};
   playerAutoScrollSongElement           = {{amplitude_player_global.player_auto_scroll_song_element}};
 
-  // code optimization
-  // ---------------------------------------------------------------------------
-  // Both 'playerDefaultType' and 'playerScrollControl' are CONSUMED now:
-  //
-  //   playerDefaultType    -> playerConfig.playerType fallback (below) and,
-  //                           via setAdapterOptions({ player: ... }).type,
-  //                           the module var of the same name
-  //   playerScrollControl  -> handed over inside the page-global 'player'
-  //                           subtree and evaluated by the module in
-  //                           _wireLargePlayer() / _effectiveScrollControl()
-  //
-  // No extra handoff key is needed for either: 'type' and
-  // 'player_scroll_control' already travel in amplitude_player_global, which
-  // is passed to setAdapterOptions() as options.player.
-  // ---------------------------------------------------------------------------
-
   playlistAudioInfo                     = {{amplitude_playlist_global.audio_info}};
 
   // ---------------------------------------------------------------------------
@@ -486,7 +470,7 @@ j1.adapter.amplitudePlayer = ((j1, window) => {
   //
   var _self = () => (_this || j1.adapter.amplitudePlayer);
 
-  // code optimization
+  // Claude - J1 amplitudePlayer optimizations #1
   // ---------------------------------------------------------------------------
   // _core()
   //
@@ -512,7 +496,7 @@ j1.adapter.amplitudePlayer = ((j1, window) => {
     return audioPlayer;
   };
 
-  // code optimization
+  // Claude - J1 amplitudePlayer optimizations #1
   // ---------------------------------------------------------------------------
   // _delegate(name, args, fallback)
   //
@@ -565,7 +549,7 @@ j1.adapter.amplitudePlayer = ((j1, window) => {
 
       // control|logging settings
       //
-      // code optimization
+      // Claude - J1 amplitudePlayer optimizations #1
       // the logger was created FAR BELOW the first isDev && logger.* call
       // site of the option chain. Moved to the top of init() so every log
       // statement of the initializer has a bound logger.
@@ -584,7 +568,7 @@ j1.adapter.amplitudePlayer = ((j1, window) => {
       amplitudeDefaults = $.extend({}, {{amplitude_player_default  | replace: 'nil', 'null' | replace: '=>', ':' }});
       amplitudePlayers  = $.extend({}, {{amplitude_player_control  | replace: 'nil', 'null' | replace: '=>', ':' }});
 
-      // code optimization
+      // Claude - J1 amplitudePlayer optimizations #1
       // -----------------------------------------------------------------------
       // Hand the complete BUILD-TIME config over to the module API ONCE.
       // This is the single adapter -> module handoff point and the direct
@@ -625,6 +609,9 @@ j1.adapter.amplitudePlayer = ((j1, window) => {
         if (key !== 'players') { amplitudeUserSettings[key] = amplitudePlayers[key]; }
       });
 
+      // Claude - J1 amplitudePlayer optimizations #1
+      // Original (deprecated, preserved for reference):
+      // amplitudeOptions = _this.deepMerge({}, amplitudeDefaults, amplitudeUserSettings);
       amplitudeOptions = _this.deepMerge({}, amplitudeDefaults, amplitudeUserSettings);
       amplitudeInstanceOptions = {};
       _self()['amplitudeOptions']         = amplitudeOptions;
@@ -712,9 +699,10 @@ j1.adapter.amplitudePlayer = ((j1, window) => {
           // initialize player-specific events
           // -------------------------------------------------------------------
           var dependencies_met_api_initialized = setInterval (() => {
-            // code optimization
+            // Claude - J1 amplitudePlayer optimizations #1
             // the API-ready flag lives in the module now
-            //
+            // Original (deprecated, preserved for reference):
+            // if (apiInitialized.state) {
             if (_core() !== null && _core().isApiInitialized()) {
               _this.initPlayerUiEvents();
 
@@ -749,7 +737,7 @@ j1.adapter.amplitudePlayer = ((j1, window) => {
     // -------------------------------------------------------------------------
     // Create global playlist|songs (API)
     //
-    // code optimization
+    // Claude - J1 amplitudePlayer optimizations #1
     // The ~55 line mapping loop (config key -> AmplitudeJS song property)
     // moved to the module as buildSongs(). Only the Liquid loop over the
     // ENABLED playlists of the media file stays here.
@@ -845,7 +833,7 @@ j1.adapter.amplitudePlayer = ((j1, window) => {
     // -------------------------------------------------------------------------
     // initApi
     //
-    // code optimization
+    // Claude - J1 amplitudePlayer optimizations #1
     // The complete Amplitude.init() call (bindings, songs, ~100 lines of
     // callbacks, continue_next, volume) and the AT player state machine moved
     // to the module. What stays here is the Liquid loop that BUILDS the
@@ -958,7 +946,7 @@ j1.adapter.amplitudePlayer = ((j1, window) => {
 
       {% endif %} {% endfor %}
 
-      // code optimization
+      // Claude - J1 amplitudePlayer optimizations #1
       // hand songs + the Liquid-built playlists hash over to the module
       var _apCore = _core();
 
@@ -973,7 +961,7 @@ j1.adapter.amplitudePlayer = ((j1, window) => {
     // -------------------------------------------------------------------------
     // initPlayerUiEvents
     //
-    // code optimization
+    // Claude - J1 amplitudePlayer optimizations #1
     // -------------------------------------------------------------------------
     // THE major size reduction. The adapter used to carry the COMPLETE
     // mini|compact|large event wiring INSIDE this Liquid loop, guarded by
@@ -1049,34 +1037,16 @@ j1.adapter.amplitudePlayer = ((j1, window) => {
                 // 'true'), so a per-player FALSE could not overload a global
                 // TRUE.
                 //
-                // -------------------------------------------------------------
-                // code optimization
-                //
-                // playerType: 'playerDefaultType' was rendered from
-                // amplitude_player_default.player.type resp.
-                // amplitude_player_global.type and then NEVER used. The
-                // per-player key falls back to it now when
-                // player_effective.type renders EMPTY (a player entry that
-                // sets no type and inherits from a YAML layer that has none).
-                // The module uses the value as the LAST resort of
-                // _resolvePlayerType() for ids without a mini|compact|large
-                // keyword.
-                //
-                // scrollControl: the per-player value of
-                // 'player_scroll_control' from the EFFECTIVE chain. The
-                // module evaluates the setting in _wireLargePlayer() now;
-                // without this key the module could only ever see the
-                // page-global value.
-                //
+                // Original (deprecated, preserved for reference):
+                // pluginManagerEnabled = ('{{player.plugin_manager.enabled}}'.length > 0 && '{{player.plugin_manager.enabled}}' === 'true') ? true : playerDefaultPluginManager;
                 // -------------------------------------------------------------
                 var playerConfig = {
                   playerID:               '{{player.id}}',
-                  playerType:             ('{{player_effective.type}}'.length > 0) ? '{{player_effective.type}}' : playerDefaultType,
+                  playerType:             '{{player_effective.type}}',
                   xhrContainerId:         '{{xhr_container_id}}',
                   playlistInfo:           {{player.playlist | replace: 'nil', 'null' | replace: '=>', ':' }},
                   playlistName:           '{{player.playlist.name}}',
                   playlistTitle:          '{{player.playlist.title}}',
-                  scrollControl:          ('{{player_effective.player_scroll_control}}' === 'true') ? true : false,
                   scrollerSongElementMin: '{{player_effective.player_scroller_song_element_min}}',
                   pluginManagerEnabled:   ('{{player_effective.plugin_manager.enabled}}' === 'true') ? true : false,
                   plugins:                '{{player_effective.plugin_manager.plugins}}',
@@ -1125,7 +1095,7 @@ j1.adapter.amplitudePlayer = ((j1, window) => {
     }, // END initPlayerUiEvents
 
     // =========================================================================
-    // code optimization
+    // Claude - J1 amplitudePlayer optimizations #1
     // PUBLIC API FACADE
     //
     // Every method below used to carry its full implementation in this file.
@@ -1224,7 +1194,7 @@ j1.adapter.amplitudePlayer = ((j1, window) => {
     getInstanceOptions: (playerId) => _delegate('getInstanceOptions', [playerId], null),
 
     // -------------------------------------------------------------------------
-    // code optimization
+    // Claude - J1 amplitudePlayer optimizations #1
     // getPlayer(playerId) / getPlayers()
     //
     // NEW, mirroring videoPlayer.getPlayer()/getPlayers() of the multiPlayer
@@ -1274,6 +1244,15 @@ j1.adapter.amplitudePlayer = ((j1, window) => {
     // sets the current (processing) state of the module
     // -------------------------------------------------------------------------
     setState: (stat) => {
+      // Claude - J1 amplitudePlayer optimizations #1
+      // _this wird erst INNERHALB von init() gebunden. Jeder Aufruf VOR
+      // init() (oder aus einem Plugin heraus) lief in
+      //   TypeError: Cannot set properties of undefined (setting 'state')
+      // Der lazy Resolver _self() existiert genau dafuer und wird hier
+      // benutzt.
+      //
+      // Original (deprecated, preserved for reference):
+      // _this.state = stat;
       _self().state = stat;
     }, // END setState
 
@@ -1282,6 +1261,11 @@ j1.adapter.amplitudePlayer = ((j1, window) => {
     // Returns the current (processing) state of the module
     // -------------------------------------------------------------------------
     getState: () => {
+      // Claude - J1 amplitudePlayer optimizations #1
+      // siehe setState()
+      //
+      // Original (deprecated, preserved for reference):
+      // return _this.state;
       return _self().state;
     } // END getState
 
