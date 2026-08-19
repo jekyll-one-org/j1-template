@@ -238,7 +238,7 @@ settings:
           rating:                       3
           start:                        ""
           end:                          ""
-          audio_info:                   //youtube.com/watch?v=eotOxW5QU8Y&list=OLAK5uy_m0ZUHQpr0w3WHDZFOdTn1lPaJmMVoUg2E
+          audio_info:                   //youtube.com/playlist?list=OLAK5uy_m0ZUHQpr0w3WHDZFOdTn1lPaJmMVoUg2E
           duration:                     "05:08"
 
         # title 02
@@ -250,7 +250,7 @@ settings:
           rating:                       3
           start:                        ""
           end:                          ""
-          audio_info:                   //youtube.com/watch?v=eotOxW5QU8Y&list=OLAK5uy_m0ZUHQpr0w3WHDZFOdTn1lPaJmMVoUg2E
+          audio_info:                   //youtube.com/playlist?list=OLAK5uy_m0ZUHQpr0w3WHDZFOdTn1lPaJmMVoUg2E
           duration:                     "04:04"
 
         # title 03
@@ -262,7 +262,7 @@ settings:
           rating:                       3
           start:                        ""
           end:                          ""
-          audio_info:                   //youtube.com/watch?v=eotOxW5QU8Y&list=OLAK5uy_m0ZUHQpr0w3WHDZFOdTn1lPaJmMVoUg2E
+          audio_info:                   //youtube.com/playlist?list=OLAK5uy_m0ZUHQpr0w3WHDZFOdTn1lPaJmMVoUg2E
           duration:                     "03:38"
 
         # title 04
@@ -274,7 +274,7 @@ settings:
           rating:                       3
           start:                        ""
           end:                          ""
-          audio_info:                   //youtube.com/watch?v=eotOxW5QU8Y&list=OLAK5uy_m0ZUHQpr0w3WHDZFOdTn1lPaJmMVoUg2E
+          audio_info:                   //youtube.com/playlist?list=OLAK5uy_m0ZUHQpr0w3WHDZFOdTn1lPaJmMVoUg2E
           duration:                     "05:24"
 
         # title 05
@@ -286,7 +286,7 @@ settings:
           rating:                       3
           start:                        ""
           end:                          ""
-          audio_info:                   //youtube.com/watch?v=eotOxW5QU8Y&list=OLAK5uy_m0ZUHQpr0w3WHDZFOdTn1lPaJmMVoUg2E
+          audio_info:                   //youtube.com/playlist?list=OLAK5uy_m0ZUHQpr0w3WHDZFOdTn1lPaJmMVoUg2E
           duration:                     "04:50"
 
         # title 06
@@ -298,7 +298,7 @@ settings:
           rating:                       3
           start:                        ""
           end:                          ""
-          audio_info:                   //youtube.com/watch?v=eotOxW5QU8Y&list=OLAK5uy_m0ZUHQpr0w3WHDZFOdTn1lPaJmMVoUg2E
+          audio_info:                   //youtube.com/playlist?list=OLAK5uy_m0ZUHQpr0w3WHDZFOdTn1lPaJmMVoUg2E
           duration:                     "05:31"
 
         # title 07
@@ -310,7 +310,7 @@ settings:
           rating:                       3
           start:                        ""
           end:                          ""
-          audio_info:                   //youtube.com/watch?v=eotOxW5QU8Y&list=OLAK5uy_m0ZUHQpr0w3WHDZFOdTn1lPaJmMVoUg2E
+          audio_info:                   //youtube.com/playlist?list=OLAK5uy_m0ZUHQpr0w3WHDZFOdTn1lPaJmMVoUg2E
           duration:                     "03:12"
 
         # title 08
@@ -322,7 +322,7 @@ settings:
           rating:                       3
           start:                        ""
           end:                          ""
-          audio_info:                   //youtube.com/watch?v=eotOxW5QU8Y&list=OLAK5uy_m0ZUHQpr0w3WHDZFOdTn1lPaJmMVoUg2E
+          audio_info:                   //youtube.com/playlist?list=OLAK5uy_m0ZUHQpr0w3WHDZFOdTn1lPaJmMVoUg2E
           duration:                     "05:15"
 
         # title 09
@@ -334,7 +334,7 @@ settings:
           rating:                       3
           start:                        ""
           end:                          ""
-          audio_info:                   //youtube.com/watch?v=eotOxW5QU8Y&list=OLAK5uy_m0ZUHQpr0w3WHDZFOdTn1lPaJmMVoUg2E
+          audio_info:                   //youtube.com/playlist?list=OLAK5uy_m0ZUHQpr0w3WHDZFOdTn1lPaJmMVoUg2E
           duration:                     "01:57"
 
     # --------------------------------------------------------------------------
