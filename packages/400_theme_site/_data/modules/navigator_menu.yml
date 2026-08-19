@@ -202,10 +202,6 @@
       href:                             /pages/public/tools/player/multiPlayer/
       icon:                             video
 
-    - title:                            J1 Audio Player
-      href:                             /pages/public/tools/player/audioPlayer/
-      icon:                             speaker
-
 
 # ------------------------------------------------------------------------------
 # Menu BLOG
