@@ -2,7 +2,7 @@
  # -----------------------------------------------------------------------------
  # ~/assets/theme/j1/modules/multiPlayer/js/player.js
  # Provides JS Core for J1 Module multiPlayer
- # Version 3.1.78 for J1 Template
+ # Version 3.1.79 for J1 Template
  #
  # Product/Info:
  # https://jekyll.one
@@ -104,7 +104,7 @@
 
   // Module version, exposed as videoPlayer.VERSION (video.js parity:
   // videojs.VERSION). Keep in sync with the file header above.
-  const VERSION = '3.1.78';
+  const VERSION = '3.1.79';
 
   let _sharedInputValueBackgroundHandlerInit = false;
   let _sharedNavbarSmoothScrollHandlerInit   = false;
@@ -787,7 +787,6 @@
       : null;
   }
 
-  // Fix multiPlayer load failed #1
   // ---------------------------------------------------------------------------
   // _adapterCloseEditPlaylist(button, playerID)
   //
@@ -2239,7 +2238,6 @@
    * (degrades to the localStorage value or false), mirroring
    * _resolveUiElementFlags().
    *
-   * Fix multiPlayer new select audio only 4
    * Precedence EXTENDED by one leading rule (see the feature note above):
    * 
    *   0. when the title-bar switch is not shown or unavailable AND the YAML
@@ -2893,7 +2891,320 @@
     isDev && logger.debug('\n' + `audioFadeIn: handlers installed for videoId ${videoId}`);
   }
 
-  // Fix J1 multiPlayer #6
+  // ===========================================================================
+  // CROSS-PAGE PLAYER SYNCHRONIZATION (feature, configurable, default OFF)
+  // ===========================================================================
+  //
+  // WHAT: players of the module that live on DIFFERENT pages (browser tabs
+  // or windows of the same site/origin) are synchronized: when playback of a
+  // player on one page is started or stopped, the players on all other pages
+  // stop as well. Only one page plays at a time.
+  //
+  // HOW: every created player publishes a small message on a same-origin
+  // broadcast channel ('play' / 'pause', with the page token, the player id
+  // and the videoId) and subscribes to the same channel. A message received
+  // from ANOTHER page pauses the local player. The transport is the
+  // BroadcastChannel API; browsers without it fall back to a localStorage
+  // key plus the 'storage' event, which the browser fires on every OTHER
+  // page of the same origin (never on the writing page itself).
+  //
+  // WHY no ping-pong: a pause that was CAUSED by a remote message is tagged
+  // (_crossPageRemoteLatch) so the resulting 'pause' event of the local
+  // player is NOT re-published. Own messages are additionally filtered by
+  // the page token, so neither transport can echo back into the sender.
+  //
+  // WHY 'playing' + settle delay instead of 'play': the non-interactive
+  // load-and-pause path (embedRunVideo(videoId, 'pause'), used by the
+  // reload/preload of the first entry) starts playback and pauses it
+  // VIDEO_START_DELAY later. Publishing on 'play' would let a mere page
+  // load stop the music on every other tab. The 'playing' event is
+  // therefore debounced by CROSS_PAGE_SYNC_SETTLE_MS (> VIDEO_START_DELAY):
+  // only a playback that is still running afterwards is announced.
+  //
+  // CONFIGURATION (YAML chain: defaults <- user settings <- per-player
+  // control entries, resolved by _resolveVideoPlayerEffectiveOptions()):
+  //
+  //   cross_page_sync:
+  //     enabled:          false     # master switch (absent key == false)
+  //     on_play:          true      # a START on one page pauses all other pages
+  //     on_pause:         true      # a STOP on one page pauses all other pages
+  //     same_page:        false     # also apply to OTHER players of the SAME page
+  //     channel:          j1.multiPlayer.crossPageSync   # transport name
+  //
+  // An absent or disabled block leaves the module byte-identical in
+  // behaviour: _applyCrossPageSync() returns before touching the player.
+  //
+  // MultiInstance #1 rule: all state below is closure-local to the instance
+  // (one subscription per player instance, re-targeted to the CURRENT
+  // video.js player on every createVideoJsPlayer()). The page token is the
+  // only page-global value and is shared by all instances on purpose.
+  // ---------------------------------------------------------------------------
+
+  const CROSS_PAGE_SYNC_CHANNEL   = 'j1.multiPlayer.crossPageSync';
+  const CROSS_PAGE_SYNC_SETTLE_MS = 600;
+
+  // per-instance transport state
+  let _crossPageChannel         = null;   // BroadcastChannel or null
+  let _crossPageStorageListener = null;   // 'storage' fallback handler or null
+  let _crossPageChannelName     = null;   // name the subscription was opened for
+  let _crossPageCurrentPlayer   = null;   // the video.js player messages target
+  let _crossPageRemoteLatch     = false;  // true while a remote message pauses us
+
+  // Claude - Optimize multiPlayer #1
+  /**
+   * _crossPageToken - token of THIS page (tab/window), shared by all player
+   * instances on the page. Created once, lazily, on the window object so
+   * every instance filters its own page's messages with the same value.
+   * @returns {string}
+   */
+  function _crossPageToken() {
+    try {
+      if (typeof window === 'undefined') return 'nowindow';
+      if (!window.__j1MultiPlayerPageToken) {
+        window.__j1MultiPlayerPageToken = Date.now().toString(36) + '-' + Math.random().toString(36).substring(2, 10);
+      }
+      return window.__j1MultiPlayerPageToken;
+    } catch (e) {
+      return 'notoken';
+    }
+  }
+
+  // Claude - Optimize multiPlayer #1
+  /**
+   * _resolveCrossPageSync - effective cross-page settings for THIS player,
+   * read from the YAML chain. Tolerant of the Liquid -> JSON hand-over
+   * (quoted booleans), mirroring _resolveSetAudioOnly().
+   *
+   * @returns {{enabled:boolean,onPlay:boolean,onPause:boolean,samePage:boolean,channel:string}}
+   */
+  function _resolveCrossPageSync() {
+    const off = { enabled: false, onPlay: true, onPause: true, samePage: false, channel: CROSS_PAGE_SYNC_CHANNEL };
+    const opts = _resolveVideoPlayerEffectiveOptions();
+    if (opts === null || typeof opts !== 'object') return off;
+
+    const cfg = opts.cross_page_sync;
+    if (cfg === null || typeof cfg !== 'object') return off;
+
+    const bool = (value, fallback) => {
+      if (value === true  || value === 'true')  return true;
+      if (value === false || value === 'false') return false;
+      return fallback;
+    };
+
+    return {
+      enabled:  bool(cfg.enabled,   false),
+      onPlay:   bool(cfg.on_play,   true),
+      onPause:  bool(cfg.on_pause,  true),
+      samePage: bool(cfg.same_page, false),
+      channel:  (typeof cfg.channel === 'string' && cfg.channel.trim()) ? cfg.channel.trim() : CROSS_PAGE_SYNC_CHANNEL
+    };
+  }
+
+  // Claude - Optimize multiPlayer #1
+  /**
+   * _crossPagePublish - send one message to all other pages (and, via the
+   * subscribers' same_page setting, to the other players of this page).
+   * @param {string} channelName
+   * @param {'play'|'pause'} type
+   * @param {string|null} videoId
+   */
+  function _crossPagePublish(channelName, type, videoId) {
+    const message = {
+      page:    _crossPageToken(),
+      player:  _playerID || '',
+      type:    type,
+      videoId: videoId || null,
+      ts:      Date.now(),
+      nonce:   Math.random().toString(36).substring(2, 10)
+    };
+
+    try {
+      if (_crossPageChannel) {
+        _crossPageChannel.postMessage(message);
+      } else if (typeof localStorage !== 'undefined') {
+        // the 'storage' event only fires on a CHANGE, hence ts + nonce
+        localStorage.setItem(channelName, JSON.stringify(message));
+      }
+      isDev && logger.debug('\n' + `crossPageSync: published '${type}' for videoId ${message.videoId}`);
+    } catch (e) {
+      isDev && logger.warn('\n' + `crossPageSync: publish failed: ${e}`);
+    }
+  }
+
+  // Claude - Optimize multiPlayer #1
+  /**
+   * _crossPageReceive - handle one message from the transport. Pauses the
+   * CURRENT player of this instance when the message comes from another
+   * page (or, with same_page, from another player of this page).
+   * @param {object} message
+   */
+  function _crossPageReceive(message) {
+    if (!message || typeof message !== 'object') return;
+    if (message.type !== 'play' && message.type !== 'pause') return;
+
+    const cfg = _resolveCrossPageSync();
+    if (!cfg.enabled) return;
+    if (message.type === 'play'  && !cfg.onPlay)  return;
+    if (message.type === 'pause' && !cfg.onPause) return;
+
+    const samePage = (message.page === _crossPageToken());
+    if (samePage && (!cfg.samePage || message.player === (_playerID || ''))) return;
+
+    const player = _crossPageCurrentPlayer;
+    if (!player) return;
+
+    try {
+      if (typeof player.isDisposed === 'function' && player.isDisposed()) return;
+      if (typeof player.paused === 'function' && player.paused()) return;
+
+      _crossPageRemoteLatch = true;
+      player.pause();
+      isDev && logger.info('\n' + `crossPageSync: paused by '${message.type}' from ${samePage ? 'player ' + message.player : 'another page'} (videoId ${message.videoId})`);
+    } catch (e) {
+      isDev && logger.warn('\n' + `crossPageSync: remote pause failed: ${e}`);
+    } finally {
+      // released on the next tick: the synchronous 'pause' event of video.js
+      // has fired by then, a later pause is a genuine local one again
+      setTimeout(() => { _crossPageRemoteLatch = false; }, 0);
+    }
+  }
+
+  // Claude - Optimize multiPlayer #1
+  /**
+   * _crossPageSubscribe - open the transport ONCE per instance (idempotent;
+   * re-opened only when the configured channel name changes).
+   * @param {string} channelName
+   */
+  function _crossPageSubscribe(channelName) {
+    if (_crossPageChannelName === channelName && (_crossPageChannel || _crossPageStorageListener)) return;
+
+    _crossPageUnsubscribe();
+    _crossPageChannelName = channelName;
+
+    try {
+      if (typeof BroadcastChannel === 'function') {
+        _crossPageChannel = new BroadcastChannel(channelName);
+        _crossPageChannel.onmessage = (event) => _crossPageReceive(event && event.data);
+        isDev && logger.info('\n' + `crossPageSync: subscribed via BroadcastChannel '${channelName}'`);
+        return;
+      }
+    } catch (e) {
+      _crossPageChannel = null;
+      isDev && logger.warn('\n' + `crossPageSync: BroadcastChannel unavailable, using storage fallback: ${e}`);
+    }
+
+    if (typeof window !== 'undefined' && typeof window.addEventListener === 'function') {
+      _crossPageStorageListener = (event) => {
+        if (!event || event.key !== channelName || !event.newValue) return;
+        try { _crossPageReceive(JSON.parse(event.newValue)); } catch (e) { /* ignore foreign values */ }
+      };
+      window.addEventListener('storage', _crossPageStorageListener);
+      isDev && logger.info('\n' + `crossPageSync: subscribed via localStorage key '${channelName}'`);
+    }
+  }
+
+  // Claude - Optimize multiPlayer #1
+  /**
+   * _crossPageUnsubscribe - close the transport of this instance.
+   */
+  function _crossPageUnsubscribe() {
+    try {
+      if (_crossPageChannel) { _crossPageChannel.close(); }
+    } catch (e) { /* already closed */ }
+    _crossPageChannel = null;
+
+    try {
+      if (_crossPageStorageListener && typeof window !== 'undefined') {
+        window.removeEventListener('storage', _crossPageStorageListener);
+      }
+    } catch (e) { /* ignore */ }
+    _crossPageStorageListener = null;
+    _crossPageChannelName     = null;
+  }
+
+  // Claude - Optimize multiPlayer #1
+  /**
+   * _applyCrossPageSync - install the cross-page synchronization on ONE
+   * created video.js player. Called from onReady() beside
+   * _applyStartEndAtPlayback() and _applyAudioFadeIn(); a no-op when the
+   * feature is not enabled in the YAML chain.
+   *
+   * @param {object} player  - the video.js player
+   * @param {string} videoId - id of the media this player was created for
+   */
+  function _applyCrossPageSync(player, videoId) {
+    const cfg = _resolveCrossPageSync();
+    if (!cfg.enabled) {
+      isDev && logger.debug('\n' + `crossPageSync: disabled for videoId ${videoId} (no-op)`);
+      return;
+    }
+    if (!player || typeof player.on !== 'function') return;
+
+    _crossPageSubscribe(cfg.channel);
+    _crossPageCurrentPlayer = player;
+
+    let _settleTimer = null;
+    let _announcedRun = false;   // true once THIS run of playback was announced
+
+    const _cancelSettle = () => {
+      if (_settleTimer !== null) { clearTimeout(_settleTimer); _settleTimer = null; }
+    };
+
+    const _activeId = () => {
+      try {
+        const cur = (player.playlist && typeof player.playlist.currentItem === 'function') ? player.playlist.currentItem() : -1;
+        const list = (player.playlist && typeof player.playlist === 'function') ? player.playlist() : null;
+        if (Array.isArray(list) && cur >= 0 && list[cur] && list[cur].videoId) return list[cur].videoId;
+      } catch (e) { /* fall through */ }
+      return videoId || null;
+    };
+
+    // START: announce only a playback that is still running after the
+    // settle delay (see the feature note: load-and-pause must stay silent)
+    player.on('playing', () => {
+      if (!cfg.onPlay) return;
+      _cancelSettle();
+      _settleTimer = setTimeout(() => {
+        _settleTimer = null;
+        try {
+          if (typeof player.isDisposed === 'function' && player.isDisposed()) return;
+          if (typeof player.paused === 'function' && player.paused()) return;
+          if (_crossPageCurrentPlayer !== player) return;
+          _announcedRun = true;
+          _crossPagePublish(cfg.channel, 'play', _activeId());
+        } catch (e) { /* ignore */ }
+      }, CROSS_PAGE_SYNC_SETTLE_MS);
+    });
+
+    // STOP: announce a LOCAL pause only - never one caused by a remote
+    // message, never the implicit pause of a source change or media end,
+    // and never the pause of a run that was not announced itself (the
+    // load-and-pause path ends its run BEFORE the settle delay expires)
+    player.on('pause', () => {
+      _cancelSettle();
+      const wasAnnounced = _announcedRun;
+      _announcedRun = false;
+      if (!cfg.onPause) return;
+      if (!wasAnnounced) return;
+      if (_crossPageRemoteLatch) return;
+      if (_crossPageCurrentPlayer !== player) return;
+      try {
+        if (typeof player.ended === 'function' && player.ended()) return;
+        if (typeof player.seeking === 'function' && player.seeking()) return;
+      } catch (e) { /* ignore */ }
+      _crossPagePublish(cfg.channel, 'pause', _activeId());
+    });
+
+    player.on('ended',   () => _cancelSettle());
+    player.on('error',   () => _cancelSettle());
+    player.on('dispose', () => {
+      _cancelSettle();
+      if (_crossPageCurrentPlayer === player) _crossPageCurrentPlayer = null;
+    });
+
+    isDev && logger.debug('\n' + `crossPageSync: handlers installed for videoId ${videoId} (on_play: ${cfg.onPlay}, on_pause: ${cfg.onPause}, same_page: ${cfg.samePage}, channel: '${cfg.channel}')`);
+  }
+
   // The "endAt beyond media duration" diagnostic below (#3) fires from
   // _resolveStartEndAt(), which is BY DESIGN re-resolved lazily on every
   // trigger point (each endAt watchdog tick, each startAt one-shot). The
@@ -2904,10 +3215,10 @@
   // once-corrupted duration is healed on the entry's next play, and a
   // still-warned id simply stays quiet - the single warning already said
   // everything there is to say about that entry.
+  //
   const _playbackWindowDurationWarnedIds = new Set();
 
   /**
-   * Fix multiPlayer for new startAt/endAt params #1
    * _resolveStartEndAt - effective playback window for ONE playlist entry.
    *
    * Precedence (first non-empty wins), matching the module's established
@@ -2937,7 +3248,6 @@
         entry = playlistManagerRef.getEntry(videoId);
       }
     } catch (e) {
-      // Fix J1 multiPlayer #3
       // "startEndAt" was never an API, config key or data field - a grep shows
       // all of its occurrences were the prefix of these log strings, i.e. a
       // made-up label for "the startAt/endAt window". Nothing read it, so it
@@ -2946,6 +3256,7 @@
       // what the feature actually is.
       // Original (deprecated, preserved for reference):
       // isDev && logger.warn('\n' + `startEndAt: playlist entry lookup skipped: ${e}`);
+      //
       isDev && logger.warn('\n' + `playbackWindow: playlist entry lookup skipped: ${e}`);
     }
 
@@ -2958,14 +3269,10 @@
     if (endAt === null) endAt = _parseTimeToSeconds(opts && opts.endAt);
 
     if (startAt !== null && endAt !== null && endAt <= startAt) {
-      // Fix J1 multiPlayer #3
-      // Original (deprecated, preserved for reference):
-      // isDev && logger.warn('\n' + `startEndAt: endAt (${endAt}s) <= startAt (${startAt}s) for videoId ${videoId} - endAt ignored`);
       isDev && logger.warn('\n' + `playbackWindow: endAt (${endAt}s) <= startAt (${startAt}s) for videoId ${videoId} - endAt ignored`);
       endAt = null;
     }
 
-    // Fix J1 multiPlayer #3
     // Diagnostic for a data problem that is indistinguishable from the bug
     // this fix series repairs: an endAt BEYOND the media length can never be
     // reached, so the video plays to its natural end and the feature looks
@@ -2974,16 +3281,13 @@
     // duration is 196s. Warn instead of silently doing nothing; the window is
     // left untouched, because duration may still be 0/unknown at this point
     // (it is filled in later on 'durationchange') and must not gate playback.
-    // Fix J1 multiPlayer #6
-    // Original (deprecated, preserved for reference):
-    // if (endAt !== null && entry && isFinite(entry.duration) && entry.duration > 0 && endAt >= entry.duration) {
-    //   isDev && logger.warn('\n' + `playbackWindow: endAt (${endAt}s) is at or beyond the media duration (${entry.duration}s) for videoId ${videoId} - it can never be reached, check the playlist entry`);
-    // }
+    //
     // Warn once per videoId (see _playbackWindowDurationWarnedIds above).
     // NOTE the wording is kept, plus a hint that entry.duration is the STORED
     // value: before #6 it could have been corrupted by a cross-entry write
     // (see doPostOnPlaying), i.e. the warning can indicate a stale record,
     // not necessarily a playlist authoring error.
+    //
     if (endAt !== null && entry && isFinite(entry.duration) && entry.duration > 0 && endAt >= entry.duration && !_playbackWindowDurationWarnedIds.has(videoId)) {
       _playbackWindowDurationWarnedIds.add(videoId);
       isDev && logger.warn('\n' + `playbackWindow: endAt (${endAt}s) is at or beyond the STORED media duration (${entry.duration}s) for videoId ${videoId} - if the real video is longer, the stored duration is stale and is re-measured on the entry's next play; otherwise check the playlist entry`);
@@ -2993,7 +3297,6 @@
   }
 
   /**
-   * Fix multiPlayer for new startAt/endAt params #1
    * _applyStartEndAtPlayback - runtime enforcement of the playback window.
    *
    * Installed once per created player (both techs, YouTube and native) from
@@ -3025,7 +3328,6 @@
   function _applyStartEndAtPlayback(player, videoId, playlistManagerRef) {
     if (!player || typeof player.on !== 'function') return;
 
-    // Fix J1 multiPlayer #3
     // ROOT CAUSE 1 of "endAt works for YouTube videos only once":
     // this function is called EXACTLY ONCE per created player (from onReady)
     // and closes over `videoId` - the id the player was CREATED with. The
@@ -3082,7 +3384,6 @@
       return fallbackVideoId;
     };
 
-    // Fix J1 multiPlayer #3
     // ROOT CAUSE 4 of "the video should stop and not even start anything":
     // the #2 implementation ended the window with
     //   player.pause(); player.trigger('ended');
@@ -3121,7 +3422,6 @@
         return;
       }
 
-      // Fix J1 multiPlayer #5
       // ROOT CAUSE of "the plugin's autoadvance does not advance anymore":
       // the #3 "stop means stop" rule above recognises exactly ONE request
       // for continuous playback - the module's own loop toggle. But the
@@ -3170,7 +3470,6 @@
         isDev && logger.info('\n' + `playbackWindow: ${techLabel}video id ${activeId} reached endAt ${endAtSec}s - plugin autoadvance takes over`);
         return;
       }
-      // END Fix J1 multiPlayer #5
 
       // Loop mode is OFF: hard stop. Nothing is triggered, nothing advances.
       // Reset the stored position so the NEXT play replays the whole window
@@ -3187,7 +3486,6 @@
       isDev && logger.info('\n' + `playbackWindow: ${techLabel}video id ${activeId} stopped at configured endAt ${endAtSec}s`);
     };
 
-    // Fix J1 multiPlayer #3
     // ROOT CAUSE 3 of "only once": _endAtFired below is a single boolean per
     // PLAYER, and its only re-arm rule is `pos < endAt - 1.5`. Because the
     // watchdog pauses the player exactly AT endAt, the position never drops
@@ -3211,7 +3509,6 @@
     player.on('loadstart', () => _rearmEndAt('loadstart'));
     player.on('playlistitem', () => _rearmEndAt('playlistitem'));
 
-    // Fix J1 multiPlayer #4
     // ROOT CAUSE of "endAt is lost for the item the playlist plugin loads on
     // autoadvance": a race in the SWAP WINDOW that #3 itself opened.
     //
@@ -3248,12 +3545,13 @@
     // via the #23 tracker, which is updated by the SAME 'playlistitem'
     // event, so expectation and resolution can only diverge for the async
     // YouTube tech — the guard is a no-op for mp3/mp4 sources.
+    //
     let _expectedActiveVideoId = videoId || null;
 
-    // Fix J1 multiPlayer #4
     // Video.js passes the trigger hash as the handler's 2nd argument; the
     // item object carries the J1 `videoId` copied through by
     // mapVideoPlayerPlaylist (see the #23 wiring in onReady).
+    //
     player.on('playlistitem', (event, item) => {
       const nextId = (item && item.videoId) ? item.videoId : null;
       if (nextId) {
@@ -3262,7 +3560,6 @@
       }
     });
 
-    // Fix J1 multiPlayer #4
     // TRUE while the id the tech ACTUALLY reports differs from the id the
     // player is EXPECTED to hold — i.e. while a plugin-driven source swap
     // has not settled yet. Watchdogs and startAt handlers must not act on
@@ -3275,7 +3572,6 @@
       return (_expectedActiveVideoId !== null && resolvedId !== _expectedActiveVideoId);
     };
 
-    // Fix multiPlayer start video at startAt #1
     // =========================================================================
     // DARK START runtime - installed here, inside _applyStartEndAtPlayback(),
     // because everything this feature needs already exists in this closure and
@@ -3556,28 +3852,28 @@
 
       setTimeout(() => {
         try {
-          // Fix multiPlayer for new startAt/endAt params #2
+
           // YouTube sources are enforced ytp-style on the RAW YT.Player by
           // the #2 handlers installed below (per-'playing' seekTo, ytp.js
           // parity). Hand over to avoid a duplicate seek to the same target
           // through the Video.js facade; native techs (resolver yields
           // null) fall through unchanged into the original #1 logic.
+          //
           if (_resolveYouTubeRawPlayer(player)) return;
-          // END Fix multiPlayer for new startAt/endAt params #2
 
-          // Fix J1 multiPlayer #3
           // Resolve the CURRENTLY loaded item (root cause 1) instead of the
           // creation-time id, and log under the honest `playbackWindow` name.
           // Original (deprecated, preserved for reference):
           // const win = _resolveStartEndAt(videoId, playlistManagerRef);
+          //
           const activeId = _resolveActivePlaybackVideoId(player, videoId);
 
-          // Fix J1 multiPlayer #4
           // Mid-swap: the tech still reports the PREVIOUS item (see the
           // _expectedActiveVideoId note). Seeking now would act on the wrong
           // video. This handler is a ONE-SHOT that already removed itself, so
           // re-attach it before bailing out — the settled new source fires
           // 'playing' again and the shot runs against the correct item.
+          //
           if (_isMidSwap(activeId)) {
             player.on('playing', onFirstPlayingStartAt);
             isDev && logger.debug('\n' + `playbackWindow: startAt one-shot deferred (source swap to ${_expectedActiveVideoId} not settled)`);
@@ -3594,27 +3890,21 @@
 
           if (beforeWindow || afterWindow) {
             player.currentTime(win.startAt);
-            // Fix J1 multiPlayer #3
-            // Original (deprecated, preserved for reference):
-            // isDev && logger.info('\n' + `startEndAt: video id ${videoId} started at configured startAt ${win.startAt}s`);
             isDev && logger.info('\n' + `playbackWindow: video id ${activeId} started at configured startAt ${win.startAt}s`);
           }
         } catch (e) {
-          // Fix J1 multiPlayer #3
-          // Original (deprecated, preserved for reference):
-          // isDev && logger.warn('\n' + `startEndAt: startAt seek skipped: ${e}`);
           isDev && logger.warn('\n' + `playbackWindow: startAt seek skipped: ${e}`);
         }
       }, 400);
     };
     player.on('playing', onFirstPlayingStartAt);
 
-    // Fix J1 multiPlayer #3
     // The #1 startAt handler is a ONE-SHOT (it removes itself on the first
     // 'playing'). That is correct per item, but the plugin loads every later
     // item into this SAME player, so from item 2 on no startAt was applied at
     // all. Re-attach the one-shot whenever a new source is loaded; off()
     // first keeps it idempotent when both events fire for one swap.
+    //
     const _reattachStartAtOneShot = () => {
       player.off('playing', onFirstPlayingStartAt);
       player.on('playing', onFirstPlayingStartAt);
@@ -3627,7 +3917,6 @@
 
     player.on('timeupdate', () => {
       try {
-        // Fix multiPlayer for new startAt/endAt params #2
         // YouTube sources are enforced ytp-style by the 500ms raw-player
         // polling interval installed below (ytp.js checkOnVideoEnd parity);
         // the synthetic 'timeupdate' relay of the videojs-youtube tech is
@@ -3635,17 +3924,15 @@
         // shared _endAtFired flag keeps both paths single-fire in every
         // case; native techs (resolver yields null) fall through unchanged
         // into the original #1 logic.
+        //
         if (_resolveYouTubeRawPlayer(player)) return;
-        // END Fix multiPlayer for new startAt/endAt params #2
 
-        // Fix J1 multiPlayer #3
         // Root cause 1: resolve the CURRENTLY loaded item, not the id the
         // player was created with.
         // Original (deprecated, preserved for reference):
         // const win = _resolveStartEndAt(videoId, playlistManagerRef);
         const activeId = _resolveActivePlaybackVideoId(player, videoId);
 
-        // Fix J1 multiPlayer #4
         // Mid-swap: the tech still reports the PREVIOUS item — its position
         // is parked at that item's endAt, so acting here would re-fire the
         // stop for a video that already stopped (see the
@@ -3657,15 +3944,10 @@
 
         const pos = (typeof player.currentTime === 'function') ? (player.currentTime() || 0) : 0;
 
-        // Fix J1 multiPlayer #3
         // Root cause 3: the latch is now keyed by video id, so it re-arms by
         // itself as soon as another item is loaded into this player. The
         // hysteresis rule is kept for a seek back inside the SAME item.
-        // Original (deprecated, preserved for reference):
-        // // re-arm after a seek back into the window (1.5s hysteresis)
-        // if (_endAtFired && pos < (win.endAt - 1.5)) {
-        //   _endAtFired = false;
-        // }
+        //
         if (_endAtFiredFor !== null && _endAtFiredFor !== activeId) {
           _rearmEndAt('item changed');
         }
@@ -3673,34 +3955,20 @@
           _rearmEndAt('seek back into window');
         }
 
-        // Fix J1 multiPlayer #3
         // Root cause 4: endAt now STOPS instead of triggering a synthetic
         // 'ended' that made the plugin autoadvance / loop mode start the next
         // video. _stopAtEndAt() keeps the loop-mode advance for the case the
         // user actually enabled it.
-        // Original (deprecated, preserved for reference):
-        // if (!_endAtFired && pos >= win.endAt) {
-        //   _endAtFired = true;
-        //   player.pause();
-        //   // Route through the standard end-of-media path: the 'ended'
-        //   // trigger reaches onStateChange via the vjsStateEventMap wiring,
-        //   // so position reset and loop-mode advance behave as usual.
-        //   player.trigger('ended');
-        //   isDev && logger.info('\n' + `startEndAt: video id ${videoId} stopped at configured endAt ${win.endAt}s`);
-        // }
+        //
         if (_endAtFiredFor === null && pos >= win.endAt) {
           _endAtFiredFor = activeId;
           _stopAtEndAt(player, activeId, win.endAt, '');
         }
       } catch (e) {
-        // Fix J1 multiPlayer #3
-        // Original (deprecated, preserved for reference):
-        // isDev && logger.warn('\n' + `startEndAt: endAt watchdog skipped: ${e}`);
         isDev && logger.warn('\n' + `playbackWindow: endAt watchdog skipped: ${e}`);
       }
     });
 
-    // Fix multiPlayer for new startAt/endAt params #2
     // YouTube enforcement, mirrored from the Amplitude module's ytp plugin
     // (ytp.js). For YouTube sources the #1 handlers above proved unreliable:
     // they act through the Video.js facade (player.currentTime() /
@@ -3743,26 +4011,23 @@
           const ytPlayer = _resolveYouTubeRawPlayer(player);
           if (!ytPlayer) return;
 
-          // Fix J1 multiPlayer #3
-          // Root cause 1: resolve the CURRENTLY loaded item. On a plugin-
+          // Resolve the CURRENTLY loaded item. On a plugin-
           // driven source swap this player keeps running, so the creation-
           // time id resolved item 1's window for every following item.
-          // Original (deprecated, preserved for reference):
-          // const win = _resolveStartEndAt(videoId, playlistManagerRef);
+          //
           const activeId = _resolveActivePlaybackVideoId(player, videoId);
 
-          // Fix J1 multiPlayer #4
-          // Mid-swap: the raw YT.Player still reports the PREVIOUS item (see
+          // The raw YT.Player still reports the PREVIOUS item (see
           // the _expectedActiveVideoId note). Seeking it would rewind the
           // wrong video. Unlike the native #1 handler this one is attached
           // per-'playing' (ytp parity), so a plain skip is enough — the
           // settled new source fires 'playing' again and this handler runs
           // against the correct item.
+          //
           if (_isMidSwap(activeId)) return;
 
           const win = _resolveStartEndAt(activeId, playlistManagerRef);
 
-          // Fix J1 multiPlayer #3
           // Replay of a window that already stopped: the player is parked AT
           // endAt with the latch set, so pressing play would run straight past
           // endAt (the hysteresis rule can never see a position below it).
@@ -3770,6 +4035,7 @@
           // and re-arm, so the trimmed clip plays again from its beginning.
           // This branch also covers items that have endAt but NO startAt,
           // which the early return below would otherwise skip entirely.
+          //
           if (_endAtFiredFor === activeId && win.endAt !== null) {
             const posFired = ytPlayer.getCurrentTime() || 0;
             if (posFired >= (win.endAt - 1.5)) {
@@ -3791,15 +4057,9 @@
           if (beforeWindow || afterWindow) {
             // ytp.js parity: ytpSeekTo(player, startSec, true)
             ytPlayer.seekTo(win.startAt, true);
-            // Fix J1 multiPlayer #3
-            // Original (deprecated, preserved for reference):
-            // isDev && logger.info('\n' + `startEndAt: YT video id ${videoId} started at configured startAt ${win.startAt}s (ytp parity)`);
             isDev && logger.info('\n' + `playbackWindow: YT video id ${activeId} started at configured startAt ${win.startAt}s (ytp parity)`);
           }
         } catch (e) {
-          // Fix J1 multiPlayer #3
-          // Original (deprecated, preserved for reference):
-          // isDev && logger.warn('\n' + `startEndAt: YT startAt seek skipped: ${e}`);
           isDev && logger.warn('\n' + `playbackWindow: YT startAt seek skipped: ${e}`);
         }
       }, 400);
@@ -3823,7 +4083,6 @@
             return;
           }
 
-          // Fix J1 multiPlayer #3
           // ROOT CAUSE 2 of "endAt works for YouTube videos only once", and
           // the one that is genuinely YouTube-specific: the raw YT.Player was
           // resolved ONCE, above, and captured in this interval closure -
@@ -3838,14 +4097,13 @@
           // Re-resolve per tick. That is cheap (a property read every 500ms)
           // and always yields the LIVE player; a null result simply skips the
           // tick, e.g. while the tech is being rebuilt between two items.
-          // Original (deprecated, preserved for reference):
-          // const win = _resolveStartEndAt(videoId, playlistManagerRef);
+          //
           const ytLive = _resolveYouTubeRawPlayer(player);
+
           if (!ytLive) return;
 
           const activeId = _resolveActivePlaybackVideoId(player, videoId);
 
-          // Fix J1 multiPlayer #4
           // Mid-swap: the raw YT.Player still reports the PREVIOUS item,
           // parked exactly at that item's endAt, while 'loadstart'/
           // 'playlistitem' have already re-armed the latch. THIS is the tick
@@ -3857,22 +4115,15 @@
           if (_isMidSwap(activeId)) return;
 
           const win = _resolveStartEndAt(activeId, playlistManagerRef);
+
           if (win.endAt === null) return;
 
-          // Fix J1 multiPlayer #3
-          // Original (deprecated, preserved for reference):
-          // const pos = ytPlayer.getCurrentTime() || 0;
           const pos = ytLive.getCurrentTime() || 0;
 
-          // Fix J1 multiPlayer #3
           // Root cause 3: latch keyed by video id (see the declaration note),
           // so it re-arms on an item change; the #1 hysteresis rule is kept
           // for a seek back inside the SAME item.
-          // Original (deprecated, preserved for reference):
-          // // re-arm after a seek back into the window (1.5s hysteresis, #1 rule)
-          // if (_endAtFired && pos < (win.endAt - 1.5)) {
-          //   _endAtFired = false;
-          // }
+          //
           if (_endAtFiredFor !== null && _endAtFiredFor !== activeId) {
             _rearmEndAt('item changed');
           }
@@ -3880,24 +4131,13 @@
             _rearmEndAt('seek back into window');
           }
 
-          // Fix J1 multiPlayer #3
           // Root cause 4: stop means stop. See the _stopAtEndAt() note.
-          // Original (deprecated, preserved for reference):
-          // if (!_endAtFired && pos >= win.endAt) {
-          //   _endAtFired = true;
-          //   player.pause();
-          //   // Route through the standard end-of-media path (see #1 note).
-          //   player.trigger('ended');
-          //   isDev && logger.info('\n' + `startEndAt: YT video id ${videoId} stopped at configured endAt ${win.endAt}s (ytp parity)`);
-          // }
+          //
           if (_endAtFiredFor === null && pos >= win.endAt) {
             _endAtFiredFor = activeId;
             _stopAtEndAt(player, activeId, win.endAt, 'YT ');
           }
         } catch (e) {
-          // Fix J1 multiPlayer #3
-          // Original (deprecated, preserved for reference):
-          // isDev && logger.warn('\n' + `startEndAt: YT endAt watchdog skipped: ${e}`);
           isDev && logger.warn('\n' + `playbackWindow: YT endAt watchdog skipped: ${e}`);
         }
       }, 500);                                          // ytp.js: 500ms poll
@@ -3910,11 +4150,9 @@
         _ytpEndAtInterval = null;
       }
     });
-    // END Fix multiPlayer for new startAt/endAt params #2
   }
 
   /**
-   * Fix multiPlayer for new startAt/endAt params #2
    * _resolveYouTubeRawPlayer - guarded probe for the raw YT.Player of a
    * created VideoJS player, mirroring the access path already established
    * by _applyYouTubeAudioOnlyQuality() (audio only #1): the videojs-youtube
@@ -3939,16 +4177,12 @@
         return tech.ytPlayer;
       }
     } catch (e) {
-      // Fix J1 multiPlayer #3
-      // Original (deprecated, preserved for reference):
-      // isDev && logger.warn('\n' + `startEndAt: YT raw player probe skipped: ${e}`);
       isDev && logger.warn('\n' + `playbackWindow: YT raw player probe skipped: ${e}`);
     }
     return null;
   }
 
   /**
-   * Fix J1 multiPlayer #5
    * _pluginWillAutoadvance - TRUE when the videojs-playlist plugin's
    * autoadvance is armed on THIS player AND has an item to advance to, i.e.
    * when a (real or synthetic) 'ended' on the player will be answered by the
@@ -3996,7 +4230,6 @@
   }
 
   /**
-   * Fix multiPlayer new select audio only #1
    * _applyYouTubeAudioOnlyQuality - hard-enforce the minimum video quality
    * on the underlying YT.Player, mirroring the ytp plugin of the Amplitude
    * module (ytp.js: ytPlayer.setPlaybackQuality('small') on player ready).
@@ -4022,7 +4255,6 @@
   }
 
   /**
-   * Fix multiPlayer new select audio only #2
    * _resolveYouTubeAudioOnlyPoster - poster URL shown on the player surface
    * while a YouTube source plays in AUDIO ONLY (audioPosterMode). The
    * PosterImage component of Video.js hides itself when the player has no
@@ -4078,7 +4310,6 @@
   }
 
   /**
-   * Fix multiPlayer new select audio only #2
    * _ensureAudioOnlyPosterStyles - one-time DEFENSIVE stylesheet for the
    * poster persistence of audioPosterMode.
    *
@@ -4107,7 +4338,6 @@
     const styleEl = document.createElement('style');
     styleEl.id    = STYLE_ID;
     styleEl.textContent = [
-      '/* Fix multiPlayer new select audio only #2 */',
       '/* Poster persistence for AUDIO ONLY playback (audioPosterMode):    */',
       '/* keep the poster visible on the player surface during playback.   */',
       '.video-js.vjs-audio-poster-mode .vjs-poster { display: block; }',
@@ -4119,7 +4349,6 @@
     isDev && logger.debug('\n' + 'audioOnly: poster-persistence stylesheet injected');
   }
 
-  // Fix multiPlayer start video at startAt #1
   // ===========================================================================
   // FEATURE: "dark start" for the startAt playback window
   //
@@ -4197,7 +4426,6 @@
   const STARTAT_DARK_CLASS = 'j1-startat-dark';
 
   /**
-   * Fix multiPlayer start video at startAt #1
    * _ensureStartAtDarkStyles - one-time stylesheet for the "dark start" of a
    * configured startAt window.
    *
@@ -4254,7 +4482,6 @@
   }
 
   /**
-   * Fix multiPlayer start video at startAt #1
    * _resolveStartAtDarkPoster - poster URL shown INSTEAD of the video while
    * the player seeks to a configured startAt.
    *
@@ -7378,7 +7605,6 @@
     initRateHandler() {
       if (this._rateHandlerInitialized) return;
 
-      // Fix multiPlayer #2: corrected ID
       const playlistContainer = document.getElementById(_pid('videoplayer_playlist_parent'));
       if (!playlistContainer) return;
 
@@ -9283,7 +9509,6 @@
             // before; the deferred autoplay branch in onReady() starts the
             // first playback once the selected source has settled.
             //
-            // Fix multiPlayer plugin option guards #1
             // The option walk below descended three levels without a check.
             // The short-circuit of `piNextPrevButtons` did NOT protect it:
             // that flag reports whether the plugin is ACTIVE on the player,
@@ -9715,6 +9940,16 @@
         // empty, i.e. byte-identical behaviour for existing configurations.
         //
         _applyAudioFadeIn(player, videoId, playlistManager);
+
+        // Claude - Optimize multiPlayer #1
+        // Install the cross-page synchronization for BOTH techs (YouTube and
+        // native), in the same place and for the same reasons as the two
+        // installers above: one installation per created player, driven by
+        // player events. A no-op unless cross_page_sync.enabled is true in
+        // the YAML chain, i.e. byte-identical behaviour for existing
+        // configurations.
+        //
+        _applyCrossPageSync(player, videoId);
 
         // ROOT CAUSE of "per-player videoJS settings never applied": this
         // assignment unconditionally overwrote the instance-level
@@ -11086,7 +11321,7 @@
       // videoConfig.youtube.playerVars above, so the late write is carried
       // into the player creation. The native (else) branch is untouched:
       // audio-only never applies to native .mp4/.mp3 sources.
-      // Fix multiPlayer new select audio only #2
+      // 
       // Display strategy CHANGED (see the ADDENDUM at the feature note):
       // audioOnlyMode collapsed the player to the control-bar height, so
       // #video_container showed the control bar and no content at all.
@@ -11097,7 +11332,7 @@
       // poster is resolved here (entry.poster <- players.youtube thumbnail <-
       // default_poster <- DEFAULT_POSTER). The quality clamp (vq = 'small' +
       // the 'playing' one-shot below) is unchanged ytp parity.
-      // Fix multiPlayer new select audio only 4
+      // 
       // UNCHANGED call site — the resolver itself gained the leading rule
       // "switch not shown/unavailable -> set_audio_only wins" (see the
       // feature note at _isAudioOnlySwitchAvailable). A player configured
@@ -11251,7 +11486,7 @@
         // asynchronously after the IFrame API is ready). one() keeps it a
         // single shot per created player; the audioOnlyMode/vq creation
         // options above already govern the initial state.
-        // Fix multiPlayer new select audio only #2
+        //
         // The creation option is now audioPosterMode (+ videoConfig.poster);
         // this quality one-shot is UNCHANGED — it clamps the video data of
         // the hidden playback exactly as before (ytp parity).
@@ -12592,7 +12827,7 @@
         // never touched, the new state simply governs the NEXT YouTube load
         // (createVideoJsPlayer). player.audioOnlyMode(bool) is the runtime
         // twin of the videoConfig.audioOnlyMode creation option (video.js).
-        // Fix multiPlayer new select audio only #2
+        //
         // Runtime twin CHANGED with the creation option (see the ADDENDUM at
         // the feature note): player.audioPosterMode(bool) hides/shows the
         // YouTube iframe while the poster persists on the full player
