@@ -154,14 +154,13 @@
         rel:              playersParams.rel,
         showinfo:         playersParams.showinfo,
 
-        // claude - fix pip on youtube
         // Explicitly set the origin parameter so the YouTube IFrame API
         // can validate the embedding page even when the browser opens
         // the player in a Picture-in-Picture browsing context (which
         // may lack the HTTP Referer header). Without this, YT may
         // reject the embed with error 153 (embedder.identity.missing.referrer).
+        //
         origin:           window.location.origin
-        // END claude - fix pip on youtube
       };
 
       // Let the user set any YouTube parameter
@@ -394,16 +393,16 @@
           break;
 
         case YT.PlayerState.PLAYING:
-          // claude - fix pip on youtube
           // Reset the PiP retry counter on successful playback so
           // future error-153 occurrences get a fresh set of retries.
+          //
           this._pipRetryCount = 0;
-          // END claude - fix pip on youtube
 
           // YouTube's IFrame API only populates the `author` field in
           // getVideoData() AFTER playback begins. The initial fetch
           // in onPlayerReady() runs before that, so `author` is always
           // an empty string.
+          //
           try {
             if (this.ytPlayer && typeof this.ytPlayer.getVideoData === 'function') {
               var freshData = this.ytPlayer.getVideoData();
@@ -419,6 +418,7 @@
 
                 // Re-dispatch the event with updated data (author field is
                 // only populated by the YT IFrame API after playback begins).
+                //
                 try {
                   var ytVideoDataEvent = new CustomEvent('ytVideoDataResolved', {
                     detail: {
@@ -469,7 +469,7 @@
     } // END onPlayerVolumeChange
 
     onPlayerError(e) {
-      // claude - fix pip on youtube
+
       // Error 153 ("embedder.identity.missing.referrer") is a transient
       // error that occurs when the browser opens the YouTube iframe in a
       // Picture-in-Picture window without forwarding the parent page's
@@ -477,6 +477,7 @@
       // ALL subsequent onPlayerStateChange calls and permanently kill the
       // player. Instead, attempt a recovery by re-loading the current
       // video after a short delay.
+      //
       if (e.data === 153) {
         j1.consoleLog(isDev, 'DEBUG', CONSOLE_LOG_ID, MODULE_NAME, `YT error 153 (PiP referrer): attempting recovery`);
 
@@ -505,7 +506,6 @@
 
         return;
       }
-      // END claude - fix pip on youtube
 
       this.errorNumber = e.data;
       this.trigger('pause');
@@ -529,13 +529,11 @@
             message: 'Playback on other Websites has been disabled by the video owner.'
           };
 
-        // claude - fix pip on youtube
         case 153:
           return {
             code: code,
             message: 'Playback failed because the embed referrer could not be verified (Picture-in-Picture). Retrying.'
           };
-        // END claude - fix pip on youtube
       }
 
       return { code: code, message: 'YouTube unknown error (' + this.errorNumber + ')' };
@@ -643,14 +641,13 @@
           // Set the low resolution first
           //  this.poster_ = 'https://img.youtube.com/vi/' + this.url.videoId + '/0.jpg';
           //  this.poster_ = 'https://img.youtube.com/vi/' + this.url.videoId + '/sddefault.jpg';
-          // claude - optimize J1 third-party cookies #1
-          // Original (deprecated, preserved for reference):
-          // this.poster_ = 'https://img.youtube.com/vi/' + this.url.videoId + '/mqdefault.jpg';
+          //
           // Poster images are now loaded from the cookieless image CDN
           // i.ytimg.com. img.youtube.com serves the identical images, but as
           // a *.youtube.com host every request carries (and can set) the
           // youtube.com cookies, which Chrome/Lighthouse flags as
           // third-party cookie usage ("Best Practices" audit).
+          //
           this.poster_ = 'https://i.ytimg.com/vi/' + this.url.videoId + '/mqdefault.jpg';
           this.trigger('posterchange');
 
@@ -921,10 +918,6 @@
 
     // Tries to get the highest resolution thumbnail available for the video
     checkHighResPoster() {
-      // claude - optimize J1 third-party cookies #1
-      // Original (deprecated, preserved for reference):
-      // var uri = 'https://img.youtube.com/vi/' + this.url.videoId + '/maxresdefault.jpg';
-      // Cookieless image CDN i.ytimg.com (see poster handling above).
       var uri = 'https://i.ytimg.com/vi/' + this.url.videoId + '/maxresdefault.jpg';
 
       try {
@@ -1072,7 +1065,6 @@
     var j1CoreFinished = (j1.getState() === 'finished') ? true : false;
 
     if (j1CoreFinished && pageVisible) {
-//  if (pageVisible) {      
       const isDev     = (j1.env === "development" || j1.env === "dev") ? true : false;
 
       startTimeModule = Date.now();
@@ -1080,14 +1072,14 @@
       isDev && logger.debug('\n' + 'initializing plugin: started');
       isDev && logger.debug('\n' + 'version of videoJS detected: ' + videojs.VERSION);
 
-      // claude - optimize J1 third-party cookies #1
-      // NOTE (no functional change): the IFrame Player API loader script is
+      // The IFrame Player API loader script is
       // intentionally kept on youtube.com. It is a static JS resource
       // that does not set cookies itself; the cookies flagged by
       // Chrome/Lighthouse are set by the embed iframe document. The embed
       // host is switched to www.youtube-nocookie.com via the tech option
       // `privacy_enhanced` (see initYTPlayer above), which the J1
       // videoPlayer core now enables by default.
+      //
       loadScript('//youtube.com/iframe_api', apiLoaded);
       injectCss();
 

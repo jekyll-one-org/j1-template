@@ -2,7 +2,6 @@
  # -----------------------------------------------------------------------------
  # ~/assets/theme/j1/modules/videojs/js/plugins/players/native/js/native.js
  # Provides Native HTML5 Video Playback Plugin for Video.js V8 and newer
- # claude - change skipAd API to local files #1
  #
  # Product/Info:
  # https://jekyll.one
@@ -31,11 +30,10 @@
 
   // ---------------------------------------------------------------------------
   // Constants
-  // claude - change skipAd API to local files #1
   // ---------------------------------------------------------------------------
 
-  const env   = 'dev';                                                           // dev | prod
-  const isDev = (env === 'dev');
+  const env             = j1.getEnv();
+  const isDev           = (env === 'dev') ? true : false;
 
   // ---------------------------------------------------------------------------
   // Module variables
@@ -65,16 +63,17 @@
 
   // ---------------------------------------------------------------------------
   // Plugin function
-  // claude - change skipAd API to local files #1
   // Replaces the youtube.js YouTube Tech with a lightweight video.js plugin
   // that delegates all actual decoding to video.js's built-in Html5 tech.
   // Supports local and remote MP4, WebM, and OGG video files without any
   // third-party dependencies.
   // Dispatches the same custom DOM events the videoPlayer adapter expects,
   // but with native-video names instead of YouTube-prefixed names:
+  //
   //   ytVideoDataResolved → videoDataResolved
   //   ytVideoEnded        → videoEnded
   //   ytVideoManualPlay   → videoManualPlay
+  //
   // ---------------------------------------------------------------------------
 
   /**
@@ -91,7 +90,6 @@
 
     // -------------------------------------------------------------------------
     // getVideoData
-    // claude - change skipAd API to local files #1
     // Collect metadata from the native HTML5 player equivalent to the data
     // YouTube's getVideoData() used to return.  A stable videoId is derived
     // from the filename portion of the src URL so downstream playlist logic
@@ -107,6 +105,7 @@
 
       // derive a stable videoId from the filename (without extension)
       // so playlist entries using videoId still resolve correctly
+      //
       var videoId  = src.split('/').pop().replace(/\.[^.]+$/, '') || src;
 
       return {
@@ -120,7 +119,6 @@
 
     // -------------------------------------------------------------------------
     // dispatchVideoDataResolved
-    // claude - change skipAd API to local files #1
     // Replaces the 'ytVideoDataResolved' event dispatched by youtube.js.
     // Fired when metadata is available so j1.adapter.videoPlayer can store
     // the video info and attach per-player event bridges.
@@ -145,7 +143,6 @@
 
     // -------------------------------------------------------------------------
     // dispatchVideoEnded
-    // claude - change skipAd API to local files #1
     // Replaces the 'ytVideoEnded' custom event previously bridged from the
     // video.js 'ended' event inside skipad.js.  The bridge is no longer
     // needed because this plugin is the canonical source of truth for the
@@ -171,7 +168,6 @@
 
     // -------------------------------------------------------------------------
     // dispatchVideoManualPlay
-    // claude - change skipAd API to local files #1
     // Replaces the 'ytVideoManualPlay' event.  Fired on every play() call so
     // the loop-mode logic in j1.adapter.videoPlayer can reset its loop-start
     // marker to the currently playing video.
@@ -196,7 +192,6 @@
 
     // -------------------------------------------------------------------------
     // Attach native video.js event listeners
-    // claude - change skipAd API to local files #1
     // All events come directly from video.js's Html5 tech (the browser's
     // native <video> element) — no YouTube IFrame API is involved.
     // -------------------------------------------------------------------------
@@ -204,6 +199,7 @@
     // loadedmetadata: dispatch videoDataResolved as soon as the browser has
     // read the media dimensions, duration, and track list from the file
     // header.  This is the earliest moment reliable metadata is available.
+    //
     player.on('loadedmetadata', function () {
       isDev && logger.debug('\n' + 'event: loadedmetadata — src=' + player.currentSrc());
       dispatchVideoDataResolved('loadedmetadata');
@@ -212,18 +208,21 @@
     // playing: re-dispatch videoDataResolved after each src swap so the
     // adapter always has the latest video info (e.g. after embedRunVideo
     // changes the source for the next playlist item).
+    //
     player.on('playing', function () {
       dispatchVideoDataResolved('playing');
     });
 
     // play: fired on every play() call (user interaction or programmatic).
     // Used by loop mode to reset the loop-start marker.
+    //
     player.on('play', function () {
       dispatchVideoManualPlay();
     });
 
     // ended: fired when the native video element reaches the end of the
     // media.  Loop mode listens for videoEnded to advance the playlist.
+    //
     player.on('ended', function () {
       dispatchVideoEnded();
     });
@@ -232,14 +231,14 @@
 
     // -------------------------------------------------------------------------
     // injectCss
-    // claude - change skipAd API to local files #1
-    // Inject minimal CSS for the native player.  Mirrors the pattern used by
+    // Inject minimal CSS for the native player. Mirrors the pattern used by
     // youtube.js#injectCss() but removes all YouTube-specific rules.
     // -------------------------------------------------------------------------
     (function injectCss() {
       // hide the control bar when the 'vjs-native-hide-controlbar' class
       // is added to the player container (same pattern as
       // 'vjs-youtube-hide-controlbar' in the old youtube.js)
+      //
       const css = `
         .vjs-native .vjs-big-play-button { display: block; }
         .vjs-native.vjs-native-hide-controlbar .vjs-control-bar { display: none !important; }
@@ -263,7 +262,6 @@
 
   // ---------------------------------------------------------------------------
   // canPlayType helper
-  // claude - change skipAd API to local files #1
   // Exposes the supported MIME types for use by the videoPlayer adapter
   // (analogous to Youtube.canPlayType in youtube.js).
   // ---------------------------------------------------------------------------
@@ -275,7 +273,6 @@
 
   // ---------------------------------------------------------------------------
   // Register the plugin with video.js
-  // claude - change skipAd API to local files #1
   // video.js's built-in Html5 tech handles all actual decoding; this plugin
   // only adds the custom event dispatching layer on top of it.
   // ---------------------------------------------------------------------------
