@@ -38,13 +38,12 @@ settings:
       id:                               player_1
       description:                      VideoJS Multi-Player 1
 
-      # Fix multiPlayer new select audio only #1
       # AUDIO ONLY playback (YouTube entries only, see multiPlayer.yml for
       # the full note). Seeds the initial state of the title-bar switch of
       # THIS player; a persisted user toggle wins.
       #
       audio_only:                       false
-      # claude - Fix multiPlayer new select audio only 4
+
       # FIXED AUDIO ONLY playback for a player WITHOUT the title-bar switch
       # (see multiPlayer.yml for the full note). INACTIVE for this player:
       # the switch is shown, so the control owns the state and this key is
@@ -59,7 +58,6 @@ settings:
       #
       # startAt:                        ""
 
-      # Modify J1 VideoPlayerfor export #1
       # UI interface settings
       #
       # MEDIA EXPORT switches (see videoPlayer.yml for the full note). Only
@@ -69,8 +67,6 @@ settings:
       ui_elements:
         playlist_download_button:       true
         playlist_download_all_button:   true
-
-        # Fix multiPlayer new select audio only #1
         audioOnlySwitch:                true
 
       # PLAYLIST settings
@@ -110,10 +106,8 @@ settings:
       enabled:                          true
       id:                               player_2
       description:                      VideoJS Multi-Player 2
-
-      # Fix multiPlayer new select audio only #1
       audio_only:                       false
-      # claude - Fix multiPlayer new select audio only 4
+
       # FIXED AUDIO ONLY playback for a player WITHOUT the title-bar switch
       # (see multiPlayer.yml for the full note). INACTIVE for this player:
       # the switch is shown, so the control owns the state and this key is
@@ -122,7 +116,6 @@ settings:
       #
       set_audio_only:                   false
 
-      # Fix multiPlayer for new startAt/endAt params #1
       # PLAYBACK WINDOW (all source kinds, see multiPlayer.yml for the full
       # note). Overloads the global startAt/endAt for THIS player; a
       # per-media value from the Edit Media Settings dialog wins.
@@ -130,12 +123,9 @@ settings:
       startAt:                          ''
       endAt:                            ''
 
-      # Modify J1 VideoPlayerfor export #1
       ui_elements:
         playlist_download_button:       true
         playlist_download_all_button:   true
-
-        # Fix multiPlayer new select audio only #1
         audioOnlySwitch:                true
 
       # PLAYLIST settings
@@ -174,13 +164,12 @@ settings:
         cards:
           perRow:                       3
 
-      # Fix multiPlayer new select audio only #1
       # AUDIO ONLY playback (YouTube entries only, see multiPlayer.yml for
       # the full note). Seeds the initial state of the title-bar switch of
       # THIS player; a persisted user toggle wins.
       #
       audio_only:                       false
-      # claude - Fix multiPlayer new select audio only 4
+
       # FIXED AUDIO ONLY playback for a player WITHOUT the title-bar switch
       # (see multiPlayer.yml for the full note). INACTIVE for this player:
       # the switch is shown, so the control owns the state and this key is
@@ -189,7 +178,6 @@ settings:
       #
       set_audio_only:                   false
 
-      # Fix multiPlayer for new startAt/endAt params #1
       # PLAYBACK WINDOW (all source kinds, see multiPlayer.yml for the full
       # note). Overloads the global startAt/endAt for THIS player; a
       # per-media value from the Edit Media Settings dialog wins.
@@ -205,14 +193,10 @@ settings:
         playlist_rate_button:           true
         playlist_edit_button:           true
         playlist_delete_button:         false
-
-        # Modify J1 VideoPlayerfor export #1
         playlist_download_button:       true
         playlist_download_all_button:   true
 
-        # Fix multiPlayer new select audio only #1
         audioOnlySwitch:                true
-
         mergeSwitch:                    false
 
       # VIDEOJS settings
@@ -252,14 +236,12 @@ settings:
         cards:
           perRow:                       3
 
-      # Fix multiPlayer new select audio only #1
       # AUDIO ONLY playback (YouTube entries only, see multiPlayer.yml for
       # the full note). Seeds the initial state of the title-bar switch of
       # THIS player; a persisted user toggle wins.
       #
       audio_only:                       true
 
-      # claude - Fix multiPlayer new select audio only 4
       # FIXED AUDIO ONLY playback for a player WITHOUT the title-bar switch
       # (see multiPlayer.yml for the full note). INACTIVE for this player:
       # the switch is shown, so the control owns the state and this key is
@@ -268,7 +250,6 @@ settings:
       #
       set_audio_only:                   true
 
-      # Fix multiPlayer for new startAt/endAt params #1
       # PLAYBACK WINDOW (all source kinds, see multiPlayer.yml for the full
       # note). Overloads the global startAt/endAt for THIS player; a
       # per-media value from the Edit Media Settings dialog wins.
@@ -330,14 +311,12 @@ settings:
         cards:
           perRow:                       4
 
-      # Fix multiPlayer new select audio only #1
       # AUDIO ONLY playback (YouTube entries only, see multiPlayer.yml for
       # the full note). Seeds the initial state of the title-bar switch of
       # THIS player; a persisted user toggle wins.
       #
       audio_only:                       true
 
-      # claude - Fix multiPlayer new select audio only 4
       # FIXED AUDIO ONLY playback for a player WITHOUT the title-bar switch
       # (see multiPlayer.yml for the full note). INACTIVE for this player:
       # the switch is shown, so the control owns the state and this key is
@@ -346,7 +325,6 @@ settings:
       #
       set_audio_only:                   true
 
-      # Fix multiPlayer for new startAt/endAt params #1
       # PLAYBACK WINDOW (all source kinds, see multiPlayer.yml for the full
       # note). Overloads the global startAt/endAt for THIS player; a
       # per-media value from the Edit Media Settings dialog wins.
@@ -407,14 +385,12 @@ settings:
         cards:
           perRow:                       3
 
-      # Fix multiPlayer new select audio only #1
       # AUDIO ONLY playback (YouTube entries only, see multiPlayer.yml for
       # the full note). Seeds the initial state of the title-bar switch of
       # THIS player; a persisted user toggle wins.
       #
       audio_only:                       false
 
-      # claude - Fix multiPlayer new select audio only 4
       # FIXED AUDIO ONLY playback for a player WITHOUT the title-bar switch
       # (see multiPlayer.yml for the full note). INACTIVE for this player:
       # the switch is shown, so the control owns the state and this key is
@@ -423,7 +399,6 @@ settings:
       #
       set_audio_only:                   false
 
-      # Fix multiPlayer for new startAt/endAt params #1
       # PLAYBACK WINDOW (all source kinds, see multiPlayer.yml for the full
       # note). Overloads the global startAt/endAt for THIS player; a
       # per-media value from the Edit Media Settings dialog wins.
@@ -484,13 +459,12 @@ settings:
         cards:
           perRow:                       3
 
-      # Fix multiPlayer new select audio only #1
       # AUDIO ONLY playback (YouTube entries only, see multiPlayer.yml for
       # the full note). Seeds the initial state of the title-bar switch of
       # THIS player; a persisted user toggle wins.
       #
       audio_only:                       true
-      # claude - Fix multiPlayer new select audio only 4
+
       # FIXED AUDIO ONLY playback for a player WITHOUT the title-bar switch
       # (see multiPlayer.yml for the full note). INACTIVE for this player:
       # the switch is shown, so the control owns the state and this key is
@@ -499,7 +473,6 @@ settings:
       #
       set_audio_only:                   true
 
-      # Fix multiPlayer for new startAt/endAt params #1
       # PLAYBACK WINDOW (all source kinds, see multiPlayer.yml for the full
       # note). Overloads the global startAt/endAt for THIS player; a
       # per-media value from the Edit Media Settings dialog wins.
@@ -560,7 +533,6 @@ settings:
         cards:
           perRow:                       3
 
-      # Fix multiPlayer new select audio only #1
       # AUDIO ONLY playback (YouTube entries only, see multiPlayer.yml for
       # the full note). Seeds the initial state of the title-bar switch of
       # THIS player; a persisted user toggle wins.
@@ -571,7 +543,7 @@ settings:
       #                                    to false (absent-key default: true)      
       #
       audio_only:                       true
-      # claude - Fix multiPlayer new select audio only 4
+
       # FIXED AUDIO ONLY playback for a player WITHOUT the title-bar switch
       # (see multiPlayer.yml for the full note). INACTIVE for this player:
       # the switch is shown, so the control owns the state and this key is
@@ -580,7 +552,6 @@ settings:
       #
       set_audio_only:                   true
 
-      # Fix multiPlayer for new startAt/endAt params #1
       # PLAYBACK WINDOW (all source kinds, see multiPlayer.yml for the full
       # note). Overloads the global startAt/endAt for THIS player; a
       # per-media value from the Edit Media Settings dialog wins.

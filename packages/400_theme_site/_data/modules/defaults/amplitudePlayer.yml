@@ -1,5 +1,5 @@
 # ------------------------------------------------------------------------------
-# ~/_data/modules/defaults/amplitudePlayer.yml (1)
+# ~/_data/modules/defaults/amplitudePlayer.yml
 # Default settings for module amplitudePlayer
 #
 # Product/Info:
@@ -306,7 +306,6 @@ defaults:
     mute_after_video_switch_interval:   750                                     # mute audio after swiching a video (ms)
     check_active_video_interval:        100                                     # how often the data structure 'activeVideoElement' is updated (ms)
 
-    # Claude - J1 amplitudePlayer optimization #4
     # --------------------------------------------------------------------------
     # sync_active_song
     # --------------------------------------------------------------------------

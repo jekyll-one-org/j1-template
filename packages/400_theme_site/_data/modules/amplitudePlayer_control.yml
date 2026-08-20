@@ -1,5 +1,5 @@
 # ------------------------------------------------------------------------------
-# ~/_data/modules/amplitudePlayer_control.yml (1)
+# ~/_data/modules/amplitudePlayer_control.yml
 # User (control) configuration settings for the module amplitudePlayer
 #
 # Product/Info:
@@ -25,7 +25,6 @@ description:
 settings:
 
   # ----------------------------------------------------------------------------
-  # Claude - J1 amplitudePlayer optimization #4
   # PAGE-GLOBAL settings (overload the module defaults for this site)
   # ----------------------------------------------------------------------------
   # sync_active_song: mirror the active song (marker, YouTube cue, native
