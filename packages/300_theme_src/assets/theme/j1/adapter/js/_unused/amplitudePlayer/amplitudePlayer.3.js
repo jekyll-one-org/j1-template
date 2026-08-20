@@ -6,7 +6,7 @@ regenerate:                             true
 
 {% comment %}
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/adapter/js/amplitudePlayer.js (4)
+ # ~/assets/theme/j1/adapter/js/amplitudePlayer.js (3)
  # J1 Adapter for the module Amplitude player
  #
  # Product/Info:
@@ -260,7 +260,7 @@ regenerate:                             true
 
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/theme/j1/adapter/js/amplitudePlayer.js (4)
+ # ~/assets/theme/j1/adapter/js/amplitudePlayer.js (3)
  # J1 Adapter for the module amplitudePlayer
  #
  # Product/Info:
@@ -528,178 +528,6 @@ j1.adapter.amplitudePlayer = ((j1, window) => {
     }
     return core[name].apply(null, args);
   };
-
-  // code optimization
-  // ===========================================================================
-  // Cross-module playback sync (amplitudePlayer <-> multiPlayer)
-  //
-  // PROBLEM
-  //   The playlists of the native large players and the ytp large players
-  //   are already kept in sync INSIDE this module (ytpStopParallelActive-
-  //   Players in the ytp plugin). Players of the multiPlayer module (Video.js)
-  //   on the SAME page were invisible to it: a multiPlayer video and an
-  //   amplitudePlayer track could play at the same time.
-  //
-  // SOLUTION
-  //   Both adapters already carry a messageHandler() (the inter-module
-  //   contract of every J1 adapter) — it was a stub that only logged
-  //   'module_initialized'. It now understands two messages:
-  //
-  //     { type: 'event',   action: 'playback_started', data: {tech, playerId} }
-  //     { type: 'command', action: 'pause_playback',   data: {reason} }
-  //
-  //   A playback start is REPORTED to the peers ('playback_started'); every
-  //   peer decides for itself to pause its own players. No peer answers, so
-  //   there is no message loop: pausing never triggers a 'play' event.
-  //
-  //   Detection of a playback start on THIS module:
-  //     * native players: Amplitude is a SINGLETON with ONE <audio> element
-  //       (Amplitude.getAudio()). Its 'play' event covers every native large
-  //       and small player without touching the module core (player.js).
-  //       NOTE: Amplitude.init() -> resetConfig() creates a NEW Audio(), so
-  //       the listener is bound AFTER the API is initialized and re-bound
-  //       whenever the element changed (_bindNativePlaybackObserver).
-  //     * ytp players: the plugin reports PLAYING via the host adapter's
-  //       messageHandler (sender 'ytp'); the adapter relays it to the peers.
-  //
-  //   Pausing THIS module on a foreign playback start:
-  //     * native: Amplitude.pause() if the player state is 'playing'
-  //     * ytp:    j1.plugins.ytp.pauseActivePlayers() (new in #6, keeps the
-  //               playback position — unlike the stopVideo() based intra-
-  //               module stop)
-  //
-  //   Peers are looked up LAZILY by adapter name at message time, so the load
-  //   order of the modules does not matter and a page without multiPlayer
-  //   simply has nothing to notify.
-  // ===========================================================================
-
-  // adapter names that receive 'playback_started' events from this module
-  var _syncPeers        = ['multiPlayer'];
-
-  // the <audio> element the 'play' listener is currently bound to
-  var _syncBoundAudio   = null;
-
-  // guard against re-entrant pausing (a peer that pauses while being paused)
-  var _syncPausing      = false;
-
-  // sync enabled? (page code may switch it off: j1.adapter.amplitudePlayer.playbackSync.enabled = false)
-  var _syncEnabled = () => {
-    var self = _self();
-    return !(self && self.playbackSync && self.playbackSync.enabled === false);
-  };
-
-  // ---------------------------------------------------------------------------
-  // _notifyPeers(action, data, type)
-  //
-  // Delivers ONE message to every peer adapter that exposes messageHandler().
-  // Uses the messageHandler contract DIRECTLY (no dependency on a specific
-  // j1.sendMessage() signature). Never throws; a failing peer is logged and
-  // the remaining peers are still notified. Returns the number of peers
-  // reached.
-  // ---------------------------------------------------------------------------
-  var _notifyPeers = (action, data, type) => {
-    var reached = 0;
-    var i, name, peer, message;
-
-    if (!_syncEnabled()) { return 0; }
-
-    for (i=0; i<_syncPeers.length; i++) {
-      name = _syncPeers[i];
-      peer = (window.j1 && j1.adapter) ? j1.adapter[name] : undefined;
-
-      if (!peer || typeof peer.messageHandler !== 'function') { continue; }
-
-      message = {
-        type:       type || 'event',
-        action:     action,
-        sender:     'amplitudePlayer',
-        recipient:  name,
-        text:       'amplitudePlayer: ' + action,
-        data:       data || {}
-      };
-
-      try {
-        peer.messageHandler('amplitudePlayer', message);
-        reached++;
-      } catch (e) {
-        logger && logger.warn('\n' + `playback sync: peer ${name} failed on ${action}: ${e}`);
-      }
-    }
-    return reached;
-  }; // END _notifyPeers
-
-  // ---------------------------------------------------------------------------
-  // _bindNativePlaybackObserver()
-  //
-  // Binds (or re-binds) the 'play' listener on the Amplitude <audio> element.
-  // Idempotent: called again with the SAME element it does nothing. Safe to
-  // call before Amplitude is loaded (returns false).
-  // ---------------------------------------------------------------------------
-  var _bindNativePlaybackObserver = () => {
-    var audio;
-
-    if (typeof Amplitude === 'undefined' || typeof Amplitude.getAudio !== 'function') {
-      return false;
-    }
-
-    try {
-      audio = Amplitude.getAudio();
-    } catch (e) {
-      return false;
-    }
-
-    if (!audio || typeof audio.addEventListener !== 'function' || audio === _syncBoundAudio) {
-      return !!audio && audio === _syncBoundAudio;
-    }
-
-    audio.addEventListener('play', () => {
-      if (_syncPausing) { return; }
-      isDev && logger.debug('\n' + 'playback sync: native player started, notifying peers');
-      _notifyPeers('playback_started', { tech: 'atp' });
-    });
-
-    _syncBoundAudio = audio;
-    isDev && logger.debug('\n' + 'playback sync: native playback observer bound');
-    return true;
-  }; // END _bindNativePlaybackObserver
-
-  // ---------------------------------------------------------------------------
-  // _pauseOwnPlayback(reason)
-  //
-  // Pauses every player of THIS module (native + ytp). Returns a summary
-  // object { native: <bool>, ytp: <number> }.
-  // ---------------------------------------------------------------------------
-  var _pauseOwnPlayback = (reason) => {
-    var result = { native: false, ytp: 0 };
-
-    _syncPausing = true;
-    try {
-      // native (Amplitude singleton)
-      try {
-        if (typeof Amplitude !== 'undefined' && typeof Amplitude.getPlayerState === 'function' &&
-            Amplitude.getPlayerState() === 'playing' && typeof Amplitude.pause === 'function') {
-          Amplitude.pause();
-          result.native = true;
-        }
-      } catch (e) {
-        logger && logger.warn('\n' + `playback sync: pausing native player failed: ${e}`);
-      }
-
-      // ytp (YouTube players of the plugin)
-      try {
-        if (window.j1 && j1.plugins && j1.plugins.ytp && typeof j1.plugins.ytp.pauseActivePlayers === 'function') {
-          result.ytp = j1.plugins.ytp.pauseActivePlayers() || 0;
-        }
-      } catch (e) {
-        logger && logger.warn('\n' + `playback sync: pausing ytp players failed: ${e}`);
-      }
-    } finally {
-      _syncPausing = false;
-    }
-
-    isDev && logger && logger.debug('\n' + `playback sync: own playback paused (${reason || 'peer'}): native=${result.native}, ytp=${result.ytp}`);
-    return result;
-  }; // END _pauseOwnPlayback
 
   // ---------------------------------------------------------------------------
   // main
@@ -1284,13 +1112,6 @@ j1.adapter.amplitudePlayer = ((j1, window) => {
 
           isDev && logger.info('\n' + 'initialize player specific UI events: finished');
 
-          // code optimization
-          // Amplitude.init() has run at this point (isApiInitialized), so
-          // the FINAL <audio> element exists: bind the playback observer
-          // that reports native playback starts to the peer modules.
-          //
-          _bindNativePlaybackObserver();
-
           _this.setState('finished');
           isDev && logger.debug('\n' + `module state: ${_this.getState()}`);
           isDev && logger.info('\n' + 'module initialized successfully');
@@ -1419,31 +1240,6 @@ j1.adapter.amplitudePlayer = ((j1, window) => {
       return (core === null) ? {} : core.getPlayers();
     },
 
-    // code optimization
-    // -------------------------------------------------------------------------
-    // playbackSync / pausePlayback(reason) / notifyPlaybackStarted(data)
-    //
-    // Public surface of the cross-module playback sync (see the helper block
-    // above the module object). Page code may disable the sync at any time:
-    //
-    //   j1.adapter.amplitudePlayer.playbackSync.enabled = false;
-    //
-    // pausePlayback(reason)      pauses every native + ytp player of this module
-    // notifyPlaybackStarted(d)   reports a playback start to the peer modules
-    //                            (used by the ytp relay and available to the
-    //                            module core should it ever want to report
-    //                            directly instead of via the <audio> event)
-    // -------------------------------------------------------------------------
-    playbackSync: { enabled: true, peers: _syncPeers },
-
-    pausePlayback: (reason) => {
-      return _pauseOwnPlayback(reason || 'api');
-    },
-
-    notifyPlaybackStarted: (data) => {
-      return _notifyPeers('playback_started', data || { tech: 'atp' });
-    },
-
     // -------------------------------------------------------------------------
     // messageHandler()
     // manage messages send from other J1 modules
@@ -1464,34 +1260,6 @@ j1.adapter.amplitudePlayer = ((j1, window) => {
         //
 
         isDev && logger.info('\n' + message.text);
-      }
-
-      // code optimization
-      // -----------------------------------------------------------------------
-      // playback sync
-      //
-      //   event   playback_started  from 'ytp'         -> RELAY to the peers
-      //                                                   (the plugin already
-      //                                                   synced this module)
-      //   event   playback_started  from a peer module -> PAUSE own players
-      //   command pause_playback    from anyone        -> PAUSE own players
-      //
-      // The <audio> element may have been re-created by a late
-      // Amplitude.init(); re-check the observer binding on every sync
-      // message (idempotent, cheap).
-      // -----------------------------------------------------------------------
-      if (message && _syncEnabled()) {
-        _bindNativePlaybackObserver();
-
-        if (message.type === 'event' && message.action === 'playback_started') {
-          if (sender === 'ytp') {
-            _notifyPeers('playback_started', message.data || { tech: 'ytp' });
-          } else if (sender !== 'amplitudePlayer') {
-            _pauseOwnPlayback(sender);
-          }
-        } else if (message.type === 'command' && message.action === 'pause_playback') {
-          _pauseOwnPlayback((message.data && message.data.reason) || sender);
-        }
       }
 
       //

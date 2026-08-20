@@ -108,7 +108,8 @@ audio::/assets/audio/sound-effects/ambient-piano.mp3[role="mt-4 mb-5"]
 
 
 [role="mt-5"]
-== Amplitude player
+[[amplitude-player--native]]
+== J1 Amplitude player
 
 The J1 Template supports *native audio* files (such as MP3) and uses
 custom players built with *Amplitude*. The default look matches the
@@ -219,6 +220,7 @@ MP3 files. You only give the YouTube video id instead of a file name.
 ====
 
 [role="mt-4"]
+[[amplitude-player--ytp]]
 ==== J1 Amplitude Player
 
 You can use the J1 Amplitude player to play the *audio track* from *YouTube*
@@ -228,9 +230,20 @@ that enables this feature. Behind the scenes, the plugin loads a YouTube
 *playlist* of YouTube videos the same way you would build a playlist of
 normal MP3 files.
 
-[role="mt-4"]
+// Claude - J1 amplitudePlayer optimization #4
+[role="mt-4 mb-5"]
+[NOTE]
+====
+All Amplitude players on a page stay *in sync*. When you pick a title in
+one player, every other player that has this title moves to it as well:
+the title is marked in its list, and a click on its play button continues
+with the same title. Only one player plays at a time.
+====
+
+[role="mt-5"]
 .Emancipator · Dusk To Dawn
 amplitude::emancipator_yt_large[role="mb-4"]
+
 
 [role="mt-5"]
 ==== J1 Multi Player

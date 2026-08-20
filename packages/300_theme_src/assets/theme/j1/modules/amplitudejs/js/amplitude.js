@@ -1,7 +1,7 @@
 /*
  # -----------------------------------------------------------------------------
  # ~/assets/theme/j1/modules/amplitudeJS/js/amplitude.js
- # AmplitudeJS v5.3.2
+ # AmplitudeJS v5.3.2, modified version for J1 Template
  #
  # Product/Info:
  # https://jekyll.one
@@ -18,15 +18,16 @@
 */
 
 (function webpackUniversalModuleDefinition(root, factory) {
-	if(typeof exports === 'object' && typeof module === 'object')
-		module.exports = factory();
-	else if(typeof define === 'function' && define.amd)
-		define("Amplitude", [], factory);
-	else if(typeof exports === 'object')
-		exports["Amplitude"] = factory();
-	else
-		root["Amplitude"] = factory();
+  if(typeof exports === 'object' && typeof module === 'object')
+    module.exports = factory();
+  else if(typeof define === 'function' && define.amd)
+    define("Amplitude", [], factory);
+  else if(typeof exports === 'object')
+    exports["Amplitude"] = factory();
+  else
+    root["Amplitude"] = factory();
 })(this, function() {
+
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -337,6 +338,19 @@ var Core = function () {
    * @access public
    */
   function play() {
+
+    // J1 amplitudePlayer adjustment
+    // RESTORE the preload mode of the audio element. Amplitude.setPlaylistSongActive()
+    // switches preload to 'none' while it changes audio.src WITHOUT playing
+    // (page-wide active-song sync driven by the J1 'ytp' plugin), so a track
+    // change on the YouTube player does not download an MP3. The configured
+    // preload mode ('auto' by default) is put back on the very next play.
+    //
+    if (_config2.default.j1_preload_restore !== undefined) {
+      _config2.default.audio.preload = _config2.default.j1_preload_restore;
+      delete _config2.default.j1_preload_restore;
+    }
+
     _visualizations2.default.stop();
     _visualizations2.default.run();
 
@@ -1061,7 +1075,7 @@ var AudioNavigation = function () {
     changeSong(nextSong, nextIndex);
 
     /*
-    	If it's the end of the list and repeat is not on, do nothing.
+      If it's the end of the list and repeat is not on, do nothing.
     */
     if (endOfList && !_config2.default.repeat) {} else {
       /*
@@ -6953,8 +6967,8 @@ var Events = function () {
  * Imports the utility classes used by the evnets.
  */
 /*
-	Import the necessary classes and config to use
-	with the events.
+  Import the necessary classes and config to use
+  with the events.
 */
 exports.default = Events;
 module.exports = exports["default"];
@@ -10292,6 +10306,14 @@ var _soundcloud = __webpack_require__(17);
 
 var _soundcloud2 = _interopRequireDefault(_soundcloud);
 
+// J1 amplitudePlayer adjustment
+// ContainerElements (module 49) is required by setPlaylistSongActive() to
+// mark the song container of the playlist it activates.
+//
+var _containerElements = __webpack_require__(49);
+
+var _containerElements2 = _interopRequireDefault(_containerElements);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
@@ -11020,7 +11042,96 @@ var Amplitude = function () {
    * @param {number} index 		- The number representing the song in the playlist array.
    * @param {string} playlist - The key string representing the playlist we are playing the song from.
    *
-   */
+  */
+
+  // J1 amplitudePlayer adjustment
+  // ---------------------------------------------------------------------------
+  // setPlaylistSongActive(playlist, index)
+  //
+  // J1 extension: makes the song at 'index' of 'playlist' the ACTIVE song of
+  // the engine WITHOUT playing it and WITHOUT touching the play|pause
+  // buttons of the page. Used for the page-wide active-song sync of the J1
+  // module amplitudePlayer: when a player driven by the 'ytp' plugin plays
+  // track N, the native players follow to track N, so a click on their
+  // play button continues with the very same track.
+  //
+  // It does what changeSongPlaylist() does for the engine state and the
+  // meta|container|time display, but
+  //
+  //   * it never calls Core.play()
+  //   * it never calls PlayPauseElements.syncToPause(), which is PAGE-GLOBAL
+  //     and would flip the (playing) YouTube button to 'paused'
+  //   * it switches audio.preload to 'none' around the src change, so the
+  //     browser does NOT download the MP3 (restored in Core.play)
+  //   * it refuses to act while the engine is PLAYING
+  //
+  // Returns true when the active song was changed, false otherwise.
+  // Public Accessor: Amplitude.setPlaylistSongActive( playlist, index );
+  // ---------------------------------------------------------------------------
+  function setPlaylistSongActive(playlist, index) {
+    var songIndex = parseInt(index, 10);
+    var song;
+
+    if (typeof playlist !== 'string' || playlist.length === 0 || isNaN(songIndex)) {
+      return false;
+    }
+    if (_config2.default.playlists[playlist] == undefined) {
+      return false;
+    }
+    song = _config2.default.playlists[playlist].songs[songIndex];
+    if (song == undefined) {
+      return false;
+    }
+
+    /*
+      Never steal the engine from a PLAYING song.
+    */
+    if (_config2.default.audio && !_config2.default.audio.paused) {
+      return false;
+    }
+
+    /*
+      Nothing to do when this song is already the active one.
+    */
+    if (_config2.default.active_playlist == playlist &&
+        parseInt(_config2.default.playlists[playlist].active_index, 10) === songIndex) {
+      return false;
+    }
+
+    /*
+      Engine state (see AudioNavigation.changeSongPlaylist)
+    */
+    if (_config2.default.j1_preload_restore === undefined) {
+      _config2.default.j1_preload_restore = _config2.default.audio.preload;
+    }
+    _config2.default.audio.preload = 'none';
+
+    if (_config2.default.active_playlist != playlist) {
+      _callbacks2.default.run("playlist_changed");
+      _config2.default.active_playlist = playlist;
+    }
+
+    _config2.default.audio.src        = song.url;
+    _config2.default.active_metadata  = song;
+    _config2.default.active_album     = song.album;
+    _config2.default.active_index     = null;
+    _config2.default.playlists[playlist].active_index = songIndex;
+
+    /*
+      Display (see AudioNavigation.afterSongChange)
+    */
+    _metaDataElements2.default.displayMetaData();
+    _containerElements2.default.setActive(true);
+    _timeElements2.default.resetDurationTimes();
+    _timeElements2.default.resetCurrentTimes();
+
+    _configState2.default.setPlayerState();
+
+    _callbacks2.default.run("song_change");
+
+    return true;
+  }
+
   function playPlaylistSongAtIndex(index, playlist) {
     _core2.default.stop();
 
@@ -11566,6 +11677,7 @@ var Amplitude = function () {
     playNow: playNow,
     playSongAtIndex: playSongAtIndex,
     playPlaylistSongAtIndex: playPlaylistSongAtIndex,
+    setPlaylistSongActive: setPlaylistSongActive,
     play: play,
     pause: pause,
     stop: stop,
@@ -11992,12 +12104,36 @@ var ContainerElements = function () {
     */
     var songContainers = document.getElementsByClassName("amplitude-song-container");
 
-    /*
-    Removes all of the active song containrs.
-    */
+    // J1 amplitudePlayer adjustment
+    // PLAYLIST-SCOPED clearing (was: PAGE-GLOBAL).
+    //
+    // The loop removed 'amplitude-active-song-container' from the song
+    // containers of EVERY player of the page, while the SET phase below
+    // re-marks only the containers of config.active_playlist. On a page
+    // holding a NATIVE player next to a player driven by the J1 'ytp'
+    // plugin (tour page 'audio_data'), every song change of the native
+    // player wiped the marker of the ytp playlist, which the J1 module
+    // could only REPAIR afterwards (polling loop, up to 100ms later).
+    //
+    // The clear is limited to the playlist being updated now. When NO
+    // playlist is active (songs played from the global songs array) the
+    // LEGACY page-global clear is kept, so the single-playlist case and
+    // the song-index case behave exactly as before.
+    //
+    var j1ActivePlaylist = _config2.default.active_playlist;
+    var j1ScopedClear    = (j1ActivePlaylist !== "" && j1ActivePlaylist !== null && j1ActivePlaylist !== undefined);
+
     for (var i = 0; i < songContainers.length; i++) {
+      if (j1ScopedClear && songContainers[i].getAttribute("data-amplitude-playlist") !== j1ActivePlaylist) {
+        continue;
+      }
       songContainers[i].classList.remove("amplitude-active-song-container");
     }
+
+    // Original (deprecated, preserved for reference):
+    // for (var i = 0; i < songContainers.length; i++) {
+    //   songContainers[i].classList.remove("amplitude-active-song-container");
+    // }
 
     /*
     Finds the active index and adds the active song container to the element

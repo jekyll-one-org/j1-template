@@ -226,7 +226,7 @@
   let playerAutoScrollSongElement         = false;
   let playlistAudioInfo                   = false;
 
-  // code optimization
+  // Claude - J1 amplitudePlayer optimization #4
   // PAGE-WIDE active-song sync (YAML key player.sync_active_song, default
   // true). See _mirrorActiveSong() for the description.
   //
@@ -337,7 +337,7 @@
     atp.playlist    = playlist;
   } // END _saveAtpState
 
-  // code optimization
+  // Claude - J1 amplitudePlayer optimization #3
   // ---------------------------------------------------------------------------
   // SHARED ACTIVE-SONG REGISTRY (native players <-> 'ytp' plugin players)
   //
@@ -457,7 +457,7 @@
 
   } // END _restoreForeignActiveContainers
 
-  // code optimization
+  // Claude - J1 amplitudePlayer optimization #4
   // ---------------------------------------------------------------------------
   // PAGE-WIDE ACTIVE-SONG SYNC (native players <-> 'ytp' plugin players)
   //
@@ -594,7 +594,7 @@
     return mirrored;
   } // END _mirrorActiveSong
 
-  // code optimization
+  // Claude - J1 amplitudePlayer optimization #5
   // ---------------------------------------------------------------------------
   // PAGE-WIDE ACTIVE-SONG SYNC, part 3: META-CONTAINER
   //
@@ -1134,7 +1134,7 @@
     var pl = opts.playlist || {};
     playlistAudioInfo                = _pick(pl.audio_info, playlistAudioInfo);
 
-    // code optimization
+    // Claude - J1 amplitudePlayer optimization #4
     // Resolve the sync switch from the effective page-global chain and
     // PUBLISH it on the shared adapter data, so the 'ytp' plugin reads the
     // very same resolved value (ytpSyncActiveSongEnabled) instead of the raw
@@ -1356,7 +1356,7 @@
 
     songIndex = currentIndex;
 
-    // code optimization
+    // Claude - J1 amplitudePlayer optimization #3
     // -------------------------------------------------------------------------
     // Remember the active song of THIS playlist BEFORE any container is
     // touched, so a parallel player (native or 'ytp') can restore the marker
@@ -1368,7 +1368,7 @@
     // clear ALL active song containers
     // -------------------------------------------------------------------------
 
-    // code optimization
+    // Claude - J1 amplitudePlayer optimization #3
     // -------------------------------------------------------------------------
     // PLAYLIST-SCOPED clearing (was: PAGE-GLOBAL).
     //
@@ -1417,7 +1417,7 @@
       }
     }
 
-    // code optimization
+    // Claude - J1 amplitudePlayer optimization #3
     // -------------------------------------------------------------------------
     // Restore the marker of every OTHER registered playlist of the page. This
     // repairs BOTH the page-global clear of AmplitudeJS itself
@@ -1427,14 +1427,14 @@
     //
     _restoreForeignActiveContainers(currentPlayList);
 
-    // code optimization
+    // Claude - J1 amplitudePlayer optimization #4
     // -------------------------------------------------------------------------
     // PAGE-WIDE sync of the marker: every other playlist of the page shows
     // the same index now (see _mirrorActiveSong). The ENGINE follow of the
     // YouTube players is triggered from processOnStateChangePlaying() AFTER
     // the parallel players were stopped.
     //
-    // code optimization
+    // Claude - J1 amplitudePlayer optimization #5
     // -------------------------------------------------------------------------
     // META-CONTAINER sync: the playlists whose marker was mirrored get the
     // metadata of the song at the same index written as well (see
@@ -1969,7 +1969,7 @@
     // -------------------------------------------------------------------------
     atpStopParallelActivePlayers(_adapterData().ytPlayers);
 
-    // code optimization
+    // Claude - J1 amplitudePlayer optimization #4
     // ENGINE follow native -> ytp: cue the YouTube players to the same index
     // (AFTER they were stopped above, see _followActiveSongYtp).
     //
@@ -3199,7 +3199,7 @@
 
     // AT runtime
     setSongActive:                  setSongActive,
-    // code optimization
+    // Claude - J1 amplitudePlayer optimization #4
     followActiveSongNative:         _followActiveSongNative,
     followActiveSongYtp:            _followActiveSongYtp,
     setAudioInfo:                   setAudioInfo,

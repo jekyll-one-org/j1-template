@@ -287,7 +287,7 @@ regenerate:                             true
   j1.plugins.ytp.getOptions   = function() { return ytpOptions; };
   j1.plugins.ytp.getPlayers   = function() { return ytpVideoPlayers(); };
 
-  // code optimization
+  // Claude - J1 amplitudePlayer optimization #6
   // Cross-module playback sync (amplitudePlayer <-> multiPlayer).
   //
   // The host adapter (j1.adapter.amplitudePlayer) needs a NON-DESTRUCTIVE
@@ -711,7 +711,7 @@ regenerate:                             true
     return data.ytp;
   } // END ytpHostModuleYtp
 
-  // code optimization
+  // Claude - J1 amplitudePlayer optimization #3
   // ---------------------------------------------------------------------------
   // SHARED ACTIVE-SONG REGISTRY (plugin side)
   //
@@ -816,7 +816,7 @@ regenerate:                             true
 
   } // END ytpRestoreForeignActiveContainers
 
-  // code optimization
+  // Claude - J1 amplitudePlayer optimization #4
   // ---------------------------------------------------------------------------
   // PAGE-WIDE ACTIVE-SONG SYNC (plugin side)
   //
@@ -904,7 +904,7 @@ regenerate:                             true
     return mirrored;
   } // END ytpMirrorActiveSong
 
-  // code optimization
+  // Claude - J1 amplitudePlayer optimization #5
   // ---------------------------------------------------------------------------
   // PAGE-WIDE ACTIVE-SONG SYNC, part 3: META-CONTAINER (plugin side)
   //
@@ -1789,7 +1789,7 @@ regenerate:                             true
     // stop active AT|YT players running in parallel except the current
     ytpStopParallelActivePlayers(playerID);
 
-    // code optimization
+    // Claude - J1 amplitudePlayer optimization #6
     // The call above syncs the players INSIDE this module (native + YT).
     // Players of OTHER modules (multiPlayer) are reached through the host
     // adapter's messageHandler(): report the playback start, the adapter
@@ -1798,7 +1798,7 @@ regenerate:                             true
     //
     ytpNotifyHostPlaybackStarted(playerID, playlist, songIndex);
 
-    // code optimization
+    // Claude - J1 amplitudePlayer optimization #4
     // ENGINE follow: the native players (AmplitudeJS engine, stopped above)
     // and every OTHER YouTube player move to the same index.
     //
@@ -2618,7 +2618,7 @@ regenerate:                             true
       updateDurationTimeContainerYTP(ytPlayer, playlist);
       resetProgressBarYTP();
 
-      // code optimization
+      // Claude - J1 amplitudePlayer optimization #4
       // -----------------------------------------------------------------------
       // A cue issued by ytpFollowActiveSong() (page-wide sync, native player
       // leads) makes the YT API fire UNSTARTED|CUED for a player that is NOT
@@ -2862,7 +2862,7 @@ regenerate:                             true
     } // END stop active YT players
   } // END ytpStopParallelActivePlayers
 
-  // code optimization
+  // Claude - J1 amplitudePlayer optimization #6
   // ---------------------------------------------------------------------------
   // ytpPauseActivePlayers(exceptPlayer)
   //
@@ -2921,7 +2921,7 @@ regenerate:                             true
     return paused;
   } // END ytpPauseActivePlayers
 
-  // code optimization
+  // Claude - J1 amplitudePlayer optimization #6
   // ---------------------------------------------------------------------------
   // ytpNotifyHostPlaybackStarted(playerID, playlist, songIndex)
   //
@@ -2984,7 +2984,7 @@ regenerate:                             true
     var index           = -1;
     var songContainers  = document.getElementsByClassName("amplitude-active-song-container");
 
-    // code optimization
+    // Claude - J1 amplitudePlayer optimization #4
     // -------------------------------------------------------------------------
     // OWNERSHIP FILTER (same hazard as checkActiveVideoElementYTP, #3).
     //
@@ -3030,7 +3030,7 @@ regenerate:                             true
 
     songIndex = currentIndex;
 
-    // code optimization
+    // Claude - J1 amplitudePlayer optimization #3
     // -------------------------------------------------------------------------
     // Remember the active song of THIS playlist BEFORE any container is
     // touched, so the module (native players) and AmplitudeJS itself cannot
@@ -3041,7 +3041,7 @@ regenerate:                             true
     // clear ALL active song containers
     // -------------------------------------------------------------------------
 
-    // code optimization
+    // Claude - J1 amplitudePlayer optimization #3
     // -------------------------------------------------------------------------
     // PLAYLIST-SCOPED clearing (was: PAGE-GLOBAL).
     //
@@ -3083,20 +3083,20 @@ regenerate:                             true
       }
     }
 
-    // code optimization
+    // Claude - J1 amplitudePlayer optimization #3
     // -------------------------------------------------------------------------
     // Restore the marker of every OTHER registered playlist of the page (the
     // playlist of a parallel NATIVE player in the first place).
     //
     ytpRestoreForeignActiveContainers(currentPlayList);
 
-    // code optimization
+    // Claude - J1 amplitudePlayer optimization #4
     // -------------------------------------------------------------------------
     // PAGE-WIDE sync of the marker (see ytpMirrorActiveSong). The ENGINE
     // follow of the native players and of the other YouTube players runs in
     // processOnStateChangePlaying() AFTER the parallel players were stopped.
     //
-    // code optimization
+    // Claude - J1 amplitudePlayer optimization #5
     // -------------------------------------------------------------------------
     // META-CONTAINER sync: the playlists whose marker was mirrored get the
     // metadata of the song at the same index written as well (see
@@ -3141,7 +3141,7 @@ regenerate:                             true
   function checkActiveVideoElementYTP() {
     var activeVideoElements = document.getElementsByClassName("amplitude-active-song-container");
 
-    // code optimization
+    // Claude - J1 amplitudePlayer optimization #3
     // -------------------------------------------------------------------------
     // OWNERSHIP FILTER for the polling loop.
     //
@@ -3172,7 +3172,7 @@ regenerate:                             true
     }
     activeVideoElements = ytpVideoElements;
 
-    // code optimization
+    // Claude - J1 amplitudePlayer optimization #3
     // -------------------------------------------------------------------------
     // SELF-HEALING of the playlist markers.
     //
@@ -3836,7 +3836,7 @@ regenerate:                             true
   function scrollToActiveElement(activePlaylist) {
     const scrollableList        = document.getElementById('large_player_title_list_' + activePlaylist);
 
-    // code optimization
+    // Claude - J1 amplitudePlayer optimization #3
     // -------------------------------------------------------------------------
     // The NULL check of scrollableList|activeElement ran AFTER both had
     // already been dereferenced (scrollableList.querySelector() and
@@ -3858,7 +3858,7 @@ regenerate:                             true
 
     const activeElement         = scrollableList.querySelector('.amplitude-active-song-container');
 
-    // code optimization
+    // Claude - J1 amplitudePlayer optimization #3
     if (activeElement === null) {
       return;
     }

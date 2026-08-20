@@ -1,5 +1,5 @@
 # ------------------------------------------------------------------------------
-# ~/_data/modules/defaults/amplitudePlayer.yml (1)
+# ~/_data/modules/defaults/amplitudePlayer.yml (0)
 # Default settings for module amplitudePlayer
 #
 # Product/Info:
@@ -305,24 +305,6 @@ defaults:
 
     mute_after_video_switch_interval:   750                                     # mute audio after swiching a video (ms)
     check_active_video_interval:        100                                     # how often the data structure 'activeVideoElement' is updated (ms)
-
-    # Claude - J1 amplitudePlayer optimization #4
-    # --------------------------------------------------------------------------
-    # sync_active_song
-    # --------------------------------------------------------------------------
-    # Synchronizes the ACTIVE song across ALL players of a page, the way the
-    # play|pause state is already mirrored. When a player activates the title
-    # at index N, every other player that has a title at index N follows:
-    # the playlist marker moves to N, YouTube players (plugin 'ytp') are cued
-    # to the video of title N and the native AmplitudeJS engine is moved to
-    # title N (without playing). The sync is done by title INDEX, intended
-    # for pages that show the same album in several players (native MP3 and
-    # YouTube). Set to 'false' for pages that combine different albums.
-    #
-    # values:                           true|false
-    # default:                          true
-    #
-    sync_active_song:                   true                                    # true|false, mirror the active song across all players of a page
 
     audio_fade_animated:                true                                    # animate the volume slider on fade in|out
     audio_fade_in:                      true                                    # enable|disable audio fade-in 

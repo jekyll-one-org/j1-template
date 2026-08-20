@@ -2,7 +2,7 @@
  # -----------------------------------------------------------------------------
  # ~/assets/theme/j1/modules/amplitudePlayer/js/player.js
  # Provides JS Core for J1 Module amplitudePlayer
- # Version 1.0.4 for J1 Template
+ # Version 1.0.3 for J1 Template
  #
  # Product/Info:
  # https://jekyll.one
@@ -83,7 +83,7 @@
 }(this, function () {
   "use strict";
 
-  const VERSION       = '1.0.4';
+  const VERSION       = '1.0.3';
   const MODULE_NAME   = 'j1.module.amplitudePlayer';
 
   // ---------------------------------------------------------------------------
@@ -226,7 +226,7 @@
   let playerAutoScrollSongElement         = false;
   let playlistAudioInfo                   = false;
 
-  // code optimization
+  // Claude - J1 amplitudePlayer optimization #4
   // PAGE-WIDE active-song sync (YAML key player.sync_active_song, default
   // true). See _mirrorActiveSong() for the description.
   //
@@ -337,7 +337,7 @@
     atp.playlist    = playlist;
   } // END _saveAtpState
 
-  // code optimization
+  // Claude - J1 amplitudePlayer optimization #3
   // ---------------------------------------------------------------------------
   // SHARED ACTIVE-SONG REGISTRY (native players <-> 'ytp' plugin players)
   //
@@ -457,7 +457,7 @@
 
   } // END _restoreForeignActiveContainers
 
-  // code optimization
+  // Claude - J1 amplitudePlayer optimization #4
   // ---------------------------------------------------------------------------
   // PAGE-WIDE ACTIVE-SONG SYNC (native players <-> 'ytp' plugin players)
   //
@@ -593,212 +593,6 @@
 
     return mirrored;
   } // END _mirrorActiveSong
-
-  // code optimization
-  // ---------------------------------------------------------------------------
-  // PAGE-WIDE ACTIVE-SONG SYNC, part 3: META-CONTAINER
-  //
-  // WHY #4 WAS NOT ENOUGH
-  // Series #4 synchronized the MARKER (_mirrorActiveSong) and the ENGINE
-  // (_followActiveSongYtp | _followActiveSongNative) of every other playlist
-  // on the page, but NOT the contents of the 'meta-container' (song name,
-  // artist, album, rating, info link, cover image). All meta WRITERS of the
-  // page are scoped to the playlist that is PLAYING:
-  //
-  //   1. AmplitudeJS MetaDataElements.displayMetaData() writes the elements
-  //      carrying 'data-amplitude-song-info' ONLY for config.active_playlist
-  //      (the NATIVE meta-container, see requiredForATP === false above).
-  //   2. atpUpdatMetaContainers() | ytpUpdatMetaContainers() write the
-  //      CLASS-based elements (song-name|artist|album|rating|info) ONLY for
-  //      the playlist passed in via metaData.playlist -- and both are called
-  //      from processOnStateChangePlaying() of the LEADER with the metadata
-  //      of the LEADER's playlist.
-  //
-  // A playlist that FOLLOWS the leader (marker moved, engine cued) was
-  // therefore never handed to any writer: its meta-container kept the
-  // previous song. The 'ytp' follow (ytpFollowActiveSong) updated the cover
-  // image only. The ytp -> native direction seemed to work on some pages
-  // because Amplitude.setPlaylistSongActive() runs displayMetaData() for the
-  // native playlist, but that covers the attribute form only, and only when
-  // the engine follow is possible (not playing, vendored patch present).
-  //
-  // MODEL
-  // The meta-container of a playlist shows the song that is MARKED in its
-  // list. The marker mirror returns the playlists it moved; every one of
-  // them gets the metadata of the song at the same index written, in BOTH
-  // forms (AmplitudeJS attribute form AND J1 class form), DOM only:
-  //
-  //   _mirrorActiveSongMeta(currentPlayList, songIndex, mirrored)
-  //     for every mirrored playlist: song = config.playlists[name].songs[i]
-  //       -> _writeSongMetaContainer(name, song)
-  //
-  // The metadata is taken from the AmplitudeJS config, which holds ALL
-  // playlists of the page (native AND 'ytp' ones, see initApi). The plugin
-  // implements the same helpers for the ytp -> * direction.
-  // ---------------------------------------------------------------------------
-  //
-
-  // ---------------------------------------------------------------------------
-  // _songMetaOfPlaylist(playlistName, songIndex)
-  //
-  // Returns a COPY of the song metadata at songIndex of playlistName (from
-  // the AmplitudeJS config) with 'playlist' and 'index' set for the writers,
-  // or null if the playlist|song is unknown.
-  // ---------------------------------------------------------------------------
-  //
-  function _songMetaOfPlaylist(playlistName, songIndex) {
-    var index = parseInt(songIndex, 10);
-    var config, songs, song, copy, key;
-
-    if (typeof playlistName !== 'string' || playlistName.length === 0 || isNaN(index)) {
-      return null;
-    }
-    if (typeof Amplitude === 'undefined' || typeof Amplitude.getConfig !== 'function') {
-      return null;
-    }
-
-    try {
-      config = Amplitude.getConfig();
-    } catch (e) {
-      config = null;
-    }
-    songs = config && config.playlists && config.playlists[playlistName] && config.playlists[playlistName].songs;
-    song  = songs && songs[index];
-    if (!song) {
-      return null;
-    }
-
-    copy = {};
-    for (key in song) {
-      if (Object.prototype.hasOwnProperty.call(song, key)) {
-        copy[key] = song[key];
-      }
-    }
-    copy.playlist = playlistName;
-    copy.index    = index;
-
-    return copy;
-  } // END _songMetaOfPlaylist
-
-  // ---------------------------------------------------------------------------
-  // _writeSongMetaContainer(playlistName, song)
-  //
-  // Writes the metadata of 'song' into the meta-container elements of
-  // playlistName (and ONLY of that playlist):
-  //
-  //   a) AmplitudeJS ATTRIBUTE form: [data-amplitude-song-info="<key>"]
-  //      elements of the playlist that do NOT belong to a single song (no
-  //      data-amplitude-song-index), same rule as displayMetaData()
-  //   b) J1 CLASS form: song-name | artist | album (ungated, the NATIVE
-  //      players get them via a) normally, the 'ytp' players never do)
-  //   c) cover image of the plugin: .cover-image-<playlist>
-  //   d) rating | info link: delegated to atpUpdatMetaContainers()
-  // ---------------------------------------------------------------------------
-  //
-  function _writeSongMetaContainer(playlistName, song) {
-    var imageKeys = ['cover_art_url', 'station_art_url', 'podcast_episode_cover_art_url'];
-    var classMap  = { 'song-name': 'name', 'artist': 'artist', 'album': 'album' };
-    var defaultArt, elements, i, key, val, cls, cover;
-
-    if (!song || typeof playlistName !== 'string' || playlistName.length === 0) {
-      return;
-    }
-
-    try {
-      defaultArt = Amplitude.getConfig().default_album_art;
-    } catch (e) {
-      defaultArt = '';
-    }
-
-    // a) attribute form (AmplitudeJS)
-    // -------------------------------------------------------------------------
-    elements = document.querySelectorAll('[data-amplitude-song-info]');
-    for (i=0; i<elements.length; i++) {
-      if (elements[i].getAttribute('data-amplitude-playlist') !== playlistName) {
-        continue;
-      }
-      if (elements[i].getAttribute('data-amplitude-song-index') !== null) {
-        continue;
-      }
-      key = elements[i].getAttribute('data-amplitude-song-info');
-      val = (song[key] !== undefined) ? song[key] : null;
-
-      if (imageKeys.indexOf(key) >= 0) {
-        elements[i].setAttribute('src', val || defaultArt || '');
-      } else {
-        elements[i].innerHTML = (val === null) ? '' : val;
-      }
-    }
-
-    // b) class form (J1 meta-container)
-    // -------------------------------------------------------------------------
-    for (cls in classMap) {
-      if (!Object.prototype.hasOwnProperty.call(classMap, cls)) {
-        continue;
-      }
-      elements = document.getElementsByClassName(cls);
-      for (i=0; i<elements.length; i++) {
-        if (elements[i].dataset.amplitudePlaylist !== playlistName) {
-          continue;
-        }
-        if (elements[i].getAttribute('data-amplitude-song-index') !== null) {
-          continue;
-        }
-        val = song[classMap[cls]];
-        elements[i].innerHTML = (val === undefined || val === null) ? '' : val;
-      }
-    }
-
-    // c) cover image of the plugin ('ytp' players)
-    // -------------------------------------------------------------------------
-    try {
-      cover = document.querySelector('.cover-image-' + playlistName);
-      if (cover !== null && song.cover_art_url) {
-        cover.src = song.cover_art_url;
-      }
-    } catch (e) {
-      isDev && logger.warn('\n' + `SYNC meta: cover image NOT updated for playlist ${playlistName}: ${e}`);
-    }
-
-    // d) rating | info link
-    // -------------------------------------------------------------------------
-    atpUpdatMetaContainers(song);
-
-  } // END _writeSongMetaContainer
-
-  // ---------------------------------------------------------------------------
-  // _mirrorActiveSongMeta(currentPlayList, songIndex, mirrored)
-  //
-  // Writes the metadata of the song at songIndex into the meta-container of
-  // every playlist the marker mirror moved (the array returned by
-  // _mirrorActiveSong). Returns the names of the playlists that were updated.
-  // ---------------------------------------------------------------------------
-  //
-  function _mirrorActiveSongMeta(currentPlayList, songIndex, mirrored) {
-    var index   = parseInt(songIndex, 10);
-    var updated = [];
-    var n, song;
-
-    if (!_activeSongSyncEnabled() || isNaN(index) || !Array.isArray(mirrored) || !mirrored.length) {
-      return updated;
-    }
-
-    for (n=0; n<mirrored.length; n++) {
-      if (mirrored[n] === currentPlayList) {
-        continue;
-      }
-      song = _songMetaOfPlaylist(mirrored[n], index);
-      if (song === null) {
-        continue;
-      }
-      _writeSongMetaContainer(mirrored[n], song);
-      updated.push(mirrored[n]);
-    }
-
-    isDev && logger.debug('\n' + `SYNC meta-container at index ${index} from playlist ${currentPlayList} to: ${updated.join('|')}`);
-
-    return updated;
-  } // END _mirrorActiveSongMeta
 
   // ---------------------------------------------------------------------------
   // _followActiveSongYtp(currentPlayList, songIndex)
@@ -1134,7 +928,7 @@
     var pl = opts.playlist || {};
     playlistAudioInfo                = _pick(pl.audio_info, playlistAudioInfo);
 
-    // code optimization
+    // Claude - J1 amplitudePlayer optimization #4
     // Resolve the sync switch from the effective page-global chain and
     // PUBLISH it on the shared adapter data, so the 'ytp' plugin reads the
     // very same resolved value (ytpSyncActiveSongEnabled) instead of the raw
@@ -1356,7 +1150,7 @@
 
     songIndex = currentIndex;
 
-    // code optimization
+    // Claude - J1 amplitudePlayer optimization #3
     // -------------------------------------------------------------------------
     // Remember the active song of THIS playlist BEFORE any container is
     // touched, so a parallel player (native or 'ytp') can restore the marker
@@ -1368,7 +1162,7 @@
     // clear ALL active song containers
     // -------------------------------------------------------------------------
 
-    // code optimization
+    // Claude - J1 amplitudePlayer optimization #3
     // -------------------------------------------------------------------------
     // PLAYLIST-SCOPED clearing (was: PAGE-GLOBAL).
     //
@@ -1417,7 +1211,7 @@
       }
     }
 
-    // code optimization
+    // Claude - J1 amplitudePlayer optimization #3
     // -------------------------------------------------------------------------
     // Restore the marker of every OTHER registered playlist of the page. This
     // repairs BOTH the page-global clear of AmplitudeJS itself
@@ -1427,23 +1221,14 @@
     //
     _restoreForeignActiveContainers(currentPlayList);
 
-    // code optimization
+    // Claude - J1 amplitudePlayer optimization #4
     // -------------------------------------------------------------------------
     // PAGE-WIDE sync of the marker: every other playlist of the page shows
     // the same index now (see _mirrorActiveSong). The ENGINE follow of the
     // YouTube players is triggered from processOnStateChangePlaying() AFTER
     // the parallel players were stopped.
     //
-    // code optimization
-    // -------------------------------------------------------------------------
-    // META-CONTAINER sync: the playlists whose marker was mirrored get the
-    // metadata of the song at the same index written as well (see
-    // _mirrorActiveSongMeta). Uses the list returned by the marker mirror.
-    //
-    // Original (deprecated, preserved for reference):
-    // _mirrorActiveSong(currentPlayList, songIndex);
-    //
-    _mirrorActiveSongMeta(currentPlayList, songIndex, _mirrorActiveSong(currentPlayList, songIndex));
+    _mirrorActiveSong(currentPlayList, songIndex);
 
   } // END setSongActive
 
@@ -1969,7 +1754,7 @@
     // -------------------------------------------------------------------------
     atpStopParallelActivePlayers(_adapterData().ytPlayers);
 
-    // code optimization
+    // Claude - J1 amplitudePlayer optimization #4
     // ENGINE follow native -> ytp: cue the YouTube players to the same index
     // (AFTER they were stopped above, see _followActiveSongYtp).
     //
@@ -3199,7 +2984,7 @@
 
     // AT runtime
     setSongActive:                  setSongActive,
-    // code optimization
+    // Claude - J1 amplitudePlayer optimization #4
     followActiveSongNative:         _followActiveSongNative,
     followActiveSongYtp:            _followActiveSongYtp,
     setAudioInfo:                   setAudioInfo,

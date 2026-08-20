@@ -529,7 +529,7 @@ j1.adapter.amplitudePlayer = ((j1, window) => {
     return core[name].apply(null, args);
   };
 
-  // code optimization
+  // Claude - J1 amplitudePlayer optimization #6
   // ===========================================================================
   // Cross-module playback sync (amplitudePlayer <-> multiPlayer)
   //
@@ -1284,7 +1284,7 @@ j1.adapter.amplitudePlayer = ((j1, window) => {
 
           isDev && logger.info('\n' + 'initialize player specific UI events: finished');
 
-          // code optimization
+          // Claude - J1 amplitudePlayer optimization #6
           // Amplitude.init() has run at this point (isApiInitialized), so
           // the FINAL <audio> element exists: bind the playback observer
           // that reports native playback starts to the peer modules.
@@ -1419,7 +1419,7 @@ j1.adapter.amplitudePlayer = ((j1, window) => {
       return (core === null) ? {} : core.getPlayers();
     },
 
-    // code optimization
+    // Claude - J1 amplitudePlayer optimization #6
     // -------------------------------------------------------------------------
     // playbackSync / pausePlayback(reason) / notifyPlaybackStarted(data)
     //
@@ -1466,7 +1466,7 @@ j1.adapter.amplitudePlayer = ((j1, window) => {
         isDev && logger.info('\n' + message.text);
       }
 
-      // code optimization
+      // Claude - J1 amplitudePlayer optimization #6
       // -----------------------------------------------------------------------
       // playback sync
       //

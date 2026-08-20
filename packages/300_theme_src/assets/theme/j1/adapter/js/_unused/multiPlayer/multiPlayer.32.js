@@ -363,7 +363,7 @@ j1.adapter.multiPlayer = ((j1, window) => {
   let endTimeModule;
   let timeSeconds;
 
-  // code optimization
+  // Claude - J1 amplitudePlayer optimization #6
   // ===========================================================================
   // Cross-module playback sync (multiPlayer <-> amplitudePlayer)
   //
@@ -652,7 +652,7 @@ j1.adapter.multiPlayer = ((j1, window) => {
                   _this.initHandlers(_this.getInstanceOptions('{{player_id}}'), '{{player_id}}');
                   _this.initPlayerUiEvents('{{player_id}}');
 
-                  // code optimization
+                  // Claude - J1 amplitudePlayer optimization #6
                   // Video.js is available here (the module core depends on
                   // it): install the playback sync hook ONCE (idempotent).
                   //
@@ -2002,7 +2002,7 @@ j1.adapter.multiPlayer = ((j1, window) => {
       }
     }, // END closeEditPlaylist
 
-    // code optimization
+    // Claude - J1 amplitudePlayer optimization #6
     // -------------------------------------------------------------------------
     // playbackSync / pausePlayback(reason) / notifyPlaybackStarted(data)
     // Public surface of the cross-module playback sync (helper block above
@@ -2036,7 +2036,7 @@ j1.adapter.multiPlayer = ((j1, window) => {
         logger.info('\n' + message.text);
       }
 
-      // code optimization
+      // Claude - J1 amplitudePlayer optimization #6
       // -----------------------------------------------------------------------
       // playback sync
       //   event   playback_started  from a peer -> PAUSE own Video.js players

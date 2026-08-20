@@ -1,6 +1,6 @@
 # ------------------------------------------------------------------------------
-# ~/_data/modules/amplitude_control.yml (0)
-# User (control) configuration settings for the module AmplitudeJS
+# ~/_data/modules/amplitudePlayer_control.yml (1)
+# User (control) configuration settings for the module amplitudePlayer
 #
 # Product/Info:
 # https://jekyll.one
@@ -15,14 +15,26 @@
 # Description
 #
 description:
-  title:                                AmplitudeJS
+  title:                                amplitudePlayer
   scope:                                User control settings
-  location:                             _data/modules/amplitude_control.yml
+  location:                             _data/modules/amplitudePlayer_control.yml
 
 # ------------------------------------------------------------------------------
 # User settings
 #
 settings:
+
+  # ----------------------------------------------------------------------------
+  # Claude - J1 amplitudePlayer optimization #4
+  # PAGE-GLOBAL settings (overload the module defaults for this site)
+  # ----------------------------------------------------------------------------
+  # sync_active_song: mirror the active song (marker, YouTube cue, native
+  # engine) across all players of a page. The tour page 'audio_data' shows
+  # the same album in native and YouTube players, so the default 'true' is
+  # kept. See defaults/amplitudePlayer.yml, key player.sync_active_song.
+  #
+  # player:
+  #   sync_active_song:                 true                                    # default: true
 
   # ----------------------------------------------------------------------------
   # PLAYER settings

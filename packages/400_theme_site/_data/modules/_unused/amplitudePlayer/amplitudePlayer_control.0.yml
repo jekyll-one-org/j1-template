@@ -1,6 +1,6 @@
 # ------------------------------------------------------------------------------
-# ~/_data/modules/audioplayer_control.yml (0)
-# User (control) configuration settings for the module J1 audioPlayer
+# ~/_data/modules/amplitudePlayer_control.yml (0)
+# User (control) configuration settings for the module amplitudePlayer
 #
 # Product/Info:
 # https://jekyll.one
@@ -15,9 +15,9 @@
 # Description
 #
 description:
-  title:                                audioPlayer
+  title:                                amplitudePlayer
   scope:                                User control settings
-  location:                             _data/modules/audioplayer_control.yml
+  location:                             _data/modules/amplitudePlayer_control.yml
 
 # ------------------------------------------------------------------------------
 # User settings
@@ -29,6 +29,28 @@ settings:
   # ----------------------------------------------------------------------------
   #
   players:
+
+    # --------------------------------------------------------------------------
+    # MINI player, Emancipator
+    # --------------------------------------------------------------------------
+    #
+    - player:
+
+      # ------------------------------------------------------------------------
+      # GENERAL settings
+      #       
+      enabled:                          true
+
+      # ------------------------------------------------------------------------
+      # PLAYER settings
+      #  
+      id:                               emancipator_mini
+      type:                             mini
+
+      # PLAYLIST settings
+      #
+      playlist:
+        name:                           emancipator
 
     # --------------------------------------------------------------------------
     # COMPACT player, Emancipator
@@ -84,6 +106,43 @@ settings:
         name:                           emancipator
 
     # --------------------------------------------------------------------------
+    # LARGE player, Emancipator - Dusk to Dawn
+    # --------------------------------------------------------------------------
+    #
+    - player:
+
+      # ------------------------------------------------------------------------
+      # GENERAL settings
+      #    
+      enabled:                          true
+
+      # ------------------------------------------------------------------------
+      # PLAYER settings
+      #
+      id:                               emancipator_yt_large
+      type:                             large
+      source:                           video
+
+      # ------------------------------------------------------------------------
+      # PRIVACY settings
+      #
+      privacy_enhanced:                 true                                    # enable|disable privacy-enhanced host 'youtube-nocookie.com'
+
+      # ------------------------------------------------------------------------
+      # PLAYLIST settings
+      #      
+      playlist:
+        name:                           dusk_to_dawn_yt
+
+      # ------------------------------------------------------------------------
+      # PLUGIN settings
+      #
+      plugin_manager:
+        enabled:                        true
+        plugins:                        [ ytp ]
+
+
+    # --------------------------------------------------------------------------
     # LARGE player, Olivia Dean
     # --------------------------------------------------------------------------
     #
@@ -97,7 +156,7 @@ settings:
       # ------------------------------------------------------------------------
       # PLAYER settings
       #
-      id:                               olivia_dean_2026_yt_large
+      id:                               olivia_dean_yt_large
       type:                             large
       source:                           video
 
@@ -116,7 +175,7 @@ settings:
       # PLUGIN settings
       #
       plugin_manager:
-        enabled:                        true                                    # if enabled, plugins loaded twice
+        enabled:                        true
         plugins:                        [ ytp ]
 
 # ------------------------------------------------------------------------------
